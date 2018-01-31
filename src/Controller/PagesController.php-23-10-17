@@ -1,0 +1,2031 @@
+<?php 
+/**
+ * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
+ * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ *
+ * Licensed under The MIT License
+ * For full copyright and license information, please see the LICENSE.txt
+ * Redistributions of files must retain the above copyright notice.
+ *
+ * @copyright Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @link      http://cakephp.org CakePHP(tm) Project
+ * @since     0.2.9
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT License
+ */
+namespace App\Controller;
+
+use Cake\Core\Configure;
+use Cake\Network\Exception\NotFoundException;
+use Cake\View\Exception\MissingTemplateException;
+use Cake\Event\Event;
+use Cake\ORM\TableRegistry;
+use Cake\Network\Email\Email;
+/**
+ * Static content controller
+ *
+ * This controller will render views from Template/Pages/
+ *
+ * @link http://book.cakephp.org/3.0/en/controllers/pages-controller.html
+ */
+class PagesController extends AppController
+{
+    public function beforeFilter(Event $event) {
+		//$this->viewBuilder()->layout('home_layout');
+		$this->loadModel('Users');
+		$this->loadModel('Contacts');
+      parent::beforeFilter($event);
+      $this->Auth->allow();
+    }
+
+    /**
+     * Displays a view
+     *
+     * @return void|\Cake\Network\Response
+     * @throws \Cake\Network\Exception\NotFoundException When the view file could not
+     *   be found or \Cake\View\Exception\MissingTemplateException in debug mode.
+     */
+    public function display()
+    {
+        $path = func_get_args();
+
+        $count = count($path);
+        if (!$count) {
+            return $this->redirect('/');
+        }
+        $page = $subpage = null;
+
+        if (!empty($path[0])) {
+            $page = $path[0];
+        }
+        if (!empty($path[1])) {
+            $subpage = $path[1];
+        }
+        $this->set(compact('page', 'subpage'));
+
+        try {
+            $this->render(implode('/', $path));
+        } catch (MissingTemplateException $e) {
+            if (Configure::read('debug')) {
+                throw $e;
+            }
+            throw new NotFoundException();
+        }
+    }
+    public function sliderautocount($countfor){
+		$this->loadModel('Requests');
+		$this->loadModel('Slider');
+		$travelAgentCount = $this->Users->find()->where(['role_id' => 1])->count();
+		$eventPlannerCount = $this->Users->find()->where(['role_id' => 2])->count();
+		$hotelierCount = $this->Users->find()->where(['role_id' => 3])->count();
+		if($countfor=="ta"){
+		echo '('.$travelAgentCount .')';
+	   } 
+	   if($countfor=="ep"){
+		echo '('.$eventPlannerCount.')';
+	   } 
+	   if($countfor=="hot"){
+		echo '('.$hotelierCount.')';
+	   } 
+		exit;
+    }    
+    public function home(){
+		$this->loadModel('Requests');
+		$this->loadModel('Slider');
+		$travelAgentCount = $this->Users->find()->where(['role_id' => 1])->count();
+		$eventPlannerCount = $this->Users->find()->where(['role_id' => 2])->count();
+		$hotelierCount = $this->Users->find()->where(['role_id' => 3])->count();
+		$overview = $this->Pages->find()->where(['id' => 1])->first();
+		$benifits1 = $this->Pages->find()->where(['id' => 2])->first();
+		$benifits2 = $this->Pages->find()->where(['id' => 3])->first();
+		$benifits3 = $this->Pages->find()->where(['id' => 4])->first();
+		$benifits4 = $this->Pages->find()->where(['id' => 5])->first();
+		$benifits5 = $this->Pages->find()->where(['id' => 6])->first();
+		$benifits6 = $this->Pages->find()->where(['id' => 7])->first();
+		$sliders = $this->Slider->find()->where(['status' => 1])->all();
+		$requests = $this->Requests->find()
+                            ->contain(["Users", "Cities"])
+                            ->where(["Requests.status !="=>2, "Requests.is_deleted"=>0])->all();
+		$userId = $this->Auth->user('id');
+		$this->set(compact("travelAgentCount", "eventPlannerCount", "hotelierCount", "userId", "requests","overview","benifits1","benifits2","benifits3","benifits4","benifits5","benifits6","sliders"));
+    }
+    public function aboutus(){	
+
+
+        $aboutcontent = $this->Pages->find()->where(['id' => 9])->first();
+        $this->set(compact("aboutcontent"));
+    }
+	 public function faq(){		
+        $faqcontent = $this->Pages->find()->where(['id' => 12])->first();
+        $this->set(compact("faqcontent"));
+    }
+ public function faqapi(){		
+        $faqcontentapi = $this->Pages->find()->where(['id' => 12])->first();
+        $this->set(compact("faqcontentapi"));
+    }
+    public function privacypolicy(){
+        $privacypolicycontent = $this->Pages->find()->where(['id' => 10])->first();
+        $this->set(compact("privacypolicycontent"));
+    } 
+	public function termsandconditions(){
+        $termsandconditionscontent = $this->Pages->find()->where(['id' => 11])->first();
+        $this->set(compact("termsandconditionscontent"));
+    }
+    public function memberships(){
+    if($this->Auth->user('id')!="") {
+ 	$this->redirect('/users/dashboard');
+    }
+    	$this->loadModel('Membership');
+		$membership_text = $this->Pages->find()->where(['id' => 8])->first();
+		$memberships = $this->Membership->find()->where(['status' => 1])->all();
+		$this->set(compact("membership_text","memberships"));
+    }
+	/**
+	public function settings(){
+		$this->loadModel('Setting');
+		$settings = $this->Setting->find('all');
+		$this->set('settings', $settings); 
+    }
+	**/
+	public function feedback(){
+		if($this->request->is('post')) {
+			$subject="TravelB2Bhub Feedback";
+					$to= "harshbula@travelb2bhub.com";
+//$to= "pradysingh@gmail.com";
+			$headers  = 'MIME-Version: 1.0' . "\r\n";
+			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+			$headers .= 'From: '.$this->request->data['name1'].' <noreply@travelb2bhub.com>' . "\r\n";
+			$message='<p>Dear Admin,</p>';
+			$message.='<p>Below are the feedback</p>';
+			$message.='<p><span style="font-weight:bold;">Name : </span><span>'.$this->request->data['name1'].'</span></p>';
+			$message.='<p><span style="font-weight:bold;">Phone : </span><span>'.$this->request->data['phone1'].'</span></p>';
+			$message.='<p><span style="font-weight:bold;">Email : </span><span>'.$this->request->data['email1'].'</span></p>';
+			
+			$message.='<p><span style="font-weight:bold;">Comment : </span><span>'.$this->request->data['body1'].'</span></p>';
+			// Mail it
+			@mail($to, $subject, $message, $headers);
+			//$this->Flash->success(__('We have received your query.'));
+			unset($this->request->data);
+exit;
+		}else {
+			$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
+			$this->set('user', $user);
+exit;
+		}
+		
+	}
+	public function contactus(){
+		
+		if ($this->request->is('post')) {
+			//pr($this->request->data); exit;
+			$subject="TravelB2Bhub Contact Us";
+			$to= "harshbula@travelb2bhub.com";
+//$to= "pradysingh@gmail.com";
+			$headers  = 'MIME-Version: 1.0' . "\r\n";
+			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+			$headers .= 'From: '.$this->request->data['first_name'].' '.$this->request->data['last_name'].' <noreply@travelb2bhub.com>' . "\r\n";
+			
+			$message='<p>Dear Admin,</p>';
+			$message.='<p> Below are the contact details.</p>';
+			$message.='<p><span style="font-weight:bold;">Name : </span><span>'.$this->request->data['first_name'].' '.$this->request->data['last_name'].'</span></p>';
+			$message.='<p><span style="font-weight:bold;">Phone : </span><span>'.$this->request->data['phone'].'</span></p>';
+			$message.='<p><span style="font-weight:bold;">Email : </span><span>'.$this->request->data['email'].'</span></p>';
+			$message.='<p><span style="font-weight:bold;">Subject : </span><span>'.$this->request->data['subject'].'</span></p>';
+			$message.='<p><span style="font-weight:bold;">Comment : </span><span>'.$this->request->data['comment'].'</span></p>';
+			// Mail it
+			@mail($to, $subject, $message, $headers);
+			$d = $this->request->data;
+            $d['status'] = 0;
+            $contact = $this->Contacts->newEntity($d);
+            $this->Contacts->save($contact);
+			$this->Flash->success(__('We have received your query.'));
+			unset($this->request->data);
+		} else {
+			$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
+			$this->set('user', $user);
+		}
+    }
+    public function services(){
+		
+        
+    }
+    public function promotionthanks(){
+		$thankscontent = "Thankyou! Your hotel's promotion has been successfully submitted.";
+        $this->set(compact("thankscontent"));  
+    }
+    public function _getHotelCategoriesArray1() {
+        return array("1"=>"Corporate Hotel", "2"=>"Boutique Hotel", "3"=>"Heritage Hotel", "4"=>"House Boat", "5"=>"Resort", "6"=>"Eco Resort", "7"=>"Farm-stay", "8"=>"Homestay", "9"=>"Heritage Homestay", "10"=>"Camping", "11"=>"Glamping");
+    }
+    public function promotions(){
+    	$this->loadModel('Countries');
+    	$this->loadModel('Users');
+		$this->loadModel('States');
+      $this->loadModel('Cities');
+      $cities = $this->Cities->getAllCities();
+		$states = $this->States->getAllStates();
+		$allstates = array();
+		$allstatesList = array();
+		/* if(!empty($states)) {
+			foreach($states as $state) {
+				$allstates[] = array("label"=>str_replace("'", "", $state['state_name']), "value"=>$state['id']);
+				$allstatesList[$state['id']] = $state['state_name'];
+			}
+		}*/
+		$allStates = json_encode($allstates);
+		$allCities = array();
+		$allCityList = array();
+		if(!empty($cities)) {
+			foreach($cities as $city) {
+				if($this->checkcityslot($city['id']) < 50){
+				$usercount = $this->Users->getAllUserCount($city['id']);
+				$allCities[] = array("label"=>str_replace("'", "", $city['name']),"usercount" => $usercount, "value"=>$city['id'],"price"=>$city['price'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
+				$allCityList[$city['id']] = $city['name'];
+			}
+			}
+		}
+		//$allCities = json_encode($allCities);
+		$userId = $this->Auth->user('id');
+		$userDetails = '';
+		if($userId!=""){
+		 $userDetails = $this->Users->get($userId);
+		 $this->set("hotelCategories", $this->_getHotelCategoriesArray1());
+	}
+		$this->set(compact('cities', 'states', 'countries',  'allStates','allstatesList','allCityList','allCities','userId','userDetails'));
+    }
+
+    function checkcityslot($city_id){
+    	 $this->loadModel('Promotion');
+		 $advertisementcount = $this->Promotion->find()->where(['status' => 1,'FIND_IN_SET(\''.  $city_id .'\',cities)'])->all();
+		 $advertisementcount = $advertisementcount->count();
+		 return $advertisementcount;
+    }
+  
+    public function pagesapi($id){
+     $pagedata = $this->Pages->find()->where(['id' => $id])->first();
+     $data = array();
+     $data['id'] = $pagedata['id'];
+     $data['title'] = $pagedata['title'];
+     $data['description'] = $pagedata['description'];
+     $pagedatajson = json_encode($data);
+     echo $pagedatajson;
+     exit;
+    }
+    public function settingapi(){
+	  $settingdata = $this->Setting->find()->all();
+     $settingdatajson = json_encode($settingdata);
+     echo $settingdatajson;
+     exit;
+    }
+     public function membershipsapi(){
+    	$this->loadModel('Membership');
+		$memberships = $this->Membership->find()->where(['status' => 1])->all();
+		$membershipsjson = json_encode($memberships);
+      echo $membershipsjson;
+      exit;
+    }
+    public function countryapi(){
+      $this->loadModel('Countries');
+      $countryapi = $this->Countries->find()->all();
+    	$result  = array();
+    	if($countryapi){
+    	$result['response_code']=200;
+    	}
+    	$i=0;
+      $result['ResponseObject'] = $countryapi;
+      $result = json_encode($result);
+      echo $result;
+      exit;
+    }
+    public function stateapi(){
+      $this->loadModel('States');
+      $statesapi = $this->States->find()->all();
+    	$result  = array();
+    	if($statesapi){
+    	$result['response_code']=200;
+    	}
+      $result['ResponseObject'] = $statesapi;
+      $result = json_encode($result);
+      echo $result;
+      exit;
+    }
+    public function citiesapi(){
+       $this->loadModel('Cities');
+       $citiesapi = $this->Cities->find()->all();
+        $totcount = count($citiesapi);
+       $i =1;
+       foreach($citiesapi as $cityapi){
+       	 $statename = $this->statename($cityapi->state_id);
+       	  $data['name'] = $cityapi->name.'('.$statename . ')' ;
+      $data['stateid'] =   $cityapi->state_id;
+      $data['cityid'] =  $cityapi->id;
+      $datacitystate['citystatefi'][$i] =  $data;
+      $i++; }
+    	$result  = array();
+    	
+    	$result['response_code']=200;
+    	$result['TotalRecord'] = $totcount;
+      $result['ResponseObject'] = $datacitystate;
+
+      $result = json_encode($result);
+      echo $result;
+      exit;
+   
+
+    }
+
+  public function promotionscityapi(){
+    	$this->loadModel('Countries');
+    	$this->loadModel('Users');
+		$this->loadModel('States');
+      $this->loadModel('Cities');
+      $cities = $this->Cities->getAllCities();
+		$states = $this->States->getAllStates();
+		$allstates = array();
+		$allstatesList = array();
+		if(!empty($states)) {
+			foreach($states as $state) {
+				$allstates[] = array("label"=>str_replace("'", "", $state['state_name']), "value"=>$state['id']);
+				$allstatesList[$state['id']] = $state['state_name'];
+			}
+		}
+		$allStates = json_encode($allstates);
+		$allCities = array();
+		$allCityList = array();
+		if(!empty($cities)) {
+			foreach($cities as $city) {
+				if($this->checkcityslot($city['id']) < 50 && $city['state_id']==$_POST['state_id']){
+				$usercount = $this->Users->getAllUserCount($city['id']);
+				if($usercount > 0) {
+				$allCities[] = array("label"=>str_replace("'", "", $city['name']),"usercount" => $usercount, "value"=>$city['id'],"price"=>$city['price'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
+			}
+			$allCityList[$city['id']] = $city['name'];
+			}
+			}
+		}
+		$result['response_code']=200;
+    	$i=0;
+      $result['ResponseObject'] = $allCities;
+      $result = json_encode($result);
+      echo $result;
+      exit;
+    }
+public function getActivationKey($mobileNo) {
+		if(empty($mobileNo)) {
+			$mobileNo = 1234567890;
+		}
+		return md5(md5($mobileNo));
+	}
+    public function registerapi(){
+    	$result  = array();
+    if ($this->Auth->user('id')) {
+   		$result['response_code']= 403;
+    	 }
+        $this->loadModel('Credits');
+        $this->loadModel('Countries');
+        $this->loadModel('States');
+        $this->loadModel('Cities');
+        $this->loadModel('Membership');
+        if($_POST) {
+			$d = $_POST;
+			
+            $checkUsers = $this->Users->find()->where(['email' => $d['email']])->count();
+            if ($checkUsers < 1) {
+                $d['email_verified'] = 0;
+                $d['mobile_verified'] = 0;
+                $d['reset_password_token'] = 0;
+                $d['verification_token'] = 0;
+                $d['mobile_otp'] = rand('1010', '9999');
+                $d['status'] = 0;
+                $d['create_at'] = date("Y-m-d H:i:s");
+                	if(isset($_POST["preference"]) && !empty($_POST["preference"])) {
+					   $d["preference"] = $_POST["preference"];
+						}
+                $user = $this->Users->newEntity($d);
+                if ($res = $this->Users->save($user)) {
+					$subject="TravelB2Bhub registration";
+					 $to=$d['email'];
+					 $headers  = 'MIME-Version: 1.0' . "\r\n";
+					 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+					 $headers .= 'From: TravelB2Bhub <contactus@travelb2bhub.com>' . "\r\n";
+					 //$headers .= "Bcc: business.leadindia@gmail.com"; // BCC mail
+					 $message='<p>Dear '.$d['first_name'].'</p>';
+					 $message.='<p>Thank you for registering with TravelB2Bhub.com, the  COMMISSION FREE, Business to Business, tourism trading network. </p>';
+					
+					 $message.='<p>Please verify your email address by <a href="http://www.travelb2bhub.com">click here</a> to login from Homepage.</p>';
+					 $message.='<p>Note: You will receive a notification when there are enough registered members for you to begin trading. Please encourage your contacts to enroll.</p>';
+					 $message.='<p>We are committed to enhance your trading experience!</p>';
+					 $message.='<p>Sincerely,<br>The TravelB2Bhub Team</p>';
+					
+					 $userId = $res->id;
+					 $subject="TravelB2Bhub Email Verification";
+					 $to=$d['email'];
+					 $headers  = 'MIME-Version: 1.0' . "\r\n";
+					 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+					 $headers .= 'From: TravelB2Bhub <contactus@travelb2bhub.com>' . "\r\n";
+					$theKey = $this->getActivationKey($d["mobile_number"]);
+					$message='<p>Dear '.$d['first_name'].'</p>';
+					$message.='<p>Thank you for registering with TravelB2Bhub.com, the  COMMISSION FREE, Business to Business, tourism trading network. </p>';
+					$message.='<p>Please verify your email address by clicking on the link below <a href="http://www.travelb2bhub.com/users/userVerification?ident='.$userId.'&activate='.$theKey.'">click here<a></p>';
+					$message.='<p>Note: You will receive a notification when there are enough registered members for you to begin trading. Please encourage your contacts to enroll.</p>';
+					$message.='<p>We are committed to enhance your trading experience!</p>';
+					$message.='<p>Sincerely,<br>The TravelB2Bhub Team</p>';
+					 @mail($to, $subject, $message, $headers);
+                    $uid = $res->id;
+                    $c['credit'] = 60;
+                    $c['user_Id'] = $uid;
+                    $creditd = $this->Credits->newEntity($c);
+                    $this->Credits->save($creditd);
+                   $result['response_code'] = 200;
+ 						 $result['msg'] = 'Thank you for registration.';
+                } else {
+                    $result['response_code'] = 406;
+                    $result['msg'] = 'The user could not be saved. Please, try again.';
+                }
+            } else {
+               $result['response_code'] =  501;
+               $result['msg'] = 'Email id already exist. Please, try another one.';
+            }
+        }
+      $data =  json_encode($result);
+      echo $data;
+	exit;
+
+    }
+    
+    public function forgotPasswordapi() {
+		Configure::write('debug',2);
+		if ($this->request->is('post')) {
+			$d = $this->request->data;
+			$user = $this->Users
+				->find()
+				->where(['email' =>$d['email']])
+				->first();
+					$result = array();
+			if (!empty($user)) {
+				
+					$theKey = $this->getActivationKey($user["mobile_number"]);
+					$userId = $user["id"];
+					$subject="TravelB2Bhub Reset Password";
+					$to = $user["email"];
+					$headers  = 'MIME-Version: 1.0' . "\r\n";
+					$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+					$headers .= 'From: TravelB2Bhub <contactus@travelb2bhub.com>' . "\r\n";
+
+					$message='<p>Dear '.$user['first_name'].'</p>';
+					$message.="<p>Reset your password, and we'll get you on your way.</p>";
+					$message.='<p>To change your TravelB2Bhub password, click the following link into your browser:
+					<a href="http://www.travelb2bhub.com/users/activatePassword?ident='.$userId.'&activate='.$theKey.'">click here</a></p>';
+					$message.='<p>Sincerely,<br>The TravelB2Bhub Team</p>';
+
+					// Mail it
+					@mail($to, $subject, $message, $headers);
+					$result['response_code'] = 200;
+					$result['msg'] = "Please check your email for reset your password";
+					$data =  json_encode($result);
+      echo $data;
+	exit;
+			
+			} else {
+				$result['msg'] = "Incorrect Email.";
+				$result['response_code'] = 501;
+				$data =  json_encode($result);
+      echo $data;
+	exit;
+			}
+		}
+	}
+	
+	public function changepasswordapi() {
+		  $this->loadModel('Requests');
+        $this->loadModel('Responses');
+        $user = $this->Users->find()->where(['id' => $this->request->data['user_id']])->first();
+			$this->set('users', $user);
+			$result1 = array();
+        if(!empty($user)) {
+			if ($this->request->is('post')) {
+				$verify = (new \Cake\Auth\DefaultPasswordHasher)->check($this->request->data['old_password'], $user->password);
+				if($verify) {
+					$result = $this->Users->patchEntity($user, ['password' => $this->request->data['password']]);
+					if ($this->Users->save($result)) {
+						$result1['msg'] = 'Your password has been changed successfully.';
+						$result1['response_code'] = 200;
+						$data =  json_encode($result1);
+      				echo $data;
+						exit;
+						
+					}
+				} else {
+					//echo "not mached"; exit;
+					$result1['response_code'] = 501;
+					$result1['msg'] = 'Current Password does not matched.';
+						$data =  json_encode($result1);
+      				echo $data;
+						exit;
+				}
+			}
+
+			$myRequestCount = $myReponseCount = 0;
+			$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.status !="=>2, "Requests.is_deleted"=>0]]);
+			$myRequestCount = $query->count();
+		
+			$this->set('myRequestCount', $myRequestCount);
+
+			$queryr = $this->Responses->find('all', ['conditions' => ['Responses.user_id' => $this->Auth->user('id')]]);
+			$myReponseCount = $queryr->count();
+			$this->set('myReponseCount', $myReponseCount);
+		} else {
+			$this->Flash->error(__('Please login to access this location.'));
+			$this->redirect('/pages/home');
+		}
+    }
+     public function loginapi() {
+        if ($this->request->is('post') || $this->request->query('provider')) {
+           $user = $this->Auth->identify();
+           $result = array();
+           if ($user) {
+           $result['response_code'] = 200;
+			  $result['msg'] = 'success';
+           $result['response_object'] = $user;
+           $data =  json_encode($result);
+           echo $data;
+           exit;
+            } else {
+           $result['response_code'] = 501;
+			  $result['msg'] = 'failed';
+			  $data =  json_encode($result);
+           echo $data;
+           exit;
+            }
+        }
+    }
+    public function blockeduserlistapi() {
+    		$result = array();
+        $this->loadModel('Responses');
+        $this->loadModel('Hotels');
+        $this->loadModel('Requests');
+        $this->loadModel('Cities');
+		  $this->loadModel('BlockedUsers');
+        $user = $this->Users->find()->where(['id' => $_POST['user_id']])->first();
+        $this->set('users', $user);
+		  $blockedUsers = $this->BlockedUsers->find()
+						->contain(["Users"])
+						->where(['BlockedUsers.blocked_by' => $_POST['user_id']])->order(["BlockedUsers.id" => "DESC"])->all();
+						if($blockedUsers){
+		$result['response_code'] = 200;
+     	$result['response_object'] = $blockedUsers;
+     }
+     else {
+     $result['response_code'] = 501;
+     }
+      $data =  json_encode($result);
+           echo $data;
+           exit;
+    }
+    public function profileeditapi() {
+    	$result = array();
+		$this->loadModel("UserRatings");
+		$this->loadModel("TravelCertificates");
+		$this->loadModel('States');
+		$this->loadModel('Cities');
+		$this->loadModel('Requests');
+      $this->loadModel('Responses');
+      	$result['response_code'] = 200;
+      $user = $this->Users->find()->where(['id' => $_POST['user_id']])->first();
+		$result['user'] = $user;
+        if(!empty($user)) {
+			
+			$data =  json_encode($result);
+           echo $data;
+           exit;
+			
+		} else {
+			$result['response_code'] = 500;
+			 echo $result;
+           exit;
+		}
+    }
+		public function myresponselistapi() {
+		$result = array();
+		$this->loadModel('BusinessBuddies');
+      $this->loadModel('Responses');
+      $this->loadModel('Requests');
+      $this->loadModel('Cities');
+       $this->loadModel('Testimonial');
+        $conditions ='';
+        if(!empty($_POST["budgetsearch"])) {
+			$QPriceRange = $_POST["budgetsearch"];
+			$result = explode("-", $QPriceRange);
+			$MinQuotePrice = $result[0];
+			$MaxQuotePrice = $result[1];
+			$conditions["Responses.total_budget >="] = $MinQuotePrice;
+			$conditions["Responses.total_budget <="] = $MaxQuotePrice;
+		}
+		if(!empty($_POST["req_typesearch"])) {
+		$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
+		}
+			
+	if(!empty( $_POST["refidsearch"])) {
+		$conditions["Requests.reference_id"] =  $_POST["refidsearch"]; 
+}
+		$sdate = $_POST["startdatesearch"];
+		$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+		
+		if(!empty($_POST["startdatesearch"])) {
+            	$da["Requests.start_date"] =  $sdate;
+            	$da["Requests.check_in"] =    $sdate;
+		$conditions["OR"] =  $da;
+		}
+		 $edate = $_POST["enddatesearch"];
+		 $edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+			
+		if(!empty($_POST["enddatesearch"])) {
+			$da1["Requests.end_date"] =  $edate;
+            	$da1["Requests.check_out"] =  $edate;
+		$conditions["OR"] =  $da1;
+	
+		}
+      $responses = $this->Responses->find()
+                     ->contain(["Users", "Requests.Users", "UserChats"])
+                     ->where(['Responses.user_id' => $_POST['user_id'],$conditions])->order(["Responses.id" => "DESC"])->all();
+                     $citystate = array();
+                     foreach($responses as $cit)
+                     {
+                     $cityname = $this->cityname($cit['request']['city_id']);
+                     $statename = $this->statename($cit['request']['state_id']);
+                     $comma = '';
+                     if($statename!=""){
+                     $comma = ',';
+                     }
+                     $citystatefull = $cityname .' '. $comma. $statename;
+                     $citystate[$cit['id']]  = $citystatefull;
+                     $citystate[$cit['id']]  = $citystatefull;
+                     }
+        $rating = array();
+        foreach($responses as $req){
+        		$query = $this->Testimonial->find();
+				$userRating = $query->select(["average_rating" => $query->func()->avg("rating")])
+				->where(['author_id' => $req['request']['user_id']])
+				->order(["id" => "DESC"]);
+				  $rating['rating'][$req['id']]  = $userRating;
+        }
+        if($responses){
+        $result['response_code'] = 200;
+        $result['response_object'] = $responses;
+         $result['rating'] = $rating;
+         $result['citystate'] = $citystate;
+        $data = json_encode($result);
+        echo $data;
+        exit;
+     } else {
+      $result['response_code'] = 501;
+      $data = json_encode($result);
+        echo $data;
+        exit;
+     }
+		}
+		
+		public function cityname($id){
+	$this->loadModel('Cities');
+	$city = $this->Cities->find()->where(['id' => $id])->first();
+	return  $city['name'];
+	}
+	public function statename($id){
+	$this->loadModel('States');
+	$state = $this->States->find()->where(['id' => $id])->first();
+	return  $state['state_name'];
+	}
+	 public function requestlistapi() {
+        $this->loadModel('Responses');
+        $this->loadModel('Hotels');
+        $this->loadModel('Requests');
+        $this->loadModel('Cities');
+			$conditions["Requests.user_id"] = $_POST['user_id'];
+			$conditions["Requests.status !="] = 2;
+			$conditions["Requests.is_deleted "] = 0;
+			if(isset($_POST["budgetsearch"]) && !empty($_POST["budgetsearch"])) {
+			$QPriceRange = $_POST["budgetsearch"];
+			$result = explode("-", $QPriceRange);
+			 $MinQuotePrice = $result[0];
+			 $MaxQuotePrice = $result[1];
+			$conditions["Requests.total_budget >="] = $MinQuotePrice;
+			$conditions["Requests.total_budget <="] = $MaxQuotePrice;
+		}
+		if(isset($_POST["req_typesearch"]) && !empty($_POST["req_typesearch"])) {
+		$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
+		}
+		if(isset($_POST["refidsearch"]) && !empty($_POST["refidsearch"])) {
+		$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
+		}
+		
+	$sdate = $_POST["startdatesearch"];
+		$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+		
+		if(!empty($_POST["startdatesearch"])) {
+			
+            	$da["Requests.start_date"] =  $sdate;
+            	$da["Requests.check_in"] =  $sdate;
+		$conditions["OR"] =  $da;
+		}
+		
+		 $edate =  $_POST["enddatesearch"]; 
+		 $edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+			
+		if(!empty($_POST["enddatesearch"])) {
+			$da1["Requests.end_date"] =  $edate;
+            	$da1["Requests.check_out"] =  $edate;
+		$conditions["OR"] =  $da1;
+	
+		}
+        if ($_POST['role_id'] == 1) {
+            $requests = $this->Requests->find()
+                            ->contain(["Users","Cities"])
+                            ->where($conditions)->order(["Requests.id" => "DESC"])->all();
+        }
+        if ($_POST['role_id'] == 2) {
+            $requests = $this->Requests->find()
+                            ->contain(["Users","Cities"])
+                            ->where($conditions)->order(["Requests.id" => "DESC"])->all();
+        }
+        if ($_POST['role_id'] == 3) {
+		  $conditions["Requests.category_id "] = 3;
+            $requests = $this->Requests->find()
+                            ->contain(["Users","Cities"])
+                            ->where($conditions)->order(["Requests.id" => "DESC"])->all();
+        }
+        	$citystate = array();
+                     foreach($requests as $cit)
+                     {
+                     $cityname = $this->cityname($cit['city_id']);
+                     $statename = $this->statename($cit['state_id']);
+                     $comma = '';
+                     if($statename!=""){
+                     $comma = ',';
+                     }
+                     $citystatefull = $cityname .' '. $comma. $statename;
+                      $citystate['citystate'][$cit['id']]  = $citystatefull;
+                     }
+        $countarr = array();
+        foreach($requests as $req){
+        $queryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
+        $countarr['responsecount'][$req['id']]  = $queryr->count();
+        }
+        if($requests){
+        $result['response_code'] = 200;
+        $result['response_object'] = $requests;
+        $result['citystate'] = $citystate;
+        $result['countarr'] = $countarr;
+        $data = json_encode($result);
+        echo $data;
+        exit;
+     } else {
+       $result['response_code'] = 501;
+        $data = json_encode($result);
+        echo $data;
+        exit;
+     }
+
+    }
+    	public function viewdetailsapi() {
+    		$result = array();
+        	$this->loadModel('Requests');
+        	$this->loadModel('Cities');
+			$this->loadModel('States');
+			$this->loadModel('Countries');
+			$this->loadModel('Responses');
+      	$details = $this->Requests->find()
+                        ->contain(["Users", "UserRatings", "Hotels", "RequestStops"])
+                        ->where(['Requests.id' => $_POST['request_id']])->first();
+	
+			$result['response_code'] = 200;
+			$result['response_object'] = $details;
+    		$data =   json_encode($result);
+         echo $data;
+         exit;
+    }
+
+	 public function removerequestapi(){
+	   $this->loadModel('Requests');
+		$res = 1;
+		if(isset($_POST["request_id"]) && !empty($_POST["request_id"]) && !empty($_POST['user_id'])) {
+			$TableRequest = TableRegistry::get('Requests');
+			$request = $TableRequest->get($_POST["request_id"]);
+			$request->is_deleted = 1;
+			if($TableRequest->save($request)) {
+				$res = 1;
+			}
+		}
+		   $result['response_code'] = 200;
+			$result['response_object'] = $res;
+    		$data = json_encode($result);
+         echo $data;
+         exit;
+	 }
+	 public function userchatapi() {
+		$this->loadModel('UserChats');
+		//$this->UserChats->updateAll(['is_read' => 1, "read_date_time"=>date("Y-m-d h:i:s")], ['request_id ' => $requestId]);
+      $UserChats = $this->UserChats->find()
+                     //   ->contain(["Users"/*, "Requests"*/])
+                        ->where(["UserChats.request_id"=>$_POST['request_id'], 'UserChats.user_id IN' => array($_POST['user_id'], $_POST['chatuserid'])])->order(["UserChats.id" => "ASC"])->all()->toArray();
+			$result['response_code'] = 200;
+			$result['response_object'] = $UserChats;
+    		$data =   json_encode($result);
+         echo $data;
+         exit;
+    }
+
+    public function blockuserapi() {
+        $this->loadModel('BlockedUsers');
+		$res = 0;
+		if(isset($_POST["blockuser_id"]) && !empty($_POST["blockuser_id"]) && !empty($_POST['user_id'])) {
+			$d["blocked_user_id"] = $_POST["blockuser_id"];
+			$d["blocked_by"] = $_POST['user_id'];
+			$d["created"] = date("Y-m-d G:i:s");
+			$BlockUser = $this->BlockedUsers->newEntity($d);
+			if($this->BlockedUsers->save($BlockUser)) {
+				$res = 1;
+			} else {
+				$res = 0;
+			}
+		}
+			$result['response_code'] = 200;
+			$result['response_object'] = $res;
+         $data = json_encode($result);
+         echo $data;
+         exit;
+    }
+
+    public function testimonialapi() {
+    	$result = array();
+    	 $this->loadModel('Testimonial');
+    	 $this->loadModel('Promotion');
+		 $this->loadModel('Users');
+    	  $usercity = $this->Users->find()->select(['city_id'])->where(['id' => $_POST['user_id']])->first();
+        $cityid =  $usercity['city_id'];
+    	  $advertisement1 = $this->Promotion->find()->where(['status' => 1,'FIND_IN_SET(\''.  $cityid .'\',cities)'])->all();
+		 $result['advertisement'] = $advertisement1 ;
+		  $user = $this->Users->find()
+                        ->contain(["Credits"])
+                        ->where(['Users.id' => $_POST['user_id']])->first();
+    	 $testimonials = $this->Testimonial->find()->where(['status' => 1,'user_id'=> $_POST['user_id']])->all();
+    	 $testimoniallist = array();
+		 $alltestimonials = array();
+		 if(!empty($testimonials)) {
+			foreach($testimonials as $testimonial) {
+			$users = $this->Users->find()->where(['status' => 1,'id'=> $testimonial['author_id']])->first();
+			$name = $users['first_name']." ".$users['last_name'];
+			$alltestimonials[] = array( "name"=>$name, "description"=>$users['description'], "profile_pic"=>$users['profile_pic'], "comment"=>$testimonial['comment'],"user_id"=>$testimonial['user_id'],"author_id"=>$testimonial['author_id']);
+			}
+			$result['response_code'] = 200;
+			$result['response_object'] = $alltestimonials;
+			$result['description1'] = $user['description'] ;
+			
+			$result['userprofile'] = $user;
+			
+    		$data =   json_encode($result);
+      echo $data;
+      exit;
+		}
+    	$result['response_code'] = 500;
+		echo $result;
+      exit;
+    }
+    public function myfinalresponsesapi() {
+        $this->loadModel('Responses');
+        $this->loadModel('Requests');
+        $this->loadModel('Cities');
+		  $this->loadModel('States');
+		  $conditions["Responses.user_id"] = $_POST['user_id'];
+		  $conditions["Responses.status"] = 1;
+if(!empty($_POST["agentname"])) {
+		$keyword1 = '';
+		$keyword2 = '';
+			$keyword = trim($_POST["agentname"]);
+			$keyword = explode(' ',$keyword);
+			if(isset($keyword[1])) {
+			$keryword2 = $keyword[1];
+			}
+			$conditions["OR"] = array("Users.first_name LIKE "=>"%".$keyword1."%", "Users.last_name LIKE" => "%$keyword2%",);
+		}
+		
+		if(!empty($_POST["quotesearch"])) {
+			$QPriceRange = $_POST["quotesearch"];
+			$result = explode("-", $QPriceRange);
+			$MinQuotePrice = $result[0];
+			$MaxQuotePrice = $result[1];
+			$conditions["Responses.quotation_price >="] = $MinQuotePrice;
+			$conditions["Responses.quotation_price <="] = $MaxQuotePrice;
+		}
+		
+		if(!empty($_POST["budgetsearch"])) {
+			$QPriceRange = $_POST["budgetsearch"];
+			$result = explode("-", $QPriceRange);
+			$MinQuotePrice = $result[0];
+			$MaxQuotePrice = $result[1];
+			$conditions["Requests.total_budget >="] = $MinQuotePrice;
+			$conditions["Requests.total_budget <="] = $MaxQuotePrice;
+		}
+		if(!empty($_POST["refidsearch"])) {
+		$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
+		}
+        $responses = $this->Responses->find()
+                        ->contain(["Users", "Requests"])
+                        ->where($conditions)->all();
+       $result['response_code'] = 200;
+		 $result['response_object'] = $responses;
+		 $data =   json_encode($result);
+       echo $data;
+      exit;
+    }
+    
+    public function removedrequestlistapi() {
+        $this->loadModel('Responses');
+        $this->loadModel('Hotels');
+        $this->loadModel('Requests');
+        $this->loadModel('Cities');
+		$conditions["Requests.user_id"] = $_POST['user_id'];
+		$conditions["Requests.is_deleted "] = 1;
+		if(isset($_POST["budgetsearch"]) && !empty($_POST["budgetsearch"])) {
+			$QPriceRange = $_POST["budgetsearch"];
+			$result = explode("-", $QPriceRange);
+			 $MinQuotePrice = $result[0];
+			 $MaxQuotePrice = $result[1];
+			$conditions["Requests.total_budget >="] = $MinQuotePrice;
+			$conditions["Requests.total_budget <="] = $MaxQuotePrice;
+		}
+		if(isset($_POST["req_typesearch"]) && !empty($_POST["req_typesearch"])) {
+		$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
+		}
+		if(isset($_POST["refidsearch"]) && !empty($_POST["refidsearch"])) {
+		$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
+		}
+		
+		$sdate = $_POST["startdatesearch"];
+		$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+		
+		if(!empty($_POST["startdatesearch"])) {
+			
+            	$da["Requests.start_date"] =  $sdate;
+            	$da["Requests.check_in"] =  $sdate;
+					$conditions["OR"] =  $da;
+		}
+		
+		 $edate =  $_POST["enddatesearch"]; 
+		 $edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+			
+		if(!empty($_POST["enddatesearch"])) {
+			$da1["Requests.end_date"] =  $edate;
+            	$da1["Requests.check_out"] =  $edate;
+			$conditions["OR"] =  $da1;
+		}
+        if ($_POST['role_id'] == 1) {
+            $requests = $this->Requests->find()
+                            ->contain(["Users"])
+                            ->where($conditions)->order(["Requests.id" => "DESC"])->all();
+        }
+        if ($_POST['role_id'] == 2) {
+            $requests = $this->Requests->find()
+                            ->contain(["Users"])
+                            ->where($conditions)->order(["Requests.id" => "DESC"])->all();
+        }
+        if ($_POST['role_id'] == 3) {
+			$conditions["Requests.category_id "] = 3;
+         $requests = $this->Requests->find()
+                            ->contain(["Users"])
+                            ->where($conditions)->order(["Requests.id" => "DESC"])->all();
+        }
+		 $result['response_code'] = 200;
+		 $result['response_object'] = $requests;
+    	 $data =   json_encode($result);
+      echo $data;
+      exit;
+    }
+    public function businessbuddieslistapi() {
+        $this->loadModel('Responses');
+        $this->loadModel('Hotels');
+        $this->loadModel('Requests');
+        $this->loadModel('Cities');
+		  $this->loadModel('BusinessBuddies');
+		  $BusinessBuddies = $this->BusinessBuddies->find()
+						->contain(["Users"])
+						->where(['BusinessBuddies.user_id' => $_POST['user_id']])->order(["BusinessBuddies.id" => "DESC"])->all();
+			$result['response_code'] = 200;
+		  $result['response_object'] = $BusinessBuddies;
+    		$data =   json_encode($result);
+      echo $data;
+      exit;
+    }
+   public function addbusinessbuddyapi() {
+        $this->loadModel('BusinessBuddies');
+			$res = 0;
+		if(isset($_POST["follow_id"]) && !empty($_POST["follow_id"]) && !empty($_POST["user_id"])) {
+			$d["bb_user_id"] = $_POST["follow_id"];
+			$d["user_id"] = $_POST["user_id"];
+			$d["created"] = date("Y-m-d h:i:s");
+			$BusinessBuddy = $this->BusinessBuddies->newEntity($d);
+			if($this->BusinessBuddies->save($BusinessBuddy)) {
+			$result['response_code'] = 200;
+			$result['response_object'] = 1;
+    		$data =   json_encode($result);
+     		echo $data;
+      	exit;
+			} else {
+		$result['response_code'] = 500;
+		$result['response_object'] = 0;
+    	$data =   json_encode($result);
+      echo $data;
+      exit;
+			}
+		}
+    }
+public function removebusinessbuddyapi() {
+      $this->loadModel('BusinessBuddies');
+		$res = 0;
+		if(isset($_POST["follow_id"]) && !empty($_POST["follow_id"]) && !empty($_POST["user_id"])) {
+		if($this->BusinessBuddies->deleteAll(["id"=>$_POST["follow_id"]])) {
+		$result['response_code'] = 200;
+		$result['response_object'] = 1;
+    	$data =   json_encode($result);
+      echo $data;
+      exit;
+		} else {
+		$result['response_code'] = 500;
+		$result['response_object'] = 0;
+    	$data =  json_encode($result);
+      echo $data;
+      exit;
+			}
+		}
+    }
+    public function checkresponsesapi() {
+      $this->loadModel('Responses');
+      $this->loadModel('Requests');
+		$conditions["Responses.request_id"] = $_POST['request_id'];
+		if(!empty($_POST['agentname'])) {
+		$keyword1 = '';
+		$keyword2 = '';
+
+
+			$keyword = trim($_POST['agentname']);
+			$keyword = explode(' ',$keyword);
+			if(isset($keyword[0]) && !isset($keyword[1])) {
+			 $keyword1 = $keyword[0];
+				$conditions["Users.first_name"] =$keyword1;
+			}
+			if(isset($keyword[1])) {
+			 $keyword1 = trim($keyword[0]);
+			 $keyword2 = trim($keyword[1]);
+			
+					$da["Users.first_name"] =  $keyword1;
+            	$da["Users.last_name"] =  $keyword2;
+		$conditions["AND"] =  $da;
+			}
+		}
+		if(!empty($this->request->query("acceptdeals"))) {
+			$conditions["Responses.status"] = 1;
+			$acceptDeals = 1;
+		}
+		if(!empty($_POST['quotesearch'])) {
+			$QPriceRange = $_POST['quotesearch'];
+			$result = explode("-", $QPriceRange);
+			$MinQuotePrice = $result[0];
+			$MaxQuotePrice = $result[1];
+			$conditions["Responses.quotation_price >="] = $MinQuotePrice;
+			$conditions["Responses.quotation_price <="] = $MaxQuotePrice;
+		}
+		if(!empty($_POST['budgetsearch'])) {
+			$QPriceRange = $_POST['budgetsearch'];
+			$result = explode("-", $QPriceRange);
+			$MinQuotePrice = $result[0];
+			$MaxQuotePrice = $result[1];
+			$conditions["Requests.total_budget >="] = $MinQuotePrice;
+			$conditions["Requests.total_budget <="] = $MaxQuotePrice;
+		}
+		if(!empty($_POST['refidsearch'])) {
+		$conditions["Requests.reference_id"] =  $_POST['refidsearch'];
+		}
+		$sortorder ='';
+		if(!empty($_POST['sort'])) {
+		$sortfield = $_POST['sort'];
+		if($sortfield =="quotationprice" && $_POST['order'] == "ASC"){
+		$sortorder["Responses.quotation_price"] = "ASC";
+		}
+		if($sortfield =="quotationprice" && $_POST['order'] == "DESC"){
+		$sortorder["Responses.quotation_price"] = "DESC";
+		}
+		}
+		$responses = $this->Responses->find()
+                        ->contain(["Users", "Requests", "UserChats","Testimonial"])
+                        ->where($conditions)
+                        ->order($sortorder)
+                        ->all();
+      $result['response_code'] = 200;
+		$result['response_object'] = $responses;
+    	$data =   json_encode($result);
+      echo $data;
+      exit;
+    }
+
+    public function userprofileapi(){
+	   $user = $this->Users->find()
+                        ->contain(["Credits"])
+                        ->where(['Users.id' => $_POST['user_id']])->first();
+      $result['response_code'] = 200;
+		$result['response_object'] = $user;
+    	$data = json_encode($result);
+      echo $data;
+      exit;
+    }
+    public function unblockUserapi() {
+        $this->loadModel('BlockedUsers');
+		$res = 0;
+		if(isset($_POST["user_id"]) && !empty($_POST["user_id"]) ) {
+			if($this->BlockedUsers->deleteAll(["blocked_user_id"=>$_POST["user_id"]])) {
+				$res = 1;
+			} else {
+				$res = 0;
+			}
+		}
+		
+		 $result['response_code'] = 200;
+		  $result['response_object'] = $res;
+    		$data =   json_encode($result);
+      echo $data;
+      exit;
+		
+    }
+ public function counterapi(){
+$travelAgentCount = $this->Users->find()->where(['role_id' => 1])->count();
+$eventPlannerCount = $this->Users->find()->where(['role_id' => 2])->count();
+$hotelierCount = $this->Users->find()->where(['role_id' => 3])->count(); 
+$countarr = array();
+$coountarr['travelAgentCount'] = $travelAgentCount;
+$coountarr['eventPlannerCount'] = $eventPlannerCount;
+$coountarr['hotelierCount'] = $hotelierCount;
+$result = array();
+$result['response_code'] = 200;
+$result['response_object'] = $coountarr;
+$data =   json_encode($result);
+      echo $data;
+      exit;
+ }
+ public function getrequestcount() {
+ $requestcount = $this->Setting->find()->where(['field' => 'requestcount'])->first();
+ $requestcountval =  $requestcount['value'];
+ return $requestcountval;
+ }
+ public function dashboardcounterapi()
+ {
+ 	   $this->loadModel('Requests');
+		$this->loadModel('Responses');
+		$myRequestCount = $myReponseCount = 0;
+		$query1 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.status !="=>2, "Requests.is_deleted"=>0]]);
+		$myRequestCount = $query1->count();
+      $queryr = $this->Responses->find('all', ['conditions' => ['Responses.user_id' => $_POST['user_id']]]);
+      $myReponseCount = $queryr->count();
+      $countarr = array();
+		$coountarr['myRequestCount'] = $myRequestCount;
+		$coountarr['myReponseCount'] = $myReponseCount;
+		$placereq = $this->getrequestcount();
+		$placereq = $placereq - $myRequestCount;
+		$coountarr['placereq'] = $placereq;
+		$coountarr['respondToRequestCount'] = $this->__getRespondToRequestCountapi();
+		$result = array();
+		$result['response_code'] = 200;
+		$result['response_object'] = $coountarr;
+		$data =   json_encode($result);
+		echo $data;
+		exit;
+ }
+ public function __getRespondToRequestCountapi() {
+		$requests ='';
+		$this->loadModel('BlockedUsers');
+		$this->loadModel('Requests');
+        $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
+				->hydrate(false)
+				->where(['blocked_by' => $_POST['user_id']])
+				->toArray();
+		if(!empty($BlockedUsers)) {
+			$BlockedUsers = array_values($BlockedUsers);
+		}
+		array_push($BlockedUsers,$_POST['user_id']);
+		$BlockedUsers = array_unique($BlockedUsers);
+        if ($_POST['role_id'] == 1) { // Travel Agent
+			if(!empty($_POST['preference'])) {
+				$conditionalStates = array_unique(array_merge(explode(",", $_POST['preference']), array($_POST['state_id'])));
+			} else {
+				$conditionalStates = $_POST['state_id'];
+			}
+            $requests = $this->Requests->find()
+                     ->contain(["Users", "Responses"])
+							->notMatching('Responses', function(\Cake\ORM\Query $q) {
+								return $q->where(['Responses.user_id' => $_POST['user_id']]);
+							})
+                            ->where(["OR"=>['Requests.state_id IN' => $conditionalStates, 'Requests.pickup_state IN' => $conditionalStates], 'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0])
+							//->group('Requests.id')
+							->order(["Requests.id" => "DESC"])->count();
+        } else if ($_POST['role_id'] == 3) {
+            $requests = $this->Requests->find()
+                            ->contain(["Users", "Responses"])
+							->notMatching('Responses', function(\Cake\ORM\Query $q) {
+								return $q->where(['Responses.user_id' => $_POST['user_id']]);
+							})
+                            ->where(['Requests.city_id' => $_POST['city_id'], 'Requests.category_id' => 3, "Requests.status !="=>2, "Requests.is_deleted"=>0])
+							->order(["Requests.id" => "DESC"])->count();
+        }
+		return $requests;
+	}
+	public function citynameapi(){
+	$this->loadModel('Cities');
+	$city = $this->Cities->find()->where(['id' => $_POST['city_id']])->first();
+	$result['response_code'] = 200;
+	$result['response_object'] = $city;
+   $data =   json_encode($result);
+   echo $data;
+   exit;
+	}
+	public function statenameapi(){
+	$this->loadModel('States');
+	$state = $this->States->find()->where(['id' => $_POST['state_id']])->first();
+	$result['response_code'] = 200;
+	$result['response_object'] = $state;
+   $data =   json_encode($result);
+   echo $data;
+   exit;
+	}
+	
+    public function finalizedrequestlistapi() {
+        $this->loadModel('Responses');
+        $this->loadModel('Hotels');
+        $this->loadModel('Requests');
+        $this->loadModel('Cities');
+        
+        $conditions["Requests.user_id"] = $_POST['user_id'];
+        
+		$conditions["Requests.status"] = 2;
+		$conditions["Requests.is_deleted "] = 0;
+		if(isset($_POST["budgetsearch"]) && !empty($_POST["budgetsearch"])) {
+			$QPriceRange = $_POST["budgetsearch"];
+			$result = explode("-", $QPriceRange);
+			 $MinQuotePrice = $result[0];
+			 $MaxQuotePrice = $result[1];
+			$conditions["Requests.total_budget >="] = $MinQuotePrice;
+			$conditions["Requests.total_budget <="] = $MaxQuotePrice;
+		}
+		if(isset($_POST["req_typesearch"]) && !empty($_POST["req_typesearch"])) {
+		$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
+		}
+		if(isset($_POST["refidsearch"]) && !empty($_POST["refidsearch"])) {
+		$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
+		}
+		
+	$sdate = $_POST["startdatesearch"];
+		$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+		
+		if(!empty($_POST["startdatesearch"])) {
+			
+            	$da["Requests.start_date"] =  $sdate;
+            	$da["Requests.check_in"] =  $sdate;
+		$conditions["OR"] =  $da;
+		}
+		
+		 $edate =  $_POST["enddatesearch"]; 
+		 $edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+			
+		if(!empty($_POST["enddatesearch"])) {
+			$da1["Requests.end_date"] =  $edate;
+            	$da1["Requests.check_out"] =  $edate;
+		$conditions["OR"] =  $da1;
+	
+		}
+        if ($_POST['role_id'] == 1) {
+            $requests = $this->Requests->find()
+                            ->contain(["Users","Responses"])
+                              ->where($conditions)->order(["Requests.id" => "DESC"])->all();
+        }
+        if ($_POST['role_id'] == 2) {
+            $requests = $this->Requests->find()
+                            ->contain(["Users","Responses"])
+                              ->where($conditions)->order(["Requests.id" => "DESC"])->all();
+        }
+        if ($_POST['role_id'] == 3) {
+
+            $requests = $this->Requests->find()
+                            ->contain(["Users","Responses"])
+                              ->where($conditions)->order(["Requests.id" => "DESC"])->all();
+        }
+        $result['response_code'] = 200;
+		  $result['response_object'] = $requests;
+    		$data =   json_encode($result);
+      echo $data;
+      exit;
+    }
+
+    public function respondtorequestapi() {
+		  $this->loadModel('Transports');
+		   $this->loadModel('Testimonial');
+        $this->loadModel('Hotels');
+        $this->loadModel('Responses');
+        $this->loadModel('Requests');
+        $this->loadModel('Cities');
+         $this->loadModel('States');
+         $conditions ='';
+        if(!empty($_POST["req_typesearch"])) {
+		$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
+		}
+		if(!empty($_POST["budgetsearch"])) {
+			$QPriceRange = $_POST["budgetsearch"];
+			$result = explode("-", $QPriceRange);
+			$MinQuotePrice = $result[0];
+			$MaxQuotePrice = $result[1];
+			$conditions["Requests.total_budget >="] = $MinQuotePrice;
+			$conditions["Requests.total_budget <="] = $MaxQuotePrice;
+		}
+		if(!empty($_POST["refidsearch"])) {
+		$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
+		}
+		
+		$sdate = $_POST["startdatesearch"];
+		$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+		
+		if(!empty($_POST["startdatesearch"])) {
+            	$da["Requests.start_date"] =  $sdate;
+            	$da["Requests.check_in"] =  $sdate;
+		$conditions["OR"] =  $da;
+		}
+		
+		 $edate = $_POST["enddatesearch"];
+		 $edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+			
+		if(!empty($_POST["enddatesearch"])) {
+			$da1["Requests.end_date"] =  $edate;
+            	$da1["Requests.check_out"] =  $edate;
+		$conditions["OR"] =  $da1;
+	
+		}
+       $allStates = $this->States->find('list',['keyField' => 'id', 'valueField' => 'state_name'])
+				->hydrate(false)
+				->toArray();
+		
+        $user = $this->Users->find()->where(['id' => $_POST['user_id']])->first();
+        $this->set('users', $user);
+        $this->loadModel('BlockedUsers');
+        $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
+				->hydrate(false)
+				->where(['blocked_by' => $_POST['user_id']])
+				->toArray();
+		if(!empty($BlockedUsers)) {
+			$BlockedUsers = array_values($BlockedUsers);
+		}
+		array_push($BlockedUsers,$_POST['user_id']);
+		$BlockedUsers = array_unique($BlockedUsers);
+		   
+        if ($_POST['role_id'] == 1) { // Travel Agent
+			if(!empty($user["preference"])) {
+				$conditionalStates = array_unique(array_merge(explode(",", $user["preference"]), array($user["state_id"])));
+			} else {
+				$conditionalStates = $_POST["state_id"];
+			}
+			
+			 $requests = $this->Requests->find()
+                            ->contain(["Users", "Responses","Cities"])
+							->notMatching('Responses', function(\Cake\ORM\Query $q) {
+								return $q->where(['Responses.user_id' =>  $_POST['user_id']]);
+							})
+          
+							 ->where(["OR"=>['Requests.state_id IN' => $conditionalStates, 'Requests.pickup_state IN' => $conditionalStates], 'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
+						->group('Requests.id')
+							->order(["Requests.id" => "DESC"])->all();
+							
+        } else if ($_POST['role_id'] == 2) { /// Event Planner
+			$requests = $this->Requests->find()
+                            ->contain(["Users"])
+                            ->where(['Requests.pickup_state' => $user["state_id"], 'Requests.category_id' => 2, "Requests.status !="=>2, "Requests.is_deleted"=>0])->order(["Requests.id" => "DESC"])->all();
+        }else if ($_POST['role_id'] == 3) { /// Hotel
+            $requests = $this->Requests->find()
+                     ->contain(["Users", "Responses"])
+							->notMatching('Responses', function(\Cake\ORM\Query $q) {
+								return $q->where(['Responses.user_id' => $_POST['user_id']]);
+							})
+                            ->where(['Requests.city_id' => $_POST['city_id'], 'Requests.category_id' => 3, "Requests.status !="=>2, "Requests.is_deleted"=>0])
+							//->group('Requests.id')
+							->order(["Requests.id" => "DESC"])->all();
+        }
+         $data = array();
+        foreach($requests as $req){
+
+        		$query = $this->Testimonial->find();
+				$userRating = $query->select(["average_rating" => $query->func()->avg("rating")])
+				->where(['author_id' => $req['user_id']])
+				->order(["id" => "DESC"]);
+				  $data['rating'][$req['id']]  = $userRating;
+        }
+		$citystate = array();
+                     foreach($requests as $cit)
+                     {
+                     $cityname = $this->cityname($cit['city_id']);
+                     $statename = $this->statename($cit['state_id']);
+                     $comma = '';
+                     if($statename!=""){
+                     $comma = ',';
+                     }
+                     $citystatefull = $cityname .' '. $comma. $statename;
+                      $citystate['citystate'][$cit['id']]  = $citystatefull;
+                     }
+		$result['response_code'] = 200;
+		$result['response_object'] = $requests;
+		$result['rating'] = $data;
+		$result['citystate'] = $citystate;
+    	$data =   json_encode($result);
+      echo $data;
+      exit;
+      }
+      
+public function editapi(){
+		
+		 $id = $_POST['user_id'];
+        $userDetails = $this->Users->get($id);
+        if (isset($_POST)) {
+			if($userDetails["role_id"] == 3) {
+				if(isset($_POST["hotel_categories"]) && !empty($_POST["hotel_categories"])) {
+					$_POST["hotel_categories"] = $_POST["hotel_categories"];
+				}
+				if(isset($_POST["hotel_rating"]) && !empty($_POST["hotel_rating"])) {
+					$_POST["hotel_rating"] = $_POST["hotel_rating"];
+				}
+			}
+			
+			if(!empty($_POST['adyoi_pic']))
+					{
+						$adyoi_pic = $_POST['adyoi_pic'];
+$id=time().mt_rand().".png";
+$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
+file_put_contents($path,base64_decode($adyoi_pic));
+$_POST['adyoi_pic'] = $id;
+					}
+					else {
+						unset($_POST['adyoi_pic']);
+					}
+					
+					if(!empty($_POST['iata_pic']))
+					{
+						$iata_pic = $_POST['iata_pic'];
+$id=time().mt_rand().".png";
+$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
+file_put_contents($path,base64_decode($iata_pic));
+$_POST['iata_pic'] = $id;
+					}
+					else {
+						unset($_POST['iata_pic']);
+					}
+					if(!empty($_POST['taai_pic']))
+					{
+						$taai_pic = $_POST['taai_pic'];
+$id=time().mt_rand().".png";
+$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
+file_put_contents($path,base64_decode($taai_pic));
+$_POST['taai_pic'] = $id;
+					}
+					else {
+						unset($_POST['taai_pic']);
+					}
+					
+					if(!empty($_POST['iato_pic']))
+					{
+						$iato_pic = $_POST['iato_pic'];
+$id=time().mt_rand().".png";
+$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
+file_put_contents($path,base64_decode($iato_pic));
+$_POST['iato_pic'] = $id;
+					}
+					else {
+						unset($_POST['iato_pic']);
+					}
+					
+					if(!empty($_POST['iso9001_pic']))
+					{
+						$iso9001_pic = $_POST['iso9001_pic'];
+$id=time().mt_rand().".png";
+$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
+file_put_contents($path,base64_decode($iso9001_pic));
+$_POST['iso9001_pic'] = $id;
+					}
+					else {
+						unset($_POST['iso9001_pic']);
+					}
+					
+					if(!empty($_POST['uftaa_pic']))
+					{
+						$uftaa_pic = $_POST['uftaa_pic'];
+$id=time().mt_rand().".png";
+$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
+file_put_contents($path,base64_decode($uftaa_pic));
+$_POST['uftaa_pic'] = $id;
+					}
+					else {
+						unset($_POST['uftaa_pic']);
+					}
+					
+					
+					if(!empty($_POST['adtoi_pic']))
+					{
+						$adtoi_pic = $_POST['adtoi_pic'];
+$id=time().mt_rand().".png";
+$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
+file_put_contents($path,base64_decode($adtoi_pic));
+$_POST['adtoi_pic'] = $id;
+					}
+					else {
+						unset($_POST['adtoi_pic']);
+					}
+					
+					if(!empty($_POST['company_shop_registration']))
+					{
+						$company_shop_registration = $_POST['company_shop_registration'];
+$id=time().mt_rand().".png";
+$path =  WWW_ROOT."img".DS."user_docs".DS.$id;
+file_put_contents($path,base64_decode($company_shop_registration));
+$_POST['company_shop_registration'] = $id;
+					}
+					else {
+						unset($_POST['company_shop_registration']);
+					}
+					if(!empty($_POST['id_card']))
+					{
+						$id_card = $_POST['id_card'];
+$id=time().mt_rand().".png";
+$path =  WWW_ROOT."img".DS."user_docs".DS.$id;
+file_put_contents($path,base64_decode($id_card));
+$_POST['id_card'] = $id;
+					}
+					else {
+						unset($_POST['id_card']);
+					}
+					
+					
+					if(!empty($_POST['company_img_2']))
+					{
+						$company_img_2 = $_POST['company_img_2'];
+$id=time().mt_rand().".png";
+$path =  WWW_ROOT."img".DS."user_docs".DS.$id;
+file_put_contents($path,base64_decode($company_img_2));
+$_POST['company_img_2'] = $id;
+					}
+					else {
+						unset($_POST['company_img_2']);
+					}
+					
+					
+					
+					if(!empty($_POST['company_img_1']))
+					{
+						$company_img_1 = $_POST['company_img_1'];
+$id=time().mt_rand().".png";
+$path =  WWW_ROOT."img".DS."user_docs".DS.$id;
+file_put_contents($path,base64_decode($company_img_1));
+$_POST['company_img_1'] = $id;
+					}
+					else {
+						unset($_POST['company_img_1']);
+					}
+					
+					if(!empty($_POST['pancard']))
+					{
+						$pancard = $_POST['pancard'];
+$id=time().mt_rand().".png";
+$path =  WWW_ROOT."img".DS."user_docs".DS.$id;
+file_put_contents($path,base64_decode($pancard));
+$_POST['pancard'] = $id;
+					}
+					else {
+						unset($_POST['pancard']);
+					}
+					
+					if(!empty($_POST['profile_pic']))
+					{
+						$profile_pic = $_POST['profile_pic'];
+$id=time().mt_rand().".png";
+$path =  WWW_ROOT."img".DS."user_docs".DS.$id;
+file_put_contents($path,base64_decode($profile_pic));
+$_POST['profile_pic'] = $id;
+					}
+					else {
+						unset($_POST['profile_pic']);
+					}
+			 		$user = $this->Users->patchEntity($userDetails, $_POST);
+			 		if ($this->Users->save($user)) {
+					$result['response_code'] = 200;
+					$result['response_object'] = "User has been updated successfully.";
+    				$data =   json_encode($result);
+      			echo $data;
+      			exit;
+            } else {
+            	$result['response_code'] = 200;
+					$result['response_object'] = "'Something went wrong please try again.";
+    				$data =   json_encode($result);
+      			echo $data;
+      			exit;
+            }
+         }
+        }
+
+    
+      public function addchatapi() {
+        $this->loadModel('UserChats');
+        if($_POST){
+			$d = $_POST;
+			$d["user_id"] = $_POST['user_id'];
+			$d["send_to_user_id"] = $d['chat_user_id'];
+			$d["created"] = date("Y-m-d h:i:s");
+			$UserChat = $this->UserChats->newEntity($d);
+			if ($re = $this->UserChats->save($UserChat)) {
+			$result['response_code'] = 200;
+			$result['response_object'] = "Message send successfully";
+    		$data =   json_encode($result);
+      	echo $data;
+      	exit;
+
+			} else {
+			$result['response_code'] = 500;
+			$result['response_object'] = "Message send failed";
+    		$data =   json_encode($result);
+      	echo $data;
+      	exit;
+			}
+		}
+	
+    }
+
+    public function acceptofferapi() {
+        $this->loadModel('Requests');
+        $this->loadModel('Responses');
+		  $res = 0;
+		if(isset($_POST["request_id"]) && !empty($_POST["request_id"]) && !empty($_POST["user_id"])) {
+			$TableRequest = TableRegistry::get('Requests');
+			$request = $TableRequest->get($_POST["request_id"]);
+			$request->status = 2;
+			$request->final_id = $_POST["response_id"];
+			$request->response_id = $_POST["response_id"];
+			if ($TableRequest->save($request)) {
+				$TableResponse = TableRegistry::get('Responses');
+				$response = $TableResponse->get($_POST["response_id"]);
+				$response->status = 1;
+				$TableResponse->save($response);
+				$res = 1;
+			$result['response_code'] = 200;
+			$result['response_object'] =$res;
+    		$data =   json_encode($result);
+      	echo $data;
+      	exit;
+			}
+		}
+    }
+    	public function sharedetailsapi() {
+       $this->loadModel('Responses');
+		 $res = 0;
+		if(isset($_POST["response_id"]) && !empty($_POST["response_id"]) && !empty($_POST["user_id"])) {
+			$TableResponse = TableRegistry::get('Responses');
+			$response = $TableResponse->get($_POST ["response_id"]);
+			$response->is_details_shared = 1;
+			$TableResponse->save($response);
+			if ($TableResponse->save($response)) {
+				$res = 1;
+			}
+		}
+		$result['response_code'] = 200;
+		$result['response_object'] = $res;
+    	$data = json_encode($result);
+      echo $data;
+		exit;
+    }
+    public function addtestimonialapi() {
+
+        $this->loadModel('Testimonial');
+	     if ($this->request->is(['post', 'put'])) {
+	      $authoruserId = $_POST['user_id'];
+	      $reviewuserId =  $_POST['profileuser_id'];
+			$testimonialTable = TableRegistry::get('Testimonial');
+			$testimonial = $testimonialTable->newEntity();
+			$testimonial->author_id = $authoruserId;
+			$testimonial->user_id = $reviewuserId;
+			$testimonial->rating = $_POST['rating'];
+			$testimonial->comment = $_POST['comment'];
+			$testimonial->status =  '0';
+			$testimonial->created_at = date("Y-m-d H:i:s");
+			if ($testimonialTable->save($testimonial)) {
+    		$res =1;
+    		$result['response_code'] = 200;
+			$result['response_object'] =$res;
+    		$data =   json_encode($result);
+      	echo $data;
+      	exit;
+			}
+		}
+    }
+    
+    	public function addresponseapi() {
+        $this->loadModel('Responses');
+        if($_POST){
+			$d = $_POST;
+			$d["user_id"] = $_POST;
+			$d["status"] = 0;
+			$response = $this->Responses->newEntity($d);
+			if ($re = $this->Responses->save($response)) {
+			 $res =1;
+    		$result['response_code'] = 200;
+			$result['response_object'] =$res;
+    		$data =   json_encode($result);
+      	echo $data;
+      	exit;
+			} else {
+			$res =0;
+    		$result['response_code'] = 200;
+			$result['response_object'] =$res;
+    		$data =   json_encode($result);
+      	echo $data;
+      	exit;
+			}
+		}
+		return $this->redirect('/users/respondtorequest');
+    }
+    
+    public function addpromotionapi(){
+      if ($_POST) {
+$PromotionsTable = TableRegistry::get('Promotion');
+$Promotion = $PromotionsTable->newEntity();
+      //print_r($this->request->data);
+					if(!empty($_POST['hotel_pic']))
+					{
+						$hotel_pic = $_POST['hotel_pic'];
+						$id=time().mt_rand().".png";
+						$path =  WWW_ROOT."img".DS."hotels";
+						file_put_contents($path,base64_decode($hotel_pic));
+						$_POST['hotel_pic'] = $id;
+					}
+					else {
+					unset($_POST['hotel_pic']);
+					}
+			$Promotion->user_id = $_POST['user_id'];
+			$Promotion->hotel_name =  $_POST['hotel_name'];
+			$Promotion->hotel_type =  $_POST['hotel_categories'];
+			$Promotion->cheap_tariff =  $_POST['cheap_tariff'];
+			$Promotion->expensive_tariff =  $_POST['expensive_tariff'];
+			$Promotion->website =  $_POST['website'];
+			$Promotion->hotel_location =  $_POST['hotel_location'];
+			$Promotion->cities =   $_POST['cityid'];
+			$Promotion->citycharge =   $_POST['citycharge'];
+			$Promotion->duration =  $_POST['duration'];
+			$Promotion->expiry_date = date('Y-m-d H:i:s', strtotime('+'.$_POST['duration'].' months'));
+			$Promotion->charges =  $_POST['charges'];
+			$Promotion->hotel_name = $_POST['hotel_name'];
+			$Promotion->payment_status =  'pending';
+			$Promotion->status =  '0';
+			$Promotion->created_at = date("Y-m-d H:i:s");
+			if ($PromotionsTable->save($Promotion)) {
+			$result['response_code'] = 200;
+			$result['response_object'] = "Success";
+    		$data =   json_encode($result);
+      	echo $data;
+      	exit;
+			}
+}
+    }
+
+	public function promotionreportsapi() {
+		  $user_id = $_POST['user_id'];
+		  $this->loadModel('Promotion');
+		  $this->loadModel('Requests');
+		  $this->loadModel('Responses');
+		  $this->loadModel('User_Chats');
+		  $promotion =  $this->Promotion->find()->where(['user_id' => $user_id])->all();
+		  $result['response_code'] = 200;
+		  $result['response_object'] = $promotion;
+    	  $data =   json_encode($result);
+        echo $data;
+        exit;
+ }
+
+    public function sendreqapi(){
+      $this->loadModel('Requests');
+      $this->loadModel('Responses');
+      $this->loadModel('RequestStops');
+      $this->loadModel('Hotels');
+      $user = $this->Users->find()->where(['id' => $_POST['user_id']])->first();
+		$myRequestCount = $myReponseCount = 0;
+		$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.status !="=>2, "Requests.is_deleted"=>0]]);
+		$myRequestCount = $query->count();
+		if($myRequestCount < 100) {
+			if($_POST){
+			$d = $_POST;
+			$d['check_in'] = (isset($d['check_in']) && !empty($d['check_in']))?$this->ymdFormatByDateFormat($d['check_in'], "d-m-Y", $dateSeparator="/"):null;
+			$d['check_out'] = (isset($d['check_out']) && !empty($d['check_out']))?$this->ymdFormatByDateFormat($d['check_out'], "d-m-Y", $dateSeparator="/"):null;
+
+			$d['start_date'] = (isset($d['start_date']) && !empty($d['start_date']))?$this->ymdFormatByDateFormat($d['start_date'], "d-m-Y", $dateSeparator="/"):null;
+				$d['end_date'] = (isset($d['end_date']) && !empty($d['start_date']))?$this->ymdFormatByDateFormat($d['end_date'], "d-m-Y", $dateSeparator="/"):null;
+				
+				if($_POST['category_id'] == 2 ){
+					$p['transport_requirement'] = $d['transport_requirement'];
+					$p['pickup_city'] = $d['t_pickup_city_id'];
+					$p['pickup_state'] = $d['t_pickup_state_id'];
+					$p['pickup_country'] = $d['t_pickup_country_id'];
+					$p['final_city'] = $d['t_final_city_id'];
+					$p['final_state'] = $d['t_final_state_id'];
+					$p['final_country'] = $d['t_final_country_id'];
+					$p['pickup_locality'] = $d['pickup_locality'];
+					$p['start_date'] = $d['start_date'];
+					$p['end_date'] = $d['end_date'];
+					$p['comment'] = $d['comment'];
+					$p['category_id'] = $d['category_id'];
+					$p['reference_id'] = $d['reference_id'];
+					$p['user_id'] = $_POST['user_id'];
+					$p['total_budget'] = $d['total_budget'];
+					$p['adult'] = $d['transportAdult'];
+					$p['children'] = $d['transportChildren'];
+					$stopes = "";
+					if(isset($d['stops'])) {
+						foreach($d['stops'] as $key=>$row) {
+							$stopes .=  $row.",";
+						}
+
+					}
+					$p['stops'] = $stopes;
+					//pr($p); exit;
+					$contact = $this->Requests->newEntity($p);
+					if ($re = $this->Requests->save($contact)) {
+						$ui = $re->id;
+						if(isset($d['stops'])) {
+							foreach($d['stops'] as $key=>$row) {
+								$stopData['request_id'] = $ui;
+
+								$stopData['locality'] =  $row;
+								$stopData['city_id'] =  $d['id_trasport_stop_city'][$key];
+								$stopData['state_id'] =  $d['state_id_trasport_stop_city'][$key];
+
+								$result = $this->RequestStops->newEntity($stopData);
+								$this->RequestStops->save($result);
+							}
+
+						}
+						$result['response_code'] = 200;
+						$result['response_object'] = "Your request details has been saved.";
+    					$data = json_encode($result);
+   					echo $data;
+						exit;
+					
+					} else {
+						$result['response_code'] = 500;
+						$result['response_object'] = "Sorry.";
+    					$data = json_encode($result);
+   					echo $data;
+						exit;
+					}
+				} elseif($_POST['category_id'] == 1 ){
+					
+					$p['transport_requirement'] = $d['transport_requirement'];
+					$p['pickup_city'] = $d['pickup_city_id'];
+					$p['pickup_state'] = $d['pickup_state_id'];
+					$p['pickup_country'] = $d['pickup_country_id'];
+					$p['pickup_locality'] = $d['pickup_locality'];
+					$p['start_date'] = $d['start_date'];
+					$p['end_date'] = $d['end_date'];
+					$p['comment'] = $d['comment'];
+					$p['category_id'] = $d['category_id'];
+					$p['reference_id'] = $d['reference_id'];
+					$p['user_id'] = $_POST['user_id'];
+					$p['total_budget'] = $d['total_budget'];
+					$p['adult'] = $d['adult'];
+					$p['children'] = $d['children'];
+					$p['city_id'] = $d['city_id'];
+					$p['state_id'] = $d['state_id'];
+					$p['country_id'] = $d['country_id'];
+					$p['locality'] = $d['locality'];
+					//$p['stops'] =  $d['stops'];
+					$p['room1'] =  $d['room1'];
+					$p['room2'] =  $d['room2'];
+					$p['room3'] =  $d['room3'];
+					$p['child_with_bed'] =  $d['child_with_bed'];
+					$p['child_without_bed'] =  $d['child_without_bed'];
+					$p['hotel_rating'] = $d['hotel_rating'];
+					$p['hotel_category'] = $d['hotel_category'];
+					//$p['meal_plan'] = $d['meal_plan'] = (isset($d['meal_plan']) && !empty($d['meal_plan']))?implode(",", $d['meal_plan']):"";
+					$p['meal_plan'] = $d['meal_plan'];
+					//$p['stops'] = $d['stops'] = (isset($d['stops']) && !empty($d['stops']))?implode(",", $d['stops']):"";
+					$stopes = "";
+					if(isset($d['stops'])) {
+						foreach($d['stops'] as $key=>$row) {
+							$stopes .=  $row.",";
+						}
+					}
+
+					$p['stops'] = $stopes;
+
+					$p['check_in'] =  $d['check_in'];
+					$p['check_out'] =  $d['check_out'];
+					//pr($p);pr($d); exit;
+					$contact = $this->Requests->newEntity($p);
+					if ($re = $this->Requests->save($contact)) {
+						$ui = $re->id;
+						$d['req_id'] = $ui;
+						$d['user_id'] = $_POST['user_id'];
+						$rest = $this->Hotels->newEntity($d);
+						$this->Hotels->save($rest);//exit;
+						if(isset($d['hh_room1'])) {
+							foreach($d['hh_room1'] as $key=>$row) {
+								$hotalExtraData['req_id'] = $ui;
+								$hotalExtraData['user_id'] = $_POST['user_id'];
+
+								$hotalExtraData['room1'] = $d['hh_room1'][$key];
+								$hotalExtraData['room2'] =  $d['hh_room2'][$key];
+								$hotalExtraData['room3'] =  $d['hh_room3'][$key];
+								$hotalExtraData['child_with_bed'] =  $d['hh_child_with_bed'][$key];
+								$hotalExtraData['child_without_bed'] =  $d['hh_child_without_bed'][$key];
+								$hotalExtraData['hotel_rating'] = $d['hh_hotel_rating'][$key];
+								$hotalExtraData['hotel_category'] = $d['hh_hotel_category'][$key];
+								//$hotalExtraData['meal_plan'] = (isset($d['hh_meal_plan'][$key]) && !empty($d['hh_meal_plan'][$key]))?implode(",", $d['hh_meal_plan'][$key]):"";
+								$hotalExtraData['meal_plan'] = $d['hh_meal_plan'][$key];
+								$hotalExtraData['city_id'] = $d['hh_city_id'][$key];
+								$hotalExtraData['state_id'] = $d['hh_state_id'][$key];
+								$hotalExtraData['country_id'] = $d['hh_country_id'][$key];
+								$hotalExtraData['locality'] = $d['hh_locality'][$key];
+
+								$hotalExtraData['check_in'] =  ($d['hh_check_in'][$key])?$this->ymdFormatByDateFormat($d['hh_check_in'][$key], "d-m-Y", $dateSeparator="/"):null;
+								$hotalExtraData['check_out'] =  ($d['hh_check_out'][$key])?$this->ymdFormatByDateFormat($d['hh_check_out'][$key], "d-m-Y", $dateSeparator="/"):null;
+
+								$result = $this->Hotels->newEntity($hotalExtraData);
+								$this->Hotels->save($result);
+							}
+						}
+						if(isset($d['stops'])) {
+							foreach($d['stops'] as $key=>$row) {
+								$stopData['request_id'] = $ui;
+
+								$stopData['locality'] =  $row;
+								$stopData['city_id'] =  $d['id_package_stop_city'][$key];
+								$stopData['state_id'] =  $d['state_id_package_stop_city'][$key];
+								$result = $this->RequestStops->newEntity($stopData);
+								$this->RequestStops->save($result);
+							}
+						}
+						
+					   $result['response_code'] = 200;
+						$result['response_object'] = "Your request details has been saved.";
+    					$data = json_encode($result);
+   					echo $data;
+						exit;
+					} else {
+						$result['response_code'] = 500;
+						$result['response_object'] = "Sorry.";
+    					$data = json_encode($result);
+   					echo $data;
+						exit;
+					}
+				} elseif($_POST['category_id'] == 3 ){
+					$p['category_id'] = $d['category_id'];
+					$p['reference_id'] = $d['reference_id'];
+					$p['user_id'] = $_POST['user_id'];
+					$p['total_budget'] = $d['total_budget'];
+					$p['adult'] = $d['hotelAdult'];
+					$p['children'] = $d['hotelChildren'];
+					$p['city_id'] = $d['h_city_id'];
+					$p['state_id'] = $d['h_state_id'];
+					$p['country_id'] = $d['h_country_id'];
+					$p['locality'] = $d['locality'];
+					$p['room1'] =  $d['room1'];
+					$p['room2'] =  $d['room2'];
+					$p['room3'] =  $d['room3'];
+					$p['child_with_bed'] =  $d['child_with_bed'];
+					$p['child_without_bed'] =  $d['child_without_bed'];
+					$p['hotel_category'] = $d['hotel_category'] ;
+				
+					$p['meal_plan'] = $d['meal_plan'];
+					$p['check_in'] =  $d['check_in'];
+					$p['check_out'] =  $d['check_out'];
+					$p['hotel_rating'] = $d['hotel_rating'];
+					$p['comment'] = $d['comment'];
+					$contact = $this->Requests->newEntity($p);
+					if ($re = $this->Requests->save($contact)) {
+						$ui = $re->id;
+							$d['req_id'] = $ui;
+							$d['user_id'] = $_POST['user_id'];
+							$rest = $this->Hotels->newEntity($d);
+							$this->Hotels->save($rest);//exit;
+					   $result['response_code'] = 200;
+						$result['response_object'] = "Your request details has been saved.";
+    					$data = json_encode($result);
+   					echo $data;
+						exit;
+					
+					} else {
+						
+					
+					}
+				}
+			}
+		} else {
+						$result['response_code'] = 500;
+						$result['response_object'] = "Sorry you can not add more then 100.";
+    					$data = json_encode($result);
+   					echo $data;
+						exit;
+		}
+    }
+
+}

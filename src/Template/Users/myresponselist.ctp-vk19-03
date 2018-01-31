@@ -1,0 +1,121 @@
+ <?php echo $this->element('header-back');?>
+  <div class="row">
+      <?php echo $this->element('left_panel');?>
+	  <?php $this->Flash->render() ?>
+      <div class="col-md-9 pro-top">
+      <?php if($users['role_id'] == 1){?>
+        <div class="col-md-12">
+        
+          <div class="col-md-3 col-sm-9 col-xs-12">
+              <div class="title"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'sendrequest')) ?>"><strong>	Place Request</strong><br>
+                      <?php //echo $number; ?></a></div>
+          </div>
+        
+          <div class="col-md-3 col-sm-9 col-xs-12">
+              <div class="title"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>"><strong> 		My Requests</strong><br>
+                      <?php echo $myRequestCount; ?></a></div>
+          </div>
+      
+		 <div class="col-md-3 col-sm-9 col-xs-12">
+             <div class="title"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>"> <strong>Respond To Request</strong><br>
+                     <?php //echo count($requests); ?></a></div>
+          </div>
+          <div class="col-md-3 col-sm-9 col-xs-12">
+             <div class="title act"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'myresponselist')) ?>"> <strong>My Responses</strong><br>
+                     <?php echo $myReponseCount; ?></a></div>
+          </div>
+         
+        </div>
+        <?php } ?>
+        <?php if($users['role_id'] == 3){?>
+        <div class="col-md-12">
+		 <div class="col-md-3 col-sm-9 col-xs-12">
+             <div class="title"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>"> <strong>Respond To Request</strong><br>
+                     <?php //echo $numbers; ?></a></div>
+          </div>
+          <div class="col-md-3 col-sm-9 col-xs-12">
+             <div class="title act"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'myresponselist')) ?>"> <strong>My Responses</strong><br>
+                     <?php echo $myReponseCount; ?></a></div>
+          </div>
+         
+        </div>
+        <?php } ?>
+        <?php if($users['role_id'] == 2){?>
+			<div class="col-md-12">
+			
+			  <div class="col-md-3 col-sm-9 col-xs-offset-3 col-xs-12">
+				<div class="title"><strong>	Place Requests</strong><br>
+				  <?php //echo $number; ?></div>
+			  </div>
+			  <div class="col-md-3 col-sm-9 col-xs-12">
+				<div class="title"><strong>		My Requests</strong><br>
+				  <?php echo $myRequestCount; ?></div>
+			  </div>
+		 </div>
+        <?php } ?>
+      </div>
+      <div class="right-panel">
+	  <div class=" col-md-9 title">My Responses</div>
+
+		<!--- End----->
+        <div class="col-md-3">
+          <div id="top-link"> <a href="javascript:void(0)" onclick="window.history.back();">Go Back</a><a href="#" class="link-icon"><?php echo $this->Html->image('notify.png'); ?></a> 
+		  <?php if($users['id'] != ''){ ?>
+		  <a data-toggle="tooltip" title="Logout" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'logout')) ?>" class="link-icon"><?php echo $this->Html->image('logout.png'); ?></a> 
+		  <?php } ?>
+		  <a href="#" class="link-icon"><?php echo $this->Html->image('search-icon.png'); ?></a> </div>
+        </div>
+      </div>
+      <div class="col-md-9 col-sm-9 col-xs-12 right">
+       <?php 
+		if(count($responses) >0) { 
+			foreach($responses as $request){ ?>
+			   <div class="box-event">
+				<div class="col-md-4"><b>Refrence Id :-</b> <?php echo $request['request']['reference_id']; ?></div>
+				<?php if($request['request']['category_id'] == 3 ) { ?>
+					<div class="col-md-4"><b>Start Date :-</b> <?php echo ($request['request']['check_in'])?$request['request']['check_in']:"-- --"; ?></div>
+					<div class="col-md-4"><b>End Date :-</b> <?php echo ($request['request']['check_out'])?$request['request']['check_out']:"-- --"; ?></div>
+				<?php } elseif($request['request']['category_id'] == 1 ) {?>
+					<div class="col-md-4"><b>Start Date :- </b><?php echo ($request['request']['check_in'])?$request['request']['check_in']:"-- --"; ?></div>
+					<div class="col-md-4"><b>End Date :- </b><?php echo ($request['request']['check_out'])?$request['request']['check_out']:"-- --"; ?><span class="budy right"><a href="#"><?php echo $this->Html->image('friend-ico.png'); ?></a></span></div>
+				<?php } elseif($request['request']['category_id'] == 2 ) {?>
+					<div class="col-md-4"><b>Start Date :- </b><?php echo ($request['request']['start_date'])?$request['request']['start_date']:"-- --"; ?></div>
+					<div class="col-md-4"><b>End Date :-</b> <?php echo ($request['request']['end_date'])?$request['request']['end_date']:"-- --"; ?><span class="budy right"><a href="#"><?php echo $this->Html->image('friend-ico.png'); ?></a></span></div>
+				<?php } ?>
+
+				<div class="col-md-4"><b>Total Budget :- </b><?php echo $request['request']['total_budget']; ?>/-</div>
+				<div class="col-md-4"><b>Request Type :- </b><?php if($request['request']['category_id']==1){ echo "Package";} if($request['request']['category_id']==2){ echo "Transport";}if($request['request']['category_id']==3){ echo "Hotel";} ?></div>
+				 <div class="col-md-4"><b>Adults :- </b><?php echo $request['request']['adult']; ?></div>
+				  <div class="col-md-4"><b>Response Comment : </b><?php echo $request['comment']; ?></div>
+				<div class="col-md-3 col-sm-3 right link">
+			
+					<?php $id = $request['request']['id'];?>
+					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$id)) ?>"><?php echo $this->Html->image('detail-ico.png'); ?> Details</a>
+					<a href="<?php echo $id; ?>">
+					<?php echo $this->Html->image('chat-ico.png'); ?> Chat </a>
+				</div>
+			   </div>
+			<?php }
+		}else {?>
+			<div class="box-event">
+				No Record Found.
+			</div>
+		<?php } ?>
+       
+       
+    <!--  <div class="col-md-5 col-xs-offset-7 right"><ul class="pagination">
+    <li><a href="#">&laquo;</a></li>
+    <li><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+    <li><a href="#">3</a></li>
+    <li><a href="#">4</a></li>
+    <li><a href="#">5</a></li>
+    <li><a href="#">&raquo;</a></li>
+</ul></div>-->
+        
+        
+      </div>
+    </div>
+    <div id="tra-tours" class="footemail"> <a href="mailto:contactus@travelb2bhub.com">contactus@travelb2bhub.com</a> </div>
+
+<?php echo $this->element('footer');?>
