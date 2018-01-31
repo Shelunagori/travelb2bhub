@@ -1,0 +1,807 @@
+[04-Sep-2017 05:51:41 UTC] PHP Parse error:  syntax error, unexpected '<' in /home/wwwtravelb2bhub/public_html/b2b/src/Template/Element/subheader.ctp on line 95
+[04-Sep-2017 06:11:08 UTC] PHP Parse error:  syntax error, unexpected '&&' (T_BOOLEAN_AND) in /home/wwwtravelb2bhub/public_html/b2b/src/Template/Element/footer_new.ctp on line 4
+[04-Sep-2017 06:11:08 UTC] PHP Parse error:  syntax error, unexpected '&&' (T_BOOLEAN_AND) in /home/wwwtravelb2bhub/public_html/b2b/src/Template/Element/footer_new.ctp on line 4
+[04-Sep-2017 06:11:08 UTC] PHP Parse error:  syntax error, unexpected '&&' (T_BOOLEAN_AND) in /home/wwwtravelb2bhub/public_html/b2b/src/Template/Element/footer_new.ctp on line 4
+[04-Sep-2017 06:11:15 UTC] PHP Parse error:  syntax error, unexpected '&&' (T_BOOLEAN_AND) in /home/wwwtravelb2bhub/public_html/b2b/src/Template/Element/footer_new.ctp on line 4
+[04-Sep-2017 06:11:15 UTC] PHP Parse error:  syntax error, unexpected '&&' (T_BOOLEAN_AND) in /home/wwwtravelb2bhub/public_html/b2b/src/Template/Element/footer_new.ctp on line 4
+[04-Sep-2017 06:11:15 UTC] PHP Parse error:  syntax error, unexpected '&&' (T_BOOLEAN_AND) in /home/wwwtravelb2bhub/public_html/b2b/src/Template/Element/footer_new.ctp on line 4
+[04-Sep-2017 10:30:42 UTC] PHP Fatal error:  Cannot use isset() on the result of a function call (you can use "null !== func()" instead) in /home/wwwtravelb2bhub/public_html/b2b/src/Template/Users/respondtorequest.ctp on line 192
+[04-Sep-2017 10:31:50 UTC] PHP Parse error:  syntax error, unexpected '{' in /home/wwwtravelb2bhub/public_html/b2b/src/Template/Users/respondtorequest.ctp on line 192
+[04-Sep-2017 10:32:03 UTC] PHP Parse error:  syntax error, unexpected 'success' (T_STRING), expecting ',' or ';' in /home/wwwtravelb2bhub/public_html/b2b/src/Template/Users/respondtorequest.ctp on line 193
+[04-Sep-2017 10:32:09 UTC] PHP Parse error:  syntax error, unexpected 'success' (T_STRING), expecting ',' or ';' in /home/wwwtravelb2bhub/public_html/b2b/src/Template/Users/respondtorequest.ctp on line 193
+[04-Sep-2017 11:39:04 UTC] PHP Fatal error:  Call to a member function count() on null in /home/wwwtravelb2bhub/public_html/b2b/src/Controller/UsersController.php on line 2182
+[04-Sep-2017 12:17:29 UTC] PHP Parse error:  syntax error, unexpected '$this' (T_VARIABLE), expecting function (T_FUNCTION) in /home/wwwtravelb2bhub/public_html/b2b/src/Controller/UsersController.php on line 796
+[04-Sep-2017 13:40:00 UTC] PHP Parse error:  syntax error, unexpected '.' in /home/wwwtravelb2bhub/public_html/b2b/src/Template/Element/subheader.ctp on line 444
+[04-Sep-2017 13:41:26 UTC] PHP Parse error:  syntax error, unexpected '.' in /home/wwwtravelb2bhub/public_html/b2b/src/Template/Element/subheader.ctp on line 444
+[05-Sep-2017 07:23:25 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/wwwtravelb2bhub/public_html/src/Template/Layout/default.ctp on line 44
+[05-Sep-2017 07:23:25 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/wwwtravelb2bhub/public_html/src/Template/Layout/default.ctp on line 44
+[05-Sep-2017 07:23:35 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/wwwtravelb2bhub/public_html/src/Template/Layout/default.ctp on line 44
+[05-Sep-2017 07:26:59 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/wwwtravelb2bhub/public_html/src/Template/Layout/default.ctp on line 45
+[05-Sep-2017 07:27:00 UTC] PHP Parse error:  syntax error, unexpected '=>' (T_DOUBLE_ARROW), expecting ']' in /home/wwwtravelb2bhub/public_html/src/Template/Layout/default.ctp on line 45
+[05-Sep-2017 10:06:44 UTC] PHP Fatal error:  Class 'AppController' not found in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 20
+[05-Sep-2017 10:06:47 UTC] PHP Fatal error:  Class 'AppController' not found in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 20
+[05-Sep-2017 10:06:51 UTC] PHP Fatal error:  Class 'AppController' not found in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 20
+[05-Sep-2017 10:06:59 UTC] PHP Fatal error:  Class 'AppController' not found in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 20
+[05-Sep-2017 10:07:02 UTC] PHP Fatal error:  Class 'AppController' not found in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 20
+[05-Sep-2017 10:07:02 UTC] PHP Fatal error:  Class 'AppController' not found in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 20
+[05-Sep-2017 10:07:14 UTC] PHP Fatal error:  Class 'AppController' not found in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 20
+[05-Sep-2017 10:07:21 UTC] PHP Fatal error:  Class 'AppController' not found in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 20
+[05-Sep-2017 10:07:23 UTC] PHP Fatal error:  Class 'AppController' not found in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 20
+[05-Sep-2017 10:07:27 UTC] PHP Fatal error:  Class 'AppController' not found in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 20
+[05-Sep-2017 10:07:28 UTC] PHP Fatal error:  Class 'AppController' not found in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 20
+[05-Sep-2017 10:07:47 UTC] PHP Fatal error:  Class 'AppController' not found in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 20
+[05-Sep-2017 10:07:51 UTC] PHP Fatal error:  Class 'AppController' not found in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 20
+[05-Sep-2017 10:07:53 UTC] PHP Fatal error:  Class 'AppController' not found in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 20
+[05-Sep-2017 10:08:00 UTC] PHP Fatal error:  Class 'AppController' not found in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 20
+[05-Sep-2017 14:46:48 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 14:46:49 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 14:51:05 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 14:51:06 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 14:54:15 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 14:54:18 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 14:54:26 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 14:54:28 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 14:54:44 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 14:54:46 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 14:55:05 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 14:55:07 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 14:55:21 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 14:55:23 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 14:55:45 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 14:55:47 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 14:56:13 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 14:56:14 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 15:40:17 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 15:40:18 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 16:11:20 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 16:11:22 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 16:16:32 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 16:16:33 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 16:17:03 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[05-Sep-2017 16:17:05 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[06-Sep-2017 05:06:26 UTC] PHP Fatal error:  Call to a member function execute() on null in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 158
+[07-Sep-2017 11:31:01 UTC] PHP Parse error:  syntax error, unexpected '<' in /home/wwwtravelb2bhub/public_html/src/Template/Element/left_panel.ctp on line 219
+[07-Sep-2017 11:31:05 UTC] PHP Parse error:  syntax error, unexpected '<' in /home/wwwtravelb2bhub/public_html/src/Template/Element/left_panel.ctp on line 219
+[07-Sep-2017 11:31:08 UTC] PHP Parse error:  syntax error, unexpected '<' in /home/wwwtravelb2bhub/public_html/src/Template/Element/left_panel.ctp on line 219
+[07-Sep-2017 11:31:12 UTC] PHP Parse error:  syntax error, unexpected '<' in /home/wwwtravelb2bhub/public_html/src/Template/Element/left_panel.ctp on line 219
+[07-Sep-2017 11:31:22 UTC] PHP Parse error:  syntax error, unexpected '<' in /home/wwwtravelb2bhub/public_html/src/Template/Element/left_panel.ctp on line 219
+[07-Sep-2017 11:31:27 UTC] PHP Parse error:  syntax error, unexpected '<' in /home/wwwtravelb2bhub/public_html/src/Template/Element/left_panel.ctp on line 219
+[07-Sep-2017 17:01:32 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '<' in /home/wwwtravelb2bhub/public_html/src/Template/Element/left_panel.ctp on line 219
+[07-Sep-2017 11:31:39 UTC] PHP Parse error:  syntax error, unexpected '<' in /home/wwwtravelb2bhub/public_html/src/Template/Element/left_panel.ctp on line 219
+[08-Sep-2017 05:23:27 UTC] PHP Fatal error:  Call to a member function count() on null in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 2046
+[13-Sep-2017 09:12:32 UTC] PHP Parse error:  syntax error, unexpected '<' in /home/wwwtravelb2bhub/public_html/src/Template/Pages/promotions.ctp on line 98
+[13-Sep-2017 09:15:27 UTC] PHP Parse error:  syntax error, unexpected '?' in /home/wwwtravelb2bhub/public_html/src/Template/Pages/promotions.ctp on line 121
+[13-Sep-2017 13:30:55 UTC] PHP Parse error:  syntax error, unexpected '<' in /home/wwwtravelb2bhub/public_html/src/Controller/PagesController.php on line 94
+[14-Sep-2017 09:52:41 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 3092
+[14-Sep-2017 09:53:17 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 3092
+[14-Sep-2017 11:37:35 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 3104
+[14-Sep-2017 11:37:55 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 3104
+[14-Sep-2017 11:38:13 UTC] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 3104
+[14-Sep-2017 11:38:25 UTC] PHP Parse error:  syntax error, unexpected ']', expecting ',' or ';' in /home/wwwtravelb2bhub/public_html/src/Template/Users/promotionreport.ctp on line 45
+[15-Sep-2017 12:19:23 UTC] PHP Parse error:  syntax error, unexpected '(', expecting identifier (T_STRING) or variable (T_VARIABLE) or '{' or '$' in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 2202
+[15-Sep-2017 12:25:39 UTC] PHP Parse error:  syntax error, unexpected '$myReponseCount' (T_VARIABLE) in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 2202
+[21-Sep-2017 14:06:17 UTC] PHP Fatal error:  Call to a member function count() on null in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 2046
+[21-Sep-2017 14:06:18 UTC] PHP Fatal error:  Call to a member function count() on null in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 2046
+[26-Sep-2017 06:12:22 America/Chicago] PHP Deprecated:  Automatically populating $HTTP_RAW_POST_DATA is deprecated and will be removed in a future version. To avoid this warning set 'always_populate_raw_post_data' to '-1' in php.ini and use the php://input stream instead. in Unknown on line 0
+[01-Oct-2017 04:41:38 UTC] PHP Fatal error:  Call to a member function count() on null in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 2050
+[01-Oct-2017 04:41:40 UTC] PHP Fatal error:  Call to a member function count() on null in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 2050
+[01-Oct-2017 04:41:53 UTC] PHP Fatal error:  Call to a member function count() on null in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 2050
+[01-Oct-2017 04:41:54 UTC] PHP Fatal error:  Call to a member function count() on null in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 2050
+[02-Oct-2017 09:30:07 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 243
+[02-Oct-2017 09:30:12 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/wwwtravelb2bhub/public_html/src/Template/Users/requestlist.ctp on line 243
+[02-Oct-2017 09:31:50 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/wwwtravelb2bhub/public_html/src/Template/Users/respondtorequest.ctp on line 439
+[02-Oct-2017 09:32:21 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/wwwtravelb2bhub/public_html/src/Template/Users/myresponselist.ctp on line 527
+[02-Oct-2017 09:33:00 UTC] PHP Parse error:  syntax error, unexpected end of file in /home/wwwtravelb2bhub/public_html/src/Template/Users/finalized_request_list.ctp on line 363
+[02-Oct-2017 11:12:41 UTC] PHP Fatal error:  Class 'App\Controller\CakeEmail' not found in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 163
+[02-Oct-2017 11:16:55 UTC] PHP Parse error:  syntax error, unexpected '@' in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 167
+[02-Oct-2017 11:16:57 UTC] PHP Parse error:  syntax error, unexpected '@' in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 167
+[02-Oct-2017 11:17:00 UTC] PHP Parse error:  syntax error, unexpected '@' in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 167
+[02-Oct-2017 11:17:00 UTC] PHP Parse error:  syntax error, unexpected '@' in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 167
+[02-Oct-2017 11:17:03 UTC] PHP Parse error:  syntax error, unexpected '@' in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 167
+[02-Oct-2017 11:17:05 UTC] PHP Parse error:  syntax error, unexpected '@' in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 167
+[02-Oct-2017 11:17:06 UTC] PHP Parse error:  syntax error, unexpected '@' in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 167
+[02-Oct-2017 11:17:09 UTC] PHP Parse error:  syntax error, unexpected '@' in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 167
+[02-Oct-2017 11:17:10 UTC] PHP Parse error:  syntax error, unexpected '@' in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 167
+[02-Oct-2017 11:17:15 UTC] PHP Parse error:  syntax error, unexpected '@' in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 167
+[02-Oct-2017 11:17:20 UTC] PHP Parse error:  syntax error, unexpected '@' in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 167
+[02-Oct-2017 11:17:44 UTC] PHP Parse error:  syntax error, unexpected '@' in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 167
+[02-Oct-2017 11:17:45 UTC] PHP Parse error:  syntax error, unexpected '@' in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 167
+[02-Oct-2017 11:17:50 UTC] PHP Parse error:  syntax error, unexpected '@' in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 167
+[02-Oct-2017 11:17:55 UTC] PHP Parse error:  syntax error, unexpected '@' in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 167
+[02-Oct-2017 11:53:20 UTC] PHP Fatal error:  Class 'App\Controller\CakeEmail' not found in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 162
+[02-Oct-2017 13:52:15 UTC] PHP Fatal error:  Class 'App\Controller\EmailTransport' not found in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 169
+[02-Oct-2017 14:03:48 UTC] PHP Fatal error:  Class 'App\Controller\PHPMailer' not found in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 170
+[08-Oct-2017 00:43:08 America/Chicago] PHP Deprecated:  Automatically populating $HTTP_RAW_POST_DATA is deprecated and will be removed in a future version. To avoid this warning set 'always_populate_raw_post_data' to '-1' in php.ini and use the php://input stream instead. in Unknown on line 0
+[10-Oct-2017 10:41:57 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[10-Oct-2017 10:42:41 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[10-Oct-2017 11:02:31 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[10-Oct-2017 11:25:05 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[10-Oct-2017 11:47:45 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[10-Oct-2017 11:57:04 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[10-Oct-2017 12:50:48 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[10-Oct-2017 13:20:35 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[10-Oct-2017 13:57:42 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[10-Oct-2017 14:05:15 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[10-Oct-2017 14:20:19 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[10-Oct-2017 19:16:18 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[10-Oct-2017 20:12:42 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[11-Oct-2017 08:11:40 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[11-Oct-2017 12:55:36 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[11-Oct-2017 13:40:45 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[11-Oct-2017 15:55:31 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[11-Oct-2017 19:46:57 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:47:00 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:47:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:47:09 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:47:13 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:47:18 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:47:24 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:47:30 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:47:36 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:47:42 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:47:48 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:47:54 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:48:00 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:48:06 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:48:12 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:48:18 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:48:24 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:48:30 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:48:36 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:48:42 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:48:48 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:48:53 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:48:59 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:49:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:49:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:49:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:49:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:49:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:49:35 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:49:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:49:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:49:53 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:49:59 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:50:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:50:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:50:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:50:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:50:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:50:35 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:50:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:50:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:50:53 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:50:59 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:51:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:51:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:51:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:51:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:51:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:51:35 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:51:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:51:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:51:53 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:51:59 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:52:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:52:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:52:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:52:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:52:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:52:35 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:52:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:52:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:52:53 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:52:59 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:53:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:53:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:53:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:53:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:53:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:53:35 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:53:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:53:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:53:53 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:53:59 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:54:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:54:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:54:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:54:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:54:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:54:35 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:54:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:54:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:54:54 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:54:59 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:55:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:55:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:55:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:55:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:55:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:55:35 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:55:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:55:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:55:53 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:55:59 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:56:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:56:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:56:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:56:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:56:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:56:35 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:56:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:56:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:56:53 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:56:59 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:57:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:57:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:57:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:57:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:57:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:57:35 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:57:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:57:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:57:53 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:57:59 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:58:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:58:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:58:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:58:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:58:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:58:35 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:58:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:58:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:58:53 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:58:59 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:59:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:59:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:59:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:59:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:59:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:59:35 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:59:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:59:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:59:53 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 19:59:59 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 20:00:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 20:00:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 20:00:15 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[11-Oct-2017 20:00:20 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 00:49:04 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[12-Oct-2017 09:41:54 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:41:59 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:42:04 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:42:09 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:42:14 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:42:19 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:42:24 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:42:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:42:35 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:42:39 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:42:45 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:42:49 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:42:54 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:43:00 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:43:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:43:09 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:43:14 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:43:20 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:43:22 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:43:28 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:43:33 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:43:38 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:43:43 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:43:49 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:43:53 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:43:58 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:44:04 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:44:08 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:44:14 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:44:19 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:44:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:44:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:44:34 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:44:39 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:44:44 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:44:49 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:44:54 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:44:59 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:45:04 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:45:09 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:45:14 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:45:22 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:45:32 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:45:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 09:45:42 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:50:55 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:51:01 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:51:06 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:51:12 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:51:18 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:51:24 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:51:30 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:51:36 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:51:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:51:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:51:53 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:51:59 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:52:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:52:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:52:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:52:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:52:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:52:35 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:52:45 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:52:56 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:53:02 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:53:04 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:53:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:53:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:53:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:53:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:53:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:53:35 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 10:53:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:05:59 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:06:04 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:06:06 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:06:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:06:16 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:06:21 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:06:26 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:06:32 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:06:36 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:06:42 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:06:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:06:51 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:06:56 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:07:01 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:07:07 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:07:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:07:16 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:07:22 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:07:26 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:07:31 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:07:36 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:07:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:07:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:07:51 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:08:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:08:06 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:08:08 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:08:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:08:18 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:08:22 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:08:28 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:08:32 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:08:37 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:08:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:08:46 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:08:52 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:08:56 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:09:01 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:09:07 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:09:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:09:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:09:22 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:09:26 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:09:31 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:09:36 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:09:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1789
+[12-Oct-2017 11:09:46 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:09:51 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:09:57 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:10:01 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:10:07 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:10:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:10:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:10:21 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:10:26 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:10:32 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:10:37 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:10:42 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:10:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:10:52 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:10:57 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:11:02 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:11:07 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:11:12 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:11:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:11:22 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:11:27 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:11:32 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:11:37 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:11:42 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:11:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:11:52 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:11:57 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:12:02 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:12:07 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:12:12 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:12:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:12:22 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:12:27 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:12:32 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:12:37 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:12:42 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:12:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:12:52 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:12:57 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:13:02 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:13:07 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:13:12 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:13:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:13:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:13:28 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:13:33 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:13:37 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:13:43 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:13:48 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:13:53 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:13:58 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:14:03 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:14:08 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:14:13 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:14:18 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:14:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:14:28 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:14:33 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:14:38 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:14:43 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:14:48 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:14:53 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:14:58 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:15:03 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:15:08 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:15:13 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:15:18 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:15:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:15:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:15:33 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:15:38 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:15:43 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:15:48 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:15:53 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:15:58 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:16:03 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:16:08 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:16:13 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:16:18 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:16:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:16:28 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:16:33 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:16:38 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:16:44 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:16:49 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:16:56 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:17:01 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:17:09 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:17:19 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:17:24 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:17:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:17:35 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:17:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:17:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:17:52 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:17:58 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:18:04 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:18:10 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:18:16 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:18:22 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:18:27 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:18:33 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:18:39 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:18:45 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:18:52 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:18:57 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:19:03 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:19:09 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:19:15 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:19:22 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:19:27 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:19:32 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:19:38 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:19:44 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:19:50 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:19:56 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:20:02 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:20:07 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:20:13 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:20:20 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:20:25 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:20:31 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:20:36 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:20:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:20:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:20:52 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:20:56 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:21:02 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:21:06 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:21:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:21:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:21:22 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:21:27 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:21:32 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:21:36 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:21:42 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:21:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:21:51 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:21:56 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:22:01 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:22:07 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:22:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:22:16 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:22:21 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:22:27 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:22:31 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:22:37 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:22:42 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:22:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:22:51 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:22:57 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:23:02 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:23:07 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:23:12 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:23:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:23:22 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:23:27 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:23:32 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:23:37 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:23:42 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:23:46 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:23:51 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:23:56 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:24:02 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:24:06 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:24:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:24:16 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:24:21 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:24:27 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:24:31 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:24:37 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:24:42 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:24:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:24:52 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:24:57 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:25:02 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:25:07 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:25:12 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:25:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:25:21 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:25:27 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:25:32 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:25:37 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:25:42 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:25:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:25:52 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:25:57 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:26:02 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:26:07 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:26:12 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:26:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:26:22 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:26:27 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:26:32 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:26:37 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:26:42 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:26:59 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:31:40 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:31:45 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:31:52 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:31:57 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:32:03 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:32:09 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:32:15 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:32:21 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:32:26 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:32:32 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:32:38 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:32:44 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:32:50 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:32:56 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:33:03 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:33:08 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:33:14 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:33:20 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:33:27 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:33:32 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:33:37 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:33:42 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:33:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:33:52 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:33:57 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:34:02 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:34:07 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:34:12 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:34:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:34:22 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:34:27 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:34:33 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:34:38 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:34:43 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:34:48 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:34:55 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:35:00 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:35:04 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:35:10 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:35:19 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:35:25 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:35:31 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:35:34 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:35:38 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:35:42 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:35:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:35:53 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:35:57 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:36:10 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:36:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:36:12 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:36:15 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:36:21 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:36:25 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:36:30 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:36:34 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:36:38 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:36:44 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:36:51 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:36:56 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:36:59 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:37:06 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:37:09 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:37:14 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:37:19 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:37:24 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:37:28 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:37:35 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:37:40 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:37:43 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:37:48 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:37:54 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:38:02 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:38:12 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:38:16 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:38:19 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:38:20 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:38:25 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:38:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:38:34 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:38:39 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:38:45 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:38:50 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:38:55 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:39:00 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:39:06 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:39:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:39:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:39:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:39:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:39:36 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:39:40 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:39:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:39:53 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:39:58 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:40:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:40:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:40:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:40:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:40:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:40:35 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:40:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:40:47 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:40:52 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:40:59 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:41:04 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:41:10 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:41:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:41:23 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:41:28 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:41:35 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:41:40 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:41:46 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:41:53 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:41:58 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:42:04 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:42:10 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:42:16 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:42:22 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:42:28 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:42:34 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:42:40 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:42:46 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:42:52 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:42:58 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:43:04 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:43:10 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:43:16 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:43:22 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:43:28 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:43:34 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:43:40 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:43:46 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:43:52 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:43:58 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:44:04 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:44:10 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:44:16 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:44:22 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:44:28 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:44:34 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:44:40 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:44:46 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:44:52 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:44:58 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:45:04 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:45:10 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:45:16 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 11:45:22 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:05:26 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:05:30 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:05:35 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:05:40 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:05:45 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:05:50 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:05:56 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:06:00 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:06:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:06:10 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:06:15 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:06:28 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:06:29 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:06:30 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:06:37 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:06:40 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:06:46 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:06:51 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:06:55 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:07:02 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:07:05 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:07:11 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:07:17 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:07:20 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:07:26 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:07:31 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:07:36 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:07:41 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:07:45 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:07:50 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:07:56 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:08:01 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:08:06 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:08:12 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:08:16 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[12-Oct-2017 13:08:21 Asia/Kolkata] PHP Fatal error:  Call to a member function find() on boolean in /home/wwwtravelb2bhub/public_html/src/Controller/UsersController.php on line 1790
+[13-Oct-2017 12:03:46 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[13-Oct-2017 16:08:20 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[13-Oct-2017 17:29:49 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[13-Oct-2017 18:05:55 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[13-Oct-2017 18:47:46 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[13-Oct-2017 19:18:12 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[13-Oct-2017 20:28:39 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[13-Oct-2017 20:35:24 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[13-Oct-2017 21:00:09 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[13-Oct-2017 21:25:47 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[13-Oct-2017 21:45:04 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[14-Oct-2017 01:47:25 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[14-Oct-2017 11:31:15 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[14-Oct-2017 11:42:03 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[14-Oct-2017 11:43:14 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[14-Oct-2017 12:36:25 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[14-Oct-2017 12:54:30 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[14-Oct-2017 13:42:10 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[14-Oct-2017 15:20:55 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[14-Oct-2017 17:53:03 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[14-Oct-2017 18:02:53 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[14-Oct-2017 18:35:42 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[14-Oct-2017 19:29:03 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[14-Oct-2017 19:31:56 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[14-Oct-2017 19:34:25 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[14-Oct-2017 19:56:58 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[14-Oct-2017 19:58:26 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[14-Oct-2017 20:01:38 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[14-Oct-2017 20:25:17 Asia/Kolkata] PHP Fatal error:  Call to undefined method Cake\Log\Log::warn() in /home/wwwtravelb2bhub/public_html/vendor/cakephp/cakephp/src/Http/ResponseEmitter.php on line 50
+[16-Oct-2017 06:19:46 America/Chicago] PHP Warning:  POST Content-Length of 74852374 bytes exceeds the limit of 67108864 bytes in Unknown on line 0
+[07-Dec-2017 03:07:27 America/Chicago] PHP Deprecated:  Automatically populating $HTTP_RAW_POST_DATA is deprecated and will be removed in a future version. To avoid this warning set 'always_populate_raw_post_data' to '-1' in php.ini and use the php://input stream instead. in Unknown on line 0
+[13-Dec-2017 05:11:47 America/Chicago] PHP Deprecated:  Automatically populating $HTTP_RAW_POST_DATA is deprecated and will be removed in a future version. To avoid this warning set 'always_populate_raw_post_data' to '-1' in php.ini and use the php://input stream instead. in Unknown on line 0
+[19-Dec-2017 15:02:58 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}' in /home/wwwtravelb2bhub/public_html/src/Template/Users/respondtorequest.ctp on line 392
+[19-Dec-2017 15:04:12 Asia/Kolkata] PHP Parse error:  syntax error, unexpected '}' in /home/wwwtravelb2bhub/public_html/src/Template/Users/respondtorequest.ctp on line 392
+[31-Dec-2017 22:07:01 America/Chicago] PHP Deprecated:  Automatically populating $HTTP_RAW_POST_DATA is deprecated and will be removed in a future version. To avoid this warning set 'always_populate_raw_post_data' to '-1' in php.ini and use the php://input stream instead. in Unknown on line 0
+[15-Jan-2018 04:20:20 America/Chicago] PHP Deprecated:  Automatically populating $HTTP_RAW_POST_DATA is deprecated and will be removed in a future version. To avoid this warning set 'always_populate_raw_post_data' to '-1' in php.ini and use the php://input stream instead. in Unknown on line 0

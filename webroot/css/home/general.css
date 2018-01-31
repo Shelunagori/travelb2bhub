@@ -1,0 +1,1808 @@
+/* CSS Document */
+
+body
+{
+    padding: 0;
+    margin: 0 auto;
+    font-family: calibri;
+    font-size: 13px;
+    color: #fff;
+}
+.listing_footer_link
+{
+    color: #fff;
+    text-decoration: none;
+}
+.header_link
+{
+    font-size: 12px;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+
+.social-ic
+{
+    padding: 5px;
+}
+.holiday-type-heading
+{
+    font-size: 40px;
+    color: #ffffff;
+    padding-top: 1em;
+    padding-bottom: 10px;
+    font-family: calibri;
+}
+.input-txt-newsletter
+{
+    height: 30px;
+    width: 200px;
+    border: 1px solid #b5b7b9;
+    background: #ffffff;
+    font-size: 15px;
+    color: #48494a;
+    padding: 5px;
+    font-family: calibri;
+}
+.home_footer_link
+{
+    font-family: calibri;
+    font-size: 14px;
+}
+.search_bt
+{
+    border: none;
+    line-height: 20px;
+    text-decoration: none;
+    font-size: 12px;
+    color: #FFFFFF;
+    background: #382d57 url("../images/search_icon.png") 13% 49% no-repeat;
+    padding-left: 32px;
+    padding-right: 10px;
+    height: 27px;
+    cursor: pointer;
+}
+.search_criteria_txt
+{
+    font-size: 14px;
+    color: #4e4e4e;
+    padding-left: 15px;
+}
+.search_criteria_dotted_line_grey
+{
+    background: url("../images/divider_grey.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    padding-bottom: 21px;
+    padding-top: 10px;
+}
+
+.search_criteria_sub_txt
+{
+    font-size: 14px;
+    color: #4e4e4e;
+    font-weight: normal;
+}
+.search_criteria_sub_date_txt
+{
+    font-size: 18px;
+    color: #4e4e4e;
+    font-weight: normal;
+}
+.input_label_heading_txt
+{
+    font-size: 15px;
+    color: #4e4e4e;
+    font-weight: normal;
+}
+
+.modify_search_headingbg
+{
+    background-color: #000000;
+}
+
+.modify_search_heading
+{
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+.modify_big_inputText
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #5e5c5c;
+    padding: 5px;
+    border: 1px solid #c6c3c3;
+    width: 90%;
+}
+
+.modify_small_inputText
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #5e5c5c;
+    padding: 5px;
+    border: 1px solid #c6c3c3;
+    width: 50px;
+}
+
+.modify_datepicker_inputText
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #5e5c5c;
+    padding: 5px;
+    border: 1px solid #c6c3c3;
+    width: 110px;
+}
+.general_dropdown
+{
+    font-size: 12px;
+    font-weight: normal;
+    color: #545353;
+    background-color: #ffffff;
+    padding: 5px;
+    border: 1px solid #dcdcdc;
+    border-top: 1px solid #dcdcdc;
+}
+
+.dropdown_search
+{
+    border: 0 !important;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: #ffffff url(../images/search_dropdown_arrow.png) no-repeat 90% center;
+    text-indent: 0.01px;
+    text-overflow: "";
+    padding: 5px;
+    width: 90%;
+    height: 40px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555555;
+}
+.general_inputText
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #5e5c5c;
+    padding: 5px;
+    border: 1px solid #c6c3c3;
+}
+.search-box-star-category ul
+{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.search-box-star-category li
+{
+    font-size: 12px;
+    color: #555;
+    float: left;
+    width: 26px;
+    list-style: none;
+    text-align: center;
+    padding: 5px 0px 4px 0px;
+}
+.search_heading_BigText
+{
+    font-size: 18px;
+    color: #382d57;
+    text-decoration: none;
+    font-weight: normal;
+}
+.modify_bt
+{
+    border: none;
+    font-size: 12px;
+    color: #FFFFFF;
+    background: #bec00f url("../images/modify_plus_icon.png") 8% 47% no-repeat;
+    padding-left: 34px;
+    padding-right: 14px;
+    cursor: pointer;
+    border: none;
+    line-height: 29px;
+    text-transform: uppercase;
+}
+.modify_bt_new
+{
+    border: none;
+    font-size: 12px;
+    color: #FFFFFF;
+    background: #bec00f;
+    padding-left: 14px;
+    padding-right: 14px;
+    cursor: pointer;
+    border: none;
+    line-height: 29px;
+    text-transform: uppercase;
+}
+.listing_bg
+{
+    background-color: #f5f4f4;
+    padding: 10px;
+}
+.listing_img_bg
+{
+    background-color: #d9d9d9;
+    width: 173px;
+    height: 174px;
+}
+.listing_record_address
+{
+    font-size: 14px;
+    font-weight: normal;
+    text-decoration: none;
+    color: #343333;
+    text-align: justify;
+}
+.listing_record_totalstay
+{
+    font-size: 13px;
+    font-weight: normal;
+    text-decoration: none;
+    color: #343333;
+}
+.listing_record_anchortag
+{
+    text-decoration: none;
+}
+
+.more_details_tab_container
+{
+    width: 98%;
+    margin: 0 auto;
+    float: left;
+}
+.left_panel_tableBG
+{
+    background-color: #f8f7f7;
+    border: 1px solid #c6c3c3;
+}
+.left_panel_headingBG
+{
+    padding: 0px 12px 0px 12px;
+    cursor: pointer;
+}
+
+.home_footer_link
+{
+    color: #ffffff;
+    text-decoration: none;
+}
+.left_panel_arrow
+{
+    background: url("../images/left_panel_arrow.png") 17% 53% no-repeat;
+    padding-right: 15px;
+}
+
+.left_panel_downarrow
+{
+    background: url("../images/left_panel_downarrow.png") 17% 53% no-repeat;
+    padding-right: 15px;
+}
+
+ul.left_panel_star_rating
+{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.left_panel_inputText
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #5e5c5c;
+    background-color: #f8f7f7;
+    padding: 6px;
+    border: 1px solid #c6c3c3;
+    background-color: #FFFFFF;
+    width: 200px;
+}
+
+.left_panel_inputText_bt
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #5e5c5c;
+    background-color: #f8f7f7;
+    padding: 6px;
+    border: 1px solid #c6c3c3;
+    background-color: #FFFFFF;
+    width: 175px;
+}
+.left_panel_select_wrapper
+{
+    float: left;
+    display: inline-block;
+    border: 1px solid #d8d8d8;
+    background: url("../images/left_panel_select_arrow.png") no-repeat 96% 63%;
+    cursor: pointer;
+    padding: 11px 0px 11px 0px;
+    font-size: 14px;
+    font-weight: normal;
+    background-color: #FFFFFF;
+    color: #5e5c5c;
+}
+.left_panel_select_wrapper, .left_panel_select_wrapper select
+{
+    width: 214px;
+    line-height: 9px;
+    font-size: 14px;
+    font-weight: normal;
+    color: #5e5c5c;
+}
+.left_panel_select_wrapper:hover
+{
+    background: url("../images/left_panel_select_arrow.png") no-repeat 96% 63%;
+    border-color: #239fdb;
+    font-size: 14px;
+    font-weight: normal;
+    color: #5e5c5c;
+    background-color: #FFFFFF;
+}
+.left_panel_select_wrapper .holder
+{
+    display: block;
+    margin: 0 35px 0 5px;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: normal;
+    color: #5e5c5c;
+}
+.left_panel_select_wrapper select
+{
+    margin: 0;
+    position: absolute;
+    z-index: 2;
+    cursor: pointer;
+    outline: none;
+    opacity: 0; /* CSS hacks for older browsers */
+    _nofocusline: expression(this.hideFocus=true);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    -khtml-opacity: 0;
+    -moz-opacity: 0;
+    font-size: 13px;
+    font-weight: normal;
+    color: #5e5c5c;
+}
+.highlight_txt
+{
+    font-size: 13px;
+    color: #dc051e;
+    font-weight: bold;
+    text-decoration: none;
+}
+.search_table_multi_row_1_bg
+{
+    padding: 8px;
+    background-color: #FFFFFF;
+    font-size: 14px;
+    font-weight: bold;
+    color: #2b2b2b;
+}
+.search_table_multi_row_2_bg
+{
+    padding: 8px;
+    background-color: #f5f4f4;
+    font-size: 14px;
+    font-weight: bold;
+    color: #2b2b2b;
+}
+
+.listing_record_dot_line
+{
+    background-image: url("../images/dot-line.png");
+    background-repeat: repeat-x;
+    background-position: left top;
+    width: auto;
+    height: 1px;
+}
+.listing_record_close_more_details
+{
+    border: 1px solid #d3d3d3;
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: normal;
+    text-decoration: none;
+    color: #343333;
+    cursor: pointer;
+    margin-top: -33px;
+    right: 92px;
+    position: absolute;
+    padding: 5px 26px 6px 9px;
+    background: #fff url("../images/close_icon.png") no-repeat 86% 54%;
+}
+.listing_row_bottom_line
+{
+    border-bottom: 1px solid #c6c3c3;
+}
+
+ul.tabs
+{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+ul.tabs li
+{
+    background: none;
+    font-size: 14px;
+    font-weight: normal;
+    text-decoration: none;
+    color: #343333;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-top: 1px solid #C6C3C3;
+    border-left: 1px solid #C6C3C3;
+    border-right: 1px solid #C6C3C3;
+}
+
+ul.tabs li.current
+{
+    background: #ededed;
+    color: #222;
+    border-top: 1px solid #C6C3C3;
+    border-left: 1px solid #C6C3C3;
+    border-right: 1px solid #C6C3C3;
+    position: relative;
+    bottom: -1px;
+}
+
+.tab-content
+{
+    display: none;
+    background: #ededed;
+    padding: 0px;
+    border: 1px solid #C6C3C3;
+    font-size: 14px;
+    font-weight: normal;
+    text-decoration: none;
+    color: #343333;
+    height: auto; /*	overflow:auto; 	overflow-x:hidden;*/
+}
+
+.tab-content.current
+{
+    display: inherit;
+}
+
+
+ul.rooms_tabs
+{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+
+ul.rooms_tabs li
+{
+    background: none;
+    font-size: 14px;
+    font-weight: normal;
+    text-decoration: none;
+    color: #343333;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-top: 1px solid #C6C3C3;
+    border-left: 1px solid #C6C3C3;
+    border-right: 1px solid #C6C3C3;
+}
+
+ul.rooms_tabs li.current
+{
+    background: #ededed;
+    color: #222;
+    border-top: 1px solid #C6C3C3;
+    border-left: 1px solid #C6C3C3;
+    border-right: 1px solid #C6C3C3;
+    position: relative;
+    bottom: -1px;
+}
+
+/******** details view ********/
+
+.detail_view_header_grey
+{
+    font-size: 17px;
+    color: #382d57;
+    border-bottom: 1px solid #d8d8d8;
+}
+.border_class
+{
+    border-top: 1px solid #ffffff;
+}
+
+
+.morecontent span
+{
+    display: none;
+}
+.amenities_txt
+{
+    color: #4D4E50;
+    font-size: 15px;
+    margin: 0;
+    padding-left: 10px;
+    padding-right: 20px;
+    padding-top: 7px;
+    text-align: justify;
+}
+.detail_view_header_bg
+{
+    background-color: #ffffff;
+}
+
+/*******Booking page *****/
+
+
+.booking_img_bg
+{
+    background-color: #d9d9d9;
+    width: 126px;
+    height: 113px;
+}
+
+.dotted_line
+{
+    border-bottom: 1px dotted #6e6e6e;
+}
+.field_txt
+{
+    font-size: 14px;
+    font-weight: normal;
+    color: #343333;
+}
+.field_white_txt
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+.pricing_header
+{
+    font-size: 14px;
+    font-weight: bold;
+    color: #2b2b2b;
+}
+.booking_input_field
+{
+    background-color: #FFFFFF;
+    height: 100%;
+    width: 80%;
+    border: 1px solid #CCCCCC;
+    padding: 5px;
+}
+
+.booking_sub_header
+{
+    font-size: 17px;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+.booking_price_txt
+{
+    font-size: 26px;
+    color: #ffffff;
+    text-transform: uppercase;
+}
+.booking_rslt_dotted_line_grey
+{
+    background: url("../images/divider_white.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    padding-bottom: 19px;
+    padding-top: 10px;
+}
+#BNPL_showHide
+{
+    width: 20%;
+}
+#Other_Payment_option_showHide
+{
+    width: 20%;
+}
+
+.txt_area
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #5e5c5c;
+    background-color: #f8f7f7;
+    padding: 4px;
+    border: 1px solid #c6c3c3;
+    background-color: #FFFFFF;
+    width: 98%;
+    text-align: justify;
+}
+
+/********************* excursion **************************/
+
+.exe_listing_record_address
+{
+    font-size: 14px;
+    font-weight: normal;
+    text-decoration: none;
+    color: #343333;
+    text-align: justify;
+    padding-left: 5px;
+}
+.on_request_bt
+{
+    background: none repeat scroll 0 0 #ff0000;
+    border: medium none;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 12px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-left: 6px;
+    padding-right: 6px;
+    height: 25px;
+}
+
+
+
+
+/******************** Create Quotations ************/
+.quotation_big_inputText
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #5e5c5c;
+    padding: 5px;
+    border: 1px solid #c6c3c3;
+    width: 85%;
+}
+
+.quotation_middle_inputText
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #5e5c5c;
+    padding: 5px;
+    border: 1px solid #c6c3c3;
+    width: 60%;
+}
+.quotation_small_inputText
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #5e5c5c;
+    padding: 5px;
+    border: 1px solid #c6c3c3;
+    width: 50%;
+}
+
+.quotation_listing_record_txt
+{
+    font-size: 17px;
+    font-weight: normal;
+    color: #2b2b2b;
+    text-decoration: none;
+}
+
+.quotation_table input[disabled]
+{
+    opacity: 0.1;
+}
+
+.quotation_table tr td
+{
+    border-bottom: 1px dotted #8b8d8b;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    vertical-align: -2px;
+}
+.quotation_table tr:first-child td
+{
+    border-bottom: 1px solid #b4b4b4;
+    padding-top: 10px;
+    padding-bottom: 0px;
+    vertical-align: -2px;
+}
+.quotation_table tr:hover
+{
+    background: #eee;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    vertical-align: -2px;
+}
+.quotation_table tr:first-child:hover
+{
+    background: none;
+    padding-top: 10px;
+    padding-bottom: 0px;
+    vertical-align: -2px;
+}
+
+
+/************ CSS for Car Rental **************/
+
+
+/******** Custom Check Box****************/
+input[type=checkbox].css-checkbox
+{
+    position: absolute;
+    z-index: -1000;
+    left: -1000px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+input[type=checkbox].css-checkbox + label.css-label, input[type=checkbox].css-checkbox + label.css-label.clr
+{
+    padding-left: 19px;
+    height: 14px;
+    display: inline-block;
+    line-height: 14px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    font-size: 14px;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+input[type=checkbox].css-checkbox:checked + label.css-label, input[type=checkbox].css-checkbox + label.css-label.chk
+{
+    background-position: 0 -14px;
+}
+label.css-label
+{
+    background-image: url(../images/csscheckbox_custom.png);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
+input[type=checkbox2].css-checkbox2
+{
+    position: absolute;
+    z-index: -1000;
+    left: -1000px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+input[type=checkbox2].css-checkbox2 + label.css-label, input[type=checkbox2].css-checkbox2 + label.css-label.clr
+{
+    padding-left: 19px;
+    height: 14px;
+    display: inline-block;
+    line-height: 14px;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    font-size: 14px;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+input[type=checkbox2].css-checkbox2:checked + label.css-label, input[type=checkbox2].css-checkbox2 + label.css-label.chk
+{
+    background-position: 0 -14px;
+}
+label.css-label
+{
+    background-image: url(../images/csscheckbox_custom.png);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.carRental_search_label_txt
+{
+    font-size: 16px;
+    font-weight: normal;
+    color: #ffffff;
+    text-decoration: none;
+}
+.carRental_big_inputText
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #dee0e2;
+    background: url("../images/carRental_search_bg.png") repeat scroll;
+    padding: 8px 10px 8px 10px;
+    border: 1px solid #5e5c5c;
+    width: 90%;
+}
+.carRental_Small_inputText
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #dee0e2;
+    background: url("../images/carRental_search_bg.png") repeat scroll;
+    padding: 8px 10px 8px 10px;
+    border: 1px solid #5e5c5c;
+    width: 80%;
+}
+.carRental_Small_Dropdown select
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #dee0e2;
+    opacity: 0.7;
+    position: relative;
+    background: #111317 url("../images/carRental_dropdown.png") no-repeat right center;
+    background-size: 25px 22px;
+    padding: 8px 10px 8px 10px;
+    border: 1px solid #5e5c5c;
+    padding-right: 20px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.carRental_listingbg
+{
+    background-color: #ffffff;
+    padding: 1px;
+    border: 1px solid #f5f4f4;
+}
+#carRental_left_panel_Filter_CheckBox
+{
+    width: 100%;
+}
+ul.carRental_left_panel_Filter
+{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 29px;
+}
+
+.carRental_search_whiteBG_border
+{
+    background-color: #ffffff;
+    border-right: 1px #e5e3e3 solid;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.carRental_search_whiteBG
+{
+    background-color: #ffffff;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.carRental_search_heading_txt
+{
+    font-size: 18px;
+    font-weight: bold;
+    color: #232323;
+    text-decoration: none;
+}
+
+.carRental_search_txt
+{
+    font-size: 14px;
+    font-weight: bold;
+    color: #232323;
+    text-decoration: none;
+}
+.carRental_checklist_txt
+{
+    font-size: 14px;
+    font-weight: normal;
+    color: #232323;
+    text-decoration: none;
+}
+
+.carRental_price_filter_txt
+{
+    font-size: 14px;
+    font-weight: normal;
+    color: #232323;
+    float: right;
+    text-decoration: none;
+}
+
+.carRental_include_txt
+{
+    font-size: 13px;
+    font-weight: bold;
+    color: #4a4b4b;
+    letter-spacing: 1px;
+    text-decoration: none;
+}
+
+.carRental_listing_bg
+{
+    background-color: #ffffff;
+    padding: 9px;
+    border-right: 1px #e5e3e3 dotted;
+}
+
+.carRental_dottedtopline
+{
+    width: 100%;
+    border-top: 1px #e5e3e3 dotted;
+}
+.carRental_listing_bg_wth_border
+{
+    background-color: #ffffff;
+    padding: 9px;
+}
+.carRental_listing_img_bg img
+{
+    width: 180px;
+    height: 120px;
+}
+
+.carRental_listing-meta
+{
+    min-height: 20px;
+    float: left;
+    background-color: #FFFFFF;
+    margin: 0 0px 15px 0px;
+}
+.carRental_listing-meta ul
+{
+    list-style: none;
+    padding: 0;
+    margin: 0; /* border: 1px solid #dee5e8; */
+}
+.carRental_listing-meta ul li
+{
+    padding: 10px 15px;
+    padding: 0px;
+    display: inline-block;
+    border-right: 1px solid #dee5e8;
+    border: 1px solid #dee5e8;
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #232323;
+    text-decoration: none;
+}
+.carRental_listing-image img
+{
+    width: 100%;
+    height: auto;
+}
+.carRental_listing_dottedline
+{
+    border-right: 1px dotted #cacaca;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.carRental_listing_wht_dottedline
+{
+    padding-left: 10px;
+    padding-right: 1px;
+}
+ul .carRental_bullet
+{
+    margin-bottom: 20px;
+}
+.carRental_bullet li
+{
+    background: url(../images/car_list_icon/circle-tick_2-20.png) no-repeat left top;
+    list-style: none;
+    padding: 0px 0 8px 33px;
+    display: inline;
+    font-size: 14px;
+    font-weight: normal;
+    color: #232323;
+    float: left;
+    width: 50%;
+    margin-left: -35px;
+    margin-right: 2px;
+}
+
+.carRental_rating_txt
+{
+    font-size: 14px;
+    font-weight: bold;
+    color: #232323;
+    text-decoration: none;
+}
+.carRental_rating_value
+{
+    font-size: 18px;
+    font-weight: bold;
+    color: #232323;
+    text-decoration: none;
+}
+
+.carRental_rating_value_outof
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #232323;
+    text-decoration: none;
+}
+
+.CarRental_TC_txt
+{
+    padding-left: 5px;
+    font-size: 13px;
+    font-weight: normal;
+    color: #232323;
+}
+
+.carRental_BookingLeft_bg
+{
+    background-color: #ffffff;
+    padding: 9px;
+    border: 1px #e5e3e3 dotted;
+}
+
+ul .carRental_Bookingbullet
+{
+    margin-bottom: 20px;
+}
+.carRental_Bookingbullet li
+{
+    background: url(../images/car_list_icon/circle-tick_2-20.png) no-repeat left top;
+    list-style: none;
+    padding: 0px 0 8px 33px;
+    display: inline;
+    font-size: 14px;
+    font-weight: normal;
+    color: #232323;
+    float: left;
+    width: 100%;
+    margin-left: -35px;
+    margin-right: 2px;
+}
+
+.carRental_Booking_totalprice
+{
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #343333;
+}
+
+.carRental_Booking_totalprice_white
+{
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #FFFFFF;
+}
+.carRental_Booking_todaypay_currency
+{
+    font-size: 18px;
+    font-weight: normal;
+    text-decoration: none;
+    color: #ffffff;
+}
+.carRental_Booking_todaypay_price
+{
+    font-size: 27px;
+    font-weight: normal;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.carRental_BookingHeading_txt
+{
+    border: none;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background: #000000;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 32px;
+    cursor: pointer;
+    outline-style: none;
+}
+.carRental_Booking_topPadding
+{
+    margin-top: 5px;
+    margin-bottom: 2px;
+}
+.carRental_txt_deco_none
+{
+    text-decoration: none;
+}
+
+/*********************Transfer search Listing ******************/
+
+.transfer_search_whiteBG_border
+{
+    background-color: #ffffff;
+    border-right: 1px #e5e3e3 solid;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.transfer_search_whiteBG
+{
+    background-color: #ffffff;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.transfer_search_heading_txt
+{
+    font-size: 18px;
+    font-weight: bold;
+    color: #232323;
+    text-decoration: none;
+}
+
+.transfer_search_txt
+{
+    font-size: 14px;
+    font-weight: bold;
+    color: #232323;
+    text-decoration: none;
+}
+.transfer_listing_bg
+{
+    background-color: #ffffff;
+    padding: 1px;
+    border: 1px solid #f5f4f4;
+}
+.transfer_listing_location
+{
+    font-size: 16px;
+    line-height: 30px;
+    font-weight: normal;
+    text-decoration: none;
+    color: #343333;
+    text-align: justify;
+}
+.transfer_table_right_border
+{
+    padding-right: 5px;
+    padding-left: 5px;
+    border-right: 1px dotted #e5e3e3;
+}
+.transfer_more_info_txt
+{
+    padding: 15px;
+    text-align: justify;
+}
+.border_bottom_removal
+{
+    border-bottom: 0;
+}
+.trans_img_size
+{
+    width: 249px;
+    height: 105px;
+}
+
+.transfer_listing_bg
+{
+    background-color: #ffffff;
+    padding: 9px;
+    border: 1px #e5e3e3 dotted;
+}
+
+.transfer_subHeading_bg
+{
+    padding: 2px 8px 2px 8px;
+    background-color: #f5f4f4;
+    font-size: 14px;
+    font-weight: bold;
+    color: #2b2b2b;
+}
+.transfer_greeting_txt
+{
+    color: #000;
+    font-size: 14px;
+    padding: 5px;
+    font-family: calibri;
+    height: 60px;
+    margin-left: 19px;
+    margin-top: 98px;
+    position: absolute;
+    text-align: center;
+    width: 166px;
+}
+
+.transfer_right_dotted_border
+{
+    border-right: 1px dotted #999999;
+}
+
+/************ CSS for Flight **************/
+
+.Flight_modify_inputText
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #5e5c5c;
+    padding: 5px;
+    border: 1px solid #c6c3c3;
+    width: 189px;
+}
+.Flight_listingbg
+{
+    background-color: #ffffff;
+    padding: 1px;
+    border: 1px solid #aeaeae;
+}
+
+ul.Flight_left_panel_Filter
+{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 29px;
+}
+
+ul.Flight_left_panel_Stop_Filter
+{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 29px;
+}
+ul.Flight_left_panel_Stop_Filter li
+{
+    width: 38px;
+    display: inline-block;
+}
+
+#Flight_left_panel_Filter_CheckBox
+{
+    width: 100%;
+}
+ul.Flight_left_panel_AirlineFilter
+{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 30px;
+}
+
+ul.Flight_left_panel_AirlineFilter li
+{
+    line-height: 30px;
+    width: 100%;
+}
+
+#Flight_left_panel_MultiAirline_id
+{
+    width: 100%;
+    border-bottom: 1px dotted #969797;
+}
+
+
+.Flight_search_whiteBG_border
+{
+    background-color: #ffffff;
+    border-right: 1px #e5e3e3 solid;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.Flight_search_whiteBG
+{
+    background-color: #ffffff;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.Flight_search_heading_txt
+{
+    font-size: 18px;
+    font-weight: bold;
+    color: #232323;
+    text-decoration: none;
+}
+
+.Flight_search_txt
+{
+    font-size: 14px;
+    font-weight: bold;
+    color: #232323;
+    text-decoration: none;
+}
+.Flight_checklist_txt
+{
+    font-size: 14px;
+    font-weight: normal;
+    color: #232323;
+    text-decoration: none;
+}
+
+.Flight_price_filter_txt
+{
+    font-size: 14px;
+    font-weight: normal;
+    color: #232323;
+    float: right;
+    text-decoration: none;
+}
+
+.Flight_listing_header_bg
+{
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #f6f6f6;
+    color: #0000;
+    border-bottom: 1px #e5e3e3 solid;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.Flight_listing_airline_txt
+{
+    font-size: 14px;
+    font-weight: normal;
+    color: #232323;
+}
+
+.Flight_listing_row_txt
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #838383;
+    padding-top: 5px;
+    text-decoration: none;
+}
+
+.Flight_listing_deal_bg
+{
+    background-color: #ffffeb;
+    text-decoration: none;
+}
+
+.Flight_listing_deal_txt
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #90724a;
+    padding-left: 8px;
+}
+.Flight_listing_row_bottom_line
+{
+    border-bottom: 1px solid #e5e5e5;
+}
+.Flight_listing_return_record_line
+{
+    border-top: 1px dotted #e5e5e5;
+}
+.Flight_farebreackup_line
+{
+    border-top: 1px dotted #e5e5e5;
+}
+.Flight_Totalfarebreackup_line
+{
+    border-top: 1px dotted #e5e5e5;
+    border-bottom: 1px dotted #e5e5e5;
+}
+.Flight_more_ditails_padding
+{
+    padding: 10px;
+    border: 1px solid #e5e5e5;
+}
+.Flight_itinerary_date_txt
+{
+    font-size: 14px;
+    font-weight: bold;
+    color: #585757;
+    padding-left: 10px;
+    text-decoration: none;
+}
+
+.Flight_Code_txt
+{
+    font-size: 16px;
+    font-weight: normal;
+    color: #222222;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-decoration: none;
+}
+.Flight_duration_txt
+{
+    font-size: 12px;
+    font-weight: normal;
+    color: #222222;
+    padding-top: 4px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-decoration: none;
+}
+
+.Flight_layover_txt
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #514f4f;
+    padding-right: 50px;
+    text-decoration: none;
+}
+
+.Flight_cancellationPP_txt
+{
+    font-size: 14px;
+    font-weight: normal;
+    color: #232323;
+    float: left;
+    padding-left: 5px;
+    text-decoration: none;
+}
+.Flight_fare_label_txt
+{
+    font-size: 14px;
+    font-weight: bold;
+    color: #232323;
+    float: left;
+    padding-left: 5px;
+    text-decoration: none;
+}
+
+.Flight_fare_val_txt
+{
+    font-size: 14px;
+    float: right;
+    padding-right: 5px;
+    font-weight: bold;
+    color: #232323;
+    text-decoration: none;
+}
+
+.Flight_farenote_txt
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #514f4f;
+    text-decoration: none;
+}
+
+.Flight_baginfo_txt
+{
+    font-size: 14px;
+    font-weight: normal;
+    color: #514f4f;
+    text-align: justify;
+    text-decoration: none;
+}
+
+/********** Flight Modify Search ***********/
+.Flight_general_txt
+{
+    color: #3e3939;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: justify;
+    font-family: calibri;
+}
+/************* End Flight Modify Search *************/
+
+
+
+/*************** 2nd dec ********************/
+
+.airline_listing_dottedline
+{
+    border-right: 1px dotted #CACACA;
+}
+.airline_listing_dottedline_bottom
+{
+    border-bottom: 1px dotted #cacaca;
+}
+.airline_listing_dottedline_left
+{
+    border-left: 1px dotted #cacaca;
+}
+.table-border-bottom
+{
+    border-bottom: 1px solid #aeaeae;
+}
+.blck_bg
+{
+    width: 200px;
+    background: #000000;
+    height: 25px;
+    float: none;
+    margin: 0 auto;
+    padding: 0;
+    color: #ffffff;
+    text-align: center;
+    font-size: 13px;
+    line-height: 25px;
+    cursor: pointer;
+}
+.red_bg_div
+{
+    width: 50px;
+    height: 25px;
+    background: #ff0000;
+    color: #ffffff;
+    padding: 0;
+    margin: 0 auto;
+    float: left;
+    margin-top: -31px;
+    margin-left: 0px; /*margin-top: -1px;     margin-left: -1px;*/
+    font-size: 12px;
+    text-align: center;
+    line-height: 25px;
+    margin-bottom: 5px;
+}
+.no-of-days
+{
+    width: 19px;
+    height: 17px;
+    color: #FFF;
+    background-color: #F00;
+    border-radius: 3px;
+    font-size: 12px;
+    padding: 3px;
+    margin-right: 5px;
+    margin-left: 5px; /* Safari 3-4, iOS 1-3.2, Android 1.6- */
+    -webkit-border-radius: 3px; /* Opera 10.5, IE 9, Safari 5, Chrome, Firefox 4, iOS 4, Android 2.1+ */
+    border-radius: 3px;
+    font-size: 12px;
+}
+.flight_it_table_border
+{
+    border: 1px solid #c9c8c8;
+}
+.flight_common_txt
+{
+    color: #565454;
+    font-size: 14px;
+    padding-bottom: 10px;
+}
+.flight_itinerary_blck_bg
+{
+    background-color: #000000;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.flight_tym_blck_bg
+{
+    background-color: #000000;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 14px;
+    width: 60px;
+    padding: 2px;
+}
+
+
+/********* Flight booking page ********/
+
+.dot_line_1
+{
+    background-image: url("../images/dot-line1.png");
+    background-repeat: repeat-y;
+    background-position: left top;
+    width: 1px;
+    height: auto;
+}
+
+.flight_BookingHeading_txt
+{
+    border: none;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background: #000000;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 32px;
+    cursor: pointer;
+    outline-style: none;
+}
+
+.flight_BookingLeft_bg
+{
+    background-color: #ffffff;
+    padding: 9px;
+    border: 1px #e5e3e3 dotted;
+}
+
+.flight_Booking_inputText
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #5e5c5c;
+    padding: 6px;
+    border: 1px solid #c6c3c3;
+    width: 80%;
+}
+.flight_Booking_selectBox
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #5e5c5c;
+    padding: 6px;
+    border: 1px solid #c6c3c3;
+    width: 84%;
+}
+
+/************ CSS for  Packages **************/
+
+.package_input_txt
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #595959;
+    padding: 8px;
+    border: 1px solid #c6c3c3;
+    width: 96%;
+    height: 30px;
+}
+.packages_small_inputText
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #5e5c5c;
+    padding: 5px;
+    border: 1px solid #c6c3c3;
+    width: 75%;
+}
+.packages_from_price_txt
+{
+    color: #fff;
+    font-size: 16px;
+}
+.packages_price_txt
+{
+    color: #bec00f;
+    font-size: 22px;
+}
+.packages_booking_img_class
+{
+    height: 330px;
+    width: 100%;
+}
+
+ul.packaes_tabs
+{
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+}
+ul.packaes_tabs li
+{
+    background: none;
+    font-size: 14px;
+    font-weight: normal;
+    text-decoration: none;
+    color: #343333;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-top: 1px solid #C6C3C3;
+    border-left: 1px solid #C6C3C3;
+    border-right: 1px solid #C6C3C3;
+}
+
+ul.packaes_tabs li.current
+{
+    background: #ededed;
+    color: #222;
+    border-top: 1px solid #C6C3C3;
+    border-left: 1px solid #C6C3C3;
+    border-right: 1px solid #C6C3C3;
+    position: relative;
+    bottom: -1px;
+}
+.packages_content ul
+{
+    padding: 0;
+}
+.packages_content ul li
+{
+    background: url(../images/icon_check_li.png) no-repeat left 5px;
+    list-style: none;
+    padding-left: 20px;
+    font-size: 14px;
+    color: #444444;
+    line-height: 18px;
+    padding-bottom: 6px;
+    margin-left: 5px;
+}
+
+.packages_tc_txt
+{
+    padding: 5px;
+}
+.packages_record_txt
+{
+    font-size: 16px;
+    color: #343333;
+}
+.packages_star_cat_txt
+{
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000000;
+    border: 1px dotted #cccccc;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 32px;
+    cursor: pointer;
+    outline-style: none;
+}
+.packages_Booking_todaypay_currency
+{
+    font-size: 18px;
+    font-weight: normal;
+    text-decoration: none;
+    color: #ffffff;
+}
+.packages_Booking_todaypay_price
+{
+    font-size: 27px;
+    font-weight: normal;
+    text-decoration: none;
+    color: #ffffff;
+}
+.packages_dottedtopline
+{
+    width: 100%;
+    border-top: 1px #e5e3e3 dotted;
+}
+.packages_Booking_big_inputText
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #5e5c5c;
+    padding: 6px;
+    border: 1px solid #c6c3c3;
+    width: 94%;
+}
+.packages_Booking_inputText
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #5e5c5c;
+    padding: 6px;
+    border: 1px solid #c6c3c3;
+    width: 80%;
+}
+.packages_Booking_selectBox
+{
+    font-size: 13px;
+    font-weight: normal;
+    color: #5e5c5c;
+    padding: 6px;
+    border: 1px solid #c6c3c3;
+    width: 84%;
+}
+
+/********************** flights domestic ******************/
+
+.blck_bg_FD
+{
+    width: auto;
+    background: #000000;
+    height: 30px;
+    float: left;
+    margin: 0 auto;
+    padding: 0;
+    color: #ffffff;
+    text-align: center;
+    font-size: 14px;
+    line-height: 30px;
+    cursor: pointer;
+    padding-left: 3px;
+    padding-right: 3px;
+}
