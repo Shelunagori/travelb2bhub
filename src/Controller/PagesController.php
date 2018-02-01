@@ -314,6 +314,46 @@ exit;
      echo $settingdatajson;
      exit;
     }
+	
+	public function masterCountry()
+	{
+		//--- LOAD TABLE
+		$this->loadModel('Countries');
+		$this->loadModel('States');
+		$this->loadModel('Cities');
+		//-- Array
+		$result  = array();
+		$response  = array();
+		//-- Country DATA
+		$countryapi = $this->Countries->find()->all();
+		//-- State DATA
+		$statesapi = $this->States->find()->where(['country_id' => '101'])->all();
+		//-- City DATA
+		$citiesapi = $this->Cities->find()->all();
+		$totcount = count($citiesapi);
+		$i =1;
+		foreach($citiesapi as $cityapi){
+			$statename = $this->statename($cityapi->state_id);
+			$data['name'] = $cityapi->name.' ('.$statename . ')' ;
+			$data['stateid'] =   $cityapi->state_id;
+			$data['cityid'] =  $cityapi->id;
+			
+			$datacitystate['citystatefi'][$i] =  $data;
+			$i++; 
+		}
+		
+		$datacitystate['citystatefi']['TotalRecord']=$totcount;
+		$result['response_code']=200;
+		$response['countryData'] = $countryapi;
+		$response['stateData'] = $statesapi;
+		 
+		$response['cityData'] = $datacitystate;
+		$result['response']=$response;
+		$result = json_encode($result);
+		echo $result;
+		exit;
+	}
+	
     public function countryapi(){
       $this->loadModel('Countries');
       $countryapi = $this->Countries->find()->all();
@@ -340,27 +380,28 @@ exit;
       exit;
     }
     public function citiesapi(){
-       $this->loadModel('Cities');
-       $citiesapi = $this->Cities->find()->all();
-        $totcount = count($citiesapi);
-       $i =1;
-       foreach($citiesapi as $cityapi){
-       	 $statename = $this->statename($cityapi->state_id);
-       	  $data['name'] = $cityapi->name.' ('.$statename . ')' ;
-      $data['stateid'] =   $cityapi->state_id;
-      $data['cityid'] =  $cityapi->id;
-      $datacitystate['citystatefi'][$i] =  $data;
-      $i++; }
-    	$result  = array();
-    	
-    	$result['response_code']=200;
-    	$result['TotalRecord'] = $totcount;
-      $result['ResponseObject'] = $datacitystate;
+		$this->loadModel('Cities');
+		$citiesapi = $this->Cities->find()->all();
+		$totcount = count($citiesapi);
+		$i =1;
+		foreach($citiesapi as $cityapi){
+		$statename = $this->statename($cityapi->state_id);
+		$data['name'] = $cityapi->name.' ('.$statename . ')' ;
+		$data['stateid'] =   $cityapi->state_id;
+		$data['cityid'] =  $cityapi->id;
+		$datacitystate['citystatefi'][$i] =  $data;
+		$i++; }
+		$result  = array();
 
-      $result = json_encode($result);
-      echo $result;
-      exit;
+		$result['response_code']=200;
+		$result['TotalRecord'] = $totcount;
+		$result['ResponseObject'] = $datacitystate;
+
+		$result = json_encode($result);
+		echo $result;
+		exit;
     }
+	 
 
   public function promotionscityapi(){
     	$this->loadModel('Countries');
@@ -608,7 +649,7 @@ exit;
 			if($rqueryr->count()!=0){
 			$delcount++;
 			}
-				}
+			}
 			if($myRequestCount > $delcount) {
 			$myRequestCount = $myRequestCount-$delcount;
 			}	
