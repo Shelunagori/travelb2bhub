@@ -341,13 +341,11 @@ exit;
 			$datacitystate['citystatefi'][$i] =  $data;
 			$i++; 
 		}
-		
-		$datacitystate['citystatefi']['TotalRecord']=$totcount;
-		$result['response_code']=200;
+ 		$result['response_code']=200;
 		$response['countryData'] = $countryapi;
 		$response['stateData'] = $statesapi;
-		 
-		$response['cityData'] = $datacitystate;
+ 		$response['cityData'] = $datacitystate;
+		$result['TotalRecord']=$totcount;
 		$result['response']=$response;
 		$result = json_encode($result);
 		echo $result;
@@ -735,24 +733,28 @@ exit;
      }   
     }
 	public function logoutapi() {
-    	if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
-    		$userid = $_POST['user_id'];
-    		$conn = ConnectionManager::get('default');
-    		 $upsql = "UPDATE users set device_id='' where id='".$userid."'";
-           $stmt = $conn->execute($upsql);
-           $result = array();
-           $result['response_code'] = 200;
-			  $result['msg'] = 'success';
-			  $data =  json_encode($result);
-           echo $data;
-           exit;
-    		}else{
-    			 $result = array();
-     $result['response_code']= 403;
-     echo json_encode($result);
-     exit;
-     }
-    }
+		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
+			$this->loadModel('Users');
+			$userid = $_POST['user_id'];
+			$this->Users->updateAll(array('device_id'=>0), array('id'=>$userid));
+			/* $conn = ConnectionManager::get('default');
+			$upsql = "UPDATE users set device_id='' where id='".$userid."'";
+			$stmt = $conn->execute($upsql); */
+			$result = array();
+			$result['response_code'] = 200;
+			$result['msg'] = 'success';
+			$data =  json_encode($result);
+			echo $data;
+			exit;
+		}
+		else
+		{
+			$result = array();
+			$result['response_code']= 403;
+			echo json_encode($result);
+			exit;
+		}
+	}
 	
     public function blockeduserlistapi() {
     	 if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
@@ -816,7 +818,7 @@ $allCities[] = array("label"=>str_replace("'", "", $city['name'].' ('.$city['sta
 			$result['states'] = $states;
 			$result['cities'] = $allCities;
 			$data =  json_encode($result);
-           echo $data;
+            echo $data;
            exit;
 			
 		} else {
@@ -1062,7 +1064,6 @@ $blockeddata['blockedUser'][$req['id']] =0;
 					group by c.id order by c.name asc ";
 		$stmt = $conn->execute($sql);
 		$allCities = $stmt->fetchAll('assoc');
-		
 		$BusinessBuddies = $this->BusinessBuddies->find('list',['keyField' => "bb_user_id",'valueField' => 'bb_user_id'])
 		->hydrate(false)
 		->where(['user_id' => $_POST['user_id']])
