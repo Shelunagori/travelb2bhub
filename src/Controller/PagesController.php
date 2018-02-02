@@ -323,12 +323,20 @@ exit;
 		$this->loadModel('Cities');
 		//-- Array
 		$result  = array();
-		$response  = array();
-		//-- Country DATA
 		$countryapi = $this->Countries->find()->all();
-		//-- State DATA
+		$result['response_code']=200;
+		$result['ResponseObject'] = $countryapi;
+		//$result = json_encode($result);
+		
+		///---
+		$result1  = array();
 		$statesapi = $this->States->find()->where(['country_id' => '101'])->all();
-		//-- City DATA
+		$result1['response_code']=200;
+		$result1['ResponseObject'] = $statesapi;
+		//$result = json_encode($result);
+		 
+		//--
+		$result2  = array();
 		$citiesapi = $this->Cities->find()->all();
 		$totcount = count($citiesapi);
 		$i =1;
@@ -337,19 +345,18 @@ exit;
 			$data['name'] = $cityapi->name.' ('.$statename . ')' ;
 			$data['stateid'] =   $cityapi->state_id;
 			$data['cityid'] =  $cityapi->id;
-			
 			$datacitystate['citystatefi'][$i] =  $data;
 			$i++; 
 		}
- 		$result['response_code']=200;
-		$response['countryData'] = $countryapi;
-		$response['stateData'] = $statesapi;
- 		$response['cityData'] = $datacitystate;
-		$result['TotalRecord']=$totcount;
-		$result['response']=$response;
-		$result = json_encode($result);
+		 
+		$result2['response_code']=200;
+		$result2['TotalRecord'] = $totcount;
+		$result2['ResponseObject'] = $datacitystate;
+
+		$response=array('countryData'=>$result,'stateData'=>$result1,'cityData'=>$result2);
+		$result = json_encode($response);
 		echo $result;
-		exit;
+		exit; 
 	}
 	
     public function countryapi(){
@@ -3391,54 +3398,54 @@ exit;
 	}
 	}
 	public function sharedetailsapi() {  
-	if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
-	date_default_timezone_set('Asia/Kolkata');
-	$this->loadModel('Responses');
-	$this->loadModel('UserChats');
-	$res = 0;
-	if(isset($_POST["response_id"]) && !empty($_POST["response_id"])  && !empty($_POST["login_user_id"]) ) { 
-	$TableResponse = TableRegistry::get('Responses');
-	 
-	$response = $TableResponse->get($_POST ["response_id"]);
-	 
-	$response->is_details_shared = 1;
-	
-	if ($TableResponse->save($response)) { 
-		$user_from_id = $_POST['login_user_id'];
-		$TableUser = TableRegistry::get('Users');
-		$user = $TableUser->get($user_from_id);
-		$name = $user['first_name'].' '.$user['last_name'];
-		/* $message = "<span class='rec_name'>".$name."</span> has shared his Contact Info. Please go to MY RESPONSES tab to view it."; */
-		
-		$message = $name." has shared his Contact Info. Please go to MY RESPONSES tab to view it.";
-		
-		$msg = "$name has shared his Contact Info. Please go to MY RESPONSES tab to view it.";
-		$send_to_user_id = $_POST['sharewith_user_id'];
-		$userchatTable = TableRegistry::get('User_Chats');
-		$userchats = $userchatTable->newEntity();
-		$userchats->request_id = $_POST["request_id"];
-		$userchats->user_id = $user_from_id;
-		$userchats->send_to_user_id = $send_to_user_id;
-		$userchats->message = $message;
-		$userchats->created = date("Y-m-d h:i:s");
-		$userchats->notification = 1;
-		if ($userchatTable->save($userchats)) {
-		$this->sendpushnotification($send_to_user_id,$msg);
-		$id = $userchats->id;
-		$res = 1;
+		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
+			date_default_timezone_set('Asia/Kolkata');
+			$this->loadModel('Responses');
+			$this->loadModel('UserChats');
+			$res = 0;
+			if(isset($_POST["response_id"]) && !empty($_POST["response_id"])  && !empty($_POST["login_user_id"]) ) { 
+			$TableResponse = TableRegistry::get('Responses');
+
+			$response = $TableResponse->get($_POST ["response_id"]);
+
+			$response->is_details_shared = 1;
+
+			if ($TableResponse->save($response)) { 
+				$user_from_id = $_POST['login_user_id'];
+				$TableUser = TableRegistry::get('Users');
+				$user = $TableUser->get($user_from_id);
+				$name = $user['first_name'].' '.$user['last_name'];
+				/* $message = "<span class='rec_name'>".$name."</span> has shared his Contact Info. Please go to MY RESPONSES tab to view it."; */
+				$message = $name." has shared his Contact Info. Please go to MY RESPONSES tab to view it.";
+				$msg = "$name has shared his Contact Info. Please go to MY RESPONSES tab to view it.";
+				$send_to_user_id = $_POST['sharewith_user_id'];
+				$userchatTable = TableRegistry::get('User_Chats');
+				$userchats = $userchatTable->newEntity();
+				$userchats->request_id = $_POST["request_id"];
+				$userchats->user_id = $user_from_id;
+				$userchats->send_to_user_id = $send_to_user_id;
+				$userchats->message = $message;
+				$userchats->created = date("Y-m-d h:i:s");
+				$userchats->notification = 1;
+					if ($userchatTable->save($userchats)) {
+						$this->sendpushnotification($send_to_user_id,$msg);
+						$id = $userchats->id;
+						$res = 1;
+					}
+					$res = 1;
+				}
+			}
+			$result['response_code'] = 200;
+			$result['response_object'] = $res;
+			$data = json_encode($result);
+			echo $data;
+			exit;
 		}
-		$res = 1;
-	}
-	}
-	$result['response_code'] = 200;
-	$result['response_object'] = $res;
-	$data = json_encode($result);
-	echo $data;
-	exit;
-	}else {
-	echo "Invalid Access";   
-	exit;
-	}
+		else 
+		{
+			echo "Invalid Access";   
+			exit;
+		}
 	}
 	public function membershipsapi(){
      	 if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
