@@ -1319,38 +1319,38 @@ $hotelcitystate[$row['id']]  = $city_state_name;
 		 /**Sorting ---------**/
 			
 			$sort='';
-if(empty($_POST["sort"])) {
-	$sort['Responses.id'] = "DESC";
-}
-if(!empty($_POST["sort"]) && $_POST["sort"]=="totalbudgetlh") {
-$sort['Requests.total_budget'] = "ASC";
-}
-if(!empty($_POST["sort"]) && $_POST["sort"]=="totalbudgethl") {
-$sort['Requests.total_budget'] = "DESC";
-}
-if(!empty($_POST["sort"]) && $_POST["sort"]=="quotationlh") {
-$sort['Responses.quotation_price'] = "ASC";
-}
-if(!empty($_POST["sort"]) && $_POST["sort"]=="quotationhl") {
-$sort['Responses.quotation_price'] = "DESC";
-}
-if(!empty($_POST["sort"]) && $_POST["sort"]=="agentaz") {
-$sort['Users.first_name'] = "ASC";
-$sort['Users.last_name'] = "ASC";
-}
-if(!empty($_POST["sort"]) && $_POST["sort"]=="agentza") {
-$sort['Users.first_name'] = "DESC";
-$sort['Users.last_name'] = "DESC";
-}
+			if(empty($_POST["sort"])) {
+				$sort['Responses.id'] = "DESC";
+			}
+			if(!empty($_POST["sort"]) && $_POST["sort"]=="totalbudgetlh") {
+			$sort['Requests.total_budget'] = "ASC";
+			}
+			if(!empty($_POST["sort"]) && $_POST["sort"]=="totalbudgethl") {
+			$sort['Requests.total_budget'] = "DESC";
+			}
+			if(!empty($_POST["sort"]) && $_POST["sort"]=="quotationlh") {
+			$sort['Responses.quotation_price'] = "ASC";
+			}
+			if(!empty($_POST["sort"]) && $_POST["sort"]=="quotationhl") {
+			$sort['Responses.quotation_price'] = "DESC";
+			}
+			if(!empty($_POST["sort"]) && $_POST["sort"]=="agentaz") {
+			$sort['Users.first_name'] = "ASC";
+			$sort['Users.last_name'] = "ASC";
+			}
+			if(!empty($_POST["sort"]) && $_POST["sort"]=="agentza") {
+			$sort['Users.first_name'] = "DESC";
+			$sort['Users.last_name'] = "DESC";
+			}
  
 		 /***Sorting --------**/ 
 		  
 		  
 		  $conditions["Responses.user_id"] = $_POST['user_id'];
 		  $conditions["Responses.status"] = 1;
-if(!empty($_POST["agentnamesearch"])) {
-		$keyword1 = '';
-		$keyword2 = '';
+		if(!empty($_POST["agentnamesearch"])) {
+			$keyword1 = '';
+			$keyword2 = '';
 			$keyword = trim($_POST["agentnamesearch"]);
 			$keyword = explode(' ',$keyword);
 			if(isset($keyword[1])) {
@@ -1384,10 +1384,11 @@ if(!empty($_POST["agentnamesearch"])) {
         $responses = $this->Responses->find()
                         ->contain(["Requests.Users", "Requests","Requests.Hotels"])
                         ->where($conditions)->order($sort)->all();
-                       
+ 
         $citystate = (object)[];
 			$review_array = array();
 			$enddatearray=array();
+ 
 			 $conn = ConnectionManager::get('default');     
         if($responses->count()>0){
                      foreach($responses as $cit)
@@ -1427,11 +1428,11 @@ if(!empty($_POST["agentnamesearch"])) {
                      $citystate[$cit['id']]  = $citystatefull.''.$city_state_name;;
                      
 					 if($cit['request']['category_id']==1){
-			$sqlh = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$cit['request']['id']."'";
+						$sqlh = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$cit['request']['id']."'";
                                  $stmth = $conn->execute($sqlh);
                                  $resulth = $stmth->fetch('assoc');
-				$end_data =  date('Y-m-d', strtotime($cit['request']['end_date']));		 
-				if(!empty($resulth['TopDate'])){
+					$end_data =  date('Y-m-d', strtotime($cit['request']['end_date']));		 
+					if(!empty($resulth['TopDate'])){
 					if($resulth['TopDate']>$end_data){
 					$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($resulth['TopDate']));
 					}else{
@@ -1439,16 +1440,16 @@ if(!empty($_POST["agentnamesearch"])) {
 						}
 					}else{
 					if($cit['request']['check_out']>$end_data){
-	$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['request']['check_out']));
-		}else{
-	$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['request']['end_date']));	
-		}
+						$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['request']['check_out']));
+							}else{
+						$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['request']['end_date']));	
+							}
 					}
-				}elseif($cit['request']['category_id'] == 2 ) {
-			$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['request']['end_date']));
-				}elseif($cit['request']['category_id'] == 3 ) {
-			$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['request']['check_out']));
-					}
+					}elseif($cit['request']['category_id'] == 2 ) {
+						$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['request']['end_date']));
+					}elseif($cit['request']['category_id'] == 3 ) {
+						$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['request']['check_out']));
+						}
 					 }
                   }
 		
@@ -3407,7 +3408,10 @@ exit;
 		$TableUser = TableRegistry::get('Users');
 		$user = $TableUser->get($user_from_id);
 		$name = $user['first_name'].' '.$user['last_name'];
-		$message = "<span class='rec_name'>".$name."</span> has shared his Contact Info. Please go to MY RESPONSES tab to view it.";
+		/* $message = "<span class='rec_name'>".$name."</span> has shared his Contact Info. Please go to MY RESPONSES tab to view it."; */
+		
+		$message = $name." has shared his Contact Info. Please go to MY RESPONSES tab to view it.";
+		
 		$msg = "$name has shared his Contact Info. Please go to MY RESPONSES tab to view it.";
 		$send_to_user_id = $_POST['sharewith_user_id'];
 		$userchatTable = TableRegistry::get('User_Chats');
@@ -4322,45 +4326,45 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 		order by c.created DESC ";
 		$stmt1 = $conn->execute($sql1);
 		$countchat = $stmt1 ->fetch('assoc');
-		if(!defined('API_ACCESS_KEY')){
-		define('API_ACCESS_KEY', 'AIzaSyA5mzBqngPlq220FYB8Cr2O4y79RH4i9s4');
-		}
+			if(!defined('API_ACCESS_KEY')){
+			define('API_ACCESS_KEY', 'AIzaSyA5mzBqngPlq220FYB8Cr2O4y79RH4i9s4');
+			}
 
-		$registrationIds =  $deviceid;
-		$msg = array
-		(
-		'body' 	=> $message,
-		'title'	=> 'Travelb2bhub Notification',
-		'icon'	=> 'myicon',/*Default Icon*/
-		'sound' => 'mySound',/*Default sound*/
-                "unread_count" => $countchat 
-		);
-		$data = array
-		(
+			$registrationIds =  $deviceid;
+			$msg = array
+			(
+			'body' 	=> $message,
+			'title'	=> 'Travelb2bhub Notification',
+			'icon'	=> 'myicon',/*Default Icon*/
+			'sound' => 'mySound',/*Default sound*/
+					"unread_count" => $countchat 
+			);
+			$data = array
+			(
 
-		"unread_count" => $countchat
-		);
-		$fields = array('to'=> $registrationIds,
-		'notification'=> $msg,
-		'data' => $msg
-		);
-		$headers = array(
-		'Authorization: key=' . API_ACCESS_KEY,
-		'Content-Type: application/json'
-		);
+			"unread_count" => $countchat
+			);
+			$fields = array('to'=> $registrationIds,
+			'notification'=> $msg,
+			'data' => $msg
+			);
+			$headers = array(
+			'Authorization: key=' . API_ACCESS_KEY,
+			'Content-Type: application/json'
+			);
 
-		$ch = curl_init();
-		curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
-		curl_setopt( $ch,CURLOPT_POST, true );
-		curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
-		curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
-		curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
-		curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
-		$result = curl_exec($ch );
-		curl_close( $ch );
-		//print_r($result); die();
-		return $result;
-		}
+			$ch = curl_init();
+			curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
+			curl_setopt( $ch,CURLOPT_POST, true );
+			curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
+			curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
+			curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
+			curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
+			$result = curl_exec($ch );
+			curl_close( $ch );
+			//print_r($result); die();
+			return $result;
+			}
 		}
 	
 		public function testimonialapi() {
