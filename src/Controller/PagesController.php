@@ -1385,7 +1385,7 @@ if(!empty($_POST["agentnamesearch"])) {
                         ->contain(["Requests.Users", "Requests","Requests.Hotels"])
                         ->where($conditions)->order($sort)->all();
                        
-        $citystate = array();
+        $citystate = (object)[];
 			$review_array = array();
 			$enddatearray=array();
 			 $conn = ConnectionManager::get('default');     
@@ -2070,20 +2070,26 @@ public function userprofileapi()
 				$star5 = $star5count;
 				$tot_stars = $star1count + $star2count + $star3count + $star4count + $star5count;
 				$allpercentage =array();
+				 
 				for ($i=5;$i >=1; --$i) {
 					$var = "star$i";
 					$count = $$var;
-					$percent = $count * 100 / $tot_stars;
+					if($count>0){
+						$percent = $count * 100 / $tot_stars;
+					}
+					else
+					{
+						$percent=0;
+					}
 					$percentage = round($percent,2);
 					$allpercentage[] = array("rating"=>$i,"percentage"=>$percentage);
 					$percentage = '';
 				}
-
+				 
 			}
 			$finalresult['response_code'] = 200;
 			$finalresult['response_object'] = $result;
 			$finalresult['Percentage'] = $allpercentage;
-			 echo"<pre>"; print_r($allpercentage); echo"</pre>"; exit;
 			$data = json_encode($finalresult);
 			echo $data;
 			exit;
@@ -3592,32 +3598,37 @@ $resultt = $stmt ->fetch('assoc');
     }
 	public function getHotelCities()
     {
-    	 if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
-    		$this->loadModel('Cities');
-    		$cities = $this->Cities->getAllCities();
-    		$allCityList = array();
-    		$allCities = array();
-		if(!empty($cities)){
-			foreach($cities as $city) {
-				if($this->checkcityslot($city['id']) < 50){
-				$usercount = $this->Users->getAllUserCount($city['id']);
-				if($usercount>0){
-				$allCities[] = array("label"=>str_replace("'", "", $city['name']),"usercount" => $usercount, "value"=>$city['id'],"price"=>$city['price'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
-				}				
-				$allCityList[$city['id']] = $city['name'];
+		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
+			$this->loadModel('Cities');
+			 
+			$cities = $this->Cities->find()->contain(['States']);
+ 			$allCityList = array();
+			$allCities = array();
+			if(!empty($cities)){
+				foreach($cities as $city) {
+					 
+					$cityId=$city['id'];
+					if($this->checkcityslot($city['id']) < 50){
+						$usercount = $this->Users->find()->where(['city_id'=>$cityId])->count();
+						if($usercount>0){
+							$allCities[] = array("label"=>str_replace("'", "", $city['name']),"usercount" => $usercount, "value"=>$city['id'],"price"=>$city['price'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name,  "country_id"=>101, "country_name"=>"India");
+						}			
+						$allCityList[$city['id']] = $city['name']; 
+					} 
 				}
+				$result['response_code'] = 200;
+				$result['response_object'] =$allCities;
+				$data =   json_encode($result);
+				echo $data;
+				exit;
 			}
-			$result['response_code'] = 200;
-			$result['response_object'] =$allCities;
-    		$data =   json_encode($result);
-      	echo $data;
-      	exit;
-				}
-    	}else{
-		$result = array();
-      $result['response_code']= 403;
-    	echo json_encode($result);
-     	exit;
+		}
+		else
+		{
+			$result = array();
+			$result['response_code']= 403;
+			echo json_encode($result);
+			exit;
 		}
     }
     
