@@ -3369,7 +3369,7 @@ exit;
 	$TableUser = TableRegistry::get('Users');
 	$user = $TableUser->get($user_from_id);
 	$name = $user['first_name'].' '.$user['last_name'];
-	$message = "<span class='rec_name'>$name</span> has accepted your offer. Please CLICK HERE to add a Review for $name";
+	$message = "$name has accepted your offer. Please CLICK HERE to add a Review for $name";
 	$msg = "$name has accepted your offer. Please CLICK HERE to add a Review for $name.";
 	$userchatTable = TableRegistry::get('User_Chats');
 	$userchats = $userchatTable->newEntity();
@@ -3470,44 +3470,42 @@ exit;
 	      $reviewuserId =  $_POST['profileuser_id'];
 			$request_id= $_POST['request_id'];
 			 $sql = "SELECT *,COUNT(*) as ts_count FROM testimonial 
-WHERE request_id='".$request_id."' AND author_id='".$authoruserId."'
-ANd user_id = '".$reviewuserId."' "; 
-$stmt = $conn->execute($sql);
-$resultt = $stmt ->fetch('assoc');
-	if($resultt['ts_count']==0){		 
-			 
-			 
-			$testimonialTable = TableRegistry::get('Testimonial');
-			$testimonial = $testimonialTable->newEntity();
-			$testimonial->author_id = $authoruserId;
-			$testimonial->user_id = $reviewuserId;
-			$testimonial->rating = $_POST['rating'];
-			 if(isset( $_POST['request_id'])){
-			$testimonial->request_id = $_POST['request_id'];
-			 }
-			$testimonial->comment = $_POST['comment'];
-			$testimonial->status =  '0';
-			$testimonial->created_at = date("Y-m-d H:i:s");
-			if ($testimonialTable->save($testimonial)) {
-    		$res =1;
-    		$result['response_code'] = 200;
-			$result['response_object'] =$res;
-    		$data =   json_encode($result);
-      	echo $data;
-      	exit;
+				WHERE request_id='".$request_id."' AND author_id='".$authoruserId."'
+				ANd user_id = '".$reviewuserId."' "; 
+				$stmt = $conn->execute($sql);
+			$resultt = $stmt ->fetch('assoc');
+			if($resultt['ts_count']==0){		 
+				$testimonialTable = TableRegistry::get('Testimonial');
+				$testimonial = $testimonialTable->newEntity();
+				$testimonial->author_id = $authoruserId;
+				$testimonial->user_id = $reviewuserId;
+				$testimonial->rating = $_POST['rating'];
+				 if(isset( $_POST['request_id'])){
+				$testimonial->request_id = $_POST['request_id'];
+				 }
+				$testimonial->comment = $_POST['comment'];
+				$testimonial->status =  '0';
+				$testimonial->created_at = date("Y-m-d H:i:s");
+				if($testimonialTable->save($testimonial)) {
+					$res =1;
+					$result['response_code'] = 200;
+					$result['response_object'] =$res;
+					$data =   json_encode($result);
+					echo $data;
+					exit;
+				}
+			}else{
+					$sql = "UPDATE testimonial SET rating='".$_POST['rating']."',
+					updated_at='".date("Y-m-d H:i:s")."',comment='".$_POST['comment']."'
+					WHERE id='".$resultt['id']."'";
+					$stmt = $conn->execute($sql);
+					$res =1;
+						$result['response_code'] = 200;
+						$result['response_object'] =$res;
+						$data =   json_encode($result);
+					echo $data;
+					exit;
 			}
-		}else{
-	$sql = "UPDATE testimonial SET rating='".$_POST['rating']."',
-	updated_at='".date("Y-m-d H:i:s")."',comment='".$_POST['comment']."'
-	WHERE id='".$resultt['id']."'";
-	$stmt = $conn->execute($sql);
-		$res =1;
-    		$result['response_code'] = 200;
-			$result['response_object'] =$res;
-    		$data =   json_encode($result);
-      	echo $data;
-      	exit;
-	}
 		}
 	}else {
       echo "Invalid Access";   
