@@ -502,7 +502,7 @@ $headers .= 'From: TravelB2Bhub <contactus@travelb2bhub.com>' . "\r\n";
 $theKey = $this->getActivationKey($d["mobile_number"]);
 $message='<p>Dear '.$d['first_name'].', </p>';
 $message.='<p>Thank you for registering with TravelB2Bhub.com, the  COMMISSION FREE, Business to Business, tourism trading network. </p>';
-$message.='<p>Please verify your email address by <span style="color:1E707E;"><a href="https://www.travelb2bhub.com/users/userVerification?ident='.$userId.'&activate='.$theKey.'">clicking here</a></span>. </p>';
+$message.='<p>Please verify your email address by <span style="color:1E707E;"><a href="http://www.konciergesolutions.com/users/userVerification?ident='.$userId.'&activate='.$theKey.'">clicking here</a></span>. </p>';
 $message.='<p>We are committed to enhance your trading experience!</p>';
 $message.='<p>Sincerely,<br>The TravelB2Bhub Team</p>';
 // Mail it
@@ -1959,138 +1959,147 @@ return $q->where(['Responses.user_id' => $userdetail['id']]);
 return $requests;
 }
 	
-public function userprofileapi() {
+public function userprofileapi() 
+{
 	if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
-$id =  $_POST['user_id'];
-$this->loadModel('Cities');
-$this->loadModel('Testimonial');
-$this->loadModel('Users');
-$this->loadModel('Requests');
-$this->loadModel('Responses');
-$this->loadModel('Membership');
-$userRequestCount = $userReponseCount = 0;
-$userrespondToRequestCount = 0;
-$rconditions["Responses.user_id"] = $id;
-$rconditions["Responses.status"] = 1;
-$rconditions["Responses.is_deleted"] = 0;
+		$id =  $_POST['user_id'];
+		$this->loadModel('Cities');
+		$this->loadModel('Testimonial');
+		$this->loadModel('Users');
+		$this->loadModel('Requests');
+		$this->loadModel('Responses');
+		$this->loadModel('Membership');
+		$userRequestCount = $userReponseCount = 0;
+		$userrespondToRequestCount = 0;
+		$rconditions["Responses.user_id"] = $id;
+		$rconditions["Responses.status"] = 1;
+		$rconditions["Responses.is_deleted"] = 0;
 
-$responses = $this->Responses->find()
-->contain(["Users", "Requests"])
-->where($rconditions)->all();
-$userReponseCount = $responses->count();
-$result['userReponseCount'] = $userReponseCount;
+		$responses = $this->Responses->find()
+			->contain(["Users", "Requests"])
+			->where($rconditions)->all();
+			$userReponseCount = $responses->count();
+			$result['userReponseCount'] = $userReponseCount;
 
 
-$user = $this->Users->find()->where(['id' => $id])->first();
-if(empty($user)){
-$finalresult['response_code'] = 200;
-        $finalresult['response_object'] = "No User Found";
-        $data = json_encode($finalresult);
-      echo $data;
-      exit;
-}else{
-$conditions["Requests.user_id"] = $id;
-$conditions["Requests.status"] = 2;
-$conditions["Requests.is_deleted "] = 0;
-if ($user['role_id'] == 1) {
-$requests = $this->Requests->find()
-->contain(["Users","Responses"])
-->where($conditions)->order(["Requests.id" => "DESC"])->all();
-}
-if ($user['role_id'] == 2) {
-$requests = $this->Requests->find()
-->contain(["Users","Responses"])
-->where($conditions)->order(["Requests.id" => "DESC"])->all();
-}
-if ($user['role_id'] == 3) {
-$conditions["Requests.category_id "] = 3;
-$requests = $this->Requests->find()
-->contain(["Users","Responses"])
-->where($conditions)->order(["Requests.id" => "DESC"])->all();
-}
-$userRequestCount = $requests->count();
-$result['userRequestCount'] = $userRequestCount;
-
-$TableMembership = TableRegistry::get('Membership');
-$membership = $TableMembership->get($user["role_id"]);
-$membership_name = $membership["membership_name"];
-$result['membership_name'] = $membership_name;
-
-$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $id]]);
-$myReponseCount = $queryr->count();
-$result['userrespondToRequestCount'] = $myReponseCount;
-//$this->set('userrespondToRequestCount', $myReponseCount);
-
-//$userrespondToRequestCount = $this->__getUserRespondToRequestCount($user);
-//$result['userrespondToRequestCount'] = $userrespondToRequestCount;
-
-$alltestimonials ='';
-$result['users'] = $user;
-$average_rating = 0;
-$query = $this->Testimonial->find();
-$userRating = $query->select(["average_rating" => $query->func()->avg("rating")])
-->where(['status' => 0,'user_id' => $id])
-->order(["id" => "DESC"])
-->first();
-$average_rating = $userRating['average_rating'];
-$result['average_rating'] = $average_rating;
-$testimonialcount= 0;
-$utestimonials = $this->Testimonial->find()->where(['user_id'=> $id])->all();
-$testimonialcount = $utestimonials->count();       
-$result['testimonialcount'] = $testimonialcount;
-
-$testimonials = $this->Testimonial->find()->where(['user_id'=> $id])->all();
-$testimoniallist = array();
-	$allpercentage =array();
-if(!empty($testimonials)) {
-foreach($testimonials as $testimonial) {
-$users = $this->Users->find()->where(['status' => 1,'id'=> $testimonial['author_id']])->first();
-$name = $users['first_name']." ".$users['last_name'];
-$alltestimonials[] = array( "name"=>$name,"rating1"=>$testimonial['rating'], "description"=>$users['description'], "profile_pic"=>$users['profile_pic'], "comment"=>$testimonial['comment'],"user_id"=>$testimonial['user_id'],"author_id"=>$testimonial['author_id']);
-}
-$result['testimonial'] = $alltestimonials;
-	
-$star1 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>1])->all();
-$star1count = $star1->count();
-$star2 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>2])->all();
-$star2count = $star2->count();
-$star3 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>3])->all();
-$star3count = $star3->count();
-$star4 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>4])->all();
-$star4count = $star4->count();
-$star5 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>5])->all();
-$star5count = $star5->count();
-	$star1 = $star1count;
-                $star2 = $star2count;
-                $star3 = $star3count;
-                $star4 = $star4count;
-                $star5 = $star5count;
-$tot_stars = $star1count + $star2count + $star3count + $star4count + $star5count;
-	$allpercentage =array();
-	for ($i=5;$i >=1; --$i) {
-		$var = "star$i";
-		$count = $$var;
-        $percent = $count * 100 / $tot_stars;
-		$percentage = round($percent,2);
-		$allpercentage[] = array("rating"=>$i,"percentage"=>$percentage);
-		$percentage = '';
-	}
-	
-}
-        $finalresult['response_code'] = 200;
-        $finalresult['response_object'] = $result;
-		$finalresult['Percentage'] = $allpercentage;
-        $data = json_encode($finalresult);
-      echo $data;
-      exit;
-      }
-	}else{
-		$result = array();
-      $result['response_code']= 403;
-    	echo json_encode($result);
-     	exit;
+		$user = $this->Users->find()->where(['id' => $id])->first();
+		if(empty($user)){
+			$finalresult['response_code'] = 200;
+			$finalresult['response_object'] = "No User Found";
+			$data = json_encode($finalresult);
+			echo $data;
+			exit;
 		}
+		else
+		{
+			$conditions["Requests.user_id"] = $id;
+			$conditions["Requests.status"] = 2;
+			$conditions["Requests.is_deleted "] = 0;
+			if ($user['role_id'] == 1) {
+				$requests = $this->Requests->find()
+				->contain(["Users","Responses"])
+				->where($conditions)->order(["Requests.id" => "DESC"])->all();
+			}
+			if ($user['role_id'] == 2) {
+				$requests = $this->Requests->find()
+				->contain(["Users","Responses"])
+				->where($conditions)->order(["Requests.id" => "DESC"])->all();
+			}
+			if ($user['role_id'] == 3) {
+				$conditions["Requests.category_id "] = 3;
+				$requests = $this->Requests->find()
+				->contain(["Users","Responses"])
+				->where($conditions)->order(["Requests.id" => "DESC"])->all();
+			}
+			$userRequestCount = $requests->count();
+			$result['userRequestCount'] = $userRequestCount;
+
+			$TableMembership = TableRegistry::get('Membership');
+			$membership = $TableMembership->get($user["role_id"]);
+			$membership_name = $membership["membership_name"];
+			$result['membership_name'] = $membership_name;
+
+			$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $id]]);
+			$myReponseCount = $queryr->count();
+			$result['userrespondToRequestCount'] = $myReponseCount;
+			//$this->set('userrespondToRequestCount', $myReponseCount);
+
+			//$userrespondToRequestCount = $this->__getUserRespondToRequestCount($user);
+			//$result['userrespondToRequestCount'] = $userrespondToRequestCount;
+
+			$alltestimonials ='';
+			$result['users'] = $user;
+			$average_rating = 0;
+			$query = $this->Testimonial->find();
+			$userRating = $query->select(["average_rating" => $query->func()->avg("rating")])
+			->where(['status' => 0,'user_id' => $id])
+			->order(["id" => "DESC"])
+			->first();
+			$average_rating = $userRating['average_rating'];
+			$result['average_rating'] = $average_rating;
+			$testimonialcount= 0;
+			$utestimonials = $this->Testimonial->find()->where(['user_id'=> $id])->all();
+			$testimonialcount = $utestimonials->count();       
+			$result['testimonialcount'] = $testimonialcount;
+
+			$testimonials = $this->Testimonial->find()->where(['user_id'=> $id])->all();
+			$testimoniallist = array();
+			$allpercentage =array();
+			if(!empty($testimonials)) {
+				foreach($testimonials as $testimonial) {
+					$users = $this->Users->find()->where(['status' => 1,'id'=> $testimonial['author_id']])->first();
+					$name = $users['first_name']." ".$users['last_name'];
+					$alltestimonials[] = array( "name"=>$name,"rating1"=>$testimonial['rating'], "description"=>$users['description'], "profile_pic"=>$users['profile_pic'], "comment"=>$testimonial['comment'],"user_id"=>$testimonial['user_id'],"author_id"=>$testimonial['author_id']);
+				}
+				$result['testimonial'] = $alltestimonials;
+
+				$star1 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>1])->all();
+				$star1count = $star1->count();
+				$star2 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>2])->all();
+				$star2count = $star2->count();
+				$star3 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>3])->all();
+				$star3count = $star3->count();
+				$star4 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>4])->all();
+				$star4count = $star4->count();
+				$star5 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>5])->all();
+				$star5count = $star5->count();
+				$star1 = $star1count;
+				$star2 = $star2count;
+				$star3 = $star3count;
+				$star4 = $star4count;
+				$star5 = $star5count;
+				$tot_stars = $star1count + $star2count + $star3count + $star4count + $star5count;
+				$allpercentage =array();
+				for ($i=5;$i >=1; --$i) {
+					$var = "star$i";
+					$count = $$var;
+					$percent = $count * 100 / $tot_stars;
+					$percentage = round($percent,2);
+					$allpercentage[] = array("rating"=>$i,"percentage"=>$percentage);
+					$percentage = '';
+				}
+
+			}
+			$finalresult['response_code'] = 200;
+			$finalresult['response_object'] = $result;
+			$finalresult['Percentage'] = $allpercentage;
+			 echo"<pre>"; print_r($allpercentage); echo"</pre>"; exit;
+			$data = json_encode($finalresult);
+			echo $data;
+			exit;
+		}
+	}
+	else
+	{
+		$result = array();
+		$result['response_code']= 403;
+		echo json_encode($result);
+		exit;
+	}
 }
+
+
+
 public function userrating() {
 	if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
 $this->loadModel('Testimonial');
@@ -3374,38 +3383,41 @@ exit;
 	exit;
 	}
 	}
-	public function sharedetailsapi() {
+	public function sharedetailsapi() {  
 	if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
 	date_default_timezone_set('Asia/Kolkata');
 	$this->loadModel('Responses');
 	$this->loadModel('UserChats');
 	$res = 0;
-	if(isset($_POST["response_id"]) && !empty($_POST["response_id"])  && !empty($_POST["login_user_id"]) ) {
+	if(isset($_POST["response_id"]) && !empty($_POST["response_id"])  && !empty($_POST["login_user_id"]) ) { 
 	$TableResponse = TableRegistry::get('Responses');
+	 
 	$response = $TableResponse->get($_POST ["response_id"]);
+	 
 	$response->is_details_shared = 1;
-	if ($TableResponse->save($response)) {
-	$user_from_id = $_POST['login_user_id'];
-	$TableUser = TableRegistry::get('Users');
-	$user = $TableUser->get($user_from_id);
-	$name = $user['first_name'].' '.$user['last_name'];
-	$message = "<span class='rec_name'>".$name."</span> has shared his Contact Info. Please go to MY RESPONSES tab to view it.";
-	$msg = "$name has shared his Contact Info. Please go to MY RESPONSES tab to view it.";
-	$send_to_user_id = $_POST['sharewith_user_id'];
-	$userchatTable = TableRegistry::get('User_Chats');
-	$userchats = $userchatTable->newEntity();
-	$userchats->request_id = $_POST["request_id"];
-	$userchats->user_id = $user_from_id;
-	$userchats->send_to_user_id = $send_to_user_id;
-	$userchats->message = $message;
-	$userchats->created = date("Y-m-d h:i:s");
-	$userchats->notification = 1;
-	if ($userchatTable->save($userchats)) {
-	$this->sendpushnotification($send_to_user_id,$msg);
-	$id = $userchats->id;
-	$res = 1;
-	}
-	$res = 1;
+	
+	if ($TableResponse->save($response)) { 
+		$user_from_id = $_POST['login_user_id'];
+		$TableUser = TableRegistry::get('Users');
+		$user = $TableUser->get($user_from_id);
+		$name = $user['first_name'].' '.$user['last_name'];
+		$message = "<span class='rec_name'>".$name."</span> has shared his Contact Info. Please go to MY RESPONSES tab to view it.";
+		$msg = "$name has shared his Contact Info. Please go to MY RESPONSES tab to view it.";
+		$send_to_user_id = $_POST['sharewith_user_id'];
+		$userchatTable = TableRegistry::get('User_Chats');
+		$userchats = $userchatTable->newEntity();
+		$userchats->request_id = $_POST["request_id"];
+		$userchats->user_id = $user_from_id;
+		$userchats->send_to_user_id = $send_to_user_id;
+		$userchats->message = $message;
+		$userchats->created = date("Y-m-d h:i:s");
+		$userchats->notification = 1;
+		if ($userchatTable->save($userchats)) {
+		$this->sendpushnotification($send_to_user_id,$msg);
+		$id = $userchats->id;
+		$res = 1;
+		}
+		$res = 1;
 	}
 	}
 	$result['response_code'] = 200;
@@ -3581,10 +3593,10 @@ $resultt = $stmt ->fetch('assoc');
 	public function getHotelCities()
     {
     	 if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
-    		 $this->loadModel('Cities');
+    		$this->loadModel('Cities');
     		$cities = $this->Cities->getAllCities();
-    		 $allCityList = array();
-    		  $allCities = array();
+    		$allCityList = array();
+    		$allCities = array();
 		if(!empty($cities)){
 			foreach($cities as $city) {
 				if($this->checkcityslot($city['id']) < 50){
