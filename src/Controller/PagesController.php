@@ -3360,19 +3360,20 @@ exit;
 	$data =   json_encode($result);
 	echo $data;
 	exit;
-	} else {
-	$result['response_code'] = 500;
-	$result['response_object'] = "Message send failed";
-	$data =   json_encode($result);
-	echo $data;
-	exit;
+	} 
+	else {
+		$result['response_code'] = 500;
+		$result['response_object'] = "Message send failed";
+		$data =   json_encode($result);
+		echo $data;
+		exit;
 	}
 	}
 	}else{
-	$result = array();
-	$result['response_code']= 403;
-	echo json_encode($result);
-	exit;
+		$result = array();
+		$result['response_code']= 403;
+		echo json_encode($result);
+		exit;
 	}
 	}
 
@@ -3484,45 +3485,59 @@ exit;
 		}
 	}
 	public function membershipsapi(){
-     	 if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
-        $this->loadModel('Membership');
-        $memberships = $this->Membership->find()->where(['status' => 1])->all();
-        $membershipsjson = json_encode($memberships);
-      echo $membershipsjson;
-      exit;
-      } 	 else {
-      echo "Invalid Access";   
-      exit;
-    }
-     }
+		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
+			$this->loadModel('Membership');
+			$memberships = $this->Membership->find()->where(['status' => 1])->all();
+			$membershipsjson = json_encode($memberships);
+			echo $membershipsjson;
+			exit;
+		} 	 
+		else {
+			echo "Invalid Access";   
+			exit;
+		}
+	}
 	
     public function addtestimonialapi() {
-  if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
- 	date_default_timezone_set('Asia/Kolkata');
-        $this->loadModel('Testimonial');
-	     if ($this->request->is(['post', 'put'])) {
-			 $conn = ConnectionManager::get('default');
-	      $authoruserId = $_POST['user_id'];
-	      $reviewuserId =  $_POST['profileuser_id'];
-			$request_id= $_POST['request_id'];
-			 $sql = "SELECT *,COUNT(*) as ts_count FROM testimonial 
+		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
+			date_default_timezone_set('Asia/Kolkata');
+			$this->loadModel('Testimonial');
+			if ($this->request->is(['post', 'put'])) {
+				$conn = ConnectionManager::get('default');
+				$authoruserId = $_POST['user_id'];
+				$reviewuserId =  $_POST['profileuser_id'];
+				$request_id= $_POST['request_id'];
+				$sql = "SELECT *,COUNT(*) as ts_count FROM testimonial 
 				WHERE request_id='".$request_id."' AND author_id='".$authoruserId."'
 				ANd user_id = '".$reviewuserId."' "; 
 				$stmt = $conn->execute($sql);
-			$resultt = $stmt ->fetch('assoc');
-			if($resultt['ts_count']==0){		 
-				$testimonialTable = TableRegistry::get('Testimonial');
-				$testimonial = $testimonialTable->newEntity();
-				$testimonial->author_id = $authoruserId;
-				$testimonial->user_id = $reviewuserId;
-				$testimonial->rating = $_POST['rating'];
-				 if(isset( $_POST['request_id'])){
-				$testimonial->request_id = $_POST['request_id'];
-				 }
-				$testimonial->comment = $_POST['comment'];
-				$testimonial->status =  '0';
-				$testimonial->created_at = date("Y-m-d H:i:s");
-				if($testimonialTable->save($testimonial)) {
+				$resultt = $stmt ->fetch('assoc');
+				if($resultt['ts_count']==0){		 
+					$testimonialTable = TableRegistry::get('Testimonial');
+					$testimonial = $testimonialTable->newEntity();
+					$testimonial->author_id = $authoruserId;
+					$testimonial->user_id = $reviewuserId;
+					$testimonial->rating = $_POST['rating'];
+					if(isset( $_POST['request_id'])){
+						$testimonial->request_id = $_POST['request_id'];
+					}
+					$testimonial->comment = $_POST['comment'];
+					$testimonial->status =  '0';
+					$testimonial->created_at = date("Y-m-d H:i:s");
+					if($testimonialTable->save($testimonial)) {
+						$res =1;
+						$result['response_code'] = 200;
+						$result['response_object'] =$res;
+						$data =   json_encode($result);
+						echo $data;
+						exit;
+					}
+				}
+				else{
+					$sql = "UPDATE testimonial SET rating='".$_POST['rating']."',
+					updated_at='".date("Y-m-d H:i:s")."',comment='".$_POST['comment']."'
+					WHERE id='".$resultt['id']."'";
+					$stmt = $conn->execute($sql);
 					$res =1;
 					$result['response_code'] = 200;
 					$result['response_object'] =$res;
@@ -3530,128 +3545,117 @@ exit;
 					echo $data;
 					exit;
 				}
-			}else{
-					$sql = "UPDATE testimonial SET rating='".$_POST['rating']."',
-					updated_at='".date("Y-m-d H:i:s")."',comment='".$_POST['comment']."'
-					WHERE id='".$resultt['id']."'";
-					$stmt = $conn->execute($sql);
-					$res =1;
-						$result['response_code'] = 200;
-						$result['response_object'] =$res;
-						$data =   json_encode($result);
-					echo $data;
-					exit;
 			}
 		}
-	}else {
-      echo "Invalid Access";   
-      exit;
-    }
+		else{
+			echo "Invalid Access";   
+			exit;
+		}
     }
     
     public function addresponseapi() {
-    		 if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
+    	if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
     		date_default_timezone_set('Asia/Kolkata');
         	$this->loadModel('Responses');
         	$this->loadModel('Requests');
 			$this->loadModel('User_Chats');
 			$this->loadModel('BlockedUsers');
-        if($_POST){
-			$d = $_POST;
-			$d["user_id"] = $_POST["user_id"];
-			$d["status"] = 0;
-			$TableRequest = TableRegistry::get('Requests');
-			$request = $TableRequest->get($d["request_id"]);
-			
-			$user = $this->Users->find()->where(['id' => $_POST["user_id"]])->first();
-			//print_r($d); die();
-			$response = $this->Responses->newEntity($d);
-			if ($re = $this->Responses->save($response)) {
-			
-			$name = $user['first_name'].' '.$user['last_name'];
-			$ref_id = $request['reference_id'];
-			$message = "You have received a Response for Reference ID: $ref_id. Please go to MY REQUESTS tab to view it.";	
-			$userchatTable = TableRegistry::get('User_Chats');
-			$userchats = $userchatTable->newEntity();
-			$userchats->request_id = $request["id"];
-			$userchats->user_id = $d["user_id"];
-			$userchats->send_to_user_id = $request["user_id"];
-			$userchats->message = $message;
-			$userchats->created = date("Y-m-d h:i:s");
-			$userchats->notification = 1;
-			if ($userchatTable->save($userchats)) {
-			$this->sendpushnotification($request["user_id"],$message);
+			if($_POST){
+				$d = $_POST;
+				$d["user_id"] = $_POST["user_id"];
+				$d["status"] = 0;
+				$TableRequest = TableRegistry::get('Requests');
+				$request = $TableRequest->get($d["request_id"]);
+				$user = $this->Users->find()->where(['id' => $_POST["user_id"]])->first();
+				$response = $this->Responses->newEntity($d);
+				if ($re = $this->Responses->save($response)) {
+					$name = $user['first_name'].' '.$user['last_name'];
+					$ref_id = $request['reference_id'];
+					$message = "You have received a Response for Reference ID: $ref_id. Please go to MY REQUESTS tab to view it.";	
+					$userchatTable = TableRegistry::get('User_Chats');
+					$userchats = $userchatTable->newEntity();
+					$userchats->request_id = $request["id"];
+					$userchats->user_id = $d["user_id"];
+					$userchats->send_to_user_id = $request["user_id"];
+					$userchats->message = $message;
+					$userchats->created = date("Y-m-d h:i:s");
+					$userchats->notification = 1;
+					if ($userchatTable->save($userchats)) {
+						$this->sendpushnotification($request["user_id"],$message);
+					}
+					$res =1;
+					$result['response_code'] = 200;
+					$result['response_object'] =$res;
+					$data =   json_encode($result);
+					echo $data;
+					exit;
+				} 
+				else {
+					$res =0;
+					$result['response_code'] = 200;
+					$result['response_object'] =$res;
+					$data =   json_encode($result);
+					echo $data;
+					exit;
+				}
 			}
-				
-			$res =1;
-    		$result['response_code'] = 200;
-			$result['response_object'] =$res;
-    		$data =   json_encode($result);
-      	echo $data;
-      	exit;
-			} else {
-			$res =0;
-    		$result['response_code'] = 200;
-			$result['response_object'] =$res;
-    		$data =   json_encode($result);
-      	echo $data;
-      	exit;
+			else
+			{
+				$result = array();
+				$result['response_code']= 501;
+				echo json_encode($result);
+				exit;
 			}
-		}else{
-		$result = array();
-      $result['response_code']= 501;
-    	echo json_encode($result);
-     	exit;
-    	 }
-		}else{
-		$result = array();
-      $result['response_code']= 403;
-    	echo json_encode($result);
-     	exit;
+		}
+		else {
+			$result = array();
+			$result['response_code']= 403;
+			echo json_encode($result);
+			exit;
 		}
     }
 	
 	public function getHotelCategories() {
-   	 if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
-        $categories = array("1"=>"Corporate Hotel", "2"=>"Boutique Hotel", "3"=>"Heritage Hotel", "4"=>"House Boat", "5"=>"Resort", "6"=>"Eco Resort", "7"=>"Farm-stay", "8"=>"Homestay", "9"=>"Heritage Homestay", "10"=>"Camping", "11"=>"Glamping", "12"=>"Dormitory");
+		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
+			$categories = array("1"=>"Corporate Hotel", "2"=>"Boutique Hotel", "3"=>"Heritage Hotel", "4"=>"House Boat", "5"=>"Resort", "6"=>"Eco Resort", "7"=>"Farm-stay", "8"=>"Homestay", "9"=>"Heritage Homestay", "10"=>"Camping", "11"=>"Glamping", "12"=>"Dormitory");
 			$result['response_code'] = 200;
 			$result['response_object'] =$categories;
-    		$data =   json_encode($result);
-      	echo $data;
-      	exit;
-      	}else{
-		$result = array();
-      $result['response_code']= 403;
-    	echo json_encode($result);
-     	exit;
+			$data =   json_encode($result);
+			echo $data;
+			exit;
+		}else
+		{
+			$result = array();
+			$result['response_code']= 403;
+			echo json_encode($result);
+			exit;
 		}
     }
 	public function getHotelMealplans() {
-   	 if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
-        $categories = array("1"=>"Select Meal Plan", "2"=>"EP - European Plan", "3"=>"CP - Contenental Plan", "4"=>"MAP - Modified American Plan", "5"=>"AP - American Plan");
+		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
+			$categories = array("1"=>"Select Meal Plan", "2"=>"EP - European Plan", "3"=>"CP - Contenental Plan", "4"=>"MAP - Modified American Plan", "5"=>"AP - American Plan");
 			$result['response_code'] = 200;
 			$result['response_object'] =$categories;
-    		$data =   json_encode($result,true);
-      	echo $data;
-      	exit;
-      	}else{
-		$result = array();
-      $result['response_code']= 403;
-    	echo json_encode($result);
-     	exit;
+			$data =   json_encode($result,true);
+			echo $data;
+			exit;
+      	}
+		else{
+			$result = array();
+			$result['response_code']= 403;
+			echo json_encode($result);
+			exit;
 		}
     }
 	public function getHotelCities()
     {
 		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
 			$this->loadModel('Cities');
-			 
 			$cities = $this->Cities->find()->contain(['States']);
  			$allCityList = array();
 			$allCities = array();
 			if(!empty($cities)){
 				foreach($cities as $city) {
-					 
 					$cityId=$city['id'];
 					if($this->checkcityslot($city['id']) < 50){
 						$usercount = $this->Users->find()->where(['city_id'=>$cityId])->count();
@@ -3677,86 +3681,91 @@ exit;
 		}
     }
     
-		public function addpromotionapi(){
+	public function addpromotionapi(){
 		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
-		date_default_timezone_set('Asia/Kolkata');
-		if ($_POST) {
-		$PromotionsTable = TableRegistry::get('Promotion');
-		$Promotion = $PromotionsTable->newEntity();
-		//print_r($this->request->data);
-		if(!empty($_POST['hotel_pic']))
-		{
-		$hotel_pic = $_POST['hotel_pic'];
-		$id=time().mt_rand().".png";
+			date_default_timezone_set('Asia/Kolkata');
+			if ($_POST) {
+				$PromotionsTable = TableRegistry::get('Promotion');
+				$Promotion = $PromotionsTable->newEntity();
+				//print_r($this->request->data);
+				if(!empty($_POST['hotel_pic']))
+				{
+					$hotel_pic = $_POST['hotel_pic'];
+					$id=time().mt_rand().".png";
 
-		$decoded=base64_decode($hotel_pic);
+					$decoded=base64_decode($hotel_pic);
 
-		$path =  WWW_ROOT."img".DS."hotels/".$id;
-		file_put_contents($path,$decoded);
-		$hotel_image = $id;
-		}
-		else {
-		$hotel_image = "";
-		}
-		$Promotion->user_id = $_POST['user_id'];
-		$Promotion->hotel_name =  $_POST['hotel_name'];
-		$Promotion->hotel_type =  $_POST['hotel_categories'];
-		$Promotion->cheap_tariff =  $_POST['cheap_tariff'];
-		$Promotion->expensive_tariff =  $_POST['expensive_tariff'];
-		$Promotion->website =  $_POST['website'];
-		$Promotion->hotel_location =  $_POST['hotel_location'];
-$cities = explode(",",$_POST['cityid']);
-			$citiesarray = array();
-			$promoted_cities = array();
-			foreach($cities as $city)
-			{
-			$citystatus = $this->getcitystatus($_POST['user_id'],$city,$_POST['duration']);
-				if($citystatus==1){
-				$citiesarray[] = $city;
-				}else{
-				$promoted_cities[] = $city;
+					$path =  WWW_ROOT."img".DS."hotels/".$id;
+					file_put_contents($path,$decoded);
+					$hotel_image = $id;
+				}
+				else {
+					$hotel_image = "";
+				}
+				$Promotion->user_id = $_POST['user_id'];
+				$Promotion->hotel_name =  $_POST['hotel_name'];
+				$Promotion->hotel_type =  $_POST['hotel_categories'];
+				$Promotion->cheap_tariff =  $_POST['cheap_tariff'];
+				$Promotion->expensive_tariff =  $_POST['expensive_tariff'];
+				$Promotion->website =  $_POST['website'];
+				$Promotion->hotel_location =  $_POST['hotel_location'];
+				$cities = explode(",",$_POST['cityid']);
+				$citiesarray = array();
+				$promoted_cities = array();
+				foreach($cities as $city)
+				{
+					$citystatus = $this->getcitystatus($_POST['user_id'],$city,$_POST['duration']);
+					if($citystatus==1){
+						$citiesarray[] = $city;
+					}
+					else{
+						$promoted_cities[] = $city;
+					}
+				}
+				if(empty($promoted_cities)){
+					$Promotion->cities =   $_POST['cityid'];
+					$Promotion->citycharge =   $_POST['citycharge'];
+					$Promotion->duration =  $_POST['duration'];
+					$total_days = 30*$_POST['duration'];
+					$Promotion->hotel_pic =  $hotel_image;
+					$Promotion->expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
+					$Promotion->charges =  $_POST['charges'];
+					//$Promotion->hotel_name = $_POST['hotel_name'];
+					$Promotion->payment_status =  'pending';
+					$Promotion->status =  '0';
+					$Promotion->created_at = date("Y-m-d H:i:s");
+					if ($PromotionsTable->save($Promotion)) {
+						$result['response_code'] = 200;
+						$result['response_object'] = "Hotel Promotion Successful.";
+						$data =   json_encode($result);
+						echo $data;
+						exit;
+					}
+				}
+				else{
+					$result = array();
+					$result['response_code']= 501;
+					$result['response_object'] = "Hotel Promotion Unsuccessful.";
+					echo json_encode($result);
+					exit;
 				}
 			}
-if(empty($promoted_cities)){
-		$Promotion->cities =   $_POST['cityid'];
-		$Promotion->citycharge =   $_POST['citycharge'];
-		$Promotion->duration =  $_POST['duration'];
-$total_days = 30*$_POST['duration'];
-		$Promotion->hotel_pic =  $hotel_image;
-		$Promotion->expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
-		$Promotion->charges =  $_POST['charges'];
-		//$Promotion->hotel_name = $_POST['hotel_name'];
-		$Promotion->payment_status =  'pending';
-		$Promotion->status =  '0';
-		$Promotion->created_at = date("Y-m-d H:i:s");
-		if ($PromotionsTable->save($Promotion)) {
-		$result['response_code'] = 200;
-		$result['response_object'] = "Hotel Promotion Successful.";
-		$data =   json_encode($result);
-		echo $data;
-		exit;
+			else{
+				$result = array();
+				$result['response_code']= 501;
+				$result['response_object'] = "Hotel Promotion Unsuccessful.";
+				echo json_encode($result);
+				exit;
+			}
 		}
-                }else{
-		$result = array();
-		$result['response_code']= 501;
-$result['response_object'] = "Hotel Promotion Unsuccessful.";
-		echo json_encode($result);
-		exit;
+		else
+		{
+			$result = array();
+			$result['response_code']= 403;
+			echo json_encode($result);
+			exit;
 		}
-		}else{
-		$result = array();
-		$result['response_code']= 501;
-$result['response_object'] = "Hotel Promotion Unsuccessful.";
-		echo json_encode($result);
-		exit;
-		}
-		}else{
-		$result = array();
-		$result['response_code']= 403;
-		echo json_encode($result);
-		exit;
-		}
-		}
+	}
 
 public function getcitystatus($userid,$cityid,$duration) {
 	date_default_timezone_set('Asia/Kolkata');
