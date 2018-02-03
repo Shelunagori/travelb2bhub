@@ -1390,7 +1390,7 @@ $hotelcitystate[$row['id']]  = $city_state_name;
 		//print_r($conditions);	  die();
         $responses = $this->Responses->find()
                         ->contain(["Requests.Users", "Requests","Requests.Hotels"])
-                        ->where($conditions)->order($sort)->all();
+                        ->where($conditions)->order($sort);
  
         $citystate = (object)[];
 			$review_array = array();
@@ -1423,16 +1423,16 @@ $hotelcitystate[$row['id']]  = $city_state_name;
                      $comma = ',';
                      }
                      //$citystatefull = $cityname.$comma.' '. $statename;
-                     $citystatefull = $cityname.' ('. $statename.')';
+                     $citystatefull = $cityname.'('.$statename.')';
 							
 							$city_state_name = "";
 							if(count($cit['request']['hotels']) >0) {
 								unset($cit['request']['hotels'][0]);
                     foreach($cit['request']['hotels'] as $row) { 
-                     $city_state_name.=', '.$this->cityname($row['city_id']).' ('.$this->statename($row['state_id']).')'; 
+                     $city_state_name.=','.$this->cityname($row['city_id']).'('.$this->statename($row['state_id']).')'; 
                   	 }  } 
-                     $citystate[$cit['id']]  = $citystatefull.''.$city_state_name;;
-                     $citystate[$cit['id']]  = $citystatefull.''.$city_state_name;;
+                     $citystate->$cit['id']  = $citystatefull.''.$city_state_name;
+                     $citystate->$cit['id']  = $citystatefull.''.$city_state_name;
                      
 					 if($cit['request']['category_id']==1){
 						$sqlh = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$cit['request']['id']."'";
@@ -1482,7 +1482,8 @@ $hotelcitystate[$row['id']]  = $city_state_name;
   	 $result = array();
       $result['response_code']= 403;
     	echo json_encode($result);
-     	exit;
+     	
+		exit;
    	}
     }
     
