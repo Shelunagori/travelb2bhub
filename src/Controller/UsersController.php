@@ -1358,55 +1358,57 @@ if(!empty($this->request->query("sort")) && $this->request->query("sort")=="tota
 $sort['Requests.total_budget'] = "DESC";
 }
 if(!empty($this->request->query("budgetsearch"))) {
-$QPriceRange = $this->request->query("budgetsearch");
-$result = explode("-", $QPriceRange);
-$MinQuotePrice = $result[0];
-$MaxQuotePrice = $result[1];
-$conditions["Requests.total_budget >="] = $MinQuotePrice;
-$conditions["Requests.total_budget <="] = $MaxQuotePrice;
+	$QPriceRange = $this->request->query("budgetsearch");
+	$result = explode("-", $QPriceRange);
+	$MinQuotePrice = $result[0];
+	$MaxQuotePrice = $result[1];
+	$conditions["Requests.total_budget >="] = $MinQuotePrice;
+	$conditions["Requests.total_budget <="] = $MaxQuotePrice;
 }
 if(!empty($this->request->query("req_typesearch"))) {
-$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
+	$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
 }
 if(!empty($this->request->query("refidsearch"))) {
-$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
+	$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
 }
-$sdate = $this->request->query("startdatesearch");
-$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+	$sdate = $this->request->query("startdatesearch");
+	$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
 if(!empty($this->request->query("startdatesearch"))) {
-$da["Requests.start_date"] =  $sdate;
-$da["Requests.check_in"] =  $sdate;
-$conditions["OR"] =  $da;
+	$da["Requests.start_date"] =  $sdate;
+	$da["Requests.check_in"] =  $sdate;
+	$conditions["OR"] =  $da;
 }
-$edate = $this->request->query("enddatesearch");
-$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+	$edate = $this->request->query("enddatesearch");
+	$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
 if(!empty($this->request->query("enddatesearch"))) {
-$da["Requests.end_date"] =  $edate;
-$da["Requests.check_out"] =  $edate;
-$conditions["OR"] =  $da;
+	$da["Requests.end_date"] =  $edate;
+	$da["Requests.check_out"] =  $edate;
+	$conditions["OR"] =  $da;
 }
 if(!empty($this->request->query("keyword"))) {
-$conditions["Requests.reference_id LIKE "] = "%".$this->request->query("keyword")."%";
+	$conditions["Requests.reference_id LIKE "] = "%".$this->request->query("keyword")."%";
 }
 $conditions["Requests.user_id"] = $this->Auth->user('id');
 $conditions["Requests.status"] = 2;
 $conditions["Requests.is_deleted "] = 0;
+
 if ($this->Auth->user('role_id') == 1) {
-$requests = $this->Requests->find()
-->contain(["Users","Responses"])
-->where($conditions)->order($sort)->all();
+	$requests = $this->Requests->find()
+		->contain(["Users","Responses"])
+		->where($conditions)->order($sort)->all();
 }
 if ($this->Auth->user('role_id') == 2) {
-$requests = $this->Requests->find()
-->contain(["Users","Responses"])
-->where($conditions)->order($sort)->all();
+	$requests = $this->Requests->find()
+		->contain(["Users","Responses"])
+		->where($conditions)->order($sort)->all();
 }
 if ($this->Auth->user('role_id') == 3) {
-$conditions["Requests.category_id "] = 3;
-$requests = $this->Requests->find()
-->contain(["Users","Requests","Responses"])
-->where($conditions)->order($sort)->all();
+	$conditions["Requests.category_id "] = 3;
+	$requests = $this->Requests->find()
+		->contain(["Users","Requests","Responses"])
+		->where($conditions)->order($sort)->all();
 }
+ 
 	$final_res_array = array();
 	 $conn = ConnectionManager::get('default');
 foreach($requests as $row){
