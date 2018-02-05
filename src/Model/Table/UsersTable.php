@@ -69,9 +69,13 @@ class UsersTable extends Table
             'foreignKey' => 'user_id',
             'dependent' => TRUE
         ]);
-         $this->hasOne('Credits', [
+		 
+        $this->hasOne('Credits', [
             'foreignKey' => 'user_id',
             'dependent' => TRUE
+        ]);
+		$this->hasMany('Promotion', [
+            'foreignKey' => 'user_id'
         ]);
         
         

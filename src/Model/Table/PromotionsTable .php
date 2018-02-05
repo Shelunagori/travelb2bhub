@@ -37,5 +37,7 @@ public function initialize(array $config)
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+		 
+		 
     }
 }
