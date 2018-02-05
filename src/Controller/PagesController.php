@@ -4458,10 +4458,18 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 	{
 		$this->loadModel('Promotion');
 		$promotionId=$this->request->data['promotionId'];
-		$Promotion=$this->Promotion->find()->where(['id'=>$promotionId])->contain(['Users'])->first();
-		$success=true;
-		$error="";
-		$response=$Promotion;
+		$PromotionCount=$this->Promotion->find()->where(['Promotion.id'=>$promotionId])->contain(['Users'])->count();
+		if($PromotionCount>0){
+			$Promotion=$this->Promotion->find()->where(['Promotion.id'=>$promotionId])->contain(['Users'])->first();
+			$success=true;
+			$error="";
+			$response=$Promotion;
+		}
+		else{
+			$success=false;
+			$error="";
+			$response=array();
+		}
 		 
 		$this->set(compact('success', 'error', 'response'));
 		$this->set('_serialize', ['success', 'error', 'response']);
