@@ -1295,9 +1295,10 @@ $hotelcitystate[$row['id']]  = $city_state_name;
 			 $sql= "SELECT first_name,last_name FROM users where id='".$_POST['chatuserid']."'";
 			 $stmt1 = $conn->execute($sql);
 			 $results1 = $stmt1->fetch('assoc');
+			 
 			 $UserChats = $this->UserChats->find()
-                        ->contain(["Users"])
-                        ->where(["UserChats.request_id"=>$_POST['request_id'],"UserChats.notification"=>0, 'UserChats.user_id IN' => array($_POST['user_id'], $_POST['chatuserid']),'UserChats.send_to_user_id IN' => array($_POST['user_id'], $_POST['chatuserid'])])->order(["UserChats.id" => "ASC"])->all()->toArray();
+					->contain(["Users"])
+					->where(["UserChats.request_id"=>$_POST['request_id'],"UserChats.notification"=>0, 'UserChats.user_id IN' => array($_POST['user_id'], $_POST['chatuserid']),'UserChats.send_to_user_id IN' => array($_POST['user_id'], $_POST['chatuserid'])])->order(["UserChats.id" => "ASC"])->all()->toArray();					 
 			$result['response_code'] = 200;
 			$result['response_object'] = $UserChats;
 			$result['chat_user_name'] = $results1['first_name'].' '.$results1['last_name'];
@@ -3323,58 +3324,125 @@ exit;
 		}
 	}
 
+	
+		public function sendpushnotification($userid,$message)
+		{
+		$conn = ConnectionManager::get('default');
+		$sql = "Select device_id FROM users where id='".$userid."'";
+		$stmt = $conn->execute($sql);
+		$user = $stmt ->fetch('assoc');
+		$deviceid = $user['device_id'];
+		if(!empty($deviceid)){
+
+		$sql1 = "Select count(*) as countchat FROM user_chats as c 
+		INNER JOIN users as u on u.id=c.user_id
+		where c.is_read='0' AND c.send_to_user_id='".$userid."'
+		order by c.created DESC ";
+		$stmt1 = $conn->execute($sql1);
+		$countchat = $stmt1 ->fetch('assoc');
+			
+			
+			$API_ACCESS_KEY='AIzaSyA5mzBqngPlq220FYB8Cr2O4y79RH4i9s4';
+
+			$registrationIds =  $deviceid;
+			$msg = array
+			(
+			'body' 	=> $message,
+			'title'	=> 'Travelb2bhub Notification',
+			'icon'	=> 'myicon',/*Default Icon*/
+			'sound' => 'mySound',/*Default sound*/
+					"unread_count" => $countchat 
+			);
+			$data = array
+			(
+
+			"unread_count" => $countchat
+			);
+			$fields = array('to'=> $registrationIds,
+			'notification'=> $msg,
+			'data' => $msg
+			);
+			$headers = array(
+			'Authorization: key='.$API_ACCESS_KEY,
+			'Content-Type: application/json'
+			);
+
+			$ch = curl_init();
+			curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
+			curl_setopt( $ch,CURLOPT_POST, true );
+			curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
+			curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
+			curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
+			curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
+			$result = curl_exec($ch );
+			curl_close( $ch );
+			//print_r($result); die();
+			return $result;
+			}
+		}	
+	
+	
+	
     
 	public function addchatapi() {
 	if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
-	date_default_timezone_set('Asia/Kolkata');
-	$this->loadModel('UserChats');
-	if($_POST){
-	$d = $_POST;
-	if(isset($_POST['screen_id'])){
-	$d["screen_id"] = $_POST['screen_id'];
-	if($d["screen_id"]==1){$res_text = "Please go to MY RESPONSES to view it.";
-	}elseif($d["screen_id"]==2)
-	{
-	$res_text = "Please go to CHECK RESPONSES to view it.";
-	}else{
-	$res_text = "";
-	}
-	}else{
-	$res_text = "";
-	}
-	$d["user_id"] = $_POST['user_id'];
-	$d["send_to_user_id"] = $d['chat_user_id'];
-	$d["created"] = date("Y-m-d h:i:s");
-	$UserChat = $this->UserChats->newEntity($d);
-	if ($re = $this->UserChats->save($UserChat)) {
-	$conn = ConnectionManager::get('default');
-	$sql = "SELECT first_name,last_name FROM users	where id='".$_POST['user_id']."'";
-	$stmt = $conn->execute($sql);
-	$res = $stmt ->fetch('assoc');   
-	$name = $res['first_name'].' '.$res['last_name'];
-	$push_message = "You have received a CHAT MESSAGE from $name. $res_text";
-	$this->sendpushnotification($d['chat_user_id'],$push_message);
+		date_default_timezone_set('Asia/Kolkata');
+		$this->loadModel('UserChats');
+		if($_POST)
+		{
+			$d = $_POST;
+			if(isset($_POST['screen_id'])){
+			$d["screen_id"] = $_POST['screen_id'];
+				if($d["screen_id"]==1)
+				{
+					$res_text = "Please go to MY RESPONSES to view it.";
+				}
+				elseif($d["screen_id"]==2)
+				{
+					$res_text = "Please go to CHECK RESPONSES to view it.";
+				}
+				else
+				{
+					$res_text = "";
+				}
+			}
+			else{
+				$res_text = "";
+			}
+			$d["user_id"] = $_POST['user_id'];
+			$d["send_to_user_id"] = $d['chat_user_id'];
+			$d["created"] = date("Y-m-d h:i:s");
+			$UserChat = $this->UserChats->newEntity($d);
+			if ($re = $this->UserChats->save($UserChat)) {
+				$conn = ConnectionManager::get('default');
+				$sql = "SELECT first_name,last_name FROM users	where id='".$_POST['user_id']."'";
+				$stmt = $conn->execute($sql);
+				$res = $stmt ->fetch('assoc');   
+				$name = $res['first_name'].' '.$res['last_name'];
+				$push_message = "You have received a CHAT MESSAGE from $name. $res_text";
+				$this->sendpushnotification($d['chat_user_id'],$push_message);
 
-	$result['response_code'] = 200;
-	$result['response_object'] = "Message sent successfully";
-	$data =   json_encode($result);
-	echo $data;
-	exit;
-	} 
-	else {
-		$result['response_code'] = 500;
-		$result['response_object'] = "Message send failed";
-		$data =   json_encode($result);
-		echo $data;
-		exit;
-	}
-	}
-	}else{
-		$result = array();
-		$result['response_code']= 403;
-		echo json_encode($result);
-		exit;
-	}
+				$result['response_code'] = 200;
+				$result['response_object'] = "Message sent successfully";
+				$data =   json_encode($result);
+				echo $data;
+				exit;
+			} 
+			else {
+				$result['response_code'] = 500;
+				$result['response_object'] = "Message send failed";
+				$data =   json_encode($result);
+				echo $data;
+				exit;
+			}
+		}
+	}else
+		{
+			$result = array();
+			$result['response_code']= 403;
+			echo json_encode($result);
+			exit;
+		}
 	}
 
 	public function acceptofferapi() {
@@ -4361,61 +4429,7 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 		exit;
 		}
 		}
-		public function sendpushnotification($userid,$message)
-		{
-		$conn = ConnectionManager::get('default');
-		$sql = "Select device_id FROM users where id='".$userid."'";
-		$stmt = $conn->execute($sql);
-		$user = $stmt ->fetch('assoc');
-		$deviceid = $user['device_id'];
-		if(!empty($deviceid)){
 
-		$sql1 = "Select count(*) as countchat FROM user_chats as c 
-		INNER JOIN users as u on u.id=c.user_id
-		where c.is_read='0' AND c.send_to_user_id='".$userid."'
-		order by c.created DESC ";
-		$stmt1 = $conn->execute($sql1);
-		$countchat = $stmt1 ->fetch('assoc');
-			if(!defined('API_ACCESS_KEY')){
-			define('API_ACCESS_KEY', 'AIzaSyA5mzBqngPlq220FYB8Cr2O4y79RH4i9s4');
-			}
-
-			$registrationIds =  $deviceid;
-			$msg = array
-			(
-			'body' 	=> $message,
-			'title'	=> 'Travelb2bhub Notification',
-			'icon'	=> 'myicon',/*Default Icon*/
-			'sound' => 'mySound',/*Default sound*/
-					"unread_count" => $countchat 
-			);
-			$data = array
-			(
-
-			"unread_count" => $countchat
-			);
-			$fields = array('to'=> $registrationIds,
-			'notification'=> $msg,
-			'data' => $msg
-			);
-			$headers = array(
-			'Authorization: key=' . API_ACCESS_KEY,
-			'Content-Type: application/json'
-			);
-
-			$ch = curl_init();
-			curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
-			curl_setopt( $ch,CURLOPT_POST, true );
-			curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
-			curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
-			curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
-			curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
-			$result = curl_exec($ch );
-			curl_close( $ch );
-			//print_r($result); die();
-			return $result;
-			}
-		}
 	
 		public function testimonialapi() {
 		$result = array();
