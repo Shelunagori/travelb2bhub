@@ -3325,7 +3325,7 @@ exit;
 	}
 
 	
-		public function sendpushnotification($userid,$message)
+		public function sendpushnotification($userid,$message,$message_data)
 		{
 		$conn = ConnectionManager::get('default');
 		$sql = "Select device_id FROM users where id='".$userid."'";
@@ -3351,7 +3351,8 @@ exit;
 			'title'	=> 'Travelb2bhub Notification',
 			'icon'	=> 'myicon',/*Default Icon*/
 			'sound' => 'mySound',/*Default sound*/
-					"unread_count" => $countchat 
+			'unread_count' => $countchat,
+			'message' => $message_data
 			);
 			$data = array
 			(
@@ -3420,7 +3421,8 @@ exit;
 				$res = $stmt ->fetch('assoc');   
 				$name = $res['first_name'].' '.$res['last_name'];
 				$push_message = "You have received a CHAT MESSAGE from $name. $res_text";
-				$this->sendpushnotification($d['chat_user_id'],$push_message);
+				$message_data = $_POST['message'];
+				$this->sendpushnotification($d['chat_user_id'],$push_message,$message_data);
 
 				$result['response_code'] = 200;
 				$result['response_object'] = "Message sent successfully";
