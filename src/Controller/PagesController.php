@@ -3061,266 +3061,274 @@ exit;
 		$id = $_POST['user_id'];
 		$userDetails = $this->Users->get($id);
 		if (isset($_POST)) {
-		if($userDetails["role_id"] == 3) {
-		if(isset($_POST["hotel_categories"]) && !empty($_POST["hotel_categories"])) {
-		$_POST["hotel_categories"] = $_POST["hotel_categories"];
-		}
-		if(isset($_POST["hotel_rating"]) && !empty($_POST["hotel_rating"])) {
-		$_POST["hotel_rating"] = $_POST["hotel_rating"];
-		}
-		}
+			if($userDetails["role_id"] == 3) {
+				if(isset($_POST["hotel_categories"]) && !empty($_POST["hotel_categories"])) {
+					$_POST["hotel_categories"] = $_POST["hotel_categories"];
+				}
+				if(isset($_POST["hotel_rating"]) && !empty($_POST["hotel_rating"])) {
+					$_POST["hotel_rating"] = $_POST["hotel_rating"];
+					//-- Rating Update 
+					$this->loadModel('Promotion');
+					$hotel_rating=$_POST["hotel_rating"];
+					$this->Promotion->updateAll(
+						array('hotel_rating' => $hotel_rating),
+						array('user_id' => $id)
+					);
+				}
+			}
 
-		if(!empty($_POST['adyoi_pic']))
-		{
-		$adyoi_pic = $_POST['adyoi_pic'];
-		$id=time().mt_rand().".png";
-		$fullpath  =  WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'];
-		$res1 = is_dir($fullpath);
-		if($res1 != 1) {
-		$res2= mkdir($fullpath, 0777, true);
-		}
-		$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'].DS.$id;
-		file_put_contents($path,base64_decode($adyoi_pic));
-		$_POST['adyoi_pic'] = $id;
-		}
-		else {
-		unset($_POST['adyoi_pic']);
-		}
+			if(!empty($_POST['adyoi_pic']))
+			{
+				$adyoi_pic = $_POST['adyoi_pic'];
+				$id=time().mt_rand().".png";
+				$fullpath  =  WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'];
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'].DS.$id;
+				file_put_contents($path,base64_decode($adyoi_pic));
+				$_POST['adyoi_pic'] = $id;
+			}
+			else {
+				unset($_POST['adyoi_pic']);
+			}
 
-		if(!empty($_POST['iata_pic']))
-		{
-		$iata_pic = $_POST['iata_pic'];
-		$id=time().mt_rand().".png";
-		$fullpath  =  WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'];
-		$res1 = is_dir($fullpath);
-		if($res1 != 1) {
-		$res2= mkdir($fullpath, 0777, true);
-		}
-		$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'].DS.$id;
-		file_put_contents($path,base64_decode($iata_pic));
-		$_POST['iata_pic'] = $id;
-		}
-		else {
-		unset($_POST['iata_pic']);
-		}
-		if(!empty($_POST['taai_pic']))
-		{
-		$taai_pic = $_POST['taai_pic'];
-		$id=time().mt_rand().".png";
-		$fullpath  =  WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'];
-		$res1 = is_dir($fullpath);
-		if($res1 != 1) {
-		$res2= mkdir($fullpath, 0777, true);
-		}
-		$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'].DS.$id;
-		file_put_contents($path,base64_decode($taai_pic));
-		$_POST['taai_pic'] = $id;
-		}
-		else {
-		unset($_POST['taai_pic']);
-		}
+			if(!empty($_POST['iata_pic']))
+			{
+				$iata_pic = $_POST['iata_pic'];
+				$id=time().mt_rand().".png";
+				$fullpath  =  WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'];
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'].DS.$id;
+				file_put_contents($path,base64_decode($iata_pic));
+				$_POST['iata_pic'] = $id;
+			}
+			else {
+				unset($_POST['iata_pic']);
+			}
+			if(!empty($_POST['taai_pic']))
+			{
+				$taai_pic = $_POST['taai_pic'];
+				$id=time().mt_rand().".png";
+				$fullpath  =  WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'];
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'].DS.$id;
+				file_put_contents($path,base64_decode($taai_pic));
+				$_POST['taai_pic'] = $id;
+			}
+			else {
+				unset($_POST['taai_pic']);
+			}
 
-		if(!empty($_POST['iato_pic']))
-		{
-		$iato_pic = $_POST['iato_pic'];
-		$id=time().mt_rand().".png";
-		$fullpath  =  WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'];
-		$res1 = is_dir($fullpath);
-		if($res1 != 1) {
-		$res2= mkdir($fullpath, 0777, true);
-		}
-		$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'].DS.$id;
-		file_put_contents($path,base64_decode($iato_pic));
-		$_POST['iato_pic'] = $id;
-		}
-		else {
-		unset($_POST['iato_pic']);
-		}
+			if(!empty($_POST['iato_pic']))
+			{
+				$iato_pic = $_POST['iato_pic'];
+				$id=time().mt_rand().".png";
+				$fullpath  =  WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'];
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'].DS.$id;
+				file_put_contents($path,base64_decode($iato_pic));
+				$_POST['iato_pic'] = $id;
+			}
+			else {
+				unset($_POST['iato_pic']);
+			}
 
-		if(!empty($_POST['iso9001_pic']))
-		{
-		$iso9001_pic = $_POST['iso9001_pic'];
-		$id=time().mt_rand().".png";
-		$fullpath  =  WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'];
-		$res1 = is_dir($fullpath);
-		if($res1 != 1) {
-		$res2= mkdir($fullpath, 0777, true);
-		}
-		$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'].DS.$id;
-		file_put_contents($path,base64_decode($iso9001_pic));
-		$_POST['iso9001_pic'] = $id;
-		}
-		else {
-		unset($_POST['iso9001_pic']);
-		}
+			if(!empty($_POST['iso9001_pic']))
+			{
+				$iso9001_pic = $_POST['iso9001_pic'];
+				$id=time().mt_rand().".png";
+				$fullpath  =  WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'];
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'].DS.$id;
+				file_put_contents($path,base64_decode($iso9001_pic));
+				$_POST['iso9001_pic'] = $id;
+			}
+			else {
+				unset($_POST['iso9001_pic']);
+			}
 
-		if(!empty($_POST['uftaa_pic']))
-		{
-		$uftaa_pic = $_POST['uftaa_pic'];
-		$id=time().mt_rand().".png";
-		$fullpath  =  WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'];
-		$res1 = is_dir($fullpath);
-		if($res1 != 1) {
-		$res2= mkdir($fullpath, 0777, true);
-		}
-		$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'].DS.$id;
-		file_put_contents($path,base64_decode($uftaa_pic));
-		$_POST['uftaa_pic'] = $id;
-		}
-		else {
-		unset($_POST['uftaa_pic']);
-		}
-
-
-		if(!empty($_POST['adtoi_pic']))
-		{
-		$adtoi_pic = $_POST['adtoi_pic'];
-		$id=time().mt_rand().".png";
-		$fullpath  =  WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'];
-		$res1 = is_dir($fullpath);
-		if($res1 != 1) {
-		$res2= mkdir($fullpath, 0777, true);
-		}
-		$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'].DS.$id;
-		file_put_contents($path,base64_decode($adtoi_pic));
-		$_POST['adtoi_pic'] = $id;
-		}
-		else {
-		unset($_POST['adtoi_pic']);
-		}
-
-		if(!empty($_POST['tafi_pic']))
-		{
-		$tafi_pic = $_POST['tafi_pic'];
-		$id=time().mt_rand().".png";
-		$fullpath  =  WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'];
-		$res1 = is_dir($fullpath);
-		if($res1 != 1) {
-		$res2= mkdir($fullpath, 0777, true);
-		}
-		$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'].DS.$id;
-		file_put_contents($path,base64_decode($tafi_pic));
-		$_POST['tafi_pic'] = $id;
-		}
-		else {
-		unset($_POST['tafi_pic']);
-		}
-
-		if(!empty($_POST['company_shop_registration_pic']))
-		{
-		$company_shop_registration = $_POST['company_shop_registration_pic'];
-		$id=time().mt_rand().".png";
-		$fullpath  =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'];
-		$res1 = is_dir($fullpath);
-		if($res1 != 1) {
-		$res2= mkdir($fullpath, 0777, true);
-		}
-		$path =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'].DS.$id;
-		file_put_contents($path,base64_decode($company_shop_registration));
-		$_POST['company_shop_registration_pic'] = $id;
-		}
-		else {
-		unset($_POST['company_shop_registration_pic']);
-		}
-		if(!empty($_POST['id_card_pic']))
-		{
-		$id_card = $_POST['id_card_pic'];
-		$id=time().mt_rand().".png";
-		$fullpath  =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'];
-		$res1 = is_dir($fullpath);
-		if($res1 != 1) {
-		$res2= mkdir($fullpath, 0777, true);
-		}
-		$path =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'].DS.$id;
-		file_put_contents($path,base64_decode($id_card));
-		$_POST['id_card_pic'] = $id;
-		}
-		else {
-		unset($_POST['id_card_pic']);
-		}
+			if(!empty($_POST['uftaa_pic']))
+			{
+				$uftaa_pic = $_POST['uftaa_pic'];
+				$id=time().mt_rand().".png";
+				$fullpath  =  WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'];
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'].DS.$id;
+				file_put_contents($path,base64_decode($uftaa_pic));
+				$_POST['uftaa_pic'] = $id;
+			}
+			else {
+				unset($_POST['uftaa_pic']);
+			}
 
 
-		if(!empty($_POST['company_img_2_pic']))
-		{
-		$company_img_2 = $_POST['company_img_2_pic'];
-		$id=time().mt_rand().".png";
-		$fullpath  =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'];
-		$res1 = is_dir($fullpath);
-		if($res1 != 1) {
-		$res2= mkdir($fullpath, 0777, true);
-		}
-		$path =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'].DS.$id;
-		file_put_contents($path,base64_decode($company_img_2));
-		$_POST['company_img_2_pic'] = $id;
-		}
-		else {
-		unset($_POST['company_img_2_pic']);
-		}
+			if(!empty($_POST['adtoi_pic']))
+			{
+				$adtoi_pic = $_POST['adtoi_pic'];
+				$id=time().mt_rand().".png";
+				$fullpath  =  WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'];
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'].DS.$id;
+				file_put_contents($path,base64_decode($adtoi_pic));
+				$_POST['adtoi_pic'] = $id;
+			}
+			else {
+				unset($_POST['adtoi_pic']);
+			}
 
-		if(!empty($_POST['company_img_1_pic']))
-		{
-		$company_img_1 = $_POST['company_img_1_pic'];
-		$id=time().mt_rand().".png";
-		$fullpath  =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'];
-		$res1 = is_dir($fullpath);
-		if($res1 != 1) {
-		$res2= mkdir($fullpath, 0777, true);
-		}
-		$path =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'].DS.$id;
-		file_put_contents($path,base64_decode($company_img_1));
-		$_POST['company_img_1_pic'] = $id;
-		}
-		else {
-		unset($_POST['company_img_1_pic']);
-		}
+			if(!empty($_POST['tafi_pic']))
+			{
+				$tafi_pic = $_POST['tafi_pic'];
+				$id=time().mt_rand().".png";
+				$fullpath  =  WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'];
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				$path = WWW_ROOT."img".DS."user_travel_certificates".DS.$_POST['user_id'].DS.$id;
+				file_put_contents($path,base64_decode($tafi_pic));
+				$_POST['tafi_pic'] = $id;
+			}
+			else {
+				unset($_POST['tafi_pic']);
+			}
 
-		if(!empty($_POST['pancard_pic']))
-		{
-		$pancard = $_POST['pancard_pic'];
-		$id=time().mt_rand().".png";
-		$fullpath  =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'];
-		$res1 = is_dir($fullpath);
-		if($res1 != 1) {
-		$res2= mkdir($fullpath, 0777, true);
-		}						
-		$path =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'].DS.$id;
-		file_put_contents($path,base64_decode($pancard));
-		$_POST['pancard_pic'] = $id;
-		}
-		else {
-		unset($_POST['pancard_pic']);
-		}
+			if(!empty($_POST['company_shop_registration_pic']))
+			{
+				$company_shop_registration = $_POST['company_shop_registration_pic'];
+				$id=time().mt_rand().".png";
+				$fullpath  =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'];
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				$path =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'].DS.$id;
+				file_put_contents($path,base64_decode($company_shop_registration));
+				$_POST['company_shop_registration_pic'] = $id;
+			}
+			else {
+				unset($_POST['company_shop_registration_pic']);
+			}
+			if(!empty($_POST['id_card_pic']))
+			{
+				$id_card = $_POST['id_card_pic'];
+				$id=time().mt_rand().".png";
+				$fullpath  =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'];
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				$path =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'].DS.$id;
+				file_put_contents($path,base64_decode($id_card));
+				$_POST['id_card_pic'] = $id;
+			}
+			else {
+				unset($_POST['id_card_pic']);
+			}
 
-		if(!empty($_POST['profile_pic']))
-		{
-		$profile_pic = $_POST['profile_pic'];
-		$id=time().mt_rand().".png";
-		$fullpath  =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'];
-		$path =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'].DS.$id;
-		$res1 = is_dir($fullpath);
-		if($res1 != 1) {
-		$res2= mkdir($fullpath, 0777, true);
-		}
-		file_put_contents($path,base64_decode($profile_pic));
-		$_POST['profile_pic'] = $id;
-		}
-		else {
-		unset($_POST['profile_pic']);
-		}
-		$user = $this->Users->patchEntity($userDetails, $_POST);
-		if ($this->Users->save($user)) {
-		$result['response_code'] = 200;
-		$result['response_object'] = "User has been updated successfully.";
-		$data =   json_encode($result);
-		echo $data;
-		exit;
-		} else {
-		$result['response_code'] = 200;
-		$result['response_object'] = "'Something went wrong please try again.";
-		$data =   json_encode($result);
-		echo $data;
-		exit;
-		}
+
+			if(!empty($_POST['company_img_2_pic']))
+			{
+				$company_img_2 = $_POST['company_img_2_pic'];
+				$id=time().mt_rand().".png";
+				$fullpath  =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'];
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				$path =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'].DS.$id;
+				file_put_contents($path,base64_decode($company_img_2));
+				$_POST['company_img_2_pic'] = $id;
+			}
+			else {
+				unset($_POST['company_img_2_pic']);
+			}
+
+			if(!empty($_POST['company_img_1_pic']))
+			{
+				$company_img_1 = $_POST['company_img_1_pic'];
+				$id=time().mt_rand().".png";
+				$fullpath  =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'];
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				$path =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'].DS.$id;
+				file_put_contents($path,base64_decode($company_img_1));
+				$_POST['company_img_1_pic'] = $id;
+			}
+			else {
+				unset($_POST['company_img_1_pic']);
+			}
+
+			if(!empty($_POST['pancard_pic']))
+			{
+				$pancard = $_POST['pancard_pic'];
+				$id=time().mt_rand().".png";
+				$fullpath  =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'];
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}						
+				$path =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'].DS.$id;
+				file_put_contents($path,base64_decode($pancard));
+				$_POST['pancard_pic'] = $id;
+			}
+			else {
+				unset($_POST['pancard_pic']);
+			}
+
+			if(!empty($_POST['profile_pic']))
+			{
+				$profile_pic = $_POST['profile_pic'];
+				$id=time().mt_rand().".png";
+				$fullpath  =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'];
+				$path =  WWW_ROOT."img".DS."user_docs".DS.$_POST['user_id'].DS.$id;
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				file_put_contents($path,base64_decode($profile_pic));
+				$_POST['profile_pic'] = $id;
+			}
+			else {
+				unset($_POST['profile_pic']);
+			}
+			$user = $this->Users->patchEntity($userDetails, $_POST);
+			if ($this->Users->save($user)) {
+				$result['response_code'] = 200;
+				$result['response_object'] = "User has been updated successfully.";
+				$data =   json_encode($result);
+				echo $data;
+				exit;
+			} 
+			else {
+				$result['response_code'] = 200;
+				$result['response_object'] = "'Something went wrong please try again.";
+				$data =   json_encode($result);
+				echo $data;
+				exit;
+			}
 		}
 	}
 
@@ -3781,6 +3789,7 @@ exit;
 				$Promotion->expensive_tariff =  $_POST['expensive_tariff'];
 				$Promotion->website =  $_POST['website'];
 				$Promotion->hotel_location =  $_POST['hotel_location'];
+				$Promotion->hotel_rating =  $_POST['hotel_rating'];
 				
 				$cities = explode(",",$_POST['cityid']);
 				$citiesarray = array();
