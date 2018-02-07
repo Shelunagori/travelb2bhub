@@ -3735,6 +3735,8 @@ exit;
 						$allCityList[$city['id']] = $city['name']; 
 					} 
 				}
+				$user_id=$_POST['user_id'];
+				$Users=$this->Users->find()->where(['id' => $user_id])->fields(['hotel_rating'])->first();
 				$result['response_code'] = 200;
 				$result['response_object'] =$allCities;
 				$data =   json_encode($result);
@@ -3757,7 +3759,7 @@ exit;
 			if ($_POST) {
 				$PromotionsTable = TableRegistry::get('Promotion');
 				$Promotion = $PromotionsTable->newEntity();
-				//print_r($this->request->data);
+				
 				if(!empty($_POST['hotel_pic']))
 				{
 					$hotel_pic = $_POST['hotel_pic'];
@@ -3779,6 +3781,7 @@ exit;
 				$Promotion->expensive_tariff =  $_POST['expensive_tariff'];
 				$Promotion->website =  $_POST['website'];
 				$Promotion->hotel_location =  $_POST['hotel_location'];
+				
 				$cities = explode(",",$_POST['cityid']);
 				$citiesarray = array();
 				$promoted_cities = array();
@@ -3805,6 +3808,15 @@ exit;
 					$Promotion->status =  '0';
 					$Promotion->created_at = date("Y-m-d H:i:s");
 					if ($PromotionsTable->save($Promotion)) {
+						//-- USERS HOTEL RATING
+						$hotel_rating=$_POST['hotel_rating'];
+						$userId=$_POST['user_id'];
+						
+						$this->Users->updateAll(
+							array('hotel_rating' => $hotel_rating),
+							array('id' => $userId)
+						);
+						//---
 						$result['response_code'] = 200;
 						$result['response_object'] = "Hotel Promotion Successful.";
 						$data =   json_encode($result);
