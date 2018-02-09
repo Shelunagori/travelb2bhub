@@ -22,7 +22,6 @@ class CitiesController extends AppController
             'contain' => ['States']
         ];
         $cities = $this->paginate($this->Cities);
-
         $this->set(compact('cities'));
         $this->set('_serialize', ['cities']);
     }
@@ -60,7 +59,8 @@ class CitiesController extends AppController
             'contain' => []
 			]);
 		}
-        if ($this->request->is(['patch', 'post', 'put'])){
+        if ($this->request->is(['patch', 'post', 'put']))
+		{
             $city = $this->Cities->patchEntity($city, $this->request->data);
             if ($this->Cities->save($city)) {
                 $this->Flash->success(__('The city has been saved.'));

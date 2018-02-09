@@ -61,8 +61,8 @@
 					<thead>
 						<tr style="background-color:#DFD9C4;">
 							<th scope="col"><?= __('Sr.No') ?></th>
-							<th scope="col"><?= __('State ') ?></th>
-							<th scope="col"><?= __('Country') ?></th>
+							<th scope="col"><?= __('state_name') ?></th>
+							<th scope="col"><?= __('country_id') ?></th>
 							<th scope="col" class="actions"><?= __('Actions') ?></th>
 						</tr>
 					</thead>
@@ -70,7 +70,7 @@
 						<?php $i=1; foreach ($states as $state): ?>
 						<tr>
 							<td><?php echo $i;?></td>
-							<td><?= h($state->name) ?></td>
+							<td><?= h($state->state_name) ?></td>
 							<td><?= h($state->country->country_name) ?></td>
 							<td class="actions">
 									<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/Cities/add/'.$city->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
@@ -80,6 +80,7 @@
 					<?php $i++; endforeach; ?>
 					</tbody>
 				</table>
+					
 			</div>
 		</div>
 	</div>

@@ -18,10 +18,9 @@ class StatesController extends AppController
      */
     public function index()
     {
-		 $this->paginate = ['contain' => ['Countries']
-        ];
+		 $this->paginate = ['contain' => ['Countries'] ];
         $states = $this->paginate($this->States);
-		pr($states);exit;
+		//pr($states->toArray('state_name'))->first;exit;
         $this->set(compact('states'));
         $this->set('_serialize', ['states']);
     }
@@ -36,9 +35,8 @@ class StatesController extends AppController
     public function view($id = null)
     {
         $state = $this->States->get($id, [
-            'contain' => ['Users']
+            'contain' => ['Countries']
         ]);
-
         $this->set('state', $state);
         $this->set('_serialize', ['state']);
     }
@@ -59,23 +57,24 @@ class StatesController extends AppController
             'contain' => []
         ]);
 		}
-			
-        if ($this->request->is('post')) {
-            $state = $this->States->patchEntity($state, $this->request->data);
-            if ($this->States->save($state)) {
-                $this->Flash->success(__('The state has been saved.'));
+        if ($this->request->is('patch', 'post', 'put'))
+			{
+				$state = $this->States->patchEntity($state, $this->request->data);
+				if ($this->States->save($state)) {
+					$this->Flash->success(__('The state has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The state could not be saved. Please, try again.'));
-            }
-        }
+					return $this->redirect(['action' => 'index']);
+				} else {
+					$this->Flash->error(__('The state could not be saved. Please, try again.'));
+				}
+			}
 		$country = $this->States->Countries->find('list', ['limit' => 200]);
 		//-- View List
 		$this->paginate = [
             'contain' => ['Countries']
         ];
-		$states = $this->States->find()->contain(['Countries'])->where(['States.is_deleted'=>0]);
+		
+		$states= $this->States->find()->contain(['Countries'])->where(['States.is_deleted'=>0]);
         $this->set(compact('state','country','states','id'));
         $this->set('_serialize', ['state','country','states','id']);
     }
