@@ -53,8 +53,7 @@
 	<div class="col-md-6">
 		<div class="box box-primary">
 			<div class="box-header with-border">
-				<i class="fa fa-pencil-square-o"></i> View City
-				 
+				City List	 
 			</div> 
 			 
 		<div class="box-body"> 

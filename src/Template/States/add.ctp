@@ -1,24 +1,3 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List States'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="states form large-9 medium-8 columns content">
-    <?= $this->Form->create($state) ?>
-    <fieldset>
-        <legend><?= __('Add State') ?></legend>
-        <?php
-            echo $this->Form->input('state_name');
-            echo $this->Form->input('country_id');
-            echo $this->Form->input('created_at');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
 
 <section class="content">
 
@@ -42,7 +21,7 @@
 						</div>
 						<div class="col-md-8">
 							<?php echo $this->Form->control('state_name',[
-							'label' => false,'class'=>'form-control input-medium ','placeholder'=>'Enter City Name']);?>
+							'label' => false,'class'=>'form-control input-medium ','placeholder'=>'Enter State Name']);?>
 						</div>
 					</div>
 					<span class="help-block"></span>
@@ -52,7 +31,7 @@
 						</div>
 						<div class="col-md-8">
 							<?php 
-							echo $this->Form->input('country_id',['options' =>$states,'label' => false,'class'=>'form-control input-sm select2','empty'=> '-----------Select State -------------']);?>	
+							echo $this->Form->input('country_id',['options' =>$country,'label' => false,'class'=>'form-control input-sm select2']);?>	
 						</div>
 					</div>
 					<span class="help-block"> </span>
@@ -71,8 +50,8 @@
 			</div>
 		</div>
 	</div>
-	<?= $this->Form->end() ?>
-	<div class="col-md-6">
+ <?= $this->Form->end() ?>
+ 	<div class="col-md-6">
 		<div class="box box-primary">
 			<div class="box-header with-border">
 				<h3 class="box-title">City List</h3>
@@ -82,17 +61,17 @@
 					<thead>
 						<tr style="background-color:#DFD9C4;">
 							<th scope="col"><?= __('Sr.No') ?></th>
-							<th scope="col"><?= __('City ') ?></th>
-							<th scope="col"><?= __('State') ?></th>
+							<th scope="col"><?= __('State ') ?></th>
+							<th scope="col"><?= __('Country') ?></th>
 							<th scope="col" class="actions"><?= __('Actions') ?></th>
 						</tr>
 					</thead>
 					<tbody>
-						<?php $i=1; foreach ($cities as $city): ?>
+						<?php $i=1; foreach ($states as $state): ?>
 						<tr>
 							<td><?php echo $i;?></td>
-							<td><?= h($city->name) ?></td>
-							<td><?= h($city->state->state_name) ?></td>
+							<td><?= h($state->name) ?></td>
+							<td><?= h($state->country->country_name) ?></td>
 							<td class="actions">
 									<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/Cities/add/'.$city->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
 									<?php echo $this->Html->link('<i class="fa fa-trash"></i>','/Cities/delete/'.$city->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $city->id)));?>

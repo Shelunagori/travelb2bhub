@@ -37,7 +37,7 @@ class CountriesTable extends Table
         parent::initialize($config);
 
         $this->table('countries');
-        $this->displayField('id');
+        $this->displayField('country_name');
         $this->primaryKey('id');
 
         $this->hasMany('Hotels', [
