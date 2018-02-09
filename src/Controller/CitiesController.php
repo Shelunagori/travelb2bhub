@@ -51,6 +51,7 @@ class CitiesController extends AppController
      */
     public function add()
     {
+		$this->viewBuilder()->layout('admin_layout');
         $city = $this->Cities->newEntity();
         if ($this->request->is('post')) {
             $city = $this->Cities->patchEntity($city, $this->request->data);
@@ -63,8 +64,15 @@ class CitiesController extends AppController
             }
         }
         $states = $this->Cities->States->find('list', ['limit' => 200]);
-        $this->set(compact('city', 'states'));
-        $this->set('_serialize', ['city']);
+		//-- View List
+		$this->paginate = [
+            'contain' => ['States']
+        ];
+        $cities = $this->paginate($this->Cities);
+
+		
+        $this->set(compact('city', 'states','cities'));
+        $this->set('_serialize', ['city','cities']);
     }
 
     /**

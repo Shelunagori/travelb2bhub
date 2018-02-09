@@ -39,7 +39,7 @@ class StatesTable extends Table
         parent::initialize($config);
 
         $this->table('states');
-        $this->displayField('id');
+        $this->displayField('state_name');
         $this->primaryKey('id');
 
         $this->belongsTo('Countries', [
