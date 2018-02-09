@@ -53,7 +53,7 @@
 	<div class="col-md-6">
 		<div class="box box-primary">
 			<div class="box-header with-border">
-				<i class="fa fa-edit"></i> <b> View City </b>
+				<i class="fa fa-list"></i> <b> View List </b>
 			</div> 
 			 
 		<div class="box-body"> 
