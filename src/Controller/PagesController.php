@@ -2931,48 +2931,48 @@ $current_date = date("Y-m-d");
 	}
  public function dashboardcounterapi()
  {
- if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
-        $this->loadModel('Requests');
-        $this->loadModel('Responses');
-	 $this->loadModel('Hotels');
-	 $this->loadModel('BlockedUsers');
-        $myRequestCount = $myReponseCount = 0;
-$myfinalCount  = 0;
-$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>0,"Requests.status "=>2]]);
-$myfinalCount = $query3 ->count();
+	if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
+		$this->loadModel('Requests');
+		$this->loadModel('Responses');
+		$this->loadModel('Hotels');
+		$this->loadModel('BlockedUsers');
+		$myRequestCount = $myReponseCount = 0;
+		$myfinalCount  = 0;
+		$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>0,"Requests.status "=>2]]);
+		$myfinalCount = $query3 ->count();
 
-$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
- $myRequestCount = $query->count();
+		$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
+		$myRequestCount = $query->count();
 
-$myRequestCount1 = $query->count();
-$delcount=0;
-$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>1]]);
-foreach($requests as $req){
-$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
-if($rqueryr->count()!=0){
-$delcount++;
-}
-}
-if($myRequestCount > $delcount) {
-$myRequestCount = $myRequestCount-$delcount;
-}   
-
-$reqcount = $this->getSettings('requestcount');
-$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $_POST['user_id']]]);
-$myReponseCount = $queryr->count();
-	 if($myReponseCount>0){
-		foreach($queryr as $req){
-	 $checkblockedUsers = $this->BlockedUsers->find()->where(['blocked_by' => $req['request']['user_id'],'blocked_user_id'=>$_POST['user_id']])->count();        
-		if($checkblockedUsers>0){
-		$myReponseCount--;
+		$myRequestCount1 = $query->count();
+		$delcount=0;
+		$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>1]]);
+		foreach($requests as $req){
+			$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
+			if($rqueryr->count()!=0){
+				$delcount++;
+			}
 		}
-		}
-		}
-$this->set('myReponseCount', $myReponseCount);
+		if($myRequestCount > $delcount) {
+			$myRequestCount = $myRequestCount-$delcount;
+		}   
 
-//$myReponseCount = $queryr->count();
-$reqcount = (($reqcount['value']-$myRequestCount1)-($delcount+ $myfinalCount));
-$countarr = array();
+		$reqcount = $this->getSettings('requestcount');
+		$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $_POST['user_id']]]);
+		$myReponseCount = $queryr->count();
+		if($myReponseCount>0){
+			foreach($queryr as $req){
+				$checkblockedUsers = $this->BlockedUsers->find()->where(['blocked_by' => $req['request']['user_id'],'blocked_user_id'=>$_POST['user_id']])->count();        
+				if($checkblockedUsers>0){
+					$myReponseCount--;
+				}
+			}
+		}
+		$this->set('myReponseCount', $myReponseCount);
+
+		//$myReponseCount = $queryr->count();
+		$reqcount = (($reqcount['value']-$myRequestCount1)-($delcount+ $myfinalCount));
+		$countarr = array();
         $coountarr['myRequestCount'] = $myRequestCount1 ;
         $coountarr['myReponseCount'] = $myReponseCount;
         $coountarr['placereq'] = $reqcount;
@@ -2983,9 +2983,10 @@ $countarr = array();
         $data =   json_encode($result);
         echo $data;
         exit;
-    } else {
-echo "Invalid Access";   
-exit;
+    } 
+	else {
+		echo "Invalid Access";   
+		exit;
     }
  }
 	
@@ -3812,6 +3813,7 @@ exit;
 					$Promotion->hotel_pic =  $hotel_image;
 					$Promotion->expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 					$Promotion->charges =  $_POST['charges'];
+					$Promotion->hotel_rating =  $_POST['hotel_rating'];
 					//$Promotion->hotel_name = $_POST['hotel_name'];
 					$Promotion->payment_status =  'pending';
 					$Promotion->status =  '0';
@@ -4367,30 +4369,29 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 	}
 	public function getchatNotification()
 	{
-	if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
-	$user_id = $_POST['user_id'];
-	$unreadnotification = array();
-	$conn = ConnectionManager::get('default');
-	$sql = "Select CONCAT(u.`first_name`,' ',u.`last_name` ) as sender_name,c.* FROM user_chats as c 
+		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
+			$user_id = $_POST['user_id'];
+			$unreadnotification = array();
+			$conn = ConnectionManager::get('default');
+			$sql = "Select CONCAT(u.`first_name`,' ',u.`last_name` ) as sender_name,c.* FROM user_chats as c 
 			INNER JOIN users as u on u.id=c.user_id
 			where c.is_read='0' AND c.send_to_user_id='".$user_id."'
 			order by c.created DESC ";
-	$stmt = $conn->execute($sql);
-	$unreadnotification = $stmt ->fetchAll('assoc');
-	$countchat = count($unreadnotification);
-	
-	
-		 $result['response_code'] = 200;
-		  $result['response_object'] = $unreadnotification;
-		   $result['unread_count'] = $countchat;
-    	  $data =   json_encode($result);
-        echo $data;
-        exit;
-		}else{
-		$result = array();
-     	$result['response_code']= 403;
-    	echo json_encode($result);
-     	exit;
+			$stmt = $conn->execute($sql);
+			$unreadnotification = $stmt ->fetchAll('assoc');
+			$countchat = count($unreadnotification);
+			$result['response_code'] = 200;
+			$result['response_object'] = $unreadnotification;
+			$result['unread_count'] = $countchat;
+			$data =   json_encode($result);
+			echo $data;
+			exit;
+		}
+		else {
+			$result = array();
+			$result['response_code']= 403;
+			echo json_encode($result);
+			exit;
 		}
 	}
 	
@@ -4399,8 +4400,9 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 		$conn = ConnectionManager::get('default');
 		date_default_timezone_set('Asia/Kolkata');
 		$user_id = $_POST['user_id'];
+		$id = $_POST['id'];
 		$sql="UPDATE user_chats SET is_read='1',read_date_time='".date("Y-m-d h:i:s")."' 
-		where send_to_user_id='".$user_id."' AND is_read=0";
+		where send_to_user_id='".$user_id."' && id ='".$id."' AND is_read=0";
 		$stmt = $conn->execute($sql);
 		$result = array();
 		$result['response_code'] = 200;

@@ -4,24 +4,25 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * Response Entity
+ * Testimonial Entity
  *
  * @property int $id
- * @property int $request_id
  * @property int $user_id
+ * @property int $author_id
  * @property string $comment
- * @property float $quotation_price
- * @property int $is_details_shared
- * @property \Cake\I18n\Time $created
- * @property int $status
- * @property bool $is_deleted
+ * @property string $rating
+ * @property string $status
+ * @property int $request_id
+ * @property int $response_id
+ * @property \Cake\I18n\Time $updated_at
+ * @property \Cake\I18n\Time $created_at
  *
  * @property \App\Model\Entity\User $user
+ * @property \App\Model\Entity\Author $author
  * @property \App\Model\Entity\Request $request
- * @property \App\Model\Entity\Testimonial $testimonial
- * @property \App\Model\Entity\UserChat[] $user_chats
+ * @property \App\Model\Entity\Response $response
  */
-class Response extends Entity
+class Testimonial extends Entity
 {
 
     /**

@@ -9,6 +9,7 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property int $user_id
  * @property string $hotel_name
+ * @property int $hotel_rating
  * @property string $hotel_location
  * @property string $hotel_type
  * @property int $cheap_tariff

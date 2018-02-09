@@ -1,22 +1,22 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\PromotionTable;
+use App\Model\Table\TestimonialTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\PromotionTable Test Case
+ * App\Model\Table\TestimonialTable Test Case
  */
-class PromotionTableTest extends TestCase
+class TestimonialTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\Model\Table\PromotionTable
+     * @var \App\Model\Table\TestimonialTable
      */
-    public $Promotion;
+    public $Testimonial;
 
     /**
      * Fixtures
@@ -24,7 +24,7 @@ class PromotionTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.promotion',
+        'app.testimonial',
         'app.users',
         'app.social_profiles',
         'app.cities',
@@ -34,12 +34,13 @@ class PromotionTableTest extends TestCase
         'app.requests',
         'app.user_ratings',
         'app.responses',
-        'app.testimonial',
         'app.user_chats',
         'app.request_stops',
         'app.userdetails',
         'app.transports',
-        'app.credits'
+        'app.credits',
+        'app.promotion',
+        'app.authors'
     ];
 
     /**
@@ -50,8 +51,8 @@ class PromotionTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Promotion') ? [] : ['className' => 'App\Model\Table\PromotionTable'];
-        $this->Promotion = TableRegistry::get('Promotion', $config);
+        $config = TableRegistry::exists('Testimonial') ? [] : ['className' => 'App\Model\Table\TestimonialTable'];
+        $this->Testimonial = TableRegistry::get('Testimonial', $config);
     }
 
     /**
@@ -61,7 +62,7 @@ class PromotionTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->Promotion);
+        unset($this->Testimonial);
 
         parent::tearDown();
     }

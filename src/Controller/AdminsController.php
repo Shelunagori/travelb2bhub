@@ -15,16 +15,12 @@ class AdminsController extends AppController
     public function login()
     {
        $this->viewBuilder()->layout('home_layout'); 
-	   if ($this->request->is('post')) {
-			
-			$user = $this->Auth->identify();
-			
+	   if ($this->request->is('post')) {			
+			$user = $this->Auth->identify();			
 			if ($user) {
-
 				$this->Auth->setUser($user);
 				return $this->redirect(['action' => 'add']);
-			}
-			
+			}		
 			$this->Flash->error('Either Password or username is not correct!!');
 		}
 	}
