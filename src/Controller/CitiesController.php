@@ -49,16 +49,23 @@ class CitiesController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($id=null)
     {
 		$this->viewBuilder()->layout('admin_layout');
-        $city = $this->Cities->newEntity();
-        if ($this->request->is('post')) {
+        
+		if(!$id){
+			$city = $this->Cities->newEntity();
+		}else{
+			 $city = $this->Cities->get($id, [
+            'contain' => []
+			]);
+		}
+        if ($this->request->is(['patch', 'post', 'put'])){
             $city = $this->Cities->patchEntity($city, $this->request->data);
             if ($this->Cities->save($city)) {
                 $this->Flash->success(__('The city has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'add']);
             } else {
                 $this->Flash->error(__('The city could not be saved. Please, try again.'));
             }
@@ -68,11 +75,9 @@ class CitiesController extends AppController
 		$this->paginate = [
             'contain' => ['States']
         ];
-        $cities = $this->paginate($this->Cities);
-
-		
-        $this->set(compact('city', 'states','cities'));
-        $this->set('_serialize', ['city','cities']);
+        $cities = $this->Cities->find()->contain(['States'])->where(['Cities.is_deleted'=>0]);
+        $this->set(compact('city', 'states','cities', 'id'));
+        $this->set('_serialize', ['city','cities', 'id']);
     }
 
     /**
@@ -111,14 +116,15 @@ class CitiesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $city = $this->Cities->get($id);
-        if ($this->Cities->delete($city)) {
+        $this->request->allowMethod(['patch','post', 'put']);
+		$city = $this->Cities->get($id);
+		$this->request->data['is_deleted']=1;
+		$city = $this->Cities->patchEntity($city, $this->request->data());
+	    if ($this->Cities->save($city)) {
             $this->Flash->success(__('The city has been deleted.'));
         } else {
             $this->Flash->error(__('The city could not be deleted. Please, try again.'));
         }
-
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'add']);
     }
 }

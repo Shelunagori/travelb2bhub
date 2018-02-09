@@ -30,7 +30,7 @@
 						</div>
 						<div class="col-md-8">
 							<?php 
-							echo $this->Form->input('state_id',['options' =>$states,'label' => false,'class'=>'form-control input-sm select2','empty'=> '-----------Select State -------------']);?>	
+							echo $this->Form->input('state_id',['options' =>$states,'label' => false,'class'=>'form-control input-sm select2','required'=>'required','empty'=> 'Select...']);?>	
 						</div>
 					</div>
 					<span class="help-block"> </span>
@@ -53,10 +53,12 @@
 	<div class="col-md-6">
 		<div class="box box-primary">
 			<div class="box-header with-border">
-				<h3 class="box-title">City List</h3>
-			</div>
+				<i class="fa fa-pencil-square-o"></i> View City
+				 
+			</div> 
+			 
 		<div class="box-body"> 
-				<table class="table" cellpadding="0" cellspacing="0">
+				<table class="table table-bordered" cellpadding="0" cellspacing="0" id="main_tble">
 					<thead>
 						<tr style="background-color:#DFD9C4;">
 							<th scope="col"><?= __('Sr.No') ?></th>
@@ -73,7 +75,7 @@
 							<td><?= h($city->state->state_name) ?></td>
 							<td class="actions">
 									<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/Cities/add/'.$city->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
-									<?php echo $this->Html->link('<i class="fa fa-trash"></i>','/Cities/delete/'.$city->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $city->id)));?>
+									<?php echo $this->Form->PostLink('<i class="fa fa-trash"></i>','/Cities/delete/'.$city->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $city->id)));?>
 							</td>
 						</tr>
 					<?php $i++; endforeach; ?>
@@ -84,3 +86,24 @@
 	</div>
 </div>
 </section>
+<?php echo $this->Html->script('/assets/global/plugins/jquery.min.js'); ?>
+<script>
+$(document).ready(function() {
+
+var $rows = $('#main_tble tbody tr');
+	$('#search3').on('keyup',function() {
+		var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+		var v = $(this).val();
+		if(v){ 
+			$rows.show().filter(function() {
+				var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+	
+				return !~text.indexOf(val);
+			}).hide();
+		}else{
+			$rows.show();
+		}
+	});
+
+});
+</script>
