@@ -258,6 +258,8 @@ margin-top: 5px !important;
 							$class_selected='';
 		}}}}	*/ ?>
 		<li><a href="#">DashBoard</a></li>		
+		<li><a href="<?php echo $this->Url->build(["controller" => "Cities", "action" => "add"]); ?>">City-Master</a></li>		
+		<li><a href="<?php echo $this->Url->build(["controller" => "States", "action" => "add"]); ?>">State-Master</a></li>		
 		</ul>
 		</section>
 	

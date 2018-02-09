@@ -46,7 +46,7 @@ class StatesController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($id = null)
     {
 		$this->viewBuilder()->layout('admin_layout');
 		if(!$id){
@@ -63,7 +63,7 @@ class StatesController extends AppController
 				if ($this->States->save($state)) {
 					$this->Flash->success(__('The state has been saved.'));
 
-					return $this->redirect(['action' => 'index']);
+					return $this->redirect(['action' => 'add']);
 				} else {
 					$this->Flash->error(__('The state could not be saved. Please, try again.'));
 				}
@@ -73,8 +73,8 @@ class StatesController extends AppController
 		$this->paginate = [
             'contain' => ['Countries']
         ];
-		
-		$states= $this->States->find()->contain(['Countries'])->where(['States.is_deleted'=>0]);
+		$states = $this->paginate($this->States->find()->contain(['Countries'])->where(['States.is_deleted'=>0]));
+		//$states= $this->States->find()->contain(['Countries'])->where(['States.is_deleted'=>0]);
         $this->set(compact('state','country','states','id'));
         $this->set('_serialize', ['state','country','states','id']);
     }
@@ -114,14 +114,16 @@ class StatesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['patch','post', 'put']);
         $state = $this->States->get($id);
-        if ($this->States->delete($state)) {
+		$this->request->data['is_deleted']=1;
+		$state = $this->States->patchEntity($state, $this->request->data());
+        if ($this->States->save($state)) {
             $this->Flash->success(__('The state has been deleted.'));
         } else {
             $this->Flash->error(__('The state could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'add']);
     }
 }

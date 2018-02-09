@@ -1,5 +1,4 @@
 <section class="content">
-
 <div class="row">
 	<div class="col-md-6">
 		<div class="box box-primary">
@@ -20,7 +19,7 @@
 						</div>
 						<div class="col-md-8">
 							<?php echo $this->Form->control('state_name',[
-							'label' => false,'class'=>'form-control input-medium ','placeholder'=>'Enter City Name']);?>
+							'label' => false,'class'=>'form-control input-medium ','placeholder'=>'Enter State Name']);?>
 						</div>
 					</div>
 					<span class="help-block"></span>
