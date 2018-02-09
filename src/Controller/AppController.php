@@ -47,67 +47,94 @@ class AppController extends Controller {
         parent::initialize();
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        $this->loadComponent('Auth', [
-            'loginAction' => '/users/login',
-            'loginRedirect' => '/users/dashboard',
-            'authenticate' => [
-                'Form' => [
-                    'fields' => [
-                        'username' => 'email',
-                        'password' => 'password'
-                    ],
-					'scope' => ['status' => '1']
-                ],
-                'ADmad/HybridAuth.HybridAuth' => [
-                    // All keys shown below are defaults
-                    'fields' => [
-                        'provider' => 'provider',
-                        'openid_identifier' => 'openid_identifier',
-                        'email' => 'email'
-                    ],
-                    'profileModel' => 'ADmad/HybridAuth.SocialProfiles',
-                    'profileModelFkField' => 'user_id',
-                    // The URL Hybridauth lib should redirect to after authentication.
-                    // If no value is specified you are redirect to this plugin's
-                    // HybridAuthController::authenticated() which handles persisting
-                    // user info to AuthComponent and redirection.
-                    'hauth_return_to' => null
-                ]
-            ]
-        ]);
+        if($this->request->params['controller'] == 'users') 
+		{
+		
+			$this->loadComponent('Auth', [
+			 'authenticate' => [
+					'Form' => [
+						'fields' => [
+							'username' => 'email',
+							'password' => 'password'
+						],
+						'scope' => ['status' => '1'],
+						'userModel' => 'Users'
+					]
+				],
+				'loginRedirect' => [
+					'controller' => 'Users',
+					'action' => 'dashboard'
+				],
+				'logoutRedirect' => [
+					'controller' => 'Users',
+					'action' => 'login'
+				],
+				'unauthorizedRedirect' => $this->referer(),
+			]);
+		}
+		else
+		{
+			$this->loadComponent('Auth', [
+				'authenticate' => [
+					'Form' => [
+						'fields' => [
+							'username' => 'email',
+							'password' => 'password'
+						],
+						'userModel' => 'Admins'
+					]
+				],
+				'loginAction' => [
+					'controller' => 'Admins',
+					'action' => 'login'
+				],
+				'loginRedirect' => [
+					'controller' => 'Admins',
+					'action' => 'index',
+				],
+				'logoutRedirect' => [
+					'controller' => 'Admins',
+					'action' => 'login'
+				],
+				'unauthorizedRedirect' => $this->referer(),
+			]);
+		}	
+		
     }
 
-public function beforeFilter(Event $event) {
-    $this->set('login_status', $this->Auth->user('id'));
-     $email = $this->getSettings('email');
-     $address = $this->getSettings('address');
-     $phone = $this->getSettings('phone');
-     $officehours = $this->getSettings('office-hours');
-	  $freemembership = $this->getSettings('freemembership');
-	  $reqcount = $this->getSettings('requestcount');
-	  $freemembershipdate = $this->getSettings('freemembershipdate');
-	  $roleid = $this->getRoleID($this->Auth->user('id'));
-     $this->set('emailsystem',   $email);
-	  $this->set('addresssystem',   $address);
-	  $this->set('phonesystem',   $phone);
-	  $this->set('officehourssystem',   $officehours);
-	  $this->set('freemembership',   $freemembership);
-	  $this->set('freemembershipdate',   $freemembershipdate);
-	  $this->set('reqcount',   $reqcount);
-	  $this->set('role_idsession',   $roleid);
-}
-public function getSettings($field)
-{
- $this->loadModel('Setting');
- $data= $this->Setting->find()->where(['field' => $field])->first();
- return $data;
-}
-public function getRoleID($userid)
-{
- $this->loadModel('Users');
- $data= $this->Users->find()->where(['id' => $userid])->first();
- return $data['role_id'];
-}
+	public function beforeFilter(Event $event) {
+		$this->set('login_status', $this->Auth->user('id'));
+		$email = $this->getSettings('email');
+		$address = $this->getSettings('address');
+		$phone = $this->getSettings('phone');
+		$officehours = $this->getSettings('office-hours');
+		$freemembership = $this->getSettings('freemembership');
+		$reqcount = $this->getSettings('requestcount');
+		$freemembershipdate = $this->getSettings('freemembershipdate');
+		$roleid = $this->getRoleID($this->Auth->user('id'));
+		$this->set('emailsystem',   $email);
+		$this->set('addresssystem',   $address);
+		$this->set('phonesystem',   $phone);
+		$this->set('officehourssystem',   $officehours);
+		$this->set('freemembership',   $freemembership);
+		$this->set('freemembershipdate',   $freemembershipdate);
+		$this->set('reqcount',   $reqcount);
+		$this->set('role_idsession',   $roleid);
+	}
+	
+	public function getSettings($field)
+	{
+		$this->loadModel('Setting');
+		$data= $this->Setting->find()->where(['field' => $field])->first();
+		return $data;
+	}	
+	
+	public function getRoleID($userid)
+	{
+		$this->loadModel('Users');
+		$data= $this->Users->find()->where(['id' => $userid])->first();
+		return $data['role_id'];
+	}
     /**
      * Before render callback.
      *
@@ -122,7 +149,7 @@ public function getRoleID($userid)
         }
     }
 
-function ymdFormatByDateFormat($date, $format, $dateSeparator) {
+	function ymdFormatByDateFormat($date, $format, $dateSeparator) {
 		$newDate = "";
 		if($date!='') {
 			$dtArr = explode($dateSeparator, $date);
@@ -138,8 +165,9 @@ function ymdFormatByDateFormat($date, $format, $dateSeparator) {
 		}
 		return $newDate;
 	}
+	
 	public function commonaddress(){
-      $email = $this->Model->query("SELECT value FROM setting where field='email'" );
-      echo $email ;
+		$email = $this->Model->query("SELECT value FROM setting where field='email'" );
+		echo $email ;
 	}
 }
