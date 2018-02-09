@@ -5,15 +5,15 @@
 		<div class="box box-primary">
 			<div class="box-header with-border">
 			<?php if(!empty($id)){ ?>
-							<i class="fa fa-pencil-square-o"></i> Edit City
+							<i class="fa fa-pencil-square-o"></i> <b> Edit City </b>
 						<?php }else{ ?>
-							<i class="fa fa-plus"></i> Add City
+							<i class="fa fa-plus"></i> <b> Add City </b>
 						<?php } ?>
 				
 			</div>
 			<div class="box-body"> 
 				<div class="form-group">
-				<?= $this->Form->create($city) ?>
+				<?= $this->Form->create($city,['id'=>'CityForm']) ?>
 					<div class="row">
 						<div class="col-md-4">
 							<label class="control-label">City Name  </label>
@@ -53,7 +53,7 @@
 	<div class="col-md-6">
 		<div class="box box-primary">
 			<div class="box-header with-border">
-				City List	 
+				<i class="fa fa-edit"></i> <b> View City </b>
 			</div> 
 			 
 		<div class="box-body"> 
@@ -80,29 +80,39 @@
 					<?php $i++; endforeach; ?>
 					</tbody>
 				</table>
+				<div class="paginator">
+					<ul class="pagination">
+						<?= $this->Paginator->prev('< ' . __('previous')) ?>
+						<?= $this->Paginator->numbers() ?>
+						<?= $this->Paginator->next(__('next') . ' >') ?>
+					</ul>
+					<p><?= $this->Paginator->counter() ?></p>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 </section>
-<?php echo $this->Html->script('/assets/global/plugins/jquery.min.js'); ?>
-<script>
-$(document).ready(function() {
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 
-var $rows = $('#main_tble tbody tr');
-	$('#search3').on('keyup',function() {
-		var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
-		var v = $(this).val();
-		if(v){ 
-			$rows.show().filter(function() {
-				var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-	
-				return !~text.indexOf(val);
-			}).hide();
-		}else{
-			$rows.show();
+<script>
+
+$(document).ready(function() {
+	// validate signup form on keyup and submit
+	 $("#CityForm").validate({ 
+		rules: {
+			name: {
+				required: true
+			},
+			state_id: {
+				required: true
+			} 
+		},
+		submitHandler: function () {
+			$("#submit_member").attr('disabled','disabled');
+			form.submit();
 		}
-	});
+	}); 
 
 });
 </script>

@@ -75,7 +75,8 @@ class CitiesController extends AppController
 		$this->paginate = [
             'contain' => ['States']
         ];
-        $cities = $this->Cities->find()->contain(['States'])->where(['Cities.is_deleted'=>0]);
+        $cities = $this->paginate($this->Cities->find()->where(['Cities.is_deleted'=>0]));
+		 
         $this->set(compact('city', 'states','cities', 'id'));
         $this->set('_serialize', ['city','cities', 'id']);
     }

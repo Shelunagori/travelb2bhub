@@ -4373,14 +4373,15 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 			$user_id = $_POST['user_id'];
 			$unreadnotification = array();
 			$conn = ConnectionManager::get('default');
-			$sql = "Select CONCAT(u.`first_name`,' ',u.`last_name` ) as sender_name,c.* FROM user_chats as c 
-			INNER JOIN users as u on u.id=c.user_id
-			where c.is_read='0' AND c.send_to_user_id='".$user_id."'
-			order by c.created DESC ";
+			$sql = "Select `id` FROM user_chats where is_read='0' AND send_to_user_id='".$user_id."' order by created DESC ";
+			$stmt = $conn->execute($sql);
+			$unreadnotificationCOunt = $stmt ->fetchAll('assoc');
+			$countchat = count($unreadnotificationCOunt);
+			//-- all data 
+			$sql = "Select * FROM user_chats where send_to_user_id='".$user_id."' order by created DESC ";
 			$stmt = $conn->execute($sql);
 			$unreadnotification = $stmt ->fetchAll('assoc');
-			$countchat = count($unreadnotification);
-			$result['response_code'] = 200;
+ 			$result['response_code'] = 200;
 			$result['response_object'] = $unreadnotification;
 			$result['unread_count'] = $countchat;
 			$data =   json_encode($result);
