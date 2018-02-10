@@ -12,7 +12,7 @@
 			</div>
 			<div class="box-body"> 
 				<div class="form-group">
-				<?= $this->Form->create($country,['id'=>'CityForm']) ?>
+				<?= $this->Form->create($country,['id'=>'CountryForm']) ?>
 					<div class="row">
 						<div class="col-md-4">
 							<label class="control-label">Country Code  </label>
@@ -29,7 +29,7 @@
 						</div>
 						<div class="col-md-8">
 							<?php 
-							echo $this->Form->input('country_name',['label' => false,'class'=>'form-control input-medium ','required'=>'required','Placeholder'=> 'Enter Country Name']);?>	
+							echo $this->Form->input('country_name',['label' => false,'class'=>'form-control input-medium ','Placeholder'=> 'Enter Country Name']);?>	
 						</div>
 					</div>
 					<span class="help-block"> </span>
@@ -98,7 +98,7 @@
 
 $(document).ready(function() {
 	// validate signup form on keyup and submit
-	 $("#CityForm").validate({ 
+	 $("#CountryForm").validate({ 
 		rules: {
 			name: {
 				required: true
