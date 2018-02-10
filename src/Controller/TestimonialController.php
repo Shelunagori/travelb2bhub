@@ -20,7 +20,7 @@ class TestimonialController extends AppController
     {
 		$this->viewBuilder()->layout('admin_layout');		
         $this->paginate = [
-            'contain' => ['Users']
+            'contain' => ['Users','Authors']
         ];
         $testimonial = $this->paginate($this->Testimonial);
 		//pr($testimonial->toArray());exit;

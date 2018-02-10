@@ -29,7 +29,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($admins as $admin): ?>
+            <?php foreach ($AdminsRecord as $admin): ?>
             <tr>
                 <td><?= $this->Number->format($admin->id) ?></td>
                 <td><?= h($admin->email) ?></td>

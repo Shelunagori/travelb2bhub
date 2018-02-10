@@ -43,10 +43,12 @@ class TestimonialTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
-		/*   $this->belongsTo('Authors', [
+		$this->belongsTo('Authors', [
+			'className' => 'Users',
             'foreignKey' => 'author_id',
             'joinType' => 'INNER'
-        ]); */
+        ]);
+		 
         $this->belongsTo('Requests', [
             'foreignKey' => 'request_id',
             'joinType' => 'INNER'

@@ -10,21 +10,22 @@
 							<thead>
 								<tr style="background-color:#DFD9C4;">
 									<th scope="col"><?= __('Sr.No') ?></th>
-									<th scope="col"><?= __('Rating') ?></th>
 									<th scope="col"><?= __('User') ?></th>
 									<th scope="col"><?= __('Author') ?></th>
+									<th scope="col"><?= __('Rating') ?></th>
 									<th scope="col" class="actions"><?= __('Actions') ?></th>
 								</tr>
 						</thead>
 						<tbody>
-							<?php $i=1; foreach ($testimonial as $testimonial): ?>
+							<?php $i=1; foreach ($testimonial as $testimonials): ?>
 							<tr>
 								<td><?php echo $i; ?></td>
-								<td><?php echo $testimonial->rating; ?></td>
-								<td><?= $testimonial->has('user') ? $this->Html->link($testimonial->user->first_name.$testimonial->user->last_name, ['controller' => 'Users', 'action' => 'view', $testimonial->user->id]) : '' ?></td>
-								<td><?= $this->Number->format($testimonial->author_id) ?></td>
+								
+								<td><?= $testimonials->user->first_name.' '.$testimonials->user->last_name ?></td>
+								<td><?= $testimonials->author->first_name ?></td> 
+								<td><?php echo $testimonials->rating; ?></td>
 								<td class="actions">
-									<?php echo $this->Html->link('<i class="fa fa-file"></i>','/Testimonial/view/'.$testimonial->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
+									<?php echo $this->Html->link('<i class="fa fa-file"></i>','/Testimonial/view/'.$testimonials->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
 									
 								</td>
 							</tr>
