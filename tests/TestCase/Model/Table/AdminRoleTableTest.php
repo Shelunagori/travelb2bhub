@@ -26,6 +26,28 @@ class AdminRoleTableTest extends TestCase
     public $fixtures = [
         'app.admin_role',
         'app.roles',
+        'app.permission_role',
+        'app.userdetails',
+        'app.users',
+        'app.social_profiles',
+        'app.cities',
+        'app.states',
+        'app.countries',
+        'app.hotels',
+        'app.requests',
+        'app.categories',
+        'app.finals',
+        'app.references',
+        'app.responses',
+        'app.testimonial',
+        'app.authors',
+        'app.request_stops',
+        'app.user_chats',
+        'app.user_chats123',
+        'app.user_ratings',
+        'app.transports',
+        'app.credits',
+        'app.promotion',
         'app.admins'
     ];
 

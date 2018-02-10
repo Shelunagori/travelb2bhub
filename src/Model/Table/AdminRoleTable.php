@@ -35,7 +35,7 @@ class AdminRoleTable extends Table
 
         $this->table('admin_role');
         $this->displayField('role_id');
-        $this->primaryKey(['role_id', 'admin_id']);
+        $this->primaryKey(['id']);
 
         $this->belongsTo('Roles', [
             'foreignKey' => 'role_id',
@@ -45,6 +45,21 @@ class AdminRoleTable extends Table
             'foreignKey' => 'admin_id',
             'joinType' => 'INNER'
         ]);
+    }
+
+    /**
+     * Default validation rules.
+     *
+     * @param \Cake\Validation\Validator $validator Validator instance.
+     * @return \Cake\Validation\Validator
+     */
+    public function validationDefault(Validator $validator)
+    {
+        $validator
+            ->integer('id')
+            ->allowEmpty('id', 'create');
+
+        return $validator;
     }
 
     /**

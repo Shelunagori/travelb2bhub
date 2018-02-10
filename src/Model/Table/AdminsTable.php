@@ -37,9 +37,9 @@ class AdminsTable extends Table
         $this->primaryKey('id');
 
         $this->hasMany('AdminRole', [
-            'foreignKey' => 'admin_id'
+            'foreignKey' => 'admin_id',
+			'saveStrategy' => 'replace'
         ]);
-		
     }
 
     /**
@@ -54,13 +54,13 @@ class AdminsTable extends Table
             ->integer('id')
             ->allowEmpty('id', 'create');
 
-        $validator
+/*         $validator
             ->email('email')
             ->requirePresence('email', 'create')
             ->notEmpty('email')
             ->add('email', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
-        /*$validator
+        $validator
             ->requirePresence('password', 'create')
             ->notEmpty('password');
 
@@ -108,8 +108,8 @@ class AdminsTable extends Table
 
         $validator
             ->dateTime('updated_at')
-            ->allowEmpty('updated_at');
-*/
+            ->allowEmpty('updated_at'); */
+
         return $validator;
     }
 

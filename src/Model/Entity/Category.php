@@ -4,16 +4,17 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * AdminRole Entity
+ * Category Entity
  *
  * @property int $id
- * @property int $role_id
- * @property int $admin_id
+ * @property string $name
+ * @property int $flag
+ * @property \Cake\I18n\Time $created_on
  *
- * @property \App\Model\Entity\Role $role
- * @property \App\Model\Entity\Admin $admin
+ * @property \App\Model\Entity\Page[] $pages
+ * @property \App\Model\Entity\Request[] $requests
  */
-class AdminRole extends Entity
+class Category extends Entity
 {
 
     /**
@@ -27,7 +28,6 @@ class AdminRole extends Entity
      */
     protected $_accessible = [
         '*' => true,
-        'role_id' => false,
-        'admin_id' => false
+        'id' => false
     ];
 }

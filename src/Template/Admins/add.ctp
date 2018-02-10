@@ -58,20 +58,19 @@
 					
 					<div class="row">
 						<div class="col-md-4">
-							<label class="control-label">Rles <span class="required" aria-required="true"> * </span></label>
+							<label class="control-label">Roles <span class="required" aria-required="true"> * </span></label>
 						</div>
 						<div class="col-md-8">
- 							<?php $x=0; foreach($Admins as $role) {
+ 							<?php $x=0; foreach($Admins as $key=>$role) {
 								?>
 								<div class="form-group">
 									<div class="checkbox">
 										<label>
-											<input type="checkbox" name="admin_role[$x]['role_id']">
-											<?php echo ucwords($role); ?>
+											<input type="checkbox" name="role_id[]" value="<?php echo $key; ?>"><?php echo ucwords($role); ?>
 										</label>
 									</div>
 								</div>
-						 <?php $x++  
+						 <?php $x++; 
 							} ?> 
 						</div>
 					</div>

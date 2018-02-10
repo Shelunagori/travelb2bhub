@@ -24,15 +24,11 @@ class AdminRoleFixture extends TestFixture
      */
     // @codingStandardsIgnoreStart
     public $fields = [
+        'id' => ['type' => 'integer', 'length' => 10, 'unsigned' => false, 'null' => false, 'default' => null, 'comment' => '', 'autoIncrement' => true, 'precision' => null],
         'role_id' => ['type' => 'integer', 'length' => 10, 'unsigned' => true, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
         'admin_id' => ['type' => 'integer', 'length' => 10, 'unsigned' => true, 'null' => false, 'default' => null, 'comment' => '', 'precision' => null, 'autoIncrement' => null],
-        '_indexes' => [
-            'admin_role_admin_id_foreign' => ['type' => 'index', 'columns' => ['admin_id'], 'length' => []],
-        ],
         '_constraints' => [
-            'primary' => ['type' => 'primary', 'columns' => ['role_id', 'admin_id'], 'length' => []],
-            'admin_role_admin_id_foreign' => ['type' => 'foreign', 'columns' => ['admin_id'], 'references' => ['admins', 'id'], 'update' => 'restrict', 'delete' => 'cascade', 'length' => []],
-            'admin_role_role_id_foreign' => ['type' => 'foreign', 'columns' => ['role_id'], 'references' => ['roles', 'id'], 'update' => 'restrict', 'delete' => 'cascade', 'length' => []],
+            'primary' => ['type' => 'primary', 'columns' => ['id'], 'length' => []],
         ],
         '_options' => [
             'engine' => 'InnoDB',
@@ -48,6 +44,7 @@ class AdminRoleFixture extends TestFixture
      */
     public $records = [
         [
+            'id' => 1,
             'role_id' => 1,
             'admin_id' => 1
         ],

@@ -57,18 +57,35 @@ class AdminsController extends AppController
     {
 		$this->viewBuilder()->layout('admin_layout');
         $admin = $this->Admins->newEntity();
+        $AdminRole = $this->Admins->AdminRole->newEntity();
         if ($this->request->is('post')) {
             $admin = $this->Admins->patchEntity($admin, $this->request->data);
-            if ($this->Admins->save($admin)) {
+ 			$admin_role=$this->request->data['role_id'];
+             if ($insert=$this->Admins->save($admin)) {
+				//- Admin Role Insert
+				$X=0;
+				foreach($admin_role as $roledata){
+ 					$this->request->data['record']['AdminRole'][$X]['admin_id']=$insert->id;
+					$this->request->data['record']['AdminRole'][$X]['role_id']=$roledata;
+ 					$X++;	
+				}
+				$AdminRoleData=$this->request->data['record'];
+				$AdminRole = $this->Admins->AdminRole->newEntities($AdminRoleData);
+				$this->Admins->AdminRole->saveMany($AdminRole);
                 $this->Flash->success(__('The admin has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                //return $this->redirect(['action' => 'add']);
             } else {
                 $this->Flash->error(__('The admin could not be saved. Please, try again.'));
             }
         }
 		$Admins = $this->Admins->AdminRole->Roles->find('list', ['limit' => 200]);
-		 
+		//-- VIew List 
+		$this->paginate = [
+            'contain' => ['AdminRole']
+        ];
+        $cities = $this->paginate($this->Admins);
+		
         $this->set(compact('admin','Admins'));
         $this->set('_serialize', ['admin','Admins']);
     }

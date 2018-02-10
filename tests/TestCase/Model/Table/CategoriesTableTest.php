@@ -1,22 +1,22 @@
 <?php
 namespace App\Test\TestCase\Model\Table;
 
-use App\Model\Table\AdminsTable;
+use App\Model\Table\CategoriesTable;
 use Cake\ORM\TableRegistry;
 use Cake\TestSuite\TestCase;
 
 /**
- * App\Model\Table\AdminsTable Test Case
+ * App\Model\Table\CategoriesTable Test Case
  */
-class AdminsTableTest extends TestCase
+class CategoriesTableTest extends TestCase
 {
 
     /**
      * Test subject
      *
-     * @var \App\Model\Table\AdminsTable
+     * @var \App\Model\Table\CategoriesTable
      */
-    public $Admins;
+    public $Categories;
 
     /**
      * Fixtures
@@ -24,31 +24,28 @@ class AdminsTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.admins',
-        'app.admin_role',
-        'app.roles',
-        'app.permission_role',
-        'app.userdetails',
+        'app.categories',
+        'app.pages',
+        'app.requests',
         'app.users',
         'app.social_profiles',
         'app.cities',
         'app.states',
         'app.countries',
         'app.hotels',
-        'app.requests',
-        'app.categories',
-        'app.finals',
-        'app.references',
+        'app.userdetails',
+        'app.request_stops',
+        'app.transports',
         'app.responses',
         'app.testimonial',
         'app.authors',
-        'app.request_stops',
+        'app.credits',
+        'app.promotion',
+        'app.finals',
+        'app.references',
         'app.user_chats',
         'app.user_chats123',
-        'app.user_ratings',
-        'app.transports',
-        'app.credits',
-        'app.promotion'
+        'app.user_ratings'
     ];
 
     /**
@@ -59,8 +56,8 @@ class AdminsTableTest extends TestCase
     public function setUp()
     {
         parent::setUp();
-        $config = TableRegistry::exists('Admins') ? [] : ['className' => 'App\Model\Table\AdminsTable'];
-        $this->Admins = TableRegistry::get('Admins', $config);
+        $config = TableRegistry::exists('Categories') ? [] : ['className' => 'App\Model\Table\CategoriesTable'];
+        $this->Categories = TableRegistry::get('Categories', $config);
     }
 
     /**
@@ -70,7 +67,7 @@ class AdminsTableTest extends TestCase
      */
     public function tearDown()
     {
-        unset($this->Admins);
+        unset($this->Categories);
 
         parent::tearDown();
     }
@@ -91,16 +88,6 @@ class AdminsTableTest extends TestCase
      * @return void
      */
     public function testValidationDefault()
-    {
-        $this->markTestIncomplete('Not implemented yet.');
-    }
-
-    /**
-     * Test buildRules method
-     *
-     * @return void
-     */
-    public function testBuildRules()
     {
         $this->markTestIncomplete('Not implemented yet.');
     }
