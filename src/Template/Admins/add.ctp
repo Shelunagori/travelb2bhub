@@ -50,7 +50,7 @@
 							<label class="control-label">Password <span class="required" aria-required="true"> * </span> </label>
 						</div>
 						<div class="col-md-8">
-							<?php echo $this->Form->control('password',[
+							<?php echo $this->Form->password('password',[
 							'label' => false,'class'=>'form-control input-medium ','placeholder'=>'Enter Your Password']);?>
 						</div>
 					</div>
@@ -148,9 +148,13 @@ $(document).ready(function() {
 				required: true
 			}, 
 			email: {
+				email: true,
 				required: true
-			} , 
+			}, 
 			role: {
+				required: true
+			}, 
+			password: {
 				required: true
 			} 
 		},
