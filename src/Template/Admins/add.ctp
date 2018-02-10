@@ -99,27 +99,27 @@
 			</div> 
 			 
 		<div class="box-body"> 
-				<!--<table class="table table-bordered" cellpadding="0" cellspacing="0" id="main_tble">
+				<table class="table table-bordered" cellpadding="0" cellspacing="0" id="main_tble">
 					<thead>
-						<tr style="background-color:#DFD9C4;">
-							<th scope="col"><?= __('Sr.No') ?></th>
-							<th scope="col"><?= __('State ') ?></th>
-							<th scope="col"><?= __('Counry') ?></th>
+						<tr>
+							<th scope="col"><?= $this->Paginator->sort('id') ?></th>
+							<th scope="col"><?= $this->Paginator->sort('first_name') ?></th>
+							<th scope="col"><?= $this->Paginator->sort('email') ?></th>
 							<th scope="col" class="actions"><?= __('Actions') ?></th>
 						</tr>
 					</thead>
 					<tbody>
-						<?php $i=1; foreach ($states as $state): ?>
+						<?php $i=0; foreach ($AdminsRecord as $admin): $i++; ?>
 						<tr>
-							<td><?php echo $i;?></td>
-							<td><?= h($state->state_name) ?></td>
-							<td><?= h($state->country->country_name) ?></td>
+							<td><?= $i ?></td>
+							<td><?= h($admin->first_name.' '. $admin->last_name) ?></td>
+							<td><?= h($admin->email) ?></td>
 							<td class="actions">
-									<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/States/add/'.$state->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
-									<?php echo $this->Form->PostLink('<i class="fa fa-trash"></i>','/States/delete/'.$state->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $state->id)));?>
+								<?= $this->Html->link(__('Edit'), ['action' => 'edit', $admin->id]) ?>
+								<?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $admin->id], ['confirm' => __('Are you sure you want to delete # {0}?', $admin->id)]) ?>
 							</td>
 						</tr>
-					<?php $i++; endforeach; ?>
+						<?php endforeach; ?>
 					</tbody>
 				</table>
 				<div class="paginator">
@@ -129,7 +129,7 @@
 						<?= $this->Paginator->next(__('next') . ' >') ?>
 					</ul>
 					<p><?= $this->Paginator->counter() ?></p>
-				</div>-->
+				</div>
 			</div>
 		</div>
 	</div>

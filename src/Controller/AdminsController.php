@@ -84,10 +84,10 @@ class AdminsController extends AppController
 		$this->paginate = [
             'contain' => ['AdminRole']
         ];
-        $cities = $this->paginate($this->Admins);
+        $AdminsRecord = $this->paginate($this->Admins);
 		
-        $this->set(compact('admin','Admins'));
-        $this->set('_serialize', ['admin','Admins']);
+        $this->set(compact('admin','Admins','AdminsRecord'));
+        $this->set('_serialize', ['admin','Admins','AdminsRecord']);
     }
 	
 	public function menu()

@@ -108,4 +108,13 @@ class ApiVersionsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+	public function apiVersion()
+    {
+		$this->loadModel('ApiVersions');
+        $apiVersions = $this->ApiVersions->find()->first();
+
+        $data =   json_encode($apiVersions);
+		echo  $data;
+		exit;
+    }
 }
