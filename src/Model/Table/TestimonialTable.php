@@ -43,10 +43,10 @@ class TestimonialTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Authors', [
+		/*   $this->belongsTo('Authors', [
             'foreignKey' => 'author_id',
             'joinType' => 'INNER'
-        ]);
+        ]); */
         $this->belongsTo('Requests', [
             'foreignKey' => 'request_id',
             'joinType' => 'INNER'
@@ -69,7 +69,7 @@ class TestimonialTable extends Table
             ->integer('id')
             ->allowEmpty('id', 'create');
 
-        $validator
+       /*  $validator
             ->requirePresence('comment', 'create')
             ->notEmpty('comment');
 
@@ -90,7 +90,7 @@ class TestimonialTable extends Table
             ->dateTime('created_at')
             ->requirePresence('created_at', 'create')
             ->notEmpty('created_at');
-
+ */
         return $validator;
     }
 
@@ -104,7 +104,7 @@ class TestimonialTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['author_id'], 'Authors'));
+        //$rules->add($rules->existsIn(['author_id'], 'Authors'));
         $rules->add($rules->existsIn(['request_id'], 'Requests'));
         $rules->add($rules->existsIn(['response_id'], 'Responses'));
 

@@ -20,10 +20,10 @@ class TestimonialController extends AppController
     {
 		$this->viewBuilder()->layout('admin_layout');		
         $this->paginate = [
-            'contain' => ['Users', 'Authors', 'Requests', 'Responses']
+            'contain' => ['Users']
         ];
         $testimonial = $this->paginate($this->Testimonial);
-
+		//pr($testimonial->toArray());exit;
         $this->set(compact('testimonial'));
         $this->set('_serialize', ['testimonial']);
     }
@@ -37,8 +37,9 @@ class TestimonialController extends AppController
      */
     public function view($id = null)
     {
+		$this->viewBuilder()->layout('admin_layout');	
         $testimonial = $this->Testimonial->get($id, [
-            'contain' => ['Users', 'Authors', 'Requests', 'Responses']
+            'contain' => ['Users']
         ]);
 
         $this->set('testimonial', $testimonial);
