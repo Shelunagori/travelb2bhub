@@ -60,7 +60,7 @@ class CategoriesTable extends Table
         $validator
             ->requirePresence('name', 'create')
             ->notEmpty('name');
-
+/*
         $validator
             ->integer('flag')
             ->requirePresence('flag', 'create')
@@ -70,7 +70,7 @@ class CategoriesTable extends Table
             ->dateTime('created_on')
             ->requirePresence('created_on', 'create')
             ->notEmpty('created_on');
-
+*/
         return $validator;
     }
 }
