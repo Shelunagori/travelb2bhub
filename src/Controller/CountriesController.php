@@ -46,21 +46,33 @@ class CountriesController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($id = null)
     {
-        $country = $this->Countries->newEntity();
-        if ($this->request->is('post')) {
+		$this->viewBuilder()->layout('admin_layout');	
+			if(!$id)
+			{				
+				$country = $this->Countries->newEntity();
+			}
+			else
+			{
+				$country = $this->Countries->get($id, [
+					'contain' => []
+				]);
+			}
+        if ($this->request->is('patch','post','post')) 
+		{	
             $country = $this->Countries->patchEntity($country, $this->request->data);
             if ($this->Countries->save($country)) {
                 $this->Flash->success(__('The country has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'add']);
             } else {
                 $this->Flash->error(__('The country could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('country'));
-        $this->set('_serialize', ['country']);
+		$countries = $this->paginate($this->Countries->find()->where(['Countries.is_deleted'=>0]));
+        $this->set(compact('country','countries','id'));
+        $this->set('_serialize', ['country','countries','id']);
     }
 
     /**
