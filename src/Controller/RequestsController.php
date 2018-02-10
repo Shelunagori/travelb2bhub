@@ -20,7 +20,7 @@ class RequestsController extends AppController
     {
 		$this->viewBuilder()->layout('admin_layout');	
         $this->paginate = [
-            'contain' => ['Users', 'Cities']
+            'contain' => ['Users', 'Cities','States']
         ];
         $requests = $this->paginate($this->Requests);
 

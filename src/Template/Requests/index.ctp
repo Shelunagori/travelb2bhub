@@ -19,7 +19,7 @@
 							<th scope="col"><?= __('Status') ?></th>
 							<th scope="col"><?= __('Removed') ?></th>
 							<th scope="col"><?= __('City') ?></th>
-							<th scope="col"><?= __('Status') ?></th>							
+							<th scope="col"><?= __('State') ?></th>							
 							<th scope="col"><?= __('Pickup City') ?></th>							
 							<th scope="col"><?= __('Pickup State') ?></th>							
 							<th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -36,15 +36,14 @@
                 <td><?= h($request->category_id) ?></td>
 				<td><?= h($request->created) ?></td>
 				<td><?= h($request->status) ?></td>
-				<td><?= h($request->status) ?>Open</td>
-				<td><?= h($request->city_id) ?></td>
-				<td><?= h($request->state_id) ?></td>
-				<td><?= h($request->pickup_city) ?></td>
-				<td><?= h($request->pickup_state) ?></td>
+				<td><?= h($request->status) ?></td>
+				<td><?= h($request->city->name) ?></td>
+				<td><?= h($request->state->state_name) ?></td>
+				<td><?= h($request->city->name) ?></td>
+				<td><?= h($request->state->state_name) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $request->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $request->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $request->id], ['confirm' => __('Are you sure you want to delete # {0}?', $request->id)]) ?>
+                    
                 </td>
             </tr>
             <?php $i++;endforeach; ?>
