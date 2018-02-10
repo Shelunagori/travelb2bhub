@@ -27,17 +27,12 @@
 							<label class="control-label">Select Country <span class="required" aria-required="true"> * </span></label>
 						</div>
 						<div class="col-md-8">
-<<<<<<< HEAD
-							<?php 
-							echo $this->Form->input('country_id',['empty'=>'Select...','options' =>$country,'label' => false,'class'=>'form-control input-sm select2','required'=>'required']);?>	
-=======
 							<?php if(!empty($id)){ 
 								echo $this->Form->input('country_id',['options' =>$country,'label' => false,'class'=>'form-control select2','empty'=> 'Select...']);
 							}else{ 
 								echo $this->Form->input('country_id',['options' =>$country,'label' => false,'class'=>'form-control select2','empty'=> 'Select...','value' => '']);
 							} ?>
 							<label id="country-id-error" class="error" for="country-id"> </label>
->>>>>>> ff013ed3d6965d81633a5809a145c6546599145a
 						</div>
 					</div>
 					<span class="help-block"> </span>
@@ -108,11 +103,7 @@ $(document).ready(function() {
 		rules: {
 			state_name: {
 				required: true
-<<<<<<< HEAD
 			},
-=======
-			}, 
->>>>>>> ff013ed3d6965d81633a5809a145c6546599145a
 			country_id: {
 				required: true
 			} 
