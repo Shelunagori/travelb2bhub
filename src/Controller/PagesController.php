@@ -4493,10 +4493,20 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 			$error="";
 			$response=array();
 		}
-		 
-		$this->set(compact('success', 'error', 'response'));
-		$this->set('_serialize', ['success', 'error', 'response']);
+		$data =   json_encode($response);
+		echo  $data;
+		exit;
 	}	
+	
+	public function apiVersion()
+    {
+		$this->loadModel('ApiVersions');
+        $apiVersions = $this->ApiVersions->find()->first();
+
+        $data =   json_encode($apiVersions);
+		echo  $data;
+		exit;
+    }
 		
 		
 		
