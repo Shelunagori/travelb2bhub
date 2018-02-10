@@ -59,7 +59,7 @@ class CountriesController extends AppController
 					'contain' => []
 				]);
 			}
-        if ($this->request->is('patch','post','post')) 
+        if ($this->request->is(['patch','post','put'])) 
 		{	
             $country = $this->Countries->patchEntity($country, $this->request->data);
             if ($this->Countries->save($country)) {
@@ -110,14 +110,16 @@ class CountriesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['patch','post', 'put']);
         $country = $this->Countries->get($id);
-        if ($this->Countries->delete($country)) {
+		$this->request->data['is_deleted']=1;
+		$country = $this->Countries->patchEntity($country, $this->request->data());
+        if ($this->Countries->save($country)) {
             $this->Flash->success(__('The country has been deleted.'));
         } else {
             $this->Flash->error(__('The country could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'add']);
     }
 }

@@ -16,7 +16,6 @@
 	<?php echo $this->Html->css('/assets/plugins/iCheck/all.css'); ?> 
 	<?php echo $this->Html->css('/assets/font-awesome/css/font-awesome.min.css'); ?> 
 	<?php echo $this->Html->css('/assets/ionicons/css/ionicons.min.css'); ?> 
-	
 	<?php echo $this->Html->css('/assets/plugins/select2/select2.min.css'); ?>
 	<?php echo $this->Html->css('/assets/plugins/bootstrap-editable/css/bootstrap-editable.css'); ?>
 	<?php echo $this->Html->css('/assets/dist/css/AdminLTE.min.css'); ?>
@@ -127,6 +126,7 @@ margin-top: 5px !important;
 					<li>
 					  <?php echo $this->Html->link('Logout',['controller' => 'Users', 'action' => 'logout', '_full' => true,'class'=>'btn btn-default btn-flat']); ?>
 					</li>
+					
 				</ul>
 			</li>
         </ul>
@@ -262,6 +262,7 @@ margin-top: 5px !important;
 		<li><a href="#">DashBoard</a></li>		
 		<li><a href="<?php echo $this->Url->build(["controller" => "Cities", "action" => "add"]); ?>">City-Master</a></li>		
 		<li><a href="<?php echo $this->Url->build(["controller" => "States", "action" => "add"]); ?>">State-Master</a></li>		
+		<li><a href="<?php echo $this->Url->build(["controller" => "Countries", "action" => "add"]); ?>">Country-Master</a></li>		
 		</ul>
 		</section>
 	

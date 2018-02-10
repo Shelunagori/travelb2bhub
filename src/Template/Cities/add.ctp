@@ -102,7 +102,7 @@ $(document).ready(function() {
 			name: {
 				required: true
 			},
-			state_iddas: {
+			state_id: {
 				required: true
 			} 
 		},
