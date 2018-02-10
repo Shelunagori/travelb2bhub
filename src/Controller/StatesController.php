@@ -50,31 +50,30 @@ class StatesController extends AppController
     {
 		$this->viewBuilder()->layout('admin_layout');
 		if(!$id){
-        $state = $this->States->newEntity();
+			$state = $this->States->newEntity();
 		}
 		else{
 			$state = $this->States->get($id, [
-            'contain' => []
-        ]);
+				'contain' => []
+			]);
 		}
-        if ($this->request->is('patch', 'post', 'put'))
-			{
-				$state = $this->States->patchEntity($state, $this->request->data);
-				if ($this->States->save($state)) {
-					$this->Flash->success(__('The state has been saved.'));
+		if ($this->request->is(['patch', 'post', 'put']))
+		{
+			$state = $this->States->patchEntity($state, $this->request->data);
+			if ($this->States->save($state)) {
+				$this->Flash->success(__('The state has been saved.'));
 
-					return $this->redirect(['action' => 'add']);
-				} else {
-					$this->Flash->error(__('The state could not be saved. Please, try again.'));
-				}
+				return $this->redirect(['action' => 'add']);
+			} else {
+				$this->Flash->error(__('The state could not be saved. Please, try again.'));
 			}
+		}
 		$country = $this->States->Countries->find('list', ['limit' => 200]);
 		//-- View List
 		$this->paginate = [
             'contain' => ['Countries']
         ];
-		$states = $this->paginate($this->States->find()->contain(['Countries'])->where(['States.is_deleted'=>0]));
-		//$states= $this->States->find()->contain(['Countries'])->where(['States.is_deleted'=>0]);
+		$states = $this->paginate($this->States->find()->where(['States.is_deleted'=>0]));
         $this->set(compact('state','country','states','id'));
         $this->set('_serialize', ['state','country','states','id']);
     }
