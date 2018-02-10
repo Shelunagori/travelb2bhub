@@ -67,8 +67,10 @@ class AdminsController extends AppController
                 $this->Flash->error(__('The admin could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('admin'));
-        $this->set('_serialize', ['admin']);
+		$Admins = $this->Admins->AdminRole->Roles->find('list', ['limit' => 200]);
+		 
+        $this->set(compact('admin','Admins'));
+        $this->set('_serialize', ['admin','Admins']);
     }
 	
 	public function menu()
