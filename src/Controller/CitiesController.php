@@ -51,12 +51,12 @@ class CitiesController extends AppController
     public function add($id=null)
     {
 		$this->viewBuilder()->layout('admin_layout');
-        
 		if(!$id){
 			$city = $this->Cities->newEntity();
-		}else{
-			 $city = $this->Cities->get($id, [
-            'contain' => []
+		}
+		else{
+			$city = $this->Cities->get($id, [
+				'contain' => []
 			]);
 		}
         if ($this->request->is(['patch', 'post', 'put']))

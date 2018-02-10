@@ -11,38 +11,39 @@
 				
 			</div>
 			<div class="box-body"> 
-				<div class="form-group">
+				<div class="form-group">	
 				<?= $this->Form->create($city,['id'=>'CityForm']) ?>
 					<div class="row">
 						<div class="col-md-4">
-							<label class="control-label">City Name  </label>
+							<label class="control-label">City Name <span class="required" aria-required="true"> * </span></label>
 						</div>
 						<div class="col-md-8">
-							<?php echo $this->Form->control('name',[
-							'label' => false,'class'=>'form-control input-medium ','placeholder'=>'Enter City Name']);?>
+							<?php echo $this->Form->input('name',[
+							'label' => false,'class'=>'form-control ','placeholder'=>'Enter City Name']);?>
 						</div>
 					</div>
-					<span class="help-block"></span>
+					 
 					<div class="row">
 						<div class="col-md-4">
-							<label class="control-label">Choose State</label>
+							<label class="control-label">Select State <span class="required" aria-required="true"> * </span></label>
 						</div>
 						<div class="col-md-8">
 							<?php 
-							echo $this->Form->input('state_id',['options' =>$states,'label' => false,'class'=>'form-control input-sm select2','required'=>'required','empty'=> 'Select...']);?>	
+							echo $this->Form->input('state_id',['options' =>$states,'label' => false,'class'=>'form-control select2','empty'=> 'Select...']);?>	
+							<label id="state-id-error" class="error" for="state-id"> </label>
 						</div>
 					</div>
-					<span class="help-block"> </span>
+					
 					<div class="box-footer">
-					<div class="row">
-						<center>
-							<div class="col-md-12">
-								<div class="col-md-offset-3 col-md-6">	
-									<?php echo $this->Form->button('Submit',['class'=>'btn btn-primary']); ?>
+						<div class="row">
+							<center>
+								<div class="col-md-12">
+									<div class="col-md-offset-3 col-md-6">	
+										<?php echo $this->Form->button('Submit',['class'=>'btn btn-primary','id'=>'submit_member']); ?>
+									</div>
 								</div>
-							</div>
-						</center>		
-					</div>
+							</center>		
+						</div>
 					</div>
 				</div>
 			</div>
@@ -93,9 +94,7 @@
 </div>
 </section>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
-
 <script>
-
 $(document).ready(function() {
 	// validate signup form on keyup and submit
 	 $("#CityForm").validate({ 
@@ -103,7 +102,7 @@ $(document).ready(function() {
 			name: {
 				required: true
 			},
-			state_id: {
+			state_iddas: {
 				required: true
 			} 
 		},

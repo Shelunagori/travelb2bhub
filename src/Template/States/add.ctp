@@ -3,19 +3,18 @@
 	<div class="col-md-6">
 		<div class="box box-primary">
 			<div class="box-header with-border">
-			<?php if(!empty($id)){ ?>
-							<i class="fa fa-pencil-square-o"></i> <b> Edit State </b>
-						<?php }else{ ?>
-							<i class="fa fa-plus"></i> <b> Add State </b>
-						<?php } ?>
-				
+				<?php if(!empty($id)){ ?>
+					<i class="fa fa-pencil-square-o"></i> <b> Edit State </b>
+				<?php }else{ ?>
+					<i class="fa fa-plus"></i> <b> Add State </b>
+				<?php } ?>
 			</div>
 			<div class="box-body"> 
 				<div class="form-group">
 				<?= $this->Form->create($state,['id'=>'StateForm']) ?>
 					<div class="row">
 						<div class="col-md-4">
-							<label class="control-label">State Name  </label>
+							<label class="control-label">State Name <span class="required" aria-required="true"> * </span> </label>
 						</div>
 						<div class="col-md-8">
 							<?php echo $this->Form->control('state_name',[
@@ -25,11 +24,20 @@
 					<span class="help-block"></span>
 					<div class="row">
 						<div class="col-md-4">
-							<label class="control-label">Choose Country</label>
+							<label class="control-label">Select Country <span class="required" aria-required="true"> * </span></label>
 						</div>
 						<div class="col-md-8">
+<<<<<<< HEAD
 							<?php 
 							echo $this->Form->input('country_id',['empty'=>'Select...','options' =>$country,'label' => false,'class'=>'form-control input-sm select2','required'=>'required']);?>	
+=======
+							<?php if(!empty($id)){ 
+								echo $this->Form->input('country_id',['options' =>$country,'label' => false,'class'=>'form-control select2','empty'=> 'Select...']);
+							}else{ 
+								echo $this->Form->input('country_id',['options' =>$country,'label' => false,'class'=>'form-control select2','empty'=> 'Select...','value' => '']);
+							} ?>
+							<label id="country-id-error" class="error" for="country-id"> </label>
+>>>>>>> ff013ed3d6965d81633a5809a145c6546599145a
 						</div>
 					</div>
 					<span class="help-block"> </span>
@@ -38,7 +46,7 @@
 						<center>
 							<div class="col-md-12">
 								<div class="col-md-offset-3 col-md-6">	
-									<?php echo $this->Form->button('Submit',['class'=>'btn btn-primary']); ?>
+									<?php echo $this->Form->button('Submit',['class'=>'btn btn-primary','id'=>'submit_member']); ?>
 								</div>
 							</div>
 						</center>		
@@ -93,16 +101,18 @@
 </div>
 </section>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
-
 <script>
-
 $(document).ready(function() {
 	// validate signup form on keyup and submit
 	 $("#StateForm").validate({ 
 		rules: {
 			state_name: {
 				required: true
+<<<<<<< HEAD
 			},
+=======
+			}, 
+>>>>>>> ff013ed3d6965d81633a5809a145c6546599145a
 			country_id: {
 				required: true
 			} 

@@ -50,7 +50,9 @@ sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a {
     background: #66cad5e3;
     border-left-color: #DA3E2E;
 }
-
+.required {
+	color:#ea3733;
+}
 
 body{
 	font-family: 'Montserrat';
