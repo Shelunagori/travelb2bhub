@@ -18,6 +18,7 @@ class TestimonialController extends AppController
      */
     public function index()
     {
+		$this->viewBuilder()->layout('admin_layout');		
         $this->paginate = [
             'contain' => ['Users', 'Authors', 'Requests', 'Responses']
         ];

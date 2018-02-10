@@ -102,7 +102,7 @@ margin-top: 5px !important;
 <header class="main-header no-print" >
    <a href="/ucci/Users/index" class="logo" style="background-color:#DA0845">
    <span class="logo-lg">
-   <?=  $this->Html->image('/packages/serverfireteam/panel/img/logo.png', ['style'=>'width:49%;margin-top: -2%;']) ?></span></a>
+   <?=  $this->Html->image('/packages/serverfireteam/panel/img/logo.png', ['style'=>'width:49%;margin-top:-4%;']) ?></span></a>
     <nav class="navbar navbar-static-top"  id="grad1">
     <a href="#" class="hidden-lg hidden-md hidden-sm sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
@@ -134,10 +134,8 @@ margin-top: 5px !important;
     </nav>
   </header>
   <aside class="main-sidebar no-print">
-  <section class="sidebar" >
-    
-	  
-		<ul class="sidebar-menu">
+  <section class="sidebar" >		
+	<ul class="sidebar-menu">
 			<?php /*
 			 $class_selected='';
 			$user_right1="";
@@ -264,6 +262,7 @@ margin-top: 5px !important;
 		<li><a href="<?php echo $this->Url->build(["controller" => "States", "action" => "add"]); ?>">State-Master</a></li>		
 		<li><a href="<?php echo $this->Url->build(["controller" => "Countries", "action" => "add"]); ?>">Country-Master</a></li>		
 		<li><a href="<?php echo $this->Url->build(["controller" => "Promotion", "action" => "index"]); ?>">Promotion</a></li>		
+		<li><a href="<?php echo $this->Url->build(["controller" => "Testimonial", "action" => "index"]); ?>">Testimonial</a></li>		
 		</ul>
 		</section>
 	
