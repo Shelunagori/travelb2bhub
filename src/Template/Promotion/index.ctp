@@ -19,7 +19,7 @@
 								<th scope="col"><?= $this->Paginator->sort('Cheap Tariff') ?></th>
 								<th scope="col"><?= $this->Paginator->sort('Expensive Tariff') ?></th>
 								<th scope="col" class="actions"><?= __('Status') ?></th>
-								<th scope="col" class="actions"><?= __('Actions') ?></th>
+								<th scope="col" class="actions"><?//= __('Actions') ?></th>
 
 							</tr>
 						</thead>
@@ -34,10 +34,18 @@
 								<td><?= h($promotion->expiry_date) ?></td>
 								<td><?= $this->Number->format($promotion->cheap_tariff) ?></td>
 								<td><?= $this->Number->format($promotion->expensive_tariff) ?></td>
-								<td><?= h($promotion->status) ?></td>
+								<td><?php 
+									if($promotion->status==1)
+									{
+								echo "Activate" ;
+									}
+									else{
+										echo "Deactivate";
+									}
+								?></td>
 								<td class="actions">
-								<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/Promotion/edit/'.$promotion->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
-								<?php echo $this->Form->PostLink('<i class="fa fa-trash"></i>','/Promotion/delete/'.$promotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $promotion->id)));?>
+								<?php //echo $this->Html->link('<i class="fa fa-edit"></i>','/Promotion/edit/'.$promotion->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
+								<?php //echo $this->Form->PostLink('<i class="fa fa-trash"></i>','/Promotion/delete/'.$promotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $promotion->id)));?>
 								</td>
 							</tr>
 								<?php $i++;endforeach; ?>
