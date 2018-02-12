@@ -89,7 +89,7 @@ span.select2 {
 						</div>
 						<div class="col-md-12" align="center">
 							<label class="control-label col-md-12">&nbsp;</label>
-							<?php echo $this->Form->button('Search',['class'=>'btn btn-success','id'=>'submit_member']); ?> 
+							<?php echo $this->Form->button('Search',['class'=>'btn btn-sm btn-success','id'=>'submit_member']); ?> 
 						</div> 
 					</div>
 				</div>

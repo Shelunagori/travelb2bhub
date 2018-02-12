@@ -72,11 +72,10 @@ class AdminsController extends AppController
 					//pr($AdminRole); 
 					$this->Admins->AdminRole->save($AdminRole);
 				}
-				
                  $this->Flash->success(__('The admin has been saved.'));
 
                 //return $this->redirect(['action' => 'add']);
-            } else { pr($admin); exit;
+            } else { 
                 $this->Flash->error(__('The admin could not be saved. Please, try again.'));
             }
         }
