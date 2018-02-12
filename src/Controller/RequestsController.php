@@ -20,10 +20,9 @@ class RequestsController extends AppController
     {
 		$this->viewBuilder()->layout('admin_layout');	
         $this->paginate = [
-            'contain' => ['Users', 'Cities','States','Categories']
+            'contain' => ['Users','Cities','States','Categories']
         ];
         $requests = $this->paginate($this->Requests);
-		//pr($requests->toArray());exit;
         $this->set(compact('requests'));
         $this->set('_serialize', ['requests']);
     }

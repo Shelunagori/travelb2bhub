@@ -5,7 +5,32 @@
 				<div class="box-header with-border">
 					<i class="fa fa-list"></i> <b>Testimonials List</b>
 				</div> 
-			 <div class="box-body"> 
+			<div class="box-body"> 
+						 
+			<form method="get">
+				<fieldset><legend><button type="button" class="btn btn-xs btn-info collapsed" data-toggle="collapse" data-target="#demo" aria-expanded="false">Click here to search</button></legend>
+					<div class="col-md-12 collapse"  id="demo" aria-expanded="false">
+						<div class="row"> 
+							<div class="col-md-6">
+								<label class="control-label">Select Rating</label>
+								<select name="Rateing" class="form-control select2" placeholder="Select...">
+									<option value="">Select...</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+								</select>	
+							</div>
+							<div class="col-md-6" align="center">
+								<label class="control-label col-md-12">&nbsp;</label>
+								<?php echo $this->Form->button('Search',['class'=>'btn btn-sm btn-success','id'=>'submit_member','name'=>'search_report']); ?> 
+							</div> 
+						</div>
+					</div>
+				</fieldset>
+			</form>
+
 				<table class="table table-bordered" cellpadding="0" cellspacing="0" id="main_tble">
 							<thead>
 								<tr style="background-color:#DFD9C4;">

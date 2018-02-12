@@ -22,8 +22,26 @@ class PromotionController extends AppController
         $this->paginate = [
             'contain' => ['Users']
         ];
-        $promotion = $this->paginate($this->Promotion);
-
+		if(isset($this->request->query['search_report'])){
+			$statusWise = @$this->request->query['statusWise'];
+			$hotelNM = $this->request->query['hotelNM'];
+			if(!empty($hotelNM)){
+				$conditions['Promotion.hotel_name LIKE']='%'.$hotelNM.'%';
+			}
+			if($statusWise==2 ||$statusWise==1){
+				if($statusWise==2){
+					$conditions['Promotion.status']=0;
+				}
+				if($statusWise==1){
+					$conditions['Promotion.status']=1;
+				}
+			}
+  			$promotion = $this->paginate($this->Promotion->find()->where($conditions));
+  		}
+		else {
+			$promotion = $this->paginate($this->Promotion);
+		}
+        
         $this->set(compact('promotion'));
         $this->set('_serialize', ['promotion']);
     }

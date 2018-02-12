@@ -11,7 +11,11 @@ use App\Controller\AppController;
 class AdminsController extends AppController
 {
 
-   
+	public function index()
+    {
+		$this->viewBuilder()->layout('admin_layout');
+    }
+	
     public function login()
     {
        $this->viewBuilder()->layout('home_layout'); 
@@ -64,17 +68,13 @@ class AdminsController extends AppController
              if ($insert=$this->Admins->save($admin)) {
 				//- Admin Role Insert
 				$AdminRole = $this->Admins->AdminRole->newEntity();
-				foreach($admin_role as $roledata){
-					$AdminRole = $this->Admins->AdminRole->patchEntity($AdminRole, $this->request->data);
-					$AdminRole->admin_id=$insert->id;
-					$AdminRole->role_id=$roledata;
-					
-					//pr($AdminRole); 
-					$this->Admins->AdminRole->save($AdminRole);
-				}
-                 $this->Flash->success(__('The admin has been saved.'));
-
-                //return $this->redirect(['action' => 'add']);
+				$AdminRole = $this->Admins->AdminRole->patchEntity($AdminRole, $this->request->data);
+				$AdminRole->admin_id=$insert->id;
+				$AdminRole->role_id=$admin_role;
+				$this->Admins->AdminRole->save($AdminRole);
+				 
+                $this->Flash->success(__('The admin has been saved.'));
+                return $this->redirect(['action' => 'add']);
             } else { 
                 $this->Flash->error(__('The admin could not be saved. Please, try again.'));
             }

@@ -4374,7 +4374,7 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 			$unreadnotification = array();
 			$conn = ConnectionManager::get('default');
 			//-- all data 
-			$sql = "Select `id` FROM user_chats where is_read='0' AND send_to_user_id='".$user_id."' order by created DESC ";
+			$sql = "Select * FROM user_chats where is_read='0' AND send_to_user_id='".$user_id."' order by created DESC ";
 			$stmt = $conn->execute($sql);
 			$unreadnotification = $stmt ->fetchAll('assoc');
 			$countchat = count($unreadnotification);

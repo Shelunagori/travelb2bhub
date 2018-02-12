@@ -64,9 +64,9 @@
  							<?php $x=0; foreach($Admins as $key=>$role) {
 								?>
 								<div class="form-group">
-									<div class="checkbox">
+									<div class="radio">
 										<label>
-											<input type="checkbox" name="role_id[]" value="<?php echo $key; ?>"><?php echo ucwords($role); ?>
+											<input type="radio" <?php if($x==0){echo "checked";} ?>  name="role_id" value="<?php echo $key; ?>"><?php echo ucwords($role); ?>
 										</label>
 									</div>
 								</div>
