@@ -83,7 +83,7 @@ class CitiesController extends AppController
 			$stateid = $this->request->query['stateid'];
 			 
 			if(!empty($city)){
-				$conditions['Cities.name']=$city;
+				$conditions['Cities.name LIKE']='%'.$city.'%';
 			}
 			if(!empty($stateid)){
 				$conditions['Cities.state_id']=$stateid;	

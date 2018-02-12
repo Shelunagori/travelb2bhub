@@ -58,7 +58,24 @@ body{
 	color: #606062;
 
 }
-
+ 
+fieldset {
+	padding: 10px ;
+	border: 1px solid #bfb7b7f7;
+	margin: 12px;
+}
+legend{
+	margin-left: 20px;	
+	 color:#144277; 
+	//color:#144277c9; 
+	font-size: 17px;
+	margin-bottom: 0px;
+	border:none;
+}
+span.select2 {
+	width :100% !important;
+}
+ 
 </style>
 <style>
 

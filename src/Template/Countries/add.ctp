@@ -54,39 +54,55 @@
 			<div class="box-header with-border">
 				<i class="fa fa-list"></i> <b> View Country List </b>
 			</div> 
-			 
 		<div class="box-body"> 
-    <table class="table" cellpadding="0" cellspacing="0">
-        <thead>
-            <tr style="background-color:#DFD9C4;">
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('country_cod') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('country_name') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($countries as $country): ?>
-            <tr>
-                <td><?= $this->Number->format($country->id) ?></td>
-                <td><?= h($country->country_cod) ?></td>
-                <td><?= h($country->country_name) ?></td>
-                <td class="actions">
-				<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/Countries/add/'.$country->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
-                   <?php echo $this->Form->PostLink('<i class="fa fa-trash"></i>','/Countries/delete/'.$country->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $country->id)));?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
-    </div>
+		<form method="get">
+			<fieldset><legend><button type="button" class="btn btn-xs btn-info collapsed" data-toggle="collapse" data-target="#demo" aria-expanded="false">Click here to search</button></legend>
+				<div class="col-md-12 collapse"  id="demo" aria-expanded="false">
+					<div class="row"> 
+						<div class="col-md-12">
+							<label class="control-label">Country name</label>
+							<?php echo $this->Form->input('CountryName',[
+							'label' => false,'class'=>'form-control ','placeholder'=>'Enter Country Name']);?>
+						</div>
+						<div class="col-md-12" align="center">
+							<label class="control-label col-md-12">&nbsp;</label>
+							<?php echo $this->Form->button('Search',['class'=>'btn btn-sm btn-success','id'=>'submit_member','name'=>'search_report']); ?> 
+						</div> 
+					</div>
+				</div>
+			</fieldset>
+		</form>
+			<table class="table" cellpadding="0" cellspacing="0">
+				<thead>
+					<tr style="background-color:#DFD9C4;">
+						<th scope="col"><?= ('S.No') ?></th>
+						<th scope="col"><?= ('Country Code') ?></th>
+						<th scope="col"><?= $this->Paginator->sort('country_name') ?></th>
+						<th scope="col" class="actions"><?= __('Actions') ?></th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php foreach ($countries as $country): ?>
+					<tr>
+						<td><?= $this->Number->format($country->id) ?></td>
+						<td><?= h($country->country_cod) ?></td>
+						<td><?= h($country->country_name) ?></td>
+						<td class="actions">
+						<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/Countries/add/'.$country->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
+						   <?php echo $this->Form->PostLink('<i class="fa fa-trash"></i>','/Countries/delete/'.$country->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $country->id)));?>
+						</td>
+					</tr>
+					<?php endforeach; ?>
+				</tbody>
+			</table>
+			<div class="paginator">
+				<ul class="pagination">
+					<?= $this->Paginator->prev('< ' . __('previous')) ?>
+					<?= $this->Paginator->numbers() ?>
+					<?= $this->Paginator->next(__('next') . ' >') ?>
+				</ul>
+				<p><?= $this->Paginator->counter() ?></p>
+			</div>
 			</div>
 		</div>
 	</div>

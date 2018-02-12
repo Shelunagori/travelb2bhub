@@ -49,16 +49,16 @@ class CountriesController extends AppController
     public function add($id = null)
     {
 		$this->viewBuilder()->layout('admin_layout');	
-			if(!$id)
-			{				
-				$country = $this->Countries->newEntity();
-			}
-			else
-			{
-				$country = $this->Countries->get($id, [
-					'contain' => []
-				]);
-			}
+		if(!$id)
+		{				
+			$country = $this->Countries->newEntity();
+		}
+		else
+		{
+			$country = $this->Countries->get($id, [
+				'contain' => []
+			]);
+		}
         if ($this->request->is(['patch','post','put'])) 
 		{	
             $country = $this->Countries->patchEntity($country, $this->request->data);
@@ -70,7 +70,19 @@ class CountriesController extends AppController
                 $this->Flash->error(__('The country could not be saved. Please, try again.'));
             }
         }
-		$countries = $this->paginate($this->Countries->find()->where(['Countries.is_deleted'=>0]));
+		//-- View 
+		if(isset($this->request->query['search_report'])){
+			$CountryName = $this->request->query['CountryName'];
+			if(!empty($CountryName)){
+				$conditions['Countries.country_name LIKE']='%'.$CountryName.'%';
+			}
+			$conditions['Countries.is_deleted']=0;
+ 			$countries = $this->paginate($this->Countries->find()->where($conditions));
+  		}
+		else {
+			$countries = $this->paginate($this->Countries->find()->where(['Countries.is_deleted'=>0]));
+		}
+		 
         $this->set(compact('country','countries','id'));
         $this->set('_serialize', ['country','countries','id']);
     }

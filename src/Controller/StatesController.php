@@ -73,7 +73,22 @@ class StatesController extends AppController
 		$this->paginate = [
             'contain' => ['Countries']
         ];
-		$states = $this->paginate($this->States->find()->where(['States.is_deleted'=>0]));
+		if(isset($this->request->query['search_report'])){
+			$StateId = $this->request->query['StateId'];
+			$CountryName = $this->request->query['CountryName'];
+			 
+			if(!empty($StateId)){
+				$conditions['States.state_name LIKE']='%'.$StateId.'%';
+			}
+			if(!empty($CountryName)){
+				$conditions['States.country_id']=$CountryName;	
+			}
+			$conditions['States.is_deleted']=0;
+ 			$states = $this->paginate($this->States->find()->where($conditions));
+  		}
+		else {
+			$states = $this->paginate($this->States->find()->where(['States.is_deleted'=>0]));
+		}
         $this->set(compact('state','country','states','id'));
         $this->set('_serialize', ['state','country','states','id']);
     }
