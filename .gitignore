@@ -3,3 +3,5 @@
 /logs/*
 /webroot/*
 app.php
+src/Template/Requests/index.ctp
+src/Template/Requests/index.ctp

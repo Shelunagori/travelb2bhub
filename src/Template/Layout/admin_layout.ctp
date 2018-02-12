@@ -263,6 +263,8 @@ margin-top: 5px !important;
 		<li><a href="<?php echo $this->Url->build(["controller" => "Countries", "action" => "add"]); ?>">Country-Master</a></li>		
 		<li><a href="<?php echo $this->Url->build(["controller" => "Promotion", "action" => "index"]); ?>">Promotion</a></li>		
 		<li><a href="<?php echo $this->Url->build(["controller" => "Testimonial", "action" => "index"]); ?>">Testimonial</a></li>		
+		<li><a href="<?php echo $this->Url->build(["controller" => "Requests", "action" => "index"]); ?>">Request</a></li>		
+		<li><a href="<?php echo $this->Url->build(["controller" => "Response", "action" => "index"]); ?>">Response</a></li>		
 		</ul>
 		</section>
 	

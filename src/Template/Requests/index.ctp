@@ -33,7 +33,7 @@
                 <td><?= $request->has('user') ? $this->Html->link($request->user->first_name.$request->user->last_name, ['controller' => 'Users', 'action' => 'view', $request->user->id]) : '' ?></td>
                 <td><?= h($request->locality) ?></td>
                 <td><?= $this->Number->format($request->total_budget) ?></td>
-                <td><?= h($request->category_id) ?></td>
+                <td><?= h($request->category->name) ?></td>
 				<td><?= h($request->created) ?></td>
 				<td><?= h($request->status) ?></td>
 				<td><?= h($request->status) ?></td>
@@ -42,7 +42,7 @@
 				<td><?= h($request->city->name) ?></td>
 				<td><?= h($request->state->state_name) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $request->id]) ?>
+					<?= $this->Html->link(__('View'), ['action' => 'view', $request->id]) ?>
                     
                 </td>
             </tr>
