@@ -1,3 +1,22 @@
+<style>
+fieldset {
+	padding: 10px ;
+	border: 1px solid #bfb7b7f7;
+	margin: 12px;
+}
+legend{
+	margin-left: 20px;	
+	 color:#144277; 
+	//color:#144277c9; 
+	font-size: 17px;
+	margin-bottom: 0px;
+	border:none;
+}
+span.select2 {
+	width :100% !important;
+}
+</style>
+
 <section class="content">
 <div class="row">
 	<div class="col-md-6">
@@ -56,21 +75,25 @@
 			</div> 
 			 
 		<div class="box-body">
-			<div class="col-md-12">
-				<div class="row">
-					<div class="col-md-4">
-						<?php echo $this->Form->input('name',[
-						'label' => false,'class'=>'form-control ','placeholder'=>'Enter City Name']);?>
-					</div>
-					<div class="col-md-4">
-						<?php echo $this->Form->input('name',[
-						'label' => false,'class'=>'form-control ','placeholder'=>'Enter City Name']);?>
-					</div>
-					<div class="col-md-4">
-						<?php echo $this->Form->button('Search',['class'=>'btn btn-success','id'=>'submit_member']); ?> 
+			<fieldset><legend><button type="button" class="btn btn-xs btn-info collapsed" data-toggle="collapse" data-target="#demo" aria-expanded="false">Search</button></legend>
+				<div class="col-md-12 collapse"  id="demo" aria-expanded="false">
+					<div class="row"> 
+						<div class="col-md-12">
+							<label class="control-label">City</label>
+							<?php echo $this->Form->input('name',[
+							'label' => false,'class'=>'form-control ','placeholder'=>'Enter City Name']);?>
+						</div>
+						<div class="col-md-12">
+							<label class="control-label">Select State</label>
+							<?php echo $this->Form->input('state_id',['options' =>$states,'label' => false,'class'=>'form-control select2','empty'=> 'Select...']);?>	 
+						</div>
+						<div class="col-md-12" align="center">
+							<label class="control-label col-md-12">&nbsp;</label>
+							<?php echo $this->Form->button('Search',['class'=>'btn btn-success','id'=>'submit_member']); ?> 
+						</div> 
 					</div>
 				</div>
-			</div>
+			</fieldset>
 				<table class="table table-bordered" cellpadding="0" cellspacing="0" id="main_tble">
 					<thead>
 						<tr style="background-color:#DFD9C4;">
