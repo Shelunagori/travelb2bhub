@@ -57,22 +57,23 @@ class AdminsController extends AppController
     {
 		$this->viewBuilder()->layout('admin_layout');
         $admin = $this->Admins->newEntity();
-        $AdminRole = $this->Admins->AdminRole->newEntity();
+        
         if ($this->request->is('post')) {
             $admin = $this->Admins->patchEntity($admin, $this->request->data);
  			$admin_role=$this->request->data['role_id'];
              if ($insert=$this->Admins->save($admin)) {
 				//- Admin Role Insert
-				$X=0;
+			 
 				foreach($admin_role as $roledata){
- 					$this->request->data['record']['AdminRole'][$X]['admin_id']=$insert->id;
-					$this->request->data['record']['AdminRole'][$X]['role_id']=$roledata;
- 					$X++;	
+					$AdminRole = $this->Admins->AdminRole->newEntity();
+ 					$this->request->data['admin_id']=$insert->id;
+					$this->request->data['role_id']=$roledata;
+					$AdminRole = $this->Admins->AdminRole->patchEntity($AdminRole, $this->request->data);
+					//pr($AdminRole); 
+					$this->Admins->AdminRole->save($AdminRole);
 				}
-				$AdminRoleData=$this->request->data['record'];
-				$AdminRole = $this->Admins->AdminRole->newEntities($AdminRoleData);
-				$this->Admins->AdminRole->saveMany($AdminRole);
-                $this->Flash->success(__('The admin has been saved.'));
+				exit;
+                 $this->Flash->success(__('The admin has been saved.'));
 
                 //return $this->redirect(['action' => 'add']);
             } else {
@@ -133,7 +134,7 @@ class AdminsController extends AppController
             if ($this->Admins->save($admin)) {
                 $this->Flash->success(__('The admin has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'add']);
             } else {
                 $this->Flash->error(__('The admin could not be saved. Please, try again.'));
             }
@@ -159,6 +160,6 @@ class AdminsController extends AppController
             $this->Flash->error(__('The admin could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'add']);
     }
 }

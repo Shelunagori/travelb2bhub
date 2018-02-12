@@ -3,14 +3,13 @@
 	<div class="col-md-6">
 		<div class="box box-primary">
 			<div class="box-header with-border">
-			<?php if(!empty($id)){ ?>
-							<i class="fa fa-pencil-square-o"></i> <b> Edit City </b>
-						<?php }else{ ?>
-							<i class="fa fa-plus"></i> <b> Add City </b>
-						<?php } ?>
-				
+				<?php if(!empty($id)){ ?>
+					<i class="fa fa-pencil-square-o"></i> <b> Edit City </b>
+				<?php }else{ ?>
+					<i class="fa fa-plus"></i> <b> Add City </b>
+				<?php } ?>
 			</div>
-			<div class="box-body"> 
+			<div class="box-body">
 				<div class="form-group">	
 				<?= $this->Form->create($city,['id'=>'CityForm']) ?>
 					<div class="row">
@@ -56,7 +55,22 @@
 				<i class="fa fa-list"></i> <b> View List </b>
 			</div> 
 			 
-		<div class="box-body"> 
+		<div class="box-body">
+			<div class="col-md-12">
+				<div class="row">
+					<div class="col-md-4">
+						<?php echo $this->Form->input('name',[
+						'label' => false,'class'=>'form-control ','placeholder'=>'Enter City Name']);?>
+					</div>
+					<div class="col-md-4">
+						<?php echo $this->Form->input('name',[
+						'label' => false,'class'=>'form-control ','placeholder'=>'Enter City Name']);?>
+					</div>
+					<div class="col-md-4">
+						<?php echo $this->Form->button('Search',['class'=>'btn btn-success','id'=>'submit_member']); ?> 
+					</div>
+				</div>
+			</div>
 				<table class="table table-bordered" cellpadding="0" cellspacing="0" id="main_tble">
 					<thead>
 						<tr style="background-color:#DFD9C4;">

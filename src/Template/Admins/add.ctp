@@ -115,8 +115,9 @@
 							<td><?= h($admin->first_name.' '. $admin->last_name) ?></td>
 							<td><?= h($admin->email) ?></td>
 							<td class="actions">
-								<?= $this->Html->link(__('Edit'), ['action' => 'edit', $admin->id]) ?>
-								<?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $admin->id], ['confirm' => __('Are you sure you want to delete # {0}?', $admin->id)]) ?>
+								<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/Admins/add/'.$admin->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
+								 
+								<?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $admin->id], ['class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $admin->id)]) ?>
 							</td>
 						</tr>
 						<?php endforeach; ?>
