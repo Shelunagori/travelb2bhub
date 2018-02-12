@@ -63,20 +63,20 @@ class AdminsController extends AppController
  			$admin_role=$this->request->data['role_id'];
              if ($insert=$this->Admins->save($admin)) {
 				//- Admin Role Insert
-			 
+				$AdminRole = $this->Admins->AdminRole->newEntity();
 				foreach($admin_role as $roledata){
-					$AdminRole = $this->Admins->AdminRole->newEntity();
- 					$this->request->data['admin_id']=$insert->id;
-					$this->request->data['role_id']=$roledata;
 					$AdminRole = $this->Admins->AdminRole->patchEntity($AdminRole, $this->request->data);
+					$AdminRole->admin_id=$insert->id;
+					$AdminRole->role_id=$roledata;
+					
 					//pr($AdminRole); 
 					$this->Admins->AdminRole->save($AdminRole);
 				}
-				exit;
+				
                  $this->Flash->success(__('The admin has been saved.'));
 
                 //return $this->redirect(['action' => 'add']);
-            } else {
+            } else { pr($admin); exit;
                 $this->Flash->error(__('The admin could not be saved. Please, try again.'));
             }
         }
