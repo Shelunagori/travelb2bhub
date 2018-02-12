@@ -72,10 +72,30 @@ class CitiesController extends AppController
         }
         $states = $this->Cities->States->find('list', ['limit' => 200]);
 		//-- View List
+		
 		$this->paginate = [
             'contain' => ['States']
         ];
-        $cities = $this->paginate($this->Cities->find()->where(['Cities.is_deleted'=>0]));	 
+        
+		
+		if(isset($this->request->query['search_report'])){
+			$city = $this->request->query['cityid'];
+			$stateid = $this->request->query['stateid'];
+			 
+			if(!empty($city)){
+				$conditions['Cities.name']=$city;
+			}
+			if(!empty($stateid)){
+				$conditions['Cities.state_id']=$stateid;	
+			}
+			$conditions['Cities.is_deleted']=0;
+ 			 
+			$cities = $this->paginate($this->Cities->find()->where($conditions));
+  		}
+		else {
+			$cities = $this->paginate($this->Cities->find()->where(['Cities.is_deleted'=>0]));
+		}
+		
         $this->set(compact('city', 'states','cities', 'id'));
         $this->set('_serialize', ['city','cities', 'id']);
     }

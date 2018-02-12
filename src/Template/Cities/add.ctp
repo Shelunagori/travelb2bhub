@@ -75,25 +75,27 @@ span.select2 {
 			</div> 
 			 
 		<div class="box-body">
+		<form method="get">
 			<fieldset><legend><button type="button" class="btn btn-xs btn-info collapsed" data-toggle="collapse" data-target="#demo" aria-expanded="false">Search</button></legend>
 				<div class="col-md-12 collapse"  id="demo" aria-expanded="false">
 					<div class="row"> 
 						<div class="col-md-12">
 							<label class="control-label">City</label>
-							<?php echo $this->Form->input('name',[
+							<?php echo $this->Form->input('cityid',[
 							'label' => false,'class'=>'form-control ','placeholder'=>'Enter City Name']);?>
 						</div>
 						<div class="col-md-12">
 							<label class="control-label">Select State</label>
-							<?php echo $this->Form->input('state_id',['options' =>$states,'label' => false,'class'=>'form-control select2','empty'=> 'Select...']);?>	 
+							<?php echo $this->Form->input('stateid',['options' =>$states,'label' => false,'class'=>'form-control select2','empty'=> 'Select...']);?>	 
 						</div>
 						<div class="col-md-12" align="center">
 							<label class="control-label col-md-12">&nbsp;</label>
-							<?php echo $this->Form->button('Search',['class'=>'btn btn-sm btn-success','id'=>'submit_member']); ?> 
+							<?php echo $this->Form->button('Search',['class'=>'btn btn-sm btn-success','id'=>'submit_member','name'=>'search_report']); ?> 
 						</div> 
 					</div>
 				</div>
 			</fieldset>
+		</form>
 				<table class="table table-bordered" cellpadding="0" cellspacing="0" id="main_tble">
 					<thead>
 						<tr style="background-color:#DFD9C4;">
