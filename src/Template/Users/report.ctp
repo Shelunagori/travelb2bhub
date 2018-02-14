@@ -61,8 +61,90 @@
 								<td><?= h($user->city->name) ?></td> 
 								<td><?= h($user->state->state_name) ?></td> 
 								<td class="actions">
-									<?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
-									<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/Users/add/'.$user->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
+									 
+
+<!-- The Modal Start-->
+<i type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal_<?= $user->id ?>">view</i>
+<!-- Modal -->
+<div id="myModal_<?= $user->id ?>" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Modal Header</h4>
+      </div>
+      <div class="modal-body">
+        <?php
+		$role_id=$user->role_id;
+		if($role_id==1){ $roleShow="Travel Agent";}
+		if($role_id==2){ $roleShow="Event Planner";}
+		if($role_id==3){ $roleShow="Hotelier";}
+		?>
+			<div class="col-md-12">
+				<div class="col-md-6">
+					Category : <?= $roleShow ?>
+				</div>
+				<div class="col-md-6">
+					Company : <?= $user->company_name ?>
+				</div>
+				
+			</div>
+			<br>
+			<br>
+			<div class="col-md-12">
+				<div class="col-md-6">
+					First Name : <?= $user->first_name ?>
+				</div>
+				<div class="col-md-6">
+					Last Name : <?= $user->last_name ?>
+				</div>
+				
+			</div>
+			<br>
+			<br>
+			<div class="col-md-12">
+				<div class="col-md-6">
+					Mobile Number : <?= $user->mobile_number ?>
+				</div>
+				<div class="col-md-6">
+					Email Id : <?= $user->email ?>
+				</div>
+			</div>
+			<br>
+			<br>
+			<div class="col-md-12">
+				<div class="col-md-6">
+					Address : <?= $user->address ?>
+				</div>
+				<div class="col-md-6">
+					City : <?= $user->city->name ?>
+				</div>
+			</div>
+			<br>
+			<br>
+			<div class="col-md-12">
+				<div class="col-md-6">
+					State : <?= $user->state->state_name ?>
+				</div>
+				<div class="col-md-6">
+					Country : 
+				</div>
+			</div>
+			<br> 
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+									
+									<!-- The Modal End-->
+									
+									
+									<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/Users/add/'.$user->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs')); ?>
 									<?php echo $this->Form->PostLink('<i class="fa fa-trash"></i>','/Users/delete/'.$user->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $user->id)));?>
 								</td>
 								 

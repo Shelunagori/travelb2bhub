@@ -53,7 +53,7 @@ class UsersController extends AppController {
 		'contain' => ['Cities','States']
 		];
 		$users = $this->paginate($this->Users);
-		//pr($users); exit;
+		//pr($users->toArray()); exit;
 		$this->set(compact('users'));
 		$this->set('_serialize', ['users']);
 		
