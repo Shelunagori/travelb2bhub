@@ -35,11 +35,12 @@ class AdminsTable extends Table
         $this->table('admins');
         $this->displayField('id');
         $this->primaryKey('id');
-
         $this->hasMany('AdminRole', [
             'foreignKey' => 'admin_id',
 			'saveStrategy' => 'replace'
         ]);
+		$this->hasMany('UserRights');
+		$this->hasMany('Modules');
     }
 
     /**

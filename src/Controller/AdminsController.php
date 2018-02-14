@@ -90,10 +90,40 @@ class AdminsController extends AppController
         $this->set('_serialize', ['admin','Admins','AdminsRecord']);
     }
 	
+	public function UserRights()
+	{
+		$user_id=$this->Auth->User('id');
+		$role_id=$this->Auth->User('role_id');
+ 		$conditions=array("user_id" => $user_id);
+		$fetch_user_right1='';
+		$fetch_user_right2='';
+		
+		$fetch_user_rights = $this->Admins->UserRights->find()->where($conditions)->toArray();
+		
+		foreach($fetch_user_rights as $data){
+			$fetch_user_right1 = $data->module_id;
+		}
+		$conditions=array("role_id" => $role_id);
+				
+		$fetch_user_roles = $this->Admins->UserRights->find()->where($conditions)->toArray();
+		
+		foreach($fetch_user_roles as $data2){
+			$fetch_user_right2 = $data2->module_id;
+		}
+		$fetch_user_right1_array = explode(',',$fetch_user_right1);
+		$fetch_user_right2_array = explode(',',$fetch_user_right2);
+		$fetch_user_right_array = array_merge($fetch_user_right1_array,$fetch_user_right2_array);
+		$fetch_user_right_array = array_unique($fetch_user_right_array);
+		$fetch_user_right = implode(',',$fetch_user_right_array);
+		$this->response->body($fetch_user_right);
+		return $this->response;
+	}
 	public function menu()
 	{
 		$user_id=$this->Auth->User('id');
+		
 		$fetch_menu = $this->Admins->Modules->find()->order(['preferance'=>'ASC'])->toArray();
+		
 		$this->response->body($fetch_menu);
 		return $this->response;
 	}
@@ -102,15 +132,18 @@ class AdminsController extends AppController
 	{
 		$user_id=$this->Auth->User('id');
 		$conditions=array("main_menu" => $main_menu);
-		$fetch_menu_submenu = $this->Users->Modules->find()->where($conditions)->toArray();
+		
+		$fetch_menu_submenu = $this->Admins->Modules->find()->where($conditions)->toArray();
+		
 		$this->response->body($fetch_menu_submenu);
 		return $this->response;
 	}
 	public function submenu($sub_menu)
-	{
+	{ 
 		$user_id=$this->Auth->User('id');
 		$conditions=array("sub_menu" => $sub_menu);
-		$fetch_submenu = $this->Users->Modules->find()->where($conditions)->toArray();
+		$fetch_submenu = $this->Admins->Modules->find()->where($conditions)->toArray();
+		
 		$this->response->body($fetch_submenu);
 		return $this->response;
 	}

@@ -75,10 +75,10 @@ class RequestsTable extends Table
             'foreignKey' => 'reference_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Responses', [
-            'foreignKey' => 'response_id',
-            'joinType' => 'INNER'
-        ]);
+        /* $this->belongsTo('Responses', [
+            'foreignKey' => 'response_id' 
+             
+        ]); */
         $this->belongsTo('Cities', [
             'foreignKey' => 'city_id'
         ]);

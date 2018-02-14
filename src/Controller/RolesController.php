@@ -46,21 +46,43 @@ class RolesController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($id=null)
     {
-        $role = $this->Roles->newEntity();
-        if ($this->request->is('post')) {
+		$this->viewBuilder()->layout('admin_layout');
+        
+        if(!$id){
+			$role = $this->Roles->newEntity();
+		}
+		else {
+			$role = $this->Roles->get($id, [
+				'contain' => []
+			]);
+		}
+        if ($this->request->is(['patch', 'post', 'put']))
+		{
             $role = $this->Roles->patchEntity($role, $this->request->data);
             if ($this->Roles->save($role)) {
                 $this->Flash->success(__('The role has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'add']);
             } else {
                 $this->Flash->error(__('The role could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('role'));
-        $this->set('_serialize', ['role']);
+		//--- View List
+		if(isset($this->request->query['search_report'])){
+			$role = $this->request->query['roleWise'];
+			if(!empty($role)){
+				$conditions['Roles.name LIKE']='%'.$role.'%';
+			}
+ 			$roles = $this->paginate($this->Roles->find()->where($conditions));  
+  		}
+		else {
+			$roles = $this->paginate($this->Roles);
+		}
+		
+		
+        $this->set(compact('role','roles'));
+        $this->set('_serialize', ['role','roles']);
     }
 
     /**
@@ -80,7 +102,7 @@ class RolesController extends AppController
             if ($this->Roles->save($role)) {
                 $this->Flash->success(__('The role has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'add']);
             } else {
                 $this->Flash->error(__('The role could not be saved. Please, try again.'));
             }
@@ -106,6 +128,6 @@ class RolesController extends AppController
             $this->Flash->error(__('The role could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'add']);
     }
 }

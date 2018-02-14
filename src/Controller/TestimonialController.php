@@ -38,6 +38,28 @@ class TestimonialController extends AppController
         $this->set('_serialize', ['testimonial']);
     }
 
+	
+	public function report()
+    {
+		$this->viewBuilder()->layout('admin_layout');		
+        $this->paginate = [
+            'contain' => ['Users','Authors']
+        ];
+		if(isset($this->request->query['search_report'])){
+			$Rateing = $this->request->query['Rateing'];
+ 			 
+			if(!empty($Rateing)){
+				$conditions['Testimonial.rating LIKE']='%'.$Rateing.'%';
+			}
+ 			$testimonial = $this->paginate($this->Testimonial->find()->where($conditions));
+  		}
+		else {
+			 $testimonial = $this->paginate($this->Testimonial);
+		}
+       
+        $this->set(compact('testimonial'));
+        $this->set('_serialize', ['testimonial']);
+    }
     /**
      * View method
      *

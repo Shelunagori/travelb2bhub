@@ -22,11 +22,82 @@ class RequestsController extends AppController
         $this->paginate = [
             'contain' => ['Users','Cities','States','Categories']
         ];
-        $requests = $this->paginate($this->Requests);
-        $this->set(compact('requests'));
-        $this->set('_serialize', ['requests']);
+		if(isset($this->request->query['search_report'])){
+ 			$RefID = $this->request->query['RefID'];
+			$status = $this->request->query['status'];
+			$removed = $this->request->query['removed'];
+			$category = $this->request->query['category'];
+			 
+			if(!empty($RefID)){
+				$conditions['Requests.reference_id LIKE']='%'.$RefID.'%';
+			}
+			if($status==1){
+				$conditions['Requests.status']=0;	
+			}
+			if($status==2){
+				$conditions['Requests.status']=2;	
+			}
+			if($removed==2){
+				$conditions['Requests.is_deleted']=0;	
+			}
+			if($removed==1){
+				$conditions['Requests.is_deleted']=1;	
+			}
+			if(!empty($category)){
+				$conditions['Requests.category_id']=$category;	
+			}
+ 			$requests = $this->paginate($this->Requests->find()->where($conditions));
+  		}
+		else {
+			$requests = $this->paginate($this->Requests);
+		}
+ 		$CategoriesList = $this->Requests->Categories->find('list', ['limit' => 200]);
+         $this->set(compact('requests','CategoriesList'));
+        $this->set('_serialize', ['requests','CategoriesList']);
+		
     }
 
+	
+	public function report()
+    {
+		$this->viewBuilder()->layout('admin_layout');	
+        $this->paginate = [
+            'contain' => ['Users','Cities','States','Categories']
+        ];
+		if(isset($this->request->query['search_report'])){
+ 			$RefID = $this->request->query['RefID'];
+			$status = $this->request->query['status'];
+			$removed = $this->request->query['removed'];
+			$category = $this->request->query['category'];
+			 
+			if(!empty($RefID)){
+				$conditions['Requests.reference_id LIKE']='%'.$RefID.'%';
+			}
+			if($status==1){
+				$conditions['Requests.status']=0;	
+			}
+			if($status==2){
+				$conditions['Requests.status']=2;	
+			}
+			if($removed==2){
+				$conditions['Requests.is_deleted']=0;	
+			}
+			if($removed==1){
+				$conditions['Requests.is_deleted']=1;	
+			}
+			if(!empty($category)){
+				$conditions['Requests.category_id']=$category;	
+			}
+ 			$requests = $this->paginate($this->Requests->find()->where($conditions));
+  		}
+		else {
+			$requests = $this->paginate($this->Requests);
+		}
+ 		$CategoriesList = $this->Requests->Categories->find('list', ['limit' => 200]);
+         $this->set(compact('requests','CategoriesList'));
+        $this->set('_serialize', ['requests','CategoriesList']);
+		
+    }
     /**
      * View method
      *

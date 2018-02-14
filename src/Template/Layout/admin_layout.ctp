@@ -153,14 +153,14 @@ margin-top: 5px !important;
   <aside class="main-sidebar no-print">
   <section class="sidebar" >		
 	<ul class="sidebar-menu">
-			<?php /*
+			<?php  
 			 $class_selected='';
 			$user_right1="";
-			$user_right1 = $this->requestAction(['controller'=>'Users', 'action'=>'UserRights'],['pass'=>array()]);
+			$user_right1 = $this->requestAction(['controller'=>'Admins', 'action'=>'UserRights'],['pass'=>array()]);
 			
 			$user_right=explode(',', $user_right1);
 			
-			$fetch_menu = $this->requestAction(['controller'=>'Users', 'action'=>'menu'],['pass'=>array()]);
+			$fetch_menu = $this->requestAction(['controller'=>'Admins', 'action'=>'menu'],['pass'=>array()]);
 		    $main_menu_arr[]='';
 			$page_name=$this->request->params['action'];
              foreach($fetch_menu as $data)
@@ -182,7 +182,7 @@ margin-top: 5px !important;
 				<?php $class_selected=''; }else{
 					if(!in_array($data['main_menu'], $main_menu_arr)){
 						$main_menu_arr[]=$data['main_menu'];
-						$fetch_menu_submenu = $this->requestAction(['controller'=>'Users', 'action'=>'MenuSubmenu'],['pass'=>array($data['main_menu'])]);		
+						$fetch_menu_submenu = $this->requestAction(['controller'=>'Admins', 'action'=>'MenuSubmenu'],['pass'=>array($data['main_menu'])]);		
 							foreach($fetch_menu_submenu as $data_value1)
 							{ 	
 								if($data_value1['page_name_url'] == $page_name)
@@ -208,7 +208,7 @@ margin-top: 5px !important;
 						{
 							if(!empty($data_value['sub_menu']))
 							{ 
-								$fetch_submenu = $this->requestAction(['controller'=>'Users', 'action'=>'submenu'],['pass'=>array($data_value['sub_menu'])]);	
+								$fetch_submenu = $this->requestAction(['controller'=>'Admins', 'action'=>'submenu'],['pass'=>array($data_value['sub_menu'])]);	
 								
 								if(!in_array($data_value['sub_menu'], $main_menu_arr))
 								{
@@ -273,15 +273,18 @@ margin-top: 5px !important;
 							$class_active='';
 							$arrow_open='';
 							$class_selected='';
-		}}}}	*/ ?>
-	<li><a href="<?php echo $this->Url->build(["controller" => "Admins/index"]); ?>">Dashboard</a></li>		
-	<li><a href="<?php echo $this->Url->build(["controller" => "Cities", "action" => "add"]); ?>">City-Master</a></li>		
-	<li><a href="<?php echo $this->Url->build(["controller" => "States", "action" => "add"]); ?>">State-Master</a></li>		
-	<li><a href="<?php echo $this->Url->build(["controller" => "Countries", "action" => "add"]); ?>">Country-Master</a></li>		
-	<li><a href="<?php echo $this->Url->build(["controller" => "Promotion/index"]); ?>">Promotion</a></li>		
-	<li><a href="<?php echo $this->Url->build(["controller" => "Testimonial/index"]); ?>">Testimonial</a></li>		
-	<li><a href="<?php echo $this->Url->build(["controller" => "Requests/index"]); ?>">Request</a></li>		
-	<li><a href="<?php echo $this->Url->build(["controller" => "Responses/index"]); ?>">Response</a></li>		
+		}}}}	  ?>
+<!--<li><a href="<?php echo $this->Url->build(["controller" => "Admins/index"]); ?>">Dashboard</a></li>		
+<li><a href="<?php echo $this->Url->build(["controller" => "Cities", "action" => "add"]); ?>">City-Master</a></li>		
+<li><a href="<?php echo $this->Url->build(["controller" => "States", "action" => "add"]); ?>">State-Master</a></li>		
+<li><a href="<?php echo $this->Url->build(["controller" => "Countries", "action" => "add"]); ?>">Country-Master</a></li>		
+<li><a href="<?php echo $this->Url->build(["controller" => "Promotion/index"]); ?>">Promotion</a></li>		
+<li><a href="<?php echo $this->Url->build(["controller" => "Testimonial/index"]); ?>">Testimonial</a></li>		
+<li><a href="<?php echo $this->Url->build(["controller" => "Requests/index"]); ?>">Request</a></li>		
+<li><a href="<?php echo $this->Url->build(["controller" => "Responses/index"]); ?>">Response</a></li>		
+<li><a href="<?php echo $this->Url->build(["controller" => "Roles", "action" => "add"]); ?>">Roles</a></li>	
+--->
+	
 		</ul>
 		</section>
 	

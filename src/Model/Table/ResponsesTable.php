@@ -44,16 +44,16 @@ class ResponsesTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->belongsTo('Requests', [
-            'foreignKey' => 'request_id',
-            'joinType' => 'INNER'
+            'foreignKey' => 'request_id'  
         ]);
+		
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
-        $this->hasMany('Requests', [
+        /* $this->hasMany('Requests', [
             'foreignKey' => 'response_id'
-        ]);
+        ]); */
         $this->hasMany('Testimonial', [
             'foreignKey' => 'response_id'
         ]);

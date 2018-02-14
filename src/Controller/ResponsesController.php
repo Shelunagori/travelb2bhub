@@ -22,11 +22,88 @@ class ResponsesController extends AppController
         $this->paginate = [
             'contain' => ['Users', 'Requests', 'Testimonial']
         ];
-        $responses = $this->paginate($this->Responses);
-
+		
+		if(isset($this->request->query['search_report'])){
+			
+ 			$RefID = $this->request->query['ReqID'];
+			$status = $this->request->query['status'];
+			$removed = $this->request->query['removed'];
+			$Quotation = $this->request->query['Quotation'];
+			 
+			if(!empty($RefID)){
+				$conditions['Responses.request_id']=$RefID;
+			}
+			if($status==1){
+				$conditions['Responses.status']=0;	
+			}
+			if($status==2){
+				$conditions['Responses.status']=1;	
+			}
+			if($removed==2){
+				$conditions['Responses.is_deleted']=0;	
+			}
+			if($removed==1){
+				$conditions['Responses.is_deleted']=1;	
+			}
+			if(!empty($Quotation)){
+				$conditions['Responses.quotation_price']=$Quotation;
+			}
+			 
+			$responses = $this->paginate($this->Responses->find()->where($conditions));
+  		}
+		else {
+			$responses = $this->paginate($this->Responses);
+		}
+		 
+	//pr($responses); exit;
         $this->set(compact('responses'));
         $this->set('_serialize', ['responses']);
     }
+	
+	public function report()
+    {
+		$this->viewBuilder()->layout('admin_layout');	
+        $this->paginate = [
+            'contain' => ['Users', 'Requests', 'Testimonial']
+        ];
+		
+		if(isset($this->request->query['search_report'])){
+			
+ 			$RefID = $this->request->query['ReqID'];
+			$status = $this->request->query['status'];
+			$removed = $this->request->query['removed'];
+			$Quotation = $this->request->query['Quotation'];
+			 
+			if(!empty($RefID)){
+				$conditions['Responses.request_id']=$RefID;
+			}
+			if($status==1){
+				$conditions['Responses.status']=0;	
+			}
+			if($status==2){
+				$conditions['Responses.status']=1;	
+			}
+			if($removed==2){
+				$conditions['Responses.is_deleted']=0;	
+			}
+			if($removed==1){
+				$conditions['Responses.is_deleted']=1;	
+			}
+			if(!empty($Quotation)){
+				$conditions['Responses.quotation_price']=$Quotation;
+			}
+			 
+			$responses = $this->paginate($this->Responses->find()->where($conditions));
+  		}
+		else {
+			$responses = $this->paginate($this->Responses);
+		}
+		 
+	//pr($responses); exit;
+        $this->set(compact('responses'));
+        $this->set('_serialize', ['responses']);
+    }
+
 
     /**
      * View method
