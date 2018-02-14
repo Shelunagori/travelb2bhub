@@ -50,9 +50,10 @@ class UsersController extends AppController {
 	public function report() {
 		$this->viewBuilder()->layout('admin_layout');
 		$this->paginate = [
-		'contain' => []
+		'contain' => ['Cities','States']
 		];
 		$users = $this->paginate($this->Users);
+		//pr($users); exit;
 		$this->set(compact('users'));
 		$this->set('_serialize', ['users']);
 		

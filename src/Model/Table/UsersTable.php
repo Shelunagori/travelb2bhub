@@ -40,7 +40,10 @@ class UsersTable extends Table
         \Cake\Event\EventManager::instance()->on('HybridAuth.newUser', [$this, 'createUser']);
         
         
-          
+        $this->belongsTo('Roles', [
+            'foreignKey' => 'role_id',
+            'joinType' => 'INNER'
+        ]); 
         $this->belongsTo('Cities', [
             'foreignKey' => 'city_id',
             'joinType' => 'INNER'
@@ -53,7 +56,6 @@ class UsersTable extends Table
             'foreignKey' => 'country_id',
             'joinType' => 'INNER'
         ]);
-        
         $this->hasMany('Requests', [
             'foreignKey' => 'user_id',
             'dependent' => TRUE

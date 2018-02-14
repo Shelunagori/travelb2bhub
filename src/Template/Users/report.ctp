@@ -36,30 +36,36 @@
 						<thead>
 							<tr>
 								<th><?= $this->Paginator->sort('id') ?></th> 
+								<th><?= ('Name') ?></th>
 								<th><?= $this->Paginator->sort('email') ?></th>
-								<th><?= $this->Paginator->sort('first_name') ?></th>
-								<th><?= $this->Paginator->sort('last_name') ?></th> 
-								<th><?= $this->Paginator->sort('mobile') ?></th>
+								<th><?= ('Mobile') ?></th>
+								<th><?= ('Role') ?></th> 
+								<th><?= ('City') ?></th> 
+								<th><?= ('State') ?></th> 
 								<th class="actions"><?= __('Actions') ?></th>
 							</tr>
 						</thead>
 						<tbody>
-							<?php $x=0; foreach ($users as $user): $x++; ?>
+							<?php $x=0; foreach ($users as $user): $x++;
+							$role_id=$user->role_id;
+							if($role_id==1){ $roleShow="Travel Agent";}
+							if($role_id==2){ $roleShow="Event Planner";}
+							if($role_id==3){ $roleShow="Hotelier";}
+							?>
 							<tr>
 								<td><?= $x; ?></td> 
+								<td><?= h($user->first_name.' '.$user->last_name) ?></td>
 								<td><?= h($user->email) ?></td>
-								<td><?= h($user->first_name) ?></td>
-								<td><?= h($user->last_name) ?></td> 
-								<td><?= h($user->mobile) ?></td>
-								<td class="actions">
-									<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/Users/add/'.$membership->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
-									<?php echo $this->Form->PostLink('<i class="fa fa-trash"></i>','/Membership/delete/'.$membership->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $membership->id)));?>
-								</td>
+								<td><?= h($user->mobile_number) ?></td> 
+								<td><?php echo $roleShow; ?></td> 
+								<td><?= h($user->city->name) ?></td> 
+								<td><?= h($user->state->state_name) ?></td> 
 								<td class="actions">
 									<?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
-									<?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
-									<?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
+									<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/Users/add/'.$user->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
+									<?php echo $this->Form->PostLink('<i class="fa fa-trash"></i>','/Users/delete/'.$user->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $user->id)));?>
 								</td>
+								 
 							</tr>
 							<?php endforeach; ?>
 						</tbody>
