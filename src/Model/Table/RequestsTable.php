@@ -82,6 +82,18 @@ class RequestsTable extends Table
         $this->belongsTo('Cities', [
             'foreignKey' => 'city_id'
         ]);
+		//-- class 
+		$this->belongsTo('PickupCities', [
+			'className' => 'Cities',
+            'foreignKey' => 'pickup_city',
+            'joinType' => 'INNER'
+        ]);
+		$this->belongsTo('FinalCities', [
+			'className' => 'Cities',
+            'foreignKey' => 'final_city',
+            'joinType' => 'INNER'
+        ]);
+		//--
         $this->hasMany('RequestStops', [
             'foreignKey' => 'request_id'
         ]);
@@ -99,6 +111,14 @@ class RequestsTable extends Table
         ]);
         $this->hasMany('UserRatings', [
             'foreignKey' => 'request_id'
+        ]);
+		$this->hasMany('Hotels', [
+            'foreignKey' => 'req_id',
+            'dependent' => TRUE
+        ]);
+		$this->hasMany('RequestStops', [
+            'foreignKey' => 'request_id',
+            'dependent' => TRUE
         ]);
     }
 
