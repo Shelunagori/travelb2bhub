@@ -1,6 +1,6 @@
-<?php echo $this->element('admin/admin-header');?>
+ 
 <div class="content-wrapper">
-<?php echo $this->element('admin/admin-sidebar');?>
+ 
     <section class="content-header">
       <h1>
         Add User Detail

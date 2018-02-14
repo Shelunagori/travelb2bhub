@@ -17,38 +17,46 @@ use Cake\Network\Email\Email;
 * @property \App\Model\Table\UsersTable $Users
 */
 class UsersController extends AppController {
-var $helpers = array('Html', 'Form', 'Response');
-public function beforeFilter(\Cake\Event\Event $event) {
-parent::beforeFilter($event);
-$this->Auth->allow(['register', 'login','getcitylist', 'userVerification', 'forgotPassword', 'activatePassword', 'cakeVersion', 'deleteAllCache', 'addNewsLatter']);
-}
-public function beforeRender(\Cake\Event\Event $event) {
-parent::beforeRender($event);
-if($this->Auth->user()) {
-$this->set("respondToRequestCount", $this->__getRespondToRequestCount());
-$this->loadModel('UserChats');
-$unreadChats = $this->UserChats->find()
-->contain(["Users"/*, "Requests"*/])
-->where(['UserChats.send_to_user_id' => $this->Auth->user('id'), "UserChats.is_read"=>0])->order(["UserChats.id" => "DESC"])->all()->toArray();
-$unreadChatCount  = count($unreadChats);
-$this->set('unreadChatCount', $unreadChatCount);
-$this->set('UnreadUserChats', $unreadChats);
-}
-}
-/**
-* Index method
-*
-* @return void
-*/
-public function index() {
-/*$this->paginate = [
-'contain' => ['Users']
-];
-$users = $this->paginate($this->Users);
-$this->set(compact('users'));
-$this->set('_serialize', ['users']);*/
-$this->redirect('/users/dashboard');
-}
+	var $helpers = array('Html', 'Form', 'Response');
+	public function beforeFilter(\Cake\Event\Event $event) {
+		parent::beforeFilter($event);
+		$this->Auth->allow(['register', 'login','getcitylist', 'userVerification', 'forgotPassword', 'activatePassword', 'cakeVersion', 'deleteAllCache', 'addNewsLatter']);
+	}
+	
+	public function beforeRender(\Cake\Event\Event $event) {
+		parent::beforeRender($event);
+		if($this->Auth->user()) {
+			$this->set("respondToRequestCount", $this->__getRespondToRequestCount());
+			$this->loadModel('UserChats');
+			$unreadChats = $this->UserChats->find()
+			->contain(["Users"/*, "Requests"*/])
+			->where(['UserChats.send_to_user_id' => $this->Auth->user('id'), "UserChats.is_read"=>0])->order(["UserChats.id" => "DESC"])->all()->toArray();
+			$unreadChatCount  = count($unreadChats);
+			$this->set('unreadChatCount', $unreadChatCount);
+			$this->set('UnreadUserChats', $unreadChats);
+		}
+	}
+
+	public function index() {
+		/*$this->paginate = [
+		'contain' => ['Users']
+		];
+		$users = $this->paginate($this->Users);
+		$this->set(compact('users'));
+		$this->set('_serialize', ['users']);*/
+		$this->redirect('/users/dashboard');
+	}
+	
+	public function report() {
+		$this->viewBuilder()->layout('admin_layout');
+		$this->paginate = [
+		'contain' => []
+		];
+		$users = $this->paginate($this->Users);
+		$this->set(compact('users'));
+		$this->set('_serialize', ['users']);
+		
+	}
 /**
 * View method
 *

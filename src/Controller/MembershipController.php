@@ -54,11 +54,19 @@ class MembershipController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($id=null)
     {
 		$this->viewBuilder()->layout('admin_layout');
-        $membership = $this->Membership->newEntity();
-        if ($this->request->is('post')) {
+		if(!$id){
+			$membership = $this->Membership->newEntity();
+		}
+		else{
+			$membership = $this->Membership->get($id, [
+				'contain' => []
+			]);
+		}
+        if ($this->request->is(['patch', 'post', 'put']))
+		{
             $membership = $this->Membership->patchEntity($membership, $this->request->data);
             if ($this->Membership->save($membership)) {
                 $this->Flash->success(__('The membership has been saved.'));
@@ -68,8 +76,8 @@ class MembershipController extends AppController
                 $this->Flash->error(__('The membership could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('membership'));
-        $this->set('_serialize', ['membership']);
+        $this->set(compact('membership','id'));
+        $this->set('_serialize', ['membership','id']);
     }
 
     /**

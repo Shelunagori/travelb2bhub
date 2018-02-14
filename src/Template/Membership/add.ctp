@@ -1,3 +1,4 @@
+ 
 <section class="content">
 <div class="row">
 	<div class="col-md-12">
@@ -47,10 +48,10 @@
 							<div class="form-group">
 								<div class="radio">
 									<label>
-										<input type="radio" checked name="status" value="1">Active
+										<input type="radio" <?php if($membership->status=='1' || empty($membership->status) ){ echo " checked"; } ?> name="status" value="1">Active
 									</label>
 									<label>
-										<input type="radio" name="status" value="0">Deactive
+										<input type="radio" <?php if($membership->status=='0'){ echo " checked"; } ?> name="status" value="0">Deactive
 									</label>
 								</div>
 							</div>
@@ -59,7 +60,7 @@
 					
 					
 					<div class="row col-md-12">
-					<textarea id="description" name="description" hidden=""></textarea>
+						<textarea id="description" name="description" hidden=""> <?php echo $membership->description; ?></textarea>
 						<div class="col-md-12">
 							<label class="control-label">Description </label>
 						</div>
@@ -93,7 +94,7 @@
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
 $(document).ready(function() {
-	
+	$('.Editor-editor').html($('#description').text());
 	$("button:submit").click(function(){  
  		$('#description').text($('.txtEditor').Editor("getText"));
 	});
