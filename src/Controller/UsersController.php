@@ -58,6 +58,35 @@ class UsersController extends AppController {
 		$this->set('_serialize', ['users']);
 		
 	}
+	
+	
+public function reportEdit($id = null)
+    {
+		$this->viewBuilder()->layout('admin_layout');
+        $users = $this->Users->get($id, [
+            'contain' => []
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $users = $this->Users->patchEntity($users, $this->request->data);
+            if ($this->Users->save($users)) {
+                $this->Flash->success(__('The Users has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('The Users could not be saved. Please, try again.'));
+            }
+        } 
+        $cities = $this->Users->Cities->find('list');
+        $states = $this->Users->States->find('list');
+        $countries = $this->Users->Countries->find('list');
+		 
+		$category[]="Travel Agent";
+		$category[]="Event Planner";
+		$category[]="Hotelier";
+        $this->set(compact('Users', 'users', 'cities', 'states', 'countries', 'category'));
+        $this->set('_serialize', ['Users']);
+    }
+
 /**
 * View method
 *
@@ -220,6 +249,7 @@ $this->set(compact('cities', 'states', 'countries', 'allCities', 'allStates','me
 * @throws \Cake\Network\Exception\NotFoundException When record not found.
 */
 public function edit($id) {
+	
 $this->loadModel("TravelCertificates");
 $userDetails = $this->Users->get($id);
 if($this->request->is(['post', 'put'])) {

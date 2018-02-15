@@ -39,7 +39,7 @@ class CitiesTable extends Table
         parent::initialize($config);
 
         $this->table('cities');
-        $this->displayField('id');
+        $this->displayField('name');
         $this->primaryKey('id');
 
         $this->belongsTo('States', [

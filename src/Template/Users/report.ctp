@@ -142,9 +142,8 @@
 </div>
 									
 									<!-- The Modal End-->
-									
-									
-									<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/Users/add/'.$user->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs')); ?>
+						  
+ 	 <?php echo $this->Html->Link('edit','/Users/report_edit/'.$user->id);?>
 									<?php echo $this->Form->PostLink('<i class="fa fa-trash"></i>','/Users/delete/'.$user->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $user->id)));?>
 								</td>
 								 
