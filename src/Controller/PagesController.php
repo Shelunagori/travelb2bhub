@@ -2228,10 +2228,10 @@ $data =   json_encode($result);
  return $requestcountval;
  }
 	public function requestlistapi() {
-	$this->loadModel('Responses');
-	$this->loadModel('Hotels');
-	$this->loadModel('Requests');
-	$this->loadModel('Cities');
+		$this->loadModel('Responses');
+		$this->loadModel('Hotels');
+		$this->loadModel('Requests');
+		$this->loadModel('Cities');
 		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
 			$conditions["Requests.user_id"] = $_POST['user_id'];
 			$conditions["Requests.status !="] = 2;
@@ -4527,7 +4527,412 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
     }
 		
 		
+	public function sendreqapinew(){
+		date_default_timezone_set('Asia/Kolkata');
+		$this->loadModel('Requests');
+		$this->loadModel('Responses');
+		$this->loadModel('RequestStops');
+		$this->loadModel('Hotels');
+		$this->loadModel('User_Chats');
+		$user_id=$this->request->data['user_id'];
+		$user = $this->Users->find()->where(['id' => $user_id])->first();
+		$myRequestCount = $myReponseCount = 0;
+		$myfinalCount  = 0;
+
+		$myfinalCount = $this->Requests->find()->where(['Requests.user_id' => $user_id, "Requests.is_deleted"=>0,"Requests.status "=>2])->count();
+ 		$this->set('myfinalCount', $myfinalCount);		
+
+		$myRequestCount = $this->Requests->find()->where(['Requests.user_id' => $user_id, "Requests.status !="=>2, "Requests.is_deleted"=>0])->count();
 		
+		$delcount=0;
+		$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $user['id'], "Requests.is_deleted"=>1]]);
+		foreach($requests as $req){
+			$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
+			if($rqueryr->count()!=0){
+				$delcount++;
+			}
+		}
+		//pr($requests->toarray()); exit;
+		$reqcount = $this->getSettings('requestcount');
+		$plcreqcount = (($reqcount['value']-$myRequestCount)-($delcount+ $myfinalCount));
+		if($myRequestCount >=50){
+			$result = array();
+			$result['response_code'] = 500;
+			$result['response_object'] = "Alert! You have exceeded the count of 50 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing a request.";
+			$data = json_encode($result);
+			echo $data;
+			exit;
+		}
+		elseif($plcreqcount<=0){
+			$result = array();
+			$result['response_code'] = 500;
+			$result['response_object'] = 'You have used up the '.$reqcount["value"] .' requests for the trial period, please contact us to increase your quota.';
+			$data = json_encode($result);
+			echo $data;
+			exit;
+		}
+		elseif($myRequestCount < 100) {
+			$user_id=$this->request->data['user_id'];
+				 
+				if(!empty($this->request->data['check_in'])){
+					$check_in=$this->request->data['check_in'];
+					$this->request->data['check_in']=date('Y-m-d',strtotime($check_in));
+				}
+				if(!empty($this->request->data['check_out'])){
+					$check_out=$this->request->data['check_out'];
+					$this->request->data['check_out']=date('Y-m-d',strtotime($check_out));
+				}
+				if(!empty($this->request->data['start_date'])){
+					$start_date=$this->request->data['start_date'];
+					$this->request->data['start_date']=date('Y-m-d',strtotime($start_date));
+				}
+				if(!empty($this->request->data['end_date'])){
+					$end_date=$this->request->data['end_date'];
+					$this->request->data['end_date']=date('Y-m-d',strtotime($end_date));
+				}
+
+				if($_POST['category_id'] == 2 ){
+					$this->request->data['transport_requirement'] = $d['transport_requirement'];
+					$this->request->data['pickup_city'] = $d['t_pickup_city_id'];
+					$this->request->data['pickup_state'] = $d['t_pickup_state_id'];
+					$this->request->data['pickup_country'] = $d['t_pickup_country_id'];
+					$this->request->data['final_city'] = $d['t_final_city_id'];
+					$this->request->data['final_state'] = $d['t_final_state_id'];
+					$this->request->data['final_country'] = $d['t_final_country_id'];
+					$this->request->data['pickup_locality'] = $d['pickup_locality'];
+					$this->request->data['final_locality'] = $d['finalLocality'];
+					$this->request->data['start_date'] = $d['start_date'];
+					$this->request->data['end_date'] = $d['end_date'];
+					$this->request->data['comment'] = $d['comment'];
+					$this->request->data['category_id'] = $d['category_id'];
+					$this->request->data['reference_id'] = $d['reference_id'];
+					$this->request->data['user_id'] = $_POST['user_id'];
+					$this->request->data['total_budget'] = $d['total_budget'];
+					$this->request->data['adult'] = $d['transportAdult'];
+					$this->request->data['children'] = $d['transportChildren'];
+					$stopes = "";
+					if(isset($d['stops'])) {
+						foreach($d['stops'] as $key=>$row) {
+							$stopes .=  $row.",";
+						}
+					}
+					$this->request->data['stops'] = $stopes;
+					//pr($this->request->data); exit;
+					$contact = $this->Requests->newEntity($this->request->data);
+					if ($re = $this->Requests->save($contact)) {
+						$ui = $re->id;
+						if(isset($d['stops'])) {
+							ksort($d['stops']);
+							foreach($d['stops'] as $key=>$row) {
+								$stopData['request_id'] = $ui;
+
+								$stopData['locality'] =  $row;
+								$stopData['city_id'] =  $d['id_trasport_stop_city'][$key];
+								$stopData['state_id'] =  $d['state_id_trasport_stop_city'][$key];
+
+								$result = $this->RequestStops->newEntity($stopData);
+								$this->RequestStops->save($result);
+							}
+						}
+						/*Users List */
+						$userchatTable = TableRegistry::get('User_Chats');
+						$conn = ConnectionManager::get('default');
+						$sql = "SELECT * FROM users WHERE id !='".$_POST['user_id']."' AND role_id in ('1')  AND FIND_IN_SET ('".$this->request->data['pickup_state']."', preference) > 0 ";
+						$stmt = $conn->execute($sql);
+						$Userlist = $stmt ->fetchAll('assoc');
+						foreach($Userlist as $usr)
+						{
+							$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$usr['id']."' AND blocked_by='".$_POST['user_id']."'";
+							$stmt = $conn->execute($sql1);
+							$bresult = $stmt ->fetch('assoc');
+							if($bresult['block_count']==0){
+								$userchats = $userchatTable->newEntity();
+								$userchats->request_id = $ui;
+								$userchats->user_id = $_POST['user_id'];
+								$userchats->send_to_user_id = $usr["id"];
+								$userchats->message = "You have received a Request! Please go to RESPOND TO REQUEST tab to view it.";
+								$userchats->created = date("Y-m-d h:i:s");
+								$userchats->notification = 1;;
+								if ($userchatTable->save($userchats)) {
+									$this->sendpushnotification($usr["id"],$userchats->message);
+									$id = $userchats->id;
+								}
+							}
+						}						
+
+						$result['response_code'] = 200;
+						$result['response_object'] = "Congratulations! Your request has been submitted successfully.";
+						$data = json_encode($result);
+						echo $data;
+						exit;
+
+					} 
+					else {
+						$result['response_code'] = 500;
+						$result['response_object'] = "Sorry.";
+						$data = json_encode($result);
+						echo $data;
+						exit;
+					}
+				}
+				elseif($_POST['category_id'] == 1 ){
+
+					$this->request->data['transport_requirement'] = $d['transport_requirement'];
+					if($d['pickup_city_id']==""){ 
+						$this->request->data['pickup_city'] = 0;
+					} else {
+						$this->request->data['pickup_city'] = $d['pickup_city_id'];
+					}
+					$this->request->data['pickup_state'] = $d['pickup_state_id'];
+					$this->request->data['pickup_country'] = $d['pickup_country_id'];
+					$this->request->data['pickup_locality'] = $d['pickup_locality'];
+					$this->request->data['final_locality'] = $d['finalLocality'];
+					if($d['p_final_city_id']==""){ 
+						$this->request->data['final_city'] = 0;
+					} 
+					else {
+						$this->request->data['final_city'] = $d['p_final_city_id'];
+					}
+
+					if($d['p_final_state_id']==""){ 
+						$this->request->data['final_state'] = 0;
+					} 
+					else {
+						$this->request->data['final_state'] = $d['p_final_state_id'];
+					}
+					$this->request->data['start_date'] = $d['start_date'];
+					$this->request->data['end_date'] = $d['end_date'];
+					$this->request->data['comment'] = $d['comment'];
+					$this->request->data['category_id'] = $d['category_id'];
+					$this->request->data['reference_id'] = $d['reference_id'];
+					$this->request->data['user_id'] = $_POST['user_id'];
+					$this->request->data['total_budget'] = $d['total_budget'];
+					$this->request->data['adult'] = $d['adult'];
+					$this->request->data['children'] = $d['children'];
+					$this->request->data['city_id'] = $d['city_id'];
+					$this->request->data['state_id'] = $d['state_id'];
+					$this->request->data['country_id'] = $d['country_id'];
+					$this->request->data['locality'] = $d['locality'];
+					//$this->request->data['stops'] =  $d['stops'];
+					$this->request->data['room1'] =  $d['room1'];
+					$this->request->data['room2'] =  $d['room2'];
+					$this->request->data['room3'] =  $d['room3'];
+					$this->request->data['child_with_bed'] =  $d['child_with_bed'];
+					$this->request->data['child_without_bed'] =  $d['child_without_bed'];
+					$this->request->data['hotel_rating'] = $d['hotel_rating'];
+					$this->request->data['hotel_category'] = $d['hotel_category'];
+					//$this->request->data['meal_plan'] = $d['meal_plan'] = (isset($d['meal_plan']) && !empty($d['meal_plan']))?implode(",", $d['meal_plan']):"";
+					$this->request->data['meal_plan'] = $_POST['meal_plan'];
+					//$this->request->data['stops'] = $d['stops'] = (isset($d['stops']) && !empty($d['stops']))?implode(",", $d['stops']):"";
+					$stopes = "";
+					if(isset($d['stops'])) {
+						ksort($d['stops']);
+						foreach($d['stops'] as $key=>$row) {
+							$stopes .=  $row.",";
+						}
+					}
+
+					$this->request->data['stops'] = $stopes;
+					$this->request->data['check_in'] =  $d['check_in'];
+					$this->request->data['check_out'] =  $d['check_out'];
+					//pr($this->request->data);pr($d); exit;
+					$contact = $this->Requests->newEntity($this->request->data);
+					if ($re = $this->Requests->save($contact)) {
+						$ui = $re->id;
+						$d['req_id'] = $ui;
+						$d['user_id'] = $_POST['user_id'];
+						$rest = $this->Hotels->newEntity($d);
+						$this->Hotels->save($rest);//exit;
+						if(isset($d['hh_room1'])) {
+							ksort($d['hh_room1']);
+							foreach($d['hh_room1'] as $key=>$row) {
+								$hotalExtraData['req_id'] = $ui;
+								$hotalExtraData['user_id'] = $_POST['user_id'];
+
+								$hotalExtraData['room1'] = $d['hh_room1'][$key];
+								$hotalExtraData['room2'] =  $d['hh_room2'][$key];
+								$hotalExtraData['room3'] =  $d['hh_room3'][$key];
+								$hotalExtraData['child_with_bed'] =  $d['hh_child_with_bed'][$key];
+								$hotalExtraData['child_without_bed'] =  $d['hh_child_without_bed'][$key];
+								$hotalExtraData['hotel_rating'] = $d['hh_hotel_rating'][$key];
+								$hotalExtraData['hotel_category'] = $d['hh_hotel_category'][$key];
+								//$hotalExtraData['meal_plan'] = (isset($d['hh_meal_plan'][$key]) && !empty($d['hh_meal_plan'][$key]))?implode(",", $d['hh_meal_plan'][$key]):"";
+								$hotalExtraData['meal_plan'] = $d['hh_meal_plan'][$key];
+								$hotalExtraData['city_id'] = $d['hh_city_id'][$key];
+								$hotalExtraData['state_id'] = $d['hh_state_id'][$key];
+								$hotalExtraData['country_id'] = $d['hh_country_id'][$key];
+								$hotalExtraData['locality'] = $d['hh_locality'][$key];
+
+								$hotalExtraData['check_in'] =  ($d['hh_check_in'][$key])?$this->ymdFormatByDateFormat($d['hh_check_in'][$key], "d-m-Y", $dateSeparator="/"):null;
+								$hotalExtraData['check_out'] =  ($d['hh_check_out'][$key])?$this->ymdFormatByDateFormat($d['hh_check_out'][$key], "d-m-Y", $dateSeparator="/"):null;
+
+								$result = $this->Hotels->newEntity($hotalExtraData);
+								$this->Hotels->save($result);
+							}
+						}
+						if(isset($d['stops'])) {
+							ksort($d['stops']);
+							foreach($d['stops'] as $key=>$row) {
+								$stopData['request_id'] = $ui;
+								$stopData['locality'] =  $row;
+								$stopData['city_id'] =  $d['id_trasport_stop_city'][$key];
+								$stopData['state_id'] =  $d['state_id_trasport_stop_city'][$key];
+								$result = $this->RequestStops->newEntity($stopData);
+								$this->RequestStops->save($result);
+							}
+						}
+
+						/*Users List*/
+						$userchatTable = TableRegistry::get('User_Chats');
+						$conn = ConnectionManager::get('default');
+						$sql = "SELECT * FROM users WHERE id !='".$_POST['user_id']."' AND role_id in ('1') AND FIND_IN_SET ('".$this->request->data['state_id']."', preference) > 0 ";
+						$stmt = $conn->execute($sql);
+						$Userlist = $stmt ->fetchAll('assoc');
+						foreach($Userlist as $usr)
+						{
+							$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$usr['id']."' AND blocked_by='".$_POST['user_id']."'";
+							$stmt = $conn->execute($sql1);
+							$bresult = $stmt ->fetch('assoc');
+							if($bresult['block_count']==0){
+								$userchats = $userchatTable->newEntity();
+								$userchats->request_id = $ui;
+								$userchats->user_id = $_POST['user_id'];
+								$userchats->send_to_user_id = $usr["id"];
+								$userchats->message = "You have received a Request! Please go to RESPOND TO REQUEST tab to view it.";
+								$userchats->created = date("Y-m-d h:i:s");
+								$userchats->notification = 1;;
+								if ($userchatTable->save($userchats)) {
+									$id = $userchats->id;
+									$this->sendpushnotification($usr["id"],$userchats->message);
+								}
+							}
+						}
+
+
+						$result['response_code'] = 200;
+						$result['response_object'] = "Congratulations! Your request has been submitted successfully.";
+						$data = json_encode($result);
+						echo $data;
+						exit;
+					} 
+					else {
+						$result['response_code'] = 500;
+						$result['response_object'] = "Sorry.";
+						$data = json_encode($result);
+						echo $data;
+						exit;
+					}
+				}
+				elseif($_POST['category_id'] == 3 ){
+					
+					$this->request->data['category_id'] = $d['category_id'];
+					$this->request->data['reference_id'] = $d['reference_id'];
+					$this->request->data['user_id'] = $_POST['user_id'];
+					$this->request->data['total_budget'] = $d['total_budget'];
+					$this->request->data['adult'] = $d['hotelAdult'];
+					$this->request->data['children'] = $d['hotelChildren'];
+					$this->request->data['city_id'] = $d['h_city_id'];
+					$this->request->data['state_id'] = $d['h_state_id'];
+					$this->request->data['country_id'] = $d['h_country_id'];
+					$this->request->data['locality'] = $d['locality'];
+					$this->request->data['room1'] =  $d['room1'];
+					$this->request->data['room2'] =  $d['room2'];
+					$this->request->data['room3'] =  $d['room3'];
+					$this->request->data['child_with_bed'] =  $d['child_with_bed'];
+					$this->request->data['child_without_bed'] =  $d['child_without_bed'];
+					$this->request->data['hotel_category'] = $d['hotel_category'] ;
+
+					$this->request->data['meal_plan'] = $_POST['meal_plan'];
+					$this->request->data['check_in'] =  $d['check_in'];
+					$this->request->data['check_out'] =  $d['check_out'];
+					$this->request->data['hotel_rating'] = $d['hotel_rating'];
+					$this->request->data['comment'] = $d['comment'];
+
+
+					$contact = $this->Requests->newEntity($this->request->data);
+					if ($re = $this->Requests->save($contact)) {
+					$ui = $re->id;
+					$d['req_id'] = $ui;
+					$d['user_id'] = $_POST['user_id'];
+					$rest = $this->Hotels->newEntity($d);
+					$this->Hotels->save($rest);//exit;
+
+					/*Users List */
+					$userchatTable = TableRegistry::get('User_Chats');
+					$conn = ConnectionManager::get('default');
+					/*For Travel Agent*/	
+					$sql = "SELECT * FROM users WHERE id !='".$_POST['user_id']."' AND role_id in ('1') AND FIND_IN_SET ('".$this->request->data['state_id']."', preference) > 0 ";
+					$stmt = $conn->execute($sql);
+					$Userlist = $stmt ->fetchAll('assoc');
+					foreach($Userlist as $usr)
+					{
+						$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$usr['id']."' AND blocked_by='".$_POST['user_id']."'";
+						$stmt = $conn->execute($sql1);
+						$bresult = $stmt ->fetch('assoc');
+						if($bresult['block_count']==0){	
+							$userchats = $userchatTable->newEntity();
+							$userchats->request_id = $ui;
+							$userchats->user_id = $_POST['user_id'];
+							$userchats->send_to_user_id = $usr["id"];
+							$userchats->message = "You have received a Request! Please go to RESPOND TO REQUEST tab to view it.";
+							$userchats->created = date("Y-m-d h:i:s");
+							$userchats->notification = 1;;
+							if ($userchatTable->save($userchats)) {
+								$id = $userchats->id;
+								$this->sendpushnotification($usr["id"],$userchats->message);
+							}
+						}
+					}
+					/*For Travel Agent*/
+						
+					/*For Hotelier*/
+					$sqlh = "SELECT * FROM users WHERE id !='".$_POST['user_id']."' AND role_id in ('3') AND city_id='".$this->request->data['city_id']."'";
+					$stmth = $conn->execute($sqlh);
+					$Userlisth = $stmth->fetchAll('assoc');
+					foreach($Userlisth as $usrh)
+					{
+						$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$usrh['id']."' AND blocked_by='".$_POST['user_id']."'";
+						$stmt = $conn->execute($sql1);
+						$bresult = $stmt ->fetch('assoc');
+						if($bresult['block_count']==0){
+							$userchats = $userchatTable->newEntity();
+							$userchats->request_id = $ui;
+							$userchats->user_id = $_POST['user_id'];
+							$userchats->send_to_user_id = $usrh["id"];
+							$userchats->message = "You have received a Request! Please go to RESPOND TO REQUEST tab to view it.";
+							$userchats->created = date("Y-m-d h:i:s");
+							$userchats->notification = 1;;
+							if ($userchatTable->save($userchats)) {
+								$id = $userchats->id;
+								$this->sendpushnotification($usrh["id"],$userchats->message);
+							}
+						}
+					}
+					/*For Hotelier*/
+						$result['response_code'] = 200;
+						$result['response_object'] = "Congratulations! Your request has been submitted successfully.";
+						$data = json_encode($result);
+						echo $data;
+						exit;
+					} 
+					else {
+						$result = array();
+						$result['response_code'] = 500;
+						$result['response_object'] = "Sorry.";
+						$data = json_encode($result);
+						echo $data;
+						exit;
+					}
+				}
+ 		} 
+		else {
+			$result['response_code'] = 500;
+			$result['response_object'] = "Sorry you can not add more then 100.";
+			$data = json_encode($result);
+			echo $data;
+			exit;
+		}
+	}	
 		
 		
 		
