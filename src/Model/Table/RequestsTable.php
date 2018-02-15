@@ -83,7 +83,7 @@ class RequestsTable extends Table
             'foreignKey' => 'city_id'
         ]);
 		//-- class 
-		$this->belongsTo('PickupCities', [
+		/*$this->belongsTo('PickupCities', [
 			'className' => 'Cities',
             'foreignKey' => 'pickup_city',
             'joinType' => 'INNER'
@@ -92,7 +92,7 @@ class RequestsTable extends Table
 			'className' => 'Cities',
             'foreignKey' => 'final_city',
             'joinType' => 'INNER'
-        ]);
+        ]);*/
 		//--
         $this->hasMany('RequestStops', [
             'foreignKey' => 'request_id'

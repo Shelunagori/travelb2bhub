@@ -60,8 +60,7 @@
 							<th scope="col"><?= __('Status') ?></th>
 							<th scope="col"><?= __('Removed') ?></th>
 							<th scope="col"><?= __('City') ?></th>
-							<!--<th scope="col"><?= __('State') ?></th>-->							
-							<th scope="col"><?= __('Pickup City') ?></th>							
+							<!--<th scope="col"><?= __('State') ?></th>-->								
 							<!--<th scope="col"><?= __('Pickup State') ?></th>							
 							<th scope="col" class="actions"><?= __('Actions') ?></th>-->
 						</tr>
@@ -88,7 +87,6 @@
 				<td><?php echo $is_deletedShow; ?></td>
 				<td><?= h($request->city->name) ?></td>
 				<!--<td><?= h($request->state->state_name) ?></td>-->
-				<td><?= h($request->city->name) ?></td>
 				<!--<td><?= h($request->state->state_name) ?></td>
                 <td class="actions">
 					<?= $this->Html->link(__('View'), ['action' => 'view', $request->id]) ?>

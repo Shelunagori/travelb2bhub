@@ -3987,6 +3987,7 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 		$this->loadModel('RequestStops');
 		$this->loadModel('Hotels');
 		$this->loadModel('User_Chats');
+		 
 		$user = $this->Users->find()->where(['id' => $_POST['user_id']])->first();
 		$myRequestCount = $myReponseCount = 0;
 		$myfinalCount  = 0;
@@ -4061,7 +4062,9 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 					}
 					$p['stops'] = $stopes;
 					//pr($p); exit;
-					$contact = $this->Requests->newEntity($p);
+					$contact = $this->Requests->newEntity();
+					$contact = $this->Requests->patchEntity($contact, $p);
+					pr($contact); exit;
 					if ($re = $this->Requests->save($contact)) {
 						$ui = $re->id;
 						if(isset($d['stops'])) {
@@ -4528,13 +4531,16 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 		
 		
 	public function sendreqapinew(){
+		
 		date_default_timezone_set('Asia/Kolkata');
 		$this->loadModel('Requests');
 		$this->loadModel('Responses');
 		$this->loadModel('RequestStops');
 		$this->loadModel('Hotels');
 		$this->loadModel('User_Chats');
+		
 		$user_id=$this->request->data['user_id'];
+		
 		$user = $this->Users->find()->where(['id' => $user_id])->first();
 		$myRequestCount = $myReponseCount = 0;
 		$myfinalCount  = 0;
@@ -4592,6 +4598,7 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 				}
 
 				if($this->request->data['category_id'] == 2 ){
+				
 					$this->request->data['transport_requirement'] = $this->request->data['transport_requirement'];
 					$this->request->data['pickup_city'] = $this->request->data['t_pickup_city_id'];
 					$this->request->data['pickup_state'] = $this->request->data['t_pickup_state_id'];
@@ -4617,8 +4624,9 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 						}
 					}
 					$this->request->data['stops'] = $stopes;
-					//pr($this->request->data); exit;
+					
 					$contact = $this->Requests->newEntity($this->request->data);
+					
 					if ($re = $this->Requests->save($contact)) {
 						$ui = $re->id;
 						if(isset($this->request->data['stops'])) {
