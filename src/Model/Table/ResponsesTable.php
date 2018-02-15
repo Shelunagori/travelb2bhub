@@ -51,6 +51,10 @@ class ResponsesTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER'
         ]);
+		$this->hasMany('UserChats', [
+            'foreignKey' => 'request_id',
+            'joinType' => 'RIGHT'
+        ]);
         /* $this->hasMany('Requests', [
             'foreignKey' => 'response_id'
         ]); */

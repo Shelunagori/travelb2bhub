@@ -47,9 +47,10 @@ class AppController extends Controller {
         parent::initialize();
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        if($this->request->params['controller'] == 'users') 
-		{
 		
+        if($this->request->params['controller'] == 'Users') 
+		{
+		 
 			$this->loadComponent('Auth', [
 			 'authenticate' => [
 					'Form' => [
