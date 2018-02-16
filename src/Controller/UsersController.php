@@ -627,6 +627,7 @@ $this->loadModel('Responses');
 $this->loadModel('Promotion');
 $this->loadModel('Testimonial');
 $this->loadModel('User_Chats');
+$this->viewBuilder()->layout('user_layout');
 $user = $this->Users->find()
 ->contain(["Credits"])
 ->where(['Users.id' => $this->Auth->user('id')])->first();

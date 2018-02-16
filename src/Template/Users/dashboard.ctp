@@ -1,18 +1,13 @@
-<div id="profile" class="container-fluid">
-    <div class="row tra-section-gray equal_column">
-          <?php echo $this->element('left_panel');?>
-           <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padding0">
-               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 border_bottom">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 ">
-                    <h4 class="title">Dashboard</h2>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5 ">
-                    <ul class="top-icons-wrap">
-					<li>
-						  <li class="notification_list">
-   <a href="javascript:void(0);" id="chat_icon" class="link-icon"><span class="chat_count"><?php echo $chatCount;?></span><img src="/img/notify.png" alt=""></a>
-                            <div class="ap-subs">
-                                <ul class="list-unstyled msg_list" role="menu">
+<section class="content-header">
+      <h1>
+        Dashboard
+        <small>Control panel</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+      </ol>
+    </section>
                   <?php
                   echo $this->element('subheader');?>
               <?php if($users['role_id'] != 3 && count($advertisement1) > 0){?>
