@@ -12,7 +12,7 @@ use Cake\Network\Email\Email;
 
 class PagesController extends AppController
 {
-	public function beforeFilter(Event $event) {
+	public function beforeFilter(Event $event) +{
 		$this->loadModel('Users');
 		$this->loadModel('Contacts');
 		parent::beforeFilter($event);
