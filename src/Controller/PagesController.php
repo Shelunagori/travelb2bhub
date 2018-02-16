@@ -2917,82 +2917,82 @@ $current_date = date("Y-m-d");
 	$testimoniallist = array();
 	$alltestimonials = array();
 	if(!empty($testimonials)) {
-	foreach($testimonials as $testimonial) {
-	$users = $this->Users->find()->where(['status' => 1,'id'=> $testimonial['author_id']])->first();
-	$name = $users['first_name']." ".$users['last_name'];
-	$alltestimonials[] = array( "name"=>$name, "rating1"=>$testimonial['rating'],"description"=>$users['description'], "profile_pic"=>$users['profile_pic'], "comment"=>$testimonial['comment']);
-	}
-	$result['response_code'] = 200;
-	$result['testimonial'] = $alltestimonials;
-	$result['description1'] = $user['description'] ;
-	$data =   json_encode($result);
-	echo $data;
-	exit;
+		foreach($testimonials as $testimonial) {
+			$users = $this->Users->find()->where(['status' => 1,'id'=> $testimonial['author_id']])->first();
+			$name = $users['first_name']." ".$users['last_name'];
+			$alltestimonials[] = array( "name"=>$name, "rating1"=>$testimonial['rating'],"description"=>$users['description'], "profile_pic"=>$users['profile_pic'], "comment"=>$testimonial['comment']);
+		}
+		$result['response_code'] = 200;
+		$result['testimonial'] = $alltestimonials;
+		$result['description1'] = $user['description'] ;
+		$data =   json_encode($result);
+		echo $data;
+		exit;
 	}
 	$result['response_code'] = 500;
 	echo $result;
 	exit;
 	}
- public function dashboardcounterapi()
- {
-	if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
-		$this->loadModel('Requests');
-		$this->loadModel('Responses');
-		$this->loadModel('Hotels');
-		$this->loadModel('BlockedUsers');
-		$myRequestCount = $myReponseCount = 0;
-		$myfinalCount  = 0;
-		$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>0,"Requests.status "=>2]]);
-		$myfinalCount = $query3 ->count();
+	public function dashboardcounterapi()
+	{
+		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
+			$this->loadModel('Requests');
+			$this->loadModel('Responses');
+			$this->loadModel('Hotels');
+			$this->loadModel('BlockedUsers');
+			$myRequestCount = $myReponseCount = 0;
+			$myfinalCount  = 0;
+			$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>0,"Requests.status "=>2]]);
+			$myfinalCount = $query3 ->count();
 
-		$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
-		$myRequestCount = $query->count();
+			$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
+			$myRequestCount = $query->count();
 
-		$myRequestCount1 = $query->count();
-		$delcount=0;
-		$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>1]]);
-		foreach($requests as $req){
-			$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
-			if($rqueryr->count()!=0){
-				$delcount++;
-			}
-		}
-		if($myRequestCount > $delcount) {
-			$myRequestCount = $myRequestCount-$delcount;
-		}   
-
-		$reqcount = $this->getSettings('requestcount');
-		$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $_POST['user_id']]]);
-		$myReponseCount = $queryr->count();
-		if($myReponseCount>0){
-			foreach($queryr as $req){
-				$checkblockedUsers = $this->BlockedUsers->find()->where(['blocked_by' => $req['request']['user_id'],'blocked_user_id'=>$_POST['user_id']])->count();        
-				if($checkblockedUsers>0){
-					$myReponseCount--;
+			$myRequestCount1 = $query->count();
+			$delcount=0;
+			$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>1]]);
+			foreach($requests as $req){
+				$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
+				if($rqueryr->count()!=0){
+					$delcount++;
 				}
 			}
-		}
-		$this->set('myReponseCount', $myReponseCount);
+			if($myRequestCount > $delcount) {
+				$myRequestCount = $myRequestCount-$delcount;
+			}  
 
-		//$myReponseCount = $queryr->count();
-		$reqcount = (($reqcount['value']-$myRequestCount1)-($delcount+ $myfinalCount));
-		$countarr = array();
-        $coountarr['myRequestCount'] = $myRequestCount1 ;
-        $coountarr['myReponseCount'] = $myReponseCount;
-        $coountarr['placereq'] = $reqcount;
-        $coountarr['respondToRequestCount'] = $this->__getRespondToRequestCountapi($_POST['user_id']);
-        $result = array();
-        $result['response_code'] = 200;
-        $result['response_object'] = $coountarr;
-        $data =   json_encode($result);
-        echo $data;
-        exit;
-    } 
-	else {
-		echo "Invalid Access";   
-		exit;
-    }
- }
+			$reqcount = $this->getSettings('requestcount');
+			$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $_POST['user_id']]]);
+			$myReponseCount = $queryr->count();
+			if($myReponseCount>0){
+				foreach($queryr as $req){
+					$checkblockedUsers = $this->BlockedUsers->find()->where(['blocked_by' => $req['request']['user_id'],'blocked_user_id'=>$_POST['user_id']])->count();        
+					if($checkblockedUsers>0){
+						$myReponseCount--;
+					}
+				}
+			}
+			$this->set('myReponseCount', $myReponseCount);
+
+			//$myReponseCount = $queryr->count();
+			$reqcount = (($reqcount['value']-$myRequestCount1)-($delcount+ $myfinalCount));
+			$countarr = array();
+			$coountarr['myRequestCount'] = $myRequestCount1 ;
+			$coountarr['myReponseCount'] = $myReponseCount;
+			$coountarr['placereq'] = $reqcount;
+			$coountarr['respondToRequestCount'] = $this->__getRespondToRequestCountapi($_POST['user_id']);
+			$result = array();
+			$result['response_code'] = 200;
+			$result['response_object'] = $coountarr;
+			$data =   json_encode($result);
+			echo $data;
+			exit;
+		} 
+		else {
+			echo "Invalid Access";   
+			exit;
+		}
+	}
 	
 	public function __getRespondToRequestCountapi($userid) {
 		$requests ='';
