@@ -82,30 +82,30 @@
 						</div>
 						<div class="col-md-12">
 							<?php echo $this->Form->input('city_id',[
-							'label' => false,'class'=>'form-control select2','options'=>$cities,'style'=>'height:34px']);?>
+							'label' => false,'class'=>'form-control select2 go','options'=>$cities,'style'=>'height:34px']);?>
 						</div>
 					</div>
-					
-					<div class="row col-md-6">
-						<div class="col-md-12">
-							<label class="control-label">States <span class="required" aria-required="true"> * </span></label>
+					<div id="st">
+						<div class="row col-md-6">
+							<div class="col-md-12">
+								<label class="control-label">States <span class="required" aria-required="true"> * </span></label>
+							</div>
+							<div class="col-md-12">
+								<?php echo $this->Form->input('state_id',[
+								'label' => false,'class'=>'form-control select2','options'=>$states,'style'=>'height:34px']);?>
+							</div>
 						</div>
-						<div class="col-md-12">
-							<?php echo $this->Form->input('state_id',[
-							'label' => false,'class'=>'form-control select2','options'=>$states,'style'=>'height:34px']);?>
+					
+						<div class="row col-md-6">
+							<div class="col-md-12">
+								<label class="control-label">Country <span class="required" aria-required="true"> * </span></label>
+							</div>
+							<div class="col-md-12">
+								<?php echo $this->Form->input('country_id',[
+								'label' => false,'class'=>'form-control select2','options'=>$countries,'style'=>'height:34px']);?>
+							</div>
 						</div>
 					</div>
-					
-					<div class="row col-md-6">
-						<div class="col-md-12">
-							<label class="control-label">Country <span class="required" aria-required="true"> * </span></label>
-						</div>
-						<div class="col-md-12">
-							<?php echo $this->Form->input('country_id',[
-							'label' => false,'class'=>'form-control select2','options'=>$countries,'style'=>'height:34px']);?>
-						</div>
-					</div>
-					
 					<div class="box-footer">
 						<div class="row">
 							<center>
@@ -154,4 +154,31 @@ $(document).ready(function() {
 	}); 
 
 });
+</script>
+
+<script>
+$(document).ready(function() {	
+	$('.go').on('change',function()
+	{ 
+		$('#data').html('<i style= "margin-top: 20px;" class="fa fa-refresh fa-spin fa-3x fa-fw"></i><b> Loading... </b>');
+		var city_id = $(this).val();
+ 		var m_data = new FormData();
+		m_data.append('id',city_id);
+		$.ajax({
+			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_state"]); ?>",
+			data: m_data,
+			processData: false,
+			contentType: false,
+			type: 'POST',
+			dataType:'text',
+			success: function(data)   // A function to be called if request succeeds
+			{
+				$('#st').html(data);
+			
+			}	
+		});	
+	});
+});
+
+
 </script>

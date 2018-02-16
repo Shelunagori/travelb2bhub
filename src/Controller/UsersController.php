@@ -71,7 +71,7 @@ public function reportEdit($id = null)
             if ($this->Users->save($users)) {
                 $this->Flash->success(__('The Users has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'report']);
             } else {
                 $this->Flash->error(__('The Users could not be saved. Please, try again.'));
             }
@@ -80,13 +80,31 @@ public function reportEdit($id = null)
         $states = $this->Users->States->find('list');
         $countries = $this->Users->Countries->find('list');
 		 
-		$category[]="Travel Agent";
-		$category[]="Event Planner";
-		$category[]="Hotelier";
+		$category[]=['text'=>'Travel Agent', 'value'=>'1'];
+		$category[]=['text'=>'Event Planner', 'value'=>'2'];
+		$category[]=['text'=>'Hotelier', 'value'=>'3'];
         $this->set(compact('Users', 'users', 'cities', 'states', 'countries', 'category'));
         $this->set('_serialize', ['Users']);
     }
 
+	public function ajaxState()
+    {
+		$city_id=$this->request->data['id'];
+		$cities=$this->Users->Cities->find()->where(['id'=>$city_id]);
+		foreach($cities as $city){
+			$state_id=$city->state_id;
+		}
+		$states=$this->Users->States->find('list')->where(['id'=>$state_id]);
+		$state=$this->Users->States->find()->where(['id'=>$state_id]);
+		 
+		foreach($state as $stat){
+			$country_id=$stat->country_id;
+		}
+		$countries=$this->Users->Countries->find('list')->where(['id'=>$country_id]);
+        
+        $this->set(compact('states', 'countries'));
+    }
+	
 /**
 * View method
 *
