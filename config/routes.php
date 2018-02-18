@@ -106,19 +106,58 @@ Router::scope('/', function (RouteBuilder $routes) {
     $routes->fallbacks(DashedRoute::class);
 });
 
-Router::prefix('api', function ($routes) {
-		$routes->extensions(['json', 'xml']);
-			$routes->resources(
-				'Cities', [
-				   'map' => [
-					   'citiesForState' => [
-						   'action' => 'citiesForState',
-						   'method' => 'GET'
+	Router::prefix('api', function ($routes) {
+			$routes->extensions(['json', 'xml']);
+				$routes->resources(
+					'PostTravlePackageCategories', [
+					   'map' => [
+						   'index' => [
+							   'action' => 'index',
+							   'method' => 'GET'
+						   ]
 					   ]
-				   ]
-				]
-			);	
-});				
+					]
+				);
+				$routes->resources(
+					'Currencies', [
+					   'map' => [
+						   'index' => [
+							   'action' => 'index',
+							   'method' => 'GET'
+						   ]
+					   ]
+					]
+				);
+
+				$routes->resources(
+					'PriceMasters', [
+					   'map' => [
+						   'index' => [
+							   'action' => 'index',
+							   'method' => 'GET'
+						   ]
+					   ]
+					]
+				);
+
+				$routes->resources(
+					'PostTravlePackages', [
+					   'map' => [
+						   'add' => [
+							   'action' => 'add',
+							   'method' => 'POST'
+						   ]
+					   ]
+					]
+				);
+				
+	});				
+
+
+
+
+
+
 
 
 /**

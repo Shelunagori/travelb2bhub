@@ -223,4 +223,5 @@ if (Configure::read('debug')) {
 }
 
 Plugin::load('Migrations');
+
 Plugin::load('ADmad/HybridAuth', ['bootstrap' => true, 'routes' => true]);
