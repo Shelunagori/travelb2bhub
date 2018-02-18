@@ -4,29 +4,30 @@ use App\Controller\Api\AppController;
 use Cake\Filesystem\Folder;
 use Cake\Filesystem\File;
 
-class TaxiFleetPromotionsController extends AppController
+
+class EventPlannerPromotionsController extends AppController
 {
+
+
     public function add()
     {
-        $taxiFleetPromotion = $this->TaxiFleetPromotions->newEntity();
+        $eventPlannerPromotion = $this->EventPlannerPromotions->newEntity();
         if ($this->request->is('post')) {
-            $taxiFleetPromotion = $this->TaxiFleetPromotions->patchEntity($taxiFleetPromotion, $this->request->data(), [
-			'associated' => ['TaxiFleetPromotionRows','TaxiFleetPromotionStates','TaxiFleetPromotionCities']]);
+            $eventPlannerPromotion = $this->EventPlannerPromotions->patchEntity($eventPlannerPromotion,$this->request->data(),['associated' => ['EventPlannerPromotionStates','EventPlannerPromotionCities']]);
 
 			$message = 'PERFECT';
 			$response_code = 101;
-
-			$id=$taxiFleetPromotion->user_id;
-			$title = $taxiFleetPromotion->title;
+			$id=$eventPlannerPromotion->user_id;
+			$title = 'Event_'.rand();
 			$image = $this->request->data('image');	
 			$document = $this->request->data('document');				
 			if(!empty($this->request->data('visible_date')))
 			{
-				$taxiFleetPromotion->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
+				$eventPlannerPromotion->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
 			}
 			if(!empty($image))
 			{	
-				$dir = new Folder(WWW_ROOT . 'images/taxiFleetPromotion/'.$id.'/'.$title.'/image', true, 0755);
+				$dir = new Folder(WWW_ROOT . 'images/eventPlannerPromotion/'.$id.'/'.$title.'/image', true, 0755);
 				$ext = substr(strtolower(strrchr($image['name'], '.')), 1); 
 				$arr_ext = array('jpg', 'jpeg','png'); 				
 				
@@ -35,21 +36,18 @@ class TaxiFleetPromotionsController extends AppController
 					if(in_array($ext, $arr_ext)) { 
 						if (!file_exists('path/to/directory')) {
 								mkdir('path/to/directory', 0777, true);
-								
 							}
-						if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)) {
-							$taxiFleetPromotion->image='images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
+						if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/eventPlannerPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)) {
+							$eventPlannerPromotion->image='images/eventPlannerPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
 						} else {
 							$message = 'Image not uploaded';
 							$response_code = 102;
-							
 						}
 					} 
 					else 
 					{ 
 						$message = 'Invalid image extension';
 						$response_code = 103;  
-						
 					}					
 				}
 				else 
@@ -57,11 +55,11 @@ class TaxiFleetPromotionsController extends AppController
 					$message = 'Invalid image extension';
 					$response_code = 103;  
 				}				
-			} else { $taxiFleetPromotion->image ='';  }	
+			} else { $eventPlannerPromotion->image ='';  }	
 
 			if(!empty($document))
 			{  
-				$dir = new Folder(WWW_ROOT . 'images/taxiFleetPromotion/'.$id.'/'.$title.'/document', true, 0755);
+				$dir = new Folder(WWW_ROOT . 'images/eventPlannerPromotion/'.$id.'/'.$title.'/document', true, 0755);
 				$ext = substr(strtolower(strrchr($document['name'], '.')), 1); 
 				$arr_ext = array('jpg', 'jpeg','png','pdf'); 				
 				if(!empty($ext))
@@ -70,8 +68,8 @@ class TaxiFleetPromotionsController extends AppController
 						if (!file_exists('path/to/directory')) {
 								mkdir('path/to/directory', 0777, true);
 							}
-						if(move_uploaded_file($document['tmp_name'], WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$title.'/document/'.$id.'.'.$ext)) {
-							$taxiFleetPromotion->document='images/taxiFleetPromotion/'.$id.'/'.$title.'/document/'.$id.'.'.$ext;
+						if(move_uploaded_file($document['tmp_name'], WWW_ROOT . '/images/eventPlannerPromotion/'.$id.'/'.$title.'/document/'.$id.'.'.$ext)) {
+							$eventPlannerPromotion->document='images/eventPlannerPromotion/'.$id.'/'.$title.'/document/'.$id.'.'.$ext;
 						} else {
 							$message = 'Document not uploaded';
 							$response_code = 104;
@@ -82,31 +80,28 @@ class TaxiFleetPromotionsController extends AppController
 					{ 	
 						$message = 'Invalid document extension';
 						$response_code = 105;  
-						
 					}					
 				}
 				else 
 				{ 	
 					$message = 'Invalid document extension';
 					$response_code = 105;  
-					
 				}				
-			} else { $taxiFleetPromotion->document = ''; }			
-			
+			} else { $eventPlannerPromotion->document = ''; }			
+
 			if($message == 'PERFECT' && $response_code == 101)
 			{
-				if ($this->TaxiFleetPromotions->save($taxiFleetPromotion)) {
-					$message = 'The Taxi/Fleet promotions has been saved';
+				if ($this->EventPlannerPromotions->save($eventPlannerPromotion)) {
+					$message = 'The event promotions has been saved';
 					$response_code = 200;
 				}else{
-					$message = 'The Taxi/Fleet promotions has not been saved';
+					$message = 'The event promotions has not been saved';
 					$response_code = 204;				
 				}
 			}			
         }
-		
+
 		$this->set(compact('message','response_code'));
-        $this->set('_serialize', ['message','response_code']);
+        $this->set('_serialize', ['message','response_code']);		
     }
-	
 }

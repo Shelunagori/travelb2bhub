@@ -140,6 +140,16 @@ Router::scope('/', function (RouteBuilder $routes) {
 					]
 				);
 				$routes->resources(
+					'Users', [
+					   'map' => [
+						   'index' => [
+							   'action' => 'index',
+							   'method' => 'GET'
+						   ]
+					   ]
+					]
+				);
+				$routes->resources(
 					'TaxiFleetCarBuses', [
 					   'map' => [
 						   'index' => [
@@ -152,6 +162,16 @@ Router::scope('/', function (RouteBuilder $routes) {
 
 				$routes->resources(
 					'TaxiFleetPromotions', [
+					   'map' => [
+						   'add' => [
+							   'action' => 'add',
+							   'method' => 'POST'
+						   ]
+					   ]
+					]
+				);
+				$routes->resources(
+					'EventPlannerPromotions', [
 					   'map' => [
 						   'add' => [
 							   'action' => 'add',
