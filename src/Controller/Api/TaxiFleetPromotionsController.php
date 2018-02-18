@@ -3,35 +3,30 @@ namespace App\Controller\Api;
 use App\Controller\Api\AppController;
 use Cake\Filesystem\Folder;
 use Cake\Filesystem\File;
-class PostTravlePackagesController extends AppController
-{
 
+class TaxiFleetPromotionsController extends AppController
+{
     public function add()
     {
-        $postTravlePackage = $this->PostTravlePackages->newEntity();
+        $taxiFleetPromotion = $this->TaxiFleetPromotions->newEntity();
         if ($this->request->is('post')) {
-           
-			$postTravlePackage = $this->PostTravlePackages->patchEntity($postTravlePackage, $this->request->data(),[ 'associated' => ['PostTravlePackageRows', 'PostTravlePackageStates','PostTravlePackageCities'] ]);
+            $taxiFleetPromotion = $this->TaxiFleetPromotions->patchEntity($taxiFleetPromotion, $this->request->data(), [
+			'associated' => ['TaxiFleetPromotionRows','TaxiFleetPromotionStates','TaxiFleetPromotionCities']]);
 
 			$message = 'PERFECT';
 			$response_code = 101;
-			
-			$id=$postTravlePackage->user_id;
+
+			$id=$taxiFleetPromotion->user_id;
+			$title = $taxiFleetPromotion->title;
 			$image = $this->request->data('image');	
-			$title = $postTravlePackage->title;
-			$document = $this->request->data('document');	
+			$document = $this->request->data('document');				
 			if(!empty($this->request->data('visible_date')))
 			{
-				$postTravlePackage->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
+				$taxiFleetPromotion->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
 			}
-			if(!empty($this->request->data('valid_date')))
-			{
-				$postTravlePackage->valid_date = date('Y-m-d',strtotime($this->request->data('valid_date')));
-			}
-			
 			if(!empty($image))
 			{	
-				$dir = new Folder(WWW_ROOT . 'images/PostTravelPackages/'.$id.'/'.$title.'/image', true, 0755);
+				$dir = new Folder(WWW_ROOT . 'images/taxiFleetPromotion/'.$id.'/'.$title.'/image', true, 0755);
 				$ext = substr(strtolower(strrchr($image['name'], '.')), 1); 
 				$arr_ext = array('jpg', 'jpeg','png'); 				
 				
@@ -42,8 +37,8 @@ class PostTravlePackagesController extends AppController
 								mkdir('path/to/directory', 0777, true);
 								
 							}
-						if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)) {
-							$postTravlePackage->image='images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
+						if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)) {
+							$taxiFleetPromotion->image='images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
 						} else {
 							$message = 'Image not uploaded';
 							$response_code = 102;
@@ -61,13 +56,12 @@ class PostTravlePackagesController extends AppController
 				{ 	
 					$message = 'Invalid image extension';
 					$response_code = 103;  
-				
 				}				
-			} else { $postTravlePackage->image ='';  }
+			} else { $taxiFleetPromotion->image ='';  }	
 
 			if(!empty($document))
 			{  
-				$dir = new Folder(WWW_ROOT . 'images/PostTravelPackages/'.$id.'/'.$title.'/document', true, 0755);
+				$dir = new Folder(WWW_ROOT . 'images/taxiFleetPromotion/'.$id.'/'.$title.'/document', true, 0755);
 				$ext = substr(strtolower(strrchr($document['name'], '.')), 1); 
 				$arr_ext = array('jpg', 'jpeg','png','pdf'); 				
 				if(!empty($ext))
@@ -76,8 +70,8 @@ class PostTravlePackagesController extends AppController
 						if (!file_exists('path/to/directory')) {
 								mkdir('path/to/directory', 0777, true);
 							}
-						if(move_uploaded_file($document['tmp_name'], WWW_ROOT . '/images/PostTravelPackages/'.$id.'/'.$title.'/document/'.$id.'.'.$ext)) {
-							$postTravlePackage->document='images/PostTravelPackages/'.$id.'/'.$title.'/document/'.$id.'.'.$ext;
+						if(move_uploaded_file($document['tmp_name'], WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$title.'/document/'.$id.'.'.$ext)) {
+							$taxiFleetPromotion->document='images/taxiFleetPromotion/'.$id.'/'.$title.'/document/'.$id.'.'.$ext;
 						} else {
 							$message = 'Document not uploaded';
 							$response_code = 104;
@@ -97,23 +91,25 @@ class PostTravlePackagesController extends AppController
 					$response_code = 105;  
 					
 				}				
-			} else { $postTravlePackage->document = ''; }
-
+			} else { $taxiFleetPromotion->document = ''; }			
+			
 			if($message == 'PERFECT' && $response_code == 101)
 			{
-				if ($this->PostTravlePackages->save($postTravlePackage)) {
-					$message = 'The post travel package has been saved';
+				if ($this->TaxiFleetPromotions->save($taxiFleetPromotion)) {
+					$message = 'The Taxi/Fleet promotions has been saved';
 					$response_code = 200;
 				}else{
-					$message = 'The post travel package has not been saved';
+					$message = 'The Taxi/Fleet promotions has not been saved';
 					$response_code = 204;				
-				}				
-			}
-		}
+				}
+			}			
+			
+			
+	
+        }
+
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);
     }
-
-
-
+	
 }

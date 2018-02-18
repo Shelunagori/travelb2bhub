@@ -139,6 +139,27 @@ Router::scope('/', function (RouteBuilder $routes) {
 					   ]
 					]
 				);
+				$routes->resources(
+					'TaxiFleetCarBuses', [
+					   'map' => [
+						   'index' => [
+							   'action' => 'index',
+							   'method' => 'GET'
+						   ]
+					   ]
+					]
+				);
+
+				$routes->resources(
+					'TaxiFleetPromotions', [
+					   'map' => [
+						   'add' => [
+							   'action' => 'add',
+							   'method' => 'POST'
+						   ]
+					   ]
+					]
+				);
 
 				$routes->resources(
 					'PostTravlePackages', [
