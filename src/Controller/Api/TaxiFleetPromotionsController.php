@@ -6,7 +6,8 @@ use Cake\Filesystem\File;
 
 class TaxiFleetPromotionsController extends AppController
 {
-    public function add()
+
+   public function add()
     {
         $taxiFleetPromotion = $this->TaxiFleetPromotions->newEntity();
         if ($this->request->is('post')) {
@@ -137,6 +138,58 @@ class TaxiFleetPromotionsController extends AppController
 		}
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);		
-	}	
+	}
+	public function getTaxiFleetPromotions()
+	{
+		$getTaxiFleetPromotions = $this->TaxiFleetPromotions->find();
+			$getTaxiFleetPromotions->select(['total_likes'=>$getTaxiFleetPromotions->func()->count('TaxiFleetPromotionLikes.id')])
+			->leftJoinWith('TaxiFleetPromotionLikes')
+		->where(['visible_date >=' =>date('Y-m-d')])
+		->group(['TaxiFleetPromotions.id'])
+		->autoFields(true);
+		//pr($getTravelPackages->toArray()); exit;
+		if(!empty($getTaxiFleetPromotions->toArray()))
+		{
+			$message = 'List Found Successfully';
+			$response_code = 200;
+		}
+		else
+		{
+			$message = 'No Content Found';
+			$getTaxiFleetPromotions = [];
+			$response_code = 204;			
+		}
+		
+		$this->set(compact('getTaxiFleetPromotions','message','response_code'));
+        $this->set('_serialize', ['getTaxiFleetPromotions','message','response_code']);		
+	}
+	
+	public function getTaxiFleetPromotionsDetails($id = null)
+	{
+		$id = $this->request->query('id');
+		$getTaxiFleetPromotionsDetails = $this->TaxiFleetPromotions->find();
+		$getTaxiFleetPromotionsDetails->select(['total_likes'=>$getTaxiFleetPromotionsDetails->func()->count('TaxiFleetPromotionLikes.id')])
+			->leftJoinWith('TaxiFleetPromotionLikes')
+			->contain(['Users','PriceMasters','Countries','TaxiFleetPromotionStates'=>['States'],'TaxiFleetPromotionCities'=>['Cities'],'TaxiFleetPromotionRows'=>['TaxiFleetCarBuses']])
+			->where(['TaxiFleetPromotions.id'=>$id])
+			->group(['TaxiFleetPromotions.id'])
+		->autoFields(true);
+		//pr($getTaxiFleetPromotionsDetails->toArray()); exit;
+		if(!empty($getTaxiFleetPromotionsDetails->toArray()))
+		{
+			$message = 'Data Found Successfully';
+			$response_code = 200;
+		}
+		else
+		{
+			$message = 'No Content Found';
+			$getTaxiFleetPromotionsDetails = [];
+			$response_code = 204;			
+		}
+		
+		$this->set(compact('getTaxiFleetPromotionsDetails','message','response_code'));
+        $this->set('_serialize', ['getTaxiFleetPromotionsDetails','message','response_code']);		
+	}
+	
 	
 }

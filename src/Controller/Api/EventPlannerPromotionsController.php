@@ -135,5 +135,60 @@ class EventPlannerPromotionsController extends AppController
         $this->set('_serialize', ['message','response_code']);		
 	}
 
+
+	public function getEventPlanners()
+	{
+		$getEventPlanners = $this->EventPlannerPromotions->find();
+			$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('EventPlannerPromotionLikes.id')])
+			->leftJoinWith('EventPlannerPromotionLikes')
+		->where(['visible_date >=' =>date('Y-m-d')])
+		->group(['EventPlannerPromotions.id'])
+		->autoFields(true);
+		//pr($getTravelPackages->toArray()); exit;
+		if(!empty($getEventPlanners->toArray()))
+		{
+			$message = 'List Found Successfully';
+			$response_code = 200;
+		}
+		else
+		{
+			$message = 'No Content Found';
+			$getEventPlanners = [];
+			$response_code = 204;			
+		}
+		
+		$this->set(compact('getEventPlanners','message','response_code'));
+        $this->set('_serialize', ['getEventPlanners','message','response_code']);		
+	}
+
+	public function getEventPlannersDetails($id = null)
+	{
+		$id = $this->request->query('id');
+		$getEventPlannersDetails = $this->EventPlannerPromotions->find();
+		$getEventPlannersDetails->select(['total_likes'=>$getEventPlannersDetails->func()->count('EventPlannerPromotionLikes.id')])
+			->leftJoinWith('EventPlannerPromotionLikes')
+			->contain(['Users','PriceMasters','Countries','EventPlannerPromotionStates'=>['States'],'EventPlannerPromotionCities'=>['Cities']])
+			->where(['EventPlannerPromotions.id'=>$id])
+			->group(['EventPlannerPromotions.id'])
+		->autoFields(true);
+		
+		//pr($getEventPlannersDetails->toArray()); exit;
+		
+		if(!empty($getEventPlannersDetails->toArray()))
+		{
+			$message = 'Data Found Successfully';
+			$response_code = 200;
+		}
+		else
+		{
+			$message = 'No Content Found';
+			$getEventPlannersDetails = [];
+			$response_code = 204;			
+		}
+		
+		$this->set(compact('getEventPlannersDetails','message','response_code'));
+        $this->set('_serialize', ['getEventPlannersDetails','message','response_code']);		
+	}	
+
 	
 }

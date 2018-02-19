@@ -171,6 +171,14 @@ Router::scope('/', function (RouteBuilder $routes) {
 							   'action' => 'likeTaxiFleetPromotions',
 							   'method' => 'POST'
 						   ],
+						   'getTaxiFleetPromotions' => [
+							   'action' => 'getTaxiFleetPromotions',
+							   'method' => 'GET'
+						   ],
+						   'getTaxiFleetPromotionsDetails' => [
+							   'action' => 'getTaxiFleetPromotionsDetails',
+							   'method' => 'GET'
+						   ]
 					   ]
 					]
 				); 
@@ -185,6 +193,14 @@ Router::scope('/', function (RouteBuilder $routes) {
 							   'action' => 'likeEventPlannerPromotions',
 							   'method' => 'POST'
 						   ],
+						   'getEventPlanners' => [
+							   'action' => 'getEventPlanners',
+							   'method' => 'GET'
+						   ],
+						   'getEventPlannersDetails' => [
+							   'action' => 'getEventPlannersDetails',
+							   'method' => 'GET'
+						   ]
 					   ]
 					]
 				);
