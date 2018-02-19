@@ -7,7 +7,7 @@ class TaxiFleetCarBusesController extends AppController
 
     public function index()
     {
-        $TaxiFleetCarBuses = $this->TaxiFleetCarBuses->find('list')
+        $TaxiFleetCarBuses = $this->TaxiFleetCarBuses->find()
 		->where(['is_deleted'=>0]);
 		
 		if(!empty($TaxiFleetCarBuses->toArray()))
