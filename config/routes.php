@@ -188,6 +188,10 @@ Router::scope('/', function (RouteBuilder $routes) {
 							   'action' => 'getTravelPackages',
 							   'method' => 'GET'
 						   ],
+						   'getTravelPackageDetails' => [
+							   'action' => 'getTravelPackageDetails',
+							   'method' => 'GET'
+						   ],
 						   'add' => [
 							   'action' => 'add',
 							   'method' => 'POST'

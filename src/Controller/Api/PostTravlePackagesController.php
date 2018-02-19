@@ -134,5 +134,29 @@ class PostTravlePackagesController extends AppController
         $this->set('_serialize', ['getTravelPackages','message','response_code']);		
 	}
 
+	public function getTravelPackageDetails($id = null)
+	{
+		$id = $this->request->query('id');
+		$getTravelPackageDetails = $this->PostTravlePackages->find()
+			->contain(['Users','PriceMasters','Countries','Currencies','PostTravlePackageRows'=>['PostTravlePackageCategories'],'PostTravlePackageStates'=>['States'],'PostTravlePackageCities'=>['Cities']])
+			->where(['PostTravlePackages.id'=>$id]);
+		//pr($getTravelPackageDetails->toArray()); exit;
+		if(!empty($getTravelPackageDetails->toArray()))
+		{
+			$message = 'Data Found Successfully';
+			$response_code = 200;
+		}
+		else
+		{
+			$message = 'No Content Found';
+			$getTravelPackageDetails = [];
+			$response_code = 204;			
+		}
+		
+		$this->set(compact('getTravelPackageDetails','message','response_code'));
+        $this->set('_serialize', ['getTravelPackageDetails','message','response_code']);		
+	}
+	
+
 	
 }
