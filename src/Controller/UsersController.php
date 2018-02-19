@@ -693,6 +693,7 @@ $this->loadModel('States');
 $this->loadModel('Cities');
 $this->loadModel('Requests');
 $this->loadModel('Responses');
+$this->viewBuilder()->layout('user_layout');
 $user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
 $this->set('users', $user);
 if(!empty($user)) {

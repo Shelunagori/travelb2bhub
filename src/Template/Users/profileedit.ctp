@@ -28,23 +28,122 @@
 
 	});
 </script>
+ 
+<section class="content">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Quick Example</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form">
+              <div class="box-body">
+				 <?php 
+				 
+				 $role_id=$this->request->session()->read('Auth.User.role_id');
+				 ?>
+				<div class="form-group col-md-4">
+                  <label>Category</label>
+                  <select class="form-control">
+                    <option>--Select--Please---</option>
+                    <option value="1" <?php if($role_id== 1){ echo "Selected"; }?> >Travel Agent</option>
+                    <option value="2" <?php if($role_id== 2){ echo "Selected"; }?> >Event Planner</option>
+                    <option value="3" <?php if($role_id== 3){ echo "Selected"; }?> >Hotelier</option>
+                  </select>
+                </div>
+				 <div class="form-group col-md-4">
+                  <label>First Name</label>
+                  <input type="text" class="form-control" name="first_name" value="<?php echo $users['first_name'] ?>" id="first_name" placeholder="First Name">
+                </div>
+				 <div class="form-group col-md-4">
+                  <label>Last Name</label>
+                  <input type="text" class="form-control" name="last_name" value="<?php echo $users['last_name'] ?>" id="last_name" placeholder="last Name">
+                </div>
+				<div class="form-group col-md-6">
+                  <label>Company Name</label>
+                  <input type="text" class="form-control" name="company_name" value="<?php echo $users['company_name'] ?>" id="company_name" placeholder="Company Name">
+                </div>
+				 <div class="form-group col-md-6">
+                  <label>Website</label>
+                  <input type="text" class="form-control" id ="web_url" value = "<?php echo (!empty($users['web_url']))?$users['web_url']:""; ?>" name="web_url" placeholder="Website URL">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="exampleInputEmail1">Email Id</label>
+                  <input type="email" class="form-control" name="email" class="form-control" value="<?php echo $users['email'] ?>" id="email" placeholder="Enter Here">
+                </div>
+                <div class="form-group col-md-4">
+                  <label for="exampleInputPassword1">Mobile No.</label>
+                  <input type="text" class="form-control" name="mobile_number" value="<?php echo str_replace(' ','',$users['mobile_number']); ?>" id="mobile_number" placeholder="Enter Here">
+                </div>
+				<div class="form-group col-md-4">
+                  <label for="exampleInputPassword1">Secondary Contact No.</label>
+                  <input type="text" class="form-control" name="p_contact" value="<?php echo $users['p_contact'] ?>" id="p_contact" placeholder="Secondary Contact Number">
+                </div>
+				
+				<div class="form-group col-md-6">
+                  <label>Address Line 1</label>
+                  <input type="text" class="form-control" name="address" value="<?php echo $users['address'] ?>" id="address" placeholder="Enter Here" >
+                </div>
+				 <div class="form-group col-md-6">
+                  <label>Address Line 2</label>
+                  <input type="text" class="form-control" name="address1" value="<?php echo $users['address1'] ?>" id="address1" placeholder="Enter Here">
+                </div>
+				
+				<div class="form-group col-md-6">
+                  <label>Locality</label>
+                  <input type="text" class="form-control" name="locality" value="<?php echo $users['locality'] ?>" id="locality" placeholder="Enter Here">
+                </div>
+				 <div class="form-group col-md-6">
+                  <label>City</label>
+                  <select class="form-control">
+                    <option>--Select--Please---</option>
+                    <option value="1" <?php if($role_id== 1){ echo "Selected"; }?> >Travel Agent</option>
+                    <option value="2" <?php if($role_id== 2){ echo "Selected"; }?> >Event Planner</option>
+                    <option value="3" <?php if($role_id== 3){ echo "Selected"; }?> >Hotelier</option>
+                  </select>
+                </div>
+				
+                <div class="form-group">
+                  <label for="exampleInputFile">File input</label>
+                  <input type="file" id="exampleInputFile">
+
+                  <p class="help-block">Example block-level help text here.</p>
+                </div>
+                <div class="checkbox">
+                  <label>
+                    <input type="checkbox"> Check me out
+                  </label>
+                </div>
+              </div>
+              <!-- /.box-body -->
+
+              <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+            
+        </div>
+         
+      </div>
+      <!-- /.row -->
+    </section>
+ 
   <div id="profile_edit" class="container-fluid">
     <div class="row equal_column">
-       <?php echo $this->element('left_panel');?>
-          <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padding0">
+          <div class="col-lg-12 col-md-9 col-sm-9 col-xs-12 padding0">
              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 border_bottom">
               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 ">
                      <h4 class="title">Edit Profile</h4>
                </div>
                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5 ">
                    
-                    <ul class="top-icons-wrap">
-
-					<li class="notification_list"><a href="javascript:void(0);" id="chat_icon" class="link-icon"><span class="chat_count"><?php echo $chatCount;?></span><img src="/img/notify.png" alt=""></a>
-                            <div class="ap-subs">
-                                <ul class="list-unstyled msg_list" role="menu">
-                               
-                  <?php echo $this->element('subheader');?>
+                   
+                    
           
           <hr class="hr_bordor">
         <p><!--<strong>This site is currently being refined to serve you better. You will be notified in the next few days, once the website is fully functional</strong>--></p>
@@ -473,6 +572,7 @@
  <?php echo $this->Html->css(['telinput/css/intlTelInput']);?>
   <?php echo $this->Html->script(['telinput/intlTelInput']);?>
   <?php echo $this->Html->script(['telinput/utils']);?>
+  <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
  $.validator.addMethod("needsSelection", function (value, element) {
 	var count = $(element).find('option:selected').length;
@@ -667,6 +767,7 @@ $.extend(true, settings, {
 </script>
  <?php echo $this->Html->css(['chosen/chosen']);?>
  <?php echo $this->Html->script(['chosen/chosen.jquery']);?>
+ <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <?php if($this->request->session()->read('Auth.User.role_id') == 1) { ?>
 	<script>
 		var needPreferenceState = true;
@@ -685,6 +786,7 @@ $.extend(true, settings, {
 		});
 		$(document).ready(function($){
 			$(".chosen-select").chosen();
+			alert();
 		});
         
         
