@@ -108,5 +108,35 @@ class TaxiFleetPromotionsController extends AppController
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);
     }
+
+	public function likeTaxiFleetPromotions()
+	{
+        $likePostTravelPackages = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->newEntity();
+        if ($this->request->is('post')) {
+           
+			$likePostTravelPackages = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->patchEntity($likePostTravelPackages, $this->request->data);		
+			
+			$exists = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->exists(['taxi_fleet_promotion_id'=>$likePostTravelPackages->taxi_fleet_promotion_id,'user_id'=>$likePostTravelPackages->user_id]);
+			
+			if($exists == 0)
+			{
+				if ($this->TaxiFleetPromotions->TaxiFleetPromotionLikes->save($likePostTravelPackages)) {
+					$message = 'Liked successfully';
+					$response_code = 200;
+				}else{
+					$message = 'Like not saved';
+					$response_code = 204;				
+				}				
+			}
+			else
+			{
+					$message = 'Already Liked';
+					$response_code = 205;					
+			}	
+
+		}
+		$this->set(compact('message','response_code'));
+        $this->set('_serialize', ['message','response_code']);		
+	}	
 	
 }
