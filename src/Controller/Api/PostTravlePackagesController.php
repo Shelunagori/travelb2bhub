@@ -116,7 +116,12 @@ class PostTravlePackagesController extends AppController
 
 	public function getTravelPackages()
 	{
-		$getTravelPackages = $this->PostTravlePackages->find()->where(['valid_date >=' =>date('Y-m-d')]);
+		$getTravelPackages = $this->PostTravlePackages->find();
+			$getTravelPackages->select(['total_likes'=>$getTravelPackages->func()->count('PostTravlePackageLikes.id')])
+			->leftJoinWith('PostTravlePackageLikes')
+		->where(['valid_date >=' =>date('Y-m-d')])
+		->group(['PostTravlePackages.id'])
+		->autoFields(true);
 		//pr($getTravelPackages->toArray()); exit;
 		if(!empty($getTravelPackages->toArray()))
 		{
@@ -137,10 +142,13 @@ class PostTravlePackagesController extends AppController
 	public function getTravelPackageDetails($id = null)
 	{
 		$id = $this->request->query('id');
-		$getTravelPackageDetails = $this->PostTravlePackages->find()
+		$getTravelPackageDetails = $this->PostTravlePackages->find();
+		$getTravelPackageDetails->select(['total_likes'=>$getTravelPackageDetails->func()->count('PostTravlePackageLikes.id')])
+			->leftJoinWith('PostTravlePackageLikes')
 			->contain(['Users','PriceMasters','Countries','Currencies','PostTravlePackageRows'=>['PostTravlePackageCategories'],'PostTravlePackageStates'=>['States'],'PostTravlePackageCities'=>['Cities']])
-			->where(['PostTravlePackages.id'=>$id]);
-		//pr($getTravelPackageDetails->toArray()); exit;
+			->where(['PostTravlePackages.id'=>$id])
+			->group(['PostTravlePackages.id'])
+		->autoFields(true);
 		if(!empty($getTravelPackageDetails->toArray()))
 		{
 			$message = 'Data Found Successfully';
