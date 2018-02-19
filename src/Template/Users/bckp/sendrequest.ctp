@@ -250,7 +250,7 @@ $(document).ready(function($){
 									<div class="panel panel-default">
 										<div class="panel-heading">
                                             <h4 class="panel-title ">
-                                                <a  class="gr" data-toggle="collapse" data-parent="#HotelAccordion" href="#HotelGeneralR"> General Requirements a</a>
+                                                <a  class="gr" data-toggle="collapse" data-parent="#HotelAccordion" href="#HotelGeneralR"> General Requirements</a>
                                             </h4>
                                         </div>
 										<div id="HotelGeneralR" class="panel-collapse collapse">
@@ -475,7 +475,7 @@ $(document).ready(function($){
 							<!--Form Box for Hotel-->
                         </div>
 						<!--Tab pane Hotel end-->
-                        <div class="tab-pane active" id="tab2" >
+                        <div class="tab-pane active" id="tab2">
                              <?php
                             echo $this->Form->create(null, [
                                 'type' => 'file',
@@ -484,27 +484,34 @@ $(document).ready(function($){
                             ?>
 							<input name="category_id" type="hidden" value="1" class="form-control" id="date-start" placeholder="Reference id"/>
 							<input type="hidden" name="user_id" value="<?php echo $users['id']; ?>">
-                            <div class="form-box" >
-                                <div class="panel-group" id="accordion" style="background-color:white;">
+                            <div class="form-box">
+                                <div class="panel-group" id="accordion">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
-												<fieldset>
-												  <legend>General Requirements:</legend>
-												  <div class="form">
+                                                <a class="gr" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                                                    General Requirements</a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapse1" class="panel-collapse collapse">
+                                            <div class="panel-body"><div class="form">
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 														<div class="input-field">
-															<label for="from">
-																Reference ID  
+															<label for="from">Reference ID
+                                                                 <span class="asterisk">
+                                                                        <img src="/img/Asterisk.png" class="img-responsive">
+                                                                 </span>   
                                                             </label>
+
 															<input name="reference_id" type="text" class="form-control ref2" id="reference_id" placeholder="Reference ID" autocomplete="off" />
-															 
 														</div>
 													</div>
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
                                                         <div class="input-field">
-                                                            <label for="from">
-																Total Budget  
+                                                            <label for="from">Total Budget
+                                                                <span class="asterisk">
+                                                                        <img src="../img/Asterisk.png" class="img-responsive">
+                                                                </span>   
                                                             </label>
                                                             <input autocomplete="off" name="total_budget" type="number" min="1" class="form-control" id="total_budget" placeholder="Total Budget"/>
                                                         </div>
@@ -512,9 +519,10 @@ $(document).ready(function($){
 
                                                     <div class="col-xs-12 col-sm-6 col-xs-12 mt">
                                                         <div class="input-field">
-                                                            <label for="from">
-																Adults
-															</label>
+                                                            <label for="from">Adults<span class="asterisk">
+                                                                        <img src="/img/Asterisk.png" class="img-responsive">
+                                                                    </span> </label>
+
                                                             <div> <input type='button' value='-' class='qtyminus' field='adult' />
                                                                 <input type='text' autocomplete="off" name='adult' value='1' class='qty' />
                                                                 <input type='button' value='+' class='qtyplus' field='adult' /></div>
@@ -531,13 +539,8 @@ $(document).ready(function($){
                                                         </div>
                                                     </div>
 
-                                                </div>
-												 </fieldset>
-                                                <a class="gr" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                                                    General Requirements b</a>
-                                            </h4>
+                                                </div></div>
                                         </div>
-                                          
                                     </div>
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
@@ -828,7 +831,7 @@ $(document).ready(function($){
 									<div class="panel panel-default">
 										<div class="panel-heading">
                                             <h4 class="panel-title">
-                                                <a class="gr" data-toggle="collapse" data-parent="#TransportAccordion" href="#TransportlR">General Requirements c</a>
+                                                <a class="gr" data-toggle="collapse" data-parent="#TransportAccordion" href="#TransportlR">General Requirements</a>
                                             </h4>
                                         </div>
 										<div id="TransportlR" class="panel-collapse collapse">
