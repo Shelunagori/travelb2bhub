@@ -165,7 +165,7 @@ $(".req").sort(function (a, b) {
    })
 </script>
 <?php } ?>
-		<?php //echo '<pre>'; print_r($finalresponse); die();
+		<?php pr($requests); //echo '<pre>'; print_r($finalresponse); die();
 		if(count($requests) >0) {
 			
 		 foreach($requests as $request){

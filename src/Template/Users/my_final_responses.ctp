@@ -1,4 +1,4 @@
-  <?php echo $this->Html->script(['jquery.validate']);?>
+  <?php  echo $this->Html->script(['jquery.validate']);?>
   <?php
 use Cake\Datasource\ConnectionManager; 
 $conn = ConnectionManager::get('default');
@@ -10,7 +10,7 @@ $conn = ConnectionManager::get('default');
   <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padding0">
        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 border_bottom">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 ">
-                <h4 class="title">Finalized Responses</h2>
+                <h4 class="title">Finalized Responses</h4>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5 ">
                 <!--<a href="javascript:void(0)" onclick="window.history.back();">Go Back</a>-->
@@ -129,6 +129,7 @@ $conn = ConnectionManager::get('default');
 </div>
 
 		<?php 
+		
 		if(count($responses) >0) {
 			foreach($responses as $row){
 				//echo "<pre>";

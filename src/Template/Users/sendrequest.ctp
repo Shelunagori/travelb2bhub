@@ -250,7 +250,7 @@ $(document).ready(function($){
 									<div class="panel panel-default">
 										<div class="panel-heading">
                                             <h4 class="panel-title ">
-                                                <a  class="gr" data-toggle="collapse" data-parent="#HotelAccordion" href="#HotelGeneralR"> General Requirements a</a>
+                                                <a  class="gr" data-toggle="collapse" data-parent="#HotelAccordion" href="#HotelGeneralR"> General Requirements </a>
                                             </h4>
                                         </div>
 										<div id="HotelGeneralR" class="panel-collapse collapse">
@@ -483,58 +483,147 @@ $(document).ready(function($){
                             ]);
                             ?>
 							<input name="category_id" type="hidden" value="1" class="form-control" id="date-start" placeholder="Reference id"/>
-							<input type="hidden" name="user_id" value="<?php echo $users['id']; ?>">
+							<input type="hidden" name="user_id" value="<?php echo $users['id']; ?>"/>
                             <div class="form-box" >
                                 <div class="panel-group" id="accordion" style="background-color:white;">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
 												<fieldset>
-												  <legend>General Requirements:</legend>
+												  <legend style="color:#369FA1;"><b>GENERAL REQUIREMENTS:</b></legend>
 												  <div class="form">
-                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+												  <div class="row">
+												  <div class="col-md-12">
+                                                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 														<div class="input-field">
-															<label for="from">
+															<p for="from" >
 																Reference ID  
-                                                            </label>
-															<input name="reference_id" type="text" class="form-control ref2" id="reference_id" placeholder="Reference ID" autocomplete="off" />
+                                                            </p>
+															<input name="reference_id" type="text" class="form-control ref2" id="Reference ID" placeholder="Reference ID" autocomplete="off" />
 															 
 														</div>
 													</div>
                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
                                                         <div class="input-field">
-                                                            <label for="from">
+                                                            <p for="from">
 																Total Budget  
-                                                            </label>
+                                                            </p>
                                                             <input autocomplete="off" name="total_budget" type="number" min="1" class="form-control" id="total_budget" placeholder="Total Budget"/>
                                                         </div>
+														</div>
+													</div>
+													</div>
+													<div class="row">
+													<div class="col-md-12">
+													<div class="col-md-6">
+                                                        <div class="input-field">
+                                                            <p for="from">
+																Adults
+															</p>
+															</div>
+															<div>
+																	<input type="button" class="btn btn-default btn-medium" id="btnminus" value="-" field='adult'/>
+															
+                                                                <input type="text" class="" autocomplete="off" name='adult' value='1' id="textcounter"/>
+															
+																<input type="button" class="btn btn-default btn-medium" id="btnplus" value="+" field='adult'/>
+															</div>
                                                     </div>
+                                                   
+													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+                                                        <div class="input-field">
+                                                            <p for="from">Children below 6  </p>
+                                                            <div><input type='button' value='-' class='qtyminus1' field='children' id="btnminus1"/>
+                                                                <input type='text' autocomplete="off" name='children' value='0' class='qty' id="textcounter1"/>
+                                                                <input type='button' value='+' class='qtyplus1' field='children' id="btnplus1"/></div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+												</fieldset></h4></div></div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+												<fieldset>
+												  <legend style="color:#369FA1;"><b>STAY REQUIREMENTS:</b></legend>
+												
+												  <div class="form">
+												  <div class="row">
+												  <div class="col-md-12">
+                                                  		
+															<div class="col-lg-2">
+															<p for="from" >
+																No. of Rooms
+                                                            </p>
+															 </div>
+															<div class="col-lg-2">
+															</label>Single</label>
+															<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
+															 </div>
+															 <div class="col-lg-2">
+															</label>Double</label>
+															<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
+															 </div>
+															 <div class="col-lg-2">
+															</label>Tripple</label>
+															<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
+															 </div>
+															 <div class="col-lg-2">
+															</label>Child with Bed</label>
+															<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
+															 </div>
+															  <div class="col-lg-2">
+															</label>Child without Bed</label>
+															<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
+															 </div>
 
-                                                    <div class="col-xs-12 col-sm-6 col-xs-12 mt">
+													</div>
+													</div>
+													<div class="row">
+													<div class="col-md-12">
+													<div class="col-md-4">
                                                         <div class="input-field">
                                                             <label for="from">
-																Adults
+																Hotel Rating
 															</label>
-                                                            <div> <input type='button' value='-' class='qtyminus' field='adult' />
-                                                                <input type='text' autocomplete="off" name='adult' value='1' class='qty' />
-                                                                <input type='button' value='+' class='qtyplus' field='adult' /></div>
-
+															
+															</div>
+															<div>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>
+															</div>
+                                                    </div>
+                                                   
+													<div class="col-md-4 ">
+                                                        <div class="input-field">
+                                                            <label for="from">Hotel Catrgory </label>
+                                                            <div>
+                                                                <input type='text' autocomplete="off" name='mob_no'  placeholder="mobile No"/>
+                                                               </div>
                                                         </div>
                                                     </div>
-
-                                                    <div class="col-xs-12 col-sm-6 col-xs-12 mt">
+													<div class="col-md-4 ">
                                                         <div class="input-field">
-                                                            <label for="from">Children below 6  </label>
-                                                            <div><input type='button' value='-' class='qtyminus1' field='children' />
-                                                                <input type='text' autocomplete="off" name='children' value='0' class='qty' />
-                                                                <input type='button' value='+' class='qtyplus1' field='children' /></div>
+                                                            <label for="from">Meal Plan </label>
+                                                            <div><input type='text' autocomplete="off" name='mob_no'  placeholder="Category"/></div>
                                                         </div>
                                                     </div>
 
                                                 </div>
+                                                </div>
+												<div class="row">
+												
+													<input type='text' autocomplete="off" name='mob_no'  placeholder="Category"/>
+												
+													</div>
+													</div>
 												 </fieldset>
                                                 <a class="gr" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                                                    General Requirements b</a>
+                                                    General Requirements</a>
                                             </h4>
                                         </div>
                                           
@@ -828,7 +917,7 @@ $(document).ready(function($){
 									<div class="panel panel-default">
 										<div class="panel-heading">
                                             <h4 class="panel-title">
-                                                <a class="gr" data-toggle="collapse" data-parent="#TransportAccordion" href="#TransportlR">General Requirements c</a>
+                                                <a class="gr" data-toggle="collapse" data-parent="#TransportAccordion" href="#TransportlR">General Requirements</a>
                                             </h4>
                                         </div>
 										<div id="TransportlR" class="panel-collapse collapse">
@@ -1080,84 +1169,35 @@ $(document).ready(function($){
         </div>
     </div>
 </div>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
 jQuery(document).ready(function () {
-
     	$('#tabtransport').click(function (e) {
     		$('.newdiv').remove();
 			$('.remove_field').remove();
     	});
         // This button will increment the value
-        $('.qtyplus').click(function (e) {
-            // Stop acting like a button
-            e.preventDefault();
-            // Get the field name
-            fieldName = $(this).attr('field');
-            // Get its current value
-            var currentVal = parseInt($('input[name=' + fieldName + ']').val());
-            // If is not undefined
-            if (!isNaN(currentVal)) {
-                // Increment
-                $('input[name=' + fieldName + ']').val(currentVal + 1);
-               
-            } else {
-                // Otherwise put a 0 there
-                $('input[name=' + fieldName + ']').val(1);
-                
-            }
+        $('#btnplus').click(function () {
+			 var counter = $('#textcounter').val();
+                    counter++ ;
+                    $('#textcounter').val(counter);
         });
-        // This button will decrement the value till 0
-        $(".qtyminus").click(function (e) {
-            // Stop acting like a button
-            e.preventDefault();
-            // Get the field name
-            fieldName = $(this).attr('field');
-            // Get its current value
-            var currentVal = parseInt($('input[name=' + fieldName + ']').val());
-            // If it isn't undefined or its greater than 0
-            if (!isNaN(currentVal) && currentVal > 1) {
-                // Decrement one
-                $('input[name=' + fieldName + ']').val(currentVal - 1);
-            } else {
-                // Otherwise put a 0 there
-                $('input[name=' + fieldName + ']').val(1);
-            }
+		$('#btnminus').click(function () {
+			 var counter = $('#textcounter').val();
+                    counter-- ;
+                    $('#textcounter').val(counter);
         });
-        $('.qtyplus1').click(function (e) {
-            // Stop acting like a button
-            e.preventDefault();
-            // Get the field name
-            fieldName = $(this).attr('field');
-            // Get its current value
-            var currentVal = parseInt($('input[name=' + fieldName + ']').val());
-            // If is not undefined
-            if (!isNaN(currentVal)) {
-                // Increment
-                $('input[name=' + fieldName + ']').val(currentVal + 1);
-            } else {
-                // Otherwise put a 0 there
-                $('input[name=' + fieldName + ']').val(0);
-            }
+		 $('#btnplus1').click(function () {
+			 var counter1 = $('#textcounter1').val();
+                    counter1++ ;
+                    $('#textcounter1').val(counter1);
         });
-        // This button will decrement the value till 0
-        $(".qtyminus1").click(function (e) {
-            // Stop acting like a button
-            e.preventDefault();
-            // Get the field name
-            fieldName = $(this).attr('field');
-            // Get its current value
-            var currentVal = parseInt($('input[name=' + fieldName + ']').val());
-            // If it isn't undefined or its greater than 0
-            if (!isNaN(currentVal) && currentVal > 0) {
-                // Decrement one
-                $('input[name=' + fieldName + ']').val(currentVal - 1);
-               
-            } else {
-                // Otherwise put a 0 there
-                $('input[name=' + fieldName + ']').val(0);
-               	
-            }
+		$('#btnminus1').click(function () {
+			 var counter1 = $('#textcounter1').val();
+                    counter1-- ;
+                    $('#textcounter1').val(counter1);
         });
+           
     });
 
 </script>

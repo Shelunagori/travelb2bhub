@@ -1479,7 +1479,7 @@ $resultt = $stmt ->fetch('assoc');
 	$final_res_array[$row['id']]  = $resultt;
 }
 	$this->set('finalresponse', $final_res_array);
-// print_r($requests);die();
+//pr($requests);die();
 $this->set('requests', $requests);
 $myRequestCount = $myReponseCount = 0;
 $myfinalCount  = 0;
@@ -2579,6 +2579,7 @@ $conditions["Responses.status"] = 1;
 $responses = $this->Responses->find()
 ->contain(["Requests.Users", "Requests"])
 ->where($conditions)->order($sort)->all();
+//pr($responses); EXIT;
 $this->set('responses', $responses);
 //pr($responses);exit;
 $allCities = $this->Cities->find('list',['keyField' => 'id', 'valueField' => 'name'])
