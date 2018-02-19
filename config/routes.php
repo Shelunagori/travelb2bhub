@@ -166,17 +166,25 @@ Router::scope('/', function (RouteBuilder $routes) {
 						   'add' => [
 							   'action' => 'add',
 							   'method' => 'POST'
-						   ]
+						   ],
+						   'likeTaxiFleetPromotions' => [
+							   'action' => 'likeTaxiFleetPromotions',
+							   'method' => 'POST'
+						   ],
 					   ]
 					]
-				);
+				); 
 				$routes->resources(
 					'EventPlannerPromotions', [
 					   'map' => [
 						   'add' => [
 							   'action' => 'add',
 							   'method' => 'POST'
-						   ]
+						   ],
+						   'likeEventPlannerPromotions' => [
+							   'action' => 'likeEventPlannerPromotions',
+							   'method' => 'POST'
+						   ],
 					   ]
 					]
 				);

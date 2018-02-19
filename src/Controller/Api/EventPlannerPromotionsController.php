@@ -104,4 +104,36 @@ class EventPlannerPromotionsController extends AppController
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);		
     }
+
+	public function likeEventPlannerPromotions()
+	{
+        $likeEventPlannerPromotions = $this->EventPlannerPromotions->EventPlannerPromotionLikes->newEntity();
+        if ($this->request->is('post')) {
+           
+			$likeEventPlannerPromotions = $this->EventPlannerPromotions->EventPlannerPromotionLikes->patchEntity($likeEventPlannerPromotions, $this->request->data);		
+			
+			$exists = $this->EventPlannerPromotions->EventPlannerPromotionLikes->exists(['event_planner_promotion_id'=>$likeEventPlannerPromotions->event_planner_promotion_id,'user_id'=>$likeEventPlannerPromotions->user_id]);
+			
+			if($exists == 0)
+			{
+				if ($this->EventPlannerPromotions->EventPlannerPromotionLikes->save($likeEventPlannerPromotions)) {
+					$message = 'Liked successfully';
+					$response_code = 200;
+				}else{
+					$message = 'Like not saved';
+					$response_code = 204;				
+				}				
+			}
+			else
+			{
+					$message = 'Already Liked';
+					$response_code = 205;					
+			}	
+
+		}
+		$this->set(compact('message','response_code'));
+        $this->set('_serialize', ['message','response_code']);		
+	}
+
+	
 }

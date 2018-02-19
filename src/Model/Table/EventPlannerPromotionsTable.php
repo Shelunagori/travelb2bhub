@@ -55,6 +55,9 @@ class EventPlannerPromotionsTable extends Table
         $this->hasMany('EventPlannerPromotionCities', [
             'foreignKey' => 'event_planner_promotion_id'
         ]);
+        $this->hasMany('EventPlannerPromotionLikes', [
+            'foreignKey' => 'event_planner_promotion_id'
+        ]);		
         $this->hasMany('EventPlannerPromotionStates', [
             'foreignKey' => 'event_planner_promotion_id'
         ]);

@@ -111,16 +111,16 @@ class TaxiFleetPromotionsController extends AppController
 
 	public function likeTaxiFleetPromotions()
 	{
-        $likePostTravelPackages = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->newEntity();
+        $likeTaxiFleetPromotions = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->newEntity();
         if ($this->request->is('post')) {
            
-			$likePostTravelPackages = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->patchEntity($likePostTravelPackages, $this->request->data);		
+			$likeTaxiFleetPromotions = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->patchEntity($likeTaxiFleetPromotions, $this->request->data);		
 			
-			$exists = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->exists(['taxi_fleet_promotion_id'=>$likePostTravelPackages->taxi_fleet_promotion_id,'user_id'=>$likePostTravelPackages->user_id]);
+			$exists = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->exists(['taxi_fleet_promotion_id'=>$likeTaxiFleetPromotions->taxi_fleet_promotion_id,'user_id'=>$likeTaxiFleetPromotions->user_id]);
 			
 			if($exists == 0)
 			{
-				if ($this->TaxiFleetPromotions->TaxiFleetPromotionLikes->save($likePostTravelPackages)) {
+				if ($this->TaxiFleetPromotions->TaxiFleetPromotionLikes->save($likeTaxiFleetPromotions)) {
 					$message = 'Liked successfully';
 					$response_code = 200;
 				}else{
