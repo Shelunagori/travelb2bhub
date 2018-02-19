@@ -114,6 +114,25 @@ class PostTravlePackagesController extends AppController
         $this->set('_serialize', ['message','response_code']);
     }
 
+	public function getTravelPackages()
+	{
+		$getTravelPackages = $this->PostTravlePackages->find()->where(['valid_date >=' =>date('Y-m-d')]);
+		//pr($getTravelPackages->toArray()); exit;
+		if(!empty($getTravelPackages->toArray()))
+		{
+			$message = 'List Found Successfully';
+			$response_code = 200;
+		}
+		else
+		{
+			$message = 'No Content Found';
+			$getTravelPackages = [];
+			$response_code = 204;			
+		}
+		
+		$this->set(compact('getTravelPackages','message','response_code'));
+        $this->set('_serialize', ['getTravelPackages','message','response_code']);		
+	}
 
-
+	
 }

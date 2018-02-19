@@ -184,15 +184,19 @@ Router::scope('/', function (RouteBuilder $routes) {
 				$routes->resources(
 					'PostTravlePackages', [
 					   'map' => [
+						   'getTravelPackages' => [
+							   'action' => 'getTravelPackages',
+							   'method' => 'GET'
+						   ],
 						   'add' => [
 							   'action' => 'add',
 							   'method' => 'POST'
-						   ]
+						   ]					   
 					   ]
 					]
 				);
-				
-	});				
+					
+});				
 
 
 
