@@ -1,21 +1,23 @@
+<style>
+li { list-style: none;}
+</style>
+
 <?php use Cake\Datasource\ConnectionManager; 
 $conn = ConnectionManager::get('default');
 $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);
-
-
-                                 $countchat = count($allunreadchat);
-                                 if($countchat > 0) {
-                                foreach($allunreadchat as $allchat) {
-										if($allchat['notification']==1) { 
-										if(strpos($allchat['message'],"accepted")){
+$countchat = count($allunreadchat);
+if($countchat > 0) {
+foreach($allunreadchat as $allchat) {
+if($allchat['notification']==1) { 
+if(strpos($allchat['message'],"accepted")){
 $req_id = $allchat['request_id'];
-		$sql = "SELECT re.id,rs.id as responseid FROM requests as re inner join `responses` as rs on rs.request_id=re.id 
-		where re.id='".$req_id."' and re.status=2";
-		$stmt = $conn->execute($sql);
-			$results = $stmt ->fetch('assoc');
+	$sql = "SELECT re.id,rs.id as responseid FROM requests as re inner join `responses` as rs on rs.request_id=re.id 
+	where re.id='".$req_id."' and re.status=2";
+$stmt = $conn->execute($sql);
+$results = $stmt ->fetch('assoc');
 $res_userid = 	$allchat['user_id'].'-'.$req_id;
 ?>
- <li>
+<li>
 <a data-target="#myModal1review<?php echo $allchat['id']; ?>" 
 href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $res_userid)) ?>"
                        data-toggle="modal"
@@ -78,31 +80,75 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 		  </div>
 	</div>
 	<?php  } }} else { ?>
-                                        
-                                        <?php } ?>
-                                
+<?php } ?>
+  		
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 right-panel pro-top">
 			<div class="row">
-			 <div class="col-lg-3 col-xs-6">
-			  <!-- small box -->
-			  <div class="small-box bg-red">
-				<div class="inner">
-					<table width="100%">
-						<tr>
-							<td rowspan="2">&nbsp;	<br>
-							<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:30px')); ?></td>
-							<th>Place Request</th>
-						</tr>
-						<tr>
-							<td>25</td>
-						</tr>
-					</table>		
-					&nbsp;	
- 				</div>
- 				<a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-			  </div>
+			<div class="col-lg-3 col-xs-6">
+				<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
+				  <!-- small box -->
+				  <div class="small-box bg-red">
+					<div class="inner">
+						<table width="100%" border="0" height="90px">
+							<tr>
+								<td rowspan="2" width="40%">&nbsp;	<br>
+									<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:40px;width:50px')); ?>
+								</td>
+								<td  align="left" style="padding-top:20px; font-size:16px">
+									Place Request
+								</td>
+							</tr>
+							<tr>
+								<td align="left" style="font-size:17px"><?php echo ($reqcount['value']-$myRequestCount); ?></td>
+							</tr>
+						</table>		
+						 
+					</div>
+				  </div>
+				  <div class="small-box bg-white">
+					  <span>Click here to fill your Requirement for Travel Package, Hotel or Transportation. <span> 
+ 					 <br>
+ 					 <br>
+					 <span>
+					<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:20px;width:25px;')); ?>
+					Place Request
+					</span>
+				  </div>
+				</li>
 			</div>
 			<!-- ./col -->
+			<div class="col-lg-3 col-xs-6">
+				<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
+				  <!-- small box -->
+				  <div class="small-box bg-yellow">
+					<div class="inner">
+						<table width="100%" border="0" height="90px">
+							<tr>
+								<td rowspan="2" width="40%">&nbsp;	<br>
+									<?php echo $this->Html->image('white-my-request-icon.png',array('style'=>'height:40px;width:50px')); ?>
+								</td>
+								<td  align="left" style="padding-top:20px; font-size:16px">
+									My Request
+								</td>
+							</tr>
+							<tr>
+								<td align="left" style="font-size:17px"><?php echo $myRequestCount; ?></td>
+							</tr>
+						</table>		
+						 
+					</div>
+				  </div>
+				  <div class="small-box bg-white">
+					<span>Click here to view the list of all currently Open requests placed by you. <span> 
+					<br>
+					<br>
+					<span>
+					 
+					My Request
+					</span>
+				  </div>
+				</li>
+			</div>
 			<div class="col-lg-3 col-xs-6">
 			  <!-- small box -->
 			  <div class="small-box bg-yellow">
@@ -110,7 +156,7 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 					<table width="100%">
 						<tr>
 							<td rowspan="2">&nbsp;	<br>
-							<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:30px')); ?></td>
+							<?php echo $this->Html->image('white-my-request-icon.png',array('style'=>'height:30px')); ?></td>
 							<th>My Request</th>
 						</tr>
 						<tr>
@@ -129,7 +175,7 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 					<table width="100%">
 						<tr>
 							<td rowspan="2">&nbsp;	<br>
-							<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:30px')); ?></td>
+							<?php echo $this->Html->image('white-back-icon.png',array('style'=>'height:30px')); ?></td>
 							<th>Respond to Request</th>
 						</tr>
 						<tr>
@@ -148,7 +194,7 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 					<table width="100%">
 						<tr>
 							<td rowspan="2">&nbsp;	<br>
-							<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:30px')); ?></td>
+							<?php echo $this->Html->image('white-my-resposes-head.png',array('style'=>'height:30px')); ?> </td>
 							<th>My Responses</th>
 						</tr>
 						<tr>

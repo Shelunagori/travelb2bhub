@@ -14,8 +14,9 @@
 	<?php echo $this->Html->css('/assets/plugins/bootstrap-editable/css/bootstrap-editable.css'); ?>
 	<?php echo $this->Html->css('/assets/dist/css/AdminLTE.min.css'); ?>
 	<?php echo $this->Html->css('/assets/dist/css/skins/_all-skins.min.css'); ?>
-<?php //echo $this->Html->css('/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>
-<?php echo $this->Html->css('/assets/plugins/WYSIWYG/editor.css'); ?>
+	<?php //echo $this->Html->css('/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>
+	<?php echo $this->Html->css('/assets/plugins/WYSIWYG/editor.css'); ?>
+	<?php echo $this->Html->css('/assets/demo-styles.css'); ?> 
 	<?php
 	echo $this->Html->meta(
     'favicon.ico',
