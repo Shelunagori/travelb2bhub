@@ -192,6 +192,10 @@ Router::scope('/', function (RouteBuilder $routes) {
 							   'action' => 'getTravelPackageDetails',
 							   'method' => 'GET'
 						   ],
+						   'likePostTravelPackages' => [
+							   'action' => 'likePostTravelPackages',
+							   'method' => 'POST'
+						   ],
 						   'add' => [
 							   'action' => 'add',
 							   'method' => 'POST'

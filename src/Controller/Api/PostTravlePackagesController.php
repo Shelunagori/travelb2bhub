@@ -157,6 +157,38 @@ class PostTravlePackagesController extends AppController
         $this->set('_serialize', ['getTravelPackageDetails','message','response_code']);		
 	}
 	
+	public function likePostTravelPackages()
+	{
+        $likePostTravelPackages = $this->PostTravlePackages->PostTravlePackageLikes->newEntity();
+        if ($this->request->is('post')) {
+           
+			$likePostTravelPackages = $this->PostTravlePackages->PostTravlePackageLikes->patchEntity($likePostTravelPackages, $this->request->data);		
+			
+			$exists = $this->PostTravlePackages->PostTravlePackageLikes->exists(['post_travle_package_id'=>$likePostTravelPackages->post_travle_package_id,'user_id'=>$likePostTravelPackages->user_id]);
+			
+			if($exists == 0)
+			{
+				if ($this->PostTravlePackages->PostTravlePackageLikes->save($likePostTravelPackages)) {
+					$message = 'Liked successfully';
+					$response_code = 200;
+				}else{
+					$message = 'Like not saved';
+					$response_code = 204;				
+				}				
+			}
+			else
+			{
+					$message = 'Already Liked';
+					$response_code = 205;					
+			}	
+
+		}
+		$this->set(compact('message','response_code'));
+        $this->set('_serialize', ['message','response_code']);		
+	}	
+	
+	
+	
 
 	
 }

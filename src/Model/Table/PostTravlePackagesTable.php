@@ -64,6 +64,9 @@ class PostTravlePackagesTable extends Table
         $this->hasMany('PostTravlePackageRows', [
             'foreignKey' => 'post_travle_package_id'
         ]);
+        $this->hasMany('PostTravlePackageLikes', [
+            'foreignKey' => 'post_travle_package_id'
+        ]);
         $this->hasMany('PostTravlePackageStates', [
             'foreignKey' => 'post_travle_package_id'
         ]);
