@@ -105,16 +105,16 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 			<!-- ./col -->
 			<div class="col-lg-3 col-xs-6">
 			  <!-- small box -->
-			  <div class="small-box bg-red">
+			  <div class="small-box bg-yellow">
 				<div class="inner">
 					<table width="100%">
 						<tr>
 							<td rowspan="2">&nbsp;	<br>
 							<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:30px')); ?></td>
-							<th>Place Request</th>
+							<th>My Request</th>
 						</tr>
 						<tr>
-							<td>25</td>
+							<td><?php echo $myRequestCount; ?></td>
 						</tr>
 					</table>		
 					&nbsp;	
@@ -124,16 +124,16 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 			</div>
 			<div class="col-lg-3 col-xs-6">
 			  <!-- small box -->
-			  <div class="small-box bg-red">
+			  <div class="small-box bg-green">
 				<div class="inner">
 					<table width="100%">
 						<tr>
 							<td rowspan="2">&nbsp;	<br>
 							<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:30px')); ?></td>
-							<th>Place Request</th>
+							<th>Respond to Request</th>
 						</tr>
 						<tr>
-							<td>25</td>
+							<td><?php echo $respondToRequestCount; ?></td>
 						</tr>
 					</table>		
 					&nbsp;	
@@ -143,16 +143,16 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 			</div>
 			<div class="col-lg-3 col-xs-6">
 			  <!-- small box -->
-			  <div class="small-box bg-red">
+			  <div class="small-box bg-blue">
 				<div class="inner">
 					<table width="100%">
 						<tr>
 							<td rowspan="2">&nbsp;	<br>
 							<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:30px')); ?></td>
-							<th>Place Request</th>
+							<th>My Responses</th>
 						</tr>
 						<tr>
-							<td>25</td>
+							<td><?php echo $myReponseCount; ?></td>
 						</tr>
 					</table>		
 					&nbsp;	

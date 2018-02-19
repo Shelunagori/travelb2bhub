@@ -814,6 +814,7 @@ $this->loadModel('Responses');
 $this->loadModel('RequestStops');
 $this->loadModel('Hotels');
 $this->loadModel('User_Chats');
+$this->viewBuilder()->layout('user_layout');
 $user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
 //print_r($user);
 $this->set('users', $user);
