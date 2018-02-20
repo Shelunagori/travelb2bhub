@@ -79,7 +79,7 @@ class ResponsesTable extends Table
             ->requirePresence('comment', 'create')
             ->notEmpty('comment');
 
-        $validator
+    /*   $validator
             ->decimal('quotation_price')
             ->allowEmpty('quotation_price');
 
@@ -97,7 +97,7 @@ class ResponsesTable extends Table
             ->boolean('is_deleted')
             ->requirePresence('is_deleted', 'create')
             ->notEmpty('is_deleted');
-
+		*/
         return $validator;
     }
 

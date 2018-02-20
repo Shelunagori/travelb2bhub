@@ -660,7 +660,7 @@ $myReponseCount = $queryr->count();
 $this->set('myReponseCount', $myReponseCount);
 $usercity = $this->Users->find()->select(['city_id'])->where(['id' => $this->Auth->user('id')])->first();
 $cityid =  $usercity['city_id'];
-$advertisement1 = $this->Promotion->find()->where(['expiry_date >' => $current_date,'FIND_IN_SET(\''.  $cityid .'\',cities)'])->all();
+$advertisement1 = $this->Promotion->find()->where(['expiry_date >' => $current_date])->all();
 $this->set('advertisement1',$advertisement1);
 $this->set("hotelCategories", $this->_getHotelCategoriesArray1());
 $testimonials = $this->Testimonial->find()->where(['user_id'=> $this->Auth->user('id')])->all();
@@ -693,6 +693,7 @@ $this->loadModel('States');
 $this->loadModel('Cities');
 $this->loadModel('Requests');
 $this->loadModel('Responses');
+$this->viewBuilder()->layout('user_layout');
 $user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
 $this->set('users', $user);
 if(!empty($user)) {
@@ -757,6 +758,17 @@ $chatCount = $allUnreadChat->count();
 $this->set('chatCount',$chatCount); 
 $this->set('allunreadchat',$allUnreadChat);
 }
+
+
+public function ajaxCity()
+    {
+		echo $name=$this->request->data['input'];
+		 exit;  
+     }
+
+
+
+
 public function changePassword() {
 $this->loadModel('Requests');
 $this->loadModel('Responses');

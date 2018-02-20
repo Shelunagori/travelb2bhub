@@ -166,16 +166,40 @@ Router::scope('/', function (RouteBuilder $routes) {
 						   'add' => [
 							   'action' => 'add',
 							   'method' => 'POST'
+						   ],
+						   'likeTaxiFleetPromotions' => [
+							   'action' => 'likeTaxiFleetPromotions',
+							   'method' => 'POST'
+						   ],
+						   'getTaxiFleetPromotions' => [
+							   'action' => 'getTaxiFleetPromotions',
+							   'method' => 'GET'
+						   ],
+						   'getTaxiFleetPromotionsDetails' => [
+							   'action' => 'getTaxiFleetPromotionsDetails',
+							   'method' => 'GET'
 						   ]
 					   ]
 					]
-				);
+				); 
 				$routes->resources(
 					'EventPlannerPromotions', [
 					   'map' => [
 						   'add' => [
 							   'action' => 'add',
 							   'method' => 'POST'
+						   ],
+						   'likeEventPlannerPromotions' => [
+							   'action' => 'likeEventPlannerPromotions',
+							   'method' => 'POST'
+						   ],
+						   'getEventPlanners' => [
+							   'action' => 'getEventPlanners',
+							   'method' => 'GET'
+						   ],
+						   'getEventPlannersDetails' => [
+							   'action' => 'getEventPlannersDetails',
+							   'method' => 'GET'
 						   ]
 					   ]
 					]
