@@ -108,7 +108,8 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 	<?php 
 	if($lastword=="dashboard"  ) {
 		?>
-		<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7 padding0 right-panel pro-top">
+		<div class="col-md-12">
+		<div class="col-md-7">
 			<div class="row">
 			<?php 
 			if($users['role_id'] == 1 || $users['role_id'] == 3)
@@ -149,7 +150,7 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 				</a>
 				</div>
 				<!-- ./col -->
-				<div class="col-md-6 col-xs-6">
+				<div class="col-md-6">
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>">
 					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
 					  <!-- small box -->
@@ -189,7 +190,7 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 			?>
 		
 				<!-- COls -->
-				<div class="col-md-6 col-xs-6">
+				<div class="col-md-6">
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>">
 					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
 					  <!-- small box -->
@@ -223,7 +224,7 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 				</a>
 				</div>
 				<!---COls--->
-				<div class="col-md-6 col-xs-6">
+				<div class="col-md-6">
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'myresponselist')) ?>">
 					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
 					  <!-- small box -->
@@ -260,86 +261,86 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 	  </div>
 	</div>
 	<div class="col-md-5">
-		<div class="row">
-			<?php if( count($testimonial) > 0) {
-				?>
-				<div class="col-md-12" style="background-color:#FFF">
-					<p style="font-size:20px;padding-top:10px">Reviews</p>
-					<hr></hr>
-					<div class="">
-					
-						<div class="carousel-reviews broun-block">
-							<div id="carousel-reviews" class="carousel slide carousel1" data-ride="carousel">
-								<div class="carousel-inner">
-								<?php
-								$x=1;
-								foreach($testimonial as $testimo){
-								?>
-									<div class="item <?php if($x==1){ echo 'active'; } ?>">
-										<?php
-										$k =1;
-										//foreach($testimon as $testimo){
-										?>
-										<div class="">
-											<div class="review-block">
-												<div class="">
-													<div class="block-text">
-														<p> <?php echo $testimo['comment']; ?> </p>
-													</div>
-													 
+		<?php if( count($testimonial) > 0) {
+			?>
+			<div class="col-md-12" style="background-color:#FFF">
+				<p style="font-size:20px;padding-top:10px">Reviews</p>
+				<hr></hr>
+				<div class="">
+				
+					<div class="carousel-reviews broun-block">
+						<div id="carousel-reviews" class="carousel slide carousel1" data-ride="carousel">
+							<div class="carousel-inner">
+							<?php
+							$x=1;
+							foreach($testimonial as $testimo){
+							?>
+								<div class="item <?php if($x==1){ echo 'active'; } ?>">
+									<?php
+									$k =1;
+									//foreach($testimon as $testimo){
+									?>
+									<div class="">
+										<div class="review-block">
+											<div class="">
+												<div class="block-text">
+													<p> <?php echo $testimo['comment']; ?> </p>
 												</div>
-												<div class="col-lg-3 col-md-3 col-sm-5 col-xs-4 person-img" style="padding-top:5px">
-													<?php
+												 
+											</div>
+											<div class="col-md-3 col-sm-2 col-xs-2 person-img" style="padding-top:5px">
+												<?php
 
-														if($testimo["profile_pic"]==""){
-															echo $this->Html->image('no-profile-image.jpg', ["class"=>"img-responsive center_img","alt"=>"Profile Pic","style"=>"border-radius: 50px;height:50px"]); 
-														}
-														else{
-															echo $this->Html->image('user_docs/'.$testimo["author_id"].'/'.$testimo["profile_pic"], ["class"=>"img-responsive center_img","alt"=>"Profile Pic","style"=>"border-radius: 50px;height:50px"]);
-														}
-													?>
-													<br>
-												</div>
-												<div class="col-lg-9 col-md-9 col-sm-7 col-xs-8 person-info">
-													<h4><?php echo $testimo['name']; ?></h4>
-													<div class="rating">
-														<?php
-														$userRating =  $testimo['rating1'];
-														//echo $userRating;
-														if($userRating>0){
-															for($i=$userRating; $i>0; $i--){
-																echo '<i class="fa fa-star"></i>';
-															}
-														}
-														else {
+													if($testimo["profile_pic"]==""){
+														echo $this->Html->image('no-profile-image.jpg', ["class"=>"img-responsive center_img","alt"=>"Profile Pic","style"=>"border-radius: 50%;height:50px"]); 
+													}
+													else{
+														echo $this->Html->image('user_docs/'.$testimo["author_id"].'/'.$testimo["profile_pic"], ["class"=>"img-responsive center_img","alt"=>"Profile Pic","style"=>"border-radius: 50%;height:50px"]);
+													}
+												?>
+												<br>
+											</div>
+											<div class="col-md-9 person-info">
+												<h4><?php echo $testimo['name']; ?></h4>
+												<div class="rating">
+													<?php
+													$userRating =  $testimo['rating1'];
+													//echo $userRating;
+													if($userRating>0){
+														for($i=$userRating; $i>0; $i--){
 															echo '<i class="fa fa-star"></i>';
 														}
-														?>
-													</div>
+													}
+													else {
+														echo '<i class="fa fa-star"></i>';
+													}
+													?>
 												</div>
 											</div>
 										</div>
-									<?php //$k++;} ?>
 									</div>
-								<?php $x++;} ?>
-
+								<?php //$k++;} ?>
 								</div>
-								<?php if(count($testimonial)>2){?>
-									<div class="">
-										<a class="left carousel-control" href="#carousel-reviews" role="button" data-slide="prev">   
-											<i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
-										</a>
-										<a class="right carousel-control" href="#carousel-reviews" role="button" data-slide="next">
-											<i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
-										</a>
-									</div>
-								<?php }?>
+							<?php $x++;} ?>
+
 							</div>
+							<?php if(count($testimonial)>2){?>
+								<div class="">
+									<a class="left carousel-control" href="#carousel-reviews" role="button" data-slide="prev">   
+										<i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
+									</a>
+									<a class="right carousel-control" href="#carousel-reviews" role="button" data-slide="next">
+										<i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
+									</a>
+								</div>
+							<?php }?>
 						</div>
 					</div>
 				</div>
-			<?php } ?>
-		</div>
+			</div>
+		<?php } ?>
+	</div>
+ 	 
 	</div>
 			
 	<?php
@@ -347,7 +348,7 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 	else 
 	{ 
 		?>
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 right-panel pro-top">
+		<div class="col-md-12">
 			<div class="row">
 			<?php if($users['role_id'] == 1 || $users['role_id'] == 3) { 
 			?>
