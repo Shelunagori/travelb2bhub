@@ -575,16 +575,15 @@
 
 $(document).ready(function(){
 			$(".btnSubmit").click(function(){
+				var city=$("#city-search-box").val();
+				if(city !=""){ 
+					$("#loader-1").show();
+				}
+			});
+		$("#city-search-box").keyup(function(){
 						 
-						var city=$("#city-search-box").val();
- 						if(city !=""){ 
-							$("#loader-1").show();
-						}
-					});
-					$("#city-search-box").keyup(function(){
-						 
-						var input=$("#city-search-box").val();
-						 
+		var input=$("#city-search-box").val();
+		alert(input);
  		var m_data = new FormData();
 		m_data.append('input',input);
 			
@@ -612,6 +611,7 @@ $(document).ready(function(){
 							}
 						}); */
 					});
+		});
 		});
 </script>
 
