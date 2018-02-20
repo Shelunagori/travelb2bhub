@@ -139,17 +139,16 @@ hr { margin-top:0px!important;}
 </div>
 <script>
 function countfunc(web,id){
-
- $.ajax({
-                url: '/users/promotioncounts/' + id,
-                cache: false,
-                type: 'GET',
-                dataType: 'HTML',
-                success: function () {
-                  //location.href=web;
-                  // window.open(web, '_blank');
-                }
-            });
+  $.ajax({
+	url: '/users/promotioncounts/' + id,
+	cache: false,
+	type: 'GET',
+	dataType: 'HTML',
+	success: function () {
+	  //location.href=web;
+	  // window.open(web, '_blank');
+	}
+});
 }
 $(function() {
     $( "#element", this ).click(function( event ) {
