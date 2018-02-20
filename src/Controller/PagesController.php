@@ -12,11 +12,8 @@ use Cake\Network\Email\Email;
 
 class PagesController extends AppController
 {
-<<<<<<< HEAD
-	public function beforeFilter(Event $event){
-=======
-	public function beforeFilter(Event $event) {
->>>>>>> 864667393e1535eadc5618d6739d777d6b49d473
+ 
+	public function beforeFilter(Event $event) { 
 		$this->loadModel('Users');
 		$this->loadModel('Contacts');
 		parent::beforeFilter($event);

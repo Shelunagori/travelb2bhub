@@ -14,8 +14,9 @@ use Cake\Network\Email\Email;
 /**
 * Users Controller
 *
-* @property \App\Model\Table\UsersTable $Users
+* @property \App\Model\Table\UsersTable $Users 
 */
+	
 class UsersController extends AppController {
 	var $helpers = array('Html', 'Form', 'Response');
 	public function beforeFilter(\Cake\Event\Event $event) {
@@ -36,7 +37,19 @@ class UsersController extends AppController {
 			$this->set('UnreadUserChats', $unreadChats);
 		}
 	}
-
+	public function initialize()
+	{
+		parent::initialize();
+		$this->Auth->allow(['logout']);
+		$first_name=$this->Auth->User('first_name');
+		$last_name=$this->Auth->User('last_name');
+		$profile_pic=$this->Auth->User('profile_pic');
+		$loginId=$this->Auth->User('id');
+		$authUserName=$first_name.' '.$last_name;
+		$this->set('MemberName',$authUserName);
+		$this->set('profilePic',$profile_pic);
+		$this->set('loginId',$loginId);
+	}
 	public function index() {
 		/*$this->paginate = [
 		'contain' => ['Users']
@@ -730,6 +743,8 @@ $myReponseCount = $queryr->count();
 $this->set('myReponseCount', $myReponseCount);
 $cities = $this->Cities->getAllCities();
 $states = $this->States->find()->where(['country_id' => '101'])->all();
+$states_show=$this->Users->States->find('list');
+$country_show=$this->Users->Countries->find('list');
 $allStates = array();
 foreach($states as $state){
 $allStates[$state["id"]] = $state['state_name'];
@@ -744,7 +759,7 @@ $allCityList[$city['id']] = str_replace("'", "", $city['name'].' ('.$city['state
 }
 }
 $allCities = json_encode($allCities);
-$this->set(compact('cities', 'states', 'countries', 'allCities', 'allStates', 'allCityList', 'userTravelCertificates'));
+$this->set(compact('states_show','country_show','cities', 'states', 'countries', 'allCities', 'allStates', 'allCityList', 'userTravelCertificates'));
 } else {
 $this->Flash->error(__('Please login to acces this location.'));
 $this->redirect('/pages/home');
@@ -762,11 +777,29 @@ $this->set('allunreadchat',$allUnreadChat);
 
 public function ajaxCity()
     {
-		echo $name=$this->request->data['input'];
+		$name=$this->request->data['input'];
+		$cities=$this->Users->Cities->find()->where(['Cities.name Like'=>'%'.$name.'%']);
+		?>
+		<ul id="country-list">
+			<?php foreach($cities as $show){ ?>
+				<li onClick="selectCountry('<?php echo $show->name; ?>','<?php echo $show->id; ?>','<?php echo $show->state_id; ?>');"><?php echo $show->name; ?></li>
+			<?php } ?>
+		</ul>
+		<?php
 		 exit;  
      }
 
-
+public function ajaxStateShow()
+    {
+		$state_id=$this->request->data['state_id'];
+		$states=$this->Users->States->find('list')->where(['States.id'=>$state_id]);
+		$statess=$this->Users->States->find()->where(['States.id'=>$state_id]);
+		foreach($statess as $st_show){
+			$country_id=$st_show->country_id;
+		}
+		$countries=$this->Users->Countries->find('list')->where(['Countries.id'=>$country_id]);
+		$this->set(compact('states','countries'));
+     }
 
 
 public function changePassword() {
@@ -3378,78 +3411,79 @@ $this->set("chatUserId", $chatUserId);
 $this->set("screen_id", $screenid);
 $this->render('/Element/user_chat');
 }
+
 public function addtestimonial($userId) {
 	date_default_timezone_set('Asia/Kolkata');
-error_reporting(0);
-$this->loadModel('Requests');
-$this->loadModel('Responses');
-$this->loadModel('Promotion');
-$this->loadModel('Testimonial');
-$this->loadModel('User_Chats');
-$explodeuserandreqid = explode('-',$userId);
-$reviewuserId = $explodeuserandreqid[0];
-$reqid = $explodeuserandreqid[1];
-$authoruserId = $this->Auth->user('id');
-$testimonialedit = $this->Testimonial->find()->where(['request_id' => $reqid, 'author_id'=>  $authoruserId,'user_id'=>$reviewuserId])->first();
-$allUnreadChat = $this->User_Chats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->all();
-$this->set('allunreadchat',$allUnreadChat);
-$user = $this->Users->find()
-->contain(["Credits"])
-->where(['Users.id' => $this->Auth->user('id')])->first();
-$this->set('users', $user);
-$this->set('userProfile', $user);
-$myRequestCount = $myReponseCount = 0;
-$myfinalCount  = 0;
-$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status "=>2]]);
-$myfinalCount = $query3 ->count();
-$this->set('myfinalCount', $myfinalCount );
-$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
-$myRequestCount = $query->count();
-$myRequestCount1 = $query->count(); 
-$delcount=0;
-$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
-foreach($requests as $req){
-$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
-if($rqueryr->count()!=0){
-$delcount++;
-}
-}
-if($myRequestCount > $delcount) {
-$myRequestCount = $myRequestCount-$delcount;
-}	
-$this->set('myRequestCountdel', $delcount);
-$this->set('myRequestCount', $myRequestCount1);
-$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.user_id' => $this->Auth->user('id')]]);
-$myReponseCount = $queryr->count();
-$this->set('myReponseCount', $myReponseCount);
-$userDetails = $this->Users->get($authoruserId);
-if ($this->request->is(['post', 'put'])) {
-if($this->request->data['testimonialid']!="0"){
-$tablename = TableRegistry::get("testimonial");
-$query = $tablename->query();
-$result = $query->update()
-->set(['author_id' => $this->request->data['author_id'],'request_id'=>$this->request->data['request_id'],'user_id'=>$this->request->data['user_id'],'rating'=>$this->request->data['rating'],'comment'=>$this->request->data['comment']])
-->where(['id' => $this->request->data['testimonialid']])
-->execute();
-return $this->redirect('/users/testimonialthanks');
-} else{
-$testimonialTable = TableRegistry::get('testimonial');
-$testimonial = $testimonialTable->newEntity();
-$testimonial->author_id = $this->request->data['author_id'];
-$testimonial->request_id = $this->request->data['request_id'];
-$testimonial->user_id = $this->request->data['user_id'];
-$testimonial->rating = $this->request->data['rating'];
-$testimonial->comment = $this->request->data['comment'];
-$testimonial->status =  '0';
-$testimonial->created_at = date("Y-m-d H:i:s");
-if ($testimonialTable->save($testimonial)) {
-$id = $testimonial->id;
-return $this->redirect('/users/testimonialthanks');
-}
-}
-}
-$this->set(compact("authoruserId","reviewuserId","reqid","userDetails","testimonialedit"));
-$this->render('/Users/add-testimonial');
+	error_reporting(0);
+	$this->loadModel('Requests');
+	$this->loadModel('Responses');
+	$this->loadModel('Promotion');
+	$this->loadModel('Testimonial');
+	$this->loadModel('User_Chats');
+	$explodeuserandreqid = explode('-',$userId);
+	$reviewuserId = $explodeuserandreqid[0];
+	$reqid = $explodeuserandreqid[1];
+	$authoruserId = $this->Auth->user('id');
+	$testimonialedit = $this->Testimonial->find()->where(['request_id' => $reqid, 'author_id'=>  $authoruserId,'user_id'=>$reviewuserId])->first();
+	$allUnreadChat = $this->User_Chats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->all();
+	$this->set('allunreadchat',$allUnreadChat);
+	$user = $this->Users->find()
+	->contain(["Credits"])
+	->where(['Users.id' => $this->Auth->user('id')])->first();
+	$this->set('users', $user);
+	$this->set('userProfile', $user);
+	$myRequestCount = $myReponseCount = 0;
+	$myfinalCount  = 0;
+	$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status "=>2]]);
+	$myfinalCount = $query3 ->count();
+	$this->set('myfinalCount', $myfinalCount );
+	$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
+	$myRequestCount = $query->count();
+	$myRequestCount1 = $query->count(); 
+	$delcount=0;
+	$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
+	foreach($requests as $req){
+	$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
+	if($rqueryr->count()!=0){
+	$delcount++;
+	}
+	}
+	if($myRequestCount > $delcount) {
+	$myRequestCount = $myRequestCount-$delcount;
+	}	
+	$this->set('myRequestCountdel', $delcount);
+	$this->set('myRequestCount', $myRequestCount1);
+	$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.user_id' => $this->Auth->user('id')]]);
+	$myReponseCount = $queryr->count();
+	$this->set('myReponseCount', $myReponseCount);
+	$userDetails = $this->Users->get($authoruserId);
+	if ($this->request->is(['post', 'put'])) {
+	if($this->request->data['testimonialid']!="0"){
+	$tablename = TableRegistry::get("testimonial");
+	$query = $tablename->query();
+	$result = $query->update()
+	->set(['author_id' => $this->request->data['author_id'],'request_id'=>$this->request->data['request_id'],'user_id'=>$this->request->data['user_id'],'rating'=>$this->request->data['rating'],'comment'=>$this->request->data['comment']])
+	->where(['id' => $this->request->data['testimonialid']])
+	->execute();
+	return $this->redirect('/users/testimonialthanks');
+	} else{
+	$testimonialTable = TableRegistry::get('testimonial');
+	$testimonial = $testimonialTable->newEntity();
+	$testimonial->author_id = $this->request->data['author_id'];
+	$testimonial->request_id = $this->request->data['request_id'];
+	$testimonial->user_id = $this->request->data['user_id'];
+	$testimonial->rating = $this->request->data['rating'];
+	$testimonial->comment = $this->request->data['comment'];
+	$testimonial->status =  '0';
+	$testimonial->created_at = date("Y-m-d H:i:s");
+	if ($testimonialTable->save($testimonial)) {
+	$id = $testimonial->id;
+	return $this->redirect('/users/testimonialthanks');
+	}
+	}
+	}
+	$this->set(compact("authoruserId","reviewuserId","reqid","userDetails","testimonialedit"));
+	$this->render('/Users/add-testimonial');
 }
 public function promotioncounts($id) {
 $this->loadModel('Promotion');

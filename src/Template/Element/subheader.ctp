@@ -45,90 +45,8 @@ hr { margin-top:0px!important;}
 	color:#1295A2 !important;
 }
 </style>
-
-<?php use Cake\Datasource\ConnectionManager; 
-$conn = ConnectionManager::get('default');
+<?php 
 $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);
-$countchat = count($allunreadchat);
-if($countchat > 0) {
-foreach($allunreadchat as $allchat) {
-if($allchat['notification']==1) { 
-if(strpos($allchat['message'],"accepted")){
-$req_id = $allchat['request_id'];
-	$sql = "SELECT re.id,rs.id as responseid FROM requests as re inner join `responses` as rs on rs.request_id=re.id 
-	where re.id='".$req_id."' and re.status=2";
-$stmt = $conn->execute($sql);
-$results = $stmt ->fetch('assoc');
-$res_userid = 	$allchat['user_id'].'-'.$req_id;
-?>
-<li>
-<a data-target="#myModal1review<?php echo $allchat['id']; ?>" 
-href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $res_userid)) ?>"
-                       data-toggle="modal"
-                        class="chat_notification chat_message" ><?php echo $allchat['message']; ?></a>
-                                        </li> 
-<div class="modal fade" id="myModal1review<?php echo $allchat['id']; ?>" role="dialog">
-		<div class="modal-dialog">
-		  <!-- Modal content-->
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">Review</h4>
-			</div>
-			<div class="modal-body">
-			</div>
-		  </div>
-		</div>
-	</div>                         
-    <?php }else{ ?>
-                                <li>
-                       <a class="chat_notification" href="#"><?php echo $allchat['message']; ?></a>
-                                        </li>
-                                <?php } }else{?>
-                                
-													<li>
-						<?php
-														if($allchat['screen_id']==1)
-											  {
-												  $c=2;
-											 $res_text = "Please go to MY RESPONSES to view it.";
-											  }elseif($allchat['screen_id']==2)
-											  {
-												  $c=1;
-											  $res_text = "Please go to CHECK RESPONSES to view it.";
-											  }else{
-												  $c=0;
-											  $res_text = "";
-											  }
-														?>								
-                       <a data-toggle="modal" class="chat_message" data-target="#myModal<?php echo $allchat['request_id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $allchat['request_id'], $allchat["user_id"],$c)) ?>">
-                       <?php $userid = $allchat['user_id'];
-			$sql = "SELECT first_name,last_name FROM users	where id='".$userid."'";
-			$stmt = $conn->execute($sql);
-			$result = $stmt ->fetch('assoc');   
-			$name = $result['first_name'].' '.$result['last_name'];
-											  
-                        echo "You have received a CHAT MESSAGE from: <span class='rec_name'>$name</span>. $res_text"; ?></a>
-                                        </li>
-                                        <div class="modal fade" id="myModal<?php echo $allchat['request_id']; ?>" role="dialog">
-		<div class="modal-dialog">
-		<!-- Modal content-->
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">Chat</h4>
-			</div>
-			<div class="modal-body">
-			</div>
-		  </div>
-		  </div>
-	</div>
-	<?php  } }} else { ?>
-	<?php } ?>
-  		
-		   
-        
-	<?php 
 	if($lastword=="dashboard"  ) {
 		?>
 		<div class="">
@@ -200,8 +118,7 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 						<br>
 						<br>
 						<span>
-						 
-						My Request
+							My Request
 						</span>
 					  </div>
 					</li>
@@ -213,7 +130,7 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 			?>
 		
 				<!-- COls -->
-				<div class="col-md-6">
+				<div class="col-md-6" style="margin-top:10px">
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>">
 					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
 					  <!-- small box -->
@@ -247,7 +164,7 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 				</a>
 				</div>
 				<!---COls--->
-				<div class="col-md-6">
+				<div class="col-md-6" style="margin-top:10px">
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'myresponselist')) ?>">
 					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
 					  <!-- small box -->
@@ -317,7 +234,8 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 													if($testimo["profile_pic"]==""){
 														echo $this->Html->image('no-profile-image.jpg', ["class"=>"img-responsive center_img","alt"=>"Profile Pic","style"=>"border-radius: 50%;height:50px;    border: 1px solid #1295A2;"]); 
 													}
-													else{
+													else
+													{
 														echo $this->Html->image('user_docs/'.$testimo["author_id"].'/'.$testimo["profile_pic"], ["class"=>"img-responsive center_img","alt"=>"Profile Pic","style"=>"border-radius: 50%;height:50px;border: 1px solid #1295A2;"]);
 													}
 												?>

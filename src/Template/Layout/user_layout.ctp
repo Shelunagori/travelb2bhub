@@ -74,7 +74,9 @@ legend{
 span.select2 {
 	width :100% !important;
 }
- 
+.menu {
+	overflow-x:scroll !important;
+}
 </style>
 <style>
 
@@ -106,9 +108,32 @@ margin-top: 5px !important;
    }
 }
 .nav navbar-nav li {color:#848688 !important;}
-.user-panel {
+.skin-blue sidebar-mini.user-panel {
 	height: 160px !important;
 	
+}
+.user-panel img
+{
+	border-radius: 100%;
+	height:80px; 
+	border: 1px solid #1295A2;
+}
+.sidebar-collapse .user-panel img
+{
+	height:35px !important; 
+	border-radius: 100%;
+	border: 1px solid #1295A2 !important;
+} 
+.notify {
+  white-space: unset !important;
+}
+.slimScrollDiv
+{
+	height: 339px !important;	
+}
+.menu
+{
+	height: 339px !important;	
 }
 </style>
 </head>
@@ -120,9 +145,9 @@ margin-top: 5px !important;
 	 
     <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo">
       
-      <span class="logo-mini"><b>A</b>LT</span>
+      <span class="logo-mini"><?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:77%;']) ?></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><?=  $this->Html->image('/packages/serverfireteam/panel/img/logo.png', ['style'=>'width:49%;padding:5px;']) ?></span>
+      <span class="logo-lg"><?=  $this->Html->image('/img/main_logo.png', ['style'=>'width:94%;']) ?></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -133,44 +158,130 @@ margin-top: 5px !important;
 
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-         
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
+              <span class="label label-warning"><?php echo $countchat = count($allunreadchat); ?></span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
-              <li>
-                <!-- inner menu: contains the actual data -->
+			<li>
+			
                 <ul class="menu">
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-aqua"></i> 5 new members joined today
+				<?php use Cake\Datasource\ConnectionManager; 
+					$conn = ConnectionManager::get('default');
+					$lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);
+					if($countchat > 0) {
+						foreach($allunreadchat as $allchat) {
+							if($allchat['notification']==1) { 
+								if(strpos($allchat['message'],"accepted")){
+									$req_id = $allchat['request_id'];
+									$sql = "SELECT re.id,rs.id as responseid FROM requests as re inner join `responses` as rs on rs.request_id=re.id 
+									where re.id='".$req_id."' and re.status=2";
+									$stmt = $conn->execute($sql);
+									$results = $stmt ->fetch('assoc');
+									$res_userid = 	$allchat['user_id'].'-'.$req_id;
+									?>
+									<li>
+										<a class="notify" href="#">
+										  <i class="fa fa-book"></i> <?php echo $allchat['message']; ?>
+										</a>
+									</li>
+									<!--
+									<li>
+										<a data-target="#myModal1review<?php echo $allchat['id']; ?>" 
+									href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $res_userid)) ?>" data-toggle="modal" class="chat_notification chat_message" ><?php echo $allchat['message']; ?></a>
+									</li>
+									
+									<div class="modal fade" id="myModal1review<?php echo $allchat['id']; ?>" role="dialog">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h4 class="modal-title">Review</h4>
+												</div>
+												<div class="modal-body"></div>
+											</div>
+										</div>
+									</div> ---->                        
+								<?php 
+								}
+								else
+								{ ?>
+									<li>
+										<a class="notify" href="#">
+										  <i class="fa fa-book"></i> <?php echo $allchat['message']; ?>
+										</a>
+									</li>
+								 <?php 
+								} 
+							}
+							else 
+							{ ?>
+								<li>
+									<?php
+									if($allchat['screen_id']==1)
+									{
+										$c=2;
+										$res_text = "Please go to MY RESPONSES to view it.";
+									}
+									elseif($allchat['screen_id']==2)
+									{
+										$c=1;
+										$res_text = "Please go to CHECK RESPONSES to view it.";
+									}
+									else{
+										$c=0;
+										$res_text = "";
+									}
+									?>
+									 
+									<a class="notify" href="#">
+									<?php 
+									$userid = $allchat['user_id'];
+									$sql = "SELECT first_name,last_name FROM users	where id='".$userid."'";
+									$stmt = $conn->execute($sql);
+									$result = $stmt ->fetch('assoc');   
+									$name = $result['first_name'].' '.$result['last_name'];?>
+									  <i class="fa fa-book"></i> <?php echo "You have received a CHAT MESSAGE from: <span class='rec_name'>$name</span>. $res_text";  ?>
+									</a>
+									 
+									<!--<a data-toggle="modal" class="chat_message" data-target="#myModal<?php echo $allchat['request_id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $allchat['request_id'], $allchat["user_id"],$c)) ?>">
+									<?php 
+									$userid = $allchat['user_id'];
+									$sql = "SELECT first_name,last_name FROM users	where id='".$userid."'";
+									$stmt = $conn->execute($sql);
+									$result = $stmt ->fetch('assoc');   
+									$name = $result['first_name'].' '.$result['last_name'];
+
+									echo "You have received a CHAT MESSAGE from: <span class='rec_name'>$name</span>. $res_text"; ?></a>-->
+								</li>
+								<!--<div class="modal fade" id="myModal<?php echo $allchat['request_id']; ?>" role="dialog">
+									<div class="modal-dialog">
+									 
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">Chat</h4>
+											</div>
+											<div class="modal-body"></div>
+										</div>
+									</div>
+								</div>-->
+								<?php  
+							} 
+						}
+					} 
+					else { 
+					?>
+					<li>
+                    <a class="notify" href="#">
+                      <i class="fa fa-warning text-yellow"></i> No Notification
                     </a>
                   </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                      page and may cause design problems
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-red"></i> 5 new members joined
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-user text-red"></i> You changed your username
-                    </a>
-                  </li>
+				<?php } ?>
+              
+                  
                 </ul>
               </li>
               <li class="footer"><a href="#">View all</a></li>
@@ -180,7 +291,7 @@ margin-top: 5px !important;
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!--<img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">-->
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs"><?php echo ucwords(strtolower($MemberName));?></span>
             </a>
             <ul class="dropdown-menu">
               
@@ -206,11 +317,19 @@ margin-top: 5px !important;
     <section class="sidebar">
       <!-- Sidebar user panel -->
       <div class="user-panel" align="center">
-        <div class="" >
-          <?php echo $this->Html->image('no-profile-image.jpg', ["class"=>"img-responsive center_img","alt"=>"Profile Pic","style"=>"border-radius: 100%;height:80px;    border: 1px solid #1295A2;"]); ?>
+        <div class='imaage'>
+          <?php
+		  if(!empty($profilePic)){
+			echo $this->Html->image('user_docs/'.$loginId.'/'.$profilePic, ["class"=>"img-responsive","alt"=>"Profile Pic"]);
+			echo $this->Html->image('no-profile-image.jpg', ["class"=>"img-responsive","alt"=>"Profile Pic"]);
+		  }
+		else{
+			echo $this->Html->image('no-profile-image.jpg', ["class"=>"img-responsive","alt"=>"Profile Pic"]);
+		}	
+		  ?>
         </div>
         <div class="info">
-          Alexander Pierce
+          <?php echo ucwords(strtolower($MemberName));?>
 		  <br>
 		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'profileedit']); ?>" class="logo">Edit Profile</a> | &nbsp;
 		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo">Change Password</a>
@@ -231,7 +350,11 @@ margin-top: 5px !important;
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
         </li>-->
-		<li class="active"><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>"><i class="fa fa-circle-o text-aqua"></i> <span>Dashboard</span></a></li>
+		<li class="active"><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+		
+		<li><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'finalizedRequestList']); ?>"><i class="fa fa-dashboard"></i> <span>FINALIZED REQUESTS</span></a></li>
+		
+		<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'myFinalResponses']); ?>"><i class="fa fa-dashboard"></i> <span>FINALIZED RESPONSES</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -281,19 +404,19 @@ margin-top: 5px !important;
  
 $('.select2').select2();
 $('.date-picker').datepicker({
-      autoclose: true
-    });
+  autoclose: true
+});
  
 <!--$(".wysihtml5textarea").wysihtml5({useLineBreaks: true,tabSpaces: 4});-->
 $(".txtEditor").Editor({
-'source':true,
-'togglescreen':false,
-'rm_format':false,
-'insert_img':false,
+	'source':true,
+	'togglescreen':false,
+	'rm_format':false,
+	'insert_img':false,
 });
 
 $(".timepicker").timepicker({
-          showInputs: false
+    showInputs: false
 });
 
 </script>
