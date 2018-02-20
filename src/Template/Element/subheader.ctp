@@ -21,6 +21,29 @@ li { list-style: none;}
     z-index: 30;
 }
 hr { margin-top:0px!important;}
+.bg-red{
+	background-color:#F3565D!important
+}
+.bg-blue{
+	background-color:#1295A2!important;
+}
+.bg-green{
+	background-color:#56BC87!important;
+}
+.bg-yellow{
+	background-color:#DFBA49!important;
+}
+.arroysign
+{
+	margin: 17px;
+	right: 23px !important;
+    width: 3% !important;
+    top: 40%;
+    bottom: 52%;
+}
+.rating i {
+	color:#1295A2 !important;
+}
 </style>
 
 <?php use Cake\Datasource\ConnectionManager; 
@@ -292,10 +315,10 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 												<?php
 
 													if($testimo["profile_pic"]==""){
-														echo $this->Html->image('no-profile-image.jpg', ["class"=>"img-responsive center_img","alt"=>"Profile Pic","style"=>"border-radius: 50%;height:50px"]); 
+														echo $this->Html->image('no-profile-image.jpg', ["class"=>"img-responsive center_img","alt"=>"Profile Pic","style"=>"border-radius: 50%;height:50px;    border: 1px solid #1295A2;"]); 
 													}
 													else{
-														echo $this->Html->image('user_docs/'.$testimo["author_id"].'/'.$testimo["profile_pic"], ["class"=>"img-responsive center_img","alt"=>"Profile Pic","style"=>"border-radius: 50%;height:50px"]);
+														echo $this->Html->image('user_docs/'.$testimo["author_id"].'/'.$testimo["profile_pic"], ["class"=>"img-responsive center_img","alt"=>"Profile Pic","style"=>"border-radius: 50%;height:50px;border: 1px solid #1295A2;"]);
 													}
 												?>
 												<br>
@@ -326,10 +349,10 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 							</div>
 							<?php if(count($testimonial)>2){?>
 								<div class="">
-									<a class="left carousel-control" href="#carousel-reviews" role="button" data-slide="prev">   
+									<a class="left carousel-control arroysign" href="#carousel-reviews" role="button" data-slide="prev">   
 										<i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
 									</a>
-									<a class="right carousel-control" href="#carousel-reviews" role="button" data-slide="next">
+									<a class="right carousel-control arroysign" href="#carousel-reviews" role="button" data-slide="next">
 										<i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
 									</a>
 								</div>

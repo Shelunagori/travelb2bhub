@@ -337,13 +337,13 @@ $(".req").sort(function (a, b) {
 <?php echo $this->Html->script(['ap.pagination.js']);?>
 <script>
 	$("#responsesWrap").apPagination({
-				targets: ".box-event",
-				pagesWrap: ".pages",
-				ulClass: "pagination",
-				perPage: 5,
-				nextText: '<i class="glyphicon glyphicon-menu-right"></i><i class="glyphicon glyphicon-menu-right"></i>',
-				prevText: '<i class="glyphicon glyphicon-menu-left"></i><i class="glyphicon glyphicon-menu-left"></i>'
-			});
+		targets: ".box-event",
+		pagesWrap: ".pages",
+		ulClass: "pagination",
+		perPage: 5,
+		nextText: '<i class="glyphicon glyphicon-menu-right"></i><i class="glyphicon glyphicon-menu-right"></i>',
+		prevText: '<i class="glyphicon glyphicon-menu-left"></i><i class="glyphicon glyphicon-menu-left"></i>'
+	});
 $('#UserChatForm').validate({
 	rules: {
 		"message" : {
