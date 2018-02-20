@@ -239,207 +239,208 @@ $(document).ready(function($){
                         </ul>
                         <div class="tab-pane" id="tab1">
 				                 <?php
-                            echo $this->Form->create(null, [
+                           /*  echo $this->Form->create(null, [
                                 'type' => 'file',
                                 'url' => ['controller' => 'Users', 'action' => 'sendrequest'], "id"=>"HotelRequestForm"
-                            ]);
+                            ]); */
                             ?>
 							<input autocomplete="off" name="category_id" type="hidden" value="3" class="form-control" id="date-start" placeholder="Reference id"/>
 							<div class="form-box">
-								<div class="panel-group" id="HotelAccordion">
+								<div class="panel-group" id="HotelAccordion" style="background-color:white;">
 									<div class="panel panel-default">
-										<div class="panel-heading">
                                             <h4 class="panel-title ">
-                                                <a  class="gr" data-toggle="collapse" data-parent="#HotelAccordion" href="#HotelGeneralR"> General Requirements </a>
-                                            </h4>
-                                        </div>
-										<div id="HotelGeneralR" class="panel-collapse collapse">
-											<div class="panel-body">
+											<fieldset>
+												  <legend style="color:#369FA1;"><b>GENERAL REQUIREMENTS:</b></legend>
 												<div class="form">
-													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+												  <div class="row">
+												  <div class="col-md-12">
+                                                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 														<div class="input-field">
-															<label for="from">Reference ID
-                                                                 <span class="asterisk">
-                                                                        <img src="/img/Asterisk.png" class="img-responsive">
-                                                                 </span>
-                                                            </label>
-
-															<input autocomplete="off" name="reference_id" type="text" class="form-control ref2" id="reference_id" placeholder="Reference ID" autofocus/>
-														
+															<p for="from" >
+																Reference ID  
+                                                            </p>
+															<input name="reference_id" type="text" class="form-control ref2" id="Reference ID" placeholder="Reference ID" autocomplete="off" />
+															 
 														</div>
 													</div>
-
-
-													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-														<div class="input-field">
-															<label for="from">Total Budget
-                                                                 <span class="asterisk">
-                                                                        <img src="../img/Asterisk.png" class="img-responsive">
-                                                                 </span>
-                                                            </label>
-															<input autocomplete="off" name="total_budget" type="number" min="1" class="form-control" id="total_budget" placeholder="Total Budget"/>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+                                                        <div class="input-field">
+                                                            <p for="from">
+																Total Budget  
+                                                            </p>
+                                                            <input autocomplete="off" name="total_budget" type="number" min="1" class="form-control" id="total_budget" placeholder="Total Budget"/>
+                                                        </div>
 														</div>
 													</div>
-
-													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-														<div class="input-field">
-															<label for="from">Adults<span class="asterisk">
-                                                                        <img src="/img/Asterisk.png" class="img-responsive">
-                                                                    </span> </label>
-
-															<div> <input type='button' value='-' class='qtyminus' field='hotelAdult' />
-																<input type='text' name='hotelAdult' autocomplete="off" value='1' class='qty' />
-																<input type='button' value='+' class='qtyplus' field='hotelAdult' /></div>
-														</div>
-													</div>
-													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-														<div class="input-field">
-															<label for="from">Children below 6  </label>
-															<div><input type='button' value='-' class='qtyminus1' field='hotelChildren' />
-																<input type='text' name='hotelChildren' autocomplete="off" value='0' class='qty' />
-																<input type='button' value='+' class='qtyplus1' field='hotelChildren' /></div>
-														</div>
-													</div>
-
-												</div>
-											</div>
-										</div>
-
-									</div>
-									<!--panel panel-default-->
-
-									<div class="panel panel-default">
-										<div class="panel-heading">
-                                            <h4 class="panel-title ">
-                                                <a  data-toggle="collapse" data-parent="#HotelAccordion" href="#HotelStayR">Stay Requirements</a>
-                                            </h4>
-                                        </div>
-										<div id="HotelStayR" class="panel-collapse collapse">
-											<div class="panel-body">
-												<div class="form">
-													<div class="destination">
-														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-															<div class="input-field">
-																<label for="from">No. of Rooms</label>
-																<div class="box-room">
-																	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> <label for="from">Single</label></div>
-																	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><input autocomplete="off" name="room1" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
-
-																	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> <label for="from">Double</label></div>
-																	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><input autocomplete="off" name="room2" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
-
-																	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> <label for="from">Triple</label></div>
-																	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><input autocomplete="off" name="room3" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
-
-																	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> <label for="from">Child with bed</label></div>
-																	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><input autocomplete="off" name="child_with_bed" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
-
-																	<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> <label for="from">Child without bed</label></div>
-																	<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><input autocomplete="off" name="child_without_bed" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
+													</div> 
+													<div class="row">
+														<div class="col-md-12">
+															<div class="col-md-6">
+															<p for="from">Adults</p>
+															<div class="col-md-6 input-group">
+																<label class="input-group-addon btn" >
+																<button type="button" class="fa fa-minus-square" id="btnminus" value=""></button>
+																</label>                    
+																<input type='text' autocomplete="off" name='children' value='1' class="form-control input-large" id="textcounter"/>	
+																<label class="input-group-addon btn" >
+																<button type="button" class="fa fa-plus-square" id="btnplus" value=""></button>
+																</label>                    
 																</div>
-
+																</div>
+											   
+															<div class="col-md-6">
+															<p for="from">Children below 6  </p>
+																<div class="col-md-6 input-group">
+																<label class="input-group-addon btn" >
+																<button type="button" class="fa fa-minus-square" id="btnminus1" value=""></button>
+																</label>                    
+																 <input type='text' autocomplete="off" name='children' value='1' class="form-control input-large" id="textcounter1"/>	
+																<label class="input-group-addon btn">
+																<button type="button" class="fa fa-plus-square" id="btnplus1" value=""></button>
+																</label>                    
+																</div>
 															</div>
 														</div>
-
-														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-															<div class="input-field">
-																<label for="from">Hotel Rating</label>
-																<div style=" width: 200px;" >
-																<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
-															   <input class="star star-5" id="star-5-21" type="radio" value="5" name="hotel_rating"/>
-															   <label class="star star-5" for="star-5-21"></label>
-															   <input class="star star-4" id="star-4-21" type="radio" value="4" name="hotel_rating"/>
-															   <label class="star star-4" for="star-4-21"></label>
-															   <input class="star star-3" id="star-3-21" type="radio" value="3" name="hotel_rating"/>
-															   <label class="star star-3" for="star-3-21"></label>
-															   <input class="star star-2" id="star-2-21" type="radio" value="2" name="hotel_rating"/>
-															   <label class="star star-2" for="star-2-21"></label>
-															   <input class="star star-1" id="star-1-21" type="radio" value="1" name="hotel_rating"/>
-															   <label class="star star-1" for="star-1-21"></label>
-															   </div>
+													</div>
+													
+													</fieldset></h4>
+											<h4 class="panel-title ">
+											<fieldset>
+											<legend style="color:#369FA1;"><b>STAY REQUIREMENTS:</b></legend>
+												  <div class="row">
+														<div class="col-md-12">
+															<div class="col-lg-2">
+																<p for="from" >
+																	No. of Rooms
+																</p>
+															</div>
+															<div class="col-lg-2">
+																<p>Single</p>
+																<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
+															</div>
+															<div class="col-lg-2">
+																<p>Double</p>
+																<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
+															</div>
+															<div class="col-lg-2">
+																<p>Tripple</p>
+																<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
+															</div>
+															<div class="col-lg-2">
+																<p>Child with Bed</p>
+																<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
+															</div>
+															<div class="col-lg-2">
+																<p>Child without Bed</p>
+																<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
 															</div>
 														</div>
+													</div>
+													<div class="row">
+															<div class="col-md-12">
+																<div class="col-md-4">
+																	<div class="input-field">
+																		<p for="from">
+																			Hotel Rating
+																		</p>
+																	</div>
+																<div>
+																		<i class="fa fa-star"></i>
+																		<i class="fa fa-star"></i>
+																		<i class="fa fa-star"></i>
+																		<i class="fa fa-star"></i>
+																		<i class="fa fa-star"></i>
+																	</div>
 
-														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-															<div class="input-field hotel_category">
-																<label for="from">Hotel Category</label>
-																<?php echo $this->Form->control('hotel_category', ["id"=>"h_hotel_category", "type"=>"select", 'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control chosen-select"]);?>
 															</div>
-														</div>
-														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-															<div class="input-field">
-																<label for="from">Meal Plan</label>
-																<select name="meal_plan" class="form-control">
+																
+																<div class="col-md-4 ">
+																	<div class="input-field">
+																		<p for="from">Hotel Catrgory </p>
+																			<div>
+																				<?php 
+																				echo $this->Form->control('hotel_category', ["id"=>"h_hotel_category", "type"=>"select", 'options' =>$hotelCategories, "multiple"=>true , "class"=>"select2me form-control input-large"]);?>
+																		   </div>
+																	</div>
+																</div>
+															<div class="col-md-4 ">
+																<div class="input-field">
+																	<p for="from">Meal Plan </p>
+																	<div>
+																	<select name="meal_plan" class="form-control">
 																	<option value="" selected>Select Meal Plan</option>
 																	<option value="1">EP - European Plan</option>
 																	<option value="2">CP - Contenental Plan</option>
 																	<option value="3">MAP - Modified American Plan</option>
 																	<option value="4">AP - American Plan</option>
-																</select>
+																</select></div>
+																</div>
 															</div>
 														</div>
-
-                                                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
-                                                            <div class="input-field">
-                                                            <label for="from">Locality</label>
-                                                            <input autocomplete="off" type="text" class="form-control" name="locality" placeholder="Enter Locality or Village or Town"/>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-                                                            <div class="input-field">
+													</div>
+													<div class="row">
+													<div class="col-md-12">
+														<p>Locality</p>
+														<input type='text' autocomplete="off" name='mob_no'  placeholder="Enter Locality or Village or Town" class="form-control input-large" />
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-12">
+														<div class="col-md-6">
+															<div class="input-field">
                                                                 <label for="from">Destination City
-                                                                     <span class="asterisk">
-                                                                        <img src="../img/Asterisk.png" class="img-responsive">
-                                                                    </span>       
                                                                 </label>
                                                                 <input autocomplete="off" type="text" class="form-control" id="h_city_name" name="h_city_name" placeholder="Select City or Nearest City"/>
                                                                 <input type='hidden' id='h_city_id' name="h_city_id" />
 
                                                             </div>
-                                                        </div>
-														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+														</div>
+														<div class="col-md-6">
 															<div class="input-field">
 															<label for="from">Destination State</label>
 																<input type='hidden' id='h_state_id' name="h_state_id"/>
 															<input type="text" class="form-control" id ="h_state_name" name="h_state_name" placeholder="State" readonly/>
 															</div>
+															</div>
+															
 														</div>
-												
-														<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt" style="display:none;">
-															<div class="input-field">
+													</div>
+													<div class="row">
+													<div class="col-md-12">
+													<div class="input-field">
 															<label for="from">Destination Country</label>
 															<input type="text" class="form-control" id ="h_country_name" name="h_country_name" placeholder="Country" readonly/>
 																<input type='hidden' id='h_country_id' name="h_country_id"/>
 															</div>
 														</div>
-                                           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-                                                            <div class="input-field">
+													</div>
+													<div class="row">
+													<div class="col-md-12">
+														<div class="col-md-6">
+															<div class="input-field">
                                                                 <label for="from">Check In 
-                                                                    <span class="asterisk">
-                                                                        <img src="../img/Asterisk.png" class="img-responsive">
-                                                                    </span>   
+                                                                     
                                                                 </label>
                                                                 <input type="text" name="check_in" class="form-control" id="datepicker1" placeholder="dd/mm/yyyy"/>
                                                             </div>
-                                                        </div>
-
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-                                                            <div class="input-field">
+														</div>
+														<div class="col-md-6">
+															 <div class="input-field">
                                                                 <label for="from">Check Out 
-                                                                    <span class="asterisk">
-                                                                        <img src="../img/Asterisk.png" class="img-responsive">
-                                                                    </span>   
+
                                                                 </label>
                                                                 <input type="text" autocomplete="off" name="check_out" class="form-control" id="datepicker2" placeholder="dd/mm/yyyy"/>
                                                             </div>
-                                                        </div>
-</div>
-												</div>
-											</div>
-										</div>
-
-									</div>
-									<!--panel panel-default-->
+															</div>
+															
+														</div>
+													</div>		
+												</div>	 
+													
+													</fieldset>
+													</h4>
+															
+	                                   
 
 									<div class="panel panel-default">
                                         <div class="panel-heading">
@@ -472,6 +473,7 @@ $(document).ready(function($){
 							</div>
 							</form>
 							<!--Form Box for Hotel-->
+							</div>
                         </div>
 						<!--Tab pane Hotel end-->
                         <div class="tab-pane active" id="tab2" >
@@ -677,80 +679,89 @@ $(document).ready(function($){
 										</div>
 										</fieldset></h4>
 										</div>
-										</div>
+							</div>
 											
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
                                                 <a  data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                                                    Stay Requirements</a>
-                                            </h4>
-                                        </div>
+                                                    Stay Requirements</a></h4>
+										</div>
+									</div>
                                         <div id="collapse2" class="panel-collapse collapse">
                                             <div class="panel-body">
                                                 <div class="form">
-                                                    <div class="destination">
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-                                                            <div class="input-field">
-                                                                <label for="from">No. of Rooms</label>
+                                                  <h4 class="panel-title">
+										<fieldset>
+											<legend style="color:#369FA1;"><b>STAY REQUIREMENTS:</b></legend>
+												<div class="form">
+												  <div class="row">
+														<div class="col-md-12">
+															<div class="col-lg-2">
+																<p for="from" >
+																	No. of Rooms
+																</p>
+															</div>
+															<div class="col-lg-2">
+																<p>Single</p>
+																<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
+															</div>
+															<div class="col-lg-2">
+																<p>Double</p>
+																<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
+															</div>
+															<div class="col-lg-2">
+																<p>Tripple</p>
+																<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
+															</div>
+															<div class="col-lg-2">
+																<p>Child with Bed</p>
+																<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
+															</div>
+															<div class="col-lg-2">
+																<p>Child without Bed</p>
+																<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
+															</div>
+														</div>
+													</div>
+													<div class="row">
+															<div class="col-md-12">
+																<div class="col-md-4">
+																	<div class="input-field">
+																		<label for="from">Hotel Rating</label>
 
-                                                                <div class="box-room">
-
-                                                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> <label for="from">Single</label></div>
-
-                                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><?php echo $this->Form->control('room1', ["id"=>"room1", "type"=>"number","min"=>0, "class"=>"form-control", 'label' => false, 'div' => false, "placeholder"=>"0"]); ?></div>
-
-                                                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> <label for="from">Double</label></div>
-                                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><?php echo $this->Form->control('room2', ["id"=>"room2", "type"=>"number","min"=>0, "class"=>"form-control", 'label' => false, 'div' => false, "placeholder"=>"0"]); ?></div>
-
-                                                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> <label for="from">Triple</label></div>
-                                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><?php echo $this->Form->control('room3', ["id"=>"room3", "type"=>"number","min"=>0, "class"=>"form-control", 'label' => false, 'div' => false, "placeholder"=>"0"]); ?></div>
-
-                                                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> <label for="from">Child with bed</label></div>
-                                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><?php echo $this->Form->control('child_with_bed', ["id"=>"child_with_bed", "type"=>"number","min"=>0, "class"=>"form-control", 'label' => false, 'div' => false, "placeholder"=>"0"]); ?></div>
-
-                                                                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> <label for="from">Child without bed</label></div>
-                                                                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><?php echo $this->Form->control('child_without_bed', ["id"=>"child_without_bed", "type"=>"number","min"=>0, "class"=>"form-control", 'label' => false, 'div' => false, "placeholder"=>"0"]); ?></div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-  <label for="from">Hotel Rating</label>
-       <div class="input-field star_rating">
-
-       
-
-     
-<div style="display: inline-block; width: 200px;" >
-<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
-       <input class="star star-5" id="star-5-2" type="radio" value="5" name="hotel_rating"/>
-       <label class="star star-5" for="star-5-2"></label>
-       <input class="star star-4" id="star-4-2" type="radio" value="4" name="hotel_rating"/>
-       <label class="star star-4" for="star-4-2"></label>
-       <input class="star star-3" id="star-3-2" type="radio" value="3" name="hotel_rating"/>
-       <label class="star star-3" for="star-3-2"></label>
-       <input class="star star-2" id="star-2-2" type="radio" value="2" name="hotel_rating"/>
-       <label class="star star-2" for="star-2-2"></label>
-       <input class="star star-1" id="star-1-2" type="radio" value="1" name="hotel_rating"/>
-       <label class="star star-1" for="star-1-2"></label>
-       </div>
-<?php // echo $this->Form->control('hotel_rating', ["type"=>"select", "empty"=>false, 'options' =>array("5"=>"*****", "4"=>"****", "3"=>"***", "2"=>"**", "1"=>"*") , "class"=>"form-control"]);?>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+																	</div>
+																<div style="display: inline-block; width: px;" >
+																	<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
+																   <input class="star star-5" id="star-5-2" type="radio" value="5" name="hotel_rating"/>
+																   <label class="star star-5" for="star-5-2"></label>
+																   <input class="star star-4" id="star-4-2" type="radio" value="4" name="hotel_rating"/>
+																   <label class="star star-4" for="star-4-2"></label>
+																   <input class="star star-3" id="star-3-2" type="radio" value="3" name="hotel_rating"/>
+																   <label class="star star-3" for="star-3-2"></label>
+																   <input class="star star-2" id="star-2-2" type="radio" value="2" name="hotel_rating"/>
+																   <label class="star star-2" for="star-2-2"></label>
+																   <input class="star star-1" id="star-1-2" type="radio" value="1" name="hotel_rating"/>
+																   <label class="star star-1" for="star-1-2"></label>
+																</div>
+															</div>
+													
+                                                        <div class="col-md-4">
                                                             <div class="input-field hotel_category">
                                                                 <label for="from">Hotel Category</label>
-<?php echo $this->Form->control('hotel_category', ["id"=>"hotel_category", "type"=>"select", 'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control chosen-select"]);?>
+														<?php echo $this->Form->control('hotel_category', ["id"=>"hotel_category", "type"=>"select", 'options' =>$hotelCategories, "multiple"=>true , "class"=>"select2me form-control chosen-select"]);?>
                                                             </div>
                                                         </div>
 
 
-                                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-                                                            <div class="input-field">
+														<div class="col-md-4">                                                        
+																<div class="input-field">
                                                                 <label for="from">Meal Plan</label>
-<?php echo $this->Form->control('meal_plan', ["type"=>"select", "empty"=>"Select Meal Plan", 'options' =>array("1"=>"EP - European Plan", "2"=>"CP - Contenental Plan", "3"=>"MAP - Modified American Plan", "4"=>"AP - American Plan") , "class"=>"form-control"]);?>
-                                                            </div>
-                                                        </div>
+																	<?php echo $this->Form->control('meal_plan', ["type"=>"select", "empty"=>"Select Meal Plan", 'options' =>array("1"=>"EP - European Plan", "2"=>"CP - Contenental Plan", "3"=>"MAP - Modified American Plan", "4"=>"AP - American Plan") , "class"=>"form-control"]);?>
+																</div>
+															</div>
+														</div>
+													</div>
 
                                                       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
                                                             <div class="input-field">
@@ -811,15 +822,18 @@ $(document).ready(function($){
                                                         </div>
 
                                                     </div>
-                                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt padding0">
+													</fieldset>
+												</h4>
+												</div>
+											</div>
+										</div>
+                                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt padding0">
                                                                  <div class="input_fields_wrap1">
                                                          </div> 
-<button class="add_field_button2 but ">Add Another Destination</button>
+													<button class="add_field_button2 but ">Add Another Destination</button>
                                                     </div>
-                                                 </div>
-                                              </div>
-                                        </div>
-                                    </div>
+                                              
+                                             
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">
@@ -919,11 +933,11 @@ $(document).ready(function($){
 											<input type="text" class="form-control" id ="p_final_state_name" name="p_final_state_name" placeholder="Select State" readonly/>
 											</div>
 										</div>
- </div>
-                                </div>
-                                </div>
-                                </div>
-                                    </div>
+						</div>
+										</div>
+										</div>
+										</div>
+									</div>
 									<!-- Add comment tag -->
 									<div class="panel panel-default">
                                         <div class="panel-heading">
@@ -950,7 +964,7 @@ $(document).ready(function($){
                                     <div class="margi text-center">
                                         <input type="submit" class="btn btn-primary btn-submit" value="Submit">
                                     </div>
-                            </div>
+                            </div> </h4>
                          </form>
                         </div>
 						<!--Tab 3-->
