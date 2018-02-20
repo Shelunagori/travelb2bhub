@@ -80,21 +80,37 @@
                 </div>
 				 <div class="form-group col-md-6">
                   <label>City</label>
-                  <input type="textbox" class="form-control" style="height:40px;" required autocomplete="off" id="city-search-box" name="city" placeholder="where you want to go?">
+                  <input type="textbox" class="form-control" required autocomplete="off" id="city-search-box" name="city" placeholder="where you want to go?">
 				  <div class="suggesstion-box" style="margin-top:-10px"></div>
                 </div>
-				
-                <div class="form-group">
-                  <label for="exampleInputFile">File input</label>
-                  <input type="file" id="exampleInputFile">
+				<div class="col-md-12">
+				<div class="form-group col-md-4">
+					  <label for="exampleInputPassword1">PinCode</label>
+					  <input type="text" class="form-control" id ="pincode" value = "<?php echo (!empty($users['pincode']))?$users['pincode']:""; ?>"name="pincode" placeholder="Enter Pincode">
+				</div>
+				<div class="shw">
+					<div class="form-group col-md-4">
+						  <label>States</label>
+						  <?php echo $this->Form->input('state_id',['label' => false,'class'=>'form-control select2','options'=>$states_show,'empty'=>'---Select--Please---']);?>
+					</div>
 
-                  <p class="help-block">Example block-level help text here.</p>
+					<div class="form-group col-md-4">
+						  <label>Country</label>
+						  <?php echo $this->Form->input('country_id',['label' => false,'class'=>'form-control select2','options'=>$country_show]);?>
+					</div>
+				
+				</div> 
+				
+				<div class="form-group col-md-12">
+                  <label>Select Preference</label>
+                   <?php 
+                            $selectedPreferenceStates = "";
+                            if(!empty($users['preference'])) {
+                                $selectedPreferenceStates = explode(",", $users['preference']);
+                            }	
+                            echo $this->Form->control('preference', ["value"=>$selectedPreferenceStates, "id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select", "data-placeholder"=>"Select Some States", "style"=>"height:125px;"]); ?>
                 </div>
-                <div class="checkbox">
-                  <label>
-                    <input type="checkbox"> Check me out
-                  </label>
-                </div>
+                 </div>
               </div>
               <!-- /.box-body -->
 
@@ -546,47 +562,14 @@
 </div>
 
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
-  <script>
-	var cityData = '<?php echo $allCities; ?>';
-	$(document).ready(function () {
-		$("#city_name").autocomplete({
-			source: JSON.parse(cityData),
-			select: function (e, ui) {
-				e.preventDefault();
-				$("#city_id").val(ui.item.value);
-				//$(this).val(ui.item.label);
-				$("#state_id").val(ui.item.state_id);
-				$("#state_name").val(ui.item.state_name);
-				$("#country_id").val(ui.item.country_id);
-				$("#country_name").val(ui.item.country_name);
-			}
-		});
-		/*// Overrides the default autocomplete filter function to search only from the beginning of the string
-		$.ui.autocomplete.filter = function (array, term) {
-			var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
-			return $.grep(array, function (value) {
-				return matcher.test(value.label);
-			});
-		};
-*/
-	});
-</script>
+   
 <script>
 
-$(document).ready(function(){
-			$(".btnSubmit").click(function(){
-				var city=$("#city-search-box").val();
-				if(city !=""){ 
-					$("#loader-1").show();
-				}
-			});
+$(document).ready(function(){	 
 		$("#city-search-box").keyup(function(){
-						 
 		var input=$("#city-search-box").val();
-		alert(input);
  		var m_data = new FormData();
-		m_data.append('input',input);
-			
+		m_data.append('input',input);			
 		$.ajax({
 			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_city"]); ?>",
 			data: m_data,
@@ -594,24 +577,37 @@ $(document).ready(function(){
 			contentType: false,
 			type: 'POST',
 			dataType:'text',
-			success: function(data)   // A function to be called if request succeeds
-			{ 
+			success: function(data)
+			{
 				$(".suggesstion-box").show();
-				$(".suggesstion-box").html(response);
+				$(".suggesstion-box").html(data);
 				$(".city-search-box").css("background","#FFF");
 			}
-					/* 	$.ajax({
-							type: "POST",
-							url: "http://udaipurcare.com/hotel/citySearch.php",
-							data:"keyword="+input,
-							success: function(response){
-								$(".suggesstion-box").show();
-								$(".suggesstion-box").html(response);
-								$(".city-search-box").css("background","#FFF");
-							}
-						}); */
-					});
+			});
 		});
-		});
+		
+	});
+	function selectCountry(value,city_code,state) {
+		
+		var state_id=state;
+		$("#city-search-box").val(value);
+		$(".suggesstion-box").hide();
+		$(".cityCode").val(city_code);
+			 	
+			var m_data = new FormData();
+		m_data.append('state_id',state_id);			
+		$.ajax({
+			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_state_show"]); ?>",
+			data: m_data,
+			processData: false,
+			contentType: false,
+			type: 'POST',
+			dataType:'text',
+			success: function(data)
+			{
+				$(".shw").html(data);
+			}
+			});	
+				
+			}
 </script>
-

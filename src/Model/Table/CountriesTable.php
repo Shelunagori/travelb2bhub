@@ -60,7 +60,7 @@ class CountriesTable extends Table
 
         $this->table('countries');
 
-        $this->displayField('id');
+        $this->displayField('country_name');
 
         $this->primaryKey('id');
 

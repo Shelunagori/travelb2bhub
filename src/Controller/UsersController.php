@@ -730,6 +730,8 @@ $myReponseCount = $queryr->count();
 $this->set('myReponseCount', $myReponseCount);
 $cities = $this->Cities->getAllCities();
 $states = $this->States->find()->where(['country_id' => '101'])->all();
+$states_show=$this->Users->States->find('list');
+$country_show=$this->Users->Countries->find('list');
 $allStates = array();
 foreach($states as $state){
 $allStates[$state["id"]] = $state['state_name'];
@@ -744,7 +746,7 @@ $allCityList[$city['id']] = str_replace("'", "", $city['name'].' ('.$city['state
 }
 }
 $allCities = json_encode($allCities);
-$this->set(compact('cities', 'states', 'countries', 'allCities', 'allStates', 'allCityList', 'userTravelCertificates'));
+$this->set(compact('states_show','country_show','cities', 'states', 'countries', 'allCities', 'allStates', 'allCityList', 'userTravelCertificates'));
 } else {
 $this->Flash->error(__('Please login to acces this location.'));
 $this->redirect('/pages/home');
@@ -762,11 +764,29 @@ $this->set('allunreadchat',$allUnreadChat);
 
 public function ajaxCity()
     {
-		echo $name=$this->request->data['input'];
+		$name=$this->request->data['input'];
+		$cities=$this->Users->Cities->find()->where(['Cities.name Like'=>'%'.$name.'%']);
+		?>
+		<ul id="country-list">
+			<?php foreach($cities as $show){ ?>
+				<li onClick="selectCountry('<?php echo $show->name; ?>','<?php echo $show->id; ?>','<?php echo $show->state_id; ?>');"><?php echo $show->name; ?></li>
+			<?php } ?>
+		</ul>
+		<?php
 		 exit;  
      }
 
-
+public function ajaxStateShow()
+    {
+		$state_id=$this->request->data['state_id'];
+		$states=$this->Users->States->find('list')->where(['States.id'=>$state_id]);
+		$statess=$this->Users->States->find()->where(['States.id'=>$state_id]);
+		foreach($statess as $st_show){
+			$country_id=$st_show->country_id;
+		}
+		$countries=$this->Users->Countries->find('list')->where(['Countries.id'=>$country_id]);
+		$this->set(compact('states','countries'));
+     }
 
 
 public function changePassword() {
