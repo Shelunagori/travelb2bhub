@@ -350,7 +350,11 @@ margin-top: 5px !important;
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
         </li>-->
-		<li class="active"><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>"><i class="fa fa-circle-o text-aqua"></i> <span>Dashboard</span></a></li>
+		<li class="active"><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+		
+		<li><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'finalizedRequestList']); ?>"><i class="fa fa-dashboard"></i> <span>FINALIZED REQUESTS</span></a></li>
+		
+		<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'myFinalResponses']); ?>"><i class="fa fa-dashboard"></i> <span>FINALIZED RESPONSES</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
