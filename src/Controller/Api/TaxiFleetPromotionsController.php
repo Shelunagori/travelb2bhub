@@ -164,9 +164,10 @@ class TaxiFleetPromotionsController extends AppController
         $this->set('_serialize', ['getTaxiFleetPromotions','message','response_code']);		
 	}
 	
-	public function getTaxiFleetPromotionsDetails($id = null)
+	public function getTaxiFleetPromotionsDetails($id = null,$user_id = null)
 	{
 		$id = $this->request->query('id');
+		$user_id = $this->request->query('user_id');
 		$getTaxiFleetPromotionsDetails = $this->TaxiFleetPromotions->find();
 		$getTaxiFleetPromotionsDetails->select(['total_likes'=>$getTaxiFleetPromotionsDetails->func()->count('TaxiFleetPromotionLikes.id')])
 			->leftJoinWith('TaxiFleetPromotionLikes')
@@ -177,8 +178,27 @@ class TaxiFleetPromotionsController extends AppController
 		//pr($getTaxiFleetPromotionsDetails->toArray()); exit;
 		if(!empty($getTaxiFleetPromotionsDetails->toArray()))
 		{
-			$message = 'Data Found Successfully';
-			$response_code = 200;
+			$viewTaxiFleetPromotions = $this->TaxiFleetPromotions->TaxiFleetPromotionViews->newEntity();
+  			$viewTaxiFleetPromotions->taxi_fleet_promotion_id = $id;
+			$viewTaxiFleetPromotions->user_id = $user_id;  			
+			$exists = $this->TaxiFleetPromotions->TaxiFleetPromotionViews->exists(['taxi_fleet_promotion_id'=>$viewTaxiFleetPromotions->taxi_fleet_promotion_id,'user_id'=>$viewTaxiFleetPromotions->user_id]);
+			
+			if($exists == 0)
+			{
+				if ($this->TaxiFleetPromotions->TaxiFleetPromotionViews->save($viewTaxiFleetPromotions)) {
+					$message = 'Data found and view increased by 1';
+					$response_code = 200;
+				}else{
+				//	pr($viewTaxiFleetPromotions); exit;
+					$message = 'Data found but view not increased';
+					$response_code = 204;				
+				}				
+			}
+			else
+			{
+					$message = 'Data found but viewed already';
+					$response_code = 205;					
+			}
 		}
 		else
 		{

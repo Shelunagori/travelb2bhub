@@ -116,12 +116,37 @@ class PostTravlePackagesController extends AppController
 
 	public function getTravelPackages()
 	{
+		$category_id = $this->request->query('category_id');
+		$category_short = '';
+		$category_short = $this->request->query('category_short');
+		if(empty($category_short))
+		{
+			$category_short = 'ASC';
+		}
+		
+		$category_id_filter = null;
+		if(!empty($category_id))
+		{
+			$category_id_filter = ['post_travle_package_category_id'=>$category_id];
+		}else
+		{
+			$category_id_filter = null;
+		}
+		
 		$getTravelPackages = $this->PostTravlePackages->find();
 			$getTravelPackages->select(['total_likes'=>$getTravelPackages->func()->count('PostTravlePackageLikes.id')])
 			->leftJoinWith('PostTravlePackageLikes')
-		->where(['valid_date >=' =>date('Y-m-d')])
-		->group(['PostTravlePackages.id'])
-		->autoFields(true);
+			->innerJoinWith('PostTravlePackageRows',function($q) use($category_id_filter,$category_short){ 
+					return $q->where($category_id_filter)
+						->contain(['PostTravlePackageCategories'=>function ($q) use($category_short)
+						{
+							return $q->order(['name' => $category_short]);
+						}]);
+				})
+			->where(['valid_date >=' =>date('Y-m-d')])
+			->group(['PostTravlePackages.id'])
+			->autoFields(true);
+		
 		//pr($getTravelPackages->toArray()); exit;
 		if(!empty($getTravelPackages->toArray()))
 		{
@@ -139,9 +164,10 @@ class PostTravlePackagesController extends AppController
         $this->set('_serialize', ['getTravelPackages','message','response_code']);		
 	}
 
-	public function getTravelPackageDetails($id = null)
+	public function getTravelPackageDetails($id = null,$user_id = null)
 	{
 		$id = $this->request->query('id');
+		$user_id = $this->request->query('user_id');
 		$getTravelPackageDetails = $this->PostTravlePackages->find();
 		$getTravelPackageDetails->select(['total_likes'=>$getTravelPackageDetails->func()->count('PostTravlePackageLikes.id')])
 			->leftJoinWith('PostTravlePackageLikes')
@@ -151,8 +177,29 @@ class PostTravlePackagesController extends AppController
 		->autoFields(true);
 		if(!empty($getTravelPackageDetails->toArray()))
 		{
-			$message = 'Data Found Successfully';
-			$response_code = 200;
+		
+			$viewPostTravelPackages = $this->PostTravlePackages->PostTravlePackageViews->newEntity();
+			$viewPostTravelPackages->post_travle_package_id = $id;
+			$viewPostTravelPackages->user_id = $user_id;
+			$exists = $this->PostTravlePackages->PostTravlePackageViews->exists(['post_travle_package_id'=>$viewPostTravelPackages->post_travle_package_id,'user_id'=>$viewPostTravelPackages->user_id]);
+			
+			if($exists == 0)
+			{
+				if ($this->PostTravlePackages->PostTravlePackageViews->save($viewPostTravelPackages)) {
+					$message = 'Data found and view increased by 1';
+					$response_code = 200;
+				}else{
+					$message = 'Data found but view not increased';
+					$response_code = 204;				
+				}				
+			}
+			else
+			{
+					$message = 'Data found but viewed already';
+					$response_code = 205;					
+			}				
+			//$message = 'Data Found Successfully';
+			//$response_code = 200;
 		}
 		else
 		{
@@ -186,6 +233,8 @@ class PostTravlePackagesController extends AppController
 			}
 			else
 			{
+				$this->PostTravlePackages->PostTravlePackageLikes->deleteAll(['post_travle_package_id'=>$likePostTravelPackages->post_travle_package_id,'user_id'=>$likePostTravelPackages->user_id]);
+					
 					$message = 'Already Liked';
 					$response_code = 205;					
 			}	

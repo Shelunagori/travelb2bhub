@@ -142,6 +142,7 @@ class EventPlannerPromotionsController extends AppController
 			$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('EventPlannerPromotionLikes.id')])
 			->leftJoinWith('EventPlannerPromotionLikes')
 		->where(['visible_date >=' =>date('Y-m-d')])
+		->contain(['Users'])
 		->group(['EventPlannerPromotions.id'])
 		->autoFields(true);
 		//pr($getTravelPackages->toArray()); exit;
@@ -161,9 +162,10 @@ class EventPlannerPromotionsController extends AppController
         $this->set('_serialize', ['getEventPlanners','message','response_code']);		
 	}
 
-	public function getEventPlannersDetails($id = null)
+	public function getEventPlannersDetails($id = null,$user_id = null)
 	{
 		$id = $this->request->query('id');
+		$user_id = $this->request->query('user_id');
 		$getEventPlannersDetails = $this->EventPlannerPromotions->find();
 		$getEventPlannersDetails->select(['total_likes'=>$getEventPlannersDetails->func()->count('EventPlannerPromotionLikes.id')])
 			->leftJoinWith('EventPlannerPromotionLikes')
@@ -176,8 +178,29 @@ class EventPlannerPromotionsController extends AppController
 		
 		if(!empty($getEventPlannersDetails->toArray()))
 		{
-			$message = 'Data Found Successfully';
-			$response_code = 200;
+			$viewEventPlannerPromotions = $this->EventPlannerPromotions->EventPlannerPromotionViews->newEntity();
+      
+  			$viewEventPlannerPromotions->event_planner_promotion_id = $id;
+			$viewEventPlannerPromotions->user_id = $user_id;         
+			
+			
+			$exists = $this->EventPlannerPromotions->EventPlannerPromotionViews->exists(['event_planner_promotion_id'=>$viewEventPlannerPromotions->event_planner_promotion_id,'user_id'=>$viewEventPlannerPromotions->user_id]);
+			
+			if($exists == 0)
+			{
+				if ($this->EventPlannerPromotions->EventPlannerPromotionViews->save($viewEventPlannerPromotions)) {
+					$message = 'Data found and view increased by 1';
+					$response_code = 200;
+				}else{
+					$message = 'Data found but view not increased';
+					$response_code = 204;				
+				}				
+			}
+			else
+			{
+					$message = 'Data found but viewed already';
+					$response_code = 205;					
+			}
 		}
 		else
 		{

@@ -50,4 +50,23 @@ class PostTravlePackage extends Entity
         '*' => true,
         'id' => false
     ];
+	
+    protected $_virtual = [
+       'full_image','full_document'
+    ];	
+	
+	protected function _getFullImage()
+	{
+		if(!empty($this->_properties['image']))
+		{
+			return 'http://konciergesolutions.com/travelb2bhub/webroot/'. $this->_properties['image'];
+		}
+	}
+	protected function _getFullDocument()
+	{
+		if(!empty($this->_properties['document']))
+		{
+			return 'http://konciergesolutions.com/travelb2bhub/webroot/'. $this->_properties['document'];
+		}
+	}	
 }

@@ -61,6 +61,9 @@ class TaxiFleetPromotionsTable extends Table
         ]);
         $this->hasMany('TaxiFleetPromotionLikes', [
             'foreignKey' => 'taxi_fleet_promotion_id'
+        ]);	
+        $this->hasMany('TaxiFleetPromotionViews', [
+            'foreignKey' => 'taxi_fleet_promotion_id'
         ]);		
         $this->hasMany('TaxiFleetPromotionStates', [
             'foreignKey' => 'taxi_fleet_promotion_id'
