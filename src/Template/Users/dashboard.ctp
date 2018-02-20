@@ -52,7 +52,7 @@ hr { margin-top:0px!important;}
 
 	if($users['role_id'] != 3 && count($advertisement1) > 0){
 	?>
-		<div class="col-md-12" style="background-color:#FFF">
+		<div class="col-md-12" style="background-color:#FFF; margin-top:10px">
 			<div style="padding:10px">
 				<p style="font-size:20px;padding-top:10px;color:#4B4B4D">Hoteliers Interested in You</p>
 			</div>

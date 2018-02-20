@@ -131,7 +131,7 @@ href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtes
 	<?php 
 	if($lastword=="dashboard"  ) {
 		?>
-		<div class="col-md-12">
+		<div class="">
 		<div class="col-md-7">
 			<div class="row">
 			<?php 

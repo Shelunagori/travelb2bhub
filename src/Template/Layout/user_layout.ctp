@@ -100,12 +100,16 @@ margin-bottom: 5px !important;
 margin-top: 5px !important;
 }
 
- @media print {
-	    .hide_print{
-		   display:none;
-	   }
+@media print {
+	.hide_print{
+	   display:none;
    }
-
+}
+.nav navbar-nav li {color:#848688 !important;}
+.user-panel {
+	height: 160px !important;
+	
+}
 </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -113,11 +117,12 @@ margin-top: 5px !important;
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
+	 
+    <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo">
+      
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>Admin</b>LTE</span>
+      <span class="logo-lg"><?=  $this->Html->image('/packages/serverfireteam/panel/img/logo.png', ['style'=>'width:49%;padding:5px;']) ?></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -200,30 +205,21 @@ margin-top: 5px !important;
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+      <div class="user-panel" align="center">
+        <div class="" >
+          <?php echo $this->Html->image('no-profile-image.jpg', ["class"=>"img-responsive center_img","alt"=>"Profile Pic","style"=>"border-radius: 100%;height:80px;    border: 1px solid #1295A2;"]); ?>
         </div>
-        <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        <div class="info">
+          Alexander Pierce
+		  <br>
+		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'profileedit']); ?>" class="logo">Edit Profile</a> | &nbsp;
+		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo">Change Password</a>
         </div>
       </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Search...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
+      
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
-        <li class="active treeview">
+       <!-- <li class="active treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             <span class="pull-right-container">
@@ -234,8 +230,8 @@ margin-top: 5px !important;
             <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
-        </li>
-		<li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+        </li>-->
+		<li class="active"><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>"><i class="fa fa-circle-o text-aqua"></i> <span>Dashboard</span></a></li>
       </ul>
     </section>
     <!-- /.sidebar -->
