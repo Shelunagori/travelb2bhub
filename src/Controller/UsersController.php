@@ -758,6 +758,17 @@ $chatCount = $allUnreadChat->count();
 $this->set('chatCount',$chatCount); 
 $this->set('allunreadchat',$allUnreadChat);
 }
+
+
+public function ajaxCity()
+    {
+		echo $name=$this->request->data['input'];
+		 exit;  
+     }
+
+
+
+
 public function changePassword() {
 $this->loadModel('Requests');
 $this->loadModel('Responses');

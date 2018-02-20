@@ -1,34 +1,15 @@
-  <?php echo $this->Html->script(['jquery.validate']);?>
+ <style>
+	#country-list{list-style:none;margin-left: 1px;padding:0;width:auto; margin-top: 10px;}
+	#country-list li{padding-left: 10px;padding-top: 7px; background: #efeeee85 ; border-bottom: #bbb9b9 1px solid; height:35px;top:2px}
+	#country-list li:hover{background:#d8d4d4;cursor: pointer;}
+	.column_column ul li, .column_helper ul li, .column_visual ul li, .icon_box ul li, .mfn-acc ul li, .ui-tabs-panel ul li, .post-excerpt ul li, .the_content_wrapper ul li{margin-bottom:0px !important}
+	#search-box{border: #e2e2e2 1px solid;border-radius:4px;}
+	#Content{ width:90% !important; margin-left: 5%;}
+	select:focus {background-color:#FFF !important;}
+	input:focus {background-color:#FFF !important;}
+	input[type="text"]:focus {background-color:#FFF !important;}
+</style>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
- 
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-	var cityData = '<?php echo $allCities; ?>';
-	$(document).ready(function () {
-		$("#city_name").autocomplete({
-			source: JSON.parse(cityData),
-			select: function (e, ui) {
-				e.preventDefault();
-				$("#city_id").val(ui.item.value);
-				$(this).val(ui.item.label);
-				$("#state_id").val(ui.item.state_id);
-				$("#state_name").val(ui.item.state_name);
-				$("#country_id").val(ui.item.country_id);
-				$("#country_name").val(ui.item.country_name);
-			}
-		});
-		// Overrides the default autocomplete filter function to search only from the beginning of the string
-		$.ui.autocomplete.filter = function (array, term) {
-			var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
-			return $.grep(array, function (value) {
-				return matcher.test(value.label);
-			});
-		};
-
-	});
-</script>
- 
 <section class="content">
       <div class="row">
         <!-- left column -->
@@ -99,12 +80,8 @@
                 </div>
 				 <div class="form-group col-md-6">
                   <label>City</label>
-                  <select class="form-control">
-                    <option>--Select--Please---</option>
-                    <option value="1" <?php if($role_id== 1){ echo "Selected"; }?> >Travel Agent</option>
-                    <option value="2" <?php if($role_id== 2){ echo "Selected"; }?> >Event Planner</option>
-                    <option value="3" <?php if($role_id== 3){ echo "Selected"; }?> >Hotelier</option>
-                  </select>
+                  <input type="textbox" class="form-control" style="height:40px;" required autocomplete="off" id="city-search-box" name="city" placeholder="where you want to go?">
+				  <div class="suggesstion-box" style="margin-top:-10px"></div>
                 </div>
 				
                 <div class="form-group">
@@ -568,266 +545,73 @@
 </div>
 </div>
 
-<?php echo $this->element('footer');?>
- <?php echo $this->Html->css(['telinput/css/intlTelInput']);?>
-  <?php echo $this->Html->script(['telinput/intlTelInput']);?>
-  <?php echo $this->Html->script(['telinput/utils']);?>
-  <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
-<script>
- $.validator.addMethod("needsSelection", function (value, element) {
-	var count = $(element).find('option:selected').length;
-	if(count == 0)
-		return false;
-	if(count > 0 && count < 6)
-		return true;
-	else
-		return false;
-});
-
-$('#UserRegisterForm').validate({
-onkeyup: function (element, event) {
-            if (event.which === 9 && this.elementValue(element) === "") {
-                return;
-            } else {
-                this.element(element);
-            }
-        },
-	rules: {
-		"company_name" : {
-			required : true
-		},
-		"first_name" : {
-			required : true
-		},
-		"last_name" : {
-			required : true
-		},
-		"email": {
-			required : true,
-			email: true
-		},
-		"mobile_number": {
-			required : true,
-			number: true,
-			minlength:10,
-  			maxlength:10
-		},
-		"address": {
-			required: true
-		},
-		"city_name": {
-			required: true
-		},
-		"locality": {
-			required: true
-		},
-		"pincode": {
-			required: true
-		},
-		"description": {
-			required: true
-		},
-		"p_contact": {
-			required: true,
-			number: true,
-			minlength:10,
-  			maxlength:10
-		},
-		"hotel_rating": {
-			required: true
-		}
-	},
-	messages: {
-		"company_name" : {
-			required : "Please enter company name."
-		},
-		"first_name" : {
-			required : "Please enter first name."
-		},
-		"last_name" : {
-			required : "Please enter last name."
-		},
-		"email": {
-			required : "Please enter email.",
-			email : "Please enter valid email."
-		},
-		"mobile_number": {
-			required : "Please enter contact number.",
-			number: "Please enter only number",
-			minlength: "Please enter at least 10 digit",
-			maxlength: "Please enter no more than 10 digit"
-		},
-		"address": {
-			required: "Please enter address."
-		},
-		"city_name": {
-			required: "Please select city."
-		},
-		"locality": {
-			required: "Please enter locality."
-		},
-		"pincode": {
-			required: "Please enter pincode."
-		},
-		"description": {
-			required: "Please enter description."
-		},
-		"p_contact": {
-			required: "Please enter secondary contact number.",
-number: "Please enter only number",
-			minlength: "Please enter at least 10 digit",
-			maxlength: "Please enter no more than 10 digit"
-		},
-		"hotel_rating": {
-			required: "Please select rating."
-		}
-	},
-	ignore: ":hidden:not(select)"
-});
-
-var profile_pic = '<?php echo $users["profile_pic"]; ?>';
-var role_id = '<?php echo $users["role_id"]; ?>';
-var company_img_1 = '<?php echo $users["company_img_1_pic"]; ?>';
-var pancard = '<?php echo $users["pancard_pic"]; ?>';
-var id_card = '<?php echo $users["id_card_pic"]; ?>';
-var company_shop_registration = '<?php echo $users["company_shop_registration_pic"]; ?>';
-var profile_pic_flag = true;
-var company_img_1_pic_flag = true;
-var pancard_pic_flag = true;
-var id_card_pic_flag = true;
-var company_shop_registration_pic_flag = true;
-if(profile_pic != "") {
-	profile_pic_flag = false;
-}
-if(company_img_1 != "") {
-	company_img_1_pic_flag = false;
-}
-if(pancard != "") {
-	pancard_pic_flag = false;
-}
-if(id_card != "") {
-	id_card_pic_flag = false;
-}
-if(company_shop_registration != "") {
-	company_shop_registration_pic_flag = false;
-}
-
-var travel_certificate_flag = false;
-var hotel_category_flag = false;
-if(role_id == "1") {
-	var travel_certificate_flag = true;
-	var hotel_category_flag = false;
-} else if(role_id == "3") {
-	var travel_certificate_flag = false;
-	var hotel_category_flag = true;
-}
-var settings = $('#UserRegisterForm').validate().settings;
-$.extend(true, settings, {
-	rules: {
-	  /* "profile_pic": {
-		   required: profile_pic_flag
-		},
-		"company_img_1": {
-			required: company_img_1_pic_flag
-		},
-		"pancard": {
-			required: pancard_pic_flag
-		},
-		"id_card": {
-			required: id_card_pic_flag
-		},
-		"company_shop_registration": {
-			required: company_shop_registration_pic_flag
-		},*/
-		"hotel_categories": {
-			required: hotel_category_flag
-		}
-	},
-	messages: {
-		/*"profile_pic" : {
-			required : "Please upload profile pic."
-		},
-		"company_img_1": {
-			required: "Please upload company image 1."
-		},
-		"pancard": {
-			required: "Please upload pancard."
-		},
-		"id_card": {
-			required: "Please upload id card."
-		},
-		"company_shop_registration": {
-			required: "Please upload company shop registration."
-		},*/
-		"hotel_categories": {
-			required: "Please select hotel categories."
-		}
-	}
-});
-</script>
- <?php echo $this->Html->css(['chosen/chosen']);?>
- <?php echo $this->Html->script(['chosen/chosen.jquery']);?>
- <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
-<?php if($this->request->session()->read('Auth.User.role_id') == 1) { ?>
-	<script>
-		var needPreferenceState = true;
-		var settings = $('#UserRegisterForm').validate().settings;
-		$.extend(true, settings, {
-			rules: {
-				"preference[]": {
-					needsSelection: needPreferenceState
-				}
-			},
-			messages: {
-				"preference[]": {
-					needsSelection: "Please select between 1 to 5 states."
-				}
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+  <script>
+	var cityData = '<?php echo $allCities; ?>';
+	$(document).ready(function () {
+		$("#city_name").autocomplete({
+			source: JSON.parse(cityData),
+			select: function (e, ui) {
+				e.preventDefault();
+				$("#city_id").val(ui.item.value);
+				//$(this).val(ui.item.label);
+				$("#state_id").val(ui.item.state_id);
+				$("#state_name").val(ui.item.state_name);
+				$("#country_id").val(ui.item.country_id);
+				$("#country_name").val(ui.item.country_name);
 			}
 		});
-		$(document).ready(function($){
-			$(".chosen-select").chosen();
-			alert();
+		/*// Overrides the default autocomplete filter function to search only from the beginning of the string
+		$.ui.autocomplete.filter = function (array, term) {
+			var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
+			return $.grep(array, function (value) {
+				return matcher.test(value.label);
+			});
+		};
+*/
+	});
+</script>
+<script>
+
+$(document).ready(function(){
+			$(".btnSubmit").click(function(){
+						 
+						var city=$("#city-search-box").val();
+ 						if(city !=""){ 
+							$("#loader-1").show();
+						}
+					});
+					$("#city-search-box").keyup(function(){
+						 
+						var input=$("#city-search-box").val();
+						 
+ 		var m_data = new FormData();
+		m_data.append('input',input);
+			
+		$.ajax({
+			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_city"]); ?>",
+			data: m_data,
+			processData: false,
+			contentType: false,
+			type: 'POST',
+			dataType:'text',
+			success: function(data)   // A function to be called if request succeeds
+			{ 
+				$(".suggesstion-box").show();
+				$(".suggesstion-box").html(response);
+				$(".city-search-box").css("background","#FFF");
+			}
+					/* 	$.ajax({
+							type: "POST",
+							url: "http://udaipurcare.com/hotel/citySearch.php",
+							data:"keyword="+input,
+							success: function(response){
+								$(".suggesstion-box").show();
+								$(".suggesstion-box").html(response);
+								$(".city-search-box").css("background","#FFF");
+							}
+						}); */
+					});
 		});
-        
-        
-        
-        function DoubleScroll(element) {
-                var scrollbar= document.createElement('div');
-                scrollbar.appendChild(document.createElement('div'));
-                scrollbar.style.overflow= 'auto';
-                scrollbar.style.overflowY= 'hidden';
-                scrollbar.firstChild.style.width= element.scrollWidth+'px';
-                scrollbar.firstChild.style.paddingTop= '1px';
-                scrollbar.firstChild.appendChild(document.createTextNode('\xA0'));
-                scrollbar.onscroll= function() {
-                    element.scrollLeft= scrollbar.scrollLeft;
-                };
-                element.onscroll= function() {
-                    scrollbar.scrollLeft= element.scrollLeft;
-                };
-                element.parentNode.insertBefore(scrollbar, element);
-            }
+</script>
 
-            DoubleScroll(document.getElementById('table_responsive'));
-	</script>
-<?php } ?>
-<script>
-    $("#mobile_number").intlTelInput({
-
-formatOnDisplay: false,
-      initialCountry: "in",
-      onlyCountries: ['in'],
-       separateDialCode: true,
-
-
-      
-    });
-  </script>
-<script>
-    $("#p_contact").intlTelInput({
-     formatOnDisplay: false,
-       initialCountry: "in",
-      onlyCountries: ['in'],
-       separateDialCode: true
-    });
-  </script>
