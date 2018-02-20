@@ -131,8 +131,10 @@ class TaxiFleetPromotionsController extends AppController
 			}
 			else
 			{
-					$message = 'Already Liked';
-					$response_code = 205;					
+				$this->TaxiFleetPromotions->TaxiFleetPromotionLikes->deleteAll(['taxi_fleet_promotion_id'=>$likeTaxiFleetPromotions->taxi_fleet_promotion_id,'user_id'=>$likeTaxiFleetPromotions->user_id]);
+					
+				$message = 'Disliked';
+				$response_code = 200;				
 			}	
 
 		}

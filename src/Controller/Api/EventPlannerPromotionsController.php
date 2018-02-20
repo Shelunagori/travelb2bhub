@@ -126,8 +126,10 @@ class EventPlannerPromotionsController extends AppController
 			}
 			else
 			{
-					$message = 'Already Liked';
-					$response_code = 205;					
+				$this->EventPlannerPromotions->EventPlannerPromotionLikes->deleteAll(['event_planner_promotion_id'=>$likeEventPlannerPromotions->event_planner_promotion_id,'user_id'=>$likeEventPlannerPromotions->user_id]);
+					
+				$message = 'Disliked';
+				$response_code = 200;						
 			}	
 
 		}

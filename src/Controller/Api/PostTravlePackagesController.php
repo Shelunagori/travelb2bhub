@@ -235,8 +235,8 @@ class PostTravlePackagesController extends AppController
 			{
 				$this->PostTravlePackages->PostTravlePackageLikes->deleteAll(['post_travle_package_id'=>$likePostTravelPackages->post_travle_package_id,'user_id'=>$likePostTravelPackages->user_id]);
 					
-					$message = 'Already Liked';
-					$response_code = 205;					
+					$message = 'Disliked';
+					$response_code = 200;					
 			}	
 
 		}
