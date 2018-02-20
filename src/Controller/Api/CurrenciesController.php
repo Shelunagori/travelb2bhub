@@ -7,7 +7,7 @@ class CurrenciesController extends AppController
 
     public function index()
     {
-        $Currencies = $this->Currencies->find('list')
+        $Currencies = $this->Currencies->find()
 		->where(['is_deleted'=>0]);
 		
 		if(!empty($Currencies->toArray()))

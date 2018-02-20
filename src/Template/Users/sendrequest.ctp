@@ -343,10 +343,9 @@ $(document).ready(function($){
 
 														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 															<div class="input-field">
-		
 																<label for="from">Hotel Rating</label>
-			<div style=" width: 200px;" >
-			<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
+		<div style=" width: 200px;" >
+		<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
        <input class="star star-5" id="star-5-21" type="radio" value="5" name="hotel_rating"/>
        <label class="star star-5" for="star-5-21"></label>
        <input class="star star-4" id="star-4-21" type="radio" value="4" name="hotel_rating"/>
@@ -486,8 +485,7 @@ $(document).ready(function($){
 							<input type="hidden" name="user_id" value="<?php echo $users['id']; ?>"/>
                             <div class="form-box" >
                                 <div class="panel-group" id="accordion" style="background-color:white;">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
+                                   
                                             <h4 class="panel-title">
 												<fieldset>
 												  <legend style="color:#369FA1;"><b>GENERAL REQUIREMENTS:</b></legend>
@@ -530,21 +528,19 @@ $(document).ready(function($){
 															</div>
                                                     </div>
                                                    
-													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+													<div class="col-md-6">
                                                         <div class="input-field">
                                                             <p for="from">Children below 6  </p>
                                                             <div><input type='button' value='-' class='qtyminus1' field='children' id="btnminus1"/>
-                                                                <input type='text' autocomplete="off" name='children' value='0' class='qty' id="textcounter1"/>
+                                                                <input type='text' autocomplete="off" name='children' value='1' class='qty' id="textcounter1"/>											
                                                                 <input type='button' value='+' class='qtyplus1' field='children' id="btnplus1"/></div>
 																	</div>
 																</div>
 															</div>
 														</div>
-													</div>
-												</fieldset></h4></div></div>
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title">
+														</div>
+												
+												</fieldset></h4>
 												<fieldset>
 												  <legend style="color:#369FA1;"><b>STAY REQUIREMENTS:</b></legend>
 												
@@ -558,23 +554,23 @@ $(document).ready(function($){
                                                             </p>
 															 </div>
 															<div class="col-lg-2">
-															</label>Single</label>
+															<p>Single</p>
 															<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
 															 </div>
 															 <div class="col-lg-2">
-															</label>Double</label>
+															<p>Double</p>
 															<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
 															 </div>
 															 <div class="col-lg-2">
-															</label>Tripple</label>
+															<p>Tripple</p>
 															<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
 															 </div>
 															 <div class="col-lg-2">
-															</label>Child with Bed</label>
+															<p>Child with Bed</p>
 															<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
 															 </div>
 															  <div class="col-lg-2">
-															</label>Child without Bed</label>
+															<p>Child without Bed</p>
 															<input name="single_room" type="number" class="form-control s_room"  autocomplete="off" />
 															 </div>
 
@@ -584,9 +580,9 @@ $(document).ready(function($){
 													<div class="col-md-12">
 													<div class="col-md-4">
                                                         <div class="input-field">
-                                                            <label for="from">
+                                                            <p for="from">
 																Hotel Rating
-															</label>
+															</p>
 															
 															</div>
 															<div>
@@ -600,7 +596,7 @@ $(document).ready(function($){
                                                    
 													<div class="col-md-4 ">
                                                         <div class="input-field">
-                                                            <label for="from">Hotel Catrgory </label>
+                                                            <p for="from">Hotel Catrgory </p>
                                                             <div>
                                                                 <input type='text' autocomplete="off" name='mob_no'  placeholder="mobile No"/>
                                                                </div>
@@ -608,7 +604,7 @@ $(document).ready(function($){
                                                     </div>
 													<div class="col-md-4 ">
                                                         <div class="input-field">
-                                                            <label for="from">Meal Plan </label>
+                                                            <p for="from">Meal Plan </p>
                                                             <div><input type='text' autocomplete="off" name='mob_no'  placeholder="Category"/></div>
                                                         </div>
                                                     </div>
@@ -616,18 +612,68 @@ $(document).ready(function($){
                                                 </div>
                                                 </div>
 												<div class="row">
-												
-													<input type='text' autocomplete="off" name='mob_no'  placeholder="Category"/>
+												<div class="col-md-12">
+												<p>Locality</p>
+													<input type='text' autocomplete="off" name='mob_no'  placeholder="Enter Locality or Village or Town" class="form-control input-large" />
 												
 													</div>
 													</div>
-												 </fieldset>
-                                                <a class="gr" data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                                                    General Requirements</a>
-                                            </h4>
-                                        </div>
-                                          
-                                    </div>
+												<div class="row">
+													<div class="col-md-12">
+														<div class="col-md-6">
+																<div class="input-field">
+																<p for="from">
+																	Destination City
+																</p>
+																</div>
+																<div>
+																		<input type='text' autocomplete="off" name='destination_city'  placeholder="Destination City" class="form-control input-large" />
+																</div>
+														</div>
+														<div class="col-md-6">
+																	<div class="input-field">
+																		<p for="from">
+																			Destination Source
+																		</p>
+																		</div>
+																		<div>
+																				<input type='text' autocomplete="off" name='destination_source'  placeholder="Destination Source" class="form-control input-large" />
+																		</div>
+														</div>
+															 
+															
+															</h4>
+													</div>
+												</div>
+												<div class="row">
+													<div class=" col-md-12">
+														<div class="col-md-6">
+																<div class="input-field">
+																<p for="from">
+																	Check In
+																</p>
+																</div>
+																<div>
+																		<input type='text' autocomplete="off" name='check_in'  placeholder="Check In" class="form-control input-large" >
+																</div>
+														</div>
+														<div class="col-md-6">
+																	<div class="input-field">
+																		<p for="from">
+																			Check Out
+																		</p>
+																		</div>
+																		<div>
+																				<input type='text' autocomplete="off" name='check_out'  placeholder="Check Out" class="form-control input-large" />
+																		</div>
+														</div>
+															
+															
+															</h4>
+													</div>
+												</div>
+										</div>
+										</fieldset>
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <h4 class="panel-title">

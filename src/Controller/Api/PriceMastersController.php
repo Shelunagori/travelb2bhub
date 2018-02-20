@@ -8,7 +8,7 @@ class PriceMastersController extends AppController
     public function index($promotion_type_id = null)
     {
 		$promotion_type_id = $this->request->query('promotion_type_id');
-        $PriceMasters = $this->PriceMasters->find('list')
+        $PriceMasters = $this->PriceMasters->find()
 		->where(['is_deleted'=>0,'promotion_type_id'=>$promotion_type_id]);
 		
 		if(!empty($PriceMasters->toArray()))

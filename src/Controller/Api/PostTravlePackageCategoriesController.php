@@ -7,7 +7,7 @@ class PostTravlePackageCategoriesController extends AppController
 
     public function index()
     {
-        $postTravlePackageCategories = $this->PostTravlePackageCategories->find('list')
+        $postTravlePackageCategories = $this->PostTravlePackageCategories->find()
 		->where(['is_deleted'=>0]);
 		
 		if(!empty($postTravlePackageCategories->toArray()))
@@ -25,7 +25,4 @@ class PostTravlePackageCategoriesController extends AppController
 		$this->set(compact('postTravlePackageCategories','message','response_code'));
         $this->set('_serialize', ['postTravlePackageCategories','message','response_code']);
     }
-
-
-
 }
