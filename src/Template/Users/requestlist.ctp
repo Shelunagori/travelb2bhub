@@ -254,7 +254,8 @@ legend
 							<p><b>Comment : </b>&nbsp;
 								<span class="details"><?php echo $request['comment']; ?></span>
 							</p>
-							<div class="col-md-3">
+							 
+							<div class="col-md-4">
 								<a class="viewdetail btn btn-danger btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"data-target="#myModal1<?php echo $request['id']; ?>"data-toggle=modal> Details</a>
 								<div class="fade modal"id="myModal1<?php echo $request['id']; ?>"role=dialog>
                                  <div class=modal-dialog>
@@ -272,7 +273,7 @@ legend
 							<div class="col-md-4">
 								<a href=javascript:void(0); class="removeRequest btn btn-danger btn-sm" request_id="<?php echo $request['id']; ?>">Remove</a>
 							</div>
-							<div class="col-md-5 check_responses" id="checkresponse_<?php echo $request['id'];?>">
+							<div class="col-md-4 check_responses" id="checkresponse_<?php echo $request['id'];?>">
 								<?php if($data['responsecount'][$pid] > 0 ) 
 								{ ?>
 									<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$pid)) ?>"class="check_responses_btn btn btn-danger btn-sm"> Responses (<strong><?php echo $data['responsecount'][$pid]; ?></strong>) </a>
