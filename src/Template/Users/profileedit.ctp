@@ -9,6 +9,54 @@
 	input:focus {background-color:#FFF !important;}
 	input[type="text"]:focus {background-color:#FFF !important;}
 </style>
+<style>
+hr { margin-top:0px!important;}
+.price {
+	height: 40px;
+    background-color: #000000d9;
+    color: #FFF;
+    text-align: center;
+    font-size: 18px;
+    padding-top: 7px;
+}
+.priceing
+{
+    padding: 5px;
+    margin-bottom: 20px;  
+    border: 1px solid #ddd;
+    border-radius: 5px;	
+}
+.img {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+.overlap {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+	width:100%;
+	opacity: .7;
+}
+.nm { 
+	font-size: 19px;
+    color: #373435;
+    font-weight: 900;
+}
+.other { 
+	font-size: 17px;
+    color: #727376; 
+}
+.arroysign
+{
+	margin: 17px;
+	right: 23px !important;
+    width: 3% !important;
+    top: 40%;
+    bottom: 52%;
+}
+ 
+</style>
 
 <section class="content">
       <div class="row">
@@ -17,12 +65,15 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Quick Example</h3>
+              <h3 class="box-title">Edit Profile</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
             <form role="form">
               <div class="box-body">
+			  <fieldset>
+				<legend>COMPANY INFORMATION</legend>
+			  <div>
 				 <?php 
 				 
 				 $role_id=$this->request->session()->read('Auth.User.role_id');
@@ -111,7 +162,153 @@
                             echo $this->Form->control('preference', ["value"=>$selectedPreferenceStates, "id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select", "data-placeholder"=>"Select Some States", "style"=>"height:125px;"]); ?>
                 </div>
                  </div>
-              </div>
+				 
+				 </div>
+				</fieldset>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				<fieldset>
+				<legend>CERTIFICATES</legend>
+			   
+				 <div>
+					<div class="col-md-12">
+						<div class="img_show col-md-3" align="center">
+							<?php if(!empty($users['iata_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iata_pic'])) { 
+								echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iata_pic'], ["alt"=>"IATA Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
+							<?php } ?>
+							<p>
+								<?php echo $this->Form->input('IATA Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'iata_pic']); ?>
+								IATA
+							</p>
+						</div>
+						<div class="img_show col-md-3" align="center">
+							<?php if(!empty($users['tafi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['tafi_pic'])) {
+                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['tafi_pic'], ["alt"=>"T A F I Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
+                            <?php } ?>
+							<p>
+								<?php echo $this->Form->input('T A F I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'tafi_pic']); ?>
+								TAFI
+							</p>
+						</div>
+						
+						<div class="img_show col-md-3" align="center">
+							<?php if(!empty($users['taai_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['taai_pic'])) { 
+                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['taai_pic'], ["alt"=>"T A A I Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
+							<?php } ?>
+							<p>
+								<?php echo $this->Form->input('T A A I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'taai_pic']); ?>
+								TAAI
+							</p>
+						</div>
+						
+						<div class="img_show col-md-3" align="center">
+							<?php if(!empty($users['iato_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iato_pic'])) { 
+                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iato_pic'], ["alt"=>"I A T O Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
+							<?php } ?>
+							<p>
+								<?php echo $this->Form->input('IATO Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'iato_pic']); ?>
+								IATO
+							</p>
+						</div>
+						
+						<div class="img_show col-md-3" align="center">
+							<?php if(!empty($users['adyoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adyoi_pic'])) { 
+                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adyoi_pic'], ["alt"=>"A D Y O I Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
+							<?php } ?>
+							<p>
+								<?php echo $this->Form->input('A D Y O I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'adyoi_pic']); ?>
+								ADYOI
+							</p>
+						</div>
+						
+						<div class="img_show col-md-3" align="center">
+							<?php if(!empty($users['iso9001_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iso9001_pic'])) { 
+                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iso9001_pic'], ["alt"=>"I S O 9001 Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
+							<?php } ?>
+							<p>
+								<?php echo $this->Form->input('I S O 9001 Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'iso9001_pic']); ?>
+								ISO
+							</p>
+						</div>
+						
+						<div class="img_show col-md-3" align="center">
+							<?php if(!empty($users['uftaa_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['uftaa_pic'])) { 
+                               echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['uftaa_pic'], ["alt"=>"U F T A A Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
+							<?php } ?>
+							<p>
+								<?php echo $this->Form->input('U F T A A Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'uftaa_pic']); ?>
+								UFTAA
+							</p>
+						</div>
+						
+						<div class="img_show col-md-3" align="center">
+							<?php if(!empty($users['adtoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adtoi_pic'])) { 
+                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adtoi_pic'], ["alt"=>"A D T O I Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
+							<?php } ?>
+							<p>
+								<?php echo $this->Form->input('A D T O I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'adtoi_pic']); ?>
+								ADTOI
+							</p>
+						</div>
+						
+					</div>
+				 </div>
+				</fieldset>
+				
+				
+				
+				
+				<fieldset>
+				<legend>UPLOAD PHOTO</legend>
+			   
+				 <div>
+					<div class="col-md-12">
+						<div class="img_show col-md-4" align="center">
+							<?php if(!empty($users['profile_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['profile_pic'])) {
+								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['profile_pic'], ["class"=>"img-responsive", "alt"=>"Profile Pic", "height"=>150]);?>
+							<?php } ?>
+							<p>
+								<?php echo $this->Form->input('Profile Picture', ['type' => 'file', 'class' => 'form-control', 'name' => 'profile_pic']); ?>
+								Profile Picture
+							</p>
+						</div>
+						<div class="img_show col-md-4" align="center">
+							<?php if(!empty($users['company_img_1_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.	$users['id'].DS.$users['company_img_1_pic'])) { 
+								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_1_pic'], ["class"=>"img-responsive", "alt"=>"Company Image 1 Pic", "height"=>150]);?>
+							<?php } ?>
+							<p>
+								<?php echo $this->Form->input('Profile Picture', ['type' => 'file', 'class' => 'form-control', 'name' => 'profile_pic']); ?>
+								Profile Picture
+							</p>
+						</div>
+						
+						 
+						
+					</div>
+				 </div>
+				</fieldset>
+				
+            </div>
+			  
+			  
+			  
+			  
               <!-- /.box-body -->
 
               <div class="box-footer">
@@ -143,150 +340,7 @@
         <div class="form" >
             <?php $pararm = $users['id']; ?>
 			<?php  echo $this->Form->create("Users", ['type' => 'file', 'url' => ['controller' => 'Users', 'action' => 'edit',$pararm], 'id'=>"UserRegisterForm"]); ?>
-             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-b20">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 user_category">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt margin-b10">
-                    <div class="input-field">
-                      <label for="from">User Category</label>
-                      <input type="text" class="form-control" name="" disabled value="<?php if($this->request->session()->read('Auth.User.role_id') == 1) {echo "Travel Agent";} elseif($this->request->session()->read('Auth.User.role_id') == 2) { echo "Event Planner";} else {echo "Hotelier";} ?>"/>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-                    <div class="input-field">
-                      <label for="from">First Name<span class="asterisk">
-                                                    <img src="../img/Asterisk.png" class="img-responsive">
-                                                </span></label>
-                      <input type="text" class="form-control" name="first_name" value="<?php echo $users['first_name'] ?>" id="first_name" placeholder="Enter Here"/>
-                    </div>
-                 </div>
-                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-                    <div class="input-field">
-                      <label for="from">Last Name<span class="asterisk">
-                                                    <img src="../img/Asterisk.png" class="img-responsive">
-                                                </span></label>
-                      <input type="text" class="form-control" name="last_name" value="<?php echo $users['last_name'] ?>" id="last_name" placeholder="Enter Here"/>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-                    <div class="input-field">
-                      <label for="from">Company Name<span class="asterisk">
-                                                    <img src="../img/Asterisk.png" class="img-responsive">
-                                                </span></label>
-                      <input type="text" class="form-control" name="company_name" value="<?php echo $users['company_name'] ?>" id="company_name" placeholder="Enter Here"/>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-                    <div class="input-field">
-                      <label for="from">Email<span class="asterisk">
-                                                    <img src="../img/Asterisk.png" class="img-responsive">
-                                                </span></label>
-                      <input type="text" name="email" class="form-control" value="<?php echo $users['email'] ?>" id="email" placeholder="Enter Here" disabled/>
-                    </div>
-                  </div>
-                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-                    <div class="input-field">
-                      <label for="from"> Mobile Number<span class="asterisk">
-                                                    <img src="../img/Asterisk.png" class="img-responsive">
-                                                </span></label>
-                      <input type="text" class="form-control" name="mobile_number" value="<?php echo str_replace(' ','',$users['mobile_number']); ?>" id="mobile_number" placeholder="Enter Here"/>
-                    </div>
-                 </div>
-                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-                    <div class="input-field">
-                      <label for="from">Secondary Contact<span class="asterisk">
-                                                    <img src="../img/Asterisk.png" class="img-responsive">
-                                                </span></label>
-                      <input type="text" name="p_contact" class="form-control" value="<?php echo $users['p_contact'] ?>" id="p_contact" placeholder="Secondary Contact Number"/>
-                    </div>
-                 </div>
-
-                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-                    <div class="input-field">
-                      <label for="from">Address Line 1<span class="asterisk">
-                                                    <img src="../img/Asterisk.png" class="img-responsive">
-                                                </span></label>
-                      <input type="text" class="form-control" name="address" value="<?php echo $users['address'] ?>" id="address" placeholder="Enter Here"/>
-                    </div>
-                 </div>
-
-                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-                    <div class="input-field">
-                      <label for="from">Address Line 2</label>
-                      <input type="text" class="form-control" name="address1" value="<?php echo $users['address1'] ?>" id="address1" placeholder="Enter Here"/>
-                    </div>
-                 </div>
-
-                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-                    <div class="input-field">
-                      <label for="from">Locality<span class="asterisk">
-                                                    <img src="../img/Asterisk.png" class="img-responsive">
-                                                </span></label>
-                      <input type="text" class="form-control" name="locality" value="<?php echo $users['locality'] ?>" id="locality" placeholder="Enter Here"/>
-                    </div>
-                 </div>
-
-
-
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-                    <div class="input-field">
-                      <label for="from">City<span class="asterisk">
-                                                    <img src="../img/Asterisk.png" class="img-responsive">
-                                                </span></label>
-                      <input type="text" class="form-control" id="city_name" name="city_name" value="<?php echo (!empty($users['city_id']))?$allCityList[$users['city_id']]:"" ;?>" placeholder="Select city/nearest city"/>
-                    <input type='hidden' id='city_id' name="city_id" value="<?php echo (!empty($users['city_id']))?$users['city_id']:"" ?>" />
-                    </div>
-                </div>
-
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-                    <div class="input-field">
-                      <label for="from">State</label>
-                      <input type="text" class="form-control" id ="state_name" value = "<?php echo (!empty($users['state_id']))?$allStates[$users['state_id']]:""; ?>"name="state_name" placeholder="Select State" readonly/>
-                        <input type='hidden' id='state_id' name="state_id" value="<?php echo (!empty($users['state_id']))?$users['state_id']:""; ?>" />
-                    </div>
-                 </div>
-
-                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-                    <div class="input-field">
-                      <label for="from">Country</label>
-                      <input type="text" class="form-control" id ="country_name" Value ="India" name="country_name" placeholder="Select Country" readonly/>
-                        <input type='hidden' id='country_id' name="country_id" value="<?php echo (!empty($users['country_id']))?$users['country_id']:""; ?>" />
-                    </div>
-                 </div>
-                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-                    <div class="input-field">
-                      <label for="from">Pincode<span class="asterisk">
-                                                    <img src="../img/Asterisk.png" class="img-responsive">
-                                                </span></label>
-                      <input type="text" class="form-control" id ="pincode" value = "<?php echo (!empty($users['pincode']))?$users['pincode']:""; ?>"name="pincode" placeholder="Enter Pincode"/>
-                    </div>
-                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-                    <div class="input-field">
-                      <label for="from">Website URL</label>
-                      <input type="text" class="form-control" id ="web_url" value = "<?php echo (!empty($users['web_url']))?$users['web_url']:""; ?>" name="web_url" placeholder="Website URL"/>
-                    </div>
-                </div>
-
-            <?php if($this->request->session()->read('Auth.User.role_id') == 1) { ?>
-                <div  class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt margin-b10">
-                    <div id="preferenceStateDiv" >
-                        <label for="Preference_States">States where you operate</label>
-                        <img src="/img/detail-ico.png" alt="" title="Select upto 5 states where you can organized Travel Packages, Hotel Rooms, or Transportation Services for other Users."/>
-                        <div class="input-field">
-                            <?php 
-                            $selectedPreferenceStates = "";
-                            if(!empty($users['preference'])) {
-                                $selectedPreferenceStates = explode(",", $users['preference']);
-                            }	
-                            echo $this->Form->control('preference', ["value"=>$selectedPreferenceStates, "id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select", "data-placeholder"=>"Select Some States", "style"=>"height:125px;"]); ?>
-                        </div>
-                     </div>
-                </div>
             
-		<?php } ?>
-		  </div>
-                </div>
-                
             <?php if($this->request->session()->read('Auth.User.role_id') == 1) { ?>
              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-b20">
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 user_category">
@@ -303,105 +357,7 @@
                                 <th style="">Previous Uploaded Image</th>
                               </tr>
                             </thead>
-                            <tbody>
-                                <tr>
-                                    <td >1.</td>
-                                    <td>IATA</td>
-                                    <td><?php echo $this->Form->input('IATA Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'iata_pic']); ?></td>
-                                    <td>
-                                        <div>
-                                        <?php if(!empty($users['iata_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iata_pic'])) { 
-                                        echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iata_pic'], ["alt"=>"IATA Pic", "height"=>150]);?>
-                                        <?php } ?>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td >2.</td>
-                                    <td>T A F I Pic</td>
-                                    <td><?php echo $this->Form->input('T A F I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'tafi_pic']); ?></td>
-                                    <td>
-                                        <div>
-                                        <?php if(!empty($users['tafi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['tafi_pic'])) { 
-                                        echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['tafi_pic'], ["alt"=>"T A F I Pic", "height"=>150]);?>
-                                        <?php } ?>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td >3.</td>
-                                    <td>T A A I Pic</td>
-                                    <td><?php echo $this->Form->input('T A A I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'taai_pic']); ?></td>
-                                    <td>
-                                        <div>
-                                        <?php if(!empty($users['taai_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['taai_pic'])) { 
-                                        echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['taai_pic'], ["alt"=>"T A A I Pic", "height"=>150]);?>
-                                        <?php } ?>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td >4.</td>
-                                    <td>I A T O Pic</td>
-                                    <td><?php echo $this->Form->input('IATO Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'iato_pic']); ?></td>
-                                    <td>
-                                        <div>
-                                        <?php if(!empty($users['iato_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iato_pic'])) { 
-                                        echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iato_pic'], ["alt"=>"I A T O Pic", "height"=>150]);?>
-                                        <?php } ?>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td >5.</td>
-                                    <td>A D Y O I Pic</td>
-                                    <td><?php echo $this->Form->input('A D Y O I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'adyoi_pic']); ?></td>
-                                    <td>
-                                        <div>
-                                        <?php if(!empty($users['adyoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adyoi_pic'])) { 
-                                        echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adyoi_pic'], ["alt"=>"A D Y O I Pic", "height"=>150]);?>
-                                        <?php } ?>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td >6.</td>
-                                    <td>I S O 9001 Pic</td>
-                                    <td><?php echo $this->Form->input('I S O 9001 Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'iso9001_pic']); ?></td>
-                                    <td>
-                                        <div>
-                                        <?php if(!empty($users['iso9001_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iso9001_pic'])) { 
-                                        echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iso9001_pic'], ["alt"=>"I S O 9001 Pic", "height"=>150]);?>
-                                        <?php } ?>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td >7.</td>
-                                    <td>U F T A A Pic</td>
-                                    <td><?php echo $this->Form->input('U F T A A Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'uftaa_pic']); ?></td>
-                                    <td>
-                                        <div>
-                                        <?php if(!empty($users['uftaa_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['uftaa_pic'])) { 
-                                        echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['uftaa_pic'], ["alt"=>"U F T A A Pic", "height"=>150]);?>
-                                        <?php } ?>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td >8.</td>
-                                    <td>A D T O I Pic</td>
-                                    <td><?php echo $this->Form->input('A D T O I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'adtoi_pic']); ?></td>
-                                    <td>
-                                        <div>
-                                        <?php if(!empty($users['adtoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adtoi_pic'])) { 
-                                        echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adtoi_pic'], ["alt"=>"A D T O I Pic", "height"=>150]);?>
-                                        <?php } ?>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                            </tbody>
+                            
                         </table>
 					</div>
 				</div>
