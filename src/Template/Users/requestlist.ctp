@@ -2,25 +2,34 @@
 use Cake\Datasource\ConnectionManager; 
 $conn = ConnectionManager::get('default');
 ?>
+<style>
+legend
+{
+	text-align: center;
+}
+.requestType {	
+	color: #f87200;
+    font-weight: 600;
+}
+.hotel{
+	
+}
+.package{
+	 
+}
+.contain>p{
+	color:#96989A !important;
+}
+.details {color:#000 !important; font-weight: 600;}	
+.btn-block { width:40% !important;}
+</style>
+
+
 <div class=container-fluid id=requestlist>
-<div class="row equal_column">
-<?php echo $this->element('left_panel');?>
-<div class="col-xs-12 padding0 col-lg-9 col-md-9 col-sm-9">
-   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding0 border_bottom">
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-         <h4 class=title>My Requests</h4>
-      </div>
-      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-         <ul class=top-icons-wrap>
-         <li><a href=javascript:void(0); class=link-icon data-target=#myModal123 data-toggle=modal><img alt=""src=/img/sortarrow.png></a>
-         <li><a href=javascript:void(0); class=link-icon data-target=#myModal122 data-toggle=modal><img alt=""src=/img/white-filter.png></a>
-         <li class="notification_list">
-            <a href=javascript:void(0); class=link-icon id=chat_icon><span class=chat_count><?php echo $chatCount;?></span><img alt=""src=/img/notify.png></a>
-            <div class=ap-subs>
-               <ul class="list-unstyled msg_list"role=menu>
+<div class="row equal_column"> 
+    <div class="col-md-12">
                <?php echo $this->element('subheader');?>
-               <hr class=hr_bordor>
-               <div class=col-md-12><?php echo  $this->Flash->render() ?></div>
+                <div class=col-md-12><?php echo  $this->Flash->render() ?></div>
                <div class="fade modal form-modal"id=myModal123 role=dialog>
                   <div class=modal-dialog>
                      <div class=modal-content>
@@ -45,7 +54,7 @@ $conn = ConnectionManager::get('default');
                      </div>
                   </div>
                </div>
-               <div class="fade modal form-modal"id=myModal122 role=dialog>
+               <div class="fade modal form-modal" id=myModal122 role=dialog>
                   <div class=modal-dialog>
                      <div class=modal-content>
                         <div class=modal-header>
@@ -126,75 +135,128 @@ $conn = ConnectionManager::get('default');
                   </div>
                </div>
 				<div id="autorefresh_requestlist">
-               <?php if(isset($_GET['sort']) && $_GET['sort']=="resposesnolh") { ?><script>$(document).ready(function(){$(".req").sort(function(n,e){return parseInt(n.id)>parseInt(e.id)}).each(function(){var n=$(this);n.remove(),$(n).appendTo("#cat")})})</script><?php } ?><?php if(isset($_GET['sort']) && $_GET['sort']=="resposesnohl") { ?><script>$(document).ready(function(){$(".req").sort(function(n,e){return parseInt(n.id)<parseInt(e.id)}).each(function(){var n=$(this);n.remove(),$(n).appendTo("#cat")})})</script><?php } ?><?php if(isset($_GET['sort']) && $_GET['sort']=="requesttype") { ?><script>$(document).ready(function(){$(".req").sort(function(n,e){return parseInt(n.id)>parseInt(e.id)}).each(function(){var n=$(this);n.remove(),$(n).appendTo("#cat")})})</script><?php } ?><?php
-                  if(count($requests) >0) {
-                  $m =0;
-                  foreach($requests as $request){ 
-                  $totmem = $request['adult'] +   $request['children']; 
-                  if(isset($_GET['memberssearch']) && $_GET['memberssearch']!="" && $_GET['memberssearch'] !=$totmem ){
-                  continue;
-                  }
-                  if($m%2==0) { echo '<div class="clearfix"></div>'; 
-                  }
+               <?php if(isset($_GET['sort']) && $_GET['sort']=="resposesnolh") { ?><script>$(document).ready(function(){$(".req").sort(function(n,e){return parseInt(n.id)>parseInt(e.id)}).each(function(){var n=$(this);n.remove(),$(n).appendTo("#cat")})})</script><?php } ?><?php if(isset($_GET['sort']) && $_GET['sort']=="resposesnohl") { ?><script>$(document).ready(function(){$(".req").sort(function(n,e){return parseInt(n.id)<parseInt(e.id)}).each(function(){var n=$(this);n.remove(),$(n).appendTo("#cat")})})</script><?php } ?><?php if(isset($_GET['sort']) && $_GET['sort']=="requesttype") { ?><script>$(document).ready(function(){$(".req").sort(function(n,e){return parseInt(n.id)>parseInt(e.id)}).each(function(){var n=$(this);n.remove(),$(n).appendTo("#cat")})})</script><?php } ?>
+			   
+	<!----------- Main SHow----------->		   
+			<?php
+            if(count($requests) >0) {
+                $m =0;
+                foreach($requests as $request){ 
+					$totmem = $request['adult'] +   $request['children']; 
+					  if(isset($_GET['memberssearch']) && $_GET['memberssearch']!="" && $_GET['memberssearch'] !=$totmem ){
+						continue;
+					  }
+					  if($m%2==0) { 
+						echo '<div class="clearfix"></div>'; 
+					  }
                   $m++;
                   ?>
+				  
                <div id=cat>
-                  <?php if(isset($_GET['sort']) && $_GET['sort']=="requesttype") { ?>
-                  <div class="col-xs-12 col-sm-12 col-lg-6 col-md-6 req"id="<?php if($request['category_id']==1){ echo "1";} if($request['category_id']==2){ echo "3";}if($request['category_id']==3){ echo "2";} ?>">
-                     <?php } else { ?>
-                     <div class="col-xs-12 col-sm-12 col-lg-6 col-md-6 req"id="<?php echo $data['responsecount'][$request['id']]; ?>">
-                        <?php } ?>
-                        <div class=box-event id="request-<?php echo $request['id']; ?>">
-                           <ul>
-                              <li class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
-                                 <p><b>Request Type: </b><?php if($request['category_id']==1){ echo "<img src='../img/slider/package-icon.png'><span class='package'>Package</span>";} if($request['category_id']==2){ echo "<img src='../img/slider/transport-icon.png'><span class='transport'>Transport</span>";}if($request['category_id']==3){ echo "<img src='../img/slider/hotelier-icon.png'><span class='hotel'>Hotel</span>";} ?>
-                              <li class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
-                                 <p><b>Total Budget: </b>Rs.<?php echo $request['total_budget']; ?>
-                              </li>
-                              <?php if($request['category_id'] == 3 ) { ?>
-                              <li class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
-                                 <p><b>Start Date: </b><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?>
-                              <li class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
-                                 <p><b>End Date: </b><?php echo ($request['check_out'])? date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?>
-                              </li>
-                              <?php }
-                                 elseif($request['category_id'] == 1 ) { 
-                                 $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$request['id']."'";
-                                 $stmt = $conn->execute($sql);
-                                 $result = $stmt->fetch('assoc');	                 
-                                 ?>
-                              <li class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
-                                 <p><b>Start Date: </b><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?>
-                              <li class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
-                                 <p><?php if(!empty($result['TopDate'])) { ?><b>End Date: </b><?php echo date('d/m/Y',strtotime($result['TopDate'])); ?><?php }else{?><b>End Date: </b><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?><?php }?>
-                              </li>
-                              <?php }
-                                 elseif($request['category_id'] == 2 ) { ?>
-                              <li class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
-                                 <p><b>Start Date: </b><?php echo ($request['start_date'])?date('d/m/Y',strtotime($request['start_date'])):"-- --"; ?>
-                              <li class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
-                                 <p><b>End Date: </b><?php echo ($request['end_date'])?date('d/m/Y',strtotime($request['end_date'])):"-- --"; ?>
-                              </li>
-                              <?php } ?>
-                              <li class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
-                                 <p><b>Reference ID: </b><?php echo $request['reference_id']; ?>
-                              <li class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
-                                 <p><b>Members: </b><?php echo $request['adult'] +   $request['children']; ?>
-                              <li class="col-xs-12 col-sm-12 col-md-12 col-lg-12 destination">
-                                 <?php if($request['category_id']==2){ ?>
-                                 <p><b>Pickup City: </b><?php echo ($request['pickup_city'])?$allCities[$request['pickup_city']]:"-- --"; ?><?php echo ($request['pickup_state'])?' ('.$allStates[$request['pickup_state']].')':"";  ?><?php } else { ?>
-                                 <p><b>Destination City: </b><?php echo ($request['city_id'])?$allCities[$request['city_id']]:"-- --"; ?><?php echo ($request['state_id'])?' ('.$allStates[$request['state_id']].')':""; ?><?php if($request['category_id'] == 1){
-                                    if(count($request['hotels']) >1) {
-                                    unset($request['hotels'][0]);?><?php
-                                    foreach($request['hotels'] as $row) { ?><?php echo ($row['city_id'])?', '.$allCities[$row['city_id']]:""; ?><?php echo ($row['state_id'])?' ('.$allStates[$row['state_id']].')':""; ?><?php } ?><?php } ?><?php } ?></</p>
-                                 <?php } ?>
-                              <li class="col-xs-12 col-sm-12 col-md-12 col-lg-12 comment">
-                                 <p><b>Comment: </b><span><?php echo $request['comment']; ?></span>
-                           </ul>
-                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 padding0 link right">
-                              <?php $pid = $request['id'];?>
-                              <div class="col-xs-12 col-lg-6 col-md-6 col-sm-6 padding0"><a class="viewdetail" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"data-target="#myModal1<?php echo $request['id']; ?>"data-toggle=modal><?php echo $this->Html->image('detail-ico.png'); ?> Details</a></div>
-                              <div class="fade modal"id="myModal1<?php echo $request['id']; ?>"role=dialog>
+					<?php 
+					if(isset($_GET['sort']) && $_GET['sort']=="requesttype") {
+						?>
+						<div class="col-md-4 req"id="<?php if($request['category_id']==1){ echo "1";} if($request['category_id']==2){ echo "3";}if($request['category_id']==3){ echo "2";} ?>">
+						<?php 
+					} 
+					else 
+					{ ?>
+						<div class="col-md-4 req"id="<?php echo $data['responsecount'][$request['id']]; ?>">
+					<?php 
+					}
+					if($request['category_id']==1){ 
+						$image="<img src='../img/slider/package-icon.png'>";
+						$text="<span class='requestType'>Package</span>";
+					} 
+					if($request['category_id']==2){
+						$image= "<img src='../img/slider/transport-icon.png'>";
+						$text="<span class='requestType'>Transport</span>";
+					}
+					if($request['category_id']==3){
+						$image= "<img src='../img/slider/hotelier-icon.png'>";
+						$text="<span class='requestType'>Hotel</span>";
+					} 
+					?>
+					<fieldset>
+						<legend><?php echo $image; ?></legend>
+						<div class="contain">
+							<p><b>Request Type : </b>&nbsp;<?php echo $text; ?></p>
+							<p><b>Total Budget : </b>&nbsp;
+								<span class="details"><?php echo $request['total_budget']; ?></span>
+							</p>
+							<?php 
+							if($request['category_id'] == 3 ) { ?>
+								<p><b>Start Date : </b>&nbsp;
+									<span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
+								</p>
+								<p><b>End Date : </b>&nbsp;
+									<span class="details"><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?></span>
+								</p>
+							<?php 
+							} 
+							if($request['category_id'] == 1 ) {
+								$sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$request['id']."'";
+                                $stmt = $conn->execute($sql);
+                                $result = $stmt->fetch('assoc');
+							?>
+								<p><b>Start Date : </b>&nbsp;
+									<span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
+								</p>
+								<p><b>End Date : </b>&nbsp;
+									<span class="details"><?php if(!empty($result['TopDate'])) { ?><b>End Date: </b><?php echo date('d/m/Y',strtotime($result['TopDate'])); ?><?php }else{?><b>End Date: </b><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?><?php }?></span>
+								</p>
+								
+							<?php
+							}
+							if($request['category_id'] == 2 ) { 
+							?>
+								<p><b>Start Date : </b>&nbsp;
+									<span class="details"><?php echo ($request['start_date'])?date('d/m/Y',strtotime($request['start_date'])):"-- --"; ?></span>
+								</p>
+								<p><b>End Date : </b>&nbsp;
+									<span class="details"><?php echo ($request['end_date'])?date('d/m/Y',strtotime($request['end_date'])):"-- --"; ?></span>
+								</p>
+							<?php
+							}
+							?>
+							<p><b>Reference ID : </b>&nbsp;
+								<span class="details"><?php echo $request['reference_id']; ?></span>
+							</p>
+							<p><b>Members : </b>&nbsp;
+								<span class="details"><?php echo $request['adult'] +   $request['children']; ?></span>
+							</p>
+							<?php 
+							if($request['category_id']==2){ ?>
+								<p><b>Pickup City : </b>&nbsp;
+									<span class="details"><?php echo ($request['pickup_city'])?$allCities[$request['pickup_city']]:"-- --"; ?><?php echo ($request['pickup_state'])?' ('.$allStates[$request['pickup_state']].')':"";  ?></span>
+								</p>
+							<?php 
+							}
+							else
+							{?>
+								<p><b>Destination City : </b>&nbsp;
+									<span class="details"><?php echo ($request['city_id'])?$allCities[$request['city_id']]:"-- --"; ?><?php echo ($request['state_id'])?' ('.$allStates[$request['state_id']].')':""; ?>
+									<?php
+										if($request['category_id'] == 1){
+											if(count($request['hotels']) >1) {
+												unset($request['hotels'][0]);?><?php
+												foreach($request['hotels'] as $row) { ?>
+													<?php echo ($row['city_id'])?', '.$allCities[$row['city_id']]:""; ?><?php echo ($row['state_id'])?' ('.$allStates[$row['state_id']].')':"";  
+												}  
+											}  
+										}?>
+									</span>
+								</p>
+							<?php
+							}
+							$pid=$request['id'];
+							?>
+							<p><b>Comment : </b>&nbsp;
+								<span class="details"><?php echo $request['comment']; ?></span>
+							</p>
+							<div class="col-md-3">
+								<a class="viewdetail btn btn-danger btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"data-target="#myModal1<?php echo $request['id']; ?>"data-toggle=modal> Details</a>
+								<div class="fade modal"id="myModal1<?php echo $request['id']; ?>"role=dialog>
                                  <div class=modal-dialog>
                                     <div class=modal-content>
                                        <div class=modal-header>
@@ -204,14 +266,31 @@ $conn = ConnectionManager::get('default');
                                        <div class=modal-body></div>
                                     </div>
                                  </div>
-                              </div>
-                              <div class="col-xs-12 col-lg-6 col-md-6 col-sm-6 padding0"><a href=javascript:void(0); class=removeRequest request_id="<?php echo $pid; ?>"><?php echo $this->Html->image('remove-request.png'); ?>Remove Request</a></div>
-                              <div class="col-xs-12 col-lg-6 col-md-6 col-sm-6 padding0 check_responses" id="checkresponse_<?php echo $request['id'];?>"><?php if($data['responsecount'][$pid] > 0 ) { ?><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$pid)) ?>"class=check_responses_btn><?php echo $this->Html->image('tick-ico.png'); ?> Check Responses ( <strong><?php echo $data['responsecount'][$pid]; ?></strong> ) </a><?php } else { ?><a href=# class=check_responses_btn><img alt=""src=/img/no-response-ico.png> No Response ( 0 ) </a><?php } ?></div>
-                           </div>
-                        </div>
-                     </div>
+                                </div>
+								
+							</div>
+							<div class="col-md-4">
+								<a href=javascript:void(0); class="removeRequest btn btn-danger btn-sm" request_id="<?php echo $request['id']; ?>">Remove</a>
+							</div>
+							<div class="col-md-5 check_responses" id="checkresponse_<?php echo $request['id'];?>">
+								<?php if($data['responsecount'][$pid] > 0 ) 
+								{ ?>
+									<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$pid)) ?>"class="check_responses_btn btn btn-danger btn-sm"> Responses (<strong><?php echo $data['responsecount'][$pid]; ?></strong>) </a>
+								  <?php 
+								} 
+								else 
+								{ ?>
+									<a href=# class="check_responses_btn btn btn-danger btn-sm"> Response</a>
+								<?php 
+								} ?>
+							</div>
+						</div>
+					</fieldset>
                   </div>
                   <?php } ?>
+				  
+				  
+				  
                   <div class=pages></div>
                   <?php }else {?>
                   <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
@@ -222,7 +301,7 @@ $conn = ConnectionManager::get('default');
 				</div>				  
                </div>
             </div>
-      </div>
+       
    </div>
 </div>				  
 <?php echo $this->element('footer');?>

@@ -146,7 +146,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 									</td>
 								</tr>
 								<tr>
-									<td align="left" style="font-size:17px"><?php echo $myRequestCount; ?></td>
+									<td align="left" style="font-size:17px"><?php echo $respondToRequestCount; ?></td>
 								</tr>
 							</table>		
 							 
@@ -180,7 +180,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 									</td>
 								</tr>
 								<tr>
-									<td align="left" style="font-size:17px"><?php echo $myRequestCount; ?></td>
+									<td align="left" style="font-size:17px"><?php echo $myReponseCount; ?></td>
 								</tr>
 							</table>		
 							 
