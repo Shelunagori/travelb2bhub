@@ -320,11 +320,18 @@ margin-top: 5px !important;
         <div class='imaage'>
           <?php
 			if(!empty($profilePic)){
-				echo $this->Html->image('user_docs/'.$loginId.'/'.$profilePic, ["class"=>"img-responsive","alt"=>"Profile Pic"]);
+				if(file_exists($this->Html->image('user_docs/'.$loginId.'/'.$profilePic)))
+				{
+					echo $this->Html->image('user_docs/'.$loginId.'/'.$profilePic, ["class"=>"img-responsive","alt"=>"Profile Pic"]);
+				}
+				else{
+					echo $this->Html->image('no-profile-image.jpg', ["class"=>"img-responsive","alt"=>"Profile Pic"]);
+				}
 			}
-			else{
+			else
+			{
 				echo $this->Html->image('no-profile-image.jpg', ["class"=>"img-responsive","alt"=>"Profile Pic"]);
-			}	
+			}
 		  ?>
         </div>
         <div class="info">
