@@ -200,6 +200,14 @@ Router::scope('/', function (RouteBuilder $routes) {
 						   'getEventPlannersDetails' => [
 							   'action' => 'getEventPlannersDetails',
 							   'method' => 'GET'
+						   ],
+						   'getEventPlannerReport' => [
+							   'action' => 'getEventPlannerReport',
+							   'method' => 'GET'
+						   ],
+						   'removeEvent' => [
+							   'action' => 'removeEvent',
+							   'method' => 'GET'
 						   ]
 					   ]
 					]
