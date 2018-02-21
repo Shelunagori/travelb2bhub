@@ -1,3 +1,4 @@
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <?php
 use Cake\Datasource\ConnectionManager; 
 $conn = ConnectionManager::get('default');
@@ -25,47 +26,67 @@ legend
 </style>
 
 
-<div class=container-fluid id=requestlist>
-<div class="row equal_column"> 
-    <div class="col-md-12">
-               <?php echo $this->element('subheader');?>
-                <div class=col-md-12><?php echo  $this->Flash->render() ?></div>
-               <div class="fade modal form-modal"id=myModal123 role=dialog>
-                  <div class=modal-dialog>
-                     <div class=modal-content>
-                        <div class=modal-header>
-                           <button class=close data-dismiss=modal type=button>×</button>
-                           <h4 class=modal-title>Sorting</h4>
-                        </div>
-                        <div class=modal-body>
-                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box-event">
-                                 <ul class=sorting_ul>
-                                    <li class="col-xs-12 col-sm-12 col-md-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=totalbudgethl">Total Budget (High To Low) <span class=arrow><span></span></span></a>
-                                    <li class="col-xs-12 col-sm-12 col-md-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=totalbudgetlh">Total Budget (Low To High) <span class=arrow><span></span></span></a>
-                                    <li class="col-xs-12 col-sm-12 col-md-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=resposesnolh">No. of Responses (Low To High) <span class=arrow><span></span></span></a>
-                                    <li class="col-xs-12 col-sm-12 col-md-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=resposesnohl">No. of Responses (High To Low) <span class=arrow><span></span></span></a>
-                                    <li class="col-xs-12 col-sm-12 col-md-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=requesttype">Request Type <span class=arrow><span></span></span></a>
-                                 </ul>
-                              </div>
-                           </div>
-                        </div>
-                        <div class=modal-footer></div>
-                     </div>
-                  </div>
-               </div>
-               <div class="fade modal form-modal" id=myModal122 role=dialog>
+<div class=container-fluid id="requestlist">
+<div class="row equal_column" > 
+    <div class="col-md-12" style="background-color:#fff"> 
+		<br>
+		<?php echo $this->element('subheader');?>
+		<?php echo  $this->Flash->render() ?>
+	</div>
+	<div class="col-md-12" style="background-color:#fff"> 
+
+<div class="box box-default">
+	<div class="box-header with-border"> 
+		<h3 class="box-title" style="padding:20px">My Requests</h3>
+		<div class="box-tools pull-right">
+			<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
+			<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+		</div>
+		 
+	</div>
+	<div class="box-body">
+		<div class="row">
+               <div id="myModal123" class="modal fade" role="dialog">
+				  <div class="modal-dialog" style=" width: 50%;">
+					<!-- Modal content-->
+					<div class="modal-content">
+					  <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Sorting</h4>
+					  </div>
+					  <div class="modal-body">
+						<table width="100%">
+						<tr>
+							<td><a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=totalbudgethl">Total Budget <i class="fa fa-sort-amount-desc"></i> <span class=arrow><span></span></span></a>
+							
+							<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=totalbudgetlh">Total Budget <i class="fa fa-sort-amount-asc"></i>  <span class=arrow><span></span></span></a>
+							
+							<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=resposesnolh">No. of Responses <i class="fa fa-sort-amount-asc"></i> <span class=arrow><span></span></span></a>
+							
+							<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=resposesnohl">No. of Responses <i class="fa fa-sort-amount-desc"></i> <span class=arrow><span></span></span></a>
+							
+							<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=requesttype">Request Type <span class=arrow><span></span></span></a>
+							</td>
+						</tr>
+						</table>
+					  </div>
+					</div>
+				  </div>
+				</div>
+               <div class="fade modal form-modal" id="myModal122" role="dialog">
                   <div class=modal-dialog>
                      <div class=modal-content>
                         <div class=modal-header>
                            <button class=close data-dismiss=modal type=button>×</button>
                            <h4 class=modal-title>Filter</h4>
                         </div>
-                        <div class=modal-body>
-                           <form class=filter_box>
-                              <div class="row form-group margin-b10">
-                                 <label class="col-form-label col-md-3"for=example-text-input>Request Type:</label>
-                                 <div class=col-md-9>
+						<form class=filter_box>
+                        <div>
+                          
+                              <div class="col-md-12 row form-group margin-b10">
+                                
+                                 <div class=col-md-6>
+								  <label class="col-form-label"for=example-text-input>Request Type:</label>
                                     <select class=form-control name=req_typesearch>
                                        <option value="">Select Request Type
                                        <option value=1>Package
@@ -73,10 +94,8 @@ legend
                                        <option value=2>Transport
                                     </select>
                                  </div>
-                              </div>
-                              <div class="row form-group margin-b10">
-                                 <label class="col-form-label col-md-3"for=example-text-input>Total Budget:</label>
-                                 <div class=col-md-9>
+                                 <div class=col-md-6>
+								 <label class="col-form-label"for=example-text-input>Total Budget:</label>
                                     <select class=form-control name=budgetsearch>
                                        <option value="">Select Total Budget
                                        <option value=0-10000<?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000
@@ -87,29 +106,32 @@ legend
                                     </select>
                                  </div>
                               </div>
-                              <div class="row form-group margin-b10">
-                                 <label class="col-form-label col-md-3"for=example-text-input>Start Date:</label>
-                                 <div class=col-md-9><input class=form-control name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"id=datepicker1></div>
+                              <div class="col-md-12 row form-group margin-b10">
+                                 <div class=col-md-6>
+								 <label class="col-form-label" for=example-text-input>Start Date:</label>
+								 <input class=form-control name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"id=datepicker1>
+								 </div>
+                                 <div class=col-md-6>
+								  <label class="col-form-label" for=example-text-input>End Date:</label>
+								  <input class=form-control name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"id=datepicker2>
+								  </div>
                               </div>
-                              <div class="row form-group margin-b10">
-                                 <label class="col-form-label col-md-3"for=example-text-input>End Date:</label>
-                                 <div class=col-md-9><input class=form-control name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"id=datepicker2></div>
-                              </div>
-                              <div class="row form-group margin-b10">
-                                 <label class="col-form-label col-md-3"for=example-text-input>Pickup City:</label>
-                                 <div class=col-md-9>
-                                    <select class=form-control name=pickup_city id=pickup_city>
+                              <div class="col-md-12 row form-group margin-b10">
+                                 
+                                 <div class=col-md-6>
+								 <label class="col-form-label"for=example-text-input>Pickup City:</label>
+                                    <select class=form-control  name=pickup_city id=pickup_city>
                                        <option value="">Select</option>
                                        <?php foreach($allCities1 as $city){?>
                                        <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['pickup_city']) AND $_GET['pickup_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
                                        <?php }?>
                                     </select>
                                  </div>
-                              </div>
-                              <div class="row form-group margin-b10">
-                                 <label class="col-form-label col-md-3"for=example-text-input>Destination City:</label>
-                                 <div class=col-md-9>
-                                    <select class=form-control name=destination_city id=destination_city>
+                               
+                                 
+                                 <div class=col-md-6>
+								 <label class="col-form-label" for=example-text-input>Destination City:</label>
+                                    <select class="form-control " name=destination_city id=destination_city>
                                        <option value="">Select</option>
                                        <?php foreach($allCities1 as $city){?>
                                        <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['destination_city']) AND $_GET['destination_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
@@ -118,26 +140,46 @@ legend
                                     <?php //echo $this->Form->control('preference', ["id"=>"destination_city", "type"=>"select", 'options' =>$allCities2, "class"=>"form-control"]); ?>
                                  </div>
                               </div>
-                              <div class="row form-group margin-b10">
-                                 <label class="col-form-label col-md-3"for=example-text-input>Reference ID:</label>
-                                 <div class=col-md-9><input class=form-control name=refidsearch value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>"></div>
+                              <div class=" col-md-12 row form-group margin-b10">
+                                 
+                                 <div class=col-md-6>
+								 <label class="col-form-label"for=example-text-input>Reference ID:</label>
+								 <input class=form-control name=refidsearch value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>">
+								 </div>
+                               
+                                 
+                                 <div class=col-md-6>
+								 <label class="col-form-label col-md-3"for=example-text-input>Members:</label>
+								 <input class=form-control name=memberssearch value="<?php echo isset($_GET['memberssearch'])? $_GET['memberssearch']:''; ?>">
+								 </div>
                               </div>
-                              <div class="row form-group margin-b10">
-                                 <label class="col-form-label col-md-3"for=example-text-input>Members:</label>
-                                 <div class=col-md-9><input class=form-control name=memberssearch value="<?php echo isset($_GET['memberssearch'])? $_GET['memberssearch']:''; ?>"></div>
-                              </div>
-                              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><input class="btn btn-primary btn-submit"name=submit value=Submit type=submit> <a href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'requestlist')) ?>"class="btn btn-primary btn-submit">Reset</a></div>
-                           </form>
-                           <script>$(document).ready(function(){$("#datepicker1").datepicker({dateFormat:"dd/mm/yy",changeMonth:!0,changeYear:!0,minDate:"<?php echo date("d/m/Y"); ?>",onSelect:function(e){$("#datepicker2").datepicker("option","minDate",e),$("#datepicker2").val("")}})}),$("#datepicker2").datepicker({dateFormat:"dd/mm/yy",changeMonth:!0,changeYear:!0,minDate:"<?php echo date("d/m/y"); ?>",onSelect:function(e){""==$("#datepicker1").val()&&(alert("Please select check-in date first."),$("#datepicker2").val(""))}})</script>
+                              
+                          
+                           
                         </div>
-                        <div class=modal-footer></div>
+                        <div class=modal-footer>
+							 
+							<button class="btn btn-primary btn-sm" name=submit value=Submit type=submit>Submit</button> 
+							<a href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'requestlist')) ?>"class="btn btn-primary btn-sm">Reset</a>
+						   <script>
+							$(document).ready(function(){
+								$("#datepicker1").datepicker({dateFormat:"dd/mm/yy",changeMonth:!0,changeYear:!0,minDate:"<?php echo date("d/m/Y"); ?>",onSelect:function(e){
+								$("#datepicker2").datepicker("option","minDate",e),
+								$("#datepicker2").val("")}});
+								
+								$("#datepicker2").datepicker({dateFormat:"dd/mm/yy",changeMonth:!0,changeYear:!0,minDate:"<?php echo date("d/m/y"); ?>",onSelect:function(e){""==$("#datepicker1").val()&&(alert("Please select check-in date first."),$("#datepicker2").val(""))}});
+							});
+						   </script>
+						</div>
+						 </form>
                      </div>
                   </div>
                </div>
 				<div id="autorefresh_requestlist">
-               <?php if(isset($_GET['sort']) && $_GET['sort']=="resposesnolh") { ?><script>$(document).ready(function(){$(".req").sort(function(n,e){return parseInt(n.id)>parseInt(e.id)}).each(function(){var n=$(this);n.remove(),$(n).appendTo("#cat")})})</script><?php } ?><?php if(isset($_GET['sort']) && $_GET['sort']=="resposesnohl") { ?><script>$(document).ready(function(){$(".req").sort(function(n,e){return parseInt(n.id)<parseInt(e.id)}).each(function(){var n=$(this);n.remove(),$(n).appendTo("#cat")})})</script><?php } ?><?php if(isset($_GET['sort']) && $_GET['sort']=="requesttype") { ?><script>$(document).ready(function(){$(".req").sort(function(n,e){return parseInt(n.id)>parseInt(e.id)}).each(function(){var n=$(this);n.remove(),$(n).appendTo("#cat")})})</script><?php } ?>
+				<?php if(isset($_GET['sort']) && $_GET['sort']=="resposesnolh") { ?><script>$(document).ready(function(){$(".req").sort(function(n,e){return parseInt(n.id)>parseInt(e.id)}).each(function(){var n=$(this);n.remove(),$(n).appendTo("#cat")})})</script><?php } ?><?php if(isset($_GET['sort']) && $_GET['sort']=="resposesnohl") { ?><script>$(document).ready(function(){$(".req").sort(function(n,e){return parseInt(n.id)<parseInt(e.id)}).each(function(){var n=$(this);n.remove(),$(n).appendTo("#cat")})})</script><?php } ?><?php if(isset($_GET['sort']) && $_GET['sort']=="requesttype") { ?><script>$(document).ready(function(){$(".req").sort(function(n,e){return parseInt(n.id)>parseInt(e.id)}).each(function(){var n=$(this);n.remove(),$(n).appendTo("#cat")})})</script><?php } ?>
 			   
-	<!----------- Main SHow----------->		   
+	<!----------- Main SHow----------->	
+	
 			<?php
             if(count($requests) >0) {
                 $m =0;
@@ -146,7 +188,7 @@ legend
 					  if(isset($_GET['memberssearch']) && $_GET['memberssearch']!="" && $_GET['memberssearch'] !=$totmem ){
 						continue;
 					  }
-					  if($m%2==0) { 
+					  if($m%3==0) { 
 						echo '<div class="clearfix"></div>'; 
 					  }
                   $m++;
@@ -203,7 +245,7 @@ legend
 									<span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
 								</p>
 								<p><b>End Date : </b>&nbsp;
-									<span class="details"><?php if(!empty($result['TopDate'])) { ?><b>End Date: </b><?php echo date('d/m/Y',strtotime($result['TopDate'])); ?><?php }else{?><b>End Date: </b><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?><?php }?></span>
+									<span class="details"><?php if(!empty($result['TopDate'])) { ?><?php echo date('d/m/Y',strtotime($result['TopDate'])); ?><?php }else{?><b>End Date: </b><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?><?php }?></span>
 								</p>
 								
 							<?php
@@ -252,40 +294,47 @@ legend
 							$pid=$request['id'];
 							?>
 							<p><b>Comment : </b>&nbsp;
-								<span class="details"><?php echo $request['comment']; ?></span>
+								<span class="details">
+								<?php echo mb_strimwidth($request['comment'], 0, 25, "...");?></span>
 							</p>
 							 
-							<div class="col-md-4">
-								<a class="viewdetail btn btn-danger btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"data-target="#myModal1<?php echo $request['id']; ?>"data-toggle=modal> Details</a>
-								<div class="fade modal"id="myModal1<?php echo $request['id']; ?>"role=dialog>
-                                 <div class=modal-dialog>
-                                    <div class=modal-content>
-                                       <div class=modal-header>
-                                          <button class=close data-dismiss=modal type=button>×</button>
-                                          <h4 class=modal-title>Details</h4>
-                                       </div>
-                                       <div class=modal-body></div>
-                                    </div>
-                                 </div>
-                                </div>
-								
+							<div class="col-md-12">
+							<table width="100%">
+							<tr>
+								<td>
+									<a class="viewdetail btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"data-target="#myModal1<?php echo $request['id']; ?>"data-toggle=modal> Details</a>
+									<div class="fade modal"id="myModal1<?php echo $request['id']; ?>"role=dialog>
+										<div class=modal-dialog>
+											<div class=modal-content>
+											   <div class=modal-header>
+												  <button class=close data-dismiss=modal type=button>×</button>
+												  <h4 class=modal-title>Details</h4>
+											   </div>
+											   <div class=modal-body></div>
+											</div>
+										</div>
+									</div>
+								</td>
+								<td>
+									<a href=javascript:void(0); class="removeRequest btn btn-danger btn-sm" request_id="<?php echo $request['id']; ?>">Remove</a>
+								</td>
+								<td>
+									<div class="check_responses" id="checkresponse_<?php echo $request['id'];?>">
+										<?php if($data['responsecount'][$pid] > 0 ) 
+										{ ?>
+											<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$pid)) ?>"class="check_responses_btn btn btn-success btn-sm"> Response ( <strong><?php echo $data['responsecount'][$pid]; ?></strong> ) </a>
+										  <?php 
+										} 
+										else 
+										{ ?>
+											<a href=# class="check_responses_btn btn btn-success btn-sm"> Response ( 0 )</a>
+										<?php 
+										} ?>
+									</div>
+								</td>
+							</tr>
+							</table>
 							</div>
-							<div class="col-md-4">
-								<a href=javascript:void(0); class="removeRequest btn btn-danger btn-sm" request_id="<?php echo $request['id']; ?>">Remove</a>
-							</div>
-							<div class="col-md-4 check_responses" id="checkresponse_<?php echo $request['id'];?>">
-								<?php if($data['responsecount'][$pid] > 0 ) 
-								{ ?>
-									<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$pid)) ?>"class="check_responses_btn btn btn-danger btn-sm"> Responses (<strong><?php echo $data['responsecount'][$pid]; ?></strong>) </a>
-								  <?php 
-								} 
-								else 
-								{ ?>
-									<a href=# class="check_responses_btn btn btn-danger btn-sm"> Response</a>
-								<?php 
-								} ?>
-							</div>
-						</div>
 					</fieldset>
                   </div>
                   <?php } ?>
@@ -302,9 +351,12 @@ legend
 				</div>				  
                </div>
             </div>
-       
-   </div>
-</div>				  
+		   </div>
+			</div>
+		</div>
+	</div>
+</div>
+				  
 <?php echo $this->element('footer');?>
 					  <?php
 $servername = $_SERVER['HTTP_HOST'];
@@ -318,6 +370,7 @@ if($servername =='192.168.3.82' OR $servername=='192.168.3.52' OR $servername=='
     $(document).ready(function() {
         $(".removeRequest").click(function(e) {
 			$('#ajaxcount').val('100000');
+			var box=$(this);
             e.preventDefault();
             var t = $(this).attr("request_id");
             confirm("Are you sure want to remove this request?") && $.ajax({
@@ -327,8 +380,10 @@ if($servername =='192.168.3.82' OR $servername=='192.168.3.52' OR $servername=='
                     request_id: t
                 }
             }).done(function(e) {
-                1 == e ? (alert("Request has been removed successfully."), $("#request-" + t).slideUp(800, "linear")): alert("There is some problem, please try again.")
-            })
+                if(e==1){alert("Request has been removed successfully.");
+					box.closest('div.col-md-4.req').hide();
+				}
+             })
         });
 		
 	getmyrequestlistsapi(5000);

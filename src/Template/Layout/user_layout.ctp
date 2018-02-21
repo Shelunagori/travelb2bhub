@@ -142,9 +142,7 @@ margin-top: 5px !important;
 
   <header class="main-header">
     <!-- Logo -->
-	 
     <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo">
-      
       <span class="logo-mini"><?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:77%;']) ?></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><?=  $this->Html->image('/img/main_logo.png', ['style'=>'width:94%;']) ?></span>

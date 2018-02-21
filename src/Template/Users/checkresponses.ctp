@@ -1,57 +1,49 @@
- <link rel="stylesheet" href="../../css/jquery-ui.css">
- <link rel="stylesheet" href="../../css/ap-filters.css">
-  <?php echo $this->Html->script(['jquery.validate']);?>
+<?php //echo $this->Html->script(['jquery.validate']);?>
 <?php
 use Cake\Datasource\ConnectionManager; 
 $conn = ConnectionManager::get('default');
 ?>
+<style>
+legend
+{
+	text-align: center;
+}
+.requestType {	
+	color: #f87200;
+    font-weight: 600;
+}
+.hotel{
+	
+}
+.package{
+	 
+}
+.contain>p{
+	color:#96989A !important;
+}
+.details {color:#000 !important; font-weight: 600;}	
+.btn-block { width:40% !important;}
+</style>
   <div class="container-fluid" id="checkresponses">
-    <div class="row equal_column">
-      <?php echo $this->element('left_panel');?>
-	  <!--Page Title-->
-		<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padding0 ">
-             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 border_bottom">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 ">
-                     <h4 class="title">Check Responses</h4>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5 ">
-                        <!--<a href="javascript:void(0)" onclick="window.history.back();">Go Back</a>-->
-                                                <!-- <a href="/users/dashboard" class="link-icon"><img src="/img/arrow.png" alt=""/></a> -->
-                       <ul class="top-icons-wrap">
- <li>
- <a href="javascript:void(0);" class="link-icon" data-toggle="modal" data-target="#myModal123" >
- <img src="/img/sortarrow.png" alt=""></a> </li>
- 
- <!--a title="Quotation price higher to lower" 
- href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'checkresponses', $requestidval)) ?>?sort=quotationprice&order=DESC"  >
- <img src="/img/down.png" alt="down"></a> 
-  
- <a title="Quotation price lower to higher" 
- href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'checkresponses', $requestidval)) ?>?sort=quotationprice&order=ASC"  >
- <img src="/img/up.png" alt="up"></a--> 
-  <li>
- <a href="javascript:void(0);" class="link-icon" data-toggle="modal" data-target="#myModal122" ><img src="/img/white-filter.png" alt=""></a> </li>
-					<li class="notification_list">
-<a href="javascript:void(0);" id="chat_icon" class="link-icon"><span class="chat_count"><?php echo $chatCount;?></span><img src="/img/notify.png" alt=""></a>
-                            <div class="ap-subs">
-                                <ul class="list-unstyled msg_list" role="menu">
-                  <?php echo $this->element('subheader');?>
-	  <!--ap top filters-->
-      <hr class="hr_bordor">
+    <div class="row equal_column"> 
+		<div class="col-md-12" style="background-color:#fff"> 
+		<br>
+		<?php echo $this->element('subheader');?>
+	  
       
-      <div id="myModal123" class="modal fade form-modal" role="dialog">
-  <div class="modal-dialog">
+<div id="myModal123" class="modal fade form-modal" role="dialog">
+<div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Sorting</h4>
-      </div>
-      <div class="modal-body">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 box-event">
-     <ul class="sorting_ul">     
+<!-- Modal content-->
+<div class="modal-content">
+<div class="modal-header">
+<button type="button" class="close" data-dismiss="modal">&times;</button>
+<h4 class="modal-title">Sorting</h4>
+</div>
+<div class="modal-body">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 box-event">
+<ul class="sorting_ul">     
 <li class="col-md-12 col-xs-12 col-sm-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=totalbudgethl">Total Budget (High To Low) <span class="arrow"><span></span></span></a> </li>
 <li class="col-md-12 col-xs-12 col-sm-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=totalbudgetlh"> Total Budget (Low To High)<span class="arrow"><span></span></span></a></li>
 <li class="col-md-12 col-xs-12 col-sm-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=quotedpricehl">Quoted Price (High To Low) <span class="arrow"><span></span></span></a> </li>
@@ -60,22 +52,20 @@ $conn = ConnectionManager::get('default');
 <li class="col-md-12 col-xs-12 col-sm-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=chatslh"> Chats (Low To High)<span class="arrow"><span></span></span></a></li>
 <li class="col-md-12 col-xs-12 col-sm-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=agentaz"> Agent Name (A To Z) <span class="arrow"><span></span></span></a></li>
 <li class="col-md-12 col-xs-12 col-sm-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=agentza"> Agent Name (Z To A)<span class="arrow"><span></span></span></a></li>
-            </ul>
-              </div>
-          </div>
-      </div>
-      <div class="modal-footer">
-
-      </div>
-    </div>
-  </div>
+</ul>
 </div>
- 
+</div>
+</div>
+<div class="modal-footer">
+
+</div>
+</div>
+</div>
+</div>
       
-	   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center margin-b10">
-		  
-		  <a data-toggle="modal" data-target="#detailModal" href="#" class="btn btn-submit">Details</a>
-        </div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center margin-b10">
+	<a data-toggle="modal" data-target="#detailModal" href="#" class="btn btn-submit">Details</a>
+</div>
       <!--ap filters-->
   <div id="myModal122" class="modal fade form-modal" role="dialog">
   <div class="modal-dialog">
@@ -181,202 +171,207 @@ $conn = ConnectionManager::get('default');
 
   </div>
 </div>
+		
+		
+		
+		
 		<?php
 		if(count($responses) >0) { 
 			foreach($responses as $row){ ?>
 			<div id="cat">
-            <?php if(isset($_GET['sort']) && $_GET['sort']=="requesttype") { ?>
-			<div class=" req col-lg-6 col-md-6 col-sm-12 col-xs-12" id="<?php if($row['request']['category_id']==1){ echo "1";} if($row['request']['category_id']==2){ echo "3";}if($row['request']['category_id']==3){ echo "2";} ?>">
-			<?php } else { ?>
-            <div class=" req col-lg-6 col-md-6 col-sm-12 col-xs-12" id="<?php echo $data['chat_count'][$row['id']]; ?>">
-			   <?php } ?>
-				<div class="box-event event-list text-center">
-					<ul>
-					<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                 <p>
-                        <b>Request Type :</b> <?php if($row['request']['category_id']==1){ echo "<img src='../../img/slider/package-icon.png'><span class='package'> Package</span>";} if($row['request']['category_id']==2){ echo "<img src='../../img/slider/transport-icon.png'><span class='transport'>Transport</span>";}if($row['request']['category_id']==3){ echo "<img src='../../img/slider/hotelier-icon.png'><span class='hotel'>Hotel</span>";} ?>
-                    </p>
-               </li>
-                 <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <p>
-                                <b>Total Budget :</b> <?php echo "Rs. ".$row['request']['total_budget']; ?>
-                            </p>
-                 </li>
-                        <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                        <?php if($row['response']['is_details_shared']==1){
+            <?php if(isset($_GET['sort']) && $_GET['sort']=="requesttype")
+			{ ?>
+				<div class="col-md-6" id="<?php if($row['request']['category_id']==1){ echo "1";} if($row['request']['category_id']==2){ echo "3";}if($row['request']['category_id']==3){ echo "2";} ?>">
+			<?php } 
+			else 
+			{ ?>
+				<div class="col-md-4" id="<?php echo $data['chat_count'][$row['id']]; ?>">
+		<?php }
+				if($row['request']['category_id']==1){ 
+					$image=$this->Html->image('/img/slider/package-icon.png');
+					$text="<span class='requestType'>Package</span>";
+				} 
+				if($row['request']['category_id']==2){
+					$image= $this->Html->image('/img/slider/transport-icon.png');
+					$text="<span class='requestType'>Transport</span>";
+				}
+				if($row['request']['category_id']==3){
+					$image= $this->Html->image('/img/slider/hotelier-icon.png');
+					$text="<span class='requestType'>Hotel</span>";
+				} 
+				?>
+				<fieldset>
+					<legend><?php echo $image; ?></legend>
+					<div class="contain">
+						<p><b>Request Type : </b>&nbsp;<?php echo $text; ?></p>
+						<p><b>Total Budget : </b>&nbsp;
+							<span class="details"><?php echo $row['request']['total_budget']; ?></span>
+						</p>
+						<?php if($row['response']['is_details_shared']==1){
 								$hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$row['user']['id'],1));                    
                         }else{
 								$hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$row['user']['id'],1));                   
                         }?>
-                            <p>
-                                <b>Agent Name :</b> <a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?> </a>
-                            </p>
-                        </li>
-                        <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <p>
-                                <b>Reference ID :</b> <?php echo $row['request']['reference_id']; ?>
-                            </p>
-                        </li>
-
-                                               
-                        <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                            <p>
-                                <b>Quoted Price :</b> <?php echo ($row['quotation_price'])?"Rs. ".$row['quotation_price']:"-- --" ?>
-                            </p>
-                        </li>
-                <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 destination">
-				   <?php if($row['request']['category_id']==2){ ?>
-                  <p>
-                                <b>Pickup City :</b><span> <?php echo ($row['request']['pickup_city'])?$allCities[$row['request']['pickup_city']]:"-- --"; ?><?php echo ($row['request']['pickup_state'])?' ('.$allStates[$row['request']['pickup_state']].')':"";  ?></span>
-
-                  <?php } else { ?>
-                        <p>
-                        <b>Destination City :</b> <span><?php echo ($row['request']['city_id'])?$allCities[$row['request']['city_id']]:"-- --"; ?> <?php echo ($row['request']['state_id'])?' ('.$allStates[$row['request']['state_id']].')':""; ?>
-                        <?php if($row['request']['category_id'] == 1){
-						if(count($row['request']['hotels']) >1) {
-							unset($row['request']['hotels'][0]);
-							//unset($details['hotels'][0]);?>
-							<?php foreach($row['request']['hotels'] as $rowc) { ?>
-							<?php echo ($rowc['city_id'])?','.$allCities[$rowc['city_id']]:""; ?><?php echo ($rowc['state_id'])?' ('.$allStates[$rowc['state_id']].')':""; ?>
-							<?php } ?>
-							<?php } ?>
-							<?php } ?></span>
+						<p><b>Agent Name : </b>&nbsp;
+							<span class="details"><a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></span>
+						</p>
+						
+						<p><b>Reference ID : </b>&nbsp;
+							<span class="details"><?php echo $row['request']['reference_id']; ?></span>
+						</p>
+						
+						<p><b>Quoted Price : </b>&nbsp;
+							<span class="details"><?php echo ($row['quotation_price'])?"Rs. ".$row['quotation_price']:"-- --" ?></span>
+						</p>
+						<?php if($row['request']['category_id']==2){ ?>
+							<p><b>Pickup City : </b>&nbsp;
+								<span class="details"><?php echo ($row['request']['pickup_city'])?$allCities[$row['request']['pickup_city']]:"-- --"; ?><?php echo ($row['request']['pickup_state'])?' ('.$allStates[$row['request']['pickup_state']].')':"";  ?></span>
+							</p>
+						<?php } else { ?>
+							<p><b>Destination City : </b>&nbsp;
+								<span class="details"><?php echo ($row['request']['city_id'])?$allCities[$row['request']['city_id']]:"-- --"; ?> <?php echo ($row['request']['state_id'])?' ('.$allStates[$row['request']['state_id']].')':""; ?>
+								<?php 
+								if($row['request']['category_id'] == 1){
+									if(count($row['request']['hotels']) >1) {
+										unset($row['request']['hotels'][0]);
+									 
+										foreach($row['request']['hotels'] as $rowc) 
+										{ ?>
+											<?php echo ($rowc['city_id'])?','.$allCities[$rowc['city_id']]:""; ?><?php echo ($rowc['state_id'])?' ('.$allStates[$rowc['state_id']].')':""; ?>
+										  <?php  
+										}  
+									}  
+								} 
+								?>
+							 </span>
                         </p>
                         <?php } ?>
-                 </li>
-                        <?php if($row['request']['category_id'] == 3 ) { ?>
-					<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <p>
-                            <b>Start Date :</b> <?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?>
-                        </p>
-                     </li>
-					<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <p>
-                            <b>End Date :</b> <?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?>
-                        </p>
-                    </li>
-				<?php } elseif($row['request']['category_id'] == 1 ) {?>
-					<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <p>
-                            <b>Start Date :</b> <?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?>
-                        </p>
-                     </li>
-					<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <p>
-                            <b>End Date :</b> <?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?>
-                        </p>
-                     </li>
-				<?php } elseif($row['request']['category_id'] == 2 ) { ?>
-					<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <p>
-                            <b>Start Date :</b> <?php echo ($row['request']['start_date'])?date("d/m/Y", strtotime($row['request']['start_date'])):"-- --"; ?>
-                        </p>
-                    </li>
-					<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <p>
-                            <b>End Date :</b> <?php echo ($row['request']['end_date'])?date("d/m/Y", strtotime($row['request']['end_date'])):"-- --"; ?>
-                        </p>
-                    </li>
-				<?php } ?>
-				<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <p>
-                            <b>Members :</b> <?php echo $row['request']['adult'] +  $row['request']['children']; ?>
-                     </p>
-                 </li>
-                         <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comment">
-                            <p>
-                                <b>Comment :</b> <span> <?php echo $row['comment']; ?></span>
-                            </p>
-                        </li>
-                    </ul>
-					<?php if(empty($row['request']['final_id'])) { ?>
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 right link padding0">
-							<?php $id = $row['id'];?>
-                        <div class="buttons padding0"> 
-							<a id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>">
-							<?php echo $this->Html->image('chat-ico.png'); ?> Chat ( <strong><?php echo $data['chat_count'][$row['id']]; ?> </strong> )</a>
-                        </div>
-                        <div class="modal fade" id="myModal11<?php echo  $row['request']['id']; ?>" role="dialog">
-		<div class="modal-dialog">
-		
-		  <!-- Modal content-->
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">Chat</h4>
-			</div>
-			<div class="modal-body">
-				
-			</div>
-		  </div>
-		</div>
-	</div>
-							<?php
-$sql="Select count(*) as block_count from blocked_users where blocked_user_id='".$row['user']['id']."' AND blocked_by='".$row['request']['user_id']."'";
-$stmt = $conn->execute($sql);
-$bresult = $stmt ->fetch('assoc'); 
-if($bresult['block_count']>0){
-$blocked = 1;
-}else{
-$blocked = 0;
-}
-							?>
-                        <div class="buttons padding0"> 
-							<?php if($row['is_details_shared'] != 1) { ?>
-								<a href="javascript:void(0);" user_id="<?php echo $row['user']['id']; ?>" class="shareDetails" request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>"><?php echo $this->Html->image('share-ico.png'); ?> Share Details</a>
-							<?php } ?>
-                         </div>
-                        <div class="buttons padding0"> 
-							<a href="javascript:void(0);" class="acceptOffer" request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>"><?php echo $this->Html->image('accept-offer-ico.png'); ?> Accept Offer</a>
-                         </div>
-                         <div class="buttons padding0">
-							 <?php if($blocked==1){?>
-							 <a href="javascript:void(0);" class="unblockUser" user_id = "<?php echo $row['user']['id']; ?>"><?php echo $this->Html->image('block-user-ico.png'); ?> Blocked </a>
-							 <?php }else{?>
-							<a href="javascript:void(0);" class="blockUser" user_id = "<?php echo $row['user']['id']; ?>"><?php echo $this->Html->image('block-user-ico.png'); ?> Block User </a>
-						  <?php }?>
-							 <?php $reviewi =  $row['user']['id']."-".$row['request']['id']; ?>
-						 <a data-toggle="modal" style="display:none;" data-target="#myModal_accept<?php echo $row['id']; ?>" id="add_review"
-href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">
-Test</a>
-						 </div>
-							<?php if( !array_key_exists($row["user"]["id"], $BusinessBuddies)) {?>
-                    <div class="buttons padding0">  
-						<span class="budy right"><a href="javascript:void(0);" class="businessBuddy" user_id = "<?php echo $row["user"]["id"]; ?>"><?php echo $this->Html->image('friend-ico.png'); ?></a></span>
-                    </div>
-					<?php } ?>
+						<?php if($row['request']['category_id'] == 3 ) { ?>
+							<p><b>Start Date : </b>&nbsp;
+								<span class="details"><?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?></span>
+							</p>
+							<p><b>End Date : </b>&nbsp;
+								<span class="details"><?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?></span>
+							</p>
+ 						<?php } ?>
+						<?php if($row['request']['category_id'] == 1 ) {?>
+							<p><b>Start Date : </b>&nbsp;
+								<span class="details"><?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?></span>
+							</p>
+							<p><b>End Date : </b>&nbsp;
+								<span class="details"><?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?></span>
+							</p>
+						<?php }
+							if($row['request']['category_id'] == 2 ) { ?>
+							<p><b>Start Date : </b>&nbsp;
+								<span class="details"><?php echo ($row['request']['start_date'])?date("d/m/Y", strtotime($row['request']['start_date'])):"-- --"; ?></span>
+							</p>
+							<p><b>End Date : </b>&nbsp;
+								<span class="details"><?php echo ($row['request']['end_date'])?date("d/m/Y", strtotime($row['request']['end_date'])):"-- --"; ?></span>
+							</p>
+ 						<?php } ?>
+						<p><b>Members : </b>&nbsp;
+							<span class="details"><?php echo $row['request']['adult'] +  $row['request']['children']; ?></span>
+						</p>
+						<p><b>Comment : </b>&nbsp;
+							<span class="details"><?php echo mb_strimwidth($row['comment'], 0, 25, "...");?></span>
+						</p>
+ 						 
+						
+						
+					</div>
+							
+				 
+			<?php if(empty($row['request']['final_id'])) { ?>
+			<?php $id = $row['id'];?>
+				<div class="col-md-12">
+				<table width="100%">
+				<tr>
+					<td>
+						<a class="btn btn-info btn-sm" id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>">
+						<?php echo $this->Html->image('chat-ico.png'); ?> Chat ( <strong><?php echo $data['chat_count'][$row['id']]; ?> </strong> )</a>
+						<div class="modal fade" id="myModal11<?php echo  $row['request']['id']; ?>" role="dialog">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">Chat</h4>
+									</div>
+									<div class="modal-body">
+									</div>
+								</div>
+							</div>
 						</div>
-		<div class="modal fade" id="myModal_accept<?php echo $row['id']; ?>" role="dialog">
-		<div class="modal-dialog">
-		<!-- Modal content-->
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">Add Review</h4>
-			</div>
-			<div class="modal-body">
-			
-			</div>
-		  </div>
-		</div>
-	</div>
+						
+					<?php if($row['is_details_shared'] != 1) { ?>
+						<a href="javascript:void(0);" user_id="<?php echo $row['user']['id']; ?>" class="shareDetails btn btn-info btn-sm" request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>"><?php echo $this->Html->image('share-ico.png'); ?> Share Details</a>
 					<?php } ?>
-				    </div>
+						<a href="javascript:void(0);" class="acceptOffer btn btn-info btn-sm" request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>"><?php echo $this->Html->image('accept-offer-ico.png'); ?> Accept Offer</a>
+					<?php
+					$sql="Select count(*) as block_count from blocked_users where blocked_user_id='".$row['user']['id']."' AND blocked_by='".$row['request']['user_id']."'";
+					$stmt = $conn->execute($sql);
+					$bresult = $stmt ->fetch('assoc'); 
+					if($bresult['block_count']>0){
+						$blocked = 1;
+					}
+					else{
+						$blocked = 0;
+					}
+					?>	
+					<?php 
+					if($blocked==10)
+					{?>
+						<a href="javascript:void(0);" class="unblockUser btn btn-info btn-sm" user_id = "<?php echo $row['user']['id']; ?>"><?php echo $this->Html->image('block-user-ico.png'); ?> Blocked </a>
+					<?php }
+					else
+					{?>
+						<a href="javascript:void(0);" class="blockUser btn btn-info btn-sm" user_id = "<?php echo $row['user']['id']; ?>"><?php echo $this->Html->image('block-user-ico.png'); ?> Block User </a>
+					<?php }?>
+					<?php $reviewi =  $row['user']['id']."-".$row['request']['id']; ?>
+						<a data-toggle="modal" class="btn btn-info btn-sm" style="display:none;" data-target="#myModal_accept<?php echo $row['id']; ?>" id="add_review" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">
+					Test</a>
+					<div class="modal fade" id="myModal_accept<?php echo $row['id']; ?>" role="dialog">
+						<div class="modal-dialog">
+						  <div class="modal-content">
+							<div class="modal-header">
+							  <button type="button" class="close" data-dismiss="modal">&times;</button>
+							  <h4 class="modal-title">Add Review</h4>
+							</div>
+							<div class="modal-body">
+							</div>
+						  </div>
+						</div>
+					</div>
+					</td>
+				</tr>
+				</table>
+				<?php if( !array_key_exists($row["user"]["id"], $BusinessBuddies)) {?>
+					<div class="buttons padding0">  
+						<span class="budy right"><a href="javascript:void(0);" class="businessBuddy" user_id = "<?php echo $row["user"]["id"]; ?>"><?php echo $this->Html->image('friend-ico.png'); ?></a></span>
+					</div>
+				<?php } ?>
 				</div>
+				
 			<?php } ?>
-			<div class="pages"></div>
-		<?php }else {?>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 box-event">
-<?php if(isset($_GET['req_typesearch'])){ echo "No matching data.";}else{ echo "There are no responses in mailbox.";}?>
-                </div>
+			</fieldset>
 			</div>
-		<?php } ?>
+		</div>
+	<?php } ?>
+			<div class="pages"></div>
+		<?php 
+		}
+		else 
+		{?>
+			<div class="col-md-12">
+				<div class="col-md-12">
+					<?php if(isset($_GET['req_typesearch'])){ echo "No matching data.";}else{ echo "There are no responses in mailbox.";}?>
+				</div>
+			</div>
+	<?php } ?>
       </div>
       </div>
       </div>
-    </div>
-</div>
+    </div> 
 	<div class="modal fade" id="myModal2" role="dialog">
 		<div class="modal-dialog">
 		

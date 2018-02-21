@@ -95,7 +95,8 @@ hr { margin-top:0px!important;}
 													<tr>
 													<tr>
 														<td height="40px">
-															 <span class="other"><?php echo ucwords(strtolower($advert2['hotel_location'])); ?>
+															 <span class="other">
+															 <?php echo ucwords(strtolower(mb_strimwidth($advert2['hotel_location'], 0, 32, "..."))); ?>
 														</span>
 														</td>
 													<tr>
