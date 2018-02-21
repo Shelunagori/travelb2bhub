@@ -114,14 +114,98 @@ class PostTravlePackagesController extends AppController
         $this->set('_serialize', ['message','response_code']);
     }
 
-	public function getTravelPackages()
+	public function getTravelPackages($category_id = null, $category_short = null,$duration_day=null,$duration_night=null,$duration_short=null,$valid_date=null,$valid_date_short=null,$starting_price=null,$starting_price_short=null,$country_id=null,$country_id_short=null,$state_id=null,$state_id_short=null)
 	{
 		$category_id = $this->request->query('category_id');
-		$category_short = '';
 		$category_short = $this->request->query('category_short');
+		$duration_day = $this->request->query('duration_day');
+		$duration_night = $this->request->query('duration_night');
+		$duration_short = $this->request->query('duration_short');
+		$valid_date = $this->request->query('valid_date');
+		$valid_date_short = $this->request->query('valid_date_short');
+		$starting_price = $this->request->query('starting_price');
+		$starting_price_short = $this->request->query('starting_price_short');
+		$country_id = $this->request->query('country_id');
+		$country_id_short = $this->request->query('country_id_short');
+		$state_id = $this->request->query('state_id');
+		$state_id_short = $this->request->query('state_id_short');
+
+		// Start shorting code
 		if(empty($category_short))
 		{
 			$category_short = 'ASC';
+		}
+		
+		if(!empty($state_id_short))
+		{
+			
+		}else
+		{
+
+		}
+		
+		
+		if(!empty($valid_date))
+		{ 
+			$valid_date = ['valid_date =' =>date('Y-m-d',strtotime($valid_date))];
+		}
+		else
+		{ 
+			$valid_date = ['valid_date >=' =>date('Y-m-d')]; 
+		}
+		
+		if(!empty($duration_short) && $duration_short == 'ASC')
+		{
+			$where_short = ['duration_day' =>'ASC','duration_night' =>'DESC'];
+		}
+		else if(!empty($duration_short) && $duration_short == 'DESC')
+		{
+			$where_short = ['duration_day' =>'DESC','duration_night' =>'ASC'];
+		}else
+		{
+			$where_short = null;
+		}
+		
+		if(!empty($valid_date_short))
+		{
+			$where_short = ['valid_date' =>$valid_date_short];
+		}else
+		{
+			$where_short = null;
+		}
+		if(!empty($starting_price_short))
+		{
+			$where_short = ['starting_price' =>$starting_price_short];
+		}else
+		{
+			$where_short = null;
+		}
+		if(!empty($country_id_short))
+		{
+			$where_short = ['country_id' =>$country_id_short];
+		}else
+		{
+			$where_short = null;
+		}
+
+
+		// End Shorting code
+		// Start Filter code
+		
+		if(!empty($duration_day) && !empty($duration_night))
+		{
+			$where_duration = ['duration_day'=>$duration_day,'duration_night'=>$duration_night];
+		}
+		else if(!empty($duration_day) && empty($duration_night))
+		{
+			$where_duration = ['duration_day'=>$duration_day];
+		}
+		else if(empty($duration_day) && !empty($duration_night))
+		{
+			$where_duration = ['duration_night'=>$duration_night];
+		}else
+		{
+			$where_duration = null;
 		}
 		
 		$category_id_filter = null;
@@ -133,17 +217,51 @@ class PostTravlePackagesController extends AppController
 			$category_id_filter = null;
 		}
 		
+		$state_filter = null;
+		
+		if(!empty($state_id))
+		{
+			$state_filter = ['state_id'=>$state_id];
+		}else
+		{
+			$state_filter = null;
+		}
+		
+		if(!empty($starting_price))
+		{
+			$starting_price = ['starting_price'=>$starting_price];
+		}else
+		{
+			$starting_price = null;
+		}
+		if(!empty($country_id))
+		{
+			$country_id = ['country_id'=>$country_id];
+		}else
+		{
+			$country_id = null;
+		}
+
+		// End Filter code
+		
 		$getTravelPackages = $this->PostTravlePackages->find();
 			$getTravelPackages->select(['total_likes'=>$getTravelPackages->func()->count('PostTravlePackageLikes.id')])
 			->leftJoinWith('PostTravlePackageLikes')
 			->innerJoinWith('PostTravlePackageRows',function($q) use($category_id_filter,$category_short){ 
 					return $q->where($category_id_filter)
 						->contain(['PostTravlePackageCategories'=>function ($q) use($category_short)
-						{
+						{	
 							return $q->order(['name' => $category_short]);
 						}]);
 				})
-			->where(['valid_date >=' =>date('Y-m-d')])
+			->innerJoinWith('PostTravlePackageStates',function($q) use($state_filter){ 
+					return $q->where($state_filter);
+				})				
+			->where($where_duration)
+			->where($valid_date)
+			->where($starting_price)
+			->where($country_id)
+			->order($where_short)
 			->group(['PostTravlePackages.id'])
 			->autoFields(true);
 		
