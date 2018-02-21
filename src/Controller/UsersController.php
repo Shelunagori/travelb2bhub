@@ -852,6 +852,7 @@ $this->redirect('/pages/home');
 }
 }
 public function sendrequest() {
+	$this->viewBuilder()->layout('user_layout');	
 	date_default_timezone_set('Asia/Kolkata');
 //Configure::write('debug',2);
 $this->loadModel('Requests');
