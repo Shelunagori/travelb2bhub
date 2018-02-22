@@ -388,7 +388,7 @@ margin-top: 5px !important;
 <footer class="main-footer hide_print">
     2016 &copy; <a href="http://www.phppoets.com" target="_blank"> PHP POETS IT SOLUTION PRIVATE LTD.</a> All Rights Reserved.
 </footer>
-
+`
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <?php echo $this->Html->script('/assets/bootstrap/js/bootstrap.min.js'); ?>
 
