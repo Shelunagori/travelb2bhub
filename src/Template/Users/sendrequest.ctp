@@ -472,12 +472,10 @@ $(document).ready(function($){
 														</div>
 													</div> 
 											</div>
-				
-			</div>
-		</div>
-	</div>
-</div>
-
+										</div>
+									</div>
+								</div>
+							</div>
 <div class="tab-pane active" id="tab2" >
 <?php
 					echo $this->Form->create(null, [
@@ -684,6 +682,160 @@ $(document).ready(function($){
 						</div>
 					</fieldset>
 				</h4>
+				<h4 class="panel-title">
+												<fieldset>
+													<legend style="color:#369FA1;"><b>Transport</b></legend>
+													<div class="row">
+														<div class="col-md-12 ">
+															<div class="input-field">
+																<select name="transport_requirement" class="form-control">
+																	<option value="" selected>Select Transport</option>
+																	<option value="1">Luxury Car</option>
+																	<option value="2">Sedan</option>
+																	<option value="3">Innova/ Tavera</option>
+																	<option value="4">Tempo Traveller</option>
+																	<option value="5">AC Coach</option>
+																	<option value="6">Non AC Bus</option>
+																</select>
+															</div>
+														</div>
+													</div>
+											<div class="row">
+											<div class=" col-md-12">
+													<div class="col-md-6">
+														<div class="input-field">
+															<p for="from">
+																Start Date
+															</p>
+														</div>
+														<div class="col-md-6 input-group">
+															 <input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker3" placeholder="dd-mm-yyyy"/>
+															<label class="input-group-addon btn" for="testdate">
+															<span class="fa fa-calendar"></span>
+															</label>                    
+														</div>
+													</div>
+													<div class="col-md-6">
+														<div class="input-field">
+																	<p for="from">
+																		End Date
+																	</p>
+														</div>
+														<div class="col-md-6 input-group">
+															 <input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker4" placeholder="dd-mm-yyyy"/>
+															<label class="input-group-addon btn" for="testdate">
+															<span class="fa fa-calendar"></span>
+															</label>                    
+														</div>
+													</div>
+												</div>
+											</div><span class="help-block"></span>
+											<div class="row">
+												<div class="col-md-12">
+												    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+                                                            <div class="input-field">
+                                                            <label for="from">Pickup Locality
+                                                                
+                                                            </label>
+                                                            <input autocomplete="off" type="text" class="form-control" name="pickup_locality" id="pickup_locality" placeholder="Enter Locality or Village or Town"/>
+                                                            </div>
+                                                    </div>
+                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+                                                            <div class="input-field">
+                                                                <label for="from">Pickup City
+                                                                    
+                                                                </label>
+                                                                <input type="text" class="form-control" id="t_pickup_city_name" name="t_pickup_city_name"  placeholder="Select City or Nearest City"/>
+                                                                <input type='hidden' id='t_pickup_city_id' name="t_pickup_city_id" />
+
+                                                            </div>
+                                                    </div>										
+												</div>
+											</div><span class="help-block"></span>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+															<div class="input-field">
+															<label for="from">Pickup State</label>
+																<input type='hidden' id='t_pickup_state_id' name="t_pickup_state_id"/>
+															<input type="text" class="form-control" id ="t_pickup_state_name" name="t_pickup_state_name" placeholder="State" readonly/>
+															</div>
+														</div>
+												
+														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+															<div class="input-field">
+															<label for="from">Pickup Country</label>
+																<input type='hidden' id='t_pickup_country_id' name="t_pickup_country_id"/>
+																<input type="hidden" class="form-control" id ="t_pickup_country_name" name="t_pickup_country_name" placeholder="Select Country" readonly/>
+															</div>
+														</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+														
+															<div class="input_fields_wrap1">
+                                                                    <button class="but btn-primary btn-md transport-stop-add">ADD STOP</button>
+                                                             </div> 
+											</div>
+													<!-- <div class="col-xxs-12 text-center">
+															<div class="input_fields_wrap">
+																<button class="add_field_button but">Add Stop</button>
+																<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+																	<div class="input-field">
+																		<label for="from" style="float:left;">Stop Name</label>
+																		<input class="form-control" type="text" placeholder="Stop Name" name="stops[]">
+																	</div>
+																</div>
+															</div>
+														</div>  -->
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+														<div class="input-field">
+															<label for="from">Final Locality
+                                                                  
+                                                                </label>
+															<input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="finalLocality"/>
+														</div>
+													</div>
+													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+															<div class="input-field">
+																<label for="from">Final City
+                                                                     
+                                                                </label>
+																<input type="text" class="form-control" id="t_final_city_name" name="t_final_city_name" placeholder="Select City or Nearest City"/>
+																<input type='hidden' id='t_final_city_id' name="t_final_city_id" />
+																
+															</div>
+														</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="col-lg-6 col-md-12 col-sm-6 col-xs-12 mt">
+															<div class="input-field">
+															<label for="from">Final State</label>
+																<input type='hidden' id='t_final_state_id' name="t_final_state_id"/>
+															<input type="text" class="form-control" id ="t_final_state_name" name="t_final_state_name" placeholder="Select State" />
+															</div>
+														</div>
+														<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
+														<input type="hidden" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" readonly/>
+														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+															<div class="input-field">
+															<label for="from">Final Country</label>
+																<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
+																<input type="text" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" />
+															</div>
+														</div>
+												</div>
+											</div>
+											</fieldset>
+											</h4>
 										<h4 class="panel-title">
 												<fieldset>
 													<legend style="color:#369FA1;"><b>Comment Box</b></legend>
@@ -729,7 +881,6 @@ $(document).ready(function($){
 										<h4 class="panel-title">
 											<fieldset>
 												  <legend style="color:#369FA1;"><b>GENERAL REQUIREMENTS:</b></legend>
-												<div class="form">
 													<div class="row">
 														<div class="col-md-12">
 														  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -750,7 +901,7 @@ $(document).ready(function($){
 																</div>
 															</div>
 														</div>
-													</div><br>
+													</div>
 													<div class="row">
 														<div class="col-md-12">
 															<div class="col-md-6">
@@ -780,7 +931,6 @@ $(document).ready(function($){
 															</div>
 														</div>
 													</div>
-												</div>
 											</fieldset>
 											</h4>
 											<h4 class="panel-title">
