@@ -1,6 +1,7 @@
+ <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
  <style>
 	#country-list{list-style:none;margin-left: 1px;padding:0;width:auto; margin-top: 10px;}
-	#country-list li{padding-left: 10px;padding-top: 7px; background: #efeeee85 ; border-bottom: #bbb9b9 1px solid; height:35px;top:2px}
+	#country-list li{padding-left: 10px;padding-top: 7px; background: #efeeee85 ; border-bottom: #bbb9b9 1px solid;top:2px}
 	#country-list li:hover{background:#d8d4d4;cursor: pointer;}
 	.column_column ul li, .column_helper ul li, .column_visual ul li, .icon_box ul li, .mfn-acc ul li, .ui-tabs-panel ul li, .post-excerpt ul li, .the_content_wrapper ul li{margin-bottom:0px !important}
 	#search-box{border: #e2e2e2 1px solid;border-radius:4px;}
@@ -46,6 +47,10 @@ hr { margin-top:0px!important;}
 .other { 
 	font-size: 17px;
     color: #727376; 
+}
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img { 
+	height: 200 !important;
+    width: 200 !important; 
 }
 .arroysign
 {
@@ -144,45 +149,26 @@ hr { margin-top:0px!important;}
 						  <label>States</label>
 						  <?php echo $this->Form->input('state_id',['label' => false,'class'=>'form-control select2','options'=>$states_show,'empty'=>'---Select--Please---']);?>
 					</div>
-
 					<div class="form-group col-md-4">
 						  <label>Country</label>
 						  <?php echo $this->Form->input('country_id',['label' => false,'class'=>'form-control select2','options'=>$country_show]);?>
 					</div>
-				
 				</div> 
 				
 				<div class="form-group col-md-12">
                   <label>Select Preference</label>
                    <?php 
-                            $selectedPreferenceStates = "";
-                            if(!empty($users['preference'])) {
-                                $selectedPreferenceStates = explode(",", $users['preference']);
-                            }	
-                            echo $this->Form->control('preference', ["value"=>$selectedPreferenceStates, "id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select", "data-placeholder"=>"Select Some States", "style"=>"height:125px;"]); ?>
+					$selectedPreferenceStates = "";
+					if(!empty($users['preference'])) {
+						$selectedPreferenceStates = explode(",", $users['preference']);
+					}	
+					echo $this->Form->control('preference', ["value"=>$selectedPreferenceStates, "id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select", "data-placeholder"=>"Select Some States", "style"=>"height:125px;"]); ?>
                 </div>
                  </div>
 				 
 				 </div>
 				</fieldset>
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+				 
 				<fieldset>
 				<legend>CERTIFICATES</legend>
 			   
@@ -191,7 +177,9 @@ hr { margin-top:0px!important;}
 						<div class="img_show col-md-3" align="center">
 							<?php if(!empty($users['iata_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iata_pic'])) { 
 								echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iata_pic'], ["alt"=>"IATA Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
-							<?php } ?>
+							<?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"IATA Pic", "height"=>200, 'width'=>200, 'style'=>'border-radius: 50%;']); 
+								} ?>
 							<p>
 								<?php echo $this->Form->input('IATA Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'iata_pic']); ?>
 								IATA
@@ -200,7 +188,9 @@ hr { margin-top:0px!important;}
 						<div class="img_show col-md-3" align="center">
 							<?php if(!empty($users['tafi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['tafi_pic'])) {
                                 echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['tafi_pic'], ["alt"=>"T A F I Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
-                            <?php } ?>
+                            <?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"T A F I Pic", "height"=>200, 'width'=>200, 'style'=>'border-radius: 50%;']); 
+								} ?>
 							<p>
 								<?php echo $this->Form->input('T A F I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'tafi_pic']); ?>
 								TAFI
@@ -210,7 +200,9 @@ hr { margin-top:0px!important;}
 						<div class="img_show col-md-3" align="center">
 							<?php if(!empty($users['taai_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['taai_pic'])) { 
                                 echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['taai_pic'], ["alt"=>"T A A I Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
-							<?php } ?>
+							<?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"T A A I Pic", "height"=>200, 'width'=>200, 'style'=>'border-radius: 50%;']); 
+								} ?>
 							<p>
 								<?php echo $this->Form->input('T A A I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'taai_pic']); ?>
 								TAAI
@@ -220,7 +212,9 @@ hr { margin-top:0px!important;}
 						<div class="img_show col-md-3" align="center">
 							<?php if(!empty($users['iato_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iato_pic'])) { 
                                 echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iato_pic'], ["alt"=>"I A T O Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
-							<?php } ?>
+							<?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"I A T O Pic", "height"=>200, 'width'=>200, 'style'=>'border-radius: 50%;']); 
+								} ?>
 							<p>
 								<?php echo $this->Form->input('IATO Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'iato_pic']); ?>
 								IATO
@@ -230,7 +224,9 @@ hr { margin-top:0px!important;}
 						<div class="img_show col-md-3" align="center">
 							<?php if(!empty($users['adyoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adyoi_pic'])) { 
                                 echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adyoi_pic'], ["alt"=>"A D Y O I Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
-							<?php } ?>
+							<?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>200, 'width'=>200, 'style'=>'border-radius: 50%;']); 
+								} ?>
 							<p>
 								<?php echo $this->Form->input('A D Y O I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'adyoi_pic']); ?>
 								ADYOI
@@ -240,7 +236,9 @@ hr { margin-top:0px!important;}
 						<div class="img_show col-md-3" align="center">
 							<?php if(!empty($users['iso9001_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iso9001_pic'])) { 
                                 echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iso9001_pic'], ["alt"=>"I S O 9001 Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
-							<?php } ?>
+							<?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"I S O 9001 Pic", "height"=>200, 'width'=>200, 'style'=>'border-radius: 50%;']); 
+								} ?>
 							<p>
 								<?php echo $this->Form->input('I S O 9001 Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'iso9001_pic']); ?>
 								ISO
@@ -250,7 +248,9 @@ hr { margin-top:0px!important;}
 						<div class="img_show col-md-3" align="center">
 							<?php if(!empty($users['uftaa_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['uftaa_pic'])) { 
                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['uftaa_pic'], ["alt"=>"U F T A A Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
-							<?php } ?>
+							<?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"U F T A A Pic", "height"=>200, 'width'=>200, 'style'=>'border-radius: 50%;']); 
+								} ?>
 							<p>
 								<?php echo $this->Form->input('U F T A A Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'uftaa_pic']); ?>
 								UFTAA
@@ -260,7 +260,9 @@ hr { margin-top:0px!important;}
 						<div class="img_show col-md-3" align="center">
 							<?php if(!empty($users['adtoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adtoi_pic'])) { 
                                 echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adtoi_pic'], ["alt"=>"A D T O I Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
-							<?php } ?>
+							<?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>200, 'width'=>200, 'style'=>'border-radius: 50%;']); 
+								} ?>
 							<p>
 								<?php echo $this->Form->input('A D T O I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'adtoi_pic']); ?>
 								ADTOI
@@ -271,9 +273,6 @@ hr { margin-top:0px!important;}
 				 </div>
 				</fieldset>
 				
-				
-				
-				
 				<fieldset>
 				<legend>UPLOAD PHOTO</legend>
 			   
@@ -281,38 +280,100 @@ hr { margin-top:0px!important;}
 					<div class="col-md-12">
 						<div class="img_show col-md-4" align="center">
 							<?php if(!empty($users['profile_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['profile_pic'])) {
-								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['profile_pic'], ["class"=>"img-responsive", "alt"=>"Profile Pic", "height"=>150]);?>
-							<?php } ?>
+								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['profile_pic'], ["class"=>"img_setup", "alt"=>"Profile Pic",'height'=>190,'width'=>250]);?>
+							<?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"Profile Pic",'height'=>220,'width'=>250]); 
+								} ?>
 							<p>
 								<?php echo $this->Form->input('Profile Picture', ['type' => 'file', 'class' => 'form-control', 'name' => 'profile_pic']); ?>
-								Profile Picture
+								 
+							</p>
+						</div>
+						<div class="img_show col-md-4" align="center" >
+							<?php if(!empty($users['company_img_1_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.	$users['id'].DS.$users['company_img_1_pic'])) { 
+								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_1_pic'], ["class"=>"  img_setup", "alt"=>"Company Image 1 Pic",'height'=>190,'width'=>250]);?>
+							<?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"Profile Pic",'height'=>220,'width'=>250]); 
+								} ?>
+							<p>
+							<?php 
+							  if($this->request->session()->read('Auth.User.role_id') == 1 or $this->request->session()->read('Auth.User.role_id') == 2) {
+								echo $this->Form->input('Photograph of your office (Pic 1)', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_img_1','style'=>'height:200 !important;' ]);
+							  }else{
+								  echo $this->Form->input('Photograph of your Hotel-1', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_img_1' ]);
+							  } ?>
+								 
+							</p>
+						</div>
+						 
+						<div class="img_show col-md-4" align="center"  style="height:250">
+							<?php if(!empty($users['company_img_2_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_img_2_pic'])) { 
+								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_2_pic'], ["class"=>"img_setup", "alt"=>"Company Image 2 Pic",'height'=>190,'width'=>250]);?>
+							<?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"Profile Pic",'height'=>220,'width'=>250]); 
+								} ?>
+							<p>
+								<?php  if($this->request->session()->read('Auth.User.role_id') == 1 or $this->request->session()->read('Auth.User.role_id') == 2) {
+									echo $this->Form->input('Photograph of your office (Pic 2)', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_img_2' ]);
+								  }else{
+									  echo $this->Form->input('Photograph of your Hotel-2', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_img_2' ]);
+								}?>
+							</p>
+						</div>
+						
+						</div>
+						 
+						<div class="col-md-12" style="margin-top:30px;">
+							<div class="img_show col-md-4" align="center">
+								<?php 
+								if(!empty($users['pancard_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['pancard_pic'])) { 
+									echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['pancard_pic'], ["class"=>"img_setup", "alt"=>"Pan Card Pic",'height'=>190,'width'=>250]);?>
+								<?php }else{ 
+									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"Profile Pic",'height'=>220,'width'=>250]); 
+								} ?>
+								<p>
+									<?php echo $this->Form->input('Pan Card', ['type' => 'file', 'class' => 'form-control', 'name' => 'pancard', "pancard"]); ?>
+								</p>
+							</div>
+						<div class="img_show col-md-4" align="center">
+							<?php 
+							if(!empty($users['id_card_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['id_card_pic'])) { 
+								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['id_card_pic'], ["class"=>"img_setup", "alt"=>"Business card Pic",'height'=>190,'width'=>250]);?>
+							<?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"Profile Pic",'height'=>220,'width'=>250]); 
+								} ?>
+							<p>
+								<?php echo $this->Form->input('Business card', ['type' => 'file', 'class' => 'form-control', 'name' => 'id_card','id'=>'id_card']); ?>
 							</p>
 						</div>
 						<div class="img_show col-md-4" align="center">
-							<?php if(!empty($users['company_img_1_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.	$users['id'].DS.$users['company_img_1_pic'])) { 
-								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_1_pic'], ["class"=>"img-responsive", "alt"=>"Company Image 1 Pic", "height"=>150]);?>
-							<?php } ?>
+							<?php 
+							if(!empty($users['company_shop_registration_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_shop_registration_pic'])) {
+								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_shop_registration_pic'], ["class"=>"img_setup", "alt"=>"Company Shop Act Registration Pic",'height'=>190,'width'=>250]);?>
+							<?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"Profile Pic",'height'=>220,'width'=>250]); 
+								} ?>
 							<p>
-								<?php echo $this->Form->input('Profile Picture', ['type' => 'file', 'class' => 'form-control', 'name' => 'profile_pic']); ?>
-								Profile Picture
+								<?php echo $this->Form->input('Company Shop Act Registration', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_shop_registration']); ?>
 							</p>
 						</div>
-						
-						 
-						
 					</div>
 				 </div>
 				</fieldset>
-				
+				<fieldset>
+				<legend>Description</legend>
+					<div>
+						<div class="form-group col-md-12">
+							<textarea name="description" class="form-control" id="description" placeholder="Enter Here" rows="3"><?php echo $users['description'] ?></textarea>
+						</div> 
+					</div>
+				</fieldset>
             </div>
-			  
-			  
-			  
-			  
-              <!-- /.box-body -->
-
+			   
               <div class="box-footer">
-                <button type="submit" class="btn btn-primary">Submit</button>
+				<center>
+					<button type="submit" class="btn btn-primary">Edit Profile</button>
+				</center>	
               </div>
             </form>
           </div>
@@ -322,202 +383,7 @@ hr { margin-top:0px!important;}
       </div>
       <!-- /.row -->
     </section>
- 
-  <div id="profile_edit" class="container-fluid">
-    <div class="row equal_column">
-          <div class="col-lg-12 col-md-9 col-sm-9 col-xs-12 padding0">
-             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 border_bottom">
-              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 ">
-                     <h4 class="title">Edit Profile</h4>
-               </div>
-               <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5 ">
-                   
-                   
-                    
-          
-          <hr class="hr_bordor">
-        <p><!--<strong>This site is currently being refined to serve you better. You will be notified in the next few days, once the website is fully functional</strong>--></p>
-        <div class="form" >
-            <?php $pararm = $users['id']; ?>
-			<?php  echo $this->Form->create("Users", ['type' => 'file', 'url' => ['controller' => 'Users', 'action' => 'edit',$pararm], 'id'=>"UserRegisterForm"]); ?>
-            
-            <?php if($this->request->session()->read('Auth.User.role_id') == 1) { ?>
-             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-b20">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 user_category">
-            
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
-					<h3 style="color: #000;">Certificates</h3>
-					<div class="table-responsive" id="table_responsive">
-                        <table class="table">
-                            <thead>
-                              <tr>
-                                <th style="">Sr. No.</th>
-                                <th style="">Certificate Name</th>
-                                <th style="">Certificate Image</th>
-                                <th style="">Previous Uploaded Image</th>
-                              </tr>
-                            </thead>
-                            
-                        </table>
-					</div>
-				</div>
-				</div>
-				</div>
-             
-            
-			<?php } elseif($this->request->session()->read('Auth.User.role_id') == 3) { ?>
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-b20">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 user_category">
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-					<div class="input-field">
-						<label for="from">Hotel Rating<span class="asterisk">
-                                                    <img src="../img/Asterisk.png" class="img-responsive">
-                                                </span></label>
-						<?php
-						$hotel_rating = (!empty($users['hotel_rating']))? $users['hotel_rating']:""; ?>		
 
-
-
-<div class="input-field">
-
-			<div style=" width: 200px;" >
-			<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
-       <input class="star star-5" id="star-5-21" type="radio" value="5" <?php if($hotel_rating=="5") {echo "checked";} ?> name="hotel_rating"/>
-       <label class="star star-5" for="star-5-21"></label>
-       <input class="star star-4" id="star-4-21" type="radio" value="4" <?php if($hotel_rating=="4") {echo "checked";} ?> name="hotel_rating"/>
-       <label class="star star-4" for="star-4-21"></label>
-       <input class="star star-3" id="star-3-21" type="radio" value="3" <?php if($hotel_rating=="3") {echo "checked";} ?>  name="hotel_rating"/>
-       <label class="star star-3" for="star-3-21"></label>
-       <input class="star star-2" id="star-2-21" type="radio" value="2" <?php if($hotel_rating=="2") {echo "checked";} ?> name="hotel_rating"/>
-       <label class="star star-2" for="star-2-21"></label>
-       <input class="star star-1" id="star-1-21" type="radio" value="1" <?php if($hotel_rating=="1") {echo "checked";} ?> name="hotel_rating"/>
-       <label class="star star-1" for="star-1-21"></label>
-       </div> </div>
-
-
-
-
-
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-					<div class="input-field">
-						<label for="from">Hotel Categories</label>
-						<?php 
-						$selectedCetegories = (!empty($users['hotel_categories']))? explode(",",$users['hotel_categories']):"";
-						echo $this->Form->control('hotel_categories', ["id"=>"hotel_categories", "type"=>"select", "empty"=>"Select Hotel Categories", 'options' =>$hotelCategories, "value"=>$selectedCetegories , "class"=>"form-control chosen-select"]);?>
-					</div>
-				</div>
-				</div>
-				</div>
-			<?php } ?>          
-			 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-b20">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 user_category">
-          
-          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-              <div class="thumbnail min_height220">               
-                  <?php echo $this->Form->input('Profile Picture', ['type' => 'file', 'class' => 'form-control', 'name' => 'profile_pic']); ?>
-                   <div>
-                    <?php if(!empty($users['profile_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['profile_pic'])) {
-                    echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['profile_pic'], ["class"=>"img-responsive", "alt"=>"Profile Pic", "height"=>150]);?>
-                    <?php } ?>
-                </div>
-              </div>
-          </div>
-
-          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-               <div class="thumbnail min_height220">
-               
-                  <?php 
-                  if($this->request->session()->read('Auth.User.role_id') == 1 or $this->request->session()->read('Auth.User.role_id') == 2) {
-                    echo $this->Form->input('Photograph of your office (Pic 1)', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_img_1' ]);
-                  }else{
-                      echo $this->Form->input('Photograph of your Hotel-1', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_img_1' ]);
-                  }		  ?>
-                    <div>
-                    <?php if(!empty($users['company_img_1_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_img_1_pic'])) { 
-                    echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_1_pic'], ["class"=>"img-responsive", "alt"=>"Company Image 1 Pic", "height"=>150]);?>
-                    <?php } ?>
-                </div>
-              </div>
-          </div>
-
-		  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-               <div class="thumbnail min_height220">			
-                  <?php  if($this->request->session()->read('Auth.User.role_id') == 1 or $this->request->session()->read('Auth.User.role_id') == 2) {
-                    echo $this->Form->input('Photograph of your office (Pic 2)', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_img_2' ]);
-                  }else{
-                      echo $this->Form->input('Photograph of your Hotel-2', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_img_2' ]);
-                  }?>
-                 <div>
-                    <?php if(!empty($users['company_img_2_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_img_2_pic'])) { 
-                    echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_2_pic'], ["class"=>"img-responsive", "alt"=>"Company Image 2 Pic", "height"=>150]);?>
-                    <?php } ?>
-                 </div>
-			</div>
-          </div>
-
-          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-              <div class="thumbnail min_height220">		
-			       <?php echo $this->Form->input('Pan Card', ['type' => 'file', 'class' => 'form-control', 'name' => 'pancard', "pancard"]); ?>
-                    <div>
-                        <?php if(!empty($users['pancard_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['pancard_pic'])) { 
-                        echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['pancard_pic'], ["class"=>"img-responsive", "alt"=>"Pan Card Pic", "height"=>150]);?>
-                        <?php } ?>
-                    </div>
-              </div>
-          </div>
-
-
-          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-              <div class="thumbnail min_height220">		
-                    <?php echo $this->Form->input('Business card', ['type' => 'file', 'class' => 'form-control', 'name' => 'id_card','id'=>'id_card']); ?>
-                    <div>
-                        <?php if(!empty($users['id_card_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['id_card_pic'])) { 
-                        echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['id_card_pic'], ["class"=>"img-responsive", "alt"=>"Business card Pic", "height"=>150]);?>
-                        <?php } ?>
-                    </div>
-              </div>
-          </div>
-
-		  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt margin-b10">
-              <div class="thumbnail min_height220">	
-			        <?php echo $this->Form->input('Company Shop Act Registration', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_shop_registration']); ?>
-              <div>
-				<?php if(!empty($users['company_shop_registration_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_shop_registration_pic'])) {
-				echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_shop_registration_pic'], ["class"=>"img-responsive", "alt"=>"Company Shop Act Registration Pic", "height"=>150]);?>
-				<?php } ?>
-              </div>
-			</div>
-          </div>
-            </div>
-          </div>
-           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-b20">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 user_category">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt margin-b20">
-			 <div class="input-field">
-                 <label for="from">Description<span class="asterisk">
-                                                    <img src="../img/Asterisk.png" class="img-responsive">
-                                                </span></label>
-                 <textarea name="description" class="form-control" id="description" placeholder="Enter Here" col="10" row="10"><?php echo $users['description'] ?></textarea>
-			 </div>
-		  </div>
-            </div>
-		  </div>
-           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
-              <div class="margi1">
-                <input type="submit" name="submit" class="btn btn-primary btn-block " value="Update Profile ">
-              </div>
-           </div>
-        </form>
-        </div>
-     
-</div>
-</div>
-</div>
-</div>
-
-<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
    
 <script>
 
