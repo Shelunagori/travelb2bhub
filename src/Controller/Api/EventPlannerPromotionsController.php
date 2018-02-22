@@ -136,29 +136,119 @@ class EventPlannerPromotionsController extends AppController
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);		
 	}
-
-
-	public function getEventPlanners()
+	
+	public function removeEvent($event_id = null)
 	{
-		$getEventPlanners = $this->EventPlannerPromotions->find();
-			$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('EventPlannerPromotionLikes.id')])
-			->leftJoinWith('EventPlannerPromotionLikes')
-		->where(['visible_date >=' =>date('Y-m-d')])
-		->contain(['Users'])
-		->group(['EventPlannerPromotions.id'])
-		->autoFields(true);
-		//pr($getTravelPackages->toArray()); exit;
-		if(!empty($getEventPlanners->toArray()))
+		$event_id = $this->request->query('event_id');
+		if(!empty($event_id))
 		{
-			$message = 'List Found Successfully';
-			$response_code = 200;
+			$query = $this->EventPlannerPromotions->query();
+			$query->update()->set(['is_deleted' => 1])
+			->where(['id' => $event_id])->execute();			
+			$message = 'The Package has been deleted successfully';
+			$response_code = 200;			
 		}
 		else
 		{
-			$message = 'No Content Found';
-			$getEventPlanners = [];
-			$response_code = 204;			
+			$message = 'Enter Event ID';
+			$response_code = 204;				
 		}
+		$this->set(compact('message','response_code'));
+        $this->set('_serialize', ['message','response_code']);				
+	}
+
+	public function getEventPlannerReport($user_id = null)
+	{
+		$user_id = $this->request->query('user_id');
+		if(!empty($user_id))
+		{
+			$getEventPlanners = $this->EventPlannerPromotions->find()
+			->where(['is_deleted' =>0])
+			->where(['user_id'=>$user_id])
+			->group(['EventPlannerPromotions.id'])
+			->autoFields(true);
+	
+			if(!empty($getEventPlanners->toArray()))
+			{
+				foreach($getEventPlanners as $getEventPlanner)
+				{
+					$getEventPlanner->total_likes = $this->EventPlannerPromotions->EventPlannerPromotionLikes
+							->find()->where(['event_planner_promotion_id' => $getEventPlanner->id])->count();
+
+					$getEventPlanner->total_views = $this->EventPlannerPromotions->EventPlannerPromotionViews
+							->find()->where(['event_planner_promotion_id' => $getEventPlanner->id])->count();
+					
+					if($getEventPlanner->visible_date >= date('Y-m-d'))
+					{
+						$getEventPlanner->expir_status = 'valid';	
+					}else
+					{
+						$getEventPlanner->expir_status = 'expired';		
+					}
+					
+					
+				}
+				$message = 'List Found Successfully';
+				$response_code = 200;
+			}
+			else
+			{
+				$message = 'No Content Found';
+				$getEventPlanners = [];
+				$response_code = 204;			
+			}			
+		}else {
+				$message = 'Please Enter User ID ';
+				$getEventPlanners = [];
+				$response_code = 205;			
+		}
+
+		
+		$this->set(compact('getEventPlanners','message','response_code'));
+        $this->set('_serialize', ['getEventPlanners','message','response_code']);				
+	}	
+	
+	public function getEventPlanners($isLikedUserId = null)
+	{
+		$isLikedUserId = $this->request->query('isLikedUserId');
+		if(!empty($isLikedUserId))
+		{
+			$getEventPlanners = $this->EventPlannerPromotions->find();
+				$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('EventPlannerPromotionLikes.id')])
+				->leftJoinWith('EventPlannerPromotionLikes')
+			->where(['visible_date >=' =>date('Y-m-d')])
+			->where(['is_deleted' =>0])
+			->group(['EventPlannerPromotions.id'])
+			->autoFields(true);
+			
+			if(!empty($getEventPlanners->toArray()))
+			{
+				foreach($getEventPlanners as $getEventPlanner)
+				{
+					$exists = $this->EventPlannerPromotions->EventPlannerPromotionLikes->exists(['event_planner_promotion_id'=>$getEventPlanner->id,'user_id'=>$isLikedUserId]);
+					if($exists == 1)
+					{ $getEventPlanner->isLiked = 'yes'; }
+					else{ $getEventPlanner->isLiked = 'no'; }
+				}
+				
+				
+				$message = 'List Found Successfully';
+				$response_code = 200;
+			}
+			else
+			{
+				$message = 'No Content Found';
+				$getEventPlanners = [];
+				$response_code = 204;			
+			}			
+		}
+		else
+		{
+				$message = 'isLikedUserId is empty';
+				$getEventPlanners = [];
+				$response_code = 204;				
+		}
+
 		
 		$this->set(compact('getEventPlanners','message','response_code'));
         $this->set('_serialize', ['getEventPlanners','message','response_code']);		
@@ -173,6 +263,7 @@ class EventPlannerPromotionsController extends AppController
 			->leftJoinWith('EventPlannerPromotionLikes')
 			->contain(['Users','PriceMasters','Countries','EventPlannerPromotionStates'=>['States'],'EventPlannerPromotionCities'=>['Cities']])
 			->where(['EventPlannerPromotions.id'=>$id])
+			->where(['EventPlannerPromotions.is_deleted' =>0])
 			->group(['EventPlannerPromotions.id'])
 		->autoFields(true);
 		

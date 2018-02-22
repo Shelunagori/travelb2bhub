@@ -141,23 +141,41 @@ class TaxiFleetPromotionsController extends AppController
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);		
 	}
-	public function getTaxiFleetPromotions()
+	public function getTaxiFleetPromotions($isLikedUserId = null)
 	{
-		$getTaxiFleetPromotions = $this->TaxiFleetPromotions->find();
-			$getTaxiFleetPromotions->select(['total_likes'=>$getTaxiFleetPromotions->func()->count('TaxiFleetPromotionLikes.id')])
-			->leftJoinWith('TaxiFleetPromotionLikes')
-		->where(['visible_date >=' =>date('Y-m-d')])
-		->group(['TaxiFleetPromotions.id'])
-		->autoFields(true);
-		//pr($getTravelPackages->toArray()); exit;
-		if(!empty($getTaxiFleetPromotions->toArray()))
+		$isLikedUserId = $this->request->query('isLikedUserId');		
+		if(!empty($isLikedUserId))
 		{
-			$message = 'List Found Successfully';
-			$response_code = 200;
+			$getTaxiFleetPromotions = $this->TaxiFleetPromotions->find();
+				$getTaxiFleetPromotions->select(['total_likes'=>$getTaxiFleetPromotions->func()->count('TaxiFleetPromotionLikes.id')])
+				->leftJoinWith('TaxiFleetPromotionLikes')
+			->where(['visible_date >=' =>date('Y-m-d')])
+			->group(['TaxiFleetPromotions.id'])
+			->autoFields(true);
+			//pr($getTravelPackages->toArray()); exit;
+			if(!empty($getTaxiFleetPromotions->toArray()))
+			{
+				foreach($getTaxiFleetPromotions as $getTaxiFleetPromotion)
+				{
+					$exists = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->exists(['taxi_fleet_promotion_id'=>$getTaxiFleetPromotion->id,'user_id'=>$isLikedUserId]);
+					
+					if($exists == 0)
+					{  $getTaxiFleetPromotion->isLiked = 'yes'; } 
+					else { $getTaxiFleetPromotion->isLiked = 'no'; }				
+				}
+				$message = 'List Found Successfully';
+				$response_code = 200;
+			}
+			else
+			{
+				$message = 'No Content Found';
+				$getTaxiFleetPromotions = [];
+				$response_code = 204;			
+			}			
 		}
 		else
 		{
-			$message = 'No Content Found';
+			$message = 'isLikedUserId is empty';
 			$getTaxiFleetPromotions = [];
 			$response_code = 204;			
 		}
@@ -213,5 +231,75 @@ class TaxiFleetPromotionsController extends AppController
         $this->set('_serialize', ['getTaxiFleetPromotionsDetails','message','response_code']);		
 	}
 	
+	public function removeTaxFlletPromotions($taxi_id = null)
+	{
+		$taxi_id = $this->request->query('taxi_id');
+		if(!empty($taxi_id))
+		{
+			$query = $this->TaxiFleetPromotions->query();
+			$query->update()->set(['is_deleted' => 1])
+			->where(['id' => $taxi_id])->execute();			
+			$message = 'The Taxi/Fleet Promotions has been deleted successfully';
+			$response_code = 200;			
+		}
+		else
+		{
+			$message = 'Enter Event ID';
+			$response_code = 204;				
+		}
+		$this->set(compact('message','response_code'));
+        $this->set('_serialize', ['message','response_code']);				
+	}
+
+	public function getTaxiFleetPromotionReport($user_id = null)
+	{
+		$user_id = $this->request->query('user_id');
+		if(!empty($user_id))
+		{
+			$getTaxifleets = $this->TaxiFleetPromotions->find()
+			->where(['is_deleted' =>0])
+			->where(['user_id'=>$user_id])
+			->group(['TaxiFleetPromotions.id'])
+			->autoFields(true);
+	
+			if(!empty($getTaxifleets->toArray()))
+			{
+				foreach($getTaxifleets as $getTaxifleet)
+				{
+					$getTaxifleet->total_likes = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes
+							->find()->where(['taxi_fleet_promotion_id' => $getTaxifleet->id])->count();
+
+					$getTaxifleet->total_views = $this->TaxiFleetPromotions->TaxiFleetPromotionViews
+							->find()->where(['taxi_fleet_promotion_id' => $getTaxifleet->id])->count();
+					
+					if($getTaxifleet->visible_date >= date('Y-m-d'))
+					{
+						$getTaxifleet->expir_status = 'valid';	
+					}else
+					{
+						$getTaxifleet->expir_status = 'expired';		
+					}
+					
+					
+				}
+				$message = 'List Found Successfully';
+				$response_code = 200;
+			}
+			else
+			{
+				$message = 'No Content Found';
+				$getTaxifleets = [];
+				$response_code = 204;			
+			}			
+		}else {
+				$message = 'Please Enter User ID ';
+				$getTaxifleets = [];
+				$response_code = 205;			
+		}
+
+		
+		$this->set(compact('getTaxifleets','message','response_code'));
+        $this->set('_serialize', ['getTaxifleets','message','response_code']);				
+	}		
 	
 }

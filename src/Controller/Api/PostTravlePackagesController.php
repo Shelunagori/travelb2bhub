@@ -114,170 +114,187 @@ class PostTravlePackagesController extends AppController
         $this->set('_serialize', ['message','response_code']);
     }
 
-	public function getTravelPackages($category_id = null, $category_short = null,$duration_day=null,$duration_night=null,$duration_short=null,$valid_date=null,$valid_date_short=null,$starting_price=null,$starting_price_short=null,$country_id=null,$country_id_short=null,$state_id=null,$state_id_short=null)
+	public function getTravelPackages($isLikedUserId=null,$category_id = null, $category_short = null,$duration_day=null,$duration_night=null,$duration_short=null,$valid_date=null,$valid_date_short=null,$starting_price=null,$starting_price_short=null,$country_id=null,$country_id_short=null,$state_id=null,$state_id_short=null)
 	{
-		$category_id = $this->request->query('category_id');
-		$category_short = $this->request->query('category_short');
-		$duration_day = $this->request->query('duration_day');
-		$duration_night = $this->request->query('duration_night');
-		$duration_short = $this->request->query('duration_short');
-		$valid_date = $this->request->query('valid_date');
-		$valid_date_short = $this->request->query('valid_date_short');
-		$starting_price = $this->request->query('starting_price');
-		$starting_price_short = $this->request->query('starting_price_short');
-		$country_id = $this->request->query('country_id');
-		$country_id_short = $this->request->query('country_id_short');
-		$state_id = $this->request->query('state_id');
-		$state_id_short = $this->request->query('state_id_short');
-
-		// Start shorting code
-		if(empty($category_short))
-		{
-			$category_short = 'ASC';
-		}
 		
-		if(!empty($state_id_short))
+		$isLikedUserId = $this->request->query('isLikedUserId');
+		if(!empty($isLikedUserId))
 		{
+			$category_id = $this->request->query('category_id');
+			$category_short = $this->request->query('category_short');
+			$duration_day = $this->request->query('duration_day');
+			$duration_night = $this->request->query('duration_night');
+			$duration_short = $this->request->query('duration_short');
+			$valid_date = $this->request->query('valid_date');
+			$valid_date_short = $this->request->query('valid_date_short');
+			$starting_price = $this->request->query('starting_price');
+			$starting_price_short = $this->request->query('starting_price_short');
+			$country_id = $this->request->query('country_id');
+			$country_id_short = $this->request->query('country_id_short');
+			$state_id = $this->request->query('state_id');
+			$state_id_short = $this->request->query('state_id_short');
+
+			// Start shorting code
+			if(empty($category_short))
+			{
+				$category_short = 'ASC';
+			}
 			
-		}else
-		{
+			if(!empty($state_id_short))
+			{
+				
+			}else
+			{
 
-		}
-		
-		
-		if(!empty($valid_date))
-		{ 
-			$valid_date = ['valid_date =' =>date('Y-m-d',strtotime($valid_date))];
-		}
-		else
-		{ 
-			$valid_date = ['valid_date >=' =>date('Y-m-d')]; 
-		}
-		
-		if(!empty($duration_short) && $duration_short == 'ASC')
-		{
-			$where_short = ['duration_day' =>'ASC','duration_night' =>'DESC'];
-		}
-		else if(!empty($duration_short) && $duration_short == 'DESC')
-		{
-			$where_short = ['duration_day' =>'DESC','duration_night' =>'ASC'];
-		}else
-		{
-			$where_short = null;
-		}
-		
-		if(!empty($valid_date_short))
-		{
-			$where_short = ['valid_date' =>$valid_date_short];
-		}else
-		{
-			$where_short = null;
-		}
-		if(!empty($starting_price_short))
-		{
-			$where_short = ['starting_price' =>$starting_price_short];
-		}else
-		{
-			$where_short = null;
-		}
-		if(!empty($country_id_short))
-		{
-			$where_short = ['country_id' =>$country_id_short];
-		}else
-		{
-			$where_short = null;
-		}
+			}
+			
+			
+			if(!empty($valid_date))
+			{ 
+				$valid_date = ['valid_date =' =>date('Y-m-d',strtotime($valid_date))];
+			}
+			else
+			{ 
+				$valid_date = ['valid_date >=' =>date('Y-m-d')]; 
+			}
+			
+			if(!empty($duration_short) && $duration_short == 'ASC')
+			{
+				$where_short = ['duration_day' =>'ASC','duration_night' =>'DESC'];
+			}
+			else if(!empty($duration_short) && $duration_short == 'DESC')
+			{
+				$where_short = ['duration_day' =>'DESC','duration_night' =>'ASC'];
+			}else
+			{
+				$where_short = null;
+			}
+			
+			if(!empty($valid_date_short))
+			{
+				$where_short = ['valid_date' =>$valid_date_short];
+			}else
+			{
+				$where_short = null;
+			}
+			if(!empty($starting_price_short))
+			{
+				$where_short = ['starting_price' =>$starting_price_short];
+			}else
+			{
+				$where_short = null;
+			}
+			if(!empty($country_id_short))
+			{
+				$where_short = ['country_id' =>$country_id_short];
+			}else
+			{
+				$where_short = null;
+			}
 
 
-		// End Shorting code
-		// Start Filter code
-		
-		if(!empty($duration_day) && !empty($duration_night))
-		{
-			$where_duration = ['duration_day'=>$duration_day,'duration_night'=>$duration_night];
-		}
-		else if(!empty($duration_day) && empty($duration_night))
-		{
-			$where_duration = ['duration_day'=>$duration_day];
-		}
-		else if(empty($duration_day) && !empty($duration_night))
-		{
-			$where_duration = ['duration_night'=>$duration_night];
-		}else
-		{
-			$where_duration = null;
-		}
-		
-		$category_id_filter = null;
-		if(!empty($category_id))
-		{
-			$category_id_filter = ['post_travle_package_category_id'=>$category_id];
-		}else
-		{
+			// End Shorting code
+			// Start Filter code
+			
+			if(!empty($duration_day) && !empty($duration_night))
+			{
+				$where_duration = ['duration_day'=>$duration_day,'duration_night'=>$duration_night];
+			}
+			else if(!empty($duration_day) && empty($duration_night))
+			{
+				$where_duration = ['duration_day'=>$duration_day];
+			}
+			else if(empty($duration_day) && !empty($duration_night))
+			{
+				$where_duration = ['duration_night'=>$duration_night];
+			}else
+			{
+				$where_duration = null;
+			}
+			
 			$category_id_filter = null;
-		}
-		
-		$state_filter = null;
-		
-		if(!empty($state_id))
-		{
-			$state_filter = ['state_id'=>$state_id];
-		}else
-		{
+			if(!empty($category_id))
+			{
+				$category_id_filter = ['post_travle_package_category_id'=>$category_id];
+			}else
+			{
+				$category_id_filter = null;
+			}
+			
 			$state_filter = null;
-		}
-		
-		if(!empty($starting_price))
-		{
-			$starting_price = ['starting_price'=>$starting_price];
-		}else
-		{
-			$starting_price = null;
-		}
-		if(!empty($country_id))
-		{
-			$country_id = ['country_id'=>$country_id];
-		}else
-		{
-			$country_id = null;
-		}
+			
+			if(!empty($state_id))
+			{
+				$state_filter = ['state_id'=>$state_id];
+			}else
+			{
+				$state_filter = null;
+			}
+			
+			if(!empty($starting_price))
+			{
+				$starting_price = ['starting_price'=>$starting_price];
+			}else
+			{
+				$starting_price = null;
+			}
+			if(!empty($country_id))
+			{
+				$country_id = ['country_id'=>$country_id];
+			}else
+			{
+				$country_id = null;
+			}
 
-		// End Filter code
-		
-		$getTravelPackages = $this->PostTravlePackages->find();
-			$getTravelPackages->select(['total_likes'=>$getTravelPackages->func()->count('PostTravlePackageLikes.id')])
-			->leftJoinWith('PostTravlePackageLikes')
-			->innerJoinWith('PostTravlePackageRows',function($q) use($category_id_filter,$category_short){ 
-					return $q->where($category_id_filter)
-						->contain(['PostTravlePackageCategories'=>function ($q) use($category_short)
-						{	
-							return $q->order(['name' => $category_short]);
-						}]);
-				})
-			->innerJoinWith('PostTravlePackageStates',function($q) use($state_filter){ 
-					return $q->where($state_filter);
-				})				
-			->where($where_duration)
-			->where($valid_date)
-			->where($starting_price)
-			->where($country_id)
-			->order($where_short)
-			->group(['PostTravlePackages.id'])
-			->autoFields(true);
-		
-		//pr($getTravelPackages->toArray()); exit;
-		if(!empty($getTravelPackages->toArray()))
-		{
-			$message = 'List Found Successfully';
-			$response_code = 200;
-		}
+			// End Filter code
+			
+			$getTravelPackages = $this->PostTravlePackages->find();
+				$getTravelPackages->select(['total_likes'=>$getTravelPackages->func()->count('PostTravlePackageLikes.id')])
+				->leftJoinWith('PostTravlePackageLikes')
+				->innerJoinWith('PostTravlePackageRows',function($q) use($category_id_filter,$category_short){ 
+						return $q->where($category_id_filter)
+							->contain(['PostTravlePackageCategories'=>function ($q) use($category_short)
+							{	
+								return $q->order(['name' => $category_short]);
+							}]);
+					})
+				->innerJoinWith('PostTravlePackageStates',function($q) use($state_filter){ 
+						return $q->where($state_filter);
+					})				
+				->where($where_duration)
+				->where($valid_date)
+				->where($starting_price)
+				->where($country_id)
+				->order($where_short)
+				->group(['PostTravlePackages.id'])
+				->autoFields(true);
+			
+			//pr($getTravelPackages->toArray()); exit;
+			if(!empty($getTravelPackages->toArray()))
+			{
+				foreach($getTravelPackages as $getTravelPackage)
+				{
+					$exists = $this->PostTravlePackages->PostTravlePackageLikes->exists(['post_travle_package_id'=>$getTravelPackage->id,'user_id'=>$isLikedUserId]);
+					if($exists == 1)
+					{ $getTravelPackage->isLiked = 'yes'; }
+					else { $getTravelPackage->isLiked = 'no'; }					
+				}
+				$message = 'List Found Successfully';
+				$response_code = 200;
+			}
+			else
+			{
+				$message = 'No Content Found';
+				$getTravelPackages = [];
+				$response_code = 204;			
+			}			
+		}		
 		else
 		{
-			$message = 'No Content Found';
+			$message = 'isLikedUserId is empty';
 			$getTravelPackages = [];
 			$response_code = 204;			
-		}
-		
+		}		
 		$this->set(compact('getTravelPackages','message','response_code'));
         $this->set('_serialize', ['getTravelPackages','message','response_code']);		
 	}
@@ -362,8 +379,72 @@ class PostTravlePackagesController extends AppController
         $this->set('_serialize', ['message','response_code']);		
 	}	
 	
-	
-	
+	public function removePostTravelPackages($post_travel_id = null)
+	{
+		$post_travel_id = $this->request->query('post_travel_id');
+		if(!empty($post_travel_id))
+		{
+			$query = $this->PostTravlePackages->query();
+			$query->update()->set(['is_deleted' => 1])
+			->where(['id' => $post_travel_id])->execute();			
+			$message = 'The Post Travel Packages has been deleted successfully';
+			$response_code = 200;			
+		}
+		else
+		{
+			$message = 'Enter Event ID';
+			$response_code = 204;				
+		}
+		$this->set(compact('message','response_code'));
+        $this->set('_serialize', ['message','response_code']);				
+	}
 
-	
+	public function getPostTravelPackageReport($user_id = null)
+	{ 
+		$user_id = $this->request->query('user_id');
+		if(!empty($user_id))
+		{
+			$getPostTravelPackages = $this->PostTravlePackages->find()
+			->where(['is_deleted' =>0])
+			->where(['user_id'=>$user_id])
+			->group(['PostTravlePackages.id'])
+			->autoFields(true);
+			
+			if(!empty($getPostTravelPackages->toArray()))
+			{
+				foreach($getPostTravelPackages as $getPostTravelPackage)
+				{
+					$getPostTravelPackage->total_likes = $this->PostTravlePackages->PostTravlePackageLikes
+							->find()->where(['post_travle_package_id' => $getPostTravelPackage->id])->count();
+
+					$getPostTravelPackage->total_views = $this->PostTravlePackages->PostTravlePackageViews
+							->find()->where(['post_travle_package_id' => $getPostTravelPackage->id])->count();
+					
+					if($getPostTravelPackage->visible_date >= date('Y-m-d'))
+					{
+						$getPostTravelPackage->expir_status = 'valid';	
+					}else
+					{
+						$getPostTravelPackage->expir_status = 'expired';		
+					}	
+				}
+				$message = 'List Found Successfully';
+				$response_code = 200;
+			}
+			else
+			{
+				$message = 'No Content Found';
+				$getPostTravelPackages= [];
+				$response_code = 204;			
+			}			
+		}else {
+				$message = 'Please Enter User ID ';
+				$getPostTravelPackages= [];
+				$response_code = 205;			
+		}
+
+
+		$this->set(compact('getPostTravelPackages','message','response_code'));
+        $this->set('_serialize', ['getPostTravelPackages','message','response_code']);				
+	}		
 }
