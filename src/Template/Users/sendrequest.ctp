@@ -516,11 +516,11 @@ $(document).ready(function($){
 								<p for="from">Adults</p>
 								<div class="col-md-6 input-group">
 									<p class="input-group-addon btn" >
-									<button type="button" class="fa fa-minus-square" id="btn_pack_minus" value=""></button>
+									<button type="button" class="btn btn-default btn-lg"  id="btn_pack_minus" value="">-</button>
 									</p>                    
 									<input type='text' autocomplete="off" name='children' value='1' class="form-control input-large" id="text_counter_pack"/>	
 									<p class="input-group-addon btn" >
-									<button type="button" class="fa fa-plus-square" id="btn_pack_plus" value=""></button>
+									<button type="button" class="btn btn-default btn-lg" " id="btn_pack_plus" value="">+</button>
 									</p>                    
 								</div>
 							</div>
