@@ -159,7 +159,7 @@ legend
                         </div>
                         <div class=modal-footer>
 							 
-							<button class="btn btn-primary btn-sm" name=submit value=Submit type=submit>Submit</button> 
+							<button class="btn btn-primary btn-sm" name=submit value=Submit type=submit>Filter</button> 
 							<a href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'requestlist')) ?>"class="btn btn-primary btn-sm">Reset</a>
 						   <script>
 							$(document).ready(function(){
@@ -297,7 +297,7 @@ legend
 								<span class="details">
 								<?php echo mb_strimwidth($request['comment'], 0, 25, "...");?></span>
 							</p>
-							 
+							<hr></hr> 
 							<div class="col-md-12">
 							<table width="100%">
 							<tr>

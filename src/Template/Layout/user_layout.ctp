@@ -158,7 +158,7 @@ margin-top: 5px !important;
         <ul class="nav navbar-nav">
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+            <a href="#" class="dropdown-toggle chat_clear" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
               <span class="label label-warning"><?php echo $countchat = count($allunreadchat); ?></span>
             </a>
@@ -390,6 +390,22 @@ margin-top: 5px !important;
 </footer>
 `
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<script>
+$(document).ready(function (){
+	$(".chat_clear").on('click',function () {  
+		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'clearreadChats')) ?>";
+		$.ajax({
+			url:url,
+			type: 'POST',
+			data: {clearchat:'1'}
+		}).done(function(result){
+			if(result == 1) { 
+				$(".chat_count").html('0');
+			}
+		});
+	});
+});
+</script>
 <?php echo $this->Html->script('/assets/bootstrap/js/bootstrap.min.js'); ?>
 
 <?php echo $this->Html->script('/assets/plugins/jquery-validation/lib/jquery.js'); ?>

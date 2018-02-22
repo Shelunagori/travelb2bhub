@@ -1,3 +1,4 @@
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <?php //echo $this->Html->script(['jquery.validate']);?>
 <?php
 use Cake\Datasource\ConnectionManager; 
@@ -20,168 +21,40 @@ legend
 }
 .contain>p{
 	color:#96989A !important;
-}
+} 
 .details {color:#000 !important; font-weight: 600;}	
 .btn-block { width:40% !important;}
+.margin {margin-top:5px;}
+.shotrs a {margin:5px;;}
+.modal-body {padding:2px!important;}
 </style>
   <div class="container-fluid" id="checkresponses">
     <div class="row equal_column"> 
 		<div class="col-md-12" style="background-color:#fff"> 
 		<br>
 		<?php echo $this->element('subheader');?>
-	  
-      
-<div id="myModal123" class="modal fade form-modal" role="dialog">
-<div class="modal-dialog">
+	</div>
+	<div class="col-md-12" style="background-color:#fff"> 
 
-<!-- Modal content-->
-<div class="modal-content">
-<div class="modal-header">
-<button type="button" class="close" data-dismiss="modal">&times;</button>
-<h4 class="modal-title">Sorting</h4>
+<div class="box box-default">
+<div class="box-header with-border"> 
+	<h3 class="box-title" style="padding:20px">Check Responses</h3>
+	<div class="box-tools pull-right">
+		<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
+		<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+	</div>
 </div>
-<div class="modal-body">
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 box-event">
-<ul class="sorting_ul">     
-<li class="col-md-12 col-xs-12 col-sm-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=totalbudgethl">Total Budget (High To Low) <span class="arrow"><span></span></span></a> </li>
-<li class="col-md-12 col-xs-12 col-sm-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=totalbudgetlh"> Total Budget (Low To High)<span class="arrow"><span></span></span></a></li>
-<li class="col-md-12 col-xs-12 col-sm-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=quotedpricehl">Quoted Price (High To Low) <span class="arrow"><span></span></span></a> </li>
-<li class="col-md-12 col-xs-12 col-sm-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=quotedpricelh"> Quoted Price (Low To High)<span class="arrow"><span></span></span></a></li>
-<li class="col-md-12 col-xs-12 col-sm-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=chatshl">Chats (High To Low) <span class="arrow"><span></span></span></a> </li>
-<li class="col-md-12 col-xs-12 col-sm-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=chatslh"> Chats (Low To High)<span class="arrow"><span></span></span></a></li>
-<li class="col-md-12 col-xs-12 col-sm-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=agentaz"> Agent Name (A To Z) <span class="arrow"><span></span></span></a></li>
-<li class="col-md-12 col-xs-12 col-sm-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=agentza"> Agent Name (Z To A)<span class="arrow"><span></span></span></a></li>
-</ul>
-</div>
-</div>
-</div>
-<div class="modal-footer">
-
-</div>
-</div>
-</div>
-</div>
-      
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center margin-b10">
-	<a data-toggle="modal" data-target="#detailModal" href="#" class="btn btn-submit">Details</a>
-</div>
-      <!--ap filters-->
-  <div id="myModal122" class="modal fade form-modal" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Filter</h4>
-      </div>
-      <div class="modal-body">
-           <form method="get" class="filter_box">
-               
-      <div class="form-group row margin-b10">
-           <label for="example-text-input" class="col-md-3 col-form-label">Name: </label> 
-           <div class="col-md-9">             
-               <input type="text" name="agentname" value="<?php echo isset($_GET['agentname'])? $_GET['agentname']:''; ?>"  class="form-control">
-           </div>
-      </div>
-         
-       <div class="form-group row margin-b10">
-           <label for="example-text-input" class="col-md-3 col-form-label">Reference ID: </label>
-           <div class="col-md-9">           
-               <input type="text" name="refidsearch" value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>"  class="form-control">
-          </div>
-      </div>
-               
-               
-      <div class="form-group row margin-b10">
-           <label for="example-text-input" class="col-md-3 col-form-label">Budget: </label> 
-           <div class="col-md-9">           
-               <select name="budgetsearch" class="form-control"><option value="">Select Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
-           </div>
-     </div>
-               
-               
-      <div class="form-group row margin-b10">
-           <label for="example-text-input" class="col-md-3 col-form-label">Quoted Price: </label>
-           <div class="col-md-9">            
-               <select name="quotesearch" class="form-control"><option value="">Select Quoted Price</option><option value="0-10000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="30000-50000")? 'selected':''; ?>>30000- 50000</option><option value="50000-100000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
-            </div>
-     </div>
-     <div class="form-group row margin-b10">
-           <label for="example-text-input" class="col-md-3 col-form-label">Chat With: </label>
-           <div class="col-md-9">            
-               <select name="chatwith" class="form-control"><option value="">Select Chat With</option>
-               <?php if(!empty($UserResponse)){ 
-					foreach($UserResponse as $user){               
-               ?>
-               <option <?php echo (isset($_GET['chatwith']) && $_GET['chatwith'] ==$user['user']['id'])? 'selected':''; ?> value="<?php echo $user['user']['id']?>"><?php echo $user['user']['first_name'].' '.$user['user']['last_name']?></option>
-               <?php }}?>
-               </select>
-            </div>
-     </div>
-     <div class="form-group row margin-b10">
-           <label for="example-text-input" class="col-md-3 col-form-label">Following: </label> 
-           <div class="col-md-9">          
-               <input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['followsearch'])? "checked":''; ?>  >
-           </div>
-       </div>
-        <div class="form-group row margin-b10">
-           <label for="example-text-input" class="col-md-3 col-form-label">Shared Details: </label> 
-           <div class="col-md-9">          
-               <input type="checkbox" name="shared_details" value="1" <?php echo isset($_GET['shared_details'])? "checked":''; ?>  >
-           </div>
-       </div>
-               
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <input type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">
-        <a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'checkresponses',$responseid)) ?>">Reset</a>
-   </div>
-   </form>
-   <script>
-   $('#datepicker1').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				$( "#datepicker2" ).datepicker( "option", "minDate",selected);
-				$('#datepicker2').val("");
-			}
-		});
-		$('#datepicker2').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				var checkInDate = $('#datepicker1').val();
-				if(checkInDate == "") {
-					alert("Please select check-in date first.");
-					$('#datepicker2').val("");
-				}
-			}
-		});
-		</script>
-</div>
-      <div class="modal-footer">
-
-      </div>
-    </div>
-
-  </div>
-</div>
-		
-		
-		
-		
-		<?php
+<div class="box-body">
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top:5px">
+		<a data-toggle="modal" data-target="#detailModal" href="#" class="btn btn-success btn-sm">Details</a>
+	</div>
+	<?php
 		if(count($responses) >0) { 
 			foreach($responses as $row){ ?>
 			<div id="cat">
             <?php if(isset($_GET['sort']) && $_GET['sort']=="requesttype")
 			{ ?>
-				<div class="col-md-6" id="<?php if($row['request']['category_id']==1){ echo "1";} if($row['request']['category_id']==2){ echo "3";}if($row['request']['category_id']==3){ echo "2";} ?>">
+				<div class="col-md-4" id="<?php if($row['request']['category_id']==1){ echo "1";} if($row['request']['category_id']==2){ echo "3";}if($row['request']['category_id']==3){ echo "2";} ?>">
 			<?php } 
 			else 
 			{ ?>
@@ -213,7 +86,7 @@ legend
 								$hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$row['user']['id'],1));                   
                         }?>
 						<p><b>Agent Name : </b>&nbsp;
-							<span class="details"><a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></span>
+							<span class="details"><a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></a></span>
 						</p>
 						
 						<p><b>Reference ID : </b>&nbsp;
@@ -284,12 +157,13 @@ legend
 				 
 			<?php if(empty($row['request']['final_id'])) { ?>
 			<?php $id = $row['id'];?>
+			<hr></hr>
 				<div class="col-md-12">
 				<table width="100%">
 				<tr>
 					<td>
-						<a class="btn btn-info btn-sm" id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>">
-						<?php echo $this->Html->image('chat-ico.png'); ?> Chat ( <strong><?php echo $data['chat_count'][$row['id']]; ?> </strong> )</a>
+						<a class="btn btn-warning btn-sm margin" id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>"> 
+						Chat ( <strong><?php echo $data['chat_count'][$row['id']]; ?> </strong> )</a>
 						<div class="modal fade" id="myModal11<?php echo  $row['request']['id']; ?>" role="dialog">
 							<div class="modal-dialog">
 								<div class="modal-content">
@@ -304,9 +178,12 @@ legend
 						</div>
 						
 					<?php if($row['is_details_shared'] != 1) { ?>
-						<a href="javascript:void(0);" user_id="<?php echo $row['user']['id']; ?>" class="shareDetails btn btn-info btn-sm" request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>"><?php echo $this->Html->image('share-ico.png'); ?> Share Details</a>
+						<a href="javascript:void(0);" user_id="<?php echo $row['user']['id']; ?>" class="shareDetails btn btn-info btn-sm margin" request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
+						Share Details</a>
+					 
 					<?php } ?>
-						<a href="javascript:void(0);" class="acceptOffer btn btn-info btn-sm" request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>"><?php echo $this->Html->image('accept-offer-ico.png'); ?> Accept Offer</a>
+						<a href="javascript:void(0);" class="acceptOffer btn btn-success btn-sm margin" request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
+						Accept Offer</a>
 					<?php
 					$sql="Select count(*) as block_count from blocked_users where blocked_user_id='".$row['user']['id']."' AND blocked_by='".$row['request']['user_id']."'";
 					$stmt = $conn->execute($sql);
@@ -321,11 +198,13 @@ legend
 					<?php 
 					if($blocked==10)
 					{?>
-						<a href="javascript:void(0);" class="unblockUser btn btn-info btn-sm" user_id = "<?php echo $row['user']['id']; ?>"><?php echo $this->Html->image('block-user-ico.png'); ?> Blocked </a>
+						<a href="javascript:void(0);" class="unblockUser btn btn-danger btn-sm margin" user_id = "<?php echo $row['user']['id']; ?>">
+						Blocked </a>
 					<?php }
 					else
 					{?>
-						<a href="javascript:void(0);" class="blockUser btn btn-info btn-sm" user_id = "<?php echo $row['user']['id']; ?>"><?php echo $this->Html->image('block-user-ico.png'); ?> Block User </a>
+						<a href="javascript:void(0);" class="blockUser btn btn-danger btn-sm margin" user_id = "<?php echo $row['user']['id']; ?>">
+						Block User </a>
 					<?php }?>
 					<?php $reviewi =  $row['user']['id']."-".$row['request']['id']; ?>
 						<a data-toggle="modal" class="btn btn-info btn-sm" style="display:none;" data-target="#myModal_accept<?php echo $row['id']; ?>" id="add_review" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">
@@ -354,11 +233,7 @@ legend
 				
 			<?php } ?>
 			</fieldset>
-			</div>
-		</div>
-	<?php } ?>
-			<div class="pages"></div>
-		<?php 
+		<?php } 
 		}
 		else 
 		{?>
@@ -368,10 +243,143 @@ legend
 				</div>
 			</div>
 	<?php } ?>
-      </div>
-      </div>
-      </div>
-    </div> 
+      
+	
+	
+</div>
+<!--------------END LAYOUT-------------->
+<div id="myModal123" class="modal fade form-modal" role="dialog">
+	<div class="modal-dialog">
+
+	<!-- Modal content-->
+	<div class="modal-content">
+	<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal">&times;</button>
+	<h4 class="modal-title">Sorting</h4>
+	</div>
+	<div class="modal-body" align="center"> 
+		<table width="90%" class="shotrs">
+			<tr>
+				<td>
+				<a class="btn btn-info btn-sm"href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=totalbudgethl">Total Budget (High To Low) <span class="arrow"></span></a>
+
+				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=totalbudgetlh"> Total Budget (Low To High)<span class="arrow"></span></a>
+				
+				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=quotedpricehl">Quoted Price (High To Low) <span class="arrow"></span></a>
+				
+				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=quotedpricelh"> Quoted Price (Low To High)<span class="arrow"></span></a>
+				
+				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=chatshl">Chats (High To Low) <span class="arrow"></span></a>
+				
+				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=chatslh"> Chats (Low To High)<span class="arrow"></span></a>
+				
+				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=chatslh"> Chats (Low To High)<span class="arrow"></span></a>
+				
+				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=chatslh"> Chats (Low To High)<span class="arrow"></span></a>
+				
+				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=agentaz"> Agent Name (A To Z) <span class="arrow"></span></a>
+				
+				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=agentza"> Agent Name (Z To A)<span class="arrow"></span></a>
+			</td>
+		</tr>
+	</table>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	</div>
+</div>
+	</div>
+</div>
+	</div>
+	
+	<div class="fade modal" id="myModal122" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+			   <div class="modal-header">
+				  <button class="close data-dismiss=modal" type="button">×</button>
+				  <h4 class="modal-title">Filter</h4>
+			   </div>
+			   <div class="modal-body" style="height:300px">
+				<form method="get" class="filter_box">
+					<div class="col-md-6">
+					   <div class="col-md-12">
+						<label for="example-text-input" class=" col-form-label">Name: </label> 
+						   <input type="text" name="agentname" value="<?php echo isset($_GET['agentname'])? $_GET['agentname']:''; ?>"  class="form-control">
+					   </div>
+					</div>
+					 
+				    <div class="col-md-6">
+					  
+					   <div class="col-md-12"> 
+						 <label for="example-text-input" class=" col-form-label">Reference ID: </label>
+						   <input type="text" name="refidsearch" value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>"  class="form-control">
+					  </div>
+					</div>
+						   
+						   
+					<div class="col-md-6">
+					   
+					   <div class="col-md-12">
+						<label for="example-text-input" class=" col-form-label">Budget: </label> 
+						   <select name="budgetsearch" class="form-control"><option value="">Select Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
+					   </div>
+					</div>
+						   
+						   
+					<div class="col-md-6">
+					   
+					   <div class="col-md-12">
+						<label for="example-text-input" class=" col-form-label">Quoted Price: </label>
+						   <select name="quotesearch" class="form-control"><option value="">Select Quoted Price</option><option value="0-10000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="30000-50000")? 'selected':''; ?>>30000- 50000</option><option value="50000-100000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
+						</div>
+					</div>
+					<div class="col-md-6">
+					  
+					   <div class="col-md-12">
+						 <label for="example-text-input" class=" col-form-label">Chat With: </label>
+						   <select name="chatwith" class="form-control"><option value="">Select Chat With</option>
+						   <?php if(!empty($UserResponse)){ 
+								foreach($UserResponse as $user){               
+						   ?>
+						   <option <?php echo (isset($_GET['chatwith']) && $_GET['chatwith'] ==$user['user']['id'])? 'selected':''; ?> value="<?php echo $user['user']['id']?>"><?php echo $user['user']['first_name'].' '.$user['user']['last_name']?></option>
+						   <?php }}?>
+						   </select>
+						</div>
+					</div>
+					<div class="col-md-6">
+					   
+					   <div class="col-md-12">
+							<label for="example-text-input" class=" col-form-label">Following: </label> 
+						   <input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['followsearch'])? "checked":''; ?>  >
+					   </div>
+				   </div>
+					<div class="col-md-6">
+					   
+					   <div class="col-md-12">
+						<label for="example-text-input" class=" col-form-label">Shared Details: </label>
+						   <input type="checkbox" name="shared_details" value="1" <?php echo isset($_GET['shared_details'])? "checked":''; ?>  >
+					   </div>
+				   </div>
+						   
+					<div class="col-md-12 text-center">
+					<hr></hr>
+						<button type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">Filter</button>
+						<a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'checkresponses',$responseid)) ?>">Reset</a>
+					</div>
+			   </form>
+			   </div>
+			</div>
+		</div>
+	</div>
+ 	
+      
+
+      
+
+      <!--ap filters-->
+  
+		
+		 
+		 
 	<div class="modal fade" id="myModal2" role="dialog">
 		<div class="modal-dialog">
 		
@@ -415,257 +423,487 @@ legend
 	</div>
 
 	<!--modal-->
-	<div class="modal fade" id="detailModal" role="dialog">
-		<div class="modal-dialog">
-			<!-- Modal content-->
+	 <div class="fade modal"id="detailModal"role=dialog>
+		<div class=modal-dialog>
 			<div class="modal-content">
-<div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button>
-<?php if($requestDetails['category_id'] == 1){ ?><h4 class="modal-title">Package Details</h4><?php } ?>
-<?php if($requestDetails['category_id'] == 2){ ?><h4 class="modal-title">Transport Details</h4><?php } ?>
-<?php if($requestDetails['category_id'] == 3){ ?><h4 class="modal-title">Hotel Details</h4><?php }?>
-</div>
-<div class="modal-body"><div class="container-fluid" id="profile"><div class="row tra-section-gray equal_column">
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 ">
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 general_requirements"><h2 class="text-center">General Requirements</h2>
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 box-event ">
-<ul>                  <li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-                        <p><b>Reference ID: </b> <?php echo $requestDetails['reference_id']; ?></p>
-                   </li>
-<li class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><p><b>Total Budget: </b> <?php echo $requestDetails['total_budget']." Rs."; ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p><b>Adult: </b> <?php echo $requestDetails['adult']; ?></p></li>
-<li class="col-lg-6 col-md-6 col-sm-6	 col-xs-6"><p><b>Children below 6: </b> <?php echo $requestDetails['children']; ?></p></li>
-				<?php if($requestDetails['category_id'] == 1 || $requestDetails['category_id'] == 3){ ?>
-</ul></div></div>
-<?php if($requestDetails['category_id'] == 1){
-						if(count($requestDetails['hotels']) >=1) { 
-							//unset($requestDetails['hotels'][0]);?>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 stay_requirements">
-                 <h2 class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">Stay Requirements <!--Another Destination Details--></h2>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 box-event stay_requirements">
-							<?php
-							$ds_count = 1;
-							foreach($requestDetails['hotels'] as $row) { ?>
-							<h4 class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">Destination <?php echo $ds_count; ?></h4>
-<ul>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Single: </b> <?php if($row['room1'] != ''){ echo $row['room1'];}else{ echo "--";} ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Double: </b> <?php if($row['room2'] != ''){ echo $row['room2'];}else{ echo "--";} ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Triple: </b> <?php if($row['room3'] != ''){ echo $row['room3'];}else{ echo "--";} ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><p><b>Child With Bed: </b> <?php if($row['child_with_bed'] != ''){ echo $row['child_with_bed'];}else{ echo "-- --";} ?>
-</p></li>
-<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-<p><b>Child Without Bed: </b> <?php if($row['child_without_bed'] != ''){ echo $row['child_without_bed'];}else{ echo "-- --";} ?></p></li>
-<li class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-<p><b>Hotel Category: </b> 
-<?php if(!empty($row['hotel_category'])) {
-                                                $result = explode(",", $row['hotel_category']);
-                                                $count = 1;
-                                                $hotel_category = "";
-                                                foreach($result as $row1) {
-                                                    $hotel_category .= "".$hotelCategories[$row1]." or ";
-                                                    //echo $count.". ".$hotelCategories[$row1].", ";
-                                                    $count++;
-                                                }
-                                              echo substr($hotel_category, 0, -3);
-                                            } else {
-                                                echo "-- --";	
-                                            }?>
-                                        </p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-<p><b>Hotel Rating:</b> <?php
-                   
-                if($row['hotel_rating']>0){
-               
-                    for($i=$row['hotel_rating']; $i>0; $i--){
-                        echo '<i class="fa fa-star"></i>';
-                    }
-                }else{
-                  
-                }
-                ?></p>
+				<div class="modal-header">
+				  <button type="button" class="close" data-dismiss="modal">&times;</button>
+				  <h4 class="modal-title">
+					<?php 
+					if ($requestDetails['category_id'] == 1)
+					{ ?>
+						Package Details<?php
+					} ?><?php
 
-</li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-offset-right-1">
-<p><b>Meal: </b> <?php echo ($row['meal_plan'])?$mealPlanArray[$row['meal_plan']]:"-- --"; ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p><b>Check In: </b> <?php echo ($row['check_in'])?date("d/m/Y", strtotime($row['check_in'])):"-- --"; ?>
-                                         </p></li>
-<li class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><p><b>Check Out: </b> <?php echo ($row['check_out'])?date("d/m/Y", strtotime($row['check_out'])):"-- --"; ?>
-</p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><p><b>Locality: </b> <?php echo ($row['locality'])?$row['locality']:"-- --"; ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><p><b>Destination City: </b> <?php echo ($row['city_id'])?$allCities[$row['city_id']]:"-- --"; ?> </p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><p><b>Destination State: </b> <?php echo ($row['state_id'])?$allStates[$row['state_id']]:"-- --"; ?>
-</p></li>
+					if ($requestDetails['category_id'] == 2)
+					{ ?>
+						Transport Details<?php
+					} ?><?php
 
-</ul>
-							<?php $ds_count++; } ?>
-								</div></div>
-						<?php } ?>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 transport_requirements">
-                <h2 class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">Transport Requirements</h2>
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center box-event">
-<ul><li class="col-lg-12 col-md-12 col-sm-6 col-xs-12">
-<p><b>Transport: </b> <?php echo ($requestDetails['transport_requirement'])?$transpoartRequirmentArray[$requestDetails['transport_requirement']]:"-- --"; ?></p></li>
-<li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-<p><b>Start Date: </b> <?php echo ($requestDetails['start_date'])?date("d/m/Y", strtotime($requestDetails['start_date'])):"-- --"; ?></p></li>
-<li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-<p><b>End Date: </b> <?php echo ($requestDetails['end_date'])?date("d/m/Y", strtotime($requestDetails['end_date'])):"-- --"; ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><p><b>Pickup Locality: </b> <?php echo ($requestDetails['pickup_locality'])?$requestDetails['pickup_locality']:"-- --"; ?>
-</p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-<p><b>Pickup City: </b> <?php echo ($requestDetails['pickup_city'])?$allCities[$requestDetails['pickup_city']]:"-- --"; ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><p><b>Pickup State: </b> <?php echo ($requestDetails['pickup_state'])?$allStates[$requestDetails['pickup_state']]:"-- --"; ?>
-                            </p></li>
-
-						<?php if(!empty($requestDetails['request_stops'])) { ?>
-							<!--h4 class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">Stops</h4-->
-							<?php $stop_count=1; foreach($requestDetails['request_stops'] as $stops) {?>
-							<li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 stops_count">Stop <?php echo $stop_count;?></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p>
-<b>Stop Locality: </b> <?php echo ($stops['locality'])?$stops['locality']:"-- --"; ?>
-</p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p><b>Stop City: </b> <?php echo ($stops['city_id'])?$allCities[$stops['city_id']]:"-- --"; ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p><b>Stop State: </b>  <?php echo ($stops['state_id'])?$allStates[$stops['state_id']]:"-- --"; ?></p></li>
-
-                        <hr>
-							<?php $stop_count++; }
-						} ?>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><p>
-<b>Final Locality: </b> <?php echo ($requestDetails['final_locality'])?$requestDetails['final_locality']:"-- --"; ?>
-</p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><p>
-<b>Final City: </b> <?php echo ($requestDetails['final_city'])?$allCities[$requestDetails['final_city']]:"-- --"; ?>
-</p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><p><b>Final State: </b> <?php echo ($requestDetails['final_state'])?$allStates[$requestDetails['final_state']]:"-- --"; ?>
-                         </p></li>
-                     </ul>
-					<?php }elseif($requestDetails['category_id'] == '3'){?>
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 stay_requirements">
-				<h2 class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">Stay Requirements</h2>
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 box-event stay_requirements">
-							<?php
-							$ds_count = 1;
-							foreach($requestDetails['hotels'] as $row) { ?>
-<ul>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Single: </b> <?php if($row['room1'] != ''){ echo $row['room1'];}else{ echo "--";} ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Double: </b> <?php if($row['room2'] != ''){ echo $row['room2'];}else{ echo "--";} ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Triple: </b> <?php if($row['room3'] != ''){ echo $row['room3'];}else{ echo "--";} ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><p><b>Child With Bed: </b> <?php if($row['child_with_bed'] != ''){ echo $row['child_with_bed'];}else{ echo "-- --";} ?>
-</p></li>
-<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-<p><b>Child Without Bed: </b> <?php if($row['child_without_bed'] != ''){ echo $row['child_without_bed'];}else{ echo "-- --";} ?></p></li>
-
-<li class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-<p><b>Hotel Category: </b> 
-<?php if(!empty($row['hotel_category'])) {
-                                                $result = explode(",", $row['hotel_category']);
-                                                $count = 1;
-                                                $hotel_category = "";
-                                                foreach($result as $row1) {
-                                                    $hotel_category .= "".$hotelCategories[$row1]." or ";
-                                                    //echo $count.". ".$hotelCategories[$row1].", ";
-                                                    $count++;
-                                                }
-                                              echo substr($hotel_category, 0, -3);
-                                            } else {
-                                                echo "-- --";	
-                                            }?>
-                                        </p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-<p><b>Hotel Rating:</b> <?php
-                   
-                if($row['hotel_rating']>0){
-               
-                    for($i=$row['hotel_rating']; $i>0; $i--){
-                        echo '<i class="fa fa-star"></i>';
-                    }
-                }else{
-                  
-                }
-                ?></p>
-
-</li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12 col-offset-right-1">
-<p><b>Meal: </b> <?php echo ($row['meal_plan'])?$mealPlanArray[$row['meal_plan']]:"-- --"; ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p><b>Check In: </b> <?php echo ($row['check_in'])?date("d/m/Y", strtotime($row['check_in'])):"-- --"; ?>
-                                         </p></li>
-<li class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><p><b>Check Out: </b> <?php echo ($row['check_out'])?date("d/m/Y", strtotime($row['check_out'])):"-- --"; ?>
-</p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><p><b>Locality: </b> <?php echo ($row['locality'])?$row['locality']:"-- --"; ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><p><b>Destination City: </b> <?php if(empty($row['city_id'])){
-echo $allCities[$requestDetails['city_id']];
-}else{ $allCities[$row['city_id']]; } ?> </p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><p><b>Destination State: </b> 
-<?php if(empty($row['state_id'])){
-echo $allStates[$requestDetails['state_id']];
-}else{ $allStates[$row['state_id']]; } ?>
-</p></li>
-
-</ul>
-							<?php $ds_count++; } ?>
-								</div>
-				</div>
-				<?php }
-				} else if($requestDetails['category_id'] == 2){ ?>
-	
-                <h2 class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">Transport Requirements</h2>
-            
-                <ul>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-<p><b>Transport: </b> <?php echo ($requestDetails['transport_requirement'])?$transpoartRequirmentArray[$requestDetails['transport_requirement']]:"-- --"; ?>
-</p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-<p><b>Start Date: </b> <?php echo ($requestDetails['start_date'])?date("d/m/Y", strtotime($requestDetails['start_date'])):"-- --"; ?>
-</p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-<p><b>End Date: </b> <?php echo ($requestDetails['end_date'])?date("d/m/Y", strtotime($requestDetails['end_date'])):"-- --"; ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-<p><b>Pickup Locality: </b> <?php echo ($requestDetails['pickup_locality'])?$requestDetails['pickup_locality']:"-- --"; ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-<p><b>Pickup City: </b> <?php echo ($requestDetails['pickup_city'])?$allCities[$requestDetails['pickup_city']]:"-- --"; ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-<p><b>Pickup State: </b> <?php echo ($requestDetails['pickup_state'])?$allStates[$requestDetails['pickup_state']]:"-- --"; ?></p></li>
-
-                
-					<?php if(!empty($requestDetails['request_stops'])) { ?>
-						<!--h2 class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">Stops</h2-->
-						<?php $stop_count=1; foreach($requestDetails['request_stops'] as $stops) {?>
-						<li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 stops_count">Stop <?php echo $stop_count;?></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p><b>Stop Locality: </b> <?php echo ($stops['locality'])?$stops['locality']:"-- --"; ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p><b>Stop City: </b> <?php echo ($stops['city_id'])?$allCities[$stops['city_id']]:"-- --"; ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p><b>Stop State: </b> <?php echo ($stops['state_id'])?$allStates[$stops['state_id']]:"-- --"; ?></p></li>
-                          
-							<hr>
-						<?php $stop_count++; }
+					if ($requestDetails['category_id'] == 3)
+					{ ?>
+						Hotel Details<?php
 					} ?>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><p>
-<b>Final Locality: </b> <?php echo ($requestDetails['final_locality'])?$requestDetails['final_locality']:"-- --"; ?>
-</p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-<p><b>Final City: </b> <?php echo ($requestDetails['final_city'])?$allCities[$requestDetails['final_city']]:"-- --"; ?></p></li>
-<li class="col-lg-4 col-md-4 col-sm-4 col-xs-12"><p>
-<b>Final State: </b> <?php echo ($requestDetails['final_state'])?$allStates[$requestDetails['final_state']]:"-- --"; ?></p></li>
-</ul>
-				<?php } ?>
-				
-			     </div></div>
-			     <?php if(!empty($requestDetails['comment'])){
-if($requestDetails['category_id'] == 2 || $requestDetails['category_id'] == 1){$comment_class="tcomments";}else{$comment_class="comments";}			     
-			     ?>
-		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 <?php echo $comment_class;?> ">
-		<h2 class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">Comments</h2>
-		<ul style="list-style: none;padding: 0;">
-<li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-left comment" style="display: inline-block;padding: 0 5px!important;">
-<p style="margin-bottom: 0;"><?php echo $requestDetails['comment']; ?></p></li>		
-		</ul>
-		</div><?php }?>    
-			     </div></div></div>			
-			</div></div>
+				  </h4>
+				</div>
+				<div class="modal-body">
+					<fieldset>
+						<legend style="text-align:left !important"><h3>General Requirements</h3></legend>
+						<ul>
+							<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p><b>Reference ID:&nbsp;</b><?php
+							echo $requestDetails['reference_id']; ?>
+							<li class="col-xs-6 col-lg-6 col-md-6 col-sm-6"><p><b>Total Budget:&nbsp;</b><?php
+							echo $requestDetails['total_budget'] . " Rs."; ?>
+							<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p><b>Adult:&nbsp;</b><?php
+							echo $requestDetails['adult']; ?>
+							<li class="col-xs-6 col-lg-6 col-md-6 col-sm-6	"><p><b>Children below 6:&nbsp;</b><?php
+							echo $requestDetails['children']; ?></li>
+						</ul>
+					</fieldset>
+				<?php
+				if ($requestDetails['category_id'] == 1 || $requestDetails['category_id'] == 3)
+				{  
+					if ($requestDetails['category_id'] == 1)
+					{
+						if (count($requestDetails['hotels']) >= 1)
+						{ ?>
+						<fieldset>
+							<legend style="text-align:left !important"><h3>Stay Requirements</h3></legend>
+							<?php
+							$ds_count = 1;
+							foreach($requestDetails['hotels'] as $row)
+							{ ?>
+							<fieldset>
+							<legend style="text-align:left !important"><h5>Destination <?php
+								echo $ds_count; ?></h5></legend>
+								 
+								<ul>
+								<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Single:&nbsp;</b><?php
+								if ($row['room1'] != '')
+								{
+									echo $row['room1'];
+								}
+								else
+								{
+									echo "--";
+								} ?><li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Double:&nbsp;</b><?php
+								if ($row['room2'] != '')
+								{
+									echo $row['room2'];
+								}
+								else
+								{
+									echo "--";
+								} ?><li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Triple:&nbsp;</b><?php
+								if ($row['room3'] != '')
+								{
+									echo $row['room3'];
+								}
+								else
+								{
+									echo "--";
+								} ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Child With Bed:&nbsp;</b><?php
+								if ($row['child_with_bed'] != '')
+								{
+									echo $row['child_with_bed'];
+								}
+								else
+								{
+									echo "-- --";
+								} ?><li class="col-xs-12 col-sm-6 col-lg-6 col-md-6"><p><b>Child Without Bed:&nbsp;</b><?php
+								if ($row['child_without_bed'] != '')
+								{
+									echo $row['child_without_bed'];
+								}
+								else
+								{
+									echo "-- --";
+								} ?><li class="col-xs-12 col-lg-12 col-md-12 col-sm-12"><p><b>Hotel Category:&nbsp;</b><?php
+								if (!empty($row['hotel_category']))
+								{
+									$result = explode(",", $row['hotel_category']);
+									$count = 1;
+									$hotel_category = "";
+									foreach($result as $row1)
+									{
+										$hotel_category.= "" . $hotelCategories[$row1] . " or ";
+
+										// echo $count.". ".$hotelCategories[$row1].", ";
+
+										$count++;
+									}
+
+									echo substr($hotel_category, 0, -3);
+								}
+								else
+								{
+									echo "-- --";
+								} ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Hotel Rating:&nbsp;</b><?php
+								if ($row['hotel_rating'] > 0)
+								{
+									for ($i = $row['hotel_rating']; $i > 0; $i--)
+									{
+										echo '<i class="fa fa-star"></i>';
+									}
+								}
+								else
+								{
+								}
+		 
+				?><li class="col-xs-12 col-sm-6 col-lg-6 col-md-6 col-offset-right-1"><p><b>Meal:&nbsp;</b><?php
+								echo ($row['meal_plan']) ? $mealPlanArray[$row['meal_plan']] : "-- --"; ?><li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p><b>Check In:&nbsp;</b><?php
+								echo ($row['check_in']) ? date("d/m/Y", strtotime($row['check_in'])) : "-- --"; ?><li class="col-xs-6 col-lg-6 col-md-6 col-sm-6"><p><b>Check Out:&nbsp;</b><?php
+								echo ($row['check_out']) ? date("d/m/Y", strtotime($row['check_out'])) : "-- --"; ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Locality:&nbsp;</b><?php
+								echo ($row['locality']) ? $row['locality'] : "-- --"; ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Destination City:&nbsp;</b><?php
+								echo ($row['city_id']) ? $allCities[$row['city_id']] : "-- --"; ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Destination State:&nbsp;</b><?php
+								echo ($row['state_id']) ? $allStates[$row['state_id']] : "-- --"; ?>
+								</ul>
+								</fieldset>
+								<?php
+								$ds_count++;
+							} ?>
+						</fieldset>	
+						<?php
+						}?>
+					<fieldset><legend style="text-align:left !important"><h3>Transport Requirements</h3></legend>
+					<ul>
+						<li class="col-xs-12 col-lg-12 col-md-12 col-sm-6">
+						<p><b>Transport:&nbsp;</b>
+							<?php
+							echo ($requestDetails['transport_requirement']) ? $transpoartRequirmentArray[$requestDetails['transport_requirement']] : "-- --"; ?>
+						</p>
+						</li>
+						<li class="col-md-6">
+						<p><b>Start Date:&nbsp;</b><?php
+							echo ($requestDetails['start_date']) ? date("d/m/Y", strtotime($requestDetails['start_date'])) : "-- --"; ?>
+						</p>
+						</li>
+						<li class="col-md-6">
+						<p><b>End Date:&nbsp;</b><?php
+							echo ($requestDetails['end_date']) ? date("d/m/Y", strtotime($requestDetails['end_date'])) : "-- --"; ?>
+						</p>
+						</li>
+						<li class="col-md-6">
+						<p><b>Pickup Locality:&nbsp;</b><?php
+						echo ($requestDetails['pickup_locality']) ? $requestDetails['pickup_locality'] : "-- --"; ?>
+						</p>
+						</li>
+						<li class="col-md-6">
+						<p><b>Pickup City:&nbsp;</b><?php
+						echo ($requestDetails['pickup_city']) ? $allCities[$requestDetails['pickup_city']] : "-- --"; ?>
+						</p>
+						</li>
+						<li class="col-md-6">
+						<p><b>Pickup State:&nbsp;</b><?php
+						echo ($requestDetails['pickup_state']) ? $allStates[$requestDetails['pickup_state']] : "-- --"; ?>
+						</p>
+						</li>
+						<?php
+						if (!empty($requestDetails['request_stops']))
+						{ ?><?php
+							$stop_count = 1;
+							foreach($requestDetails['request_stops'] as $stops)
+							{ ?>
+							<fieldset><legend>Stop <?php	echo $stop_count; ?></legend>
+								 
+								<li class="col-md-6">
+									<p><b>Stop Locality:&nbsp;</b><?php
+										echo ($stops['locality']) ? $stops['locality'] : "-- --"; ?>
+									</p>
+								</li>
+								<li class="col-md-6">
+									<p><b>Stop City:&nbsp;</b><?php
+										echo ($stops['city_id']) ? $allCities[$stops['city_id']] : "-- --"; ?>
+									</p>
+								</li>
+								<li class="col-md-6">
+									<p><b>Stop State:&nbsp;</b><?php
+										echo ($stops['state_id']) ? $allStates[$stops['state_id']] : "-- --"; ?>
+									</p>
+								</li>
+							</fieldset>
+								<?php
+								$stop_count++;
+							}
+						} ?>
+						
+						<li class="col-md-6">
+							<p><b>Final Locality:&nbsp;</b><?php
+								echo ($requestDetails['final_locality']) ? $requestDetails['final_locality'] : "-- --"; ?>
+							</p>
+						</li>
+						<li class="col-md-6">
+							<p><b>Final City:&nbsp;</b><?php
+								echo ($requestDetails['final_city']) ? $allCities[$requestDetails['final_city']] : "-- --"; ?>
+							</p>
+						</li>
+						<li class="col-md-6">
+							<p><b>Final State:&nbsp;</b><?php
+								echo ($requestDetails['final_state']) ? $allStates[$requestDetails['final_state']] : "-- --"; ?>
+							</p>
+						</li>
+					</ul>
+					</fieldset>
+				<?php
+				}
+				elseif ($requestDetails['category_id'] == '3')
+				{ ?>
+					<fieldset><legend style="text-align:left !important"><h3>Stay Requirements</h3></legend>
+					<?php
+					$ds_count = 1;
+					foreach($requestDetails['hotels'] as $row)
+					{ ?>
+						<ul>
+							<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Single:&nbsp;</b><?php
+							if ($row['room1'] != '')
+							{
+								echo $row['room1'];
+							}
+							else
+							{
+								echo "--";
+							} ?>
+							</p>
+							</li>
+							<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Double:&nbsp;</b><?php
+							if ($row['room2'] != '')
+							{
+								echo $row['room2'];
+							}
+							else
+							{
+								echo "--";
+							} ?>
+							</p>
+							</li>
+							<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Triple:&nbsp;</b><?php
+							if ($row['room3'] != '')
+							{
+								echo $row['room3'];
+							}
+							else
+							{
+								echo "--";
+							} ?>
+							</p>
+							</li>
+							<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Child With Bed:&nbsp;</b><?php
+							if ($row['child_with_bed'] != '')
+							{
+								echo $row['child_with_bed'];
+							}
+							else
+							{
+								echo "-- --";
+							} ?>
+							</p>
+							</li>
+							<li class="col-xs-12 col-sm-6 col-lg-6 col-md-6"><p><b>Child Without Bed:&nbsp;</b><?php
+							if ($row['child_without_bed'] != '')
+							{
+								echo $row['child_without_bed'];
+							}
+							else
+							{
+								echo "-- --";
+							} ?>
+							</p>
+							</li>
+							<li class="col-xs-12 col-lg-12 col-md-12 col-sm-12"><p><b>Hotel Category:&nbsp;</b><?php
+							if (!empty($row['hotel_category']))
+							{
+								$result = explode(",", $row['hotel_category']);
+								$count = 1;
+								$hotel_category = "";
+								foreach($result as $row1)
+								{
+									$hotel_category.= "" . $hotelCategories[$row1] . " or ";
+									$count++;
+								}
+								echo substr($hotel_category, 0, -3);
+							}
+							else
+							{
+								echo "-- --";
+							} ?>
+							</p>
+							</li>
+							<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Hotel Rating:&nbsp;</b><?php
+							if ($row['hotel_rating'] > 0)
+							{
+								for ($i = $row['hotel_rating']; $i > 0; $i--)
+								{
+									echo '<i class="fa fa-star"></i>';
+								}
+							}
+							else
+							{
+							}
+
+							?>
+							</p>
+							</li>
+							<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4 col-offset-right-1">
+							<p><b>Meal:&nbsp;</b><?php
+							echo ($row['meal_plan']) ? $mealPlanArray[$row['meal_plan']] : "-- --"; ?>
+							</p>
+							</li>
+							<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+							<p><b>Check In:&nbsp;</b><?php
+							echo ($row['check_in']) ? date("d/m/Y", strtotime($row['check_in'])) : "-- --"; ?>
+							</p>
+							</li>
+							<li class="col-xs-6 col-lg-6 col-md-6 col-sm-6">
+							<p><b>Check Out:&nbsp;</b><?php
+							echo ($row['check_out']) ? date("d/m/Y", strtotime($row['check_out'])) : "-- --"; ?>
+							</p>
+							</li>
+							<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4">
+							<p><b>Locality:&nbsp;</b><?php
+							echo ($row['locality']) ? $row['locality'] : "-- --"; ?>
+							</p>
+							</li>
+							<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4">
+							<p><b>Destination City:&nbsp;</b><?php
+							if (empty($row['city_id']))
+							{
+								echo $allCities[$requestDetails['city_id']];
+							}
+							else
+							{
+								$allCities[$row['city_id']];
+							} ?>
+							</p>
+							</li>
+							<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Destination State:&nbsp;</b><?php
+							if (empty($row['state_id']))
+							{
+								echo $allStates[$requestDetails['state_id']];
+							}
+							else
+							{
+								$allStates[$row['state_id']];
+							} ?>
+							</p>
+							</li>
+						</ul><?php
+						$ds_count++;
+					} ?>
+					</fieldset><?php
+				}
+			}
+			else
+			if ($requestDetails['category_id'] == 2)
+			{ ?>
+				<fieldset><legend style="text-align:left !important"><h3>Transport Requirements</h3></legend>
+					<ul>
+						<li class="col-md-6">
+						<p><b>Transport:&nbsp;</b><?php
+							echo ($requestDetails['transport_requirement']) ? $transpoartRequirmentArray[$requestDetails['transport_requirement']] : "-- --"; ?>
+						</p>
+						</li>
+						<li class="col-md-6">
+						<p><b>Start Date:&nbsp;</b><?php
+							echo ($requestDetails['start_date']) ? date("d/m/Y", strtotime($requestDetails['start_date'])) : "-- --"; ?>
+						</p>
+						</li>
+						<li class="col-md-6">
+						<p><b>End Date:&nbsp;</b><?php
+							echo ($requestDetails['end_date']) ? date("d/m/Y", strtotime($requestDetails['end_date'])) : "-- --"; ?>
+						</p>
+						</li>
+						<li class="col-md-6">
+						<p><b>Pickup Locality:&nbsp;</b><?php
+							echo ($requestDetails['pickup_locality']) ? $requestDetails['pickup_locality'] : "-- --"; ?>
+						</p>
+						</li>
+						<li class="col-md-6">
+						<p><b>Pickup City:&nbsp;</b><?php
+							echo ($requestDetails['pickup_city']) ? $allCities[$requestDetails['pickup_city']] : "-- --"; ?>
+						</p>
+						</li>
+						<li class="col-md-6">
+						<p><b>Pickup State:&nbsp;</b><?php
+							echo ($requestDetails['pickup_state']) ? $allStates[$requestDetails['pickup_state']] : "-- --"; ?>
+						</p>
+						</li><?php
+						if (!empty($requestDetails['request_stops']))
+						{ ?><?php
+							$stop_count = 1;
+							foreach($requestDetails['request_stops'] as $stops)
+							{ ?>
+							<fieldset><legend>Stop <?php echo $stop_count; ?></legend>
+								<li class="col-md-6">
+									<p><b>Stop Locality:&nbsp;</b><?php
+									echo ($stops['locality']) ? $stops['locality'] : "-- --"; ?>
+									</p>
+								</li>
+								<li class="col-md-6">
+									<p><b>Stop City:&nbsp;</b><?php
+									echo ($stops['city_id']) ? $allCities[$stops['city_id']] : "-- --"; ?>
+									</p>
+								</li>
+								<li class="col-md-6">
+									<p><b>Stop State:&nbsp;</b><?php
+									echo ($stops['state_id']) ? $allStates[$stops['state_id']] : "-- --"; ?>
+									</p>
+								</li> 
+								</fieldset><?php
+								$stop_count++;
+							}
+						} ?>
+						<li class="col-md-6">
+						<p><b>Final Locality:&nbsp;</b><?php
+						echo ($requestDetails['final_locality']) ? $requestDetails['final_locality'] : "-- --"; ?>
+						</p>
+						</li>
+						<li class="col-md-6">
+						<p><b>Final City:&nbsp;</b><?php
+						echo ($requestDetails['final_city']) ? $allCities[$requestDetails['final_city']] : "-- --"; ?>
+						</p>
+						</li>
+						<li class="col-md-6">
+						<p><b>Final State:&nbsp;</b><?php
+						echo ($requestDetails['final_state']) ? $allStates[$requestDetails['final_state']] : "-- --"; ?>
+						</p>
+						</li>
+					</ul>
+				</fieldset>
+				<?php
+			} 
+			
+			if (!empty($requestDetails['comment']))
+			{
+				if ($requestDetails['category_id'] == 2 || $requestDetails['category_id'] == 1)
+				{
+					$comment_class = "tcomments";
+				}
+				else
+				{
+					$comment_class = "comments";
+				}
+
+			?>
+			
+				<fieldset><legend style="text-align:left !important"><h3>Comments</h3></legend>
+					<ul>
+						<li class="col-xs-12 col-lg-12 col-md-12 col-sm-12 comment text-left">
+							<p><?php echo $requestDetails['comment']; ?>
+							</p>
+						</li>
+					</ul>
+				</fieldset>
+			<?php
+			} ?>
+			<div class="modal-footer">
+				<button class="btn btn-default"data-dismiss=modal type=button>Close</button>
+			</div>
+		</div>
+		</div>
 		</div>
 	</div>
+      </div>
 	<!--/modal-->
-<?php echo $this->element('footer');?>
-<?php echo $this->Html->script(['https://code.jquery.com/ui/1.12.1/jquery-ui.js']);?>
-<?php echo $this->Html->script(['jquery-ui-slider-pips.js']);?>
-<?php echo $this->Html->script(['ap.pagination.js']);?>
 <?php if(isset($_GET['sort']) && $_GET['sort']=="chatslh") { ?>
 <script>
 $(document).ready(function(){
@@ -861,7 +1099,7 @@ $(document).ready(function () {
 			var chres_id = "#chatcounts_"+index;
 			if(value>0)
 			{
-			var res_html = '<?php echo $this->Html->image("chat-ico.png"); ?> Chat ( <strong>'+value+'</strong> )';
+			var res_html = ' Chat ( <strong>'+value+'</strong> )';
 			$(chres_id).html(res_html);	
 			}
 			

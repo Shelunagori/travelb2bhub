@@ -2026,123 +2026,124 @@ public function checkresponses($id) {
 	$acceptDeals = "";
 	$conditions["Responses.request_id"] = $id;
 	if(!empty($this->request->query("agentname"))) {
-	$keyword1 = '';
-	$keyword2 = '';
-	$keyword = trim($this->request->query("agentname"));
-	$keyword = explode(' ',$keyword);
-	if(isset($keyword[0]) && !isset($keyword[1])) {
-	$keyword1 = $keyword[0];
-	$conditions["Users.first_name"] =$keyword1;
-	}
-	if(isset($keyword[1])) {
-	$keyword1 = trim($keyword[0]);
-	$keyword2 = trim($keyword[1]);
-	$da["Users.first_name"] =  $keyword1;
-	$da["Users.last_name"] =  $keyword2;
-	$conditions["AND"] =  $da;
-	}
+		$keyword1 = '';
+		$keyword2 = '';
+		$keyword = trim($this->request->query("agentname"));
+		$keyword = explode(' ',$keyword);
+		if(isset($keyword[0]) && !isset($keyword[1])) {
+			$keyword1 = $keyword[0];
+			$conditions["Users.first_name"] =$keyword1;
+		}
+		if(isset($keyword[1])) {
+			$keyword1 = trim($keyword[0]);
+			$keyword2 = trim($keyword[1]);
+			$da["Users.first_name"] =  $keyword1;
+			$da["Users.last_name"] =  $keyword2;
+			$conditions["AND"] =  $da;
+		}
 	}
 	if(!empty($this->request->query("acceptdeals"))) {
-	$conditions["Responses.status"] = 1;
-	$acceptDeals = 1;
+		$conditions["Responses.status"] = 1;
+		$acceptDeals = 1;
 	}
 	if(!empty($this->request->query("quotesearch"))) {
-	$QPriceRange = $this->request->query("quotesearch");
-	$result = explode("-", $QPriceRange);
-	$MinQuotePrice = $result[0];
-	$MaxQuotePrice = $result[1];
-	$conditions["Responses.quotation_price >="] = $MinQuotePrice;
-	$conditions["Responses.quotation_price <="] = $MaxQuotePrice;
+		$QPriceRange = $this->request->query("quotesearch");
+		$result = explode("-", $QPriceRange);
+		$MinQuotePrice = $result[0];
+		$MaxQuotePrice = $result[1];
+		$conditions["Responses.quotation_price >="] = $MinQuotePrice;
+		$conditions["Responses.quotation_price <="] = $MaxQuotePrice;
 	}
 	if(!empty($this->request->query("chatwith"))) {
-	$chatuserid = $this->request->query("chatwith");
-	$conditions["Responses.user_id"] = $chatuserid;
+		$chatuserid = $this->request->query("chatwith");
+		$conditions["Responses.user_id"] = $chatuserid;
 	}
 	if(!empty($this->request->query("budgetsearch"))) {
-	$QPriceRange = $this->request->query("budgetsearch");
-	$result = explode("-", $QPriceRange);
-	$MinQuotePrice = $result[0];
-	$MaxQuotePrice = $result[1];
-	$conditions["Requests.total_budget >="] = $MinQuotePrice;
-	$conditions["Requests.total_budget <="] = $MaxQuotePrice;
+		$QPriceRange = $this->request->query("budgetsearch");
+		$result = explode("-", $QPriceRange);
+		$MinQuotePrice = $result[0];
+		$MaxQuotePrice = $result[1];
+		$conditions["Requests.total_budget >="] = $MinQuotePrice;
+		$conditions["Requests.total_budget <="] = $MaxQuotePrice;
 	}
 	if(!empty($this->request->query("refidsearch"))) {
-	$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
+		$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
 	}
 	if(!empty($this->request->query("shared_details"))) {
-	$conditions["Responses.is_details_shared"] =  $this->request->query("shared_details");
+		$conditions["Responses.is_details_shared"] =  $this->request->query("shared_details");
 	}
 	$sortorder ='';
 	$chat_sort = 0;
 	if(!empty($this->request->query("sort"))) {
-	if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgethl") {
-	$sortorder['Requests.total_budget'] = "DESC";
+		if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgethl") {
+			$sortorder['Requests.total_budget'] = "DESC";
+		}
+		if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgetlh") {
+			$sortorder['Requests.total_budget'] = "ASC";
+		}
+		if(!empty($this->request->query("sort")) && $this->request->query("sort")=="quotedpricehl") {
+			$sortorder['Responses.quotation_price'] = "DESC";
+		}
+		if(!empty($this->request->query("sort")) && $this->request->query("sort")=="quotedpricelh") {
+			$sortorder['Responses.quotation_price'] = "ASC";
+		}
+		if(!empty($this->request->query("sort")) && $this->request->query("sort")=="agentaz") {
+			$sortorder['Users.first_name'] = "ASC";
+			$sortorder['Users.last_name'] = "ASC";
+		}
+		if(!empty($this->request->query("sort")) && $this->request->query("sort")=="agentza") {	
+			$sortorder['Users.first_name'] = "DESC";
+			$sortorder['Users.last_name'] = "DESC";
+		}
 	}
-	if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgetlh") {
-	$sortorder['Requests.total_budget'] = "ASC";
-	}
-	if(!empty($this->request->query("sort")) && $this->request->query("sort")=="quotedpricehl") {
-	$sortorder['Responses.quotation_price'] = "DESC";
-	}
-	if(!empty($this->request->query("sort")) && $this->request->query("sort")=="quotedpricelh") {
-	$sortorder['Responses.quotation_price'] = "ASC";
-	}
-	if(!empty($this->request->query("sort")) && $this->request->query("sort")=="agentaz") {
-	$sortorder['Users.first_name'] = "ASC";
-	$sortorder['Users.last_name'] = "ASC";
-	}
-	if(!empty($this->request->query("sort")) && $this->request->query("sort")=="agentza") {	
-	$sortorder['Users.first_name'] = "DESC";
-	$sortorder['Users.last_name'] = "DESC";
-	}
-	}
+	
 	$responses = $this->Responses->find()
-	->contain(["Users", "Requests", "UserChats","Testimonial"])
-	->where($conditions)
-	->order($sortorder)
-	->all();
-		
+		->contain(["Users", "Requests", "UserChats","Testimonial"])
+		->where($conditions)
+		->order($sortorder)
+		->all();
 	$this->loadModel('BusinessBuddies');
 	$BusinessBuddies = $this->BusinessBuddies->find('list',['keyField' => "bb_user_id",'valueField' => 'bb_user_id'])
-	->hydrate(false)
-	->where(['user_id' => $this->Auth->user('id')])
-	->toArray();
+		->hydrate(false)
+		->where(['user_id' => $this->Auth->user('id')])
+		->toArray();
 	$this->set('BusinessBuddies', $BusinessBuddies);	
 		
 	$userchatTable = TableRegistry::get('User_Chats');
 	$conn = ConnectionManager::get('default');
 	$data = array();
 	foreach($responses as $row){ 
-	$request_id = $row['request']['id'];
-	$user_id = $row['user']['id'];
-	$sql = "SELECT *,COUNT(*) as ch_count FROM user_chats 
-	WHERE request_id='".$request_id."' AND (user_id in ('".$loggedinid."','".$user_id."') 
-	AND notification='0'
-	ANd send_to_user_id in ('".$loggedinid."','".$user_id."')) ";
-	$stmt = $conn->execute($sql);
-	$results = $stmt ->fetch('assoc');			
-	//$row["request"]["chat_count"]=$results['ch_count'];
-	$data['chat_count'][$row['id']] =$results['ch_count'];
+		$request_id = $row['request']['id'];
+		$user_id = $row['user']['id'];
+		$sql = "SELECT *,COUNT(*) as ch_count FROM user_chats 
+		WHERE request_id='".$request_id."' AND (user_id in ('".$loggedinid."','".$user_id."') 
+		AND notification='0'
+		ANd send_to_user_id in ('".$loggedinid."','".$user_id."')) ";
+		$stmt = $conn->execute($sql);
+		$results = $stmt ->fetch('assoc');			
+		//$row["request"]["chat_count"]=$results['ch_count'];
+		$data['chat_count'][$row['id']] =$results['ch_count'];
 	}
-	$this->set('data', $data);		
+	$this->set('data', $data);
+//pr($conditions); exit;	
 	$this->set('responses', $responses);
 	$this->set('requestidval', $id);
 	$requestDetails = $this->Requests->find()
-	->contain(["Users", "UserRatings", "Hotels", "RequestStops"])
-	->where(['Requests.id' => $id])->first();
+		->contain(["Users", "UserRatings", "Hotels", "RequestStops"])
+		->where(['Requests.id' => $id])->first();
 	$this->set('requestDetails', $requestDetails);
 	$allCities = $this->Cities->find('list',['keyField' => 'id', 'valueField' => 'name'])
-	->hydrate(false)
-	->toArray();
+		->hydrate(false)
+		->toArray();
 	$allStates = $this->States->find('list',['keyField' => 'id', 'valueField' => 'state_name'])
-	->hydrate(false)
-	->toArray();
+		->hydrate(false)
+		->toArray();
 	/*$allCountries = $this->Countries->find('list',['keyField' => 'id', 'valueField' => 'country_name'])
 	->hydrate(false)
 	->toArray();*/
 	$allUsers = $this->Users->find('list',['keyField' => 'id', 'valueField' => 'first_name'])
-	->hydrate(false)
-	->toArray();
+		->hydrate(false)
+		->toArray();
 	$this->set('allUsers', $allUsers);
 	$transpoartRequirmentArray = $this->_getTranspoartRequirmentsArray();
 	$mealPlanArray = $this->_getMealPlansArray();
@@ -2157,13 +2158,13 @@ public function checkresponses($id) {
 	$delcount=0;
 	$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
 	foreach($requests as $req){
-	$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
-	if($rqueryr->count()!=0){
-	$delcount++;
-	}
+		$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
+		if($rqueryr->count()!=0){
+			$delcount++;
+		}
 	}
 	if($myRequestCount > $delcount) {
-	$myRequestCount = $myRequestCount-$delcount;
+		$myRequestCount = $myRequestCount-$delcount;
 	}	
 	$this->set('myRequestCountdel', $delcount);
 	$this->set('myRequestCount', $myRequestCount1);
@@ -2346,7 +2347,8 @@ $this->loadModel('Responses');
 $this->loadModel('Requests');
 $this->loadModel('Cities');
 $this->loadModel('States');
-$this->loadModel('Hotels');
+$this->loadModel('Hotels'); 
+$this->viewBuilder()->layout('user_layout');
 $user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
 $this->set('users', $user);
 $conditions ='';
@@ -2713,22 +2715,22 @@ $myReponseCount = $queryr->count();
 $this->set('myReponseCount', $myReponseCount);
 }
 public function clearreadChats() {
-$this->loadModel('UserChats');
-date_default_timezone_set('Asia/Kolkata');
-$loggedinid = $this->Auth->user('id');
- $conn = ConnectionManager::get('default');
- 
-$sql = "UPDATE user_chats SET `is_read` = '1',`read_date_time`='".date("Y-m-d h:i:s")."'
-     WHERE id IN (
-         SELECT id FROM (
-             SELECT id FROM user_chats WHERE send_to_user_id = '".$loggedinid."' AND is_read='0' ORDER BY created DESC  
-             LIMIT 0, 10
-         ) tmp
-     );"; 
- $upsql = "UPDATE `user_chats` SET `is_read` = '1',`read_date_time`='".date("Y-m-d h:i:s")."' 
- WHERE send_to_user_id = '".$loggedinid."' AND is_read='0' order by created DESC LIMIT 10";
- $stmt = $conn->execute($sql);
-echo	$res=1;
+	$this->loadModel('UserChats');
+	date_default_timezone_set('Asia/Kolkata');
+	$loggedinid = $this->Auth->user('id');
+	$conn = ConnectionManager::get('default');
+	 
+	$sql = "UPDATE user_chats SET `is_read` = '1',`read_date_time`='".date("Y-m-d h:i:s")."'
+		 WHERE id IN (
+			 SELECT id FROM (
+				 SELECT id FROM user_chats WHERE send_to_user_id = '".$loggedinid."' AND is_read='0' ORDER BY created DESC  
+				 LIMIT 0, 10
+			 ) tmp
+		 );"; 
+	 $upsql = "UPDATE `user_chats` SET `is_read` = '1',`read_date_time`='".date("Y-m-d h:i:s")."' 
+	 WHERE send_to_user_id = '".$loggedinid."' AND is_read='0' order by created DESC LIMIT 10";
+	 $stmt = $conn->execute($sql);
+	echo $res=1;
 exit;
 }
 
@@ -3394,25 +3396,25 @@ echo $res;
 exit;
 }
 public function userChat($requestId, $chatUserId,$screenid=null) {
-Configure::write('debug',2);
-date_default_timezone_set('Asia/Kolkata');
-$this->loadModel('UserChats');
-$readtime = date("Y-m-d h:i:s");
-$loggedinid = $this->Auth->user('id');
-	
-$conn = ConnectionManager::get('default');
-$sql = "UPDATE user_chats SET is_read='1',read_date_time='".$readtime."' WHERE request_id='".$requestId."' AND send_to_user_id='".$loggedinid."'";
-$stmt = $conn->execute($sql);
-	
-//$this->UserChats->updateAll(['is_read' => 1, "read_date_time"=>date("Y-m-d h:i:s")], ['request_id ' => $requestId]);
-$UserChats = $this->UserChats->find()
-->contain(["Users"/*, "Requests"*/])
-->where(["UserChats.request_id"=>$requestId,"UserChats.notification"=>0, 'UserChats.user_id IN' => array($this->Auth->user('id'), $chatUserId),'UserChats.send_to_user_id IN' => array($this->Auth->user('id'), $chatUserId)])->order(["UserChats.id" => "ASC"])->all()->toArray();
-$this->set('UserChats', $UserChats);
-$this->set("requestId", $requestId);
-$this->set("chatUserId", $chatUserId);
-$this->set("screen_id", $screenid);
-$this->render('/Element/user_chat');
+	Configure::write('debug',2);
+	date_default_timezone_set('Asia/Kolkata');
+	$this->loadModel('UserChats');
+	$readtime = date("Y-m-d h:i:s");
+	$loggedinid = $this->Auth->user('id');
+		
+	$conn = ConnectionManager::get('default');
+	$sql = "UPDATE user_chats SET is_read='1',read_date_time='".$readtime."' WHERE request_id='".$requestId."' AND send_to_user_id='".$loggedinid."'";
+	$stmt = $conn->execute($sql);
+		
+	//$this->UserChats->updateAll(['is_read' => 1, "read_date_time"=>date("Y-m-d h:i:s")], ['request_id ' => $requestId]);
+	$UserChats = $this->UserChats->find()
+	->contain(["Users"/*, "Requests"*/])
+	->where(["UserChats.request_id"=>$requestId,"UserChats.notification"=>0, 'UserChats.user_id IN' => array($this->Auth->user('id'), $chatUserId),'UserChats.send_to_user_id IN' => array($this->Auth->user('id'), $chatUserId)])->order(["UserChats.id" => "ASC"])->all()->toArray();
+	$this->set('UserChats', $UserChats);
+	$this->set("requestId", $requestId);
+	$this->set("chatUserId", $chatUserId);
+	$this->set("screen_id", $screenid);
+	$this->render('/Element/user_chat');
 }
 
 public function addtestimonial($userId) {

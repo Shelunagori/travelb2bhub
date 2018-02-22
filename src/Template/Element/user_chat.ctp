@@ -1,3 +1,49 @@
+<style>
+ 
+
+.containerss {
+    border: 2px solid #dedede;
+    background-color: #f1f1f1;
+    border-radius: 5px;
+    padding: 2px;
+    margin: 3px 0;
+}
+
+.darker {
+    border-color: #ccc;
+    background-color: #ddd;
+}
+
+.containerss::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.containerss img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+.containerss img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+}
+
+.time-right {
+    float: right;
+    color: #aaa;
+}
+
+.time-left {
+    float: left;
+    color: #999;
+}
+</style>
 	  <!-- Modal content-->
 	  <div class="modal-content">
 		<div class="modal-header">
@@ -6,40 +52,49 @@
 		</div>
 		<div class="modal-body">
 			<!--Chat history-->
-			<div class="chat-wrap">
-				<ul class="chat">
-					<?php 
-					foreach($UserChats as $row){
-						if($row["user_id"] == $this->request->session()->read('Auth.User.id')) {?>
-							<li class="right clearfix">
-								<span class="chat-img pull-right">
-									<?php echo $this->Html->image('user_docs/'.$row["user"]["id"].'/'.$row["user"]["profile_pic"], ["alt"=>"User Pic.", "style"=>"width:50px; height:50px;", "class"=>"img-circle"]);?>
-									<!-- <img src="/img/user_docs/143/1488187056334449536.jpg" style="width:50px; height:50px;"  alt="User Avatar" class="img-circle"> -->
-								</span>
-								<div class="chat-body clearfix">
-									<div class="header">
-										<small class=" text-muted" style="float:left;"><?php echo date("d M Y h:i A", strtotime($row["created"])); ?></small>
-										<strong class="pull-right primary-font"><?php echo $row["user"]["first_name"]; ?></strong>
-									</div><br/>
-									<p style="float: left;"><?php echo $row["message"]; ?></p>
-								</div>
-							</li>
-						<?php } else {?>
-							<li class="left clearfix">
-								<span class="chat-img pull-left">
-									<?php echo $this->Html->image('user_docs/'.$row["user"]["id"].'/'.$row["user"]["profile_pic"], ["alt"=>"User Pic.", "style"=>"width:50px; height:50px;", "class"=>"img-circle"]);?>
-								</span>
-								<div class="chat-body clearfix">
-									<div class="header">
-										<strong class="primary-font" style="float:left;"><?php echo $row["user"]["first_name"]; ?></strong> <small class="pull-right text-muted">
-										<?php echo date("d M Y h:i A", strtotime($row["created"])); ?></small>
-									</div><br/>
-									<p style="float: left;"><?php echo $row["message"]; ?></p>
-								</div>
-							</li>
-						<?php } ?>
+			<div class="chat-wrap" style="overflow-y: scroll; height: 400px;">
+				<?php 
+				foreach($UserChats as $row){
+					if($row["user_id"] == $this->request->session()->read('Auth.User.id')) {?>
+						<?php 
+						if(file_exists($this->Html->image('user_docs/'.$row["user"]["id"].'/'.$row["user"]["profile_pic"]))){
+							$img= $this->Html->image('user_docs/'.$row["user"]["id"].'/'.$row["user"]["profile_pic"], ["alt"=>"User Pic.", "style"=>"width:58px;height:58px;", "class"=>"img-circle right"]);
+						}
+						else
+						{
+							$img= $this->Html->image('no-profile-image.jpg', ["alt"=>"User Pic.", "style"=>"width:58px; height:58px;", "class"=>"img-circle right"]);
+						}
+						?>
+						
+						<div class="containerss">
+							<?php echo $img;?>
+							<p style="text-align: right;"><b><?php echo ucwords($row["user"]["first_name"]); ?></b></p>
+							<p style="text-align: right;"><?php echo ucwords($row["message"]); ?></p>
+							<span class="time-left"><?php echo date("d M Y h:i A", strtotime($row["created"])); ?></span>
+						</div>
+			<?php   } 
+					else 
+					{ ?>
+				 
+							<?php 
+								if(file_exists($this->Html->image('user_docs/'.$row["user"]["id"].'/'.$row["user"]["profile_pic"]))){
+									
+									$images= $this->Html->image('user_docs/'.$row["user"]["id"].'/'.$row["user"]["profile_pic"], ["alt"=>"User Pic.", "style"=>"width:58px; height:58px;", "class"=>"img-circle "]);
+								}
+								else {
+									$images=  $this->Html->image('no-profile-image.jpg', ["alt"=>"User Pic.", "style"=>"width:58px; height:58px;", "class"=>"img-circle "]);
+								}
+						 
+							?>
+						<div class="containerss darker">
+							<?php echo $images;?>
+							<p><b><?php echo ucwords($row["user"]["first_name"]); ?></b></p>
+							<p><?php echo ucwords($row["message"]); ?></p>
+							<span class="time-right"><?php echo date("d M Y h:i A", strtotime($row["created"])); ?></span>
+						</div>
+						 		 
 					<?php } ?>
-			</ul>
+			<?php } ?>
 			</div>
 			<!--Chat history/-->
 			<div class="form">
@@ -52,14 +107,24 @@
 					<input id="message"  name="message" type="text" class="form-control input-sm" autocomplete="off" placeholder="Type your message here..." />
 					<input type="hidden" name="screen_id" id="screen_id" value="<?php echo $screen_id; ?>">
 					<span class="input-group-btn">
-						<input type="submit" name="submit" class="btn btn-orange btn-sm" value="Send">
+						<button type="submit" name="submit" class="btn btn-orange btn-sm" value="Send">Send</button>
 					</span>
 				</div>
 				</form>
 			</div>
 		</div>
 	  </div>
-	  
+
+ 
+
+ 
+ 
+
+
+
+
+ 
+	 
 	
 <script>
 $('#UserChatForm').validate({
