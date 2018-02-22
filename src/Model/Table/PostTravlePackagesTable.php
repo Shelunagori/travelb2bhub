@@ -73,6 +73,9 @@ class PostTravlePackagesTable extends Table
         $this->hasMany('PostTravlePackageStates', [
             'foreignKey' => 'post_travle_package_id'
         ]);
+        $this->hasMany('PostTravlePackagePriceBeforeRenews', [
+            'foreignKey' => 'post_travle_package_id'
+        ]);
     }
 
     /**

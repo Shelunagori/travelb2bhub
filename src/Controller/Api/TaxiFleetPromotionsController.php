@@ -302,4 +302,49 @@ class TaxiFleetPromotionsController extends AppController
         $this->set('_serialize', ['getTaxifleets','message','response_code']);				
 	}		
 	
+	public function renewTaxiFleet($taxifleet_id = null,$price_master_id=null,$price=null,$visible_date=null)
+	{
+		$taxifleet_id = $this->request->query('taxifleet_id');
+		$price_master_id = $this->request->query('price_master_id');
+		$price = $this->request->query('price');
+		$visible_date = $this->request->query('visible_date');
+		if(!empty($taxifleet_id) && !empty($price_master_id) && !empty($price) && !empty($visible_date))
+		{
+		$getTaxiFleetPromotions = $this->TaxiFleetPromotions->find()->where(['id'=>$taxifleet_id]);
+			if(!empty($getTaxiFleetPromotions->toArray()))
+			{
+				foreach($getTaxiFleetPromotions as $getTaxiFleetPromotion)
+				{
+					$PriceBeforeRenews = $this->TaxiFleetPromotions->TaxiFleetPromotionPriceBeforeRenews->newEntity();
+					
+					$PriceBeforeRenews->taxi_fleet_promotion_id = $getTaxiFleetPromotion->id;
+					$PriceBeforeRenews->price_master_id = $getTaxiFleetPromotion->price_master_id;
+					$PriceBeforeRenews->price = $getTaxiFleetPromotion->price;
+					$PriceBeforeRenews->visible_date = $getTaxiFleetPromotion->visible_date;
+					
+					if ($this->TaxiFleetPromotions->TaxiFleetPromotionPriceBeforeRenews->save($PriceBeforeRenews))
+					{
+						$query = $this->TaxiFleetPromotions->query();
+						$query->update()->set(['price_master_id' => $price_master_id,'price'=>$price,'visible_date'=>date('Y-m-d',strtotime($visible_date))])
+						->where(['id' => $taxifleet_id])->execute();			
+						$message = 'Update Successfully';
+						$response_code = 200;						
+					}else
+					{
+						$message = 'not updated';
+						$response_code = 204;						
+					}
+				}
+			}			
+		}else
+		{
+						$message = 'Invalid Data';
+						$response_code = 205;				
+		}
+
+		$this->set(compact('message','response_code'));
+        $this->set('_serialize', ['message','response_code']);		
+
+	}
+	
 }

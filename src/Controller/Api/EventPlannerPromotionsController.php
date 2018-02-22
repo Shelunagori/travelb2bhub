@@ -304,7 +304,52 @@ class EventPlannerPromotionsController extends AppController
 		
 		$this->set(compact('getEventPlannersDetails','message','response_code'));
         $this->set('_serialize', ['getEventPlannersDetails','message','response_code']);		
-	}	
+	}
+
+	public function renewEventPlanner($event_id = null,$price_master_id=null,$price=null,$visible_date=null)
+	{
+		$event_id = $this->request->query('event_id');
+		$price_master_id = $this->request->query('price_master_id');
+		$price = $this->request->query('price');
+		$visible_date = $this->request->query('visible_date');
+		if(!empty($event_id) && !empty($price_master_id) && !empty($price) && !empty($visible_date))
+		{
+		$getEventPlannerPromotions = $this->EventPlannerPromotions->find()->where(['id'=>$event_id]);
+			if(!empty($getEventPlannerPromotions->toArray()))
+			{
+				foreach($getEventPlannerPromotions as $getEventPlannerPromotion)
+				{
+					$PriceBeforeRenews = $this->EventPlannerPromotions->EventPlannerPromotionPriceBeforeRenews->newEntity();
+					
+					$PriceBeforeRenews->event_planner_promotion_id = $getEventPlannerPromotion->id;
+					$PriceBeforeRenews->price_master_id = $getEventPlannerPromotion->price_master_id;
+					$PriceBeforeRenews->price = $getEventPlannerPromotion->price;
+					$PriceBeforeRenews->visible_date = $getEventPlannerPromotion->visible_date;
+					
+					if ($this->EventPlannerPromotions->EventPlannerPromotionPriceBeforeRenews->save($PriceBeforeRenews))
+					{
+						$query = $this->EventPlannerPromotions->query();
+						$query->update()->set(['price_master_id' => $price_master_id,'price'=>$price,'visible_date'=>date('Y-m-d',strtotime($visible_date))])
+						->where(['id' => $event_id])->execute();			
+						$message = 'Update Successfully';
+						$response_code = 200;						
+					}else
+					{
+						$message = 'not updated';
+						$response_code = 204;						
+					}
+				}
+			}			
+		}else
+		{
+						$message = 'Invalid Data';
+						$response_code = 205;				
+		}
+
+		$this->set(compact('message','response_code'));
+        $this->set('_serialize', ['message','response_code']);		
+
+	}		
 
 	
 }

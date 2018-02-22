@@ -68,6 +68,9 @@ class TaxiFleetPromotionsTable extends Table
         $this->hasMany('TaxiFleetPromotionStates', [
             'foreignKey' => 'taxi_fleet_promotion_id'
         ]);
+        $this->hasMany('TaxiFleetPromotionPriceBeforeRenews', [
+            'foreignKey' => 'taxi_fleet_promotion_id'
+        ]);
     }
 
     /**

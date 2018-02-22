@@ -186,6 +186,10 @@ Router::scope('/', function (RouteBuilder $routes) {
 						   'getTaxiFleetPromotionReport' => [
 							   'action' => 'getTaxiFleetPromotionReport',
 							   'method' => 'GET'
+						   ],
+						   'renewTaxiFleet' => [
+							   'action' => 'renewTaxiFleet',
+							   'method' => 'GET'
 						   ]
 					   ]
 					]
@@ -215,6 +219,10 @@ Router::scope('/', function (RouteBuilder $routes) {
 						   ],
 						   'removeEvent' => [
 							   'action' => 'removeEvent',
+							   'method' => 'GET'
+						   ],
+						   'renewEventPlanner' => [
+							   'action' => 'renewEventPlanner',
 							   'method' => 'GET'
 						   ]
 					   ]
@@ -246,6 +254,10 @@ Router::scope('/', function (RouteBuilder $routes) {
 						   ],
 						   'getPostTravelPackageReport' => [
 							   'action' => 'getPostTravelPackageReport',
+							   'method' => 'GET'
+						   ],
+						   'renewPostTravelPackage' => [
+							   'action' => 'renewPostTravelPackage',
 							   'method' => 'GET'
 						   ]					   
 					   ]

@@ -446,5 +446,51 @@ class PostTravlePackagesController extends AppController
 
 		$this->set(compact('getPostTravelPackages','message','response_code'));
         $this->set('_serialize', ['getPostTravelPackages','message','response_code']);				
-	}		
+	}
+
+	public function renewPostTravelPackage($post_travel_id=null,$price_master_id=null,$price=null,$visible_date=null)
+	{
+		$post_travel_id = $this->request->query('post_travel_id');
+		$price_master_id = $this->request->query('price_master_id');
+		$price = $this->request->query('price');
+		$visible_date = $this->request->query('visible_date'); 
+		if(!empty($post_travel_id) && !empty($price_master_id) && !empty($price) && !empty($visible_date))
+		{
+		$getPostTravelPackages = $this->PostTravlePackages->find()->where(['id'=>$post_travel_id]);
+			if(!empty($getPostTravelPackages->toArray()))
+			{
+				foreach($getPostTravelPackages as $getPostTravelPackage)
+				{
+					$PriceBeforeRenews = $this->PostTravlePackages->PostTravlePackagePriceBeforeRenews->newEntity();
+					
+					$PriceBeforeRenews->post_travle_package_id = $getPostTravelPackage->id;
+					$PriceBeforeRenews->price_master_id = $getPostTravelPackage->price_master_id;
+					$PriceBeforeRenews->price = $getPostTravelPackage->price;
+					$PriceBeforeRenews->visible_date = $getPostTravelPackage->visible_date;
+					
+					if ($this->PostTravlePackages->PostTravlePackagePriceBeforeRenews->save($PriceBeforeRenews))
+					{
+						$query = $this->PostTravlePackages->query();
+						$query->update()->set(['price_master_id' => $price_master_id,'price'=>$price,'visible_date'=>date('Y-m-d',strtotime($visible_date))])
+						->where(['id' => $post_travel_id])->execute();			
+						$message = 'Update Successfully';
+						$response_code = 200;						
+					}else
+					{
+						$message = 'not updated';
+						$response_code = 204;						
+					}
+				}
+			}			
+		}else
+		{
+						$message = 'Invalid Data';
+						$response_code = 205;				
+		}
+
+		$this->set(compact('message','response_code'));
+        $this->set('_serialize', ['message','response_code']);		
+
+	}
+	
 }
