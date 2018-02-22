@@ -251,11 +251,9 @@ $(document).ready(function($){
 <div class="form-box">
 	<div class="panel-group" id="HotelAccordion" style="background-color:white;">
 		<div class="panel panel-default">
-		
 				<h4 class="panel-title ">
 				<fieldset>
 					  <legend style="color:#369FA1;"><b>GENERAL REQUIREMENTS:</b></legend>
-					<div class="form">
 					  <div class="row">
 					  <div class="col-md-12">
 					  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -306,8 +304,8 @@ $(document).ready(function($){
 								</div>
 							</div>
 						</div>
-						
-						</fieldset></h4>
+					</fieldset>
+				</h4>
 				<h4 class="panel-title ">
 				<fieldset>
 				<legend style="color:#369FA1;"><b>STAY REQUIREMENTS:</b></legend>
@@ -447,8 +445,7 @@ $(document).ready(function($){
 									</div>
 								</div>
 							</div>
-						</div>
-						</div>		
+						</div>	
 						</fieldset>
 						</h4>
 						<h4 class="panel-title">
@@ -496,7 +493,6 @@ echo $this->Form->create(null, [
 			<h4 class="panel-title">
 			<fieldset>
 				  <legend style="color:#369FA1;"><b>GENERAL REQUIREMENTS:</b></legend>
-				<div class="form">
 					<div class="row">
 						<div class="col-md-12">
 						  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -517,7 +513,7 @@ echo $this->Form->create(null, [
 								</div>
 							</div>
 						</div>
-					</div><br>
+					</div>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="col-md-6">
@@ -547,13 +543,11 @@ echo $this->Form->create(null, [
 							</div>
 						</div>
 					</div>
-				</div>
 			</fieldset>
 		</h4>
 		<h4 class="panel-title">
 			<fieldset>
 				<legend style="color:#369FA1;"><b>STAY REQUIREMENTS:</b></legend>
-					<div class="form">
 					  <div class="row">
 							<div class="col-md-12">
 								<div class="col-lg-2">
@@ -703,12 +697,10 @@ echo $this->Form->create(null, [
 											</div>
 																			
 									</div>
-							</fieldset>
-						</h4>
+							
 					</div>
 				</div>
 			</div>
-		</div>
 			<div class="tab-pane" id="tab3">
 							<?php
                             echo $this->Form->create(null, [
@@ -1431,7 +1423,6 @@ $(this).find(':input[type=submit]').prop('disabled', true);
 alert('Please Check All Required Fields.');
 }   
 });
-
 $('#HotelRequestForm').submit(function(){
 if ($("#HotelRequestForm").valid()) {
 $(this).find(':input[type=submit]').prop('disabled', true);
