@@ -145,7 +145,7 @@ class EventPlannerPromotionsController extends AppController
 			$query = $this->EventPlannerPromotions->query();
 			$query->update()->set(['is_deleted' => 1])
 			->where(['id' => $event_id])->execute();			
-			$message = 'Deleted Successfully';
+			$message = 'The Package has been deleted successfully';
 			$response_code = 200;			
 		}
 		else
@@ -208,28 +208,47 @@ class EventPlannerPromotionsController extends AppController
         $this->set('_serialize', ['getEventPlanners','message','response_code']);				
 	}	
 	
-	public function getEventPlanners()
+	public function getEventPlanners($isLikedUserId = null)
 	{
-		$getEventPlanners = $this->EventPlannerPromotions->find();
-			$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('EventPlannerPromotionLikes.id')])
-			->leftJoinWith('EventPlannerPromotionLikes')
-		->where(['visible_date >=' =>date('Y-m-d')])
-		->where(['is_deleted' =>0])
-		->contain(['Users'])
-		->group(['EventPlannerPromotions.id'])
-		->autoFields(true);
-		//pr($getTravelPackages->toArray()); exit;
-		if(!empty($getEventPlanners->toArray()))
+		$isLikedUserId = $this->request->query('isLikedUserId');
+		if(!empty($isLikedUserId))
 		{
-			$message = 'List Found Successfully';
-			$response_code = 200;
+			$getEventPlanners = $this->EventPlannerPromotions->find();
+				$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('EventPlannerPromotionLikes.id')])
+				->leftJoinWith('EventPlannerPromotionLikes')
+			->where(['visible_date >=' =>date('Y-m-d')])
+			->where(['is_deleted' =>0])
+			->group(['EventPlannerPromotions.id'])
+			->autoFields(true);
+			
+			if(!empty($getEventPlanners->toArray()))
+			{
+				foreach($getEventPlanners as $getEventPlanner)
+				{
+					$exists = $this->EventPlannerPromotions->EventPlannerPromotionLikes->exists(['event_planner_promotion_id'=>$getEventPlanner->id,'user_id'=>$isLikedUserId]);
+					if($exists == 1)
+					{ $getEventPlanner->isLiked = 'yes'; }
+					else{ $getEventPlanner->isLiked = 'no'; }
+				}
+				
+				
+				$message = 'List Found Successfully';
+				$response_code = 200;
+			}
+			else
+			{
+				$message = 'No Content Found';
+				$getEventPlanners = [];
+				$response_code = 204;			
+			}			
 		}
 		else
 		{
-			$message = 'No Content Found';
-			$getEventPlanners = [];
-			$response_code = 204;			
+				$message = 'isLikedUserId is empty';
+				$getEventPlanners = [];
+				$response_code = 204;				
 		}
+
 		
 		$this->set(compact('getEventPlanners','message','response_code'));
         $this->set('_serialize', ['getEventPlanners','message','response_code']);		
