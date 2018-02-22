@@ -21,8 +21,8 @@
 		  </h4>
         </div>
         <div class="modal-body">
-			<fieldset>
-				<legend style="text-align:left !important"><h3>General Requirements</h3></legend>
+			 
+				<div style="text-align:left !important"><h3>General Requirements</h3></div>
 				<ul>
 					<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p><b>Reference ID:&nbsp;</b><?php
 					echo $details['reference_id']; ?>
@@ -33,7 +33,7 @@
 					<li class="col-xs-6 col-lg-6 col-md-6 col-sm-6	"><p><b>Children below 6:&nbsp;</b><?php
 					echo $details['children']; ?></li>
 				</ul>
-			</fieldset>
+			 
 		<?php
 		if ($details['category_id'] == 1 || $details['category_id'] == 3)
 		{  

@@ -17,7 +17,8 @@
 	<?php //echo $this->Html->css('/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>
 	<?php echo $this->Html->css('/assets/plugins/WYSIWYG/editor.css'); ?>
 	<?php echo $this->Html->css('/assets/demo-styles.css'); ?>
-	<?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Poppins'); ?> 	
+	<?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Poppins'); ?> 
+	<?php echo $this->Html->css('//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'); ?> 
 	<?php
 	echo $this->Html->meta(
     'favicon.ico',
@@ -135,6 +136,70 @@ margin-top: 5px !important;
 {
 	height: 339px !important;	
 }
+</style>
+<!--- Star style ---->
+<style>
+	div.stars {
+	  width: 270px;
+	  display: inline-block;
+	}
+	 
+	input.star { display: none; }
+	 
+	label.star {
+	  float: right;
+	  padding: 10px;
+	  font-size: 36px;
+	  color: #444;
+	  transition: all .2s;
+	}
+	 input.star:checked ~ label.star:before {
+	  content: '\f005';
+	  color: #FD4;
+	  transition: all .25s;
+
+	}
+
+
+	input.star-5:checked ~ label.star:before {
+
+	  color: #FE7;
+
+	  text-shadow: 0 0 20px #952;
+
+	}
+
+	input.star-1:checked ~ label.star:before { color: #F62; }
+	label.star:hover { transform: rotate(-15deg) scale(1.3); }
+	label.star:before {
+	  content: '\f006';
+	  font-family: FontAwesome;
+	}
+
+</style>
+<style>
+legend
+{
+	text-align: center;
+}
+.requestType {	
+	color: #f87200;
+    font-weight: 600;
+}
+.hotel{
+	
+}
+.package{
+	 
+}
+.contain>p{
+	color:#96989A !important;
+} 
+.details {color:#000 !important; font-weight: 600;}	
+.btn-block { width:40% !important;}
+.margin {margin-top:5px;}
+.shotrs a {margin:5px;;}
+.modal-body {padding:0px!important;}
 </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -292,15 +357,7 @@ margin-top: 5px !important;
               <span class="hidden-xs"><?php echo ucwords(strtolower($MemberName));?></span>
             </a>
             <ul class="dropdown-menu">
-              
-              <li class="user-footer">
-                <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
-                </div>
-                <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                </div>
-              </li>
+			  <li><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'logout')) ?>" class="btn btn-default signup_btn">Log Out</a></li>
             </ul>
           </li>
           <!-- Control Sidebar Toggle Button -->
