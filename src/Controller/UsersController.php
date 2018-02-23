@@ -2443,7 +2443,7 @@ public function myresponselist() {
 		$da1["Requests.check_out"] =  $edate;
 		$conditions["OR"] =  $da1;
 	}
-	//$conditions["Responses.is_deleted "] = 0;
+	$conditions["Responses.is_deleted "] = 0;
 	$conditions["Responses.status "] = 0;
 	$responses = $this->Responses->find()
 		->contain([ "Requests.Users", "UserChats","Requests.Hotels"])

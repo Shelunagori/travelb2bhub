@@ -6,7 +6,8 @@
  padding:10px !important;
 }
 h3 {
-	margin:0px !important; 
+	margin:0px !important;
+    font-size: 18px !important;	
 }
 .modal-body{
 	text-align:left !important;
@@ -17,6 +18,7 @@ li {
 ul li b {
 	color:#96989A;
 }
+
  </style>
  
       <div class="modal-content">
@@ -42,6 +44,7 @@ ul li b {
         </div>
         <div class="modal-body">
 			<div class="col-md-12">
+			<br>
 				<div class="head_of_popup"><h3>General Requirements</h3></div>
 				<ul>
 					<li class="col-md-12"><p><b>Reference ID : &nbsp;</b><span style="color:#FB6542"><?php
@@ -80,7 +83,9 @@ ul li b {
 						else
 						{
 							echo "--";
-						} ?><li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Double :&nbsp;</b><?php
+						} ?>
+						</li>
+						<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Double :&nbsp;</b><?php
 						if ($row['room2'] != '')
 						{
 							echo $row['room2'];
@@ -88,7 +93,9 @@ ul li b {
 						else
 						{
 							echo "--";
-						} ?><li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Triple :&nbsp;</b><?php
+						} ?>
+						</li>
+						<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Triple :&nbsp;</b><?php
 						if ($row['room3'] != '')
 						{
 							echo $row['room3'];
@@ -96,7 +103,9 @@ ul li b {
 						else
 						{
 							echo "--";
-						} ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Child With Bed :&nbsp;</b><?php
+						} ?>
+						</li>
+						<li class="col-md-6"><p><b>Child With Bed :&nbsp;</b><?php
 						if ($row['child_with_bed'] != '')
 						{
 							echo $row['child_with_bed'];
@@ -104,7 +113,9 @@ ul li b {
 						else
 						{
 							echo "-- --";
-						} ?><li class="col-xs-12 col-sm-6 col-lg-6 col-md-6"><p><b>Child Without Bed :&nbsp;</b><?php
+						} ?>
+						</li>
+						<li class="col-md-6"><p><b>Child Without Bed :&nbsp;</b><?php
 						if ($row['child_without_bed'] != '')
 						{
 							echo $row['child_without_bed'];
@@ -112,7 +123,9 @@ ul li b {
 						else
 						{
 							echo "-- --";
-						} ?><li class="col-xs-12 col-lg-12 col-md-12 col-sm-12"><p><b>Hotel Category :&nbsp;</b><?php
+						} ?>
+						</li>
+						<li class="col-md-12"><p><b>Hotel Category :&nbsp;</b><?php
 						if (!empty($row['hotel_category']))
 						{
 							$result = explode(",", $row['hotel_category']);
@@ -132,7 +145,9 @@ ul li b {
 						else
 						{
 							echo "-- --";
-						} ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Hotel Rating :&nbsp;</b><?php
+						} ?>
+						</li>
+						<li class="col-md-6"><p><b>Hotel Rating :&nbsp;</b><?php
 						if ($row['hotel_rating'] > 0)
 						{
 							for ($i = $row['hotel_rating']; $i > 0; $i--)
@@ -144,12 +159,23 @@ ul li b {
 						{
 						}
  
-		?><li class="col-xs-12 col-sm-6 col-lg-6 col-md-6 col-offset-right-1"><p><b>Meal :&nbsp;</b><?php
-						echo ($row['meal_plan']) ? $mealPlanArray[$row['meal_plan']] : "-- --"; ?><li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p><b>Check In :&nbsp;</b><?php
-						echo ($row['check_in']) ? date("d/m/Y", strtotime($row['check_in'])) : "-- --"; ?><li class="col-xs-6 col-lg-6 col-md-6 col-sm-6"><p><b>Check Out :&nbsp;</b><?php
+						?></li>
+						<li class="col-md-6"><p><b>Meal :&nbsp;</b><?php
+						echo ($row['meal_plan']) ? $mealPlanArray[$row['meal_plan']] : "-- --"; ?>
+						</li>
+						<li class="col-md-6"><p><b>Check In :&nbsp;</b><?php
+						echo ($row['check_in']) ? date("d/m/Y", strtotime($row['check_in'])) : "-- --"; ?>
+						</li>
+						<li class="col-md-6">
+							<p><b>Check Out :&nbsp;</b><?php
 						echo ($row['check_out']) ? date("d/m/Y", strtotime($row['check_out'])) : "-- --"; ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Locality :&nbsp;</b><?php
-						echo ($row['locality']) ? $row['locality'] : "-- --"; ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Destination City :&nbsp;</b><?php
-						echo ($row['city_id']) ? $allCities[$row['city_id']] : "-- --"; ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Destination State :&nbsp;</b><?php
+						echo ($row['locality']) ? $row['locality'] : "-- --"; ?>
+						</li>
+						<li class="col-md-6">
+							<p><b>Destination City :&nbsp;</b><?php
+						echo ($row['city_id']) ? $allCities[$row['city_id']] : "-- --"; ?>
+						</li>
+						<li class="col-md-6"><p><b>Destination State :&nbsp;</b><?php
 						echo ($row['state_id']) ? $allStates[$row['state_id']] : "-- --"; ?>
 						</ul>
 						 
@@ -163,7 +189,7 @@ ul li b {
 				<div class="col-md-12">
 				    <div class="head_of_popup"><h3>Transport Requirements</h3></div>
 			<ul>
-				<li class="col-xs-12 col-lg-12 col-md-12 col-sm-6">
+				<li class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
 				<p><b>Transport :&nbsp;</b>
 					<?php
 					echo ($details['transport_requirement']) ? $transpoartRequirmentArray[$details['transport_requirement']] : "-- --"; ?>

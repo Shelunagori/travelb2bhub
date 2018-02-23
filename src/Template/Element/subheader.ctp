@@ -110,7 +110,6 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 									<td align="left" style="font-size:17px"><?php echo $myRequestCount; ?></td>
 								</tr>
 							</table>		
-							 
 						</div>
 					  </div>
 					  <div class="small-box bg-white">
