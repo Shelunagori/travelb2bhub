@@ -37,7 +37,7 @@ $conn = ConnectionManager::get('default');
  		  <table width="90%" class="shotrs">
 			<tr>
 				<td>
-				<a class="btn btn-info btn-sm"href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'myresponselist')) ?>?sort=totalbudgethl">Total Budget (High To Low) <span class="arrow"></span></a>
+				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'myresponselist')) ?>?sort=totalbudgethl">Total Budget (High To Low) <span class="arrow"></span></a>
 
 				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'myresponselist')) ?>?sort=totalbudgetlh"> Total Budget (Low To High)<span class="arrow"></span></a>
 				

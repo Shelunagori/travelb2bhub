@@ -44,8 +44,7 @@ body {
 
 .box.box-primary {
     border-top-color: #66cad5 !important;
-}
-
+} 
 sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a {
     color: #fff;
     background: #66cad5e3;
