@@ -233,14 +233,14 @@ $(document).ready(function($){
 			<div class="content">
 				<div class="tab-content">
 					<ul class="nav nav-tabs" >
-						<li class="active">
+						<li >
 						<a href="#tab2" data-toggle="tab">Package</a></li>
-						<li><a href="#tab1" data-toggle="tab">Hotel</a></li>
-						<li><a id="tabtransport" href="#tab3" data-toggle="tab">Transport</a>
+						<li class="active"><a href="#tab1" data-toggle="tab">Hotel</a></li>
+						<li ><a id="tabtransport" href="#tab3" data-toggle="tab">Transport</a>
 						</li>
 					</ul>
 				
-<div class="tab-pane" id="tab1">
+<div class="tab-pane active" id="tab1">
 <?php
  echo $this->Form->create(null, [
 	'type' => 'file',
@@ -474,7 +474,7 @@ $(document).ready(function($){
 									</div>
 								</div>
 							</div>
-<div class="tab-pane active" id="tab2" >
+<div class="tab-pane " id="tab2" >
 <?php
 					echo $this->Form->create(null, [
 						'type' => 'file',
@@ -627,11 +627,12 @@ $(document).ready(function($){
 							<div class="col-md-6">
 								<div class="input-field">
 									<p for="from">
-												Destination Source
+												Destination State
 									</p>
 								</div>
 								<div>
-									<input type='text' autocomplete="off" name='destination_source'  placeholder="Destination Source" class="form-control input-large" />
+										<input type='hidden' id='state_id' name="state_id"/>
+										<input type='text' autocomplete="off" name='destination_source'  placeholder="Destination Source" class="form-control input-large" />
 								</div>
 							</div>
 						</div>
@@ -812,8 +813,8 @@ $(document).ready(function($){
 																<p for="from">Final City
                                                                      
                                                                 </p>
-																<input type="text" class="form-control" id="t_final_city_name" name="t_final_city_name" placeholder="Select City or Nearest City"/>
-																<input type='hidden' id='t_final_city_id' name="t_final_city_id" />
+																<input type="text" class="form-control" id="p_final_city_name" name="p_final_city_name" placeholder="Select City or Nearest City"/>
+																<input type='hidden' id='p_final_city_id' name="p_final_city_id" />
 																
 															</div>
 														</div>
@@ -824,17 +825,15 @@ $(document).ready(function($){
 													<div class="col-lg-6 col-md-12 col-sm-6 col-xs-12 mt">
 															<div class="input-field">
 															<p for="from">Final State</p>
-																<input type='hidden' id='t_final_state_id' name="t_final_state_id"/>
-															<input type="text" class="form-control" id ="t_final_state_name" name="t_final_state_name" placeholder="Select State" />
+																<input type='hidden' id='p_final_state_id' name="p_final_state_id"/>
+																<input type="text" class="form-control" id ="p_final_state_name" name="p_final_state_name" placeholder="Select State" readonly/>
 															</div>
 														</div>
-														<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
-														<input type="hidden" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" readonly/>
 														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 															<div class="input-field">
 															<p for="from">Final Country</p>
 																<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
-																<input type="text" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" />
+																<input type="text" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" readonly/>
 															</div>
 														</div>
 												</div>
@@ -872,7 +871,7 @@ $(document).ready(function($){
 					</div>
 				</div>
 			</div>
-			<div class="tab-pane" id="tab3">
+			<div class="tab-pane " id="tab3">
 							<?php
                             echo $this->Form->create(null, [
                                 'type' => 'file',
@@ -894,7 +893,7 @@ $(document).ready(function($){
 																	<p for="from" >
 																		Reference ID  
 																	</p>
-																	<input name="reference_id" type="text" class="form-control ref2" id="Reference ID" placeholder="Reference ID" autocomplete="off" />
+																	<input  name="reference_id" type="text" class="form-control ref1" id="reference_id" placeholder="Reference ID" autocomplete="off" />
 																	 
 																</div>
 															</div>
@@ -903,7 +902,7 @@ $(document).ready(function($){
 																	<p for="from">
 																		Total Budget  
 																	</p>
-																	<input autocomplete="off" name="total_budget" type="number" min="1" class="form-control" id="total_budget" placeholder="Total Budget"/>
+																	<input name="total_budget" type="number" min="1" class="form-control" id="total_budget" placeholder="Total Budget" autocomplete="off" />
 																</div>
 															</div>
 														</div>
@@ -914,11 +913,11 @@ $(document).ready(function($){
 																<p for="from">Adults</p>
 																<div class="col-md-6 input-group">
 																	<p class="input-group-addon btn" >
-																	<button type="button" class="fa fa-minus-square" id="btn_tran_minus" value=""></button>
+																	<button type="button" class="fa fa-minus-square" id="btn_tran_minus" value=""  field='transportAdult'></button>
 																	</p>                    
-																	<input type='text' autocomplete="off" name='children' value='1' class="form-control input-large" id="text_trans_counter"/>	
+																	<input type='text' autocomplete="off" name='transportAdult' value='1' class="form-control input-large" id="text_trans_counter"/>	
 																	<p class="input-group-addon btn" >
-																	<button type="button" class="fa fa-plus-square" id="btn_tran_plus" value=""></button>
+																	<button type="button" class="fa fa-plus-square" id="btn_tran_plus" value=""    field='transportAdult'></button>
 																	</p>                    
 																</div>
 															</div>
@@ -927,11 +926,11 @@ $(document).ready(function($){
 																<p for="from">Children below 6  </p>
 																	<div class="col-md-6 input-group">
 																	<p class="input-group-addon btn" >
-																	<button type="button" class="fa fa-minus-square" id="btn_tran_minus1" value=""></button>
+																	<button type="button" class="fa fa-minus-square" id="btn_tran_minus1" value="" field='transportChildren'></button>
 																	</p>                    
-																	 <input type='text' autocomplete="off" name='children' value='1' class="form-control input-large" id="text_trans_counter1"/>	
+																	 <input type='text' autocomplete="off" name='transportChildren' value='1' class="form-control input-large" id="text_trans_counter1"/>	
 																	<p class="input-group-addon btn">
-																	<button type="button" class="fa fa-plus-square" id="btn_tran_plus1" value=""></button>
+																	<button type="button" class="fa fa-plus-square" id="btn_tran_plus1" value=""  field='transportChildren'></button>
 																	</p>                    
 																	</div>
 															</div>
@@ -941,7 +940,7 @@ $(document).ready(function($){
 											</h4>
 											<h4 class="panel-title">
 											<fieldset>
-													<legend style="color:#369FA1;"><b>Transport</b></legend>
+													<legend style="color:#369FA1;"><b>TRANSPORT REQUIREMENTS</b></legend>
 													<div class="row">
 														<div class="col-md-12 ">
 															<div class="input-field">
@@ -957,6 +956,8 @@ $(document).ready(function($){
 															</div>
 														</div>
 													</div>
+													<input type='hidden' id='t_pickup_country_id' name="t_pickup_country_id"/>
+														<input type="hidden" class="form-control" id ="t_pickup_country_name" name="t_pickup_country_name" placeholder="Country" readonly/>
 											<div class="row">
 											<div class=" col-md-12">
 													<div class="col-md-6">
@@ -966,7 +967,7 @@ $(document).ready(function($){
 															</p>
 														</div>
 														<div class="col-md-6 input-group">
-															 <input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker3" placeholder="dd-mm-yyyy"/>
+															 <input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker5" placeholder="dd-mm-yyyy"/>
 															<p class="input-group-addon btn" for="testdate">
 															<span class="fa fa-calendar"></span>
 															</p>                    
@@ -979,7 +980,7 @@ $(document).ready(function($){
 																	</p>
 														</div>
 														<div class="col-md-6 input-group">
-															 <input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker4" placeholder="dd-mm-yyyy"/>
+															 <input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker6" placeholder="dd-mm-yyyy"/>
 															<p class="input-group-addon btn" for="testdate">
 															<span class="fa fa-calendar"></span>
 															</p>                    
@@ -1000,7 +1001,6 @@ $(document).ready(function($){
                                                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
                                                             <div class="input-field">
                                                                 <p for="from">Pickup City
-                                                                    
                                                                 </p>
                                                                 <input type="text" class="form-control" id="t_pickup_city_name" name="t_pickup_city_name"  placeholder="Select City or Nearest City"/>
                                                                 <input type='hidden' id='t_pickup_city_id' name="t_pickup_city_id" />
@@ -1019,14 +1019,17 @@ $(document).ready(function($){
 															</div>
 														</div>
 												
-														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+														<!--  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
 															<div class="input-field">
 															<p for="from">Pickup Country</p>
 																<input type='hidden' id='t_pickup_country_id' name="t_pickup_country_id"/>
 																<input type="text" class="form-control" id ="t_pickup_country_name" name="t_pickup_country_name" placeholder="Select Country" />
 															</div>
-														</div>
-												</div>
+														</div>-->
+												</div> 
+											</div>
+											<div class="transport-stops">
+															
 											</div>
 											<div class="row">
 												<div class="col-md-12">
@@ -1056,7 +1059,7 @@ $(document).ready(function($){
 															<p for="from">Final Locality
                                                                   
                                                                 </p>
-															<input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="finalLocality"/>
+															<input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="finalLocality">
 														</div>
 													</div>
 													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
@@ -1077,18 +1080,18 @@ $(document).ready(function($){
 															<div class="input-field">
 															<p for="from">Final State</p>
 																<input type='hidden' id='t_final_state_id' name="t_final_state_id"/>
-															<input type="text" class="form-control" id ="t_final_state_name" name="t_final_state_name" placeholder="Select State" />
+															<input type="text" class="form-control" id ="t_final_state_name" name="t_final_state_name" placeholder="Select State" readonly/>
 															</div>
 														</div>
 														<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
 														<input type="hidden" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" readonly/>
-														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+														<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 															<div class="input-field">
 															<p for="from">Final Country</p>
 																<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
 																<input type="text" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" />
 															</div>
-														</div>
+														</div>-->
 												</div>
 											</div>
 											</fieldset>
