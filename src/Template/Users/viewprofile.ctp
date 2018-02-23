@@ -1,3 +1,480 @@
+<section class="content">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Edit Profile</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form">
+              <div class="box-body">
+			     
+					<div>
+						<div class="form-group col-md-12">
+						<div class="form-group col-md-3">
+							<?php
+							if( $users['profile_pic']=="" ){
+								echo $this->Html->image('no-profile-image.jpg', ["alt"=>"Profile Pic", "height"=>150]); 
+							}else {
+								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['profile_pic'], ["alt"=>"Profile Pic", "height"=>150,"class"=>"profile_img"]);
+							} 
+							?>
+						</div> 
+						<div class="form-group col-md-9">
+							<h1 class="margin-tb5"><font color="#1295A2"><?php echo $users['first_name'] ?> <?php echo $users['last_name'] ?></font></h1>
+							<p><font color="#848688"><?php echo $membership_name;?></font></p>
+							
+								<?php
+			$profilePercentage = 0;
+			if(!empty($users['pancard_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['pancard_pic'])) {
+					if($users['role_id'] == 3) {
+						$profilePercentage += 10;
+						
+			}
+			else if($users['role_id'] == 2) {
+						$profilePercentage += 16;
+						
+			}
+			else {
+				$profilePercentage += 5;
+			}
+			}
+			if(!empty($users['company_shop_registration_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_shop_registration_pic'])) {
+				if($users['role_id'] == 3) {
+						$profilePercentage += 10;
+						
+			}
+			else if($users['role_id'] == 2) {
+						$profilePercentage += 15;
+						
+			}
+			else {
+				$profilePercentage += 5;
+			}
+			}
+			if(!empty($users['company_img_1_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_img_1_pic'])) {
+				if($users['role_id'] == 3 || $users['role_id'] == 2) {
+						$profilePercentage += 10;
+						
+			} else {
+				$profilePercentage += 5;
+			}
+			}
+			if(!empty($users['id_card_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['id_card_pic'])) {
+				if($users['role_id'] == 3 || $users['role_id'] == 2) {
+						$profilePercentage += 10;
+						
+			} else {
+				$profilePercentage += 5;
+			}
+			}
+			if(!empty($users['profile_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['profile_pic'])) {
+				if($users['role_id'] == 3 || $users['role_id'] == 2) {
+						$profilePercentage += 10;
+						
+			} else {
+				$profilePercentage += 5;
+			}
+			}		
+			if(!empty($users['first_name'])) {
+				
+					if($users['role_id'] == 3 || $users['role_id'] == 2) {
+					$profilePercentage += 3;
+			}
+			else {
+				$profilePercentage += 2;
+			}
+			}
+			if(!empty($users['company_name'])) {
+				
+					if($users['role_id'] == 3 || $users['role_id'] == 2) {
+					$profilePercentage += 3;
+			}
+			else {
+				$profilePercentage += 2;
+			}
+			}
+			if(!empty($users['email'])) {
+				$profilePercentage += 3;
+			}
+			if(!empty($users['mobile_number'])) {
+				
+					if($users['role_id'] == 3 || $users['role_id'] == 2) {
+					$profilePercentage += 4;
+			}
+			else {
+				$profilePercentage += 3;
+			}
+			}
+			if(!empty($users['p_contact'])) {
+				$profilePercentage += 3;
+			}
+			if(!empty($users['address'])) {
+				$profilePercentage += 3;
+			}
+			if(!empty($users['locality'])) {
+				
+					if($users['role_id'] == 3) {
+					$profilePercentage += 3;
+			}
+			else {
+				$profilePercentage += 2;
+
+			}
+			}
+			if(!empty($users['city_id'])) {
+				$profilePercentage += 3;
+			}
+			if(!empty($users['state_id'])) {
+				$profilePercentage += 3;
+			}
+			if(!empty($users['country_id'])) {
+				$profilePercentage += 3;
+			}
+			if(!empty($users['pincode'])) {
+				$profilePercentage += 3;
+			}
+			if(!empty($users['web_url'])) {
+				$profilePercentage += 3;
+			}
+			if(!empty($users['description'])) {
+				
+					if($users['role_id'] == 3 || $users['role_id'] == 2) {
+					$profilePercentage += 3;
+			}
+			else {
+				$profilePercentage += 2;
+
+			}
+			}
+			if($users['role_id'] == 3 ) {
+				if(!empty($users['hotel_rating'])) {
+					$profilePercentage += 5;
+				}
+				if(!empty($users['hotel_categories'])) {
+					$profilePercentage += 5;
+				}
+			} 
+			
+			if($users['role_id'] == 1 ) {
+				if(!empty($users['iata_pic'])) {
+					$profilePercentage += 5;
+				}
+				if(!empty($users['tafi_pic'])) {
+					$profilePercentage += 5;
+				}
+				if(!empty($users['taai_pic'])) {
+					$profilePercentage += 5;
+				}
+				if(!empty($users['iato_pic'])) {
+					$profilePercentage += 5;
+				}
+            if(!empty($users['adyoi_pic'])) {
+					$profilePercentage += 5;
+				}
+				if(!empty($users['iso9001_pic'])) {
+					$profilePercentage += 5;
+				}
+				if(!empty($users['uftaa_pic'])) {
+					$profilePercentage += 5;
+				}
+				if(!empty($users['adtoi_pic'])) {
+					$profilePercentage += 5;
+				}
+			}
+	
+			?>
+			
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
+				<div class="text-center">
+					<h4 style="text-align:left;"><font color="#4B4B4D">Profile Completeness</font></h4>
+						<div class="contact-icons">
+                        <ul class="hidden-xs hidden-sm">
+                                        <?php if($users['web_url']!="") { ?>
+                    <li><a title="Website" href="#"><?php  echo $this->Html->image('black-web-url.png', ["alt"=>"Website", "height"=>32, "width"=>32]); ?></a></li>
+                    <?php } ?>
+                    <?php if($users['pancard_pic']!="") { ?>
+                    <li><a title="Pan Card" href="#"><?php  echo $this->Html->image('black-pan-card.png', ["alt"=>"Pan Card","height"=>32, "width"=>32 ]); ?></a></li>
+                    <?php } ?>
+                    <?php if($users['id_card_pic']!="") { ?>
+                    <li><a href="#" title="ID Card"><?php  echo $this->Html->image('black-id-card.png', ["alt"=>"ID Card","height"=>32, "width"=>32 ]); ?></a></li>
+                    <?php } ?>
+                    <?php if($users['company_shop_registration_pic']!="") { ?>
+                    <li><a href="#" title="Company shop registration"><?php  echo $this->Html->image('black-company-reg.png', ["alt"=>"Company shop registration","height"=>32, "width"=>32 ]); ?></a></li>
+                    <?php } ?>
+                                        </ul>
+                                        
+                
+                                        
+                <ul class="visible-sm visible-xs">
+                                        
+                    <?php if($users['web_url']!="") { ?>                    
+                    <li>  
+                        <button tabindex="0" class="btn btn_tooltip" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-style="mypops" id="Pops">
+                        <a title="Website" ><?php  echo $this->Html->image('black-web-url.png', ["alt"=>"Website", "height"=>32, "width"=>32]); ?></a></button>
+                        
+                         <span id="popover-content" class="hide">Website</span>
+                    </li>
+                    <?php } ?>
+                    
+                    <?php if($users['pancard_pic']!="") { ?>
+                    <li>
+                        <button tabindex="0" class="btn btn_tooltip" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-style="mypops" id="Pops1">
+                        <a title="Pan Card"><?php  echo $this->Html->image('black-pan-card.png', ["alt"=>"Pan Card","height"=>32, "width"=>32 ]); ?></a></button>
+                        
+                         <span id="popover-content1" class="hide">Pan Card</span>
+                            
+                            </li>
+                    <?php } ?>
+                    
+                    <?php if($users['id_card_pic']!="") { ?>
+                    <li>
+                        <button tabindex="0" class="btn btn_tooltip" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-style="mypops" id="Pops2">
+                        <a title="ID Card"><?php  echo $this->Html->image('black-id-card.png', ["alt"=>"ID Card","height"=>32, "width"=>32 ]); ?></a></button>
+                        
+                         <span id="popover-content2" class="hide">ID Card</span>
+                        
+                            </li>
+                    <?php } ?>
+                    
+                    <?php if($users['company_shop_registration_pic']!="") { ?>
+                    <li>
+                        <button tabindex="0" class="btn btn_tooltip" role="button" data-toggle="popover" data-trigger="focus" data-placement="bottom" data-style="mypops" id="Pops3">
+                        <a title="Company shop registration"><?php  echo $this->Html->image('black-company-reg.png', ["alt"=>"Company shop registration","height"=>32, "width"=>32 ]); ?></a></button>
+                        
+                         <span id="popover-content3" class="hide">Company shop registration</span>
+                    
+                    </li>
+                    <?php } ?>
+                    </ul>
+                </div>
+						<div class="progress">
+							<div class="progress-bar"  role="progressbar" aria-valuenow="<?php echo $profilePercentage; ?>"
+							aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $profilePercentage; ?>%">
+								<?php echo $profilePercentage; ?>%
+							</div>
+						</div>
+                    <div class="rating" style="cursor: pointer;" data-toggle="collapse"  data-parent="#reviews" href="#reviews">
+                    <?php
+                if($average_rating>0){
+               
+                    for($i=$average_rating; $i>0; $i--){
+                        echo '<i class="fa fa-star"></i>';
+                    }
+                }else{
+                  
+                }  
+                ?><span title="Average Rating"> <?php echo $average_rating;?></span><?php if($testimonialcount>0){?>
+             <span title="Numbe of Users"> ( <?php echo $testimonialcount;?> )</span>
+             <?php }?> 
+                    </div>
+                   
+				   
+				   <hr/>
+				   <div class="clo-md-12">
+						<font color="#4B4B4D" size="4">
+						<div class="col-md-4">
+							<?php 
+							if($users['role_id'] == 1){ ?>
+								<strong>
+									Finalized Requests
+								</strong>
+								<br>
+								<span>
+									<font color="#1295A2">
+										<?php echo $userRequestCount;?>
+									</font>
+								</span>
+							 <?php }
+							 else if($users['role_id'] == 2){ ?>
+								<strong>
+								Finalized Requests
+								</strong><br>
+								<span>
+									<font color="#1295A2">
+										<?php echo $userRequestCount;?>
+									</font>
+								</span>
+							 <?php } ?>
+						</div>		
+						<div class="col-md-4">
+							<?php 
+							if($users['role_id'] == 1){ ?>
+								<strong>
+								Responded Requests
+								</strong><br>
+								<span>
+									<font color="#1295A2">
+										<?php echo $userrespondToRequestCount;?>
+									</font>	
+								</span>
+							<?php }
+							 else if($users['role_id'] == 3){ ?>
+								<strong>Responded Requests</strong><br><span>
+								<font color="#1295A2">
+									<?php echo $userrespondToRequestCount;?></span>
+								</font>
+							 <?php } ?>
+						</div>
+						<div class="col-md-4">
+							<?php 
+							if($users['role_id'] == 1){ ?>
+								<strong>Finalized Responses</strong><br>
+								<span>
+								<font color="#1295A2">
+								<?php echo $userReponseCount;?>
+								</font>
+								</span>
+							<?php }
+							 else if($users['role_id'] == 3){ ?>
+								<strong>Finalized Responses</strong><br>
+								<span>
+								<font color="#1295A2">
+								<?php echo $userReponseCount;?>
+								</font>
+								</span>
+							 <?php } ?>
+						</div>
+						</font>
+				   </div>
+				</div> 
+			</div> 
+		</div> 
+	</div>
+            </form>
+          </div>      
+        </div>
+      </div>
+      <!-- /.row -->
+	  
+		<font size="4">Description</font>
+		<div class="box box-primary">
+			<div class="box-body">
+				<div>
+					<div class="form-group col-md-12">
+						<?php echo $users['description']; ?>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<font size="4">Certificates</font>
+		<div class="box box-primary">
+			<div class="box-body">
+				<div>
+					<div class="col-md-12">
+						<div class="img_show col-md-3" align="center">
+							<?php if(!empty($users['iata_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iata_pic'])) { 
+								echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iata_pic'], ["alt"=>"IATA Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
+							<?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"IATA Pic", "height"=>200, 'width'=>200, 'style'=>'border-radius: 50%;']); 
+								} ?>
+							<p>
+								IATA Pic
+							</p>
+						</div>
+						<div class="img_show col-md-3" align="center">
+							<?php if(!empty($users['tafi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['tafi_pic'])) {
+                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['tafi_pic'], ["alt"=>"T A F I Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
+                            <?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"T A F I Pic", "height"=>200, 'width'=>200, 'style'=>'border-radius: 50%;']); 
+								} ?>
+							<p>
+								T A F I Pic
+							</p>
+						</div>
+						
+						<div class="img_show col-md-3" align="center">
+							<?php if(!empty($users['taai_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['taai_pic'])) { 
+                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['taai_pic'], ["alt"=>"T A A I Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
+							<?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"T A A I Pic", "height"=>200, 'width'=>200, 'style'=>'border-radius: 50%;']); 
+								} ?>
+							<p>
+								T A A I Pic
+							</p>
+						</div>
+						
+						<div class="img_show col-md-3" align="center">
+							<?php if(!empty($users['iato_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iato_pic'])) { 
+                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iato_pic'], ["alt"=>"I A T O Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
+							<?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"I A T O Pic", "height"=>200, 'width'=>200, 'style'=>'border-radius: 50%;']); 
+								} ?>
+							<p>
+								IATO Pic
+							</p>
+						</div>
+						
+						<div class="img_show col-md-3" align="center">
+							<?php if(!empty($users['adyoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adyoi_pic'])) { 
+                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adyoi_pic'], ["alt"=>"A D Y O I Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
+							<?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>200, 'width'=>200, 'style'=>'border-radius: 50%;']); 
+								} ?>
+							<p>
+								A D Y O I Pic
+							</p>
+						</div>
+						
+						<div class="img_show col-md-3" align="center">
+							<?php if(!empty($users['iso9001_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iso9001_pic'])) { 
+                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iso9001_pic'], ["alt"=>"I S O 9001 Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
+							<?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"I S O 9001 Pic", "height"=>200, 'width'=>200, 'style'=>'border-radius: 50%;']); 
+								} ?>
+							<p>
+								I S O 9001 Pic
+							</p>
+						</div>
+						
+						<div class="img_show col-md-3" align="center">
+							<?php if(!empty($users['uftaa_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['uftaa_pic'])) { 
+                               echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['uftaa_pic'], ["alt"=>"U F T A A Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
+							<?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"U F T A A Pic", "height"=>200, 'width'=>200, 'style'=>'border-radius: 50%;']); 
+								} ?>
+								<p>
+									U F T A A Pic
+								</p>
+						</div>
+						
+						<div class="img_show col-md-3" align="center">
+							<?php if(!empty($users['adtoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adtoi_pic'])) { 
+                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adtoi_pic'], ["alt"=>"A D T O I Pic", "height"=>150, 'width'=>150, 'style'=>'border-radius: 50%;']);?>
+							<?php }else{ 
+								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>200, 'width'=>200, 'style'=>'border-radius: 50%;']); 
+								} ?>
+								<p>
+									A D T O I Pic
+								</p>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+		
+    </section>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <div id="profile-page" class="container-fluid padding0">
 
     <div id="profile_bg" class="top_profile_bar">
