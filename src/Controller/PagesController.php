@@ -2708,203 +2708,203 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	}
 	}
 	public function finalizedrequestlistapi() {
-	$this->loadModel('Responses');
-	$this->loadModel('Hotels');
-	$this->loadModel('Requests');
-	$this->loadModel('Cities');
-	$headers =  getallheaders();
-	if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
+		$this->loadModel('Responses');
+		$this->loadModel('Hotels');
+		$this->loadModel('Requests');
+		$this->loadModel('Cities');
+		$headers =  getallheaders();
+		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
 
-	$sort='';
+		$sort='';
 
-	if(!isset($_POST["sort"])) {
-	//$sort['Requests.accept_date'] = "DESC";
-	$sort['Requests.id'] = "DESC";
-	}
-	if(!empty($_POST["sort"]) && $_POST["sort"]=="requesttype") {
-	$sort['Requests.category_id'] = "ASC";
-	}
-	if(!empty($_POST["sort"]) && $_POST["sort"]=="totalbudgetlh") {
-	$sort['Requests.total_budget'] = "ASC";
-	}
-	if(!empty($_POST["sort"]) && $_POST["sort"]=="totalbudgethl") {
-	$sort['Requests.total_budget'] = "DESC";
-	}
-
-	$conditions["Requests.user_id"] = $_POST['user_id'];
-
-	$conditions["Requests.status"] = 2;
-	$conditions["Requests.is_deleted "] = 0;
-	//$conditions["Requests.status"] = 1;
-if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
-	if(isset($_POST["budgetsearch"]) && !empty($_POST["budgetsearch"])) {
-	$QPriceRange = $_POST["budgetsearch"];
-	$result = explode("-", $QPriceRange);
-	$MinQuotePrice = $result[0];
-	$MaxQuotePrice = $result[1];
-	$conditions["Requests.total_budget >="] = $MinQuotePrice;
-	$conditions["Requests.total_budget <="] = $MaxQuotePrice;
-	}
-	if(isset($_POST["req_typesearch"]) && !empty($_POST["req_typesearch"])) {
-	$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
-	}
-	if(isset($_POST["refidsearch"]) && !empty($_POST["refidsearch"])) {
-	$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
-	}
-	if(isset($_POST["members"]) && !empty($_POST["members"])) {
-	$conditions["Requests.children+Requests.adult"] =  $_POST["members"];
-	}
-	if(isset($_POST["startdatesearch"])){
-	$sdate = $_POST["startdatesearch"];
-	}
-	if(isset($sdate) && !empty($sdate)){
-	$date = str_replace('/', '-', $sdate);
-	$sdate = date('Y-m-d', strtotime($date));
-	}
-
-	if(!empty($_POST["startdatesearch"])) {
-	$da["Requests.start_date"] =  $sdate;
-	$da["Requests.check_in"] =  $sdate;
-	$conditions["OR"] =  $da;
-	}
-
-	if(isset($_POST["enddatesearch"])){
-	$edate = $_POST["enddatesearch"];
-	}
-	if(isset($edate) && !empty($edate)){
-	$date = str_replace('/', '-', $edate);
-	$edate = date('Y-m-d', strtotime($date));
-	}
-
-	if(!empty($_POST["enddatesearch"])) {
-	$da1["Requests.end_date"] =  $edate;
-	$da1["Requests.check_out"] =  $edate;
-	if(!empty($sdate)){
-	$da1["Requests.start_date"] =  $sdate;
-	$da1["Requests.check_in"] =  $sdate;
-	}
-	$conditions["OR"] =  $da1;
-	}
-
-	if ($_POST['role_id'] == 1) {
-	$requests = $this->Requests->find()
-	->contain(["Users","Responses","Hotels","Responses.Users"])
-	->where($conditions)->order($sort)->all();
-	}
-	if ($_POST['role_id'] == 2) {
-	$requests = $this->Requests->find()
-	->contain(["Users","Responses","Hotels","Responses.Users"])
-	->where($conditions)->order($sort)->all();
-	}
-	if ($_POST['role_id'] == 3) {
-	$requests = $this->Requests->find()
-	->contain(["Users","Responses","Hotels","Responses.Users"])
-	->where($conditions)->order($sort)->all();
-	}
-
-	$citystate = array();
-	$review_array = array();
-	$enddatearray=array();
-	$final_res_array = array();
-	$conn = ConnectionManager::get('default');
-	if($requests->count()>0)
-	{
-	foreach($requests as $cit)
-	{
-	$sql = "SELECT * FROM testimonial WHERE request_id='".$cit['id']."' AND author_id='".$_POST['user_id']."' order by created_at DESC";
-	$stmt = $conn->execute($sql);
-	$reviews = $stmt ->fetch('assoc');
-	$review_array[]=$reviews;
-	if($cit['category_id']==2)
-	{
-	$cityname = $this->cityname($cit['pickup_city']);
-	}else{
-	$cityname = $this->cityname($cit['city_id']);
-	}	 
-
-	if($cit['category_id']==2)
-	{
-	$statename = $this->statename($cit['pickup_state']);
-	}else{
-	$statename = $this->statename($cit['state_id']);
-	}
-
-	$comma = '';
-	if($statename!=""){
-	$comma = ',';
-	}
-
-	$citystatefull = $cityname.' ('. $statename.')';
-
-	$city_state_name = "";
-	if(count($cit['hotels']) >0) {
-	unset($cit['hotels'][0]);
-	foreach($cit['hotels'] as $row) { 
-	$city_state_name.=', '.$this->cityname($row['city_id']).' ('.$this->statename($row['state_id']).')'; 
-	}  } 
-	$citystate['citystate'][$cit['id']]  = $citystatefull.''.$city_state_name;
-
-	if($cit['category_id']==1){
-	$sqlh = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$cit['id']."'";
-	$stmth = $conn->execute($sqlh);
-	$resulth = $stmth->fetch('assoc');
-	$end_data =  date('Y-m-d', strtotime($cit['end_date']));
-	if(!empty($resulth['TopDate'])){
-		if($resulth['TopDate']>$end_data){
-	$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($resulth['TopDate']));
-		}else{
-	$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['end_date']));	
+		if(!isset($_POST["sort"])) {
+		//$sort['Requests.accept_date'] = "DESC";
+		$sort['Requests.id'] = "DESC";
 		}
-	}else{
-		if($cit['check_out']>$end_data){
-	$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['check_out']));
-		}else{
-	$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['end_date']));	
+		if(!empty($_POST["sort"]) && $_POST["sort"]=="requesttype") {
+		$sort['Requests.category_id'] = "ASC";
 		}
-	}
-	}elseif($cit['category_id'] == 2 ) {
-	$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['end_date']));
-	}elseif($cit['category_id'] == 3 ) {
-	$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['check_out']));
-	}		 
+		if(!empty($_POST["sort"]) && $_POST["sort"]=="totalbudgetlh") {
+		$sort['Requests.total_budget'] = "ASC";
+		}
+		if(!empty($_POST["sort"]) && $_POST["sort"]=="totalbudgethl") {
+		$sort['Requests.total_budget'] = "DESC";
+		}
 
-	$sqlf = "SELECT r.*,u.first_name,u.last_name FROM responses as r
-	inner JOIN users u on u.id=r.user_id
-	WHERE r.request_id='".$cit['id']."' AND r.id='".$cit['final_id']."'"; 
-	$stmtd = $conn->execute($sqlf);
-	$resultd = $stmtd ->fetch('assoc');
-	$final_res_array[$cit['id']]  = $resultd;	 
+		$conditions["Requests.user_id"] = $_POST['user_id'];
+
+		$conditions["Requests.status"] = 2;
+		$conditions["Requests.is_deleted "] = 0;
+		//$conditions["Requests.status"] = 1;
+	if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
+		if(isset($_POST["budgetsearch"]) && !empty($_POST["budgetsearch"])) {
+		$QPriceRange = $_POST["budgetsearch"];
+		$result = explode("-", $QPriceRange);
+		$MinQuotePrice = $result[0];
+		$MaxQuotePrice = $result[1];
+		$conditions["Requests.total_budget >="] = $MinQuotePrice;
+		$conditions["Requests.total_budget <="] = $MaxQuotePrice;
+		}
+		if(isset($_POST["req_typesearch"]) && !empty($_POST["req_typesearch"])) {
+		$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
+		}
+		if(isset($_POST["refidsearch"]) && !empty($_POST["refidsearch"])) {
+		$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
+		}
+		if(isset($_POST["members"]) && !empty($_POST["members"])) {
+		$conditions["Requests.children+Requests.adult"] =  $_POST["members"];
+		}
+		if(isset($_POST["startdatesearch"])){
+		$sdate = $_POST["startdatesearch"];
+		}
+		if(isset($sdate) && !empty($sdate)){
+		$date = str_replace('/', '-', $sdate);
+		$sdate = date('Y-m-d', strtotime($date));
+		}
+
+		if(!empty($_POST["startdatesearch"])) {
+		$da["Requests.start_date"] =  $sdate;
+		$da["Requests.check_in"] =  $sdate;
+		$conditions["OR"] =  $da;
+		}
+
+		if(isset($_POST["enddatesearch"])){
+		$edate = $_POST["enddatesearch"];
+		}
+		if(isset($edate) && !empty($edate)){
+		$date = str_replace('/', '-', $edate);
+		$edate = date('Y-m-d', strtotime($date));
+		}
+
+		if(!empty($_POST["enddatesearch"])) {
+		$da1["Requests.end_date"] =  $edate;
+		$da1["Requests.check_out"] =  $edate;
+		if(!empty($sdate)){
+		$da1["Requests.start_date"] =  $sdate;
+		$da1["Requests.check_in"] =  $sdate;
+		}
+		$conditions["OR"] =  $da1;
+		}
+
+		if ($_POST['role_id'] == 1) {
+		$requests = $this->Requests->find()
+		->contain(["Users","Responses","Hotels","Responses.Users"])
+		->where($conditions)->order($sort)->all();
+		}
+		if ($_POST['role_id'] == 2) {
+		$requests = $this->Requests->find()
+		->contain(["Users","Responses","Hotels","Responses.Users"])
+		->where($conditions)->order($sort)->all();
+		}
+		if ($_POST['role_id'] == 3) {
+		$requests = $this->Requests->find()
+		->contain(["Users","Responses","Hotels","Responses.Users"])
+		->where($conditions)->order($sort)->all();
+		}
+
+		$citystate = array();
+		$review_array = array();
+		$enddatearray=array();
+		$final_res_array = array();
+		$conn = ConnectionManager::get('default');
+		if($requests->count()>0)
+		{
+		foreach($requests as $cit)
+		{
+		$sql = "SELECT * FROM testimonial WHERE request_id='".$cit['id']."' AND author_id='".$_POST['user_id']."' order by created_at DESC";
+		$stmt = $conn->execute($sql);
+		$reviews = $stmt ->fetch('assoc');
+		$review_array[]=$reviews;
+		if($cit['category_id']==2)
+		{
+		$cityname = $this->cityname($cit['pickup_city']);
+		}else{
+		$cityname = $this->cityname($cit['city_id']);
+		}	 
+
+		if($cit['category_id']==2)
+		{
+		$statename = $this->statename($cit['pickup_state']);
+		}else{
+		$statename = $this->statename($cit['state_id']);
+		}
+
+		$comma = '';
+		if($statename!=""){
+		$comma = ',';
+		}
+
+		$citystatefull = $cityname.' ('. $statename.')';
+
+		$city_state_name = "";
+		if(count($cit['hotels']) >0) {
+		unset($cit['hotels'][0]);
+		foreach($cit['hotels'] as $row) { 
+		$city_state_name.=', '.$this->cityname($row['city_id']).' ('.$this->statename($row['state_id']).')'; 
+		}  } 
+		$citystate['citystate'][$cit['id']]  = $citystatefull.''.$city_state_name;
+
+		if($cit['category_id']==1){
+		$sqlh = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$cit['id']."'";
+		$stmth = $conn->execute($sqlh);
+		$resulth = $stmth->fetch('assoc');
+		$end_data =  date('Y-m-d', strtotime($cit['end_date']));
+		if(!empty($resulth['TopDate'])){
+			if($resulth['TopDate']>$end_data){
+		$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($resulth['TopDate']));
+			}else{
+		$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['end_date']));	
+			}
+		}else{
+			if($cit['check_out']>$end_data){
+		$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['check_out']));
+			}else{
+		$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['end_date']));	
+			}
+		}
+		}elseif($cit['category_id'] == 2 ) {
+		$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['end_date']));
+		}elseif($cit['category_id'] == 3 ) {
+		$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['check_out']));
+		}		 
+
+		$sqlf = "SELECT r.*,u.first_name,u.last_name FROM responses as r
+		inner JOIN users u on u.id=r.user_id
+		WHERE r.request_id='".$cit['id']."' AND r.id='".$cit['final_id']."'"; 
+		$stmtd = $conn->execute($sqlf);
+		$resultd = $stmtd ->fetch('assoc');
+		$final_res_array[$cit['id']]  = $resultd;	 
 
 
-	}
-	}
+		}
+		}
 
 
-	$sql = "select s.state_name,c.id as city_id,c.name as city_name from cities as c 
-	INNER JOIN states as s on s.id=c.state_id
-	INNER JOIN requests as r on r.city_id=c.id
-	INNER JOIN requests as re on re.pickup_city=c.id
-	group by c.id order by c.name asc ";
-	$stmt = $conn->execute($sql);
-	$allCities = $stmt ->fetchAll('assoc');
+		$sql = "select s.state_name,c.id as city_id,c.name as city_name from cities as c 
+		INNER JOIN states as s on s.id=c.state_id
+		INNER JOIN requests as r on r.city_id=c.id
+		INNER JOIN requests as re on re.pickup_city=c.id
+		group by c.id order by c.name asc ";
+		$stmt = $conn->execute($sql);
+		$allCities = $stmt ->fetchAll('assoc');
 
 
-	$result['response_code'] = 200;
-	$result['response_object'] = $requests;
-	$result['end_date'] = $enddatearray;
-	$result['finalresponse'] = $final_res_array;
-	$result['citystate'] = $citystate;
-	$result['reviews'] = $review_array;	
-	$result['cities_list'] = $allCities;
-	$data =   json_encode($result);
-	echo $data;
-	exit;
-	}else{
-	$result = array();
-	$result['response_code']= 403;
-	echo json_encode($result);
-	exit;
-	}
+		$result['response_code'] = 200;
+		$result['response_object'] = $requests;
+		$result['end_date'] = $enddatearray;
+		$result['finalresponse'] = $final_res_array;
+		$result['citystate'] = $citystate;
+		$result['reviews'] = $review_array;	
+		$result['cities_list'] = $allCities;
+		$data =   json_encode($result);
+		echo $data;
+		exit;
+		}else{
+		$result = array();
+		$result['response_code']= 403;
+		echo json_encode($result);
+		exit;
+		}
 	}
 	public function dashboardapi() {
 date_default_timezone_set('Asia/Kolkata');
@@ -3483,11 +3483,13 @@ exit;
 		$request->status = 2;
 		$request->final_id = $_POST["response_id"];
 		$request->response_id = $_POST["response_id"];
+		$request->final_date = date("Y-m-d h:i:s");
 		if ($TableRequest->save($request)) {
 			$TableResponse = TableRegistry::get('Responses');
 			$response = $TableResponse->get($_POST["response_id"]);
 			$send_to_user_id = $response['user_id'];
 			$response->status = 1;
+			
 			$TableResponse->save($response);
 			$res = 1;
 			if($res==1)
@@ -3509,6 +3511,7 @@ exit;
 			$userchats->send_to_user_id = $send_to_user_id;
 			$userchats->message = $message;
 			$userchats->created = date("Y-m-d h:i:s");
+			
 			$userchats->notification = 1;
 			if ($userchatTable->save($userchats)) {
 			$this->sendpushnotification($send_to_user_id,$msg);
@@ -3663,7 +3666,8 @@ exit;
 				$TableRequest = TableRegistry::get('Requests');
 				$request = $TableRequest->get($d["request_id"]);
 				$user = $this->Users->find()->where(['id' => $_POST["user_id"]])->first();
-				$response = $this->Responses->newEntity($d);
+				$response = $this->Responses->newEntity($d); 
+				
 				if ($re = $this->Responses->save($response)) {
 					$name = $user['first_name'].' '.$user['last_name'];
 					$ref_id = $request['reference_id'];

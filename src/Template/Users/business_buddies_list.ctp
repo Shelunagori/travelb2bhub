@@ -1,21 +1,24 @@
-<div id="business_buddies_list" class="container-fluid">
-  <div class="row equal_column">
-      <?php echo $this->element('left_panel');?>
-      <?php $this->Flash->render() ?>
-      <!--Page Title-->
-    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padding0 ">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 border_bottom">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 ">
-                <h4 class="title">Following</h2>
-            </div>
-             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5 ">
-                    <ul class="top-icons-wrap">
-					     <li class="notification_list">
-                           <a href="javascript:void(0);" id="chat_icon" class="link-icon"><span class="chat_count"><?php echo $chatCount;?></span><img src="/img/notify.png" alt=""></a>
-                            <div class="ap-subs">
-                                <ul class="list-unstyled msg_list" role="menu">
-                  <?php echo $this->element('subheader');?>
-       <hr class="hr_bordor">
+
+<div class=container-fluid id="business_buddies_list">
+<div class="row equal_column" > 
+    <div class="col-md-12" style="background-color:#fff"> 
+		<br>
+		<?php echo $this->element('subheader');?>
+		<?php echo  $this->Flash->render() ?>
+	</div>
+	<div class="col-md-12" style="background-color:#fff"> 
+
+<div class="box box-default">
+	<div class="box-header with-border"> 
+		<h3 class="box-title" style="padding:20px">Following</h3>
+		<div class="box-tools pull-right">
+			<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
+			<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+		</div>
+		 
+	</div>
+	<div class="box-body">
+		<div class="row">
 		<?php
 		if(count($BusinessBuddies) >0) {
 			foreach($BusinessBuddies as $row){ ?>

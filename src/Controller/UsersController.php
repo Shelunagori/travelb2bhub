@@ -3264,6 +3264,8 @@ $this->loadModel('Hotels');
 $this->loadModel('Requests');
 $this->loadModel('Cities');
 $this->loadModel('BusinessBuddies');
+
+	$this->viewBuilder()->layout('user_layout');
 $BusinessBuddies = $this->BusinessBuddies->find()
 ->contain(["Users"])
 ->where(['BusinessBuddies.user_id' => $this->Auth->user('id')])->group(['BusinessBuddies.bb_user_id'])->order(["BusinessBuddies.id" => "DESC"])->all();
