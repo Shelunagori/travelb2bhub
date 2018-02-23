@@ -126,9 +126,10 @@ public function reportEdit($id = null)
 * @throws \Cake\Network\Exception\NotFoundException When record not found.
 */
 public function view($slug = null) {
+	
 }
 function cakeVersion() {
-echo Configure::version(); exit;
+	echo Configure::version(); exit;
 }
 /**
 * Add method
@@ -657,19 +658,19 @@ $myRequestCount = $query->count();
 $myRequestCount1 = $query->count(); 
 $delcount=0;
 $requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
-foreach($requests as $req){
-$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
-if($rqueryr->count()!=0){
-$delcount++;
-}
-}
+	foreach($requests as $req){
+		$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
+		if($rqueryr->count()!=0){
+			$delcount++;
+		}
+	}
 if($myRequestCount > $delcount) {
 $myRequestCount = $myRequestCount-$delcount;
 }	
 $this->set('myRequestCountdel', $delcount);
 $this->set('myRequestCount', $myRequestCount1);
 $queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]]);
-$myReponseCount = $queryr->count();
+$myReponseCount = $queryr->count(); 
 $this->set('myReponseCount', $myReponseCount);
 $usercity = $this->Users->find()->select(['city_id'])->where(['id' => $this->Auth->user('id')])->first();
 $cityid =  $usercity['city_id'];
@@ -2342,219 +2343,222 @@ $this->set('testimonial',$alltestimonials);
 }
 }
 public function myresponselist() {
-$this->loadModel('BusinessBuddies');
-$this->loadModel('Responses');
-$this->loadModel('Requests');
-$this->loadModel('Cities');
-$this->loadModel('States');
-$this->loadModel('Hotels'); 
-$this->viewBuilder()->layout('user_layout');
-$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
-$this->set('users', $user);
-$conditions ='';
-if(!empty($this->request->query("budgetsearch"))) {
-$QPriceRange = $this->request->query("budgetsearch");
-$result = explode("-", $QPriceRange);
-$MinQuotePrice = $result[0];
-$MaxQuotePrice = $result[1];
-$conditions["Requests.total_budget >="] = $MinQuotePrice;
-$conditions["Requests.total_budget <="] = $MaxQuotePrice;
-}
-$sort='';
-if(empty($this->request->query("sort"))) {
-$sort['Requests.id'] = "DESC";
-}
-if(!empty($this->request->query("sort")) && $this->request->query("sort")=="requesttype") {
-$sort['Requests.category_id'] = "ASC";
-}
-if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgetlh") {
-$sort['Requests.total_budget'] = "ASC";
-}
-if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgethl") {
-$sort['Requests.total_budget'] = "DESC";
-}
-if(!empty($this->request->query("sort")) && $this->request->query("sort")=="agentaz") {
-$sort['Users.first_name'] = "ASC";
-$sort['Users.last_name'] = "ASC";
-}
-if(!empty($this->request->query("sort")) && $this->request->query("sort")=="agentza") {
-$sort['Users.first_name'] = "DESC";
-$sort['Users.last_name'] = "DESC";
-}
-if(!empty($this->request->query("agentnamesearch"))) {
-$keyword1 = '';
-$keyword2 = '';
-$keyword = trim($this->request->query("agentnamesearch"));
-$keyword = explode(' ',$keyword);
-if(isset($keyword[1])) {
-$keyword2 = $keyword[1];
-}
-$conditions["AND"] = array("Users.first_name LIKE "=>"%". $keyword[0]."%", "Users.last_name LIKE" => "%".$keyword2."%",);
-}
-if(!empty($this->request->query("req_typesearch"))) {
-$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
-}
-if(!empty($this->request->query("refidsearch"))) {
-$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
-}
-if(!empty($this->request->query("destination_city"))) {
-$conditions["Requests.city_id"] =  $this->request->query("destination_city");
-}
-if(!empty($this->request->query("pickup_city"))) {
-$conditions["Requests.pickup_city"] =  $this->request->query("pickup_city");
-}
-if(!empty($this->request->query("chatwith"))) {
-$chatuserid = $this->request->query("chatwith");
-$conditions["Requests.user_id"] = $chatuserid;
-}		
-if(!empty($this->request->query("shared_details"))) {
-$conditions["Responses.is_details_shared"] =  $this->request->query("shared_details");
-}
-$sdate = $this->request->query("startdatesearch");
-$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
-if(!empty($this->request->query("startdatesearch"))) {
-$da["Requests.start_date"] =  $sdate;
-$da["Requests.check_in"] =  $sdate;
-$conditions["OR"] =  $da;
-}
-$edate = $this->request->query("enddatesearch");
-if(isset($edate) AND !empty($edate)){
-$date = str_replace('/', '-', $edate);
-$edate = date('Y-m-d', strtotime($date));
-}else{
-$edate = null;		
-}
+	$this->loadModel('BusinessBuddies');
+	$this->loadModel('Responses');
+	$this->loadModel('Requests');
+	$this->loadModel('Cities');
+	$this->loadModel('States');
+	$this->loadModel('Hotels'); 
+	$this->viewBuilder()->layout('user_layout');
+	$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
+	$this->set('users', $user);
+	$conditions ='';
+	if(!empty($this->request->query("budgetsearch"))) {
+		$QPriceRange = $this->request->query("budgetsearch");
+		$result = explode("-", $QPriceRange);
+		$MinQuotePrice = $result[0];
+		$MaxQuotePrice = $result[1];
+		$conditions["Requests.total_budget >="] = $MinQuotePrice;
+		$conditions["Requests.total_budget <="] = $MaxQuotePrice;
+	}
+	$sort='';
+	if(empty($this->request->query("sort"))) {
+		$sort['Requests.id'] = "DESC";
+	}
+	if(!empty($this->request->query("sort")) && $this->request->query("sort")=="requesttype") {
+		$sort['Requests.category_id'] = "ASC";
+	}
+	if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgetlh") {
+		$sort['Requests.total_budget'] = "ASC";
+	}
+	if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgethl") {
+		$sort['Requests.total_budget'] = "DESC";
+	}
+	if(!empty($this->request->query("sort")) && $this->request->query("sort")=="agentaz") {
+		$sort['Users.first_name'] = "ASC";
+		$sort['Users.last_name'] = "ASC";
+	}
+	if(!empty($this->request->query("sort")) && $this->request->query("sort")=="agentza") {
+		$sort['Users.first_name'] = "DESC";
+		$sort['Users.last_name'] = "DESC";
+	}
+	if(!empty($this->request->query("agentnamesearch"))) {
+		$keyword1 = '';
+		$keyword2 = '';
+		$keyword = trim($this->request->query("agentnamesearch"));
+		$keyword = explode(' ',$keyword);
+		if(isset($keyword[1])) {
+			$keyword2 = $keyword[1];
+		}
+		$conditions["AND"] = array("Users.first_name LIKE "=>"%". $keyword[0]."%", "Users.last_name LIKE" => "%".$keyword2."%",);
+	}
+	if(!empty($this->request->query("req_typesearch"))) {
+		$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
+	}
+	if(!empty($this->request->query("refidsearch"))) {
+		$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
+	}
+	if(!empty($this->request->query("destination_city"))) {
+		$conditions["Requests.city_id"] =  $this->request->query("destination_city");
+	}
+	if(!empty($this->request->query("pickup_city"))) {
+		$conditions["Requests.pickup_city"] =  $this->request->query("pickup_city");
+	}
+	if(!empty($this->request->query("chatwith"))) {
+		$chatuserid = $this->request->query("chatwith");
+		$conditions["Requests.user_id"] = $chatuserid;
+	}		
+	if(!empty($this->request->query("shared_details"))) {
+		$conditions["Responses.is_details_shared"] =  $this->request->query("shared_details");
+	}
+	$sdate = $this->request->query("startdatesearch");
+	$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+	if(!empty($this->request->query("startdatesearch"))) {
+		$da["Requests.start_date"] =  $sdate;
+		$da["Requests.check_in"] =  $sdate;
+		$conditions["OR"] =  $da;
+	}
+	$edate = $this->request->query("enddatesearch");
+	if(isset($edate) AND !empty($edate)){
+		$date = str_replace('/', '-', $edate);
+		$edate = date('Y-m-d', strtotime($date));
+	}
+	else{
+		$edate = null;		
+	}
 //$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
-if(!empty($this->request->query("enddatesearch"))) {
-$da1["Requests.end_date"] =  $edate;
-$da1["Requests.check_out"] =  $edate;
-$conditions["OR"] =  $da1;
-}
-$conditions["Responses.is_deleted "] = 0;
-$conditions["Responses.status "] = 0;
-$responses = $this->Responses->find()
-->contain([ "Requests.Users", "UserChats","Requests.Hotels"])
-->where(['Responses.user_id' => $this->Auth->user('id'),$conditions])->order($sort)->all();
-$this->set('responses', $responses);
+	if(!empty($this->request->query("enddatesearch"))) {
+		$da1["Requests.end_date"] =  $edate;
+		$da1["Requests.check_out"] =  $edate;
+		$conditions["OR"] =  $da1;
+	}
+	//$conditions["Responses.is_deleted "] = 0;
+	$conditions["Responses.status "] = 0;
+	$responses = $this->Responses->find()
+		->contain([ "Requests.Users", "UserChats","Requests.Hotels"])
+		->where(['Responses.user_id' => $this->Auth->user('id'),$conditions])->order($sort)->all();
+	$this->set('responses', $responses);
 	$conn = ConnectionManager::get('default');
-$blockeddata = array();
-		 $reqidarray = array();
-$chatdata = array();
-$loggedinid = $this->Auth->user('id');
+	$blockeddata = array();
+	$reqidarray = array();
+	$chatdata = array();
+	$loggedinid = $this->Auth->user('id');
 	if(count($responses)>0){
-	foreach($responses as $req){
-		$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$req['user_id']."' AND blocked_by='".$req['request']['user_id']."'";
-$stmt = $conn->execute($sql1);
-$bresult = $stmt ->fetch('assoc');
-if($bresult['block_count']>0){
-$blockeddata['blockedUser'][$req['id']] =1;
-}else{
-$blockeddata['blockedUser'][$req['id']] =0;
-}
-	$reqidarray[] = $req['request']['user_id'];
-$request_id = $req['request_id'];	
-	$user_id = $req['request']['user_id'];
-	$sqlc = "SELECT *,COUNT(*) as ch_count FROM user_chats 
-WHERE request_id='".$request_id."' AND (user_id in ('".$loggedinid."','".$user_id."') 
-AND notification='0'
-ANd send_to_user_id in ('".$loggedinid."','".$user_id."')) ";
-$stmtc = $conn->execute($sqlc);
-$resultsch = $stmtc ->fetch('assoc');		
-	$chatdata['chat_count'][$req['id']] =$resultsch['ch_count'];
+		foreach($responses as $req){
+			$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$req['user_id']."' AND blocked_by='".$req['request']['user_id']."'";
+			$stmt = $conn->execute($sql1);
+			$bresult = $stmt ->fetch('assoc');
+			if($bresult['block_count']>0){
+				$blockeddata['blockedUser'][$req['id']] =1;
+			}
+			else{
+				$blockeddata['blockedUser'][$req['id']] =0;
+			}
+			$reqidarray[] = $req['request']['user_id'];
+			$request_id = $req['request_id'];	
+				$user_id = $req['request']['user_id'];
+				$sqlc = "SELECT *,COUNT(*) as ch_count FROM user_chats 
+			WHERE request_id='".$request_id."' AND (user_id in ('".$loggedinid."','".$user_id."') 
+			AND notification='0'
+			ANd send_to_user_id in ('".$loggedinid."','".$user_id."')) ";
+			$stmtc = $conn->execute($sqlc);
+			$resultsch = $stmtc ->fetch('assoc');		
+			$chatdata['chat_count'][$req['id']] =$resultsch['ch_count'];
+		}
 	}
-	}
-$this->set('chatdata', $chatdata);
+	$this->set('chatdata', $chatdata);
 	$this->set('blockedUser', $blockeddata);
-//debug($responses);
-//	die();
-$allUsers = $this->Users->find('list',['keyField' => 'id', 'valueField' => 'first_name'])
-->hydrate(false)
-->toArray();
-$this->set('allUsers', $allUsers);
-$myRequestCount = $myReponseCount = 0;
-$myfinalCount  = 0;
-$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status "=>2]]);
-$myfinalCount = $query3 ->count();
-$this->set('myfinalCount', $myfinalCount );
-$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
-$myRequestCount = $query->count();
-$myRequestCount1 = $query->count(); 
-$delcount=0;
+	//debug($responses);
+	//	die();
+	$allUsers = $this->Users->find('list',['keyField' => 'id', 'valueField' => 'first_name'])
+		->hydrate(false)
+		->toArray();
+	$this->set('allUsers', $allUsers);
+	$myRequestCount = $myReponseCount = 0;
+	$myfinalCount  = 0;
+	$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status "=>2]]);
+	$myfinalCount = $query3 ->count();
+	$this->set('myfinalCount', $myfinalCount );
+	$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
+	$myRequestCount = $query->count();
+	$myRequestCount1 = $query->count(); 
+	$delcount=0;
 
-$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
-foreach($requests as $req){
-$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
-if($rqueryr->count()!=0){
-$delcount++;
-}
-	
-}
-if($myRequestCount > $delcount) {
-$myRequestCount = $myRequestCount-$delcount;
-}	
-$this->set('myRequestCountdel', $delcount);
-$this->set('myRequestCount', $myRequestCount1);
-$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]]);
-$myReponseCount = $queryr->count();
-$this->set('myReponseCount', $myReponseCount);
-$BusinessBuddies = $this->BusinessBuddies->find('list',['keyField' => "bb_user_id",'valueField' => 'bb_user_id'])
-->hydrate(false)
-->where(['user_id' => $this->Auth->user('id')])
-->toArray();
-$this->set('BusinessBuddies', $BusinessBuddies);
-$this->loadModel('User_Chats');
-$allCities = $this->Cities->find('list',['keyField' => 'id', 'valueField' => 'name'])
-->hydrate(false)
-->toArray();
-$allStates = $this->States->find('list',['keyField' => 'id', 'valueField' => 'state_name'])
-->hydrate(false)
-->toArray();
-$this->set('allCities',$allCities);
-$this->set('allStates',$allStates);
-$csort['created'] = "DESC";
-$allUnreadChat = $this->User_Chats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->order($csort)->limit(10)->all();
-$chatCount = $allUnreadChat->count();
-$this->set('chatCount',$chatCount); 
-$this->set('allunreadchat',$allUnreadChat);
-$cities = $this->Cities->getAllCities();
-$this->set('allCities', $allCities);
-$allCities1 = array();
-$allCities2 = array();
-$allCityList = array();
-if(!empty($cities)) {
-foreach($cities as $city) {
-$cit = $city['name'].' ('.$city['state']->state_name.')';
-$cit1 = $city['name'];
-$allCities1[] = array("label"=>str_replace("'", "", $cit), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
-$allCities2[] = array("label"=>str_replace("'", "", $cit1), "value"=>$city['id'] );
-$allCityList[$city['id']] = $city['name'];
-}
-}
-//$allCities2 = $allCities1;
-//  $allCities1 = json_encode($allCities1);
-$this->set('allCities1', $allCities1);
-$this->set('allCities2', $cities);	
-	$chatusers = array();
-	$conn = ConnectionManager::get('default');
-	if(count($responses)>0){
-	$un_req_array = array_unique($reqidarray);
-		$str_reqid =  implode(",",$un_req_array);
-		$chatusers = array();
-		$sql = "SELECT u.id,u.first_name,u.last_name FROM users as u 
-		INNER JOIN requests as rs on rs.user_id=u.id
-		WHERE rs.user_id !='".$this->Auth->user('id')."' and u.id in($str_reqid) GROUP BY rs.user_id ";
-		$stmt = $conn->execute($sql);
-		$chatusers = $stmt->fetchAll('assoc');
-		$this->set('UserResponse',$chatusers); 
-	}else{
-	$this->set('UserResponse',$chatusers); 
+	$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
+	foreach($requests as $req){
+		$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
+		if($rqueryr->count()!=0){
+			$delcount++;
+		}
 	}
-	
-$UserResponse = $this->Requests->find()
-->contain(["Users"])
-->where(['Requests.user_id !=' => $this->Auth->user('id')])->group(['Requests.user_id'])->all()->toArray();
-//$this->set('UserResponse',$UserResponse); 
-//$this->set("respondToRequestCount", $this->__getRespondToRequestCount());
+	if($myRequestCount > $delcount) {
+		$myRequestCount = $myRequestCount-$delcount;
+	}	
+	$this->set('myRequestCountdel', $delcount);
+	$this->set('myRequestCount', $myRequestCount1);
+	$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]]);
+	$myReponseCount = $queryr->count();
+	$this->set('myReponseCount', $myReponseCount);
+	$BusinessBuddies = $this->BusinessBuddies->find('list',['keyField' => "bb_user_id",'valueField' => 'bb_user_id'])
+		->hydrate(false)
+		->where(['user_id' => $this->Auth->user('id')])
+		->toArray();
+	$this->set('BusinessBuddies', $BusinessBuddies);
+	$this->loadModel('User_Chats');
+	$allCities = $this->Cities->find('list',['keyField' => 'id', 'valueField' => 'name'])
+		->hydrate(false)
+		->toArray();
+	$allStates = $this->States->find('list',['keyField' => 'id', 'valueField' => 'state_name'])
+		->hydrate(false)
+		->toArray();
+	$this->set('allCities',$allCities);
+	$this->set('allStates',$allStates);
+	$csort['created'] = "DESC";
+	$allUnreadChat = $this->User_Chats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->order($csort)->limit(10)->all();
+	$chatCount = $allUnreadChat->count();
+	$this->set('chatCount',$chatCount); 
+	$this->set('allunreadchat',$allUnreadChat);
+	$cities = $this->Cities->getAllCities();
+	$this->set('allCities', $allCities);
+	$allCities1 = array();
+	$allCities2 = array();
+	$allCityList = array();
+	if(!empty($cities)) {
+		foreach($cities as $city) {
+			$cit = $city['name'].' ('.$city['state']->state_name.')';
+			$cit1 = $city['name'];
+			$allCities1[] = array("label"=>str_replace("'", "", $cit), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
+			$allCities2[] = array("label"=>str_replace("'", "", $cit1), "value"=>$city['id'] );
+			$allCityList[$city['id']] = $city['name'];
+		}
+	}
+	//$allCities2 = $allCities1;
+	//  $allCities1 = json_encode($allCities1);
+	$this->set('allCities1', $allCities1);
+	$this->set('allCities2', $cities);	
+		$chatusers = array();
+		$conn = ConnectionManager::get('default');
+		if(count($responses)>0){
+		$un_req_array = array_unique($reqidarray);
+			$str_reqid =  implode(",",$un_req_array);
+			$chatusers = array();
+			$sql = "SELECT u.id,u.first_name,u.last_name FROM users as u 
+			INNER JOIN requests as rs on rs.user_id=u.id
+			WHERE rs.user_id !='".$this->Auth->user('id')."' and u.id in($str_reqid) GROUP BY rs.user_id ";
+			$stmt = $conn->execute($sql);
+			$chatusers = $stmt->fetchAll('assoc');
+			$this->set('UserResponse',$chatusers); 
+		}
+		else
+		{
+			$this->set('UserResponse',$chatusers); 
+		}
+		
+	$UserResponse = $this->Requests->find()
+		->contain(["Users"])
+		->where(['Requests.user_id !=' => $this->Auth->user('id')])->group(['Requests.user_id'])->all()->toArray();
+	//$this->set('UserResponse',$UserResponse); 
+	//$this->set("respondToRequestCount", $this->__getRespondToRequestCount());
 }
 	public function myFinalResponses() {
 		$this->loadModel('Responses');
@@ -3434,8 +3438,8 @@ public function addtestimonial($userId) {
 	$allUnreadChat = $this->User_Chats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->all();
 	$this->set('allunreadchat',$allUnreadChat);
 	$user = $this->Users->find()
-	->contain(["Credits"])
-	->where(['Users.id' => $this->Auth->user('id')])->first();
+		->contain(["Credits"])
+		->where(['Users.id' => $this->Auth->user('id')])->first();
 	$this->set('users', $user);
 	$this->set('userProfile', $user);
 	$myRequestCount = $myReponseCount = 0;
@@ -3449,13 +3453,13 @@ public function addtestimonial($userId) {
 	$delcount=0;
 	$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
 	foreach($requests as $req){
-	$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
-	if($rqueryr->count()!=0){
-	$delcount++;
-	}
+		$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
+		if($rqueryr->count()!=0){
+			$delcount++;
+		}
 	}
 	if($myRequestCount > $delcount) {
-	$myRequestCount = $myRequestCount-$delcount;
+		$myRequestCount = $myRequestCount-$delcount;
 	}	
 	$this->set('myRequestCountdel', $delcount);
 	$this->set('myRequestCount', $myRequestCount1);
@@ -3464,83 +3468,88 @@ public function addtestimonial($userId) {
 	$this->set('myReponseCount', $myReponseCount);
 	$userDetails = $this->Users->get($authoruserId);
 	if ($this->request->is(['post', 'put'])) {
-	if($this->request->data['testimonialid']!="0"){
-	$tablename = TableRegistry::get("testimonial");
-	$query = $tablename->query();
-	$result = $query->update()
-	->set(['author_id' => $this->request->data['author_id'],'request_id'=>$this->request->data['request_id'],'user_id'=>$this->request->data['user_id'],'rating'=>$this->request->data['rating'],'comment'=>$this->request->data['comment']])
-	->where(['id' => $this->request->data['testimonialid']])
-	->execute();
-	return $this->redirect('/users/testimonialthanks');
-	} else{
-	$testimonialTable = TableRegistry::get('testimonial');
-	$testimonial = $testimonialTable->newEntity();
-	$testimonial->author_id = $this->request->data['author_id'];
-	$testimonial->request_id = $this->request->data['request_id'];
-	$testimonial->user_id = $this->request->data['user_id'];
-	$testimonial->rating = $this->request->data['rating'];
-	$testimonial->comment = $this->request->data['comment'];
-	$testimonial->status =  '0';
-	$testimonial->created_at = date("Y-m-d H:i:s");
-	if ($testimonialTable->save($testimonial)) {
-	$id = $testimonial->id;
-	return $this->redirect('/users/testimonialthanks');
-	}
-	}
+		if($this->request->data['testimonialid']!="0"){
+			$tablename = TableRegistry::get("testimonial");
+			$query = $tablename->query();
+			$result = $query->update()
+				->set(['author_id' => $this->request->data['author_id'],'request_id'=>$this->request->data['request_id'],'user_id'=>$this->request->data['user_id'],'rating'=>$this->request->data['rating'],'comment'=>$this->request->data['comment']])
+				->where(['id' => $this->request->data['testimonialid']])
+				->execute();
+			return $this->redirect('/users/testimonialthanks');
+		} 
+		else
+		{
+			$testimonialTable = TableRegistry::get('testimonial');
+			$testimonial = $testimonialTable->newEntity();
+			$testimonial->author_id = $this->request->data['author_id'];
+			$testimonial->request_id = $this->request->data['request_id'];
+			$testimonial->user_id = $this->request->data['user_id'];
+			$testimonial->rating = $this->request->data['rating'];
+			$testimonial->comment = $this->request->data['comment'];
+			$testimonial->status =  '0';
+			$testimonial->created_at = date("Y-m-d H:i:s");
+			 
+			if ($testimonialTable->save($testimonial)) {
+				$id = $testimonial->id;
+				return $this->redirect('/users/testimonialthanks');
+			}
+		}
 	}
 	$this->set(compact("authoruserId","reviewuserId","reqid","userDetails","testimonialedit"));
 	$this->render('/Users/add-testimonial');
 }
 public function promotioncounts($id) {
-$this->loadModel('Promotion');
-$query =  $this->Promotion->find()->where(['id' => $id])->first();
-$nextcount =  $query['count'] + 1;
-$this->Promotion->updateAll(
-array('count' => $nextcount),
-array('id' => $id)
-);
-exit;
+	$this->loadModel('Promotion');
+	$query =  $this->Promotion->find()->where(['id' => $id])->first();
+	$nextcount =  $query['count'] + 1;
+	$this->Promotion->updateAll(
+		array('count' => $nextcount),
+		array('id' => $id)
+	);
+	exit;
 }
-public function testimonialthanks(){
-$this->loadModel('Responses');
-$this->loadModel('Hotels');
-$this->loadModel('Requests');
-$this->loadModel('Cities');
-$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
-$this->set('users', $user);
-$myRequestCount = $myReponseCount = 0;
-$myfinalCount  = 0;
-$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status "=>2]]);
-$myfinalCount = $query3 ->count();
-$this->set('myfinalCount', $myfinalCount );
-$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
-$myRequestCount = $query->count();
-$myRequestCount1 = $query->count(); 
-$delcount=0;
-$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
-foreach($requests as $req){
-$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
-if($rqueryr->count()!=0){
-$delcount++;
-}
-}
-if($myRequestCount > $delcount) {
-$myRequestCount = $myRequestCount-$delcount;
-}	
-$this->set('myRequestCountdel', $delcount);
-$this->set('myRequestCount', $myRequestCount1);
-$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.user_id' => $this->Auth->user('id')]]);
-$myReponseCount = $queryr->count();
-$this->set('myReponseCount', $myReponseCount);
-$this->loadModel('User_Chats');
-$csort['created'] = "DESC";
-$allUnreadChat = $this->User_Chats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->order($csort)->limit(10)->all();
-$chatCount = $allUnreadChat->count();
-$this->set('chatCount',$chatCount);
-$this->set('allunreadchat',$allUnreadChat);
-$thankscontent = "Thank you! Your Review has been successfully submitted.";
-$this->set(compact("thankscontent"));  
-}
+	public function testimonialthanks(){
+		$this->loadModel('Responses');
+		$this->loadModel('Hotels');
+		$this->loadModel('Requests');
+		$this->loadModel('Cities');
+		$this->viewBuilder()->layout('user_layout');
+		$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
+		$this->set('users', $user);
+		$myRequestCount = $myReponseCount = 0;
+		$myfinalCount  = 0;
+		$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status "=>2]]);
+		$myfinalCount = $query3 ->count();
+		$this->set('myfinalCount', $myfinalCount );
+		$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
+		$myRequestCount = $query->count();
+		$myRequestCount1 = $query->count(); 
+		$delcount=0;
+		$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
+		foreach($requests as $req){
+			$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
+			if($rqueryr->count()!=0){
+				$delcount++;
+			}
+		}
+		if($myRequestCount > $delcount) {
+			$myRequestCount = $myRequestCount-$delcount;
+		}	
+		$this->set('myRequestCountdel', $delcount);
+		$this->set('myRequestCount', $myRequestCount1);
+	
+		$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.user_id' => $this->Auth->user('id')]]);
+		$myReponseCount = $queryr->count();
+		$this->set('myReponseCount', $myReponseCount);
+		$this->loadModel('User_Chats');
+		$csort['created'] = "DESC";
+		$allUnreadChat = $this->User_Chats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->order($csort)->limit(10)->all();
+		$chatCount = $allUnreadChat->count();
+		$this->set('chatCount',$chatCount);
+		$this->set('allunreadchat',$allUnreadChat);
+		$thankscontent = "Thank you! Your Review has been successfully submitted.";
+		$this->set(compact("thankscontent"));  
+	}
 public function promotionreports($id) {
 $this->loadModel('Promotion');
 $this->loadModel('Requests');

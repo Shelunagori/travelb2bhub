@@ -52,10 +52,10 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 		<div class="">
 		<div class="col-md-7">
 			<div class="row">
-			<?php 
+			<?php
 			if($users['role_id'] == 1 || $users['role_id'] == 3)
 			{
-			?>
+				?>
 				<div class="col-md-6">
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'sendrequest')) ?>">
 					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">

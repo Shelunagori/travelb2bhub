@@ -115,17 +115,6 @@
 		</div>
 	  </div>
 
- 
-
- 
- 
-
-
-
-
- 
-	 
-	
 <script>
 $('#UserChatForm').validate({
 	rules: {

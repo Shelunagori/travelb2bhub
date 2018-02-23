@@ -302,8 +302,7 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 		  </div>
 		</div>
 	</div>
-<?php echo $this->element('footer');?>
-<?php echo $this->Html->script(['ap.pagination.js']);?>
+<?php echo $this->element('footer');?> 
 <script>
 	$("#responsesWrap").apPagination({
     targets: ".box-event",
@@ -325,6 +324,18 @@ $('#UserChatForm').validate({
 		}
 	},
 	ignore: ":hidden:not(select)"
+});
+$('#addtestimonial').validate({
+	rules: {
+		"rating" : {
+			required : true
+		}
+	},
+	messages: {
+		"rating" : {
+			required : "Please select rating."
+		}
+	}
 });
 function f1(res){
 	var result = res.split(",");

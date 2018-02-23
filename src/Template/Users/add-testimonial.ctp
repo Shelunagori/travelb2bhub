@@ -1,4 +1,5 @@
-	  <div class="modal-content"><?php echo $this->Html->script(['jquery.validate']);?>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+ 	  <div class="modal-content">
 		<div class="modal-header">
 		  <button type="button" class="close" data-dismiss="modal">&times;</button>
 		  <h4 class="modal-title" style="text-align:left">Add Review</h4>
@@ -17,16 +18,14 @@
  	 $rating = '0';
  	 $testimonialid = 0;
   
-	 if(count($testimonialedit) > 0 ){
-	 	//print_r($testimonialedit);
-	 
-	 $comment = $testimonialedit["comment"];
-    $rating = $testimonialedit["rating"];
-    $testimonialid = $testimonialedit["id"];
-	 }
+	if(count($testimonialedit) > 0 ){
+		$comment = $testimonialedit["comment"];
+		$rating = $testimonialedit["rating"];
+		$testimonialid = $testimonialedit["id"];
+	}
 	echo $this->Form->create("Promotions", ['type' => 'file', 'class'=> 'form-horizontal', 'url' => ['controller' => 'Users', 'action' => 'addtestimonial',$authoruserId], 'onSubmit' => 'return addtestimonial();', 'id'=>"addtestimonial"]); ?>
                        
-								<!-- Text input-->
+						<!-- Text input-->
 						<div class="form-group">
 						<label class="col-md-4 control-label" for="Rating">Rating <span class="asterisk">
 
@@ -77,8 +76,9 @@
 		</form>
 	</div>
 	<script>
-function addtestimonial() {
+function addtestimonial() {  
     var radios = document.getElementsByName("rating");
+	
     var formValid = false;
     var i = 0;
     while (!formValid && i < radios.length) {
@@ -88,6 +88,7 @@ function addtestimonial() {
 
     if (!formValid) alert("Please Select Rating!");
     return formValid;
-}	
+}
+ 
 	</script>
 	  </div>
