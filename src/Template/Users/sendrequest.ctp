@@ -516,15 +516,14 @@ $(document).ready(function($){
 								<p for="from">Adults</p>
 								<div class="col-md-6 input-group">
 									<p class="input-group-addon btn" >
-									<button type="button" class="btn btn-default btn-lg"  id="btn_pack_minus" value="">-</button>
-									</p>                    
-									<input type='text' autocomplete="off" name='children' value='1' class="form-control input-large" id="text_counter_pack"/>	
-									<p class="input-group-addon btn" >
-									<button type="button" class="btn btn-default btn-lg" " id="btn_pack_plus" value="">+</button>
-									</p>                    
+									<button type="button" class="fa fa-minus-square"  id="btn_pack_minus" value="-"></button>
+									</p>
+									<input type='text' autocomplete="off" name='children' value='1' class="form-control input-large" id="text_counter_pack"/>
+									<p class="input-group-addon btn">
+									<button type="button" class="fa fa-plus-square" id="btn_pack_plus" value=""></button>
+								   </p>    
 								</div>
 							</div>
-				   
 							<div class="col-md-6">
 								<p for="from">Children below 6  </p>
 									<div class="col-md-6 input-group">
@@ -795,7 +794,6 @@ $(document).ready(function($){
 													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
 														<div class="input-field">
 															<p for="from">Final Locality
-                                                                  
                                                                 </p>
 															<input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="finalLocality"/>
 														</div>
