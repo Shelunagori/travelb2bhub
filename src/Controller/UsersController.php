@@ -802,6 +802,17 @@ public function ajaxStateShow()
 		$this->set(compact('states','countries'));
      }
 
+	 public function ajaxDestStateShow()
+    {
+		$state_id=$this->request->data['state_id'];
+		$states=$this->Users->States->find('list')->where(['States.id'=>$state_id]);
+		$statess=$this->Users->States->find()->where(['States.id'=>$state_id]);
+		foreach($statess as $st_show){
+			$country_id=$st_show->country_id;
+		}
+		$countries=$this->Users->Countries->find('list')->where(['Countries.id'=>$country_id]);
+		$this->set(compact('states','countries'));
+     }
 
 public function changePassword() {
 $this->loadModel('Requests');
