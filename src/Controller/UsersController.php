@@ -2261,6 +2261,7 @@ $this->loadModel('Users');
 $this->loadModel('Requests');
 $this->loadModel('Responses');
 $this->loadModel('Membership');
+$this->viewBuilder()->layout('user_layout');
 $userRequestCount = $userReponseCount = 0;
 $userrespondToRequestCount = 0;
 /*$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $id, 
