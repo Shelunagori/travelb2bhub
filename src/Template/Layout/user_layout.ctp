@@ -394,7 +394,7 @@ legend
         <div class="info">
           <?php echo ucwords(strtolower($MemberName));?>
 		  <br>
-		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'profileedit']); ?>" class="logo">Edit Profile</a> | &nbsp;
+		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'profileedit/'.$loginId]); ?>" class="logo">Edit Profile</a> | &nbsp;
 		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo">Change Password</a>
         </div>
       </div>
