@@ -28,6 +28,8 @@
 ?>
 
 <style>
+
+
 body {
 	font-family: 'Poppins', sans-serif !important;
 }
@@ -149,7 +151,7 @@ margin-top: 5px !important;
 	label.star {
 	  float: right;
 	  padding: 10px;
-	  font-size: 36px;
+	  font-size: 20px;
 	  color: #444;
 	  transition: all .2s;
 	}

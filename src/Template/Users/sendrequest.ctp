@@ -260,8 +260,9 @@ $(document).ready(function($){
 							<div class="input-field">
 								<p for="from" >
 									Reference ID  
+									<span class="required">*</span>
 								</p>
-								<input name="reference_id" type="text" class="form-control ref2" id="Reference ID" placeholder="Reference ID" autocomplete="off" />
+								<input autocomplete="off" name="reference_id" type="text" class="form-control ref2" id="reference_id" placeholder="Reference ID" autofocus/>
 								 
 							</div>
 						</div>
@@ -269,6 +270,7 @@ $(document).ready(function($){
 							<div class="input-field">
 								<p for="from">
 									Total Budget  
+									<span class="required">*</span>
 								</p>
 								<input autocomplete="off" name="total_budget" type="number" min="1" class="form-control" id="total_budget" placeholder="Total Budget"/>
 							</div>
@@ -278,12 +280,14 @@ $(document).ready(function($){
 						<div class="row">
 							<div class="col-md-12">
 								<div class="col-md-6">
-								<p for="from">Adults</p>
+								<p for="from">Adults
+								<span class="required">*</span>
+								</p>
 								<div class="col-md-6 input-group">
 									<p class="input-group-addon btn" >
 									<button type="button" class="fa fa-minus-square" id="btnminus" value=""></button>
 									</p>                    
-									<input type='text' autocomplete="off" name='children' value='1' class="form-control input-large" id="textcounter"/>	
+									<input type='text' autocomplete="off" name='hotelAdult' value='1' class="form-control input-large" id="textcounter"/>	
 									<p class="input-group-addon btn" >
 									<button type="button" class="fa fa-plus-square" id="btnplus" value=""></button>
 									</p>                    
@@ -291,12 +295,12 @@ $(document).ready(function($){
 									</div>
 				   
 								<div class="col-md-6">
-								<p for="from">Children below 6  </p>
+								<p for="from">Children below 6  <span class="required">*</span></p>
 									<div class="col-md-6 input-group">
 									<p class="input-group-addon btn" >
 									<button type="button" class="fa fa-minus-square" id="btnminus1" value=""></button>
 									</p>                    
-									 <input type='text' autocomplete="off" name='children' value='1' class="form-control input-large" id="textcounter1"/>	
+									 <input type='text' autocomplete="off" name='hotelChildren'  value='1' class="form-control input-large" id="textcounter1"/>	
 									<p class="input-group-addon btn">
 									<button type="button" class="fa fa-plus-square" id="btnplus1" value=""></button>
 									</p>                    
@@ -346,35 +350,41 @@ $(document).ready(function($){
 												Hotel Rating
 											</p>
 										</div>
-										<div>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
+										<div style=" width: 200px;" class="stars">
+										<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
+										   <input class="star star-5" id="star-5-21" type="radio" value="5" name="hotel_rating"/>
+										   <label class="star star-5" for="star-5-21"></label>
+										   <input class="star star-4" id="star-4-21" type="radio" value="4" name="hotel_rating"/>
+										   <label class="star star-4" for="star-4-21"></label>
+										   <input class="star star-3" id="star-3-21" type="radio" value="3" name="hotel_rating"/>
+										   <label class="star star-3" for="star-3-21"></label>
+										   <input class="star star-2" id="star-2-21" type="radio" value="2" name="hotel_rating"/>
+										   <label class="star star-2" for="star-2-21"></label>
+										   <input class="star star-1" id="star-1-21" type="radio" value="1" name="hotel_rating"/>
+										   <label class="star star-1" for="star-1-21"></label>
+										   </div>
 									</div>
 									<div class="col-md-4 ">
 										<div class="input-field">
 											<p for="from">Hotel Catrgory </p>
 												<div>
-													<?php echo $this->Form->control('hotel_category', ["id"=>"hotel_category", "type"=>"select", 'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control chosen-select"]);?>
+													<?php echo $this->Form->control('hotel_category', ["id"=>"h_hotel_category", "type"=>"select", 'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control chosen-select"]);?>
 
 											   </div>
 										</div>
 									</div>
-								<div class="col-md-4 ">
-									<div class="input-field">
-										<p for="from">Meal Plan </p>
-										<div><?php echo $this->Form->control('meal_plan', ["type"=>"select", "empty"=>"Select Meal Plan", 'options' =>array("1"=>"EP - European Plan", "2"=>"CP - Contenental Plan", "3"=>"MAP - Modified American Plan", "4"=>"AP - American Plan") , "class"=>"form-control"]);?></div>
+									<div class="col-md-4 ">
+										<div class="input-field">
+											<p for="from">Meal Plan </p>
+											<div><?php echo $this->Form->control('meal_plan', ["type"=>"select", "empty"=>"Select Meal Plan", 'options' =>array("1"=>"EP - European Plan", "2"=>"CP - Contenental Plan", "3"=>"MAP - Modified American Plan", "4"=>"AP - American Plan") , "class"=>"form-control"]);?></div>
+										</div>
 									</div>
-								</div>
 							</div>
 						</div>
 					<div class="row">
 						<div class="col-md-12">
 							<p>Locality</p>
-						 <input type="text" autocomplete="off" class="form-control" name="locality" id="locality" placeholder="Enter Locality or Village or Town"/>
+						<input autocomplete="off" type="text" class="form-control" name="locality" placeholder="Enter Locality or Village or Town"/>
 						</div>
 					</div>
 					<div class="row">
@@ -386,18 +396,19 @@ $(document).ready(function($){
 									</p>
 									</div>
 									<div>
-											<input type="text" class="form-control" id="city_name" name="city_name" placeholder="Select City or Nearest City"/>
-                                             <input type='hidden' id='city_id' name="city_id" />
+											<input autocomplete="off" type="text" class="form-control" id="h_city_name" name="h_city_name" placeholder="Select City or Nearest City"/>
+                                            <input type='hidden' id='h_city_id' name="h_city_id" />
 									</div>
 							</div>
 							<div class="col-md-6">
 								<div class="input-field">
 									<p for="from">
-												Destination Source
+												Destination State
 									</p>
 								</div>
 								<div>
-									<input type='text' autocomplete="off" name='destination_source'  placeholder="Destination Source" class="form-control input-large" />
+									<input type='hidden' id='h_state_id' name="h_state_id"/>
+									<input type="text" class="form-control" id ="h_state_name" name="h_state_name" placeholder="State" readonly/>
 								</div>
 							</div>
 						</div>
@@ -407,8 +418,8 @@ $(document).ready(function($){
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt" style="display:none;">
 									<div class="input-field">
 										<p for="from">Destination Country</p>
-										<input type="text" class="form-control" id ="country_name" name="country_name" placeholder="Country" readonly/>
-										<input type='hidden' id='country_id' name="country_id"/>
+										<input type="text" class="form-control" id ="h_country_name" name="h_country_name" placeholder="Country" readonly/>
+										<input type='hidden' id='h_country_id' name="h_country_id"/>
 									</div>
 								</div>
 							</div>
@@ -419,6 +430,7 @@ $(document).ready(function($){
 									<div class="input-field">
 										<p for="from">
 											Check In
+											<span class="required">*</span>
 										</p>
 									</div>
 									<div class="col-md-6 input-group">
@@ -432,6 +444,7 @@ $(document).ready(function($){
 									<div class="input-field">
 												<p for="from">
 													Check Out
+													<span class="required">*</span>
 												</p>
 									</div>
 									<div class="col-md-6 input-group">
@@ -495,6 +508,7 @@ $(document).ready(function($){
 								<div class="input-field">
 									<p for="from" >
 										Reference ID  
+										<span class="required">*</span>
 									</p>
 									<input name="reference_id" type="text" class="form-control ref2" id="Reference ID" placeholder="Reference ID" autocomplete="off" />
 									 
@@ -503,7 +517,8 @@ $(document).ready(function($){
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 								<div class="input-field">
 									<p for="from">
-										Total Budget  
+										Total Budget 
+										<span class="required">*</span>										
 									</p>
 									<input autocomplete="off" name="total_budget" type="number" min="1" class="form-control" id="total_budget" placeholder="Total Budget"/>
 								</div>
@@ -513,7 +528,8 @@ $(document).ready(function($){
 					<div class="row">
 						<div class="col-md-12">
 							<div class="col-md-6">
-								<p for="from">Adults</p>
+								<p for="from">Adults
+								<span class="required">*</span></p>
 								<div class="col-md-6 input-group">
 									<p class="input-group-addon btn" >
 									<button type="button" class="fa fa-minus-square"  id="btn_pack_minus" value="-"></button>
@@ -525,7 +541,9 @@ $(document).ready(function($){
 								</div>
 							</div>
 							<div class="col-md-6">
-								<p for="from">Children below 6  </p>
+								<p for="from">Children below 6 
+									<span class="required">*</span>
+									</p>
 									<div class="col-md-6 input-group">
 									<p class="input-group-addon btn" >
 									<button type="button" class="fa fa-minus-square" id="btn_pack_minus1" value=""></button>
@@ -580,13 +598,19 @@ $(document).ready(function($){
 												Hotel Rating
 											</p>
 										</div>
-										<div>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
+										<div style=" width: 200px;" class="stars">
+										<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
+										   <input class="star star-5" id="star-5-21" type="radio" value="5" name="hotel_rating"/>
+										   <label class="star star-5" for="star-5-21"></label>
+										   <input class="star star-4" id="star-4-21" type="radio" value="4" name="hotel_rating"/>
+										   <label class="star star-4" for="star-4-21"></label>
+										   <input class="star star-3" id="star-3-21" type="radio" value="3" name="hotel_rating"/>
+										   <label class="star star-3" for="star-3-21"></label>
+										   <input class="star star-2" id="star-2-21" type="radio" value="2" name="hotel_rating"/>
+										   <label class="star star-2" for="star-2-21"></label>
+										   <input class="star star-1" id="star-1-21" type="radio" value="1" name="hotel_rating"/>
+										   <label class="star star-1" for="star-1-21"></label>
+										   </div>
 									</div>
 									<div class="col-md-4 ">
 										<div class="input-field">
@@ -617,6 +641,7 @@ $(document).ready(function($){
 									<div class="input-field">
 									<p for="from">
 										Destination City
+										<span class="required">*</span>
 									</p>
 									</div>
 									<div>
@@ -654,6 +679,7 @@ $(document).ready(function($){
 									<div class="input-field">
 										<p for="from">
 											Check In
+											<span class="required">*</span>
 										</p>
 									</div>
 									<div class="col-md-6 input-group">
@@ -667,6 +693,7 @@ $(document).ready(function($){
 									<div class="input-field">
 												<p for="from">
 													Check Out
+													<span class="required">*</span>
 												</p>
 									</div>
 									<div class="col-md-6 input-group">
