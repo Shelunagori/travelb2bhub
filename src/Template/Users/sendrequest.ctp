@@ -233,14 +233,14 @@ $(document).ready(function($){
 			<div class="content">
 				<div class="tab-content">
 					<ul class="nav nav-tabs" >
-						<li >
+						<li class="active">
 						<a href="#tab2" data-toggle="tab">Package</a></li>
-						<li class="active"><a href="#tab1" data-toggle="tab">Hotel</a></li>
+						<li ><a href="#tab1" data-toggle="tab">Hotel</a></li>
 						<li ><a id="tabtransport" href="#tab3" data-toggle="tab">Transport</a>
 						</li>
 					</ul>
 				
-<div class="tab-pane active" id="tab1">
+<div class="tab-pane " id="tab1">
 <?php
  echo $this->Form->create(null, [
 	'type' => 'file',
@@ -393,6 +393,7 @@ $(document).ready(function($){
 									<div class="input-field">
 									<p for="from">
 										Destination City
+										<span class="required">*</span>
 									</p>
 									</div>
 									<div>
@@ -404,6 +405,7 @@ $(document).ready(function($){
 								<div class="input-field">
 									<p for="from">
 												Destination State
+												
 									</p>
 								</div>
 								<div>
@@ -487,7 +489,7 @@ $(document).ready(function($){
 									</div>
 								</div>
 							</div>
-<div class="tab-pane " id="tab2" >
+<div class="tab-pane active" id="tab2" >
 <?php
 					echo $this->Form->create(null, [
 						'type' => 'file',
@@ -704,11 +706,14 @@ $(document).ready(function($){
 									</div>
 								</div>
 							</div>
-						</div><span class="help-block"></span>
+						</div>
+						<span class="help-block"></span><hr></hr>
+						  <div class="input_fields_wrap1">
+                     				  
+						</div> <span class="help-block"></span><hr></hr>
 						<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt padding0">
-                                     <div class="input_fields_wrap1">
-                                      </div> 
+                                   
 									<button class="btn btn-default btn-lg add_field_button2 but ">Add Another Destination</button>
                              </div>
                         </div>
@@ -803,12 +808,18 @@ $(document).ready(function($){
 														</div>
 												</div>
 											</div>
+											<span class="help-block"></span>
+											<hr></hr>
+											<div class="package-stops">
+															
+											</div>
+											<span class="help-block"></span><hr></hr>
 											<div class="row">
 												<div class="col-md-12">
 														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 															
 																<div class="input_fields_wrap1">
-																		<button class="but btn-default btn-lg transport-stop-add">ADD STOP</button>
+																		<button class="but btn-default btn-lg package-stop-add">ADD STOP</button>
 																 </div> 
 														</div>
 														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -919,6 +930,7 @@ $(document).ready(function($){
 																<div class="input-field">
 																	<p for="from" >
 																		Reference ID  
+																		<span class="required">*</span>
 																	</p>
 																	<input  name="reference_id" type="text" class="form-control ref1" id="reference_id" placeholder="Reference ID" autocomplete="off" />
 																	 
@@ -927,7 +939,8 @@ $(document).ready(function($){
 															<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 																<div class="input-field">
 																	<p for="from">
-																		Total Budget  
+																		Total Budget 
+																		<span class="required">*</span>
 																	</p>
 																	<input name="total_budget" type="number" min="1" class="form-control" id="total_budget" placeholder="Total Budget" autocomplete="off" />
 																</div>
@@ -937,7 +950,8 @@ $(document).ready(function($){
 													<div class="row">
 														<div class="col-md-12">
 															<div class="col-md-6">
-																<p for="from">Adults</p>
+																<p for="from">Adults
+																<span class="required">*</span></p>
 																<div class="col-md-6 input-group">
 																	<p class="input-group-addon btn" >
 																	<button type="button" class="fa fa-minus-square" id="btn_tran_minus" value=""  field='transportAdult'></button>
@@ -950,7 +964,8 @@ $(document).ready(function($){
 															</div>
 												   
 															<div class="col-md-6">
-																<p for="from">Children below 6  </p>
+																<p for="from">Children below 6
+																<span class="required">*</span> </p>
 																	<div class="col-md-6 input-group">
 																	<p class="input-group-addon btn" >
 																	<button type="button" class="fa fa-minus-square" id="btn_tran_minus1" value="" field='transportChildren'></button>
@@ -991,6 +1006,7 @@ $(document).ready(function($){
 														<div class="input-field">
 															<p for="from">
 																Start Date
+																<span class="required">*</span>
 															</p>
 														</div>
 														<div class="col-md-6 input-group">
@@ -1004,6 +1020,7 @@ $(document).ready(function($){
 														<div class="input-field">
 																	<p for="from">
 																		End Date
+																		<span class="required">*</span>
 																	</p>
 														</div>
 														<div class="col-md-6 input-group">
@@ -1020,7 +1037,7 @@ $(document).ready(function($){
 												    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
                                                             <div class="input-field">
                                                             <p for="from">Pickup Locality
-                                                                
+                                                             <span class="required">*</span>   
                                                             </p>
                                                             <input autocomplete="off" type="text" class="form-control" name="pickup_locality" id="pickup_locality" placeholder="Enter Locality or Village or Town"/>
                                                             </div>
@@ -1028,6 +1045,7 @@ $(document).ready(function($){
                                                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
                                                             <div class="input-field">
                                                                 <p for="from">Pickup City
+																<span class="required">*</span>
                                                                 </p>
                                                                 <input type="text" class="form-control" id="t_pickup_city_name" name="t_pickup_city_name"  placeholder="Select City or Nearest City"/>
                                                                 <input type='hidden' id='t_pickup_city_id' name="t_pickup_city_id" />
@@ -1055,9 +1073,13 @@ $(document).ready(function($){
 														</div>-->
 												</div> 
 											</div>
-											<div class="transport-stops">
+											<span class="help-block"></span><hr></hr>
+											  <div class="transport-stops">
 															
 											</div>
+											<span class="help-block"></span><hr></hr>
+											
+											
 											<div class="row">
 												<div class="col-md-12">
 													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -1092,7 +1114,7 @@ $(document).ready(function($){
 													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
 															<div class="input-field">
 																<p for="from">Final City
-                                                                     
+                                                                 <span class="required">*</span>    
                                                                 </p>
 																<input type="text" class="form-control" id="t_final_city_name" name="t_final_city_name" placeholder="Select City or Nearest City"/>
 																<input type='hidden' id='t_final_city_id' name="t_final_city_id" />
@@ -1253,7 +1275,7 @@ jQuery(document).ready(function () {
         	strHtml += '<div class="col-sm-6 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="stops[' +packageI+ ']"></div></div>';
         	strHtml += '<div class="col-sm-6 mt"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control" type="text" placeholder="Select City or Nearest City" use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" name="id_package_stop_city[' +packageI+ ']" /></div></div>';
         	strHtml += '<div class="col-sm-6 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly></div></div></div>';
-        	strHtml += '<button class="package_remove_stop">Remove stop</button>';
+        	strHtml += '<button class="btn btn-primary btn-lg package_remove_stop">Remove stop</button>';
          strHtml += '</div>';
         $(".package-stops").append(strHtml);
         	packageI++;
@@ -1279,7 +1301,7 @@ var gg = 1;
         strHtml += '<div class="col-sm-6 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="stops[' +transI+ ']"></div></div>';
         strHtml += '<div class="col-sm-6 mt"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control" type="text" placeholder="Select City or Nearest City" use_for = "trasport" numCount = ' +transI+ ' id="trasport_stop_city[' +transI+ ']" name="trasport_stop_city[' +transI+ ']"><input type="hidden" id="id_trasport_stop_city[' +transI+ ']" name="id_trasport_stop_city[' +transI+ ']" /></div></div>';
         strHtml += '<div class="col-sm-6 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_trasport_stop_city[' +transI+ ']" name="state_id_trasport_stop_city[' +transI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_trasport_stop_city[' +transI+ ']" name="state_name_trasport_stop_city[' +transI+ ']" readonly></div></div></div>';
-         strHtml += '<button class="transport_remove_stop but">Remove stop</button>';
+         strHtml += '<button class="btn btn-primary btn-lg transport_remove_stop but">Remove stop</button>';
          strHtml += '</div>';
          $(".transport-stops").append(strHtml);
          transI++;
