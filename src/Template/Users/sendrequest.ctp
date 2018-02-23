@@ -676,7 +676,14 @@ $(document).ready(function($){
 									</div>
 								</div>
 							</div>
-						</div>
+						</div><span class="help-block"></span>
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt padding0">
+                                     <div class="input_fields_wrap1">
+                                      </div> 
+									<button class="btn btn-default btn-lg add_field_button2 but ">Add Another Destination</button>
+                             </div>
+                        </div>
 					</fieldset>
 				</h4>
 								<h4 class="panel-title">
@@ -770,23 +777,25 @@ $(document).ready(function($){
 											</div>
 											<div class="row">
 												<div class="col-md-12">
-													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-														
-															<div class="input_fields_wrap1">
-                                                                    <button class="but btn-default btn-lg transport-stop-add">ADD STOP</button>
-                                                             </div> 
-											</div>
-													<!-- <div class="col-xxs-12 text-center">
-															<div class="input_fields_wrap">
-																<button class="add_field_button but">Add Stop</button>
-																<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-																	<div class="input-field">
-																		<p for="from" style="float:left;">Stop Name</p>
-																		<input class="form-control" type="text" placeholder="Stop Name" name="stops[]">
+														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+															
+																<div class="input_fields_wrap1">
+																		<button class="but btn-default btn-lg transport-stop-add">ADD STOP</button>
+																 </div> 
+														</div>
+														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+														<!-- <div class="col-xxs-12 text-center">
+																<div class="input_fields_wrap">
+																	<button class="add_field_button but">Add Stop</button>
+																	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+																		<div class="input-field">
+																			<p for="from" style="float:left;">Stop Name</p>
+																			<input class="form-control" type="text" placeholder="Stop Name" name="stops[]">
+																		</div>
 																	</div>
 																</div>
-															</div>
-														</div>  -->
+															</div>  -->
+														</div>
 												</div>
 											</div><span class="help-block"></span>
 											<div class="row">
@@ -1235,7 +1244,7 @@ var gg = 1;
 
         var transI = 1;
         $(".transport-stop-add").click(function(e){
-e.preventDefault();
+		e.preventDefault();
         var strHtml = '<div class="stop"><div class="stop-title">Stop ' +transI+ '</div><div class="row">';
         strHtml += '<div class="col-sm-6 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="stops[' +transI+ ']"></div></div>';
         strHtml += '<div class="col-sm-6 mt"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control" type="text" placeholder="Select City or Nearest City" use_for = "trasport" numCount = ' +transI+ ' id="trasport_stop_city[' +transI+ ']" name="trasport_stop_city[' +transI+ ']"><input type="hidden" id="id_trasport_stop_city[' +transI+ ']" name="id_trasport_stop_city[' +transI+ ']" /></div></div>';
