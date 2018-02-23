@@ -817,8 +817,7 @@ $(document).ready(function($){
 											<div class="row">
 												<div class="col-md-12">
 														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-															
-																<div class="input_fields_wrap1">
+																<div >
 																		<button class="but btn-default btn-lg package-stop-add">ADD STOP</button>
 																 </div> 
 														</div>
@@ -1362,7 +1361,7 @@ var f = 1;
 				$(wrapper).find("input[name='hh_room3["+number+"]']").val($("#room3").val());
 				$(wrapper).find("input[name='hh_child_with_bed["+number+"]']").val($("#child_with_bed").val());
 				$(wrapper).find("input[name='hh_child_without_bed["+number+"]']").val($("#child_without_bed").val());
-$(".hh_hotel_category").multiselect();
+				$(".hh_hotel_category").multiselect();
 				$(wrapper).find("input:text[name='hh_city_name["+number+"]']").autocomplete({
 					source: JSON.parse(cityData),
 					select: function (e, ui) {
