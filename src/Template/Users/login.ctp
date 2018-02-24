@@ -18,21 +18,23 @@
 		.p-b-34 { padding-bottom: 10px !important; }
 		.login100-form-title { font-size:25px; }
 		.wrap-login100 { background:#0c0a10 !important; width:420px !important; padding: 18px 55px 37px 55px; }
+		.p-t-27 { padding-top: 10px; }
+		.error { color: #fff; margin-left: 25px; }
 	</style>
 </head>
 <body>
 	<div class="limiter">
 		<div class="container-login100 bgdiv">
 			<div class="wrap-login100">
-				<?php echo $this->Flash->render(); ?>
-                <?php  echo $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'login'],'id'=>"UserLoginForm", 'class'=>'login100-form validate-form']); ?>
 					<center>
 						<?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:20%;']) ?>
 					</center>
 					<span class="login100-form-title p-b-34 p-t-27">
 						TRAVEL B2b HUB
-					</span>
-
+					</span>			
+				<p style="color:#fff !important;"><?php echo $this->Flash->render(); ?></p>
+				<br />
+                <?php  echo $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'login'],'id'=>"UserLoginForm", 'class'=>'login100-form validate-form']); ?>
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
 						<input class="input100" type="text" name="email" placeholder="Email">
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
