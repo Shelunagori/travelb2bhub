@@ -50,6 +50,13 @@ class UsersController extends AppController {
 		$this->set('profilePic',$profile_pic);
 		$this->set('loginId',$loginId);
 	}
+	
+	
+	public function loginNew()
+	{
+		$this->viewBuilder()->layout('');
+	}
+	
 	public function index() {
 		/*$this->paginate = [
 		'contain' => ['Users']

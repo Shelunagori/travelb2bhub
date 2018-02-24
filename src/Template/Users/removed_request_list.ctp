@@ -1,7 +1,9 @@
 <?php
 use Cake\Datasource\ConnectionManager; 
 $conn = ConnectionManager::get('default');
-?><div id="removed_request_list" class="container-fluid">
+?>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<div id="removed_request_list" class="container-fluid">
 <div class="row equal_column" > 
     <div class="col-md-12" style="background-color:#fff"> 
 		<br>
@@ -73,31 +75,7 @@ $conn = ConnectionManager::get('default');
         <a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'removed-request-list')) ?>">Reset</a>
    </div>
    </form>
-   <script>
-   $('#datepicker1').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				$( "#datepicker2" ).datepicker( "option", "minDate",selected);
-				$('#datepicker2').val("");
-			}
-		});
-		$('#datepicker2').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				var checkInDate = $('#datepicker1').val();
-				if(checkInDate == "") {
-					alert("Please select check-in date first.");
-					$('#datepicker2').val("");
-				}
-			}
-		});
-		</script>
+ 
            </div>
       <div class="modal-footer">
       
@@ -178,7 +156,7 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
                             <b>End Date :</b> <?php echo ($request['end_date'])?date('d/m/Y',strtotime($request['end_date'])):"-- --"; ?>
                         </p>
                    </li>
-				<?php } ?>
+			<?php } ?>
 
 				
 				<li class="col-md-12">
@@ -214,25 +192,26 @@ unset($request['hotels'][0]);?><?php foreach($request['hotels'] as $row) { ?>
                          <p><b>Comment :</b> <span><?php echo $request['comment']; ?></span></p>
                      </li>
                   </ul>
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 right link padding0">
-				<a data-toggle="modal" data-target="#myModal1<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"><?php echo $this->Html->image('detail-ico.png'); ?> Details</a>
-				  <div class="modal fade" id="myModal1<?php echo $request['id']; ?>" role="dialog">
-		<div class="modal-dialog">
-		
-		  <!-- Modal content-->
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">Details</h4>
-			</div>
-			<div class="modal-body">
-				
-			</div>
-		  </div>
-		  
-		</div>
-	</div>
-				</div>
+						<div class="col-md-12">
+							<table width="100%">
+							<tr>
+								<td>
+									<a class="viewdetail btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"data-target="#myModal1<?php echo $request['id']; ?>" data-toggle=modal> Details</a>
+									<div class="fade modal"id="myModal1<?php echo $request['id']; ?>"role=dialog>
+										<div class=modal-dialog>
+											<div class=modal-content>
+											   <div class=modal-header>
+												  <button class=close data-dismiss=modal type=button>×</button>
+												  <h4 class=modal-title>Details</h4>
+											   </div>
+											   <div class=modal-body></div>
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							</table>
+							</div>				
 				</fieldset>
 			</div>
 			</div>
@@ -264,6 +243,33 @@ unset($request['hotels'][0]);?><?php foreach($request['hotels'] as $row) { ?>
 </div>
   
 <?php echo $this->element('footer');?>
+  <script>
+ $(document).ready(function(){ 
+   $('#datepicker1').datepicker({
+			dateFormat: 'dd/mm/yy',
+			changeMonth: true,
+			changeYear: true,
+			minDate: '<?php echo date("d/m/Y"); ?>',
+			onSelect: function(selected) {
+				$( "#datepicker2" ).datepicker( "option", "minDate",selected);
+				$('#datepicker2').val("");
+			}
+		});
+		$('#datepicker2').datepicker({
+			dateFormat: 'dd/mm/yy',
+			changeMonth: true,
+			changeYear: true,
+			minDate: '<?php echo date("d/m/Y"); ?>',
+			onSelect: function(selected) {
+				var checkInDate = $('#datepicker1').val();
+				if(checkInDate == "") {
+					alert("Please select check-in date first.");
+					$('#datepicker2').val("");
+				}
+			}
+		});
+	});	
+		</script> 
 <?php echo $this->Html->script(['ap.pagination.js']);?>
 <script>
 	$("#responsesWrap").apPagination({
@@ -275,3 +281,4 @@ unset($request['hotels'][0]);?><?php foreach($request['hotels'] as $row) { ?>
     prevText: '<i class="glyphicon glyphicon-menu-left"></i><i class="glyphicon glyphicon-menu-left"></i>'
   });
   </script>
+ 
