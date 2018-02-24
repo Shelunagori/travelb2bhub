@@ -179,10 +179,7 @@ margin-top: 5px !important;
 
 </style>
 <style>
-legend
-{
-	text-align: center;
-}
+ 
 .requestType {	
 	color: #f87200;
     font-weight: 600;
@@ -432,7 +429,7 @@ legend
   <div class="content-wrapper">
 	 <section class="content">
 		<div class="row">
-		<?= $this->Flash->render() ?>
+			<?= $this->Flash->render() ?>
 
 			<?php echo $this->fetch('content'); ?>
 		</div>

@@ -1,7 +1,9 @@
  <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
  <style>
-	#country-list{list-style:none;margin-left: 1px;padding:0;width:auto; margin-top: 10px;}
-	#country-list li{padding-left: 10px;padding-top: 7px; background: #efeeee85 ; border-bottom: #bbb9b9 1px solid;top:2px}
+	#country-list{list-style:none;margin-left: 1px;padding:0;width:94%; margin-top: 10px;    position: absolute;
+    z-index: 1000;
+    background-color: #fff;}
+	#country-list li{padding-left: 10px;padding-top: 7px; background: #d8d4d41a ; border: 1px solid #bbb9b9;;top:2px}
 	#country-list li:hover{background:#d8d4d4;cursor: pointer;}
 	.column_column ul li, .column_helper ul li, .column_visual ul li, .icon_box ul li, .mfn-acc ul li, .ui-tabs-panel ul li, .post-excerpt ul li, .the_content_wrapper ul li{margin-bottom:0px !important}
 	#search-box{border: #e2e2e2 1px solid;border-radius:4px;}
@@ -69,18 +71,19 @@ hr { margin-top:0px!important;}
         <div class="col-md-12">
           <!-- general form elements -->
           <div class="box box-primary">
+		  
             <div class="box-header with-border">
               <h3 class="box-title">Edit Profile</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+			<?php $pararm = $users['id']; ?>
+            <?php  echo $this->Form->create("Users", ['type' => 'file', 'url' => ['controller' => 'Users', 'action' => 'edit',$pararm], 'id'=>"UserRegisterForm"]); ?>
               <div class="box-body">
 			  <fieldset>
-				<legend>COMPANY INFORMATION</legend>
+				<legend><b>COMPANY INFORMATION</b></legend>
 			  <div>
 				 <?php 
-				 
 				 $role_id=$this->request->session()->read('Auth.User.role_id');
 				 ?>
 				<div class="form-group col-md-4">
@@ -127,7 +130,7 @@ hr { margin-top:0px!important;}
                 </div>
 				 <div class="form-group col-md-6">
                   <label>Address Line 2</label>
-                  <input type="text" class="form-control" name="address1" value="<?php echo $users['address1'] ?>" id="address1" placeholder="Enter Here">
+                  <input type="text" class="form-control" name="adress1" value="<?php echo $users['adress1'] ?>" id="adress1" placeholder="Enter Here">
                 </div>
 				
 				<div class="form-group col-md-6">
@@ -136,7 +139,7 @@ hr { margin-top:0px!important;}
                 </div>
 				 <div class="form-group col-md-6">
                   <label>City</label>
-                  <input type="textbox" class="form-control" required autocomplete="off" id="city-search-box" name="city" placeholder="where you want to go?">
+                  <input type="textbox" class="form-control" required autocomplete="off" id="city-search-box" name="city" placeholder="Select city/nearest city" value="<?php echo (!empty($users['city_id']))?$allCityList[$users['city_id']]:"" ;?>">
 				  <div class="suggesstion-box" style="margin-top:-10px"></div>
                 </div>
 				<div class="col-md-12">
@@ -146,12 +149,15 @@ hr { margin-top:0px!important;}
 				</div>
 				<div class="shw">
 					<div class="form-group col-md-4">
+						
 						  <label>States</label>
-						  <?php echo $this->Form->input('state_id',['label' => false,'class'=>'form-control select2','options'=>$states_show,'empty'=>'---Select--Please---']);?>
+							<input type="text" class="form-control" id ="state_name" value = "<?php echo (!empty($users['state_id']))?$allStates[$users['state_id']]:""; ?>"name="state_name" placeholder="Select State" readonly/>
+							<input type='hidden' id='state_id' name="state_id" value="<?php echo (!empty($users['state_id']))?$users['state_id']:""; ?>" />
 					</div>
 					<div class="form-group col-md-4">
 						  <label>Country</label>
-						  <?php echo $this->Form->input('country_id',['label' => false,'class'=>'form-control select2','options'=>$country_show]);?>
+						  <input type="text" class="form-control" id ="country_name" Value ="India" name="country_name" placeholder="Select Country" readonly/>
+                          <input type='hidden' id='country_id' name="country_id" value="<?php echo (!empty($users['country_id']))?$users['country_id']:""; ?>" />
 					</div>
 				</div> 
 				
@@ -162,15 +168,13 @@ hr { margin-top:0px!important;}
 					if(!empty($users['preference'])) {
 						$selectedPreferenceStates = explode(",", $users['preference']);
 					}	
-					echo $this->Form->control('preference', ["value"=>$selectedPreferenceStates, "id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select", "data-placeholder"=>"Select Some States", "style"=>"height:125px;"]); ?>
+					echo $this->Form->control('preference', ["value"=>$selectedPreferenceStates, "id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control select2", "data-placeholder"=>"Select Some States", "style"=>"height:125px;"]); ?>
                 </div>
                  </div>
-				 
 				 </div>
 				</fieldset>
-				 
 				<fieldset>
-				<legend>CERTIFICATES</legend>
+				<legend><b>CERTIFICATES</b></legend>
 			   
 				 <div>
 					<div class="col-md-12">
@@ -274,7 +278,7 @@ hr { margin-top:0px!important;}
 				</fieldset>
 				
 				<fieldset>
-				<legend>UPLOAD PHOTO</legend>
+				<legend><b>UPLOAD PHOTO</b></legend>
 			   
 				 <div>
 					<div class="col-md-12">
@@ -361,7 +365,7 @@ hr { margin-top:0px!important;}
 				 </div>
 				</fieldset>
 				<fieldset>
-				<legend>Description</legend>
+				<legend><b>Description</b></legend>
 					<div>
 						<div class="form-group col-md-12">
 							<textarea name="description" class="form-control" id="description" placeholder="Enter Here" rows="3"><?php echo $users['description'] ?></textarea>
@@ -407,8 +411,187 @@ $(document).ready(function(){
 			}
 			});
 		});
-		
+	$('#UserRegisterForm').validate({
+		onkeyup: function (element, event) {
+            if (event.which === 9 && this.elementValue(element) === "") {
+                return;
+            } else {
+                this.element(element);
+            }
+        },
+		rules: {
+			"company_name" : {
+				required : true
+			},
+			"first_name" : {
+				required : true
+			},
+			"last_name" : {
+				required : true
+			},
+			"email": {
+				required : true,
+				email: true
+			},
+			"mobile_number": {
+				required : true,
+				number: true,
+				minlength:10,
+				maxlength:10
+			},
+			"address": {
+				required: true
+			},
+			"city_name": {
+				required: true
+			},
+			"locality": {
+				required: true
+			},
+			"pincode": {
+				required: true
+			},
+			"description": {
+				required: true
+			},
+			"p_contact": {
+				required: true,
+				number: true,
+				minlength:10,
+				maxlength:10
+			},
+			"hotel_rating": {
+				required: true
+			}
+		},
+		messages: {
+			"company_name" : {
+				required : "Please enter company name."
+			},
+			"first_name" : {
+				required : "Please enter first name."
+			},
+			"last_name" : {
+				required : "Please enter last name."
+			},
+			"email": {
+				required : "Please enter email.",
+				email : "Please enter valid email."
+			},
+			"mobile_number": {
+				required : "Please enter contact number.",
+				number: "Please enter only number",
+				minlength: "Please enter at least 10 digit",
+				maxlength: "Please enter no more than 10 digit"
+			},
+			"address": {
+				required: "Please enter address."
+			},
+			"city_name": {
+				required: "Please select city."
+			},
+			"locality": {
+				required: "Please enter locality."
+			},
+			"pincode": {
+				required: "Please enter pincode."
+			},
+			"description": {
+				required: "Please enter description."
+			},
+			"p_contact": {
+				required: "Please enter secondary contact number.",
+	number: "Please enter only number",
+				minlength: "Please enter at least 10 digit",
+				maxlength: "Please enter no more than 10 digit"
+			},
+			"hotel_rating": {
+				required: "Please select rating."
+			}
+		},
+		ignore: ":hidden:not(select)"
 	});
+	var profile_pic = '<?php echo $users["profile_pic"]; ?>';
+	var role_id = '<?php echo $users["role_id"]; ?>';
+	var company_img_1 = '<?php echo $users["company_img_1_pic"]; ?>';
+	var pancard = '<?php echo $users["pancard_pic"]; ?>';
+	var id_card = '<?php echo $users["id_card_pic"]; ?>';
+	var company_shop_registration = '<?php echo $users["company_shop_registration_pic"]; ?>';
+	var profile_pic_flag = true;
+	var company_img_1_pic_flag = true;
+	var pancard_pic_flag = true;
+	var id_card_pic_flag = true;
+	var company_shop_registration_pic_flag = true;
+	if(profile_pic != "") {
+		profile_pic_flag = false;
+	}
+	if(company_img_1 != "") {
+		company_img_1_pic_flag = false;
+	}
+	if(pancard != "") {
+		pancard_pic_flag = false;
+	}
+	if(id_card != "") {
+		id_card_pic_flag = false;
+	}
+	if(company_shop_registration != "") {
+		company_shop_registration_pic_flag = false;
+	}
+
+	var travel_certificate_flag = false;
+	var hotel_category_flag = false;
+	if(role_id == "1") {
+		var travel_certificate_flag = true;
+		var hotel_category_flag = false;
+	} else if(role_id == "3") {
+		var travel_certificate_flag = false;
+		var hotel_category_flag = true;
+	}
+	var settings = $('#UserRegisterForm').validate().settings;
+	$.extend(true, settings, {
+		rules: {
+		  /* "profile_pic": {
+			   required: profile_pic_flag
+			},
+			"company_img_1": {
+				required: company_img_1_pic_flag
+			},
+			"pancard": {
+				required: pancard_pic_flag
+			},
+			"id_card": {
+				required: id_card_pic_flag
+			},
+			"company_shop_registration": {
+				required: company_shop_registration_pic_flag
+			},*/
+			"hotel_categories": {
+				required: hotel_category_flag
+			}
+		},
+		messages: {
+			/*"profile_pic" : {
+				required : "Please upload profile pic."
+			},
+			"company_img_1": {
+				required: "Please upload company image 1."
+			},
+			"pancard": {
+				required: "Please upload pancard."
+			},
+			"id_card": {
+				required: "Please upload id card."
+			},
+			"company_shop_registration": {
+				required: "Please upload company shop registration."
+			},*/
+			"hotel_categories": {
+				required: "Please select hotel categories."
+			}
+		}
+	});
+		
+});
 	function selectCountry(value,city_code,state) {
 		
 		var state_id=state;
@@ -430,6 +613,5 @@ $(document).ready(function(){
 				$(".shw").html(data);
 			}
 			});	
-				
-			}
+	}
 </script>

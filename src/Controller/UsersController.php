@@ -287,300 +287,304 @@ $this->set(compact('cities', 'states', 'countries', 'allCities', 'allStates','me
 * @return void Redirects on successful edit, renders view otherwise.
 * @throws \Cake\Network\Exception\NotFoundException When record not found.
 */
-public function edit($id) {
-	
-$this->loadModel("TravelCertificates");
-$userDetails = $this->Users->get($id);
-if($this->request->is(['post', 'put'])) {
-//pr($userDetails);
-if($userDetails["role_id"] == 3) {
-if(isset($this->request->data["hotel_categories"]) && !empty($this->request->data["hotel_categories"])) {
-$this->request->data["hotel_categories"] = $this->request->data["hotel_categories"];
-}
-if(isset($this->request->data["hotel_rating"]) && !empty($this->request->data["hotel_rating"])) {
-$this->request->data["hotel_rating"] = $this->request->data["hotel_rating"];
-}
-}
-if(isset($this->request->data["preference"]) && !empty($this->request->data["preference"])) {
-$this->request->data["preference"] = implode(",", $this->request->data["preference"]);
-}
-//pr($this->request->data);
-//exit;
-if(is_uploaded_file($this->request->data['profile_pic']['tmp_name']) && !empty($this->request->data['profile_pic']['tmp_name']))
-{
-$path_info = pathinfo($this->request->data['profile_pic']['name']);
-chmod ($this->request->data['profile_pic']['tmp_name'], 0644);
-$photo=time().mt_rand().".".$path_info['extension'];
-$fullpath= WWW_ROOT."img".DS."user_docs".DS.$id;
-$res1 = is_dir($fullpath);
-if($res1 != 1) {
-$res2= mkdir($fullpath, 0777, true);
-}
-move_uploaded_file($this->request->data['profile_pic']['tmp_name'],$fullpath.DS.$photo);
-$this->request->data['profile_pic'] = $photo;
-/*if(!empty($user['profile_pic']) && file_exists($fullpath.DS.$user['profile_pic'])) {
-unlink($fullpath.DS.$user['profile_pic']);
-}*/
-}
-else {
-unset($this->request->data['profile_pic']);
-}
-if(is_uploaded_file($this->request->data['pancard']['tmp_name']) && !empty($this->request->data['pancard']['tmp_name']))
-{
-$path_info = pathinfo($this->request->data['pancard']['name']);
-chmod ($this->request->data['pancard']['tmp_name'], 0644);
-$photo=time().mt_rand().".".$path_info['extension'];
-$fullpath= WWW_ROOT."img".DS."user_docs".DS.$id;
-$res1 = is_dir($fullpath);
-if($res1 != 1) {
-$res2= mkdir($fullpath, 0777, true);
-}
-move_uploaded_file($this->request->data['pancard']['tmp_name'],$fullpath.DS.$photo);
-$this->request->data['pancard_pic'] = $photo;
-/*if(!empty($user['pancard_pic']) && file_exists($fullpath.DS.$user['pancard_pic'])) {
-unlink($fullpath.DS.$user['pancard_pic']);
-}*/
-}
-else {
-unset($this->request->data['pancard']);
-}
-if(is_uploaded_file($this->request->data['company_img_1']['tmp_name']) && !empty($this->request->data['company_img_1']['tmp_name']))
-{
-$path_info = pathinfo($this->request->data['company_img_1']['name']);
-chmod ($this->request->data['company_img_1']['tmp_name'], 0644);
-$photo=time().mt_rand().".".$path_info['extension'];
-$fullpath= WWW_ROOT."img".DS."user_docs".DS.$id;
-$res1 = is_dir($fullpath);
-if($res1 != 1) {
-$res2= mkdir($fullpath, 0777, true);
-}
-move_uploaded_file($this->request->data['company_img_1']['tmp_name'],$fullpath.DS.$photo);
-$this->request->data['company_img_1_pic'] = $photo;
-/*if(!empty($user['company_img_1_pic']) && file_exists($fullpath.DS.$user['company_img_1_pic'])) {
-unlink($fullpath.DS.$user['company_img_1_pic']);
-}*/
-}
-else {
-unset($this->request->data['company_img_1']);
-}
-if(is_uploaded_file($this->request->data['company_img_2']['tmp_name']) && !empty($this->request->data['company_img_2']['tmp_name']))
-{
-$path_info = pathinfo($this->request->data['company_img_2']['name']);
-chmod ($this->request->data['company_img_2']['tmp_name'], 0644);
-$photo=time().mt_rand().".".$path_info['extension'];
-$fullpath= WWW_ROOT."img".DS."user_docs".DS.$id;
-$res1 = is_dir($fullpath);
-if($res1 != 1) {
-$res2= mkdir($fullpath, 0777, true);
-}
-move_uploaded_file($this->request->data['company_img_2']['tmp_name'],$fullpath.DS.$photo);
-$this->request->data['company_img_2_pic'] = $photo;
-/*if(!empty($user['company_img_2_pic']) && file_exists($fullpath.DS.$user['company_img_2_pic'])) {
-unlink($fullpath.DS.$user['company_img_2_pic']);
-}*/
-}
-else {
-unset($this->request->data['company_img_2']);
-}
-if(is_uploaded_file($this->request->data['id_card']['tmp_name']) && !empty($this->request->data['id_card']['tmp_name']))
-{
-$path_info = pathinfo($this->request->data['id_card']['name']);
-chmod ($this->request->data['id_card']['tmp_name'], 0644);
-$photo=time().mt_rand().".".$path_info['extension'];
-$fullpath= WWW_ROOT."img".DS."user_docs".DS.$id;
-$res1 = is_dir($fullpath);
-if($res1 != 1) {
-$res2= mkdir($fullpath, 0777, true);
-}
-move_uploaded_file($this->request->data['id_card']['tmp_name'],$fullpath.DS.$photo);
-$this->request->data['id_card_pic'] = $photo;
-/*if(!empty($user['id_card_pic']) && file_exists($fullpath.DS.$user['id_card_pic'])) {
-unlink($fullpath.DS.$user['id_card_pic']);
-}*/
-}
-else {
-unset($this->request->data['id_card']);
-}
-if(is_uploaded_file($this->request->data['company_shop_registration']['tmp_name']) && !empty($this->request->data['company_shop_registration']['tmp_name']))
-{
-$path_info = pathinfo($this->request->data['company_shop_registration']['name']);
-chmod ($this->request->data['company_shop_registration']['tmp_name'], 0644);
-$photo=time().mt_rand().".".$path_info['extension'];
-$fullpath= WWW_ROOT."img".DS."user_docs".DS.$id;
-$res1 = is_dir($fullpath);
-if($res1 != 1) {
-$res2= mkdir($fullpath, 0777, true);
-}
-move_uploaded_file($this->request->data['company_shop_registration']['tmp_name'],$fullpath.DS.$photo);
-$this->request->data['company_shop_registration_pic'] = $photo;
-/*if(!empty($user['company_shop_registration_pic']) && file_exists($fullpath.DS.$user['company_shop_registration_pic'])) {
-unlink($fullpath.DS.$user['company_shop_registration_pic']);
-}*/
-}
-else {
-unset($this->request->data['company_shop_registration']);
-}
-if($userDetails["role_id"] == 1) {
-if(is_uploaded_file($this->request->data['iata_pic']['tmp_name']) && !empty($this->request->data['iata_pic']['tmp_name']))
-{
-$path_info = pathinfo($this->request->data['iata_pic']['name']);
-chmod ($this->request->data['iata_pic']['tmp_name'], 0644);
-$photo=time().mt_rand().".".$path_info['extension'];
-$fullpath= WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
-$res1 = is_dir($fullpath);
-if($res1 != 1) {
-$res2= mkdir($fullpath, 0777, true);
-}
-move_uploaded_file($this->request->data['iata_pic']['tmp_name'],$fullpath.DS.$photo);
-$this->request->data['iata_pic'] = $photo;
-/*if(!empty($user['iata_pic']) && file_exists($fullpath.DS.$user['iata_pic'])) {
-unlink($fullpath.DS.$user['iata_pic']);
-}*/
-}
-else {
-unset($this->request->data['iata_pic']);
-}
-if(is_uploaded_file($this->request->data['tafi_pic']['tmp_name']) && !empty($this->request->data['tafi_pic']['tmp_name']))
-{
-$path_info = pathinfo($this->request->data['tafi_pic']['name']);
-chmod ($this->request->data['tafi_pic']['tmp_name'], 0644);
-$photo=time().mt_rand().".".$path_info['extension'];
-$fullpath= WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
-$res1 = is_dir($fullpath);
-if($res1 != 1) {
-$res2= mkdir($fullpath, 0777, true);
-}
-move_uploaded_file($this->request->data['tafi_pic']['tmp_name'],$fullpath.DS.$photo);
-$this->request->data['tafi_pic'] = $photo;
-}
-else {
-unset($this->request->data['tafi_pic']);
-}					
-if(is_uploaded_file($this->request->data['taai_pic']['tmp_name']) && !empty($this->request->data['taai_pic']['tmp_name']))
-{
-$path_info = pathinfo($this->request->data['taai_pic']['name']);
-chmod ($this->request->data['taai_pic']['tmp_name'], 0644);
-$photo=time().mt_rand().".".$path_info['extension'];
-$fullpath= WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
-$res1 = is_dir($fullpath);
-if($res1 != 1) {
-$res2= mkdir($fullpath, 0777, true);
-}
-move_uploaded_file($this->request->data['taai_pic']['tmp_name'],$fullpath.DS.$photo);
-$this->request->data['taai_pic'] = $photo;
-/*if(!empty($user['taai_pic']) && file_exists($fullpath.DS.$user['taai_pic'])) {
-unlink($fullpath.DS.$user['taai_pic']);
-}*/
-}
-else {
-unset($this->request->data['taai_pic']);
-}
-if(is_uploaded_file($this->request->data['iato_pic']['tmp_name']) && !empty($this->request->data['iato_pic']['tmp_name']))
-{
-$path_info = pathinfo($this->request->data['iato_pic']['name']);
-chmod ($this->request->data['iato_pic']['tmp_name'], 0644);
-$photo=time().mt_rand().".".$path_info['extension'];
-$fullpath= WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
-$res1 = is_dir($fullpath);
-if($res1 != 1) {
-$res2= mkdir($fullpath, 0777, true);
-}
-move_uploaded_file($this->request->data['iato_pic']['tmp_name'],$fullpath.DS.$photo);
-$this->request->data['iato_pic'] = $photo;
-/*if(!empty($user['iato_pic']) && file_exists($fullpath.DS.$user['iato_pic'])) {
-unlink($fullpath.DS.$user['iato_pic']);
-}*/
-}
-else {
-unset($this->request->data['iato_pic']);
-}
-if(is_uploaded_file($this->request->data['iso9001_pic']['tmp_name']) && !empty($this->request->data['iso9001_pic']['tmp_name']))
-{
-$path_info = pathinfo($this->request->data['iso9001_pic']['name']);
-chmod ($this->request->data['iso9001_pic']['tmp_name'], 0644);
-$photo=time().mt_rand().".".$path_info['extension'];
-$fullpath= WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
-$res1 = is_dir($fullpath);
-if($res1 != 1) {
-$res2= mkdir($fullpath, 0777, true);
-}
-move_uploaded_file($this->request->data['iso9001_pic']['tmp_name'],$fullpath.DS.$photo);
-$this->request->data['iso9001_pic'] = $photo;
-/*if(!empty($user['iso9001_pic']) && file_exists($fullpath.DS.$user['iso9001_pic'])) {
-unlink($fullpath.DS.$user['iso9001_pic']);
-}*/
-}
-else {
-unset($this->request->data['iso9001_pic']);
-}
-if(is_uploaded_file($this->request->data['uftaa_pic']['tmp_name']) && !empty($this->request->data['uftaa_pic']['tmp_name']))
-{
-$path_info = pathinfo($this->request->data['uftaa_pic']['name']);
-chmod ($this->request->data['uftaa_pic']['tmp_name'], 0644);
-$photo=time().mt_rand().".".$path_info['extension'];
-$fullpath= WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
-$res1 = is_dir($fullpath);
-if($res1 != 1) {
-$res2= mkdir($fullpath, 0777, true);
-}
-move_uploaded_file($this->request->data['uftaa_pic']['tmp_name'],$fullpath.DS.$photo);
-$this->request->data['uftaa_pic'] = $photo;
-/*if(!empty($user['uftaa_pic']) && file_exists($fullpath.DS.$user['uftaa_pic'])) {
-unlink($fullpath.DS.$user['uftaa_pic']);
-}*/
-}
-else {
-unset($this->request->data['uftaa_pic']);
-}
-if(is_uploaded_file($this->request->data['adtoi_pic']['tmp_name']) && !empty($this->request->data['adtoi_pic']['tmp_name']))
-{
-$path_info = pathinfo($this->request->data['adtoi_pic']['name']);
-chmod ($this->request->data['adtoi_pic']['tmp_name'], 0644);
-$photo=time().mt_rand().".".$path_info['extension'];
-$fullpath= WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
-$res1 = is_dir($fullpath);
-if($res1 != 1) {
-$res2= mkdir($fullpath, 0777, true);
-}
-move_uploaded_file($this->request->data['adtoi_pic']['tmp_name'],$fullpath.DS.$photo);
-$this->request->data['adtoi_pic'] = $photo;
-/*if(!empty($user['adtoi_pic']) && file_exists($fullpath.DS.$user['adtoi_pic'])) {
-unlink($fullpath.DS.$user['adtoi_pic']);
-}*/
-}
-else {
-unset($this->request->data['adtoi_pic']);
-}
-if(is_uploaded_file($this->request->data['adyoi_pic']['tmp_name']) && !empty($this->request->data['adyoi_pic']['tmp_name']))
-{
-$path_info = pathinfo($this->request->data['adyoi_pic']['name']);
-chmod ($this->request->data['adyoi_pic']['tmp_name'], 0644);
-$photo=time().mt_rand().".".$path_info['extension'];
-$fullpath= WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
-$res1 = is_dir($fullpath);
-if($res1 != 1) {
-$res2= mkdir($fullpath, 0777, true);
-}
-move_uploaded_file($this->request->data['adyoi_pic']['tmp_name'],$fullpath.DS.$photo);
-$this->request->data['adyoi_pic'] = $photo;
-}
-else {
-unset($this->request->data['adyoi_pic']);
-}
-}
-$user = $this->Users->patchEntity($userDetails, $this->request->data);
-if ($this->Users->save($user)) {
-$this->Flash->error(__('User has been updated successfully.'));
-$result['msg'] = "User has been updated successfully";
-$this->redirect('/users/dashboard');
-} else {
-$this->Flash->error(__('Something went wrong please try again.'));
-$this->redirect('/users/profileedit');
-}
-} else {
-$this->redirect('/users/profileedit');
-}
-}
+	public function edit($id) {
+		$this->loadModel("TravelCertificates");
+		$userDetails = $this->Users->get($id);
+		if($this->request->is(['post', 'put'])) {
+			//pr($userDetails);
+			if($userDetails["role_id"] == 3) {
+				if(isset($this->request->data["hotel_categories"]) && !empty($this->request->data["hotel_categories"])) {
+					$this->request->data["hotel_categories"] = $this->request->data["hotel_categories"];
+				}
+				if(isset($this->request->data["hotel_rating"]) && !empty($this->request->data["hotel_rating"])) {
+					$this->request->data["hotel_rating"] = $this->request->data["hotel_rating"];
+				}
+			}
+			if(isset($this->request->data["preference"]) && !empty($this->request->data["preference"])) {
+				$this->request->data["preference"] = implode(",", $this->request->data["preference"]);
+			}
+	 
+			if(is_uploaded_file($this->request->data['profile_pic']['tmp_name']) && !empty($this->request->data['profile_pic']['tmp_name']))
+			{
+				$path_info = pathinfo($this->request->data['profile_pic']['name']);
+				chmod ($this->request->data['profile_pic']['tmp_name'], 0644);
+				$photo=time().mt_rand().".".$path_info['extension'];
+				$fullpath= WWW_ROOT."img".DS."user_docs".DS.$id;
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				move_uploaded_file($this->request->data['profile_pic']['tmp_name'],$fullpath.DS.$photo);
+				$this->request->data['profile_pic'] = $photo;
+				/*if(!empty($user['profile_pic']) && file_exists($fullpath.DS.$user['profile_pic'])) {
+				unlink($fullpath.DS.$user['profile_pic']);
+				}*/
+			}
+			else 
+			{
+				unset($this->request->data['profile_pic']);
+			}
+			if(is_uploaded_file($this->request->data['pancard']['tmp_name']) && !empty($this->request->data['pancard']['tmp_name']))
+			{
+				$path_info = pathinfo($this->request->data['pancard']['name']);
+				chmod ($this->request->data['pancard']['tmp_name'], 0644);
+				$photo=time().mt_rand().".".$path_info['extension'];
+				$fullpath= WWW_ROOT."img".DS."user_docs".DS.$id;
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				move_uploaded_file($this->request->data['pancard']['tmp_name'],$fullpath.DS.$photo);
+				$this->request->data['pancard_pic'] = $photo;
+				/*if(!empty($user['pancard_pic']) && file_exists($fullpath.DS.$user['pancard_pic'])) {
+				unlink($fullpath.DS.$user['pancard_pic']);
+				}*/
+			}
+			else 
+			{
+				unset($this->request->data['pancard']);
+			}
+			if(is_uploaded_file($this->request->data['company_img_1']['tmp_name']) && !empty($this->request->data['company_img_1']['tmp_name']))
+			{
+				$path_info = pathinfo($this->request->data['company_img_1']['name']);
+				chmod ($this->request->data['company_img_1']['tmp_name'], 0644);
+				$photo=time().mt_rand().".".$path_info['extension'];
+				$fullpath= WWW_ROOT."img".DS."user_docs".DS.$id;
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				move_uploaded_file($this->request->data['company_img_1']['tmp_name'],$fullpath.DS.$photo);
+				$this->request->data['company_img_1_pic'] = $photo;
+				/*if(!empty($user['company_img_1_pic']) && file_exists($fullpath.DS.$user['company_img_1_pic'])) {
+				unlink($fullpath.DS.$user['company_img_1_pic']);
+				}*/
+			}
+			else 
+			{
+				unset($this->request->data['company_img_1']);
+			}
+			if(is_uploaded_file($this->request->data['company_img_2']['tmp_name']) && !empty($this->request->data['company_img_2']['tmp_name']))
+			{
+				$path_info = pathinfo($this->request->data['company_img_2']['name']);
+				chmod ($this->request->data['company_img_2']['tmp_name'], 0644);
+				$photo=time().mt_rand().".".$path_info['extension'];
+				$fullpath= WWW_ROOT."img".DS."user_docs".DS.$id;
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				move_uploaded_file($this->request->data['company_img_2']['tmp_name'],$fullpath.DS.$photo);
+				$this->request->data['company_img_2_pic'] = $photo;
+				/*if(!empty($user['company_img_2_pic']) && file_exists($fullpath.DS.$user['company_img_2_pic'])) {
+				unlink($fullpath.DS.$user['company_img_2_pic']);
+				}*/
+			}
+			else {
+				unset($this->request->data['company_img_2']);
+			}
+			if(is_uploaded_file($this->request->data['id_card']['tmp_name']) && !empty($this->request->data['id_card']['tmp_name']))
+			{
+				$path_info = pathinfo($this->request->data['id_card']['name']);
+				chmod ($this->request->data['id_card']['tmp_name'], 0644);
+				$photo=time().mt_rand().".".$path_info['extension'];
+				$fullpath= WWW_ROOT."img".DS."user_docs".DS.$id;
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				move_uploaded_file($this->request->data['id_card']['tmp_name'],$fullpath.DS.$photo);
+				$this->request->data['id_card_pic'] = $photo;
+				/*if(!empty($user['id_card_pic']) && file_exists($fullpath.DS.$user['id_card_pic'])) {
+				unlink($fullpath.DS.$user['id_card_pic']);
+				}*/
+			}
+			else {
+				unset($this->request->data['id_card']);
+			}
+			if(is_uploaded_file($this->request->data['company_shop_registration']['tmp_name']) && !empty($this->request->data['company_shop_registration']['tmp_name']))
+			{
+				$path_info = pathinfo($this->request->data['company_shop_registration']['name']);
+				chmod ($this->request->data['company_shop_registration']['tmp_name'], 0644);
+				$photo=time().mt_rand().".".$path_info['extension'];
+				$fullpath= WWW_ROOT."img".DS."user_docs".DS.$id;
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				move_uploaded_file($this->request->data['company_shop_registration']['tmp_name'],$fullpath.DS.$photo);
+				$this->request->data['company_shop_registration_pic'] = $photo;
+				/*if(!empty($user['company_shop_registration_pic']) && file_exists($fullpath.DS.$user['company_shop_registration_pic'])) {
+				unlink($fullpath.DS.$user['company_shop_registration_pic']);
+				}*/
+			}
+			else {
+				unset($this->request->data['company_shop_registration']);
+			}
+			if($userDetails["role_id"] == 1) {
+				if(is_uploaded_file($this->request->data['iata_pic']['tmp_name']) && !empty($this->request->data['iata_pic']['tmp_name']))
+				{
+					$path_info = pathinfo($this->request->data['iata_pic']['name']);
+					chmod ($this->request->data['iata_pic']['tmp_name'], 0644);
+					$photo=time().mt_rand().".".$path_info['extension'];
+					$fullpath= WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
+					$res1 = is_dir($fullpath);
+					if($res1 != 1) {
+						$res2= mkdir($fullpath, 0777, true);
+					}
+					move_uploaded_file($this->request->data['iata_pic']['tmp_name'],$fullpath.DS.$photo);
+					$this->request->data['iata_pic'] = $photo;
+					/*if(!empty($user['iata_pic']) && file_exists($fullpath.DS.$user['iata_pic'])) {
+					unlink($fullpath.DS.$user['iata_pic']);
+					}*/
+				}
+				else {
+					unset($this->request->data['iata_pic']);
+				}
+				if(is_uploaded_file($this->request->data['tafi_pic']['tmp_name']) && !empty($this->request->data['tafi_pic']['tmp_name']))
+				{
+					$path_info = pathinfo($this->request->data['tafi_pic']['name']);
+					chmod ($this->request->data['tafi_pic']['tmp_name'], 0644);
+					$photo=time().mt_rand().".".$path_info['extension'];
+					$fullpath= WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
+					$res1 = is_dir($fullpath);
+					if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				move_uploaded_file($this->request->data['tafi_pic']['tmp_name'],$fullpath.DS.$photo);
+				$this->request->data['tafi_pic'] = $photo;
+				}
+				else {
+					unset($this->request->data['tafi_pic']);
+				}					
+				if(is_uploaded_file($this->request->data['taai_pic']['tmp_name']) && !empty($this->request->data['taai_pic']['tmp_name']))
+				{
+					$path_info = pathinfo($this->request->data['taai_pic']['name']);
+					chmod ($this->request->data['taai_pic']['tmp_name'], 0644);
+					$photo=time().mt_rand().".".$path_info['extension'];
+					$fullpath= WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
+					$res1 = is_dir($fullpath);
+					if($res1 != 1) {
+						$res2= mkdir($fullpath, 0777, true);
+					}
+					move_uploaded_file($this->request->data['taai_pic']['tmp_name'],$fullpath.DS.$photo);
+					$this->request->data['taai_pic'] = $photo;
+					/*if(!empty($user['taai_pic']) && file_exists($fullpath.DS.$user['taai_pic'])) {
+					unlink($fullpath.DS.$user['taai_pic']);
+					}*/
+				}
+				else {
+					unset($this->request->data['taai_pic']);
+				}
+				if(is_uploaded_file($this->request->data['iato_pic']['tmp_name']) && !empty($this->request->data['iato_pic']['tmp_name']))
+				{
+					$path_info = pathinfo($this->request->data['iato_pic']['name']);
+					chmod ($this->request->data['iato_pic']['tmp_name'], 0644);
+					$photo=time().mt_rand().".".$path_info['extension'];
+					$fullpath= WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
+					$res1 = is_dir($fullpath);
+					if($res1 != 1) {
+						$res2= mkdir($fullpath, 0777, true);
+					}
+					move_uploaded_file($this->request->data['iato_pic']['tmp_name'],$fullpath.DS.$photo);
+					$this->request->data['iato_pic'] = $photo;
+					/*if(!empty($user['iato_pic']) && file_exists($fullpath.DS.$user['iato_pic'])) {
+					unlink($fullpath.DS.$user['iato_pic']);
+					}*/
+				}
+				else {
+					unset($this->request->data['iato_pic']);
+				}
+				if(is_uploaded_file($this->request->data['iso9001_pic']['tmp_name']) && !empty($this->request->data['iso9001_pic']['tmp_name']))
+				{
+					$path_info = pathinfo($this->request->data['iso9001_pic']['name']);
+					chmod ($this->request->data['iso9001_pic']['tmp_name'], 0644);
+					$photo=time().mt_rand().".".$path_info['extension'];
+					$fullpath= WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
+					$res1 = is_dir($fullpath);
+					if($res1 != 1) {
+						$res2= mkdir($fullpath, 0777, true);
+					}
+					move_uploaded_file($this->request->data['iso9001_pic']['tmp_name'],$fullpath.DS.$photo);
+					$this->request->data['iso9001_pic'] = $photo;
+					/*if(!empty($user['iso9001_pic']) && file_exists($fullpath.DS.$user['iso9001_pic'])) {
+					unlink($fullpath.DS.$user['iso9001_pic']);
+					}*/
+				}
+				else {
+					unset($this->request->data['iso9001_pic']);
+				}
+				if(is_uploaded_file($this->request->data['uftaa_pic']['tmp_name']) && !empty($this->request->data['uftaa_pic']['tmp_name']))
+				{
+					$path_info = pathinfo($this->request->data['uftaa_pic']['name']);
+					chmod ($this->request->data['uftaa_pic']['tmp_name'], 0644);
+					$photo=time().mt_rand().".".$path_info['extension'];
+					$fullpath= WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
+					$res1 = is_dir($fullpath);
+					if($res1 != 1) {
+						$res2= mkdir($fullpath, 0777, true);
+					}
+					move_uploaded_file($this->request->data['uftaa_pic']['tmp_name'],$fullpath.DS.$photo);
+					$this->request->data['uftaa_pic'] = $photo;
+					/*if(!empty($user['uftaa_pic']) && file_exists($fullpath.DS.$user['uftaa_pic'])) {
+					unlink($fullpath.DS.$user['uftaa_pic']);
+					}*/
+				}
+				else {
+					unset($this->request->data['uftaa_pic']);
+				}
+				if(is_uploaded_file($this->request->data['adtoi_pic']['tmp_name']) && !empty($this->request->data['adtoi_pic']['tmp_name']))
+				{
+					$path_info = pathinfo($this->request->data['adtoi_pic']['name']);
+					chmod ($this->request->data['adtoi_pic']['tmp_name'], 0644);
+					$photo=time().mt_rand().".".$path_info['extension'];
+					$fullpath= WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
+					$res1 = is_dir($fullpath);
+					if($res1 != 1) {
+						$res2= mkdir($fullpath, 0777, true);
+					}
+					move_uploaded_file($this->request->data['adtoi_pic']['tmp_name'],$fullpath.DS.$photo);
+					$this->request->data['adtoi_pic'] = $photo;
+					/*if(!empty($user['adtoi_pic']) && file_exists($fullpath.DS.$user['adtoi_pic'])) {
+					unlink($fullpath.DS.$user['adtoi_pic']);
+					}*/
+				}
+				else {
+					unset($this->request->data['adtoi_pic']);
+				}
+				if(is_uploaded_file($this->request->data['adyoi_pic']['tmp_name']) && !empty($this->request->data['adyoi_pic']['tmp_name']))
+					{
+					$path_info = pathinfo($this->request->data['adyoi_pic']['name']);
+					chmod ($this->request->data['adyoi_pic']['tmp_name'], 0644);
+					$photo=time().mt_rand().".".$path_info['extension'];
+					$fullpath= WWW_ROOT."img".DS."user_travel_certificates".DS.$id;
+					$res1 = is_dir($fullpath);
+					if($res1 != 1) {
+						$res2= mkdir($fullpath, 0777, true);
+					}
+					move_uploaded_file($this->request->data['adyoi_pic']['tmp_name'],$fullpath.DS.$photo);
+					$this->request->data['adyoi_pic'] = $photo;
+				}
+				else {
+					unset($this->request->data['adyoi_pic']);
+				}
+			}
+			$user = $this->Users->patchEntity($userDetails, $this->request->data);
+			//pr($user); exit;
+			if ($this->Users->save($user)) {
+				$this->Flash->error(__('User has been updated successfully.'));
+				$result['msg'] = "User has been updated successfully";
+				$this->redirect('/users/profileedit');
+			} else {
+				$this->Flash->error(__('Something went wrong please try again.'));
+				$this->redirect('/users/profileedit');
+			}
+		}
+		else 
+		{
+			$this->redirect('/users/profileedit');
+		}
+	}
 /**
 * Delete method
 *
@@ -707,80 +711,81 @@ return array("1"=>"Corporate Hotel", "2"=>"Boutique Hotel", "3"=>"Heritage Hotel
 }
 public function viewuserprofile(){
 }
-public function profileedit() {
-$this->loadModel("UserRatings");
-$this->loadModel("TravelCertificates");
-$this->loadModel('States');
-$this->loadModel('Cities');
-$this->loadModel('Requests');
-$this->loadModel('Responses');
-$this->viewBuilder()->layout('user_layout');
-$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
-$this->set('users', $user);
-if(!empty($user)) {
-$userTravelCertificates = $this->TravelCertificates->find('list',['keyField' => 'certificate_name', 'valueField' => 'certificate_pic'])
-->hydrate(false)
-->where(['user_id' => $this->Auth->user('id')])
-->toArray();
-$myRequestCount = $myReponseCount = 0;
-$myfinalCount  = 0;
-$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status "=>2]]);
-$myfinalCount = $query3 ->count();
-$this->set('myfinalCount', $myfinalCount );
-$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
-$myRequestCount = $query->count();
-$myRequestCount1 = $query->count(); 
-$delcount=0;
-$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
-foreach($requests as $req){
-$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
-if($rqueryr->count()!=0){
-$delcount++;
-}
-}
-if($myRequestCount > $delcount) {
-$myRequestCount = $myRequestCount-$delcount;
-}	
-$this->set('myRequestCountdel', $delcount);
-$this->set('myRequestCount', $myRequestCount1);
-$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.user_id' => $this->Auth->user('id')]]);
-$myReponseCount = $queryr->count();
-$this->set('myReponseCount', $myReponseCount);
-$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.user_id' => $this->Auth->user('id'),"Responses.is_deleted"=>0]]);
-$myReponseCount = $queryr->count();
-$this->set('myReponseCount', $myReponseCount);
-$cities = $this->Cities->getAllCities();
-$states = $this->States->find()->where(['country_id' => '101'])->all();
-$states_show=$this->Users->States->find('list');
-$country_show=$this->Users->Countries->find('list');
-$allStates = array();
-foreach($states as $state){
-$allStates[$state["id"]] = $state['state_name'];
-}
-$allCities = array();
-$allCityList = array();
-if(!empty($cities)) {
-foreach($cities as $city) {
-/*$allCities[] = array("label"=>str_replace("'", "", $city['name']), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");*/
-$allCities[] = array("label"=>str_replace("'", "", $city['name'].' ('.$city['state']->state_name. ')'), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
-$allCityList[$city['id']] = str_replace("'", "", $city['name'].' ('.$city['state']->state_name. ')');
-}
-}
-$allCities = json_encode($allCities);
-$this->set(compact('states_show','country_show','cities', 'states', 'countries', 'allCities', 'allStates', 'allCityList', 'userTravelCertificates'));
-} else {
-$this->Flash->error(__('Please login to acces this location.'));
-$this->redirect('/pages/home');
-}
-$this->set("travelCertificates", $this->_getCertificatesArray());
-$this->set("hotelCategories", $this->_getHotelCategoriesArray());
-$this->loadModel('User_Chats');
-$csort['created'] = "DESC";
-$allUnreadChat = $this->User_Chats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->order($csort)->limit(10)->all();
-$chatCount = $allUnreadChat->count();
-$this->set('chatCount',$chatCount); 
-$this->set('allunreadchat',$allUnreadChat);
-}
+	public function profileedit() {
+		$this->loadModel("UserRatings");
+		$this->loadModel("TravelCertificates");
+		$this->loadModel('States');
+		$this->loadModel('Cities');
+		$this->loadModel('Requests');
+		$this->loadModel('Responses');
+		$this->viewBuilder()->layout('user_layout');
+		$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
+		$this->set('users', $user);
+		if(!empty($user)) {
+			$userTravelCertificates = $this->TravelCertificates->find('list',['keyField' => 'certificate_name', 'valueField' => 'certificate_pic'])
+				->hydrate(false)
+				->where(['user_id' => $this->Auth->user('id')])
+				->toArray();
+			$myRequestCount = $myReponseCount = 0;
+			$myfinalCount  = 0;
+			$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status "=>2]]);
+			$myfinalCount = $query3 ->count();
+			$this->set('myfinalCount', $myfinalCount );
+			$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
+			$myRequestCount = $query->count();
+			$myRequestCount1 = $query->count(); 
+			$delcount=0;
+			$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
+			foreach($requests as $req){
+				$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
+				if($rqueryr->count()!=0){
+					$delcount++;
+				}
+			}
+			if($myRequestCount > $delcount) {
+				$myRequestCount = $myRequestCount-$delcount;
+			}
+			$this->set('myRequestCountdel', $delcount);
+			$this->set('myRequestCount', $myRequestCount1);
+			$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.user_id' => $this->Auth->user('id')]]);
+			$myReponseCount = $queryr->count();
+			$this->set('myReponseCount', $myReponseCount);
+			$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.user_id' => $this->Auth->user('id'),"Responses.is_deleted"=>0]]);
+			$myReponseCount = $queryr->count();
+			$this->set('myReponseCount', $myReponseCount);
+			$cities = $this->Cities->getAllCities();
+			$states = $this->States->find()->where(['country_id' => '101'])->all();
+			$states_show=$this->Users->States->find('list');
+			$country_show=$this->Users->Countries->find('list');
+			$allStates = array();
+			foreach($states as $state){
+				$allStates[$state["id"]] = $state['state_name'];
+			}
+			$allCities = array();
+			$allCityList = array();
+			if(!empty($cities)) {
+				foreach($cities as $city) {
+					/*$allCities[] = array("label"=>str_replace("'", "", $city['name']), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");*/
+					$allCities[] = array("label"=>str_replace("'", "", $city['name'].' ('.$city['state']->state_name. ')'), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
+					$allCityList[$city['id']] = str_replace("'", "", $city['name'].' ('.$city['state']->state_name. ')');
+				}
+			}
+			$allCities = json_encode($allCities);
+			$this->set(compact('states_show','country_show','cities', 'states', 'countries', 'allCities', 'allStates', 'allCityList', 'userTravelCertificates'));
+		} 
+		else {
+			$this->Flash->error(__('Please login to acces this location.'));
+			$this->redirect('/pages/home');
+		}
+		$this->set("travelCertificates", $this->_getCertificatesArray());
+		$this->set("hotelCategories", $this->_getHotelCategoriesArray());
+		$this->loadModel('User_Chats');
+		$csort['created'] = "DESC";
+		$allUnreadChat = $this->User_Chats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->order($csort)->limit(10)->all();
+		$chatCount = $allUnreadChat->count();
+		$this->set('chatCount',$chatCount); 
+		$this->set('allunreadchat',$allUnreadChat);
+	}
 
 
 public function ajaxCity()
