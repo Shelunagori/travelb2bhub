@@ -2,6 +2,11 @@
 use Cake\Datasource\ConnectionManager; 
 $conn = ConnectionManager::get('default');
 ?>
+<style>
+	legend {
+		text-align:center;
+	}
+</style>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <div id="removed_request_list" class="container-fluid">
 <div class="row equal_column" > 
@@ -89,7 +94,7 @@ $conn = ConnectionManager::get('default');
 		if(count($requests) >0) {
 $m =0;
 			foreach($requests as $request){
-if($m%3==0) { echo '<div class="clearfix"></div>'; 
+			if($m%3==0) { echo '<div class="clearfix"></div>'; 
                   }
                   $m++;	
  ?>

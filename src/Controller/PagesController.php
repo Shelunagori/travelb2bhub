@@ -895,7 +895,7 @@ class PagesController extends AppController
 			}       
        
 			$conditions ='';
-if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
+		if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 			if(!empty($_POST["budgetsearch"])) {
 				$QPriceRange = $_POST["budgetsearch"];
 				$result = explode("-", $QPriceRange);
@@ -1076,13 +1076,14 @@ $chatusers = array();
 				->order(["id" => "DESC"]);
 				  $rating['rating'][$req['id']]  = $userRating;
 			$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$req['user_id']."' AND blocked_by='".$req['request']['user_id']."'";
-$stmt = $conn->execute($sql1);
-$bresult = $stmt ->fetch('assoc');
-if($bresult['block_count']>0){
-$blockeddata['blockedUser'][$req['id']] =1;
-}else{
-$blockeddata['blockedUser'][$req['id']] =0;
-}
+		$stmt = $conn->execute($sql1);
+		$bresult = $stmt ->fetch('assoc');
+		if($bresult['block_count']>0){
+			$blockeddata['blockedUser'][$req['id']] =1;
+		}
+		else{
+			$blockeddata['blockedUser'][$req['id']] =0;
+		}
 	$reqidarray[] =$req['request']['user_id'];		
         }
 			
@@ -1839,12 +1840,29 @@ public function removebusinessbuddyapi() {
 					$sortorder['Users.last_name'] = "DESC";
 				}		
 			}
+			
+		$this->loadModel('BlockedUsers');
+		$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
+			->hydrate(false)
+			->where(['blocked_by' => $_POST['user_id']])
+			->toArray();
+		$myBlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_by'])
+			->hydrate(false)
+			->where(['blocked_user_id' => $_POST['user_id']])
+			->toArray();
+		if(!empty($BlockedUsers)) {
+			$BlockedUsers = array_values($BlockedUsers);
+		}
+		array_push($BlockedUsers,$_POST['user_id']);
+		$BlockedUsers = array_unique($BlockedUsers);
+		$BlockedUsers=array_merge($BlockedUsers,$myBlockedUsers);
+		
 			$responses = $this->Responses->find()
 				->contain(["Users", "Requests","Requests.Hotels","Testimonial"])
-				->where($conditions)
+				->where($conditions,'Requests.user_id NOT IN' => $BlockedUsers)
 				->order($sortorder)
 				->all();
-
+			
 			$chatusers = array();
 			$conn = ConnectionManager::get('default');
 			$sql = "SELECT u.id,u.first_name,u.last_name FROM users as u 
@@ -2581,37 +2599,37 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	$BlockedUsers = array_unique($BlockedUsers);
 
 	if ($_POST['role_id'] == 1) { // Travel Agent
-	if(!empty($user["preference"])) {
-	$conditionalStates = array_unique(array_merge(explode(",", $user["preference"]), array($user["state_id"])));
-	} else {
-	$conditionalStates = $user["state_id"];
-	}
-  
-	$requests = $this->Requests->find()
-	->contain(["Users", "Responses","Hotels"])
-	->notMatching('Responses', function(\Cake\ORM\Query $q) {
-	return $q->where(['Responses.user_id' =>  $_POST['user_id']]);
-	})
+		if(!empty($user["preference"])) {
+			$conditionalStates = array_unique(array_merge(explode(",", $user["preference"]), array($user["state_id"])));
+		} else {
+			$conditionalStates = $user["state_id"];
+		}
+	  
+		$requests = $this->Requests->find()
+		->contain(["Users", "Responses","Hotels"])
+		->notMatching('Responses', function(\Cake\ORM\Query $q) {
+		return $q->where(['Responses.user_id' =>  $_POST['user_id']]);
+		})->where(["OR"=>['Requests.state_id IN' => $conditionalStates, 'Requests.pickup_state IN' => $conditionalStates], 'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
+		->group('Requests.id')
+		->order($sort)->all();
 
-	->where(["OR"=>['Requests.state_id IN' => $conditionalStates, 'Requests.pickup_state IN' => $conditionalStates], 'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
-	->group('Requests.id')
-	->order($sort)->all();
-
-	} else if ($_POST['role_id'] == 2) { /// Event Planner
-	$requests = $this->Requests->find()
-	->contain(["Users","Hotels"])
-	->where(['Requests.pickup_state' => $user["state_id"], 'Requests.category_id' => 2, "Requests.status !="=>2, "Requests.is_deleted"=>0])->order($sort)->all();
-	}else if ($_POST['role_id'] == 3) { /// Hotel
-	$requests = $this->Requests->find()
-	->contain(["Users", "Responses","Hotels"])
-	->notMatching('Responses', function(\Cake\ORM\Query $q) {
-	return $q->where(['Responses.user_id' => $_POST['user_id']]);
-	})
-	->where(['Requests.city_id' => $user['city_id'],'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
-	//->where(['Requests.category_id' => 3, "Requests.status !="=>2, "Requests.is_deleted"=>0])
-	->group('Requests.id')
-	->order($sort)->all();
+	} 
+	else if ($_POST['role_id'] == 2) { /// Event Planner
+		$requests = $this->Requests->find()
+		->contain(["Users","Hotels"])
+		->where(['Requests.pickup_state' => $user["state_id"], 'Requests.category_id' => 2, "Requests.status !="=>2, "Requests.is_deleted"=>0])->order($sort)->all();
 	}
+	else if ($_POST['role_id'] == 3) { /// Hotel
+			$requests = $this->Requests->find()
+			->contain(["Users", "Responses","Hotels"])
+			->notMatching('Responses', function(\Cake\ORM\Query $q) {
+			return $q->where(['Responses.user_id' => $_POST['user_id']]);
+			})
+		->where(['Requests.city_id' => $user['city_id'],'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
+		//->where(['Requests.category_id' => 3, "Requests.status !="=>2, "Requests.is_deleted"=>0])
+		->group('Requests.id')
+		->order($sort)->all();
+		}
 	$data = array();
 	$blockeddata = array();
 	foreach($requests as $req){

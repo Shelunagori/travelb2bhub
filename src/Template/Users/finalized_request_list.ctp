@@ -4,6 +4,11 @@
 use Cake\Datasource\ConnectionManager; 
 $conn = ConnectionManager::get('default');
 ?>
+<style>
+	legend {
+		text-align:center;
+	}
+</style>
 	<div id ="finalized_request_list" class="container-fluid">
 <div class="row equal_column" > 
     <div class="col-md-12" style="background-color:#fff"> 
