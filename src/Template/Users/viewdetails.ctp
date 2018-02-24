@@ -18,6 +18,7 @@ li {
 ul li b {
 	color:#96989A;
 }
+.col-md-12 { background: #fff !important; }
 
  </style>
  
@@ -57,7 +58,7 @@ ul li b {
 					echo $details['children']; ?></li>
 				</ul>
 			 </div>
-			<div class="col-md-12">
+			<div class="">
 		<?php
 		if ($details['category_id'] == 1 || $details['category_id'] == 3)
 		{  
@@ -184,7 +185,7 @@ ul li b {
 					} ?>
 				 
 				<?php
-				} ?>
+				} ?> <br />
 				</div>
 				<div class="col-md-12">
 				    <div class="head_of_popup"><h3>Transport Requirements</h3></div>
