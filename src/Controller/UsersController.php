@@ -2947,6 +2947,7 @@ exit;
 * @return void
 */
 public function forgotPassword() {
+	$this->viewBuilder()->layout('');
 Configure::write('debug',2);
 if ($this->request->is('post')) {
 $this->loadModel('Users');
