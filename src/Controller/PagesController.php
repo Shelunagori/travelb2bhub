@@ -1856,10 +1856,10 @@ public function removebusinessbuddyapi() {
 		array_push($BlockedUsers,$_POST['user_id']);
 		$BlockedUsers = array_unique($BlockedUsers);
 		$BlockedUsers=array_merge($BlockedUsers,$myBlockedUsers);
-		
+		$conditions["Requests.user_id NOT IN"] =  $BlockedUsers;
 			$responses = $this->Responses->find()
 				->contain(["Users", "Requests","Requests.Hotels","Testimonial"])
-				->where($conditions,'Requests.user_id NOT IN' => $BlockedUsers)
+				->where($conditions)
 				->order($sortorder)
 				->all();
 			
