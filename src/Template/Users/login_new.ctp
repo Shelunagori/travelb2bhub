@@ -1,83 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
- <?php echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
-   <?php echo $this->Html->css('/assets/dist/css/AdminLTE.min.css'); ?>
-  <?php echo $this->Html->css('/assets/plugins/iCheck/square/blue.css'); ?>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+	<title>Travel B2B HUB</title>
+	 <?php echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
+	<?php echo $this->Html->css('/assets/login/fonts/iconic/css/material-design-iconic-font.min.css'); ?>
+	<?php echo $this->Html->css('/assets/login/animate/animate.css'); ?>
+	<?php echo $this->Html->css('/assets/login/css-hamburgers/hamburgers.min.css'); ?>
+	<?php echo $this->Html->css('/assets/login/animsition/css/animsition.min.css'); ?>
+	<?php echo $this->Html->css('/assets/login/select2/select2.min.css'); ?>
+	<?php echo $this->Html->css('/assets/login/daterangepicker/daterangepicker.css'); ?>
+	<?php echo $this->Html->css('/assets/login/daterangepicker/daterangepicker.css'); ?>
+	<?php echo $this->Html->css('/assets/login/css/util.css'); ?>
+	<?php echo $this->Html->css('/assets/login/css/main.css'); ?>
 </head>
-<body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg">Sign in to start your session</p>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('img/login_background.jpg');">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form">
+					<span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
 
-    <form action="../../index2.html" method="post">
-      <div class="form-group has-feedback">
-        <input type="email" class="form-control" placeholder="Email">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-      <div class="row">
-        <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> Remember Me
-            </label>
-          </div>
-        </div>
-        <!-- /.col -->
-        <div class="col-xs-4">
-          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
-        </div>
-        <!-- /.col -->
-      </div>
-    </form>
+					<span class="login100-form-title p-b-34 p-t-27">
+						Log in
+					</span>
 
-    <div class="social-auth-links text-center">
-      <p>- OR -</p>
-      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
-        Facebook</a>
-      <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
-        Google+</a>
-    </div>
-    <!-- /.social-auth-links -->
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100" type="text" name="username" placeholder="Username">
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					</div>
 
-    <a href="#">I forgot my password</a><br>
-    <a href="register.html" class="text-center">Register a new membership</a>
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="password" name="pass" placeholder="Password">
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					</div>
 
-  </div>
-  <!-- /.login-box-body -->
-</div>
-<!-- /.login-box -->
+					<div class="contact100-form-checkbox">
+						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+						<label class="label-checkbox100" for="ckb1">
+							Remember me
+						</label>
+					</div>
 
-<!-- jQuery 2.2.0 -->
-<?php echo $this->Html->script('/assets/plugins/jQuery/jQuery-2.2.0.min.js'); ?>
-<?php echo $this->Html->script('/assets/bootstrap/js/bootstrap.min.js'); ?>
-<?php echo $this->Html->script('/assets/plugins/iCheck/icheck.min.js'); ?>
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Login
+						</button>
+					</div>
 
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' // optional
-    });
-  });
-</script>
+					<div class="text-center p-t-90">
+						<a class="txt1" href="#">
+							Forgot Password?
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="dropDownSelect1"></div>
+
+<?php echo $this->Html->script('/assets/login/jquery/jquery-3.2.1.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/animsition/js/animsition.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/bootstrap/js/popper.js'); ?>
+<?php echo $this->Html->script('/assets/login/bootstrap/js/bootstrap.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/select2/select2.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/daterangepicker/moment.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/daterangepicker/daterangepicker.js'); ?>
+<?php echo $this->Html->script('/assets/login/countdowntime/countdowntime.js'); ?>
+<?php echo $this->Html->script('/assets/login/js/main.js'); ?>
 </body>
 </html>
