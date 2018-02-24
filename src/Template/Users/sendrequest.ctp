@@ -368,7 +368,7 @@ $(document).ready(function($){
 										<div class="input-field">
 											<p for="from">Hotel Catrgory </p>
 												<div>
-													<?php echo $this->Form->control('hotel_category', ["id"=>"h_hotel_category", "type"=>"select", 'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control chosen-select"]);?>
+													<?php echo $this->Form->control('hotel_category', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Hotel Category","style"=>"height:125px;"]);?>
 
 											   </div>
 										</div>
@@ -489,6 +489,7 @@ $(document).ready(function($){
 									</div>
 								</div>
 							</div>
+<?= $this->Form->end()?>							
 <div class="tab-pane active" id="tab2" >
 <?php
 					echo $this->Form->create(null, [
@@ -600,8 +601,8 @@ $(document).ready(function($){
 												Hotel Rating
 											</p>
 										</div>
-										<div style=" width: 200px;" class="stars">
-										<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
+										<div style="width: 200px;" class="stars">
+											<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
 										   <input class="star star-5" id="star-5-21" type="radio" value="5" name="hotel_rating"/>
 										   <label class="star star-5" for="star-5-21"></label>
 										   <input class="star star-4" id="star-4-21" type="radio" value="4" name="hotel_rating"/>
@@ -612,14 +613,13 @@ $(document).ready(function($){
 										   <label class="star star-2" for="star-2-21"></label>
 										   <input class="star star-1" id="star-1-21" type="radio" value="1" name="hotel_rating"/>
 										   <label class="star star-1" for="star-1-21"></label>
-										   </div>
+										 </div>
 									</div>
 									<div class="col-md-4 ">
 										<div class="input-field">
 											<p for="from">Hotel Catrgory </p>
 												<div>
-													<?php echo $this->Form->control('hotel_category', ["id"=>"hotel_category", "type"=>"select", 'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control chosen-select"]);?>
-
+												<?php echo $this->Form->control('hotel_category', ["id"=>"hotel_category", "type"=>"select",'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Hotel Category","style"=>"height:125px;"]);?>
 											   </div>
 										</div>
 									</div>
@@ -904,6 +904,7 @@ $(document).ready(function($){
 					</div>
 				</div>
 			</div>
+<?= $this->Form->end()?>
 			<div class="tab-pane " id="tab3">
 							<?php
                             echo $this->Form->create(null, [
@@ -1163,7 +1164,8 @@ $(document).ready(function($){
 										</div>
 									</div>
 								</div>
-							</div>		
+							</div>	
+			<?= $this->Form->end()?>							
 							<!--Form Box for Hotel-->
                         </div>
 					</div>
@@ -1264,7 +1266,7 @@ jQuery(document).ready(function () {
         	strHtml += '<div class="col-sm-6 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="stops[' +packageI+ ']"></div></div>';
         	strHtml += '<div class="col-sm-6 mt"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control" type="text" placeholder="Select City or Nearest City" use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" name="id_package_stop_city[' +packageI+ ']" /></div></div>';
         	strHtml += '<div class="col-sm-6 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly></div></div></div>';
-        	strHtml += '<div align="center"><button class="btn btn-primary btn-md package_remove_stop">Remove stop</button></div>';
+        	strHtml += '<button class="btn btn-primary btn-md package_remove_stop">Remove stop</button>';
          strHtml += '</div>';
         $(".package-stops").append(strHtml);
         	packageI++;
@@ -1290,7 +1292,7 @@ var gg = 1;
         strHtml += '<div class="col-sm-6 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="stops[' +transI+ ']"></div></div>';
         strHtml += '<div class="col-sm-6 mt"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control" type="text" placeholder="Select City or Nearest City" use_for = "trasport" numCount = ' +transI+ ' id="trasport_stop_city[' +transI+ ']" name="trasport_stop_city[' +transI+ ']"><input type="hidden" id="id_trasport_stop_city[' +transI+ ']" name="id_trasport_stop_city[' +transI+ ']" /></div></div>';
         strHtml += '<div class="col-sm-6 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_trasport_stop_city[' +transI+ ']" name="state_id_trasport_stop_city[' +transI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_trasport_stop_city[' +transI+ ']" name="state_name_trasport_stop_city[' +transI+ ']" readonly></div></div></div>';
-         strHtml += '<center><button class="btn btn-primary btn-md transport_remove_stop but ">Remove stop</button></center>';
+         strHtml += '<button class="btn btn-primary btn-md transport_remove_stop but ">Remove stop</button>';
          strHtml += '</div>';
          $(".transport-stops").append(strHtml);
          transI++;

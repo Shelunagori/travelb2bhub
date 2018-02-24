@@ -165,7 +165,8 @@ hr { margin-top:0px!important;}
                   <label>Select Preference</label>
                    <?php 
 					$selectedPreferenceStates = "";
-					if(!empty($users['preference'])) {
+					if(!empty($users['preference'])) 
+					{
 						$selectedPreferenceStates = explode(",", $users['preference']);
 					}	
 					echo $this->Form->control('preference', ["value"=>$selectedPreferenceStates, "id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control select2", "data-placeholder"=>"Select Some States", "style"=>"height:125px;"]); ?>

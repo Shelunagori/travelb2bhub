@@ -923,13 +923,16 @@ return $this->redirect('/users/requestlist');
 $this->Flash->error(__('Sorry, You cannot add more than '.$reqcount["value"] .' request.'));
 return $this->redirect('/users/dashboard');
 }elseif($myRequestCount < $reqcount['value']) {
+	
 if($this->request->is('post')){
 $d = $this->request->data;
+pr($d);exit;
 //Change input date format to mysql date format
 $d['check_in'] = (isset($d['check_in']) && !empty($d['check_in']))?$this->ymdFormatByDateFormat($d['check_in'], "d-m-Y", $dateSeparator="/"):null;
 $d['check_out'] = (isset($d['check_out']) && !empty($d['check_out']))?$this->ymdFormatByDateFormat($d['check_out'], "d-m-Y", $dateSeparator="/"):null;
 $d['start_date'] = (isset($d['start_date']) && !empty($d['start_date']))?$this->ymdFormatByDateFormat($d['start_date'], "d-m-Y", $dateSeparator="/"):null;
 $d['end_date'] = (isset($d['end_date']) && !empty($d['start_date']))?$this->ymdFormatByDateFormat($d['end_date'], "d-m-Y", $dateSeparator="/"):null;
+
 if($this->request->data['category_id'] == 2 ){
 $p['transport_requirement'] = $d['transport_requirement'];
 $p['pickup_city'] = $d['t_pickup_city_id'];
