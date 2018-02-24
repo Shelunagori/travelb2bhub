@@ -3014,6 +3014,8 @@ $this->Flash->error(__('Incorrect Email.'));
 * @return void
 */
 public function activatePassword() {
+	$this->viewBuilder()->layout('');
+	
 if ($this->request->is('post')) {
 if (!empty($this->request->data['ident']) && !empty($this->request->data['activate'])) {
 $this->set('ident',$this->request->data['ident']);
