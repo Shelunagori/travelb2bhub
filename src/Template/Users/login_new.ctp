@@ -15,13 +15,16 @@
 	<?php echo $this->Html->css('/assets/login/css/main.css'); ?>
 	<style>
 		.bgdiv { background-image: url('../webroot/assets/login/login_background.jpg'); }
+		.p-b-34 { padding-bottom: 10px !important; }
+		.login100-form-title { font-size:25px; }
+		.wrap-login100 { background:#0c0a10 !important; width:420px !important; padding: 18px 55px 37px 55px; }
 	</style>
 </head>
 <body>
 	
 	<div class="limiter">
 		<div class="container-login100 bgdiv">
-			<div class="wrap-login100" style="background:#0c0a10 !important; width:420px !important;">
+			<div class="wrap-login100">
 				<form class="login100-form validate-form">
 					<center>
 						<?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:20%;']) ?>
