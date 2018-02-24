@@ -178,6 +178,7 @@ return $this->redirect('/pages/contactus');
 }
 }
 public function register() {
+	
 if ($this->Auth->user('id')) {
 return $this->redirect('/users/dashboard');
 }
