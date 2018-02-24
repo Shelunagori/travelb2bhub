@@ -554,7 +554,7 @@ $this->set(compact('cities', 'states', 'countries', 'allCities', 'allStates','me
 					unset($this->request->data['adtoi_pic']);
 				}
 				if(is_uploaded_file($this->request->data['adyoi_pic']['tmp_name']) && !empty($this->request->data['adyoi_pic']['tmp_name']))
-					{
+				{
 					$path_info = pathinfo($this->request->data['adyoi_pic']['name']);
 					chmod ($this->request->data['adyoi_pic']['tmp_name'], 0644);
 					$photo=time().mt_rand().".".$path_info['extension'];

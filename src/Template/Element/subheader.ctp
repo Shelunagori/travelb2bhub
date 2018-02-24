@@ -259,9 +259,10 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 											</div>
 										</div>
 									</div>
-								<?php //$k++;} ?>
+								<?php  ?>
 								</div>
-							<?php $x++;} ?>
+							<?php $x++;
+								} ?>
 
 							</div>
 							<?php if(count($testimonial)>2){?>

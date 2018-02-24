@@ -7,6 +7,26 @@
 .checked {
     color: orange;
 }
+.review-block .block-text {
+    background-color: #eee;
+    padding: 10px 15px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+.carousel {
+    position: relative;
+}
+.review-block .block-text p {
+    margin: 0;
+    min-height: 120px; 
+    height: 120px;
+    z-index: 30;
+}
 
 </style>
 
@@ -483,50 +503,44 @@
 						 <div class="row">
                 <div class="col-md-12 paddingright0">
                     <div class="rating-block">
-                        <h4 >Average user rating &nbsp; <font color="#1295A2" ><?php echo $average_rating;?> <small> ( <?php echo $testimonialcount;?> ) </font> </small>&nbsp; 
+                        <h5 >Average user rating &nbsp; <font color="#1295A2" ><?php echo $average_rating;?> <small> ( <?php echo $testimonialcount;?> ) </font> </small>&nbsp; 
 							<span <?php if($average_rating==1 OR $average_rating>1){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
 							<span <?php if($average_rating==2 OR $average_rating>2){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
 							<span <?php if($average_rating==3 OR $average_rating>3){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
 							<span <?php if($average_rating==4 OR $average_rating>4){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
 							<span <?php if($average_rating==5 OR $average_rating>5){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
-						</h4>
+						</h5>
                     <div class="row">  
-                   <div class="col-md-8 col-xs-8 col-sm-8"> <h4 class="media_h4">Rating breakdown </h4> </div><div class="col-md-2 col-xs-2 col-sm-2"><h4 class="media_h4">ALL </h4></div> <div class="col-md-2 col-xs-2 col-sm-2"><span class="review_button  btn-group btn-group-vertical" id="0" data-toggle="buttons">  
-                           <label class="btn">
-                             <h4 >   <input type="radio" checked value="0" id="ratingval" name="ratingval"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i> 
-                            </label> 
-                </span> </div></div>
+                   <div class="col-md-8 col-xs-8 col-sm-8"> <h5 class="media_h4">Rating breakdown </h5> </div>
+				   
+				  </div>
                   <div class="row"> 
                     <?php     
-                // Example data
-                $star1 = $star1count;
-                $star2 = $star2count;
-                $star3 = $star3count;
-                $star4 = $star4count;
-                $star5 = $star5count;
+					// Example data
+					$star1 = $star1count;
+					$star2 = $star2count;
+					$star3 = $star3count;
+					$star4 = $star4count;
+					$star5 = $star5count;
 
-                $tot_stars = $star1 + $star2 + $star3 + $star4 + $star5;
-					for ($i=5;$i >=1; --$i) {
-                  $var = "star$i";
-                  $count = $$var;
-                   $percent = $count * 100 / $tot_stars;?>
-                        <div class="col-md-2 col-xs-3 col-sm-2">
+					$tot_stars = $star1 + $star2 + $star3 + $star4 + $star5;
+						for ($i=5;$i >=1; --$i) {
+					  $var = "star$i";
+					  $count = $$var;
+					   $percent = $count * 100 / $tot_stars;?>
+                        <div class="col-md-3">
                             <div><?php echo $i;?> 
 							<span <?php if($average_rating==$i OR $average_rating>$i){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
 							</div>
                         </div>
-                        <div class="col-md-6 col-xs-5 col-sm-6" >
+                        <div class="col-md-7" >
                             <div class="progress">         
 								<div <?php if($average_rating==$i OR $average_rating>$i){ ?>style="width: 100%; height: 18px; background-color: #ff9800;"<?php } ?>></div>	
                             </div>
                         </div>
-                          <div class="col-md-2 col-xs-2 col-sm-2" ><?php if($average_rating==$i OR $average_rating>$i){ echo "100"; }else{ echo "0"; }  ?>%
-                           </div>
-                       <div class="review_button col-md-2 col-sm-1 col-xs-1 btn-group btn-group-vertical" id="<?php echo $i; ?>" data-toggle="buttons">  
-                           <label class="btn">
-                              <input type="radio" value="" id="ratingval" name="ratingval"><i class="fa fa-circle-o fa-2x"></i><i class="fa fa-dot-circle-o fa-2x"></i> 
-                           </label>
-                       </div> 
+                        <div class="col-md-2" ><?php if($average_rating==$i OR 	$average_rating>$i){ echo "100"; }else{ echo "0"; }  ?>%
+                        </div>
+                        
                       <?php }?> 
                        </div> 
                     
@@ -536,7 +550,7 @@
                 
             </div>
 			
-			<div id="testimonial_list" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 padding-t10">
+			<!--<div id="testimonial_list" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 padding-t10">
 
                      <?php
             if($testimonial!="") { ?>
@@ -610,7 +624,7 @@
 			</div>
 			</div>
 			<?php } else { echo "No reviews";} ?>
-			</div>
+			</div>--->
 
 					</div>
 				</div>
