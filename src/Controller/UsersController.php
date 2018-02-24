@@ -598,6 +598,7 @@ public function delete($id = null) {
 * Login method
 */
 public function login() {
+	$this->viewBuilder()->layout('');
 if ($this->Auth->user('id')) {
 return $this->redirect('/users/dashboard');
 }
