@@ -55,7 +55,8 @@ legend
 						<h4 class="modal-title">Sorting</h4>
 					  </div>
 					  <div class="modal-body">
-						<table width="100%">
+					     
+						<table width="100%" style="height:50px; margin-left:10px">
 						<tr>
 							<td><a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=totalbudgethl">Total Budget <i class="fa fa-sort-amount-desc"></i> <span class=arrow><span></span></span></a>
 							
@@ -69,6 +70,7 @@ legend
 							</td>
 						</tr>
 						</table>
+					   <hr></hr>
 					  </div>
 					</div>
 				  </div>

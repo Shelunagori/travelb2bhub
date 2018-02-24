@@ -194,14 +194,20 @@ unset($request['hotels'][0]);?><?php foreach($request['hotels'] as $row) { ?>
 
              
                      <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comment">
-                         <p><b>Comment :</b> <span><?php echo $request['comment']; ?></span></p>
+                         <p><b>Comment :</b>
+						 <span>
+						 <?php echo mb_strimwidth($request['comment'], 0, 25, "...");?></span></p>
                      </li>
                   </ul>
-						<div class="col-md-12">
-							<table width="100%">
+						<div class="col-md-12" >
+							<table width="100%" style="text-align:center">
 							<tr>
 								<td>
 									<a class="viewdetail btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"data-target="#myModal1<?php echo $request['id']; ?>" data-toggle=modal> Details</a>
+									
+								</td>
+							</tr>
+							</table>
 									<div class="fade modal"id="myModal1<?php echo $request['id']; ?>"role=dialog>
 										<div class=modal-dialog>
 											<div class=modal-content>
@@ -213,9 +219,6 @@ unset($request['hotels'][0]);?><?php foreach($request['hotels'] as $row) { ?>
 											</div>
 										</div>
 									</div>
-								</td>
-							</tr>
-							</table>
 							</div>				
 				</fieldset>
 			</div>

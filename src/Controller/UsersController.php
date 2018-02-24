@@ -2371,7 +2371,7 @@ foreach($testimonials as $testimonial) {
 $users = $this->Users->find()->where(['id'=> $testimonial['author_id']])->first();
 $name = $users['first_name']." ".$users['last_name'];
 $alltestimonials[] = array( "name"=>$name,"rating1"=>$testimonial['rating'], "description"=>$users['description'], "profile_pic"=>$users['profile_pic'], "comment"=>$testimonial['comment'],"user_id"=>$testimonial['user_id'],"author_id"=>$testimonial['author_id']);
-}
+} 
 $this->set('testimonial',$alltestimonials);
 }
 }
