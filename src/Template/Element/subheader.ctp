@@ -53,7 +53,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 		<div class="col-md-7">
 			<div class="row">
 			<?php
-			if($users['role_id'] == 1 || $users['role_id'] == 3)
+			if($users['role_id'] == 1 || $users['role_id'] == 2)
 			{
 				?>
 				<div class="col-md-6">
@@ -125,7 +125,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 				</div>
 			<?php 
 			} 
-			if($users['role_id'] == 1 || $users['role_id'] == 2) { 
+			if($users['role_id'] == 1 || $users['role_id'] == 3) { 
 			?>
 		
 				<!-- COls -->
@@ -291,7 +291,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 		?>
 		<div class="col-md-12">
 			<div class="row">
-			<?php if($users['role_id'] == 1 || $users['role_id'] == 3) { 
+			<?php if($users['role_id'] == 1 || $users['role_id'] == 2) { 
 			?>
 			<div class="col-lg-3 col-xs-6">
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'sendrequest')) ?>">
@@ -300,7 +300,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						<table width="100%" border="0" height="120px" style="text-align:center">
 							<tr>
 								<td>&nbsp;	 
-									<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:40px;width:50px')); ?>
+									<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:33px;width:40px')); ?>
 								</td>
 							</tr>
 							<tr>
@@ -326,7 +326,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						<table width="100%" border="0"  height="120px" style="text-align:center">
 							<tr>
 								<td>&nbsp; 
-									<?php echo $this->Html->image('white-my-request-icon.png',array('style'=>'height:40px;width:50px')); ?>
+									<?php echo $this->Html->image('white-my-request-icon.png',array('style'=>'height:33px;width:40px')); ?>
 								</td>
 							</tr>
 							<tr>
@@ -343,7 +343,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 				</a>
 			</div>
 			<?php } 
-			if($users['role_id'] == 1 || $users['role_id'] == 2) { 
+			if($users['role_id'] == 1 || $users['role_id'] == 3) { 
 			?>
 			<!-- COls -->
 			<div class="col-lg-3 col-xs-6">
@@ -354,7 +354,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						<table width="100%" border="0"  height="120px" style="text-align:center">
 							<tr>
 								<td>&nbsp;	 
-									<?php echo $this->Html->image('white-back-icon.png',array('style'=>'height:40px;width:50px')); ?>
+									<?php echo $this->Html->image('white-back-icon.png',array('style'=>'height:33px;width:40px')); ?>
 								</td>
 							</tr>
 							<tr>
@@ -379,7 +379,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						<table width="100%" border="0" height="120px" style="text-align:center">
 							<tr>
 								<td>&nbsp;
-									<?php echo $this->Html->image('white-my-resposes-head.png',array('style'=>'height:40px;width:50px')); ?>
+									<?php echo $this->Html->image('white-my-resposes-head.png',array('style'=>'height:33px;width:40px')); ?>
 								</td>
 							</tr>
 							<tr>

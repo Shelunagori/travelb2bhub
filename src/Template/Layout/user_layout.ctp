@@ -411,15 +411,29 @@ margin-top: 5px !important;
         </li>-->
 		<li class="active"><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>"><i class="fa fa-dashboard"></i> <span>DASHBOARD</span></a></li>
 		
-		<li><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'finalizedRequestList']); ?>"><i class="fa fa-edit"></i> <span>FINALIZED REQUESTS</span></a></li>
-		
-		<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'myFinalResponses']); ?>"><i class="fa fa-book"></i> <span>FINALIZED RESPONSES</span></a></li>
-		
-		<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'businessBuddiesList']); ?>"><i class="fa fa-user"></i> <span>FOLLOWING</span></a></li>
-		
-		<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'removedRequestList']); ?>"><i class="fa fa-trash"></i> <span>REMOVED REQUESTS</span></a></li>
-		
+		<?php if($roleId==1 || $roleId==2 ) {?>
+			<li><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'finalizedRequestList']); ?>"><i class="fa fa-edit"></i> <span>FINALIZED REQUESTS</span></a></li>
+		<?php
+		}
+		if($roleId==1 || $roleId==3) {
+		?>
+			<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'myFinalResponses']); ?>"><i class="fa fa-book"></i> <span>FINALIZED RESPONSES</span></a></li>
+		<?php
+		}
+		if($roleId==1 || $roleId==3) {
+		?>
+			<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'businessBuddiesList']); ?>"><i class="fa fa-user"></i> <span>FOLLOWING</span></a></li>
+		<?php
+		}
+		if($roleId==1 || $roleId==2) {
+		?>
+			<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'removedRequestList']); ?>"><i class="fa fa-trash"></i> <span>REMOVED REQUESTS</span></a></li>
+		<?php
+		}
+		 
+		?>
 		<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'blockedUserList']); ?>"><i class="fa fa-group"></i> <span>BLOCKED USERS</span></a></li>
+		 
       </ul>
     </section>
     <!-- /.sidebar -->
