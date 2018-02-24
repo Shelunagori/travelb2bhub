@@ -1,37 +1,36 @@
  <?php echo $this->Html->script(['jquery.validate']);?>
- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+ <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <?php
 use Cake\Datasource\ConnectionManager; 
 $conn = ConnectionManager::get('default');
 ?>
 <style>
-.blockuser_hidden{
-display: none;
-}
+	legend {
+		text-align:center;
+	}
 </style>
-<div class="container-fluid">
- <div class="row equal_column">
-      <?php echo $this->element('left_panel');?>
-	  <?php $this->Flash->render() ?>
-    <!--Page Title-->
-     <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12 padding0">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 border_bottom"> 
-            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 ">
-                 <h4 class="title">Respond To Request</h4>
-            </div>
-           <div class="col-lg-6 col-md-6 col-sm-6 col-xs-5 ">
-                <ul class="top-icons-wrap"><ul class="top-icons-wrap">
-                       <li>
- <a href="javascript:void(0);" class="link-icon" data-toggle="modal" data-target="#myModal123" ><img src="/img/sortarrow.png" alt=""></a> </li>
-                 <li>
- <a href="javascript:void(0);" class="link-icon" data-toggle="modal" data-target="#myModal122" ><img src="/img/white-filter.png" alt=""></a> </li>
-					<li class="notification_list">
-<a href="javascript:void(0);" id="chat_icon" class="link-icon"><span class="chat_count"><?php echo $chatCount;?></span><img src="/img/notify.png" alt=""></a>
-                            <div class="ap-subs">
-                                <ul class="list-unstyled msg_list" role="menu">
-                  <?php echo $this->element('subheader');?>
-          <hr class="hr_bordor">
+<div id="my_final_responses" class="container-fluid">
+	<div class="row equal_column">
+	<div class="col-md-12" style="background-color:#fff"> 
+		<br>
+		<?php echo $this->element('subheader');?>
+		<?php echo  $this->Flash->render() ?>
+	</div>
+	<div class="col-md-12" style="background-color:#fff"> 
+
+<div class="box box-default">
+	<div class="box-header with-border"> 
+		<h3 class="box-title" style="padding:20px">Respond To Request</h3>
+		<div class="box-tools pull-right">
+			<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
+			<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+		</div>
+		 
+	</div>
+	<div class="box-body">
+		<div class="row">
+   
+ 
           <div id="myModal123" class="modal fade form-modal" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
@@ -40,18 +39,22 @@ display: none;
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Sorting</h4>
       </div>
-      <div class="modal-body">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 box-event">
-     <ul class="sorting_ul">
-<li class="col-md-12 col-xs-12 col-sm-12"> <a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=totalbudgethl">Total Budget (High To Low) <span class="arrow"><span></span></span></a> </li>
-<li class="col-md-12 col-xs-12 col-sm-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=totalbudgetlh"> Total Budget (Low To High)<span class="arrow"><span></span></span></a></li>
-<li class="col-md-12 col-xs-12 col-sm-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=agentaz"> Agent Name (A To Z) <span class="arrow"><span></span></span></a></li>
-<li class="col-md-12 col-xs-12 col-sm-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=agentza"> Agent Name (Z To A)<span class="arrow"><span></span></span></a></li>
-<li class="col-md-12 col-xs-12 col-sm-12"> <a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=requesttype">Request Type  <span class="arrow"><span></span></span></a> </li>
-                  </ul>
-              </div>
-          </div>
+      <div class="modal-body">   
+		<table width="90%" class="shotrs">
+			<tr>
+				<td>
+					<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=totalbudgethl">Total Budget (High To Low) <span class="arrow"><span></span></span></a> 
+					
+					<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=totalbudgetlh"> Total Budget (Low To High)<span class="arrow"><span></span></span></a> 
+					
+					<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=agentaz"> Agent Name (A To Z) <span class="arrow"><span></span></span></a> 
+					
+					<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=agentza"> Agent Name (Z To A)<span class="arrow"><span></span></span></a>
+					
+					<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=requesttype">Request Type  <span class="arrow"><span></span></span></a>
+                 </td>
+			</tr>
+		</table>    
       </div>
       <div class="modal-footer">
 
@@ -67,43 +70,35 @@ display: none;
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Filter</h4>
       </div>
-      <div class="modal-body">
-           <form method="get" class="filter_box">
+      <div class="modal-body" style="height:180px">
+           <form method="get" class="filter_box" style="margin-top:5px">
                
-       <div class="form-group row margin-b10">
-          <label for="example-text-input" class="col-md-3 col-form-label">Request Type: </label>
-          <div class="col-md-9">
-          <select name="req_typesearch" class="form-control"><option value="">Select Request Type</option><option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option><option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option><option value="2">Transport</option></select>
+       <div class="col-md-12">
+          <div class="col-md-6">
+			  <label for="example-text-input" class="  col-form-label">Request Type: </label>
+			  <select name="req_typesearch" class="form-control"><option value="">Select Request Type</option><option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option><option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option><option value="2">Transport</option></select>
           </div>
-      </div>
-               
-       <div class="form-group row margin-b10">
-          <label for="example-text-input" class="col-md-3 col-form-label">Total Budget: </label>
-          <div class="col-md-9">
-            <select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option>
+       
+          <div class="col-md-6">
+			<label for="example-text-input" class="  col-form-label">Total Budget: </label>
+			<select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option>
              <option value="100000-100000000000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? 'selected':''; ?>>100000-Above</option>
              </select>
           </div>
-      </div>
-               
-       <div class="form-group row margin-b10">
-          <label for="example-text-input" class="col-md-3 col-form-label">Start Date: </label>
-          <div class="col-md-9">
-          <input type="text" id="datepicker1"  name="startdatesearch" value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"  class="form-control">
+        
+          <div class="col-md-6">
+			<label for="example-text-input" class="  col-form-label">Start Date: </label>
+			<input type="text" id="datepicker1"  name="startdatesearch" value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"  class="form-control">
           </div>
-      </div>
-               
-     <div class="form-group row margin-b10">
-          <label for="example-text-input" class="col-md-3 col-form-label">End Date: </label>
-          <div class="col-md-9">
+        
+          <div class="col-md-6">
+			<label for="example-text-input" class="  col-form-label">End Date: </label>
               <input type="text" id="datepicker2" name="enddatesearch" value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"  class="form-control" >
           </div>
-      </div>
-      
-<div class="form-group row margin-b10">
-          <label for="example-text-input" class="col-md-3 col-form-label">Pickup City: </label>
-          <div class="col-md-9">
-          <select class="form-control" id="pickup_city" name="pickup_city">
+        
+          <div class="col-md-6">
+			<label for="example-text-input" class="  col-form-label">Pickup City: </label>
+			<select class="form-control" id="pickup_city" name="pickup_city">
 			<option value="">Select</option>
 			<?php foreach($allCities1 as $city){?>
 			<option <?php if(isset($_GET['pickup_city']) AND $_GET['pickup_city']==$city['value']){ echo 'selected'; }?> value="<?php echo $city['value'];?>">
@@ -111,12 +106,10 @@ display: none;
 			<?php }?>          
           </select>     
          </div>
-        </div>       
-      
-       <div class="form-group row margin-b10">
-          <label for="example-text-input" class="col-md-3 col-form-label">Destination City: </label>
-          <div class="col-md-9">
-          <select class="form-control" id="destination_city" name="destination_city">
+         
+          <div class="col-md-6">
+			<label for="example-text-input" class="  col-form-label">Destination City: </label>
+			<select class="form-control" id="destination_city" name="destination_city">
 			<option value="">Select</option>
 			<?php foreach($allCities1 as $city){?>
 			<option <?php if(isset($_GET['destination_city']) AND $_GET['destination_city']==$city['value']){ echo 'selected'; }?> value="<?php echo $city['value'];?>">
@@ -124,41 +117,35 @@ display: none;
 			<?php }?>          
           </select>     
          </div>
-        </div>         
-               
-     <div class="form-group row margin-b10">
-          <label for="example-text-input" class="col-md-3 col-form-label">Reference ID: </label>
-          <div class="col-md-9">
+         
+          <div class="col-md-6">
+				<label for="example-text-input" class="  col-form-label">Reference ID: </label>
               <input type="text" name="refidsearch" value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>"  class="form-control">
           </div>
-      </div>   
-               
-     <div class="form-group row margin-b10">
-          <label for="example-text-input" class="col-md-3 col-form-label">Members: </label>
-          <div class="col-md-9">
+        
+          <div class="col-md-6">
+				<label for="example-text-input" class="  col-form-label">Members: </label>
               <input type="text" name="memberssearch" value="<?php echo isset($_GET['memberssearch'])? $_GET['memberssearch']:''; ?>"  class="form-control">
           </div>
-      </div>  
-               
-     <div class="form-group row margin-b10">
-          <label for="example-text-input" class="col-md-3 col-form-label">Agent Name: </label>
-          <div class="col-md-9">
+        
+          <div class="col-md-6">
+				<label for="example-text-input" class="  col-form-label">Agent Name: </label>
               <input type="text" name="agentnamesearch" value="<?php echo isset($_GET['agentnamesearch'])? $_GET['agentnamesearch']:''; ?>"  class="form-control">
           </div>
-      </div> 
-               
-     <div class="form-group row margin-b10">
-          <label for="example-text-input" class="col-md-3 col-form-label">Following: </label>
-          <div class="col-md-9">
+        
+          <div class="col-md-6">
+				<label for="example-text-input" class="col-form-label">Following: </label>
               <input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['followsearch'])? "checked":''; ?>  >
           </div>
       </div> 
               
                
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+    <div class="col-md-12 text-center">
+		<hr></hr>
        <input type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">
        <a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'respondtorequest')) ?>">Reset</a>
    </div>
+
    </form>
    <script>
    $('#datepicker1').datepicker({
@@ -202,74 +189,79 @@ display: none;
 		if(count($requests) > 0) {
 			$m =0;
 			foreach($requests as $request){
+				
+				if($request['category_id']==1){ 
+					$image=$this->Html->image('/img/slider/package-icon.png');
+					$text="<span class='requestType'>Package</span>";
+				} 
+				if($request['category_id']==2){
+					$image= $this->Html->image('/img/slider/transport-icon.png');
+					$text="<span class='requestType'>Transport</span>";
+				}
+				if($request['category_id']==3){
+					$image= $this->Html->image('/img/slider/hotelier-icon.png');
+					$text="<span class='requestType'>Hotel</span>";
+				} 
+				
 				$totmem = $request['adult'] +   $request['children']; 
-       if(isset($_GET['memberssearch'])  && $_GET['memberssearch']!="" && $_GET['memberssearch'] !=$totmem ){
- continue;
-       }
-				  if(isset($_GET['followsearch']) && $_GET['followsearch']==1 && !in_array($request['user_id'],$BusinessBuddies)) {
-				 continue;
-			}
+				if(isset($_GET['memberssearch'])  && $_GET['memberssearch']!="" && $_GET['memberssearch'] !=$totmem ){
+					continue;
+				}
+				if(isset($_GET['followsearch']) && $_GET['followsearch']==1 && !in_array($request['user_id'],$BusinessBuddies)) {
+					continue;
+				}
+				$blockuser_class= "";
+				if($data['blockedUser'][$request['id']]==1 OR  $resdata['responsecount'][$request['id']]>=20) { 
 
-			 $blockuser_class= "";
-if($data['blockedUser'][$request['id']]==1 OR  $resdata['responsecount'][$request['id']]>=20) { 
-
-  }else{
-			 	if($m%2==0) { echo '<div class="clearfix"></div>'; 
-}
-			 $m++;
+				}
+				else{
+					if($m%2==0) {
+						echo '<div class="clearfix"></div>'; 
+					}
+				$m++;
 			// echo $resdata['responsecount'][$request['id']];	
 			?>
-			
-               <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-				   <div class="box-event">
-                       <ul>
-                   <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                         <p>
-                        <b>Request Type:</b> <?php if($request['category_id']==1){ echo "<img src='../img/slider/package-icon.png'><span class='package'> Package</span>";} if($request['category_id']==2){ echo "<img src='../img/slider/transport-icon.png'><span class='transport'>Transport</span>";}if($request['category_id']==3){ echo "<img src='../img/slider/hotelier-icon.png'><span class='hotel'>Hotel</span>";} ?>
-                    </p>
-                   </li>
- <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                        <p>
-                            <b>Total Budget:</b> Rs. <?php echo $request['total_budget']; ?>
-                       </p>
-                   </li>
-<li class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                            <p><b>Agent Name:</b> <a href="viewprofile/<?php echo $request['user_id']; ?>"><?php echo $request['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $request['user']['last_name']; ?></a>
-                            <?php if(in_array($request['user_id'],$BusinessBuddies)) {  echo $this->Html->image('friend-ico1.png', [ "height"=>28]); } ?>
-                            <?php /* $userRating =   $rating[$request['id']] ;
-
-                if($userRating>0){
-                    for($i=$userRating; $i>0; $i--){
-                        echo '<i class="fa fa-star"></i>';
-                    }
-                }else{
-                    echo '<i class="fa fa-star"></i>';
-                }
-               */ ?>
-                       </p>
-
-                   </li>
-                   <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 destination">
-                    <?php if($request['category_id']==2){ ?>
-                  <p>
-                                <b>Pickup City:</b><?php echo ($request['pickup_city'])?$allCities[$request['pickup_city']]:"-- --"; ?><?php echo ($request['pickup_state'])?' ('.$allStates[$request['pickup_state']].')':"";  ?>
-                                
-                  <?php } else { ?>
-                            <p>
-                                <b>Destination City:</b> <?php echo ($request['city_id'])?$allCities[$request['city_id']]:"-- --"; ?><?php echo ($request['state_id'])?' ('.$allStates[$request['state_id']].')':""; ?> 	
-                                <?php if($request['category_id'] == 1){ 
-                               
-						if(count($request['hotels']) >1) { 
-						
-							unset($request['hotels'][0]);?>
+			<div class="col-md-4"> 
+				<fieldset>
+				<legend><?php echo @$image; ?></legend>
+                 <ul>
+					<li class="col-md-12">
+						<p>
+							<b>Request Type  : </b> <?php echo $text; ?>
+						</p>
+					</li>
+					<li class="col-md-12">
+						<p>
+							<b>Total Budget : </b> <?php echo ($request['total_budget'])? "Rs. ". $request['total_budget'] :"-- --" ?>
+						</p>
+				 </li>
+				 
+					<li class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<p>
+							<b>Agent Name:</b> <a href="viewprofile/<?php echo $request['user_id']; ?>"><?php echo $request['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $request['user']['last_name']; ?></a>
+							<?php if(in_array($request['user_id'],$BusinessBuddies)) {  echo $this->Html->image('friend-ico1.png', [ "height"=>28]); } ?>
+						</p>
+					</li>
+					<li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 destination">
+					<?php if($request['category_id']==2){ ?>
+						<p>
+							<b>Pickup City:</b><?php echo ($request['pickup_city'])?$allCities[$request['pickup_city']]:"-- --"; ?><?php echo ($request['pickup_state'])?' ('.$allStates[$request['pickup_state']].')':"";  ?>
+						<?php } else { ?>
+						<p>
+							<b>Destination City:</b> <?php echo ($request['city_id'])?$allCities[$request['city_id']]:"-- --"; ?>
+							<?php echo ($request['state_id'])?' ('.$allStates[$request['state_id']].')':""; ?> 	
+							<?php if($request['category_id'] == 1){
+								if(count($request['hotels']) >1) {
+								unset($request['hotels'][0]);?>
 								<?php
-							foreach($request['hotels'] as $row) { ?>
-							<?php echo ($row['city_id'])?', '.$allCities[$row['city_id']]:""; ?><?php echo ($row['state_id'])?' ('.$allStates[$row['state_id']].')':""; ?> 	
+								foreach($request['hotels'] as $row) { ?>
+									<?php echo ($row['city_id'])?', '.$allCities[$row['city_id']]:""; ?><?php echo ($row['state_id'])?' ('.$allStates[$row['state_id']].')':""; ?> 	
+								<?php } ?>
+								<?php } ?>
 							<?php } ?>
-							<?php } ?>
-							<?php } ?></p>
-                     <?php } ?>
-                       </li>
+						</p>
+					<?php } ?>
+					</li>
 					   <?php if($request['category_id'] == 3 ) { ?>
 						<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                             <p>
@@ -321,11 +313,13 @@ if($data['blockedUser'][$request['id']]==1 OR  $resdata['responsecount'][$reques
                      <p><b>Comment:</b><span> <?php echo $request['comment']; ?></span></p>
                  </li>
                       </ul>
-                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 right link padding0">
+					  
+					  
+					   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 right link padding0">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 padding0">
 						<?php if($users['role_id'] == 3 || $users['role_id'] == 1){
 							if(count($request["responses"]) < 20) {?>
-							<a data-toggle="modal" data-target="#myModal<?php echo $request['id']; ?>" href="javascript:void(0);" onclick="f1('<?php echo $request['id']; ?>');" id="<?php echo $request['id']; ?>"><?php echo $this->Html->image('tick-ico.png'); ?> Show interest</a>
+							<a data-toggle="modal" class="btn btn-success btn-sm" data-target="#myModal<?php echo $request['id']; ?>" href="javascript:void(0);" onclick="f1('<?php echo $request['id']; ?>');" id="<?php echo $request['id']; ?>"> Show interest</a>
 							<?php }
 						}?>
                      </div>
@@ -371,24 +365,26 @@ if($data['blockedUser'][$request['id']]==1 OR  $resdata['responsecount'][$reques
     </div>
   </div>
                      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 padding0">
-						<a data-toggle="modal" data-target="#myModal1<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"><?php echo $this->Html->image('detail-ico.png'); ?> Details</a>
+						<a data-toggle="modal" class="btn btn-info btn-sm"  data-target="#myModal1<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"> Details</a>
                      </div>
 						<div class="modal fade" id="myModal1<?php echo $request['id']; ?>" role="dialog">
-		<div class="modal-dialog">
-		  <!-- Modal content-->
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">Details</h4>
-			</div>
-			<div class="modal-body">
-			</div>
-		  </div>
-		</div>
-	</div>
+							<div class="modal-dialog">
+							  <!-- Modal content-->
+							  <div class="modal-content">
+								<div class="modal-header">
+								  <button type="button" class="close" data-dismiss="modal">&times;</button>
+								  <h4 class="modal-title">Details</h4>
+								</div>
+								<div class="modal-body">
+								</div>
+							  </div>
+							</div>
+						</div>
 					</div>
-				   </div>
-               </div>
+			</fieldset>
+		</div>
+                 
+				    
 			<?php  } } ?>
 			<div class="pages"></div>
 		<?php }else {?>

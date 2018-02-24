@@ -1691,6 +1691,8 @@ $allStates = $this->States->find('list',['keyField' => 'id', 'valueField' => 'st
 $this->set('allStates', $allStates);
 }
 public function respondtorequest() {
+	
+$this->viewBuilder()->layout('user_layout');
 date_default_timezone_set('Asia/Kolkata');
 $current_time = date("Y-m-d");
 Configure::write('debug',2);
