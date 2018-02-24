@@ -826,23 +826,24 @@ class PagesController extends AppController
 			$user = $this->Users->find()->where(['id' => $_POST['user_id']])->first();
 			$result['user'] = $user;
 			if(!empty($user)) {
-				$cities = $this->Cities->getAllCities();
 				$states = $this->States->find()->where(['country_id' => '101'])->all();
+				/*$cities = $this->Cities->getAllCities();
+				
 				$allStates = array();
 				foreach($states as $state){
 					$allStates[$state["id"]] = $state['state_name'];
 				}
 				$allCities = array();
 				$allCityList = array();
-				if(!empty($cities)) {
+				/*if(!empty($cities)) {
 					foreach($cities as $city) {
 						//$allCities[] = array("label"=>str_replace("'", "", $city['name']), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
 						$allCities[] = array("label"=>str_replace("'", "", $city['name'].' ('.$city['state']->state_name. ')'), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
 						$allCityList[$city['id']] = str_replace("'", "", $city['name'].' ('.$city['state']->state_name. ')');
 					}
-				}
+				}*/
 				$result['states'] = $states;
-				$result['cities'] = $allCities;
+				//$result['cities'] = $allCities;
 				$data =  json_encode($result);
 				echo $data;
 				exit;
