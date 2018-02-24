@@ -13,11 +13,14 @@
 	<?php echo $this->Html->css('/assets/login/daterangepicker/daterangepicker.css'); ?>
 	<?php echo $this->Html->css('/assets/login/css/util.css'); ?>
 	<?php echo $this->Html->css('/assets/login/css/main.css'); ?>
+	<style>
+		.bgdiv { background-image: url('../webroot/assets/login/login_background.jpg'); }
+	</style>
 </head>
 <body>
 	
 	<div class="limiter">
-		<div class="container-login100" style="background-image: url('img/login_background.jpg');">
+		<div class="container-login100 bgdiv">
 			<div class="wrap-login100" style="background:#0c0a10 !important; width:420px !important;">
 				<form class="login100-form validate-form">
 					<center>
@@ -56,8 +59,8 @@
 						</a>
 					</div>
 					<div class="text-center p-t-90" style="padding-top: 20px;">
-						<p>Don't  have an account ?
-							<a class="txt1" href="#">
+						<p style="color:#fff">Don't  have an account ?
+							<a class="txt1" href="#" style="color:#5ba7a4;">
 								Sign up
 							</a>
 						</p>
