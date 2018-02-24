@@ -18,18 +18,17 @@
 	
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('img/login_background.jpg');">
-			<div class="wrap-login100">
+			<div class="wrap-login100" style="background:#0c0a10 !important; width:420px !important;">
 				<form class="login100-form validate-form">
-					<span class="login100-form-logo">
-						<i class="zmdi zmdi-landscape"></i>
-					</span>
-
+					<center>
+						<?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:20%;']) ?>
+					</center>
 					<span class="login100-form-title p-b-34 p-t-27">
-						Log in
+						TRAVEL B2b HUB
 					</span>
 
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="text" name="username" placeholder="Username">
+						<input class="input100" type="text" name="username" placeholder="Email">
 						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 
@@ -41,21 +40,28 @@
 					<div class="contact100-form-checkbox">
 						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
 						<label class="label-checkbox100" for="ckb1">
-							Remember me
+							Keep me singed in
 						</label>
 					</div>
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" style="width: 100%;">
 							Login
 						</button>
 					</div>
 
-					<div class="text-center p-t-90">
+					<div class="text-center p-t-90" style="padding-top: 20px;">
 						<a class="txt1" href="#">
-							Forgot Password?
+							Forgot your password?
 						</a>
 					</div>
+					<div class="text-center p-t-90" style="padding-top: 20px;">
+						<p>Don't  have an account ?
+							<a class="txt1" href="#">
+								Sign up
+							</a>
+						</p>
+					</div>					
 				</form>
 			</div>
 		</div>
