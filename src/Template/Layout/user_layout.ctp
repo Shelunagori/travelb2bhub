@@ -391,7 +391,7 @@ margin-top: 5px !important;
           <?php echo ucwords(strtolower($MemberName));?>
 		  <br>
 		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'profileedit/'.$loginId]); ?>" class="logo">Edit Profile</a> | &nbsp;
-		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo">Change Password</a>
+		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'change_password']); ?>" class="logo">Change Password</a>
         </div>
       </div>
       

@@ -831,6 +831,7 @@ public function ajaxStateShow()
      }
 
 public function changePassword() {
+	$this->viewBuilder()->layout('user_layout');
 $this->loadModel('Requests');
 $this->loadModel('Responses');
 $user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
@@ -874,6 +875,14 @@ $this->set('myRequestCount', $myRequestCount1);
 $queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'Responses.status' =>0,'conditions' => ['Responses.user_id' => $this->Auth->user('id')]]);
 $myReponseCount = $queryr->count();
 $this->set('myReponseCount', $myReponseCount);
+
+		$this->loadModel('User_Chats');
+		$csort['created'] = "DESC";
+		$allUnreadChat = $this->User_Chats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->order($csort)->limit(10)->all();
+		$chatCount = $allUnreadChat->count();
+		$this->set('chatCount',$chatCount); 
+		$this->set('allunreadchat',$allUnreadChat);
+
 } else {
 $this->Flash->error(__('Please login to access this location.'));
 $this->redirect('/pages/home');
