@@ -795,11 +795,13 @@ public function viewuserprofile(){
 public function ajaxCity()
     {
 		$name=$this->request->data['input'];
-		$cities=$this->Users->Cities->find()->where(['Cities.name Like'=>'%'.$name.'%']);
+		$cities=$this->Users->Cities->find()
+		->contain(['States'])
+		->where(['Cities.name Like'=>'%'.$name.'%']);
 		?>
 		<ul id="country-list">
 			<?php foreach($cities as $show){ ?>
-				<li onClick="selectCountry('<?php echo $show->name; ?>','<?php echo $show->id; ?>','<?php echo $show->state_id; ?>');"><?php echo $show->name; ?></li>
+				<li onClick="selectCountry('<?php echo $show->name; ?>','<?php echo $show->id; ?>','<?php echo $show->state_id; ?>');"><?php echo $show->name .'('. $show->state->state_name .')'; ?></li>
 			<?php } ?>
 		</ul>
 		<?php
