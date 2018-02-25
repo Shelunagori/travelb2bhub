@@ -55,4 +55,33 @@
       <!-- /.row -->
     </section>
 
-   
+ <script>
+$('#UserRegisterForm').validate({
+	rules: {
+		"old_password": {
+			required: true
+		},
+		"password": {
+			required: true
+		},
+		"cpassword": {
+			required: true,
+			equalTo: "#password"
+		}
+	},
+	messages: {
+		"old_password": {
+			required: "Please enter current password."
+		},
+		"password": {
+			required: "Please enter password."
+		},
+		"cpassword": {
+			required: "Please enter confirm password.",
+			equalTo: "Confirm password should be equal to password."
+		}
+	},
+	ignore: ":hidden:not(select)"
+});
+
+</script>  
