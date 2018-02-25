@@ -315,76 +315,73 @@ $conn = ConnectionManager::get('default');
                       </ul>
 					  
 					  
-					   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 right link padding0">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 padding0">
-						<?php if($users['role_id'] == 3 || $users['role_id'] == 1){
-							if(count($request["responses"]) < 20) {?>
-							<a data-toggle="modal" class="btn btn-success btn-sm" data-target="#myModal<?php echo $request['id']; ?>" href="javascript:void(0);" onclick="f1('<?php echo $request['id']; ?>');" id="<?php echo $request['id']; ?>"> Show interest</a>
-							<?php }
-						}?>
-                     </div>
-                     <div class="modal fade" id="myModal<?php echo $request['id']; ?>" role="dialog">
-    <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Show Interest</h4>
-        </div>
-        <div class="modal-body">
-			<div class="">
-				<?php  echo $this->Form->create("Users", ['type' => 'file', 'url' => ['controller' => 'Users', 'action' => 'addresponse'], 'id'=>"UserResponseForm"]); ?>
-				<input type="hidden" name="request_id" class="request_id" id="request_id" value=""/>
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt margin-b20">
-					<div class="input-field">
-					  <label for="from">Quote price
-                          <span class="asterisk">
-                              <img src="/img/Asterisk.png" class="img-responsive">
-                          </span>
-                      </label>
-					  <input type="text" class="form-control" id="quotation_price" name="quotation_price" placeholder="Quote your price"/>
-					</div>
-				</div>
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt margin-b20">
-					<div class="input-field">
-					  <label for="from">Comment
-                           <span class="asterisk">
-                              <img src="/img/Asterisk.png" class="img-responsive">
-                          </span>
-                      </label>
-					  <textarea name="comment" class="form-control" id="comment" placeholder="Enter comment here" col="10" row="10"></textarea>
-					</div>
-				</div>
-				<div class="margi1 text-center">
-					<input type="submit" name="submit" class="btn btn-primary btn-submit" value="Submit">
-				</div>
-				</form>
-			</div>
-        </div>
-      </div>
-    </div>
-  </div>
-                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 padding0">
-						<a data-toggle="modal" class="btn btn-info btn-sm"  data-target="#myModal1<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"> Details</a>
-                     </div>
-						<div class="modal fade" id="myModal1<?php echo $request['id']; ?>" role="dialog">
-							<div class="modal-dialog">
-							  <!-- Modal content-->
-							  <div class="modal-content">
-								<div class="modal-header">
-								  <button type="button" class="close" data-dismiss="modal">&times;</button>
-								  <h4 class="modal-title">Details</h4>
-								</div>
-								<div class="modal-body">
-								</div>
-							  </div>
-							</div>
-						</div>
-					</div>
-			</fieldset>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 right link padding0">
+		<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 padding0">
+			<?php if($users['role_id'] == 3 || $users['role_id'] == 1){
+			if(count($request["responses"]) < 20) {?>
+			<a data-toggle="modal" class="btn btn-success btn-sm" data-target="#myModal<?php echo $request['id']; ?>" href="javascript:void(0);" onclick="f1('<?php echo $request['id']; ?>');" id="<?php echo $request['id']; ?>"> Show interest</a>
+			<?php } } ?>
 		</div>
-                 
-				    
+				<div id="myModal<?php echo $request['id']; ?>" class="modal fade form-modal" role="dialog">
+			  <div class="modal-dialog">
+				<!-- Modal content-->
+				<div class="modal-content">
+				  <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Sorting</h4>
+				  </div>
+				  <?php  echo $this->Form->create("Users", ['type' => 'file', 'url' => ['controller' => 'Users', 'action' => 'addresponse'], 'id'=>"UserResponseForm"]); ?>
+				  <div class="modal-body">   
+					
+					<input type="hidden" name="request_id" class="request_id" id="request_id" value=""/><br>
+					<table width="90%" class="shotrs">
+						<tr>
+							<td>
+								 Quote price
+							 </td>
+							 <td>
+								  <input type="text" class="form-control" id="quotation_price" name="quotation_price" placeholder="Quote your price"/>
+							 </td>
+						</tr>
+						<tr>
+							<td>
+								 Comment
+							 </td>
+							 <td>
+								  <textarea name="comment" class="form-control" id="comment" placeholder="Enter comment here" col="10" row="10"></textarea>
+							 </td>
+						</tr>
+					</table>
+				  </div>
+				  <div class="modal-footer">
+					 <div style="float:right">
+						<input type="submit" name="submit" class="btn btn-info btn-sm" width="20px" style="width:70px !important;" value="Submit">
+					 </div>
+				  </div>
+				  </form>
+				</div>
+			  </div>
+			</div>	
+		 
+			 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 padding0">
+				<a data-toggle="modal" class="btn btn-info btn-sm"  data-target="#myModal1<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"> Details</a>
+			 </div>
+				<div class="modal fade" id="myModal1<?php echo $request['id']; ?>" role="dialog">
+					<div class="modal-dialog">
+					  <!-- Modal content-->
+					  <div class="modal-content">
+						<div class="modal-header">
+						  <button type="button" class="close" data-dismiss="modal">&times;</button>
+						  <h4 class="modal-title">Details</h4>
+						</div>
+						<div class="modal-body">
+						</div>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+	</div>
 			<?php  } } ?>
 			<div class="pages"></div>
 		<?php }else {?>
