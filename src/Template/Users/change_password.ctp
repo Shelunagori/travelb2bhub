@@ -5,7 +5,6 @@
 	input:focus {background-color:#FFF !important;}
 	input[type="password"]:focus {background-color:#FFF !important;}
 </style>
-
 <section class="content">
       <div class="row">
         <div class="col-md-12">
@@ -43,20 +42,14 @@
 				</center>	
               </div>				
 			</fieldset>				
-				</div>
-				
+				</div>				
             </div>
-
             </form>
-          </div>
-            
+          </div>            
         </div>
-         
-      </div>
-      <!-- /.row -->
-    </section>
-
- <script>
+       </div>
+   </section>
+<script>
 $('#UserRegisterForm').validate({
 	rules: {
 		"old_password": {

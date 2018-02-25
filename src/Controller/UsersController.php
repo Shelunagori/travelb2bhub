@@ -888,6 +888,7 @@ $this->Flash->error(__('Please login to access this location.'));
 $this->redirect('/pages/home');
 }
 }
+
 public function sendrequest() {
 	$this->viewBuilder()->layout('user_layout');	
 	date_default_timezone_set('Asia/Kolkata');
