@@ -3609,62 +3609,71 @@ public function promotioncounts($id) {
 		$thankscontent = "Thank you! Your Review has been successfully submitted.";
 		$this->set(compact("thankscontent"));  
 	}
+	
 public function promotionreports($id) {
-$this->loadModel('Promotion');
-$this->loadModel('Requests');
-$this->loadModel('Responses');
-$this->loadModel('User_Chats');
-$this->loadModel('Cities');
-$this->loadModel('States');
-$promotion =  $this->Promotion->find()->where(['user_id' => $id])->all();
-$this->set("promotionreport", $promotion);
-$allCities = $this->Cities->find('list',['keyField' => 'id', 'valueField' => 'name'])
-->hydrate(false)
-->toArray();
+	
+	$this->viewBuilder()->layout('user_layout');
+	$this->loadModel('Promotion');
+	$this->loadModel('Requests');
+	$this->loadModel('Responses');
+	$this->loadModel('User_Chats');
+	$this->loadModel('Cities');
+	$this->loadModel('States');
+	
+	$promotion =  $this->Promotion->find()->where(['user_id' => $id])->all();
+	$this->set("promotionreport", $promotion);
+	$allCities = $this->Cities->find('list',['keyField' => 'id', 'valueField' => 'name'])
+	->hydrate(false)
+	->toArray();
 
-$this->set("allCities", $allCities);
+	$this->set("allCities", $allCities);
 
-$allCities1 = $this->Cities->find('list',['keyField' => 'id', 'valueField' => 'state_id'])
-->hydrate(false)
-->toArray();
+	$allCities1 = $this->Cities->find('list',['keyField' => 'id', 'valueField' => 'state_id'])
+	->hydrate(false)
+	->toArray();
 
-$this->set("allCities1", $allCities1);
-$allStates = $this->States->find('list',['keyField' => 'id', 'valueField' => 'state_name'])
-->hydrate(false)
-->toArray();
+	$this->set("allCities1", $allCities1);
+	$allStates = $this->States->find('list',['keyField' => 'id', 'valueField' => 'state_name'])
+	->hydrate(false)
+	->toArray();
 
-$this->set("allStates", $allStates);
-$user = $this->Users->find()
-->contain(["Credits"])
-->where(['Users.id' => $this->Auth->user('id')])->first();
-$this->set('users', $user);
-$myRequestCount = $myReponseCount = 0;
-$myfinalCount  = 0;
-$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status "=>2]]);
-$myfinalCount = $query3 ->count();
-$this->set('myfinalCount', $myfinalCount );
-$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
-$myRequestCount = $query->count();
-$myRequestCount1 = $query->count(); 
-$delcount=0;
-$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
-foreach($requests as $req){
-$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
-if($rqueryr->count()!=0){
-$delcount++;
-}
-}
-if($myRequestCount > $delcount) {
-$myRequestCount = $myRequestCount-$delcount;
-}	
-$this->set('myRequestCountdel', $delcount);
-$this->set('myRequestCount', $myRequestCount1);
-$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]]);
-$myReponseCount = $queryr->count();
-$this->set('myReponseCount', $myReponseCount);
-$this->render('/Users/promotionreport');
-$allUnreadChat = $this->User_Chats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->all();
-$this->set('allunreadchat',$allUnreadChat);
+	$this->set("allStates", $allStates);
+	$user = $this->Users->find()
+	->contain(["Credits"])
+	->where(['Users.id' => $this->Auth->user('id')])->first();
+	$this->set('users', $user);
+	
+	$myRequestCount = $myReponseCount = 0;
+	$myfinalCount  = 0;
+	$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status "=>2]]);
+	$myfinalCount = $query3 ->count();
+	$this->set('myfinalCount', $myfinalCount );
+	
+	$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
+	$myRequestCount = $query->count();
+	$myRequestCount1 = $query->count(); 
+	$delcount=0;
+	$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
+		foreach($requests as $req){
+			$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
+			if($rqueryr->count()!=0){
+				$delcount++;
+			}
+		}
+		if($myRequestCount > $delcount) {
+			$myRequestCount = $myRequestCount-$delcount;
+		}	
+	$this->set('myRequestCountdel', $delcount);
+	$this->set('myRequestCount', $myRequestCount1);
+	
+	$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]]);
+	$myReponseCount = $queryr->count();
+	$this->set('myReponseCount', $myReponseCount);
+	
+	$this->render('/Users/promotionreport');
+	$allUnreadChat = $this->User_Chats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->all();
+	 
+	$this->set('allunreadchat',$allUnreadChat);
 }
 
 public function getuserrating() {

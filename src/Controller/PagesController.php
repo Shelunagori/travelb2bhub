@@ -219,6 +219,8 @@ class PagesController extends AppController
     }
 	
     public function promotions(){
+		
+		$this->viewBuilder()->layout('user_layout');
 		$this->loadModel('Countries');
 		$this->loadModel('Users');
 		$this->loadModel('States');

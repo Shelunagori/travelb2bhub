@@ -1,7 +1,7 @@
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 
          <?=$this->Html->css([ 'colorbox' ]);?>
-  <?php echo $this->Html->script(['colorbox']);?>
+		<?php echo $this->Html->script(['colorbox']);?>
 
         <script>
             $(document).ready(function(){
@@ -37,21 +37,52 @@
     }
 }
  </script>
- <div id="tra-promotion">
-    <div class="container-fluid promotion_bg">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0">
-                 <h1 class="text-center">Promote your hotel</h1>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid grey_bg padding-t35">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-b30">
-                 <h3 class="text-center free_promotion">Promotions will be free till<br> 
-                     <span>31st January 2018</span></h3>
-            </div>
- 
+ <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+
+<?php
+use Cake\Datasource\ConnectionManager; 
+$conn = ConnectionManager::get('default');
+?>
+<style>
+	legend {
+		text-align:center;
+	}
+</style>
+
+	<div id="my_final_responses" class="container-fluid">
+	<div class="row equal_column">
+	<div class="col-md-12" style="background-color:#fff"> 
+		<br>
+		<?php echo $this->element('subheader');?>
+		<?php echo  $this->Flash->render() ?>
+	</div>
+	<div class="col-md-12" style="background-color:#fff"> 
+     <div class="box box-default">
+	<div class="box-header with-border"> 
+		<h3 class="box-title" style="padding:20px">Promote your hotel</h3>
+		<div class="box-tools pull-right">
+			
+		</div>
+	</div>
+	<div class="box-body">
+		<div class="row">
+		<center>
+			<div class="col-md-12">
+				<div class="box box-primary">
+					<div class="box-body">
+						<div>
+							<div class="form-group col-md-12">
+								  <div class="col-md-12">
+										<h3>Promotions will be free till</h3>
+										<a href="#" class="unfollow btn btn-success btn-sm"> 31st March 2018</a>
+									</div>
+						 
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+			</center>	
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  margin-b15 padding-lr7per"> 
               <div class="panel-group" id="accordion">
                   <div class="panel panel-default">
@@ -63,13 +94,33 @@
                       </h4>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse">
-                      <div class="panel-body">
+                      <div class="panel-body" style="margin-left:20px;">
                           <h5>Promoting your Hotel on TravelB2BHub helps you:</h5>
                           <ol>
-                              <li><strong>1. Increase your reach: </strong>Increase your business by connecting with new Travel Agents/ Event Planners to build lasting relationships.</li>
-                               <li><strong>2. Do Targeted Marketing: </strong>Pick specific cities where you want to drive business from, or reach new cities where you didn’t previously have a marketing presence.</li>
-                               <li><strong>3. Analyze your promotion’s performance: </strong>On your personal profile, you will be able to see how your promotion is performing, and the number/ type of people/regions responded to your promotions initiative.</li>
-                               <li><strong>4. Pay nominal price: </strong>Do all of the above at a small fraction of the cost of attending Travel and Tourism Fairs, or using sales reps.</li>
+								<li>
+									<strong>
+										Increase your reach:
+									</strong>
+										Increase your business by connecting with new Travel Agents/ Event Planners to build lasting relationships.
+								</li>
+								<li>
+									<strong> 
+										Do Targeted Marketing: 
+									</strong>
+										Pick specific cities where you want to drive business from, or reach new cities where you didn’t previously have a marketing presence.
+								</li>
+								<li>
+									<strong> 
+										Analyze your promotion’s performance: 
+									</strong>
+										On your personal profile, you will be able to see how your promotion is performing, and the number/ type of people/regions responded to your promotions initiative.
+								</li>
+								<li>
+									<strong> 
+										Pay nominal price: 
+									</strong>
+										Do all of the above at a small fraction of the cost of attending Travel and Tourism Fairs, or using sales reps.
+								</li>
                           </ol>
                       </div>
                     </div>
@@ -127,12 +178,16 @@
     <div class="container-fluid grey_bg">
         <div class="row">
             <!-- Pricing -->
-            <div class="col-lg-8 col-md-8 col-sm-12 col-lg-offset-2 col-md-offset-2 col-xs-12 animate-box fadeInUp animated mt">
+            <div  >
          
             <?php  echo $this->Form->create("Promotions", ['type' => 'file', 'class'=> 'form-horizontal', 'url' => ['controller' => 'Promotions', 'action' => 'addPromotion'], 'onSubmit' => 'return submiton();', 'id'=>"PromotionForm"]); ?>
                 <fieldset class="promotion_form margin-b50">
-<h3 class="text-center  margin-b50">Promotion Form
-          </h3>
+					<legend>
+						<h3 class="text-center  margin-b50">
+							Promotion Form
+						</h3>
+					</legend>
+
 		       <!-- Text input-->
                 <div class="form-group">
                   <label class="col-md-4 control-label" for="user_id">User Name</label>  
@@ -293,20 +348,13 @@
           <button type="button" class="btn btn-default closepreview" data-dismiss="modal">Close</button>
         </div>
       </div>
-      
     </div>
-  </div>		
-		
-		
-
-    </div>
-   
-    
-
+  </div>	
+</div>
+</div>
+</div>
+</div>  
   <?php echo $this->Html->script(['jquery.validate']);?>
-
- 
-
   <?php echo $this->Html->css(['select2/select2']);?>
   <?php echo $this->Html->script(['select2/select2']);?>
    	<script>

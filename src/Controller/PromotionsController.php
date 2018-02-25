@@ -18,7 +18,7 @@ var $helpers = array('Html', 'Form');
 
 public function addPromotion(){
 date_default_timezone_set('Asia/Kolkata');
-    
+    $this->viewBuilder()->layout('user_layout');
       if ($this->request->is(['post', 'put'])) {
       	 
 $PromotionsTable = TableRegistry::get('Promotion');
