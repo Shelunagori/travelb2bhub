@@ -393,7 +393,7 @@ $(document).ready(function(){
 			type: 'POST',
 			dataType:'text',
 			success: function(data)
-			{
+			{	
 				$(".suggesstion-box").show();
 				$(".suggesstion-box").html(data);
 				$(".city-search-box").css("background","#FFF");

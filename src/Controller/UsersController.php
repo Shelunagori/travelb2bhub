@@ -801,7 +801,7 @@ public function ajaxCity()
 		?>
 		<ul id="country-list">
 			<?php foreach($cities as $show){ ?>
-				<li onClick="selectCountry('<?php echo $show->name; ?>','<?php echo $show->id; ?>','<?php echo $show->state_id; ?>');"><?php echo $show->name .'('. $show->state->state_name .')'; ?></li>
+				<li onClick="selectCountry('<?php echo $show->name .' ('. $show->state->state_name .')'; ?>','<?php echo $show->id; ?>','<?php echo $show->state_id; ?>');"><?php echo $show->name .' ('. $show->state->state_name .')'; ?></li>
 			<?php } ?>
 		</ul>
 		<?php
