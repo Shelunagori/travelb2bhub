@@ -3,6 +3,7 @@
 	#Content{ width:90% !important; margin-left: 5%;}
 	input:focus {background-color:#FFF !important;}
 	input[type="password"]:focus {background-color:#FFF !important;}
+	div.error { display: block !important; } 
 </style>
 
 <section class="content">
@@ -14,10 +15,14 @@
             </div>
 			
 			<?php  echo $this->Form->create("Users", ['id'=>"UserRegisterForm"]); ?>
-			<?= $this->Flash->render() ?>
-              <div class="box-body">
+			<div class="box-body">
 				<div class="col-md-offset-3 col-md-6">
 			  <fieldset>
+				<div class="col-md-12">
+					<div class="form-group col-md-12">
+						<?= $this->Flash->render() ?>
+					</div>
+				</div>
 				<div class="col-md-12">
 					<div class="form-group col-md-12">
 					  <label>Current Password</label>

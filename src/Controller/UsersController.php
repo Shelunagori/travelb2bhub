@@ -843,12 +843,12 @@ $verify = (new \Cake\Auth\DefaultPasswordHasher)->check($this->request->data['ol
 if($verify) {
 $result = $this->Users->patchEntity($user, ['password' => $this->request->data['password']]);
 if ($this->Users->save($result)) {
-$this->Flash->success(__('Your password has been changed successfully.'));
+$this->Flash->successnew(__('Your password has been changed successfully.'));
 //$this->redirect('/users/dashboard');
 }
 } else {
 //echo "not mached"; exit;
-$this->Flash->success(__('Current Password does not matched.'));
+$this->Flash->error(__('Current Password does not matched.'));
 }
 }
 $myRequestCount = $myReponseCount = 0;
