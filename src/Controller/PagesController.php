@@ -12,8 +12,7 @@ use Cake\Network\Email\Email;
 
 class PagesController extends AppController
 {
- 
-	public function beforeFilter(Event $event) { 
+	public function beforeFilter(Event $event) {
 		$this->loadModel('Users');
 		$this->loadModel('Contacts');
 		parent::beforeFilter($event);
@@ -219,8 +218,6 @@ class PagesController extends AppController
     }
 	
     public function promotions(){
-		
-		$this->viewBuilder()->layout('user_layout');
 		$this->loadModel('Countries');
 		$this->loadModel('Users');
 		$this->loadModel('States');
@@ -828,16 +825,15 @@ class PagesController extends AppController
 			$user = $this->Users->find()->where(['id' => $_POST['user_id']])->first();
 			$result['user'] = $user;
 			if(!empty($user)) {
+				//$cities = $this->Cities->getAllCities();
 				$states = $this->States->find()->where(['country_id' => '101'])->all();
-				/*$cities = $this->Cities->getAllCities();
-				
-				$allStates = array();
+				/*$allStates = array();
 				foreach($states as $state){
 					$allStates[$state["id"]] = $state['state_name'];
 				}
 				$allCities = array();
 				$allCityList = array();
-				/*if(!empty($cities)) {
+				if(!empty($cities)) {
 					foreach($cities as $city) {
 						//$allCities[] = array("label"=>str_replace("'", "", $city['name']), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
 						$allCities[] = array("label"=>str_replace("'", "", $city['name'].' ('.$city['state']->state_name. ')'), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
@@ -898,7 +894,7 @@ class PagesController extends AppController
 			}       
        
 			$conditions ='';
-		if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
+if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 			if(!empty($_POST["budgetsearch"])) {
 				$QPriceRange = $_POST["budgetsearch"];
 				$result = explode("-", $QPriceRange);
@@ -1079,14 +1075,13 @@ $chatusers = array();
 				->order(["id" => "DESC"]);
 				  $rating['rating'][$req['id']]  = $userRating;
 			$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$req['user_id']."' AND blocked_by='".$req['request']['user_id']."'";
-		$stmt = $conn->execute($sql1);
-		$bresult = $stmt ->fetch('assoc');
-		if($bresult['block_count']>0){
-			$blockeddata['blockedUser'][$req['id']] =1;
-		}
-		else{
-			$blockeddata['blockedUser'][$req['id']] =0;
-		}
+$stmt = $conn->execute($sql1);
+$bresult = $stmt ->fetch('assoc');
+if($bresult['block_count']>0){
+$blockeddata['blockedUser'][$req['id']] =1;
+}else{
+$blockeddata['blockedUser'][$req['id']] =0;
+}
 	$reqidarray[] =$req['request']['user_id'];		
         }
 			
@@ -1139,7 +1134,7 @@ $chatusers = array();
     		echo json_encode($result);
      		exit;
   		}
-	}
+		}
 		
 	public function cityname($id){
 	$this->loadModel('Cities');
@@ -1175,10 +1170,10 @@ $chatusers = array();
 				 			$transportArray = array();
 							if($details['category_id']==2){
 								if(!empty($details['transport_requirement'])) {
-              	$transport_name = $transpoartRequirments[$details['transport_requirement']];
-						}else {
-				$transport_name  = "-- --";	
-						}
+									$transport_name = $transpoartRequirments[$details['transport_requirement']];
+										}else {
+										$transport_name  = "-- --";	
+								}
 							
 							$cityname = $this->cityname($details['pickup_city']);
 							$statename = $this->statename($details['pickup_state']);
@@ -1221,9 +1216,7 @@ $hotelcitystate[$row['id']]  = $city_state_name;
 				$hotelcategoryArray[$row['id']]  = "-- --";	
 						}
                   	 }  
-                  	 }
-                  	               
-                     
+                  	 }            
                $citystate['citystate'][$details['id']]  = $citystatefull;
 				 $transportArray[$details['id']]  = $transport_name;
               $allStates = $this->States->find('list',['keyField' => 'id', 'valueField' => 'state_name'])->where(['country_id' => 101])
@@ -1249,6 +1242,8 @@ $hotelcitystate[$row['id']]  = $city_state_name;
          $result['mealPlans'] = $mealPlanArray;
          $result['hotelcategory'] = $hotelcategoryArray;
          
+		 
+		 
     		$data =   json_encode($result);
          echo $data;
          exit;
@@ -1358,8 +1353,8 @@ $hotelcitystate[$row['id']]  = $city_state_name;
         $this->loadModel('Responses');
         $this->loadModel('Requests');
         $this->loadModel('Cities');
-		  $this->loadModel('States');
-		 
+		$this->loadModel('States');
+		$this->loadModel('Testimonial');
 		 /**Sorting ---------**/
 			
 			$sort='';
@@ -1412,7 +1407,7 @@ $hotelcitystate[$row['id']]  = $city_state_name;
 			$conditions["Responses.quotation_price <="] = $MaxQuotePrice;
 		}
 		//print_r($conditions); die();
-if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
+		if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 		if(!empty($_POST["budgetsearch"])) {
 			$QPriceRange = $_POST["budgetsearch"];
 			$result = explode("-", $QPriceRange);
@@ -1433,37 +1428,40 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
         $citystate = (object)[];
 			$review_array = array();
 			$enddatearray=array();
- 
-			 $conn = ConnectionManager::get('default');     
+		$rating = array();
+		$conn = ConnectionManager::get('default');     
         if($responses->count()>0){
-                     foreach($responses as $cit)
-                     {
-						 $sql = "SELECT * FROM testimonial WHERE request_id='".$cit['request']['id']."' AND author_id='".$_POST['user_id']."' order by created_at DESC";
-						$stmt = $conn->execute($sql);
-						$reviews = $stmt ->fetch('assoc');
-						$review_array[]=$reviews;
+		foreach($responses as $cit)
+		{
+			$query = $this->Testimonial->find();
+			$userRating = $query->select(["average_rating" => $query->func()->avg("rating")])
+					->where(['author_id' => $cit['request']['user_id']])
+					->order(["id" => "DESC"]);
+			$rating['rating'][$cit['request']['user_id']]  = $userRating;
+			 $sql = "SELECT * FROM testimonial WHERE request_id='".$cit['request']['id']."' AND author_id='".$_POST['user_id']."' order by created_at DESC";
+			$stmt = $conn->execute($sql);
+			$reviews = $stmt ->fetch('assoc');
+			$review_array[]=$reviews;
                      
-						 if($cit['request']['category_id']==2)
-						 {
-						 $cityname = $this->cityname($cit['request']['pickup_city']);
-						 }else{
-						 $cityname = $this->cityname($cit['request']['city_id']);
-						 }	 
-                     
-						 if($cit['request']['category_id']==2)
-						 {
-						 $statename = $this->statename($cit['request']['pickup_state']);
-						 }else{
-						$statename = $this->statename($cit['request']['state_id']);
-						 }
-                     $comma = '';
-                     if($statename!=""){
-                     $comma = ',';
-                     }
-                     //$citystatefull = $cityname.$comma.' '. $statename;
-                     $citystatefull = $cityname.'('.$statename.')';
-							
-			
+			 if($cit['request']['category_id']==2)
+			 {
+			 $cityname = $this->cityname($cit['request']['pickup_city']);
+			 }else{
+			 $cityname = $this->cityname($cit['request']['city_id']);
+			 }	 
+		 
+			 if($cit['request']['category_id']==2)
+			 {
+			 $statename = $this->statename($cit['request']['pickup_state']);
+			 }else{
+			$statename = $this->statename($cit['request']['state_id']);
+			 }
+		 $comma = '';
+		 if($statename!=""){
+		 $comma = ',';
+		 }
+		 //$citystatefull = $cityname.$comma.' '. $statename;
+		 $citystatefull = $cityname.'('.$statename.')';
 			$city_state_name = "";
 							if(count($cit['request']['hotels']) >0) {
 								unset($cit['request']['hotels'][0]);
@@ -1507,16 +1505,17 @@ $city[$cit['id']]=$citystatefull.''.$city_state_name;
 					INNER JOIN requests as r on r.city_id=c.id
 					INNER JOIN requests as re on re.pickup_city=c.id
 					group by c.id order by c.name asc ";
-		$stmt = $conn->execute($sql);
-		$allCities = $stmt ->fetchAll('assoc');       
-         //  print_r($city); exit;
-       $result['response_code'] = 200;
-		 $result['response_object'] = $responses;
-		 $result['citystate'] = $city;
-			$result['end_date'] = $enddatearray;
-			$result['reviews'] = $review_array;
-		 $result['cities_list'] = $allCities;
-		 $data =   json_encode($result);
+			$stmt = $conn->execute($sql);
+			$allCities = $stmt ->fetchAll('assoc');       
+			//  print_r($city); exit;
+		$result['response_code'] = 200;
+		$result['response_object'] = $responses;
+		$result['citystate'] = $city;
+		$result['rating'] = $rating;
+		$result['end_date'] = $enddatearray;
+		$result['reviews'] = $review_array;
+		$result['cities_list'] = $allCities;
+		$data =   json_encode($result);
        echo $data;
       exit;
    }else{
@@ -1761,89 +1760,92 @@ public function removebusinessbuddyapi() {
    	}
     }
 	public function checkresponsesapi() {
-		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
-			$this->loadModel('Responses');
-			$this->loadModel('Requests');
-			$this->loadModel('BusinessBuddies');
-			$this->loadModel('User_Chats');
-			$this->loadModel('Testimonial');
-			$conditions["Responses.request_id"] = $_POST['request_id'];
-				if(!empty($_POST['agentnamesearch'])) {
-				$keyword1 = '';
-				$keyword2 = '';
-				$keyword = trim($_POST['agentnamesearch']);
-				$keyword = explode(' ',$keyword);
-				if(isset($keyword[0]) && !isset($keyword[1])) {
-					$keyword1 = $keyword[0];
-					$conditions["Users.first_name"] =$keyword1;
-				}
-				if(isset($keyword[1])) {
-					$keyword1 = trim($keyword[0]);
-					$keyword2 = trim($keyword[1]);
+	if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
+	$this->loadModel('Responses');
+	$this->loadModel('Requests');
+	$this->loadModel('BusinessBuddies');
+	$this->loadModel('User_Chats');
+$this->loadModel('Testimonial');
+	$conditions["Responses.request_id"] = $_POST['request_id'];
+	if(!empty($_POST['agentnamesearch'])) {
+	$keyword1 = '';
+	$keyword2 = '';
+	$keyword = trim($_POST['agentnamesearch']);
+	$keyword = explode(' ',$keyword);
+	if(isset($keyword[0]) && !isset($keyword[1])) {
+	$keyword1 = $keyword[0];
+	$conditions["Users.first_name"] =$keyword1;
+	}
+	if(isset($keyword[1])) {
+	$keyword1 = trim($keyword[0]);
+	$keyword2 = trim($keyword[1]);
 
-					$da["Users.first_name"] =  $keyword1;
-					$da["Users.last_name"] =  $keyword2;
-					$conditions["AND"] =  $da;
-				}
-			}
-			if(!empty($_POST["acceptdeals"])) {
-				$conditions["Responses.status"] = 1;
-				$acceptDeals = 1;
-			}
-			if(!empty($_POST['quotesearch'])) {
-				$QPriceRange = $_POST['quotesearch'];
-				$result = explode("-", $QPriceRange);
-				$MinQuotePrice = $result[0];
-				$MaxQuotePrice = $result[1];
-				$conditions["Responses.quotation_price >="] = $MinQuotePrice;
-				$conditions["Responses.quotation_price <="] = $MaxQuotePrice;
-			}
-			if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
-			if(!empty($_POST['budgetsearch'])) {
-				$QPriceRange = $_POST['budgetsearch'];
-				$result = explode("-", $QPriceRange);
-				$MinBudgetPrice = $result[0];
-				$MaxBudgetPrice = $result[1];
-				$conditions["Requests.total_budget >="] = $MinBudgetPrice;
-				$conditions["Requests.total_budget <="] = $MaxBudgetPrice;
-			}
-			if(!empty($_POST["chatwith"])) {
-				$chatuserid = $_POST["chatwith"];
-				$conditions["Responses.user_id"] = $chatuserid;
-			}
-			if(!empty($_POST["shared_details"])) {
-				$conditions["Responses.is_details_shared"] =  $_POST["shared_details"];
-			}
-			if(!empty($_POST['refidsearch'])) {
-				$conditions["Requests.reference_id"] =  $_POST['refidsearch'];
-			}
-			$sortorder ='';
-			if(!empty($_POST['sort'])) {
-				$sortfield = $_POST['sort'];
-				if($sortfield =="quotedpricelh"){
-					$sortorder["Responses.quotation_price"] = "ASC";
-				}
-				if($sortfield =="quotedpricehl"){
-					$sortorder["Responses.quotation_price"] = "DESC";
-				}
+	$da["Users.first_name"] =  $keyword1;
+	$da["Users.last_name"] =  $keyword2;
+	$conditions["AND"] =  $da;
+	}
+	}
+	if(!empty($_POST["acceptdeals"])) {
+	$conditions["Responses.status"] = 1;
+	$acceptDeals = 1;
+	}
+	if(!empty($_POST['quotesearch'])) {
+	$QPriceRange = $_POST['quotesearch'];
+	$result = explode("-", $QPriceRange);
+	$MinQuotePrice = $result[0];
+	$MaxQuotePrice = $result[1];
+	$conditions["Responses.quotation_price >="] = $MinQuotePrice;
+	$conditions["Responses.quotation_price <="] = $MaxQuotePrice;
+	}
 
-				if($sortfield =="totalbudgetlh"){
-					$sortorder["Requests.total_budget"] = "ASC";
-				}
-				if($sortfield =="totalbudgethl"){
-					$sortorder["Requests.total_budget"] = "DESC";
-				}	
+	if(!empty($_POST['budgetsearch'])) {
+	if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
+	$QPriceRange = $_POST['budgetsearch'];
+	$result = explode("-", $QPriceRange);
+	$MinBudgetPrice = $result[0];
+	$MaxBudgetPrice = $result[1];
+	$conditions["Requests.total_budget >="] = $MinBudgetPrice;
+	$conditions["Requests.total_budget <="] = $MaxBudgetPrice;
+	}
+	if(!empty($_POST["chatwith"])) {
+	$chatuserid = $_POST["chatwith"];
+	$conditions["Responses.user_id"] = $chatuserid;
+	}
+	if(!empty($_POST["shared_details"])) {
+	$conditions["Responses.is_details_shared"] =  $_POST["shared_details"];
+	}
+	if(!empty($_POST['refidsearch'])) {
+	$conditions["Requests.reference_id"] =  $_POST['refidsearch'];
+	}
+	$sortorder ='';
+	if(!empty($_POST['sort'])) {
+	$sortfield = $_POST['sort'];
+	if($sortfield =="quotedpricelh"){
+	$sortorder["Responses.quotation_price"] = "ASC";
+	}
+	if($sortfield =="quotedpricehl"){
+	$sortorder["Responses.quotation_price"] = "DESC";
+	}
 
-				if($sortfield =="agentaz"){
-					$sortorder['Users.first_name'] = "ASC";
-					$sortorder['Users.last_name'] = "ASC";
-				}
-				if($sortfield =="agentza"){
-					$sortorder['Users.first_name'] = "DESC";
-					$sortorder['Users.last_name'] = "DESC";
-				}		
-			}
-			
+	if($sortfield =="totalbudgetlh"){
+	$sortorder["Requests.total_budget"] = "ASC";
+	}
+	if($sortfield =="totalbudgethl"){
+	$sortorder["Requests.total_budget"] = "DESC";
+	}	
+
+	if($sortfield =="agentaz"){
+	$sortorder['Users.first_name'] = "ASC";
+	$sortorder['Users.last_name'] = "ASC";
+	}
+	if($sortfield =="agentza"){
+	$sortorder['Users.first_name'] = "DESC";
+	$sortorder['Users.last_name'] = "DESC";
+	}		
+
+	}
+//---
+ 
 		$this->loadModel('BlockedUsers');
 		$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
 			->hydrate(false)
@@ -1856,154 +1858,146 @@ public function removebusinessbuddyapi() {
 		if(!empty($BlockedUsers)) {
 			$BlockedUsers = array_values($BlockedUsers);
 		}
-		array_push($BlockedUsers,$_POST['user_id']);
+		//array_push($BlockedUsers,$_POST['user_id']);
 		$BlockedUsers = array_unique($BlockedUsers);
-		$BlockedUsers=array_merge($BlockedUsers,$myBlockedUsers);
-		$conditions["Requests.user_id NOT IN"] =  $BlockedUsers;
-			$responses = $this->Responses->find()
-				->contain(["Users", "Requests","Requests.Hotels","Testimonial"])
-				->where($conditions)
-				->order($sortorder)
-				->all();
-			
-			$chatusers = array();
-			$conn = ConnectionManager::get('default');
-			$sql = "SELECT u.id,u.first_name,u.last_name FROM users as u 
-			INNER JOIN responses as rs on rs.user_id=u.id
-			WHERE rs.request_id ='".$_POST['request_id']."' ";
-			$stmt = $conn->execute($sql);
-			$chatusers = $stmt ->fetchAll('assoc');
-			$data = array();
-			$rating = array();
-			$BusinessBuddies = array();
-			$blockeddata = array();
-			if(count($responses)>0) {
-				foreach($responses as $row){ 
-				
-					$request_id = $row['request']['id'];
-					$loggedinid = $row['request']['user_id'];
-					
-					$userRating = $query->select(["average_rating" => $query->func()->avg("rating")])
+		//$BlockedUsers=array_merge($BlockedUsers,$myBlockedUsers);
+
+//$conditions["Responses.user_id NOT IN"] =  $BlockedUsers; 
+//---
+	$responses = $this->Responses->find()
+	->contain(["Users", "Requests","Requests.Hotels","Testimonial"])
+	->where($conditions)
+	->order($sortorder)
+	->all();
+//print_r($conditions); exit;
+	$chatusers = array();
+	$conn = ConnectionManager::get('default');
+	$sql = "SELECT u.id,u.first_name,u.last_name FROM users as u 
+	INNER JOIN responses as rs on rs.user_id=u.id
+	WHERE rs.request_id ='".$_POST['request_id']."' ";
+	$stmt = $conn->execute($sql);
+	$chatusers = $stmt ->fetchAll('assoc');
+	$data = array();
+	$BusinessBuddies = array();
+	$blockeddata = array();
+$rating = array();
+	if(count($responses)>0) {
+	foreach($responses as $row){ 
+	$request_id = $row['request']['id'];
+	$loggedinid = $row['request']['user_id'];
+
+$query = $this->Testimonial->find();
+$userRating = $query->select(["average_rating" => $query->func()->avg("rating")])
 						->where(['author_id' => $row['request']['user_id']])
 						->order(["id" => "DESC"]);
 					$rating['rating'][$row['id']]  = $userRating;
-					//--
-					$user_id = $row['user']['id'];
-					$sql = "SELECT *,COUNT(*) as ch_count FROM user_chats 
-					WHERE request_id='".$request_id."' AND (user_id in ('".$loggedinid."','".$user_id."') 
-					AND notification='0'
-					ANd send_to_user_id in ('".$loggedinid."','".$user_id."')) ";
-					$stmt1 = $conn->execute($sql);
-					$results1 = $stmt1->fetch('assoc');			
-					//$row["request"]["chat_count"]=$results1['ch_count'];
-					$data[$row['id']] =$results1['ch_count'];
 
-					$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$row['user']['id']."' AND blocked_by='".$row['request']['user_id']."'";
-					$stmt = $conn->execute($sql1);
-					$bresult = $stmt->fetch('assoc');
-					if($bresult['block_count']>0){
-						$blockeddata['blockedUser'][$row['id']] =1;
-					}
-					else{
-						$blockeddata['blockedUser'][$row['id']] =0;
-					}
-				}
+	$user_id = $row['user']['id'];
+	$sql = "SELECT *,COUNT(*) as ch_count FROM user_chats 
+	WHERE request_id='".$request_id."' AND (user_id in ('".$loggedinid."','".$user_id."') 
+	AND notification='0'
+	ANd send_to_user_id in ('".$loggedinid."','".$user_id."')) ";
+	$stmt1 = $conn->execute($sql);
+	$results1 = $stmt1->fetch('assoc');			
+	//$row["request"]["chat_count"]=$results1['ch_count'];
+	$data[$row['id']] =$results1['ch_count'];
 
-				$BusinessBuddies = $this->BusinessBuddies->find('list',['keyField' => "bb_user_id",'valueField' => 'bb_user_id'])
-				->hydrate(false)
-				->where(['user_id' => $loggedinid])
-				->toArray();
+	$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$row['user']['id']."' AND blocked_by='".$row['request']['user_id']."'";
+	$stmt = $conn->execute($sql1);
+	$bresult = $stmt->fetch('assoc');
+	if($bresult['block_count']>0){
+	$blockeddata['blockedUser'][$row['id']] =1;
+	}else{
+	$blockeddata['blockedUser'][$row['id']] =0;
+	}
+	}
 
-			}
+	$BusinessBuddies = $this->BusinessBuddies->find('list',['keyField' => "bb_user_id",'valueField' => 'bb_user_id'])
+	->hydrate(false)
+	->where(['user_id' => $loggedinid])
+	->toArray();
 
-			$citystate = array();
-			$enddatearray=array();
-			foreach($responses as $cit)
-			{
-				
-				if($cit['request']['category_id']==2)
-				{
-				$cityname = $this->cityname($cit['request']['pickup_city']);
-				}
-				else{
-					$cityname = $this->cityname($cit['request']['city_id']);
-				}	 
+	}
 
-				if($cit['request']['category_id']==2)
-				{
-					$statename = $this->statename($cit['request']['pickup_state']);
-				}else{
-					$statename = $this->statename($cit['request']['state_id']);
-				}
+	$citystate = array();
+	$enddatearray=array();
+	foreach($responses as $cit)
+	{
+	if($cit['request']['category_id']==2)
+	{
+	$cityname = $this->cityname($cit['request']['pickup_city']);
+	}else{
+	$cityname = $this->cityname($cit['request']['city_id']);
+	}	 
 
-				$comma = '';
-				if($statename!=""){
-				$comma = ',';
-				}
-				// $citystatefull = $cityname.$comma.' '. $statename;
+	if($cit['request']['category_id']==2)
+	{
+	$statename = $this->statename($cit['request']['pickup_state']);
+	}else{
+	$statename = $this->statename($cit['request']['state_id']);
+	}
 
-				$citystatefull = $cityname.' ('. $statename.')';
+	$comma = '';
+	if($statename!=""){
+	$comma = ',';
+	}
+	// $citystatefull = $cityname.$comma.' '. $statename;
 
-				$city_state_name = "";
-				if(count($cit['request']['hotels']) >0) {
-					unset($cit['request']['hotels'][0]);
-					foreach($cit['request']['hotels'] as $row) { 
-						$city_state_name.=', '.$this->cityname($row['city_id']).' ('.$this->statename($row['state_id']).')'; 
-					} 
-				}  
+	$citystatefull = $cityname.' ('. $statename.')';
 
-				$citystate['citystate'][$cit['id']]  = $citystatefull.''.$city_state_name;
-				// $citystate['citystate'][$cit['id']]  = $citystatefull;
-				if($cit['request']['category_id']==1){
-					$sqlh = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$cit['request']['id']."'";
-					$stmth = $conn->execute($sqlh);
-					$resulth = $stmth->fetch('assoc');
-					$end_data =  date('Y-m-d', strtotime($cit['request']['end_date']));
-					if(!empty($resulth['TopDate'])){
-						if($resulth['TopDate']>$end_data){
-							$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($resulth['TopDate']));
-						}else
-						{
-							$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['request']['end_date']));	
-						}
-					}
-					else{
-						if($req['check_out']>$end_data){
-							$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['request']['check_out']));
-						}else{
-							$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['request']['end_date']));	
-						}
-					}
-				}
-				elseif($cit['request']['category_id'] == 2 ) {
-					$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['request']['end_date']));
-				}
-				elseif($cit['request']['category_id'] == 3 ) {
-					$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['request']['check_out']));
-				} 
+	$city_state_name = "";
+	if(count($cit['request']['hotels']) >0) {
+	unset($cit['request']['hotels'][0]);
+	foreach($cit['request']['hotels'] as $row) { 
+	$city_state_name.=', '.$this->cityname($row['city_id']).' ('.$this->statename($row['state_id']).')'; 
+	}  }  
 
-			}
-
-			$result['response_code'] = 200;
-			$result['response_object'] = $responses;
-			$result['citystate'] = $citystate;
-			$result['end_date'] = $enddatearray;
-			$result['rating'] = $rating;
-			$result['BusinessBuddies'] = $BusinessBuddies;
-			$result['chat_count'] = $data;
-			$result['blockeddata'] = $blockeddata;
-			$result['chat_users'] = $chatusers;
-			$data =   json_encode($result);
-			echo $data;
-			exit;
+	$citystate['citystate'][$cit['id']]  = $citystatefull.''.$city_state_name;
+	// $citystate['citystate'][$cit['id']]  = $citystatefull;
+	if($cit['request']['category_id']==1){
+	$sqlh = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$cit['request']['id']."'";
+	$stmth = $conn->execute($sqlh);
+	$resulth = $stmth->fetch('assoc');
+		$end_data =  date('Y-m-d', strtotime($cit['request']['end_date']));
+	if(!empty($resulth['TopDate'])){
+		if($resulth['TopDate']>$end_data){
+	$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($resulth['TopDate']));
+		}else{
+	$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['request']['end_date']));	
 		}
-		else
-		{
-			$result = array();
-			$result['response_code']= 403;
-			echo json_encode($result);
-			exit;
+	}else{
+		if($req['check_out']>$end_data){
+	$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['request']['check_out']));
+		}else{
+	$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['request']['end_date']));	
 		}
+	}
+	}elseif($cit['request']['category_id'] == 2 ) {
+	$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['request']['end_date']));
+	}elseif($cit['request']['category_id'] == 3 ) {
+	$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['request']['check_out']));
+	} 
+
+	}
+
+	$result['response_code'] = 200;
+	$result['response_object'] = $responses;
+	$result['citystate'] = $citystate;
+$result['rating'] = $rating;
+	$result['end_date'] = $enddatearray;
+	$result['BusinessBuddies'] = $BusinessBuddies;
+	$result['chat_count'] = $data;
+	$result['blockeddata'] = $blockeddata;
+	$result['chat_users'] = $chatusers;
+	$data =   json_encode($result);
+	echo $data;
+	exit;
+	}else{
+	$result = array();
+	$result['response_code']= 403;
+	echo json_encode($result);
+	exit;
+	}
 	}
 public function __getUserRespondToRequestCount($userdetail) {
 error_reporting(0);
@@ -2595,44 +2589,55 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	->hydrate(false)
 	->where(['blocked_by' => $_POST['user_id']])
 	->toArray();
+$myBlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_by'])
+	->hydrate(false)
+	->where(['blocked_user_id' => $_POST['user_id']])
+	->toArray();
+
 	if(!empty($BlockedUsers)) {
 	$BlockedUsers = array_values($BlockedUsers);
 	}
 	array_push($BlockedUsers,$_POST['user_id']);
 	$BlockedUsers = array_unique($BlockedUsers);
-
+$BlockedUsers=array_merge($BlockedUsers,$myBlockedUsers);
 	if ($_POST['role_id'] == 1) { // Travel Agent
-		if(!empty($user["preference"])) {
-			$conditionalStates = array_unique(array_merge(explode(",", $user["preference"]), array($user["state_id"])));
-		} else {
-			$conditionalStates = $user["state_id"];
-		}
-	  
-		$requests = $this->Requests->find()
-		->contain(["Users", "Responses","Hotels"])
-		->notMatching('Responses', function(\Cake\ORM\Query $q) {
-		return $q->where(['Responses.user_id' =>  $_POST['user_id']]);
-		})->where(["OR"=>['Requests.state_id IN' => $conditionalStates, 'Requests.pickup_state IN' => $conditionalStates], 'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
-		->group('Requests.id')
-		->order($sort)->all();
-
-	} 
-	else if ($_POST['role_id'] == 2) { /// Event Planner
-		$requests = $this->Requests->find()
-		->contain(["Users","Hotels"])
-		->where(['Requests.pickup_state' => $user["state_id"], 'Requests.category_id' => 2, "Requests.status !="=>2, "Requests.is_deleted"=>0])->order($sort)->all();
+	if(!empty($user["preference"])) {
+	$conditionalStates = array_unique(array_merge(explode(",", $user["preference"]), array($user["state_id"])));
+	} else {
+	$conditionalStates = $user["state_id"];
 	}
-	else if ($_POST['role_id'] == 3) { /// Hotel
-			$requests = $this->Requests->find()
-			->contain(["Users", "Responses","Hotels"])
-			->notMatching('Responses', function(\Cake\ORM\Query $q) {
-			return $q->where(['Responses.user_id' => $_POST['user_id']]);
-			})
-		->where(['Requests.city_id' => $user['city_id'],'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
-		//->where(['Requests.category_id' => 3, "Requests.status !="=>2, "Requests.is_deleted"=>0])
-		->group('Requests.id')
-		->order($sort)->all();
-		}
+  
+	$requests = $this->Requests->find()
+	->contain(["Users", "Responses","Hotels"])
+	->notMatching('Responses', function(\Cake\ORM\Query $q) {
+	return $q->where(['Responses.user_id' =>  $_POST['user_id']]);
+	})
+
+	->where(["OR"=>['Requests.state_id IN' => $conditionalStates, 'Requests.pickup_state IN' => $conditionalStates], 'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
+	->group('Requests.id')
+	->order($sort)->all();
+
+	} else if ($_POST['role_id'] == 2) { /// Event Planner
+	$requests = $this->Requests->find()
+	->contain(["Users","Hotels"])
+	->where(['Requests.pickup_state' => $user["state_id"], 'Requests.category_id' => 2, "Requests.status !="=>2, "Requests.is_deleted"=>0])->order($sort)->all();
+	}else if ($_POST['role_id'] == 3) { /// Hotel
+	$requests = $this->Requests->find()
+	->contain(["Users", "Responses","Hotels"])
+	->notMatching('Responses', function(\Cake\ORM\Query $q) {
+	return $q->where(['Responses.user_id' => $_POST['user_id']]);
+	})
+	->where(['Requests.city_id' => $user['city_id'],'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
+	//->where(['Requests.category_id' => 3, "Requests.status !="=>2, "Requests.is_deleted"=>0])
+	->group('Requests.id')
+	->order($sort)->all();
+	}
+
+/*if (in_array($_POST['user_id'], $BlockedUsers)){
+echo $_POST['user_id'];
+print_r($BlockedUsers);
+$requests=array();
+} exit;*/
 	$data = array();
 	$blockeddata = array();
 	foreach($requests as $req){
@@ -2747,205 +2752,216 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	exit;
 	}
 	}
-	public function finalizedrequestlistapi() {
-		$this->loadModel('Responses');
-		$this->loadModel('Hotels');
-		$this->loadModel('Requests');
-		$this->loadModel('Cities');
-		$headers =  getallheaders();
-		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
+		public function finalizedrequestlistapi() {
+			$this->loadModel('Responses');
+			$this->loadModel('Hotels');
+			$this->loadModel('Requests');
+			$this->loadModel('Cities');
+			$headers =  getallheaders();
+			if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
 
-		$sort='';
+				$sort='';
 
-		if(!isset($_POST["sort"])) {
-		//$sort['Requests.accept_date'] = "DESC";
-		$sort['Requests.id'] = "DESC";
-		}
-		if(!empty($_POST["sort"]) && $_POST["sort"]=="requesttype") {
-		$sort['Requests.category_id'] = "ASC";
-		}
-		if(!empty($_POST["sort"]) && $_POST["sort"]=="totalbudgetlh") {
-		$sort['Requests.total_budget'] = "ASC";
-		}
-		if(!empty($_POST["sort"]) && $_POST["sort"]=="totalbudgethl") {
-		$sort['Requests.total_budget'] = "DESC";
-		}
+				if(!isset($_POST["sort"])) {
+				//$sort['Requests.accept_date'] = "DESC";
+				$sort['Requests.id'] = "DESC";
+				}
+				if(!empty($_POST["sort"]) && $_POST["sort"]=="requesttype") {
+				$sort['Requests.category_id'] = "ASC";
+				}
+				if(!empty($_POST["sort"]) && $_POST["sort"]=="totalbudgetlh") {
+				$sort['Requests.total_budget'] = "ASC";
+				}
+				if(!empty($_POST["sort"]) && $_POST["sort"]=="totalbudgethl") {
+				$sort['Requests.total_budget'] = "DESC";
+				}
 
-		$conditions["Requests.user_id"] = $_POST['user_id'];
+				$conditions["Requests.user_id"] = $_POST['user_id'];
 
-		$conditions["Requests.status"] = 2;
-		$conditions["Requests.is_deleted "] = 0;
-		//$conditions["Requests.status"] = 1;
-	if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
-		if(isset($_POST["budgetsearch"]) && !empty($_POST["budgetsearch"])) {
-		$QPriceRange = $_POST["budgetsearch"];
-		$result = explode("-", $QPriceRange);
-		$MinQuotePrice = $result[0];
-		$MaxQuotePrice = $result[1];
-		$conditions["Requests.total_budget >="] = $MinQuotePrice;
-		$conditions["Requests.total_budget <="] = $MaxQuotePrice;
-		}
-		if(isset($_POST["req_typesearch"]) && !empty($_POST["req_typesearch"])) {
-		$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
-		}
-		if(isset($_POST["refidsearch"]) && !empty($_POST["refidsearch"])) {
-		$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
-		}
-		if(isset($_POST["members"]) && !empty($_POST["members"])) {
-		$conditions["Requests.children+Requests.adult"] =  $_POST["members"];
-		}
-		if(isset($_POST["startdatesearch"])){
-		$sdate = $_POST["startdatesearch"];
-		}
-		if(isset($sdate) && !empty($sdate)){
-		$date = str_replace('/', '-', $sdate);
-		$sdate = date('Y-m-d', strtotime($date));
-		}
+				$conditions["Requests.status"] = 2;
+				$conditions["Requests.is_deleted "] = 0;
+				//$conditions["Requests.status"] = 1;
 
-		if(!empty($_POST["startdatesearch"])) {
-		$da["Requests.start_date"] =  $sdate;
-		$da["Requests.check_in"] =  $sdate;
-		$conditions["OR"] =  $da;
-		}
+				if(isset($_POST["budgetsearch"]) && !empty($_POST["budgetsearch"])) {
+			if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
+				$QPriceRange = $_POST["budgetsearch"];
+				$result = explode("-", $QPriceRange);
+				$MinQuotePrice = $result[0];
+				$MaxQuotePrice = $result[1];
+				$conditions["Requests.total_budget >="] = $MinQuotePrice;
+				$conditions["Requests.total_budget <="] = $MaxQuotePrice;
+				}
+				if(isset($_POST["req_typesearch"]) && !empty($_POST["req_typesearch"])) {
+				$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
+				}
+				if(isset($_POST["refidsearch"]) && !empty($_POST["refidsearch"])) {
+				$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
+				}
+				if(isset($_POST["members"]) && !empty($_POST["members"])) {
+				$conditions["Requests.children+Requests.adult"] =  $_POST["members"];
+				}
+				if(isset($_POST["startdatesearch"])){
+				$sdate = $_POST["startdatesearch"];
+				}
+				if(isset($sdate) && !empty($sdate)){
+				$date = str_replace('/', '-', $sdate);
+				$sdate = date('Y-m-d', strtotime($date));
+				}
 
-		if(isset($_POST["enddatesearch"])){
-		$edate = $_POST["enddatesearch"];
-		}
-		if(isset($edate) && !empty($edate)){
-		$date = str_replace('/', '-', $edate);
-		$edate = date('Y-m-d', strtotime($date));
-		}
+				if(!empty($_POST["startdatesearch"])) {
+				$da["Requests.start_date"] =  $sdate;
+				$da["Requests.check_in"] =  $sdate;
+				$conditions["OR"] =  $da;
+				}
 
-		if(!empty($_POST["enddatesearch"])) {
-		$da1["Requests.end_date"] =  $edate;
-		$da1["Requests.check_out"] =  $edate;
-		if(!empty($sdate)){
-		$da1["Requests.start_date"] =  $sdate;
-		$da1["Requests.check_in"] =  $sdate;
-		}
-		$conditions["OR"] =  $da1;
-		}
+				if(isset($_POST["enddatesearch"])){
+				$edate = $_POST["enddatesearch"];
+				}
+				if(isset($edate) && !empty($edate)){
+				$date = str_replace('/', '-', $edate);
+				$edate = date('Y-m-d', strtotime($date));
+				}
 
-		if ($_POST['role_id'] == 1) {
-		$requests = $this->Requests->find()
-		->contain(["Users","Responses","Hotels","Responses.Users"])
-		->where($conditions)->order($sort)->all();
-		}
-		if ($_POST['role_id'] == 2) {
-		$requests = $this->Requests->find()
-		->contain(["Users","Responses","Hotels","Responses.Users"])
-		->where($conditions)->order($sort)->all();
-		}
-		if ($_POST['role_id'] == 3) {
-		$requests = $this->Requests->find()
-		->contain(["Users","Responses","Hotels","Responses.Users"])
-		->where($conditions)->order($sort)->all();
-		}
+				if(!empty($_POST["enddatesearch"])) {
+				$da1["Requests.end_date"] =  $edate;
+				$da1["Requests.check_out"] =  $edate;
+				if(!empty($sdate)){
+				$da1["Requests.start_date"] =  $sdate;
+				$da1["Requests.check_in"] =  $sdate;
+				}
+				$conditions["OR"] =  $da1;
+				}
 
-		$citystate = array();
-		$review_array = array();
-		$enddatearray=array();
-		$final_res_array = array();
-		$conn = ConnectionManager::get('default');
-		if($requests->count()>0)
-		{
-		foreach($requests as $cit)
-		{
-		$sql = "SELECT * FROM testimonial WHERE request_id='".$cit['id']."' AND author_id='".$_POST['user_id']."' order by created_at DESC";
-		$stmt = $conn->execute($sql);
-		$reviews = $stmt ->fetch('assoc');
-		$review_array[]=$reviews;
-		if($cit['category_id']==2)
-		{
-		$cityname = $this->cityname($cit['pickup_city']);
-		}else{
-		$cityname = $this->cityname($cit['city_id']);
-		}	 
+				if ($_POST['role_id'] == 1) {
+				$requests = $this->Requests->find()
+				->contain(["Users","Responses","Hotels","Responses.Users"])
+				->where($conditions)->order($sort)->all();
+				}
+				if ($_POST['role_id'] == 2) {
+				$requests = $this->Requests->find()
+				->contain(["Users","Responses","Hotels","Responses.Users"])
+				->where($conditions)->order($sort)->all();
+				}
+				if ($_POST['role_id'] == 3) {
+				$requests = $this->Requests->find()
+				->contain(["Users","Responses","Hotels","Responses.Users"])
+				->where($conditions)->order($sort)->all();
+				}
+			$rating = array();
+			$citystate = array();
+			$review_array = array();
+			$enddatearray=array();
+			$final_res_array = array();
+			$conn = ConnectionManager::get('default');
+			$this->loadModel('Testimonial');
+			if($requests->count()>0)
+			{
+			foreach($requests as $cit)
+			{
 
-		if($cit['category_id']==2)
-		{
-		$statename = $this->statename($cit['pickup_state']);
-		}else{
-		$statename = $this->statename($cit['state_id']);
-		}
+				$query = $this->Testimonial->find();
+				$userRating = $query->select(["average_rating" => $query->func()->avg("rating")])
+					->where(['author_id' => $cit['response']['user_id']])
+					->order(["id" => "DESC"]);
+				$rating['rating'][$cit['response']['user_id']]  = $userRating;
+			 
+				$sql = "SELECT * FROM testimonial WHERE request_id='".$cit['id']."' AND author_id='".$_POST['user_id']."' order by created_at DESC";
+				$stmt = $conn->execute($sql);
+				$reviews = $stmt ->fetch('assoc');
+				$review_array[]=$reviews;
+				if($cit['category_id']==2)
+				{
+				$cityname = $this->cityname($cit['pickup_city']);
+				}else{
+				$cityname = $this->cityname($cit['city_id']);
+				}	 
 
-		$comma = '';
-		if($statename!=""){
-		$comma = ',';
-		}
+				if($cit['category_id']==2)
+				{
+				$statename = $this->statename($cit['pickup_state']);
+				}else{
+				$statename = $this->statename($cit['state_id']);
+				}
 
-		$citystatefull = $cityname.' ('. $statename.')';
+				$comma = '';
+				if($statename!=""){
+				$comma = ',';
+				}
 
-		$city_state_name = "";
-		if(count($cit['hotels']) >0) {
-		unset($cit['hotels'][0]);
-		foreach($cit['hotels'] as $row) { 
-		$city_state_name.=', '.$this->cityname($row['city_id']).' ('.$this->statename($row['state_id']).')'; 
-		}  } 
-		$citystate['citystate'][$cit['id']]  = $citystatefull.''.$city_state_name;
+				$citystatefull = $cityname.' ('. $statename.')';
 
-		if($cit['category_id']==1){
-		$sqlh = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$cit['id']."'";
-		$stmth = $conn->execute($sqlh);
-		$resulth = $stmth->fetch('assoc');
-		$end_data =  date('Y-m-d', strtotime($cit['end_date']));
-		if(!empty($resulth['TopDate'])){
-			if($resulth['TopDate']>$end_data){
-		$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($resulth['TopDate']));
-			}else{
-		$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['end_date']));	
+				$city_state_name = "";
+				if(count($cit['hotels']) >0) {
+				unset($cit['hotels'][0]);
+				foreach($cit['hotels'] as $row) { 
+				$city_state_name.=', '.$this->cityname($row['city_id']).' ('.$this->statename($row['state_id']).')'; 
+				}  } 
+				$citystate['citystate'][$cit['id']]  = $citystatefull.''.$city_state_name;
+
+				if($cit['category_id']==1){
+				$sqlh = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$cit['id']."'";
+				$stmth = $conn->execute($sqlh);
+				$resulth = $stmth->fetch('assoc');
+				$end_data =  date('Y-m-d', strtotime($cit['end_date']));
+				if(!empty($resulth['TopDate'])){
+					if($resulth['TopDate']>$end_data){
+				$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($resulth['TopDate']));
+					}else{
+				$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['end_date']));	
+					}
+				}else{
+					if($cit['check_out']>$end_data){
+				$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['check_out']));
+					}else{
+				$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['end_date']));	
+					}
+				}
+				}elseif($cit['category_id'] == 2 ) {
+				$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['end_date']));
+				}elseif($cit['category_id'] == 3 ) {
+				$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['check_out']));
+				}		 
+
+				$sqlf = "SELECT r.*,u.first_name,u.last_name FROM responses as r
+				inner JOIN users u on u.id=r.user_id
+				WHERE r.request_id='".$cit['id']."' AND r.id='".$cit['final_id']."'"; 
+				$stmtd = $conn->execute($sqlf);
+				$resultd = $stmtd ->fetch('assoc');
+				$final_res_array[$cit['id']]  = $resultd;	 
+
+
+				}
+				}
+
+
+				$sql = "select s.state_name,c.id as city_id,c.name as city_name from cities as c 
+				INNER JOIN states as s on s.id=c.state_id
+				INNER JOIN requests as r on r.city_id=c.id
+				INNER JOIN requests as re on re.pickup_city=c.id
+				group by c.id order by c.name asc ";
+				$stmt = $conn->execute($sql);
+				$allCities = $stmt ->fetchAll('assoc');
+
+
+				$result['response_code'] = 200;
+				$result['response_object'] = $requests;
+				$result['rating'] = $rating;
+				$result['end_date'] = $enddatearray;
+				$result['finalresponse'] = $final_res_array;
+				$result['citystate'] = $citystate;
+				$result['reviews'] = $review_array;	
+				$result['cities_list'] = $allCities;
+				$data =   json_encode($result);
+				echo $data;
+				exit;
 			}
-		}else{
-			if($cit['check_out']>$end_data){
-		$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['check_out']));
-			}else{
-		$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['end_date']));	
+			else{
+				$result = array();
+				$result['response_code']= 403;
+				echo json_encode($result);
+				exit;
 			}
 		}
-		}elseif($cit['category_id'] == 2 ) {
-		$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['end_date']));
-		}elseif($cit['category_id'] == 3 ) {
-		$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['check_out']));
-		}		 
-
-		$sqlf = "SELECT r.*,u.first_name,u.last_name FROM responses as r
-		inner JOIN users u on u.id=r.user_id
-		WHERE r.request_id='".$cit['id']."' AND r.id='".$cit['final_id']."'"; 
-		$stmtd = $conn->execute($sqlf);
-		$resultd = $stmtd ->fetch('assoc');
-		$final_res_array[$cit['id']]  = $resultd;	 
-
-
-		}
-		}
-
-
-		$sql = "select s.state_name,c.id as city_id,c.name as city_name from cities as c 
-		INNER JOIN states as s on s.id=c.state_id
-		INNER JOIN requests as r on r.city_id=c.id
-		INNER JOIN requests as re on re.pickup_city=c.id
-		group by c.id order by c.name asc ";
-		$stmt = $conn->execute($sql);
-		$allCities = $stmt ->fetchAll('assoc');
-
-
-		$result['response_code'] = 200;
-		$result['response_object'] = $requests;
-		$result['end_date'] = $enddatearray;
-		$result['finalresponse'] = $final_res_array;
-		$result['citystate'] = $citystate;
-		$result['reviews'] = $review_array;	
-		$result['cities_list'] = $allCities;
-		$data =   json_encode($result);
-		echo $data;
-		exit;
-		}else{
-		$result = array();
-		$result['response_code']= 403;
-		echo json_encode($result);
-		exit;
-		}
-	}
 	public function dashboardapi() {
 date_default_timezone_set('Asia/Kolkata');
 $current_date = date("Y-m-d");
@@ -3529,7 +3545,6 @@ exit;
 			$response = $TableResponse->get($_POST["response_id"]);
 			$send_to_user_id = $response['user_id'];
 			$response->status = 1;
-			
 			$TableResponse->save($response);
 			$res = 1;
 			if($res==1)
@@ -3551,7 +3566,6 @@ exit;
 			$userchats->send_to_user_id = $send_to_user_id;
 			$userchats->message = $message;
 			$userchats->created = date("Y-m-d h:i:s");
-			
 			$userchats->notification = 1;
 			if ($userchatTable->save($userchats)) {
 			$this->sendpushnotification($send_to_user_id,$msg);
@@ -3706,8 +3720,7 @@ exit;
 				$TableRequest = TableRegistry::get('Requests');
 				$request = $TableRequest->get($d["request_id"]);
 				$user = $this->Users->find()->where(['id' => $_POST["user_id"]])->first();
-				$response = $this->Responses->newEntity($d); 
-				
+				$response = $this->Responses->newEntity($d);
 				if ($re = $this->Responses->save($response)) {
 					$name = $user['first_name'].' '.$user['last_name'];
 					$ref_id = $request['reference_id'];
@@ -5130,9 +5143,4 @@ $response=array('success'=>$success,'error'=>$error,'response'=>$response);
 			exit;
 		}
 	}
-		
-			
-		
-		
-
 }
