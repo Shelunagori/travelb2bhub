@@ -19,7 +19,7 @@
 		.login100-form-title { font-size:25px; }
 		.wrap-login100 { background:#1f222db8 !important; width:420px !important; padding: 18px 55px 37px 55px; }
 		.p-t-27 { padding-top: 10px; }
-		.error { color: #fff; margin-left: 25px; }
+		.error { color: #ff9898; text-align:center; }
 	</style>
 </head>
 <body>
@@ -32,7 +32,7 @@
 					<span class="login100-form-title p-b-34 p-t-27">
 						TRAVEL B2b HUB
 					</span>			
-				<p style="color:#fff !important;"><?php echo $this->Flash->render(); ?></p>
+				<p style="color:#ff9898 !important;"><?php echo $this->Flash->render(); ?></p>
 				<br />
                 <?php  echo $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'login'],'id'=>"UserLoginForm", 'class'=>'login100-form validate-form']); ?>
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">

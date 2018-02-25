@@ -1,13 +1,56 @@
-<?php echo $this->Html->script(['jquery.validate']);?>
-<?= $this->Html->css(['jquery.steps']); ?>
-<?php echo $this->Html->script(['modernizr-2.6.2.min', 'jquery.cookie-1.3.1', 'jquery.steps', 'selectFx']); ?>
 
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/css/bootstrap-multiselect.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<?php echo $this->Html->css(['chosen/chosen']);?>
-<?php echo $this->Html->script(['chosen/chosen.jquery']);?>
- <script>
+<style> 
+a:hover,a:focus{
+    outline: none !important;
+    text-decoration: none !important;
+}
+.tab .nav-tabs{
+    display: inline-block !important;
+    background: #F0F0F0 !important;
+    border-radius: 50px !important;
+    border: none !important;
+    padding: 1px !important;
+}
+.tab .nav-tabs li{
+    float: none !important;
+    display: inline-block !important;
+    position: relative !important;
+}
+.tab .nav-tabs li a{
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    background: none !important;
+    color: #999 !important;
+    border: none !important;
+    padding: 10px 15px !important;
+    border-radius: 50px !important;
+    transition: all 0.5s ease 0s !important;
+}
+.tab .nav-tabs li a:hover{
+    background: #1295A2 !important;
+    color: #fff !important;
+    border: none !important;
+}
+.tab .nav-tabs li.active a,
+.tab .nav-tabs li.active a:focus,
+.tab .nav-tabs li.active a:hover{
+    border: none !important;
+    background: #1295A2 !important;
+    color: #fff !important;
+}
+.tab .tab-content{
+    font-size: 14px !important;
+    color: #686868 !important;
+    line-height: 25px !important;
+    text-align: left !important;
+    padding: 5px 20px !important;
+}
+.tab .tab-content h3{
+    font-size: 22px !important;
+    color: #5b5a5a !important;
+} 
+</style> 
+<!--------- <script>
 	var cityData = '<?php echo $allCities; ?>';
 	$(document).ready(function () {
 		$("#city_name").autocomplete({
@@ -224,23 +267,36 @@ $(document).ready(function($){
 	//$(".chosen-select").chosen();
 });
 </script>
- 
-<?php echo $this->element('subheader');?>
+------------>	 
+<div class="row equal_column">
+	<div class="col-md-12" style="background-color:#fff"> 
+		<br>
+		<?php echo $this->element('subheader');?>
+ 	</div>
+<div class="col-md-12" style="background-color:#fff"> 
 
-	<hr class="hr_bordor">
-		<div id="tra-sendrequest" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="box box-default">
+	<div class="box-header with-border"> 
+		<h3 class="box-title" style="padding:10px">Place Request</h3>
+		<div class="box-tools pull-right">
+ 		</div>
+		 
+	</div>
+	<div class="box-body">
+		<div class="row"> 
+		<div id="tra-sendrequest" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background:#FFF">
 			<?= $this->Flash->render() ?>
 			<div class="content">
-				<div class="tab-content">
+			<div class="tab-content tab">
+				<div align="center">
 					<ul class="nav nav-tabs" >
-						<li class="active">
-						<a href="#tab2" data-toggle="tab">Package</a></li>
-						<li ><a href="#tab1" data-toggle="tab">Hotel</a></li>
-						<li ><a id="tabtransport" href="#tab3" data-toggle="tab">Transport</a>
-						</li>
-					</ul>
-				
-<div class="tab-pane " id="tab1">
+						<li class="active"><a href="#tab1" data-toggle="tab">Hotel</a></li>
+						<li><a id="tabtransport" href="#tab3" data-toggle="tab">Transport</a></li>
+						<li><a href="#tab2" data-toggle="tab">Package</a></li>
+ 					</ul>
+				</div>
+				</br></br>
+<div class="tab-pane active" id="tab1">
 <?php
  echo $this->Form->create(null, [
 	'type' => 'file',
@@ -262,8 +318,7 @@ $(document).ready(function($){
 									Reference ID  
 									<span class="required">*</span>
 								</p>
-								<input autocomplete="off" name="reference_id" type="text" class="form-control ref2" id="reference_id" placeholder="Reference ID" autofocus/>
-								 
+								<input autocomplete="off" name="reference_id" type="text" class="form-control ref2" id="reference_id" required placeholder="Reference ID" autofocus/>
 							</div>
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -397,22 +452,25 @@ $(document).ready(function($){
 									</p>
 									</div>
 									<div>
-											<input autocomplete="off" type="text" class="form-control" id="h_city_name" name="h_city_name" placeholder="Select City or Nearest City"/>
-                                            <input type='hidden' id='h_city_id' name="h_city_id" />
+										<input autocomplete="off" type="text" class="form-control" id="h_city_name" name="h_city_name" placeholder="Select City or Nearest City"/>
+										<input type='hidden' id='h_city_id' name="h_city_id" />
+										<div class="suggesstion-box" style="margin-top:-10px"></div>
 									</div>
 							</div>
-							<div class="col-md-6">
-								<div class="input-field">
-									<p for="from">
-												Destination State
-												
-									</p>
+							<span class="shw">
+								<div class="col-md-6 ">
+									<div class="input-field">
+										<p for="from">
+													Destination State
+													
+										</p>
+									</div>
+									<div>
+										<input type='hidden' id='h_state_id' name="h_state_id"/>
+										<input type="text" class="form-control" id ="h_state_name" name="h_state_name" placeholder="State" readonly/>
+									</div>
 								</div>
-								<div>
-									<input type='hidden' id='h_state_id' name="h_state_id"/>
-									<input type="text" class="form-control" id ="h_state_name" name="h_state_name" placeholder="State" readonly/>
-								</div>
-							</div>
+							</span>
 						</div>
 					</div>	 
 						<div class="row">
@@ -435,7 +493,7 @@ $(document).ready(function($){
 											<span class="required">*</span>
 										</p>
 									</div>
-									<div class="col-md-6 input-group">
+									<div class="col-md-12 input-group">
 									<input autocomplete="off" type="text" name="check_in" class="form-control date-picker" id="datepicker7" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy"/>
 									<p class="input-group-addon btn">
 									<span class="fa fa-calendar"></span>
@@ -449,7 +507,7 @@ $(document).ready(function($){
 													<span class="required">*</span>
 												</p>
 									</div>
-									<div class="col-md-6 input-group">
+									<div class="col-md-12 input-group">
 										<input autocomplete="off" type="text" name="check_out" class="form-control date-picker" id="datepicker8" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy" />
 										<p class="input-group-addon btn" >
 										<span class="fa fa-calendar"></span>
@@ -490,7 +548,7 @@ $(document).ready(function($){
 								</div>
 							</div>
 <?= $this->Form->end()?>							
-<div class="tab-pane active" id="tab2" >
+<div class="tab-pane" id="tab2" >
 <?php
 					echo $this->Form->create(null, [
 						'type' => 'file',
@@ -603,16 +661,16 @@ $(document).ready(function($){
 										</div>
 										<div style="width: 200px;" class="stars">
 											<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
-										   <input class="star star-5" id="star-5-21" type="radio" value="5" name="hotel_rating"/>
-										   <label class="star star-5" for="star-5-21"></label>
-										   <input class="star star-4" id="star-4-21" type="radio" value="4" name="hotel_rating"/>
-										   <label class="star star-4" for="star-4-21"></label>
-										   <input class="star star-3" id="star-3-21" type="radio" value="3" name="hotel_rating"/>
-										   <label class="star star-3" for="star-3-21"></label>
-										   <input class="star star-2" id="star-2-21" type="radio" value="2" name="hotel_rating"/>
-										   <label class="star star-2" for="star-2-21"></label>
-										   <input class="star star-1" id="star-1-21" type="radio" value="1" name="hotel_rating"/>
-										   <label class="star star-1" for="star-1-21"></label>
+										   <input class="star star-5" id="star-5-212" type="radio" value="5" name="hotel_rating"/>
+										   <label class="star star-5" for="star-5-212"></label>
+										   <input class="star star-4" id="star-4-212" type="radio" value="4" name="hotel_rating"/>
+										   <label class="star star-4" for="star-4-212"></label>
+										   <input class="star star-3" id="star-3-212" type="radio" value="3" name="hotel_rating"/>
+										   <label class="star star-3" for="star-3-212"></label>
+										   <input class="star star-2" id="star-2-212" type="radio" value="2" name="hotel_rating"/>
+										   <label class="star star-2" for="star-2-212"></label>
+										   <input class="star star-1" id="star-1-212" type="radio" value="1" name="hotel_rating"/>
+										   <label class="star star-1" for="star-1-212"></label>
 										 </div>
 									</div>
 									<div class="col-md-4 ">
@@ -647,8 +705,8 @@ $(document).ready(function($){
 									</p>
 									</div>
 									<div>
-											<input type="text" class="form-control" id="city_name" name="city_name" placeholder="Select City or Nearest City"/>
-                                             <input type='hidden' id='city_id' name="city_id" />
+									<input type="text" class="form-control" id="city_name" name="city_name" placeholder="Select City or Nearest City"/>
+                                    <input type='hidden' id='city_id' name="city_id" />
 									</div>
 							</div>
 							<div class="col-md-6">
@@ -684,7 +742,7 @@ $(document).ready(function($){
 											<span class="required">*</span>
 										</p>
 									</div>
-									<div class="col-md-6 input-group">
+									<div class="col-md-12 input-group">
 									<input autocomplete="off" type="text" name="check_in" class="form-control date-picker" id="datepicker7" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy"/>
 									<p class="input-group-addon btn">
 									<span class="fa fa-calendar"></span>
@@ -698,7 +756,7 @@ $(document).ready(function($){
 													<span class="required">*</span>
 												</p>
 									</div>
-									<div class="col-md-6 input-group">
+									<div class="col-md-12 input-group">
 										<input autocomplete="off" type="text" name="check_out" class="form-control date-picker" id="datepicker8" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy" />
 										<p class="input-group-addon btn" >
 										<span class="fa fa-calendar"></span>
@@ -1170,10 +1228,271 @@ $(document).ready(function($){
                         </div>
 					</div>
 				</div>
-			</hr>
+				</div>
+				</div>
+				</div>
+				</div>
+				</div>
+				</div>
+				</div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<?php echo $this->Html->script(['jquery.validate']);?>		 
 <script>
-jQuery(document).ready(function () {
+$(document).ready(function(){ 
+$("#h_city_name").keyup(function(){
+	var input=$("#h_city_name").val();
+	var m_data = new FormData();
+	m_data.append('input',input);			
+	$.ajax({
+		url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_city"]); ?>",
+		data: m_data,
+		processData: false,
+		contentType: false,
+		type: 'POST',
+		dataType:'text',
+		success: function(data)
+		{
+			$(".suggesstion-box").show();
+			$(".suggesstion-box").html(data);
+			$(".h_city_name").css("background","#FFF");
+		}
+		});
+	});
+});
+	function selectCountry(value,city_code,state) {
+		var state_id=state;
+		$("#h_city_name").val(value);
+		$(".suggesstion-box").hide();
+		$("#h_city_id").val(city_code);
+			 	
+		var m_data = new FormData();
+ 		m_data.append('state_id',state_id);			
+		$.ajax({
+			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_state_show_new"]); ?>",
+			data: m_data,
+			processData: false,
+			contentType: false,
+			type: 'POST',
+			dataType:'text',
+			success: function(data)
+			{
+				$(".shw").html(data);
+			}
+		});	
+	}
+ 
+	$('#PackgeRequestForm').validate({
+		rules: {
+			"reference_id" : {
+				required : true
+			},
+			"total_budget" : {
+				required : true
+			},
+			"adult":{
+			required : true,
+			min: 1
+			},
+			"children":{
+			required : true,
+			min: 0
+			},
+			"check_in" : {
+				required : true
+			},
+			"check_out": {
+				required : true,
+			},
+			"city_id": {
+				required: true
+			},
+			
+			"pincode": {
+				required: true
+			}
+		},
+		messages: {
+			"reference_id" : {
+				required : "Please enter reference id."
+			},
+			"total_budget" : {
+				required : "Please enter total budget."
+			},
+			"adult" : {
+				required : "Please enter number of adults."
+			},
+			"children" : {
+				required : "Please enter number of children."
+			},
+			"check_in" : {
+				required : "Please select check-in date."
+			},
+			"check_out": {
+				required : "Please select check-out date."
+			},
+			"city_id": {
+				required: "Please select city."
+			},
+		
+			"pincode": {
+				required: "Please enter pincode."
+			}
+		},
+		ignore: ""
+	});
+	$('#HotelRequestForm').validate({
+		rules: {
+			"reference_id" : {
+				required : true
+			},
+			"hotelAdult":{
+			required : true,
+			min: 1
+			},
+			"hotelChildren":{
+				required : true,
+			min: 0
+			},
+			"total_budget" : {
+				required : true
+			},
+			"check_in" : {
+				required : true
+			},
+			"check_out": {
+				required : true,
+			},
+			"h_city_id": {
+				required: true
+			},
+		
+		},
+		messages: {
+			"reference_id" : {
+				required : "Please enter reference id."
+			},
+			"total_budget" : {
+				required : "Please enter total budget."
+			},
+			"hotelAdult" : {
+				required : "Please enter number of adults."
+			},
+			"hotelChildren" : {
+				required : "Please enter number of children."
+			},
+			"check_in" : {
+				required : "Please select check-in date."
+			},
+			"check_out": {
+				required : "Please select check-out date."
+			},
+			"h_city_id": {
+				required: "Please select city."
+			},
+			"locality": {
+				required: "Please enter locality."
+			}
+		},
+		ignore: ""
+	});
+	$('#TransportRequestForm').validate({
+		rules: {
+			"reference_id" : {
+				required : true
+			},
+			"total_budget" : {
+				required : true
+			},
+			"transportAdult":{
+			required : true,
+			min: 1
+			},
+			"transportChildren":{
+			required : true,
+			min: 0
+			},
+			"start_date" : {
+				required : true
+			},
+			"end_date": {
+				required : true,
+			},
+			"t_pickup_city_id": {
+				required: true
+			},
+			"t_final_city_id": {
+				required: true
+			},
+			"pickup_locality": {
+				required: true
+			}
+		},
+		messages: {
+			"reference_id" : {
+				required : "Please enter reference id."
+			},
+			"total_budget" : {
+				required : "Please enter total budget."
+			},
+			"transportAdult" : {
+				required : "Please enter number of adults."
+			},
+			"transportChildren" : {
+				required : "Please enter number of children."
+			},
+			"start_date" : {
+				required : "Please select start date."
+			},
+			"end_date": {
+				required : "Please select end date."
+			},
+			"t_pickup_city_id": {
+				required: "Please select city."
+			},
+			"t_final_city_id": {
+				required: "Please select city."
+			},
+			"pickup_locality": {
+				required: "Please enter locality."
+			}
+		},
+		ignore: ""
+	});
+	 
+	/*$('#PackgeRequestForm').submit(function(){
+		if ($("#PackgeRequestForm").valid()) {
+			$(this).find(':input[type=submit]').prop('disabled', true);
+		}else{
+			alert('Please Check All Required Fields.');
+		}   
+	});
+
+	$('#HotelRequestForm').submit(function(){
+		if ($("#HotelRequestForm").valid()) {
+			$(this).find(':input[type=submit]').prop('disabled', true);
+		}else{
+			alert('Please Check All Required Fields.');
+		}   
+	});
+
+	$('#TransportRequestForm').submit(function(){
+		if ($("#TransportRequestForm").valid()) {
+			$(this).find(':input[type=submit]').prop('disabled', true);
+		}else{
+			alert('Please Check All Required Fields.');
+		}   
+	});	
+*/
+	$('#accordion').on('shown.bs.collapse', function () {
+		
+		$('.ref2').focus()
+	});
+
+
+</script>
+<script>
+$(document).ready(function () {
+	
     	$('#tabtransport').click(function (e) {
     		$('.newdiv').remove();
 			$('.remove_field').remove();
@@ -1436,224 +1755,5 @@ var f = 1;
         })
     });
 </script>
-
-
-<?php //echo $this->element('footer'); ?>
-
-<script>
-	$(function ()
-	{
-		$("#wizard").steps({
-			headerTag: "h2",
-			bodyTag: "section",
-			transitionEffect: "slideLeft"
-		});
-	});
-</script>		
-<script>
-$('#PackgeRequestForm').validate({
-	rules: {
-		"reference_id" : {
-			required : true
-		},
-		"total_budget" : {
-			required : true
-		},
-		"adult":{
-		required : true,
-		min: 1
-		},
-		"children":{
-		required : true,
-		min: 0
-		},
-		"check_in" : {
-			required : true
-		},
-		"check_out": {
-			required : true,
-		},
-		"city_id": {
-			required: true
-		},
-		
-		"pincode": {
-			required: true
-		}
-	},
-	messages: {
-		"reference_id" : {
-			required : "Please enter reference id."
-		},
-		"total_budget" : {
-			required : "Please enter total budget."
-		},
-		"adult" : {
-			required : "Please enter number of adults."
-		},
-		"children" : {
-			required : "Please enter number of children."
-		},
-		"check_in" : {
-			required : "Please select check-in date."
-		},
-		"check_out": {
-			required : "Please select check-out date."
-		},
-		"city_id": {
-			required: "Please select city."
-		},
-	
-		"pincode": {
-			required: "Please enter pincode."
-		}
-	},
-	ignore: ""
-});
-$('#HotelRequestForm').validate({
-	rules: {
-		"reference_id" : {
-			required : true
-		},
-		"hotelAdult":{
-		required : true,
-		min: 1
-		},
-		"hotelChildren":{
-			required : true,
-		min: 0
-		},
-		"total_budget" : {
-			required : true
-		},
-		"check_in" : {
-			required : true
-		},
-		"check_out": {
-			required : true,
-		},
-		"h_city_id": {
-			required: true
-		},
-	
-	},
-	messages: {
-		"reference_id" : {
-			required : "Please enter reference id."
-		},
-		"total_budget" : {
-			required : "Please enter total budget."
-		},
-		"hotelAdult" : {
-			required : "Please enter number of adults."
-		},
-		"hotelChildren" : {
-			required : "Please enter number of children."
-		},
-		"check_in" : {
-			required : "Please select check-in date."
-		},
-		"check_out": {
-			required : "Please select check-out date."
-		},
-		"h_city_id": {
-			required: "Please select city."
-		},
-		"locality": {
-			required: "Please enter locality."
-		}
-	},
-	ignore: ""
-});
-$('#TransportRequestForm').validate({
-	rules: {
-		"reference_id" : {
-			required : true
-		},
-		"total_budget" : {
-			required : true
-		},
-		"transportAdult":{
-		required : true,
-		min: 1
-		},
-		"transportChildren":{
-		required : true,
-		min: 0
-		},
-		"start_date" : {
-			required : true
-		},
-		"end_date": {
-			required : true,
-		},
-		"t_pickup_city_id": {
-			required: true
-		},
-		"t_final_city_id": {
-			required: true
-		},
-		"pickup_locality": {
-			required: true
-		}
-	},
-	messages: {
-		"reference_id" : {
-			required : "Please enter reference id."
-		},
-		"total_budget" : {
-			required : "Please enter total budget."
-		},
-		"transportAdult" : {
-			required : "Please enter number of adults."
-		},
-		"transportChildren" : {
-			required : "Please enter number of children."
-		},
-		"start_date" : {
-			required : "Please select start date."
-		},
-		"end_date": {
-			required : "Please select end date."
-		},
-		"t_pickup_city_id": {
-			required: "Please select city."
-		},
-		"t_final_city_id": {
-			required: "Please select city."
-		},
-		"pickup_locality": {
-			required: "Please enter locality."
-		}
-	},
-	ignore: ""
-});
  
-$('#PackgeRequestForm').submit(function(){
-if ($("#PackgeRequestForm").valid()) {
-$(this).find(':input[type=submit]').prop('disabled', true);
-}else{
-alert('Please Check All Required Fields.');
-}   
-});
-$('#HotelRequestForm').submit(function(){
-if ($("#HotelRequestForm").valid()) {
-$(this).find(':input[type=submit]').prop('disabled', true);
-}else{
-alert('Please Check All Required Fields.');
-}   
-});
-
-$('#TransportRequestForm').submit(function(){
-if ($("#TransportRequestForm").valid()) {
-$(this).find(':input[type=submit]').prop('disabled', true);
-}else{
-alert('Please Check All Required Fields.');
-}   
-});	
-
-$('#accordion').on('shown.bs.collapse', function () {
 	
- $('.ref2').focus()
-});
-</script>

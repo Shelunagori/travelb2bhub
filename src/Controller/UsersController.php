@@ -43,12 +43,12 @@ class UsersController extends AppController {
 		$this->Auth->allow(['logout']);
 		$first_name=$this->Auth->User('first_name');
 		$last_name=$this->Auth->User('last_name');
-		$profile_pic=$this->Auth->User('profile_pic');
+		$profile_pic=$this->Auth->User('profile_pic');  
 		$loginId=$this->Auth->User('id');
 		$role_id=$this->Auth->User('role_id');
 		$authUserName=$first_name.' '.$last_name;
 		$this->set('MemberName',$authUserName);
-		$this->set('profilePic',$profile_pic);
+		$this->set('profile_pic', $profile_pic);
 		$this->set('loginId',$loginId);
 		$this->set('roleId',$role_id);
 	}
@@ -180,7 +180,7 @@ return $this->redirect('/pages/contactus');
 }
 }
 public function register() {
-	
+$this->viewBuilder()->layout('');	
 if ($this->Auth->user('id')) {
 return $this->redirect('/users/dashboard');
 }
@@ -795,18 +795,20 @@ public function viewuserprofile(){
 public function ajaxCity()
     {
 		$name=$this->request->data['input'];
-		$cities=$this->Users->Cities->find()->where(['Cities.name Like'=>'%'.$name.'%']);
+		$cities=$this->Users->Cities->find()
+		->contain(['States'])
+		->where(['Cities.name Like'=>'%'.$name.'%']);
 		?>
 		<ul id="country-list">
 			<?php foreach($cities as $show){ ?>
-				<li onClick="selectCountry('<?php echo $show->name; ?>','<?php echo $show->id; ?>','<?php echo $show->state_id; ?>');"><?php echo $show->name; ?></li>
+				<li onClick="selectCountry('<?php echo $show->name .' ('. $show->state->state_name .')'; ?>','<?php echo $show->id; ?>','<?php echo $show->state_id; ?>');"><?php echo $show->name .' ('. $show->state->state_name .')'; ?></li>
 			<?php } ?>
 		</ul>
 		<?php
 		 exit;  
      }
 
-public function ajaxStateShow()
+	public function ajaxStateShow()
     {
 		$state_id=$this->request->data['state_id'];
 		$states=$this->Users->States->find('list')->where(['States.id'=>$state_id]);
@@ -816,7 +818,19 @@ public function ajaxStateShow()
 		}
 		$countries=$this->Users->Countries->find('list')->where(['Countries.id'=>$country_id]);
 		$this->set(compact('states','countries'));
-     }
+    }
+	public function ajaxStateShowNew()
+    {
+		$state_id=$this->request->data['state_id'];
+		$states=$this->Users->States->find('list')->where(['States.id'=>$state_id]);
+		$statess=$this->Users->States->find()->where(['States.id'=>$state_id]);
+		foreach($statess as $st_show){
+			$country_id=$st_show->country_id;
+		}
+		$countries=$this->Users->Countries->find('list')->where(['Countries.id'=>$country_id]);
+		$this->set(compact('states','countries'));
+    }
+
 
 	 public function ajaxDestStateShow()
     {
@@ -843,12 +857,12 @@ $verify = (new \Cake\Auth\DefaultPasswordHasher)->check($this->request->data['ol
 if($verify) {
 $result = $this->Users->patchEntity($user, ['password' => $this->request->data['password']]);
 if ($this->Users->save($result)) {
-$this->Flash->success(__('Your password has been changed successfully.'));
-$this->redirect('/users/dashboard');
+$this->Flash->successnew(__('Your password has been changed successfully.'));
+//$this->redirect('/users/dashboard');
 }
 } else {
 //echo "not mached"; exit;
-$this->Flash->success(__('Current Password does not matched.'));
+$this->Flash->error(__('Current Password does not matched.'));
 }
 }
 $myRequestCount = $myReponseCount = 0;
@@ -888,6 +902,7 @@ $this->Flash->error(__('Please login to access this location.'));
 $this->redirect('/pages/home');
 }
 }
+
 public function sendrequest() {
 	$this->viewBuilder()->layout('user_layout');	
 	date_default_timezone_set('Asia/Kolkata');

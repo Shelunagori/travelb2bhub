@@ -1,9 +1,9 @@
- <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
- <?php echo $this->Html->script(['jquery.validate']);?>
- <style>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<style>
 	#Content{ width:90% !important; margin-left: 5%;}
 	input:focus {background-color:#FFF !important;}
 	input[type="password"]:focus {background-color:#FFF !important;}
+	div.error { display: block !important; } 
 </style>
 
 <section class="content">
@@ -13,12 +13,16 @@
 			<div class="box-header with-border">
               <h3 class="box-title">Change Password</h3>
             </div>
-			<?= $this->Flash->render() ?>
-			<?php  echo $this->Form->create("Users", ['id'=>"UserRegisterForm"]); ?>
 			
-              <div class="box-body">
+			<?php  echo $this->Form->create("Users", ['id'=>"UserRegisterForm"]); ?>
+			<div class="box-body">
 				<div class="col-md-offset-3 col-md-6">
 			  <fieldset>
+				<div class="col-md-12">
+					<div class="form-group col-md-12">
+						<?= $this->Flash->render() ?>
+					</div>
+				</div>
 				<div class="col-md-12">
 					<div class="form-group col-md-12">
 					  <label>Current Password</label>
@@ -43,20 +47,16 @@
 				</center>	
               </div>				
 			</fieldset>				
-				</div>
-				
+				</div>				
             </div>
-
             </form>
-          </div>
-            
+          </div>            
         </div>
-         
-      </div>
-      <!-- /.row -->
-    </section>
-
- <script>
+       </div>
+   </section>
+ 
+ <?php echo $this->Html->script(['jquery.validate']);?>   
+<script>
 $('#UserRegisterForm').validate({
 	rules: {
 		"old_password": {
