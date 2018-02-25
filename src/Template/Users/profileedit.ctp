@@ -455,12 +455,6 @@ $(document).ready(function(){
 			"description": {
 				required: true
 			},
-			"p_contact": {
-				required: true,
-				number: true,
-				minlength:10,
-				maxlength:10
-			},
 			"hotel_rating": {
 				required: true
 			}
@@ -499,12 +493,6 @@ $(document).ready(function(){
 			},
 			"description": {
 				required: "Please enter description."
-			},
-			"p_contact": {
-				required: "Please enter secondary contact number.",
-	number: "Please enter only number",
-				minlength: "Please enter at least 10 digit",
-				maxlength: "Please enter no more than 10 digit"
 			},
 			"hotel_rating": {
 				required: "Please select rating."

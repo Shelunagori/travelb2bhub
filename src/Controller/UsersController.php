@@ -180,7 +180,7 @@ return $this->redirect('/pages/contactus');
 }
 }
 public function register() {
-	
+$this->viewBuilder()->layout('');	
 if ($this->Auth->user('id')) {
 return $this->redirect('/users/dashboard');
 }
