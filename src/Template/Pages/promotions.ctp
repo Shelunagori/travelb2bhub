@@ -1,8 +1,4 @@
         <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
-
-         <?=$this->Html->css([ 'colorbox' ]);?>
-		<?php echo $this->Html->script(['colorbox']);?>
-
         <script>
             $(document).ready(function(){
                  $(document).ready(function(){   
@@ -68,7 +64,6 @@ $conn = ConnectionManager::get('default');
 		<div class="row">
 		<center>
 			<div class="col-md-12">
-				<div class="box box-primary">
 					<div class="box-body">
 						<div>
 							<div class="form-group col-md-12">
@@ -80,7 +75,7 @@ $conn = ConnectionManager::get('default');
 							</div>
 						</div>
 					</div>
-				</div>
+				 
 				</div>
 			</center>	
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  margin-b15 padding-lr7per"> 
@@ -99,25 +94,25 @@ $conn = ConnectionManager::get('default');
                           <ol>
 								<li>
 									<strong>
-										Increase your reach:
+										1. Increase your reach:
 									</strong>
 										Increase your business by connecting with new Travel Agents/ Event Planners to build lasting relationships.
 								</li>
 								<li>
 									<strong> 
-										Do Targeted Marketing: 
+										2. Do Targeted Marketing: 
 									</strong>
 										Pick specific cities where you want to drive business from, or reach new cities where you didn’t previously have a marketing presence.
 								</li>
 								<li>
 									<strong> 
-										Analyze your promotion’s performance: 
+										3. Analyze your promotion’s performance: 
 									</strong>
 										On your personal profile, you will be able to see how your promotion is performing, and the number/ type of people/regions responded to your promotions initiative.
 								</li>
 								<li>
 									<strong> 
-										Pay nominal price: 
+										4. Pay nominal price: 
 									</strong>
 										Do all of the above at a small fraction of the cost of attending Travel and Tourism Fairs, or using sales reps.
 								</li>
@@ -263,10 +258,19 @@ $conn = ConnectionManager::get('default');
                     <?php } }?>
                     </select>
                    </div>
-                   <div class="col-md-3 btn_cart">
+                   <!--div class="col-md-3 btn_cart">
                     <a class="btn inline" href="#">
                       <h4>Total </h4>
                       <h5 id="charges1">0</h5>
+                      </a>
+                    </div-->
+                </div>
+				  <div class="form-group">
+                  <label class="col-md-4 control-label" for="duration"></label>  
+                   <div class="col-md-5 btn_cart">
+                    <a class="btn inline" href="#">
+                      Total 
+                      <span id="charges1">0</span>
                       </a>
                     </div>
                 </div>
