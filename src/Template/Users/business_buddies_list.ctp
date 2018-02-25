@@ -21,34 +21,32 @@
 		<?php
 		if(count($BusinessBuddies) >0) {
 			foreach($BusinessBuddies as $row){ ?>
-			 
-			 
-		<div class="col-md-6">
-		<div class="box box-primary">
-			<div class="box-body">
-				<div>
-					<div class="form-group col-md-12">
-						  <div class="col-md-8">
-					<b>Name :</b> <?php echo $row['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $row['user']['last_name']; ?><br>
-					<b>Company Name :</b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?><br>
-					<b>Website :</b> <?php echo ($row['user']['website'])?$row['user']['website']:"-- --"; ?>
-				</div>
-				<div class="col-md-4">
-					<br>
-					<a href="javascript:void(0);" class="unfollow btn btn-danger btn-sm" follow_id = "<?php echo $row['id']; ?>"> Unfollow</a>
-				</div>
+				<div class="col-md-6">
+				<div class="box box-primary">
+					<div class="box-body">
+						<div>
+							<div class="form-group col-md-12">
+								  <div class="col-md-8">
+							<b>Name :</b> <?php echo $row['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $row['user']['last_name']; ?><br>
+							<b>Company Name :</b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?><br>
+							<b>Website :</b> <?php echo ($row['user']['website'])?$row['user']['website']:"-- --"; ?>
+						</div>
+						<div class="col-md-4">
+							<br>
+							<a href="javascript:void(0);" class="unfollow btn btn-danger btn-sm" follow_id = "<?php echo $row['id']; ?>"> Unfollow</a>
+						</div>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-		</div>
+				</div>
 			<?php } ?>
       <div class="pages"></div>
 		<?php } else {?>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-         <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 box-event">
-                You are not following anyone.
-          </div>
+				<div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 box-event">
+				You are not following anyone.
+				</div>
 			</div>
 		<?php } ?>
     <!--<div class="col-md-5 col-xs-offset-7 right">

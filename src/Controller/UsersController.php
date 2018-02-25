@@ -3242,48 +3242,58 @@ echo $res;
 exit;
 }
 public function blockedUserList() {
-$this->loadModel('Responses');
-$this->loadModel('Hotels');
-$this->loadModel('Requests');
-$this->loadModel('Cities');
-$this->loadModel('BlockedUsers');
-$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
-$this->set('users', $user);
-$blockedUsers = $this->BlockedUsers->find()
-->contain(["Users"])
-->where(['BlockedUsers.blocked_by' => $this->Auth->user('id')])->order(["BlockedUsers.id" => "DESC"])->all();
-//pr($blockedUsers); exit;
-$this->set('blockedUsers', $blockedUsers);
-$myRequestCount = $myReponseCount = 0;
-$myfinalCount  = 0;
-$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status "=>2]]);
-$myfinalCount = $query3 ->count();
-$this->set('myfinalCount', $myfinalCount );
-$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
-$myRequestCount = $query->count();
-$myRequestCount1 = $query->count(); 
-$delcount=0;
-$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
-foreach($requests as $req){
-$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
-if($rqueryr->count()!=0){
-$delcount++;
-}
-}
-if($myRequestCount > $delcount) {
-$myRequestCount = $myRequestCount-$delcount;
-}	
-$this->set('myRequestCountdel', $delcount);
-$this->set('myRequestCount', $myRequestCount1);
-$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]]);
-$myReponseCount = $queryr->count();
-$this->set('myReponseCount', $myReponseCount);
-$this->loadModel('User_Chats');
-$csort['created'] = "DESC";
-$allUnreadChat = $this->User_Chats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->order($csort)->limit(10)->all();
-$chatCount = $allUnreadChat->count();
-$this->set('chatCount',$chatCount);
-$this->set('allunreadchat',$allUnreadChat);
+	$this->viewBuilder()->layout('user_layout');	
+	$this->loadModel('Responses');
+	$this->loadModel('Hotels');
+	$this->loadModel('Requests');
+	$this->loadModel('Cities');
+	$this->loadModel('BlockedUsers');
+	
+		$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
+		$this->set('users', $user);
+		
+		$blockedUsers = $this->BlockedUsers->find()
+		->contain(["Users"])
+		->where(['BlockedUsers.blocked_by' => $this->Auth->user('id')])->order(["BlockedUsers.id" => "DESC"])->all();
+	 
+		$this->set('blockedUsers', $blockedUsers);
+		$myRequestCount = $myReponseCount = 0;
+		$myfinalCount  = 0;
+		$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status "=>2]]);
+		$myfinalCount = $query3 ->count();
+		$this->set('myfinalCount', $myfinalCount );
+		
+		$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
+		$myRequestCount = $query->count();
+		$myRequestCount1 = $query->count(); 
+		$delcount=0;
+		$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
+		
+		foreach($requests as $req){
+			$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
+			if($rqueryr->count()!=0){
+				$delcount++;
+			}
+		}
+		
+		if($myRequestCount > $delcount) {
+			$myRequestCount = $myRequestCount-$delcount;
+		}	
+	$this->set('myRequestCountdel', $delcount);
+	$this->set('myRequestCount', $myRequestCount1);
+	
+	$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]]);
+	$myReponseCount = $queryr->count();
+	
+	$this->set('myReponseCount', $myReponseCount);
+	$this->loadModel('User_Chats');
+	$csort['created'] = "DESC";
+	
+	$allUnreadChat = $this->User_Chats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->order($csort)->limit(10)->all();
+	$chatCount = $allUnreadChat->count();
+	
+	$this->set('chatCount',$chatCount);
+	$this->set('allunreadchat',$allUnreadChat);
 }
 public function businessBuddiesList() {
 $this->loadModel('Responses');
