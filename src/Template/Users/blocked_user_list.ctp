@@ -37,7 +37,12 @@ $conn = ConnectionManager::get('default');
 						<div>
 							<div class="form-group col-md-12">
 								<div class="col-md-8">
-									<b>Name :</b> <?php echo $row['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $row['user']['last_name']; ?><br>
+									<?php 
+										$hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$row['user']['id']));
+									?>
+									<b>Name :</b> <?php //echo $row['user']['first_name']; ?>&nbsp;&nbsp;<?php //echo $row['user']['last_name']; ?>
+									<a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $row['user']['last_name']; ?></a>
+									<br>
 									<b>Email :</b> <?php echo ($row['user']['email'])?$row['user']['email']:"-- --"; ?><br>
 									<b>Mobile No. :</b> <?php echo ($row['user']['mobile_number'])?$row['user']['mobile_number']:"-- --"; ?><br>
 									<b>Company Name :</b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?>

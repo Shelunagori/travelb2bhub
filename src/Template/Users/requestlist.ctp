@@ -329,12 +329,12 @@ legend
 									<div class="check_responses" id="checkresponse_<?php echo $request['id'];?>">
 										<?php if($data['responsecount'][$pid] > 0 ) 
 										{ ?>
-											<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$pid)) ?>"class="check_responses_btn btn btn-success btn-sm"> Response ( <strong><?php echo $data['responsecount'][$pid]; ?></strong> ) </a>
+											<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$pid)) ?>"class="check_responses_btn btn btn-success btn-sm"> Check Response ( <strong><?php echo $data['responsecount'][$pid]; ?></strong> ) </a>
 										  <?php 
 										} 
 										else 
 										{ ?>
-											<a href=# class="check_responses_btn btn btn-success btn-sm"> Response ( 0 )</a>
+											<a href=# class="check_responses_btn btn btn-success btn-sm"> No Response</a>
 										<?php 
 										} ?>
 									</div>
