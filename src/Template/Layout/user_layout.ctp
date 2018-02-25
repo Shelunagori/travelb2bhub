@@ -430,7 +430,13 @@ margin-top: 5px !important;
 			<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'removedRequestList']); ?>"><i class="fa fa-trash"></i> <span>REMOVED REQUESTS</span></a></li>
 		<?php
 		}
-		 
+		if($roleId == 3)
+		{ ?>
+			 
+			<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'promotionreports',$this->request->session()->read('Auth.User.id')]); ?>"><i class="fa fa-trash"></i> <span>Promotion Report</span></a></li> 
+			 
+			
+		<?php }			
 		?>
 		<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'blockedUserList']); ?>"><i class="fa fa-group"></i> <span>BLOCKED USERS</span></a></li>
 		 
