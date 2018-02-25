@@ -844,7 +844,7 @@ if($verify) {
 $result = $this->Users->patchEntity($user, ['password' => $this->request->data['password']]);
 if ($this->Users->save($result)) {
 $this->Flash->success(__('Your password has been changed successfully.'));
-$this->redirect('/users/dashboard');
+//$this->redirect('/users/dashboard');
 }
 } else {
 //echo "not mached"; exit;
