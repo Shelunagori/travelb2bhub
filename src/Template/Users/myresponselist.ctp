@@ -432,7 +432,7 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 				</div>
 				</fieldset>
                   </div>
-               </div>
+               
 			 
 			<?php  } 
 			}?>
@@ -455,10 +455,11 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
                 </div>
             </div>
 			<?php }?>
-
+			</div>
           </div>
       </div>
     </div>
+</div>
 </div>
 <script>
 $(document).ready(function () {

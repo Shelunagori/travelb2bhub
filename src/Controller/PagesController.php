@@ -247,6 +247,7 @@ class PagesController extends AppController
 				}
 			}
 		}
+		 
 		//$allCities = json_encode($allCities);
 		$userId = $this->Auth->user('id');
 		$userDetails = '';

@@ -248,7 +248,7 @@ $conn = ConnectionManager::get('default');
                 <div class="form-group">
                   <label class="col-md-4 control-label" for="charges">City</label>  
                   <div class="col-md-5 col-xs-12" style="z-index: 1;">
-                    <select multiple="multiple" id="city" name="city[]">
+                    <select multiple="multiple" class="form-control" id="city" name="city[]">
                     <?php foreach($allCities as $city){
 							if($city['usercount']>0){                    
                      ?>
@@ -360,13 +360,14 @@ $conn = ConnectionManager::get('default');
 </div>  
   <?php echo $this->Html->script(['jquery.validate']);?>
   <?php echo $this->Html->css(['select2/select2']);?>
-  <?php echo $this->Html->script(['select2/select2']);?>
+  <?php //echo $this->Html->script(['select2/select2']);?>
    	<script>
 
 $("#city").change(function() {
-   var price = $('select#city').val();
+   //var price = $('#city selected').val();
+	var price=$("#city option:selected").val();
    
-   //prices = '"'+price+'"';
+   prices = '"'+price+'"';
    prices = String(price);
    if (prices.indexOf(",") > -1)
    {   
