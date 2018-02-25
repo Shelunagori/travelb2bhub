@@ -1,4 +1,5 @@
  <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+ <?php echo $this->Html->script(['jquery.validate']);?>
  <style>
 	#Content{ width:90% !important; margin-left: 5%;}
 	input:focus {background-color:#FFF !important;}
@@ -12,28 +13,28 @@
 			<div class="box-header with-border">
               <h3 class="box-title">Change Password</h3>
             </div>
-			
-			<?php  echo $this->Form->create("Users", ['id'=>"UserRegisterForm"]); ?>
 			<?= $this->Flash->render() ?>
+			<?php  echo $this->Form->create("Users", ['id'=>"UserRegisterForm"]); ?>
+			
               <div class="box-body">
 				<div class="col-md-offset-3 col-md-6">
 			  <fieldset>
 				<div class="col-md-12">
 					<div class="form-group col-md-12">
 					  <label>Current Password</label>
-					  <input type="password" class="form-control" name="old_password" value=""  placeholder="Current Password">
+					  <input type="password" class="form-control" name="old_password" id="old_password" value=""  placeholder="Current Password">
 					</div>
 				</div>
 				<div class="col-md-12">
 					<div class="form-group col-md-12">
 					  <label>New Password</label>
-					  <input type="password" class="form-control" name="password" value=""  placeholder="New Password">
+					  <input type="password" class="form-control" name="password" id="password" value=""  placeholder="New Password">
 					</div>
 				</div>
 				<div class="col-md-12">
 					 <div class="form-group col-md-12">
 					  <label>Confirm New Password</label>
-					  <input type="password" class="form-control" name="cpassword" value=""  placeholder="Confirm New Password">
+					  <input type="password" class="form-control" name="cpassword" id="cpassword" value=""  placeholder="Confirm New Password">
 					</div>				
 				</div>
               <div class="">
