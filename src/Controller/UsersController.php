@@ -806,7 +806,7 @@ public function ajaxCity()
 		 exit;  
      }
 
-public function ajaxStateShow()
+	public function ajaxStateShow()
     {
 		$state_id=$this->request->data['state_id'];
 		$states=$this->Users->States->find('list')->where(['States.id'=>$state_id]);
@@ -816,7 +816,19 @@ public function ajaxStateShow()
 		}
 		$countries=$this->Users->Countries->find('list')->where(['Countries.id'=>$country_id]);
 		$this->set(compact('states','countries'));
-     }
+    }
+	public function ajaxStateShowNew()
+    {
+		$state_id=$this->request->data['state_id'];
+		$states=$this->Users->States->find('list')->where(['States.id'=>$state_id]);
+		$statess=$this->Users->States->find()->where(['States.id'=>$state_id]);
+		foreach($statess as $st_show){
+			$country_id=$st_show->country_id;
+		}
+		$countries=$this->Users->Countries->find('list')->where(['Countries.id'=>$country_id]);
+		$this->set(compact('states','countries'));
+    }
+
 
 	 public function ajaxDestStateShow()
     {

@@ -283,7 +283,27 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 					</div>
 				</div>
 			</div>
-		<?php } ?>
+		<?php }
+		else{
+			?>
+			<div class="col-md-12" style="background-color:#FFF">
+				<p style="font-size:20px;padding-top:10px">Reviews</p>
+				<hr></hr>
+				<div class="">
+				
+					<div class="carousel-reviews broun-block" style="height: 214px;">
+						<div id="carousel-reviews" class="carousel slide carousel1" data-ride="carousel">
+							<div class="carousel-inner">
+								<div class="block-text">
+									No Reviews
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php
+		}?>  
 	</div>
  	 
 	</div>

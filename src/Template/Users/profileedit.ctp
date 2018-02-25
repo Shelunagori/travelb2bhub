@@ -1,17 +1,5 @@
  <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
- <style>
-	#country-list{list-style:none;margin-left: 1px;padding:0;width:94%; margin-top: 10px;    position: absolute;
-    z-index: 1000;
-    background-color: #fff;}
-	#country-list li{padding-left: 10px;padding-top: 7px; background: #d8d4d41a ; border: 1px solid #bbb9b9;;top:2px}
-	#country-list li:hover{background:#d8d4d4;cursor: pointer;}
-	.column_column ul li, .column_helper ul li, .column_visual ul li, .icon_box ul li, .mfn-acc ul li, .ui-tabs-panel ul li, .post-excerpt ul li, .the_content_wrapper ul li{margin-bottom:0px !important}
-	#search-box{border: #e2e2e2 1px solid;border-radius:4px;}
-	#Content{ width:90% !important; margin-left: 5%;}
-	select:focus {background-color:#FFF !important;}
-	input:focus {background-color:#FFF !important;}
-	input[type="text"]:focus {background-color:#FFF !important;}
-</style>
+ 
 <style>
 hr { margin-top:0px!important;}
 .price {
@@ -587,11 +575,10 @@ $(document).ready(function(){
 		$("#city-search-box").val(value);
 		$(".suggesstion-box").hide();
 		$(".cityCode").val(city_code);
-			 	
-			var m_data = new FormData();
+		var m_data = new FormData();
 		m_data.append('state_id',state_id);			
 		$.ajax({
-			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_state_show"]); ?>",
+			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajaxStateShowNew"]); ?>",
 			data: m_data,
 			processData: false,
 			contentType: false,
@@ -601,6 +588,6 @@ $(document).ready(function(){
 			{
 				$(".shw").html(data);
 			}
-			});	
+		});	
 	}
 </script>
