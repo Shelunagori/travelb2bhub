@@ -33,6 +33,10 @@ hr { margin-top:0px!important;}
 .bg-yellow{
 	background-color:#DFBA49!important;
 }
+.bg-white
+{
+	padding: 30px !important;
+}
 .arroysign
 {
 	margin: 17px;
