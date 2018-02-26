@@ -8,6 +8,7 @@ $conn = ConnectionManager::get('default');
 	legend {
 		text-align:center;
 	}
+	.details {color:#000 !important; font-weight: 400;}	
 </style>
 	<div id ="finalized_request_list" class="container-fluid">
 <div class="row equal_column" > 
@@ -193,36 +194,35 @@ $(".req").sort(function (a, b) {
                     <ul>
                       <li class="col-md-12">
                      <p>
-						
-                        <b>Request Type :</b> <?php  echo $text; ?>
+						Request Type : <span class="details"><?php  echo $text; ?></span>
                     </p>
                     </li>
                     
                      <li class="col-md-12">
                         <p>
-                            <b>Total Budget :</b> Rs. <?php echo $request['total_budget']; ?>
+                            Total Budget : <span class="details">Rs. <?php echo $request['total_budget']; ?></span>
                         </p>
                     </li>
                     <li class="col-md-12">
                         <p>
-                            <b>Agent Name :</b> <a href="viewprofile/<?php echo $finalresponse[$request['id']]['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$finalresponse[$request['id']]['user_id']]); ?></a>
+                            Agent Name : <span class="details"><a href="viewprofile/<?php echo $finalresponse[$request['id']]['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$finalresponse[$request['id']]['user_id']]); ?></a></span>
                         </p>
                      </li>
                      <li class="col-md-12">
                         <p>
-                            <b>Quotation Price :</b> Rs. <?php echo $finalresponse[$request['id']]['quotation_price']; ?>
+                            Quotation Price : <span class="details">Rs. <?php echo $finalresponse[$request['id']]['quotation_price']; ?></span>
                         </p>
                     </li>
                    
                     <?php if($request['category_id'] == 3 ) { ?>
                     <li class="col-md-12">
                         <p>
-                            <b>Start Date :</b> <?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?>
+                            Start Date : <span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
                         </p>
                     </li>
                     <li class="col-md-12">
                         <p>
-                            <b>End Date :</b> <?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?></p>
+                            End Date : <span class="details"><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?></p></span>
                     </li>
                     <?php } elseif($request['category_id'] == 1 ) {
 							$sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$request['id']."'";
@@ -231,42 +231,42 @@ $(".req").sort(function (a, b) {
                     	?>
                     <li class="col-md-12">
                         <p>
-                            <b>Start Date :</b> <?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?>
+                            Start Date : <span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
                         </p>
                     </li>
                     <li class="col-md-12">
                         <p>
                         <?php if(!empty($result['TopDate'])) { ?>
-                        <b>End Date : </b> <?php echo date('d/m/Y',strtotime($result['TopDate'])); ?>
+                        End Date :  <span class="details"><?php echo date('d/m/Y',strtotime($result['TopDate'])); ?></span>
                         <?php }else{?>
-                            <b>End Date : </b> <?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?>
+                            End Date :  <span class="details"><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?></span>
                             <?php }?>
                         </p>
                     </li>
                     <?php } elseif($request['category_id'] == 2 ) {?>
                     <li class="col-md-12">
                         <p>
-                            <b>Start Date :</b> <?php echo ($request['start_date'])?date('d/m/Y',strtotime($request['start_date'])):"-- --"; ?>
+                            Start Date : <span class="details"><?php echo ($request['start_date'])?date('d/m/Y',strtotime($request['start_date'])):"-- --"; ?>
                         </p>
                     </li>
                      <li class="col-md-12">
                         <p>
-                            <b>End Date :</b> <?php echo ($request['end_date'])?date('d/m/Y',strtotime($request['end_date'])):"-- --"; ?><span class="budy right" style="display:none;"><a href="#" ><?php echo $this->Html->image('friend-ico.png'); ?></a></span>
+                            End Date : <span class="details"><?php echo ($request['end_date'])?date('d/m/Y',strtotime($request['end_date'])):"-- --"; ?><span class="budy right" style="display:none;"><a href="#" ><?php echo $this->Html->image('friend-ico.png'); ?></a></span></span>
                         </p>
                     </li>
                     <?php } ?>
 							<li class="col-md-12">
                         <p>
-                            <b>Reference ID :</b> <?php echo $request['reference_id']; ?>
+                            Reference ID : <span class="details"><?php echo $request['reference_id']; ?></span>
                         </p>
                     </li>
                      <li class="col-md-12">
                         <p>
-                            <b>Members :</b> <?php echo $request['adult'] +   $request['children']; ?>
+                            Members : <span class="details"><?php echo $request['adult'] +   $request['children']; ?></span>
                         </p>
                     </li>
                     <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comment">
-                        <p><b>Response Comment :</b> <span><?php echo $finalresponse[$request['id']]['comment']; ?></span></p>
+                        <p>Response Comment : <span class="details"><?php echo $finalresponse[$request['id']]['comment']; ?></span></p>
                      </li>
                     </ul>
                       <table width="100%" style="text-align:center">
