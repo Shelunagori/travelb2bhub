@@ -795,13 +795,16 @@ public function viewuserprofile(){
 public function ajaxCity()
     {
 		$name=$this->request->data['input'];
+		$noofrows=$this->request->data['noofrows'];
 		$cities=$this->Users->Cities->find()
 		->contain(['States'])
 		->where(['Cities.name Like'=>'%'.$name.'%']);
 		?>
 		<ul id="country-list">
 			<?php foreach($cities as $show){ ?>
-				<li onClick="selectCountry('<?php echo $show->name .' ('. $show->state->state_name .')'; ?>','<?php echo $show->id; ?>','<?php echo $show->state_id; ?>');"><?php echo $show->name .' ('. $show->state->state_name .')'; ?></li>
+				<li onClick="selectCountry('<?php echo $show->name .' ('. $show->state->state_name .')'; ?>','<?php echo $show->id; ?>','<?php echo $show->state_id; ?>','<?php echo $noofrows; ?>');"  class="selectCountry" cty_nm="<?php echo $show->name .' ('. $show->state->state_name .')'; ?>" cty_id="<?php echo $show->id; ?>" stat_id="<?php echo $show->state_id; ?>" noofrows="<?php echo $noofrows; ?>">
+					<?php echo $show->name .' ('. $show->state->state_name .')';  ?>
+				</li>
 			<?php } ?>
 		</ul>
 		<?php
@@ -822,13 +825,14 @@ public function ajaxCity()
 	public function ajaxStateShowNew()
     {
 		$state_id=$this->request->data['state_id'];
+		$noofrows=$this->request->data['noofrows'];
 		$states=$this->Users->States->find('list')->where(['States.id'=>$state_id]);
 		$statess=$this->Users->States->find()->where(['States.id'=>$state_id]);
 		foreach($statess as $st_show){
 			$country_id=$st_show->country_id;
 		}
 		$countries=$this->Users->Countries->find('list')->where(['Countries.id'=>$country_id]);
-		$this->set(compact('states','countries'));
+		$this->set(compact('states','countries','noofrows'));
     }
 
 
@@ -952,125 +956,128 @@ return $this->redirect('/users/dashboard');
 	
 if($this->request->is('post')){
 $d = $this->request->data;
-pr($d);exit;
+
 //Change input date format to mysql date format
 $d['check_in'] = (isset($d['check_in']) && !empty($d['check_in']))?$this->ymdFormatByDateFormat($d['check_in'], "d-m-Y", $dateSeparator="/"):null;
 $d['check_out'] = (isset($d['check_out']) && !empty($d['check_out']))?$this->ymdFormatByDateFormat($d['check_out'], "d-m-Y", $dateSeparator="/"):null;
 $d['start_date'] = (isset($d['start_date']) && !empty($d['start_date']))?$this->ymdFormatByDateFormat($d['start_date'], "d-m-Y", $dateSeparator="/"):null;
 $d['end_date'] = (isset($d['end_date']) && !empty($d['start_date']))?$this->ymdFormatByDateFormat($d['end_date'], "d-m-Y", $dateSeparator="/"):null;
 
-if($this->request->data['category_id'] == 2 ){
-$p['transport_requirement'] = $d['transport_requirement'];
-$p['pickup_city'] = $d['t_pickup_city_id'];
-$p['pickup_state'] = $d['t_pickup_state_id'];
-$p['pickup_country'] = $d['t_pickup_country_id'];
-$p['final_city'] = $d['t_final_city_id'];
-$p['final_state'] = $d['t_final_state_id'];
-$p['final_country'] = $d['t_final_country_id'];
-$p['pickup_locality'] = $d['pickup_locality'];
-$p['final_locality'] = $d['finalLocality'];
-$p['start_date'] = $d['start_date'];
-$p['end_date'] = $d['end_date'];
-$p['comment'] = $d['comment'];
-$p['category_id'] = $d['category_id'];
-$p['reference_id'] = $d['reference_id'];
-$p['user_id'] = $this->Auth->user('id');
-$p['total_budget'] = $d['total_budget'];
-$p['adult'] = $d['transportAdult'];
-$p['children'] = $d['transportChildren'];
-$stopes = "";
-if(isset($d['stops'])) {
-foreach($d['stops'] as $key=>$row) {
-$stopes .=  $row.",";
-}
-}
-$p['stops'] = $stopes;
-//pr($p); exit;
-$contact = $this->Requests->newEntity($p);
-if ($re = $this->Requests->save($contact)) {
-$ui = $re->id;
-if(isset($d['stops'])) {
-foreach($d['stops'] as $key=>$row) {
-$stopData['request_id'] = $ui;
-$stopData['locality'] =  $row;
-$stopData['city_id'] =  $d['id_trasport_stop_city'][$key];
-$stopData['state_id'] =  $d['state_id_trasport_stop_city'][$key];
-$result = $this->RequestStops->newEntity($stopData);
-$this->RequestStops->save($result);
-}
-}
-/*Users List */
-$userchatTable = TableRegistry::get('User_Chats');
-$conn = ConnectionManager::get('default');
-$sql = "SELECT * FROM users WHERE id !='".$this->Auth->user('id')."' AND role_id in ('1') AND FIND_IN_SET ('".$p['pickup_state']."', preference) > 0";
-$stmt = $conn->execute($sql);
-$Userlist = $stmt ->fetchAll('assoc');
+	if($this->request->data['category_id'] == 2 ){
+		$p['transport_requirement'] = $d['transport_requirement'];
+		$p['pickup_city'] = $d['t_pickup_city_id'];
+		$p['pickup_state'] = $d['t_pickup_state_id'];
+		$p['pickup_country'] = $d['t_pickup_country_id'];
+		$p['final_city'] = $d['t_final_city_id'];
+		$p['final_state'] = $d['t_final_state_id'];
+		$p['final_country'] = $d['t_final_country_id'];
+		$p['pickup_locality'] = $d['pickup_locality'];
+		$p['final_locality'] = $d['finalLocality'];
+		$p['start_date'] = $d['start_date'];
+		$p['end_date'] = $d['end_date'];
+		$p['comment'] = $d['comment'];
+		$p['category_id'] = $d['category_id'];
+		$p['reference_id'] = $d['reference_id'];
+		$p['user_id'] = $this->Auth->user('id');
+		$p['total_budget'] = $d['total_budget'];
+		$p['adult'] = $d['transportAdult'];
+		$p['children'] = $d['transportChildren'];
+		$stopes = "";
+		if(isset($d['stops'])) {
+			foreach($d['stops'] as $key=>$row) {
+				$stopes .=  $row.",";
+			}
+		}
+		$p['stops'] = $stopes;
+		//pr($p); exit;
+		$contact = $this->Requests->newEntity($p);
+		if ($re = $this->Requests->save($contact)) {
+		$ui = $re->id;
+		if(isset($d['stops'])) {
+		foreach($d['stops'] as $key=>$row) {
+		$stopData['request_id'] = $ui;
+		$stopData['locality'] =  $row;
+		$stopData['city_id'] =  $d['id_trasport_stop_city'][$key];
+		$stopData['state_id'] =  $d['state_id_trasport_stop_city'][$key];
+		$result = $this->RequestStops->newEntity($stopData);
+		$this->RequestStops->save($result);
+		}
+		}
+		/*Users List */
+		$userchatTable = TableRegistry::get('User_Chats');
+		$conn = ConnectionManager::get('default');
+		$sql = "SELECT * FROM users WHERE id !='".$this->Auth->user('id')."' AND role_id in ('1') AND FIND_IN_SET ('".$p['pickup_state']."', preference) > 0";
+		$stmt = $conn->execute($sql);
+		$Userlist = $stmt ->fetchAll('assoc');
 			foreach($Userlist as $usr)
 			{
 				$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$usr['id']."' AND blocked_by='".$this->Auth->user('id')."'";
 					$stmt = $conn->execute($sql1);
 					$bresult = $stmt ->fetch('assoc');
-						if($bresult['block_count']==0){
-				$userchats = $userchatTable->newEntity();
-				$userchats->request_id = $ui;
-				$userchats->user_id = $this->Auth->user('id');
-				$userchats->send_to_user_id = $usr["id"];
-				$userchats->message = "You have received a Request! Please go to RESPOND TO REQUEST tab to view it.";
-				$userchats->created = date("Y-m-d h:i:s");
-				$userchats->notification = 1;;
-				if ($userchatTable->save($userchats)) {
-				$id = $userchats->id;
+				if($bresult['block_count']==0){
+					$userchats = $userchatTable->newEntity();
+					$userchats->request_id = $ui;
+					$userchats->user_id = $this->Auth->user('id');
+					$userchats->send_to_user_id = $usr["id"];
+					$userchats->message = "You have received a Request! Please go to RESPOND TO REQUEST tab to view it.";
+					$userchats->created = date("Y-m-d h:i:s");
+					$userchats->notification = 1;;
+					if ($userchatTable->save($userchats)) {
+						$id = $userchats->id;
+					}
 				}
-						}
 			}		
 			
                         
-$this->Flash->success(__('Congratulations! Your Request has been submitted!'));
-return $this->redirect('/users/requestlist');
-} else {
-$this->Flash->error(__('Sorry.'));
-return $this->redirect('/users/sendrequest');
-}
-} elseif($this->request->data['category_id'] == 1 ){
-$p['transport_requirement'] = $d['transport_requirement'];
-$p['pickup_city'] = $d['pickup_city_id'];
-$p['pickup_state'] = $d['pickup_state_id'];
-$p['pickup_country'] = $d['pickup_country_id'];
-$p['pickup_locality'] = $d['pickup_locality'];
-$p['final_locality'] = $d['finalLocality'];
-$p['final_city'] = $d['p_final_city_id'];
-$p['final_state'] = $d['p_final_state_id'];
-$p['final_state'] = $d['p_final_state_id'];
-$p['start_date'] = $d['start_date'];
-$p['end_date'] = $d['end_date'];
-$p['comment'] = $d['comment'];
-$p['category_id'] = $d['category_id'];
-$p['reference_id'] = $d['reference_id'];
-$p['user_id'] = $this->Auth->user('id');
-$p['total_budget'] = $d['total_budget'];
-$p['adult'] = $d['adult'];
-$p['children'] = $d['children'];
-$p['city_id'] = $d['city_id'];
-$p['state_id'] = $d['state_id'];
-$p['country_id'] = $d['country_id'];
-$p['locality'] = $d['locality'];
-//$p['stops'] =  $d['stops'];
-$p['room1'] =  $d['room1'];
-$p['room2'] =  $d['room2'];
-$p['room3'] =  $d['room3'];
-$p['child_with_bed'] =  $d['child_with_bed'];
-$p['child_without_bed'] =  $d['child_without_bed'];
-$p['hotel_rating'] = $d['hotel_rating'];
-$p['hotel_category'] = $d['hotel_category'] = (isset($d['hotel_category']) && !empty($d['hotel_category']))?implode(",", $d['hotel_category']):"";
-//$p['meal_plan'] = $d['meal_plan'] = (isset($d['meal_plan']) && !empty($d['meal_plan']))?implode(",", $d['meal_plan']):"";
-$p['meal_plan'] = $d['meal_plan'];
-//$p['stops'] = $d['stops'] = (isset($d['stops']) && !empty($d['stops']))?implode(",", $d['stops']):"";
-$stopes = "";
-if(isset($d['stops'])) {
-foreach($d['stops'] as $key=>$row) {
-$stopes .=  $row.",";
-}
-}
+			$this->Flash->success(__('Congratulations! Your Request has been submitted!'));
+				return $this->redirect('/users/requestlist');
+			} 
+			else {
+				$this->Flash->error(__('Sorry.'));
+				return $this->redirect('/users/sendrequest');
+			}
+		} 
+elseif($this->request->data['category_id'] == 1 ){
+		
+	$p['transport_requirement'] = $d['transport_requirement'];
+	$p['pickup_city'] = $d['pickup_city_id'];
+	$p['pickup_state'] = $d['pickup_state_id'];
+	$p['pickup_country'] = $d['pickup_country_id'];
+	$p['pickup_locality'] = $d['pickup_locality'];
+	$p['final_locality'] = $d['finalLocality'];
+	$p['final_city'] = $d['p_final_city_id'];
+	$p['final_state'] = $d['p_final_state_id'];
+	$p['final_state'] = $d['p_final_state_id'];
+	$p['start_date'] = $d['start_date'];
+	$p['end_date'] = $d['end_date'];
+	$p['comment'] = $d['comment'];
+	$p['category_id'] = $d['category_id'];
+	$p['reference_id'] = $d['reference_id'];
+	$p['user_id'] = $this->Auth->user('id');
+	$p['total_budget'] = $d['total_budget'];
+	$p['adult'] = $d['adult'];
+	$p['children'] = $d['children'];
+	$p['city_id'] = $d['city_id'];
+	$p['state_id'] = $d['state_id'];
+	$p['country_id'] = $d['country_id'];
+	$p['locality'] = $d['locality'];
+	//$p['stops'] =  $d['stops'];
+	$p['room1'] =  $d['room1'];
+	$p['room2'] =  $d['room2'];
+	$p['room3'] =  $d['room3'];
+	$p['child_with_bed'] =  $d['child_with_bed'];
+	$p['child_without_bed'] =  $d['child_without_bed'];
+	$p['hotel_rating'] = $d['hotel_rating'];
+	$p['hotel_category'] = $d['hotel_category'] = (isset($d['hotel_category']) && !empty($d['hotel_category']))?implode(",", $d['hotel_category']):"";
+	//$p['meal_plan'] = $d['meal_plan'] = (isset($d['meal_plan']) && !empty($d['meal_plan']))?implode(",", $d['meal_plan']):"";
+	$p['meal_plan'] = $d['meal_plan'];
+	//$p['stops'] = $d['stops'] = (isset($d['stops']) && !empty($d['stops']))?implode(",", $d['stops']):"";
+	$stopes = "";
+	if(isset($d['stops'])) {
+		foreach($d['stops'] as $key=>$row) {
+			$stopes .=  $row.",";
+		}
+	}
 $p['stops'] = $stopes;
 $p['check_in'] =  $d['check_in'];
 $p['check_out'] =  $d['check_out'];
@@ -1146,44 +1153,45 @@ return $this->redirect('/users/requestlist');
 $this->Flash->error(__('Sorry.'));
 return $this->redirect('/users/sendrequest');
 }
-} elseif($this->request->data['category_id'] == 3 ){
-$p['category_id'] = $d['category_id'];
-$p['reference_id'] = $d['reference_id'];
-$p['user_id'] = $this->Auth->user('id');
-$p['total_budget'] = $d['total_budget'];
-$p['adult'] = $d['hotelAdult'];
-$p['children'] = $d['hotelChildren'];
-$p['city_id'] = $d['h_city_id'];
-$p['state_id'] = $d['h_state_id'];
-$p['country_id'] = $d['h_country_id'];
-$p['locality'] = $d['locality'];
-$p['room1'] =  $d['room1'];
-$p['room2'] =  $d['room2'];
-$p['room3'] =  $d['room3'];
-$p['child_with_bed'] =  $d['child_with_bed'];
-$p['child_without_bed'] =  $d['child_without_bed'];
-$p['hotel_category'] = $d['hotel_category'] = (isset($d['hotel_category']) && !empty($d['hotel_category']))?implode(",", $d['hotel_category']):"";
-//$p['meal_plan'] = $d['meal_plan'] = (isset($d['meal_plan']) && !empty($d['meal_plan']))?implode(",", $d['meal_plan']):"";
-$p['meal_plan'] = $d['meal_plan'];
-$p['check_in'] =  $d['check_in'];
-$p['check_out'] =  $d['check_out'];
-$p['hotel_rating'] = $d['hotel_rating'];
-$p['comment'] = $d['comment'];
-//print_r($p); exit;
-$contact = $this->Requests->newEntity($p);
-if ($re = $this->Requests->save($contact)) {
-$ui = $re->id;
-$d['req_id'] = $ui;
-$d['user_id'] = $this->Auth->user('id');
-$rest = $this->Hotels->newEntity($d);
-$this->Hotels->save($rest);//exit;
-/*Users List */
-	/*For Travel Agent*/
-$userchatTable = TableRegistry::get('User_Chats');
-$conn = ConnectionManager::get('default');
-$sql = "SELECT * FROM users WHERE id !='".$this->Auth->user('id')."' AND role_id in ('1') AND FIND_IN_SET ('".$p['state_id']."', preference) > 0 ";
-$stmt = $conn->execute($sql);
-$Userlist = $stmt ->fetchAll('assoc');            
+} 
+elseif($this->request->data['category_id'] == 3 ){
+	$p['category_id'] = $d['category_id'];
+	$p['reference_id'] = $d['reference_id'];
+	$p['user_id'] = $this->Auth->user('id');
+	$p['total_budget'] = $d['total_budget'];
+	$p['adult'] = $d['hotelAdult'];
+	$p['children'] = $d['hotelChildren'];
+	$p['city_id'] = $d['h_city_id'];
+	$p['state_id'] = $d['h_state_id'];
+	$p['country_id'] = $d['h_country_id'];
+	$p['locality'] = $d['locality'];
+	$p['room1'] =  $d['room1'];
+	$p['room2'] =  $d['room2'];
+	$p['room3'] =  $d['room3'];
+	$p['child_with_bed'] =  $d['child_with_bed'];
+	$p['child_without_bed'] =  $d['child_without_bed'];
+	$p['hotel_category'] = $d['hotel_category'] = (isset($d['hotel_category']) && !empty($d['hotel_category']))?implode(",", $d['hotel_category']):"";
+	//$p['meal_plan'] = $d['meal_plan'] = (isset($d['meal_plan']) && !empty($d['meal_plan']))?implode(",", $d['meal_plan']):"";
+	$p['meal_plan'] = $d['meal_plan'];
+	$p['check_in'] =  $d['check_in'];
+	$p['check_out'] =  $d['check_out'];
+	$p['hotel_rating'] = $d['hotel_rating'];
+	$p['comment'] = $d['comment'];
+	//print_r($p); exit;
+	$contact = $this->Requests->newEntity($p);
+	if ($re = $this->Requests->save($contact)) {
+	$ui = $re->id;
+	$d['req_id'] = $ui;
+	$d['user_id'] = $this->Auth->user('id');
+	$rest = $this->Hotels->newEntity($d);
+	$this->Hotels->save($rest);//exit;
+	/*Users List */
+		/*For Travel Agent*/
+	$userchatTable = TableRegistry::get('User_Chats');
+	$conn = ConnectionManager::get('default');
+	$sql = "SELECT * FROM users WHERE id !='".$this->Auth->user('id')."' AND role_id in ('1') AND FIND_IN_SET ('".$p['state_id']."', preference) > 0 ";
+	$stmt = $conn->execute($sql);
+	$Userlist = $stmt ->fetchAll('assoc');            
 			foreach($Userlist as $usr)
 			{
 				$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$usr['id']."' AND blocked_by='".$this->Auth->user('id')."'";

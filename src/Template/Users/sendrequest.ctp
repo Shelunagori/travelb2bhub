@@ -452,8 +452,8 @@ $(document).ready(function($){
 									</p>
 									</div>
 									<div>
-										<input autocomplete="off" type="text" class="form-control" id="h_city_name" name="h_city_name" placeholder="Select City or Nearest City"/>
-										<input type='hidden' id='h_city_id' name="h_city_id" />
+										<input autocomplete="off" type="text" class="form-control city_select" id="h_city_name" name="h_city_name" noofrows="1" placeholder="Select City or Nearest City"/>
+										<input type='hidden' id='h_city_id' class="ctyidd" name="h_city_id" />
 										<div class="suggesstion-box" style="margin-top:-10px"></div>
 									</div>
 							</div>
@@ -494,7 +494,7 @@ $(document).ready(function($){
 										</p>
 									</div>
 									<div class="col-md-12 input-group">
-									<input autocomplete="off" type="text" name="check_in" class="form-control date-picker" id="datepicker7" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy"/>
+									<input autocomplete="off" type="text" name="check_in" class="form-control date-picker" id="datepicker7" data-date-format="dd/mm/yyyy" placeholder="dd/mm/yyyy"/>
 									<p class="input-group-addon btn">
 									<span class="fa fa-calendar"></span>
 									</p>                    
@@ -508,7 +508,7 @@ $(document).ready(function($){
 												</p>
 									</div>
 									<div class="col-md-12 input-group">
-										<input autocomplete="off" type="text" name="check_out" class="form-control date-picker" id="datepicker8" data-date-format="dd-mm-yyyy" placeholder="dd-mm-yyyy" />
+										<input autocomplete="off" type="text" name="check_out" class="form-control date-picker" id="datepicker8" data-date-format="dd/mm/yyyy" placeholder="dd/mm/yyyy" />
 										<p class="input-group-addon btn" >
 										<span class="fa fa-calendar"></span>
 										</p>                    
@@ -705,8 +705,9 @@ $(document).ready(function($){
 									</p>
 									</div>
 									<div>
-									<input type="text" class="form-control" id="city_name" name="city_name" placeholder="Select City or Nearest City"/>
+									<input type="text" class="form-control city_select" id="city_name" name="city_name" placeholder="Select City or Nearest City"/>
                                     <input type='hidden' id='city_id' name="city_id" />
+									<div class="suggesstion-box" style="margin-top:-10px"></div>
 									</div>
 							</div>
 							<div class="col-md-6">
@@ -826,24 +827,22 @@ $(document).ready(function($){
 											</div><span class="help-block"></span>
 											<div class="row">
 												<div class="col-md-12">
-												    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
-                                                            <div class="input-field">
-                                                            <p for="from">Pickup Locality
-                                                                
-                                                            </p>
-                                                            <input autocomplete="off" type="text" class="form-control" name="pickup_locality" id="pickup_locality" placeholder="Enter Locality or Village or Town"/>
-                                                            </div>
-                                                    </div>
-                                                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
-                                                            <div class="input-field">
-                                                                <p for="from">Pickup City
-                                                                    
-                                                                </p>
-                                                                <input type="text" class="form-control" id="t_pickup_city_name" name="t_pickup_city_name"  placeholder="Select City or Nearest City"/>
-                                                                <input type='hidden' id='t_pickup_city_id' name="t_pickup_city_id" />
-
-                                                            </div>
-                                                    </div>										
+													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+															<div class="input-field">
+															<p for="from">Pickup Locality
+																
+															</p>
+															<input autocomplete="off" type="text" class="form-control" name="pickup_locality" id="pickup_locality" placeholder="Enter Locality or Village or Town"/>
+															</div>
+													</div>
+													 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+															<div class="input-field">
+																<p for="from">Pickup City</p>
+																<input type="text" class="form-control city_select" id="t_pickup_city_name" name="t_pickup_city_name"  placeholder="Select City or Nearest City"/>
+																<input type='hidden' id='t_pickup_city_id' name="t_pickup_city_id" />
+																<div class="suggesstion-box" style="margin-top:-10px"></div>
+															</div>
+													</div>										
 												</div>
 											</div><span class="help-block"></span>
 											<div class="row">
@@ -904,16 +903,17 @@ $(document).ready(function($){
 																<p for="from">Final City
                                                                      
                                                                 </p>
-																<input type="text" class="form-control" id="p_final_city_name" name="p_final_city_name" placeholder="Select City or Nearest City"/>
+																<input type="text" class="form-control city_select" id="p_final_city_name" noofrows="2" name="p_final_city_name" placeholder="Select City or Nearest City"/>
 																<input type='hidden' id='p_final_city_id' name="p_final_city_id" />
+																<div class="suggesstion-box" style="margin-top:-10px"></div>
 																
 															</div>
 														</div>
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-md-12">
-													<div class="col-lg-6 col-md-12 col-sm-6 col-xs-12 mt">
+												<div class="col-md-12 rw">
+														<div class="col-lg-6 col-md-12 col-sm-6 col-xs-12 mt">
 															<div class="input-field">
 															<p for="from">Final State</p>
 																<input type='hidden' id='p_final_state_id' name="p_final_state_id"/>
@@ -922,7 +922,7 @@ $(document).ready(function($){
 														</div>
 														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 															<div class="input-field">
-															<p for="from">Final Country</p>
+																<p for="from">Final Country</p>
 																<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
 																<input type="text" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" readonly/>
 															</div>
@@ -1101,8 +1101,9 @@ $(document).ready(function($){
                                                                 <p for="from">Pickup City
 																<span class="required">*</span>
                                                                 </p>
-                                                                <input type="text" class="form-control" id="t_pickup_city_name" name="t_pickup_city_name"  placeholder="Select City or Nearest City"/>
+                                                                <input type="text" class="form-control city_select" id="t_pickup_city_name" name="t_pickup_city_name"  placeholder="Select City or Nearest City"/>
                                                                 <input type='hidden' id='t_pickup_city_id' name="t_pickup_city_id" />
+<div class="suggesstion-box" style="margin-top:-10px"></div>
 
                                                             </div>
                                                     </div>										
@@ -1164,15 +1165,16 @@ $(document).ready(function($){
 																<p for="from">Final City
                                                                  <span class="required">*</span>    
                                                                 </p>
-																<input type="text" class="form-control" id="t_final_city_name" name="t_final_city_name" placeholder="Select City or Nearest City"/>
+																<input type="text" class="form-control city_select" id="t_final_city_name" noofrows="3" name="t_final_city_name" placeholder="Select City or Nearest City"/>
 																<input type='hidden' id='t_final_city_id' name="t_final_city_id" />
+													<div class="suggesstion-box" style="margin-top:-10px"></div>
 																
 															</div>
 														</div>
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-md-12">
+												<div class="col-md-12 rw2">
 													<div class="col-lg-6 col-md-12 col-sm-6 col-xs-12 mt">
 															<div class="input-field">
 															<p for="from">Final State</p>
@@ -1238,35 +1240,55 @@ $(document).ready(function($){
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <?php echo $this->Html->script(['jquery.validate']);?>		 
 <script>
+
 $(document).ready(function(){ 
-$("#h_city_name").keyup(function(){
-	var input=$("#h_city_name").val();
-	var m_data = new FormData();
-	m_data.append('input',input);			
-	$.ajax({
-		url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_city"]); ?>",
-		data: m_data,
-		processData: false,
-		contentType: false,
-		type: 'POST',
-		dataType:'text',
-		success: function(data)
-		{
-			$(".suggesstion-box").show();
-			$(".suggesstion-box").html(data);
-			$(".h_city_name").css("background","#FFF");
-		}
+	$(".city_select").keyup(function(){
+		var input=$(this).val();
+		var noofrows=$(this).attr('noofrows');
+ 		var master=$(this);
+		var m_data = new FormData();
+		m_data.append('input',input);			
+		m_data.append('noofrows',noofrows);			
+		$.ajax({
+			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_city"]); ?>",
+			data: m_data,
+			processData: false,
+			contentType: false,
+			type: 'POST',
+			dataType:'text',
+			success: function(data)
+			{
+				master.closest('div').find('div.suggesstion-box').show();
+				master.closest('div').find('div.suggesstion-box').html(data);
+				master.css("background","#FFF");
+			}
 		});
 	});
+	
+	
+	/*$(document).on('click',".selectCountry",function(){
+		
+		var stat_id=$(this).attr('stat_id');
+		var cty_id=$(this).attr('cty_id');
+		var noofrows=$(this).attr('noofrows');
+		var cty_nm=$(this).attr('cty_nm');
+		alert($(this).closest('div').html());
+		//$(this).closest('div input').val(cty_nm);
+		//$(this).closest('div').find(".suggesstion-box").hide();
+		//$(this).closest('div').find("input.ctyidd").val(cty_id);
+		
+	});*/
 });
-	function selectCountry(value,city_code,state) {
-		var state_id=state;
-		$("#h_city_name").val(value);
+
+function selectCountry(value,city_code,state,noofrows) {
+	var state_id=state;
+	if(noofrows==1){
+		$('#h_city_name').val(value);
 		$(".suggesstion-box").hide();
 		$("#h_city_id").val(city_code);
-			 	
 		var m_data = new FormData();
- 		m_data.append('state_id',state_id);			
+		m_data.append('state_id',state_id);	
+		m_data.append('noofrows',noofrows);		
 		$.ajax({
 			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_state_show_new"]); ?>",
 			data: m_data,
@@ -1278,9 +1300,95 @@ $("#h_city_name").keyup(function(){
 			{
 				$(".shw").html(data);
 			}
-		});	
+		});
 	}
- 
+	if(noofrows==2){
+		$('#p_final_city_name').val(value);
+		$(".suggesstion-box").hide();
+		$("#p_final_city_id").val(city_code);
+		var m_data = new FormData();
+		m_data.append('state_id',state_id);			
+		m_data.append('noofrows',noofrows);			
+		$.ajax({
+			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_state_show_new"]); ?>",
+			data: m_data,
+			processData: false,
+			contentType: false,
+			type: 'POST',
+			dataType:'text',
+			success: function(data)
+			{
+				$(".rw").html(data);
+			}
+		});
+	}		  
+	if(noofrows==3){
+		$('#t_final_city_name').val(value);
+		$(".suggesstion-box").hide();
+		$("#t_final_city_id").val(city_code);
+		var m_data = new FormData();
+		m_data.append('state_id',state_id);			
+		m_data.append('noofrows',noofrows);			
+		$.ajax({
+			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_state_show_new"]); ?>",
+			data: m_data,
+			processData: false,
+			contentType: false,
+			type: 'POST',
+			dataType:'text',
+			success: function(data)
+			{
+				$(".rw2").html(data);
+			}
+		});
+	}
+	 
+	
+} 
+//--- Second  Transport Menu
+/*$(document).ready(function(){ 
+	$("#p_final_city_name").keyup(function(){
+		var input=$("#p_final_city_name").val();
+		var m_data = new FormData();
+		m_data.append('input',input);			
+		$.ajax({
+			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_city"]); ?>",
+			data: m_data,
+			processData: false,
+			contentType: false,
+			type: 'POST',
+			dataType:'text',
+			success: function(data)
+			{
+				$(".suggesstion-box2").show();
+				$(".suggesstion-box2").html(data);
+				$(".p_final_city_name").css("background","#FFF");
+			}
+		});
+	});
+});
+function selectCountry(value,city_code,state) {
+	var state_id=state;
+	$("#p_final_city_name").val(value);
+	$(".suggesstion-box2").hide();
+	$("#p_final_city_id").val(city_code);
+			
+	var m_data = new FormData();
+	m_data.append('state_id',state_id);			
+	$.ajax({
+		url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_state_show_new"]); ?>",
+		data: m_data,
+		processData: false,
+		contentType: false,
+		type: 'POST',
+		dataType:'text',
+		success: function(data)
+		{
+			$(".shw").html(data);
+		}
+	});	
+}*/
+//------
 	$('#PackgeRequestForm').validate({
 		rules: {
 			"reference_id" : {

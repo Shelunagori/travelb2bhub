@@ -20,6 +20,7 @@
 		.wrap-login100 { background:#1f222db8 !important; width:420px !important; padding: 18px 55px 37px 55px; }
 		.p-t-27 { padding-top: 10px; }
 		.error { color: #ff9898; text-align:center; }
+		.alert-warning{ color:#FFF !important;}
 	</style>
 </head>
 <body>
