@@ -169,8 +169,8 @@ $(".req").sort(function (a, b) {
 			continue;
 		   }
 		 ?>
-		 <div id="cat">
-						<div class=" req col-lg-4 col-md-4 col-sm-4 col-xs-4" id="<?php if($request['category_id']==1){ echo "1";} if($request['category_id']==2){ echo "3";}if($request['category_id']==3){ echo "2";} ?>">
+		 <div id="cat" >
+						<div class="col-md-4" id="<?php if($request['category_id']==1){ echo "1";} if($request['category_id']==2){ echo "3";}if($request['category_id']==3){ echo "2";} ?>">
 						<?php 
 					   if($request['category_id']==1){ 
 							$image=$this->Html->image('/img/slider/package-icon.png');
@@ -184,8 +184,12 @@ $(".req").sort(function (a, b) {
 							$image= $this->Html->image('/img/slider/hotelier-icon.png');
 							$text="<span class='requestType'>Hotel</span>";
 						} 
+						$created=$request['created'];
+						$org_created=date('d-M-Y', strtotime($created));
 						?>
-                <fieldset><legend><?php echo $image; ?></legend>
+                <fieldset>
+				<legend><?php echo $image; ?></legend>
+				<span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
                     <ul>
                       <li class="col-md-12">
                      <p>
@@ -276,7 +280,7 @@ $(".req").sort(function (a, b) {
                         
                         <?php $reviewi = $request['responses'][0]['user_id']."-".$request['id']; ?>
                          <a data-toggle="modal" class="btn btn-warning btn-sm" data-target="#myModal1review<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi )) ?>"> Review </a>
-                        </div>
+                       
                        
 						</td>
 					</tr>
@@ -324,8 +328,10 @@ $(".req").sort(function (a, b) {
 	</fieldset>
    </div>
    </div>
-			</div>
+			 
 		<?php } ?>
+		</div>
+		</div>
 		<div class="pages"></div>
 		<?php }else {?>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">

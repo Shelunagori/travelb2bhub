@@ -1,4 +1,9 @@
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<style>
+legend{
+	text-align: center;
+}
+</style>
 <?php
 use Cake\Datasource\ConnectionManager; 
 $conn = ConnectionManager::get('default');
@@ -241,9 +246,14 @@ $(document).ready(function(){
 					$image= $this->Html->image('/img/slider/hotelier-icon.png');
 					$text="<span class='requestType'>Hotel</span>";
 				} 
+				 
+				$created=$response['created'];
+				$org_created=date('d-M-Y', strtotime($created));
 				?>
 				<fieldset>
 					<legend><?php echo $image; ?></legend>
+					 <span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
+					 <div class="contain">
                  <ul>
                  <li class="col-md-12">
                     <p>
@@ -347,6 +357,7 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
                        <p> <b>Comment :</b><span><?php echo $response['comment']; ?></span></p>
                      </li>
                    </ul>
+				   </div>
 				   <div class="">
 					<table width="100%" style="text-align:center">
 						<tr>

@@ -114,6 +114,7 @@ $conn = ConnectionManager::get('default');
 <!------------ Main -------------->	
 	<?php 
 		if(count($responses) >0) {
+			//pr($responses);
 			foreach($responses as $row){
 			?>
             <div class="col-md-4">
@@ -130,9 +131,12 @@ $conn = ConnectionManager::get('default');
 					$image= $this->Html->image('/img/slider/hotelier-icon.png');
 					$text="<span class='requestType'>Hotel</span>";
 				} 
+				$created=$row['created'];
+				$org_created=date('d-M-Y', strtotime($created));
 				?>
 				<fieldset>
 					<legend><?php echo $image; ?></legend>
+					<span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
                  <ul>
                  <li class="col-md-12">
                     <p>
@@ -270,8 +274,9 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 				</div>
 				</fieldset>
                   </div>
-               </div>
+               
 			<?php } ?>
+			</div>
 			<div class="pages"></div>
 		
 		<?php 
