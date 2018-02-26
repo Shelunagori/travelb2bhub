@@ -2175,7 +2175,7 @@ public function checkresponses($id) {
 		->where(['user_id' => $this->Auth->user('id')])
 		->toArray();
 	$this->set('BusinessBuddies', $BusinessBuddies);	
-		
+		 
 	$userchatTable = TableRegistry::get('User_Chats');
 	$conn = ConnectionManager::get('default');
 	$data = array();
