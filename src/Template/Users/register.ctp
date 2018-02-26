@@ -156,10 +156,10 @@
 					</div>	
 					<div class="col-md-12">
 						<div id="preferenceStateDiv">
-							<div class="col-md-12 col-md-12 mt" tooltip="Select upto 5 states">
+							<div class="mt" tooltip="Select upto 5 states">
 								<div class="col-md-12 mt padding0">
-									<label for="Preference_States">States where you operate</label>
-									<span style="font-size:11px;">(Select upto 5 states )</span>
+									<label for="Preference_States" style="color:#fff;">States where you operate</label>
+									<span style="font-size:11px;color:#fff;">(Select upto 5 states )</span>
 									<div class="input-field">
 										<?php echo $this->Form->control('preference', ["id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select", "data-placeholder"=>"Select upto 5 states where you operate", "style"=>"height:125px;"]); ?>
 									</div>
