@@ -30,4 +30,15 @@ if($noofrows==3)
 	  
 	 <?php
 }
+if($noofrows==4)
+{
+	?>
+	<div class="form-group col-md-4">
+	  <label>Stop State</label>
+	  <?php echo $this->Form->input($taxboxname,['label' => false,'class'=>'form-control select2','options'=>$states]);?>
+	</div>
+	<?php echo $this->Form->hidden('t_final_country_id',['label' => false,'class'=>'form-control select2','options'=>$countries]);?>
+	  
+	 <?php
+}
  

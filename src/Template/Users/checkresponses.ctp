@@ -186,8 +186,14 @@ legend
 						Share Details</a>
 					 
 					<?php } ?>
-						<a href="javascript:void(0);" class="acceptOffer btn btn-success btn-sm margin" request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
-						Accept Offer</a>
+						
+						
+					<?php
+						if( !array_key_exists($row['user']['id'], $BusinessBuddies)) {?>
+							<a href="javascript:void(0);" class="businessBuddy btn btn-sm" style="background-color:#1295A2;color:#FFF" user_id = "<?php echo $row['user']['id']; ?>"> Follow</a>
+					<?php } ?>
+						
+						
 					<?php
 					$sql="Select count(*) as block_count from blocked_users where blocked_user_id='".$row['user']['id']."' AND blocked_by='".$row['request']['user_id']."'";
 					$stmt = $conn->execute($sql);
@@ -209,7 +215,11 @@ legend
 					{?>
 						<a href="javascript:void(0);" class="blockUser btn btn-danger btn-sm margin" user_id = "<?php echo $row['user']['id']; ?>">
 						Block User </a>
-					<?php }?>
+					<?php } ?>
+					
+						<a href="javascript:void(0);" class="acceptOffer btn btn-success btn-sm margin" request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
+						Accept Offer</a>
+						
 					<?php $reviewi =  $row['user']['id']."-".$row['request']['id']; ?>
 						<a data-toggle="modal" class="btn btn-info btn-sm" style="display:none;" data-target="#myModal_accept<?php echo $row['id']; ?>" id="add_review" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">
 					Test</a>
@@ -1111,6 +1121,27 @@ $(document).ready(function () {
 		});
     setTimeout(getcheckresponselists, 5000);
 		}
+		
+		
+		$(".businessBuddy").on('click',function () {
+ 		var datas = $(this);
+		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'addBusinessBuddy')) ?>";
+		var user_id = $(this).attr("user_id");
+		if(confirm("Are you sure want to follow this user?")) {
+			$.ajax({
+				url:url,
+				type: 'POST',
+				data: {user_id:user_id}
+			}).done(function(result){
+				if(result == 1) {
+					alert("This user has been added to your following list successfully.");
+					datas.parent().remove();
+				} else {
+					alert("There is some problem, please try again.");
+				}
+			});
+		}
+	});
 	
 });
 $('#UserRatingForm').validate({
