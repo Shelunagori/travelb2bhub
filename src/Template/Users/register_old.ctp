@@ -321,7 +321,7 @@ padding-left: 84px !important;
                                                     <img src="../img/Asterisk.png" class="img-responsive">
                                                 </span>
                                                 </label>
-												 <input type="text" name="pincode" class="form-control trim_space_valid" id="pincode" />
+												 <input type="text" class="form-control trim_space_valid" name="pincode" id="pincode" />
 											</div>
 										</div>
 										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">

@@ -110,7 +110,7 @@
 						</div>
 						<div class="col-md-12">
 							<div class="wrap-input100 validate-input" data-validate = "Address1">
-								<input class="input100 trim_space_valid" type="password" name="address1" placeholder="" id="address1">
+								<input class="input100 trim_space_valid" type="password" name="address1" placeholder="" id="address1"><span class="focus-input100"></span>
 							</div>	
 						</div>										
 					</div>
@@ -129,9 +129,59 @@
 						</div>										
 					</div>
 
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<div class="wrap-input100 validate-input" data-validate = "State">
+								<input class="input100 trim_space_valid" type="text" id ="state_name" name="state_name" placeholder="State" readonly>
+								<span class="focus-input100" data-placeholder="&#xf003;"></span>
+								<input type='hidden' id='state_id' value='' name="state_id"/>
+								
+							</div>						
+						</div>
+						<div class="col-md-6">
+							<div class="wrap-input100 validate-input" data-validate = "Pincode">
+								<input class="input100 trim_space_valid" placeholder="Pinecode" type="text" name="pincode" id="pincode">
+								<span class="focus-input100" data-placeholder="&#xf003;"></span>
+							</div>	
+						</div>										
+					</div>	
+					<div class="col-md-12">
+						<div class="col-md-6">
+							<div class="wrap-input100 validate-input" data-validate = "Country">
+								<input class="input100 trim_space_valid" type="text" id ="country_name" name="country_name" placeholder="Country" readonly>
+								<span class="focus-input100" data-placeholder="&#xf003;"></span>
+								<input type='hidden' id='country_id' value='' name="country_id"/>
+							</div>						
+						</div>										
+					</div>	
+					<div class="col-md-12">
+						<div id="preferenceStateDiv">
+							<div class="mt" tooltip="Select upto 5 states">
+								<div class="col-md-12 mt padding0">
+									<label for="Preference_States" style="color:#fff;">States where you operate</label>
+									<span style="font-size:11px;color:#fff;">(Select upto 5 states )</span>
+									<div class="input-field">
+										<?php echo $this->Form->control('preference', ["id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select", "data-placeholder"=>"Select upto 5 states where you operate", "style"=>"height:125px;"]); ?>
+									</div>
+								</div>
+							</div>
+						</div>										
+					</div>					
+
+					<div class="col-xs-12 col-md-12 mt" style="display:none;">
+						<div class="image-upload">
+							<label for="file-input">
+								User Profile Picture<br><?php echo $this->Html->image('img-icon.png'); ?>
+							</label>
+
+							<input id="file-input" name="image" type="file"/>  Upload Picture
+						</div>
+					</div>					
+					
+					
+					
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" style="width: 100%;">Login</button>
-						<input type="hidden" name="redirect_page" value="<?php echo $redirect_page;?>"/>
 					</div>					
 				<?php echo $this->Form->end();?>
 			</div>
@@ -224,4 +274,262 @@
 
 						});
                     </script>
+<script>
+$('.trim_space_valid').change(function() {
+    $(this).val($(this).val().trim());
+});
+ $.validator.addMethod("needsSelection", function (value, element) {
+	var count = $(element).find('option:selected').length;
+	if(count == 0)
+		return false;
+	if(count > 0 && count < 6)
+		return true;
+	else
+		return false;
+});
+jQuery.validator.addMethod("phoneno", function(phone_number, element) {
+    	    phone_number = phone_number.replace(/\s+/g, "");
+    	    return this.optional(element) || phone_number.length > 9 && 
+phone_number.match(/^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/);
+    	}, "<br />Please specify a valid phone number");
+jQuery.validator.addMethod("email", function(value, element) {
+value = value.trim();
+return this.optional(element) || /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i.test(value);
+}, "Please enter a valid email.");
+
+$('#UserRegisterForm').validate({
+onkeyup: function (element, event) {
+            if (event.which === 9 && this.elementValue(element) === "") {
+                return;
+            } else {
+                this.element(element);
+            }
+        },
+	rules: {
+		"company_name" : {
+			required : true
+		},
+		"first_name" : {
+			required : true
+		},
+		"last_name" : {
+			required : true
+		},
+		"email": {
+			required : true,
+			email: true
+		},
+		"mobile_number": {
+			required : true,
+			number: true,
+			minlength:10,
+  			maxlength:10
+		},
+		"address": {
+			required: true
+		},
+		"city_name": {
+			required: true
+		},
+		"state_name": {
+			required: true
+		},
+		"country_name": {
+			required: true
+		},
+		"pincode": {
+			required: true,
+			number:true
+		},
+		
+		"password": {
+			required: true
+		},
+		"cpassword": {
+			required: true,
+			equalTo: "#password"
+		},
+		"term_n_cond": {
+			required: true
+		}
+	},
+	messages: {
+		"company_name" : {
+			required : "Please enter company name."
+		},
+		"first_name" : {
+			required : "Please enter first name."
+		},
+		"last_name" : {
+			required : "Please enter last name."
+		},
+		"email": {
+			required : "Please enter email.",
+			email : "Please enter valid email."
+		},
+		"mobile_number": {
+			required : "Please enter contact number.",
+			number: "Please enter only number",
+			minlength: "Please enter at least 10 digit",
+			maxlength: "Please enter no more than 10 digit"
+		},
+		"address": {
+			required: "Please enter address."
+		},
+		"city_name": {
+			required: "Please select city."
+		},
+		"state_name": {
+			required: ""
+		},
+		"country_name": {
+			required: ""
+		},
+		"pincode": {
+			required: "Please enter pincode.",
+			number: "Please enter only number"
+		},
+		"password": {
+			required: "Please enter password."
+		},
+		"cpassword": {
+			required: "Please enter confirm password.",
+			equalTo: "Confirm password should be equal to password."
+		},
+		"term_n_cond": {
+			required: "Please select terms & conditions."
+		}
+	},
+	ignore: ":hidden:not(select)",
+errorPlacement: function(error, element) {
+        if (element.is(':checkbox')) {
+            error.insertAfter($(".termcondition"));
+        }else{
+         error.insertAfter(element);
+        } 
+    }
+});
+$(function () {
+	$('#role_id').change(function(){
+		var roleid = jQuery( "#role_id option:selected" ).val();
+		if(roleid==3){
+		$('.hotelname').html('Hotel Name<span class="asterisk"><img class="img-responsive" src="../img/Asterisk.png"></span>')		
+		} else{
+			$('.hotelname').html('Company Name<span class="asterisk"><img class="img-responsive" src="../img/Asterisk.png"></span>')		
+		}
+		if(roleid != "" && roleid == 1) {
+			$('#preferenceStateDiv').show();
+			var needPreferenceState = true;
+		} else {
+			$('#preferenceStateDiv').hide();
+			var needPreferenceState = false;
+		}
+		var settings = $('#UserRegisterForm').validate().settings;
+		$.extend(true, settings, {
+			rules: {
+				"preference[]": {
+					needsSelection: needPreferenceState
+				}
+			},
+			messages: {
+				"preference[]": {
+					needsSelection: "Please select between 1 to 5 states."
+				}
+			}
+		});
+	});
+});
+function getstatevalid()
+	{
+		var statename = $('#state_name').val();
+		var cityname = $('#city_name').val();
+		var cityid = $('#city_id').val();
+		if(cityname!=""){
+		if(statename==""){
+			//stateerrormodal
+			$('body').addClass('modal-open'); 
+	$("#stateerrormodal").addClass("in");
+	$("#stateerrormodal").show();
+		 }
+		}
+	}
+$(".closepreview" ).click(function() {
+$('body').removeClass('modal-open');
+$("#stateerrormodal").removeClass("in");
+	$("#stateerrormodal").hide(); 
+});
+</script>
+  <?php echo $this->Html->css(['chosen/chosen']);?>
+  <?php echo $this->Html->script(['chosen/chosen.jquery']);?>
+  
+  <?php echo $this->Html->css(['select2/select2']);?>
+  <?php echo $this->Html->script(['select2/select2']);?>
+  
+  <?php echo $this->Html->css(['telinput/css/intlTelInput']);?>
+  <?php echo $this->Html->script(['telinput/intlTelInput']);?>
+  <?php echo $this->Html->script(['telinput/utils']);?>
+  
+<script type="text/javascript">
+$('#UserRegisterForm').submit(function(){
+if ($("#UserRegisterForm").valid()) {
+$(this).find(':input[type=submit]').prop('disabled', true);
+}
+    
+});
+$(document).ready(function($){
+
+	//$(".chosen-select").chosen({ max_selected_options: 5 });
+	
+	$("#preferenceStateDiv").hide();
+	<?php if(isset($_GET['role']) && $_GET['role']=="1"){ ?>
+	
+	$("#preferenceStateDiv").show();
+	<?php } ?>
+	<?php if(isset($_GET['role']) && $_GET['role']=="3"){ ?>
+	$('.hotelname').html('Hotel Name');
+	<?php } ?>
+	$(".chosen-select").select2({
+		  maximumSelectionLength: 5,width: '100%'
+		 
+		 });
+	/*var last_valid_selection = null;
+	$( "#preference" ).change(function(event) {
+  	var total_preference = $("#preference :selected").length;
+ 	if ($(this).val().length > 5) {
+  	alert("You can select only 5 Preference");
+  	//$("#preference option:selected:last").attr('selected', null);
+  	$(this).val(last_valid_selection);
+  	return false;
+  	}else{
+  	last_valid_selection = $(this).val();
+  	}
+	});*/
+	
+	$(".select2-search__field").css("width", "280");
+	
+});
+
+    $("#mobile_number").intlTelInput({
+      // allowDropdown: false,
+      // autoHideDialCode: false,
+      // autoPlaceholder: "off",
+      // dropdownContainer: "body",
+      // excludeCountries: ["us"],
+      // formatOnDisplay: false,
+      // geoIpLookup: function(callback) {
+      //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+      //     var countryCode = (resp && resp.country) ? resp.country : "";
+      //     callback(countryCode);
+      //   });
+      // },
+      // hiddenInput: "full_number",
+      // initialCountry: "auto",
+      // nationalMode: false,
+      onlyCountries: ['in'],
+      // placeholderNumberType: "MOBILE",
+      // preferredCountries: ['cn', 'jp'],
+       separateDialCode: true
+      //utilsScript: "build/js/utils.js"
+    });
+  </script>					
 </html>
