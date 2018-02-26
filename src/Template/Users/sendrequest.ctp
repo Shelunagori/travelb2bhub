@@ -1,5 +1,8 @@
 
-<style> 
+<style>
+.hr{
+	margin-top:25px !important;
+}	
 a:hover,a:focus{
     outline: none !important;
     text-decoration: none !important;
@@ -307,9 +310,9 @@ $(document).ready(function($){
 <div class="form-box">
 	<div class="panel-group" id="HotelAccordion" style="background-color:white;">
 		<div class="panel panel-default">
-				<h4 class="panel-title ">
+				
 				<fieldset>
-					  <legend style="color:#369FA1;"><b>GENERAL REQUIREMENTS:</b></legend>
+					  <legend style="color:#369FA1;"><b> &nbsp; GENERAL REQUIREMENTS  &nbsp;  </b></legend>
 					  <div class="row">
 					  <div class="col-md-12">
 					  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -364,16 +367,16 @@ $(document).ready(function($){
 							</div>
 						</div>
 					</fieldset>
-				</h4>
-				<h4 class="panel-title">
+				 
+				 
 			<fieldset>
-				<legend style="color:#369FA1;"><b>STAY REQUIREMENTS:</b></legend>
+				<legend style="color:#369FA1;"><b> &nbsp;  STAY REQUIREMENTS  &nbsp; </b></legend>
 					  <div class="row">
 							<div class="col-md-12">
-								<div class="col-lg-2">
-									<p for="from" >
+								<div class="col-md-12">
+									<b for="from" >
 										No. of Rooms
-									</p>
+									</b>
 								</div>
 								<div class="col-lg-2">
 									<p>Single</p>
@@ -387,11 +390,11 @@ $(document).ready(function($){
 									<p>Tripple</p>
 									<?php echo $this->Form->control('room3', ["id"=>"room3", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 								</div>
-								<div class="col-lg-2">
+								<div class="col-lg-3">
 									<p>Child with Bed</p>
 									<?php echo $this->Form->control('child_with_bed', ["id"=>"child_with_bed", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 								</div>
-								<div class="col-lg-2">
+								<div class="col-lg-3">
 									<p>Child without Bed</p>
 									<?php echo $this->Form->control('child_without_bed', ["id"=>"child_without_bed", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 								</div>
@@ -438,8 +441,10 @@ $(document).ready(function($){
 						</div>
 					<div class="row">
 						<div class="col-md-12">
-							<p>Locality</p>
-						<input autocomplete="off" type="text" class="form-control" name="locality" placeholder="Enter Locality or Village or Town"/>
+							<div class="col-md-12">
+								<p>Locality</p>
+								<input autocomplete="off" type="text" class="form-control" name="locality" placeholder="Enter Locality or Village or Town"/>
+							</div>
 						</div>
 					</div>
 					<div class="row">
@@ -517,10 +522,10 @@ $(document).ready(function($){
 							</div>
 						</div>
 					</fieldset>
-				</h4>
-						<h4 class="panel-title">
-												<fieldset>
-													<legend style="color:#369FA1;"><b>Comment Box</b></legend>
+				 
+						 
+									<fieldset>
+										<legend style="color:#369FA1;"><b> &nbsp;  Comment Box &nbsp; </b></legend>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
@@ -531,17 +536,16 @@ $(document).ready(function($){
 													</div> 
 												</div>
 											</div>
-												</fieldset>
-										</h4>			
+									</fieldset>
+										 			
 											<div class="row">
-											<div class="col-md-4"></div>
-													<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 mt">
-														<div class="input-field">
-															<div class="margin text-center">
-															<center><input type="submit" class="btn btn-primary btn-submit" value="Submit"></center>
-															</div>
+												<div class="col-md-12">
+													<div class="input-field">
+														<div class="margin text-center">
+														<center><input type="submit" class="btn btn-primary btn-submit" value="Submit"></center>
 														</div>
-													</div> 
+													</div>
+												</div> 
 											</div>
 										</div>
 									</div>
@@ -560,9 +564,9 @@ $(document).ready(function($){
 <div class="form-box" >
 	<div class="panel-group" id="accordion" style="background-color:white;">
 		<div class="panel panel-default">
-			<h4 class="panel-title">
+			  
 			<fieldset>
-				  <legend style="color:#369FA1;"><b>GENERAL REQUIREMENTS:</b></legend>
+				  <legend style="color:#369FA1;"><b>  &nbsp; GENERAL REQUIREMENTS  &nbsp; </b></legend>
 					<div class="row">
 						<div class="col-md-12">
 						  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -618,16 +622,16 @@ $(document).ready(function($){
 						</div>
 					</div>
 			</fieldset>
-		</h4>
-		<h4 class="panel-title">
+		 
+		 
 			<fieldset>
-				<legend style="color:#369FA1;"><b>STAY REQUIREMENTS:</b></legend>
+				<legend style="color:#369FA1;"><b> &nbsp; STAY REQUIREMENTS &nbsp; </b></legend>
 					  <div class="row">
 							<div class="col-md-12">
-								<div class="col-lg-2">
-									<p for="from" >
+								<div class="col-md-12">
+									<b for="from" >
 										No. of Rooms
-									</p>
+									</b>
 								</div>
 								<div class="col-lg-2">
 									<p>Single</p>
@@ -641,11 +645,11 @@ $(document).ready(function($){
 									<p>Tripple</p>
 									<?php echo $this->Form->control('room3', ["id"=>"room3", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 								</div>
-								<div class="col-lg-2">
+								<div class="col-lg-3">
 									<p>Child with Bed</p>
 									<?php echo $this->Form->control('child_with_bed', ["id"=>"child_with_bed", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 								</div>
-								<div class="col-lg-2">
+								<div class="col-lg-3">
 									<p>Child without Bed</p>
 									<?php echo $this->Form->control('child_without_bed', ["id"=>"child_without_bed", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 								</div>
@@ -691,8 +695,10 @@ $(document).ready(function($){
 						</div>
 					<div class="row">
 						<div class="col-md-12">
-							<p>Locality</p>
-						 <input type="text" autocomplete="off" class="form-control" name="locality" id="locality" placeholder="Enter Locality or Village or Town"/>
+							<div class="col-md-12">
+								<p>Locality</p>
+									<input type="text" autocomplete="off" class="form-control" name="locality" id="locality" placeholder="Enter Locality or Village or Town"/>
+							</div>
 						</div>
 					</div>
 					<div class="row">
@@ -775,190 +781,190 @@ $(document).ready(function($){
 									<button class="btn btn-primary btn-md add_field_button2 but ">Add Another Destination</button>
                              </div>
                         </div>
-					</fieldset>
-				</h4>
-								<h4 class="panel-title">
-											<fieldset>
-													<legend style="color:#369FA1;"><b>TRANSPORT REQUIREMENTS</b></legend>
-													<div class="row">
-														<div class="col-md-12 ">
-															<div class="input-field">
-																<select name="transport_requirement" class="form-control">
-																	<option value="" selected>Select Transport</option>
-																	<option value="1">Luxury Car</option>
-																	<option value="2">Sedan</option>
-																	<option value="3">Innova/ Tavera</option>
-																	<option value="4">Tempo Traveller</option>
-																	<option value="5">AC Coach</option>
-																	<option value="6">Non AC Bus</option>
-																</select>
-															</div>
-														</div>
-													</div>
-											<div class="row">
-											<div class=" col-md-12">
-													<div class="col-md-6">
-														<div class="input-field">
-															<p for="from">
-																Start Date
-															</p>
-														</div>
-														<div class="col-md-12 input-group">
-															 <input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd/mm/yyyy" id="datepicker3" placeholder="dd/mm/yyyy"/>
-															<p class="input-group-addon btn" for="testdate">
-															<span class="fa fa-calendar"></span>
-															</p>                    
-														</div>
-													</div>
-													<div class="col-md-6">
-														<div class="input-field">
-																	<p for="from">
-																		End Date
-																	</p>
-														</div>
-														<div class="col-md-12 input-group">
-															 <input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd/mm/yyyy" id="datepicker4" placeholder="dd/mm/yyyy"/>
-															<p class="input-group-addon btn" for="testdate">
-															<span class="fa fa-calendar"></span>
-															</p>                    
-														</div>
-													</div>
+			</fieldset>
+				 
+								 
+								<fieldset>
+									<legend style="color:#369FA1;"><b> &nbsp;  TRANSPORT REQUIREMENTS  &nbsp; </b></legend>
+									<div class="row">
+										<div class="col-md-12 ">
+											<div class="col-md-12 ">
+												<div class="input-field">
+													<select name="transport_requirement" class="form-control">
+														<option value="" selected>Select Transport</option>
+														<option value="1">Luxury Car</option>
+														<option value="2">Sedan</option>
+														<option value="3">Innova/ Tavera</option>
+														<option value="4">Tempo Traveller</option>
+														<option value="5">AC Coach</option>
+														<option value="6">Non AC Bus</option>
+													</select>
 												</div>
-											</div><span class="help-block"></span>
-											<div class="row">
-												<div class="col-md-12">
-													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
-															<div class="input-field">
-															<p for="from">Pickup Locality
-																
-															</p>
-															<input autocomplete="off" type="text" class="form-control" name="pickup_locality" id="pickup_locality" placeholder="Enter Locality or Village or Town"/>
-															</div>
-													</div>
-													 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
-															<div class="input-field">
-																<p for="from">Pickup City</p>
-																<input type="text" class="form-control city_select" id="t_pickup_city_name" name="t_pickup_city_name"  placeholder="Select City or Nearest City"/>
-																<input type='hidden' id='t_pickup_city_id' name="t_pickup_city_id" />
-																<div class="suggesstion-box" style="margin-top:-10px"></div>
-															</div>
-													</div>										
+											</div>
+										</div>
+									</div>
+								<div class="row">
+								<div class=" col-md-12">
+										<div class="col-md-6">
+											<div class="input-field">
+												<p for="from">
+													Start Date
+												</p>
+											</div>
+											<div class="col-md-12 input-group">
+												 <input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd/mm/yyyy" id="datepicker3" placeholder="dd/mm/yyyy"/>
+												<p class="input-group-addon btn" for="testdate">
+												<span class="fa fa-calendar"></span>
+												</p>                    
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="input-field">
+														<p for="from">
+															End Date
+														</p>
+											</div>
+											<div class="col-md-12 input-group">
+												 <input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd/mm/yyyy" id="datepicker4" placeholder="dd/mm/yyyy"/>
+												<p class="input-group-addon btn" for="testdate">
+												<span class="fa fa-calendar"></span>
+												</p>                    
+											</div>
+										</div>
+									</div>
+								</div><span class="help-block"></span>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+												<div class="input-field">
+												<p for="from">Pickup Locality
+													
+												</p>
+												<input autocomplete="off" type="text" class="form-control" name="pickup_locality" id="pickup_locality" placeholder="Enter Locality or Village or Town"/>
 												</div>
-											</div><span class="help-block"></span>
-											<div class="row">
-												<div class="col-md-12">
-													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
-															<div class="input-field">
-															<p for="from">Pickup State</p>
-																<input type='hidden' id='t_pickup_state_id' name="t_pickup_state_id"/>
-															<input type="text" class="form-control" id ="t_pickup_state_name" name="t_pickup_state_name" placeholder="State">
-															</div>
-														</div>
+										</div>
+										 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+												<div class="input-field">
+													<p for="from">Pickup City</p>
+													<input type="text" class="form-control city_select" id="t_pickup_city_name" name="t_pickup_city_name"  placeholder="Select City or Nearest City"/>
+													<input type='hidden' id='t_pickup_city_id' name="t_pickup_city_id" />
+													<div class="suggesstion-box" style="margin-top:-10px"></div>
+												</div>
+										</div>										
+									</div>
+								</div><span class="help-block"></span>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+												<div class="input-field">
+												<p for="from">Pickup State</p>
+													<input type='hidden' id='t_pickup_state_id' name="t_pickup_state_id"/>
+												<input type="text" class="form-control" id ="t_pickup_state_name" name="t_pickup_state_name" placeholder="State">
+												</div>
+											</div>
+									
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+												<div class="input-field">
+												<p for="from">Pickup Country</p>
+													<input type='hidden' id='t_pickup_country_id' name="t_pickup_country_id"/>
+													<input type="text" class="form-control" id ="t_pickup_country_name" name="t_pickup_country_name" placeholder="Select Country" />
+												</div>
+											</div>
+									</div>
+								</div>
+								<span class="help-block"></span>
+								
+								<div class="package-stops">
 												
-														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
-															<div class="input-field">
-															<p for="from">Pickup Country</p>
-																<input type='hidden' id='t_pickup_country_id' name="t_pickup_country_id"/>
-																<input type="text" class="form-control" id ="t_pickup_country_name" name="t_pickup_country_name" placeholder="Select Country" />
-															</div>
-														</div>
-												</div>
-											</div>
-											<span class="help-block"></span>
-											
-											<div class="package-stops">
-															
-											</div>
-											<span class="help-block"></span><hr></hr>
-											<div class="row">
-													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-															<button class="btn btn-primary btn-md package-stop-add ">ADD STOP</button>
-														<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-														<div class="col-xxs-12 text-center">
-																<div class="input_fields_wrap">
-																	<button class="add_field_button but">Add Stop</button>
-																	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-																		<div class="input-field">
-																			<p for="from" style="float:left;">Stop Name</p>
-																			<input class="form-control" type="text" placeholder="Stop Name" name="stops[]">
-																		</div>
-																	</div>
-																</div>
-															</div>  </div>-->
-														
-												</div>
-											</div>
-											<span class="help-block"></span>
-											<div class="row">
-												<div class="col-md-12">
-													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
-														<div class="input-field">
-															<p for="from">Final Locality
-                                                                </p>
-															<input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="finalLocality"/>
-														</div>
-													</div>
-													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
-															<div class="input-field">
-																<p for="from">Final City
-                                                                     
-                                                                </p>
-																<input type="text" class="form-control city_select" id="p_final_city_name" noofrows="2" name="p_final_city_name" placeholder="Select City or Nearest City"/>
-																<input type='hidden' id='p_final_city_id' name="p_final_city_id" />
-																<div class="suggesstion-box" style="margin-top:-10px"></div>
-																
-															</div>
-														</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-12 rw">
-														<div class="col-lg-6 col-md-12 col-sm-6 col-xs-12 mt">
-															<div class="input-field">
-															<p for="from">Final State</p>
-																<input type='hidden' id='p_final_state_id' name="p_final_state_id"/>
-																<input type="text" class="form-control" id ="p_final_state_name" name="p_final_state_name" placeholder="Select State" readonly/>
-															</div>
-														</div>
+								</div>
+								<span class="help-block"></span><hr></hr>
+								<div class="row">
+										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+												<button class="btn btn-primary btn-md package-stop-add ">ADD STOP</button>
+											<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+											<div class="col-xxs-12 text-center">
+													<div class="input_fields_wrap">
+														<button class="add_field_button but">Add Stop</button>
 														<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 															<div class="input-field">
-																<p for="from">Final Country</p>
-																<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
-																<input type="text" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" readonly/>
+																<p for="from" style="float:left;">Stop Name</p>
+																<input class="form-control" type="text" placeholder="Stop Name" name="stops[]">
 															</div>
 														</div>
-												</div>
-											</div>
-											</fieldset>
-											</h4>
-										<h4 class="panel-title">
-												<fieldset>
-													<legend style="color:#369FA1;"><b>Comment Box</b></legend>
-											<div class="row">
-												<div class="col-md-12">
-													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
-														<div class="input-field">
-															<p for="from"></p>
-															<textarea name="comment" class="form-control mt" cols="" rows="4"></textarea>
-														</div>
-													</div> 
-												</div>
-											</div>
-												</fieldset>
-										</h4>			
-											<div class="row">
-											<div class="col-md-4"></div>
-													<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 mt">
-														<div class="input-field">
-															<div class="margin text-center">
-															<center><input type="submit" class="btn btn-primary btn-submit" value="Submit"></center>
-															</div>
-														</div>
-													</div> 
-											</div>
-																			
+													</div>
+												</div>  </div>-->
+											
 									</div>
-							
+								</div>
+								<span class="help-block"></span>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+											<div class="input-field">
+												<p for="from">Final Locality
+													</p>
+												<input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="finalLocality"/>
+											</div>
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+												<div class="input-field">
+													<p for="from">Final City
+														 
+													</p>
+													<input type="text" class="form-control city_select" id="p_final_city_name" noofrows="2" name="p_final_city_name" placeholder="Select City or Nearest City"/>
+													<input type='hidden' id='p_final_city_id' name="p_final_city_id" />
+													<div class="suggesstion-box" style="margin-top:-10px"></div>
+													
+												</div>
+											</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12 rw">
+											<div class="col-lg-6 col-md-12 col-sm-6 col-xs-12 mt">
+												<div class="input-field">
+												<p for="from">Final State</p>
+													<input type='hidden' id='p_final_state_id' name="p_final_state_id"/>
+													<input type="text" class="form-control" id ="p_final_state_name" name="p_final_state_name" placeholder="Select State" readonly/>
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+												<div class="input-field">
+													<p for="from">Final Country</p>
+													<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
+													<input type="text" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" readonly/>
+												</div>
+											</div>
+									</div>
+								</div>
+						</fieldset>
+											 
+										 
+						<fieldset>
+							<legend style="color:#369FA1;"><b> &nbsp;  Comment Box  &nbsp; </b></legend>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
+										<div class="input-field">
+											<p for="from"></p>
+											<textarea name="comment" class="form-control mt" cols="" rows="4"></textarea>
+										</div>
+									</div> 
+								</div>
+							</div>
+						</fieldset>
+										 			
+							<div class="row">
+								 
+								<div class="col-md-12">
+									<div class="input-field">
+										<div class="margin text-center">
+										<center><input type="submit" class="btn btn-primary btn-submit" value="Submit"></center>
+										</div>
+									</div>
+								</div> 
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -975,9 +981,9 @@ $(document).ready(function($){
 							<div class="form-box">
 								<div class="panel-group" id="TransportAccordion" style="background-color:white;">
 									<div class="panel panel-default">
-										<h4 class="panel-title">
+										 
 											<fieldset>
-												  <legend style="color:#369FA1;"><b>GENERAL REQUIREMENTS:</b></legend>
+												  <legend style="color:#369FA1;"><b> &nbsp;  GENERAL REQUIREMENTS  &nbsp; </b></legend>
 													<div class="row">
 														<div class="col-md-12">
 														  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -1033,22 +1039,23 @@ $(document).ready(function($){
 														</div>
 													</div>
 											</fieldset>
-											</h4>
-											<h4 class="panel-title">
+											 
 											<fieldset>
-													<legend style="color:#369FA1;"><b>TRANSPORT REQUIREMENTS</b></legend>
+													<legend style="color:#369FA1;"><b> &nbsp;  TRANSPORT REQUIREMENTS &nbsp; </b></legend>
 													<div class="row">
 														<div class="col-md-12 ">
-															<div class="input-field">
-																<select name="transport_requirement" class="form-control">
-																	<option value="" selected>Select Transport</option>
-																	<option value="1">Luxury Car</option>
-																	<option value="2">Sedan</option>
-																	<option value="3">Innova/ Tavera</option>
-																	<option value="4">Tempo Traveller</option>
-																	<option value="5">AC Coach</option>
-																	<option value="6">Non AC Bus</option>
-																</select>
+															<div class="col-md-12 ">
+																<div class="input-field">
+																	<select name="transport_requirement" class="form-control">
+																		<option value="" selected>Select Transport</option>
+																		<option value="1">Luxury Car</option>
+																		<option value="2">Sedan</option>
+																		<option value="3">Innova/ Tavera</option>
+																		<option value="4">Tempo Traveller</option>
+																		<option value="5">AC Coach</option>
+																		<option value="6">Non AC Bus</option>
+																	</select>
+																</div>
 															</div>
 														</div>
 													</div>
@@ -1191,10 +1198,9 @@ $(document).ready(function($){
 												</div>
 											</div>
 											</fieldset>
-											</h4>
-											<h4 class="panel-title">
+											 
 												<fieldset>
-													<legend style="color:#369FA1;"><b>Comment Box</b></legend>
+													<legend style="color:#369FA1;"><b> &nbsp; Comment Box  &nbsp; </b></legend>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
@@ -1206,13 +1212,13 @@ $(document).ready(function($){
 												</div>
 											</div>
 											</fieldset>
-											</h4>
+											 
 											<div class="row">
-											<div class="col-md-4"></div>
-													<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 mt">
+											 
+													<div class="col-md-12">
 														<div class="input-field">
 															<div class="margin text-center">
-															<center><input type="submit" class="btn btn-primary btn-lg btn-submit" value="Submit"></center>
+															<center><input type="submit" class="btn btn-primary btn-submit btn-submit" value="Submit"></center>
 															</div>
 														</div>
 													</div> 
@@ -1712,15 +1718,16 @@ $(document).ready(function () {
         var wrapper = $(".input_fields_wrap");
         var add_button5 = $(".add_field_button");
         var packageI = 1;
+		
         $(".package-stop-add").click(function (e) {
         
             e.preventDefault();
-            var strHtml = '<div class="stop"><div class="stop-title">Stop ' +packageI+ '</div><div class="row">';
-        	strHtml += '<div class="col-sm-6 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="stops[' +packageI+ ']"></div></div>';
-        	strHtml += '<div class="col-sm-6 mt"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control" type="text" placeholder="Select City or Nearest City" use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" name="id_package_stop_city[' +packageI+ ']" /></div></div>';
-        	strHtml += '<div class="col-sm-6 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly></div></div></div>';
+            var strHtml = '<div class="stop col-md-12"><div class="stop-title"><b>Stop ' +packageI+ '</b> </div><div class="row"> <br>';
+        	strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="stops[' +packageI+ ']"></div></div>';
+        	strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control" type="text" placeholder="Select City or Nearest City" use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" name="id_package_stop_city[' +packageI+ ']" /></div></div>';
+        	strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly></div></div></div>';
         	strHtml += '<button class="btn btn-primary btn-md package_remove_stop">Remove stop</button>';
-         strHtml += '</div>';
+         strHtml += ' <hr class="hr"></hr></div>';
         $(".package-stops").append(strHtml);
         	packageI++;
         });
@@ -1741,12 +1748,12 @@ var gg = 1;
         var transI = 1;
         $(".transport-stop-add").click(function(e){
 				e.preventDefault();
-				var strHtml = '<div class="stop col-md-12"><div class="stop-title"> <br>  Stop ' +transI+ '</div><br><div class="row main_row">';
+				var strHtml = '<div class="stop col-md-12"><div class="stop-title"> <b> Stop ' +transI+ '</b></div><br><div class="row main_row">';
 				strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="stops[' +transI+ ']"></div></div>';
 				strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control ctynamerecord city_select" type="text" noofrows="4" taxboxname="state_id_trasport_stop_city[' +transI+ ']" placeholder="Select City or Nearest City" use_for = "trasport" numCount = ' +transI+ ' id="trasport_stop_city[' +transI+ ']" name="trasport_stop_city[' +transI+ ']"><input type="hidden" class="ctyIDname" id="id_trasport_stop_city[' +transI+ ']" name="id_trasport_stop_city[' +transI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div></div>';
 				strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_trasport_stop_city[' +transI+ ']" name="state_id_trasport_stop_city[' +transI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_trasport_stop_city[' +transI+ ']" name="state_name_trasport_stop_city[' +transI+ ']" readonly></div></div></div></div>';
 				strHtml += '<button class="btn btn-danger btn-sm transport_remove_stop but"> Remove Stop </button>';
-				strHtml += ' </div>';
+				strHtml += ' <hr class="hr"></hr></div>';
 				$(".transport-stops").append(strHtml);
 				transI++;
         })

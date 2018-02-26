@@ -221,7 +221,7 @@ $conn = ConnectionManager::get('default');
 					}
 				$m++;
 			// echo $resdata['responsecount'][$request['id']];
-			$created=$request['response']['created'];
+			$created=$request['created'];
 			$org_created=date('d-M-Y', strtotime($created));
 			?>
 			<div class="col-md-4"> 

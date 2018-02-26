@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <?php echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
+  <?php  echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
 	
 	<?php echo $this->Html->css('/assets/plugins/bootstrap-datepicker/css/datepicker3.css'); ?> 
 	<?php echo $this->Html->css('/assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css'); ?> 
@@ -35,13 +35,13 @@
 	.column_column ul li, .column_helper ul li, .column_visual ul li, .icon_box ul li, .mfn-acc ul li, .ui-tabs-panel ul li, .post-excerpt ul li, .the_content_wrapper ul li{margin-bottom:0px !important}
 	#search-box{border: #e2e2e2 1px solid;border-radius:4px;}
 	#Content{ width:90% !important; margin-left: 5%;}
-	select:focus {background-color:#FFF !important;}
-	input:focus {background-color:#FFF !important;}
-	input[type="text"]:focus {background-color:#FFF !important;}
-</style>
+  </style>
 <style>
 
-
+.btn-primary.focus, .btn-primary:focus
+{
+	color:ins
+}
 body {
 	font-family: 'Poppins', sans-serif !important;
 }
@@ -384,10 +384,12 @@ margin-top: 5px !important;
       <div class="user-panel" align="center">
         <div class='imaage'>
           <?php
-			if(!empty($profilePic)){
-				if(file_exists($this->Html->image('user_docs/'.$loginId.'/'.$profilePic)))
+			
+			if(!empty($profile_pic)){
+				//echo $this->Html->image('user_docs/'.$loginId.'/'.$profile_pic, ["class"=>"img-responsive","alt"=>"Profile Pic"]);
+				if(file_exists($this->Html->image('user_docs/'.$loginId.'/'.$profile_pic)))
 				{
-					echo $this->Html->image('user_docs/'.$loginId.'/'.$profilePic, ["class"=>"img-responsive","alt"=>"Profile Pic"]);
+					echo $this->Html->image('user_docs/'.$loginId.'/'.$profile_pic, ["class"=>"img-responsive","alt"=>"Profile Pic"]);
 				}
 				else{
 					echo $this->Html->image('no-profile-image.jpg', ["class"=>"img-responsive","alt"=>"Profile Pic"]);

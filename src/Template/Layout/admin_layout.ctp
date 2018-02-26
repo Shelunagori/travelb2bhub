@@ -275,7 +275,8 @@ margin-top: 5px !important;
 							$arrow_open='';
 							$class_selected='';
 		}}}}	  ?>
-<!--<li><a href="<?php echo $this->Url->build(["controller" => "Admins/index"]); ?>">Dashboard</a></li>		
+		<!----
+<li><a href="<?php echo $this->Url->build(["controller" => "Admins/index"]); ?>">Dashboard</a></li>		
 <li><a href="<?php echo $this->Url->build(["controller" => "Cities", "action" => "add"]); ?>">City-Master</a></li>		
 <li><a href="<?php echo $this->Url->build(["controller" => "States", "action" => "add"]); ?>">State-Master</a></li>		
 <li><a href="<?php echo $this->Url->build(["controller" => "Countries", "action" => "add"]); ?>">Country-Master</a></li>		
@@ -284,7 +285,7 @@ margin-top: 5px !important;
 <li><a href="<?php echo $this->Url->build(["controller" => "Requests/index"]); ?>">Request</a></li>		
 <li><a href="<?php echo $this->Url->build(["controller" => "Responses/index"]); ?>">Response</a></li>		
 <li><a href="<?php echo $this->Url->build(["controller" => "Roles", "action" => "add"]); ?>">Roles</a></li>	
---->
+---->
 	
 		</ul>
 		</section>

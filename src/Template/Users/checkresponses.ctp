@@ -190,7 +190,7 @@ legend
 						
 					<?php
 						if( !array_key_exists($row['user']['id'], $BusinessBuddies)) {?>
-							<a href="javascript:void(0);" class="businessBuddy btn btn-sm" style="background-color:#1295A2;color:#FFF" user_id = "<?php echo $row['user']['id']; ?>"> Follow</a>
+							<a href="javascript:void(0);" class="businessBuddy btn btn-sm margin" style="background-color:#1295A2;color:#FFF" user_id = "<?php echo $row['user']['id']; ?>"> Follow</a>
 					<?php } ?>
 						
 						
