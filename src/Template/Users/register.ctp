@@ -508,8 +508,7 @@ $(document).ready(function($){
 	$(".select2-search__field").css("width", "280");
 	
 });
-</script>
- <script>
+
     $("#mobile_number").intlTelInput({
       // allowDropdown: false,
       // autoHideDialCode: false,
