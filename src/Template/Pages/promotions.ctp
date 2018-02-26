@@ -366,7 +366,7 @@ $conn = ConnectionManager::get('default');
 $("#city").change(function() {
    //var price = $('#city selected').val();
 	var price=$("#city option:selected").val();
-   
+   alert(price);
    prices = '"'+price+'"';
    prices = String(price);
    if (prices.indexOf(",") > -1)
