@@ -58,7 +58,7 @@ ul li b {
 					echo $details['children']; ?></li>
 				</ul>
 			 </div>
-			<div class="">
+			<div class="col-md-12">
 		<?php
 		if ($details['category_id'] == 1 || $details['category_id'] == 3)
 		{  

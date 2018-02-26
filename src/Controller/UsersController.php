@@ -43,7 +43,7 @@ class UsersController extends AppController {
 		$this->Auth->allow(['logout']);
 		$first_name=$this->Auth->User('first_name');
 		$last_name=$this->Auth->User('last_name');
-		$profile_pic=$this->Auth->User('profile_pic');  
+		$profile_pic=$this->Auth->User('profile_pic');    
 		$loginId=$this->Auth->User('id');
 		$role_id=$this->Auth->User('role_id');
 		$authUserName=$first_name.' '.$last_name;

@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 	<title>Travel B2B HUB</title>
-	 <?php echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
+	<?php echo $this->Html->css('/assets/font-awesome/fonts/font-awesome.min.css'); ?>
+	<?php echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
 	<?php echo $this->Html->css('/assets/login/fonts/iconic/css/material-design-iconic-font.min.css'); ?>
 	<?php echo $this->Html->css('/assets/login/animate/animate.css'); ?>
 	<?php echo $this->Html->css('/assets/login/css-hamburgers/hamburgers.min.css'); ?>
@@ -53,9 +53,9 @@
 							</div>					
 						</div>
 						<div class="col-md-6">
-							<div class="wrap-input100 validate-input"  data-validate = "Company Name">
-								<input class="input100 trim_space_valid" id="company_name" type="text" name="company_name" placeholder="Company Name">
-								<span class="focus-input100" data-placeholder="&#xf0f7;"></span>
+							<div class="wrap-input100 validate-input "  data-validate = "Company Name">
+								<input class="input100 trim_space_valid " id="company_name" type="text" name="company_name" placeholder="Company Name">
+								<span class="focus-input100" data-placeholder="&#xf202;"></span>
 							</div>				
 						</div>										
 					</div>
@@ -77,13 +77,13 @@
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Email">
 								<input class="input100 trim_space_valid" type="email" name="email" placeholder="Email">
-								<span class="focus-input100" data-placeholder="&#xf003;"></span>
+								<span class="focus-input100" data-placeholder="&#xf215;"></span>
 							</div>						
 						</div>
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Contact No">
 								<input class="input100 trim_space_valid" id="mobile_number" type="text" name="mobile_number" placeholder="Contact No.">
-								<span class="focus-input100" data-placeholder="&#xf003;"></span>
+								<span class="focus-input100" data-placeholder=""></span>
 							</div>	
 						</div>										
 					</div>
@@ -91,13 +91,13 @@
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Password">
 								<input class="input100 trim_space_valid" type="password" name="password" placeholder="Password" id="password">
-								<span class="focus-input100" data-placeholder="&#xf003;"></span>
+								<span class="focus-input100" data-placeholder="&#xf213;"></span>
 							</div>						
 						</div>
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Contact No">
 								<input class="input100 trim_space_valid" type="password" name="cpassword" placeholder=" Confirm Password" id="cpassword">
-								<span class="focus-input100" data-placeholder="&#xf003;"></span>
+								<span class="focus-input100" data-placeholder="&#xf213;"></span>
 							</div>	
 						</div>										
 					</div>
@@ -105,12 +105,12 @@
 						<div class="col-md-12">
 							<div class="wrap-input100 validate-input" data-validate = "Address">
 								<input class="input100 trim_space_valid" type="text" name="address" placeholder="Address" id="address">
-								<span class="focus-input100" data-placeholder="&#xf015;"></span>
+								<span class="focus-input100" data-placeholder="&#xf256;"></span>
 							</div>						
 						</div>
 						<div class="col-md-12">
 							<div class="wrap-input100 validate-input" data-validate = "Address1">
-								<input class="input100 trim_space_valid" type="password" name="address1" placeholder="" id="address1"><span class="focus-input100"></span>
+								<input class="input100 trim_space_valid" type="text" name="address1" placeholder="" id="address1"><span class="focus-input100"></span>
 							</div>	
 						</div>										
 					</div>
@@ -118,13 +118,13 @@
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Locality">
 								<input class="input100 trim_space_valid" type="text" name="locality" placeholder="Locality or Village or Town" id="locality">
-								<span class="focus-input100" data-placeholder="&#xf015;"></span>
+								<span class="focus-input100" data-placeholder="&#xf301;"></span>
 							</div>						
 						</div>
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "City">
 								<input class="input100 trim_space_valid" name="city_name" type="text" placeholder="City or Nearest City" id="city_name" autocomplete="off">
-								<span class="focus-input100" data-placeholder="&#xf015;"></span>
+								<span class="focus-input100" data-placeholder="&#xf300;"></span>
 							</div>	
 						</div>										
 					</div>
@@ -132,24 +132,24 @@
 					<div class="col-md-12">
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "State">
-								<input class="input100 trim_space_valid" type="text" id ="state_name" name="state_name" placeholder="State" readonly>
-								<span class="focus-input100" data-placeholder="&#xf003;"></span>
+								<input class="input100 trim_space_valid" type="text" id ="state_name" name="state_name" placeholder="State" >
+								<span class="focus-input100" data-placeholder="&#xf304;"></span>
 								<input type='hidden' id='state_id' value='' name="state_id"/>
 								
 							</div>						
 						</div>
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Pincode">
-								<input class="input100 trim_space_valid" placeholder="Pinecode" type="text" name="pincode" id="pincode">
-								<span class="focus-input100" data-placeholder="&#xf003;"></span>
+								<input class="input100 trim_space_valid" placeholder="Pin Code" type="text" name="pincode" id="pincode">
+								<span class="focus-input100" data-placeholder="&#xf309;"></span>
 							</div>	
 						</div>										
 					</div>	
 					<div class="col-md-12">
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Country">
-								<input class="input100 trim_space_valid" type="text" id ="country_name" name="country_name" placeholder="Country" readonly>
-								<span class="focus-input100" data-placeholder="&#xf003;"></span>
+								<input class="input100 trim_space_valid" type="text" id ="country_name" name="country_name" placeholder="Country" >
+								<span class="focus-input100" data-placeholder="&#xf315;"></span>
 								<input type='hidden' id='country_id' value='' name="country_id"/>
 							</div>						
 						</div>										
@@ -181,7 +181,7 @@
 					
 					
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn" style="width: 100%;">Login</button>
+						<button type="submit" class="login100-form-btn" style="width: 100%;">Login</button>
 					</div>					
 				<?php echo $this->Form->end();?>
 			</div>

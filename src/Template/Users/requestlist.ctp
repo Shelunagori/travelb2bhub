@@ -21,7 +21,7 @@ legend
 .contain>p{
 	color:#96989A !important;
 }
-.details {color:#000 !important; font-weight: 600;}	
+.details {color:#000 !important; font-weight: 400;}	
 .btn-block { width:40% !important;}
 </style>
 
@@ -229,16 +229,16 @@ legend
 						 <span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
 						<div class="contain">
 							
-							<p><b>Request Type : </b>&nbsp;<?php echo $text; ?></p>
-							<p><b>Total Budget : </b>&nbsp;
+							<p>Request Type : &nbsp;<?php echo $text; ?></p>
+							<p>Total Budget : &nbsp;
 								<span class="details"><?php echo $request['total_budget']; ?></span>
 							</p>
 							<?php 
 							if($request['category_id'] == 3 ) { ?>
-								<p><b>Start Date : </b>&nbsp;
+								<p>Start Date : &nbsp;
 									<span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
 								</p>
-								<p><b>End Date : </b>&nbsp;
+								<p>End Date : &nbsp;
 									<span class="details"><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?></span>
 								</p>
 							<?php 
@@ -248,42 +248,42 @@ legend
                                 $stmt = $conn->execute($sql);
                                 $result = $stmt->fetch('assoc');
 							?>
-								<p><b>Start Date : </b>&nbsp;
+								<p>Start Date : &nbsp;
 									<span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
 								</p>
-								<p><b>End Date : </b>&nbsp;
-									<span class="details"><?php if(!empty($result['TopDate'])) { ?><?php echo date('d/m/Y',strtotime($result['TopDate'])); ?><?php }else{?><b>End Date: </b><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?><?php }?></span>
+								<p>End Date : &nbsp;
+									<span class="details"><?php if(!empty($result['TopDate'])) { ?><?php echo date('d/m/Y',strtotime($result['TopDate'])); ?><?php }else{?>End Date: <?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?><?php }?></span>
 								</p>
 								
 							<?php
 							}
 							if($request['category_id'] == 2 ) { 
 							?>
-								<p><b>Start Date : </b>&nbsp;
+								<p>Start Date : &nbsp;
 									<span class="details"><?php echo ($request['start_date'])?date('d/m/Y',strtotime($request['start_date'])):"-- --"; ?></span>
 								</p>
-								<p><b>End Date : </b>&nbsp;
+								<p>End Date : &nbsp;
 									<span class="details"><?php echo ($request['end_date'])?date('d/m/Y',strtotime($request['end_date'])):"-- --"; ?></span>
 								</p>
 							<?php
 							}
 							?>
-							<p><b>Reference ID : </b>&nbsp;
+							<p>Reference ID : &nbsp;
 								<span class="details"><?php echo $request['reference_id']; ?></span>
 							</p>
-							<p><b>Members : </b>&nbsp;
+							<p>Members : &nbsp;
 								<span class="details"><?php echo $request['adult'] +   $request['children']; ?></span>
 							</p>
 							<?php 
 							if($request['category_id']==2){ ?>
-								<p><b>Pickup City : </b>&nbsp;
+								<p>Pickup City : &nbsp;
 									<span class="details"><?php echo ($request['pickup_city'])?$allCities[$request['pickup_city']]:"-- --"; ?><?php echo ($request['pickup_state'])?' ('.$allStates[$request['pickup_state']].')':"";  ?></span>
 								</p>
 							<?php 
 							}
 							else
 							{?>
-								<p><b>Destination City : </b>&nbsp;
+								<p>Destination City : &nbsp;
 									<span class="details"><?php echo ($request['city_id'])?$allCities[$request['city_id']]:"-- --"; ?><?php echo ($request['state_id'])?' ('.$allStates[$request['state_id']].')':""; ?>
 									<?php
 										if($request['category_id'] == 1){
@@ -300,7 +300,7 @@ legend
 							}
 							$pid=$request['id'];
 							?>
-							<p><b>Comment : </b>&nbsp;
+							<p>Comment : &nbsp;
 								<span class="details">
 								<?php echo mb_strimwidth($request['comment'], 0, 25, "...");?></span>
 							</p>
@@ -329,7 +329,7 @@ legend
 									<div class="check_responses" id="checkresponse_<?php echo $request['id'];?>">
 										<?php if($data['responsecount'][$pid] > 0 ) 
 										{ ?>
-											<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$pid)) ?>"class="check_responses_btn btn btn-success btn-sm"> Check Response ( <strong><?php echo $data['responsecount'][$pid]; ?></strong> ) </a>
+											 <a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$pid)) ?>"class="check_responses_btn btn btn-success btn-sm"> Check Response (<strong><?php echo $data['responsecount'][$pid]; ?></strong>) </a>
 										  <?php 
 										} 
 										else 

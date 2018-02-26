@@ -30,7 +30,7 @@
 						<label class="col-md-4 control-label" for="Rating">Rating <span class="asterisk">
 
 						</span></label>
-						<div class="col-md-6 margin_t20_on_mob">
+						<div class="col-md-5">
 						<input class="star star-5" id="star-5<?php echo $reqid; ?>" type="radio" name="rating" <?php if($rating=="5") {echo "checked";} ?> value="5"/>
 						<label class="star star-5" for="star-5<?php echo $reqid; ?>"></label>
 						<input class="star star-4" id="star-4<?php echo $reqid; ?>" type="radio" name="rating" <?php if($rating=="4") {echo "checked";} ?> value="4"/>
