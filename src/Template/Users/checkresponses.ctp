@@ -72,9 +72,13 @@ legend
 					$image= $this->Html->image('/img/slider/hotelier-icon.png');
 					$text="<span class='requestType'>Hotel</span>";
 				} 
+				
+				$created=$row['created'];
+				$org_created=date('d-M-Y', strtotime($created));
 				?>
 				<fieldset>
 					<legend><?php echo $image; ?></legend>
+					<span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
 					<div class="contain">
 						<p><b>Request Type : </b>&nbsp;<?php echo $text; ?></p>
 						<p><b>Total Budget : </b>&nbsp;
