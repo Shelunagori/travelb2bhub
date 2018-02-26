@@ -177,11 +177,6 @@ padding-left: 84px !important;
                                         <input type="text" name="company_name" class="form-control trim_space_valid" id="company_name"/>
                                     </div>
                                 </div>
-                               
-                          
-
-
-                          
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
                                     <div class="input-field">
                                         <label for="from">First Name
