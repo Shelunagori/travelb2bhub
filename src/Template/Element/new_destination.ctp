@@ -3,9 +3,9 @@
 	  <div class="row">
 			<div class="col-md-12">
 				<div class="col-md-12">
-					<b for="from" >
+					<p for="from" >
 						No. of Rooms
-					</b>
+					</p>
 				</div>
 				<div class="col-lg-2">
 					<p>Single</p>
@@ -29,31 +29,31 @@
 				</div>
 			</div>
 		</div>
-		<div class="row">
-				<div class="col-md-12">
-					<div class="col-md-4">
-						<div class="input-field">
-							<p for="from">
-								Hotel Rating
-							</p>
-						</div>
-						<div>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-						</div>
+		<div class="row" style="margin-top:10px">
+			<div class="col-md-12">
+				<div class="col-md-4">
+					<div class="input-field">
+						<p for="from">
+							Hotel Rating
+						</p>
 					</div>
-					<div class="col-md-4 ">
-						<div class="input-field">
-							<p for="from">Hotel Catrgory </p>
-								<div>
-									<?php echo $this->Form->control('hotel_category', ["id"=>"hotel_category", "type"=>"select", 'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control chosen-select"]);?>
+					<div>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+						<i class="fa fa-star"></i>
+					</div>
+				</div>
+				<div class="col-md-4 ">
+					<div class="input-field">
+						<p for="from">Hotel Catrgory </p>
+							<div>
+								<?php echo $this->Form->control('hotel_category', ["id"=>"hotel_category", "type"=>"select", 'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control chosen-select"]);?>
 
-							   </div>
-						</div>
+						   </div>
 					</div>
+				</div>
 				<div class="col-md-4 ">
 					<div class="input-field">
 						<p for="from">Meal Plan </p>
