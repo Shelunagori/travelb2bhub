@@ -13,18 +13,20 @@ class PriceMastersController extends AppController
 		
 		if(!empty($PriceMasters->toArray()))
 		{
+			$currentDate= date('Y-m-d');
 			$message = 'List Found Successfully';
 			$response_code = 200;
 		}
 		else
 		{
+			$currentDate= date('Y-m-d');
 			$message = 'No Content Found';
 			$PriceMasters = [];
 			$response_code = 204;			
 		}
 		
-		$this->set(compact('PriceMasters','message','response_code'));
-        $this->set('_serialize', ['PriceMasters','message','response_code']);
+		$this->set(compact('PriceMasters','message','response_code','currentDate'));
+        $this->set('_serialize', ['PriceMasters','message','response_code','currentDate']);
     }
 
 

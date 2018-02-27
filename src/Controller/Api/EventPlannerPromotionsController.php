@@ -185,8 +185,6 @@ class EventPlannerPromotionsController extends AppController
 					{
 						$getEventPlanner->expir_status = 'expired';		
 					}
-					
-					
 				}
 				$message = 'List Found Successfully';
 				$response_code = 200;

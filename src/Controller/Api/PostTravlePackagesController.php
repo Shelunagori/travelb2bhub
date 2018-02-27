@@ -248,17 +248,14 @@ class PostTravlePackagesController extends AppController
 
 			// End Filter code
 			
-			$getTravelPackages = $this->PostTravlePackages->find();
-				$getTravelPackages->select(['total_likes'=>$getTravelPackages->func()->count('PostTravlePackageLikes.id')])
-				->leftJoinWith('PostTravlePackageLikes')
-				->innerJoinWith('PostTravlePackageRows',function($q) use($category_id_filter,$category_short){ 
-						return $q->where($category_id_filter)
+			$getTravelPackages = $this->PostTravlePackages->find()->leftJoinWith('PostTravlePackageRows',function($q) use($category_id_filter,$category_short){ 
+						return $q->where(['post_travle_package_category_id' =>$category_id_filter])
 							->contain(['PostTravlePackageCategories'=>function ($q) use($category_short)
 							{	
 								return $q->order(['name' => $category_short]);
 							}]);
 					})
-				->innerJoinWith('PostTravlePackageStates',function($q) use($state_filter){ 
+				->leftJoinWith('PostTravlePackageStates',function($q) use($state_filter){ 
 						return $q->where($state_filter);
 					})				
 				->where($where_duration)
@@ -274,6 +271,8 @@ class PostTravlePackagesController extends AppController
 			{
 				foreach($getTravelPackages as $getTravelPackage)
 				{
+					$getTravelPackage->total_likes = $this->PostTravlePackages->PostTravlePackageLikes
+							->find()->where(['post_travle_package_id' => $getTravelPackage->id])->count();					
 					$exists = $this->PostTravlePackages->PostTravlePackageLikes->exists(['post_travle_package_id'=>$getTravelPackage->id,'user_id'=>$isLikedUserId]);
 					if($exists == 1)
 					{ $getTravelPackage->isLiked = 'yes'; }
