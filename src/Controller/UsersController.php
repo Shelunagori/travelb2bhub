@@ -830,6 +830,7 @@ public function viewuserprofile(){
 		$taxboxname=$this->request->data['taxboxname'];
 		$states=$this->Users->States->find('list')->where(['States.id'=>$state_id]);
 		$statess=$this->Users->States->find()->where(['States.id'=>$state_id]);
+		//pr($statess);
 		foreach($statess as $st_show){
 			$country_id=$st_show->country_id;
 		}
@@ -912,49 +913,51 @@ $this->redirect('/pages/home');
 public function sendrequest() {
 	$this->viewBuilder()->layout('user_layout');	
 	date_default_timezone_set('Asia/Kolkata');
-//Configure::write('debug',2);
-$this->loadModel('Requests');
-$this->loadModel('Responses');
-$this->loadModel('RequestStops');
-$this->loadModel('Hotels');
-$this->loadModel('User_Chats');
-$this->viewBuilder()->layout('user_layout');
-$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
-//print_r($user);
-$this->set('users', $user);
-$myRequestCount = $myReponseCount =  0;
-$myfinalCount  = 0;
-$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status "=>2]]);
-$myfinalCount = $query3 ->count();
-$this->set('myfinalCount', $myfinalCount );
-$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
-$myRequestCount = $query->count();
-$myRequestCount1 = $query->count(); 
-$delcount=0;
-$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
-foreach($requests as $req){
-$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
-if($rqueryr->count()!=0){
-$delcount++;
-}
-}
-if($myRequestCount > $delcount) {
-$myRequestCount = $myRequestCount-$delcount;
-}	
-$this->set('myRequestCountdel', $delcount);
-$this->set('myRequestCount', $myRequestCount1);
-$reqcount = $this->getSettings('requestcount');
-$this->set('delcount', $delcount);
-$plcreqcount = (($reqcount['value']-$myRequestCount1)-($delcount+ $myfinalCount));
-//echo $myRequestCount1; die();
-if($myRequestCount1 >=50){
-$msg = "You have exceeded the count of permissible open requests. You must Finalize a Request or Remove a Request in order to proceed with placing another request.";
-$this->Flash->error(__($msg));
-return $this->redirect('/users/requestlist');
-}elseif($plcreqcount<=0){
-$this->Flash->error(__('Sorry, You cannot add more than '.$reqcount["value"] .' request.'));
-return $this->redirect('/users/dashboard');
-}elseif($myRequestCount < $reqcount['value']) {
+	//Configure::write('debug',2);
+	$this->loadModel('Requests');
+	$this->loadModel('Responses');
+	$this->loadModel('RequestStops');
+	$this->loadModel('Hotels');
+	$this->loadModel('User_Chats');
+	$this->viewBuilder()->layout('user_layout');
+	$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
+	//print_r($user);
+	$this->set('users', $user);
+	$myRequestCount = $myReponseCount =  0;
+	$myfinalCount  = 0;
+	$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status "=>2]]);
+	$myfinalCount = $query3 ->count();
+	$this->set('myfinalCount', $myfinalCount );
+	$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
+	$myRequestCount = $query->count();
+	$myRequestCount1 = $query->count(); 
+	$delcount=0;
+	$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
+	foreach($requests as $req){
+		$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
+		if($rqueryr->count()!=0){
+			$delcount++;
+		}
+	}
+	if($myRequestCount > $delcount) {
+		$myRequestCount = $myRequestCount-$delcount;
+	}	
+	$this->set('myRequestCountdel', $delcount);
+	$this->set('myRequestCount', $myRequestCount1);
+	$reqcount = $this->getSettings('requestcount');
+	$this->set('delcount', $delcount);
+	$plcreqcount = (($reqcount['value']-$myRequestCount1)-($delcount+ $myfinalCount));
+	//echo $myRequestCount1; die();
+	if($myRequestCount1 >=50){
+		$msg = "You have exceeded the count of permissible open requests. You must Finalize a Request or Remove a Request in order to proceed with placing another request.";
+		$this->Flash->error(__($msg));
+		return $this->redirect('/users/requestlist');
+	}
+	elseif($plcreqcount<=0){
+		$this->Flash->error(__('Sorry, You cannot add more than '.$reqcount["value"] .' request.'));
+		return $this->redirect('/users/dashboard');
+	}
+	elseif($myRequestCount < $reqcount['value']) {
 	
 if($this->request->is('post')){
 $d = $this->request->data;
@@ -1039,8 +1042,8 @@ $d['end_date'] = (isset($d['end_date']) && !empty($d['start_date']))?$this->ymdF
 				return $this->redirect('/users/sendrequest');
 			}
 		} 
-elseif($this->request->data['category_id'] == 1 ){
-		
+else if($this->request->data['category_id'] == 1 ){
+	
 	$p['transport_requirement'] = $d['transport_requirement'];
 	$p['pickup_city'] = $d['pickup_city_id'];
 	$p['pickup_state'] = $d['pickup_state_id'];
@@ -1058,6 +1061,7 @@ elseif($this->request->data['category_id'] == 1 ){
 	$p['user_id'] = $this->Auth->user('id');
 	$p['total_budget'] = $d['total_budget'];
 	$p['adult'] = $d['adult'];
+	
 	$p['children'] = $d['children'];
 	$p['city_id'] = $d['city_id'];
 	$p['state_id'] = $d['state_id'];
@@ -1083,13 +1087,15 @@ elseif($this->request->data['category_id'] == 1 ){
 $p['stops'] = $stopes;
 $p['check_in'] =  $d['check_in'];
 $p['check_out'] =  $d['check_out'];
-//pr($p);pr($d); exit;
+//pr($d); exit;
 $contact = $this->Requests->newEntity($p);
+
 if ($re = $this->Requests->save($contact)) {
 $ui = $re->id;
 $d['req_id'] = $ui;
 $d['user_id'] = $this->Auth->user('id');
 $rest = $this->Hotels->newEntity($d);
+  
 $this->Hotels->save($rest);//exit;
 if(isset($d['hh_room1'])) {
 foreach($d['hh_room1'] as $key=>$row) {
@@ -1133,20 +1139,20 @@ $Userlist = $stmt ->fetchAll('assoc');
 			foreach($Userlist as $usr)
 			{
 				$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$usr['id']."' AND blocked_by='".$this->Auth->user('id')."'";
-					$stmt = $conn->execute($sql1);
-					$bresult = $stmt ->fetch('assoc');
-						if($bresult['block_count']==0){
-				$userchats = $userchatTable->newEntity();
-				$userchats->request_id = $ui;
-				$userchats->user_id = $this->Auth->user('id');
-				$userchats->send_to_user_id = $usr["id"];
-				$userchats->message = "You have received a Request! Please go to RESPOND TO REQUEST tab to view it.";
-				$userchats->created = date("Y-m-d h:i:s");
-				$userchats->notification = 1;;
-				if ($userchatTable->save($userchats)) {
-				$id = $userchats->id;
+				$stmt = $conn->execute($sql1);
+				$bresult = $stmt ->fetch('assoc');
+				if($bresult['block_count']==0){
+					$userchats = $userchatTable->newEntity();
+					$userchats->request_id = $ui;
+					$userchats->user_id = $this->Auth->user('id');
+					$userchats->send_to_user_id = $usr["id"];
+					$userchats->message = "You have received a Request! Please go to RESPOND TO REQUEST tab to view it.";
+					$userchats->created = date("Y-m-d h:i:s");
+					$userchats->notification = 1;;
+					if ($userchatTable->save($userchats)) {
+						$id = $userchats->id;
+					}
 				}
-						}
 			}
 	
 $this->Flash->success(__('Congratulations! Your Request has been submitted!'));

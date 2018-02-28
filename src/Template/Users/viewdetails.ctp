@@ -71,11 +71,10 @@ ul li b {
 					$ds_count = 1;
 					foreach($details['hotels'] as $row)
 					{ ?>
-					 
+					<div class="col-md-12">
 					<legend style="text-align:left !important; color:#1395A2"><h5>Destination <?php
 						echo $ds_count; ?></h5></legend>
-						 
-						<ul>
+ 						<ul>
 						<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Single :&nbsp;</b><?php
 						if ($row['room1'] != '')
 						{
@@ -179,7 +178,7 @@ ul li b {
 						<li class="col-md-6"><p><b>Destination State :&nbsp;</b><?php
 						echo ($row['state_id']) ? $allStates[$row['state_id']] : "-- --"; ?>
 						</ul>
-						 
+						</div> 
 						<?php
 						$ds_count++;
 					} ?>

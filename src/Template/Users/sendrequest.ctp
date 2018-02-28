@@ -1,8 +1,8 @@
-
 <style>
 .hr{
 	margin-top:25px !important;
-}	
+}
+/*	
 a:hover,a:focus{
     outline: none !important;
     text-decoration: none !important;
@@ -51,7 +51,7 @@ a:hover,a:focus{
 .tab .tab-content h3{
     font-size: 22px !important;
     color: #5b5a5a !important;
-} 
+}*/ 
 </style> 
 <!--------- <script>
 	var cityData = '<?php echo $allCities; ?>';
@@ -554,10 +554,10 @@ $(document).ready(function($){
 <?= $this->Form->end()?>							
 <div class="tab-pane active" id="tab2" >
 <?php
-					echo $this->Form->create(null, [
-						'type' => 'file',
-						'url' => ['controller' => 'Users', 'action' => 'sendrequest'], "id"=>"PackgeRequestForm"
-					]);
+		echo $this->Form->create(null, [
+			'type' => 'file',
+			'url' => ['controller' => 'Users', 'action' => 'sendrequest'], "id"=>"PackgeRequestForm"
+		]);
 					?>
 <input name="category_id" type="hidden" value="1" class="form-control" id="date-start" placeholder="Reference id"/>
 <input type="hidden" name="user_id" value="<?php echo $users['id']; ?>"/>
@@ -599,7 +599,7 @@ $(document).ready(function($){
 									<p class="input-group-addon btn" >
 									<button type="button" class="fa fa-minus-square"  id="btn_pack_minus" value="-"></button>
 									</p>
-									<input type='text' autocomplete="off" name='children' value='1' class="form-control input-large" id="text_counter_pack"/>
+									<input type='text' autocomplete="off" name='adult' value='1' class="form-control input-large" id="text_counter_pack"/>
 									<p class="input-group-addon btn">
 									<button type="button" class="fa fa-plus-square" id="btn_pack_plus" value=""></button>
 								   </p>    
@@ -665,16 +665,16 @@ $(document).ready(function($){
 										</div>
 										<div style="width: 200px;" class="stars">
 											<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
-										   <input class="star star-5" id="star-5-212" type="radio" value="5" name="hotel_rating"/>
-										   <label class="star star-5" for="star-5-212"></label>
-										   <input class="star star-4" id="star-4-212" type="radio" value="4" name="hotel_rating"/>
-										   <label class="star star-4" for="star-4-212"></label>
-										   <input class="star star-3" id="star-3-212" type="radio" value="3" name="hotel_rating"/>
-										   <label class="star star-3" for="star-3-212"></label>
-										   <input class="star star-2" id="star-2-212" type="radio" value="2" name="hotel_rating"/>
-										   <label class="star star-2" for="star-2-212"></label>
-										   <input class="star star-1" id="star-1-212" type="radio" value="1" name="hotel_rating"/>
-										   <label class="star star-1" for="star-1-212"></label>
+										   <input class="star star-5" id="star-5-2" type="radio" value="5" name="hotel_rating"/>
+										   <label class="star star-5" for="star-5-2"></label>
+										   <input class="star star-4" id="star-4-2" type="radio" value="4" name="hotel_rating"/>
+										   <label class="star star-4" for="star-4-2"></label>
+										   <input class="star star-3" id="star-3-2" type="radio" value="3" name="hotel_rating"/>
+										   <label class="star star-3" for="star-3-2"></label>
+										   <input class="star star-2" id="star-2-2" type="radio" value="2" name="hotel_rating"/>
+										   <label class="star star-2" for="star-2-2"></label>
+										   <input class="star star-1" id="star-1-2" type="radio" value="1" name="hotel_rating"/>
+										   <label class="star star-1" for="star-1-2"></label>
 										 </div>
 									</div>
 									<div class="col-md-4 ">
@@ -694,37 +694,35 @@ $(document).ready(function($){
 							</div>
 						</div>
 					<div class="row">
-						<div class="col-md-12">
-							<div class="col-md-12">
+						<div class="col-md-12 main_row">
+							<div class="col-md-4">
 								<p>Locality</p>
 									<input type="text" autocomplete="off" class="form-control" name="locality" id="locality" placeholder="Enter Locality or Village or Town"/>
 							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="col-md-6">
-									<div class="input-field">
-									<p for="from">
-										Destination City
-										<span class="required">*</span>
-									</p>
-									</div>
-									<div>
-									<input type="text" class="form-control city_select" id="city_name" name="city_name" placeholder="Select City or Nearest City"/>
-                                    <input type='hidden' id='city_id' name="city_id" />
-									<div class="suggesstion-box" style="margin-top:-10px"></div>
-									</div>
-							</div>
-							<div class="col-md-6">
+						 
+							<div class="col-md-4">
 								<div class="input-field">
-									<p for="from">
-												Destination State
-									</p>
+								<p for="from">
+									Destination City <span class="required">*</span>
+								</p>
 								</div>
 								<div>
+								<input type="text" class="form-control city_select ctynamerecord" taxboxname="state_id" noofrows="6"  id="city_name" name="city_name" placeholder="Select City or Nearest City"/>
+								<input type='hidden' class="ctyIDname" id='city_id' name="city_id" />
+								<div class="suggesstion-box" style="margin-top:-10px"></div>
+								</div>
+							</div>
+							<div class="stateRpl">
+								<div class="col-md-4">
+									<div class="input-field">
+										<p for="from">
+													Destination State
+										</p>
+									</div>
+									<div>
 										<input type='hidden' id='state_id' name="state_id"/>
-										<input type='text' autocomplete="off" name='destination_source'  placeholder="Destination Source" class="form-control input-large" />
+										<input type='text' autocomplete="off" name='state_name'  placeholder="Destination Source" class="form-control input-large" />
+									</div>
 								</div>
 							</div>
 						</div>
@@ -778,7 +776,7 @@ $(document).ready(function($){
 						</div> <span class="help-block"></span><hr></hr>
 						<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt padding text-center">
-									<button class="btn btn-primary btn-md add_field_button2 but ">Add Another Destination</button>
+									<button class="btn btn-primary btn-sm add_field_button2 but ">Add Another Destination</button>
                              </div>
                         </div>
 			</fieldset>
@@ -834,8 +832,8 @@ $(document).ready(function($){
 									</div>
 								</div><span class="help-block"></span>
 								<div class="row">
-									<div class="col-md-12">
-										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+									<div class="col-md-12 main_row">
+										<div class="col-md-4 col-xs-6 mt">
 												<div class="input-field">
 												<p for="from">Pickup Locality
 													
@@ -843,33 +841,31 @@ $(document).ready(function($){
 												<input autocomplete="off" type="text" class="form-control" name="pickup_locality" id="pickup_locality" placeholder="Enter Locality or Village or Town"/>
 												</div>
 										</div>
-										 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+										 <div class="col-md-4 mt">
 												<div class="input-field">
 													<p for="from">Pickup City</p>
-													<input type="text" class="form-control city_select" id="pickup_city_name" name="pickup_city_name"  placeholder="Select City or Nearest City"/>
-													<input type='hidden' id='pickup_city_id' name="pickup_city_id" />
+													<input type="text" class="form-control city_select ctynamerecord" id="pickup_city_name" name="pickup_city_name"  placeholder="Select City or Nearest City" taxboxname="pickup_state_id" noofrows="5" />
+													<input type='hidden' class="ctyIDname" id='pickup_city_id' name="pickup_city_id" />
 													<div class="suggesstion-box" style="margin-top:-10px"></div>
 												</div>
-										</div>										
-									</div>
-								</div><span class="help-block"></span>
-								<div class="row">
-									<div class="col-md-12">
-										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
-												<div class="input-field">
-												<p for="from">Pickup State</p>
-													<input type='hidden' id='t_pickup_state_id' name="t_pickup_state_id"/>
-												<input type="text" class="form-control" id ="pickup_state_name" name="pickup_state_name" placeholder="State">
-												</div>
+										</div>	
+										<div class="stateRpl">										
+											<div class="col-md-4 mt">
+													<div class="input-field">
+													<p for="from">Pickup State</p>
+													<input type='hidden' id='pickup_state_id' name="pickup_state_id"/>
+													<input type="text" class="form-control"  id="pickup_state_name" name="pickup_state_name" placeholder="State">
+													</div>
 											</div>
-									
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+										
+											<div class="col-md-4 mt" style="display:none">
 												<div class="input-field">
 												<p for="from">Pickup Country</p>
-													<input type='hidden' id='pickup_country_id' name="pickup_country_id"/>
-													<input type="text" class="form-control" id ="pickup_country_name" name="pickup_country_name" placeholder="Select Country" />
+												<input type='hidden' id='pickup_country_id' name="pickup_country_id"/>
+												<input type="text" class="form-control" id ="pickup_country_name" name="pickup_country_name" placeholder="Select Country" />
 												</div>
 											</div>
+										</div>
 									</div>
 								</div>
 								<span class="help-block"></span>
@@ -1232,13 +1228,11 @@ $(document).ready(function($){
 </div>
 					</div>
 				</div>
-				</div>
-				</div>
-				</div>
-				</div>
-				</div>
-				</div>
-				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div> 
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <?php echo $this->Html->script(['jquery.validate']);?>		 
 <script>
@@ -1301,9 +1295,61 @@ $(document).ready(function(){
 				}
 			});
 		}
-		//if(noofrows == 4){
-			
-		//}
+		if(noofrows == 5){
+			var stat_id=$(this).attr('stat_id');
+			var cty_id=$(this).attr('cty_id');
+			var cty_nm=$(this).attr('cty_nm');
+			var taxboxname=$(this).attr('taxboxname');
+			$(this).closest('div').parent('div').parent('div').parent('div.main_row').find('.ctyIDname').val(cty_id); 
+			$(this).closest('div').parent('div').parent('div').parent('div.main_row').find('.ctynamerecord').val(cty_nm); 
+			$(this).closest('div').parent('div').parent('div').parent('div.main_row').find(".suggesstion-box").hide();
+			//alert($(this).closest('div').parent('div').parent('div').parent('div.main_row').html());
+			var mainthis=$(this);
+			var m_data = new FormData();
+			m_data.append('state_id',stat_id);	
+			m_data.append('noofrows',noofrows);		
+			m_data.append('taxboxname',taxboxname);		
+			$.ajax({
+				url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_state_show_new"]); ?>",
+				data: m_data,
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				dataType:'text',
+				success: function(data)
+				{
+					mainthis.closest('div').parent('div').parent('div').parent('div.main_row').find(".stateRpl").html(data);
+				}
+			});
+		}
+		
+		if(noofrows == 6){
+			var stat_id=$(this).attr('stat_id');
+			var cty_id=$(this).attr('cty_id');
+			var cty_nm=$(this).attr('cty_nm');
+			var taxboxname=$(this).attr('taxboxname');
+			$(this).closest('div').parent('div').parent('div').parent('div.main_row').find('.ctyIDname').val(cty_id); 
+			$(this).closest('div').parent('div').parent('div').parent('div.main_row').find('.ctynamerecord').val(cty_nm); 
+			$(this).closest('div').parent('div').parent('div').parent('div.main_row').find(".suggesstion-box").hide();
+			//alert($(this).closest('div').parent('div').parent('div').parent('div.main_row').html());
+			var mainthis=$(this);
+			var m_data = new FormData();
+			m_data.append('state_id',stat_id);	
+			m_data.append('noofrows',noofrows);		
+			m_data.append('taxboxname',taxboxname);		
+			$.ajax({
+				url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_state_show_new"]); ?>",
+				data: m_data,
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				dataType:'text',
+				success: function(data)
+				{
+					mainthis.closest('div').parent('div').parent('div').parent('div.main_row').find(".stateRpl").html(data);
+				}
+			});
+		}
 		
 	});
 });
@@ -1722,10 +1768,10 @@ $(document).ready(function () {
         $(".package-stop-add").click(function (e) {
         
             e.preventDefault();
-            var strHtml = '<div class="stop col-md-12"><div class="stop-title"><b>Stop ' +packageI+ '</b> </div><div class="row"> <br>';
+            var strHtml = '<div class="stop col-md-12 main_row"><div class="stop-title"><b>Stop ' +packageI+ '</b> </div><div class="row"> <br>';
         	strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="stops[' +packageI+ ']"></div></div>';
-        	strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control" type="text" placeholder="Select City or Nearest City" use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" name="id_package_stop_city[' +packageI+ ']" /></div></div>';
-        	strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly></div></div></div>';
+        	strHtml += '<div class="col-sm-4 mt"><p for="from">Stop City</p><input class="trans_city form-control city_select ctynamerecord" noofrows="5" taxboxname="state_id_package_stop_city[' +packageI+ ']" type="text" placeholder="Select City or Nearest City" use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" class="ctyIDname" name="id_package_stop_city[' +packageI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div> ';
+        	strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly></div></div></div></div>';
         	strHtml += '<button class="btn btn-danger btn-sm package_remove_stop">Remove Stop</button>';
          strHtml += ' <hr class="hr"></hr></div>';
         $(".package-stops").append(strHtml);
@@ -1776,19 +1822,14 @@ var gg = 1;
         
     });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-multiselect/0.9.13/js/bootstrap-multiselect.min.js"></script>
 <script>
-	$(window).on("load", function(){
-		$("#h_hotel_category").multiselect();
-		$("#hotel_category").multiselect();
-
-	});
+	 
     $(document).ready(function () {
 
         var wrapper = $(".input_fields_wrap1");
 		$(wrapper).on("click", ".remove_field", function (e) {
             e.preventDefault();
-            $(this).parent('div').slideUp(function(){
+            $(this).parent('div').parent('div').slideUp(function(){
 				$(this).remove();
 			});
         });
@@ -1807,7 +1848,6 @@ var gg = 1;
 				async:false
 			}).done(function(result){
 				$(wrapper).append(result);
-
 				$(wrapper).find("input[name='hh_room1["+number+"]']").val($("#room1").val());
 				$(wrapper).find("input[name='hh_room2["+number+"]']").val($("#room2").val());
 				$(wrapper).find("input[name='hh_room3["+number+"]']").val($("#room3").val());
@@ -1818,8 +1858,8 @@ var gg = 1;
 					source: JSON.parse(cityData),
 					select: function (e, ui) {
 						e.preventDefault();
-
-						$(this).val(ui.item.p);
+						$('.select2').select2();
+ 						$(this).val(ui.item.p);
 						$(wrapper).find("input:hidden[name='hh_city_id["+number+"]']").val(ui.item.value);
 
 						$(wrapper).find("input:hidden[name='hh_state_id["+number+"]']").val(ui.item.state_id);
@@ -1838,15 +1878,15 @@ var gg = 1;
 				//checkOutDatePicker.datepicker();
 
 				var lastdate = '';
-							
 				
 				var enddate ='';
 				var enddate2 = $('#datepicker8').val();
 				var enddate1 = $(".enddate").val();
 				if (enddate1 == '' || enddate1==null)
 				{
-				var enddate =enddate2;
-				}else{
+					var enddate =enddate2;
+				}
+				else{
 				$("#collapse2 .enddate").each(function() {
 					if ($(this).val()=='' || $(this).val()==null) {
 					x=1	
