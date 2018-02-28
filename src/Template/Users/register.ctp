@@ -35,156 +35,154 @@
 				<p style="color:#ff9898 !important;"><?php echo $this->Flash->render(); ?></p>
 				<br />
                 <?php echo $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'register','autocomplete'=>"off"],'id'=>"UserRegisterForm",'onSubmit' => 'return getstatevalid();']); ?>
-					<div class="col-md-12">
-						<div class="col-md-6">
-							<div class="wrap-input100 validate-input" data-validate = "Select Type">
-								<select name="role_id" id="role_id" class="input100" required="" style="height: 35px;margin-top: 11px;" >
-									<option value="" disabled selected>Select</option>
-									<?php foreach($memberships as $membership) { 
-									   $selected ='';
-									   if(isset($_GET['role']) && $_GET['role']!="" && ($membership['id']==$_GET['role'])){
-								   
-										$selected ='selected';
-									   }
-									   ?>
-									<option <?php echo $selected; ?> style="color:black;" value="<?php echo  $membership['id']; ?>"><?php echo  $membership['membership_name']; ?></option>
-									  <?php } ?>
-								</select>
-							</div>					
-						</div>
-						<div class="col-md-6">
-							<div class="wrap-input100 validate-input "  data-validate = "Company Name">
-								<input class="input100 trim_space_valid " id="company_name" type="text" name="company_name" placeholder="Company Name">
-								<span class="focus-input100" data-placeholder="&#xf202;"></span>
-							</div>				
-						</div>										
-					</div>
-					<div class="col-md-12">
-						<div class="col-md-6">
-							<div class="wrap-input100 validate-input" data-validate = "First name">
-								<input class="input100 trim_space_valid" type="text" name="first_name" placeholder="First Name">
-								<span class="focus-input100" data-placeholder="&#xf207;"></span>
-							</div>						
-						</div>
-						<div class="col-md-6">
-							<div class="wrap-input100 validate-input" data-validate = "Last name">
-								<input class="input100 trim_space_valid" type="text" name="last_name" placeholder="Last Name">
-								<span class="focus-input100" data-placeholder="&#xf207;"></span>
-							</div>						
-						</div>										
-					</div>
-					<div class="col-md-12">
-						<div class="col-md-6">
-							<div class="wrap-input100 validate-input" data-validate = "Email">
-								<input class="input100 trim_space_valid" type="email" name="email" placeholder="Email">
-								<span class="focus-input100" data-placeholder="&#xf215;"></span>
-							</div>						
-						</div>
-						<div class="col-md-6">
-							<div class="wrap-input100 validate-input" data-validate = "Contact No">
-								<input class="input100 trim_space_valid" id="mobile_number" type="text" name="mobile_number" placeholder="Contact No.">
-								<span class="focus-input100" data-placeholder=""></span>
-							</div>	
-						</div>										
-					</div>
-					<div class="col-md-12">
-						<div class="col-md-6">
-							<div class="wrap-input100 validate-input" data-validate = "Password">
-								<input class="input100 trim_space_valid" type="password" name="password" placeholder="Password" id="password">
-								<span class="focus-input100" data-placeholder="&#xf213;"></span>
-							</div>						
-						</div>
-						<div class="col-md-6">
-							<div class="wrap-input100 validate-input" data-validate = "Contact No">
-								<input class="input100 trim_space_valid" type="password" name="cpassword" placeholder=" Confirm Password" id="cpassword">
-								<span class="focus-input100" data-placeholder="&#xf213;"></span>
-							</div>	
-						</div>										
-					</div>
-					<div class="col-md-12">
+					<div class="row">
 						<div class="col-md-12">
-							<div class="wrap-input100 validate-input" data-validate = "Address">
-								<input class="input100 trim_space_valid" type="text" name="address" placeholder="Address" id="address">
-								<span class="focus-input100" data-placeholder="&#xf256;"></span>
-							</div>						
+							<div class="col-md-6">
+								<div class="wrap-input100 validate-input" data-validate = "Select Type">
+									<select name="role_id" id="role_id" class="form-control input100" required="" style="height: 35px;margin-top: 11px;" >
+										<option value="" disabled selected>Select</option>
+										<?php foreach($memberships as $membership) { 
+										   $selected ='';
+										   if(isset($_GET['role']) && $_GET['role']!="" && ($membership['id']==$_GET['role'])){
+									   
+											$selected ='selected';
+										   }
+										   ?>
+										<option <?php echo $selected; ?> style="color:black;" value="<?php echo  $membership['id']; ?>"><?php echo  $membership['membership_name']; ?></option>
+										  <?php } ?>
+									</select>
+								</div>					
+							</div>
+							<div class="col-md-6">
+								<div class="wrap-input100 validate-input "  data-validate = "Company Name">
+							 <input class=" input100 trim_space_valid " id="company_name" type="text" name="company_name" placeholder="Company Name">
+								</div>				
+							</div>										
 						</div>
+					</div>
+					<div class="row">
 						<div class="col-md-12">
-							<div class="wrap-input100 validate-input" data-validate = "Address1">
-								<input class="input100 trim_space_valid" type="text" name="address1" placeholder="" id="address1"><span class="focus-input100"></span>
-							</div>	
-						</div>										
-					</div>
-					<div class="col-md-12">
-						<div class="col-md-6">
-							<div class="wrap-input100 validate-input" data-validate = "Locality">
-								<input class="input100 trim_space_valid" type="text" name="locality" placeholder="Locality or Village or Town" id="locality">
-								<span class="focus-input100" data-placeholder="&#xf301;"></span>
-							</div>						
-						</div>
-						<div class="col-md-6">
-							<div class="wrap-input100 validate-input" data-validate = "City">
-								<input class="input100 trim_space_valid" name="city_name" type="text" placeholder="City or Nearest City" id="city_name" autocomplete="off">
-								<span class="focus-input100" data-placeholder="&#xf300;"></span>
-							</div>	
-						</div>										
-					</div>
-
-					<div class="col-md-12">
-						<div class="col-md-6">
-							<div class="wrap-input100 validate-input" data-validate = "State">
-								<input class="input100 trim_space_valid" type="text" id ="state_name" name="state_name" placeholder="State" >
-								<span class="focus-input100" data-placeholder="&#xf304;"></span>
-								<input type='hidden' id='state_id' value='' name="state_id"/>
-								
-							</div>						
-						</div>
-						<div class="col-md-6">
-							<div class="wrap-input100 validate-input" data-validate = "Pincode">
-								<input class="input100 trim_space_valid" placeholder="Pin Code" type="text" name="pincode" id="pincode">
-								<span class="focus-input100" data-placeholder="&#xf309;"></span>
-							</div>	
-						</div>										
-					</div>	
-					<div class="col-md-12">
-						<div class="col-md-6">
-							<div class="wrap-input100 validate-input" data-validate = "Country">
-								<input class="input100 trim_space_valid" type="text" id ="country_name" name="country_name" placeholder="Country" >
-								<span class="focus-input100" data-placeholder="&#xf315;"></span>
-								<input type='hidden' id='country_id' value='' name="country_id"/>
-							</div>						
-						</div>										
-					</div>	
-					<div class="col-md-12">
-						<div id="preferenceStateDiv">
-							<div class="mt" tooltip="Select upto 5 states">
-								<div class="col-md-12 mt padding0">
-									<label for="Preference_States" style="color:#fff;">States where you operate</label>
-									<span style="font-size:11px;color:#fff;">(Select upto 5 states )</span>
-									<div class="input-field">
-										<?php echo $this->Form->control('preference', ["id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select", "data-placeholder"=>"Select upto 5 states where you operate", "style"=>"height:125px;"]); ?>
-									</div>
+							<div class="col-md-6">
+									<div class="wrap-input100 validate-input" data-validate = "First name">
+										<input class="input100 trim_space_valid" type="text" name="first_name" placeholder="First Name"/>
 								</div>
 							</div>
-						</div>										
-					</div>					
-
-					<div class="col-xs-12 col-md-12 mt" style="display:none;">
-						<div class="image-upload">
-							<label for="file-input">
-								User Profile Picture<br><?php echo $this->Html->image('img-icon.png'); ?>
-							</label>
-
-							<input id="file-input" name="image" type="file"/>  Upload Picture
+							<div class="col-md-6">
+								<div class="wrap-input100 validate-input" data-validate = "Last name">
+										<input class="input100 trim_space_valid" type="text" name="last_name" placeholder="Last Name">
+									</div>						
+							</div>
 						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<div class="wrap-input100 validate-input" data-validate = "Email">
+										<input class="input100 trim_space_valid" type="email" name="email" placeholder="Email">
+									</div>
+							</div>
+							<div class="col-md-6">
+								<div class="wrap-input100 validate-input" data-validate = "Contact No">
+										<input class="input100 trim_space_valid" id="mobile_number" type="text" name="mobile_number" placeholder="Contact No.">
+								</div>										
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+								<div class="col-md-6">
+									<div class="wrap-input100 validate-input" data-validate = "Password">
+											<input class="input100 trim_space_valid" type="password" name="password" placeholder="Password" id="password">
+										</div>	
+									</div>						
+								<div class="col-md-6">
+									<div class="wrap-input100 validate-input" data-validate = "Confirm Password">
+												<input class="input100 trim_space_valid" type="password" name="cpassword" placeholder=" Confirm Password" id="cpassword">
+											</div>
+										</div>	
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+								<div class="wrap-input100 validate-input" data-validate = "Address">
+											<input class="input100 trim_space_valid" type="text" name="address" placeholder="Address" id="address">
+										</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+								<div class="wrap-input100 validate-input" data-validate = "Address1">
+											<input class="input100 trim_space_valid" type="text" name="address1" placeholder="Address1" id="address1">
+									</div>	
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<div class="wrap-input100 validate-input" data-validate = "Locality">
+											<input class="input100 trim_space_valid" type="text" name="locality" placeholder="Locality or Village or Town" id="locality">
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="wrap-input100 validate-input" data-validate = "City">
+												<input class="input100 trim_space_valid" name="city_name" type="text" placeholder="City or Nearest City" id="city_name" autocomplete="off">
+									</div>	
+								</div>				
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<div class="wrap-input100 validate-input" data-validate = "State">
+											<input class="input100 trim_space_valid" type="text" id ="state_name" name="state_name" placeholder="State" >
+											<input type='hidden' id='state_id' value='' name="state_id"/>
+									</div>						
+								</div>
+							<div class="col-md-6">
+								<div class="wrap-input100 validate-input" data-validate = "Pincode">
+											<input class="input100 trim_space_valid" placeholder="Pin Code" type="text" name="pincode" id="pincode">
+									</div>
+							</div>	
+						</div>	
+					</div>	
+					<div class="row">
+						<div class="col-md-12">
+								<div class="wrap-input100 validate-input" data-validate = "Country">
+											<input class="input100 trim_space_valid" type="text" id ="country_name" name="country_name" placeholder="Country" >
+											<input type='hidden' id='country_id' value='' name="country_id"/>
+								</div>										
+							</div>	
+					</div>	
+					<div class="row">
+						<div class="col-md-12">
+							<div id="preferenceStateDiv">
+								<div class="mt" tooltip="Select upto 5 states">
+									<div class="col-md-12 mt padding0">
+										<label for="Preference_States" style="color:#fff;">States where you operate</label>
+										<span style="font-size:11px;color:#fff;">(Select upto 5 states )</span>
+										<div class="input-field">
+											<?php echo $this->Form->control('preference', ["id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select", "data-placeholder"=>"Select upto 5 states where you operate", "style"=>"height:125px;"]); ?>
+										</div>
+									</div>
+								</div>
+							</div>										
+						</div>					
 					</div>					
-					
-					
-					
-					<div class="container-login100-form-btn">
-						<button type="submit" class="login100-form-btn" style="width: 100%;">Login</button>
-					</div>					
-				<?php echo $this->Form->end();?>
-			</div>
+					<div class="row">
+						<div class="col-xs-12 col-md-12 mt" style="display:none;">
+							<div class="image-upload">
+								<label for="file-input">
+									User Profile Picture<br><?php echo $this->Html->image('img-icon.png'); ?>
+								</label>
+
+								<input id="file-input" name="image" type="file"/>  Upload Picture
+							</div>
+						</div>				
+						<div class="container-login100-form-btn">
+							<button type="submit" class="login100-form-btn" style="width: 100%;">Login</button>
+						</div>					
+							<?php echo $this->Form->end();?>
+					</div>
 		</div>
 	</div>
 	<div id="dropDownSelect1"></div>

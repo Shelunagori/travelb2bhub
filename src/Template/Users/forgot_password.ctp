@@ -17,9 +17,9 @@
 		.bgdiv { background-image: url('../webroot/assets/login/login_background.jpg'); }
 		.p-b-34 { padding-bottom: 10px !important; }
 		.login100-form-title { font-size:25px; }
-		.wrap-login100 { background:#0c0a10 !important; width:420px !important; padding: 18px 55px 37px 55px; }
+		.wrap-login100 { background:#1f222db8 !important; width:420px !important; padding: 18px 55px 37px 55px; }
 		.p-t-27 { padding-top: 10px; }
-		.error { color: #fff; margin-left: 25px; }
+		.error { color: #ff9898; margin-left: 25px; }
 		
 	</style>
 </head>
@@ -39,7 +39,6 @@
 					</div> <br />
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
 						<input class="input100" type="text" name="email" placeholder="Email">
-						<span class="focus-input100" data-placeholder="&#xf207;"></span>
 					</div>
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" style="width: 100%;">
@@ -51,7 +50,7 @@
 				
 					<div class="text-center p-t-90" style="padding-top: 20px;">
 						<p style="color:#fff">Already have an account ?
-							<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'register')) ?>" style="color:#5ba7a4;">
+							<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'login')) ?>" style="color:#5ba7a4;">
 								Login
 							</a>
 						</p>
