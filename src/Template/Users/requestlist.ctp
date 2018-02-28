@@ -47,7 +47,7 @@ legend
 	<div class="box-body">
 		<div class="row">
                <div id="myModal123" class="modal fade" role="dialog">
-				  <div class="modal-dialog" style=" width: 50%;">
+				  <div class="modal-dialog " style=" width: 60%;">
 					<!-- Modal content-->
 					<div class="modal-content">
 					  <div class="modal-header">
@@ -55,18 +55,28 @@ legend
 						<h4 class="modal-title">Sorting</h4>
 					  </div>
 					  <div class="modal-body">
-					     
 						<table width="100%" style="height:50px; margin-left:10px">
 						<tr>
-							<td><a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=totalbudgethl">Total Budget <i class="fa fa-sort-amount-desc"></i> <span class=arrow><span></span></span></a>
+							<td>
+							<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=totalbudgethl">
+							<input class="btn btn-info btn-sm" type="radio" name="r1"/>
+							Total Budget <i class="fa fa-sort-amount-desc"></i> <span class=arrow><span></span></span></a>&nbsp;
 							
-							<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=totalbudgetlh">Total Budget <i class="fa fa-sort-amount-asc"></i>  <span class=arrow><span></span></span></a>
+							<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=totalbudgetlh">
+							<input class="btn btn-info btn-sm" type="radio" name="r1"/>
+							Total Budget <i class="fa fa-sort-amount-asc"></i>  <span class=arrow><span></span></span></a>&nbsp;
 							
-							<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=resposesnolh">No. of Responses <i class="fa fa-sort-amount-asc"></i> <span class=arrow><span></span></span></a>
+							<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=resposesnolh">
+							<input class="btn btn-info btn-sm" type="radio" name="r1"/>
+							No. of Responses <i class="fa fa-sort-amount-asc"></i> <span class=arrow><span></span></span></a>&nbsp;
 							
-							<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=resposesnohl">No. of Responses <i class="fa fa-sort-amount-desc"></i> <span class=arrow><span></span></span></a>
+							<a  href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=resposesnohl">
+							<input class="btn btn-info btn-sm" type="radio" name="r1"/>
+							No. of Responses <i class="fa fa-sort-amount-desc"></i> <span class=arrow><span></span></span></a>&nbsp;
 							
-							<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=requesttype">Request Type <span class=arrow><span></span></span></a>
+							<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>?sort=requesttype">
+							<input class="btn btn-info btn-sm" type="radio" name="r1"/>
+							Request Type <span class=arrow><span></span></span></a>
 							</td>
 						</tr>
 						</table>
@@ -76,7 +86,7 @@ legend
 				  </div>
 				</div>
                <div class="fade modal form-modal" id="myModal122" role="dialog">
-                  <div class=modal-dialog>
+                  <div class="modal-dialog" style=" width:30%;">
                      <div class=modal-content>
                         <div class=modal-header>
                            <button class=close data-dismiss=modal type=button>×</button>
@@ -87,7 +97,7 @@ legend
                           
                               <div class="col-md-12 row form-group margin-b10">
                                 
-                                 <div class=col-md-6>
+                                 <div class=col-md-12>
 								  <label class="col-form-label"for=example-text-input>Request Type:</label>
                                     <select class=form-control name=req_typesearch>
                                        <option value="">Select Request Type
@@ -96,7 +106,7 @@ legend
                                        <option value=2>Transport
                                     </select>
                                  </div>
-                                 <div class=col-md-6>
+                                 <div class=col-md-12>
 								 <label class="col-form-label"for=example-text-input>Total Budget:</label>
                                     <select class=form-control name=budgetsearch>
                                        <option value="">Select Total Budget
@@ -107,20 +117,19 @@ legend
                                        <option value=100000-100000000000<?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? 'selected':''; ?>>100000-Above
                                     </select>
                                  </div>
-                              </div>
                               <div class="col-md-12 row form-group margin-b10">
-                                 <div class=col-md-6>
+                                 <div class=col-md-12>
 								 <label class="col-form-label" for=example-text-input>Start Date:</label>
 								 <input class=form-control name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"id=datepicker1>
 								 </div>
-                                 <div class=col-md-6>
+                                 <div class=col-md-12>
 								  <label class="col-form-label" for=example-text-input>End Date:</label>
 								  <input class=form-control name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"id=datepicker2>
 								  </div>
                               </div>
                               <div class="col-md-12 row form-group margin-b10">
                                  
-                                 <div class=col-md-6>
+                                 <div class=col-md-12>
 								 <label class="col-form-label"for=example-text-input>Pickup City:</label>
                                     <select class=form-control  name=pickup_city id=pickup_city>
                                        <option value="">Select</option>
@@ -131,7 +140,7 @@ legend
                                  </div>
                                
                                  
-                                 <div class=col-md-6>
+                                 <div class=col-md-12>
 								 <label class="col-form-label" for=example-text-input>Destination City:</label>
                                     <select class="form-control " name=destination_city id=destination_city>
                                        <option value="">Select</option>
@@ -144,13 +153,13 @@ legend
                               </div>
                               <div class=" col-md-12 row form-group margin-b10">
                                  
-                                 <div class=col-md-6>
+                                 <div class=col-md-12>
 								 <label class="col-form-label"for=example-text-input>Reference ID:</label>
 								 <input class=form-control name=refidsearch value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>">
 								 </div>
                                
                                  
-                                 <div class=col-md-6>
+                                 <div class=col-md-12>
 								 <label class="col-form-label col-md-3"for=example-text-input>Members:</label>
 								 <input class=form-control name=memberssearch value="<?php echo isset($_GET['memberssearch'])? $_GET['memberssearch']:''; ?>">
 								 </div>
