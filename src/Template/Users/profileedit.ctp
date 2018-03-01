@@ -386,7 +386,7 @@ $(document).ready(function(){
  		var m_data = new FormData();
 		m_data.append('input',input);			
 		$.ajax({
-			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_city"]); ?>",
+			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajaxStateShow"]); ?>",
 			data: m_data,
 			processData: false,
 			contentType: false,

@@ -234,7 +234,6 @@ if(isset($this->request->data["preference"]) && !empty($this->request->data["pre
 $d["preference"] = implode(",", $this->request->data["preference"]);
 }
 $user = $this->Users->newEntity($d);
-pr($d); exit;
 if ($res = $this->Users->save($user)) {
 $subject="TravelB2Bhub registration";
 $to=$d['email'];
@@ -840,6 +839,7 @@ public function viewuserprofile(){
 
 	public function ajaxCity()
     {
+		
 		$name=$this->request->data['input'];
 		$noofrows=$this->request->data['noofrows'];
 		$taxboxname=$this->request->data['taxboxname'];

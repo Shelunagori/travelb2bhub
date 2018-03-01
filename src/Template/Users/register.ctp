@@ -1,8 +1,55 @@
-
-<?php 
-
-?>
+<style>
+hr { margin-top:0px!important;}
+.price {
+	height: 40px;
+    background-color: #000000d9;
+    color: #FFF;
+    text-align: center;
+    font-size: 18px;
+    padding-top: 7px;
+}
+.priceing
+{
+    padding: 5px;
+    margin-bottom: 20px;  
+    border: 1px solid #ddd;
+    border-radius: 5px;	
+}
+.img {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+.overlap {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+	width:100%;
+	opacity: .7;
+}
+.nm { 
+	font-size: 19px;
+    color: #373435;
+    font-weight: 900;
+}
+.other { 
+	font-size: 17px;
+    color: #727376; 
+}
+.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img { 
+	height: 200 !important;
+    width: 200 !important; 
+}
+.arroysign
+{
+	margin: 17px;
+	right: 23px !important;
+    width: 3% !important;
+    top: 40%;
+    bottom: 52%;
+}
  
+</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -130,7 +177,8 @@
 							</div>
 							<div class="col-md-6">
 								<div class="wrap-input100 validate-input" data-validate = "City">
-												<input class="input100 trim_space_valid" name="city_name" type="text" placeholder="City or Nearest City" id="city_name" autocomplete="off" value="">
+												<input class="input100 trim_space_valid" name="city_name" type="text" placeholder="City or Nearest City" id="city-search-box" autocomplete="off" >
+												<div class="suggesstion-box" style="margin-top:-10px">sdfsdfdfsf</div>
 									</div>	
 								</div>				
 						</div>
@@ -140,7 +188,7 @@
 							<div class="col-md-6">
 								<div class="wrap-input100 validate-input" data-validate = "State">
 											<input class="input100 trim_space_valid" type="text" id ="state_name" name="state_name" placeholder="State" >
-											<input type='hidden' id='state_id' value='' name="state_id"/>
+											<input type='hidden' id='state_id' value="Rajsthan" name="state_id"/>
 									</div>						
 								</div>
 							<div class="col-md-6">
@@ -154,7 +202,7 @@
 						<div class="col-md-12">
 								<div class="wrap-input100 validate-input" data-validate = "Country">
 											<input class="input100 trim_space_valid" type="text" id ="country_name" name="country_name" placeholder="Country" >
-											<input type='hidden' id='country_id' value='' name="country_id"/>
+											<input type='hidden' id='country_id' value='india' name="country_id"/>
 								</div>										
 							</div>	
 					</div>	
@@ -192,7 +240,31 @@
 	</div>
 	<div id="dropDownSelect1"></div>
 </body>
-<?php echo $this->Html->script('/assets/login/jquery/jquery-3.2.1.min.js'); ?>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<script>
+$(document).ready(function(){	 
+	$("#city-search-box").keyup(function(){
+		var input=$("#city-search-box").val();
+ 		var m_data = new FormData();
+		m_data.append('input',input);
+		$.ajax({
+			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_city"]); ?>",
+			data: m_data,
+			processData: false,
+			contentType: false,
+			type: 'POST',
+			dataType:'text',
+			success: function(data)
+			{				
+
+				$(".suggesstion-box").show();
+				$(".suggesstion-box").html(data);
+				$(".city-search-box").css("background","#FFF");
+			}
+			});
+		});
+	});
+</script>	
 <?php echo $this->Html->script('/assets/login/animsition/js/animsition.min.js'); ?>
 <?php echo $this->Html->script('/assets/login/bootstrap/js/popper.js'); ?>
 <?php echo $this->Html->script('/assets/login/bootstrap/js/bootstrap.min.js'); ?>
@@ -201,12 +273,12 @@
 <?php echo $this->Html->script('/assets/login/daterangepicker/daterangepicker.js'); ?>
 <?php echo $this->Html->script('/assets/login/countdowntime/countdowntime.js'); ?>
 <?php echo $this->Html->script('/assets/login/js/main.js'); ?>
-					<script>
+
+<script>	/*
 						var cityData = '<?php echo $allCities; ?>';
 						//alert(cityData);
                         $(function ()
                         {
-							
 							
                             $('#city_id').change(function(){
                                 var city=$('#city_id').val();
@@ -224,7 +296,7 @@
                                 bodyTag: "section",
                                 transitionEffect: "slideLeft"
                             });
-                        });
+                        }); 
 						$(document).ready(function () {
 							//alert("working..");
 						   // $.get("usersgetcitylist.json", function (d) {
