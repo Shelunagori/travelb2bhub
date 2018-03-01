@@ -277,65 +277,70 @@ $d['verification_token'] = 0;
 $d['mobile_otp'] = rand('1010', '9999');
 $d['status'] = 0;
 $d['create_at'] = date("Y-m-d H:i:s");
-$file = $d['image'];
+/*$file = $d['image'];
 $path = WWW_ROOT . "userimages" . DS . $file['name'];
 move_uploaded_file($file['tmp_name'], $path);
-$d['image'] = $file['name'];
+$d['image'] = $file['name'];*/
 if(isset($this->request->data["preference"]) && !empty($this->request->data["preference"])) {
-$d["preference"] = implode(",", $this->request->data["preference"]);
+	$d["preference"] = implode(",", $this->request->data["preference"]);
 }
+$d['country_id'] = 101;
+$d['state_id'] = 877;
+$d['city_id'] = 33;
+
 $user = $this->Users->newEntity($d);
-if ($res = $this->Users->save($user)) {
-$subject="TravelB2Bhub registration";
-$to=$d['email'];
-$headers  = 'MIME-Version: 1.0' . "\r\n";
-$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-$headers .= 'From: TravelB2Bhub <contactus@travelb2bhub.com>' . "\r\n";
-//$headers .= "Bcc: business.leadindia@gmail.com"; // BCC mail
-$message='<p>Dear '.$d['first_name'].',</p>';
-$message.='<p>Thank you for registering with TravelB2Bhub.com, the  COMMISSION FREE, Business to Business, tourism trading network. </p>';
-//$message.='<p>Update profile by <a href="https://www.travelb2bhub.com">click here</a> to login from Homepage.</p>';
-$message.='<p>Please verify your email address by <a href="https://www.travelb2bhub.com">click here</a> to login from Homepage.</p>';
-$message.='<p style="color:#000;">Note: You will receive a notification when there are enough registered members for you to begin trading. Please encourage your contacts to enroll.</p>';
-$message.='<p style="color:#000;">We are committed to enhance your trading experience!</p>';
-$message.='<p style="color:#000;">Sincerely,<br>The TravelB2Bhub Team</p>';
-$userId = $res->id;
-$subject= $d['first_name'].": TravelB2Bhub Account Activation";
-$to=$d['email'];
+	if ($res = $this->Users->save($user)) {
+		$subject="TravelB2Bhub registration";
+		$to=$d['email'];
+		$headers  = 'MIME-Version: 1.0' . "\r\n";
+		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		$headers .= 'From: TravelB2Bhub <contactus@travelb2bhub.com>' . "\r\n";
+		//$headers .= "Bcc: business.leadindia@gmail.com"; // BCC mail
+		$message='<p>Dear '.$d['first_name'].',</p>';
+		$message.='<p>Thank you for registering with TravelB2Bhub.com, the  COMMISSION FREE, Business to Business, tourism trading network. </p>';
+		//$message.='<p>Update profile by <a href="https://www.travelb2bhub.com">click here</a> to login from Homepage.</p>';
+		$message.='<p>Please verify your email address by <a href="https://www.travelb2bhub.com">click here</a> to login from Homepage.</p>';
+		$message.='<p style="color:#000;">Note: You will receive a notification when there are enough registered members for you to begin trading. Please encourage your contacts to enroll.</p>';
+		$message.='<p style="color:#000;">We are committed to enhance your trading experience!</p>';
+		$message.='<p style="color:#000;">Sincerely,<br>The TravelB2Bhub Team</p>';
+		$userId = $res->id;
+		$subject= $d['first_name'].": TravelB2Bhub Account Activation";
+		$to=$d['email'];
 
 
-$headers  = "MIME-Version: 1.0" . "\r\n";
-$headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
-$headers .= 'From: TravelB2Bhub <contactus@travelb2bhub.com>' . "\r\n";
-$theKey = $this->getActivationKey($d["mobile_number"]);
+		$headers  = "MIME-Version: 1.0" . "\r\n";
+		$headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
+		$headers .= 'From: TravelB2Bhub <contactus@travelb2bhub.com>' . "\r\n";
+		$theKey = $this->getActivationKey($d["mobile_number"]);
 
-$message='<p>Dear '.$d['first_name'].',</p>';
-$message.='<p>Thank you for registering with TravelB2Bhub.com, the  COMMISSION FREE, Business to Business, tourism trading network. </p>';
-$message.='<p>Please verify your email address by <span style="color:1E707E;"><a href="https://www.travelb2bhub.com/users/userVerification?ident='.$userId.'&activate='.$theKey.'">clicking here</a></span>. </p>';
-$message.='<p>We are committed to enhance your trading experience!</p>';
-$message.='<p>Sincerely,<br>The TravelB2Bhub Team</p>';
-// Mail it
-$email = new Email();    
-       $email->transport('gmail')
-            ->from(['webmaster@travelb2bhub.com'=>'TravelB2Bhub'])
-            ->to($to)
-            ->subject($subject)
-             ->emailFormat('html')
-            ->viewVars(array('msg' => $message))
-            ->send($message);
+		$message='<p>Dear '.$d['first_name'].',</p>';
+		$message.='<p>Thank you for registering with TravelB2Bhub.com, the  COMMISSION FREE, Business to Business, tourism trading network. </p>';
+		$message.='<p>Please verify your email address by <span style="color:1E707E;"><a href="https://www.travelb2bhub.com/users/userVerification?ident='.$userId.'&activate='.$theKey.'">clicking here</a></span>. </p>';
+		$message.='<p>We are committed to enhance your trading experience!</p>';
+		$message.='<p>Sincerely,<br>The TravelB2Bhub Team</p>';
+		// Mail it
+		$email = new Email();    
+			   $email->transport('gmail')
+					->from(['webmaster@travelb2bhub.com'=>'TravelB2Bhub'])
+					->to($to)
+					->subject($subject)
+					 ->emailFormat('html')
+					->viewVars(array('msg' => $message))
+					->send($message);
 
 
-//mail($to, $subject, $message, $headers);
-$uid = $res->id;
-$c['credit'] = 60;
-$c['user_Id'] = $uid;
-$creditd = $this->Credits->newEntity($c);
-$this->Credits->save($creditd);
-$this->Flash->success(__('Thank you for registering with Travelb2bhub.com! Please activate your account by clicking on the link sent to your e-mail address. If you do not receive an e-mail in your inbox, please check SPAM or JUNK folder.'));
-$this->redirect('/users/dashboard/');
-} else {
-$this->Flash->error(__('The user could not be saved. Please, try again.'));
-}
+		//mail($to, $subject, $message, $headers);
+		$uid = $res->id;
+		$c['credit'] = 60;
+		$c['user_Id'] = $uid;
+		$creditd = $this->Credits->newEntity($c);
+		$this->Credits->save($creditd);
+		$this->Flash->success(__('Thank you for registering with Travelb2bhub.com! Please activate your account by clicking on the link sent to your e-mail address. If you do not receive an e-mail in your inbox, please check SPAM or JUNK folder.'));
+		$this->redirect('/users/dashboard/');
+	} 
+	else {
+	$this->Flash->error(__('The user could not be saved. Please, try again.'));
+	}
 } else {
 $this->Flash->error(__('Email ID already exists. Please enter another Email ID to register.'));
 }

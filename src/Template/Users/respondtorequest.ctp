@@ -332,10 +332,10 @@ $conn = ConnectionManager::get('default');
 				<div class="modal-content">
 				  <div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Sorting</h4>
+					<h4 class="modal-title">Show Interest</h4>
 				  </div>
 				  <?php  echo $this->Form->create("Users", ['type' => 'file', 'url' => ['controller' => 'Users', 'action' => 'addresponse'], 'id'=>"UserResponseForm"]); ?>
-				  <div class="modal-body">   
+				  <div class="modal-body" align="center">   
 					
 					<input type="hidden" name="request_id" class="request_id" id="request_id" value=""/><br>
 					<table width="90%" class="shotrs">

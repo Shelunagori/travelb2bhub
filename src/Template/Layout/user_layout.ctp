@@ -217,6 +217,9 @@ margin-top: 5px !important;
 </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
+<?php 
+$page_name=$this->request->params['action'];  
+?>
 <div class="wrapper">
 
   <header class="main-header">
@@ -426,38 +429,52 @@ margin-top: 5px !important;
             <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
-        </li>-->
-		<li class="active"><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+        </li> -->
+		
+		<li <?php if($page_name=='dashboard'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+		<?php
+		if($users['role_id'] == 1 || $users['role_id'] == 2)
+		{?>
+			<li <?php if($page_name=='sendrequest'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'sendrequest']); ?>"><i class="fa fa-book"></i> <span>Place Request</span></a></li>
+			
+			<li <?php if($page_name=='requestlist'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'requestlist']); ?>"><i class="fa fa-suitcase"></i> <span>My Request</span></a></li>
+		<?php } 
+		if($users['role_id'] == 1 || $users['role_id'] == 3)
+		{?>
+			<li <?php if($page_name=='respondtorequest'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'respondtorequest']); ?>"><i class="fa fa-book"></i> <span>Respond To Request</span></a></li>
+			
+			<li <?php if($page_name=='myresponselist'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'myresponselist']); ?>"><i class="fa fa-suitcase"></i> <span>My Responses</span></a></li>
+		<?php } ?>
 		
 		<?php if($roleId==1 || $roleId==2 ) {?>
-			<li><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'finalizedRequestList']); ?>"><i class="fa fa-edit"></i> <span>Finalized Requests</span></a></li>
+			<li <?php if($page_name=='finalizedRequestList'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'finalizedRequestList']); ?>"><i class="fa fa-edit"></i> <span>Finalized Requests</span></a></li>
 		<?php
 		}
 		if($roleId==1 || $roleId==3) {
 		?>
-			<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'myFinalResponses']); ?>"><i class="fa fa-book"></i> <span>Finalized Responses</span></a></li>
+			<li <?php if($page_name=='myFinalResponses'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'myFinalResponses']); ?>"><i class="fa fa-book"></i> <span>Finalized Responses</span></a></li>
 		<?php
 		}
 		if($roleId==1 || $roleId==3) {
 		?>
-			<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'businessBuddiesList']); ?>"><i class="fa fa-user"></i> <span>Following</span></a></li>
+			<li <?php if($page_name=='businessBuddiesList'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'businessBuddiesList']); ?>"><i class="fa fa-user"></i> <span>Following</span></a></li>
 		<?php
 		}
 		if($roleId==1 || $roleId==2) {
 		?>
-			<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'removedRequestList']); ?>"><i class="fa fa-trash"></i> <span>Removed Requests</span></a></li>
+			<li <?php if($page_name=='removedRequestList'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'removedRequestList']); ?>"><i class="fa fa-trash"></i> <span>Removed Requests</span></a></li>
 		<?php
 		}
 		if($roleId == 3)
 		{ ?>
 			 
-			<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'promotionreports',$this->request->session()->read('Auth.User.id')]); ?>"><i class="fa fa-trash"></i> <span>Promotion Report</span></a></li> 
+			<li <?php if($page_name=='promotionreports'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'promotionreports',$this->request->session()->read('Auth.User.id')]); ?>"><i class="fa fa-trash"></i> <span>Promotion Report</span></a></li> 
 			 
 			
 		<?php }			
 		?>
-		<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'blockedUserList']); ?>"><i class="fa fa-group"></i> <span>Blocked Users</span></a></li>
-		 
+		<li <?php if($page_name=='blockedUserList'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'blockedUserList']); ?>"><i class="fa fa-group"></i> <span>Blocked Users</span></a></li>
+		
       </ul>
     </section>
     <!-- /.sidebar -->
