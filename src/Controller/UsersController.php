@@ -205,7 +205,8 @@ return $this->redirect('/pages/contactus');
 }
 public function register() {
 $this->viewBuilder()->layout('');	
-if ($this->Auth->user('id')) {
+if ($this->Auth->user('id')) 
+{
 return $this->redirect('/users/dashboard');
 }
 date_default_timezone_set('Asia/Kolkata');
@@ -233,7 +234,7 @@ if(isset($this->request->data["preference"]) && !empty($this->request->data["pre
 $d["preference"] = implode(",", $this->request->data["preference"]);
 }
 $user = $this->Users->newEntity($d);
-//pr($d); exit;
+pr($d); exit;
 if ($res = $this->Users->save($user)) {
 $subject="TravelB2Bhub registration";
 $to=$d['email'];
@@ -301,6 +302,7 @@ if(!empty($cities)) {
 foreach($cities as $city) {
 $allCities[] = array("label"=>str_replace("'", "", $city['name'].' ('.$city['state']->state_name. ')'), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
 $allCityList[$city['id']] = $city['name'];
+
 }
 }
 $allCities = json_encode($allCities);

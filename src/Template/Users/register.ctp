@@ -1,3 +1,8 @@
+
+<?php 
+
+?>
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -125,7 +130,7 @@
 							</div>
 							<div class="col-md-6">
 								<div class="wrap-input100 validate-input" data-validate = "City">
-												<input class="input100 trim_space_valid" name="city_name" type="text" placeholder="City or Nearest City" id="city_name" autocomplete="off">
+												<input class="input100 trim_space_valid" name="city_name" type="text" placeholder="City or Nearest City" id="city_name" autocomplete="off" value="">
 									</div>	
 								</div>				
 						</div>
@@ -203,22 +208,22 @@
                         {
 							
 							
-                            /*$('#city_id').change(function(){
+                            $('#city_id').change(function(){
                                 var city=$('#city_id').val();
                                 $('#state_id').val($('#city_id').find("#"+city).attr("state"));
                                  $('#country_id').val("101");
-                            });*/
+                            });
                             $('.multiselect-ui').multiselect({
                                 includeSelectAllOption: false,
 								maxHeight: 300,
 								
                             });
                        
-                         /*$("#wizard").steps({
+                         $("#wizard").steps({
                                 headerTag: "h2",
                                 bodyTag: "section",
                                 transitionEffect: "slideLeft"
-                            });*/
+                            });
                         });
 						$(document).ready(function () {
 							//alert("working..");
