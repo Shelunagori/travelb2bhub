@@ -681,7 +681,19 @@ $requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' =>
 	}
 if($myRequestCount > $delcount) {
 $myRequestCount = $myRequestCount-$delcount;
-}	
+}
+//----	 FInalized
+$finalreq["Requests.user_id"] = $this->Auth->user('id');
+$finalreq["Requests.status"] = 2;
+$finalreq["Requests.is_deleted "] = 0;
+$finalizeRequest = $this->Requests->find()->where($finalreq)->count();
+$this->set('finalizeRequest', $finalizeRequest);
+//--- Removed Request
+$remoev["Requests.user_id"] = $this->Auth->user('id');
+$remoev["Requests.is_deleted "] = 1;
+$RemovedReqest = $this->Requests->find()->where($remoev)->count();
+$this->set('RemovedReqest', $RemovedReqest);
+//---
 $this->set('myRequestCountdel', $delcount);
 $this->set('myRequestCount', $myRequestCount1);
 $queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]]);
@@ -1945,80 +1957,83 @@ $userRating = $query->select(["average_rating" => $query->func()->avg("rating")]
 ->order(["id" => "DESC"]);
 return $userRating;
 }
-public function __getRespondToRequestCount() {
-$requests ='';
-date_default_timezone_set('Asia/Kolkata');
-$current_time = date("Y-m-d");
-$this->loadModel('BlockedUsers');
-$this->loadModel('Requests');
-	$this->loadModel('Responses');
-$this->loadModel('Hotels');
-$this->loadModel('User_Chats');
-$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
-$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
-->hydrate(false)
-->where(['blocked_by' => $this->Auth->user('id')])
-->toArray();
-if(!empty($BlockedUsers)) {
-$BlockedUsers = array_values($BlockedUsers);
-}
-array_push($BlockedUsers,$this->Auth->user('id'));
-$BlockedUsers = array_unique($BlockedUsers);
-if ($this->Auth->user('role_id') == 1) { // Travel Agent
-if(!empty($user["preference"])) {
-$conditionalStates = array_unique(array_merge(explode(",", $user["preference"]), array($user["state_id"])));
-} else {
-$conditionalStates =  $user["state_id"];
-}
-$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
-$requests = $this->Requests->find()
-->contain(["Users", "Responses"])
-->notMatching('Responses', function(\Cake\ORM\Query $q) {
-return $q->where(['Responses.user_id' => $this->Auth->user('id')]);
-})
-->where(["OR"=>['Requests.state_id IN' => $conditionalStates, 'Requests.pickup_state IN' => $conditionalStates],$conditions, 'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0])
-//->group('Requests.id')
-->order(["Requests.id" => "DESC"]);
-} else if ($this->Auth->user('role_id') == 3) { /// Hotel d
-	$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
-$requests = $this->Requests->find()
-->contain(["Users", "Responses"])
-->notMatching('Responses', function(\Cake\ORM\Query $q) {
-return $q->where(['Responses.user_id' => $this->Auth->user('id')]);
-})
-->where(['Requests.city_id' => $user['city_id'], 'Requests.category_id' => 3, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
-//->group('Requests.id')
-->order(["Requests.id" => "DESC"]);
-}else{
-return  $requests;
-}
-$res_request_count = $requests->count();	 
-$this->loadModel('BlockedUsers');
-$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
-->hydrate(false)
-->where(['blocked_by' => $this->Auth->user('id')])
-->toArray();
-if(!empty($BlockedUsers)) {
-$BlockedUsers = array_values($BlockedUsers);
-}
-array_push($BlockedUsers,$this->Auth->user('id'));
-$BlockedUsers = array_unique($BlockedUsers);
-if($res_request_count>0){	
-$loggedinid = $this->Auth->user('id');
-foreach($requests as $req){
-$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.request_id' =>$req['id']]])->contain(['Users']);	
-$total_responses = $queryr->count();
-$checkblockedUsers = $this->BlockedUsers->find()->where(['blocked_by' => $req['user_id'],'blocked_user_id'=>$loggedinid])->count();        
-if($checkblockedUsers==1 OR $total_responses>=20){
-$res_request_count--;
-}      
-}
-	return $res_request_count;
-}
-	
-return  $res_request_count;
-//return $requests->count();
-}
+	public function __getRespondToRequestCount() {
+		$requests ='';
+		date_default_timezone_set('Asia/Kolkata');
+		$current_time = date("Y-m-d");
+		$this->loadModel('BlockedUsers');
+		$this->loadModel('Requests');
+		$this->loadModel('Responses');
+		$this->loadModel('Hotels');
+		$this->loadModel('User_Chats');
+		$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
+		$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
+		->hydrate(false)
+		->where(['blocked_by' => $this->Auth->user('id')])
+		->toArray();
+		if(!empty($BlockedUsers)) {
+			$BlockedUsers = array_values($BlockedUsers);
+		}
+		array_push($BlockedUsers,$this->Auth->user('id'));
+		$BlockedUsers = array_unique($BlockedUsers);
+
+		if ($this->Auth->user('role_id') == 1) { // Travel Agent
+			if(!empty($user["preference"])) {
+				$conditionalStates = array_unique(array_merge(explode(",", $user["preference"]), array($user["state_id"])));
+			} else {
+				$conditionalStates =  $user["state_id"];
+			}
+			$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
+			$requests = $this->Requests->find()
+			->contain(["Users", "Responses"])
+			->notMatching('Responses', function(\Cake\ORM\Query $q) {
+			return $q->where(['Responses.user_id' => $this->Auth->user('id')]);
+			})
+			->where(["OR"=>['Requests.state_id IN' => $conditionalStates, 'Requests.pickup_state IN' => $conditionalStates],$conditions, 'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0])
+			//->group('Requests.id')
+			->order(["Requests.id" => "DESC"]);
+		} 
+		else if ($this->Auth->user('role_id') == 3) { /// Hotel d
+			$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
+			$requests = $this->Requests->find()
+			->contain(["Users", "Responses"])
+			->notMatching('Responses', function(\Cake\ORM\Query $q) {
+			return $q->where(['Responses.user_id' => $this->Auth->user('id')]);
+			})
+			->where(['Requests.city_id' => $user['city_id'], 'Requests.category_id' => 3, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
+			//->group('Requests.id')
+			->order(["Requests.id" => "DESC"]);
+		}
+		else
+		{
+			return  $requests;
+		}
+		$res_request_count = $requests->count();	 
+		$this->loadModel('BlockedUsers');
+		$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
+		->hydrate(false)
+		->where(['blocked_by' => $this->Auth->user('id')])
+		->toArray();
+		if(!empty($BlockedUsers)) {
+			$BlockedUsers = array_values($BlockedUsers);
+		}
+		array_push($BlockedUsers,$this->Auth->user('id'));
+		$BlockedUsers = array_unique($BlockedUsers);
+		if($res_request_count>0){	
+			$loggedinid = $this->Auth->user('id');
+			foreach($requests as $req){
+				$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.request_id' =>$req['id']]])->contain(['Users']);	
+				$total_responses = $queryr->count();
+				$checkblockedUsers = $this->BlockedUsers->find()->where(['blocked_by' => $req['user_id'],'blocked_user_id'=>$loggedinid])->count();        
+				if($checkblockedUsers==1 OR $total_responses>=20){
+					$res_request_count--;
+				}      
+			}
+			return $res_request_count;
+		}
+		
+	return  $res_request_count;
+	}
 public function __getUserRespondToRequestCount($userdetail) {
 error_reporting(0);
 $requests ='';

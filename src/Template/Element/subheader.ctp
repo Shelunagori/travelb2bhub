@@ -71,26 +71,20 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 									<td rowspan="2" width="40%">&nbsp;	<br>
 										<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:40px;width:50px')); ?>
 									</td>
-									<td  align="left" style="padding-top:20px; font-size:16px">
-										Place Request
+									<td  align="left" style="padding-top:20px; font-size:20px">
+										<?php echo ($reqcount['value']-$myRequestCount); ?>
 									</td>
 								</tr>
 								<tr>
-									<td align="left" style="font-size:17px"><?php echo ($reqcount['value']-$myRequestCount); ?></td>
+									<td align="left" style="font-size:15px">Place Request</td>
 								</tr>
 							</table>		
 							 
 						</div>
 					  </div>
 					  <div class="small-box bg-white">
-						  <span>Click here to fill your Requirement for Travel Package, Hotel or Transportation. <span> 
-						 <br>
-						 <br>
-						 <span>
-						<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:20px;width:25px;')); ?>
-						Place Request
-						</span>
-					  </div>
+						  <span>Click here to fill your Requirement for Travel Package, Hotel or Transportation. </span> 
+ 					  </div>
 					</li>
 				</a>
 				</div>
@@ -106,24 +100,19 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 									<td rowspan="2" width="40%">&nbsp;	<br>
 										<?php echo $this->Html->image('white-my-request-icon.png',array('style'=>'height:40px;width:50px')); ?>
 									</td>
-									<td  align="left" style="padding-top:20px; font-size:16px">
-										My Request
+									<td  align="left" style="padding-top:20px; font-size:20px">
+										<?php echo $myRequestCount; ?>
 									</td>
 								</tr>
 								<tr>
-									<td align="left" style="font-size:17px"><?php echo $myRequestCount; ?></td>
+									<td align="left" style="font-size:15px">My Request</td>
 								</tr>
 							</table>		
 						</div>
 					  </div>
 					  <div class="small-box bg-white">
 						<span> Click here to view the list of all currently Open requests placed by you. <span> 
-						<br>
-						<br>
-						<span>
-							My Request
-						</span>
-					  </div>
+ 					  </div>
 					</li>
 				</a>
 				</div>
@@ -144,12 +133,12 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 									<td rowspan="2" width="40%">&nbsp;	<br>
 										<?php echo $this->Html->image('white-back-icon.png',array('style'=>'height:40px;width:50px')); ?>
 									</td>
-									<td  align="left" style="padding-top:20px; font-size:16px">
-										Respond to Request
+									<td  align="left" style="padding-top:20px; font-size:20px">
+										<?php echo $respondToRequestCount; ?>
 									</td>
 								</tr>
 								<tr>
-									<td align="left" style="font-size:17px"><?php echo $respondToRequestCount; ?></td>
+									<td align="left" style="font-size:15px">Respond to Request</td>
 								</tr>
 							</table>		
 							 
@@ -157,12 +146,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 					  </div>
 					  <div class="small-box bg-white">
 						<span> Click here to view, And Respond to Requirements placed by other users. <span> 
-						<br>
-						<br>
-						<span>
-							<?php echo $this->Html->image('white-back-icon.png',array('style'=>'height:20px;width:25px;')); ?> Respond to Request
-						</span>
-					  </div>
+ 					  </div>
 					</li>
 				</a>
 				</div>
@@ -178,12 +162,12 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 									<td rowspan="2" width="40%">&nbsp;	<br>
 										<?php echo $this->Html->image('white-my-resposes-head.png',array('style'=>'height:40px;width:50px')); ?>
 									</td>
-									<td  align="left" style="padding-top:20px; font-size:16px">
-										My Responses
+									<td  align="left" style="padding-top:20px; font-size:20px">
+										<?php echo $myReponseCount; ?>
 									</td>
 								</tr>
 								<tr>
-									<td align="left" style="font-size:17px"><?php echo $myReponseCount; ?></td>
+									<td align="left" style="font-size:15px">My Responses</td>
 								</tr>
 							</table>		
 							 
@@ -191,16 +175,78 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 					  </div>
 					  <div class="small-box bg-white">
 						<span> Click here to view all currently open Requests, You have Respoded to. <span> 
-						<br>
-						<br>
-						<span>
-							<?php echo $this->Html->image('white-my-resposes-head.png',array('style'=>'height:20px;width:25px;')); ?> My Responses
-						</span>
-					  </div>
+ 					  </div>
 					</li>
 				</a>
 				</div>
-		<?php } ?>
+		<?php }
+		
+		if($users['role_id'] == 2 ) { 
+			?>
+		
+				<!-- COls -->
+				<div class="col-md-6" style="margin-top:10px">
+				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'finalized-request-list')) ?>">
+					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
+					  <!-- small box -->
+					  <div class="small-box bg-green">
+						<div class="inner">
+							<table width="100%" border="0" height="90px">
+								<tr>
+									<td rowspan="2" width="40%">&nbsp;	<br>
+										<i style='font-size:46px' class="fa fa-check"></i>
+									</td>
+									<td  align="left" style="padding-top:20px; font-size:20px">
+										<?php echo $finalizeRequest; ?>
+									</td>
+								</tr>
+								<tr>
+									<td align="left" style="font-size:15px">Finalized Request</td>
+								</tr>
+							</table>		
+							 
+						</div>
+					  </div>
+					  <div class="small-box bg-white">
+						<span> Click here to view, And Respond to Requirements placed by other users. <span> 
+ 					  </div>
+					</li>
+				</a>
+				</div>
+				<!---COls--->
+				<div class="col-md-6" style="margin-top:10px">
+				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'removed-request-list')) ?>">
+					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
+					  <!-- small box -->
+					  <div class="small-box bg-blue">
+						<div class="inner">
+							<table width="100%" border="0" height="90px">
+								<tr>
+									<td rowspan="2" width="40%">&nbsp;	<br>
+										<i style='font-size:46px' class="fa fa-trash"></i>
+									</td>
+									<td  align="left" style="padding-top:20px; font-size:20px">
+										<?php echo $RemovedReqest; ?>
+									</td>
+								</tr>
+								<tr>
+									<td align="left" style="font-size:15px">Removed Request</td>
+								</tr>
+							</table>		
+							 
+						</div>
+					  </div>
+					  <div class="small-box bg-white">
+						<span> Click here to view all currently open Requests, You have Respoded to. <span> 
+ 					  </div>
+					</li>
+				</a>
+				</div>
+		<?php }
+
+
+
+		?>
 	  </div>
 	</div>
 	<div class="col-md-5">

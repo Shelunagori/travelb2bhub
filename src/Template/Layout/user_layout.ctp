@@ -17,8 +17,8 @@
 	<?php //echo $this->Html->css('/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>
 	<?php echo $this->Html->css('/assets/plugins/WYSIWYG/editor.css'); ?>
 	<?php echo $this->Html->css('/assets/demo-styles.css'); ?>
-	<?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Poppins'); ?> 
-	<?php echo $this->Html->css('//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'); ?> 
+	<?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Raleway'); ?>
+ 	<?php echo $this->Html->css('//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'); ?> 
 	<?php
 	echo $this->Html->meta(
     'favicon.ico',
@@ -43,7 +43,7 @@
 	color:ins
 }
 body {
-	font-family: 'Poppins', sans-serif !important;
+	font-family: 'Raleway', sans-serif !important;
 }
 #grad1 {
     height: 50px;
