@@ -9,9 +9,7 @@ h3 {
 	margin:0px !important;
     font-size: 18px !important;	
 }
-.modal-body{
-	text-align:left !important;
-}
+ 
 li {
 	    margin-top: 7px;
 }
@@ -50,8 +48,8 @@ ul li b {
 				<ul>
 					<li class="col-md-12"><p>Reference ID : &nbsp;<span style="color:#FB6542"><?php
 					echo $details['reference_id']; ?></span>
-					<li class="col-md-12"><p>Total Budget : &nbsp;<span style="color:#1295A2"><?php
-					echo $details['total_budget'] . " Rs."; ?></span>
+					<li class="col-md-12"><p>Total Budget : &nbsp;<span style="color:#1295A2">  Rs. <?php
+					echo $details['total_budget'] . ""; ?></span>
 					<li class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><p>Adult : &nbsp;<?php
 					echo $details['adult']; ?>
 					<li class="col-xs-6 col-lg-6 col-md-6 col-sm-6	"><p>Children below 6 : &nbsp;<?php
