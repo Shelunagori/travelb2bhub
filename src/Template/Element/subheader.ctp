@@ -194,7 +194,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 							<table width="100%" border="0" height="90px">
 								<tr>
 									<td rowspan="2" width="40%">&nbsp;	<br>
-										<i style='font-size:46px' class="fa fa-check"></i>
+										<i style='font-size:46px' class="fa fa-check-square"></i>
 									</td>
 									<td  align="left" style="padding-top:20px; font-size:20px">
 										<?php echo $finalizeRequest; ?>
@@ -243,7 +243,67 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 				</a>
 				</div>
 		<?php }
-
+			if($users['role_id'] == 3)
+			{
+				?>
+				<div class="col-md-6">
+				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'my-final-responses')) ?>">
+					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
+					  <!-- small box -->
+					  <div class="small-box bg-red">
+						<div class="inner">
+							<table width="100%" border="0" height="90px">
+								<tr>
+									<td rowspan="2" width="40%">&nbsp;	<br>
+										<i style='font-size:46px' class="fa fa-check-square"></i>
+									</td>
+									<td  align="left" style="padding-top:20px; font-size:20px">
+										<?php echo ($FInalResponseCount); ?>
+									</td>
+								</tr>
+								<tr>
+									<td align="left" style="font-size:15px">Finalized Response</td>
+								</tr>
+							</table>		
+							 
+						</div>
+					  </div>
+					  <div class="small-box bg-white">
+						  <span>Click here to fill your Requirement for Travel Package, Hotel or Transportation. </span> 
+ 					  </div>
+					</li>
+				</a>
+				</div>
+				<!-- ./col -->
+				<div class="col-md-6">
+				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'blocked-user-list')) ?>">
+					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
+					  <!-- small box -->
+					  <div class="small-box bg-yellow">
+						<div class="inner">
+							<table width="100%" border="0" height="90px">
+								<tr>
+									<td rowspan="2" width="40%">&nbsp;	<br>
+										<i style='font-size:46px' class="fa fa-users"></i>
+									</td>
+									<td  align="left" style="padding-top:20px; font-size:20px">
+										<?php echo $blockedUserscount; ?>
+									</td>
+								</tr>
+								<tr>
+									<td align="left" style="font-size:15px">Blocked Users</td>
+								</tr>
+							</table>		
+						</div>
+					  </div>
+					  <div class="small-box bg-white">
+						<span> Click here to view the list of all currently Open requests placed by you. <span> 
+ 					  </div>
+					</li>
+				</a>
+				</div>
+			<?php 
+			}
 
 
 		?>
@@ -465,7 +525,118 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 				  </div>
 				</a>
 			</div>
-			<?php } ?>
+			<?php }
+			
+		if($users['role_id'] == 2 ) { 
+			?>
+				<!-- COls -->
+				<div class="col-md-3">
+					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'finalized-request-list')) ?>">
+					  <div class="small-box bg-green">
+						<div class="inner">
+							<table width="100%" border="0" height="120px" style="text-align:center">
+								<tr>
+									<td align="center">&nbsp;	<br>
+										<i style='font-size:38px' class="fa fa-check-square"></i>
+									</td>
+								</tr>
+								<tr>
+									<td style=" font-size:16px">
+										Finalized Request
+									</td>
+								</tr>
+								<tr>
+									<td style="font-size:17px"><?php echo $finalizeRequest; ?></td>
+								</tr>
+							</table>		
+							 
+						</div>
+					  </div>
+					</a>
+				</div>
+				<!---COls--->
+				<div class="col-md-3">
+					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'removed-request-list')) ?>">
+					  <div class="small-box bg-blue">
+						<div class="inner">
+							<table width="100%" border="0" height="120px" style="text-align:center">
+								<tr>
+									<td align="center">&nbsp;	<br>
+										<i style='font-size:38px' class="fa fa-trash"></i>
+									</td>
+								</tr>
+								<tr>
+									<td  style="font-size:16px">
+										Removed Request
+									</td>
+								</tr>
+								<tr>
+									<td style="font-size:17px"><?php echo $RemovedReqest; ?></td>
+								</tr>
+							</table>		
+							 
+						</div>
+					  </div>
+					  
+					</a>
+				</div>
+		<?php }
+			if($users['role_id'] == 3)
+			{
+				?>
+				<div class="col-md-3">
+					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'my-final-responses')) ?>">
+						 
+					  <div class="small-box bg-red">
+						<div class="inner">
+							<table width="100%" border="0" height="120px" style="text-align:center">
+								<tr>
+									<td align="center">&nbsp;	<br>
+										<i style='font-size:38px' class="fa fa-check-square"></i>
+									</td>
+								</tr>
+								<tr>
+									<td  style="font-size:16px">
+										Finalized Response
+									</td>
+								</tr>
+								<tr>
+									<td style="font-size:17px"><?php echo ($FInalResponseCount); ?></td>
+								</tr>
+							</table>		
+							 
+						</div>
+					  </div>
+					</a>
+				</div>
+				<!-- ./col -->
+				<div class="col-md-3">
+					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'blocked-user-list')) ?>">
+						<!-- small box -->
+					  <div class="small-box bg-yellow">
+						<div class="inner">
+							<table width="100%" border="0" height="120px" style="text-align:center">
+								<tr>
+									<td align="center">&nbsp;	<br>
+										<i style='font-size:38px' class="fa fa-users"></i>
+									</td>
+								</tr>
+								<tr>
+									<td style="font-size:16px">
+										Blocked Users
+									</td>
+								</tr>
+								<tr>
+									<td style="font-size:17px"><?php echo $blockedUserscount; ?></td>
+								</tr>
+							</table>		
+						</div>
+					  </div>
+					</a>
+				</div>
+			<?php 
+			}
+			?>
  		  </div>
 		</div>
 <?php } ?>

@@ -51,6 +51,30 @@ class UsersController extends AppController {
 		$this->set('profile_pic', $profile_pic);
 		$this->set('loginId',$loginId);
 		$this->set('roleId',$role_id);
+		
+		//----	 FInalized
+		$this->loadModel('Requests');
+		$finalreq["Requests.user_id"] = $this->Auth->user('id');
+		$finalreq["Requests.status"] = 2;
+		$finalreq["Requests.is_deleted "] = 0;
+		$finalizeRequest = $this->Requests->find()->where($finalreq)->count();
+		$this->set('finalizeRequest', $finalizeRequest);
+		//--- Removed Request
+		$remoev["Requests.user_id"] = $this->Auth->user('id');
+		$remoev["Requests.is_deleted "] = 1;
+		$RemovedReqest = $this->Requests->find()->where($remoev)->count();
+		$this->set('RemovedReqest', $RemovedReqest);
+		//--- Blocked User
+		$this->loadModel('blocked_users');
+		$blk["blocked_users.blocked_by"] = $this->Auth->user('id');
+		$blockedUserscount = $this->blocked_users->find()->where($blk)->count();
+		$this->set('blockedUserscount', $blockedUserscount);
+		//--- Finalize Response;
+		$this->loadModel('Responses');
+		$FInalResponseCount = $this->Responses->find('all', ['conditions' => ['Responses.status' =>1,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->count();
+		$this->set('FInalResponseCount', $FInalResponseCount);
+		//*---
+		
 	}
 	
 	
@@ -682,18 +706,26 @@ $requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' =>
 if($myRequestCount > $delcount) {
 $myRequestCount = $myRequestCount-$delcount;
 }
-//----	 FInalized
-$finalreq["Requests.user_id"] = $this->Auth->user('id');
-$finalreq["Requests.status"] = 2;
-$finalreq["Requests.is_deleted "] = 0;
-$finalizeRequest = $this->Requests->find()->where($finalreq)->count();
-$this->set('finalizeRequest', $finalizeRequest);
-//--- Removed Request
-$remoev["Requests.user_id"] = $this->Auth->user('id');
-$remoev["Requests.is_deleted "] = 1;
-$RemovedReqest = $this->Requests->find()->where($remoev)->count();
-$this->set('RemovedReqest', $RemovedReqest);
-//---
+	//----	 FInalized
+	$finalreq["Requests.user_id"] = $this->Auth->user('id');
+	$finalreq["Requests.status"] = 2;
+	$finalreq["Requests.is_deleted "] = 0;
+	$finalizeRequest = $this->Requests->find()->where($finalreq)->count();
+	$this->set('finalizeRequest', $finalizeRequest);
+	//--- Removed Request
+	$remoev["Requests.user_id"] = $this->Auth->user('id');
+	$remoev["Requests.is_deleted "] = 1;
+	$RemovedReqest = $this->Requests->find()->where($remoev)->count();
+	$this->set('RemovedReqest', $RemovedReqest);
+	//--- Blocked User
+	$this->loadModel('blocked_users');
+	$blk["blocked_users.blocked_by"] = $this->Auth->user('id');
+	$blockedUserscount = $this->blocked_users->find()->where($blk)->count();
+	$this->set('blockedUserscount', $blockedUserscount);
+	//--- Finalize Response;
+	$FInalResponseCount = $this->Responses->find('all', ['conditions' => ['Responses.status' =>1,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->count();
+	$this->set('FInalResponseCount', $FInalResponseCount);
+	//*---
 $this->set('myRequestCountdel', $delcount);
 $this->set('myRequestCount', $myRequestCount1);
 $queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]]);
@@ -1418,16 +1450,16 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		$sdate = $this->request->query("startdatesearch");
 		$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
 		if(!empty($this->request->query("startdatesearch"))) {
-		$da["Requests.start_date"] =  $sdate;
-		$da["Requests.check_in"] =  $sdate;
-		$conditions["OR"] =  $da;
+			$da["Requests.start_date"] =  $sdate;
+			$da["Requests.check_in"] =  $sdate;
+			$conditions["OR"] =  $da;
 		}
 		$edate = $this->request->query("enddatesearch");
 		$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
 		if(!empty($this->request->query("enddatesearch"))) {
-		$da1["Requests.end_date"] =  $edate;
-		$da1["Requests.check_out"] =  $edate;
-		$conditions["OR"] =  $da1;
+			$da1["Requests.end_date"] =  $edate;
+			$da1["Requests.check_out"] =  $edate;
+			$conditions["OR"] =  $da1;
 		}
 		$conditions["Requests.user_id"] = $this->Auth->user('id');
 		$conditions["Requests.status !="] = 2;
@@ -1451,23 +1483,21 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		->where($conditions)->order($sort)->all();
 		}
 		if ($this->Auth->user('role_id') == 2) {
-		$requests = $this->Requests->find()
-		->contain(["Users","Hotels"])
-		->where($conditions)->order($sort)->all();
+			$requests = $this->Requests->find()
+				->contain(["Users","Hotels"])
+				->where($conditions)->order($sort)->all();
 		}
 		if ($this->Auth->user('role_id') == 3) {
-		$conditions["Requests.category_id "] = 3;
-		$requests = $this->Requests->find()
-		->contain(["Users","Hotels"])
-		->where($conditions)->order($sort)->all();
-		//  print_r($requests);
+			$conditions["Requests.category_id "] = 3;
+			$requests = $this->Requests->find()
+				->contain(["Users","Hotels"])
+				->where($conditions)->order($sort)->all();
 		}
 		$data = array();
 		foreach($requests as $req){
 		$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.request_id' =>$req['id']]])->contain(['Users']);
 		$data['responsecount'][$req['id']]  = $queryr->count();
 		}
-		//print_r($data);
 		$this->set('data', $data);
 		$this->set('requests', $requests);
 		$myRequestCount = $myReponseCount = 0;
@@ -2769,6 +2799,26 @@ public function myresponselist() {
 		$chatCount = $allUnreadChat->count();
 		$this->set('chatCount',$chatCount);
 		$this->set('allunreadchat',$allUnreadChat);
+		//----	 FInalized
+		$finalreq["Requests.user_id"] = $this->Auth->user('id');
+		$finalreq["Requests.status"] = 2;
+		$finalreq["Requests.is_deleted "] = 0;
+		$finalizeRequest = $this->Requests->find()->where($finalreq)->count();
+		$this->set('finalizeRequest', $finalizeRequest);
+		//--- Removed Request
+		$remoev["Requests.user_id"] = $this->Auth->user('id');
+		$remoev["Requests.is_deleted "] = 1;
+		$RemovedReqest = $this->Requests->find()->where($remoev)->count();
+		$this->set('RemovedReqest', $RemovedReqest);
+		//--- Blocked User
+		$this->loadModel('blocked_users');
+		$blk["blocked_users.blocked_by"] = $this->Auth->user('id');
+		$blockedUserscount = $this->blocked_users->find()->where($blk)->count();
+		$this->set('blockedUserscount', $blockedUserscount);
+		//--- Finalize Response;
+		$FInalResponseCount = $this->Responses->find('all', ['conditions' => ['Responses.status' =>1,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->count();
+		$this->set('FInalResponseCount', $FInalResponseCount);
+		//*---
 }
 public function unreadChats() {
 Configure::write('debug',2);
