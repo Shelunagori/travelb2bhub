@@ -18,6 +18,49 @@ class PagesController extends AppController
 		parent::beforeFilter($event);
 		$this->Auth->allow();
 	}
+	
+	
+	
+	public function initialize()
+	{
+		parent::initialize();
+		$this->Auth->allow(['logout']);
+		$first_name=$this->Auth->User('first_name');
+		$last_name=$this->Auth->User('last_name');
+		$profile_pic=$this->Auth->User('profile_pic');    
+		$loginId=$this->Auth->User('id');
+		$role_id=$this->Auth->User('role_id');
+		$authUserName=$first_name.' '.$last_name;
+		$this->set('MemberName',$authUserName);
+		$this->set('profile_pic', $profile_pic);
+		$this->set('loginId',$loginId);
+		$this->set('roleId',$role_id);
+		
+		//----	 FInalized
+		$this->loadModel('Requests');
+		$finalreq["Requests.user_id"] = $this->Auth->user('id');
+		$finalreq["Requests.status"] = 2;
+		$finalreq["Requests.is_deleted "] = 0;
+		$finalizeRequest = $this->Requests->find()->where($finalreq)->count();
+		$this->set('finalizeRequest', $finalizeRequest);
+		//--- Removed Request
+		$remoev["Requests.user_id"] = $this->Auth->user('id');
+		$remoev["Requests.is_deleted "] = 1;
+		$RemovedReqest = $this->Requests->find()->where($remoev)->count();
+		$this->set('RemovedReqest', $RemovedReqest);
+		//--- Blocked User
+		$this->loadModel('blocked_users');
+		$blk["blocked_users.blocked_by"] = $this->Auth->user('id');
+		$blockedUserscount = $this->blocked_users->find()->where($blk)->count();
+		$this->set('blockedUserscount', $blockedUserscount);
+		//--- Finalize Response;
+		$this->loadModel('Responses');
+		$FInalResponseCount = $this->Responses->find('all', ['conditions' => ['Responses.status' =>1,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->count();
+		$this->set('FInalResponseCount', $FInalResponseCount);
+		//*---
+		
+	}
+	
     /**
      * Displays a view
      *
@@ -218,7 +261,7 @@ class PagesController extends AppController
     }
 	
     public function promotions(){
-		$this->loadModel('Countries');
+		$this->viewBuilder()->layout('user_layout');
 		$this->loadModel('Users');
 		$this->loadModel('States');
 		$this->loadModel('Cities');
@@ -2493,6 +2536,7 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	$this->loadModel('Cities');
 	$this->loadModel('States');
 	$this->loadModel('BusinessBuddies');
+	$this->loadModel('BlockedUsers');
 	if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
 
 	$sort='';

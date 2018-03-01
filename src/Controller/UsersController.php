@@ -93,6 +93,57 @@ class UsersController extends AppController {
 		$this->redirect('/users/dashboard');
 	}
 	
+	
+	    public function promotions(){
+		$this->viewBuilder()->layout('user_layout');
+		$this->loadModel('Users');
+		$this->loadModel('States');
+		$this->loadModel('Cities');
+		$cities = $this->Cities->getAllCities();
+		$states = $this->States->getAllStates();
+		$allstates = array();
+		$allstatesList = array();
+		/* if(!empty($states)) {
+			foreach($states as $state) {
+				$allstates[] = array("label"=>str_replace("'", "", $state['state_name']), "value"=>$state['id']);
+				$allstatesList[$state['id']] = $state['state_name'];
+			}
+		}*/
+		$allStates = json_encode($allstates);
+		$allCities = array();
+		$allCityList = array();
+		if(!empty($cities)) {
+			foreach($cities as $city) {
+				if($this->checkcityslot($city['id']) < 50){
+					$usercount = $this->Users->getAllUserCount($city['id']);
+					$allCities[] = array("label"=>str_replace("'", "", $city['name']),"usercount" => $usercount, "value"=>$city['id'],"price"=>$city['price'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
+					$allCityList[$city['id']] = $city['name'];
+				}
+			}
+		}
+		//$allCities = json_encode($allCities);
+		$userId = $this->Auth->user('id');
+		$userDetails = '';
+		if($userId!=""){
+			$userDetails = $this->Users->get($userId);
+			$this->set("hotelCategories", $this->_getHotelCategoriesArray1());
+		}
+		$this->set(compact('cities', 'states', 'countries',  'allStates','allstatesList','allCityList','allCities','userId','userDetails'));
+    }
+
+	 public function promotionthanks(){
+		$this->viewBuilder()->layout('user_layout');
+		$thankscontent = "Thankyou! Your hotel's promotion has been successfully submitted.";
+        $this->set(compact("thankscontent"));  
+    }
+	
+	 function checkcityslot($city_id){
+    	 $this->loadModel('Promotion');
+		 $advertisementcount = $this->Promotion->find()->where(['status' => 1,'FIND_IN_SET(\''.  $city_id .'\',cities)'])->all();
+		 $advertisementcount = $advertisementcount->count();
+		 return $advertisementcount;
+    }
+	
 	public function report() {
 		$this->viewBuilder()->layout('admin_layout');
 		$this->paginate = [

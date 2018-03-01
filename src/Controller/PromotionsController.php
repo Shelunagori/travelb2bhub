@@ -84,7 +84,7 @@ $total_days = 30*$Promotion->duration;
 			if ($PromotionsTable->save($Promotion)) {
 
     		$id = $Promotion->id;
-    		return $this->redirect('/pages/promotionthanks');
+    		return $this->redirect('/Users/promotionthanks');
 			}      
     }
     }
