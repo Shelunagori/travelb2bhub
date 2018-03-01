@@ -3167,9 +3167,9 @@ public function _getMealPlansArray() {
 return array("1"=>"EP - European Plan", "2"=>"CP - Contenental Plan", "3"=>"MAP - Modified American Plan", "4"=>"AP - American Plan");
 }
 function addNewDestinationRow() {
-$this->set("hotelCategories", $this->_getHotelCategoriesArray());
-$this->set("randomNumber", $_POST["number"]);
-$this->render('/Element/new_destination');
+	$this->set("hotelCategories", $this->_getHotelCategoriesArray());
+	$this->set("randomNumber", $_POST["number"]);
+	$this->render('/Element/new_destination');
 }
 public function addresponse() {
 	date_default_timezone_set('Asia/Kolkata');

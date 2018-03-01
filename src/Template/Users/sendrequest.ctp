@@ -52,6 +52,9 @@ a:hover,a:focus{
     font-size: 22px !important;
     color: #5b5a5a !important;
 }*/ 
+fieldset{
+	margin:10px !important;
+}
 </style> 
 <!--------- <script>
 	var cityData = '<?php echo $allCities; ?>';
@@ -312,7 +315,7 @@ $(document).ready(function($){
 		<div class="panel panel-default">
 				
 				<fieldset>
-					  <legend style="color:#369FA1;"><b> &nbsp; GENERAL REQUIREMENTS  &nbsp;  </b></legend>
+					  <legend style="color:#369FA1;"><b> &nbsp; GENERAL REQUIREMENTS &nbsp;  </b></legend>
 					  <div class="row">
 					  <div class="col-md-12">
 					  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -441,15 +444,12 @@ $(document).ready(function($){
 						</div>
 					<div class="row">
 						<div class="col-md-12">
-							<div class="col-md-12">
+							<div class="col-md-4">
 								<p>Locality</p>
 								<input autocomplete="off" type="text" class="form-control" name="locality" placeholder="Enter Locality or Village or Town"/>
 							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="col-md-6">
+						 
+							<div class="col-md-4">
 									<div class="input-field">
 									<p for="from">
 										Destination City
@@ -463,7 +463,7 @@ $(document).ready(function($){
 									</div>
 							</div>
 							<span class="shw">
-								<div class="col-md-6 ">
+								<div class="col-md-4 ">
 									<div class="input-field">
 										<p for="from">
 													Destination State
@@ -566,7 +566,7 @@ $(document).ready(function($){
 		<div class="panel panel-default">
 			  
 			<fieldset>
-				  <legend style="color:#369FA1;"><b>  &nbsp; GENERAL REQUIREMENTS  &nbsp; </b></legend>
+				  <legend style="color:#369FA1;"><b>  &nbsp; GENERAL REQUIREMENTS &nbsp; </b></legend>
 					<div class="row">
 						<div class="col-md-12">
 						  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -776,7 +776,7 @@ $(document).ready(function($){
 						</div> <span class="help-block"></span><hr></hr>
 						<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt padding text-center">
-									<button class="btn btn-primary btn-sm add_field_button2 but ">Add Another Destination</button>
+									<button class="btn btn-primary btn-sm add_field_button2 but ">Add More Destination</button>
                              </div>
                         </div>
 			</fieldset>
@@ -786,7 +786,12 @@ $(document).ready(function($){
 									<legend style="color:#369FA1;"><b> &nbsp;  TRANSPORT REQUIREMENTS  &nbsp; </b></legend>
 									<div class="row">
 										<div class="col-md-12 ">
-											<div class="col-md-12 ">
+											<div class="col-md-4 ">
+												<div class="input-field">
+													<p for="from">
+														Select Transport
+													</p>
+												</div>
 												<div class="input-field">
 													<select name="transport_requirement" class="form-control">
 														<option value="" selected>Select Transport</option>
@@ -799,38 +804,36 @@ $(document).ready(function($){
 													</select>
 												</div>
 											</div>
-										</div>
-									</div>
-								<div class="row">
-								<div class=" col-md-12">
-										<div class="col-md-6">
+											<div class="col-md-4">
 											<div class="input-field">
 												<p for="from">
 													Start Date
 												</p>
 											</div>
-											<div class="col-md-12 input-group">
+											<div class="input-group">
 												 <input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd/mm/yyyy" id="datepicker3" placeholder="dd/mm/yyyy"/>
 												<p class="input-group-addon btn" for="testdate">
 												<span class="fa fa-calendar"></span>
 												</p>                    
 											</div>
 										</div>
-										<div class="col-md-6">
+										<div class="col-md-4">
 											<div class="input-field">
 														<p for="from">
 															End Date
 														</p>
 											</div>
-											<div class="col-md-12 input-group">
+											<div class="input-group">
 												 <input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd/mm/yyyy" id="datepicker4" placeholder="dd/mm/yyyy"/>
 												<p class="input-group-addon btn" for="testdate">
 												<span class="fa fa-calendar"></span>
 												</p>                    
 											</div>
+										</div>	
+											
 										</div>
 									</div>
-								</div><span class="help-block"></span>
+							 
 								<div class="row">
 									<div class="col-md-12 main_row">
 										<div class="col-md-4 col-xs-6 mt">
@@ -1040,7 +1043,13 @@ $(document).ready(function($){
 													<legend style="color:#369FA1;"><b> &nbsp;  TRANSPORT REQUIREMENTS &nbsp; </b></legend>
 													<div class="row">
 														<div class="col-md-12 ">
-															<div class="col-md-12 ">
+															<div class="col-md-4 ">
+																<div class="input-field">
+																	<p for="from">
+																		Select Transport
+																		<span class="required">*</span>
+																	</p>
+																</div>
 																<div class="input-field">
 																	<select name="transport_requirement" class="form-control">
 																		<option value="" selected>Select Transport</option>
@@ -1053,6 +1062,35 @@ $(document).ready(function($){
 																	</select>
 																</div>
 															</div>
+															<div class="col-md-4">
+															<div class="input-field">
+																<p for="from">
+																	Start Date
+																	<span class="required">*</span>
+																</p>
+															</div>
+															<div class="col-md-12 input-group">
+																 <input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd/mm/yyyy" id="datepicker5" placeholder="dd/mm/yyyy"/>
+																<p class="input-group-addon btn" for="testdate">
+																<span class="fa fa-calendar"></span>
+																</p>                    
+															</div>
+														</div>
+														<div class="col-md-4">
+														<div class="input-field">
+																	<p for="from">
+																		End Date
+																		<span class="required">*</span>
+																	</p>
+														</div>
+														<div class="col-md-12 input-group">
+															 <input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd/mm/yyyy" id="datepicker6" placeholder="dd/mm/yyyy"/>
+															<p class="input-group-addon btn" for="testdate">
+															<span class="fa fa-calendar"></span>
+															</p>                    
+														</div>
+													</div>	
+															
 														</div>
 													</div>
 													<input type='hidden' id='t_pickup_country_id' name="t_pickup_country_id"/>
@@ -1152,7 +1190,7 @@ $(document).ready(function($){
 											<span class="help-block"></span>
 											<div class="row">
 												<div class="col-md-12">
-													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+													<div class="col-md-4 mt">
 														<div class="input-field">
 															<p for="from">Final Locality
                                                                   
@@ -1160,7 +1198,7 @@ $(document).ready(function($){
 															<input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="finalLocality">
 														</div>
 													</div>
-													<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+													<div class="col-md-4 mt">
 															<div class="input-field">
 																<p for="from">Final City
                                                                  <span class="required">*</span>    
@@ -1171,26 +1209,25 @@ $(document).ready(function($){
 																
 															</div>
 														</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-12 rw2">
-													<div class="col-lg-6 col-md-12 col-sm-6 col-xs-12 mt">
-															<div class="input-field">
-															<p for="from">Final State</p>
-																<input type='hidden' id='t_final_state_id' name="t_final_state_id"/>
-															<input type="text" class="form-control" id ="t_final_state_name" name="t_final_state_name" placeholder="Select State" readonly/>
+												 
+													<div class="rw2">
+														<div class="col-md-4 mt">
+																<div class="input-field">
+																<p for="from">Final State</p>
+																	<input type='hidden' id='t_final_state_id' name="t_final_state_id"/>
+																<input type="text" class="form-control" id ="t_final_state_name" name="t_final_state_name" placeholder="Select State" readonly/>
+																</div>
 															</div>
-														</div>
-														<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
-														<input type="hidden" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" readonly/>
-														<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-															<div class="input-field">
-															<p for="from">Final Country</p>
-																<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
-																<input type="text" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" />
-															</div>
-														</div>-->
+															<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
+															<input type="hidden" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" readonly/>
+															<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+																<div class="input-field">
+																<p for="from">Final Country</p>
+																	<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
+																	<input type="text" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" />
+																</div>
+															</div>-->
+													</div>
 												</div>
 											</div>
 											</fieldset>

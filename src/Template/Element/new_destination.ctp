@@ -1,5 +1,7 @@
-<div><hr>
+<div>
 	<div class="destination newdiv">
+	<div class="stop col-md-12"><div class="stop-title"> <b> Destination </b></div><br><div class="row main_row"> 
+	
 	  <div class="row">
 			<div class="col-md-12">
 				<div class="col-md-12">
@@ -142,10 +144,12 @@
 			</div>
 		</div><span class="help-block"></span>
 	</div>
+	</div>
 	<div class="col-md-12">
 		<a href="java:script(0);" class="remove_field btn btn-danger btn-sm">Remove</a>
-		<hr></hr>
+		<br/><br/><hr></hr>
 	</div>
+	
 	<script>
 	$('.select2').select2();
 	$('.date-picker').datepicker();

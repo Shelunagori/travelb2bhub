@@ -1,6 +1,6 @@
 
 <?php if($noofrows==1) {?>
-<div class="form-group col-md-6">
+<div class="form-group col-md-4">
 	  <label>Destination States</label>
 	  <?php echo $this->Form->input('h_state_id',['label' => false,'class'=>'form-control','options'=>$states]);?>
 </div>
@@ -21,7 +21,7 @@ if($noofrows==2)
 if($noofrows==3)
 {
 	?>
-	<div class="form-group col-md-6">
+	<div class="form-group col-md-4">
 	  <label>Final States</label>
 	  <?php echo $this->Form->input('t_final_state_id',['label' => false,'class'=>'form-control select2','options'=>$states]);?>
 	</div>
