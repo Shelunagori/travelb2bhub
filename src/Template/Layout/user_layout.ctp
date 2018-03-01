@@ -75,7 +75,7 @@ body{
 fieldset {
 	padding: 10px ;
 	border: 1px solid #bfb7b7f7;
-	margin: 12px;
+	margin: 0px;
 }
 legend{
 	margin-left: 20px;	
@@ -188,7 +188,11 @@ margin-top: 5px !important;
 	  content: '\f006';
 	  font-family: FontAwesome;
 	}
-
+	.user-panel
+	{
+		background: #057F8A !important;
+		height: 169px;
+	}
 </style>
 <style>
  
@@ -405,7 +409,7 @@ margin-top: 5px !important;
           <?php echo ucwords(strtolower($MemberName));?>
 		  <br>
 		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'profileedit/'.$loginId]); ?>" class="logo">Edit Profile</a> | &nbsp;
-		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'change_password']); ?>" class="logo">Change Password</a>
+		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'change_password']); ?>" class="logo">Reset Password</a>
         </div>
       </div>
       
@@ -423,25 +427,25 @@ margin-top: 5px !important;
             <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
         </li>-->
-		<li class="active"><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>"><i class="fa fa-dashboard"></i> <span>DASHBOARD</span></a></li>
+		<li class="active"><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 		
 		<?php if($roleId==1 || $roleId==2 ) {?>
-			<li><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'finalizedRequestList']); ?>"><i class="fa fa-edit"></i> <span>FINALIZED REQUESTS</span></a></li>
+			<li><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'finalizedRequestList']); ?>"><i class="fa fa-edit"></i> <span>Finalized Requests</span></a></li>
 		<?php
 		}
 		if($roleId==1 || $roleId==3) {
 		?>
-			<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'myFinalResponses']); ?>"><i class="fa fa-book"></i> <span>FINALIZED RESPONSES</span></a></li>
+			<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'myFinalResponses']); ?>"><i class="fa fa-book"></i> <span>Finalized Responses</span></a></li>
 		<?php
 		}
 		if($roleId==1 || $roleId==3) {
 		?>
-			<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'businessBuddiesList']); ?>"><i class="fa fa-user"></i> <span>FOLLOWING</span></a></li>
+			<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'businessBuddiesList']); ?>"><i class="fa fa-user"></i> <span>Following</span></a></li>
 		<?php
 		}
 		if($roleId==1 || $roleId==2) {
 		?>
-			<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'removedRequestList']); ?>"><i class="fa fa-trash"></i> <span>REMOVED REQUESTS</span></a></li>
+			<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'removedRequestList']); ?>"><i class="fa fa-trash"></i> <span>Removed Requests</span></a></li>
 		<?php
 		}
 		if($roleId == 3)
@@ -452,7 +456,7 @@ margin-top: 5px !important;
 			
 		<?php }			
 		?>
-		<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'blockedUserList']); ?>"><i class="fa fa-group"></i> <span>BLOCKED USERS</span></a></li>
+		<li class=""><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'blockedUserList']); ?>"><i class="fa fa-group"></i> <span>Blocked Users</span></a></li>
 		 
       </ul>
     </section>
