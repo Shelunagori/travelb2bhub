@@ -296,13 +296,13 @@ $(document).ready(function($){
 			<div class="tab-content tab">
 				<div align="center">
 					<ul class="nav nav-tabs" >
-						<li ><a href="#tab1" data-toggle="tab">Hotel</a></li>
+						<li class="active"><a href="#tab1" data-toggle="tab">Hotel</a></li>
 						<li><a id="tabtransport" href="#tab3" data-toggle="tab">Transport</a></li>
-						<li class="active"><a href="#tab2" data-toggle="tab">Package</a></li>
+						<li ><a href="#tab2" data-toggle="tab">Package</a></li>
  					</ul>
 				</div>
 				</br></br>
-<div class="tab-pane " id="tab1">
+<div class="tab-pane active" id="tab1">
 <?php
  echo $this->Form->create(null, [
 	'type' => 'file',
@@ -552,7 +552,7 @@ $(document).ready(function($){
 								</div>
 							</div>
 <?= $this->Form->end()?>							
-<div class="tab-pane active" id="tab2" >
+<div class="tab-pane " id="tab2" >
 <?php
 		echo $this->Form->create(null, [
 			'type' => 'file',
