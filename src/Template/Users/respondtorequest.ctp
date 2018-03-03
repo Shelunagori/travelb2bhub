@@ -43,7 +43,29 @@ $conn = ConnectionManager::get('default');
 		<table width="90%" class="shotrs">
 			<tr>
 				<td>
-					<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=totalbudgethl">Total Budget (High To Low) <span class="arrow"><span></span></span></a> 
+				
+					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=totalbudgethl">
+					<input class="btn btn-info btn-sm" type="radio" name="r1"/>
+					Total Budget <i class="fa fa-sort-amount-desc"></i> <span class=arrow><span></span></span></a>&nbsp;
+					
+					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=totalbudgetlh">
+					<input class="btn btn-info btn-sm" type="radio" name="r1"/>
+					Total Budget <i class="fa fa-sort-amount-asc"></i>  <span class=arrow><span></span></span></a>&nbsp;
+					<br>
+					<br>
+					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=agentaz">
+					<input class="btn btn-info btn-sm" type="radio" name="r1"/>
+					No. of Responses <i class="fa fa-sort-amount-asc"></i> <span class=arrow><span></span></span></a>&nbsp;
+					
+					<a  href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=agentza">
+					<input class="btn btn-info btn-sm" type="radio" name="r1"/>
+					No. of Responses <i class="fa fa-sort-amount-desc"></i> <span class=arrow><span></span></span></a>&nbsp;
+					
+					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=requesttype">
+					<input class="btn btn-info btn-sm" type="radio" name="r1"/>
+					Request Type <span class=arrow><span></span></span></a>
+					
+					<!--a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=totalbudgethl">Total Budget (High To Low) <span class="arrow"><span></span></span></a> 
 					
 					<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=totalbudgetlh"> Total Budget (Low To High)<span class="arrow"><span></span></span></a> 
 					
@@ -51,7 +73,7 @@ $conn = ConnectionManager::get('default');
 					
 					<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=agentza"> Agent Name (Z To A)<span class="arrow"><span></span></span></a>
 					
-					<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=requesttype">Request Type  <span class="arrow"><span></span></span></a>
+					<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=requesttype">Request Type  <span class="arrow"><span></span></span></a-->
                  </td>
 			</tr>
 		</table>    
@@ -74,29 +96,29 @@ $conn = ConnectionManager::get('default');
            <form method="get" class="filter_box" style="margin-top:5px">
                
        <div class="col-md-12">
-          <div class="col-md-6">
+          <div class="col-md-12">
 			  <label for="example-text-input" class="  col-form-label">Request Type: </label>
 			  <select name="req_typesearch" class="form-control"><option value="">Select Request Type</option><option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option><option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option><option value="2">Transport</option></select>
           </div>
        
-          <div class="col-md-6">
+          <div class="col-md-12">
 			<label for="example-text-input" class="  col-form-label">Total Budget: </label>
 			<select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option>
              <option value="100000-100000000000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? 'selected':''; ?>>100000-Above</option>
              </select>
           </div>
         
-          <div class="col-md-6">
+          <div class="col-md-12">
 			<label for="example-text-input" class="  col-form-label">Start Date: </label>
 			<input type="text" id="datepicker1"  name="startdatesearch" value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"  class="form-control">
           </div>
         
-          <div class="col-md-6">
+          <div class="col-md-12">
 			<label for="example-text-input" class="  col-form-label">End Date: </label>
               <input type="text" id="datepicker2" name="enddatesearch" value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"  class="form-control" >
           </div>
         
-          <div class="col-md-6">
+          <div class="col-md-12">
 			<label for="example-text-input" class="  col-form-label">Pickup City: </label>
 			<select class="form-control" id="pickup_city" name="pickup_city">
 			<option value="">Select</option>
@@ -107,7 +129,7 @@ $conn = ConnectionManager::get('default');
           </select>     
          </div>
          
-          <div class="col-md-6">
+          <div class="col-md-12">
 			<label for="example-text-input" class="  col-form-label">Destination City: </label>
 			<select class="form-control" id="destination_city" name="destination_city">
 			<option value="">Select</option>
@@ -118,22 +140,23 @@ $conn = ConnectionManager::get('default');
           </select>     
          </div>
          
-          <div class="col-md-6">
+		 
+          <div class="col-md-12">
 				<label for="example-text-input" class="  col-form-label">Reference ID: </label>
               <input type="text" name="refidsearch" value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>"  class="form-control">
           </div>
         
-          <div class="col-md-6">
+          <div class="col-md-12">
 				<label for="example-text-input" class="  col-form-label">Members: </label>
               <input type="text" name="memberssearch" value="<?php echo isset($_GET['memberssearch'])? $_GET['memberssearch']:''; ?>"  class="form-control">
           </div>
         
-          <div class="col-md-6">
+          <div class="col-md-12">
 				<label for="example-text-input" class="  col-form-label">Agent Name: </label>
               <input type="text" name="agentnamesearch" value="<?php echo isset($_GET['agentnamesearch'])? $_GET['agentnamesearch']:''; ?>"  class="form-control">
           </div>
         
-          <div class="col-md-6">
+          <div class="col-md-12">
 				<label for="example-text-input" class="col-form-label">Following: </label>
               <input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['followsearch'])? "checked":''; ?>  >
           </div>
