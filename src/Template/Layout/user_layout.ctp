@@ -216,6 +216,7 @@ margin-top: 5px !important;
 .modal-body {padding:0px!important;}
 </style>
 </head>
+<title>Travel B2B Hub</title>
 <body class="hold-transition skin-blue sidebar-mini">
 <?php 
 $page_name=$this->request->params['action'];  
