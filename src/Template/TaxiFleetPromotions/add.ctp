@@ -97,7 +97,8 @@
 								</p>
 								
 								<div class="input-field">
-									<?php  echo $this->Form->input('state_id', ['class'=>'form-control','options' => $allStates,'label'=>false]); ?>
+									<?php echo $this->Form->control('state_id', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$allStates, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select State","style"=>"height:125px;"]);?>
+									
 								</div>
 							</div>
 							<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -114,9 +115,9 @@
 											Choose City
 											<span class="required">*</span>
 								</p>
-								
 								<div class="input-field">
-									<?php  echo $this->Form->input('city_id', ['class'=>'form-control','options' => $allCityList,'label'=>false]); ?>
+								<?php echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$allCityList, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
+									
 								</div>
 							</div>
 						</div>
@@ -165,5 +166,11 @@
 						</div>
 					</div>
 				</div>
-			
 <?= $this->Form->end() ?>
+<script>
+	 
+    $(document).ready(function () {
+$(".multi_city").multiselect();
+$(".multi_states").multiselect();
+	});
+</script>
