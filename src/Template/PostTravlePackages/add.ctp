@@ -126,6 +126,30 @@ fieldset{
 										<div class="col-md-12">
 											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 												<p for="from">
+													Promotion Duration
+													<span class="required">*</span>
+												</p>
+												<div class="input-field">
+													
+													 <?php echo $this->Form->input('price_master_id',['options' => $priceMasters,'class'=>'form-control','label'=>false]);?>
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+												<p for="from">
+													Valid Till
+													<span class="required">*</span>
+												</p>
+												<div class="input-field">
+													
+													 <?php echo $this->Form->input('visible_date',['class'=>'form-control date-picker','label'=>false]);?>
+												</div>
+											</div>
+										</div>
+									</div> 
+									<div class="row">
+										<div class="col-md-12">
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+												<p for="from">
 													Duration Night
 													<span class="required">*</span>
 												</p>
@@ -173,26 +197,27 @@ fieldset{
 									</div> 
 									<div class="row">
 										<div class="col-md-12">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-												<p for="from">
-													Valid Date
-													<span class="required">*</span>
-												</p>
-												<div class="input-field">
-													 <?php echo $this->Form->input('valid_date',['class'=>'form-control date-picker date','label'=>false,'id'=>'datepicker7','data-date-format'=>'dd/mm/yyyy','placeholder'=>'dd/mm/yyyy' ]);?>
-													
+												<div class="col-md-6">
+													<p for="from">
+														Package Type
+														<span class="required">*</span>
+													</p>
+													<div class="input-field">
+													   <input  type="radio" value="4" name="hotel_rating"/>
+													   <label >India</label>
+													   <input  type="radio" value="4" name="hotel_rating"/>
+													   <label >International</label>
+													</div>
 												</div>
-											</div>
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-												<div class="input-field">
+												<div class="col-md-6">
 													<p for="from">
 														Choose Country
 														<span class="required">*</span>
 													</p>
-
+													<div class="input-field">
 													 <?php echo $this->Form->input('country_id',['class'=>'form-control select2','options' => $countries,'label'=>false,"empty"=>"Select Country"]);?>
+													</div>
 												</div>
-											</div>
 										</div>
 									</div> 
 									<div class="row">
@@ -242,47 +267,8 @@ fieldset{
 											</div>
 										</div>
 									</div> 
-									<div class="row">
-										<div class="col-md-12">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-												<p for="from">
-													Promotion Duration
-													<span class="required">*</span>
-												</p>
-												<div class="input-field">
-													
-													 <?php echo $this->Form->input('price_master_id',['options' => $priceMasters,'class'=>'form-control','label'=>false]);?>
-												</div>
-											</div>
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-												<p for="from">
-													Valid Till
-													<span class="required">*</span>
-												</p>
-												<div class="input-field">
-													
-													 <?php echo $this->Form->input('visible_date',['class'=>'form-control date-picker','label'=>false]);?>
-												</div>
-											</div>
-										</div>
-									</div> 
-									<div class="row ">
-										<div class="col-md-12">
-											<div class="col-md-6">
-												<p for="from">
-													Package Type
-													<span class="required">*</span>
-												</p>
-										   <input  type="radio" value="4" name="hotel_rating"/>
-										   <label >India</label>
-										   <input  type="radio" value="4" name="hotel_rating"/>
-										   <label >International</label>
-												
-											</div>
-											<div class="col-md-6">
-											</div>
-										</div>
-									</div>
+									
+									
 								</fieldset>
 							<br>
 					<fieldset>
@@ -331,8 +317,8 @@ fieldset{
 <script>
 	 
     $(document).ready(function () {
-$(".multi_city").multiselect();
-$(".multi_states").multiselect();
-$("#atepicker7").datepicker();
+$("#multi_city").multiselect();
+$("#multi_states").multiselect();
+$("#datepicker7").datepicker();
 	});
 </script>
