@@ -118,16 +118,21 @@ margin-top: 5px !important;
 		?>
 <div id="wrapper">
 <header class="main-header no-print" >
-   <a href="/ucci/Users/index" class="logo" style="background-color:#DA0845">
-   <span class="logo-lg">
-   <?=  $this->Html->image('/packages/serverfireteam/panel/img/logo.png', ['style'=>'width:49%;margin-top:-4%;']) ?></span></a>
-    <nav class="navbar navbar-static-top"  id="grad1">
-    <a href="#" class="hidden-lg hidden-md hidden-sm sidebar-toggle" data-toggle="offcanvas" role="button">
+   <a href="<?php echo $this->Url->build(["controller" => "Admins",'action'=>'add']); ?>" class="logo">
+      <span class="logo-mini"><?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:77%;']) ?></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><?=  $this->Html->image('/img/main_logo.png', ['style'=>'width:85%;']) ?></span>
+    </a>
+    <nav class="navbar navbar-static-top"  >
+    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+	 <!---<a href="#" class="hidden-lg hidden-md hidden-sm sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-      </a>
+      </a>-->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
             <li class="dropdown user user-menu">
@@ -135,14 +140,14 @@ margin-top: 5px !important;
 				  <span> <i class="fa fa-setting"></i> Setting</span>
 				</a>
 				<ul class="dropdown-menu">
-					<li>
+					<!--<li>
 					  <?php echo $this->Html->link('Edit Profile',['controller' => 'Users', 'action' => 'editprofile', '_full' => true,'class'=>'btn btn-default btn-flat']); ?>
 					</li>
 					<li>
 					  <?php echo $this->Html->link('Change Password',['controller' => 'Users', 'action' => 'changepassword', '_full' => true,'class'=>'btn btn-default btn-flat']); ?>
-					</li>
+					</li>-->
 					<li>
-					  <?php echo $this->Html->link('Logout',['controller' => 'Users', 'action' => 'logout', '_full' => true,'class'=>'btn btn-default btn-flat']); ?>
+					  <?php echo $this->Html->link('Logout',['controller' => 'Admins', 'action' => 'logout', '_full' => true,'class'=>'btn btn-default btn-flat']); ?>
 					</li>
 					
 				</ul>
