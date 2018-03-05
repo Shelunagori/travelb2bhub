@@ -3,44 +3,174 @@
   * @var \App\View\AppView $this
   */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Taxi Fleet Promotions'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Countries'), ['controller' => 'Countries', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Country'), ['controller' => 'Countries', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Price Masters'), ['controller' => 'PriceMasters', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Price Master'), ['controller' => 'PriceMasters', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Taxi Fleet Promotion Cities'), ['controller' => 'TaxiFleetPromotionCities', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Taxi Fleet Promotion City'), ['controller' => 'TaxiFleetPromotionCities', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Taxi Fleet Promotion Rows'), ['controller' => 'TaxiFleetPromotionRows', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Taxi Fleet Promotion Row'), ['controller' => 'TaxiFleetPromotionRows', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Taxi Fleet Promotion States'), ['controller' => 'TaxiFleetPromotionStates', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Taxi Fleet Promotion State'), ['controller' => 'TaxiFleetPromotionStates', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="taxiFleetPromotions form large-9 medium-8 columns content">
-    <?= $this->Form->create($taxiFleetPromotion) ?>
-    <fieldset>
-        <legend><?= __('Add Taxi Fleet Promotion') ?></legend>
-        <?php
-            echo $this->Form->input('title');
-            echo $this->Form->input('country_id', ['options' => $countries]);
-            echo $this->Form->input('fleet_detail');
-            echo $this->Form->input('image');
-            echo $this->Form->input('document');
-            echo $this->Form->input('price_master_id', ['options' => $priceMasters]);
-            echo $this->Form->input('like_count');
-            echo $this->Form->input('visible_date');
-            echo $this->Form->input('user_id', ['options' => $users]);
-            echo $this->Form->input('created_on');
-            echo $this->Form->input('edited_by');
-            echo $this->Form->input('edited_on');
-            echo $this->Form->input('is_deleted');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+<div class="box-body">
+ <?= $this->Form->create($taxiFleetPromotion) ?>
+	<div class="row"> 
+		<div class="col-md-12"> 
+			<div class="form-box">
+				<div class="panel-group" style="background-color:white;">
+					<div class="panel panel-default">
+						<fieldset>
+							<legend style="color:#369FA1;"><b><?= __('Add Taxi Fleet Promotion') ?></b></legend> 
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+								<p for="from">
+									Company Name
+									<span class="required">*</span>
+								</p>
+								<div class="input-field">
+									 <?php echo $this->Form->input('company_name',['class'=>'form-control','label'=>false,'readonly']);?>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+								<p for="from">
+									Promotion Title
+									<span class="required">*</span>
+								</p>
+								<div class="input-field">
+									 <?php echo $this->Form->input('title',['class'=>'form-control','label'=>false]);?>
+									
+								</div>
+							</div>
+						</div>
+					</div> 
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+								<p for="from">
+									Upload Image of the Promotion
+									<span class="required">*</span>
+								</p>
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+								<div class="input-field">
+									<?php  echo $this->Form->input('image',['class'=>'form-control','label'=>false,'type'=>'file']); ?>
+								</div>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+				<br>
+			<fieldset>
+			<legend style="color:#369FA1;"><b><?= __('Package Details') ?></b></legend> 
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+								<p for="from">
+									Promotion Name
+									<span class="required">*</span>
+								</p>
+								<div class="input-field">
+									
+									 <?php echo $this->Form->input('promotion_type',['options' => $priceMasters,'class'=>'form-control','label'=>false]);?>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+								<p for="from">
+									Promotion Type
+									<span class="required">*</span>
+								</p>
+								<div class="input-field">
+									
+									 <?php echo $this->Form->input('price_master_id',['options' => $priceMasters,'class'=>'form-control','label'=>false]);?>
+								</div>
+							</div>
+							
+						</div>
+					</div> 
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+								<div class="input-field">
+									<p for="from">
+										Choose Country
+										<span class="required">*</span>
+									</p>
+									 <?php echo $this->Form->input('country_id',['class'=>'form-control','options' => $countries,'label'=>false]);?>
+								</div>
+							</div>
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+								<p for="from">
+											Choose State
+											<span class="required">*</span>
+								</p>
+								
+								<div class="input-field">
+									<?php echo $this->Form->control('state_id', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$allStates, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select State","style"=>"height:125px;"]);?>
+									
+								</div>
+							</div>
+							<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+								<div class="input-field">
+									<?php  //echo $this->Form->input('visible_date', ['class'=>'form-control input-medium date-picker']); ?>
+								</div>
+							</div> -->
+						</div>
+					</div> 
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-6">
+								<p for="from">
+											Choose City
+											<span class="required">*</span>
+								</p>
+								<div class="input-field">
+								<?php echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$allCityList, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<p for="from">
+								Fleet Details
+								
+							</p>
+							<div class="input-field">
+									<?php echo $this->Form->input('fleet_detail',['class'=>'form-control','label'=>false]);?>
+							</div>
+						</div>
+					</div>
+						</fieldset>
+					<br>
+					<fieldset>
+						<legend style="color:#369FA1;"><b><?= __('Payment ') ?></b></legend> 
+							<div class="col-md-6">
+							<p for="from">
+								Promotion Duration
+							</p>
+								<div class="input-field">
+									<?php  echo $this->Form->input('duration', ['options' => $priceMasters,'class'=>'form-control','label'=>false]); ?>
+								</div>
+							</div>
+						</div>
+					</div>
+					</fieldset>
+					
+					
+					<div class="row">
+								<div class="col-md-12">
+									<div class="input-field">
+										<div class="margin text-center">
+										<center>
+										<?php echo $this->Form->button('Submit',['class'=>'btn btn-primary btn-submit','value'=>'submit']); ?>
+										</center>
+										</div>
+									</div>
+								</div> 
+							</div>
+						</fieldset>
+							</div>
+						</div>
+					</div>
+				</div>
+<?= $this->Form->end() ?>
+<script>
+	 
+    $(document).ready(function () {
+$(".multi_city").multiselect();
+$(".multi_states").multiselect();
+	});
+</script>

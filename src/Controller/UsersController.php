@@ -73,7 +73,14 @@ class UsersController extends AppController {
 		$this->loadModel('Responses');
 		$FInalResponseCount = $this->Responses->find('all', ['conditions' => ['Responses.status' =>1,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->count();
 		$this->set('FInalResponseCount', $FInalResponseCount);
-		//*---
+		//*--- UserChats
+		$this->loadModel('UserChats');
+		$csort['created'] = "DESC";
+		$allUnreadChat = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->order($csort)->all();
+		$chatCount = $allUnreadChat->count();
+		$this->set('chatCount',$chatCount); 
+		$this->set('allunreadchat',$allUnreadChat);
+		//---
 		
 	}
 	

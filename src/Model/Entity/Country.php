@@ -9,8 +9,10 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $country_cod
  * @property string $country_name
+ * @property int $is_deleted
  *
  * @property \App\Model\Entity\User[] $users
+ * @property \App\Model\Entity\EventPlannerPromotion[] $event_planner_promotions
  */
 class Country extends Entity
 {

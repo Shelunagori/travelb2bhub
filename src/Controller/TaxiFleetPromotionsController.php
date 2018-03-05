@@ -19,7 +19,7 @@ class TaxiFleetPromotionsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Countries', 'PriceMasters', 'Users']
+            'contain' => ['Countries', 'PriceMasters', 'Users','States','Cities']
         ];
         $taxiFleetPromotions = $this->paginate($this->TaxiFleetPromotions);
 
@@ -51,6 +51,7 @@ class TaxiFleetPromotionsController extends AppController
      */
     public function add()
     {
+		$this->viewBuilder()->layout('user_layout');
         $taxiFleetPromotion = $this->TaxiFleetPromotions->newEntity();
         if ($this->request->is('post')) {
             $taxiFleetPromotion = $this->TaxiFleetPromotions->patchEntity($taxiFleetPromotion, $this->request->data);
@@ -61,10 +62,34 @@ class TaxiFleetPromotionsController extends AppController
             }
             $this->Flash->error(__('The taxi fleet promotion could not be saved. Please, try again.'));
         }
+		$a=$this->loadModel('States');
+		$this->loadModel('Cities');
+		$cities = $this->Cities->getAllCities();
+		$states = $this->States->find()->where(['country_id' => '101'])->all();
+				
+		$allStates = array();
+		foreach($states as $state){
+		$allStates[$state["id"]] = $state['state_name'];
+		}
+		$allCities = array();
+		$allCityList = array();
+		$statelist = array();
+		if(!empty($cities)) {
+		foreach($cities as $city) {
+		$cit = $city['name'].' ('.$city['state']->state_name.')';
+		$allCities[] = array("label"=>str_replace("'", "", $cit), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
+		$allCityList[$city['id']] = $city['name'];
+		$allStates[$state["id"]] = $state['state_name'];
+		}
+		}
+		$allCities = json_encode($allCities);
+
+		
         $countries = $this->TaxiFleetPromotions->Countries->find('list', ['limit' => 200]);
+        //$states = $this->TaxiFleetPromotions->States->find('list', ['limit' => 200]);
         $priceMasters = $this->TaxiFleetPromotions->PriceMasters->find('list', ['limit' => 200]);
         $users = $this->TaxiFleetPromotions->Users->find('list', ['limit' => 200]);
-        $this->set(compact('taxiFleetPromotion', 'countries', 'priceMasters', 'users'));
+        $this->set(compact('taxiFleetPromotion', 'countries', 'priceMasters', 'users','cities','states','allCities','allStates','allCityList','statelist'));
         $this->set('_serialize', ['taxiFleetPromotion']);
     }
 
@@ -115,4 +140,43 @@ class TaxiFleetPromotionsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+	public function initialize()
+	{
+		parent::initialize();
+		$this->Auth->allow(['logout']);
+		$first_name=$this->Auth->User('first_name');
+		$last_name=$this->Auth->User('last_name');
+		$profile_pic=$this->Auth->User('profile_pic');    
+		$loginId=$this->Auth->User('id');
+		$role_id=$this->Auth->User('role_id');
+		$authUserName=$first_name.' '.$last_name;
+		$this->set('MemberName',$authUserName);
+		$this->set('profile_pic', $profile_pic);
+		$this->set('loginId',$loginId);
+		$this->set('roleId',$role_id);
+		
+		//----	 FInalized
+		$this->loadModel('Requests');
+		$finalreq["Requests.user_id"] = $this->Auth->user('id');
+		$finalreq["Requests.status"] = 2;
+		$finalreq["Requests.is_deleted "] = 0;
+		$finalizeRequest = $this->Requests->find()->where($finalreq)->count();
+		$this->set('finalizeRequest', $finalizeRequest);
+		//--- Removed Request
+		$remoev["Requests.user_id"] = $this->Auth->user('id');
+		$remoev["Requests.is_deleted "] = 1;
+		$RemovedReqest = $this->Requests->find()->where($remoev)->count();
+		$this->set('RemovedReqest', $RemovedReqest);
+		//--- Blocked User
+		$this->loadModel('blocked_users');
+		$blk["blocked_users.blocked_by"] = $this->Auth->user('id');
+		$blockedUserscount = $this->blocked_users->find()->where($blk)->count();
+		$this->set('blockedUserscount', $blockedUserscount);
+		//--- Finalize Response;
+		$this->loadModel('Responses');
+		$FInalResponseCount = $this->Responses->find('all', ['conditions' => ['Responses.status' =>1,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->count();
+		$this->set('FInalResponseCount', $FInalResponseCount);
+		//*---
+		
+	}
 }

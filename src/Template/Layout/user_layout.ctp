@@ -434,13 +434,13 @@ $page_name=$this->request->params['action'];
 		
 		<li <?php if($page_name=='dashboard'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 		<?php
-		if($users['role_id'] == 1 || $users['role_id'] == 2)
+		if($roleId == 1 || $roleId == 2)
 		{?>
 			<li <?php if($page_name=='sendrequest'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'sendrequest']); ?>"><i class="fa fa-book"></i> <span>Place Request</span></a></li>
 			
 			<li <?php if($page_name=='requestlist'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'requestlist']); ?>"><i class="fa fa-suitcase"></i> <span>My Request</span></a></li>
 		<?php } 
-		if($users['role_id'] == 1 || $users['role_id'] == 3)
+		if($roleId == 1 || $roleId == 3)
 		{?>
 			<li <?php if($page_name=='respondtorequest'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'respondtorequest']); ?>"><i class="fa fa-book"></i> <span>Respond To Request</span></a></li>
 			
