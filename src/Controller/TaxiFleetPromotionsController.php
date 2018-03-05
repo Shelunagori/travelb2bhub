@@ -51,43 +51,21 @@ class TaxiFleetPromotionsController extends AppController
      */
     public function add()
     {
-		$this->viewBuilder()->layout('user_layout');
+		$this->viewBuilder()->layout('user_layout');	
         $taxiFleetPromotion = $this->TaxiFleetPromotions->newEntity();
-        if ($this->request->is('post')) {
-            $taxiFleetPromotion = $this->TaxiFleetPromotions->patchEntity($taxiFleetPromotion, $this->request->data);
-            if ($this->TaxiFleetPromotions->save($taxiFleetPromotion)) {
-                $this->Flash->success(__('The taxi fleet promotion has been saved.'));
+        if ($this->request->is('post'))
+			{
+				$taxiFleetPromotion = $this->TaxiFleetPromotions->patchEntity($taxiFleetPromotion, $this->request->data);
+				if ($this->TaxiFleetPromotions->save($taxiFleetPromotion)) {
+					$this->Flash->success(__('The taxi fleet promotion has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The taxi fleet promotion could not be saved. Please, try again.'));
-        }
-		$a=$this->loadModel('States');
-		$this->loadModel('Cities');
-		$cities = $this->Cities->getAllCities();
-		$states = $this->States->find()->where(['country_id' => '101'])->all();
-				
-		$allStates = array();
-		foreach($states as $state){
-		$allStates[$state["id"]] = $state['state_name'];
-		}
-		$allCities = array();
-		$allCityList = array();
-		$statelist = array();
-		if(!empty($cities)) {
-		foreach($cities as $city) {
-		$cit = $city['name'].' ('.$city['state']->state_name.')';
-		$allCities[] = array("label"=>str_replace("'", "", $cit), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
-		$allCityList[$city['id']] = $city['name'];
-		$allStates[$state["id"]] = $state['state_name'];
-		}
-		}
-		$allCities = json_encode($allCities);
-
-		
+					return $this->redirect(['action' => 'index']);
+				}
+				$this->Flash->error(__('The taxi fleet promotion could not be saved. Please, try again.'));
+			}
+		$city = $this->TaxiFleetPromotions->Users->Cities->find('list');
+        $states = $this->TaxiFleetPromotions->Users->States->find('list');
         $countries = $this->TaxiFleetPromotions->Countries->find('list', ['limit' => 200]);
-        $city = $this->TaxiFleetPromotions->TaxiFleetPromotionCities->find('list', ['limit' => 200]);
-        //$states = $this->TaxiFleetPromotions->States->find('list', ['limit' => 200]);
         $priceMasters = $this->TaxiFleetPromotions->PriceMasters->find('list', ['limit' => 200]);
         $users = $this->TaxiFleetPromotions->Users->find('list', ['limit' => 200]);
         $this->set(compact('taxiFleetPromotion', 'countries', 'priceMasters', 'users','cities','states','allCities','allStates','allCityList','statelist','city','price'));

@@ -164,7 +164,7 @@ fieldset{
 								</p>
 								
 								<div class="input-field">
-									<?php echo $this->Form->control('state_id', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$allStates, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select State","style"=>"height:125px;"]);?>
+									<?php echo $this->Form->control('state_id', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$states, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select State","style"=>"height:125px;"]);?>
 									
 								</div>
 							</div>
@@ -183,7 +183,7 @@ fieldset{
 											<span class="required">*</span>
 								</p>
 								<div class="input-field">
-								<?php echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$allCityList, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
+								<?php echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$city, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
 									
 								</div>
 							</div>
@@ -196,7 +196,7 @@ fieldset{
 								
 							</p>
 							<div class="input-field">
-									<?php echo $this->Form->input('fleet_detail',['class'=>'form-control','label'=>false]);?>
+									<?php echo $this->Form->input('price',['class'=>'form-control','label'=>false]);?>
 							</div>
 						</div>
 					</div>
