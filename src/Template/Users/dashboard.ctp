@@ -79,8 +79,10 @@ hr { margin-top:0px!important;}
 										<div class=" col-md-4">
 										<a onclick="countfunc('<?php echo $advert2['website']; ?>','<?php echo $advert2['id']; ?>')" href="<?php echo $advert2['website']; ?>" target="_blank">
 											<div class="priceing">
-												<div class="img">
-													<img <?php  if($advert2['hotel_pic']=="") {?> src="../img/travel-advertisement.jpg"<?php } else {?>
+												<div class="img" style="height:230px">
+													<img 
+													<?php if($advert2['hotel_pic']=="") {?> src="../img/travel-advertisement.jpg"<?php } else 
+													{ ?>
 													src="../img/hotels/<?php echo $advert2['hotel_pic']; } ?>" alt="Image" height="230px" width="100%" />
 													<div class="price overlap" >Rs. <span>
 														<?php echo $advert2['cheap_tariff']; ?></span>-<span><?php echo $advert2['expensive_tariff']; ?></span>
