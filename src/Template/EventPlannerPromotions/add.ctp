@@ -1,22 +1,68 @@
-<?php
-/**
-  * @var \App\View\AppView $this
-  */
-?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Event Planner Promotions'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Price Masters'), ['controller' => 'PriceMasters', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Price Master'), ['controller' => 'PriceMasters', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Event Planner Promotion Cities'), ['controller' => 'EventPlannerPromotionCities', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Event Planner Promotion City'), ['controller' => 'EventPlannerPromotionCities', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Event Planner Promotion States'), ['controller' => 'EventPlannerPromotionStates', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Event Planner Promotion State'), ['controller' => 'EventPlannerPromotionStates', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
+<div id="my_final_responses" class="container-fluid">
+	<div class="row equal_column">
+		<div class="col-md-12" style="background-color:#fff"> 
+			<br>
+			 
+			<?php echo  $this->Flash->render() ?>
+		</div>
+		<div class="col-md-12" style="background-color:#fff"> 
+			<div class="box box-default">
+				<div class="box-header with-border"> 
+					<h3 class="box-title" style="padding:20px">Event Planner Promotion</h3>
+					<div class="box-tools pull-right">
+ 					</div>
+ 				</div>
+				<div class="box-body">
+					<fieldset>
+					<legend style="color:#369FA1;"><b> &nbsp; Load Package &nbsp;  </b></legend>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<div class="input-field">
+										<p> Company Name </p>
+										<input autocomplete="off" type="text" class="form-control" placeholder="Company Name" readonly  value="<?= $users->company_name; ?>"/>
+									</div>
+								</div>
+								 
+							</div>
+						</div>
+					</fieldset>
+					<fieldset>
+					<legend style="color:#369FA1;"><b> &nbsp; Package Details &nbsp;  </b></legend>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="col-md-4">
+									<div class="input-field">
+										<p> Company Name </p>
+										<input autocomplete="off" type="text" class="form-control" placeholder="Company Name" readonly  value="<?= $users->company_name; ?>"/>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="input-field">
+										<p> Upload Image of Promotion <span class="required">*</span></p>
+										<input autocomplete="off" type="file" class="form-control" name="image" />
+									</div>
+								</div>
+								<div class="col-md-4">
+									<div class="input-field">
+										<p> Upload Document </p>
+										<input autocomplete="off" type="file" class="form-control" name="document" />
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+   
+
+
+
+
 <div class="eventPlannerPromotions form large-9 medium-8 columns content">
     <?= $this->Form->create($eventPlannerPromotion) ?>
     <fieldset>
