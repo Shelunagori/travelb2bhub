@@ -95,24 +95,15 @@ fieldset{
 					</div> 
 					<div class="row">
 						<div class="col-md-12">
-							<div class="col-md-6">
+							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 								<p for="from">
 									Upload Image of the Promotion
 									<span class="required">*</span>
 								</p>
-								
+								</div>
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 								<div class="input-field">
 									<?php  echo $this->Form->input('image',['class'=>'form-control','label'=>false,'type'=>'file']); ?>
-								</div>
-							</div>
-							<div class="col-md-6 ">
-							<p for="from">
-									Upload Document
-									<span class="required">*</span>
-								</p>
-								
-								<div class="input-field">
-									<?php  echo $this->Form->input('document',['class'=>'form-control','label'=>false,'type'=>'file']); ?>
 								</div>
 							</div>
 						</div>

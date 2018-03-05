@@ -19,10 +19,10 @@ class TaxiFleetPromotionsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Countries', 'PriceMasters', 'Users','States','Cities']
+            'contain' => ['Countries', 'PriceMasters', 'Users']
         ];
         $taxiFleetPromotions = $this->paginate($this->TaxiFleetPromotions);
-
+	pr($taxiFleetPromotions);exit;
         $this->set(compact('taxiFleetPromotions'));
         $this->set('_serialize', ['taxiFleetPromotions']);
     }
@@ -86,10 +86,11 @@ class TaxiFleetPromotionsController extends AppController
 
 		
         $countries = $this->TaxiFleetPromotions->Countries->find('list', ['limit' => 200]);
+        $city = $this->TaxiFleetPromotions->TaxiFleetPromotionCities->find('list', ['limit' => 200]);
         //$states = $this->TaxiFleetPromotions->States->find('list', ['limit' => 200]);
         $priceMasters = $this->TaxiFleetPromotions->PriceMasters->find('list', ['limit' => 200]);
         $users = $this->TaxiFleetPromotions->Users->find('list', ['limit' => 200]);
-        $this->set(compact('taxiFleetPromotion', 'countries', 'priceMasters', 'users','cities','states','allCities','allStates','allCityList','statelist'));
+        $this->set(compact('taxiFleetPromotion', 'countries', 'priceMasters', 'users','cities','states','allCities','allStates','allCityList','statelist','city','price'));
         $this->set('_serialize', ['taxiFleetPromotion']);
     }
 

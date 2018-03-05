@@ -37,6 +37,7 @@ class PriceMastersTable extends Table
 
         $this->table('price_masters');
         $this->displayField('week');
+        //$this->displayField('price');
         $this->primaryKey('id');
 
         $this->belongsTo('PromotionTypes', [
