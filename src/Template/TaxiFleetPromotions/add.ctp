@@ -20,12 +20,12 @@
 									<span class="required">*</span>
 								</p>
 								<div class="input-field">
-									 <?php echo $this->Form->input('company_name',['class'=>'form-control','label'=>false]);?>
+									 <?php echo $this->Form->input('company_name',['class'=>'form-control','label'=>false,'readonly']);?>
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 								<p for="from">
-									Title
+									Promotion Title
 									<span class="required">*</span>
 								</p>
 								<div class="input-field">
@@ -58,7 +58,7 @@
 						<div class="col-md-12">
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 								<p for="from">
-									Promotion Type
+									Promotion Name
 									<span class="required">*</span>
 								</p>
 								<div class="input-field">
@@ -109,20 +109,46 @@
 					</div> 
 					<div class="row">
 						<div class="col-md-12">
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+							<div class="col-md-6">
+								<p for="from">
+											Choose City
+											<span class="required">*</span>
+								</p>
+								
 								<div class="input-field">
-									<?php  echo $this->Form->input('user_id', ['options' => $users,'class'=>'form-control']); ?>
+									<?php  echo $this->Form->input('city_id', ['class'=>'form-control','options' => $allCityList,'label'=>false]); ?>
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-								<div class="input-field">
-									
-									 <?php echo $this->Form->input('fleet_detail',['class'=>'form-control']);?>
-								</div>
-							</div>
-						
 						</div>
-					</div> 
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<p for="from">
+								Fleet Details
+								
+							</p>
+							<div class="input-field">
+									<?php echo $this->Form->input('fleet_detail',['class'=>'form-control','label'=>false]);?>
+							</div>
+						</div>
+					</div>
+						</fieldset>
+					<br>
+					<fieldset>
+						<legend style="color:#369FA1;"><b><?= __('Payment ') ?></b></legend> 
+							<div class="col-md-6">
+							<p for="from">
+								Promotion Duration
+							</p>
+								<div class="input-field">
+									<?php  echo $this->Form->input('duration', ['options' => $priceMasters,'class'=>'form-control','label'=>false]); ?>
+								</div>
+							</div>
+						</div>
+					</div>
+					</fieldset>
+					
+					
 					<div class="row">
 								<div class="col-md-12">
 									<div class="input-field">
@@ -139,6 +165,5 @@
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
+			
 <?= $this->Form->end() ?>
