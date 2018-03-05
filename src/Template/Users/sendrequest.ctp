@@ -427,7 +427,7 @@ $(document).ready(function($){
 									</div>
 									<div class="col-md-4 ">
 										<div class="input-field">
-											<p for="from">Hotel Catrgory </p>
+											<p for="from">Hotel Category </p>
 												<div>
 													<?php echo $this->Form->control('hotel_category', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Hotel Category","style"=>"height:125px;"]);?>
 
@@ -679,7 +679,7 @@ $(document).ready(function($){
 									</div>
 									<div class="col-md-4 ">
 										<div class="input-field">
-											<p for="from">Hotel Catrgory </p>
+											<p for="from">Hotel Category </p>
 												<div>
 												<?php echo $this->Form->control('hotel_category', ["id"=>"hotel_category", "type"=>"select",'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Hotel Category","style"=>"height:125px;"]);?>
 											   </div>

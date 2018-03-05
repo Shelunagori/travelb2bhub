@@ -88,7 +88,7 @@ fieldset{
 													<span class="required">*</span>
 												</p>
 												<div class="input-field">
-													 <?php echo $this->Form->input('price_master_id',['options' => $priceMasters,'class'=>'form-control','label'=>false]);?>
+													 <?php echo $this->Form->input('price_master_id',['options' => $cat,'class'=>'form-control','label'=>false]);?>
 													
 												</div>
 											</div>
@@ -179,7 +179,7 @@ fieldset{
 													<span class="required">*</span>
 												</p>
 												<div class="input-field">
-													 <?php echo $this->Form->input('valid_date',['class'=>'form-control','label'=>false]);?>
+													 <?php echo $this->Form->input('valid_date',['class'=>'form-control date-picker date','label'=>false,'id'=>'datepicker7','data-date-format'=>'dd/mm/yyyy','placeholder'=>'dd/mm/yyyy' ]);?>
 													
 												</div>
 											</div>
@@ -189,7 +189,8 @@ fieldset{
 														Choose Country
 														<span class="required">*</span>
 													</p>
-													 <?php echo $this->Form->input('country_id',['class'=>'form-control','options' => $countries,'label'=>false]);?>
+
+													 <?php echo $this->Form->input('country_id',['class'=>'form-control select2','options' => $countries,'label'=>false,"empty"=>"Select Country"]);?>
 												</div>
 											</div>
 										</div>
@@ -217,6 +218,105 @@ fieldset{
 											</div>
 										</div>
 									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+												<p for="from">
+												Package Details				
+													<span class="required">*</span>
+												</p>
+												<div class="input-field">
+													 <?php echo $this->Form->input('package_detail',['class'=>'form-control','label'=>false]);?>
+													
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+												<p for="from">
+													Excluded Details
+													<span class="required">*</span>
+												</p>
+												<div class="input-field">
+													 <?php echo $this->Form->input('excluded_detail',['class'=>'form-control','label'=>false]);?>
+													
+												</div>
+											</div>
+										</div>
+									</div> 
+									<div class="row">
+										<div class="col-md-12">
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+												<p for="from">
+													Promotion Duration
+													<span class="required">*</span>
+												</p>
+												<div class="input-field">
+													
+													 <?php echo $this->Form->input('price_master_id',['options' => $priceMasters,'class'=>'form-control','label'=>false]);?>
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+												<p for="from">
+													Valid Till
+													<span class="required">*</span>
+												</p>
+												<div class="input-field">
+													
+													 <?php echo $this->Form->input('visible_date',['class'=>'form-control date-picker','label'=>false]);?>
+												</div>
+											</div>
+										</div>
+									</div> 
+									<div class="row ">
+										<div class="col-md-12">
+											<div class="col-md-6">
+												<p for="from">
+													Package Type
+													<span class="required">*</span>
+												</p>
+										   <input  type="radio" value="4" name="hotel_rating"/>
+										   <label >India</label>
+										   <input  type="radio" value="4" name="hotel_rating"/>
+										   <label >International</label>
+												
+											</div>
+											<div class="col-md-6">
+											</div>
+										</div>
+									</div>
+								</fieldset>
+							<br>
+					<fieldset>
+						<legend style="color:#369FA1;"><b><?= __('Payment ') ?></b></legend> 
+							<div class="col-md-6">
+							<p for="from">
+								Promotion Duration
+							</p>
+								<div class="input-field">
+									<?php  echo $this->Form->input('duration', ['options' => $priceMasters,'class'=>'form-control','label'=>false]); ?>
+								</div>
+							</div>
+							<div class="col-md-6">
+							<p for="from">
+								Promotion Amount
+							</p>
+								<div class="input-field">
+									<?php  echo $this->Form->input('amount', ['class'=>'form-control','label'=>false]); ?>
+								</div>
+							</div>
+						</div>
+					</div>
+					</fieldset>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="input-field">
+												<div class="margin text-center">
+												<center>
+												<?php echo $this->Form->button('Submit',['class'=>'btn btn-primary btn-submit','value'=>'submit']); ?>
+												</center>
+												</div>
+											</div>
+										</div> 
+									</div>
 						</fieldset>
 						</div>
 					</div>
@@ -224,27 +324,15 @@ fieldset{
 			</div>
 		</div>
 	</div>
-        <?php
-            echo $this->Form->input('title');
-            echo $this->Form->input('duration_night');
-            echo $this->Form->input('duration_day');
-            echo $this->Form->input('valid_date');
-            echo $this->Form->input('currency_id', ['options' => $currencies]);
-            echo $this->Form->input('starting_price');
-            echo $this->Form->input('country_id', ['options' => $countries]);
-            echo $this->Form->input('package_detail');
-            echo $this->Form->input('excluded_detail');
-            echo $this->Form->input('image');
-            echo $this->Form->input('document');
-            echo $this->Form->input('price_master_id', ['options' => $priceMasters]);
-            echo $this->Form->input('like_count');
-            echo $this->Form->input('visible_date');
-            echo $this->Form->input('user_id', ['options' => $users]);
-            echo $this->Form->input('created_on');
-            echo $this->Form->input('edited_by');
-            echo $this->Form->input('edited_on');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<?php echo $this->Html->script(['jquery.validate']);?>	
+<script>
+	 
+    $(document).ready(function () {
+$(".multi_city").multiselect();
+$(".multi_states").multiselect();
+$("#atepicker7").datepicker();
+	});
+</script>

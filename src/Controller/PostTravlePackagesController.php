@@ -19,10 +19,10 @@ class PostTravlePackagesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Currencies', 'Countries', 'PriceMasters', 'Users']
+            'contain' => ['Currencies', 'Countries', 'PriceMasters', 'Users','PostTravlePackageRows']
         ];
         $postTravlePackages = $this->paginate($this->PostTravlePackages);
-
+		pr($postTravlePackages->toArray());exit;
         $this->set(compact('postTravlePackages'));
         $this->set('_serialize', ['postTravlePackages']);
     }
@@ -65,14 +65,15 @@ class PostTravlePackagesController extends AppController
 			else
 				$this->Flash->error(__('The post travle package could not be saved. Please, try again.'));
 		}
-		$city = $this->TaxiFleetPromotions->Users->Cities->find('list');
-		pr($city);exit;
-        $states = $this->TaxiFleetPromotions->Users->States->find('list');
+		$city = $this->PostTravlePackages->Users->Cities->find('list');
+		$cat = $this->PostTravlePackages->PostTravlePackageRows->PostTravlePackageCategories->find('list');
+		//pr($cat->toArray());exit;
+        $states = $this->PostTravlePackages->Users->States->find('list');
         $currencies = $this->PostTravlePackages->Currencies->find('list', ['limit' => 200]);
         $countries = $this->PostTravlePackages->Countries->find('list', ['limit' => 200]);
         $priceMasters = $this->PostTravlePackages->PriceMasters->find('list', ['limit' => 200]);
         $users = $this->PostTravlePackages->Users->find('list', ['limit' => 200]);  
-        $this->set(compact('postTravlePackage', 'currencies', 'countries', 'priceMasters', 'users','states','city'));
+        $this->set(compact('postTravlePackage', 'currencies', 'countries', 'priceMasters', 'users','states','city','cat'));
         $this->set('_serialize', ['postTravlePackage']);
     }
 
