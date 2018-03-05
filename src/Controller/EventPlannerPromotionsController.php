@@ -110,10 +110,12 @@ class EventPlannerPromotionsController extends AppController
             }
             $this->Flash->error(__('The event planner promotion could not be saved. Please, try again.'));
         }
-        $Countries = $this->EventPlannerPromotions->Countries->find('list', ['limit' => 200]);
-        $priceMasters = $this->EventPlannerPromotions->PriceMasters->find('list', ['limit' => 200]);
-        $users = $this->EventPlannerPromotions->Users->find()->where(['id'=>$UserId])->first();;
-        $this->set(compact('eventPlannerPromotion', 'Countries', 'priceMasters', 'users'));
+       
+ 	    $States = $this->EventPlannerPromotions->States->find('list', ['limit' => 200])->where(['country_id'=>'101']);
+ 	    $Cities = $this->EventPlannerPromotions->Cities->find('list');
+        $priceMasters = $this->EventPlannerPromotions->PriceMasters->find('all', ['limit' => 200])->where(['promotion_type_id'=>3]);
+        $users = $this->EventPlannerPromotions->Users->find()->where(['id'=>$UserId])->first();
+        $this->set(compact('eventPlannerPromotion', 'States', 'priceMasters', 'users','Cities'));
         $this->set('_serialize', ['eventPlannerPromotion']);
     }
 

@@ -44,6 +44,10 @@ class EventPlannerPromotionsTable extends Table
             'foreignKey' => 'country_id',
             'joinType' => 'INNER'
         ]);
+		
+        $this->belongsTo('States');
+        $this->belongsTo('Cities');
+		
         $this->belongsTo('PriceMasters', [
             'foreignKey' => 'price_master_id',
             'joinType' => 'INNER'
