@@ -19,7 +19,7 @@ class PostTravlePackagesController extends AppController
 			$id=$postTravlePackage->user_id;
 			$image = $this->request->data('image');	
 			$title = $postTravlePackage->title;
-			$document = base64_decode($this->request->data('document'));	
+			$document = $this->request->data('document');	
 			if(!empty($this->request->data('visible_date')))
 			{
 				$postTravlePackage->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
@@ -29,24 +29,13 @@ class PostTravlePackagesController extends AppController
 				$postTravlePackage->valid_date = date('Y-m-d',strtotime($this->request->data('valid_date')));
 			}
 			
-			
-
 			if(!empty($image))
 			{	
-				$image=base64_decode($image);
-				$id=time().mt_rand().".png";
-				
 				$dir = new Folder(WWW_ROOT . 'images/PostTravelPackages/'.$id.'/'.$title.'/image', true, 0755);
-
-				$path =  WWW_ROOT.'images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id;
-					file_put_contents($path,$image);
-					$postTravlePackage->image='images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id;
-				}
-				else {
-					$postTravlePackage->image='';
-				}		
+				$ext = substr(strtolower(strrchr($image['name'], '.')), 1); 
+				$arr_ext = array('jpg', 'jpeg','png'); 				
 				
-			/* 	if(!empty($ext))
+				if(!empty($ext))
 				{
 					if(in_array($ext, $arr_ext)) { 
 						if (!file_exists('path/to/directory')) {
@@ -73,9 +62,9 @@ class PostTravlePackagesController extends AppController
 					$message = 'Invalid image extension';
 					$response_code = 103;  
 				
-				}	 		
+				}				
 			} else { $postTravlePackage->image ='';  }
-*/	
+
 			if(!empty($document))
 			{  
 				$dir = new Folder(WWW_ROOT . 'images/PostTravelPackages/'.$id.'/'.$title.'/document', true, 0755);
