@@ -1875,6 +1875,7 @@ var gg = 1;
 
         var x = 1;
         $(add_button).click(function (e) {
+			alert();
             e.preventDefault();
 			var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'addNewDestinationRow')) ?>";
 			var number = Math.floor((Math.random() * 100000) + 1);
