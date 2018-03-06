@@ -69,7 +69,7 @@ fieldset{
 				<div class="panel-group" style="background-color:white;">
 					<div class="panel panel-default">
 						<fieldset>
-							<legend style="color:#369FA1;"><b><?= __('Add Taxi Fleet Promotion') ?></b></legend> 
+							<legend style="color:#369FA1;"><b><?= __('Load Package') ?></b></legend> 
 					<div class="row">
 						<div class="col-md-12">
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -188,15 +188,17 @@ fieldset{
 								</div>
 							</div>
 						</div>
-					</div>
+					</div></br>
 					<div class="row">
+						<div class="col-md-12">
 						<div class="col-md-12">
 							<p for="from">
 								Fleet Details
 								
 							</p>
 							<div class="input-field">
-									<?php echo $this->Form->input('price',['class'=>'form-control','label'=>false]);?>
+									<?php echo $this->Form->input('fleet_details',['class'=>'form-control','label'=>false,'rows'=>'5']);?>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -204,35 +206,45 @@ fieldset{
 					<br>
 					<fieldset>
 						<legend style="color:#369FA1;"><b><?= __('Payment ') ?></b></legend> 
-							<div class="col-md-6">
-							<p for="from">
-								Promotion Duration
-							</p>
-								<div class="input-field">
-									<?php  echo $this->Form->input('duration', ['options' => $priceMasters,'class'=>'form-control','label'=>false]); ?>
-								</div>
-							</div>
-						</div>
-					</div>
-					</fieldset>
-					
-					
-					<div class="row">
+							<div class="row">
 								<div class="col-md-12">
-									<div class="input-field">
-										<div class="margin text-center">
-										<center>
-										<?php echo $this->Form->button('Submit',['class'=>'btn btn-primary btn-submit','value'=>'submit']); ?>
-										</center>
+									<div class="col-md-6">
+										<p for="from">
+											Promotion Duration
+										</p>
+										<div class="input-field">
+											<?php  echo $this->Form->input('duration', ['options' => $priceMasters,'class'=>'form-control','label'=>false]); ?>
 										</div>
 									</div>
-								</div> 
+									<div class="col-md-6">
+									<p for="from">
+										Promotion Amount
+									</p>
+										<div class="input-field">
+											<?php  echo $this->Form->input('amount', ['class'=>'form-control','label'=>false]); ?>
+										</div>
+									</div>
+								</div>
 							</div>
 						</fieldset>
+								<div class="row">
+											<div class="col-md-12">
+												<div class="input-field">
+													<div class="margin text-center">
+													<center>
+													<?php echo $this->Form->button('Submit',['class'=>'btn btn-primary btn-submit','value'=>'submit']); ?>
+													</center>
+													</div>
+												</div>
+											</div> 
+										</div>
+								
 							</div>
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
 <?= $this->Form->end() ?>
 <script>
 	 
