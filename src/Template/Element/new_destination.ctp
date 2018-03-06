@@ -57,14 +57,14 @@
 					<div class="input-field">
 						<p for="from">Hotel Catrgory </p>
 							<div>
-								<?php echo $this->Form->control('hh_hotel_category['.$randomNumber.']', ["id"=>"hotel_category", "type"=>"select", 'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Hotel Category",]);?>
+								<?php echo $this->Form->control('hh_hotel_category'.$randomNumber[], ["id"=>"hotel_category", "type"=>"select", 'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Hotel Category",]);?>
 						   </div>
 					</div>
 				</div>
 				<div class="col-md-4 ">
 					<div class="input-field">
 						<p for="from">Meal Plan </p>
-						<div><?php echo $this->Form->control('hh_meal_plan.['.$randomNumber.']', ["type"=>"select", "empty"=>"Select Meal Plan", 'options' =>array("1"=>"EP - European Plan", "2"=>"CP - Contenental Plan", "3"=>"MAP - Modified American Plan", "4"=>"AP - American Plan") , "class"=>"form-control"]);?></div>
+						<div><?php echo $this->Form->control('hh_meal_plan['.$randomNumber.']', ["type"=>"select", "empty"=>"Select Meal Plan", 'options' =>array("1"=>"EP - European Plan", "2"=>"CP - Contenental Plan", "3"=>"MAP - Modified American Plan", "4"=>"AP - American Plan") , "class"=>"form-control"]);?></div>
 					</div>
 				</div>
 			</div>
