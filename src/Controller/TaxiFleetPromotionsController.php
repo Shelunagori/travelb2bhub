@@ -52,10 +52,12 @@ class TaxiFleetPromotionsController extends AppController
     public function add()
     {
 		$this->viewBuilder()->layout('user_layout');	
+		$UserId=$this->Auth->User('id');
         $taxiFleetPromotion = $this->TaxiFleetPromotions->newEntity();
         if ($this->request->is('post'))
 			{
 				$taxiFleetPromotion = $this->TaxiFleetPromotions->patchEntity($taxiFleetPromotion, $this->request->data);
+				pr($taxiFleetPromotion);exit;
 				if ($this->TaxiFleetPromotions->save($taxiFleetPromotion)) {
 					$this->Flash->success(__('The taxi fleet promotion has been saved.'));
 
@@ -65,13 +67,14 @@ class TaxiFleetPromotionsController extends AppController
 			}
 		$city = $this->TaxiFleetPromotions->Users->Cities->find('list');
 		$company = $this->TaxiFleetPromotions->Users->find('all');
-		//pr($company->['company_name']);exit;
-        $states = $this->TaxiFleetPromotions->Users->States->find('list');
+		//pr($company->toArray());exit;
+		$states = $this->TaxiFleetPromotions->Users->States->find('list', ['limit' => 200])->where(['country_id'=>'101']);
 		$cat = $this->TaxiFleetPromotions->TaxiFleetPromotionRows->TaxiFleetCarBuses->find('list');
 		//pr($cat->toArray());exit;
         $countries = $this->TaxiFleetPromotions->Countries->find('list', ['limit' => 200]);
-        $priceMasters = $this->TaxiFleetPromotions->PriceMasters->find('list', ['limit' => 200]);
-        $users = $this->TaxiFleetPromotions->Users->find('list', ['limit' => 200]);
+        $priceMasters = $this->TaxiFleetPromotions->PriceMasters->find('all', ['limit' => 200])->where(['promotion_type_id'=>2]);
+		
+		 $users = $this->TaxiFleetPromotions->Users->find()->where(['id'=>$UserId])->first();
         $this->set(compact('taxiFleetPromotion', 'countries', 'priceMasters', 'users','states','company','city','cat'));
         $this->set('_serialize', ['taxiFleetPromotion']);
     }

@@ -78,7 +78,7 @@ fieldset{
 									<span class="required">*</span>
 								</p>
 								<div class="input-field">
-									
+									 <?php echo $this->Form->input('company_name',['class'=>'form-control','label'=>false,'autocomplete'=> "off",'placeholder'=>"Company Name",'readonly'=>'readonly','value'=>$users->company_name]);?>
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -88,7 +88,6 @@ fieldset{
 								</p>
 								<div class="input-field">
 									 <?php echo $this->Form->input('title',['class'=>'form-control','label'=>false]);?>
-									
 								</div>
 							</div>
 						</div>
@@ -134,21 +133,6 @@ fieldset{
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-								<p for="from">
-									Promotion Type
-									<span class="required">*</span>
-								</p>
-								<div class="input-field">
-									
-									 <?php echo $this->Form->input('price_master_id',['options' => $priceMasters,'class'=>'form-control','label'=>false]);?>
-								</div>
-							</div>
-							
-						</div>
-					</div> 
-					<div class="row">
-						<div class="col-md-12">
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 								<div class="input-field">
 									<p for="from">
 										Choose Country
@@ -157,23 +141,9 @@ fieldset{
 									<?php echo $this->Form->input('country_id',['class'=>'form-control select2','options' => $countries,'label'=>false,"empty"=>"Select Country"]);?>
 								</div>
 							</div>
-							<div class="col-md-6">
-								<p for="from">
-											Visibility Date
-											<span class="required">*</span>
-								</p>
-								<div class="input-field">
-								 <?php echo $this->Form->input('visible_date1',['class'=>'form-control date-picker','label'=>false,'data-date-format'=>'dd/mm/yyyy','placeholder'=>'dd/mm/yyyy']);?>
-								</div>
-							</div>
-							
-							<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-								<div class="input-field">
-									<?php  //echo $this->Form->input('visible_date', ['class'=>'form-control input-medium date-picker']); ?>
-								</div>
-							</div> -->
 						</div>
 					</div> 
+					
 					<div class="row">
 						<div class="col-md-12">
 							<div class="col-md-6">
@@ -190,7 +160,7 @@ fieldset{
 							</div>
 							<div class="col-md-6">
 								<p for="from">
-											Choose City
+											Cities of Operation
 											<span class="required">*</span>
 								</p>
 								<div class="input-field">
@@ -209,7 +179,7 @@ fieldset{
 								
 							</p>
 							<div class="input-field">
-									<?php echo $this->Form->input('fleet_details',['class'=>'form-control','label'=>false,'rows'=>'5']);?>
+									<?php echo $this->Form->input('fleet_detail',['class'=>'form-control','label'=>false,'rows'=>'5']);?>
 								</div>
 							</div>
 						</div>
@@ -220,20 +190,38 @@ fieldset{
 						<legend style="color:#369FA1;"><b><?= __('Payment ') ?></b></legend> 
 							<div class="row">
 								<div class="col-md-12">
-									<div class="col-md-6">
+									<div class="col-md-4">
 										<p for="from">
-											Promotion Duration
+											Payment Duration
 										</p>
 										<div class="input-field">
-											<?php  echo $this->Form->input('duration', ['options' => $priceMasters,'class'=>'form-control','label'=>false]); ?>
+												 
+										<?php				 
+											$options=array();
+											foreach($priceMasters as $Price)
+											{
+												$options[] = ['value'=>$Price->id,'text'=>$Price->week,'priceVal'=>$Price->week,'price'=>$Price->price];
+											};
+											echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters','label'=>false,'empty'=>'Select ...']);?>
+											<?php // echo $this->Form->input('duration', ['options' => $priceMasters,'class'=>'form-control','label'=>false]); ?>
 										</div>
 									</div>
-									<div class="col-md-6">
-									<p for="from">
-										Promotion Amount
-									</p>
+									<div class="col-md-4">
+										<p for="from">
+													Visibility Date
+													<span class="required">*</span>
+										</p>
 										<div class="input-field">
-											<?php  echo $this->Form->input('amount', ['class'=>'form-control','label'=>false]); ?>
+										<?php echo $this->Form->input('visible_date', ['class'=>'form-control visible_date','label'=>false,"placeholder"=>"Visible Date",'readonly'=>'readonly','type'=>'text']); ?>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<p for="from">
+													Promotion Amount
+													<span class="required">*</span>
+										</p>
+										<div class="input-field">
+										<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text']);?> 
 										</div>
 									</div>
 								</div>
@@ -258,9 +246,32 @@ fieldset{
 			</div>
 		</div>
 <?= $this->Form->end() ?>
-<script>
-	 
-    $(document).ready(function () {
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<script>	 
+    $(document).ready(function ()
+	{
+		$(document).on('change','.priceMasters',function()
+		{
+			var priceVal=$('.priceMasters option:selected').attr('priceVal');
+			var price=$('.priceMasters option:selected').attr('price');
+			var Result = priceVal.split(" ");
+			var Result1 = price.split(" ");
+			var weeks=Result[0];
+			var price=Result1[0];
+			
+			var todaydate = new Date(); // Parse date
+			for(var x=0; x < weeks; x++){
+				todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
+			}
+			var dd = todaydate .getDate();
+			var mm = todaydate .getMonth()+1; //January is 0!
+			var yyyy = todaydate .getFullYear();
+			if(dd<10){  dd='0'+dd } 
+			if(mm<10){  mm='0'+mm } 
+			var date = dd+'-'+mm+'-'+yyyy;	
+			$('.visible_date').val(date);
+			$('.payment_amount').val(price);
+		})
 $("#multi_city").multiselect();
 $("#multi_states").multiselect();
 	});
