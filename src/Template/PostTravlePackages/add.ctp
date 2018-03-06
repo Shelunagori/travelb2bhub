@@ -88,7 +88,7 @@ fieldset{
 													<span class="required">*</span>
 												</p>
 												<div class="input-field">
-													 <?php echo $this->Form->input('price_master_id',['options' => $cat,'class'=>'form-control','label'=>false]);?>
+													 <?php echo $this->Form->input('package_category_id',['options' => $cat,'class'=>'form-control','label'=>false]);?>
 													
 												</div>
 											</div>
@@ -139,9 +139,11 @@ fieldset{
 													Valid Till
 													<span class="required">*</span>
 												</p>
-												<div class="input-field">
-													
-													 <?php echo $this->Form->input('visible_date',['class'=>'form-control date-picker','label'=>false]);?>
+												<div class="input-field input-group">
+													 <?php echo $this->Form->input('visible_date1',['class'=>'form-control date-picker','label'=>false,'data-date-format'=>'dd/mm/yyyy','placeholder'=>'dd/mm/yyyy']);?>
+													 <p class="input-group-addon btn" >
+													<span class="fa fa-calendar"></span>
+													</p>
 												</div>
 											</div>
 										</div>
@@ -200,13 +202,16 @@ fieldset{
 												<div class="col-md-6">
 													<p for="from">
 														Package Type
-														<span class="required">*</span>
 													</p>
-													<div class="input-field">
-													   <input  type="radio" value="4" name="hotel_rating"/>
-													   <label >India</label>
-													   <input  type="radio" value="4" name="hotel_rating"/>
-													   <label >International</label>
+													<div class="input-group">
+													  <span class="input-group-addon">
+															<input type="radio" name="r1" value="1"/>
+															<p>India</p> 
+														</span>
+													   <span class="input-group-addon">
+															<input type="radio" name="r1" value="2"/>
+															<p>International</p>
+													   </span>
 													</div>
 												</div>
 												<div class="col-md-6">
@@ -313,6 +318,7 @@ fieldset{
     <?= $this->Form->end() ?>
 </div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+
 <?php echo $this->Html->script(['jquery.validate']);?>	
 <script>
 	 
