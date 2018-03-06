@@ -128,8 +128,7 @@ fieldset{
 									<span class="required">*</span>
 								</p>
 								<div class="input-field">
-									
-									 <?php echo $this->Form->input('vehicle_type',['options' => $cat,'class'=>'form-control','label'=>false,"class"=>"form-control select2","empty"=>"Select Vehicle"]);?>
+									<?php echo $this->Form->control('vehicle_type[]', ['label'=>false,"id"=>"multi_vehicle", "type"=>"select",'options' =>$cat, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Vehicle ","style"=>"height:125px;"]);?>
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -154,7 +153,7 @@ fieldset{
 								
 								<div class="input-field">
 							
-									<?php echo $this->Form->control('state_id', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$states, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select State","style"=>"height:125px;"]);?>
+									<?php echo $this->Form->control('state_id[]', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$states, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select State","style"=>"height:125px;"]);?>
 									
 								</div>
 							</div>
@@ -164,7 +163,7 @@ fieldset{
 											<span class="required">*</span>
 								</p>
 								<div class="input-field">
-								<?php echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$city, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
+								<?php echo $this->Form->control('city_id[]', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$city, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
 									
 								</div>
 							</div>
@@ -274,5 +273,6 @@ fieldset{
 		})
 $("#multi_city").multiselect();
 $("#multi_states").multiselect();
+$("#multi_vehicle").multiselect();
 	});
 </script>

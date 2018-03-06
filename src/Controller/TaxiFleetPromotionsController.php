@@ -58,6 +58,39 @@ class TaxiFleetPromotionsController extends AppController
 			{
 				$taxiFleetPromotion = $this->TaxiFleetPromotions->patchEntity($taxiFleetPromotion, $this->request->data);
 				// Call Curl FOR FB DETAILS
+				
+				$state_id=$this->request->data['state_id'];
+				$x=0;
+				$array_of_state=array();
+				foreach($state_id as $state)
+				{
+					$array_of_state[]=array('texi_fleet_promotion_state[$x]["state_id"]'=>$state);
+					$x++;	
+				}
+			print_r($array_of_state)."<br>";
+				
+				$city_id=$this->request->data['city_id'];
+				$y=0;
+				$array_of_cities=array();
+				foreach($city_id as $city)
+				{
+					$array_of_cities[]=array('texi_fleet_promotion_city[$y]["city_id"]'=>$city);
+					$y++;	
+				}
+				print_r($array_of_cities)."<br>";
+				
+				$vehicle_type=$this->request->data['vehicle_type'];
+				$z=0;
+				$array_of_vehicles=array();
+				foreach($vehicle_type as $vehicle)
+				{
+					$array_of_vehicles[]=array('texi_fleet_promotion_bus[$z]["vehicle_type"]'=>$vehicle);
+					$z++;	
+				}
+				print_r($array_of_vehicles)."<br>";exit;
+				
+			
+				
 							$post =[
 								'company_name' => $company_name,
 								'title' =>$title,
@@ -72,7 +105,7 @@ class TaxiFleetPromotionsController extends AppController
 								'payment_amount' =>$payment_amount,									
 							];
 							//foreach()
-							$ch = curl_init('https://app.flexiloans.in/app/api/communicationRequestData');
+							$ch = curl_init('http://konciergesolutions.com/travelb2bhub/api/taxi_fleet_promotions/add.json');
 							curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 							curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 							$response = curl_exec($ch);
