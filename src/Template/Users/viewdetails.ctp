@@ -225,7 +225,7 @@ ul li b {
 					$stop_count = 1;
 					foreach($details['request_stops'] as $stops)
 					{ ?>
-					<fieldset><legend>Stop <?php	echo $stop_count; ?></legend>
+					<fieldset class="col-md-12"><legend>Stop <?php	echo $stop_count; ?></legend>
 						 
 						<li class="col-md-6">
 							<p>Stop Locality :&nbsp;<?php

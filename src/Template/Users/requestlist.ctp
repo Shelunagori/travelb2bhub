@@ -54,9 +54,9 @@ legend
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title">Sorting</h4>
 					  </div>
-					  <div class="modal-body">
+					  <div class="modal-body" style="height:170px;">
 						<div class="col-md-12 row form-group margin-b10">
-							<div class=col-md-12>
+							<div class="col-md-12">
 									 <input class="btn btn-info btn-sm" type="radio" name="r1"/>
 									 <label class="col-form-label"for=example-text-input>
 										Total Budget <i class="fa fa-sort-amount-desc"></i> <span class=arrow><span></span></span>
@@ -64,7 +64,7 @@ legend
 							</div>
                         </div>
 						<div class="col-md-12 row form-group margin-b10">
-							<div class=col-md-12>
+							<div class="col-md-12">
 									<input class="btn btn-info btn-sm" type="radio" name="r1"/>
 									<label class="col-form-label"for=example-text-input>
 										No. of Responses <i class="fa fa-sort-amount-asc"></i> <span class=arrow><span></span></span></label>
