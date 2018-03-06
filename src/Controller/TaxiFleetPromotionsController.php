@@ -57,13 +57,34 @@ class TaxiFleetPromotionsController extends AppController
         if ($this->request->is('post'))
 			{
 				$taxiFleetPromotion = $this->TaxiFleetPromotions->patchEntity($taxiFleetPromotion, $this->request->data);
-				pr($taxiFleetPromotion);exit;
-				if ($this->TaxiFleetPromotions->save($taxiFleetPromotion)) {
+				// Call Curl FOR FB DETAILS
+							$post =[
+								'company_name' => $company_name,
+								'title' =>$title,
+								'image' =>$image,
+								'document' =>$document,
+								'vehicle_type' =>$vehicle_type,									
+								'country_id' =>$country_id,									
+								'promotion_type' =>$promotion_type,									
+								'fleet_detail' =>$fleet_detail,									
+								'price_master_id' =>$price_master_id,									
+								'visible_date' =>$visible_date,									
+								'payment_amount' =>$payment_amount,									
+							];
+							//foreach()
+							$ch = curl_init('https://app.flexiloans.in/app/api/communicationRequestData');
+							curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+							curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+							$response = curl_exec($ch);
+							curl_close($ch);
+							
+				/* if ($this->TaxiFleetPromotions->save($taxiFleetPromotion)) {
 					$this->Flash->success(__('The taxi fleet promotion has been saved.'));
 
 					return $this->redirect(['action' => 'index']);
 				}
-				$this->Flash->error(__('The taxi fleet promotion could not be saved. Please, try again.'));
+
+				$this->Flash->error(__('The taxi fleet promotion could not be saved. Please, try again.')); */
 			}
 		$city = $this->TaxiFleetPromotions->Users->Cities->find('list');
 		$company = $this->TaxiFleetPromotions->Users->find('all');

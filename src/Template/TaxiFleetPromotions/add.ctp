@@ -129,7 +129,7 @@ fieldset{
 								</p>
 								<div class="input-field">
 									
-									 <?php echo $this->Form->input('promotion_type',['options' => $cat,'class'=>'form-control','label'=>false,"class"=>"form-control select2","empty"=>"Select Vehicle"]);?>
+									 <?php echo $this->Form->input('vehicle_type',['options' => $cat,'class'=>'form-control','label'=>false,"class"=>"form-control select2","empty"=>"Select Vehicle"]);?>
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -212,7 +212,7 @@ fieldset{
 													<span class="required">*</span>
 										</p>
 										<div class="input-field">
-										<?php echo $this->Form->input('visible_date', ['class'=>'form-control visible_date','label'=>false,"placeholder"=>"Visible Date",'readonly'=>'readonly','type'=>'text']); ?>
+										<?php echo $this->Form->input('visible_date', ['data-date-format'=>'dd/mm/yyyy','class'=>'form-control visible_date','label'=>false,"placeholder"=>"Visible Date",'readonly'=>'readonly','type'=>'text']); ?>
 										</div>
 									</div>
 									<div class="col-md-4">
