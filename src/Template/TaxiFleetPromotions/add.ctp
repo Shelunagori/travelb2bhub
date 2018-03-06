@@ -78,7 +78,7 @@ fieldset{
 									<span class="required">*</span>
 								</p>
 								<div class="input-field">
-									 <?php echo $this->Form->input('company_name',['class'=>'form-control','label'=>false,'readonly']);?>
+									
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -125,12 +125,12 @@ fieldset{
 						<div class="col-md-12">
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 								<p for="from">
-									Promotion Name
+									Vehicle Type
 									<span class="required">*</span>
 								</p>
 								<div class="input-field">
 									
-									 <?php echo $this->Form->input('promotion_type',['options' => $priceMasters,'class'=>'form-control','label'=>false]);?>
+									 <?php echo $this->Form->input('promotion_type',['options' => $cat,'class'=>'form-control','label'=>false,"class"=>"form-control select2","empty"=>"Select Vehicle"]);?>
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -154,20 +154,19 @@ fieldset{
 										Choose Country
 										<span class="required">*</span>
 									</p>
-									 <?php echo $this->Form->input('country_id',['class'=>'form-control','options' => $countries,'label'=>false]);?>
+									<?php echo $this->Form->input('country_id',['class'=>'form-control select2','options' => $countries,'label'=>false,"empty"=>"Select Country"]);?>
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+							<div class="col-md-6">
 								<p for="from">
-											Choose State
+											Visibility Date
 											<span class="required">*</span>
 								</p>
-								
 								<div class="input-field">
-									<?php echo $this->Form->control('state_id', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$states, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select State","style"=>"height:125px;"]);?>
-									
+								 <?php echo $this->Form->input('visible_date1',['class'=>'form-control date-picker','label'=>false,'data-date-format'=>'dd/mm/yyyy','placeholder'=>'dd/mm/yyyy']);?>
 								</div>
 							</div>
+							
 							<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 								<div class="input-field">
 									<?php  //echo $this->Form->input('visible_date', ['class'=>'form-control input-medium date-picker']); ?>
@@ -179,6 +178,18 @@ fieldset{
 						<div class="col-md-12">
 							<div class="col-md-6">
 								<p for="from">
+											Choose State
+											<span class="required">*</span>
+								</p>
+								
+								<div class="input-field">
+							
+									<?php echo $this->Form->control('state_id', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$states, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select State","style"=>"height:125px;"]);?>
+									
+								</div>
+							</div>
+							<div class="col-md-6">
+								<p for="from">
 											Choose City
 											<span class="required">*</span>
 								</p>
@@ -187,8 +198,9 @@ fieldset{
 									
 								</div>
 							</div>
+							
 						</div>
-					</div></br>
+					</div><br>
 					<div class="row">
 						<div class="col-md-12">
 						<div class="col-md-12">
@@ -202,8 +214,8 @@ fieldset{
 							</div>
 						</div>
 					</div>
-						</fieldset>
-					<br>
+				</fieldset>
+			<br>
 					<fieldset>
 						<legend style="color:#369FA1;"><b><?= __('Payment ') ?></b></legend> 
 							<div class="row">
@@ -249,7 +261,7 @@ fieldset{
 <script>
 	 
     $(document).ready(function () {
-$(".multi_city").multiselect();
-$(".multi_states").multiselect();
+$("#multi_city").multiselect();
+$("#multi_states").multiselect();
 	});
 </script>

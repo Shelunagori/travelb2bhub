@@ -22,7 +22,7 @@ class PostTravlePackagesController extends AppController
             'contain' => ['Currencies', 'Countries', 'PriceMasters', 'Users','PostTravlePackageRows']
         ];
         $postTravlePackages = $this->paginate($this->PostTravlePackages);
-		pr($postTravlePackages->toArray());exit;
+		//pr($postTravlePackages->toArray());exit;
         $this->set(compact('postTravlePackages'));
         $this->set('_serialize', ['postTravlePackages']);
     }

@@ -19,10 +19,10 @@ class TaxiFleetPromotionsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Countries', 'PriceMasters', 'Users']
+            'contain' => ['Countries', 'PriceMasters', 'Users','TaxiFleetPromotionRows']
         ];
         $taxiFleetPromotions = $this->paginate($this->TaxiFleetPromotions);
-	pr($taxiFleetPromotions);exit;
+		pr($taxiFleetPromotions->toArray());exit;
         $this->set(compact('taxiFleetPromotions'));
         $this->set('_serialize', ['taxiFleetPromotions']);
     }
@@ -64,11 +64,15 @@ class TaxiFleetPromotionsController extends AppController
 				$this->Flash->error(__('The taxi fleet promotion could not be saved. Please, try again.'));
 			}
 		$city = $this->TaxiFleetPromotions->Users->Cities->find('list');
+		$company = $this->TaxiFleetPromotions->Users->find('all');
+		//pr($company->['company_name']);exit;
         $states = $this->TaxiFleetPromotions->Users->States->find('list');
+		$cat = $this->TaxiFleetPromotions->TaxiFleetPromotionRows->TaxiFleetCarBuses->find('list');
+		//pr($cat->toArray());exit;
         $countries = $this->TaxiFleetPromotions->Countries->find('list', ['limit' => 200]);
         $priceMasters = $this->TaxiFleetPromotions->PriceMasters->find('list', ['limit' => 200]);
         $users = $this->TaxiFleetPromotions->Users->find('list', ['limit' => 200]);
-        $this->set(compact('taxiFleetPromotion', 'countries', 'priceMasters', 'users','cities','states','allCities','allStates','allCityList','statelist','city','price'));
+        $this->set(compact('taxiFleetPromotion', 'countries', 'priceMasters', 'users','states','company','city','cat'));
         $this->set('_serialize', ['taxiFleetPromotion']);
     }
 
