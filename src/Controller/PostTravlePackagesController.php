@@ -98,11 +98,73 @@ class PostTravlePackagesController extends AppController
     public function add()
     {
 		$this->viewBuilder()->layout('user_layout');
+		$UserId=$this->Auth->User('id');
         $postTravlePackage = $this->PostTravlePackages->newEntity();
         if ($this->request->is('post'))
 		{
             $postTravlePackage = $this->PostTravlePackages->patchEntity($postTravlePackage, $this->request->data);
-            if ($this->PostTravlePackages->save($postTravlePackage))
+			// Call Curl FOR FB DETAILS
+				
+				$state_id=$this->request->data['state_id'];
+				$x=0;
+				$array_of_state=array();
+				foreach($state_id as $state)
+				{
+					$array_of_state['post_travle_package_states['.$x.']["state_id"]']=$state_id[$x];
+					$x++;	
+				}
+				
+				$city_id=$this->request->data['city_id'];
+				$y=0;
+				$array_of_cities=array();
+				foreach($city_id as $city)
+				{
+					$array_of_cities['post_travle_package_cities['.$y.']["city_id"]']=$city_id[$y];
+					$y++;	
+				}
+				$package_category_id=$this->request->data['package_category_id'];
+				$z=0;
+				$array_of_category=array();
+				//pr($city_id);
+				foreach($package_category_id as $category)
+				{
+					$array_of_category['post_travle_package_rows['.$z.']["post_travle_package_category_id"]']=$package_category_id[$z];
+					$z++;	
+				}
+
+							$post =[
+								'company_name' => $this->request->data['company_name'],
+								'UserId' => $UserId,
+								'title' =>$this->request->data['title'],
+								'image' =>'',//$this->request->data['image'],
+								'document' =>'',//$this->request->data['document'],
+								'duration_night' =>$this->request->data['duration_night'],									
+								'duration_day' =>$this->request->data['duration_day'],									
+								//'promotion_type' =>$this->request->data['promotion_type'],									
+								'valid_date' =>$this->request->data['valid_date1'],									
+								'currency_id' =>$this->request->data['currency_id'],									
+								'starting_price' =>$this->request->data['starting_price'],									
+								'country_id' =>$this->request->data['country_id'],									
+								'package_detail' =>$this->request->data['package_detail'],									
+								'excluded_detail' =>$this->request->data['excluded_detail'],									
+								'price_master_id' =>$this->request->data['price_master_id'],									
+								'visible_date' =>$this->request->data['visible_date']									
+								//'payment_amount' =>$this->request->data['payment_amount'],									
+							];
+							$post=array_merge($post,$array_of_category);
+							$post=array_merge($post,$array_of_cities);
+							$post=array_merge($post,$array_of_state);
+							//pr($post);exit;
+							$ch = curl_init('http://konciergesolutions.com/travelb2bhub/api/post_travle_packages/add.json');
+							curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+							curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+							$response = curl_exec($ch);
+							$result = json_encode($response);
+							curl_close($ch);
+							pr($result);
+				exit;
+				
+          /*   if ($this->PostTravlePackages->save($postTravlePackage))
 				{
                 $this->Flash->success(__('The post travle package has been saved.'));
 
@@ -110,15 +172,16 @@ class PostTravlePackagesController extends AppController
 				}
 			else
 				$this->Flash->error(__('The post travle package could not be saved. Please, try again.'));
-		}
+		} */
+	}
 		$city = $this->PostTravlePackages->Users->Cities->find('list');
 		$cat = $this->PostTravlePackages->PostTravlePackageRows->PostTravlePackageCategories->find('list');
 		//pr($cat->toArray());exit;
-        $states = $this->PostTravlePackages->Users->States->find('list');
+		$states = $this->PostTravlePackages->Users->States->find('list', ['limit' => 200])->where(['country_id'=>'101']);
         $currencies = $this->PostTravlePackages->Currencies->find('list', ['limit' => 200]);
         $countries = $this->PostTravlePackages->Countries->find('list', ['limit' => 200]);
-        $priceMasters = $this->PostTravlePackages->PriceMasters->find('list', ['limit' => 200]);
-        $users = $this->PostTravlePackages->Users->find('list', ['limit' => 200]);  
+		$priceMasters = $this->PostTravlePackages->PriceMasters->find('all', ['limit' => 200])->where(['promotion_type_id'=>1]);
+        $users = $this->PostTravlePackages->Users->find()->where(['id'=>$UserId])->first();  
         $this->set(compact('postTravlePackage', 'currencies', 'countries', 'priceMasters', 'users','states','city','cat'));
         $this->set('_serialize', ['postTravlePackage']);
     }
