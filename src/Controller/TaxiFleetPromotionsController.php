@@ -64,52 +64,54 @@ class TaxiFleetPromotionsController extends AppController
 				$array_of_state=array();
 				foreach($state_id as $state)
 				{
-					$array_of_state[]=array('texi_fleet_promotion_state[$x]["state_id"]'=>$state);
+					$array_of_state['taxi_fleet_promotion_states['.$x.']["state_id"]']=$state_id[$x];
 					$x++;	
 				}
-			print_r($array_of_state)."<br>";
 				
 				$city_id=$this->request->data['city_id'];
 				$y=0;
 				$array_of_cities=array();
 				foreach($city_id as $city)
 				{
-					$array_of_cities[]=array('texi_fleet_promotion_city[$y]["city_id"]'=>$city);
+					$array_of_cities['taxi_fleet_promotion_cities['.$y.']["city_id"]']=$city_id[$y];
 					$y++;	
 				}
-				print_r($array_of_cities)."<br>";
-				
 				$vehicle_type=$this->request->data['vehicle_type'];
 				$z=0;
 				$array_of_vehicles=array();
+				//pr($city_id);
 				foreach($vehicle_type as $vehicle)
 				{
-					$array_of_vehicles[]=array('texi_fleet_promotion_bus[$z]["vehicle_type"]'=>$vehicle);
+					$array_of_vehicles['taxi_fleet_promotion_rows['.$z.']["taxi_fleet_car_bus_id"]']=$vehicle_type[$z];
 					$z++;	
 				}
-				print_r($array_of_vehicles)."<br>";exit;
-				
-			
-				
+
 							$post =[
-								'company_name' => $company_name,
-								'title' =>$title,
-								'image' =>$image,
-								'document' =>$document,
-								'vehicle_type' =>$vehicle_type,									
-								'country_id' =>$country_id,									
-								'promotion_type' =>$promotion_type,									
-								'fleet_detail' =>$fleet_detail,									
-								'price_master_id' =>$price_master_id,									
-								'visible_date' =>$visible_date,									
-								'payment_amount' =>$payment_amount,									
+								'company_name' => $this->request->data['company_name'],
+								'UserId' => $UserId,
+								'title' =>$this->request->data['title'],
+								'image' =>$this->request->data['image'],
+								'document' =>$this->request->data['document'],
+								'vehicle_type' =>$this->request->data['vehicle_type'],									
+								'country_id' =>$this->request->data['country_id'],									
+								//'promotion_type' =>$this->request->data['promotion_type'],									
+								'fleet_detail' =>$this->request->data['fleet_detail'],									
+								'price_master_id' =>$this->request->data['price_master_id'],									
+								'visible_date' =>$this->request->data['visible_date'],									
+								'payment_amount' =>$this->request->data['payment_amount'],									
 							];
-							//foreach()
+							$post=array_merge($post,$array_of_vehicles);
+							$post=array_merge($post,$array_of_cities);
+							$post=array_merge($post,$array_of_state);
+							pr($post);
 							$ch = curl_init('http://konciergesolutions.com/travelb2bhub/api/taxi_fleet_promotions/add.json');
 							curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 							curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 							$response = curl_exec($ch);
+							$result = json_encode($response);
 							curl_close($ch);
+							pr($result);
+				exit;
 							
 				/* if ($this->TaxiFleetPromotions->save($taxiFleetPromotion)) {
 					$this->Flash->success(__('The taxi fleet promotion has been saved.'));

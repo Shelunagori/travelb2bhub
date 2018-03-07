@@ -64,7 +64,7 @@ class TaxiFleetPromotionsController extends AppController
 			{  
 				$dir = new Folder(WWW_ROOT . 'images/taxiFleetPromotion/'.$id.'/'.$title.'/document', true, 0755);
 				$ext = substr(strtolower(strrchr($document['name'], '.')), 1); 
-				$arr_ext = array('jpg', 'jpeg','png','pdf'); 				
+				$arr_ext = array('jpg','jpeg','png','pdf'); 				
 				if(!empty($ext))
 				{
 					if (in_array($ext, $arr_ext)) {
