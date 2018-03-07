@@ -64,6 +64,7 @@ class PostTravlePackagesController extends AppController
 	}
     public function index()
     {
+		$this->viewBuilder()->layout('user_layout');
         $this->paginate = [
             'contain' => ['Currencies', 'Countries', 'PriceMasters', 'Users','PostTravlePackageRows']
         ];

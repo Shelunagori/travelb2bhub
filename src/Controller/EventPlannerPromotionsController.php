@@ -65,6 +65,7 @@ class EventPlannerPromotionsController extends AppController
 	
     public function index()
     {
+		$this->viewBuilder()->layout('user_layout');
         $this->paginate = [
             'contain' => ['Countries', 'PriceMasters', 'Users']
         ];
@@ -144,10 +145,9 @@ class EventPlannerPromotionsController extends AppController
 							curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 							curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 							$response = curl_exec($ch);
-							$result = json_encode($response);
+							$result = json_encode($response, true);
 							curl_close($ch);
-							pr($result);
-				exit;
+							pr($result);exit;
 			/*	if ($this->EventPlannerPromotions->save($eventPlannerPromotion)) {
                 $this->Flash->success(__('The event planner promotion has been saved.'));
 
@@ -210,5 +210,16 @@ class EventPlannerPromotionsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+	 public function report()
+    {
+		$this->viewBuilder()->layout('user_layout');
+        $this->paginate = [
+            'contain' => ['Countries', 'PriceMasters', 'Users']
+        ];
+        $eventPlannerPromotions = $this->paginate($this->EventPlannerPromotions);
+
+        $this->set(compact('eventPlannerPromotions'));
+        $this->set('_serialize', ['eventPlannerPromotions']);
     }
 }

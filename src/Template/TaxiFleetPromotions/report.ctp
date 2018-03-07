@@ -27,8 +27,11 @@
                 <th scope="col"><?= ('Duration') ?></th>
                 <th scope="col"><?= ('Likes') ?></th>
                 <th scope="col"><?= ('Visibility Date') ?></th>
-				<th scope="col"><?= ('Image') ?></th>
+				 <th scope="col"><?= ('Image') ?></th>
                 <th scope="col"><?= ('Document') ?></th>
+               
+               
+               
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>

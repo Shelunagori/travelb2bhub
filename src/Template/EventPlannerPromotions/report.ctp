@@ -22,13 +22,11 @@
 							 <tr style="background-color:#709090;color:white;">
 								<th scope="col"><?= ('Sr.No') ?></th>
 								<th scope="col"><?= ('User Name') ?></th>
-								
 								<th scope="col"><?= ('Country') ?></th>
 								<th scope="col"><?= ('Duration') ?></th>
 								<th scope="col"><?= ('Likes') ?></th>
 								<th scope="col"><?= ('Visibility Date') ?></th>
 								<th scope="col"><?= ('Image') ?></th>
-								<th scope="col"><?//= ('Document') ?></th>
 								<th scope="col" class="actions"><?= __('Actions') ?></th>
 							</tr>
 						</thead>
@@ -41,8 +39,7 @@
 								<td><?= h($eventPlannerPromotion->price_master->week); ?></td>
 								<td><?= $this->Number->format($eventPlannerPromotion->like_count) ?></td>
 								<td><?= h($eventPlannerPromotion->visible_date) ?></td>	
-								<td><?= h($eventPlannerPromotion->image) ?></td>
-								
+								<td><?php echo "yash";//= h($eventPlannerPromotion->image) ?></td>
 								<td class="actions">
 									<?= $this->Html->link(__('View'), ['action' => 'view', $eventPlannerPromotion->id]) ?>
 									<?= $this->Html->link(__('Edit'), ['action' => 'edit', $eventPlannerPromotion->id]) ?>

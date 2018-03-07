@@ -14,15 +14,54 @@ class TaxiFleetPromotionsController extends AppController
     /**
      * Index method
      *
-     * @return \Cake\Network\Response|null
-     */
+     * @return \Cake\Network\Response|null*/
+	 public function initialize()
+	{
+		parent::initialize();
+		$this->Auth->allow(['logout']);
+		$first_name=$this->Auth->User('first_name');
+		$last_name=$this->Auth->User('last_name');
+		$profile_pic=$this->Auth->User('profile_pic');    
+		$loginId=$this->Auth->User('id');
+		$role_id=$this->Auth->User('role_id');
+		$authUserName=$first_name.' '.$last_name;
+		$this->set('MemberName',$authUserName);
+		$this->set('profile_pic', $profile_pic);
+		$this->set('loginId',$loginId);
+		$this->set('roleId',$role_id);
+		
+		//----	 FInalized
+		$this->loadModel('Requests');
+		$finalreq["Requests.user_id"] = $this->Auth->user('id');
+		$finalreq["Requests.status"] = 2;
+		$finalreq["Requests.is_deleted "] = 0;
+		$finalizeRequest = $this->Requests->find()->where($finalreq)->count();
+		$this->set('finalizeRequest', $finalizeRequest);
+		//--- Removed Request
+		$remoev["Requests.user_id"] = $this->Auth->user('id');
+		$remoev["Requests.is_deleted "] = 1;
+		$RemovedReqest = $this->Requests->find()->where($remoev)->count();
+		$this->set('RemovedReqest', $RemovedReqest);
+		//--- Blocked User
+		$this->loadModel('blocked_users');
+		$blk["blocked_users.blocked_by"] = $this->Auth->user('id');
+		$blockedUserscount = $this->blocked_users->find()->where($blk)->count();
+		$this->set('blockedUserscount', $blockedUserscount);
+		//--- Finalize Response;
+		$this->loadModel('Responses');
+		$FInalResponseCount = $this->Responses->find('all', ['conditions' => ['Responses.status' =>1,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->count();
+		$this->set('FInalResponseCount', $FInalResponseCount);
+		//*---
+		
+	}
     public function index()
     {
+		$this->viewBuilder()->layout('user_layout');
         $this->paginate = [
-            'contain' => ['Countries', 'PriceMasters', 'Users','TaxiFleetPromotionRows']
+            'contain' => ['Countries', 'PriceMasters', 'Users','TaxiFleetPromotionRows','TaxiFleetPromotionCities','TaxiFleetPromotionStates']
         ];
         $taxiFleetPromotions = $this->paginate($this->TaxiFleetPromotions);
-		pr($taxiFleetPromotions->toArray());exit;
+		//pr($taxiFleetPromotions->toArray());exit;
         $this->set(compact('taxiFleetPromotions'));
         $this->set('_serialize', ['taxiFleetPromotions']);
     }
@@ -184,43 +223,16 @@ class TaxiFleetPromotionsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-	public function initialize()
-	{
-		parent::initialize();
-		$this->Auth->allow(['logout']);
-		$first_name=$this->Auth->User('first_name');
-		$last_name=$this->Auth->User('last_name');
-		$profile_pic=$this->Auth->User('profile_pic');    
-		$loginId=$this->Auth->User('id');
-		$role_id=$this->Auth->User('role_id');
-		$authUserName=$first_name.' '.$last_name;
-		$this->set('MemberName',$authUserName);
-		$this->set('profile_pic', $profile_pic);
-		$this->set('loginId',$loginId);
-		$this->set('roleId',$role_id);
-		
-		//----	 FInalized
-		$this->loadModel('Requests');
-		$finalreq["Requests.user_id"] = $this->Auth->user('id');
-		$finalreq["Requests.status"] = 2;
-		$finalreq["Requests.is_deleted "] = 0;
-		$finalizeRequest = $this->Requests->find()->where($finalreq)->count();
-		$this->set('finalizeRequest', $finalizeRequest);
-		//--- Removed Request
-		$remoev["Requests.user_id"] = $this->Auth->user('id');
-		$remoev["Requests.is_deleted "] = 1;
-		$RemovedReqest = $this->Requests->find()->where($remoev)->count();
-		$this->set('RemovedReqest', $RemovedReqest);
-		//--- Blocked User
-		$this->loadModel('blocked_users');
-		$blk["blocked_users.blocked_by"] = $this->Auth->user('id');
-		$blockedUserscount = $this->blocked_users->find()->where($blk)->count();
-		$this->set('blockedUserscount', $blockedUserscount);
-		//--- Finalize Response;
-		$this->loadModel('Responses');
-		$FInalResponseCount = $this->Responses->find('all', ['conditions' => ['Responses.status' =>1,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->count();
-		$this->set('FInalResponseCount', $FInalResponseCount);
-		//*---
-		
-	}
+	 public function report()
+    {
+        $this->viewBuilder()->layout('user_layout');
+        $this->paginate = [
+            'contain' => ['Countries', 'PriceMasters', 'Users','TaxiFleetPromotionRows','TaxiFleetPromotionCities','TaxiFleetPromotionStates']
+        ];
+        $taxiFleetPromotions = $this->paginate($this->TaxiFleetPromotions);
+		//pr($taxiFleetPromotions->toArray());exit;
+        $this->set(compact('taxiFleetPromotions'));
+        $this->set('_serialize', ['taxiFleetPromotions']);
+    }
+	
 }
