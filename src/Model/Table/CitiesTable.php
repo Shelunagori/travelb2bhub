@@ -46,6 +46,10 @@ class CitiesTable extends Table
             'foreignKey' => 'state_id',
             'joinType' => 'INNER'
         ]);
+		$this->belongsTo('Countries', [
+            'foreignKey' => 'country_id',
+            'joinType' => 'INNER'
+        ]);
         $this->hasMany('Hotels', [
             'foreignKey' => 'city_id'
         ]);

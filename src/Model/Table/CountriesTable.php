@@ -58,6 +58,9 @@ class CountriesTable extends Table
         $this->hasMany('States', [
             'foreignKey' => 'country_id'
         ]);
+		 $this->hasMany('Cities', [
+            'foreignKey' => 'country_id'
+        ]);
         $this->hasMany('TaxiFleetPromotions', [
             'foreignKey' => 'country_id'
         ]);

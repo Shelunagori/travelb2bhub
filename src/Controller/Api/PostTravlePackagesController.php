@@ -325,7 +325,7 @@ class PostTravlePackagesController extends AppController
 				}else{
 					$message = 'Data found but view not increased';
 					$response_code = 204;				
-				}				
+				}
 			}
 			else
 			{

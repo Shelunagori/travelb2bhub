@@ -263,6 +263,24 @@ Router::scope('/', function (RouteBuilder $routes) {
 					   ]
 					]
 				);
+				$routes->resources(
+					'PostTravlePackageCarts', [
+					   'map' => [
+						   'postTravlePackageCartAdd' => [
+							   'action' => 'postTravlePackageCartAdd',
+							   'method' => 'POST'
+						   ],
+						   'postTravlePackageCartlist' => [
+							   'action' => 'postTravlePackageCartlist',
+							   'method' => 'GET'
+						   ],
+						   'PostTravlePackageCartDelete' => [
+							   'action' => 'PostTravlePackageCartDelete',
+							   'method' => 'GET'
+						   ]
+					   ]
+					]
+				);
 					
 });				
 
