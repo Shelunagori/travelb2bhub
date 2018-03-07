@@ -1057,7 +1057,7 @@ public function sendrequest() {
 	$this->set('delcount', $delcount);
 	$plcreqcount = (($reqcount['value']-$myRequestCount1)-($delcount+ $myfinalCount));
 	//echo $myRequestCount1; die();
-	if($myRequestCount1 >=50){
+	if($myRequestCount1 >=10){
 		$msg = "You have exceeded the count of permissible open requests. You must Finalize a Request or Remove a Request in order to proceed with placing another request.";
 		$this->Flash->error(__($msg));
 		return $this->redirect('/users/requestlist');
