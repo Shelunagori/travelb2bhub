@@ -103,19 +103,64 @@ class EventPlannerPromotionsController extends AppController
         $eventPlannerPromotion = $this->EventPlannerPromotions->newEntity();
         if ($this->request->is('post')) {
             $eventPlannerPromotion = $this->EventPlannerPromotions->patchEntity($eventPlannerPromotion, $this->request->data);
-            if ($this->EventPlannerPromotions->save($eventPlannerPromotion)) {
+			
+			// Call Curl FOR FB DETAILS
+				
+				$state_id=$this->request->data['state_id'];
+				$x=0;
+				$array_of_state=array();
+				foreach($state_id as $state)
+				{
+					$array_of_state['event_planner_promotion_states['.$x.']["state_id"]']=$state_id[$x];
+					$x++;	
+				}
+				
+				$city_id=$this->request->data['city_id'];
+				$y=0;
+				$array_of_cities=array();
+				foreach($city_id as $city)
+				{
+					$array_of_cities['event_planner_promotion_cities['.$y.']["city_id"]']=$city_id[$y];
+					$y++;	
+				}
+				
+
+							$post =[
+								'company_name' => $this->request->data['company_name'],
+								'UserId' => $UserId,
+								'title' =>$this->request->data['title'],
+								'image' =>'',//$this->request->data['image'],
+								'document' =>'',//$this->request->data['document'],
+								'event_detail' =>$this->request->data['event_detail'],
+								'country_id' =>$this->request->data['country_id'],									
+								'price_master_id' =>$this->request->data['price_master_id'],
+								'visible_date' =>$this->request->data['visible_date']									
+								//'payment_amount' =>$this->request->data['payment_amount'],									
+							];
+							$post=array_merge($post,$array_of_cities);
+							$post=array_merge($post,$array_of_state);
+							//pr($post);exit;
+							$ch = curl_init('http://konciergesolutions.com/travelb2bhub/api/event_planner_promotions/add.json');
+							curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+							curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+							$response = curl_exec($ch);
+							$result = json_encode($response);
+							curl_close($ch);
+							pr($result);
+				exit;
+			/*	if ($this->EventPlannerPromotions->save($eventPlannerPromotion)) {
                 $this->Flash->success(__('The event planner promotion has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The event planner promotion could not be saved. Please, try again.'));
+            $this->Flash->error(__('The event planner promotion could not be saved. Please, try again.')); */
         }
-       
+		$countries = $this->EventPlannerPromotions->Countries->find('list', ['limit' => 200]);
  	    $States = $this->EventPlannerPromotions->States->find('list', ['limit' => 200])->where(['country_id'=>'101']);
  	    $Cities = $this->EventPlannerPromotions->Cities->find('list');
         $priceMasters = $this->EventPlannerPromotions->PriceMasters->find('all', ['limit' => 200])->where(['promotion_type_id'=>3]);
         $users = $this->EventPlannerPromotions->Users->find()->where(['id'=>$UserId])->first();
-        $this->set(compact('eventPlannerPromotion', 'States', 'priceMasters', 'users','Cities'));
+        $this->set(compact('eventPlannerPromotion', 'States', 'priceMasters', 'users','Cities','countries'));
         $this->set('_serialize', ['eventPlannerPromotion']);
     }
 
