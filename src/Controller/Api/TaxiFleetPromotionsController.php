@@ -234,6 +234,19 @@ class TaxiFleetPromotionsController extends AppController
 			$viewTaxiFleetPromotions->user_id = $user_id;  			
 			$exists = $this->TaxiFleetPromotions->TaxiFleetPromotionViews->exists(['taxi_fleet_promotion_id'=>$viewTaxiFleetPromotions->taxi_fleet_promotion_id,'user_id'=>$viewTaxiFleetPromotions->user_id]);
 			
+			$carts = $this->TaxiFleetPromotions->TaxiFleetPromotionCarts->exists(['TaxiFleetPromotionCarts.taxi_fleet_promotion_id'=>$id,'TaxiFleetPromotionCarts.user_id'=>$user_id,'TaxiFleetPromotionCarts.is_deleted'=>0]);
+			
+			if($carts==0){
+				foreach($getTaxiFleetPromotionsDetails as $sfad){
+					$sfad->issaved=false;
+				}
+				
+			}else{
+				foreach($getTaxiFleetPromotionsDetails as $sfad){
+					$sfad->issaved=true;
+				}
+			}
+			
 			if($exists == 0)
 			{
 				if ($this->TaxiFleetPromotions->TaxiFleetPromotionViews->save($viewTaxiFleetPromotions)) {
@@ -250,6 +263,9 @@ class TaxiFleetPromotionsController extends AppController
 					$message = 'Data found but viewed already';
 					$response_code = 205;					
 			}
+			
+					$getTaxiFleetPromotionsDetails->total_views = $this->TaxiFleetPromotions->TaxiFleetPromotionViews
+							->find()->where(['taxi_fleet_promotion_id' => $id])->count();
 		}
 		else
 		{

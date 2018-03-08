@@ -351,6 +351,7 @@ class PostTravlePackagesController extends AppController
 			if($exists == 0)
 			{
 				if ($this->PostTravlePackages->PostTravlePackageViews->save($viewPostTravelPackages)) {
+					 
 					$message = 'Data found and view increased by 1';
 					$response_code = 200;
 				}else{
@@ -362,7 +363,12 @@ class PostTravlePackagesController extends AppController
 			{
 					$message = 'Data found but viewed already';
 					$response_code = 205;					
-			}				
+			}			
+
+				$getTravelPackageDetails->total_views = $this->PostTravlePackages->PostTravlePackageViews
+							->find()->where(['post_travle_package_id' => $id])->count();		
+					 
+					
 			//$message = 'Data Found Successfully';
 			//$response_code = 200;
 		}
@@ -370,7 +376,7 @@ class PostTravlePackagesController extends AppController
 		{
 			$message = 'No Content Found';
 			$getTravelPackageDetails = [];
-			$response_code = 204;			
+			$response_code = 204;
 		}
 		
 		$this->set(compact('getTravelPackageDetails','message','response_code'));
