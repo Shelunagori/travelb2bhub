@@ -17,10 +17,36 @@ class TaxiFleetPromotionsController extends AppController
 			$message = 'PERFECT';
 			$response_code = 101;
 
-			$id=$taxiFleetPromotion->user_id;
+			$id = $taxiFleetPromotion->user_id;
 			$title = $taxiFleetPromotion->title;
 			$image = $this->request->data('image');	
-			$document = $this->request->data('document');				
+			$document = $this->request->data('document');
+			$submitted_from = @$this->request->data('submitted_from');
+			if(@$submitted_from=='web')
+			{
+				$state_id=$this->request->data['state_id'];
+				$x=0; 
+				foreach($state_id as $state)
+				{
+					$taxiFleetPromotion['taxi_fleet_promotion_states['.$x.']["state_id"]']=$state_id[$x];
+					$x++;	
+				}
+				$city_id=$this->request->data['city_id'];
+				$y=0; 
+				foreach($city_id as $city)
+				{
+					$taxiFleetPromotion['taxi_fleet_promotion_cities['.$y.']["city_id"]']=$city_id[$y];
+					$y++;	
+				}
+				$vehicle_type=$this->request->data['vehicle_type'];
+				$z=0; 
+				foreach($vehicle_type as $vehicle)
+				{
+					$taxiFleetPromotion['taxi_fleet_promotion_rows['.$z.']["taxi_fleet_car_bus_id"]']=$vehicle_type[$z];
+					$z++;	
+				}
+			}
+ 
 			if(!empty($this->request->data('visible_date')))
 			{
 				$taxiFleetPromotion->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
@@ -64,7 +90,7 @@ class TaxiFleetPromotionsController extends AppController
 			{  
 				$dir = new Folder(WWW_ROOT . 'images/taxiFleetPromotion/'.$id.'/'.$title.'/document', true, 0755);
 				$ext = substr(strtolower(strrchr($document['name'], '.')), 1); 
-				$arr_ext = array('jpg','jpeg','png','pdf'); 				
+				$arr_ext = array('jpg', 'jpeg','png','pdf'); 				
 				if(!empty($ext))
 				{
 					if (in_array($ext, $arr_ext)) {
@@ -101,11 +127,16 @@ class TaxiFleetPromotionsController extends AppController
 					$response_code = 200;
 				}else{
 					$message = 'The Taxi/Fleet promotions has not been saved';
-					$response_code = 204;				
+					$response_code = 204; 
 				}
 			}			
         }
-		
+ 
+		if(@$submitted_from=='web'){
+			$this->Flash->success(__('message'));
+			return $this->redirect(['controller'=>'TaxiFleetPromotions','action' => 'add']);
+		}
+
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);
     }
@@ -149,7 +180,6 @@ class TaxiFleetPromotionsController extends AppController
 			$getTaxiFleetPromotions = $this->TaxiFleetPromotions->find();
 				$getTaxiFleetPromotions->select(['total_likes'=>$getTaxiFleetPromotions->func()->count('TaxiFleetPromotionLikes.id')])
 				->leftJoinWith('TaxiFleetPromotionLikes')
-				->contain(['Users'])
 			->where(['visible_date >=' =>date('Y-m-d')])
 			->group(['TaxiFleetPromotions.id'])
 			->autoFields(true);
