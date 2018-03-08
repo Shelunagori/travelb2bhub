@@ -54,6 +54,7 @@ a:hover,a:focus{
 }*/ 
 fieldset{
 	margin:10px !important;
+	border-radius: 6px;
 }
 </style> 
 <!--------- <script>
@@ -1809,7 +1810,7 @@ $(document).ready(function () {
         	strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="stops[' +packageI+ ']"></div></div>';
         	strHtml += '<div class="col-sm-4 mt"><p for="from">Stop City</p><input class="trans_city form-control city_select ctynamerecord" noofrows="5" taxboxname="state_id_package_stop_city[' +packageI+ ']" type="text" placeholder="Select City or Nearest City" use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" class="ctyIDname" name="id_package_stop_city[' +packageI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div> ';
         	strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly></div></div></div></div>';
-        	strHtml += '<button class="btn btn-danger btn-sm package_remove_stop">Remove Stop</button>';
+        	strHtml += '<div align="right" style="margin-top:10px"><button aligh="right" class="btn btn-danger btn-sm package_remove_stop">Remove Stop</button></div>';
          strHtml += ' <hr class="hr"></hr></div>';
         $(".package-stops").append(strHtml);
         	packageI++;
@@ -1817,7 +1818,7 @@ $(document).ready(function () {
         $(document).on("click", ".package_remove_stop", function (e) {
             e.preventDefault();
             packageI--;
-            $(this).parent('.stop').slideUp(function(){
+            $(this).parent('div').parent('.stop').slideUp(function(){
 				$(this).remove();
 var gg = 1;
 		$( ".stop-title" ).each(function() {
@@ -1835,7 +1836,7 @@ var gg = 1;
 				strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="stops[' +transI+ ']"></div></div>';
 				strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control ctynamerecord city_select" type="text" noofrows="4" taxboxname="state_id_trasport_stop_city[' +transI+ ']" placeholder="Select City or Nearest City" use_for = "trasport" numCount = ' +transI+ ' id="trasport_stop_city[' +transI+ ']" name="trasport_stop_city[' +transI+ ']"><input type="hidden" class="ctyIDname" id="id_trasport_stop_city[' +transI+ ']" name="id_trasport_stop_city[' +transI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div></div>';
 				strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_trasport_stop_city[' +transI+ ']" name="state_id_trasport_stop_city[' +transI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_trasport_stop_city[' +transI+ ']" name="state_name_trasport_stop_city[' +transI+ ']" readonly></div></div></div></div>';
-				strHtml += '<button class="btn btn-danger btn-sm transport_remove_stop but"> Remove Stop </button>';
+				strHtml += '<div align="right" style="margin-top:10px;"><button class="btn btn-danger btn-sm transport_remove_stop but"> Remove Stop </button></div>';
 				strHtml += ' <hr class="hr"></hr></div>';
 				$(".transport-stops").append(strHtml);
 				transI++;
@@ -1845,7 +1846,7 @@ var gg = 1;
 
             e.preventDefault();
             transI--;
-            $(this).parent('.stop').slideUp(function(){
+            $(this).parent('div').parent('.stop').slideUp(function(){
 				$(this).remove();
 		var f = 1;
 		$( ".stop-title" ).each(function() {
@@ -1875,7 +1876,6 @@ var gg = 1;
 
         var x = 1;
         $(add_button).click(function (e) {
-			alert();
             e.preventDefault();
 			var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'addNewDestinationRow')) ?>";
 			var number = Math.floor((Math.random() * 100000) + 1);

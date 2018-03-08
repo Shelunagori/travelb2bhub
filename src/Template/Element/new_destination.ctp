@@ -57,7 +57,7 @@
 					<div class="input-field">
 						<p for="from">Hotel Catrgory </p>
 							<div>
-								<?php echo $this->Form->control('hh_hotel_category'.$randomNumber[], ["id"=>"hotel_category", "type"=>"select", 'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Hotel Category",]);?>
+								<?php echo $this->Form->control('hh_hotel_category['.$randomNumber.']', ["id"=>"hotel_category", "type"=>"select", 'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Hotel Category",]);?>
 						   </div>
 					</div>
 				</div>
@@ -145,7 +145,7 @@
 		</div><span class="help-block"></span>
 	</div>
 	</div>
-	<div class="col-md-12">
+	<div class="col-md-12" align="right">
 		<a href="java:script(0);" class="remove_field btn btn-danger btn-sm">Remove</a>
 		<br/><br/><hr></hr>
 	</div>
