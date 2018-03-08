@@ -81,7 +81,7 @@ hr { margin-top:0px!important;}
 											<div class="priceing">
 												<div class="img" style="height:230px">
 													<img 
-													<?php if($advert2['hotel_pic']=="") {?> src="../img/travel-advertisement.jpg"<?php } else 
+													<?php if(($advert2['hotel_pic']=="") || (!file_exists('../img/hotels/'.$advert2['hotel_pic']))) {?> src="../img/blankhotel.PNG"<?php } else 
 													{ ?>
 													src="../img/hotels/<?php echo $advert2['hotel_pic']; } ?>" alt="Image" height="230px" width="100%" />
 													<div class="price overlap" >Rs. <span>

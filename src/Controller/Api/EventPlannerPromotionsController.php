@@ -7,8 +7,6 @@ use Cake\Filesystem\File;
 
 class EventPlannerPromotionsController extends AppController
 {
-
-
     public function add()
     {
         $eventPlannerPromotion = $this->EventPlannerPromotions->newEntity();
@@ -20,7 +18,25 @@ class EventPlannerPromotionsController extends AppController
 			$id=$eventPlannerPromotion->user_id;
 			$title = 'Event_'.rand();
 			$image = $this->request->data('image');	
-			$document = $this->request->data('document');				
+			$document = $this->request->data('document');
+			$submitted_from = @$this->request->data('submitted_from');
+			if(@$submitted_from=='web')
+			{
+				$state_id=$this->request->data['state_id'];
+				$x=0;
+				foreach($state_id as $state)
+				{
+					$eventPlannerPromotion['event_planner_promotion_states['.$x.']["state_id"]']=$state_id[$x];
+					$x++;
+				}
+				$city_id=$this->request->data['city_id'];
+				$y=0;
+				foreach($city_id as $city)
+				{
+					$eventPlannerPromotion['event_planner_promotion_cities['.$y.']["city_id"]']=$city_id[$y];
+					$y++;	
+				}
+			}
 			if(!empty($this->request->data('visible_date')))
 			{
 				$eventPlannerPromotion->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
@@ -100,7 +116,11 @@ class EventPlannerPromotionsController extends AppController
 				}
 			}			
         }
-
+		if(@$submitted_from=='web')
+		{
+			$this->Flash->success(__('message'));
+			return $this->redirect(['controller'=>'EventPlannerPromotions','action' => 'report']);
+		}
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);		
     }
@@ -214,7 +234,6 @@ class EventPlannerPromotionsController extends AppController
 			$getEventPlanners = $this->EventPlannerPromotions->find();
 				$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('EventPlannerPromotionLikes.id')])
 				->leftJoinWith('EventPlannerPromotionLikes')
-				->contain(['Users'])
 			->where(['visible_date >=' =>date('Y-m-d')])
 			->where(['is_deleted' =>0])
 			->group(['EventPlannerPromotions.id'])

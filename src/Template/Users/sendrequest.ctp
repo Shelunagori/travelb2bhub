@@ -277,11 +277,10 @@ $(document).ready(function($){
 ------------>	 
 <div class="row equal_column">
 	<div class="col-md-12" style="background-color:#fff"> 
-		<br>
+		<br> 
 		<?php echo $this->element('subheader');?>
  	</div>
 <div class="col-md-12" style="background-color:#fff"> 
-
 <div class="box box-default">
 	<div class="box-header with-border"> 
 		<h3 class="box-title" style="padding:10px">Place Request</h3>
@@ -292,7 +291,7 @@ $(document).ready(function($){
 	<div class="box-body">
 		<div class="row"> 
 		<div id="tra-sendrequest" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background:#FFF">
-			<?= $this->Flash->render() ?>
+			
 			<div class="content">
 			<div class="tab-content tab">
 				<div align="center">
