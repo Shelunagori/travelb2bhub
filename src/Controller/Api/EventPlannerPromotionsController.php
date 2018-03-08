@@ -307,6 +307,19 @@ class EventPlannerPromotionsController extends AppController
 			
 			$exists = $this->EventPlannerPromotions->EventPlannerPromotionViews->exists(['event_planner_promotion_id'=>$viewEventPlannerPromotions->event_planner_promotion_id,'user_id'=>$viewEventPlannerPromotions->user_id]);
 			
+			$carts = $this->EventPlannerPromotions->EventPlannerPromotionCarts->exists(['EventPlannerPromotionCarts.event_planner_promotion_id'=>$id,'EventPlannerPromotionCarts.user_id'=>$user_id,'EventPlannerPromotionCarts.is_deleted'=>0]);
+			
+			if($carts==0){
+				foreach($getEventPlannersDetails as $sfad){
+					$sfad->issaved=false;
+				}
+				
+			}else{
+				foreach($getEventPlannersDetails as $sfad){
+					$sfad->issaved=true;
+				}
+			}
+			
 			if($exists == 0)
 			{
 				if ($this->EventPlannerPromotions->EventPlannerPromotionViews->save($viewEventPlannerPromotions)) {
@@ -322,6 +335,11 @@ class EventPlannerPromotionsController extends AppController
 					$message = 'Data found but viewed already';
 					$response_code = 205;					
 			}
+			
+			foreach($getEventPlannersDetails as $vew){
+					$vew->total_views = $this->EventPlannerPromotions->EventPlannerPromotionViews
+							->find()->where(['event_planner_promotion_id' => $id])->count();
+				}
 		}
 		else
 		{
