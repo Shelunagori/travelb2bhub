@@ -1,7 +1,28 @@
 <?php
-/**
-  * @var \App\View\AppView $this
-  */
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "http://konciergesolutions.com/travelb2bhub/api/price_masters/index.json?promotion_type_id=2",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: 4f8087cd-6560-4ca6-5539-9499d3c5b967"
+  ),
+));
+$response = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  $response;
+}
+$priceMasters=json_decode($response);
+$priceMasters->PriceMasters
 ?>
 <style>
 .hr{
@@ -60,9 +81,12 @@ a:hover,a:focus{
 fieldset{
 	margin:10px !important;
 }
+.col-md-12 {
+	margin:5px !important;
+}
 </style> 
 <div class="box-body">
- <?= $this->Form->create($taxiFleetPromotion,['type' => 'file']) ?>
+	<form action="http://konciergesolutions.com/travelb2bhub/api/taxi_fleet_promotions/add.json" method="post" enctype="multipart/form-data">	
 	<div class="row"> 
 		<div class="col-md-12"> 
 			<div class="form-box">
@@ -78,7 +102,7 @@ fieldset{
 									<span class="required">*</span>
 								</p>
 								<div class="input-field">
-									 <?php echo $this->Form->input('company_name',['class'=>'form-control','label'=>false,'autocomplete'=> "off",'placeholder'=>"Company Name",'readonly'=>'readonly','value'=>$users->company_name]);?>
+									 <?php echo $this->Form->input('company_name',['class'=>'form-control','label'=>false,'autocomplete'=> "off",'placeholder'=>"Company Name",'readonly'=>'readonly']); // 'value'=>$users->company_name ?>
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -227,24 +251,24 @@ fieldset{
 							</div>
 						</fieldset>
 								<div class="row">
-											<div class="col-md-12">
-												<div class="input-field">
-													<div class="margin text-center">
-													<center>
-													<?php echo $this->Form->button('Submit',['class'=>'btn btn-primary btn-submit','value'=>'submit']); ?>
-													</center>
-													</div>
-												</div>
-											</div> 
+									<div class="col-md-12">
+										<div class="input-field">
+											<div class="margin text-center">
+											<center>
+											<?php echo $this->Form->button('Submit',['class'=>'btn btn-primary btn-submit','value'=>'submit']); ?>
+											</center>
+											</div>
 										</div>
-								
+									</div> 
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-<?= $this->Form->end() ?>
+	</form>
+</div>
+ 
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>	 
     $(document).ready(function ()

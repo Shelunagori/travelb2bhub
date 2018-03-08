@@ -86,7 +86,6 @@ class TaxiFleetPromotionsController extends AppController
         $taxiFleetPromotion = $this->TaxiFleetPromotions->get($id, [
             'contain' => ['Countries', 'PriceMasters', 'Users', 'TaxiFleetPromotionCities'=>['Cities'], 'TaxiFleetPromotionRows', 'TaxiFleetPromotionStates'=>['States']]
         ]);
-		//pr($taxiFleetPromotion->toArray());exit;
         $this->set('taxiFleetPromotion', $taxiFleetPromotion);
         $this->set('_serialize', ['taxiFleetPromotion']);
     }
@@ -101,7 +100,7 @@ class TaxiFleetPromotionsController extends AppController
 		$this->viewBuilder()->layout('user_layout');	
 		$UserId=$this->Auth->User('id');
         $taxiFleetPromotion = $this->TaxiFleetPromotions->newEntity();
-        if ($this->request->is('post'))
+       /* if ($this->request->is('post'))
 			{
 				$taxiFleetPromotion = $this->TaxiFleetPromotions->patchEntity($taxiFleetPromotion, $this->request->data);
 				// Call Curl FOR FB DETAILS
@@ -162,15 +161,16 @@ class TaxiFleetPromotionsController extends AppController
 							pr($result);
 						exit;
 							
-				/* if ($this->TaxiFleetPromotions->save($taxiFleetPromotion)) {
+				  if ($this->TaxiFleetPromotions->save($taxiFleetPromotion)) {
 					$this->Flash->success(__('The taxi fleet promotion has been saved.'));
 
 					return $this->redirect(['action' => 'index']);
 				}
 
-				$this->Flash->error(__('The taxi fleet promotion could not be saved. Please, try again.')); */
+				$this->Flash->error(__('The taxi fleet promotion could not be saved. Please, try again.'));  
 			}
-		$city = $this->TaxiFleetPromotions->Users->Cities->find('list');
+			*/
+		/*$city = $this->TaxiFleetPromotions->Users->Cities->find('list');
 		$company = $this->TaxiFleetPromotions->Users->find('all');
 		//pr($company->toArray());exit;
 		$states = $this->TaxiFleetPromotions->Users->States->find('list', ['limit' => 200])->where(['country_id'=>'101']);
@@ -178,10 +178,10 @@ class TaxiFleetPromotionsController extends AppController
 		//pr($cat->toArray());exit;
         $countries = $this->TaxiFleetPromotions->Countries->find('list', ['limit' => 200]);
         $priceMasters = $this->TaxiFleetPromotions->PriceMasters->find('all', ['limit' => 200])->where(['promotion_type_id'=>2]);
-		
-		 $users = $this->TaxiFleetPromotions->Users->find()->where(['id'=>$UserId])->first();
+		$users = $this->TaxiFleetPromotions->Users->find()->where(['id'=>$UserId])->first();
         $this->set(compact('taxiFleetPromotion', 'countries', 'priceMasters', 'users','states','company','city','cat'));
         $this->set('_serialize', ['taxiFleetPromotion']);
+		*/
     }
 
     /**
