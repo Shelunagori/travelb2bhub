@@ -16,13 +16,97 @@ curl_setopt_array($curl, array(
 $response = curl_exec($curl);
 $err = curl_error($curl);
 curl_close($curl);
+$priceMasters=array();
 if ($err) {
   echo "cURL Error #:" . $err;
 } else {
-  $response;
+	$response;
+	$priceMasters=json_decode($response);
+	$priceMasters=$priceMasters->PriceMasters;
 }
-$priceMasters=json_decode($response);
-$priceMasters->PriceMasters
+
+//-- BUSES LIST 
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "http://konciergesolutions.com/travelb2bhub/api/taxi_fleet_car_buses/index.json",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: f0bdc3fd-dd35-cc7d-9c8b-a8ebdcf4b05e"
+  ),
+));
+$Result = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+$TaxiFleetCarBuses=array();
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+$TaxiFleetCarBuses=json_decode($Result);
+$TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
+}
+//---- Company Name
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "http://konciergesolutions.com/travelb2bhub/api/users/index.json?user_id=".$user_id,
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: cf69b1e0-6e33-3968-c6ab-c750e8131c5f"
+  ),
+));
+$cmpnynm = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+$user='';
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+	$Users=json_decode($cmpnynm);
+	$user=$Users->Users;	
+}
+//--- COUNTRY STATE & CITY
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "http://konciergesolutions.com/travelb2bhub/pages/masterCountry",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: 39e47dc1-a66a-2347-2fc6-3b5e0160d26d"
+  ),
+));
+$masterCountry = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+$countries=array();
+$states=array();
+$city=array();
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+	$masterCountry=json_decode($masterCountry);
+	$countries=$masterCountry->countryData->ResponseObject;
+	$states=$masterCountry->stateData->ResponseObject;
+	$city=$masterCountry->cityData->ResponseObject;
+}
+
 ?>
 <style>
 .hr{
@@ -102,7 +186,8 @@ fieldset{
 									<span class="required">*</span>
 								</p>
 								<div class="input-field">
-									 <?php echo $this->Form->input('company_name',['class'=>'form-control','label'=>false,'autocomplete'=> "off",'placeholder'=>"Company Name",'readonly'=>'readonly']); // 'value'=>$users->company_name ?>
+									 <?php
+									 echo $this->Form->input('company_name',['class'=>'form-control','label'=>false,'autocomplete'=> "off",'placeholder'=>"Company Name",'readonly'=>'readonly','value'=>$user[0]->company_name]);?>
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -116,6 +201,8 @@ fieldset{
 							</div>
 						</div>
 					</div> 
+					<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
+					<input type="hidden" name="submitted_from" value="web">
 					<div class="row">
 						<div class="col-md-12">
 							<div class="col-md-6">
@@ -152,7 +239,13 @@ fieldset{
 									<span class="required">*</span>
 								</p>
 								<div class="input-field">
-									<?php echo $this->Form->control('vehicle_type', ['label'=>false,"id"=>"multi_vehicle", "type"=>"select",'options' =>$cat, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Vehicle ","style"=>"height:125px;"]);?>
+									<?php 
+									$options=array();
+									foreach($TaxiFleetCarBuses as $Buses)
+									{
+										$options[] = ['value'=>$Buses->id,'text'=>$Buses->name];
+									};
+									echo $this->Form->control('vehicle_type', ['label'=>false,"id"=>"multi_vehicle", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Vehicle ","style"=>"height:125px;"]);?>
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -161,7 +254,13 @@ fieldset{
 										Choose Country
 										<span class="required">*</span>
 									</p>
-									<?php echo $this->Form->input('country_id',['class'=>'form-control select2','options' => $countries,'label'=>false,"empty"=>"Select Country"]);?>
+									<?php 
+									$options=array();
+									foreach($countries as $country)
+									{
+										$options[] = ['value'=>$country->id,'text'=>$country->country_name];
+									};
+									echo $this->Form->input('country_id',['class'=>'form-control select2','options' => $options,'label'=>false,"empty"=>"Select Country"]);?>
 								</div>
 							</div>
 						</div>
@@ -177,7 +276,13 @@ fieldset{
 								
 								<div class="input-field">
 							
-									<?php echo $this->Form->control('state_id', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$states, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select State","style"=>"height:125px;"]);?>
+									<?php 
+									$options=array();
+									foreach($states as $st)
+									{
+										$options[] = ['value'=>$st->id,'text'=>$st->state_name];
+									};
+									echo $this->Form->control('state_id', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select State","style"=>"height:125px;"]);?>
 									
 								</div>
 							</div>
@@ -187,7 +292,13 @@ fieldset{
 											<span class="required">*</span>
 								</p>
 								<div class="input-field">
-								<?php echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$city, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
+								<?php 
+									$options=array();
+									foreach($city->citystatefi as $cty)
+									{
+										$options[] = ['value'=>$cty->cityid,'text'=>$cty->name];
+									};
+									echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
 									
 								</div>
 							</div>
@@ -223,6 +334,7 @@ fieldset{
 											$options=array();
 											foreach($priceMasters as $Price)
 											{
+											 
 												$options[] = ['value'=>$Price->id,'text'=>$Price->week,'priceVal'=>$Price->week,'price'=>$Price->price];
 											};
 											echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters','label'=>false,'empty'=>'Select ...']);?>

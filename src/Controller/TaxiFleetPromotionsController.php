@@ -98,9 +98,9 @@ class TaxiFleetPromotionsController extends AppController
     public function add()
     {
 		$this->viewBuilder()->layout('user_layout');	
-		$UserId=$this->Auth->User('id');
-        $taxiFleetPromotion = $this->TaxiFleetPromotions->newEntity();
-       /* if ($this->request->is('post'))
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id'));
+        /* if ($this->request->is('post'))
 			{
 				$taxiFleetPromotion = $this->TaxiFleetPromotions->patchEntity($taxiFleetPromotion, $this->request->data);
 				// Call Curl FOR FB DETAILS
