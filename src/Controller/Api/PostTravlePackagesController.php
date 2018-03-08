@@ -279,7 +279,21 @@ class PostTravlePackagesController extends AppController
 					$exists = $this->PostTravlePackages->PostTravlePackageLikes->exists(['post_travle_package_id'=>$getTravelPackage->id,'user_id'=>$isLikedUserId]);
 					if($exists == 1)
 					{ $getTravelPackage->isLiked = 'yes'; }
-					else { $getTravelPackage->isLiked = 'no'; }					
+					else { $getTravelPackage->isLiked = 'no'; }		
+
+					$carts = $this->PostTravlePackages->PostTravlePackageCarts->exists(['PostTravlePackageCarts.post_travle_package_id'=>$getTravelPackage->id,'PostTravlePackageCarts.user_id'=>$isLikedUserId,'PostTravlePackageCarts.is_deleted'=>0]);
+					if($carts==0){
+						$getTravelPackage->issaved=false;
+					}else{
+						$getTravelPackage->issaved=true;
+					}	
+					
+					$views_count = $this->PostTravlePackages->PostTravlePackageViews->exists(['PostTravlePackageViews.post_travle_package_id'=>$getTravelPackage->id]);
+					if($views_count==0){
+						$getTravelPackage->isviewed=false;
+					}else{
+						$getTravelPackage->isviewed=true;
+					}
 				}
 				$message = 'List Found Successfully';
 				$response_code = 200;
@@ -312,6 +326,8 @@ class PostTravlePackagesController extends AppController
 			->where(['PostTravlePackages.id'=>$id])
 			->group(['PostTravlePackages.id'])
 		->autoFields(true);
+		
+			
 		if(!empty($getTravelPackageDetails->toArray()))
 		{
 		
@@ -320,6 +336,18 @@ class PostTravlePackagesController extends AppController
 			$viewPostTravelPackages->user_id = $user_id;
 			$exists = $this->PostTravlePackages->PostTravlePackageViews->exists(['post_travle_package_id'=>$viewPostTravelPackages->post_travle_package_id,'user_id'=>$viewPostTravelPackages->user_id]);
 			
+			$carts = $this->PostTravlePackages->PostTravlePackageCarts->exists(['PostTravlePackageCarts.post_travle_package_id'=>$id,'PostTravlePackageCarts.user_id'=>$user_id,'PostTravlePackageCarts.is_deleted'=>0]);
+			
+			if($carts==0){
+				foreach($getTravelPackageDetails as $sfad){
+					$sfad->issaved=false;
+				}
+				
+			}else{
+				foreach($getTravelPackageDetails as $sfad){
+					$sfad->issaved=true;
+				}
+			}
 			if($exists == 0)
 			{
 				if ($this->PostTravlePackages->PostTravlePackageViews->save($viewPostTravelPackages)) {
