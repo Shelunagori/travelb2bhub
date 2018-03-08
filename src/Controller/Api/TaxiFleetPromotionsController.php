@@ -202,7 +202,7 @@ class TaxiFleetPromotionsController extends AppController
 					}			
 					
 					$getTaxiFleetPromotion->total_views = $this->TaxiFleetPromotions->TaxiFleetPromotionViews
-						->find()->where(['taxi_fleet_promotion_id' => $id])->count();
+						->find()->where(['taxi_fleet_promotion_id' => $getTaxiFleetPromotion->id])->count();
 					
 				}
 				$message = 'List Found Successfully';

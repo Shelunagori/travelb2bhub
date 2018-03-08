@@ -289,7 +289,7 @@ class PostTravlePackagesController extends AppController
 					}	
 					
 					$getTravelPackage->total_views = $this->PostTravlePackages->PostTravlePackageViews
-						->find()->where(['post_travle_package_id' => $id])->count();
+						->find()->where(['post_travle_package_id' => $getTravelPackage->id])->count();
 				}
 				$message = 'List Found Successfully';
 				$response_code = 200;
