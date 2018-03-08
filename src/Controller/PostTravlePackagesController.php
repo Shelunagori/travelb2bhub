@@ -59,7 +59,14 @@ class PostTravlePackagesController extends AppController
 		$chatCount = $allUnreadChat->count();
 		$this->set('chatCount',$chatCount); 
 		$this->set('allunreadchat',$allUnreadChat);
-		//---
+		//*---
+		$this->loadModel('UserChats');
+		$csort['created'] = "DESC";
+		$allUnreadChat = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->order($csort)->limit(10)->all();
+		$chatCount = $allUnreadChat->count();
+		$this->set('chatCount',$chatCount); 
+		$this->set('allunreadchat',$allUnreadChat);
+		//--
 		
 	}
     public function index()

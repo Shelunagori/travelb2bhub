@@ -29,7 +29,8 @@ class TaxiFleetPromotionsController extends AppController
 		$this->set('profile_pic', $profile_pic);
 		$this->set('loginId',$loginId);
 		$this->set('roleId',$role_id);
-		
+		//--
+
 		//----	 FInalized
 		$this->loadModel('Requests');
 		$finalreq["Requests.user_id"] = $this->Auth->user('id');
@@ -52,7 +53,13 @@ class TaxiFleetPromotionsController extends AppController
 		$FInalResponseCount = $this->Responses->find('all', ['conditions' => ['Responses.status' =>1,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->count();
 		$this->set('FInalResponseCount', $FInalResponseCount);
 		//*---
-		
+		$this->loadModel('UserChats');
+		$csort['created'] = "DESC";
+		$allUnreadChat = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->order($csort)->limit(10)->all();
+		$chatCount = $allUnreadChat->count();
+		$this->set('chatCount',$chatCount); 
+		$this->set('allunreadchat',$allUnreadChat);
+		//--
 	}
     public function index()
     {
