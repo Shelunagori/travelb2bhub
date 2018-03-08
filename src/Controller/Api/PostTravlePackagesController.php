@@ -11,7 +11,7 @@ class PostTravlePackagesController extends AppController
         $postTravlePackage = $this->PostTravlePackages->newEntity();
         if ($this->request->is('post')) {
            
-			$postTravlePackage = $this->PostTravlePackages->patchEntity($postTravlePackage, $this->request->data(),[ 'associated' => ['PostTravlePackageRows', 'PostTravlePackageStates','PostTravlePackageCities'] ]);
+			$postTravlePackage = $this->PostTravlePackages->patchEntity($postTravlePackage, $this->request->data(),[ 'associated' => ['PostTravlePackageRows','PostTravlePackageCountries', 'PostTravlePackageStates','PostTravlePackageCities'] ]);
 
 			$message = 'PERFECT';
 			$response_code = 101;
@@ -105,6 +105,7 @@ class PostTravlePackagesController extends AppController
 					$message = 'The post travel package has been saved';
 					$response_code = 200;
 				}else{
+					pr($postTravlePackage); exit;
 					$message = 'The post travel package has not been saved';
 					$response_code = 204;				
 				}				
@@ -307,7 +308,7 @@ class PostTravlePackagesController extends AppController
 		$getTravelPackageDetails = $this->PostTravlePackages->find();
 		$getTravelPackageDetails->select(['total_likes'=>$getTravelPackageDetails->func()->count('PostTravlePackageLikes.id')])
 			->leftJoinWith('PostTravlePackageLikes')
-			->contain(['Users','PriceMasters','Countries','Currencies','PostTravlePackageRows'=>['PostTravlePackageCategories'],'PostTravlePackageStates'=>['States'],'PostTravlePackageCities'=>['Cities']])
+			->contain(['Users','PriceMasters','Currencies','PostTravlePackageRows'=>['PostTravlePackageCategories'],'PostTravlePackageStates'=>['States'],'PostTravlePackageCities'=>['Cities'],'PostTravlePackageCountries'=>['Countries']])
 			->where(['PostTravlePackages.id'=>$id])
 			->group(['PostTravlePackages.id'])
 		->autoFields(true);
