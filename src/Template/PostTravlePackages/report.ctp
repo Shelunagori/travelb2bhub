@@ -12,7 +12,7 @@
 		<div class="col-md-12" style="background-color:#fff"> 
 			<div class="box box-default">
 				<div class="box-header with-border"> 
-					<h3 class="box-title" style="padding:5px"><?= __('Post Travle Packages') ?></h3>
+					<h3 class="box-title" ><?= __('Post Travle Packages') ?></h3>
 					<div class="box-tools pull-right">
  					</div>
  				</div>
@@ -33,7 +33,7 @@
 									<th scope="col"><?= ('Price') ?></th>
 									<th scope="col"><?= ('Likes') ?></th>
 									<th scope="col"><?= ('Visible Date') ?></th>
-									<th scope="col" class="actions"><?= __('Actions') ?></th>
+									<th scope="col" class="actions"><?//= __('Actions') ?></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -55,10 +55,10 @@
 									<td><?= h($postTravlePackage->visible_date) ?></td>
 									
 									
-									<td class="actions">
+									<td class="actions" style="display:none;">
 										<?= $this->Html->link(__('View'), ['action' => 'view', $postTravlePackage->id]) ?>
 										<?= $this->Html->link(__('Edit'), ['action' => 'edit', $postTravlePackage->id]) ?>
-										<?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $postTravlePackage->id], ['confirm' => __('Are you sure you want to delete # {0}?', $postTravlePackage->id)]) ?>
+										<?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $postTravlePackage->id], ['confirm' => __('Are you sure you want to delete # {0}?', $postTravlePackage->id)]) ?> 
 									</td>
 								</tr>
 								<?php endforeach; ?>

@@ -12,7 +12,7 @@
 		<div class="col-md-12" style="background-color:#fff"> 
 			<div class="box box-default">
 				<div class="box-header with-border"> 
-					<h3 class="box-title" style="padding:5px"><?= __('Event Planner Promotions') ?></h3>
+					<h3 class="box-title"><?= __('Event Planner Promotions') ?></h3>
 					<div class="box-tools pull-right">
  					</div>
  				</div>
@@ -24,10 +24,11 @@
 								<th scope="col"><?= ('User Name') ?></th>
 								<th scope="col"><?= ('Country') ?></th>
 								<th scope="col"><?= ('Duration') ?></th>
+								<th scope="col"><?= ('Price') ?> (&#8377;)</th>
 								<th scope="col"><?= ('Likes') ?></th>
 								<th scope="col"><?= ('Visibility Date') ?></th>
 								<th scope="col"><?= ('Image') ?></th>
-								<th scope="col" class="actions"><?= __('Actions') ?></th>
+								<th scope="col" class="actions"><//= __('Actions') ?></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -37,10 +38,11 @@
 								<td><?= h($eventPlannerPromotion->user->first_name.$eventPlannerPromotion->user->last_name);?></td>
 								<td><?= h($eventPlannerPromotion->country->country_name); ?></td>
 								<td><?= h($eventPlannerPromotion->price_master->week); ?></td>
+								<td><?= h($eventPlannerPromotion->price_master->price); ?></td>
 								<td><?= $this->Number->format($eventPlannerPromotion->like_count) ?></td>
 								<td><?= h($eventPlannerPromotion->visible_date) ?></td>	
 								<td><?php echo "yash";//= h($eventPlannerPromotion->image) ?></td>
-								<td class="actions">
+								<td class="actions" style="display:none;">
 									<?= $this->Html->link(__('View'), ['action' => 'view', $eventPlannerPromotion->id]) ?>
 									<?= $this->Html->link(__('Edit'), ['action' => 'edit', $eventPlannerPromotion->id]) ?>
 									<?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $eventPlannerPromotion->id], ['confirm' => __('Are you sure you want to delete # {0}?', $eventPlannerPromotion->id)]) ?>

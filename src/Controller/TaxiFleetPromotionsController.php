@@ -82,10 +82,11 @@ class TaxiFleetPromotionsController extends AppController
      */
     public function view($id = null)
     {
+		$this->viewBuilder()->layout('user_layout');
         $taxiFleetPromotion = $this->TaxiFleetPromotions->get($id, [
-            'contain' => ['Countries', 'PriceMasters', 'Users', 'TaxiFleetPromotionCities', 'TaxiFleetPromotionRows', 'TaxiFleetPromotionStates']
+            'contain' => ['Countries', 'PriceMasters', 'Users', 'TaxiFleetPromotionCities'=>['Cities'], 'TaxiFleetPromotionRows', 'TaxiFleetPromotionStates'=>['States']]
         ]);
-
+		//pr($taxiFleetPromotion->toArray());exit;
         $this->set('taxiFleetPromotion', $taxiFleetPromotion);
         $this->set('_serialize', ['taxiFleetPromotion']);
     }
@@ -237,7 +238,7 @@ class TaxiFleetPromotionsController extends AppController
             'contain' => ['Countries', 'PriceMasters', 'Users','TaxiFleetPromotionRows','TaxiFleetPromotionCities','TaxiFleetPromotionStates']
         ];
         $taxiFleetPromotions = $this->paginate($this->TaxiFleetPromotions);
-		//pr($taxiFleetPromotions->toArray());exit;
+		pr($taxiFleetPromotions->toArray());exit;
         $this->set(compact('taxiFleetPromotions'));
         $this->set('_serialize', ['taxiFleetPromotions']);
     }

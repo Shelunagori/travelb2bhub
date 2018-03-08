@@ -12,7 +12,7 @@
 		<div class="col-md-12" style="background-color:#fff"> 
 			<div class="box box-default">
 				<div class="box-header with-border"> 
-					<h3 class="box-title" style="padding:5px"><?= __('Taxi Fleet Promotions') ?></h3>
+					<h3 class="box-title"><?= __('Taxi Fleet Promotions') ?></h3>
 					<div class="box-tools pull-right">
  					</div>
  				</div>
