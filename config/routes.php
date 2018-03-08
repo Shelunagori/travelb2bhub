@@ -281,6 +281,34 @@ Router::scope('/', function (RouteBuilder $routes) {
 					   ]
 					]
 				);
+				$routes->resources(
+					'EventPlannerPromotionCarts', [
+					   'map' => [
+						   'EventPlannerPromotionsCartAdd' => [
+							   'action' => 'EventPlannerPromotionsCartAdd',
+							   'method' => 'POST'
+						   ],
+						   'EventPlannerPromotionsCartlist' => [
+							   'action' => 'EventPlannerPromotionsCartlist',
+							   'method' => 'GET'
+						   ]
+					   ]
+					]
+				);
+				$routes->resources(
+					'TaxiFleetPromotionCarts', [
+					   'map' => [
+						   'TaxiFleetPromotionsCartAdd' => [
+							   'action' => 'TaxiFleetPromotionsCartAdd',
+							   'method' => 'POST'
+						   ],
+						   'TaxiFleetPromotionsCartlist' => [
+							   'action' => 'TaxiFleetPromotionsCartlist',
+							   'method' => 'GET'
+						   ]
+					   ]
+					]
+				);
 					
 });				
 
