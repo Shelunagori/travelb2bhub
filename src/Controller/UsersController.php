@@ -1414,7 +1414,8 @@ $this->set('allunreadchat',$allUnreadChat);
 public function hotelrequest() {
 $this->loadModel('Hotels');
 $user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
-//print_r($user);
+//print_r($user);register
+
 $this->set('users', $user);
 // print_r($this->request->data);
 if ($this->request->is('post')) {

@@ -1,12 +1,5 @@
-<?php
-if (!isset($params['escape']) || $params['escape'] !== false) {
-    $message = h($message);
-}
-?>
 
-<style>.alert-warning { background-color: #e41b1b !important; }</style>
-
-  <div class="alert alert-warning alert-dismissible">
-    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <?= $message ?>
-  </div>
+<div class="alert alert-danger alert-dismissible" style="width: 30%; float:right; margin-right: 10px;" onclick="this.classList.add('hidden');">
+<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+<i class="icon fa fa-ban"></i> <?= h($message) ?>
+</div>

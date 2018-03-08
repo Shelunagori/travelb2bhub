@@ -107,8 +107,9 @@ class EventPlannerPromotionsController extends AppController
     public function add()
     {
 		$this->viewBuilder()->layout('user_layout');
-		$UserId=$this->Auth->User('id');
-        $eventPlannerPromotion = $this->EventPlannerPromotions->newEntity();
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id'));
+        /*$eventPlannerPromotion = $this->EventPlannerPromotions->newEntity();
         if ($this->request->is('post')) {
             $eventPlannerPromotion = $this->EventPlannerPromotions->patchEntity($eventPlannerPromotion, $this->request->data);
 			
@@ -161,14 +162,14 @@ class EventPlannerPromotionsController extends AppController
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The event planner promotion could not be saved. Please, try again.')); */
-        }
-		$countries = $this->EventPlannerPromotions->Countries->find('list', ['limit' => 200]);
+        //}
+		/*$countries = $this->EventPlannerPromotions->Countries->find('list', ['limit' => 200]);
  	    $States = $this->EventPlannerPromotions->States->find('list', ['limit' => 200])->where(['country_id'=>'101']);
  	    $Cities = $this->EventPlannerPromotions->Cities->find('list');
         $priceMasters = $this->EventPlannerPromotions->PriceMasters->find('all', ['limit' => 200])->where(['promotion_type_id'=>3]);
         $users = $this->EventPlannerPromotions->Users->find()->where(['id'=>$UserId])->first();
         $this->set(compact('eventPlannerPromotion', 'States', 'priceMasters', 'users','Cities','countries'));
-        $this->set('_serialize', ['eventPlannerPromotion']);
+        $this->set('_serialize', ['eventPlannerPromotion']);*/
     }
 
     /**

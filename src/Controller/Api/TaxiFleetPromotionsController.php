@@ -61,9 +61,8 @@ class TaxiFleetPromotionsController extends AppController
 				{
 					if(in_array($ext, $arr_ext)) { 
 						if (!file_exists('path/to/directory')) {
-								mkdir('path/to/directory', 0777, true);
-								
-							}
+							mkdir('path/to/directory', 0777, true);
+						}
 						if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)) {
 							$taxiFleetPromotion->image='images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
 						} else {
@@ -178,11 +177,12 @@ class TaxiFleetPromotionsController extends AppController
 		if(!empty($isLikedUserId))
 		{
 			$getTaxiFleetPromotions = $this->TaxiFleetPromotions->find();
-				$getTaxiFleetPromotions->select(['total_likes'=>$getTaxiFleetPromotions->func()->count('TaxiFleetPromotionLikes.id')])
+			$getTaxiFleetPromotions->select(['total_likes'=>$getTaxiFleetPromotions->func()->count('TaxiFleetPromotionLikes.id')])
 				->leftJoinWith('TaxiFleetPromotionLikes')
-			->where(['visible_date >=' =>date('Y-m-d')])
-			->group(['TaxiFleetPromotions.id'])
-			->autoFields(true);
+				->contain(['Users','PriceMasters','Countries'])
+				->where(['TaxiFleetPromotions.visible_date >=' =>date('Y-m-d')])
+				->group(['TaxiFleetPromotions.id'])
+				->autoFields(true);
 			//pr($getTravelPackages->toArray()); exit;
 			if(!empty($getTaxiFleetPromotions->toArray()))
 			{

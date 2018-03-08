@@ -174,6 +174,7 @@ fieldset{
 	<form action="http://konciergesolutions.com/travelb2bhub/api/taxi_fleet_promotions/add.json" method="post" enctype="multipart/form-data">	
 	<div class="row"> 
 		<div class="col-md-12"> 
+
 			<div class="form-box">
 				<div class="panel-group" style="background-color:white;">
 					<div class="panel panel-default">

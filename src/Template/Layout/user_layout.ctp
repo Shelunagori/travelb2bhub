@@ -485,6 +485,7 @@ $page_name=$this->request->params['action'];
   <div class="content-wrapper">
 	 <section class="content">
 		<div class="row">
+			<?= $this->Flash->render() ?>
 			<?php echo $this->fetch('content'); ?>
 		</div>
 	 </section>
