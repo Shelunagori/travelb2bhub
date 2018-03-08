@@ -288,12 +288,8 @@ class PostTravlePackagesController extends AppController
 						$getTravelPackage->issaved=true;
 					}	
 					
-					$views_count = $this->PostTravlePackages->PostTravlePackageViews->exists(['PostTravlePackageViews.post_travle_package_id'=>$getTravelPackage->id]);
-					if($views_count==0){
-						$getTravelPackage->isviewed=false;
-					}else{
-						$getTravelPackage->isviewed=true;
-					}
+					$getTravelPackage->total_views = $this->PostTravlePackages->PostTravlePackageViews
+						->find()->where(['post_travle_package_id' => $id])->count();
 				}
 				$message = 'List Found Successfully';
 				$response_code = 200;
@@ -364,9 +360,14 @@ class PostTravlePackagesController extends AppController
 					$message = 'Data found but viewed already';
 					$response_code = 205;					
 			}			
+			
+		
 
-				$getTravelPackageDetails->total_views = $this->PostTravlePackages->PostTravlePackageViews
-							->find()->where(['post_travle_package_id' => $id])->count();		
+			foreach($getTravelPackageDetails as $getTravelPackageDetail)
+			{
+				$getTravelPackageDetail->total_views = $this->PostTravlePackages->PostTravlePackageViews
+			->find()->where(['post_travle_package_id' => $id])->count();				
+			}
 					 
 					
 			//$message = 'Data Found Successfully';

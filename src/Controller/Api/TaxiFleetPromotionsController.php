@@ -192,7 +192,18 @@ class TaxiFleetPromotionsController extends AppController
 					
 					if($exists == 0)
 					{  $getTaxiFleetPromotion->isLiked = 'yes'; } 
-					else { $getTaxiFleetPromotion->isLiked = 'no'; }				
+					else { $getTaxiFleetPromotion->isLiked = 'no'; }	
+
+					$carts = $this->TaxiFleetPromotions->TaxiFleetPromotionCarts->exists(['TaxiFleetPromotionCarts.taxi_fleet_promotion_id'=>$getTaxiFleetPromotion->id,'TaxiFleetPromotionCarts.user_id'=>$isLikedUserId,'TaxiFleetPromotionCarts.is_deleted'=>0]);
+					if($carts==0){
+						$getTaxiFleetPromotion->issaved=false;
+					}else{
+						$getTaxiFleetPromotion->issaved=true;
+					}			
+					
+					$getTaxiFleetPromotion->total_views = $this->TaxiFleetPromotions->TaxiFleetPromotionViews
+						->find()->where(['taxi_fleet_promotion_id' => $id])->count();
+					
 				}
 				$message = 'List Found Successfully';
 				$response_code = 200;
@@ -263,9 +274,10 @@ class TaxiFleetPromotionsController extends AppController
 					$message = 'Data found but viewed already';
 					$response_code = 205;					
 			}
-			
-					$getTaxiFleetPromotionsDetails->total_views = $this->TaxiFleetPromotions->TaxiFleetPromotionViews
+				foreach($getTaxiFleetPromotionsDetails as $vew){
+					$vew->total_views = $this->TaxiFleetPromotions->TaxiFleetPromotionViews
 							->find()->where(['taxi_fleet_promotion_id' => $id])->count();
+				}
 		}
 		else
 		{
