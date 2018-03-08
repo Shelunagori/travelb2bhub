@@ -247,6 +247,16 @@ class EventPlannerPromotionsController extends AppController
 					if($exists == 1)
 					{ $getEventPlanner->isLiked = 'yes'; }
 					else{ $getEventPlanner->isLiked = 'no'; }
+					
+					$carts = $this->EventPlannerPromotions->EventPlannerPromotionCarts->exists(['EventPlannerPromotionCarts.event_planner_promotion_id'=>$getEventPlanner->id,'EventPlannerPromotionCarts.user_id'=>$isLikedUserId,'EventPlannerPromotionCarts.is_deleted'=>0]);
+					if($carts==0){
+						$getEventPlanner->issaved=false;
+					}else{
+						$getEventPlanner->issaved=true;
+					}	
+					
+					$getEventPlanner->total_views = $this->EventPlannerPromotions->EventPlannerPromotionViews
+						->find()->where(['event_planner_promotion_id' => $getEventPlanner->id])->count();
 				}
 				
 				
