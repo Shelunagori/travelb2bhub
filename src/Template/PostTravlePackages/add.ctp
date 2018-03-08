@@ -62,7 +62,7 @@ fieldset{
 }
 </style> 
 <div class="box-body">
-    <?= $this->Form->create($postTravlePackage) ?>
+<?= $this->Form->create($postTravlePackage,['type' => 'file']) ?>
 	<div class="row"> 
 		<div class="col-md-12"> 
 			<div class="form-box">
@@ -70,31 +70,30 @@ fieldset{
 					<div class="panel panel-default">
 						<fieldset>
 							<legend style="color:#369FA1;"><b><?= __('Load Package') ?></b></legend>
-							<div class="row">
-								<div class="col-md-12">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-												<p for="from">
-													Package Title
-													<span class="required">*</span>
-												</p>
-												<div class="input-field">
-													 <?php echo $this->Form->input('title',['class'=>'form-control','label'=>false]);?>
-													
-												</div>
-											</div>
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-												<p for="from">
-													Package Category
-													<span class="required">*</span>
-												</p>
-												<div class="input-field">
-													 <?php echo $this->Form->input('price_master_id',['options' => $priceMasters,'class'=>'form-control','label'=>false]);?>
-													
-												</div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+														<p for="from">
+															Company Name
+															<span class="required">*</span>
+														</p>
+														<div class="input-field">
+															 <?php echo $this->Form->input('company_name',['class'=>'form-control','label'=>false,'autocomplete'=> "off",'placeholder'=>"Company Name",'readonly'=>'readonly','value'=>$users->company_name]);?>
+														</div>
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+											<p for="from">
+												Package Title
+												<span class="required">*</span>
+											</p>
+											<div class="input-field">
+												 <?php echo $this->Form->input('title',['class'=>'form-control','label'=>false]);?>
+												
 											</div>
 										</div>
 									</div>
-									<div class="row">
+								</div>
+								<div class="row">
 									<div class="col-md-12">
 										<div class="col-md-6">
 											<p for="from">
@@ -118,10 +117,35 @@ fieldset{
 										</div>
 									</div>
 								</div>
-								</fieldset>
-									<br>
+							</fieldset>
+						<br>
 							<fieldset>
 								<legend style="color:#369FA1;"><b><?= __('Package Details') ?></b></legend> 
+									<div class="row">
+										<div class="col-md-12">
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+												<p for="from">
+													Package Category
+													<span class="required">*</span>
+												</p>
+												<div class="input-field">
+													<?php echo $this->Form->control('package_category_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$cat, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Category ","style"=>"height:125px;"]);?>
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+												<p for="from">
+													Valid Till
+													<span class="required">*</span>
+												</p>
+												<div class="input-field input-group">
+													 <?php echo $this->Form->input('valid_date1',['class'=>'form-control date-picker date','label'=>false,'data-date-format'=>'dd/mm/yyyy','placeholder'=>'dd/mm/yyyy']);?>
+													 <p class="input-group-addon btn" >
+													<span class="fa fa-calendar"></span>
+													</p>
+												</div>
+											</div>
+										</div>
+									</div> 
 									<div class="row">
 										<div class="col-md-12">
 											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -173,25 +197,30 @@ fieldset{
 									</div> 
 									<div class="row">
 										<div class="col-md-12">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-												<p for="from">
-													Valid Date
-													<span class="required">*</span>
-												</p>
-												<div class="input-field">
-													 <?php echo $this->Form->input('valid_date',['class'=>'form-control','label'=>false]);?>
-													
+												<div class="col-md-6">
+													<p for="from">
+														Package Type
+													</p>
+													<div class="input-group">
+													  <span class="input-group-addon">
+															<input type="radio" name="r1" value="1"/>
+															<p>India</p> 
+														</span>
+													   <span class="input-group-addon">
+															<input type="radio" name="r1" value="2"/>
+															<p>International</p>
+													   </span>
+													</div>
 												</div>
-											</div>
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-												<div class="input-field">
+												<div class="col-md-6">
 													<p for="from">
 														Choose Country
 														<span class="required">*</span>
 													</p>
-													 <?php echo $this->Form->input('country_id',['class'=>'form-control','options' => $countries,'label'=>false]);?>
+													<div class="input-field">
+													 <?php echo $this->Form->input('country_id',["class"=>"form-control select2",'options' => $countries,'label'=>false,"empty"=>"Select Country"]);?>
+													</div>
 												</div>
-											</div>
 										</div>
 									</div> 
 									<div class="row">
@@ -217,6 +246,86 @@ fieldset{
 											</div>
 										</div>
 									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+												<p for="from">
+												Package Details				
+													<span class="required">*</span>
+												</p>
+												<div class="input-field">
+													 <?php echo $this->Form->input('package_detail',['class'=>'form-control','label'=>false]);?>
+													
+												</div>
+											</div>
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+												<p for="from">
+													Excluded Details
+													<span class="required">*</span>
+												</p>
+												<div class="input-field">
+													 <?php echo $this->Form->input('excluded_detail',['class'=>'form-control','label'=>false]);?>
+													
+												</div>
+											</div>
+										</div>
+									</div> 
+									
+									
+								</fieldset>
+							<br>
+				<fieldset>
+						<legend style="color:#369FA1;"><b><?= __('Payment ') ?></b></legend> 
+							<div class="row">
+								<div class="col-md-12">
+									<div class="col-md-4">
+										<p for="from">
+											Payment Duration
+										</p>
+										<div class="input-field">
+												 
+										<?php				 
+											$options=array();
+											foreach($priceMasters as $Price)
+											{
+												$options[] = ['value'=>$Price->id,'text'=>$Price->week,'priceVal'=>$Price->week,'price'=>$Price->price];
+											};
+											echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters','label'=>false,'empty'=>'Select ...']);?>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<p for="from">
+													Visibility Date
+													<span class="required">*</span>
+										</p>
+										<div class="input-field">
+										<?php echo $this->Form->input('visible_date', ['data-date-format'=>'dd/mm/yyyy','class'=>'form-control visible_date','label'=>false,"placeholder"=>"Visible Date",'readonly'=>'readonly','type'=>'text']); ?>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<p for="from">
+													Promotion Amount
+													<span class="required">*</span>
+										</p>
+										<div class="input-field">
+										<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text']);?> 
+										</div>
+									</div>
+								</div>
+							</div>
+						</fieldset>
+					
+									<div class="row">
+										<div class="col-md-12">
+											<div class="input-field">
+												<div class="margin text-center">
+												<center>
+												<?php echo $this->Form->button('Submit',['class'=>'btn btn-primary btn-submit','value'=>'submit']); ?>
+												</center>
+												</div>
+											</div>
+										</div> 
+									</div>
 						</fieldset>
 						</div>
 					</div>
@@ -224,27 +333,36 @@ fieldset{
 			</div>
 		</div>
 	</div>
-        <?php
-            echo $this->Form->input('title');
-            echo $this->Form->input('duration_night');
-            echo $this->Form->input('duration_day');
-            echo $this->Form->input('valid_date');
-            echo $this->Form->input('currency_id', ['options' => $currencies]);
-            echo $this->Form->input('starting_price');
-            echo $this->Form->input('country_id', ['options' => $countries]);
-            echo $this->Form->input('package_detail');
-            echo $this->Form->input('excluded_detail');
-            echo $this->Form->input('image');
-            echo $this->Form->input('document');
-            echo $this->Form->input('price_master_id', ['options' => $priceMasters]);
-            echo $this->Form->input('like_count');
-            echo $this->Form->input('visible_date');
-            echo $this->Form->input('user_id', ['options' => $users]);
-            echo $this->Form->input('created_on');
-            echo $this->Form->input('edited_by');
-            echo $this->Form->input('edited_on');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
 </div>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<script>
+	 
+    $(document).ready(function () {
+		$(document).on('change','.priceMasters',function()
+		{
+			var priceVal=$('.priceMasters option:selected').attr('priceVal');
+			var price=$('.priceMasters option:selected').attr('price');
+			var Result = priceVal.split(" ");
+			var Result1 = price.split(" ");
+			var weeks=Result[0];
+			var price=Result1[0];
+			
+			var todaydate = new Date(); // Parse date
+			for(var x=0; x < weeks; x++){
+				todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
+			}
+			var dd = todaydate .getDate();
+			var mm = todaydate .getMonth()+1; //January is 0!
+			var yyyy = todaydate .getFullYear();
+			if(dd<10){  dd='0'+dd } 
+			if(mm<10){  mm='0'+mm } 
+			var date = dd+'-'+mm+'-'+yyyy;	
+			$('.visible_date').val(date);
+			$('.payment_amount').val(price);
+		})
+$("#multi_city").multiselect();
+$("#multi_states").multiselect();
+$("#multi_category").multiselect();
+});
+</script>

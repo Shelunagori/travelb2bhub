@@ -4,7 +4,8 @@
 			<br>
 			<?php echo  $this->Flash->render() ?>
 		</div>
-		<?= $this->Form->create($eventPlannerPromotion) ?>
+		<?= $this->Form->create($eventPlannerPromotion,['type' => 'file']) ?>
+
 		<div class="col-md-12" style="background-color:#fff"> 
 			<div class="box box-default">
 				<div class="box-header with-border"> 
@@ -16,38 +17,69 @@
 					<fieldset>
 					<legend style="color:#369FA1;"><b> &nbsp; Load Package &nbsp;  </b></legend>
 						<div class="row">
-							<div class="col-md-12">
-								<div class="col-md-4">
-									<p> Company Name </p>
-									<?php echo $this->Form->input('company_name',['class'=>'form-control','label'=>false,'autocomplete'=> "off",'placeholder'=>"Company Name",'readonly'=>'readonly','value'=>$users->company_name]);?>
+									<div class="col-md-12">
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+														<p for="from">
+															Company Name
+															<span class="required">*</span>
+														</p>
+														<div class="input-field">
+															 <?php echo $this->Form->input('company_name',['class'=>'form-control','label'=>false,'autocomplete'=> "off",'placeholder'=>"Company Name",'readonly'=>'readonly','value'=>$users->company_name]);?>
+														</div>
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+											<p for="from">
+												Package Title
+												<span class="required">*</span>
+											</p>
+											<div class="input-field">
+												 <?php echo $this->Form->input('title',['class'=>'form-control','label'=>false]);?>
+												
+											</div>
+										</div>
+									</div>
 								</div>
-								<div class="col-md-4">
-									<p> Upload Image of Promotion <span class="required">*</span></p>
-									<?php echo $this->Form->file('image',['class'=>'form-control','label'=>false]);?>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="col-md-6">
+											<p for="from">
+												Upload Image of the Promotion
+												<span class="required">*</span>
+											</p>
+											
+											<div class="input-field">
+												<?php  echo $this->Form->input('image',['class'=>'form-control','label'=>false,'type'=>'file']); ?>
+											</div>
+										</div>
+										<div class="col-md-6 ">
+										<p for="from">
+												Upload Document
+												<span class="required">*</span>
+											</p>
+											
+											<div class="input-field">
+												<?php  echo $this->Form->input('document',['class'=>'form-control','label'=>false,'type'=>'file']); ?>
+											</div>
+										</div>
+									</div>
 								</div>
-								<div class="col-md-4">
-									<p> Upload Document </p>
- 									<?php echo $this->Form->file('document',['class'=>'form-control','label'=>false]);?>
-								</div>
-							</div>
-						</div>
 					</fieldset>
 					<fieldset>
 					<legend style="color:#369FA1;"><b> &nbsp; Package Details &nbsp;  </b></legend>
 						<div class="row">
 							<div class="col-md-12">
-								<!--<div class="col-md-4">
+								<div class="col-md-4">
 									<p> Country </p>
-									<?php echo $this->Form->input('Country', ['options' => $States,'class'=>'form-control select2','label'=>false,'empty'=>'Select...']); ?> 
-								</div>---->
-								
-								<div class="col-md-6">
-									<p> States <span class="required">*</span></p>
-									<?php echo $this->Form->input('state[]', ['options' => $States,'class'=>'form-control select2','label'=>false,"data-placeholder"=>"Select States",'multiple'=>true]); ?> 										 
+									<?php echo $this->Form->input('country_id', ['options' => $countries,'class'=>'form-control select2','label'=>false,'empty'=>'Select...']); ?> 
 								</div>
-								<div class="col-md-6">
+								
+								<div class="col-md-4">
+									<p> States <span class="required">*</span></p>
+									<?php echo $this->Form->input('state_id', ['options' => $States,'class'=>'form-control select2','label'=>false,"data-placeholder"=>"Select States",'multiple'=>true]); ?> 										 
+								</div>
+								<div class="col-md-4">
 									<p> Cities of Operation </p>
-									<?php echo $this->Form->input('city[]', ['options' =>$Cities,'class'=>'form-control select2','label'=>false,"data-placeholder"=>"Select Cities",'multiple'=>true]); ?> 	 
+									<?php echo $this->Form->input('city_id', ['options' =>$Cities,'class'=>'form-control select2','label'=>false,"data-placeholder"=>"Select Cities",'multiple'=>true]); ?> 	 
 								</div>
  							</div>
 						</div>

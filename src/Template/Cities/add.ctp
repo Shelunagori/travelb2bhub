@@ -21,7 +21,7 @@
 							'label' => false,'class'=>'form-control ','placeholder'=>'Enter City Name']);?>
 						</div>
 					</div>
-					 
+					<span class="help-block"></span>
 					<div class="row">
 						<div class="col-md-4">
 							<label class="control-label">Select State <span class="required" aria-required="true"> * </span></label>
@@ -32,7 +32,7 @@
 							<label id="state-id-error" class="error" for="state-id"> </label>
 						</div>
 					</div>
-					
+					<span class="help-block"></span>
 					<div class="box-footer">
 						<div class="row">
 							<center>

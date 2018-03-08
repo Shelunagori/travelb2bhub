@@ -34,7 +34,7 @@ class TaxiFleetPromotionStatesTable extends Table
         parent::initialize($config);
 
         $this->table('taxi_fleet_promotion_states');
-        $this->displayField('id');
+        $this->displayField('name');
         $this->primaryKey('id');
 
         $this->belongsTo('TaxiFleetPromotions', [

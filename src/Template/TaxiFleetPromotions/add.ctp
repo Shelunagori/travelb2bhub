@@ -1,7 +1,28 @@
 <?php
-/**
-  * @var \App\View\AppView $this
-  */
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "http://konciergesolutions.com/travelb2bhub/api/price_masters/index.json?promotion_type_id=2",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: 4f8087cd-6560-4ca6-5539-9499d3c5b967"
+  ),
+));
+$response = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  $response;
+}
+$priceMasters=json_decode($response);
+$priceMasters->PriceMasters
 ?>
 <style>
 .hr{
@@ -60,16 +81,19 @@ a:hover,a:focus{
 fieldset{
 	margin:10px !important;
 }
+.col-md-12 {
+	margin:5px !important;
+}
 </style> 
 <div class="box-body">
- <?= $this->Form->create($taxiFleetPromotion) ?>
+	<form action="http://konciergesolutions.com/travelb2bhub/api/taxi_fleet_promotions/add.json" method="post" enctype="multipart/form-data">	
 	<div class="row"> 
 		<div class="col-md-12"> 
 			<div class="form-box">
 				<div class="panel-group" style="background-color:white;">
 					<div class="panel panel-default">
 						<fieldset>
-							<legend style="color:#369FA1;"><b><?= __('Add Taxi Fleet Promotion') ?></b></legend> 
+							<legend style="color:#369FA1;"><b><?= __('Load Package') ?></b></legend> 
 					<div class="row">
 						<div class="col-md-12">
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -78,7 +102,7 @@ fieldset{
 									<span class="required">*</span>
 								</p>
 								<div class="input-field">
-									 <?php echo $this->Form->input('company_name',['class'=>'form-control','label'=>false,'readonly']);?>
+									 <?php echo $this->Form->input('company_name',['class'=>'form-control','label'=>false,'autocomplete'=> "off",'placeholder'=>"Company Name",'readonly'=>'readonly']); // 'value'=>$users->company_name ?>
 								</div>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -88,7 +112,6 @@ fieldset{
 								</p>
 								<div class="input-field">
 									 <?php echo $this->Form->input('title',['class'=>'form-control','label'=>false]);?>
-									
 								</div>
 							</div>
 						</div>
@@ -125,61 +148,42 @@ fieldset{
 						<div class="col-md-12">
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 								<p for="from">
-									Promotion Name
+									Vehicle Type
 									<span class="required">*</span>
 								</p>
 								<div class="input-field">
-									
-									 <?php echo $this->Form->input('promotion_type',['options' => $priceMasters,'class'=>'form-control','label'=>false]);?>
+									<?php echo $this->Form->control('vehicle_type', ['label'=>false,"id"=>"multi_vehicle", "type"=>"select",'options' =>$cat, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Vehicle ","style"=>"height:125px;"]);?>
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-								<p for="from">
-									Promotion Type
-									<span class="required">*</span>
-								</p>
-								<div class="input-field">
-									
-									 <?php echo $this->Form->input('price_master_id',['options' => $priceMasters,'class'=>'form-control','label'=>false]);?>
-								</div>
-							</div>
-							
-						</div>
-					</div> 
-					<div class="row">
-						<div class="col-md-12">
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 								<div class="input-field">
 									<p for="from">
 										Choose Country
 										<span class="required">*</span>
 									</p>
-									 <?php echo $this->Form->input('country_id',['class'=>'form-control','options' => $countries,'label'=>false]);?>
+									<?php echo $this->Form->input('country_id',['class'=>'form-control select2','options' => $countries,'label'=>false,"empty"=>"Select Country"]);?>
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+						</div>
+					</div> 
+					
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-6">
 								<p for="from">
 											Choose State
 											<span class="required">*</span>
 								</p>
 								
 								<div class="input-field">
+							
 									<?php echo $this->Form->control('state_id', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$states, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select State","style"=>"height:125px;"]);?>
 									
 								</div>
 							</div>
-							<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-								<div class="input-field">
-									<?php  //echo $this->Form->input('visible_date', ['class'=>'form-control input-medium date-picker']); ?>
-								</div>
-							</div> -->
-						</div>
-					</div> 
-					<div class="row">
-						<div class="col-md-12">
 							<div class="col-md-6">
 								<p for="from">
-											Choose City
+											Cities of Operation
 											<span class="required">*</span>
 								</p>
 								<div class="input-field">
@@ -187,57 +191,112 @@ fieldset{
 									
 								</div>
 							</div>
+							
 						</div>
-					</div>
+					</div><br>
 					<div class="row">
+						<div class="col-md-12">
 						<div class="col-md-12">
 							<p for="from">
 								Fleet Details
 								
 							</p>
 							<div class="input-field">
-									<?php echo $this->Form->input('price',['class'=>'form-control','label'=>false]);?>
-							</div>
-						</div>
-					</div>
-						</fieldset>
-					<br>
-					<fieldset>
-						<legend style="color:#369FA1;"><b><?= __('Payment ') ?></b></legend> 
-							<div class="col-md-6">
-							<p for="from">
-								Promotion Duration
-							</p>
-								<div class="input-field">
-									<?php  echo $this->Form->input('duration', ['options' => $priceMasters,'class'=>'form-control','label'=>false]); ?>
+									<?php echo $this->Form->input('fleet_detail',['class'=>'form-control','label'=>false,'rows'=>'5']);?>
 								</div>
 							</div>
 						</div>
 					</div>
-					</fieldset>
-					
-					
-					<div class="row">
+				</fieldset>
+			<br>
+					<fieldset>
+						<legend style="color:#369FA1;"><b><?= __('Payment ') ?></b></legend> 
+							<div class="row">
 								<div class="col-md-12">
-									<div class="input-field">
-										<div class="margin text-center">
-										<center>
-										<?php echo $this->Form->button('Submit',['class'=>'btn btn-primary btn-submit','value'=>'submit']); ?>
-										</center>
+									<div class="col-md-4">
+										<p for="from">
+											Payment Duration
+										</p>
+										<div class="input-field">
+												 
+										<?php				 
+											$options=array();
+											foreach($priceMasters as $Price)
+											{
+												$options[] = ['value'=>$Price->id,'text'=>$Price->week,'priceVal'=>$Price->week,'price'=>$Price->price];
+											};
+											echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters','label'=>false,'empty'=>'Select ...']);?>
+											<?php // echo $this->Form->input('duration', ['options' => $priceMasters,'class'=>'form-control','label'=>false]); ?>
 										</div>
 									</div>
-								</div> 
+									<div class="col-md-4">
+										<p for="from">
+													Visibility Date
+													<span class="required">*</span>
+										</p>
+										<div class="input-field">
+										<?php echo $this->Form->input('visible_date', ['data-date-format'=>'dd/mm/yyyy','class'=>'form-control visible_date','label'=>false,"placeholder"=>"Visible Date",'readonly'=>'readonly','type'=>'text']); ?>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<p for="from">
+													Promotion Amount
+													<span class="required">*</span>
+										</p>
+										<div class="input-field">
+										<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text']);?> 
+										</div>
+									</div>
+								</div>
 							</div>
 						</fieldset>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="input-field">
+											<div class="margin text-center">
+											<center>
+											<?php echo $this->Form->button('Submit',['class'=>'btn btn-primary btn-submit','value'=>'submit']); ?>
+											</center>
+											</div>
+										</div>
+									</div> 
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-<?= $this->Form->end() ?>
-<script>
-	 
-    $(document).ready(function () {
-$(".multi_city").multiselect();
-$(".multi_states").multiselect();
+			</div>
+	</form>
+</div>
+ 
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<script>	 
+    $(document).ready(function ()
+	{
+		$(document).on('change','.priceMasters',function()
+		{
+			var priceVal=$('.priceMasters option:selected').attr('priceVal');
+			var price=$('.priceMasters option:selected').attr('price');
+			var Result = priceVal.split(" ");
+			var Result1 = price.split(" ");
+			var weeks=Result[0];
+			var price=Result1[0];
+			
+			var todaydate = new Date(); // Parse date
+			for(var x=0; x < weeks; x++){
+				todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
+			}
+			var dd = todaydate .getDate();
+			var mm = todaydate .getMonth()+1; //January is 0!
+			var yyyy = todaydate .getFullYear();
+			if(dd<10){  dd='0'+dd } 
+			if(mm<10){  mm='0'+mm } 
+			var date = dd+'-'+mm+'-'+yyyy;	
+			$('.visible_date').val(date);
+			$('.payment_amount').val(price);
+		})
+$("#multi_city").multiselect();
+$("#multi_states").multiselect();
+$("#multi_vehicle").multiselect();
 	});
 </script>

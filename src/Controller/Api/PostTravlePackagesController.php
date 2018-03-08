@@ -248,7 +248,9 @@ class PostTravlePackagesController extends AppController
 
 			// End Filter code
 			
-			$getTravelPackages = $this->PostTravlePackages->find()->leftJoinWith('PostTravlePackageRows',function($q) use($category_id_filter,$category_short){ 
+			$getTravelPackages = $this->PostTravlePackages->find()
+			->contain(['Users'])
+			->leftJoinWith('PostTravlePackageRows',function($q) use($category_id_filter,$category_short){ 
 						return $q->where(['post_travle_package_category_id' =>$category_id_filter])
 							->contain(['PostTravlePackageCategories'=>function ($q) use($category_short)
 							{	

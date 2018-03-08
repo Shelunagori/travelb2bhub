@@ -11,23 +11,23 @@
 				</div>
 				<div class="col-lg-2">
 					<p>Single</p>
-					<?php echo $this->Form->control('hh_room1'.$randomNumber, ["id"=>"room1", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
+					<?php echo $this->Form->control('hh_room1['.$randomNumber.']', ["id"=>"room1", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 				</div>
 				<div class="col-lg-2">
 					<p>Double</p>
-					<?php echo $this->Form->control('hh_room2'.$randomNumber, ["id"=>"room2", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
+					<?php echo $this->Form->control('hh_room2['.$randomNumber.']', ["id"=>"room2", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 				</div>
 				<div class="col-lg-2">
 					<p>Tripple</p>
-					<?php echo $this->Form->control('hh_room3'.$randomNumber, ["id"=>"room3", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
+					<?php echo $this->Form->control('hh_room3['.$randomNumber.']', ["id"=>"room3", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 				</div>
 				<div class="col-lg-3">
 					<p>Child with Bed</p>
-					<?php echo $this->Form->control('hh_child_with_bed'.$randomNumber, ["id"=>"child_with_bed", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
+					<?php echo $this->Form->control('hh_child_with_bed['.$randomNumber.']', ["id"=>"child_with_bed", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 				</div>
 				<div class="col-lg-3">
 					<p>Child without Bed</p>
-					<?php echo $this->Form->control('hh_child_without_bed'.$randomNumber, ["id"=>"child_without_bed", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
+					<?php echo $this->Form->control('hh_child_without_bed['.$randomNumber.']', ["id"=>"child_without_bed", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 				</div>
 			</div>
 		</div>
@@ -57,14 +57,14 @@
 					<div class="input-field">
 						<p for="from">Hotel Catrgory </p>
 							<div>
-								<?php echo $this->Form->control('hh_hotel_category'.$randomNumber, ["id"=>"hotel_category", "type"=>"select", 'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Hotel Category",]);?>
+								<?php echo $this->Form->control('hh_hotel_category['.$randomNumber.']', ["id"=>"hotel_category", "type"=>"select", 'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Hotel Category",]);?>
 						   </div>
 					</div>
 				</div>
 				<div class="col-md-4 ">
 					<div class="input-field">
 						<p for="from">Meal Plan </p>
-						<div><?php echo $this->Form->control('hh_meal_plan.'.$randomNumber, ["type"=>"select", "empty"=>"Select Meal Plan", 'options' =>array("1"=>"EP - European Plan", "2"=>"CP - Contenental Plan", "3"=>"MAP - Modified American Plan", "4"=>"AP - American Plan") , "class"=>"form-control"]);?></div>
+						<div><?php echo $this->Form->control('hh_meal_plan['.$randomNumber.']', ["type"=>"select", "empty"=>"Select Meal Plan", 'options' =>array("1"=>"EP - European Plan", "2"=>"CP - Contenental Plan", "3"=>"MAP - Modified American Plan", "4"=>"AP - American Plan") , "class"=>"form-control"]);?></div>
 					</div>
 				</div>
 			</div>
@@ -145,7 +145,7 @@
 		</div><span class="help-block"></span>
 	</div>
 	</div>
-	<div class="col-md-12">
+	<div class="col-md-12" align="right">
 		<a href="java:script(0);" class="remove_field btn btn-danger btn-sm">Remove</a>
 		<br/><br/><hr></hr>
 	</div>

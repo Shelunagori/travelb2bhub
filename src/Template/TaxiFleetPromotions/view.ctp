@@ -3,102 +3,60 @@
   * @var \App\View\AppView $this
   */
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Taxi Fleet Promotion'), ['action' => 'edit', $taxiFleetPromotion->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Taxi Fleet Promotion'), ['action' => 'delete', $taxiFleetPromotion->id], ['confirm' => __('Are you sure you want to delete # {0}?', $taxiFleetPromotion->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Taxi Fleet Promotions'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Taxi Fleet Promotion'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Countries'), ['controller' => 'Countries', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Country'), ['controller' => 'Countries', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Price Masters'), ['controller' => 'PriceMasters', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Price Master'), ['controller' => 'PriceMasters', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Taxi Fleet Promotion Cities'), ['controller' => 'TaxiFleetPromotionCities', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Taxi Fleet Promotion City'), ['controller' => 'TaxiFleetPromotionCities', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Taxi Fleet Promotion Rows'), ['controller' => 'TaxiFleetPromotionRows', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Taxi Fleet Promotion Row'), ['controller' => 'TaxiFleetPromotionRows', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Taxi Fleet Promotion States'), ['controller' => 'TaxiFleetPromotionStates', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Taxi Fleet Promotion State'), ['controller' => 'TaxiFleetPromotionStates', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="taxiFleetPromotions view large-9 medium-8 columns content">
-    <h3><?= h($taxiFleetPromotion->title) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('Title') ?></th>
-            <td><?= h($taxiFleetPromotion->title) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Country') ?></th>
-            <td><?= $taxiFleetPromotion->has('country') ? $this->Html->link($taxiFleetPromotion->country->id, ['controller' => 'Countries', 'action' => 'view', $taxiFleetPromotion->country->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Price Master') ?></th>
-            <td><?= $taxiFleetPromotion->has('price_master') ? $this->Html->link($taxiFleetPromotion->price_master->week, ['controller' => 'PriceMasters', 'action' => 'view', $taxiFleetPromotion->price_master->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('User') ?></th>
-            <td><?= $taxiFleetPromotion->has('user') ? $this->Html->link($taxiFleetPromotion->user->last_name, ['controller' => 'Users', 'action' => 'view', $taxiFleetPromotion->user->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($taxiFleetPromotion->id) ?></td>
-        </tr>
-        <tr>
+<div id="my_final_responses" class="container-fluid">
+	<div class="row equal_column">
+		<div class="col-md-12" style="background-color:#fff"> 
+			<br>
+			<?php echo  $this->Flash->render() ?>
+		</div>
+		<div class="col-md-12" style="background-color:#fff"> 
+			<div class="box box-default">
+				<div class="box-header with-border"> 
+					<h3 class="box-title" >TaxiFleet Promotion Details</h3>
+					<div class="box-tools pull-right">
+ 					</div>
+ 				</div>
+<div class="box-body">
+	<table class="table" cellpadding="0" cellspacing="0">
+        <tr style="background-color:#709090;color:white">
             <th scope="row"><?= __('Image') ?></th>
-            <td><?= $this->Number->format($taxiFleetPromotion->image) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Document') ?></th>
+			<th scope="row"><?= __('Document') ?></th>			
+			<th scope="row"><?= __('Cities of Operation') ?></th>			
+			<th scope="row"><?= __('States ') ?></th>			
+		</tr>
+		<tr>
+			<td><?= $this->Number->format($taxiFleetPromotion->image) ?></td>
             <td><?= $this->Number->format($taxiFleetPromotion->document) ?></td>
+			<td><?= h($taxiFleetPromotion->taxi_fleet_promotion_cities->city_id); ?></td>
+			<th scope="row"><?= __('Document') ?></th>
+            <td><?= $this->Number->format($taxiFleetPromotion->document) ?></td>
+        </tr> 
+		<tr>
+			<div class="row">
+				<h4><?= __('Fleet Detail') ?></h4>
+				<?= $this->Text->autoParagraph(h($taxiFleetPromotion->fleet_detail)); ?>
+			</div>
         </tr>
-        <tr>
-            <th scope="row"><?= __('Like Count') ?></th>
-            <td><?= $this->Number->format($taxiFleetPromotion->like_count) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Edited By') ?></th>
-            <td><?= $this->Number->format($taxiFleetPromotion->edited_by) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Is Deleted') ?></th>
-            <td><?= $this->Number->format($taxiFleetPromotion->is_deleted) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Visible Date') ?></th>
-            <td><?= h($taxiFleetPromotion->visible_date) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Created On') ?></th>
-            <td><?= h($taxiFleetPromotion->created_on) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Edited On') ?></th>
-            <td><?= h($taxiFleetPromotion->edited_on) ?></td>
-        </tr>
+       
     </table>
-    <div class="row">
-        <h4><?= __('Fleet Detail') ?></h4>
-        <?= $this->Text->autoParagraph(h($taxiFleetPromotion->fleet_detail)); ?>
-    </div>
+   
     <div class="related">
         <h4><?= __('Related Taxi Fleet Promotion Cities') ?></h4>
         <?php if (!empty($taxiFleetPromotion->taxi_fleet_promotion_cities)): ?>
-        <table cellpadding="0" cellspacing="0">
+        <table class="table" cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Taxi Fleet Promotion Id') ?></th>
                 <th scope="col"><?= __('City Id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
-            <?php foreach ($taxiFleetPromotion->taxi_fleet_promotion_cities as $taxiFleetPromotionCities): ?>
+            <?php 
+			//pr($taxiFleetPromotion->taxi_fleet_promotion_cities);
+			foreach ($taxiFleetPromotion->taxi_fleet_promotion_cities as $taxiFleetPromotionCities): ?>
             <tr>
                 <td><?= h($taxiFleetPromotionCities->id) ?></td>
                 <td><?= h($taxiFleetPromotionCities->taxi_fleet_promotion_id) ?></td>
-                <td><?= h($taxiFleetPromotionCities->city_id) ?></td>
+                <td><?= h($taxiFleetPromotionCities->City->name) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'TaxiFleetPromotionCities', 'action' => 'view', $taxiFleetPromotionCities->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'TaxiFleetPromotionCities', 'action' => 'edit', $taxiFleetPromotionCities->id]) ?>
@@ -112,7 +70,7 @@
     <div class="related">
         <h4><?= __('Related Taxi Fleet Promotion Rows') ?></h4>
         <?php if (!empty($taxiFleetPromotion->taxi_fleet_promotion_rows)): ?>
-        <table cellpadding="0" cellspacing="0">
+        <table class="table" cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Taxi Fleet Promotion Id') ?></th>
@@ -137,18 +95,19 @@
     <div class="related">
         <h4><?= __('Related Taxi Fleet Promotion States') ?></h4>
         <?php if (!empty($taxiFleetPromotion->taxi_fleet_promotion_states)): ?>
-        <table cellpadding="0" cellspacing="0">
+        <table class="table" cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Taxi Fleet Promotion Id') ?></th>
                 <th scope="col"><?= __('State Id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
-            <?php foreach ($taxiFleetPromotion->taxi_fleet_promotion_states as $taxiFleetPromotionStates): ?>
+            <?php  
+			foreach ($taxiFleetPromotion->taxi_fleet_promotion_states as $taxiFleetPromotionStates): ?>
             <tr>
                 <td><?= h($taxiFleetPromotionStates->id) ?></td>
                 <td><?= h($taxiFleetPromotionStates->taxi_fleet_promotion_id) ?></td>
-                <td><?= h($taxiFleetPromotionStates->state_id) ?></td>
+                <td><?= h($taxiFleetPromotionStates->state->state_name) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'TaxiFleetPromotionStates', 'action' => 'view', $taxiFleetPromotionStates->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'TaxiFleetPromotionStates', 'action' => 'edit', $taxiFleetPromotionStates->id]) ?>

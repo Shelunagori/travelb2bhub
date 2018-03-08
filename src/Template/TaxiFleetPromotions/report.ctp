@@ -12,7 +12,7 @@
 		<div class="col-md-12" style="background-color:#fff"> 
 			<div class="box box-default">
 				<div class="box-header with-border"> 
-					<h3 class="box-title" style="padding:5px"><?= __('Taxi Fleet Promotions') ?></h3>
+					<h3 class="box-title"><?= __('Taxi Fleet Promotions') ?></h3>
 					<div class="box-tools pull-right">
  					</div>
  				</div>
@@ -27,8 +27,11 @@
                 <th scope="col"><?= ('Duration') ?></th>
                 <th scope="col"><?= ('Likes') ?></th>
                 <th scope="col"><?= ('Visibility Date') ?></th>
-				<th scope="col"><?= ('Image') ?></th>
+				 <th scope="col"><?= ('Image') ?></th>
                 <th scope="col"><?= ('Document') ?></th>
+               
+               
+               
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>

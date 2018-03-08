@@ -77,7 +77,7 @@
 						?>
 						<tr>
 							<td><?= $this->Number->format($response->id) ?></td>
-							<td><?= $response->has('request') ? $this->Html->link($response->request->id, ['controller' => 'Requests', 'action' => 'view', $response->request->id]) : '' ?></td>
+							<td><?= $response->request->id ?></td>
 							<td><?php echo $response->user->first_name.$response->user->last_name; ?></td>
 							<td><?= $this->Number->format($response->quotation_price) ?></td>
 							<td><?php echo $showis_details_shared; ?></td>

@@ -21,7 +21,7 @@
 							'label' => false,'class'=>'form-control ','placeholder'=>'Enter City Name']);?>
 						</div>
 					</div>
-					
+					<span class="help-block"></span>
 					<div class="row">
 						<div class="col-md-4">
 							<label class="control-label">Description </label>
@@ -31,7 +31,7 @@
 							'label' => false,'class'=>'form-control ','placeholder'=>'Enter Description']);?>
 						</div>
 					</div>
-					 
+					 <span class="help-block"></span>
 					 
 					<div class="box-footer">
 						<div class="row">

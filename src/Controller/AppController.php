@@ -48,33 +48,9 @@ class AppController extends Controller {
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
 		
-        if($this->request->params['controller'] == 'Users') 
+        if($this->request->params['controller'] == 'Admins') 
 		{
 		 
-			$this->loadComponent('Auth', [
-			 'authenticate' => [
-					'Form' => [
-						'fields' => [
-							'username' => 'email',
-							'password' => 'password'
-						],
-						'scope' => ['status' => '1'],
-						'userModel' => 'Users'
-					]
-				],
-				'loginRedirect' => [
-					'controller' => 'Users',
-					'action' => 'dashboard'
-				],
-				'logoutRedirect' => [
-					'controller' => 'Users',
-					'action' => 'login'
-				],
-				'unauthorizedRedirect' => $this->referer(),
-			]);
-		}
-		else
-		{
 			$this->loadComponent('Auth', [
 				'authenticate' => [
 					'Form' => [
@@ -99,6 +75,31 @@ class AppController extends Controller {
 				],
 				'unauthorizedRedirect' => $this->referer(),
 			]);
+		}
+		else
+		{
+$this->loadComponent('Auth', [
+			 'authenticate' => [
+					'Form' => [
+						'fields' => [
+							'username' => 'email',
+							'password' => 'password'
+						],
+						'scope' => ['status' => '1'],
+						'userModel' => 'Users'
+					]
+				],
+				'loginRedirect' => [
+					'controller' => 'Users',
+					'action' => 'dashboard'
+				],
+				'logoutRedirect' => [
+					'controller' => 'Users',
+					'action' => 'login'
+				],
+				'unauthorizedRedirect' => $this->referer(),
+			]);
+			
 		}	
 		
     }
