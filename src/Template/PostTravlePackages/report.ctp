@@ -21,22 +21,20 @@
 							<thead>
 								<tr style="background-color:#709090;color:white;">
 									<th scope="col"><?= ('Sr.No') ?></th>
-									<th scope="col"><?= ('title') ?></th>
-									<th scope="col"><?= ('duration_night') ?></th>
-									<th scope="col"><?= ('duration_day') ?></th>
-									<th scope="col"><?= ('valid_date') ?></th>
-									<th scope="col"><?= ('currency_id') ?></th>
-									<th scope="col"><?= ('starting_price') ?></th>
-									<th scope="col"><?= ('country_id') ?></th>
-									<th scope="col"><?= ('image') ?></th>
-									<th scope="col"><?= ('document') ?></th>
-									<th scope="col"><?= ('price_master_id') ?></th>
-									<th scope="col"><?= ('like_count') ?></th>
-									<th scope="col"><?= ('visible_date') ?></th>
-									<th scope="col"><?= ('user_id') ?></th>
-									<th scope="col"><?= ('created_on') ?></th>
-									<th scope="col"><?= ('edited_by') ?></th>
-									<th scope="col"><?= ('edited_on') ?></th>
+									<th scope="col"><?= ('Title') ?></th>
+									<th scope="col"><?= ('Duration Night') ?></th>
+									<th scope="col"><?= ('Duration Day') ?></th>
+									<th scope="col"><?= ('Valid Date') ?></th>
+									<th scope="col"><?= ('Currency') ?></th>
+									<th scope="col"><?= ('Starting Price') ?></th>
+									<th scope="col"><?= ('Country') ?></th>
+									<th scope="col"><?= ('Image') ?></th>
+									<th scope="col"><?= ('Document') ?></th>
+									<th scope="col"><?= ('Duration') ?></th>
+									<th scope="col"><?= ('Likes') ?></th>
+									<th scope="col"><?= ('Visible Date') ?></th>
+									<th scope="col"><?= ('User Name') ?></th>
+									
 									<th scope="col" class="actions"><?= __('Actions') ?></th>
 								</tr>
 							</thead>
@@ -44,23 +42,20 @@
 								<?php $i=1; foreach ($postTravlePackages as $postTravlePackage): ?>
 								<tr>
 									<td><?= $i; ?></td>
-									<td><?= $this->Number->format($postTravlePackage->id) ?></td>
 									<td><?= h($postTravlePackage->title) ?></td>
 									<td><?= $this->Number->format($postTravlePackage->duration_night) ?></td>
 									<td><?= $this->Number->format($postTravlePackage->duration_day) ?></td>
 									<td><?= h($postTravlePackage->valid_date) ?></td>
-									<td><?= $postTravlePackage->has('currency') ? $this->Html->link($postTravlePackage->currency->name, ['controller' => 'Currencies', 'action' => 'view', $postTravlePackage->currency->id]) : '' ?></td>
+									<td><?= h($postTravlePackage->currency->name);?></td>
 									<td><?= $this->Number->format($postTravlePackage->starting_price) ?></td>
-									<td><?= $postTravlePackage->has('country') ? $this->Html->link($postTravlePackage->country->country_name, ['controller' => 'Countries', 'action' => 'view', $postTravlePackage->country->id]) : '' ?></td>
+									<td><?= h($postTravlePackage->country->country_name);?></td>
 									<td><?= h($postTravlePackage->image) ?></td>
 									<td><?= h($postTravlePackage->document) ?></td>
 									<td><?= $postTravlePackage->has('price_master') ? $this->Html->link($postTravlePackage->price_master->id, ['controller' => 'PriceMasters', 'action' => 'view', $postTravlePackage->price_master->id]) : '' ?></td>
 									<td><?= $this->Number->format($postTravlePackage->like_count) ?></td>
 									<td><?= h($postTravlePackage->visible_date) ?></td>
 									<td><?= $postTravlePackage->has('user') ? $this->Html->link($postTravlePackage->user->last_name, ['controller' => 'Users', 'action' => 'view', $postTravlePackage->user->id]) : '' ?></td>
-									<td><?= h($postTravlePackage->created_on) ?></td>
-									<td><?= $this->Number->format($postTravlePackage->edited_by) ?></td>
-									<td><?= h($postTravlePackage->edited_on) ?></td>
+									
 									<td class="actions">
 										<?= $this->Html->link(__('View'), ['action' => 'view', $postTravlePackage->id]) ?>
 										<?= $this->Html->link(__('Edit'), ['action' => 'edit', $postTravlePackage->id]) ?>
