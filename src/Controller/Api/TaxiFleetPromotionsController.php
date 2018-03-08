@@ -149,6 +149,7 @@ class TaxiFleetPromotionsController extends AppController
 			$getTaxiFleetPromotions = $this->TaxiFleetPromotions->find();
 				$getTaxiFleetPromotions->select(['total_likes'=>$getTaxiFleetPromotions->func()->count('TaxiFleetPromotionLikes.id')])
 				->leftJoinWith('TaxiFleetPromotionLikes')
+				->contain(['Users'])
 			->where(['visible_date >=' =>date('Y-m-d')])
 			->group(['TaxiFleetPromotions.id'])
 			->autoFields(true);
