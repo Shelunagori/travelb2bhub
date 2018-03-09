@@ -29,68 +29,77 @@ $conn = ConnectionManager::get('default');
 	</div>
 	<div class="box-body">
 		<div class="row">
-   
- 
           <div id="myModal123" class="modal fade form-modal" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Sorting</h4>
-      </div>
-      <div class="modal-body">   
-		<table width="90%" class="shotrs">
-			<tr>
-				<td>
-				
-				
-					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=totalbudgethl">
-					<input class="btn btn-info btn-sm" type="radio" name="r1"/>
-					Total Budget <i class="fa fa-sort-amount-desc"></i> <span class=arrow><span></span></span></a>&nbsp;
-					
-					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=totalbudgetlh">
-					<input class="btn btn-info btn-sm" type="radio" name="r1"/>
-					Total Budget <i class="fa fa-sort-amount-asc"></i>  <span class=arrow><span></span></span></a>&nbsp;
-					<br>
-					<br>
-					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=agentaz">
-					<input class="btn btn-info btn-sm" type="radio" name="r1"/>
-					No. of Responses <i class="fa fa-sort-amount-asc"></i> <span class=arrow><span></span></span></a>&nbsp;
-					
-					<a  href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=agentza">
-					<input class="btn btn-info btn-sm" type="radio" name="r1"/>
-					No. of Responses <i class="fa fa-sort-amount-desc"></i> <span class=arrow><span></span></span></a>&nbsp;
-					
-					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=requesttype">
-					<input class="btn btn-info btn-sm" type="radio" name="r1"/>
-					Request Type <span class=arrow><span></span></span></a>
-					
-					<!--a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=totalbudgethl">Total Budget (High To Low) <span class="arrow"><span></span></span></a> 
-					
-					<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=totalbudgetlh"> Total Budget (Low To High)<span class="arrow"><span></span></span></a> 
-					
-					<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=agentaz"> Agent Name (A To Z) <span class="arrow"><span></span></span></a> 
-					
-					<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=agentza"> Agent Name (Z To A)<span class="arrow"><span></span></span></a>
-					
-					<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>?sort=requesttype">Request Type  <span class="arrow"><span></span></span></a-->
-                 </td>
-			</tr>
-		</table>    
-      </div>
-      <div class="modal-footer">
-
-      </div>
+			  <div class="modal-dialog" style=" width: 20%;">
+				<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Sorting</h4>
+					</div>
+					  <div class="modal-body" style="height:200px;">
+						<div class="col-md-12 row form-group ">
+							<div class="col-md-12">
+									 <input class="btn btn-info btn-sm" type="radio" name="r1" value="totalbudgethl"/>
+									 <label class="col-form-label" for=example-text-input>
+										Total Budget <i class="fa fa-sort-amount-desc"></i>
+										<span class=arrow></span>
+									 </label>
+							</div>
+                        </div>
+						<div class="col-md-12 row form-group ">
+							<div class="col-md-12">
+									 <input class="btn btn-info btn-sm" type="radio" name="r1" value="totalbudgetlh"/>
+									 <label class="col-form-label"for=example-text-input>
+										Total Budget <i class="fa fa-sort-amount-desc"></i> 
+										<span class=arrow></span>
+									 </label>
+							</div>
+                        </div>
+						<div class="col-md-12 row form-group ">
+							<div class="col-md-12">
+									<input class="btn btn-info btn-sm" type="radio" name="r1" value="agentaz"/>
+									<label class="col-form-label"for=example-text-input>
+										No. of Responses <i class="fa fa-sort-amount-asc"></i> 
+										<span class=arrow></span>
+									</label>
+							</div>
+						</div>
+						<div class="col-md-12 row form-group ">
+							<div class=col-md-12>
+									<input class="btn btn-info btn-sm" type="radio" name="r1" value="agentza"/>
+									<label class="col-form-label"for=example-text-input>
+										No. of Responses <i class="fa fa-sort-amount-desc"></i> 
+										<span class=arrow></span>
+									</label>
+							</div>
+						</div>
+						<div class="col-md-12 row form-group ">
+							<div class=col-md-12>
+									<input class="btn btn-info btn-sm" type="radio" name="r1" value="requesttype"/>
+									<label class="col-form-label"for=example-text-input>
+									Request Type 
+									<span class=arrow></span>
+									</label>
+							</div>
+						</div>
+					  </div>
+						<div class="modal-footer" style="height:60px;">
+						  <div class="row">
+								<div class="col-md-12 text-center">
+									<input type="submit" name="submit" value="Sort"  class="btn btn-primary btn-submit">
+								</div>
+						  </div>
+						</div>
     </div>
   </div>
 </div>
-          <div id="myModal122" class="modal fade form-modal" role="dialog">
-  <div class="modal-dialog">
+<div id="myModal122" class="modal fade form-modal" role="dialog">
+  <div class="modal-dialog" style="width:35%;">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal">×</button>
         <h4 class="modal-title">Filter</h4>
       </div>
       <div class="modal-body" style="height:180px">

@@ -58,7 +58,7 @@ legend
 						<div class="col-md-12 row form-group ">
 							<div class="col-md-12">
 									 <input class="btn btn-info btn-sm" type="radio" name="r1" value="totalbudgethl"/>
-									 <label class="col-form-label"for=example-text-input>
+									 <label class="col-form-label" for=example-text-input>
 										Total Budget <i class="fa fa-sort-amount-desc"></i>
 										<span class=arrow></span>
 									 </label>
@@ -102,11 +102,11 @@ legend
 						</div>
 					  </div>
 					  <div class="modal-footer" style="height:60px;">
-					  <div class="row">
-							<div class="col-md-12 text-center">
-								<input type="submit" name="submit" value="Sort"  class="btn btn-primary btn-submit">
-							</div>
-					  </div>
+						  <div class="row">
+								<div class="col-md-12 text-center">
+									<input type="submit" name="submit" value="Sort"  class="btn btn-primary btn-submit">
+								</div>
+						  </div>
 					</div>
 				  </div>
 				</div>
@@ -115,7 +115,7 @@ legend
                   <div class="modal-dialog " style="width:35%;" >
                      <div class=modal-content>
                         <div class=modal-header>
-                           <button class=close data-dismiss=modal type=button>×</button>
+                           <button class="close" data-dismiss="modal" type="button">×</button>
                            <h4 class=modal-title>Filter</h4>
                         </div>
 						<form class=filter_box>
@@ -128,32 +128,22 @@ legend
 									  <div class=col-md-1>:
 									  </div>
 									 <div class=col-md-7>
-										<select class="form-control input-medium" name=req_typesearch>
-										   <option value="">Select Request Type
-										   <option value=1>Package
-										   <option value=3>Hotel
-										   <option value=2>Transport
-										</select>
-								</div>
+										<select name="req_typesearch" class="form-control"><option value="">Select Request Type</option><option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option><option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option><option value="2">Transport</option></select>
+									</div>
                                  </div>
                                 </div>
 								<div class="row form-group margin-b10">
-                                 <div class=col-md-12>
-								<div class=col-md-4>
-								 <label class="col-form-label"for=example-text-input>Total Budget</label>
-								 </div>
-								 <div class=col-md-1>:</div>
-								 <div class=col-md-7>
-                                    <select class="form-control input-medium" name=budgetsearch>
-                                       <option value="">Select Total Budget
-                                       <option value=0-10000<?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000
-                                       <option value=10000-30000<?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000
-                                       <option value=30000-50000<?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000
-                                       <option value=50000-100000<?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000
-                                       <option value=100000-100000000000<?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? 'selected':''; ?>>100000-Above
-                                    </select>
-                                 </div>
-                                 </div>
+									<div class=col-md-12>
+										<div class=col-md-4>
+											<label class="col-form-label"for=example-text-input>Total Budget</label>
+										</div>
+										<div class=col-md-1>:</div>
+										<div class=col-md-7>
+											<select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option>
+											<option value="100000-100000000000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? 'selected':''; ?>>100000-Above</option>
+											</select>
+										</div>
+									 </div>
                                  </div>
 								<div class="row form-group margin-b10">
 									<div class=col-md-12>
