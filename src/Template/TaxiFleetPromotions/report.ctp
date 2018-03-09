@@ -68,7 +68,7 @@ if ($err) {
                 <td><?= h($taxiFleetPromotion->country->country_name); ?></td>
                 <td><?= h($taxiFleetPromotion->price_master->week); ?></td>              
                 <td><?= $this->Number->format($taxiFleetPromotion->like_count) ?></td>
-                <td><?= h($taxiFleetPromotion->visible_date) ?></td>
+                <td><?= h(date('d-m-Y',strtotime($taxiFleetPromotion->visible_date))); ?></td>
 				<td><?= $this->Number->format($taxiFleetPromotion->image) ?></td>
                 <td><?= $this->Number->format($taxiFleetPromotion->document) ?></td>
                 <td class="actions">
