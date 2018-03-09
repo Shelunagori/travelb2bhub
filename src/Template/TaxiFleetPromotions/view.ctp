@@ -20,7 +20,7 @@
 						<table class="table" cellpadding="0" cellspacing="0">
 							<tr style="background-color:#709090;color:white">
 								<th scope="row"><?= __('Image') ?></th>
-								<th scope="row"><?//= __('Document') ?></th>
+								<th scope="row"><?= __('Document') ?></th>
 							</tr>
 							<tr>
 								<td>dsdfsdfsdfs<?= $this->Number->format($taxiFleetPromotion->image) ?></td>
