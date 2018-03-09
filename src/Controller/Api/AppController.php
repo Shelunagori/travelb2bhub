@@ -7,7 +7,8 @@ use Cake\Event\Event;
 //use Cake\I18n\FrozenTime;
 class AppController extends Controller
 {
-   use \Crud\Controller\ControllerTrait;
+  use \Crud\Controller\ControllerTrait;
+	
   public $components = [
         'RequestHandler',
         'Crud.Crud' => [
@@ -24,6 +25,19 @@ class AppController extends Controller
                 'Crud.ApiQueryLog'
             ]
         ]
-    ];	
+    ];
+	public function initialize()
+    {
+		$coreVariable = [
+			'SiteUrl' => 'http://app.ucciudaipur.in/webroot/',
+		];
+		$this->coreVariable = $coreVariable;
+		$this->set(compact('coreVariable'));
+	}
+	
 }
+
+/*
+
+*/
 ?>

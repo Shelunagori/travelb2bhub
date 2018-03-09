@@ -120,6 +120,7 @@ class EventPlannerPromotionsController extends AppController
 		{
 			$this->Flash->success(__('message'));
 			return $this->redirect(['controller'=>'EventPlannerPromotions','action' => 'report']);
+			return $this->redirect('http://www.example.com');
 		}
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);		
