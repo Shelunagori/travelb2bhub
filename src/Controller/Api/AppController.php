@@ -8,9 +8,8 @@ use Cake\Event\Event;
 class AppController extends Controller
 {
   use \Crud\Controller\ControllerTrait;
-	
   public $components = [
-        'RequestHandler',
+        'RequestHandler','Flash',
         'Crud.Crud' => [
             'actions' => [
                 'Crud.Index',
@@ -29,7 +28,7 @@ class AppController extends Controller
 	public function initialize()
     {
 		$coreVariable = [
-			'SiteUrl' => 'http://app.ucciudaipur.in/webroot/',
+			'SiteUrl' => 'http://konciergesolutions.com/travelb2bhub/',
 		];
 		$this->coreVariable = $coreVariable;
 		$this->set(compact('coreVariable'));

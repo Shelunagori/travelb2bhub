@@ -1,7 +1,31 @@
 <?php
-/**
-  * @var \App\View\AppView $this
-  */
+//-- List
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/EventPlannerPromotions/getEventPlanners.json?isLikedUserId=".$user_id,
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: 4f8087cd-6560-4ca6-5539-9499d3c5b967"
+  ),
+));
+$response = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+$priceMasters=array();
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+	$response;
+	$List=json_decode($response);
+	$eventPlannerPromotions=$List->getEventPlanners;
+}
+//pr($List); exit;
 ?>
 <div id="my_final_responses" class="container-fluid">
 	<div class="row equal_column">
@@ -51,7 +75,7 @@
 							 <?php $i++;endforeach; ?>
 						</tbody>
 					</table>
-					<div class="paginator">
+					<!--<div class="paginator">
 						<ul class="pagination">
 							<?= $this->Paginator->first('<< ' . __('first')) ?>
 							<?= $this->Paginator->prev('< ' . __('previous')) ?>
@@ -60,7 +84,7 @@
 							<?= $this->Paginator->last(__('last') . ' >>') ?>
 						</ul>
 						<p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-					</div>
+					</div>--->
 				</div>
 			</div>
 		</div>

@@ -118,9 +118,8 @@ class EventPlannerPromotionsController extends AppController
         }
 		if(@$submitted_from=='web')
 		{
-			$this->Flash->success(__('message'));
-			return $this->redirect(['controller'=>'EventPlannerPromotions','action' => 'report']);
-			return $this->redirect('http://www.example.com');
+			$this->Flash->success(__('message')); 
+			return $this->redirect($this->coreVariable['SiteUrl'].'EventPlannerPromotions/report');
 		}
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);		
@@ -235,8 +234,9 @@ class EventPlannerPromotionsController extends AppController
 			$getEventPlanners = $this->EventPlannerPromotions->find();
 				$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('EventPlannerPromotionLikes.id')])
 				->leftJoinWith('EventPlannerPromotionLikes')
-			->where(['visible_date >=' =>date('Y-m-d')])
-			->where(['is_deleted' =>0])
+			->contain(['Users','PriceMasters','Countries'])
+			->where(['EventPlannerPromotions.visible_date >=' =>date('Y-m-d')])
+			->where(['EventPlanner.Promotionsis_deleted' =>0])
 			->group(['EventPlannerPromotions.id'])
 			->autoFields(true);
 			
@@ -248,16 +248,6 @@ class EventPlannerPromotionsController extends AppController
 					if($exists == 1)
 					{ $getEventPlanner->isLiked = 'yes'; }
 					else{ $getEventPlanner->isLiked = 'no'; }
-					
-					$carts = $this->EventPlannerPromotions->EventPlannerPromotionCarts->exists(['EventPlannerPromotionCarts.event_planner_promotion_id'=>$getEventPlanner->id,'EventPlannerPromotionCarts.user_id'=>$isLikedUserId,'EventPlannerPromotionCarts.is_deleted'=>0]);
-					if($carts==0){
-						$getEventPlanner->issaved=false;
-					}else{
-						$getEventPlanner->issaved=true;
-					}	
-					
-					$getEventPlanner->total_views = $this->EventPlannerPromotions->EventPlannerPromotionViews
-						->find()->where(['event_planner_promotion_id' => $getEventPlanner->id])->count();
 				}
 				
 				
@@ -308,19 +298,6 @@ class EventPlannerPromotionsController extends AppController
 			
 			$exists = $this->EventPlannerPromotions->EventPlannerPromotionViews->exists(['event_planner_promotion_id'=>$viewEventPlannerPromotions->event_planner_promotion_id,'user_id'=>$viewEventPlannerPromotions->user_id]);
 			
-			$carts = $this->EventPlannerPromotions->EventPlannerPromotionCarts->exists(['EventPlannerPromotionCarts.event_planner_promotion_id'=>$id,'EventPlannerPromotionCarts.user_id'=>$user_id,'EventPlannerPromotionCarts.is_deleted'=>0]);
-			
-			if($carts==0){
-				foreach($getEventPlannersDetails as $sfad){
-					$sfad->issaved=false;
-				}
-				
-			}else{
-				foreach($getEventPlannersDetails as $sfad){
-					$sfad->issaved=true;
-				}
-			}
-			
 			if($exists == 0)
 			{
 				if ($this->EventPlannerPromotions->EventPlannerPromotionViews->save($viewEventPlannerPromotions)) {
@@ -336,11 +313,6 @@ class EventPlannerPromotionsController extends AppController
 					$message = 'Data found but viewed already';
 					$response_code = 205;					
 			}
-			
-			foreach($getEventPlannersDetails as $vew){
-					$vew->total_views = $this->EventPlannerPromotions->EventPlannerPromotionViews
-							->find()->where(['event_planner_promotion_id' => $id])->count();
-				}
 		}
 		else
 		{

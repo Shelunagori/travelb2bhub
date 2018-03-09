@@ -49,7 +49,7 @@ class AppController extends Controller {
         $this->loadComponent('Flash');
 	 
 		$coreVariable = [
-			'SiteUrl' => 'http://app.ucciudaipur.in/webroot/',
+			'SiteUrl' => 'http://konciergesolutions.com/travelb2bhub/',
 		];
 		$this->coreVariable = $coreVariable;
 		$this->set(compact('coreVariable'));
