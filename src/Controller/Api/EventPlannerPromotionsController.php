@@ -232,7 +232,11 @@ class EventPlannerPromotionsController extends AppController
 		if(!empty($isLikedUserId))
 		{
 			$getEventPlanners = $this->EventPlannerPromotions->find();
+			
 				$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('EventPlannerPromotionLikes.id')])
+				->contain(['Users'=>function($q){
+				return $q->select(['first_name','last_name','mobile_number','company_name']);
+			}])
 				->leftJoinWith('EventPlannerPromotionLikes')
 			->where(['visible_date >=' =>date('Y-m-d')])
 			->where(['is_deleted' =>0])
@@ -257,9 +261,27 @@ class EventPlannerPromotionsController extends AppController
 					
 					$getEventPlanner->total_views = $this->EventPlannerPromotions->EventPlannerPromotionViews
 						->find()->where(['event_planner_promotion_id' => $getEventPlanner->id])->count();
+						
+					$all_raiting=0;	
+					$testimonial=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId]);
+					$testimonial_count=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId])->count();
+						 
+						 foreach($testimonial as $test_data){
+							 $rating=$test_data->rating;
+							 $all_raiting+=$rating;
+						 }
+						 if($testimonial_count>0){
+							 $final_raiting=($all_raiting/$testimonial_count);
+							 if($final_raiting>0){
+								$getEventPlanner->user_rating=number_format($final_raiting, 1);
+							 }else{
+								$getEventPlanner->user_rating=0;
+							 }	
+						 }else{
+							$getEventPlanner->user_rating=0;
+						 }	 
 				}
-				
-				
+				 
 				$message = 'List Found Successfully';
 				$response_code = 200;
 			}
@@ -320,6 +342,31 @@ class EventPlannerPromotionsController extends AppController
 				}
 			}
 			
+			$all_raiting=0;	
+					$testimonial=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id]);
+					$testimonial_count=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id])->count();
+						 
+						 foreach($testimonial as $test_data){
+							 
+							 $rating=$test_data->rating;
+							 $all_raiting+=$rating;
+						 }
+						 if($testimonial_count>0){
+							 $final_raiting=($all_raiting/$testimonial_count);
+							 foreach($getEventPlannersDetails as $rat){
+								 if($final_raiting>0){
+									$rat->user_rating=number_format($final_raiting, 1);
+								 }else{
+									$rat->user_rating=0;
+								 }
+							 }	
+						 }else{
+							 foreach($getEventPlannersDetails as $rat){
+								$rat->user_rating=0;
+							 }	
+							 
+						 }
+						 
 			if($exists == 0)
 			{
 				if ($this->EventPlannerPromotions->EventPlannerPromotionViews->save($viewEventPlannerPromotions)) {

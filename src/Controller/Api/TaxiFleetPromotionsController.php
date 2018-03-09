@@ -178,6 +178,9 @@ class TaxiFleetPromotionsController extends AppController
 		{
 			$getTaxiFleetPromotions = $this->TaxiFleetPromotions->find();
 			$getTaxiFleetPromotions->select(['total_likes'=>$getTaxiFleetPromotions->func()->count('TaxiFleetPromotionLikes.id')])
+				->contain(['Users'=>function($q){
+					return $q->select(['first_name','last_name','mobile_number','company_name']);
+				}])
 				->leftJoinWith('TaxiFleetPromotionLikes')
 				->contain(['Users','PriceMasters','Countries'])
 				->where(['TaxiFleetPromotions.visible_date >=' =>date('Y-m-d')])
@@ -204,6 +207,25 @@ class TaxiFleetPromotionsController extends AppController
 					$getTaxiFleetPromotion->total_views = $this->TaxiFleetPromotions->TaxiFleetPromotionViews
 						->find()->where(['taxi_fleet_promotion_id' => $getTaxiFleetPromotion->id])->count();
 					
+					$all_raiting=0;	
+					$testimonial=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId]);
+					$testimonial_count=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId])->count();
+						 
+						 foreach($testimonial as $test_data){
+							 $rating=$test_data->rating;
+							 $all_raiting+=$rating;
+						 }
+						 if($testimonial_count>0){
+							 $final_raiting=($all_raiting/$testimonial_count);
+							 if($final_raiting>0){
+								$getTaxiFleetPromotion->user_rating=number_format($final_raiting, 1);
+							 }else{
+								$getTaxiFleetPromotion->user_rating=0;
+							 }	
+						 }else{
+							$getTaxiFleetPromotion->user_rating=0;
+						 }	 
+					 
 				}
 				$message = 'List Found Successfully';
 				$response_code = 200;
@@ -258,6 +280,31 @@ class TaxiFleetPromotionsController extends AppController
 				}
 			}
 			
+			$all_raiting=0;	
+					$testimonial=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id]);
+					$testimonial_count=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id])->count();
+						 
+						 foreach($testimonial as $test_data){
+							 
+							 $rating=$test_data->rating;
+							 $all_raiting+=$rating;
+						 }
+						 if($testimonial_count>0){
+							 $final_raiting=($all_raiting/$testimonial_count);
+							 foreach($getTaxiFleetPromotionsDetails as $rat){
+								 if($final_raiting>0){
+									$rat->user_rating=number_format($final_raiting, 1);
+								 }else{
+									$rat->user_rating=0;
+								 }
+							 }	
+						 }else{
+							 foreach($getTaxiFleetPromotionsDetails as $rat){
+								$rat->user_rating=0;
+							 }	
+							 
+						 }
+						 
 			if($exists == 0)
 			{
 				if ($this->TaxiFleetPromotions->TaxiFleetPromotionViews->save($viewTaxiFleetPromotions)) {

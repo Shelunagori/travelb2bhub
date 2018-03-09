@@ -250,7 +250,9 @@ class PostTravlePackagesController extends AppController
 			// End Filter code
 			
 			$getTravelPackages = $this->PostTravlePackages->find()
-			->contain(['Users'])
+			->contain(['Users'=>function($q){
+				return $q->select(['first_name','last_name','mobile_number','company_name']);
+			}])
 			->leftJoinWith('PostTravlePackageRows',function($q) use($category_id_filter,$category_short){ 
 						return $q->where(['post_travle_package_category_id' =>$category_id_filter])
 							->contain(['PostTravlePackageCategories'=>function ($q) use($category_short)
@@ -290,6 +292,26 @@ class PostTravlePackagesController extends AppController
 					
 					$getTravelPackage->total_views = $this->PostTravlePackages->PostTravlePackageViews
 						->find()->where(['post_travle_package_id' => $getTravelPackage->id])->count();
+						
+					$all_raiting=0;	
+					$testimonial=$this->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId]);
+					$testimonial_count=$this->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId])->count();
+						 
+						 foreach($testimonial as $test_data){
+							 
+							 $rating=$test_data->rating;
+							 $all_raiting+=$rating;
+						 }
+						 if($testimonial_count>0){
+							 $final_raiting=($all_raiting/$testimonial_count);
+							 if($final_raiting>0){
+								$getTravelPackage->user_rating=number_format($final_raiting, 1);
+							 }else{
+								 $getTravelPackage->user_rating=0;
+							 }
+						 }else{
+							 $getTravelPackage->user_rating=0;
+						 }
 				}
 				$message = 'List Found Successfully';
 				$response_code = 200;
@@ -323,7 +345,7 @@ class PostTravlePackagesController extends AppController
 			->group(['PostTravlePackages.id'])
 		->autoFields(true);
 		
-			
+			 
 		if(!empty($getTravelPackageDetails->toArray()))
 		{
 		
@@ -344,6 +366,30 @@ class PostTravlePackagesController extends AppController
 					$sfad->issaved=true;
 				}
 			}
+			  $all_raiting=0;	
+					$testimonial=$this->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id]);
+					$testimonial_count=$this->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id])->count();
+						 
+						 foreach($testimonial as $test_data){
+							 
+							 $rating=$test_data->rating;
+							 $all_raiting+=$rating;
+						 }
+						 $final_raiting=($all_raiting/$testimonial_count);
+					 if($testimonial_count>0){
+						 foreach($getTravelPackageDetails as $rat){
+							 if($final_raiting>0){
+								$rat->user_rating=number_format($final_raiting, 1);
+							 }else{
+								$rat->user_rating=0;
+							 }
+						 }  
+					 }else{
+						  foreach($getTravelPackageDetails as $rat){
+								$rat->user_rating=0;
+						 }
+					 }
+						 
 			if($exists == 0)
 			{
 				if ($this->PostTravlePackages->PostTravlePackageViews->save($viewPostTravelPackages)) {
