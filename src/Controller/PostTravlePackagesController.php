@@ -239,13 +239,8 @@ class PostTravlePackagesController extends AppController
 	public function report()
     {
 		$this->viewBuilder()->layout('user_layout');
-        $this->paginate = [
-            'contain' => ['Currencies', 'Countries', 'PriceMasters', 'Users','PostTravlePackageRows']
-        ];
-        $postTravlePackages = $this->paginate($this->PostTravlePackages);
-		//pr($postTravlePackages->toArray());exit;
-        $this->set(compact('postTravlePackages'));
-        $this->set('_serialize', ['postTravlePackages']);
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id'));
     }
 
 }

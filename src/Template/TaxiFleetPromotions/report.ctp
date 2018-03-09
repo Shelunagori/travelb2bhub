@@ -23,6 +23,7 @@ if ($err) {
 } else {
 	$response;
 	$List=json_decode($response);
+	//pr($List); exit;
 	$taxiFleetPromotions=$List->getTaxiFleetPromotions;
 }
 //pr($taxiFleetPromotions); exit;
