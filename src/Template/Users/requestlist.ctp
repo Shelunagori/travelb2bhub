@@ -239,7 +239,7 @@ legend
                      </div>
                   </div>
                </div>
-               </div>
+            </div>
 				<div id="autorefresh_requestlist">
 				<?php if(isset($_GET['sort']) && $_GET['sort']=="resposesnolh") { ?><script>$(document).ready(function(){$(".req").sort(function(n,e){return parseInt(n.id)>parseInt(e.id)}).each(function(){var n=$(this);n.remove(),$(n).appendTo("#cat")})})</script><?php } ?><?php if(isset($_GET['sort']) && $_GET['sort']=="resposesnohl") { ?><script>$(document).ready(function(){$(".req").sort(function(n,e){return parseInt(n.id)<parseInt(e.id)}).each(function(){var n=$(this);n.remove(),$(n).appendTo("#cat")})})</script><?php } ?><?php if(isset($_GET['sort']) && $_GET['sort']=="requesttype") { ?><script>$(document).ready(function(){$(".req").sort(function(n,e){return parseInt(n.id)>parseInt(e.id)}).each(function(){var n=$(this);n.remove(),$(n).appendTo("#cat")})})</script><?php } ?>
 			   

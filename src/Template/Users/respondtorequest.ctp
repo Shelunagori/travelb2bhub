@@ -236,45 +236,38 @@ $conn = ConnectionManager::get('default');
 								   <a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'respondtorequest')) ?>">Reset</a>
 								</div>
 							</div>
+							 <script>
+									   $('#datepicker1').datepicker({
+												dateFormat: 'dd/mm/yy',
+												changeMonth: true,
+												changeYear: true,
+												minDate: '<?php echo date("d/m/Y"); ?>',
+												onSelect: function(selected) {
+													$( "#datepicker2" ).datepicker( "option", "minDate",selected);
+													$('#datepicker2').val("");
+												}
+											});
+											$('#datepicker2').datepicker({
+												dateFormat: 'dd/mm/yy',
+												changeMonth: true,
+												changeYear: true,
+												minDate: '<?php echo date("d/m/Y"); ?>',
+												onSelect: function(selected) {
+													var checkInDate = $('#datepicker1').val();
+													if(checkInDate == "") {
+														alert("Please select check-in date first.");
+														$('#datepicker2').val("");
+													}
+												}
+											});
+							</script>
 						</div>
 					</form>
 				</div>
 			</div>	
 		</div>	
-   <script>
-   $('#datepicker1').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				$( "#datepicker2" ).datepicker( "option", "minDate",selected);
-				$('#datepicker2').val("");
-			}
-		});
-		$('#datepicker2').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				var checkInDate = $('#datepicker1').val();
-				if(checkInDate == "") {
-					alert("Please select check-in date first.");
-					$('#datepicker2').val("");
-				}
-			}
-		});
-		</script>
-		</div>
-		</div>
-      <div class="modal-footer">
+	</div>
 
-      </div>
-    </div>
-
-  </div>
-</div>
 
 <?php if(isset($_GET["success"])) {
  echo '<div class="success col-md-12">Your Interest has been submitted!</div>';
