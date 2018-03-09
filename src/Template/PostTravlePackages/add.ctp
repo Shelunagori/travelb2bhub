@@ -58,7 +58,7 @@ if ($err) {
 //--- Category
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "http://konciergesolutions.com/travelb2bhub/api/post_travle_package_categories/index.json",
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/post_travle_package_categories/index.json",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -84,7 +84,7 @@ if ($err) {
 //--- Currency
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "http://konciergesolutions.com/travelb2bhub/api/currencies/index.json",
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/currencies/index.json",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
