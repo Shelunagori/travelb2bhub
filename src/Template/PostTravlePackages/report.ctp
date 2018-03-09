@@ -23,17 +23,10 @@
 									<th scope="col"><?= ('Sr.No') ?></th>
 									<th scope="col"><?= ('User Name') ?></th>
 									<th scope="col"><?= ('Title') ?></th>
-									<th scope="col"><?= ('Duration Night') ?></th>
-									<th scope="col"><?= ('Duration Day') ?></th>
-									<th scope="col"><?= ('Valid Date') ?></th>
-									<th scope="col"><?= ('Starting Price') ?></th>
-									<th scope="col"><?= ('Currency') ?></th>
 									<th scope="col"><?= ('Country') ?></th>
 									<th scope="col"><?= ('Duration') ?></th>
 									<th scope="col"><?= ('Price') ?></th>
-									<th scope="col"><?= ('Likes') ?></th>
-									<th scope="col"><?= ('Visible Date') ?></th>
-									<th scope="col" class="actions"><?//= __('Actions') ?></th>
+									<th scope="col" class="actions"><?= __('Actions') ?></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -43,19 +36,10 @@
 									<td><?= h($postTravlePackage->user->first_name.$postTravlePackage->user->last_name);?>
 									</td>
 									<td><?= h($postTravlePackage->title) ?></td>
-									<td><?= $this->Number->format($postTravlePackage->duration_night) ?></td>
-									<td><?= $this->Number->format($postTravlePackage->duration_day) ?></td>
-									<td><?= h($postTravlePackage->valid_date) ?></td>
-									<td><?= $this->Number->format($postTravlePackage->starting_price) ?></td>
-									<td><?= h($postTravlePackage->currency->name);?></td>
 									<td><?= h($postTravlePackage->country->country_name);?></td>
 									<td><?= h($postTravlePackage->price_master->week); ?></td>
 									<td><?= h($postTravlePackage->price_master->price); ?></td>
-									<td><?= $this->Number->format($postTravlePackage->like_count) ?></td>
-									<td><?= h($postTravlePackage->visible_date) ?></td>
-									
-									
-									<td class="actions" style="display:none;">
+									<td class="actions" >
 										<?= $this->Html->link(__('View'), ['action' => 'view', $postTravlePackage->id]) ?>
 										<?= $this->Html->link(__('Edit'), ['action' => 'edit', $postTravlePackage->id]) ?>
 										<?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $postTravlePackage->id], ['confirm' => __('Are you sure you want to delete # {0}?', $postTravlePackage->id)]) ?> 

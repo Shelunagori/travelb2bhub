@@ -51,8 +51,7 @@ if ($err) {
 								<th scope="col"><?= ('Price') ?> (&#8377;)</th>
 								<th scope="col"><?= ('Likes') ?></th>
 								<th scope="col"><?= ('Visibility Date') ?></th>
-								<th scope="col"><?= ('Image') ?></th>
-								<th scope="col" class="actions"><//= __('Actions') ?></th>
+								<th scope="col" class="actions"><?= __('Actions') ?></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -64,9 +63,8 @@ if ($err) {
 								<td><?= h($eventPlannerPromotion->price_master->week); ?></td>
 								<td><?= h($eventPlannerPromotion->price_master->price); ?></td>
 								<td><?= $this->Number->format($eventPlannerPromotion->like_count) ?></td>
-								<td><?= h($eventPlannerPromotion->visible_date) ?></td>	
-								<td><?php echo "yash";//= h($eventPlannerPromotion->image) ?></td>
-								<td class="actions" style="display:none;">
+								<td><?= h(date('d-m-Y',strtotime($eventPlannerPromotion->visible_date))); ?></td>	
+								<td class="actions" >
 									<?= $this->Html->link(__('View'), ['action' => 'view', $eventPlannerPromotion->id]) ?>
 									<?= $this->Html->link(__('Edit'), ['action' => 'edit', $eventPlannerPromotion->id]) ?>
 									<?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $eventPlannerPromotion->id], ['confirm' => __('Are you sure you want to delete # {0}?', $eventPlannerPromotion->id)]) ?>
