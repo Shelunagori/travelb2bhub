@@ -54,43 +54,63 @@ legend
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title">Sorting</h4>
 					  </div>
-					  <div class="modal-body" style="height:170px;">
-						<div class="col-md-12 row form-group margin-b10">
+					  <div class="modal-body" style="height:200px;">
+						<div class="col-md-12 row form-group ">
 							<div class="col-md-12">
-									 <input class="btn btn-info btn-sm" type="radio" name="r1"/>
+									 <input class="btn btn-info btn-sm" type="radio" name="r1" value="totalbudgethl"/>
 									 <label class="col-form-label"for=example-text-input>
-										Total Budget <i class="fa fa-sort-amount-desc"></i> <span class=arrow><span></span></span>
+										Total Budget <i class="fa fa-sort-amount-desc"></i>
+										<span class=arrow></span>
 									 </label>
 							</div>
                         </div>
-						<div class="col-md-12 row form-group margin-b10">
+						<div class="col-md-12 row form-group ">
 							<div class="col-md-12">
-									<input class="btn btn-info btn-sm" type="radio" name="r1"/>
-									<label class="col-form-label"for=example-text-input>
-										No. of Responses <i class="fa fa-sort-amount-asc"></i> <span class=arrow><span></span></span></label>
+									 <input class="btn btn-info btn-sm" type="radio" name="r1" value="totalbudgetlh"/>
+									 <label class="col-form-label"for=example-text-input>
+										Total Budget <i class="fa fa-sort-amount-desc"></i> 
+										<span class=arrow></span>
+									 </label>
 							</div>
-						</div>
-						<div class="col-md-12 row form-group margin-b10">
-							<div class=col-md-12>
-									<input class="btn btn-info btn-sm" type="radio" name="r1"/>
+                        </div>
+						<div class="col-md-12 row form-group ">
+							<div class="col-md-12">
+									<input class="btn btn-info btn-sm" type="radio" name="r1" value="agentaz"/>
 									<label class="col-form-label"for=example-text-input>
-										No. of Responses <i class="fa fa-sort-amount-desc"></i> <span class=arrow><span></span></span>
+										No. of Responses <i class="fa fa-sort-amount-asc"></i> 
+										<span class=arrow></span>
 									</label>
 							</div>
 						</div>
-						<div class="col-md-12 row form-group margin-b10">
+						<div class="col-md-12 row form-group ">
 							<div class=col-md-12>
-									<input class="btn btn-info btn-sm" type="radio" name="r1"/>
+									<input class="btn btn-info btn-sm" type="radio" name="r1" value="agentza"/>
 									<label class="col-form-label"for=example-text-input>
-									Request Type <span class=arrow><span></span></span>
+										No. of Responses <i class="fa fa-sort-amount-desc"></i> 
+										<span class=arrow></span>
+									</label>
 							</div>
 						</div>
-						
-					   <hr></hr>
+						<div class="col-md-12 row form-group ">
+							<div class=col-md-12>
+									<input class="btn btn-info btn-sm" type="radio" name="r1" value="requesttype"/>
+									<label class="col-form-label"for=example-text-input>
+									Request Type 
+									<span class=arrow></span>
+									</label>
+							</div>
+						</div>
+					  </div>
+					  <div class="modal-footer" style="height:60px;">
+					  <div class="row">
+							<div class="col-md-12 text-center">
+								<input type="submit" name="submit" value="Sort"  class="btn btn-primary btn-submit">
+							</div>
 					  </div>
 					</div>
 				  </div>
 				</div>
+			</div>
                <div class="fade modal form-modal" id="myModal122" role="dialog">
                   <div class="modal-dialog " style="width:35%;" >
                      <div class=modal-content>
