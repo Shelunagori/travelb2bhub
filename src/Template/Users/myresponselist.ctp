@@ -51,8 +51,8 @@ $conn = ConnectionManager::get('default');
 							<div class="col-md-12">
 									 <input class="btn btn-info btn-sm" type="radio" name="r1" value="totalbudgetlh"/>
 									 <label class="col-form-label"for=example-text-input>
-										Total Budget <i class="fa fa-sort-amount-desc"></i> 
-										<span class=arrow></span>
+										Total Budget <i class="fa fa-sort-amount-asc"></i> 
+										<span class="arrow"></span>
 									 </label>
 							</div>
                         </div>
@@ -60,7 +60,7 @@ $conn = ConnectionManager::get('default');
 							<div class="col-md-12">
 									<input class="btn btn-info btn-sm" type="radio" name="r1" value="agentaz"/>
 									<label class="col-form-label"for=example-text-input>
-										No. of Responses <i class="fa fa-sort-amount-asc"></i> 
+										Agent Name (A To Z)   <i class="fa fa-sort-amount-asc"></i> 
 										<span class=arrow></span>
 									</label>
 							</div>
@@ -69,7 +69,7 @@ $conn = ConnectionManager::get('default');
 							<div class=col-md-12>
 									<input class="btn btn-info btn-sm" type="radio" name="r1" value="agentza"/>
 									<label class="col-form-label"for=example-text-input>
-										No. of Responses <i class="fa fa-sort-amount-desc"></i> 
+										Agent Name (Z To A)  <i class="fa fa-sort-amount-desc"></i> 
 										<span class=arrow></span>
 									</label>
 							</div>
@@ -217,6 +217,21 @@ $conn = ConnectionManager::get('default');
 								</div>
 							  </div>
 						  </div>
+						  <div class="row form-group ">
+							<div class=col-md-12>
+								 <div class=col-md-4>
+								  <label class="col-form-label"for=example-text-input>Chat With </label>
+								  </div>
+								  <div class=col-md-1>:</div>
+								 <div class=col-md-7>
+									<select name="chatwith" class="form-control">
+									<option value="">Select Chat With</option>
+									<option value="1" <?php echo (isset($_GET['chatdata']) && $_GET['chatdata'] =="1")? 'selected':''; ?>>Dasu Menariya</option>
+									<option value="3" <?php echo (isset($_GET['chatdata']) && $_GET['chatdata'] =="2")? 'selected':''; ?>>Prakash Menariya</option>
+									<option value="2">Gopesh Parihar</option></select>
+								</div>
+							 </div>
+						</div>
 						 <div class="row form-group">
 							<div class="col-md-12">
 								<div class=col-md-4>
@@ -225,6 +240,18 @@ $conn = ConnectionManager::get('default');
 								<div class=col-md-1>:</div>
 								 <div class=col-md-7>
 									<input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['followsearch'])? "checked":''; ?>  >
+								</div>                            
+							</div>
+						  </div>
+						  
+						   <div class="row form-group">
+							<div class="col-md-12">
+								<div class=col-md-4>
+									<label for="example-text-input" class="  col-form-label">Shared Details</label>
+								</div>
+								<div class=col-md-1>:</div>
+								 <div class=col-md-7>
+									<input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['is_details_shared'])? "checked":''; ?>  >
 								</div>                            
 							</div>
 						  </div>
