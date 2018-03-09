@@ -125,8 +125,7 @@ legend
 									 <div class=col-md-4>
 									  <label class="col-form-label"for=example-text-input>Request Type</label>
 									  </div>
-									  <div class=col-md-1>:
-									  </div>
+									  <div class=col-md-1>:</div>
 									 <div class=col-md-7>
 										<select name="req_typesearch" class="form-control"><option value="">Select Request Type</option><option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option><option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option><option value="2">Transport</option></select>
 									</div>
@@ -223,8 +222,7 @@ legend
 								</div>
                               </div>                         
                         </div>
-                        <div class=modal-footer>
-							 
+                        <div class="modal-footer">
 							<button class="btn btn-primary btn-sm" name=submit value=Submit type=submit>Filter</button> 
 							<a href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'requestlist')) ?>"class="btn btn-primary btn-sm">Reset</a>
 						   <script>
