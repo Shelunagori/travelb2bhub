@@ -224,11 +224,13 @@ $conn = ConnectionManager::get('default');
 								  </div>
 								  <div class=col-md-1>:</div>
 								 <div class=col-md-7>
-									<select name="chatwith" class="form-control">
-									<option value="">Select Chat With</option>
-									<option value="1" <?php echo (isset($_GET['chatdata']) && $_GET['chatdata'] =="1")? 'selected':''; ?>>Dasu Menariya</option>
-									<option value="3" <?php echo (isset($_GET['chatdata']) && $_GET['chatdata'] =="2")? 'selected':''; ?>>Prakash Menariya</option>
-									<option value="2">Gopesh Parihar</option></select>
+									 <select name="chatwith" class="form-control"><option value="">Select Chat With</option>
+									   <?php if(!empty($UserResponse)){ 
+											foreach($UserResponse as $user){               
+									   ?>
+									   <option <?php echo (isset($_GET['chatwith']) && $_GET['chatwith'] ==$user['id'])? 'selected':''; ?> value="<?php echo $user['id']?>"><?php echo $user['first_name'].' '.$user['last_name']?></option>
+									   <?php }}?>
+									  </select>
 								</div>
 							 </div>
 						</div>
