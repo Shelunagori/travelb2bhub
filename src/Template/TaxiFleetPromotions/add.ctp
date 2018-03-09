@@ -171,7 +171,7 @@ fieldset{
 }
 </style> 
 <div class="box-body">
-	<form action="http://konciergesolutions.com/travelb2bhub/api/taxi_fleet_promotions/add.json" method="post" enctype="multipart/form-data">	
+	<form action="<?php echo $coreVariable['SiteUrl'];?>api/taxi_fleet_promotions/add.json" method="post" enctype="multipart/form-data">	
 	<div class="row"> 
 		<div class="col-md-12"> 
 

@@ -122,7 +122,7 @@ if ($err) {
 			 
 			<?php echo  $this->Flash->render() ?>
 		</div>
-		<form action="http://konciergesolutions.com/travelb2bhub/api/event_planner_promotions/add.json" method="post" enctype="multipart/form-data">	
+		<form action="<?php echo $coreVariable['SiteUrl'];?>api/event_planner_promotions/add.json" method="post" enctype="multipart/form-data">	
 		<div class="col-md-12"> 
 			<div class="box box-default">
 				<div class="box-header with-border"> 

@@ -169,7 +169,7 @@ fieldset{
 }
 </style> 
 <div class="box-body">
-<form action="http://konciergesolutions.com/travelb2bhub/api/event_planner_promotions/add.json" method="post" enctype="multipart/form-data">	
+<form action="<?php echo $coreVariable['SiteUrl'];?>api/post_travle_packages/add.json" method="post" enctype="multipart/form-data">	
 	<div class="row"> 
 		<div class="col-md-12"> 
 			<div class="form-box">
@@ -251,13 +251,31 @@ fieldset{
 													Duration Night
 													<span class="required">*</span>
 												</p>
-												<div class="input-field">
-													 <?php echo $this->Form->input('duration_day_night',['class'=>'form-control','label'=>false]);?>
+												<div class="input-field"> 
+													<select name="duration_day_night" class="form-control select2">
+													<option value="">Select...</option>
+													<option>1 Night 2 Days</option>
+													<option>2 Night 3 Days</option>
+													<option>3 Night 4 Days</option>
+													<option>4 Night 5 Days</option>
+													<option>5 Night 6 Days</option>
+													<option>6 Night 7 Days</option>
+													<option>7 Night 8 Days</option>
+													<option>8 Night 9 Days</option>
+													<option>9 Night 10 Days</option>
+													<option>10 Night 11 Days</option>
+													<option>11 Night 12 Days</option>
+													<option>12 Night 13 Days</option>
+													<option>13 Night 14 Days</option>
+													<option>14 Night 15 Days</option>
+													<option>More than 15 Days</option>
+													</select>
 												</div>
 											</div>											 
 										</div>
 									</div>
-									
+								<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
+								<input type="hidden" name="submitted_from" value="web">
 									<div class="row">
 										<div class="col-md-12">
 											<div class="col-md-4">
@@ -266,7 +284,7 @@ fieldset{
 													<span class="required">*</span>
 												</p>
 												<div class="input-field">
-													<?php echo $this->Form->input('starting_price',['class'=>'form-control','label'=>false]);?>
+													<?php echo $this->Form->input('starting_price',['class'=>'form-control','label'=>false,'placeholder'=>'Starting Price']);?>
 												</div>
 											</div>
 											<div class="col-md-4">
@@ -300,10 +318,10 @@ fieldset{
 												</div>
 										</div>
 									</div> 
+									
 									<div class="row">
 										<div class="col-md-12">
-											 
-											<div class="col-md-6">
+											<div class="col-md-4">
 												<p for="from">
 												Choose City
 												<span class="required">*</span>
@@ -318,33 +336,32 @@ fieldset{
 												echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
 												</div>
 											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-md-12">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+											<div class="col-md-8">
 												<p for="from">
 												Package Details				
 													<span class="required">*</span>
 												</p>
 												<div class="input-field">
-													 <?php echo $this->Form->input('package_detail',['class'=>'form-control','label'=>false]);?>
-													
-												</div>
-											</div>
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-												<p for="from">
-													Excluded Details
-													<span class="required">*</span>
-												</p>
-												<div class="input-field">
-													 <?php echo $this->Form->input('excluded_detail',['class'=>'form-control','label'=>false]);?>
+													 <?php echo $this->Form->textarea('package_detail',['class'=>'form-control','label'=>false,'rows'=>2]);?>
 													
 												</div>
 											</div>
 										</div>
 									</div> 
-									
+									<div class="row">
+										<div class="col-md-12">
+											 
+											<div class="col-md-12">
+												<p for="from">
+													Excluded Details
+												<span class="required">*</span>
+												</p>
+												<div class="input-field">
+													 <?php echo $this->Form->textarea('excluded_detail',['class'=>'form-control','label'=>false,'rows'=>2]);?>
+												</div>
+											</div>
+										</div>
+									</div>
 									
 								</fieldset>
 							<br>
