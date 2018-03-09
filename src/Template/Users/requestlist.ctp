@@ -115,7 +115,7 @@ legend
                   <div class="modal-dialog " style="width:35%;" >
                      <div class=modal-content>
                         <div class=modal-header>
-                           <button class="close" data-dismiss="modal" type="button">×</button>
+                           <button class="close" data-dismiss="modal" type="button">&times;</button>
                            <h4 class=modal-title>Filter</h4>
                         </div>
 						<form class=filter_box>
