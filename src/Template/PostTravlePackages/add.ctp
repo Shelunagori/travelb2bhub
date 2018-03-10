@@ -417,15 +417,14 @@ fieldset{
 											</div>
 										</div> 
 									</div>
-						</fieldset>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</form>
 		</div>
-</form>
 	</div>
-</div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
 	 
