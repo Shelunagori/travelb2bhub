@@ -1,8 +1,12 @@
 <?php
 namespace App\Controller\Api;
 use App\Controller\Api\AppController;
-use Cake\Filesystem\Folder;
-use Cake\Filesystem\File;
+
+use Cake\ORM\Query;
+use Cake\ORM\RulesChecker;
+use Cake\ORM\Table;
+use Cake\Validation\Validator;
+
 /**
  * HotelPromotionReports Controller
  *
@@ -49,24 +53,23 @@ class HotelPromotionReportsController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+
+    public function HotelPromotionReportAdd()
     {
         $hotelPromotionReport = $this->HotelPromotionReports->newEntity();
         if ($this->request->is('post')) {
             $hotelPromotionReport = $this->HotelPromotionReports->patchEntity($hotelPromotionReport, $this->request->data);
             if ($this->HotelPromotionReports->save($hotelPromotionReport)) {
-                $this->Flash->success(__('The hotel promotion report has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The hotel promotion report could not be saved. Please, try again.'));
-            }
+                $message = 'The Hotel Promotion Report has been saved';
+				$response_code = 200;
+			}else{
+				 
+				$message = 'The Hotel Promotion Report has not been saved';
+				$response_code = 204;
+			}
         }
-        $hotelPromotions = $this->HotelPromotionReports->HotelPromotions->find('list', ['limit' => 200]);
-        $users = $this->HotelPromotionReports->Users->find('list', ['limit' => 200]);
-        $reportReasons = $this->HotelPromotionReports->ReportReasons->find('list', ['limit' => 200]);
-        $this->set(compact('hotelPromotionReport', 'hotelPromotions', 'users', 'reportReasons'));
-        $this->set('_serialize', ['hotelPromotionReport']);
+        $this->set(compact('message','response_code'));
+        $this->set('_serialize', ['message','response_code']);
     }
 
     /**

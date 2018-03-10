@@ -64,14 +64,14 @@ class PostTravlePackageReportsTable extends Table
             ->integer('id')
             ->allowEmpty('id', 'create');
 
-        $validator
+       /*  $validator
             ->requirePresence('comment', 'create')
             ->notEmpty('comment');
 
         $validator
             ->dateTime('created_on')
             ->requirePresence('created_on', 'create')
-            ->notEmpty('created_on');
+            ->notEmpty('created_on'); */
 
         return $validator;
     }
