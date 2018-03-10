@@ -15,71 +15,65 @@ $conn = ConnectionManager::get('default');
 		<?php echo $this->element('subheader');?>
 		<?php echo  $this->Flash->render() ?>
 	</div>
-	<div class="col-md-12" style="background-color:#fff"> 
-
-<div class="box box-default">
-	<div class="box-header with-border"> 
-		<h3 class="box-title" style="padding:20px">My Responses</h3>
-		<div class="box-tools pull-right">
-			<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-			<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
-		</div>
-		 
-	</div>
-	<div class="box-body">
-		<div class="row">
- 
-<div id="myModal123" class="modal fade form-modal" role="dialog">
-  <div class="modal-dialog" style=" width: 20%;">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Sorting</h4>
-      </div>
-					<div class="modal-body" style="height:200px;">
+<div class="col-md-12" style="background-color:#fff"> 
+	<div class="box box-default">
+		<div class="box-header with-border"> 
+			<h3 class="box-title" style="padding:20px">My Responses</h3>
+				<div class="box-tools pull-right">
+					<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
+					<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+				</div>
+			</div>
+<div class="box-body">
+	<div class="row">
+		 <div id="myModal123" class="modal fade form-modal" role="dialog">
+		  <div class="modal-dialog" style=" width: 20%;">
+			<!-- Modal content-->
+			<div class="modal-content">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Sorting</h4>
+			  </div>
+				<form method="get" class="filter_box">
+					<div class="modal-body" style="height:170px;">
 						<div class="col-md-12 row form-group ">
 							<div class="col-md-12">
-									 <input class="btn btn-info btn-sm" type="radio" name="r1" value="totalbudgethl"/>
+									 <input class="btn btn-info btn-sm" type="radio" name="sort" value="totalbudgethl"/>
 									 <label class="col-form-label" for=example-text-input>
-										Total Budget <i class="fa fa-sort-amount-desc"></i>
-										<span class=arrow></span>
+											Total Budget (Hign to Low)
 									 </label>
 							</div>
                         </div>
 						<div class="col-md-12 row form-group ">
 							<div class="col-md-12">
-									 <input class="btn btn-info btn-sm" type="radio" name="r1" value="totalbudgetlh"/>
+									 <input class="btn btn-info btn-sm" type="radio" name="sort" value="totalbudgetlh"/>
 									 <label class="col-form-label"for=example-text-input>
-										Total Budget <i class="fa fa-sort-amount-asc"></i> 
-										<span class="arrow"></span>
+										Total Budget (Low to High)
 									 </label>
 							</div>
                         </div>
 						<div class="col-md-12 row form-group ">
 							<div class="col-md-12">
-									<input class="btn btn-info btn-sm" type="radio" name="r1" value="agentaz"/>
+									<input class="btn btn-info btn-sm" type="radio" name="sort" value="agentaz"/>
 									<label class="col-form-label"for=example-text-input>
-										Agent Name (A To Z)   <i class="fa fa-sort-amount-asc"></i> 
-										<span class=arrow></span>
+										Agent Name (A To Z)   
 									</label>
 							</div>
 						</div>
 						<div class="col-md-12 row form-group ">
 							<div class=col-md-12>
-									<input class="btn btn-info btn-sm" type="radio" name="r1" value="agentza"/>
+									<input class="btn btn-info btn-sm" type="radio" name="sort" value="agentza"/>
 									<label class="col-form-label"for=example-text-input>
-										Agent Name (Z To A)  <i class="fa fa-sort-amount-desc"></i> 
-										<span class=arrow></span>
+										Agent Name (Z To A) 
 									</label>
 							</div>
 						</div>
-						<div class="col-md-12 row form-group ">
+						<div class="col-md-12 row form-group " style="display:none;">
 							<div class=col-md-12>
-									<input class="btn btn-info btn-sm" type="radio" name="r1" value="requesttype"/>
+									<input class="btn btn-info btn-sm" type="radio" name="sort" value="requesttype"/>
 									<label class="col-form-label"for=example-text-input>
 									Request Type 
-									<span class=arrow></span>
+									
 									</label>
 							</div>
 						</div>
@@ -91,9 +85,10 @@ $conn = ConnectionManager::get('default');
 								</div>
 						  </div>
 					</div>
-				</div>
-			  </div>
-		</div>
+				</form>
+			</div>
+		  </div>
+	</div>
 <div id="myModal122" class="modal fade form-modal" role="dialog">
   <div class="modal-dialog" style="width:35%;">
     <!-- Modal content-->
@@ -261,7 +256,7 @@ $conn = ConnectionManager::get('default');
 							<div class="row form-group">			  
 								<div class="col-md-12 text-center">
 								   <input type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">
-								   <a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'respondtorequest')) ?>">Reset</a>
+								   <a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'myresponselist')) ?>">Reset</a>
 								</div>
 							</div>
 							 <script>
@@ -294,6 +289,7 @@ $conn = ConnectionManager::get('default');
 				</div>
 			</div>
 		</div>
+	</div>
 						
  <?php if(isset($_GET['sort']) && $_GET['sort']=="requesttype") { ?>
 <script>

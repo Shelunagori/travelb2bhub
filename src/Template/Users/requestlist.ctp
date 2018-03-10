@@ -60,7 +60,7 @@ legend
 							<div class="col-md-12">
 									 <input class="btn btn-info btn-sm" type="radio" name="sort" value="totalbudgethl"/>
 									 <label class="col-form-label" for=example-text-input>
-										Total Budget (Hign to Low)</span>
+										Total Budget (Hign to Low)
 									 </label>
 							</div>
                         </div>
@@ -68,7 +68,7 @@ legend
 							<div class="col-md-12">
 									 <input class="btn btn-info btn-sm" type="radio" name="sort" value="totalbudgetlh"/>
 									 <label class="col-form-label"for=example-text-input>
-										Total Budget (Low to High)</span>
+										Total Budget (Low to High)
 									 </label>
 							</div>
                         </div>
@@ -76,7 +76,7 @@ legend
 							<div class="col-md-12">
 									<input class="btn btn-info btn-sm" type="radio" name="sort" value="agentaz"/>
 									<label class="col-form-label"for=example-text-input>
-										No. of Responses (Hign to Low)</span>
+										No. of Responses (Hign to Low)
 									</label>
 							</div>
 						</div>
@@ -84,16 +84,16 @@ legend
 							<div class=col-md-12>
 									<input class="btn btn-info btn-sm" type="radio" name="sort" value="agentza"/>
 									<label class="col-form-label"for=example-text-input>
-										No. of Responses (Low to High)</span>
+										No. of Responses (Low to High)
 									</label>
 							</div>
 						</div>
-						<div class="col-md-12 row form-group " style="display:none;">
+						<div class="col-md-12 row form-group" style="display:none;">
 							<div class=col-md-12>
 									<input class="btn btn-info btn-sm" type="radio" name="sort" value="requesttype"/>
 									<label class="col-form-label"for=example-text-input>
 									Request Type 
-									<span class=arrow></span>
+								
 									</label>
 							</div>
 						</div>
