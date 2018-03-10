@@ -324,6 +324,13 @@ class TaxiFleetPromotionsController extends AppController
 				foreach($getTaxiFleetPromotionsDetails as $vew){
 					$vew->total_views = $this->TaxiFleetPromotions->TaxiFleetPromotionViews
 							->find()->where(['taxi_fleet_promotion_id' => $id])->count();
+
+					$exists = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->exists(['taxi_fleet_promotion_id'=>$vew->id,'user_id'=>$user_id]);
+					
+					if($exists == 0)
+					{  $vew->isLiked = 'yes'; } 
+					else { $vew->isLiked = 'no'; }							
+							
 				}
 		}
 		else
