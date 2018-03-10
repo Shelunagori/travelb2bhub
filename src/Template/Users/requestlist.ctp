@@ -226,11 +226,10 @@ legend
 							<button class="btn btn-primary btn-sm" name=submit value=Submit type=submit>Filter</button> 
 							<a href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'requestlist')) ?>"class="btn btn-primary btn-sm">Reset</a>
 						   <script>
-							$(document).ready(function(){
+								$(document).ready(function(){
 								$("#datepicker1").datepicker({dateFormat:"dd/mm/yy",changeMonth:!0,changeYear:!0,minDate:"<?php echo date("d/m/Y"); ?>",onSelect:function(e){
 								$("#datepicker2").datepicker("option","minDate",e),
 								$("#datepicker2").val("")}});
-								
 								$("#datepicker2").datepicker({dateFormat:"dd/mm/yy",changeMonth:!0,changeYear:!0,minDate:"<?php echo date("d/m/y"); ?>",onSelect:function(e){""==$("#datepicker1").val()&&(alert("Please select check-in date first."),$("#datepicker2").val(""))}});
 							});
 						   </script>
