@@ -288,16 +288,15 @@ class PostTravlePackagesController extends AppController
 			$getTravelPackages = $this->PostTravlePackages->find()
 			->contain(['Users'=>function($q){
 				return $q->select(['first_name','last_name','mobile_number','company_name']);
-			}])
-			->contain(['PostTravlePackageRows'=>function($q)use($category_id_filter,$category_short,$category_search){
+			},'PostTravlePackageRows'=>['PostTravlePackageCategories']])
+			->innerJoinWith('PostTravlePackageRows',function($q)use($category_id_filter,$category_short,$category_search){
 				return $q->where($category_id_filter)
 				->order(['post_travle_package_category_id' => $category_short])
-				->contain(['PostTravlePackageCategories'=>function($q)use($category_search){
+				->innerJoinWith('PostTravlePackageCategories',function($q)use($category_search){
 					return $q->where($category_search);
-				}]);
-			}])
-			
-			->leftJoinWith('PostTravlePackageStates',function($q) use($state_filter){ 
+				});
+			})
+			->innerJoinWith('PostTravlePackageStates',function($q) use($state_filter){ 
 						return $q->where($state_filter);
 					})				
 				->where($where_duration)
