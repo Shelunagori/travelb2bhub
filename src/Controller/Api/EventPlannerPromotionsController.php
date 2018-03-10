@@ -226,20 +226,57 @@ class EventPlannerPromotionsController extends AppController
         $this->set('_serialize', ['getEventPlanners','message','response_code']);				
 	}	
 	
-	public function getEventPlanners($isLikedUserId = null)
+	public function getEventPlanners($isLikedUserId = null,$country_id=null,$state_id=null,$city_id=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
 		{
-			$getEventPlanners = $this->EventPlannerPromotions->find();
+			$country_id = $this->request->query('country_id');
+			$state_id = $this->request->query('state_id');
+			$city_id = $this->request->query('city_id');
 			
+			if(!empty($country_id))
+			{
+				$country_id = ['EventPlannerPromotions.country_id'=>$country_id];
+			}else
+			{
+				$country_id = null;
+			}
+			$state_filter = null;
+			
+			if(!empty($state_id))
+			{
+				$state_filter = ['state_id'=>$state_id];
+			}else
+			{
+				$state_filter = null;
+			}
+			$city_filter = null;
+			
+			if(!empty($city_id))
+			{
+				$city_filter = ['city_id'=>$city_id];
+			}else
+			{
+				$city_filter = null;
+			}
+			
+			$getEventPlanners = $this->EventPlannerPromotions->find();
+			 
 				$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('EventPlannerPromotionLikes.id')])
 				->contain(['Users'=>function($q){
 				return $q->select(['first_name','last_name','mobile_number','company_name']);
 			}])
 				->leftJoinWith('EventPlannerPromotionLikes')
+				->innerJoinWith('EventPlannerPromotionStates',function($q) use($state_filter){ 
+						return $q->where($state_filter);
+					})
+				->innerJoinWith('EventPlannerPromotionCities',function($q) use($city_filter){ 
+						return $q->where($city_filter);
+					})	
 			->where(['visible_date >=' =>date('Y-m-d')])
 			->where(['is_deleted' =>0])
+			->where($country_id)
 			->group(['EventPlannerPromotions.id'])
 			->autoFields(true);
 			
