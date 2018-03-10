@@ -106,6 +106,7 @@ ul li b {
 							echo "--";
 						} ?>
 						</li>
+						
 						<li class="col-md-6"><p>Child With Bed :&nbsp;<?php
 						if ($row['child_with_bed'] != '')
 						{
