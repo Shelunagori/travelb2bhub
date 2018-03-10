@@ -52,7 +52,7 @@ if ($err) {
 	<div class="box-body">
 		<div class="row">
                <div id="myModal123" class="modal fade" role="dialog">
-				  <div class="modal-dialog " style=" width: 20%;">
+				  <div class="modal-dialog " style=" width: 22%;">
 					<!-- Modal content-->
 					<div class="modal-content">
 					  <div class="modal-header">
