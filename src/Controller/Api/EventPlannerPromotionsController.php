@@ -226,13 +226,16 @@ class EventPlannerPromotionsController extends AppController
         $this->set('_serialize', ['getEventPlanners','message','response_code']);				
 	}	
 	
-	public function getEventPlanners($isLikedUserId = null,$country_id=null,$state_id=null,$city_id=null)
+	public function getEventPlanners($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
 		{
 			$country_id = $this->request->query('country_id');
+			$country_id_short = $this->request->query('country_id_short');
 			$state_id = $this->request->query('state_id');
+			$state_id_short = $this->request->query('state_id_short');
+			$city_id_short = $this->request->query('city_id_short');
 			$city_id = $this->request->query('city_id');
 			
 			if(!empty($country_id))
@@ -261,6 +264,33 @@ class EventPlannerPromotionsController extends AppController
 				$city_filter = null;
 			}
 			
+			
+			if(!empty($country_id_short))
+			{
+				$where_short = ['EventPlannerPromotions.country_id' =>$country_id_short];
+			}else
+			{
+				$where_short = null;
+			}	
+			
+			
+			if(!empty($state_id_short))
+			{
+				$where_short = ['EventPlannerPromotionStates.id' =>$state_id_short];
+			}else
+			{
+				$where_short = null;
+			}
+			if(!empty($city_id_short))
+			{
+				$where_short = ['EventPlannerPromotionCities.id' =>$city_id_short];
+			}else
+			{
+				$where_short = null;
+			}	
+
+			//pr($where_short);exit;	
+			
 			$getEventPlanners = $this->EventPlannerPromotions->find();
 			 
 				$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('EventPlannerPromotionLikes.id')])
@@ -277,6 +307,7 @@ class EventPlannerPromotionsController extends AppController
 			->where(['visible_date >=' =>date('Y-m-d')])
 			->where(['is_deleted' =>0])
 			->where($country_id)
+			->order($where_short)
 			->group(['EventPlannerPromotions.id'])
 			->autoFields(true);
 			
@@ -284,6 +315,10 @@ class EventPlannerPromotionsController extends AppController
 			{
 				foreach($getEventPlanners as $getEventPlanner)
 				{
+					
+					$getEventPlanner->total_likes = $this->EventPlannerPromotions->EventPlannerPromotionLikes
+                            ->find()->where(['event_planner_promotion_id' => $getEventPlanner->id])->count();
+					
 					$exists = $this->EventPlannerPromotions->EventPlannerPromotionLikes->exists(['event_planner_promotion_id'=>$getEventPlanner->id,'user_id'=>$isLikedUserId]);
 					if($exists == 1)
 					{ $getEventPlanner->isLiked = 'yes'; }
