@@ -128,9 +128,9 @@ class HotelPromotionsController extends AppController
         $this->set('_serialize', ['message','response_code']);		
 	}
 	
-	public function removeEvent($event_id = null)
+	public function removePromotion($event_id = null)
 	{
-		$event_id = $this->request->query('event_id');
+		$event_id = $this->request->query('promotion_id');
 		if(!empty($event_id))
 		{
 			$query = $this->HotelPromotions->query();
@@ -148,7 +148,7 @@ class HotelPromotionsController extends AppController
         $this->set('_serialize', ['message','response_code']);				
 	}
 
-	public function getEventPlannerReport($user_id = null)
+	public function getHotelReport($user_id = null)
 	{
 		$user_id = $this->request->query('user_id');
 		if(!empty($user_id))
@@ -275,7 +275,7 @@ class HotelPromotionsController extends AppController
         $this->set('_serialize', ['getEventPlanners','message','response_code']);		
 	}
 
-	public function getEventPlannersDetails($id = null,$user_id = null)
+	public function getHotelDetails($id = null,$user_id = null)
 	{
 		$id = $this->request->query('id');
 		$user_id = $this->request->query('user_id');

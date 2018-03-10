@@ -310,47 +310,16 @@ Router::scope('/', function (RouteBuilder $routes) {
 					]
 				);
 				$routes->resources(
-<<<<<<< HEAD
-					'HotelCategories', [
-					   'map' => [
-						   'HotelCategoriesList' => [
-							   'action' => 'HotelCategoriesList',
-							   'method' => 'GET'
-						   ] 
-=======
 					'ReportReasonsController', [
 					   'map' => [
 						   'reportReasonList' => [
 							   'action' => 'reportReasonList',
 							   'method' => 'GET'
 						   ]
->>>>>>> 2367fcb26419711fb592b1e62443f26602ac1879
 					   ]
 					]
 				);
 				$routes->resources(
-<<<<<<< HEAD
-					'HotelPromotions', [
-					   'map' => [
-						   'add' => [
-							   'action' => 'add',
-							   'method' => 'POST'
-						   ],
-						   'likeHotelPromotions' => [
-							   'action' => 'likeHotelPromotions',
-							   'method' => 'POST'
-						   ],
-						   'getHotelList' => [
-							   'action' => 'getHotelList',
-							   'method' => 'POST'
-						   ],
-						   'getEventPlannersDetails' => [
-							   'action' => 'getEventPlannersDetails',
-							   'method' => 'POST'
-						   ],
-						   'getEventPlannerReport' => [
-							   'action' => 'getEventPlannerReport',
-=======
 					'PostTravlePackageReports', [
 					   'map' => [
 						   'PostTravlePackageReportAdd' => [
@@ -385,17 +354,55 @@ Router::scope('/', function (RouteBuilder $routes) {
 					   'map' => [
 						   'HotelPromotionReportAdd' => [
 							   'action' => 'HotelPromotionReportAdd',
->>>>>>> 2367fcb26419711fb592b1e62443f26602ac1879
 							   'method' => 'POST'
 						   ]
 					   ]
 					]
 				);
-<<<<<<< HEAD
-					
-=======
->>>>>>> 2367fcb26419711fb592b1e62443f26602ac1879
-});				
+				$routes->resources(
+					'HotelCategories', [
+					   'map' => [
+						   'HotelCategoriesList' => [
+							   'action' => 'HotelCategoriesList',
+							   'method' => 'POST'
+						   ]
+					   ]
+					]
+				);
+				$routes->resources(
+					'HotelPromotions', [
+					   'map' => [
+						   'add' => [
+							   'action' => 'add',
+							   'method' => 'POST'
+						   ],
+						   'likeHotelPromotions' => [
+							   'action' => 'likeHotelPromotions',
+							   'method' => 'POST'
+						   ],
+						   'getHotelList' => [
+							   'action' => 'getHotelList',
+							   'method' => 'GET'
+						   ],
+						   'getHotelDetails' => [
+							   'action' => 'getHotelDetails',
+							   'method' => 'GET'
+						   ],
+						   'getHotelReport' => [
+							   'action' => 'getHotelReport',
+							   'method' => 'GET'
+						   ],
+						   'removePromotion' => [
+							   'action' => 'removePromotion',
+							   'method' => 'GET'
+						   ]
+					   ]
+					]
+				);
+				
+				
+				
+			});				
 
 
 
