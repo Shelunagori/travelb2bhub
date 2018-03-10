@@ -95,6 +95,52 @@ class TaxiFleetPromotionCartsController extends AppController
 		{
 			$taxiFleetPromotionCarts=$this->TaxiFleetPromotionCarts->find()->where(['TaxiFleetPromotionCarts.user_id'=>$user_id, 'TaxiFleetPromotionCarts.is_deleted'=>0])->contain(['TaxiFleetPromotions','Users']);
 			if(!empty($taxiFleetPromotionCarts->toArray())){
+				
+				foreach($taxiFleetPromotionCarts as $data){
+					
+					
+					$taxi_fleet_promotion_id=$data->taxi_fleet_promotion_id;
+					$data->total_likes = $this->TaxiFleetPromotionCarts->EventPlannerPromotions->EventPlannerPromotionLikes
+							->find()->where(['taxi_fleet_promotion_id' => $taxi_fleet_promotion_id])->count();	
+							
+					$exists = $this->TaxiFleetPromotionCarts->TaxiFleetPromotionCarts->TaxiFleetPromotions->TaxiFleetPromotionLikes->exists(['taxi_fleet_promotion_id'=>$taxi_fleet_promotion_id,'user_id'=>$user_id]);
+					
+					if($exists == 0)
+					{  $data->isLiked = 'yes'; } 
+					else { $data->isLiked = 'no'; }	
+
+					$carts = $this->TaxiFleetPromotionCarts->exists(['TaxiFleetPromotionCarts.taxi_fleet_promotion_id'=>$taxi_fleet_promotion_id,'TaxiFleetPromotionCarts.user_id'=>$user_id,'TaxiFleetPromotionCarts.is_deleted'=>0]);
+					if($carts==0){
+						$data->issaved=false;
+					}else{
+						$data->issaved=true;
+					}			
+					
+					$data->total_views = $this->TaxiFleetPromotionCarts->TaxiFleetPromotions->TaxiFleetPromotionViews
+						->find()->where(['taxi_fleet_promotion_id' => $taxi_fleet_promotion_id])->count();
+					
+					$all_raiting=0;	
+					$testimonial=$this->TaxiFleetPromotionCarts->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id]);
+					$testimonial_count=$this->TaxiFleetPromotionCarts->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id])->count();
+						 
+						 foreach($testimonial as $test_data){
+							 $rating=$test_data->rating;
+							 $all_raiting+=$rating;
+						 }
+						 if($testimonial_count>0){
+							 $final_raiting=($all_raiting/$testimonial_count);
+							 if($final_raiting>0){
+								$data->user_rating=number_format($final_raiting, 1);
+							 }else{
+								$data->user_rating=0;
+							 }	
+						 }else{
+								$data->user_rating=0;
+						 }	 
+					
+				}
+				
+				
 				$message = 'Taxi Fleet Promotion Carts List Found Successfully';
 				$response_code = 200;
 			}

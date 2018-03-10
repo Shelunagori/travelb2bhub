@@ -218,6 +218,8 @@ $getHotelPromotion=$getEventPlanners ;
 			{
 				foreach($getEventPlanners as $getEventPlanner)
 				{
+					$getEventPlanner->total_likes = $this->HotelPromotions->HotelPromotionLikes
+							->find()->where(['hotel_promotion_id' => $getEventPlanner->id])->count();	
 					$exists = $this->HotelPromotions->HotelPromotionLikes->exists(['hotel_promotion_id'=>$getEventPlanner->id,'user_id'=>$isLikedUserId]);
 					if($exists == 1)
 					{ $getEventPlanner->isLiked = 'yes'; }

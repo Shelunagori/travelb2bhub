@@ -59,7 +59,7 @@ class HotelPromotionCartsTable extends Table
             ->integer('id')
             ->allowEmpty('id', 'create');
 
-        $validator
+      /*   $validator
             ->dateTime('created_on')
             ->requirePresence('created_on', 'create')
             ->notEmpty('created_on');
@@ -67,7 +67,7 @@ class HotelPromotionCartsTable extends Table
         $validator
             ->integer('is_deleted')
             ->requirePresence('is_deleted', 'create')
-            ->notEmpty('is_deleted');
+            ->notEmpty('is_deleted'); */
 
         return $validator;
     }

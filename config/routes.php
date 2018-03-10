@@ -407,6 +407,20 @@ Router::scope('/', function (RouteBuilder $routes) {
 					   ]
 					]
 				);
+				$routes->resources(
+					'HotelPromotionCarts', [
+					   'map' => [
+						   'HotelPromotionCartAdd' => [
+							   'action' => 'HotelPromotionCartAdd',
+							   'method' => 'POST'
+						   ],
+						   'HotelPromotionCartlist' => [
+							   'action' => 'HotelPromotionCartlist',
+							   'method' => 'GET'
+						   ]
+					   ]
+					]
+				);
 				
 				
 				
