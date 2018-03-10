@@ -20,25 +20,23 @@
 						<table class="table" cellpadding="0" cellspacing="0">
 							<tr style="background-color:#709090;color:white">
 								<th scope="row"><?= __('Image') ?></th>
-								<th scope="row"><?= __('Document') ?></th>
-							</tr>
-							<tr>
-								<td>dsdfsdfsdfs<?= $this->Number->format($taxiFleetPromotion->image) ?></td>
-								<td>sdfsdfsd<?= $this->Number->format($taxiFleetPromotion->document) ?></td>
-							</tr>
-							<tr style="background-color:#709090;color:white">
+								<th scope="row"><?= __('Document') ?></th>			
 								<th scope="row"><?= __('Cities of Operation') ?></th>			
 								<th scope="row"><?= __('States ') ?></th>			
 							</tr>
 							<tr>
+								<td><?= $this->Number->format($taxiFleetPromotion->image) ?></td>
+								<td><?= $this->Number->format($taxiFleetPromotion->document) ?></td>
 								<td>Udaipur<?php // h($taxiFleetPromotion->taxi_fleet_promotion_cities->city_id); ?></td>
 								<td>Rajasthan<?php //= $this->Number->format($taxiFleetPromotion->state_id) ?></td>
 							</tr> 
-							<tr style="background-color:#709090;color:white">
-								<th colspan="100" scope="row">Fleet Details</th>
-								</tr>
+						</table>
+						<table class="table" cellpadding="0" cellspacing="0">
+						<tr style="background-color:#709090;color:white">
+							<th colspan="100" >Fleet Details</th>
+							</tr>
 							<tr>
-								<td colspan="100" ><?= $this->Text->autoParagraph(h($taxiFleetPromotion->fleet_detail)); ?></td>
+							<?= $this->Text->autoParagraph(h($taxiFleetPromotion->fleet_detail)); ?>
 							</tr>
 						</table>
 					</div>
