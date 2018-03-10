@@ -61,9 +61,8 @@ class TaxiFleetPromotionsController extends AppController
 				{
 					if(in_array($ext, $arr_ext)) { 
 						if (!file_exists('path/to/directory')) {
-								mkdir('path/to/directory', 0777, true);
-								
-							}
+							mkdir('path/to/directory', 0777, true);
+						}
 						if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)) {
 							$taxiFleetPromotion->image='images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
 						} else {
@@ -130,10 +129,11 @@ class TaxiFleetPromotionsController extends AppController
 					$response_code = 204; 
 				}
 			}			
-        } 
+        }
+ 
 		if(@$submitted_from=='web'){
-			$this->Flash->success(__('message')); 
-			return $this->redirect($this->coreVariable['SiteUrl'].'TaxiFleetPromotions/report');
+			$this->Flash->success(__('message'));
+			return $this->redirect(['controller'=>'TaxiFleetPromotions','action' => 'add']);
 		}
 
 		$this->set(compact('message','response_code'));
@@ -177,19 +177,15 @@ class TaxiFleetPromotionsController extends AppController
 		if(!empty($isLikedUserId))
 		{
 			$getTaxiFleetPromotions = $this->TaxiFleetPromotions->find();
-<<<<<<< HEAD
 			$getTaxiFleetPromotions->select(['total_likes'=>$getTaxiFleetPromotions->func()->count('TaxiFleetPromotionLikes.id')])
 				->contain(['Users'=>function($q){
 					return $q->select(['first_name','last_name','mobile_number','company_name']);
 				}])
-=======
-				$getTaxiFleetPromotions->select(['total_likes'=>$getTaxiFleetPromotions->func()->count('TaxiFleetPromotionLikes.id')])
->>>>>>> e36567c038fde20487491238013c05a3d417e05a
 				->leftJoinWith('TaxiFleetPromotionLikes')
-			->contain(['Users','PriceMasters','Countries'])
-			->where(['TaxiFleetPromotions.visible_date >=' =>date('Y-m-d')])
-			->group(['TaxiFleetPromotions.id'])
-			->autoFields(true);
+				->contain(['Users','PriceMasters','Countries'])
+				->where(['TaxiFleetPromotions.visible_date >=' =>date('Y-m-d')])
+				->group(['TaxiFleetPromotions.id'])
+				->autoFields(true);
 			//pr($getTravelPackages->toArray()); exit;
 			if(!empty($getTaxiFleetPromotions->toArray()))
 			{
@@ -199,7 +195,6 @@ class TaxiFleetPromotionsController extends AppController
 					
 					if($exists == 0)
 					{  $getTaxiFleetPromotion->isLiked = 'yes'; } 
-<<<<<<< HEAD
 					else { $getTaxiFleetPromotion->isLiked = 'no'; }	
 
 					$carts = $this->TaxiFleetPromotions->TaxiFleetPromotionCarts->exists(['TaxiFleetPromotionCarts.taxi_fleet_promotion_id'=>$getTaxiFleetPromotion->id,'TaxiFleetPromotionCarts.user_id'=>$isLikedUserId,'TaxiFleetPromotionCarts.is_deleted'=>0]);
@@ -231,9 +226,6 @@ class TaxiFleetPromotionsController extends AppController
 							$getTaxiFleetPromotion->user_rating=0;
 						 }	 
 					 
-=======
-					else { $getTaxiFleetPromotion->isLiked = 'no'; }				
->>>>>>> e36567c038fde20487491238013c05a3d417e05a
 				}
 				$message = 'List Found Successfully';
 				$response_code = 200;
@@ -275,7 +267,6 @@ class TaxiFleetPromotionsController extends AppController
 			$viewTaxiFleetPromotions->user_id = $user_id;  			
 			$exists = $this->TaxiFleetPromotions->TaxiFleetPromotionViews->exists(['taxi_fleet_promotion_id'=>$viewTaxiFleetPromotions->taxi_fleet_promotion_id,'user_id'=>$viewTaxiFleetPromotions->user_id]);
 			
-<<<<<<< HEAD
 			$carts = $this->TaxiFleetPromotions->TaxiFleetPromotionCarts->exists(['TaxiFleetPromotionCarts.taxi_fleet_promotion_id'=>$id,'TaxiFleetPromotionCarts.user_id'=>$user_id,'TaxiFleetPromotionCarts.is_deleted'=>0]);
 			
 			if($carts==0){
@@ -314,8 +305,6 @@ class TaxiFleetPromotionsController extends AppController
 							 
 						 }
 						 
-=======
->>>>>>> e36567c038fde20487491238013c05a3d417e05a
 			if($exists == 0)
 			{
 				if ($this->TaxiFleetPromotions->TaxiFleetPromotionViews->save($viewTaxiFleetPromotions)) {
@@ -332,6 +321,10 @@ class TaxiFleetPromotionsController extends AppController
 					$message = 'Data found but viewed already';
 					$response_code = 205;					
 			}
+				foreach($getTaxiFleetPromotionsDetails as $vew){
+					$vew->total_views = $this->TaxiFleetPromotions->TaxiFleetPromotionViews
+							->find()->where(['taxi_fleet_promotion_id' => $id])->count();
+				}
 		}
 		else
 		{

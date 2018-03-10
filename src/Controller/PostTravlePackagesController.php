@@ -137,7 +137,9 @@ class PostTravlePackagesController extends AppController
 				//pr($city_id);
 				foreach($package_category_id as $category)
 				{
-					$array_of_category['post_travle_package_rows['.$z.']["post_travle_package_category_id"]']=$package_category_id[$z];
+					
+$array_of_category['post_travle_package_rows['.$z.']["post_travle_package_category_id"]']=$package_categ
+ory_id[$z];
 					$z++;	
 				}
 

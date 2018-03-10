@@ -240,8 +240,8 @@ fieldset{
 													<span class="required">*</span>
 												</p>
 												<div class="input-field input-group">
-													 <?php echo $this->Form->input('valid_date1',['class'=>'form-control date-picker date','label'=>false,'data-date-format'=>'dd/mm/yyyy','placeholder'=>'dd/mm/yyyy']);?>
-													 <p class="input-group-addon btn" >
+													<?php echo $this->Form->input('valid_date',['class'=>'form-control date-picker date','label'=>false,'data-date-format'=>'dd-mm-yyyy','placeholder'=>'dd-mm-yyyy']);?>
+													<p class="input-group-addon btn" >
 													<span class="fa fa-calendar"></span>
 													</p>
 												</div>
