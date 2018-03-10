@@ -59,6 +59,7 @@ ul li b {
 				</ul>
 			 </div>
 			<div class="col-md-12">
+			<br>
 		<?php
 		if ($details['category_id'] == 1 || $details['category_id'] == 3)
 		{  
@@ -169,6 +170,7 @@ ul li b {
 						<li class="col-md-6">
 							<p>Check Out :&nbsp;<?php
 						echo ($row['check_out']) ? date("d/m/Y", strtotime($row['check_out'])) : "-- --"; ?>
+						</li>
 						<li class="col-md-6"><p>Locality :&nbsp;<?php
 						echo ($row['locality']) ? $row['locality'] : "-- --"; ?>
 						</li>
