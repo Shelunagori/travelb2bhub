@@ -70,6 +70,9 @@ class HotelPromotionsTable extends Table
         $this->hasMany('HotelPromotionViews', [
             'foreignKey' => 'hotel_promotion_id'
         ]);
+        $this->hasMany('HotelPromotionCarts', [
+            'foreignKey' => 'hotel_promotion_id'
+        ]);
     }
 
     /**
@@ -106,10 +109,10 @@ class HotelPromotionsTable extends Table
             ->requirePresence('website', 'create')
             ->notEmpty('website');
 
-        $validator
+       /* $validator
             ->requirePresence('status', 'create')
             ->notEmpty('status');
-
+		*/
         $validator
             ->integer('hotel_pic')
             ->requirePresence('hotel_pic', 'create')
@@ -134,7 +137,7 @@ class HotelPromotionsTable extends Table
             ->requirePresence('hotel_rating', 'create')
             ->notEmpty('hotel_rating');
 
-        $validator
+       /* $validator
             ->dateTime('created_on')
             ->requirePresence('created_on', 'create')
             ->notEmpty('created_on');
@@ -148,7 +151,7 @@ class HotelPromotionsTable extends Table
             ->date('accept_date')
             ->requirePresence('accept_date', 'create')
             ->notEmpty('accept_date');
-
+*/
         return $validator;
     }
 

@@ -7,20 +7,20 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * HotelPromotionLikes Model
+ * HotelPromotionCarts Model
  *
  * @property \Cake\ORM\Association\BelongsTo $HotelPromotions
  * @property \Cake\ORM\Association\BelongsTo $Users
  *
- * @method \App\Model\Entity\HotelPromotionLike get($primaryKey, $options = [])
- * @method \App\Model\Entity\HotelPromotionLike newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\HotelPromotionLike[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\HotelPromotionLike|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\HotelPromotionLike patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\HotelPromotionLike[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\HotelPromotionLike findOrCreate($search, callable $callback = null)
+ * @method \App\Model\Entity\HotelPromotionCart get($primaryKey, $options = [])
+ * @method \App\Model\Entity\HotelPromotionCart newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\HotelPromotionCart[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\HotelPromotionCart|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\HotelPromotionCart patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\HotelPromotionCart[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\HotelPromotionCart findOrCreate($search, callable $callback = null, $options = [])
  */
-class HotelPromotionLikesTable extends Table
+class HotelPromotionCartsTable extends Table
 {
 
     /**
@@ -33,7 +33,7 @@ class HotelPromotionLikesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('hotel_promotion_likes');
+        $this->table('hotel_promotion_carts');
         $this->displayField('id');
         $this->primaryKey('id');
 
@@ -59,11 +59,16 @@ class HotelPromotionLikesTable extends Table
             ->integer('id')
             ->allowEmpty('id', 'create');
 
-        /*$validator
+        $validator
             ->dateTime('created_on')
             ->requirePresence('created_on', 'create')
             ->notEmpty('created_on');
-*/
+
+        $validator
+            ->integer('is_deleted')
+            ->requirePresence('is_deleted', 'create')
+            ->notEmpty('is_deleted');
+
         return $validator;
     }
 

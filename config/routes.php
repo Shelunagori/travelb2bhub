@@ -309,6 +309,42 @@ Router::scope('/', function (RouteBuilder $routes) {
 					   ]
 					]
 				);
+				$routes->resources(
+					'HotelCategories', [
+					   'map' => [
+						   'HotelCategoriesList' => [
+							   'action' => 'HotelCategoriesList',
+							   'method' => 'GET'
+						   ] 
+					   ]
+					]
+				);
+				$routes->resources(
+					'HotelPromotions', [
+					   'map' => [
+						   'add' => [
+							   'action' => 'add',
+							   'method' => 'POST'
+						   ],
+						   'likeHotelPromotions' => [
+							   'action' => 'likeHotelPromotions',
+							   'method' => 'POST'
+						   ],
+						   'getHotelList' => [
+							   'action' => 'getHotelList',
+							   'method' => 'POST'
+						   ],
+						   'getEventPlannersDetails' => [
+							   'action' => 'getEventPlannersDetails',
+							   'method' => 'POST'
+						   ],
+						   'getEventPlannerReport' => [
+							   'action' => 'getEventPlannerReport',
+							   'method' => 'POST'
+						   ]
+					   ]
+					]
+				);
 					
 });				
 
