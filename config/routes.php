@@ -309,7 +309,56 @@ Router::scope('/', function (RouteBuilder $routes) {
 					   ]
 					]
 				);
-					
+				$routes->resources(
+					'ReportReasonsController', [
+					   'map' => [
+						   'reportReasonList' => [
+							   'action' => 'reportReasonList',
+							   'method' => 'GET'
+						   ]
+					   ]
+					]
+				);
+				$routes->resources(
+					'PostTravlePackageReports', [
+					   'map' => [
+						   'PostTravlePackageReportAdd' => [
+							   'action' => 'PostTravlePackageReportAdd',
+							   'method' => 'POST'
+						   ]
+					   ]
+					]
+				);
+				$routes->resources(
+					'EventPlannerPromotionReports', [
+					   'map' => [
+						   'EventPlannerPromotionReportAdd' => [
+							   'action' => 'EventPlannerPromotionReportAdd',
+							   'method' => 'POST'
+						   ]
+					   ]
+					]
+				);
+				$routes->resources(
+					'TaxiFleetPromotionReports', [
+					   'map' => [
+						   'TaxiFleetPromotionReportAdd' => [
+							   'action' => 'TaxiFleetPromotionReportAdd',
+							   'method' => 'POST'
+						   ]
+					   ]
+					]
+				);
+				$routes->resources(
+					'HotelPromotionReports', [
+					   'map' => [
+						   'HotelPromotionReportAdd' => [
+							   'action' => 'HotelPromotionReportAdd',
+							   'method' => 'POST'
+						   ]
+					   ]
+					]
+				);
 });				
 
 

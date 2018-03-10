@@ -64,15 +64,15 @@ class HotelPromotionReportsTable extends Table
             ->integer('id')
             ->allowEmpty('id', 'create');
 
-        $validator
+    /*     $validator
             ->requirePresence('comment', 'create')
             ->notEmpty('comment');
-
+df
         $validator
             ->dateTime('created_on')
             ->requirePresence('created_on', 'create')
             ->notEmpty('created_on');
-
+ */
         return $validator;
     }
 
