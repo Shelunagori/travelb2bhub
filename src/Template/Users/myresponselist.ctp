@@ -471,7 +471,6 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 								  </div>
 								</div>
 							</div>
-						 
 						 <?php $userChats = $this->Response->getUserChats($response['request_id']); ?>
 							
 						<?php if(count($userChats) > 0) { ?>

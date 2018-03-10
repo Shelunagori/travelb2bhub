@@ -12,9 +12,11 @@ h3 {
  
 li {
 	    margin-top: 7px;
+		 text-align:left !important;
 }
 ul li b {
 	color:#96989A;
+	 text-align:left !important;
 }
 .col-md-12 { background: #fff !important; }
 
@@ -56,7 +58,7 @@ ul li b {
 					echo $details['children']; ?></li>
 				</ul>
 			 </div>
-			<div class="col-md-12">
+			
 		<?php
 		if ($details['category_id'] == 1 || $details['category_id'] == 3)
 		{  
@@ -64,6 +66,7 @@ ul li b {
 			{
 				if (count($details['hotels']) >= 1)
 				{ ?>
+			<div class="col-md-12">
 					<div class="head_of_popup"><h3>Stay Requirements</h3></div> 
 					<?php
 					$ds_count = 1;
@@ -103,7 +106,8 @@ ul li b {
 							echo "--";
 						} ?>
 						</li>
-						<li class="col-md-6"><p>Child With Bed :&nbsp;<?php
+						
+						<li class="col-md-4"><p>Child With Bed :&nbsp;<?php
 						if ($row['child_with_bed'] != '')
 						{
 							echo $row['child_with_bed'];
@@ -113,7 +117,8 @@ ul li b {
 							echo "-- --";
 						} ?>
 						</li>
-						<li class="col-md-6"><p>Child Without Bed :&nbsp;<?php
+						<li class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></li>
+						<li class="col-md-4"><p>Child Without Bed :&nbsp;<?php
 						if ($row['child_without_bed'] != '')
 						{
 							echo $row['child_without_bed'];
@@ -167,6 +172,7 @@ ul li b {
 						<li class="col-md-6">
 							<p>Check Out :&nbsp;<?php
 						echo ($row['check_out']) ? date("d/m/Y", strtotime($row['check_out'])) : "-- --"; ?>
+						</li>
 						<li class="col-md-6"><p>Locality :&nbsp;<?php
 						echo ($row['locality']) ? $row['locality'] : "-- --"; ?>
 						</li>
@@ -185,7 +191,7 @@ ul li b {
 				<?php
 				} ?> <br />
 				</div>
-				<div class="col-md-12">
+		<div class="col-md-12">
 				    <div class="head_of_popup"><h3>Transport Requirements</h3></div>
 			<ul>
 				<li class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
@@ -264,7 +270,7 @@ ul li b {
 					</p>
 				</li>
 			</ul>
-			</div>
+		</div>
 		<?php
 		}
 		elseif ($details['category_id'] == '3')
@@ -310,7 +316,7 @@ ul li b {
 					} ?>
 					</p>
 					</li>
-					<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p>Child With Bed :&nbsp;<?php
+					<li class="col-xs-6 col-lg-6 col-md-6 col-sm-6"><p>Child With Bed :&nbsp;<?php
 					if ($row['child_with_bed'] != '')
 					{
 						echo $row['child_with_bed'];
@@ -321,7 +327,7 @@ ul li b {
 					} ?>
 					</p>
 					</li>
-					<li class="col-xs-12 col-sm-6 col-lg-6 col-md-6"><p>Child Without Bed :&nbsp;<?php
+					<li class="col-xs-6 col-sm-6 col-lg-6 col-md-6"><p>Child Without Bed :&nbsp;<?php
 					if ($row['child_without_bed'] != '')
 					{
 						echo $row['child_without_bed'];
@@ -351,7 +357,7 @@ ul li b {
 					} ?>
 					</p>
 					</li>
-					<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p>Hotel Rating :&nbsp;<?php
+					<li class="col-xs-12 col-lg-6 col-md-6 col-sm-6"><p>Hotel Rating :&nbsp;<?php
 					if ($row['hotel_rating'] > 0)
 					{
 						for ($i = $row['hotel_rating']; $i > 0; $i--)
@@ -366,12 +372,12 @@ ul li b {
 					?>
 					</p>
 					</li>
-					<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4 col-offset-right-1">
+					<li class="col-xs-12 col-lg-6 col-md-6 col-sm-6 col-offset-right-1">
 					<p>Meal :&nbsp;<?php
 					echo ($row['meal_plan']) ? $mealPlanArray[$row['meal_plan']] : "-- --"; ?>
 					</p>
 					</li>
-					<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
+					<li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 					<p>Check In :&nbsp;<?php
 					echo ($row['check_in']) ? date("d/m/Y", strtotime($row['check_in'])) : "-- --"; ?>
 					</p>
@@ -381,12 +387,12 @@ ul li b {
 					echo ($row['check_out']) ? date("d/m/Y", strtotime($row['check_out'])) : "-- --"; ?>
 					</p>
 					</li>
-					<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4">
+					<li class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
 					<p>Locality :&nbsp;<?php
 					echo ($row['locality']) ? $row['locality'] : "-- --"; ?>
 					</p>
 					</li>
-					<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4">
+					<li class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
 					<p>Destination City :&nbsp;<?php
 					if (empty($row['city_id']))
 					{
@@ -398,7 +404,7 @@ ul li b {
 					} ?>
 					</p>
 					</li>
-					<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p>Destination State :&nbsp;<?php
+					<li class="col-xs-12 col-lg-6 col-md-6 col-sm-6"><p>Destination State :&nbsp;<?php
 					if (empty($row['state_id']))
 					{
 						echo $allStates[$details['state_id']];

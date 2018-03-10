@@ -55,7 +55,7 @@ legend
 						<h4 class="modal-title">Sorting</h4>
 					  </div>
 					  <form method="get" class="filter_box">
-					  <div class="modal-body" style="height:200px;">
+					  <div class="modal-body" style="height:170px;">
 						<div class="col-md-12 row form-group ">
 							<div class="col-md-12">
 									 <input class="btn btn-info btn-sm" type="radio" name="sort" value="totalbudgethl"/>

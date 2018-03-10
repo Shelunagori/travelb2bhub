@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Api;
 use App\Controller\Api\AppController;
+
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
@@ -52,6 +53,7 @@ class HotelPromotionReportsController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
+
     public function HotelPromotionReportAdd()
     {
         $hotelPromotionReport = $this->HotelPromotionReports->newEntity();

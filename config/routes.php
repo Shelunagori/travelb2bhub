@@ -359,7 +359,58 @@ Router::scope('/', function (RouteBuilder $routes) {
 					   ]
 					]
 				);
-});				
+				$routes->resources(
+					'HotelCategories', [
+					   'map' => [
+						   'HotelCategoriesList' => [
+							   'action' => 'HotelCategoriesList',
+							   'method' => 'GET'
+						   ]
+					   ]
+					]
+				);
+				$routes->resources(
+					'HotelPromotions', [
+					   'map' => [
+						   'add' => [
+							   'action' => 'add',
+							   'method' => 'POST'
+						   ],
+						   'likeHotelPromotions' => [
+							   'action' => 'likeHotelPromotions',
+							   'method' => 'POST'
+						   ],
+						   'getHotelList' => [
+							   'action' => 'getHotelList',
+							   'method' => 'GET'
+						   ],
+						   'getHotelDetails' => [
+							   'action' => 'getHotelDetails',
+							   'method' => 'GET'
+						   ],
+						   'getHotelReport' => [
+							   'action' => 'getHotelReport',
+							   'method' => 'GET'
+						   ],
+						   'removePromotion' => [
+							   'action' => 'removePromotion',
+							   'method' => 'GET'
+						   ],
+						   'renewHotelpromotion' => [
+							   'action' => 'renewHotelpromotion',
+							   'method' => 'GET'
+						   ],
+						   'checkCityStatus' => [
+							   'action' => 'checkCityStatus',
+							   'method' => 'GET'
+						   ]
+					   ]
+					]
+				);
+				
+				
+				
+			});				
 
 
 
