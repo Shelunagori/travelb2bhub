@@ -191,10 +191,10 @@ class HotelPromotionsController extends AppController
 				$getEventPlanners = [];
 				$response_code = 205;			
 		}
-
+$getHotelPromotion=$getEventPlanners ;
 		
-		$this->set(compact('getEventPlanners','message','response_code'));
-        $this->set('_serialize', ['getEventPlanners','message','response_code']);				
+		$this->set(compact('getHotelPromotion','message','response_code'));
+        $this->set('_serialize', ['getHotelPromotion','message','response_code']);				
 	}	
 	
 	public function getHotelList($isLikedUserId = null)
@@ -252,27 +252,27 @@ class HotelPromotionsController extends AppController
 							$getEventPlanner->user_rating=0;
 						 }	 
 				}
-				 
+				$getHotelPromotion=$getEventPlanner;
 				$message = 'List Found Successfully';
 				$response_code = 200;
 			}
 			else
 			{
 				$message = 'No Content Found';
-				$getEventPlanners = [];
+				$getHotelPromotion= [];
 				$response_code = 204;			
 			}			
 		}
 		else
 		{
 				$message = 'isLikedUserId is empty';
-				$getEventPlanners = [];
+				$getHotelPromotion= [];
 				$response_code = 204;				
 		}
 
 		
-		$this->set(compact('getEventPlanners','message','response_code'));
-        $this->set('_serialize', ['getEventPlanners','message','response_code']);		
+		$this->set(compact('getHotelPromotion','message','response_code'));
+        $this->set('_serialize', ['getHotelPromotion','message','response_code']);		
 	}
 
 	public function getHotelDetails($id = null,$user_id = null)
@@ -370,9 +370,9 @@ class HotelPromotionsController extends AppController
         $this->set('_serialize', ['getEventPlannersDetails','message','response_code']);		
 	}
 
-	public function renewEventPlanner($event_id = null,$price_master_id=null,$price=null,$visible_date=null)
+	public function renewHotelpromotion($event_id = null,$price_master_id=null,$price=null,$visible_date=null)
 	{
-		$event_id = $this->request->query('event_id');
+		$event_id = $this->request->query('promotion_id');
 		$price_master_id = $this->request->query('price_master_id');
 		$price = $this->request->query('price');
 		$visible_date = $this->request->query('visible_date');
@@ -385,15 +385,15 @@ class HotelPromotionsController extends AppController
 				{
 					$PriceBeforeRenews = $this->HotelPromotions->HotelPromotionPriceBeforeRenews->newEntity();
 					
-					$PriceBeforeRenews->event_planner_promotion_id = $getHotelPromotion->id;
+					$PriceBeforeRenews->hotel_promotion_id = $getHotelPromotion->id;
 					$PriceBeforeRenews->price_master_id = $getHotelPromotion->price_master_id;
-					$PriceBeforeRenews->price = $getHotelPromotion->price;
+					$PriceBeforeRenews->price = $getHotelPromotion->total_charges;
 					$PriceBeforeRenews->visible_date = $getHotelPromotion->visible_date;
 					
 					if ($this->HotelPromotions->HotelPromotionPriceBeforeRenews->save($PriceBeforeRenews))
 					{
 						$query = $this->HotelPromotions->query();
-						$query->update()->set(['price_master_id' => $price_master_id,'price'=>$price,'visible_date'=>date('Y-m-d',strtotime($visible_date))])
+						$query->update()->set(['price_master_id' => $price_master_id,'total_charges'=>$price,'visible_date'=>date('Y-m-d',strtotime($visible_date))])
 						->where(['id' => $event_id])->execute();			
 						$message = 'Update Successfully';
 						$response_code = 200;						
@@ -415,5 +415,45 @@ class HotelPromotionsController extends AppController
 
 	}		
 
+	public function checkCityStatus($user_id = null,$city_id = null){
+		$city_id = $this->request->query('city_id');
+		$user_id = $this->request->query('user_id');
+		$visible_date=date('Y-m-d');
+		
+		$getEventPlannersDetails = $this->HotelPromotions->find()
+		->where(['HotelPromotions.visible_date >='=>$visible_date])
+		->where(['HotelPromotions.is_deleted' =>0])
+		->where(['HotelPromotions.user_id' =>$user_id])->count();
+		
+		if($getEventPlannersDetails > 0){
+			$getEventPlannersDetailsu = $this->HotelPromotions->find()
+			 ->notMatching('HotelPromotionCities', function(\Cake\ORM\Query $q)use($city_id) {
+				return $q->where(['HotelPromotionCities.city_id' => $city_id]);
+			})
+			->where(['HotelPromotions.visible_date >='=>$visible_date])
+			->where(['HotelPromotions.is_deleted' =>0])
+			->where(['HotelPromotions.user_id' =>$user_id])->count();
+			if($getEventPlannersDetailsu==0)
+			{
+				$response_code = 200;
+				$message = "Promotion is already running, please choose another city.";
+			}
+			else{
+				$response_code = 204;
+				$message='Success';
+			}
+		}
+		else
+		{
+			$response_code = 204;
+			$message='Success';
+		}
+		 
+		 
+	 
+		$this->set(compact('response_code','message'));
+        $this->set('_serialize', ['response_code','message']);		
+		 
+	}
 	
 }

@@ -364,7 +364,7 @@ Router::scope('/', function (RouteBuilder $routes) {
 					   'map' => [
 						   'HotelCategoriesList' => [
 							   'action' => 'HotelCategoriesList',
-							   'method' => 'POST'
+							   'method' => 'GET'
 						   ]
 					   ]
 					]
@@ -394,6 +394,14 @@ Router::scope('/', function (RouteBuilder $routes) {
 						   ],
 						   'removePromotion' => [
 							   'action' => 'removePromotion',
+							   'method' => 'GET'
+						   ],
+						   'renewHotelpromotion' => [
+							   'action' => 'renewHotelpromotion',
+							   'method' => 'GET'
+						   ],
+						   'checkCityStatus' => [
+							   'action' => 'checkCityStatus',
 							   'method' => 'GET'
 						   ]
 					   ]
