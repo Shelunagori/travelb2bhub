@@ -30,69 +30,67 @@ $conn = ConnectionManager::get('default');
 	<div class="box-body">
 		<div class="row">
           <div id="myModal123" class="modal fade form-modal" role="dialog">
-			  <div class="modal-dialog" style=" width: 20%;">
+			  <div class="modal-dialog" style=" width: 22%;">
 				<!-- Modal content-->
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title">Sorting</h4>
 					</div>
-					  <div class="modal-body" style="height:200px;">
+					<form method="get" class="filter_box">
+					 <div class="modal-body" style="height:170px;">
 						<div class="col-md-12 row form-group ">
 							<div class="col-md-12">
-									 <input class="btn btn-info btn-sm" type="radio" name="r1" value="totalbudgethl"/>
+									 <input class="btn btn-info btn-sm" type="radio" name="sort" value="totalbudgethl"/>
 									 <label class="col-form-label" for=example-text-input>
-										Total Budget <i class="fa fa-sort-amount-desc"></i>
-										<span class=arrow></span>
+										Total Budget (Hign to Low)</span>
 									 </label>
 							</div>
                         </div>
 						<div class="col-md-12 row form-group ">
 							<div class="col-md-12">
-									 <input class="btn btn-info btn-sm" type="radio" name="r1" value="totalbudgetlh"/>
+									 <input class="btn btn-info btn-sm" type="radio" name="sort" value="totalbudgetlh"/>
 									 <label class="col-form-label"for=example-text-input>
-										Total Budget <i class="fa fa-sort-amount-desc"></i> 
-										<span class=arrow></span>
+										Total Budget (Low to High)</span>
 									 </label>
 							</div>
                         </div>
 						<div class="col-md-12 row form-group ">
 							<div class="col-md-12">
-									<input class="btn btn-info btn-sm" type="radio" name="r1" value="agentaz"/>
+									<input class="btn btn-info btn-sm" type="radio" name="sort" value="agentaz"/>
 									<label class="col-form-label"for=example-text-input>
-										No. of Responses <i class="fa fa-sort-amount-asc"></i> 
-										<span class=arrow></span>
+										No. of Responses (Hign to Low)</span>
 									</label>
 							</div>
 						</div>
-						<div class="col-md-12 row form-group ">
+						<div class="col-md-12 row form-group" >
 							<div class=col-md-12>
-									<input class="btn btn-info btn-sm" type="radio" name="r1" value="agentza"/>
+									<input class="btn btn-info btn-sm" type="radio" name="sort" value="agentza"/>
 									<label class="col-form-label"for=example-text-input>
-										No. of Responses <i class="fa fa-sort-amount-desc"></i> 
-										<span class=arrow></span>
+										No. of Responses (Low to High)</span>
 									</label>
 							</div>
 						</div>
-						<div class="col-md-12 row form-group ">
+						<div class="col-md-12 row form-group " style="display:none;">
 							<div class=col-md-12>
-									<input class="btn btn-info btn-sm" type="radio" name="r1" value="requesttype"/>
+									<input class="btn btn-info btn-sm" type="radio" name="sort" value="requesttype"/>
 									<label class="col-form-label"for=example-text-input>
 									Request Type 
 									<span class=arrow></span>
 									</label>
 							</div>
 						</div>
-					  </div>
-						<div class="modal-footer" style="height:60px;">
-						  <div class="row">
-								<div class="col-md-12 text-center">
-									<input type="submit" name="submit" value="Sort"  class="btn btn-primary btn-submit">
+					 </div>
+								<div class="modal-footer" style="height:60px;">
+								  <div class="row">
+										<div class="col-md-12 text-center">
+											<input type="submit" name="submit" value="Sort"  class="btn btn-primary btn-submit">
+										</div>
+									</div>
 								</div>
-						  </div>
+							</form>
 						</div>
 					</div>
-				  </div>
 				</div>
 <div id="myModal122" class="modal fade form-modal" role="dialog">
   <div class="modal-dialog" style="width:35%;">
@@ -402,7 +400,8 @@ $conn = ConnectionManager::get('default');
                            </p>
                    </li>
                 <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comment">
-                     <p><b>Comment:</b><span> <?php echo $request['comment']; ?></span></p>
+                     <p><b>Comment:</b><span> 
+					 <?php echo mb_strimwidth($request['comment'], 0, 25, "...");?></span></p>
                  </li>
                       </ul>
 					  
