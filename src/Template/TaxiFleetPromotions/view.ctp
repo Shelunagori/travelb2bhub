@@ -23,7 +23,7 @@
 								<td><img src="..\images\header4.png" height="150px" width="300px"/>
 								<?php //= $this->Number->format($taxiFleetPromotion->image) ?></td>
 							</tr>
-							<tr >
+							<tr>
 								<th scope="row"><?= __('Document') ?></th>	
 								<td><img src="..\images\header4.png" height="150px" width="300px"/>
 								<?php //= $this->Number->format($taxiFleetPromotion->document) ?></td>
