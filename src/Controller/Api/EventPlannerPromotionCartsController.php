@@ -94,6 +94,50 @@ class EventPlannerPromotionCartsController extends AppController
 		{
 			$eventPlannerPromotionCarts=$this->EventPlannerPromotionCarts->find()->where(['EventPlannerPromotionCarts.user_id'=>$user_id, 'EventPlannerPromotionCarts.is_deleted'=>0])->contain(['EventPlannerPromotions','Users']);
 			if(!empty($eventPlannerPromotionCarts->toArray())){
+				
+				
+				foreach($eventPlannerPromotionCarts as $data){
+					
+					$event_planner_promotion_id=$data->event_planner_promotion_id;
+					
+					$data->total_likes = $this->EventPlannerPromotionCarts->EventPlannerPromotions->EventPlannerPromotionLikes
+							->find()->where(['event_planner_promotion_id' => $event_planner_promotion_id])->count();	
+					$exists = $this->EventPlannerPromotionCarts->EventPlannerPromotions->EventPlannerPromotionLikes->exists(['event_planner_promotion_id'=>$event_planner_promotion_id,'user_id'=>$user_id]);
+					if($exists == 1)
+					{ $data->isLiked = 'yes'; }
+					else{ $data->isLiked = 'no'; }
+					
+					$carts = $this->EventPlannerPromotionCarts->EventPlannerPromotions->EventPlannerPromotionCarts->exists(['EventPlannerPromotionCarts.event_planner_promotion_id'=>$event_planner_promotion_id,'EventPlannerPromotionCarts.user_id'=>$user_id,'EventPlannerPromotionCarts.is_deleted'=>0]);
+					if($carts==0){
+						$data->issaved=false;
+					}else{
+						$data->issaved=true;
+					}	
+					
+					$data->total_views = $this->EventPlannerPromotionCarts->EventPlannerPromotions->EventPlannerPromotionViews
+						->find()->where(['event_planner_promotion_id' => $event_planner_promotion_id])->count();
+						
+					$all_raiting=0;	
+					$testimonial=$this->EventPlannerPromotionCarts->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id]);
+					$testimonial_count=$this->EventPlannerPromotionCarts->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id])->count();
+						 
+						 foreach($testimonial as $test_data){
+							 $rating=$test_data->rating;
+							 $all_raiting+=$rating;
+						 }
+						 if($testimonial_count>0){
+							 $final_raiting=($all_raiting/$testimonial_count);
+							 if($final_raiting>0){
+								$data->user_rating=number_format($final_raiting, 1);
+							 }else{
+								$data->user_rating=0;
+							 }	
+						 }else{
+							$data->user_rating=0;
+						 }	 
+					
+					
+				}	
 				$message = 'Event Planner Promotion Carts List Found Successfully';
 				$response_code = 200;
 			}

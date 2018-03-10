@@ -191,6 +191,9 @@ class TaxiFleetPromotionsController extends AppController
 			{
 				foreach($getTaxiFleetPromotions as $getTaxiFleetPromotion)
 				{
+					$getTaxiFleetPromotion->total_likes = $this->EventPlannerPromotions->EventPlannerPromotionLikes
+							->find()->where(['taxi_fleet_promotion_id' => $getTaxiFleetPromotion->id])->count();	
+							
 					$exists = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->exists(['taxi_fleet_promotion_id'=>$getTaxiFleetPromotion->id,'user_id'=>$isLikedUserId]);
 					
 					if($exists == 0)
