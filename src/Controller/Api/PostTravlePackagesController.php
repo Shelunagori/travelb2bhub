@@ -152,8 +152,8 @@ class PostTravlePackagesController extends AppController
 		{
 			$category_id = $this->request->query('category_id');
 			$category_short = $this->request->query('category_short');
-			$duration_day = $this->request->query('duration_day');
-			$duration_night = $this->request->query('duration_night');
+			//$duration_day = $this->request->query('duration_day');
+			$duration_day_night = $this->request->query('duration_day_night');
 			$duration_short = $this->request->query('duration_short');
 			$valid_date = $this->request->query('valid_date');
 			$valid_date_short = $this->request->query('valid_date_short');
@@ -171,12 +171,9 @@ class PostTravlePackagesController extends AppController
 				$category_short = 'ASC';
 			}
 			
-			if(!empty($state_id_short))
+			if(empty($state_id_short))
 			{
-				
-			}else
-			{
-
+				$state_id_short = 'ASC';
 			}
 			
 			
@@ -227,18 +224,11 @@ class PostTravlePackagesController extends AppController
 			// End Shorting code
 			// Start Filter code
 			
-			if(!empty($duration_day) && !empty($duration_night))
+			if(!empty($duration_day_night))
 			{
-				$where_duration = ['duration_day'=>$duration_day,'duration_night'=>$duration_night];
+				$where_duration = ['duration_day_night'=>$duration_day_night];
 			}
-			else if(!empty($duration_day) && empty($duration_night))
-			{
-				$where_duration = ['duration_day'=>$duration_day];
-			}
-			else if(empty($duration_day) && !empty($duration_night))
-			{
-				$where_duration = ['duration_night'=>$duration_night];
-			}else
+			else
 			{
 				$where_duration = null;
 			}
@@ -288,7 +278,7 @@ class PostTravlePackagesController extends AppController
 			$getTravelPackages = $this->PostTravlePackages->find()
 			->contain(['Users'=>function($q){
 				return $q->select(['first_name','last_name','mobile_number','company_name']);
-			},'PostTravlePackageRows'=>['PostTravlePackageCategories']])
+			},'PostTravlePackageStates','PostTravlePackageRows'=>['PostTravlePackageCategories']])
 			->innerJoinWith('PostTravlePackageRows',function($q)use($category_id_filter,$category_short,$category_search){
 				return $q->where($category_id_filter)
 				->order(['post_travle_package_category_id' => $category_short])
@@ -296,16 +286,16 @@ class PostTravlePackagesController extends AppController
 					return $q->where($category_search);
 				});
 			})
-			->innerJoinWith('PostTravlePackageStates',function($q) use($state_filter){ 
-						return $q->where($state_filter);
+			->innerJoinWith('PostTravlePackageStates',function($q) use($state_filter,$state_id_short){ 
+						return $q->where($state_filter)->order(['state_id'=>$state_id_short]);
 					})				
-				->where($where_duration)
-				->where($valid_date)
-				->where($starting_price)
-				->where($country_id)
-				->order($where_short)
-				->group(['PostTravlePackages.id'])
-				->autoFields(true);
+			->where($where_duration)
+			->where($valid_date)
+			->where($starting_price)
+			->where($country_id)
+			->order($where_short)
+			->group(['PostTravlePackages.id'])
+			->autoFields(true);
 			
 			//pr($getTravelPackages->toArray()); exit;
 			if(!empty($getTravelPackages->toArray()))
