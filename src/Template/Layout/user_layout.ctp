@@ -475,6 +475,23 @@ $page_name=$this->request->params['action'];
 		<?php }			
 		?>
 		<li <?php if($page_name=='blockedUserList'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'blockedUserList']); ?>"><i class="fa fa-group"></i> <span>Blocked Users</span></a></li>
+		<li class="treeview">
+          <a href="#">
+            <i class="fa fa-dashboard"></i> <span>Promotions</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+           <li>
+			<?php //if($page_name=='add'){ echo 'class="active"';}?><a href="<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions",'action'=>'add']); ?>"><i class="fa fa-book"></i> <span> Taxi Fleet</span></a></li>
+			 <li>
+			<?php //if($page_name=='add'){ echo 'class="active"';}?><a href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>'add']); ?>"><i class="fa fa-book"></i> <span>Post Travel</span></a></li>
+			 <li>
+			<?php //if($page_name=='add'){ echo 'class="active"';}?><a href="<?php echo $this->Url->build(["controller" => "EventPlannerPromotions",'action'=>'add']); ?>"><i class="fa fa-book"></i> <span> Event Planner</span></a></li>
+          </ul>
+        </li>
+		
 		
       </ul>
     </section>

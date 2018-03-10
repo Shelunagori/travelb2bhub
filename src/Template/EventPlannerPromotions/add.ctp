@@ -232,18 +232,23 @@ if ($err) {
 							</div>
 						</div>
 					</fieldset>
-					 
-					<div class="row">
-						<div class="col-md-12" align="center">
-							<?= $this->Form->button(__('Submit'),['class'=>'btn btn-sm btn-success']) ?>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="input-field">
+											<div class="margin text-center">
+											<center>
+											<?php echo $this->Form->button('Submit',['class'=>'btn btn-primary btn-submit','value'=>'submit']); ?>
+											</center>
+											</div>
+										</div>
+									</div> 
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
-		</form>
-	</div>
-</div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
 $(document).ready(function (){
