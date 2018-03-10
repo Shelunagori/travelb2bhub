@@ -149,17 +149,12 @@ class TaxiFleetPromotionsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-	 public function report()
+
+	public function report()
     {
         $this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');
-        $this->paginate = [
-            'contain' => ['Countries', 'PriceMasters', 'Users','TaxiFleetPromotionRows','TaxiFleetPromotionCities','TaxiFleetPromotionStates']
-        ];
-        $taxiFleetPromotions = $this->paginate($this->TaxiFleetPromotions);
-		//pr($taxiFleetPromotions->toArray());exit;
-        $this->set(compact('taxiFleetPromotions','user_id'));
-        $this->set('_serialize', ['taxiFleetPromotions']);
+        $this->set(compact('user_id'));
     }
 	
 }

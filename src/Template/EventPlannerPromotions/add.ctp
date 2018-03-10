@@ -2,7 +2,7 @@
 //-- priceMasters
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "http://konciergesolutions.com/travelb2bhub/api/price_masters/index.json?promotion_type_id=2",
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/price_masters/index.json?promotion_type_id=2",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -30,7 +30,7 @@ if ($err) {
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "http://konciergesolutions.com/travelb2bhub/api/taxi_fleet_car_buses/index.json",
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/taxi_fleet_car_buses/index.json",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -55,7 +55,7 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 //---- Company Name
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "http://konciergesolutions.com/travelb2bhub/api/users/index.json?user_id=".$user_id,
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/users/index.json?user_id=".$user_id,
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -82,7 +82,7 @@ if ($err) {
 $curl = curl_init();
 
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "http://konciergesolutions.com/travelb2bhub/pages/masterCountry",
+  CURLOPT_URL => $coreVariable['SiteUrl']."pages/masterCountry",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -122,7 +122,7 @@ if ($err) {
 			 
 			<?php echo  $this->Flash->render() ?>
 		</div>
-		<form action="http://konciergesolutions.com/travelb2bhub/api/event_planner_promotions/add.json" method="post" enctype="multipart/form-data">	
+		<form action="<?php echo $coreVariable['SiteUrl'];?>api/event_planner_promotions/add.json" method="post" enctype="multipart/form-data">	
 		<div class="col-md-12"> 
 			<div class="box box-default">
 				<div class="box-header with-border"> 

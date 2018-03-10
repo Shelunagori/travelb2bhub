@@ -7,9 +7,9 @@ use Cake\Event\Event;
 //use Cake\I18n\FrozenTime;
 class AppController extends Controller
 {
-   use \Crud\Controller\ControllerTrait;
+  use \Crud\Controller\ControllerTrait;
   public $components = [
-        'RequestHandler',
+        'RequestHandler','Flash',
         'Crud.Crud' => [
             'actions' => [
                 'Crud.Index',
@@ -24,6 +24,19 @@ class AppController extends Controller
                 'Crud.ApiQueryLog'
             ]
         ]
-    ];	
+    ];
+	public function initialize()
+    {
+		$coreVariable = [
+			'SiteUrl' => 'http://konciergesolutions.com/travelb2bhub/',
+		];
+		$this->coreVariable = $coreVariable;
+		$this->set(compact('coreVariable'));
+	}
+	
 }
+
+/*
+
+*/
 ?>

@@ -2,7 +2,7 @@
 //-- priceMasters
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "http://konciergesolutions.com/travelb2bhub/api/TaxiFleetPromotions/getTaxiFleetPromotions.json?isLikedUserId=".$user_id,
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/TaxiFleetPromotions/getTaxiFleetPromotions.json?isLikedUserId=".$user_id,
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -23,6 +23,7 @@ if ($err) {
 } else {
 	$response;
 	$List=json_decode($response);
+	//pr($List); exit;
 	$taxiFleetPromotions=$List->getTaxiFleetPromotions;
 }
 //pr($taxiFleetPromotions); exit;
@@ -51,8 +52,8 @@ if ($err) {
                 <th scope="col"><?= ('Duration') ?></th>
                 <th scope="col"><?= ('Likes') ?></th>
                 <th scope="col"><?= ('Visibility Date') ?></th>
-				 <th scope="col"><?= ('Image') ?></th>
-                <th scope="col"><?= ('Document') ?></th>
+				<!--<th scope="col"><?= ('Image') ?></th>
+                <th scope="col"><?= ('Document') ?></th>-->
                
                
                
@@ -68,9 +69,9 @@ if ($err) {
                 <td><?= h($taxiFleetPromotion->country->country_name); ?></td>
                 <td><?= h($taxiFleetPromotion->price_master->week); ?></td>              
                 <td><?= $this->Number->format($taxiFleetPromotion->like_count) ?></td>
-                <td><?= h($taxiFleetPromotion->visible_date) ?></td>
-				<td><?= $this->Number->format($taxiFleetPromotion->image) ?></td>
-                <td><?= $this->Number->format($taxiFleetPromotion->document) ?></td>
+                <td><?= h(date('d-m-Y',strtotime($taxiFleetPromotion->visible_date))); ?></td>
+				<!--<td><?= $this->Number->format($taxiFleetPromotion->image) ?></td>
+                <td><?= $this->Number->format($taxiFleetPromotion->document) ?></td>-->
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $taxiFleetPromotion->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $taxiFleetPromotion->id]) ?>
@@ -80,7 +81,7 @@ if ($err) {
             <?php $i++;endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
+    <!--<div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
@@ -89,7 +90,7 @@ if ($err) {
             <?= $this->Paginator->last(__('last') . ' >>') ?>
         </ul>
         <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
+    </div>--->
 </div>
 </div>
 </div>

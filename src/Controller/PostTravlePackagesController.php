@@ -16,7 +16,7 @@ class PostTravlePackagesController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
-	 public function initialize()
+	public function initialize()
 	{
 		parent::initialize();
 		$this->Auth->allow(['logout']);
@@ -106,8 +106,9 @@ class PostTravlePackagesController extends AppController
     public function add()
     {
 		$this->viewBuilder()->layout('user_layout');
-		$UserId=$this->Auth->User('id');
-        $postTravlePackage = $this->PostTravlePackages->newEntity();
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id'));
+       /* $postTravlePackage = $this->PostTravlePackages->newEntity();
         if ($this->request->is('post'))
 		{
             $postTravlePackage = $this->PostTravlePackages->patchEntity($postTravlePackage, $this->request->data);
@@ -181,17 +182,17 @@ class PostTravlePackagesController extends AppController
 			else
 				$this->Flash->error(__('The post travle package could not be saved. Please, try again.'));
 		} */
-	}
-		$city = $this->PostTravlePackages->Users->Cities->find('list');
+	//}
+		/*$city = $this->PostTravlePackages->Users->Cities->find('list');
 		$cat = $this->PostTravlePackages->PostTravlePackageRows->PostTravlePackageCategories->find('list');
 		//pr($cat->toArray());exit;
 		$states = $this->PostTravlePackages->Users->States->find('list', ['limit' => 200])->where(['country_id'=>'101']);
         $currencies = $this->PostTravlePackages->Currencies->find('list', ['limit' => 200]);
         $countries = $this->PostTravlePackages->Countries->find('list', ['limit' => 200]);
-		$priceMasters = $this->PostTravlePackages->PriceMasters->find('all', ['limit' => 200])->where(['promotion_type_id'=>1]);
-        $users = $this->PostTravlePackages->Users->find()->where(['id'=>$UserId])->first();  
-        $this->set(compact('postTravlePackage', 'currencies', 'countries', 'priceMasters', 'users','states','city','cat'));
-        $this->set('_serialize', ['postTravlePackage']);
+		//$priceMasters = $this->PostTravlePackages->PriceMasters->find('all', ['limit' => 200])->where(['promotion_type_id'=>1]);
+        $users = $this->PostTravlePackages->Users->find()->where(['id'=>$uest_id])->first();  
+        $this->set(compact('postTravlePackage', 'currencies', 'countries', 'users','states','city','cat','uest_id'));
+        $this->set('_serialize', ['postTravlePackage']);*/
     }
 
     public function edit($id = null)
@@ -238,13 +239,8 @@ class PostTravlePackagesController extends AppController
 	public function report()
     {
 		$this->viewBuilder()->layout('user_layout');
-        $this->paginate = [
-            'contain' => ['Currencies', 'Countries', 'PriceMasters', 'Users','PostTravlePackageRows']
-        ];
-        $postTravlePackages = $this->paginate($this->PostTravlePackages);
-		//pr($postTravlePackages->toArray());exit;
-        $this->set(compact('postTravlePackages'));
-        $this->set('_serialize', ['postTravlePackages']);
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id'));
     }
 
 }

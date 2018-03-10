@@ -47,7 +47,13 @@ class AppController extends Controller {
         parent::initialize();
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-		
+	 
+		$coreVariable = [
+			'SiteUrl' => 'http://konciergesolutions.com/travelb2bhub/',
+		];
+		$this->coreVariable = $coreVariable;
+		$this->set(compact('coreVariable'));
+	 
         if($this->request->params['controller'] == 'Admins') 
 		{
 		 
