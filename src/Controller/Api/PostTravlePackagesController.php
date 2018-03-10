@@ -282,7 +282,7 @@ class PostTravlePackagesController extends AppController
 			->innerJoinWith('PostTravlePackageRows',function($q)use($category_id_filter,$category_short,$category_search){
 				return $q->where($category_id_filter)
 				
-				->innerJoinWith('PostTravlePackageCategories',function($q)use($category_search){
+			->innerJoinWith('PostTravlePackageCategories',function($q)use($category_search){
 					return $q->where($category_search);
 				});
 			})
