@@ -399,9 +399,6 @@ $conn = ConnectionManager::get('default');
   <?php //echo $this->Html->css(['select2/select2']);?>
   <?php //echo $this->Html->script(['select2/select2']);?>
    	<script>
-
-
-
 function checkcitystatus(price)
 {
 	var url = "<?php echo $this->Url->build(array('controller'=>'Promotions','action'=>'checkcitystatus')) ?>";

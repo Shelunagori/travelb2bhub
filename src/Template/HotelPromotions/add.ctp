@@ -224,9 +224,9 @@ if ($err) {
 														$options=array();
 														foreach($pricemaster as $duration)
 														{
-															$options[] = ['value'=>$duration->id,'text'=>$duration->week];
+															$options[] = ['value'=>$duration->id,'text'=>$duration->week,'priceVal'=>$duration->week];
 														};
-												 echo $this->Form->input('price_master_id',['class'=>'form-control select2','options' => $options,'label'=>false]);?>
+												 echo $this->Form->input('price_master_id',['class'=>'form-control duration select2 ','options' => $options,'label'=>false]);?>
 											</div>
 										</div>
 								</div>
@@ -306,61 +306,65 @@ if ($err) {
 		</div>
 	</div>
 </section>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
+	 
+    $(document).ready(function () {
+		$(document).on('change','.duration',function()
+		{
+			var priceVal=$('.duration option:selected').attr('priceVal');
+			var Result = priceVal.split(" ");
+			var weeks=Result[0];
+			
+			var todaydate = new Date(); // Parse date
+			for(var x=0; x < weeks; x++){
+				todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
+			}
+			var dd = todaydate .getDate();
+			var mm = todaydate .getMonth()+1; //January is 0!
+			var yyyy = todaydate .getFullYear();
+			if(dd<10){  dd='0'+dd } 
+			if(mm<10){  mm='0'+mm } 
+			var date = dd+'-'+mm+'-'+yyyy;	
+			$('.visible_date').val(date);
+		})
+					//Calculation Of Charges //	
+					
+			$("#city").on('change', function() {
+			   //var price = $('#city selected').val();
+				var price=$("#city option:selected").val();
+				var countries=[];
+				$.each($("#city option:selected"), function(){            
+					countries.push($(this).val());				 
+				});
+			   if(countries.length>0){
+			   prices = '"'+countries+'"';
+			   alert(prices);
+			   prices = String(countries);
+			   if (prices.indexOf(",") > -1)
+			   {   
+			   $('#hiddencharges').val('');
+			   $('#charges').val('');
+			   $('#charges1').html('0');
+				arr = prices.split(',');
+				for(i=0; i < arr.length; i++){
+				checkcitystatus(arr[i]);
+				charges1(arr[i]);
+				}
+			   }else{
+			   if (countries==null) {
+			   $('#hiddencharges').val('');
+			   $('#charges').val('');
+			   $('#charges1').html('0');
+			   }else{
+			 checkcitystatus(countries);
+				 charges(countries);
+				// $('option:selected', this).remove();
+				}
+				}
+			   }
+			});
 
-function charges1(price){
-price = String(price);
-var price = price.substr(price.indexOf("-") + 1);
-if(price==""){ price =0;}
-duration = $('#duration').val();
-if(duration==""){duration = 1 }
-getcharge = $('#charges').val();
-if(getcharge==""){getcharge = 0; }
-totalcharge =  (parseInt(getcharge)) + (parseInt(price) * parseInt(duration))	;
-$('#charges').val(totalcharge);
-hiddencharges = $('#hiddencharges').val();
-if(hiddencharges==""){hiddencharges = 0; }
-totalcharge1 =  parseInt(hiddencharges)+ parseInt(price);
-$('#hiddencharges').val(totalcharge1);
-$('#charges1').html(totalcharge1);
-$('#charges2').html(totalcharge1);
-}	
+		});
 
-function charges(price){
-price = String(price);
-var price = price.substr(price.indexOf("-") + 1);
-if(price==""){ price =0;}
-duration = $('#duration').val();
-if(duration==""){duration = 1 }
-getcharge = $('#charges').val();
-if(getcharge==""){getcharge = 0; }
-//totalcharge =  (parseInt(getcharge)) + (parseInt(price) * parseInt(duration))	;
-totalcharge =  (parseInt(getcharge)) + 6(parseInt(price) * parseInt(duration))	;
-$('#charges').val(totalcharge)
-hiddencharges = $('#hiddencharges').val()
-if(hiddencharges==""){hiddencharges = 0; }
-totalcharge1 =  parseInt(hiddencharges)+ parseInt(price);
-$('#hiddencharges').val(totalcharge1)
-$('#charges1').html(totalcharge1)
-$('#charges2').html(totalcharge1)
-}
-
-function removecharges(price){
-price = String(price);
-var price = price.substr(price.indexOf("-") + 1)
-
-if(price==""){ price =0;}
-duration = $('#duration').val();
-if(duration==""){duration = 1 }
-getcharge = $('#charges').val();
-if(getcharge==""){getcharge = 0; }
-totalcharge =  (parseInt(getcharge)) - (parseInt(price) * parseInt(duration))	;
-$('#charges').val(totalcharge)
-hiddencharges = $('#hiddencharges').val()
-if(hiddencharges==""){hiddencharges = 0; }
-totalcharge1 =  parseInt(hiddencharges)- parseInt(price);
-$('#hiddencharges').val(totalcharge1)
-$('#charges1').html(totalcharge1)
-$('#charges2').html(totalcharge1)
-}	
 </script>
