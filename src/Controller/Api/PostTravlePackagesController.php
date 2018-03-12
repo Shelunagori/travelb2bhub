@@ -212,12 +212,9 @@ class PostTravlePackagesController extends AppController
 			{
 				$where_short = null;
 			}
-			if(!empty($country_id_short))
+			if(empty($country_id_short))
 			{
-				$where_short = ['country_id' =>$country_id_short];
-			}else
-			{
-				$where_short = null;
+				$country_id_short = 'ASC';
 			}
 
 
@@ -265,12 +262,13 @@ class PostTravlePackagesController extends AppController
 			{
 				$starting_price = null;
 			}
+			$country_filter=null;
 			if(!empty($country_id))
 			{
-				$country_id = ['country_id'=>$country_id];
+				$country_filter = ['country_id'=>$country_id];
 			}else
 			{
-				$country_id = null;
+				$country_filter = null;
 			}
 
 			// End Filter code
@@ -288,14 +286,17 @@ class PostTravlePackagesController extends AppController
 			})
 			->innerJoinWith('PostTravlePackageStates',function($q) use($state_filter,$state_id_short){ 
 						return $q->where($state_filter);
+					})		
+			->innerJoinWith('PostTravlePackageCountries',function($q) use($country_filter,$country_id_short){ 
+						return $q->where($country_filter);
 					})				
 			->where($where_duration)
 			->where($valid_date)
 			->where($starting_price)
-			->where($country_id)
 			->order($where_short)
 			->order(['PostTravlePackageRows.id' => $category_short])
 			->order(['PostTravlePackageStates.id'=>$state_id_short])
+			->order(['PostTravlePackageCountries.id'=>$country_id_short])
 			->group(['PostTravlePackages.id'])
 			->autoFields(true);
 			

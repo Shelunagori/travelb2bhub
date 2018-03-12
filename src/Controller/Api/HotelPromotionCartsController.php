@@ -110,11 +110,11 @@ class HotelPromotionCartsController extends AppController
 						$data->issaved=false;
 					}else{
 						$data->issaved=true;
-					}	
+					}
 					
 					$data->total_views = $this->HotelPromotionCarts->HotelPromotions->HotelPromotionViews
 						->find()->where(['hotel_promotion_id' => $hotel_promotion_id])->count();
-						
+					
 					$all_raiting=0;	
 					$testimonial=$this->HotelPromotionCarts->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id]);
 					$testimonial_count=$this->HotelPromotionCarts->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id])->count();
