@@ -410,7 +410,7 @@ function checkcitystatus(price)
 		var a;					
 		}else{
 			alert(result);
-								$('#city option[value="'+price+'"]').remove();
+			$('#city option[value="'+price+'"]').remove();
 			removecharges(price);
 			//$('option:selected', "#city").remove();
 			

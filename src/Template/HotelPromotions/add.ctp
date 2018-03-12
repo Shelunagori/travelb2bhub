@@ -172,6 +172,21 @@ if ($err) {
 							</div> 
 							<div class="row">
 								<div class="col-md-12">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+											<p for="from">
+												Promotion Duration
+												<span class="required">*</span>
+											</p>
+											<div class="input-field">
+												 <?php
+														$options=array();
+														foreach($pricemaster as $duration)
+														{
+															$options[] = ['value'=>$duration->id,'text'=>$duration->week,'priceVal'=>$duration->week];
+														};
+												 echo $this->Form->input('price_master_id',['class'=>'form-control duration select2 ','options' => $options,'label'=>false]);?>
+											</div>
+										</div>
 										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 										<p for="from">
 											City
@@ -188,21 +203,7 @@ if ($err) {
 											
 										</div>
 									</div>
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-											<p for="from">
-												Promotion Duration
-												<span class="required">*</span>
-											</p>
-											<div class="input-field">
-												 <?php
-														$options=array();
-														foreach($pricemaster as $duration)
-														{
-															$options[] = ['value'=>$duration->id,'text'=>$duration->week,'priceVal'=>$duration->week];
-														};
-												 echo $this->Form->input('price_master_id',['class'=>'form-control duration select2 ','options' => $options,'label'=>false]);?>
-											</div>
-										</div>
+									
 								</div>
 							</div> 
 							<div class="row">
@@ -279,6 +280,7 @@ if ($err) {
 			</div>
 		</div>
 	</div>
+	<input type="text" name="week_value" class="week_value">
 </section>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
@@ -289,7 +291,7 @@ if ($err) {
 			var priceVal=$('.duration option:selected').attr('priceVal');
 			var Result = priceVal.split(" ");
 			var weeks=Result[0];
-		
+			$('.week_value').val(weeks);
 			var todaydate = new Date(); // Parse date
 			for(var x=0; x < weeks; x++)
 			{
@@ -302,6 +304,7 @@ if ($err) {
 			if(mm<10){  mm='0'+mm } 
 			var date = dd+'-'+mm+'-'+yyyy;	
 			$('.visible_date').val(date);
+			
 		});
 					//Calculation Of Charges //	
 					
@@ -316,27 +319,27 @@ if ($err) {
 				if(countries.length>0)
 				{
 					prices = '"'+countries+'"';
-					// alert(prices);
+					//alert(prices);
 					prices = String(countries);
 					if (prices.indexOf(",") > -1)
 					{   
-						$('#hiddencharges').val('');
-						$('.charges').val('');
-						$('#charges1').html('0');
+						//$('#hiddencharges').val('');
+							$('.charges').val('');
+						//$('#charges1').html('0');
 						arr = prices.split(',');
 						for(i=0; i < arr.length; i++)
 						{
-							checkcitystatus(arr[i]);
-							charges1(arr[i]);
+							//checkcitystatus(arr[i]);
+							charges(arr[i]);
 						}
 					}
 					else
 					{
 						if (countries==null) 
 						{
-							$('#hiddencharges').val('');
+							//$('#hiddencharges').val('');
 							$('.charges').val('');
-							$('#charges1').html('0');
+							//$('#charges1').html('0');
 						}
 						else
 						{
@@ -352,7 +355,8 @@ if ($err) {
 				var totalcharge=0;
 				var price = price.substr(price.indexOf("-") + 1);
 				if(price==""){ price =0;}
-				duration = 2;
+				duration =$('.week_value').val();
+				//alert(duration);
 				if(duration==""){duration = 1 }
 				getcharge = $('.charges').val();
 				//
@@ -375,7 +379,6 @@ if ($err) {
 			{
 				price = String(price);
 				var price = price.substr(price.indexOf("-") + 1)
-
 				if(price==""){ price =0;}
 				duration = 2;//$('#duration').val();
 				if(duration==""){duration = 1 }
@@ -391,7 +394,7 @@ if ($err) {
 				$('#charges2').html(totalcharge1) */
 			}	
 			
-			function checkcitystatus(price)
+			/* function checkcitystatus(price)
 				{
 					var url = "<?php echo $this->Url->build(array(
 						CURLOPT_URL => $coreVariable['SiteUrl']."api/hotel_promotions/checkCityStatus.json?user_id=3&city_id=4")) ?>";
@@ -415,7 +418,7 @@ if ($err) {
 							
 						}
 					});
-				}
+				} */
 
 			//****Image Validation script****//
 			function checkCertificate()
