@@ -294,7 +294,7 @@ class EventPlannerPromotionsController extends AppController
 			$getEventPlanners = $this->EventPlannerPromotions->find();
 			 
 				$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('EventPlannerPromotionLikes.id')])
-				->contain(['Users'=>function($q){
+				->contain(['EventPlannerPromotionCities'=>['Cities'],'Users'=>function($q){
 				return $q->select(['first_name','last_name','mobile_number','company_name']);
 			}])
 				->leftJoinWith('EventPlannerPromotionLikes')

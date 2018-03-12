@@ -98,7 +98,9 @@ class HotelPromotionsController extends AppController
     public function add()
     {
 		$this->viewBuilder()->layout('user_layout');
-        $hotelPromotion = $this->HotelPromotions->newEntity();
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id'));
+       /* $hotelPromotion = $this->HotelPromotions->newEntity();
         if ($this->request->is('post')) {
             $hotelPromotion = $this->HotelPromotions->patchEntity($hotelPromotion, $this->request->data);
             if ($this->HotelPromotions->save($hotelPromotion)) {
@@ -114,7 +116,7 @@ class HotelPromotionsController extends AppController
 		//pr($hotelCategories->toArray());exit;
         $priceMasters = $this->HotelPromotions->PriceMasters->find('list', ['limit' => 200]);
         $this->set(compact('hotelPromotion', 'users', 'hotelCategories', 'priceMasters'));
-        $this->set('_serialize', ['hotelPromotion']);
+        $this->set('_serialize', ['hotelPromotion']);*/
     }
 
     /**

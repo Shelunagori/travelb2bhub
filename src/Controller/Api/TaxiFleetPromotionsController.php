@@ -171,19 +171,39 @@ class TaxiFleetPromotionsController extends AppController
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);		
 	}
-	public function getTaxiFleetPromotions($isLikedUserId = null)
+	public function getTaxiFleetPromotions($isLikedUserId = null,$country_id=null,$country_id_short = null)
 	{
-		$isLikedUserId = $this->request->query('isLikedUserId');		
+		$isLikedUserId = $this->request->query('isLikedUserId');
+		$country_id_short = $this->request->query('country_id_short');		
+		$country_id = $this->request->query('country_id');		
 		if(!empty($isLikedUserId))
 		{
+			if(!empty($country_id))
+			{
+				$country_id = ['TaxiFleetPromotions.country_id'=>$country_id];
+			}else
+			{
+				$country_id = null;
+			}
+			
+			if(!empty($country_id_short))
+			{
+				$where_short = ['TaxiFleetPromotions.country_id' =>$country_id_short];
+			}else
+			{
+				$where_short = null;
+			}			
+			
 			$getTaxiFleetPromotions = $this->TaxiFleetPromotions->find();
 			$getTaxiFleetPromotions->select(['total_likes'=>$getTaxiFleetPromotions->func()->count('TaxiFleetPromotionLikes.id')])
 				->contain(['Users'=>function($q){
 					return $q->select(['first_name','last_name','mobile_number','company_name']);
 				}])
 				->leftJoinWith('TaxiFleetPromotionLikes')
-				->contain(['Users','PriceMasters','Countries'])
+				->contain(['Users','PriceMasters','Countries','TaxiFleetPromotionCities'=>['Cities']])
 				->where(['TaxiFleetPromotions.visible_date >=' =>date('Y-m-d')])
+				->where($country_id)
+				->order($where_short)
 				->group(['TaxiFleetPromotions.id'])
 				->autoFields(true);
 			//pr($getTravelPackages->toArray()); exit;

@@ -310,10 +310,11 @@ fieldset{
 												</p>
 												<div class="input-field">
 												 <?php $options=array();
-									foreach($countries as $country)
-									{
-										$options[] = ['value'=>$country->id,'text'=>$country->country_name];
-									};echo $this->Form->input('country_id',["class"=>"form-control select2", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select City "]);?>
+												foreach($countries as $country)
+												{
+													$options[] = ['value'=>$country->id,'text'=>$country->country_name];
+												};
+													echo $this->Form->input('country_id',["class"=>"form-control select2", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select City "]);?>
 												</div>
 												</div>
 										</div>
