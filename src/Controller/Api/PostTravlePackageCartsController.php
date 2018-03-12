@@ -78,7 +78,7 @@ class PostTravlePackageCartsController extends AppController
 							->where(['post_travle_package_id'=>$post_travle_package_id,'user_id'=>$user_id])
 							->execute();
 						$message = 'The post travel package Cart has been Deleted';
-						$response_code = 200;
+						$response_code = 300;
 			}		
         }
 		$this->set(compact('message','response_code'));
@@ -92,7 +92,7 @@ class PostTravlePackageCartsController extends AppController
 		$user_id = $this->request->query('user_id');
 		if(!empty($user_id))
 		{
-			$postTravelPackageCarts=$this->PostTravlePackageCarts->find()->where(['PostTravlePackageCarts.user_id'=>$user_id, 'PostTravlePackageCarts.is_deleted'=>0])->contain(['PostTravlePackages'=>['PostTravlePackageStates','PostTravlePackageRows'=>['PostTravlePackageCategories']],'Users'=>function($q){
+			$postTravelPackageCarts=$this->PostTravlePackageCarts->find()->where(['PostTravlePackageCarts.user_id'=>$user_id, 'PostTravlePackageCarts.is_deleted'=>0])->contain(['PostTravlePackages'=>['PostTravlePackageCities'=>['Cities'],'PostTravlePackageRows'=>['PostTravlePackageCategories']],'Users'=>function($q){
 				return $q->select(['first_name','last_name','mobile_number','company_name']);
 			}]);
 			 
@@ -107,7 +107,7 @@ class PostTravlePackageCartsController extends AppController
 					$exists = $this->PostTravlePackageCarts->PostTravlePackages->PostTravlePackageLikes->exists(['post_travle_package_id'=>$post_travle_package_id,'user_id'=>$user_id]);
 					if($exists == 1)
 					{ $data->isLiked = 'yes'; }
-					else { $data->isLiked = 'no'; }		
+					else { $data->isLiked = 'no'; }
 
 					$carts = $this->PostTravlePackageCarts->PostTravlePackages->PostTravlePackageCarts->exists(['PostTravlePackageCarts.post_travle_package_id'=>$post_travle_package_id,'PostTravlePackageCarts.user_id'=>$user_id,'PostTravlePackageCarts.is_deleted'=>0]);
 					if($carts==0){
