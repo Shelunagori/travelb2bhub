@@ -181,11 +181,19 @@ class TaxiFleetPromotionsController extends AppController
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);		
 	}
-	public function getTaxiFleetPromotions($isLikedUserId = null,$country_id=null,$country_id_short = null)
+	public function getTaxiFleetPromotions($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$car_bus_id=null,$car_bus_short=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		$country_id_short = $this->request->query('country_id_short');		
 		$country_id = $this->request->query('country_id');		
+		$state_id = $this->request->query('state_id');
+		$state_id_short = $this->request->query('state_id_short');
+		$city_id_short = $this->request->query('city_id_short');
+		$city_id = $this->request->query('city_id');
+
+		$car_bus_short = $this->request->query('car_bus_short');
+		$car_bus_id = $this->request->query('car_bus_id');		
+		
 		if(!empty($isLikedUserId))
 		{
 			if(!empty($country_id))
@@ -196,6 +204,35 @@ class TaxiFleetPromotionsController extends AppController
 				$country_id = null;
 			}
 			
+			if(!empty($state_id))
+			{
+				$state_id = explode(',',$state_id);
+				$state_filter = ['TaxiFleetPromotionStates.state_id IN'=>$state_id];
+			}else
+			{
+				$state_filter = null;
+			}
+			$city_filter = null;
+			
+			if(!empty($city_id))
+			{
+				$city_id = explode(',',$city_id);
+				$city_filter = ['TaxiFleetPromotionCities.city_id IN'=>$city_id];
+			}else
+			{
+				$city_filter = null;
+			}			
+
+			if(!empty($car_bus_id))
+			{
+				$car_bus_id = explode(',',$car_bus_id);
+				$car_bus_filter = ['TaxiFleetPromotionRows.taxi_fleet_car_bus_id IN'=>$car_bus_id];
+			}else
+			{
+				$car_bus_filter = null;
+			}	
+
+			
 			if(!empty($country_id_short))
 			{
 				$where_short = ['TaxiFleetPromotions.country_id' =>$country_id_short];
@@ -204,13 +241,48 @@ class TaxiFleetPromotionsController extends AppController
 				$where_short = null;
 			}			
 			
+			if(!empty($state_id_short))
+			{
+				$where_short = ['TaxiFleetPromotionsStates.id' =>$state_id_short];
+			}else
+			{
+				$where_short = null;
+			}
+			if(!empty($city_id_short))
+			{
+				$where_short = ['TaxiFleetPromotionCities.id' =>$city_id_short];
+			}else
+			{
+				$where_short = null;
+			}
+			if(!empty($car_bus_short))
+			{
+				$where_short = ['TaxiFleetPromotionRows.id' =>$car_bus_short];
+			}else
+			{
+				$where_short = null;
+			}				
+
+			
 			$getTaxiFleetPromotions = $this->TaxiFleetPromotions->find();
 			$getTaxiFleetPromotions->select(['total_likes'=>$getTaxiFleetPromotions->func()->count('TaxiFleetPromotionLikes.id')])
 				->contain(['Users'=>function($q){
 					return $q->select(['first_name','last_name','mobile_number','company_name']);
 				}])
 				->leftJoinWith('TaxiFleetPromotionLikes')
-				->contain(['Users','PriceMasters','Countries','TaxiFleetPromotionCities'=>['Cities']])
+				
+				->innerJoinWith('TaxiFleetPromotionStates',function($q) use($state_filter){ 
+						return $q->where($state_filter);
+					})
+				->innerJoinWith('TaxiFleetPromotionCities',function($q) use($city_filter){ 
+						return $q->where($city_filter);
+					})
+				->innerJoinWith('TaxiFleetPromotionRows',function($q) use($car_bus_filter){ 
+						return $q->where($car_bus_filter);
+					})					
+				
+				->contain(['Users','PriceMasters','Countries','TaxiFleetPromotionCities'=>['Cities'],'TaxiFleetPromotionRows'=>['TaxiFleetCarBuses']])
+					
 				->where(['TaxiFleetPromotions.visible_date >=' =>date('Y-m-d')])
 				->where($country_id)
 				->order($where_short)
