@@ -261,7 +261,7 @@ if ($err) {
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
-											 <?php echo $this->Form->input('hotel_pic',['class'=>'form-control','label'=>false,'type'=>'file']);?>
+											 <?php echo $this->Form->input('hotel_pic',['class'=>'form-control','label'=>false,'type'=>'file','id'=>'hotelImg']);?>
 											  <span style="color: red;font-size: 13px;"><b>File Type:</b> jpeg/jpg/png</span>&nbsp;&nbsp;&nbsp;<span style="color: red;font-size: 13px;"><b>Max Size:</b> 2 MB</span>
 										</div>
 									</div>
@@ -364,7 +364,29 @@ if ($err) {
 				}
 			   }
 			});
+			//****Image Validation script****//
+			function checkCertificate()
+			{
+				var file = document.getElementById("hotelImg");
+				var file_name = file.value;
+				var extension = file_name.split('.').pop().toLowerCase();
+				var size = file.files[0].size;
+				var allowedFormats = ["jpeg", "jpg", "png"];
 
+				if (!(allowedFormats.indexOf(extension) > -1)) {
+					alert("Enter a jpg/jpeg/pdf/png file");
+
+					document.getElementById("sbmtpromotion").disabled = true;
+					return false;
+				} else if (((size / 1024) / 1024) > 2) {
+					alert("Your file should be less than 2MB");
+					return false;
+				} else {
+					document.getElementById("sbmtpromotion").disabled = false;
+				}
+			}
+			
+			
 		});
 
 </script>
