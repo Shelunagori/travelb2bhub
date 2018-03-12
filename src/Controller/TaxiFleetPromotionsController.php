@@ -126,7 +126,7 @@ class TaxiFleetPromotionsController extends AppController
         $countries = $this->TaxiFleetPromotions->Countries->find('list', ['limit' => 200]);
         $priceMasters = $this->TaxiFleetPromotions->PriceMasters->find('list', ['limit' => 200]);
         $users = $this->TaxiFleetPromotions->Users->find('list', ['limit' => 200]);
-        $this->set(compact('taxiFleetPromotion', 'countries', 'priceMasters', 'users'));
+		$this->set(compact('taxiFleetPromotion', 'countries', 'priceMasters', 'users'));
         $this->set('_serialize', ['taxiFleetPromotion']);
     }
 
