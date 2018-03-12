@@ -22,18 +22,24 @@ class EventPlannerPromotionsController extends AppController
 			$submitted_from = @$this->request->data('submitted_from');
 			if(@$submitted_from=='web')
 			{
+				$eventPlannerPromotion->event_planner_promotion_states = [];
+				$eventPlannerPromotion->event_planner_promotion_cities = []; 
 				$state_id=$this->request->data['state_id'];
 				$x=0;
 				foreach($state_id as $state)
 				{
-					$eventPlannerPromotion['event_planner_promotion_states['.$x.']["state_id"]']=$state_id[$x];
+ 					$eventPlannerPromotionStates = $this->EventPlannerPromotions->EventPlannerPromotionStates->newEntity();
+					$eventPlannerPromotionStates->state_id = $state;
+					$eventPlannerPromotion->event_planner_promotion_states[$x]=$eventPlannerPromotionStates;
 					$x++;
 				}
 				$city_id=$this->request->data['city_id'];
 				$y=0;
 				foreach($city_id as $city)
 				{
-					$eventPlannerPromotion['event_planner_promotion_cities['.$y.']["city_id"]']=$city_id[$y];
+					$eventPlannerPromotionCities = $this->EventPlannerPromotions->EventPlannerPromotionCities->newEntity();
+					$eventPlannerPromotionCities->state_id = $city;
+					$eventPlannerPromotion->event_planner_promotion_cities[$x]=$eventPlannerPromotionCities;
 					$y++;	
 				}
 			}

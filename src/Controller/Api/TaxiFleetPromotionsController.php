@@ -26,27 +26,37 @@ class TaxiFleetPromotionsController extends AppController
 			{
 				$state_id=$this->request->data['state_id'];
 				$x=0; 
+				$taxiFleetPromotion->taxi_fleet_promotion_states = [];
+				$taxiFleetPromotion->taxi_fleet_promotion_cities = [];
+				$taxiFleetPromotion->taxi_fleet_promotion_rows = [];
 				foreach($state_id as $state)
 				{
-					$taxiFleetPromotion['taxi_fleet_promotion_states['.$x.']["state_id"]']=$state_id[$x];
+                    $taxiFleetPromotion_state = $this->TaxiFleetPromotions->TaxiFleetPromotionStates->newEntity();
+					
+					$taxiFleetPromotion_state->state_id = $state;
+					
+					$taxiFleetPromotion->taxi_fleet_promotion_states[$x]=$taxiFleetPromotion_state;
 					$x++;	
-				}
+ 
+				} 
 				$city_id=$this->request->data['city_id'];
 				$y=0; 
 				foreach($city_id as $city)
 				{
-					$taxiFleetPromotion['taxi_fleet_promotion_cities['.$y.']["city_id"]']=$city_id[$y];
-					$y++;	
+					$taxiFleetPromotion_cities = $this->TaxiFleetPromotions->TaxiFleetPromotionCities->newEntity();
+					$taxiFleetPromotion_cities->city_id = $city;
+					$taxiFleetPromotion->taxi_fleet_promotion_cities[$y]=$taxiFleetPromotion_cities;
+                    $y++;	
 				}
 				$vehicle_type=$this->request->data['vehicle_type'];
 				$z=0; 
 				foreach($vehicle_type as $vehicle)
 				{
-					$taxiFleetPromotion['taxi_fleet_promotion_rows['.$z.']["taxi_fleet_car_bus_id"]']=$vehicle_type[$z];
+					$taxiFleetPromotion_row = $this->TaxiFleetPromotions->TaxiFleetPromotionRows->newEntity();$taxiFleetPromotion_row->taxi_fleet_car_bus_id = $vehicle;
+					$taxiFleetPromotion->taxi_fleet_promotion_rows[$z]=$taxiFleetPromotion_row;					
 					$z++;	
 				}
 			}
- 
 			if(!empty($this->request->data('visible_date')))
 			{
 				$taxiFleetPromotion->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
