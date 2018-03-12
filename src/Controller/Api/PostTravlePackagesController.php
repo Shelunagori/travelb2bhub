@@ -145,7 +145,7 @@ class PostTravlePackagesController extends AppController
         $this->set('_serialize', ['message','response_code']);
     }
 
-	public function getTravelPackages($isLikedUserId=null,$category_id = null, $category_short = null,$duration_day=null,$duration_night=null,$duration_short=null,$valid_date=null,$valid_date_short=null,$starting_price=null,$starting_price_short=null,$country_id=null,$country_id_short=null,$state_id=null,$state_id_short=null,$category_name=null)
+	public function getTravelPackages($isLikedUserId=null,$category_id = null, $category_short = null,$duration_day=null,$duration_night=null,$duration_short=null,$valid_date=null,$valid_date_short=null,$starting_price=null,$starting_price_short=null,$country_id=null,$country_id_short=null,$city_id=null,$city_id_short=null,$category_name=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
@@ -161,8 +161,8 @@ class PostTravlePackagesController extends AppController
 			$starting_price_short = $this->request->query('starting_price_short');
 			$country_id = $this->request->query('country_id');
 			$country_id_short = $this->request->query('country_id_short');
-			$state_id = $this->request->query('state_id');
-			$state_id_short = $this->request->query('state_id_short');
+			$city_id = $this->request->query('city_id');
+			$city_id_short = $this->request->query('city_id_short');
 			$category_name = $this->request->query('category_name');
 
 			// Start shorting code
@@ -186,7 +186,7 @@ class PostTravlePackagesController extends AppController
 				$valid_date = ['valid_date >=' =>date('Y-m-d')]; 
 			}
 			
-			if(!empty($duration_short) && $duration_short == 'ASC')
+/* 			if(!empty($duration_short) && $duration_short == 'ASC')
 			{
 				$where_short = ['duration_day' =>'ASC','duration_night' =>'DESC'];
 			}
@@ -196,7 +196,7 @@ class PostTravlePackagesController extends AppController
 			}else
 			{
 				$where_short = null;
-			}
+			} */
 			
 			if(!empty($valid_date_short))
 			{
@@ -233,7 +233,8 @@ class PostTravlePackagesController extends AppController
 			$category_id_filter = null;
 			if(!empty($category_id))
 			{
-				$category_id_filter = ['post_travle_package_category_id'=>$category_id];
+				$category_id = explode(',',$category_id);
+				$category_id_filter = ['post_travle_package_category_id IN'=>$category_id];
 			}else
 			{
 				$category_id_filter = null;
@@ -245,15 +246,25 @@ class PostTravlePackagesController extends AppController
 				
 			}else { $category_search = null;  }
 		
-			$state_filter = null;
+			$city_filter = null;
 			
-			if(!empty($state_id))
+			if(!empty($city_id))
 			{
-				$state_filter = ['state_id'=>$state_id];
+				$city_id = explode(',',$city_id);
+				$city_filter = ['PostTravlePackageCities.city_id IN'=>$city_id];
 			}else
 			{
-				$state_filter = null;
+				$city_filter = null;
 			}
+
+			if(!empty($city_id_short))
+			{
+				$where_short = ['PostTravlePackageCities.id' =>$city_id_short];
+			}else
+			{
+				$where_short = null;
+			}
+
 			
 			if(!empty($starting_price))
 			{
@@ -264,7 +275,8 @@ class PostTravlePackagesController extends AppController
 			}
 			$country_filter=null;
 			if(!empty($country_id))
-			{$country_id = explode(',',$country_id);
+			{
+				$country_id = explode(',',$country_id);
 				$country_filter = ['PostTravlePackageCountries.country_id IN' =>$country_id];
 			}else
 			{
@@ -284,7 +296,9 @@ class PostTravlePackagesController extends AppController
 					return $q->where($category_search);
 				});
 			})
-			
+			->innerJoinWith('PostTravlePackageCities',function($q) use($city_filter){ 
+						return $q->where($city_filter);
+					})
 			->innerJoinWith('PostTravlePackageCountries',function($q) use($country_filter,$country_id_short){ 
 						return $q->where($country_filter);
 					})				
