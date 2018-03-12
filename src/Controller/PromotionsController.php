@@ -49,7 +49,7 @@ $Promotion = $PromotionsTable->newEntity();
 			
 			$Promotion->user_id = $this->request->data['user_id'];
 			$Promotion->hotel_name =  $this->request->data['hotel_name'];
-$Promotion->hotel_location =  $this->request->data['hotel_location'];
+			$Promotion->hotel_location =  $this->request->data['hotel_location'];
 			$Promotion->hotel_type =  $this->request->data['hotel_categories'];
 			$Promotion->cheap_tariff =  $this->request->data['cheap_tariff'];
 			$Promotion->expensive_tariff =  $this->request->data['expensive_tariff'];
