@@ -330,16 +330,17 @@ if ($err) {
 		})
 					//Calculation Of Charges //	
 					
-			$("#city").on('change', function() {
-			 //  var price = $('#city selected').attr('price');
+			$("#city").on('change', function()
+			{
+				var price = $('#city selected').attr('price');
 				//var price=$("#city option:selected").val();
 				var countries=[];
 				$.each($("#city option:selected"), function(){            
 					countries.push($(this).val());				 
 				});
-			   if(countries.length>0){
-			   prices = '"'+countries+'"';
-			  // alert(prices);
+				if(countries.length>0){
+				prices = '"'+countries+'"';
+				// alert(prices);
 			   prices = String(countries);
 			   if (prices.indexOf(",") > -1)
 			   {   
@@ -375,9 +376,9 @@ if ($err) {
 				//
 				if(getcharge==""){getcharge = 0; }
 				//totalcharge =  (parseInt(getcharge)) + (parseInt(price) * parseInt(duration))	;
-				alert(price);
-				alert(duration);
-				alert(getcharge);
+				//alert(price);
+				//alert(duration);
+				//alert(getcharge);
 				totalcharge =  (parseInt(getcharge)) + (parseInt(price) * parseInt(duration));
 				$('.charges').val(totalcharge);
 				//alert(totalcharge);
