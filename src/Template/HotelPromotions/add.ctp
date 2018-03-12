@@ -172,32 +172,6 @@ if ($err) {
 							</div> 
 							<div class="row">
 								<div class="col-md-12">
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-										<p for="from">
-											Total Charges
-											<span class="required">*</span>
-										</p>
-										<div class="input-field">
-										 <?php echo $this->Form->input('total_charges',['class'=>'form-control','label'=>false]);?>
-											
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-										<p for="from">
-										Hotel Rating
-											<span class="required">*</span>
-										</p>
-										<div class="input-field">
-										 <?php echo $this->Form->input('hotel_rating',['class'=>'form-control','label'=>false]);?>
-											
-										</div>
-									</div>
-									
-								</div>
-							</div>
-							
-							<div class="row">
-								<div class="col-md-12">
 										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 										<p for="from">
 											City
@@ -328,7 +302,7 @@ if ($err) {
 			if(mm<10){  mm='0'+mm } 
 			var date = dd+'-'+mm+'-'+yyyy;	
 			$('.visible_date').val(date);
-		})
+		});
 					//Calculation Of Charges //	
 					
 			$("#city").on('change', function()
