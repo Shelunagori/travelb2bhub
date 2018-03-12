@@ -100,7 +100,7 @@ class PostTravlePackagesTable extends Table
             ->requirePresence('title', 'create')
             ->notEmpty('title');
 
-        $validator
+/*         $validator
             ->integer('duration_night')
             ->requirePresence('duration_night', 'create')
             ->notEmpty('duration_night');
@@ -108,7 +108,7 @@ class PostTravlePackagesTable extends Table
         $validator
             ->integer('duration_day')
             ->requirePresence('duration_day', 'create')
-            ->notEmpty('duration_day');
+            ->notEmpty('duration_day'); */
 
         $validator
             ->date('valid_date')

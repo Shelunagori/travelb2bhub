@@ -264,8 +264,8 @@ class PostTravlePackagesController extends AppController
 			}
 			$country_filter=null;
 			if(!empty($country_id))
-			{
-				$country_filter = ['country_id'=>$country_id];
+			{$country_id = explode(',',$country_id);
+				$country_filter = ['PostTravlePackageCountries.country_id IN' =>$country_id];
 			}else
 			{
 				$country_filter = null;
@@ -284,9 +284,7 @@ class PostTravlePackagesController extends AppController
 					return $q->where($category_search);
 				});
 			})
-			->innerJoinWith('PostTravlePackageStates',function($q) use($state_filter,$state_id_short){ 
-						return $q->where($state_filter);
-					})		
+			
 			->innerJoinWith('PostTravlePackageCountries',function($q) use($country_filter,$country_id_short){ 
 						return $q->where($country_filter);
 					})				
@@ -295,7 +293,7 @@ class PostTravlePackagesController extends AppController
 			->where($starting_price)
 			->order($where_short)
 			->order(['PostTravlePackageRows.id' => $category_short])
-			->order(['PostTravlePackageStates.id'=>$state_id_short])
+			
 			->order(['PostTravlePackageCountries.id'=>$country_id_short])
 			->group(['PostTravlePackages.id'])
 			->autoFields(true);
@@ -369,7 +367,7 @@ class PostTravlePackagesController extends AppController
 		$getTravelPackageDetails = $this->PostTravlePackages->find();
 		$getTravelPackageDetails->select(['total_likes'=>$getTravelPackageDetails->func()->count('PostTravlePackageLikes.id')])
 			->leftJoinWith('PostTravlePackageLikes')
-			->contain(['Users','PriceMasters','Currencies','PostTravlePackageRows'=>['PostTravlePackageCategories'],'PostTravlePackageStates'=>['States'],'PostTravlePackageCities'=>['Cities'],'PostTravlePackageCountries'=>['Countries']])
+			->contain(['Users','PriceMasters','Currencies','PostTravlePackageRows'=>['PostTravlePackageCategories'],'PostTravlePackageCities'=>['Cities'],'PostTravlePackageCountries'=>['Countries']])
 			->where(['PostTravlePackages.id'=>$id])
 			->group(['PostTravlePackages.id'])
 		->autoFields(true);
