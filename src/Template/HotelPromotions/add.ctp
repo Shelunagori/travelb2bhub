@@ -315,9 +315,10 @@ if ($err) {
 			var priceVal=$('.duration option:selected').attr('priceVal');
 			var Result = priceVal.split(" ");
 			var weeks=Result[0];
-			
+		
 			var todaydate = new Date(); // Parse date
-			for(var x=0; x < weeks; x++){
+			for(var x=0; x < weeks; x++)
+			{
 				todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
 			}
 			var dd = todaydate .getDate();
@@ -332,37 +333,44 @@ if ($err) {
 					
 			$("#city").on('change', function()
 			{
-				var price = $('#city selected').attr('price');
+				//var price = $('#city selected').attr('price');
 				//var price=$("#city option:selected").val();
 				var countries=[];
 				$.each($("#city option:selected"), function(){            
 					countries.push($(this).val());				 
 				});
-				if(countries.length>0){
-				prices = '"'+countries+'"';
-				// alert(prices);
-			   prices = String(countries);
-			   if (prices.indexOf(",") > -1)
-			   {   
-			   $('#hiddencharges').val('');
-			   $('.charges').val('');
-			   $('#charges1').html('0');
-				arr = prices.split(',');
-				for(i=0; i < arr.length; i++){
-				checkcitystatus(arr[i]);
-				charges1(arr[i]);
-				}
-			   }else{
-			   if (countries==null) {
-			   $('#hiddencharges').val('');
-			   $('.charges').val('');
-			   $('#charges1').html('0');
-			   }else{
-				//checkcitystatus(countries);
-				 charges(countries);
-				// $('option:selected', this).remove();
-				}
-				}
+				if(countries.length>0)
+				{
+					prices = '"'+countries+'"';
+					// alert(prices);
+					prices = String(countries);
+					if (prices.indexOf(",") > -1)
+					{   
+						$('#hiddencharges').val('');
+						$('.charges').val('');
+						$('#charges1').html('0');
+						arr = prices.split(',');
+						for(i=0; i < arr.length; i++)
+						{
+							checkcitystatus(arr[i]);
+							charges1(arr[i]);
+						}
+					}
+					else
+					{
+						if (countries==null) 
+						{
+							$('#hiddencharges').val('');
+							$('.charges').val('');
+							$('#charges1').html('0');
+						}
+						else
+						{
+							//checkcitystatus(countries);
+							charges(countries);
+							// $('option:selected', this).remove();
+						}
+					}
 			   }
 			});
 			function charges(price){
