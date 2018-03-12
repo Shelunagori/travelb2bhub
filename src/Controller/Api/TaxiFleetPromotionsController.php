@@ -483,7 +483,7 @@ class TaxiFleetPromotionsController extends AppController
 			}			
 		}else
 		{
-						$message = 'Invalid Data';
+						$message = 'Invalid Data'; 
 						$response_code = 205;				
 		}
 

@@ -489,6 +489,8 @@ $page_name=$this->request->params['action'];
 			<?php //if($page_name=='add'){ echo 'class="active"';}?><a href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>'add']); ?>"><i class="fa fa-book"></i> <span>Post Travel</span></a></li>
 			 <li>
 			<?php //if($page_name=='add'){ echo 'class="active"';}?><a href="<?php echo $this->Url->build(["controller" => "EventPlannerPromotions",'action'=>'add']); ?>"><i class="fa fa-book"></i> <span> Event Planner</span></a></li>
+			<li>
+			<?php //if($page_name=='add'){ echo 'class="active"';}?><a href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>'add']); ?>"><i class="fa fa-book"></i> <span>Hotel Promotions</span></a></li>
           </ul>
         </li>
 		

@@ -35,10 +35,6 @@
 				}
 			   }
 			});
-
-				
-				
-                
            $(".previewform").click(function(){
            var hotel_category =  $("#hotel_categories").find('option:selected').text();
              $('#hotelname').html($('#hotel_name').val());
@@ -368,32 +364,30 @@ $conn = ConnectionManager::get('default');
          
 			</div>
 		</div-->
-		
-		
-  <div class="modal fade form-modal" id="previewmodal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-body">
-         <div class="hotelimage" ><img width="100%" class="" src="../img/travel-advertisement.jpg"  id="hotelimage"></div>
-			<div>Hotel Name: <span class="hotelname" id="hotelname"></span></div>
-			<div>Hotel Type: <span class="hoteltype" id="hoteltype"></span></div>
-			<div>Minimum and Maximum Price: <span class="hotelprice" id="hotelprice"></span></div>
-			<div>Location: <span class="hotellocation" id="hotellocation"></span></div>
-			<div>Website: <span class="hotelwebsite" id="hotelwebsite"></span></div>
-			
-        </div>
-        <div class="modal-footer">
-        <input type="submit" name="submitpromotion" id="sbmtpromotion" class="btn btn-primary btn-submit" value="Submit "/>
-          <button type="button" class="btn btn-default closepreview" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>	
-</div>
-</div>
-</div>
+			  <div class="modal fade form-modal" id="previewmodal" role="dialog">
+				<div class="modal-dialog">
+				
+				  <!-- Modal content-->
+				  <div class="modal-content">
+					<div class="modal-body">
+					 <div class="hotelimage" ><img width="100%" class="" src="../img/travel-advertisement.jpg"  id="hotelimage"></div>
+						<div>Hotel Name: <span class="hotelname" id="hotelname"></span></div>
+						<div>Hotel Type: <span class="hoteltype" id="hoteltype"></span></div>
+						<div>Minimum and Maximum Price: <span class="hotelprice" id="hotelprice"></span></div>
+						<div>Location: <span class="hotellocation" id="hotellocation"></span></div>
+						<div>Website: <span class="hotelwebsite" id="hotelwebsite"></span></div>
+						
+					</div>
+					<div class="modal-footer">
+					<input type="submit" name="submitpromotion" id="sbmtpromotion" class="btn btn-primary btn-submit" value="Submit "/>
+					  <button type="button" class="btn btn-default closepreview" data-dismiss="modal">Close</button>
+					</div>
+				  </div>
+				</div>
+			  </div>	
+			</div>
+		</div>
+	</div>
 </div>  
   <?php //echo $this->Html->script(['jquery.validate']);?>
   <?php //echo $this->Html->css(['select2/select2']);?>
