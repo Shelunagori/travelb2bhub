@@ -11,45 +11,6 @@ use Cake\Filesystem\File;
  */
 class HotelPromotionCartsController extends AppController
 {
-
-    /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
-     */
-    public function index()
-    {
-        $this->paginate = [
-            'contain' => ['HotelPromotions', 'Users']
-        ];
-        $hotelPromotionCarts = $this->paginate($this->HotelPromotionCarts);
-
-        $this->set(compact('hotelPromotionCarts'));
-        $this->set('_serialize', ['hotelPromotionCarts']);
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Hotel Promotion Cart id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $hotelPromotionCart = $this->HotelPromotionCarts->get($id, [
-            'contain' => ['HotelPromotions', 'Users']
-        ]);
-
-        $this->set('hotelPromotionCart', $hotelPromotionCart);
-        $this->set('_serialize', ['hotelPromotionCart']);
-    }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise.
-     */
     public function HotelPromotionCartAdd()
     {
         $hotelPromotionCart = $this->HotelPromotionCarts->newEntity();
@@ -85,14 +46,12 @@ class HotelPromotionCartsController extends AppController
         $this->set('_serialize', ['message','response_code']);
     }
 
-	
 	public function HotelPromotionCartlist($user_id=null)
 	{
-		
-		$user_id = $this->request->query('user_id');
+ 		$user_id = $this->request->query('user_id');
 		if(!empty($user_id))
 		{
-			$hotelPromotionCarts=$this->HotelPromotionCarts->find()->where(['HotelPromotionCarts.user_id'=>$user_id, 'HotelPromotionCarts.is_deleted'=>0])->contain(['HotelPromotions','Users']);
+			$hotelPromotionCarts=$this->HotelPromotionCarts->find()->where(['HotelPromotionCarts.user_id'=>$user_id, 'HotelPromotionCarts.is_deleted'=>0])->contain(['HotelPromotions'=>['HotelCategories','Users']]);
 			if(!empty($hotelPromotionCarts->toArray())){
 				
 				foreach($hotelPromotionCarts as $data){
@@ -110,11 +69,11 @@ class HotelPromotionCartsController extends AppController
 						$data->issaved=false;
 					}else{
 						$data->issaved=true;
-					}
+					}	
 					
 					$data->total_views = $this->HotelPromotionCarts->HotelPromotions->HotelPromotionViews
 						->find()->where(['hotel_promotion_id' => $hotel_promotion_id])->count();
-					
+						
 					$all_raiting=0;	
 					$testimonial=$this->HotelPromotionCarts->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id]);
 					$testimonial_count=$this->HotelPromotionCarts->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id])->count();
@@ -156,51 +115,5 @@ class HotelPromotionCartsController extends AppController
 		$this->set(compact('hotelPromotionCarts','message','response_code'));
         $this->set('_serialize', ['hotelPromotionCarts','message','response_code']);		
 	}
-	
-    /**
-     * Edit method
-     *
-     * @param string|null $id Hotel Promotion Cart id.
-     * @return \Cake\Network\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $hotelPromotionCart = $this->HotelPromotionCarts->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $hotelPromotionCart = $this->HotelPromotionCarts->patchEntity($hotelPromotionCart, $this->request->data);
-            if ($this->HotelPromotionCarts->save($hotelPromotionCart)) {
-                $this->Flash->success(__('The hotel promotion cart has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The hotel promotion cart could not be saved. Please, try again.'));
-        }
-        $hotelPromotions = $this->HotelPromotionCarts->HotelPromotions->find('list', ['limit' => 200]);
-        $users = $this->HotelPromotionCarts->Users->find('list', ['limit' => 200]);
-        $this->set(compact('hotelPromotionCart', 'hotelPromotions', 'users'));
-        $this->set('_serialize', ['hotelPromotionCart']);
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Hotel Promotion Cart id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $hotelPromotionCart = $this->HotelPromotionCarts->get($id);
-        if ($this->HotelPromotionCarts->delete($hotelPromotionCart)) {
-            $this->Flash->success(__('The hotel promotion cart has been deleted.'));
-        } else {
-            $this->Flash->error(__('The hotel promotion cart could not be deleted. Please, try again.'));
-        }
-
-        return $this->redirect(['action' => 'index']);
-    }
+    
 }
