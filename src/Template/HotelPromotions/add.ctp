@@ -208,7 +208,7 @@ if ($err) {
 											$options=array();
 												foreach($hotelcities as $cities)
 												{
-													$options[] = ['value'=>$cities->value,'text'=>$cities->label.' ('.$cities->state_name.') ('.$cities->usercount.') - Rs.'.$cities->price ];
+													$options[] = ['value'=>$cities->value.'-'.$cities->price,'text'=>$cities->label.' ('.$cities->state_name.') ('.$cities->usercount.') - Rs.'.$cities->price,'price'=>$cities->price ];
 												}
 										 echo $this->Form->input('city_id',['class'=>'form-control select2 ',"multiple"=>true ,'label'=>false,'options' => $options,"data-placeholder"=>"Select City ",'id'=>'city']);?>
 											
@@ -236,7 +236,7 @@ if ($err) {
 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 											<p for="from">
 												Charges
-												<span class="required"></span>
+												<span class="required "></span>
 											</p>
 											<div class="input-field">
 										<?php echo $this->Form->input('charges', ['class'=>'form-control charges','label'=>false,"placeholder"=>"Total Charges",'readonly'=>'readonly','type'=>'text']); ?>
@@ -331,20 +331,20 @@ if ($err) {
 					//Calculation Of Charges //	
 					
 			$("#city").on('change', function() {
-			   //var price = $('#city selected').val();
-				var price=$("#city option:selected").val();
+			 //  var price = $('#city selected').attr('price');
+				//var price=$("#city option:selected").val();
 				var countries=[];
 				$.each($("#city option:selected"), function(){            
 					countries.push($(this).val());				 
 				});
 			   if(countries.length>0){
 			   prices = '"'+countries+'"';
-			   alert(prices);
+			  // alert(prices);
 			   prices = String(countries);
 			   if (prices.indexOf(",") > -1)
 			   {   
 			   $('#hiddencharges').val('');
-			   $('#charges').val('');
+			   $('.charges').val('');
 			   $('#charges1').html('0');
 				arr = prices.split(',');
 				for(i=0; i < arr.length; i++){
@@ -354,16 +354,86 @@ if ($err) {
 			   }else{
 			   if (countries==null) {
 			   $('#hiddencharges').val('');
-			   $('#charges').val('');
+			   $('.charges').val('');
 			   $('#charges1').html('0');
 			   }else{
-			 checkcitystatus(countries);
+				//checkcitystatus(countries);
 				 charges(countries);
 				// $('option:selected', this).remove();
 				}
 				}
 			   }
 			});
+			function charges(price){
+				price = String(price);
+				var totalcharge=0;
+				var price = price.substr(price.indexOf("-") + 1);
+				if(price==""){ price =0;}
+				duration = 2;
+				if(duration==""){duration = 1 }
+				getcharge = $('.charges').val();
+				//
+				if(getcharge==""){getcharge = 0; }
+				//totalcharge =  (parseInt(getcharge)) + (parseInt(price) * parseInt(duration))	;
+				alert(price);
+				alert(duration);
+				alert(getcharge);
+				totalcharge =  (parseInt(getcharge)) + (parseInt(price) * parseInt(duration));
+				$('.charges').val(totalcharge);
+				//alert(totalcharge);
+				/* hiddencharges = $('#hiddencharges').val()
+				if(hiddencharges==""){hiddencharges = 0; }
+				totalcharge1 =  parseInt(hiddencharges)+ parseInt(price);
+				$('#hiddencharges').val(totalcharge1)
+				$('#charges1').html(totalcharge1)
+				$('#charges2').html(totalcharge1) */
+			}
+			function removecharges(price)
+			{
+				price = String(price);
+				var price = price.substr(price.indexOf("-") + 1)
+
+				if(price==""){ price =0;}
+				duration = 2;//$('#duration').val();
+				if(duration==""){duration = 1 }
+				getcharge = $('.charges').val();
+				if(getcharge==""){getcharge = 0; }
+				totalcharge =  (parseInt(getcharge)) - (parseInt(price) * parseInt(duration))	;
+				$('.charges').val(totalcharge);
+				/* hiddencharges = $('#hiddencharges').val()
+				if(hiddencharges==""){hiddencharges = 0; }
+				totalcharge1 =  parseInt(hiddencharges)- parseInt(price);
+				$('#hiddencharges').val(totalcharge1)
+				$('#charges1').html(totalcharge1)
+				$('#charges2').html(totalcharge1) */
+			}	
+			
+			function checkcitystatus(price)
+				{
+					var url = "<?php echo $this->Url->build(array(
+						CURLOPT_URL => $coreVariable['SiteUrl']."api/hotel_promotions/checkCityStatus.json?user_id=3&city_id=4")) ?>";
+					price1 = String(price);	
+					var fields = price1.split('-');
+					var city_id = fields[0];
+					var user_id = $('#user_id').val();
+					var duration = $('#duration').val();
+					$.ajax({
+						url:url,
+						type: 'POST',
+						data: {city_id:city_id,user_id:user_id,duration:duration}
+					}).done(function(result){
+						if (result==1) {
+						var a;					
+						}else{
+							alert(result);
+							$('#city option[value="'+price+'"]').remove();
+							removecharges(price);
+							//$('option:selected', "#city").remove();
+							
+						}
+					});
+				}
+
 			//****Image Validation script****//
 			function checkCertificate()
 			{

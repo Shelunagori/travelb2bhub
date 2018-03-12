@@ -437,22 +437,22 @@ $('#charges2').html(totalcharge1);
 }	
 
 function charges(price){
-price = String(price);
-var price = price.substr(price.indexOf("-") + 1);
-if(price==""){ price =0;}
-duration = $('#duration').val();
-if(duration==""){duration = 1 }
-getcharge = $('#charges').val();
-if(getcharge==""){getcharge = 0; }
-//totalcharge =  (parseInt(getcharge)) + (parseInt(price) * parseInt(duration))	;
-totalcharge =  (parseInt(getcharge)) + 6(parseInt(price) * parseInt(duration))	;
-$('#charges').val(totalcharge)
-hiddencharges = $('#hiddencharges').val()
-if(hiddencharges==""){hiddencharges = 0; }
-totalcharge1 =  parseInt(hiddencharges)+ parseInt(price);
-$('#hiddencharges').val(totalcharge1)
-$('#charges1').html(totalcharge1)
-$('#charges2').html(totalcharge1)
+	price = String(price);
+	var price = price.substr(price.indexOf("-") + 1);
+	if(price==""){ price =0;}
+	duration = $('#duration').val();
+	if(duration==""){duration = 1 }
+	getcharge = $('#charges').val();
+	if(getcharge==""){getcharge = 0; }
+	//totalcharge =  (parseInt(getcharge)) + (parseInt(price) * parseInt(duration))	;
+	totalcharge =  (parseInt(getcharge)) + 6(parseInt(price) * parseInt(duration))	;
+	$('#charges').val(totalcharge)
+	hiddencharges = $('#hiddencharges').val()
+	if(hiddencharges==""){hiddencharges = 0; }
+	totalcharge1 =  parseInt(hiddencharges)+ parseInt(price);
+	$('#hiddencharges').val(totalcharge1)
+	$('#charges1').html(totalcharge1)
+	$('#charges2').html(totalcharge1)
 }
 
 function removecharges(price){
