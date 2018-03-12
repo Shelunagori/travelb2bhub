@@ -205,7 +205,7 @@ $getHotelPromotion=$getEventPlanners ;
 			$getEventPlanners = $this->HotelPromotions->find();
 			
 				$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('HotelPromotionLikes.id')])
-				->contain(['Users'=>function($q){
+				->contain(['HotelCategories','Users'=>function($q){
 				return $q->select(['first_name','last_name','mobile_number','company_name']);
 			}])
 				->leftJoinWith('HotelPromotionLikes')
@@ -254,7 +254,7 @@ $getHotelPromotion=$getEventPlanners ;
 							$getEventPlanner->user_rating=0;
 						 }	 
 				}
-				$getHotelPromotion=$getEventPlanner;
+				$getHotelPromotion=$getEventPlanners ;
 				$message = 'List Found Successfully';
 				$response_code = 200;
 			}
@@ -284,7 +284,7 @@ $getHotelPromotion=$getEventPlanners ;
 		$getEventPlannersDetails = $this->HotelPromotions->find();
 		$getEventPlannersDetails->select(['total_likes'=>$getEventPlannersDetails->func()->count('HotelPromotionLikes.id')])
 			->leftJoinWith('HotelPromotionLikes')
-			->contain(['Users','PriceMasters','HotelPromotionCities'=>['Cities']])
+			->contain(['HotelCategories','Users','PriceMasters','HotelPromotionCities'=>['Cities']])
 			->where(['HotelPromotions.id'=>$id])
 			->where(['HotelPromotions.is_deleted' =>0])
 			->group(['HotelPromotions.id'])

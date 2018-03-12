@@ -380,6 +380,7 @@ class PagesController extends AppController
 			$data['name'] = $cityapi->name.' ('.$statename . ')' ;
 			$data['stateid'] =   $cityapi->state_id;
 			$data['cityid'] =  $cityapi->id;
+$data['country_id'] =  $cityapi->country_id;
 			$datacitystate['citystatefi'][$i] =  $data;
 			$i++; 
 		}
