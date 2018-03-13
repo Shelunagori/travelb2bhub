@@ -12,11 +12,9 @@ h3 {
  
 li {
 	    margin-top: 7px;
-		 text-align:left !important;
 }
 ul li b {
 	color:#96989A;
-	 text-align:left !important;
 }
 .col-md-12 { background: #fff !important; }
 
@@ -48,12 +46,12 @@ ul li b {
 			<br>
 				<div class="head_of_popup"><h3>General Requirements</h3></div>
 				<ul>
-					<li class="col-md-12"><p>Reference ID : &nbsp;<span style="color:#FB6542"><?php
-					echo $details['reference_id']; ?></span>
-					<li class="col-md-12"><p>Total Budget : &nbsp;<span style="color:#1295A2">  Rs. <?php
-					echo $details['total_budget'] . ""; ?></span>
+					<li class="col-md-6"><p>Reference ID : &nbsp;<span style="color:#FB6542"><?php
+					echo $details['reference_id']; ?></span></li>
+					<li class="col-md-6"><p>Total Budget : &nbsp;<span style="color:#1295A2">  Rs. <?php
+					echo number_format($details['total_budget'] . ""); ?></span></li>
 					<li class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><p>Adult : &nbsp;<?php
-					echo $details['adult']; ?>
+					echo $details['adult']; ?></li>
 					<li class="col-xs-6 col-lg-6 col-md-6 col-sm-6	"><p>Children below 6 : &nbsp;<?php
 					echo $details['children']; ?></li>
 				</ul>

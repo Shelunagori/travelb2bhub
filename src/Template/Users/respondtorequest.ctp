@@ -37,50 +37,50 @@ $conn = ConnectionManager::get('default');
 						<button type="button" class="close" data-dismiss="modal">&times;</button>
 						<h4 class="modal-title">Sorting</h4>
 					</div>
-					<form method="get" class="filter_box">
-					 <div class="modal-body" style="height:170px;">
-						<div class="col-md-12 row form-group ">
-							<div class="col-md-12">
-									 <input class="btn btn-info btn-sm" type="radio" name="sort" value="totalbudgethl"/>
-									 <label class="col-form-label" for=example-text-input>
-										Total Budget (Hign to Low)</span>
-									 </label>
-							</div>
-                        </div>
-						<div class="col-md-12 row form-group ">
-							<div class="col-md-12">
-									 <input class="btn btn-info btn-sm" type="radio" name="sort" value="totalbudgetlh"/>
-									 <label class="col-form-label"for=example-text-input>
-										Total Budget (Low to High)</span>
-									 </label>
-							</div>
-                        </div>
-						<div class="col-md-12 row form-group ">
-							<div class="col-md-12">
-									<input class="btn btn-info btn-sm" type="radio" name="sort" value="agentaz"/>
-									<label class="col-form-label"for=example-text-input>
-										No. of Responses (Hign to Low)</span>
-									</label>
-							</div>
-						</div>
-						<div class="col-md-12 row form-group" >
-							<div class=col-md-12>
-									<input class="btn btn-info btn-sm" type="radio" name="sort" value="agentza"/>
-									<label class="col-form-label"for=example-text-input>
-										No. of Responses (Low to High)</span>
-									</label>
-							</div>
-						</div>
-						<div class="col-md-12 row form-group " style="display:none;">
-							<div class=col-md-12>
-									<input class="btn btn-info btn-sm" type="radio" name="sort" value="requesttype"/>
-									<label class="col-form-label"for=example-text-input>
-									Request Type 
-									<span class=arrow></span>
-									</label>
-							</div>
-						</div>
-					 </div>
+						<form method="get" class="filter_box">
+							 <div class="modal-body" style="height:170px;">
+								<div class="col-md-12 row form-group ">
+									<div class="col-md-12">
+											 <input class="btn btn-info btn-sm" type="radio" name="sort" value="totalbudgethl"/>
+											 <label class="col-form-label" for=example-text-input>
+												Total Budget (Hign to Low)</span>
+											 </label>
+									</div>
+								</div>
+								<div class="col-md-12 row form-group ">
+									<div class="col-md-12">
+											 <input class="btn btn-info btn-sm" type="radio" name="sort" value="totalbudgetlh"/>
+											 <label class="col-form-label"for=example-text-input>
+												Total Budget (Low to High)</span>
+											 </label>
+									</div>
+								</div>
+								<div class="col-md-12 row form-group ">
+									<div class="col-md-12">
+											<input class="btn btn-info btn-sm" type="radio" name="sort" value="agentaz"/>
+											<label class="col-form-label"for=example-text-input>
+												No. of Responses (Hign to Low)</span>
+											</label>
+									</div>
+								</div>
+								<div class="col-md-12 row form-group" >
+									<div class=col-md-12>
+											<input class="btn btn-info btn-sm" type="radio" name="sort" value="agentza"/>
+											<label class="col-form-label"for=example-text-input>
+												No. of Responses (Low to High)</span>
+											</label>
+									</div>
+								</div>
+								<div class="col-md-12 row form-group " style="display:none;">
+									<div class=col-md-12>
+											<input class="btn btn-info btn-sm" type="radio" name="sort" value="requesttype"/>
+											<label class="col-form-label"for=example-text-input>
+											Request Type 
+											<span class=arrow></span>
+											</label>
+									</div>
+								</div>
+							 </div>
 								<div class="modal-footer" style="height:60px;">
 								  <div class="row">
 										<div class="col-md-12 text-center">
@@ -92,181 +92,179 @@ $conn = ConnectionManager::get('default');
 						</div>
 					</div>
 				</div>
-<div id="myModal122" class="modal fade form-modal" role="dialog">
-  <div class="modal-dialog" style="width:35%;">
-    <!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Filter</h4>
-				  </div>
-				  <form method="get" class="filter_box" style="margin-top:5px">
-					<div class="modal-body">
-						 <div class="row form-group ">
-							<div class=col-md-12>
-								 <div class=col-md-4>
-								  <label class="col-form-label"for=example-text-input>Request Type</label>
+				<div id="myModal122" class="modal fade form-modal" role="dialog">
+				  <div class="modal-dialog" style="width:35%;">
+					<!-- Modal content-->
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Filter</h4>
 								  </div>
-								  <div class=col-md-1>:</div>
-								 <div class=col-md-7>
-									<select name="req_typesearch" class="form-control"><option value="">Select Request Type</option><option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option><option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option><option value="2">Transport</option></select>
-								</div>
-							 </div>
-						</div>
-						<div class="row form-group ">
-							<div class=col-md-12>
-								<div class=col-md-4>
-									<label class="col-form-label"for=example-text-input>Total Budget</label>
-								</div>
-								<div class=col-md-1>:</div>
-									<div class=col-md-7>
-										<select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option>
-										<option value="100000-100000000000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? 'selected':''; ?>>100000-Above</option>
-										</select>
-									</div>
-								</div>
-							  </div>
-								<div class="row form-group">
-									<div class=col-md-12>
-									  <div class=col-md-4>
-									 <label class="col-form-label" for=example-text-input>Start Date</label>
-									 </div>
-									<div class=col-md-1>:</div>
-									 <div class=col-md-7>
-									 <input class=form-control name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" id="datepicker1">
-									 </div>
-									</div>	
-								</div>
-								<div class="row form-group">								
-									<div class=col-md-12>
-										<div class=col-md-4>
-										  <label class="col-form-label" for=example-text-input>End Date</label>
+								  <form method="get" class="filter_box" style="margin-top:5px">
+									<div class="modal-body">
+										 <div class="row form-group ">
+											<div class=col-md-12>
+												 <div class=col-md-4>
+												  <label class="col-form-label"for=example-text-input>Request Type</label>
+												  </div>
+												  <div class=col-md-1>:</div>
+												 <div class=col-md-7>
+													<select name="req_typesearch" class="form-control"><option value="">Select Request Type</option><option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option><option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option><option value="2">Transport</option></select>
+												</div>
+											 </div>
 										</div>
-										<div class=col-md-1>:</div>
-										<div class=col-md-7>
-										<input class=form-control name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>" id="datepicker2">
-										</div>
-									</div>
-								</div>
-                              <div class="row form-group">
-									 <div class=col-md-12>
-										 <div class=col-md-4>
-										 <label class="col-form-label"for=example-text-input>Pickup City</label>
-										 </div>
-										<div class=col-md-1>:</div>
-										<div class=col-md-7>
-											<select class=form-control  name=pickup_city id=pickup_city>
-											   <option value="">Select</option>
-											   <?php foreach($allCities1 as $city){?>
-											   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['pickup_city']) AND $_GET['pickup_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
-											   <?php }?>
-											</select>
-										</div>
-									 </div>
-                                 </div>   
-								<div class="row form-group">								 
-									 <div class=col-md-12>
-										 <div class=col-md-4>
-										 <label class="col-form-label" for=example-text-input>Destination City</label>
-										 </div>
-										<div class="col-md-1">:</div>
-										<div class="col-md-7">
-											<select class="form-control " name=destination_city id=destination_city>
-											   <option value="">Select</option>
-											   <?php foreach($allCities1 as $city){?>
-											   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['destination_city']) AND $_GET['destination_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
-											   <?php }?>
-											</select>
-											<?php //echo $this->Form->control('preference', ["id"=>"destination_city", "type"=>"select", 'options' =>$allCities2, "class"=>"form-control"]); ?>
-										</div>
-									</div>
-                              </div>
-                              <div class="row form-group">
-									 <div class=col-md-12>
-										 <div class=col-md-4>
-										 <label class="col-form-label"for=example-text-input>Reference ID</label>
-										 </div>
-										<div class=col-md-1>:</div>
-										 <div class=col-md-7>
-										 <input class=form-control name=refidsearch value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>">
-										 </div>
-									 </div>
-								</div>
-                               <div class="row form-group">
-                                 <div class=col-md-12>
-                                 <div class=col-md-4>
-								 <label class="col-form-label "for=example-text-input>Members</label>
-								 </div>
-								 <div class=col-md-1>:</div>
-								 <div class=col-md-7>
-								 <input class=form-control name=memberssearch value="<?php echo isset($_GET['memberssearch'])? $_GET['memberssearch']:''; ?>">
-								 </div>
-								</div>
-                              </div>                         
+										<div class="row form-group ">
+											<div class=col-md-12>
+												<div class=col-md-4>
+													<label class="col-form-label"for=example-text-input>Total Budget</label>
+												</div>
+												<div class=col-md-1>:</div>
+													<div class=col-md-7>
+														<select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option>
+														<option value="100000-100000000000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? 'selected':''; ?>>100000-Above</option>
+														</select>
+													</div>
+												</div>
+											  </div>
+												<div class="row form-group">
+													<div class=col-md-12>
+													  <div class=col-md-4>
+													 <label class="col-form-label" for=example-text-input>Start Date</label>
+													 </div>
+													<div class=col-md-1>:</div>
+													 <div class=col-md-7>
+													 <input class=form-control name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" id="datepicker1">
+													 </div>
+													</div>	
+												</div>
+												<div class="row form-group">								
+													<div class=col-md-12>
+														<div class=col-md-4>
+														  <label class="col-form-label" for=example-text-input>End Date</label>
+														</div>
+														<div class=col-md-1>:</div>
+														<div class=col-md-7>
+														<input class=form-control name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>" id="datepicker2">
+														</div>
+													</div>
+												</div>
+											  <div class="row form-group">
+													 <div class=col-md-12>
+														 <div class=col-md-4>
+														 <label class="col-form-label"for=example-text-input>Pickup City</label>
+														 </div>
+														<div class=col-md-1>:</div>
+														<div class=col-md-7>
+															<select class=form-control  name=pickup_city id=pickup_city>
+															   <option value="">Select</option>
+															   <?php foreach($allCities1 as $city){?>
+															   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['pickup_city']) AND $_GET['pickup_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
+															   <?php }?>
+															</select>
+														</div>
+													 </div>
+												 </div>   
+												<div class="row form-group">								 
+													 <div class=col-md-12>
+														 <div class=col-md-4>
+														 <label class="col-form-label" for=example-text-input>Destination City</label>
+														 </div>
+														<div class="col-md-1">:</div>
+														<div class="col-md-7">
+															<select class="form-control " name=destination_city id=destination_city>
+															   <option value="">Select</option>
+															   <?php foreach($allCities1 as $city){?>
+															   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['destination_city']) AND $_GET['destination_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
+															   <?php }?>
+															</select>
+															<?php //echo $this->Form->control('preference', ["id"=>"destination_city", "type"=>"select", 'options' =>$allCities2, "class"=>"form-control"]); ?>
+														</div>
+													</div>
+											  </div>
+											  <div class="row form-group">
+													 <div class=col-md-12>
+														 <div class=col-md-4>
+														 <label class="col-form-label"for=example-text-input>Reference ID</label>
+														 </div>
+														<div class=col-md-1>:</div>
+														 <div class=col-md-7>
+														 <input class=form-control name=refidsearch value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>">
+														 </div>
+													 </div>
+												</div>
+											   <div class="row form-group">
+												 <div class=col-md-12>
+												 <div class=col-md-4>
+												 <label class="col-form-label "for=example-text-input>Members</label>
+												 </div>
+												 <div class=col-md-1>:</div>
+												 <div class=col-md-7>
+												 <input class=form-control name=memberssearch value="<?php echo isset($_GET['memberssearch'])? $_GET['memberssearch']:''; ?>">
+												 </div>
+												</div>
+											  </div>                         
 
-						 <div class="row form-group">
-							  <div class="col-md-12">
-								<div class=col-md-4>
-									<label for="example-text-input" class="  col-form-label">Agent Name</label>
+										 <div class="row form-group">
+											  <div class="col-md-12">
+												<div class=col-md-4>
+													<label for="example-text-input" class="  col-form-label">Agent Name</label>
+												</div>
+												<div class=col-md-1>:</div>
+												 <div class=col-md-7>
+												  <input type="text" name="agentnamesearch" value="<?php echo isset($_GET['agentnamesearch'])? $_GET['agentnamesearch']:''; ?>"  class="form-control">
+												</div>
+											  </div>
+										  </div>
+										 <div class="row form-group">
+											<div class="col-md-12">
+												<div class=col-md-4>
+													<label for="example-text-input" class="  col-form-label">Following</label>
+												</div>
+												<div class=col-md-1>:</div>
+												 <div class=col-md-7>
+													<input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['followsearch'])? "checked":''; ?>  >
+												</div>                            
+											</div>
+										  </div>
+										</div>
+										<div class="modal-footer">
+											<div class="row form-group">			  
+												<div class="col-md-12 text-center">
+												   <input type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">
+												   <a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'respondtorequest')) ?>">Reset</a>
+												</div>
+											</div>
+											 <script>
+													   $('#datepicker1').datepicker({
+																dateFormat: 'dd/mm/yy',
+																changeMonth: true,
+																changeYear: true,
+																minDate: '<?php echo date("d/m/Y"); ?>',
+																onSelect: function(selected) {
+																	$( "#datepicker2" ).datepicker( "option", "minDate",selected);
+																	$('#datepicker2').val("");
+																}
+															});
+															$('#datepicker2').datepicker({
+																dateFormat: 'dd/mm/yy',
+																changeMonth: true,
+																changeYear: true,
+																minDate: '<?php echo date("d/m/Y"); ?>',
+																onSelect: function(selected) {
+																	var checkInDate = $('#datepicker1').val();
+																	if(checkInDate == "") {
+																		alert("Please select check-in date first.");
+																		$('#datepicker2').val("");
+																	}
+																}
+															});
+											</script>
+										</div>
+									</form>
 								</div>
-								<div class=col-md-1>:</div>
-								 <div class=col-md-7>
-								  <input type="text" name="agentnamesearch" value="<?php echo isset($_GET['agentnamesearch'])? $_GET['agentnamesearch']:''; ?>"  class="form-control">
-								</div>
-							  </div>
-						  </div>
-						 <div class="row form-group">
-							<div class="col-md-12">
-								<div class=col-md-4>
-									<label for="example-text-input" class="  col-form-label">Following</label>
-								</div>
-								<div class=col-md-1>:</div>
-								 <div class=col-md-7>
-									<input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['followsearch'])? "checked":''; ?>  >
-								</div>                            
-							</div>
-						  </div>
-						</div>
-						<div class="modal-footer">
-							<div class="row form-group">			  
-								<div class="col-md-12 text-center">
-								   <input type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">
-								   <a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'respondtorequest')) ?>">Reset</a>
-								</div>
-							</div>
-							 <script>
-									   $('#datepicker1').datepicker({
-												dateFormat: 'dd/mm/yy',
-												changeMonth: true,
-												changeYear: true,
-												minDate: '<?php echo date("d/m/Y"); ?>',
-												onSelect: function(selected) {
-													$( "#datepicker2" ).datepicker( "option", "minDate",selected);
-													$('#datepicker2').val("");
-												}
-											});
-											$('#datepicker2').datepicker({
-												dateFormat: 'dd/mm/yy',
-												changeMonth: true,
-												changeYear: true,
-												minDate: '<?php echo date("d/m/Y"); ?>',
-												onSelect: function(selected) {
-													var checkInDate = $('#datepicker1').val();
-													if(checkInDate == "") {
-														alert("Please select check-in date first.");
-														$('#datepicker2').val("");
-													}
-												}
-											});
-							</script>
-						</div>
-					</form>
-				</div>
-			</div>	
-		</div>	
-	</div>
-
-
+							</div>	
+						</div>	
+					</div>
 <?php if(isset($_GET["success"])) {
  echo '<div class="success col-md-12">Your Interest has been submitted!</div>';
 }
@@ -310,6 +308,7 @@ $conn = ConnectionManager::get('default');
 			$created=$request['created'];
 			$org_created=date('d-M-Y', strtotime($created));
 			?>
+
 			<div class="col-md-4"> 
 				<fieldset>
 				<legend><?php echo @$image; ?></legend>
@@ -322,7 +321,7 @@ $conn = ConnectionManager::get('default');
 					</li>
 					<li class="col-md-12">
 						<p>
-							<b>Total Budget : </b> <?php echo ($request['total_budget'])? "Rs. ". $request['total_budget'] :"-- --" ?>
+							<b>Total Budget : </b> <?php echo ($request['total_budget'])? "Rs. ". number_format($request['total_budget']) :"-- --" ?>
 						</p>
 				 </li>
 				 
@@ -472,20 +471,22 @@ $conn = ConnectionManager::get('default');
 				</div>
 			</div>
 		</fieldset>
-	</div>
-			<?php  } } ?>
-			<div class="pages"></div>
-		<?php }else {?>
-			<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center box-event">
-                 <?php if(isset($_GET['req_typesearch'])){ echo "No matching data.";}else{ echo "You have not received any requests.";}?>
-                </div>
+		</div>
+							<?php  } } ?>
+							<div class="pages"></div>
+						<?php }else {?>
+							<div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center box-event">
+								 <?php if(isset($_GET['req_typesearch'])){ echo "No matching data.";}else{ echo "You have not received any requests.";}?>
+								</div>
+							</div>
+						<?php } ?>
+					  </div>
+					</div>
+				</div>
 			</div>
-		<?php } ?>
-      </div>
-    </div>
-    </div>
-    </div>
+		</div>
+
 
 <?php echo $this->element('footer');?>
 <?php echo $this->Html->script(['ap.pagination.js']);?>
