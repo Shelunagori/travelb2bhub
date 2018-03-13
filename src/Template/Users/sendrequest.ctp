@@ -542,7 +542,7 @@ $(document).ready(function($){
 												<div class="col-md-12">
 													<div class="input-field">
 														<div class="margin text-center">
-														<center><input type="submit" class="btn btn-primary btn-submit" value="Submit"></center>
+														<center><input type="submit" class="btn btn-primary btn-submit" value="Submit" style="background-color:#1295A2"></center>
 														</div>
 													</div>
 												</div> 
@@ -776,7 +776,7 @@ $(document).ready(function($){
 						</div> <span class="help-block"></span><hr></hr>
 						<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt padding text-center">
-									<button class="btn btn-primary btn-sm add_field_button2 but ">Add More Destination</button>
+									<button class="btn btn-primary btn-sm add_field_button2 but " style="background-color:#1295A2">Add More Destination</button>
                              </div>
                         </div>
 			</fieldset>
@@ -879,7 +879,7 @@ $(document).ready(function($){
 								<span class="help-block"></span><hr></hr>
 								<div class="row">
 										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-												<button class="btn btn-primary btn-sm package-stop-add ">Add Stop</button>
+												<button class="btn btn-primary btn-sm package-stop-add " style="background-color:#1295A2">Add Stop</button>
 											<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 											<div class="col-xxs-12 text-center">
 													<div class="input_fields_wrap">
@@ -958,7 +958,7 @@ $(document).ready(function($){
 								<div class="col-md-12">
 									<div class="input-field">
 										<div class="margin text-center">
-										<center><input type="submit" class="btn btn-primary btn-submit" value="Submit"></center>
+										<center><input type="submit" class="btn btn-primary btn-submit" value="Submit" style="background-color:#1295A2"></center>
 										</div>
 									</div>
 								</div> 
@@ -1173,7 +1173,7 @@ $(document).ready(function($){
 											<span class="help-block"></span><hr></hr>
 											<div class="row">
 											<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-															<button class="btn btn-primary btn-sm transport-stop-add ">Add Stop</button>	
+															<button class="btn btn-primary btn-sm transport-stop-add " style="background-color:#1295A2">Add Stop</button>	
 											</div>
 													<!-- <div class="col-xxs-12 text-center">
 															<div class="input_fields_wrap">
@@ -1251,7 +1251,7 @@ $(document).ready(function($){
 													<div class="col-md-12">
 														<div class="input-field">
 															<div class="margin text-center">
-															<center><input type="submit" class="btn btn-primary btn-submit btn-submit" value="Submit"></center>
+															<center><input type="submit" class="btn btn-primary btn-submit btn-submit" value="Submit" style="background-color:#1295A2"></center>
 															</div>
 														</div>
 													</div> 
