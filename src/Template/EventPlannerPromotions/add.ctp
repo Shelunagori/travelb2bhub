@@ -237,7 +237,7 @@ if ($err) {
 										<div class="input-field">
 											<div class="margin text-center">
 											<center>
-											<?php echo $this->Form->button('Submit',['class'=>'btn btn-primary btn-submit','value'=>'submit']); ?>
+											<?php echo $this->Form->button('Submit',['class'=>'btn btn-primary btn-submit','value'=>'submit','style'=>'background-color:#1295A2']); ?>
 											</center>
 											</div>
 										</div>
