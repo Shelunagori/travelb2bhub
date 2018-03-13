@@ -90,9 +90,9 @@ if ($err) {
 					<i class="fa fa-plus"></i> <b> Hotel Promotion</b>
 				</div> 
 				<div class="box-body"> 
-				<form action="<?php echo $coreVariable['SiteUrl'];?>api/hotel_promotions/add.json" method="post" enctype="multipart/form-data">
+					<form action="<?php echo $coreVariable['SiteUrl'];?>api/hotel_promotions/add.json" method="post" enctype="multipart/form-data">
 					<fieldset>
-						<legend><?= __('Add Hotel Promotion') ?></legend>
+						<legend style="color:#369FA1;"><b> &nbsp; <?= __('Hotel Details ') ?> &nbsp;  </b></legend>
 							<div class="row">
 								<div class="col-md-12">
 									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -101,7 +101,7 @@ if ($err) {
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
-											 <?php echo $this->Form->input('hotel_name',['class'=>'form-control','label'=>false]);?>
+											 <?php echo $this->Form->input('hotel_name',['class'=>'form-control','label'=>false,'placeholder'=>"Enter Your Hotel Name",'required']);?>
 										</div>
 									</div>
 									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -130,7 +130,7 @@ if ($err) {
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
-										 <?php echo $this->Form->input('hotel_location',['class'=>'form-control','label'=>false]);?>
+										 <?php echo $this->Form->input('hotel_location',['class'=>'form-control','label'=>false,'placeholder'=>"Enter Your Hotel Location (City, State)"]);?>
 											
 										</div>
 									</div>
@@ -140,7 +140,7 @@ if ($err) {
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
-										 <?php echo $this->Form->input('website',['class'=>'form-control','label'=>false]);?>
+										 <?php echo $this->Form->input('website',['class'=>'form-control','label'=>false,'placeholder'=>"Enter Your Website"]);?>
 											
 										</div>
 									</div>
@@ -150,12 +150,49 @@ if ($err) {
 							<div class="row">
 								<div class="col-md-12">
 									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+										<div class="input-field">
+												<p for="from">
+													Hotel Rating
+												</p>
+										</div>
+										<div style=" width: 200px;" class="stars">
+											<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
+											   <input class="star star-5" id="star-5-21" type="radio" value="5" name="hotel_rating"/>
+											   <label class="star star-5" for="star-5-21"></label>
+											   <input class="star star-4" id="star-4-21" type="radio" value="4" name="hotel_rating"/>
+											   <label class="star star-4" for="star-4-21"></label>
+											   <input class="star star-3" id="star-3-21" type="radio" value="3" name="hotel_rating"/>
+											   <label class="star star-3" for="star-3-21"></label>
+											   <input class="star star-2" id="star-2-21" type="radio" value="2" name="hotel_rating"/>
+											   <label class="star star-2" for="star-2-21"></label>
+											   <input class="star star-1" id="star-1-21" type="radio" value="1" name="hotel_rating"/>
+											   <label class="star star-1" for="star-1-21"></label>
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+											<p for="from">
+												Photograph of the Hotel	
+												<span class="required">*</span>
+											</p>
+											<div class="input-field">
+												 <?php echo $this->Form->input('hotel_pic',['class'=>'form-control','label'=>false,'type'=>'file','id'=>'hotelImg']);?>
+												  <!--<span style="color: red;font-size: 13px;"><b>File Type:</b> jpeg/jpg/png</span>&nbsp;&nbsp;&nbsp;<span style="color: red;font-size: 13px;"><b>Max Size:</b> 2 MB</span>-->
+											</div>
+										</div>
+									</div>
+								</div>
+						</fieldset><br>
+						<fieldset>
+							<legend style="color:#369FA1;"><b> &nbsp; <?= __(' Package Details') ?> &nbsp;  </b></legend>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 										<p for="from">
 											Tariff of Cheapest Room
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
-										 <?php echo $this->Form->input('cheap_tariff',['class'=>'form-control','label'=>false]);?>
+										 <?php echo $this->Form->input('cheap_tariff',['class'=>'form-control','label'=>false,'type'=>'number','placeholder'=>"Minimum Tariff"]);?>
 											
 										</div>
 									</div>
@@ -165,7 +202,7 @@ if ($err) {
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
-											 <?php echo $this->Form->input('expensive_tariff',['class'=>'form-control','label'=>false]);?>
+											 <?php echo $this->Form->input('expensive_tariff',['class'=>'form-control','label'=>false,'type'=>'number','placeholder'=>"Maximum Tariff"]);?>
 										</div>
 									</div>
 								</div>
@@ -210,7 +247,6 @@ if ($err) {
 								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 											<p for="from">
 												Charges
-												<span class="required "></span>
 											</p>
 											<div class="input-field">
 										<?php echo $this->Form->input('charges', ['class'=>'form-control charges','label'=>false,"placeholder"=>"Total Charges",'readonly'=>'readonly','type'=>'text']); ?>
@@ -219,7 +255,6 @@ if ($err) {
 									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 											<p for="from">
 												Visible Date
-												<span class="required">*</span>
 											</p>
 											<div class="input-field">
 										<?php echo $this->Form->input('visible_date', ['data-date-format'=>'dd/mm/yyyy','class'=>'form-control visible_date','label'=>false,"placeholder"=>"Visibility Date",'readonly'=>'readonly','type'=>'text']); ?>
@@ -227,59 +262,24 @@ if ($err) {
 									</div>
 								</div>
 							</div> 	
-							<div class="row">
-								<div class="col-md-12">
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-										<p for="from">
-											Photograph of the Hotel	
-											<span class="required">*</span>
-										</p>
+								<div class="row">
+									<div class="col-md-12">
 										<div class="input-field">
-											 <?php echo $this->Form->input('hotel_pic',['class'=>'form-control','label'=>false,'type'=>'file','id'=>'hotelImg']);?>
-											  <span style="color: red;font-size: 13px;"><b>File Type:</b> jpeg/jpg/png</span>&nbsp;&nbsp;&nbsp;<span style="color: red;font-size: 13px;"><b>Max Size:</b> 2 MB</span>
+											<div class="margin text-center">
+											<center>
+											<?php echo $this->Form->button('Submit',['class'=>'btn btn-success btn-submit','value'=>'submit','style'=>'background-color:#1295A2']); ?>
+											</center>
+											</div>
 										</div>
-									</div>
-									
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-										<div class="input-field">
-											<p for="from">
-												Hotel Rating
-											</p>
-										</div>
-										<div style=" width: 200px;" class="stars">
-										<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
-										   <input class="star star-5" id="star-5-21" type="radio" value="5" name="hotel_rating"/>
-										   <label class="star star-5" for="star-5-21"></label>
-										   <input class="star star-4" id="star-4-21" type="radio" value="4" name="hotel_rating"/>
-										   <label class="star star-4" for="star-4-21"></label>
-										   <input class="star star-3" id="star-3-21" type="radio" value="3" name="hotel_rating"/>
-										   <label class="star star-3" for="star-3-21"></label>
-										   <input class="star star-2" id="star-2-21" type="radio" value="2" name="hotel_rating"/>
-										   <label class="star star-2" for="star-2-21"></label>
-										   <input class="star star-1" id="star-1-21" type="radio" value="1" name="hotel_rating"/>
-										   <label class="star star-1" for="star-1-21"></label>
-										   </div>
-									</div>
-								</div>
-							</div> 
-							<div class="row">
-								<div class="col-md-12">
-									<div class="input-field">
-										<div class="margin text-center">
-										<center>
-										<?php echo $this->Form->button('Submit',['class'=>'btn btn-primary btn-submit','value'=>'submit']); ?>
-										</center>
-										</div>
-									</div>
-								</div> 
-							</div>							
-					</fieldset>
+									</div> 
+								</div>							
+						</fieldset>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	<input type="text" name="week_value" class="week_value">
+	<input type="hidden" name="week_value" class="week_value">
 </section>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
@@ -314,7 +314,7 @@ if ($err) {
 				$.each($("#city option:selected"), function(){            
 					countries.push($(this).val());				 
 				})
-				alert(countries.length);
+				//alert(countries.length);
 				if(countries.length>0)
 				{
 					prices = '"'+countries+'"';
@@ -371,7 +371,7 @@ if ($err) {
 				//alert(getcharge);
 				totalcharge =  (parseInt(getcharge)) + (parseInt(price) * parseInt(duration));
 				$('.charges').val(totalcharge);
-				alert(totalcharge);
+				//alert(totalcharge);
 				/* hiddencharges = $('#hiddencharges').val()
 				if(hiddencharges==""){hiddencharges = 0; }
 				totalcharge1 =  parseInt(hiddencharges)+ parseInt(price);
@@ -391,7 +391,7 @@ if ($err) {
 				if(getcharge==""){getcharge = 0; }
 				totalcharge =  (parseInt(getcharge)) - (parseInt(price) * parseInt(duration))	;
 				$('.charges').val(totalcharge);
-				alert(totalcharge);
+				//alert(totalcharge);
 				/*  hiddencharges = $('#hiddencharges').val()
 				if(hiddencharges==""){hiddencharges = 0; }
 				totalcharge1 =  parseInt(hiddencharges)- parseInt(price);
@@ -426,7 +426,7 @@ if ($err) {
 				}  
 
 			//****Image Validation script***
-			function checkCertificate()
+		/* 	function checkCertificate()
 			{
 				var file = document.getElementById("hotelImg");
 				var file_name = file.value;
@@ -445,9 +445,7 @@ if ($err) {
 				} else {
 					document.getElementById("sbmtpromotion").disabled = false;
 				}
-			}
-			
-			
+			} */			
 		});
 
 </script>
