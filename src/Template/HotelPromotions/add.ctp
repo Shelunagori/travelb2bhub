@@ -101,7 +101,7 @@ if ($err) {
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
-											<?php echo $this->Form->input('hotel_name',['class'=>'form-control','label'=>false,'placeholder'=>"Enter Your Hotel Name",'required']);?>
+											 <?php echo $this->Form->input('hotel_name',['class'=>'form-control','label'=>false,'placeholder'=>"Enter Your Hotel Name",'required']);?>
 										</div>
 									</div>
 									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -288,22 +288,21 @@ if ($err) {
 		$(document).on('change','.duration',function()
 		{
 			var priceVal=$('.duration option:selected').attr('priceVal');
-			var Result = priceVal.split(" ");
-			var weeks=Result[0];
-			$('.week_value').val(weeks);
-			var todaydate = new Date(); // Parse date
-			for(var x=0; x < weeks; x++)
-			{
-				todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
-			}
-			var dd = todaydate .getDate();
-			var mm = todaydate .getMonth()+1; //January is 0!
-			var yyyy = todaydate .getFullYear();
-			if(dd<10){  dd='0'+dd } 
-			if(mm<10){  mm='0'+mm } 
-			var date = dd+'-'+mm+'-'+yyyy;	
-			$('.visible_date').val(date);
-			
+				var Result = priceVal.split(" ");
+				var weeks=Result[0];
+				$('.week_value').val(weeks);
+				var todaydate = new Date(); // Parse date
+				for(var x=0; x < weeks; x++)
+				{
+					todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
+				}
+				var dd = todaydate .getDate();
+				var mm = todaydate .getMonth()+1; //January is 0!
+				var yyyy = todaydate .getFullYear();
+				if(dd<10){  dd='0'+dd } 
+				if(mm<10){  mm='0'+mm } 
+				var date = dd+'-'+mm+'-'+yyyy;	
+				$('.visible_date').val(date);
 		});
 			//Calculation Of Charges //	
 			$(document).on('change','#city,.duration',function()		
@@ -342,7 +341,7 @@ if ($err) {
 						//$('#hiddencharges').val('');
 						$('.charges').val('');
 						//$('#charges1').html('0');
-						removecharges(countries)
+						//removecharges(countries)
 					}
 					else
 					{
@@ -352,7 +351,7 @@ if ($err) {
 					}
 				}
 			});
-			 function checkcitystatus(price)
+			/*  function checkcitystatus(price)
 				{
 				var url ="<?php echo "http://konciergesolutions.com/travelb2bhub/api/hotel_promotions/checkCityStatus.json?user_id=3&city_id=4"; ?>",
 					price1 = String(price);	
@@ -375,7 +374,7 @@ if ($err) {
 							
 						}
 					});
-				}  
+				}   */
 
 			
 			
