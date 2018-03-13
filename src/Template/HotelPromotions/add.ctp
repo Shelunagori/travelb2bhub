@@ -308,8 +308,8 @@ if ($err) {
 			//Calculation Of Charges //	
 			$(document).on('change','#city,.duration',function()		
 			{
-				var price = $('#city selected').attr('price');
-				//var price=$("#city option:selected").val();
+				//var price = $('#city selected').attr('price');
+				var price=$("#city option:selected").val();
 				var countries=[];
 				$.each($("#city option:selected"), function(){            
 					countries.push($(this).val());				 
@@ -352,6 +352,32 @@ if ($err) {
 					}
 				}
 			});
+			 function checkcitystatus(price)
+				{
+				var url ="<?php echo "http://konciergesolutions.com/travelb2bhub/api/hotel_promotions/checkCityStatus.json?user_id=3&city_id=4"; ?>",
+					price1 = String(price);	
+					var fields = price1.split('-');
+					var city_id = fields[0];
+					var user_id = $('#user_id').val();
+					var duration = $('#duration').val();
+					$.ajax({
+						url:url,
+						type: 'POST',
+						data: {city_id:city_id,user_id:user_id,duration:duration}
+					}).done(function(result){
+						if (result==1) {
+						var a;					
+						}else{
+							alert(result);
+							$('#city option[value="'+price+'"]').remove();
+							removecharges(price);
+							//$('option:selected', "#city").remove();
+							
+						}
+					});
+				}  
+
+			
 			
 			 function charges(price)
 			 {
@@ -400,31 +426,7 @@ if ($err) {
 				$('#charges2').html(totalcharge1) */
 			}	 
 			
-			 function checkcitystatus(price)
-				{
-					var url ="<?php echo $coreVariable['SiteUrl']."api/hotel_promotions/checkCityStatus.json?user_id=3&city_id=4"; ?>",
-					price1 = String(price);	
-					var fields = price1.split('-');
-					var city_id = fields[0];
-					var user_id = $('#user_id').val();
-					var duration = $('#duration').val();
-					$.ajax({
-						url:url,
-						type: 'POST',
-						data: {city_id:city_id,user_id:user_id,duration:duration}
-					}).done(function(result){
-						if (result==1) {
-						var a;					
-						}else{
-							alert(result);
-							$('#city option[value="'+price+'"]').remove();
-							removecharges(price);
-							//$('option:selected', "#city").remove();
-							
-						}
-					});
-				}  
-
+			
 			//****Image Validation script***
 		/* 	function checkCertificate()
 			{
