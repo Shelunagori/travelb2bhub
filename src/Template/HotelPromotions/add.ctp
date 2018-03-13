@@ -184,7 +184,7 @@ if ($err) {
 														{
 															$options[] = ['value'=>$duration->id,'text'=>$duration->week,'priceVal'=>$duration->week];
 														};
-												 echo $this->Form->input('price_master_id',['class'=>'form-control duration select2 ','options' => $options,'label'=>false]);?>
+												 echo $this->Form->input('price_master_id',['class'=>'form-control duration select2 ','options' => $options,'label'=>false,"empty"=>"Select Promotion Weeks"]);?>
 											</div>
 										</div>
 										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -323,6 +323,7 @@ if ($err) {
 					prices = String(countries);
 					if (prices.indexOf(",") > -1)
 					{   
+						
 						//$('#hiddencharges').val('');
 							$('.charges').val('');
 						//$('#charges1').html('0');
@@ -335,6 +336,7 @@ if ($err) {
 					}
 					else
 					{
+						
 						if (countries==null) 
 						{
 							//$('#hiddencharges').val('');
@@ -350,7 +352,8 @@ if ($err) {
 					}
 			   }
 			});
-			function charges(price){
+			 function charges(price)
+			 {
 				price = String(price);
 				var totalcharge=0;
 				var price = price.substr(price.indexOf("-") + 1);
@@ -373,14 +376,15 @@ if ($err) {
 				totalcharge1 =  parseInt(hiddencharges)+ parseInt(price);
 				$('#hiddencharges').val(totalcharge1)
 				$('#charges1').html(totalcharge1)
-				$('#charges2').html(totalcharge1) */
-			}
-			function removecharges(price)
+				$('#charges2').html(totalcharge1)*/
+				}
+			
+			/* function removecharges(price)
 			{
 				price = String(price);
 				var price = price.substr(price.indexOf("-") + 1)
 				if(price==""){ price =0;}
-				duration = 2;//$('#duration').val();
+				duration = $('.week_value').val();
 				if(duration==""){duration = 1 }
 				getcharge = $('.charges').val();
 				if(getcharge==""){getcharge = 0; }
@@ -391,8 +395,7 @@ if ($err) {
 				totalcharge1 =  parseInt(hiddencharges)- parseInt(price);
 				$('#hiddencharges').val(totalcharge1)
 				$('#charges1').html(totalcharge1)
-				$('#charges2').html(totalcharge1) */
-			}	
+				$('#charges2').html(totalcharge1) }	 */
 			
 			/* function checkcitystatus(price)
 				{
@@ -418,9 +421,9 @@ if ($err) {
 							
 						}
 					});
-				} */
+				}  
 
-			//****Image Validation script****//
+			//****Image Validation script***
 			function checkCertificate()
 			{
 				var file = document.getElementById("hotelImg");
@@ -441,7 +444,7 @@ if ($err) {
 					document.getElementById("sbmtpromotion").disabled = false;
 				}
 			}
-			
+			*/
 			
 		});
 
