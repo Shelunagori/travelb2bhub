@@ -305,24 +305,24 @@ if ($err) {
 			$('.visible_date').val(date);
 			
 		});
-					//Calculation Of Charges //	
-					
-			$("#city").on('change', function()
+			//Calculation Of Charges //	
+			$(document).on('change','#city,.duration',function()		
 			{
-				//var price = $('#city selected').attr('price');
+				var price = $('#city selected').attr('price');
 				//var price=$("#city option:selected").val();
 				var countries=[];
 				$.each($("#city option:selected"), function(){            
 					countries.push($(this).val());				 
-				});
+				})
+				alert(countries.length);
 				if(countries.length>0)
 				{
 					prices = '"'+countries+'"';
 					//alert(prices);
 					prices = String(countries);
+					charges(countries);
 					if (prices.indexOf(",") > -1)
 					{   
-						
 						//$('#hiddencharges').val('');
 							$('.charges').val('');
 						//$('#charges1').html('0');
@@ -331,26 +331,28 @@ if ($err) {
 						{
 							//checkcitystatus(arr[i]);
 							charges(arr[i]);
+							
 						}
+					}
+				}
+				else
+				{
+					if (countries==null) 
+					{
+						//$('#hiddencharges').val('');
+						$('.charges').val('');
+						//$('#charges1').html('0');
+						removecharges(countries)
 					}
 					else
 					{
-						
-						if (countries==null) 
-						{
-							//$('#hiddencharges').val('');
-							$('.charges').val('');
-							//$('#charges1').html('0');
-						}
-						else
-						{
-							//checkcitystatus(countries);
-							charges(countries);
-							// $('option:selected', this).remove();
-						}
+						//checkcitystatus(countries);
+						charges(countries);
+						// $('option:selected', this).remove();
 					}
-			   }
+				}
 			});
+			
 			 function charges(price)
 			 {
 				price = String(price);
@@ -369,7 +371,7 @@ if ($err) {
 				//alert(getcharge);
 				totalcharge =  (parseInt(getcharge)) + (parseInt(price) * parseInt(duration));
 				$('.charges').val(totalcharge);
-				//alert(totalcharge);
+				alert(totalcharge);
 				/* hiddencharges = $('#hiddencharges').val()
 				if(hiddencharges==""){hiddencharges = 0; }
 				totalcharge1 =  parseInt(hiddencharges)+ parseInt(price);
@@ -378,7 +380,7 @@ if ($err) {
 				$('#charges2').html(totalcharge1)*/
 				}
 			
-			/* function removecharges(price)
+			 function removecharges(price)
 			{
 				price = String(price);
 				var price = price.substr(price.indexOf("-") + 1)
@@ -389,17 +391,18 @@ if ($err) {
 				if(getcharge==""){getcharge = 0; }
 				totalcharge =  (parseInt(getcharge)) - (parseInt(price) * parseInt(duration))	;
 				$('.charges').val(totalcharge);
-				/* hiddencharges = $('#hiddencharges').val()
+				alert(totalcharge);
+				/*  hiddencharges = $('#hiddencharges').val()
 				if(hiddencharges==""){hiddencharges = 0; }
 				totalcharge1 =  parseInt(hiddencharges)- parseInt(price);
 				$('#hiddencharges').val(totalcharge1)
 				$('#charges1').html(totalcharge1)
-				$('#charges2').html(totalcharge1) }	 */
+				$('#charges2').html(totalcharge1) */
+			}	 
 			
-			/* function checkcitystatus(price)
+			 function checkcitystatus(price)
 				{
-					var url = "<?php echo $this->Url->build(array(
-						CURLOPT_URL => $coreVariable['SiteUrl']."api/hotel_promotions/checkCityStatus.json?user_id=3&city_id=4")) ?>";
+					var url ="<?php echo $coreVariable['SiteUrl']."api/hotel_promotions/checkCityStatus.json?user_id=3&city_id=4"; ?>",
 					price1 = String(price);	
 					var fields = price1.split('-');
 					var city_id = fields[0];
@@ -443,7 +446,7 @@ if ($err) {
 					document.getElementById("sbmtpromotion").disabled = false;
 				}
 			}
-			*/
+			
 			
 		});
 

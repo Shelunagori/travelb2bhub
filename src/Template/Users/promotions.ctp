@@ -10,7 +10,7 @@
 				});
 			   if(countries.length>0){
 			   prices = '"'+countries+'"';
-			   alert(prices);
+			   //alert(prices);
 			   prices = String(countries);
 			   if (prices.indexOf(",") > -1)
 			   {   
