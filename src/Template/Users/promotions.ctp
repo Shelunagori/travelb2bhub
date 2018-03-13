@@ -311,14 +311,13 @@ $conn = ConnectionManager::get('default');
                   <label class="col-md-4 control-label" for="duration">Duration (in Months, 1 Month = 30 days)</label>  
                   <div class="col-md-5">
                   <input id="duration" value="1" min="1" name="duration" placeholder="Duration (in Months, 1 Month = 30 days)" class="form-control input-md" required="" type="number">
-
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="col-md-4 control-label" for="charges">Charges</label>  
                   <div class="col-md-5">
                   <input id="charges" name="charges" placeholder="Charges" class="form-control input-md" required="" type="text" readonly>
-                  <input id="hiddencharges" name="hiddencharges" placeholder="Charges" class="form-control input-md" required="" type="hidden">
+                  <input id="hiddencharges" name="hiddencharges" placeholder="Charges" class="form-control input-md" required="" type="text">
                   </div>
                 </div>
                 <div class="form-group">
