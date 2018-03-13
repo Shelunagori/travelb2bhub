@@ -199,7 +199,7 @@ if ($err) {
 												{
 													$options[] = ['value'=>$cities->value.'-'.$cities->price,'text'=>$cities->label.' ('.$cities->state_name.') ('.$cities->usercount.') - Rs.'.$cities->price,'price'=>$cities->price ];
 												}
-										 echo $this->Form->input('city_id',['class'=>'form-control select2 ',"multiple"=>true ,'label'=>false,'options' => $options,"data-placeholder"=>"Select City ",'id'=>'city']);?>
+										 echo $this->Form->input('city_id',['class'=>'form-control select2 city ',"multiple"=>true ,'label'=>false,'options' => $options,"data-placeholder"=>"Select City",'id'=>'city']);?>
 											
 										</div>
 									</div>
