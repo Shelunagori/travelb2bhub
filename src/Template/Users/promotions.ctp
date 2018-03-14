@@ -45,26 +45,22 @@
              });
         
 
-         $(".imgInp").change(function(){
-    readURL(this);
-});
+				$(".imgInp").change(function(){
+					readURL(this);});
             });
-            function readURL(input) {
+            function readURL(input)
+			{
 
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-        
-       
-        
-            $('#hotelimage').attr('src', e.target.result);
-            
-        }
-
-        reader.readAsDataURL(input.files[0]);
-    }
-}
+				if (input.files && input.files[0])
+					{
+						var reader = new FileReader();
+						reader.onload = function (e) 
+						{
+							$('#hotelimage').attr('src', e.target.result);
+						}
+						reader.readAsDataURL(input.files[0]);
+					}
+			}
  </script>
  <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 
@@ -362,11 +358,11 @@ $conn = ConnectionManager::get('default');
 		
          
 			</div>
-		</div-->
+		</div
 			  <div class="modal fade form-modal" id="previewmodal" role="dialog">
 				<div class="modal-dialog">
 				
-				  <!-- Modal content-->
+				  <!-- Modal content
 				  <div class="modal-content">
 					<div class="modal-body">
 					 <div class="hotelimage" ><img width="100%" class="" src="../img/travel-advertisement.jpg"  id="hotelimage"></div>
@@ -381,7 +377,7 @@ $conn = ConnectionManager::get('default');
 					<input type="submit" name="submitpromotion" id="sbmtpromotion" class="btn btn-primary btn-submit" value="Submit "/>
 					  <button type="button" class="btn btn-default closepreview" data-dismiss="modal">Close</button>
 					</div>
-				  </div>
+				  </div>-->
 				</div>
 			  </div>	
 			</div>
@@ -501,12 +497,13 @@ $( "#duration" ).keyup(function() {
 
 $("#city").select2({
 width: '100%',placeholder: "Select cities for promotions"
-		 
-		 });
+});
 </script>
 
 <script type="text/javascript">
-function checkCertificate() {
+function checkCertificate() 
+{
+	alert();
     var file = document.getElementById("hotelImg");
     var file_name = file.value;
     var extension = file_name.split('.').pop().toLowerCase();

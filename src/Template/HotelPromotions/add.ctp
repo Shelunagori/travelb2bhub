@@ -175,8 +175,8 @@ if ($err) {
 												<span class="required">*</span>
 											</p>
 											<div class="input-field">
-												 <?php echo $this->Form->input('hotel_pic',['class'=>'form-control','label'=>false,'type'=>'file','id'=>'hotelImg']);?>
-												  <!--<span style="color: red;font-size: 13px;"><b>File Type:</b> jpeg/jpg/png</span>&nbsp;&nbsp;&nbsp;<span style="color: red;font-size: 13px;"><b>Max Size:</b> 2 MB</span>-->
+												 <?php echo $this->Form->input('hotel_pic',['class'=>'form-control imgInp','label'=>false,'type'=>'file','id'=>'hotelImg', 'onchange' => 'checkCertificate()']);?>
+												  <span style="color: red;font-size: 13px;"><b>File Type:</b> jpeg/jpg/png</span>&nbsp;&nbsp;&nbsp;<span style="color: red;font-size: 13px;"><b>Max Size:</b> 2 MB</span>
 											</div>
 										</div>
 									</div>
@@ -304,11 +304,11 @@ if ($err) {
 				var date = dd+'-'+mm+'-'+yyyy;	
 				$('.visible_date').val(date);
 		});
-			//Calculation Of Charges //	
-			$(document).on('change','#city,.duration',function()		
+	//Calculation Of Charges //	
+	$(document).on('change','#city,.duration',function()		
 			{
 				//var price = $('#city selected').attr('price');
-				var price=$("#city option:selected").val();
+				//var price=$("#city option:selected").val();
 				var countries=[];
 				$.each($("#city option:selected"), function(){            
 					countries.push($(this).val());				 
@@ -336,12 +336,13 @@ if ($err) {
 				}
 				else
 				{
+					//removecharges(countries);
 					if (countries==null) 
 					{
 						//$('#hiddencharges').val('');
 						$('.charges').val('');
 						//$('#charges1').html('0');
-						//removecharges(countries)
+						removecharges(countries);
 					}
 					else
 					{
@@ -350,34 +351,7 @@ if ($err) {
 						// $('option:selected', this).remove();
 					}
 				}
-			});
-			/*  function checkcitystatus(price)
-				{
-				var url ="<?php echo "http://konciergesolutions.com/travelb2bhub/api/hotel_promotions/checkCityStatus.json?user_id=3&city_id=4"; ?>",
-					price1 = String(price);	
-					var fields = price1.split('-');
-					var city_id = fields[0];
-					var user_id = $('#user_id').val();
-					var duration = $('#duration').val();
-					$.ajax({
-						url:url,
-						type: 'POST',
-						data: {city_id:city_id,user_id:user_id,duration:duration}
-					}).done(function(result){
-						if (result==1) {
-						var a;					
-						}else{
-							alert(result);
-							$('#city option[value="'+price+'"]').remove();
-							removecharges(price);
-							//$('option:selected', "#city").remove();
-							
-						}
-					});
-				}   */
-
-			
-			
+			});			
 			 function charges(price)
 			 {
 				price = String(price);
@@ -423,13 +397,14 @@ if ($err) {
 				$('#hiddencharges').val(totalcharge1)
 				$('#charges1').html(totalcharge1)
 				$('#charges2').html(totalcharge1) */
-			}	 
-			
-			
-			//****Image Validation script***
+			}	
+	});		
+</script>	
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+	<script type="text/javascript">		
 		 	function checkCertificate()
 			{
-				var file = document.getElementById("hotelImg");
+				 var file = document.getElementById("hotelImg");
 				var file_name = file.value;
 				var extension = file_name.split('.').pop().toLowerCase();
 				var size = file.files[0].size;
@@ -446,7 +421,5 @@ if ($err) {
 				} else {
 					document.getElementById("sbmtpromotion").disabled = false;
 				}
-			} 		
-		});
-
-</script>
+			}
+	</script>
