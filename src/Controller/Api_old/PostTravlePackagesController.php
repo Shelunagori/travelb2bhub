@@ -335,8 +335,8 @@ class PostTravlePackagesController extends AppController
 						->find()->where(['post_travle_package_id' => $getTravelPackage->id])->count();
 						
 					$all_raiting=0;	
-					$testimonial=$this->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getTravelPackage->user_id]);
-					$testimonial_count=$this->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getTravelPackage->user_id])->count();
+					$testimonial=$this->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId]);
+					$testimonial_count=$this->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId])->count();
 						 
 						 foreach($testimonial as $test_data){
 							 
@@ -396,20 +396,20 @@ class PostTravlePackagesController extends AppController
 			$exists = $this->PostTravlePackages->PostTravlePackageViews->exists(['post_travle_package_id'=>$viewPostTravelPackages->post_travle_package_id,'user_id'=>$viewPostTravelPackages->user_id]);
 			
 			$carts = $this->PostTravlePackages->PostTravlePackageCarts->exists(['PostTravlePackageCarts.post_travle_package_id'=>$id,'PostTravlePackageCarts.user_id'=>$user_id,'PostTravlePackageCarts.is_deleted'=>0]);
-			foreach($getTravelPackageDetails as $sfad){
+			
 			if($carts==0){
-				f
+				foreach($getTravelPackageDetails as $sfad){
 					$sfad->issaved=false;
-				 
+				}
 				
 			}else{
-				 
+				foreach($getTravelPackageDetails as $sfad){
 					$sfad->issaved=true;
-				 
+				}
 			}
 			  $all_raiting=0;	
-					$testimonial=$this->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id]);
-					$testimonial_count=$this->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id])->count();
+					$testimonial=$this->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id]);
+					$testimonial_count=$this->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id])->count();
 						 
 						 foreach($testimonial as $test_data){
 							 
@@ -430,7 +430,7 @@ class PostTravlePackagesController extends AppController
 								$rat->user_rating=0;
 						 }
 					 }
-			}		 
+						 
 			if($exists == 0)
 			{
 				if ($this->PostTravlePackages->PostTravlePackageViews->save($viewPostTravelPackages)) {

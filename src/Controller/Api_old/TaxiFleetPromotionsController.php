@@ -312,8 +312,8 @@ class TaxiFleetPromotionsController extends AppController
 						->find()->where(['taxi_fleet_promotion_id' => $getTaxiFleetPromotion->id])->count();
 					
 					$all_raiting=0;	
-					$testimonial=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getTaxiFleetPromotion->user_id]);
-					$testimonial_count=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getTaxiFleetPromotion->user_id])->count();
+					$testimonial=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId]);
+					$testimonial_count=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId])->count();
 						 
 						 foreach($testimonial as $test_data){
 							 $rating=$test_data->rating;
@@ -372,19 +372,21 @@ class TaxiFleetPromotionsController extends AppController
 			$exists = $this->TaxiFleetPromotions->TaxiFleetPromotionViews->exists(['taxi_fleet_promotion_id'=>$viewTaxiFleetPromotions->taxi_fleet_promotion_id,'user_id'=>$viewTaxiFleetPromotions->user_id]);
 			
 			$carts = $this->TaxiFleetPromotions->TaxiFleetPromotionCarts->exists(['TaxiFleetPromotionCarts.taxi_fleet_promotion_id'=>$id,'TaxiFleetPromotionCarts.user_id'=>$user_id,'TaxiFleetPromotionCarts.is_deleted'=>0]);
-			foreach($getTaxiFleetPromotionsDetails as $sfad){
+			
 			if($carts==0){
-				
+				foreach($getTaxiFleetPromotionsDetails as $sfad){
 					$sfad->issaved=false;
-				 
-			}else{ 
+				}
+				
+			}else{
+				foreach($getTaxiFleetPromotionsDetails as $sfad){
 					$sfad->issaved=true;
-				 
+				}
 			}
 			
 			$all_raiting=0;	
-					$testimonial=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id]);
-					$testimonial_count=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id])->count();
+					$testimonial=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id]);
+					$testimonial_count=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id])->count();
 						 
 						 foreach($testimonial as $test_data){
 							 
@@ -406,7 +408,7 @@ class TaxiFleetPromotionsController extends AppController
 							 }	
 							 
 						 }
-			}			 
+						 
 			if($exists == 0)
 			{
 				if ($this->TaxiFleetPromotions->TaxiFleetPromotionViews->save($viewTaxiFleetPromotions)) {

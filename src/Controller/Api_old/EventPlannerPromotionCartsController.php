@@ -92,10 +92,7 @@ class EventPlannerPromotionCartsController extends AppController
 		$user_id = $this->request->query('user_id');
 		if(!empty($user_id))
 		{
-			$eventPlannerPromotionCarts=$this->EventPlannerPromotionCarts->find()->where(['EventPlannerPromotionCarts.user_id'=>$user_id, 'EventPlannerPromotionCarts.is_deleted'=>0])->contain(['EventPlannerPromotions'=>['PriceMasters','Countries','EventPlannerPromotionCities'=>['Cities'],'EventPlannerPromotionStates'=>['States'],'Users'=>function($q){
-				return $q->select(['first_name','last_name','mobile_number','company_name']);
-			},'EventPlannerPromotionCities'=>['Cities']]]);
-			//pr($eventPlannerPromotionCarts->toArray()); exit;
+			$eventPlannerPromotionCarts=$this->EventPlannerPromotionCarts->find()->where(['EventPlannerPromotionCarts.user_id'=>$user_id, 'EventPlannerPromotionCarts.is_deleted'=>0])->contain(['EventPlannerPromotions','Users']);
 			if(!empty($eventPlannerPromotionCarts->toArray())){
 				
 				
@@ -110,7 +107,7 @@ class EventPlannerPromotionCartsController extends AppController
 					{ $data->isLiked = 'yes'; }
 					else{ $data->isLiked = 'no'; }
 					
-					$carts = $this->EventPlannerPromotionCarts->exists(['EventPlannerPromotionCarts.event_planner_promotion_id'=>$event_planner_promotion_id,'EventPlannerPromotionCarts.user_id'=>$user_id,'EventPlannerPromotionCarts.is_deleted'=>0]);
+					$carts = $this->EventPlannerPromotionCarts->EventPlannerPromotions->EventPlannerPromotionCarts->exists(['EventPlannerPromotionCarts.event_planner_promotion_id'=>$event_planner_promotion_id,'EventPlannerPromotionCarts.user_id'=>$user_id,'EventPlannerPromotionCarts.is_deleted'=>0]);
 					if($carts==0){
 						$data->issaved=false;
 					}else{
@@ -121,8 +118,8 @@ class EventPlannerPromotionCartsController extends AppController
 						->find()->where(['event_planner_promotion_id' => $event_planner_promotion_id])->count();
 						
 					$all_raiting=0;	
-					$testimonial=$this->EventPlannerPromotionCarts->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$data->event_planner_promotion->user_id]);
-					$testimonial_count=$this->EventPlannerPromotionCarts->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$data->event_planner_promotion->user_id])->count();
+					$testimonial=$this->EventPlannerPromotionCarts->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id]);
+					$testimonial_count=$this->EventPlannerPromotionCarts->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id])->count();
 						 
 						 foreach($testimonial as $test_data){
 							 $rating=$test_data->rating;
@@ -160,7 +157,6 @@ class EventPlannerPromotionCartsController extends AppController
 		$this->set(compact('eventPlannerPromotionCarts','message','response_code'));
         $this->set('_serialize', ['eventPlannerPromotionCarts','message','response_code']);		
 	}
-	
 	
     /**
      * Edit method

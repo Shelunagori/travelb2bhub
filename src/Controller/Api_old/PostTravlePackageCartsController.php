@@ -92,9 +92,9 @@ class PostTravlePackageCartsController extends AppController
 		$user_id = $this->request->query('user_id');
 		if(!empty($user_id))
 		{
-			$postTravelPackageCarts=$this->PostTravlePackageCarts->find()->where(['PostTravlePackageCarts.user_id'=>$user_id, 'PostTravlePackageCarts.is_deleted'=>0])->contain(['PostTravlePackages'=>['Users'=>function($q){
+			$postTravelPackageCarts=$this->PostTravlePackageCarts->find()->where(['PostTravlePackageCarts.user_id'=>$user_id, 'PostTravlePackageCarts.is_deleted'=>0])->contain(['PostTravlePackages'=>['PostTravlePackageCities'=>['Cities'],'PostTravlePackageRows'=>['PostTravlePackageCategories']],'Users'=>function($q){
 				return $q->select(['first_name','last_name','mobile_number','company_name']);
-			},'PostTravlePackageCities'=>['Cities'],'PostTravlePackageRows'=>['PostTravlePackageCategories']]]);
+			}]);
 			 
 			if(!empty($postTravelPackageCarts->toArray())){
 				
@@ -120,8 +120,8 @@ class PostTravlePackageCartsController extends AppController
 						->find()->where(['post_travle_package_id' => $post_travle_package_id])->count();
 						
 					$all_raiting=0;	
-					$testimonial=$this->PostTravlePackageCarts->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$data->post_travle_packages->user_id]);
-					$testimonial_count=$this->PostTravlePackageCarts->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$data->post_travle_packages->user_id])->count();
+					$testimonial=$this->PostTravlePackageCarts->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id]);
+					$testimonial_count=$this->PostTravlePackageCarts->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id])->count();
 						 
 						 foreach($testimonial as $test_data){
 							 

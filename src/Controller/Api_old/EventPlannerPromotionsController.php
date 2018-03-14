@@ -255,8 +255,7 @@ class EventPlannerPromotionsController extends AppController
 			
 			if(!empty($state_id))
 			{
-				$state_id = explode(',',$state_id);
-				$state_filter = ['EventPlannerPromotionStates.state_id IN'=>$state_id];
+				$state_filter = ['state_id'=>$state_id];
 			}else
 			{
 				$state_filter = null;
@@ -265,8 +264,7 @@ class EventPlannerPromotionsController extends AppController
 			
 			if(!empty($city_id))
 			{
-				$city_id = explode(',',$city_id);
-				$city_filter = ['EventPlannerPromotionCities.city_id IN'=>$city_id];
+				$city_filter = ['city_id'=>$city_id];
 			}else
 			{
 				$city_filter = null;
@@ -302,9 +300,9 @@ class EventPlannerPromotionsController extends AppController
 			$getEventPlanners = $this->EventPlannerPromotions->find();
 			 
 				$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('EventPlannerPromotionLikes.id')])
-				->contain(['Users'=>function($q){
+				->contain(['EventPlannerPromotionCities'=>['Cities'],'Users'=>function($q){
 				return $q->select(['first_name','last_name','mobile_number','company_name']);
-			},'PriceMasters','Countries','EventPlannerPromotionStates'=>['States'],'EventPlannerPromotionCities'=>['Cities']])
+			}])
 				->leftJoinWith('EventPlannerPromotionLikes')
 				->innerJoinWith('EventPlannerPromotionStates',function($q) use($state_filter){ 
 						return $q->where($state_filter);
@@ -313,12 +311,12 @@ class EventPlannerPromotionsController extends AppController
 						return $q->where($city_filter);
 					})	
 			->where(['visible_date >=' =>date('Y-m-d')])
-			->where(['EventPlannerPromotions.is_deleted' =>0])
+			->where(['is_deleted' =>0])
 			->where($country_id)
 			->order($where_short)
 			->group(['EventPlannerPromotions.id'])
 			->autoFields(true);
-			//pr($where_short);exit;	
+			
 			if(!empty($getEventPlanners->toArray()))
 			{
 				foreach($getEventPlanners as $getEventPlanner)
@@ -327,12 +325,12 @@ class EventPlannerPromotionsController extends AppController
 					$getEventPlanner->total_likes = $this->EventPlannerPromotions->EventPlannerPromotionLikes
                             ->find()->where(['event_planner_promotion_id' => $getEventPlanner->id])->count();
 					
-					$exists = $this->EventPlannerPromotions->EventPlannerPromotionLikes->exists(['event_planner_promotion_id'=>$getEventPlanner->id,'user_id'=>$getEventPlanner->user_id]);
+					$exists = $this->EventPlannerPromotions->EventPlannerPromotionLikes->exists(['event_planner_promotion_id'=>$getEventPlanner->id,'user_id'=>$isLikedUserId]);
 					if($exists == 1)
 					{ $getEventPlanner->isLiked = 'yes'; }
 					else{ $getEventPlanner->isLiked = 'no'; }
 					
-					$carts = $this->EventPlannerPromotions->EventPlannerPromotionCarts->exists(['EventPlannerPromotionCarts.event_planner_promotion_id'=>$getEventPlanner->id,'EventPlannerPromotionCarts.user_id'=>$getEventPlanner->user_id,'EventPlannerPromotionCarts.is_deleted'=>0]);
+					$carts = $this->EventPlannerPromotions->EventPlannerPromotionCarts->exists(['EventPlannerPromotionCarts.event_planner_promotion_id'=>$getEventPlanner->id,'EventPlannerPromotionCarts.user_id'=>$isLikedUserId,'EventPlannerPromotionCarts.is_deleted'=>0]);
 					if($carts==0){
 						$getEventPlanner->issaved=false;
 					}else{
@@ -343,8 +341,8 @@ class EventPlannerPromotionsController extends AppController
 						->find()->where(['event_planner_promotion_id' => $getEventPlanner->id])->count();
 						
 					$all_raiting=0;	
-					$testimonial=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getEventPlanner->user_id]);
-					$testimonial_count=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getEventPlanner->user_id])->count();
+					$testimonial=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId]);
+					$testimonial_count=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId])->count();
 						 
 						 foreach($testimonial as $test_data){
 							 $rating=$test_data->rating;
@@ -410,20 +408,21 @@ class EventPlannerPromotionsController extends AppController
 			$exists = $this->EventPlannerPromotions->EventPlannerPromotionViews->exists(['event_planner_promotion_id'=>$viewEventPlannerPromotions->event_planner_promotion_id,'user_id'=>$viewEventPlannerPromotions->user_id]);
 			
 			$carts = $this->EventPlannerPromotions->EventPlannerPromotionCarts->exists(['EventPlannerPromotionCarts.event_planner_promotion_id'=>$id,'EventPlannerPromotionCarts.user_id'=>$user_id,'EventPlannerPromotionCarts.is_deleted'=>0]);
-			foreach($getEventPlannersDetails as $sfad){
+			
 			if($carts==0){
-				
+				foreach($getEventPlannersDetails as $sfad){
 					$sfad->issaved=false;
-				 
+				}
 				
 			}else{
-				 	$sfad->issaved=true;
-				 
+				foreach($getEventPlannersDetails as $sfad){
+					$sfad->issaved=true;
+				}
 			}
 			
 			$all_raiting=0;	
-					$testimonial=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id]);
-					$testimonial_count=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id])->count();
+					$testimonial=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id]);
+					$testimonial_count=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id])->count();
 						 
 						 foreach($testimonial as $test_data){
 							 
@@ -444,7 +443,7 @@ class EventPlannerPromotionsController extends AppController
 								$rat->user_rating=0;
 							 }	
 							 
-					}	 }
+						 }
 						 
 			if($exists == 0)
 			{

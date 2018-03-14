@@ -154,9 +154,8 @@ class HotelPromotionsController extends AppController
 		if(!empty($user_id))
 		{
 			$getEventPlanners = $this->HotelPromotions->find()
-->contain(['HotelPromotionCities'=>['Cities']])
-			->where(['HotelPromotions.is_deleted' =>0])
-			->where(['HotelPromotions.user_id'=>$user_id])
+			->where(['is_deleted' =>0])
+			->where(['user_id'=>$user_id])
 			->group(['HotelPromotions.id'])
 			->autoFields(true);
 	
@@ -237,8 +236,8 @@ $getHotelPromotion=$getEventPlanners ;
 						->find()->where(['hotel_promotion_id' => $getEventPlanner->id])->count();
 						
 					$all_raiting=0;	
-					$testimonial=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getEventPlanner->user_id]);
-					$testimonial_count=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getEventPlanner->user_id])->count();
+					$testimonial=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId]);
+					$testimonial_count=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId])->count();
 						 
 						 foreach($testimonial as $test_data){
 							 $rating=$test_data->rating;
@@ -285,7 +284,7 @@ $getHotelPromotion=$getEventPlanners ;
 		$getEventPlannersDetails = $this->HotelPromotions->find();
 		$getEventPlannersDetails->select(['total_likes'=>$getEventPlannersDetails->func()->count('HotelPromotionLikes.id')])
 			->leftJoinWith('HotelPromotionLikes')
-			->contain(['HotelCategories','Users','PriceMasters'])
+			->contain(['HotelCategories','Users','PriceMasters','HotelPromotionCities'=>['Cities']])
 			->where(['HotelPromotions.id'=>$id])
 			->where(['HotelPromotions.is_deleted' =>0])
 			->group(['HotelPromotions.id'])
@@ -301,25 +300,24 @@ $getHotelPromotion=$getEventPlanners ;
 			$viewHotelPromotions->user_id = $user_id;         
 			
 			
-			$exists = $this->HotelPromotions->HotelPromotionViews->exists(['HotelPromotionViews.hotel_promotion_id'=>$id,'HotelPromotionViews.user_id'=>$user_id]);
-			$count_view=$this->HotelPromotions->HotelPromotionViews->find()->where(['HotelPromotionViews.hotel_promotion_id'=>$id,'HotelPromotionViews.user_id'=>$user_id])->count();
+			$exists = $this->HotelPromotions->HotelPromotionViews->exists(['hotel_promotion_id'=>$viewHotelPromotions->hotel_promotion_id,'user_id'=>$viewHotelPromotions->user_id]);
+			
 			$carts = $this->HotelPromotions->HotelPromotionCarts->exists(['HotelPromotionCarts.hotel_promotion_id'=>$id,'HotelPromotionCarts.user_id'=>$user_id,'HotelPromotionCarts.is_deleted'=>0]);
-			foreach($getEventPlannersDetails as $sfad){
-				if($carts==0){
-						$sfad->issaved=false;
-				}else{
-						$sfad->issaved=true;
+			
+			if($carts==0){
+				foreach($getEventPlannersDetails as $sfad){
+					$sfad->issaved=false;
 				}
-			 
-				$exists = $this->HotelPromotions->HotelPromotionLikes->exists(['hotel_promotion_id'=>$sfad->id,'user_id'=>$user_id ]);
-				if($exists == 1)
-				{ $sfad->isLiked = 'yes'; }
-				else{ $sfad->isLiked = 'no'; }
-			 
+				
+			}else{
+				foreach($getEventPlannersDetails as $sfad){
+					$sfad->issaved=true;
+				}
+			}
 			
 			$all_raiting=0;	
-					$testimonial=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id]);
-					$testimonial_count=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id])->count();
+					$testimonial=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id]);
+					$testimonial_count=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id])->count();
 						 
 						 foreach($testimonial as $test_data){
 							 
@@ -341,8 +339,8 @@ $getHotelPromotion=$getEventPlanners ;
 							 }	
 							 
 						 }
-				}		 
-			if($count_view==0)
+						 
+			if($exists == 0)
 			{
 				if ($this->HotelPromotions->HotelPromotionViews->save($viewHotelPromotions)) {
 					$message = 'Data found and view increased by 1';
