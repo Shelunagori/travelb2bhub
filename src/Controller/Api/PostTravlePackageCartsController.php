@@ -120,8 +120,8 @@ class PostTravlePackageCartsController extends AppController
 						->find()->where(['post_travle_package_id' => $post_travle_package_id])->count();
 						
 					$all_raiting=0;	
-					$testimonial=$this->PostTravlePackageCarts->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$data->post_travle_packages->user_id]);
-					$testimonial_count=$this->PostTravlePackageCarts->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$data->post_travle_packages->user_id])->count();
+					$testimonial=$this->PostTravlePackageCarts->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$data->post_travle_package->user_id]);
+					$testimonial_count=$this->PostTravlePackageCarts->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$data->post_travle_package->user_id])->count();
 						 
 						 foreach($testimonial as $test_data){
 							 
