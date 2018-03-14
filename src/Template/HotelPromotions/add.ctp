@@ -427,7 +427,7 @@ if ($err) {
 			
 			
 			//****Image Validation script***
-		/* 	function checkCertificate()
+		 	function checkCertificate()
 			{
 				var file = document.getElementById("hotelImg");
 				var file_name = file.value;
@@ -446,7 +446,7 @@ if ($err) {
 				} else {
 					document.getElementById("sbmtpromotion").disabled = false;
 				}
-			} */			
+			} 		
 		});
 
 </script>
