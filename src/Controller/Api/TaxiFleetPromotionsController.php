@@ -345,7 +345,7 @@ class TaxiFleetPromotionsController extends AppController
 		{
 			$message = 'isLikedUserId is empty';
 			$getTaxiFleetPromotions = [];
-			$response_code = 204;			
+			$response_code = 204;		
 		}
 		
 		$this->set(compact('getTaxiFleetPromotions','message','response_code'));
