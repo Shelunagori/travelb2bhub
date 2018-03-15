@@ -2,7 +2,7 @@
 //-- List
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => $coreVariable['SiteUrl']."api/PostTravlePackages/getTravelPackages.json?isLikedUserId=".$user_id,
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/hotel_promotions/getHotelList.json?isLikedUserId=".$user_id,
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -24,7 +24,7 @@ if ($err) {
 	$response;
 	$List=json_decode($response);
 	//pr($List); exit;
-	$postTravlePackages=$List->getTravelPackages;
+	$hotelPromotions=$List->getHotelPromotion;
 }
 //pr($List); exit;
 ?>
