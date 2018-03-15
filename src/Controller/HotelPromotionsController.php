@@ -156,4 +156,10 @@ class HotelPromotionsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+	   public function report()
+    {
+		 $this->viewBuilder()->layout('user_layout');
+		$user_id=$this->Auth->User('id');
+        $this->set(compact('user_id'));
+	}
 }
