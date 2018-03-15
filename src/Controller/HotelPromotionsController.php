@@ -83,6 +83,7 @@ class HotelPromotionsController extends AppController
      */
     public function view($id = null)
     {
+		$this->viewBuilder()->layout('user_layout');
         $hotelPromotion = $this->HotelPromotions->get($id, [
             'contain' => ['Users', 'HotelCategories', 'PriceMasters', 'HotelPromotionCities', 'HotelPromotionLikes', 'HotelPromotionPriceBeforeRenews', 'HotelPromotionReports', 'HotelPromotionViews']
         ]);
@@ -98,6 +99,7 @@ class HotelPromotionsController extends AppController
      */
     public function add()
     {
+		
 		$this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');
 		$this->set(compact('user_id'));
@@ -112,6 +114,9 @@ class HotelPromotionsController extends AppController
      */
     public function edit($id = null)
     {
+		$this->viewBuilder()->layout('user_layout');
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id'));
         $hotelPromotion = $this->HotelPromotions->get($id, [
             'contain' => []
         ]);

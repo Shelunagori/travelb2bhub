@@ -235,8 +235,7 @@
                 <td><?= h(date('d-m-Y',strtotime($hotelPromotion->visible_date))); ?></td>				
                 <td class="actions">
 				<a class="viewdetail btn btn-info btn-sm" href="<?php echo "/travelb2bhub/HotelPromotions/view/". $hotelPromotion->id;?>" > Details</a>
-				<a class="viewdetail btn btn-warning btn-sm" href="<?php echo "/travelb2bhub/HotelPromotions/view/". $hotelPromotion->id;?>" > Edit</a>
-				<a class="viewdetail btn btn-danger btn-sm" href="<?php echo "/travelb2bhub/HotelPromotions/view/". $hotelPromotion->id;?>" > Remove</a>
+				<a class="viewdetail btn btn-danger btn-sm" href="<?php echo "/travelb2bhub/HotelPromotions/delete/". $hotelPromotion->id;?>" > Remove</a>
                     <?php //$this->Html->link(__('View'), ['action' => 'view',	$hotelPromotion->id]) ?>
                     <?php // $this->Html->link(__('Edit'), ['action' => 'edit', $hotelPromotion->id]) ?>
                     <?php // $this->Form->postLink(__('Delete'), ['action' => 'delete', $hotelPromotion->id], ['confirm' => __('Are you sure you want to delete # {0}?', $hotelPromotion->id)]) ?>
