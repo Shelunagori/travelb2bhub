@@ -65,10 +65,13 @@ if ($err) {
 								<td><?= h($eventPlannerPromotion->price_master->price); ?></td>
 								<td><?= $this->Number->format($eventPlannerPromotion->like_count) ?></td>
 								<td><?= h(date('d-m-Y',strtotime($eventPlannerPromotion->visible_date))); ?></td>	
-								<td class="actions" >
-									<?= $this->Html->link(__('View'), ['action' => 'view', $eventPlannerPromotion->id]) ?>
-									<?= $this->Html->link(__('Edit'), ['action' => 'edit', $eventPlannerPromotion->id]) ?>
-									<?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $eventPlannerPromotion->id], ['confirm' => __('Are you sure you want to delete # {0}?', $eventPlannerPromotion->id)]) ?>
+								<td class="actions" style="width:25%;">
+									 <span>
+										 <?php echo $this->Html->link('Details','api address'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?></i>
+										<?php echo $this->Html->link('View','api address'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+										<?php echo $this->Html->link('Follow','api address'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+										<?php echo $this->Html->link('Delete','api address'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $eventPlannerPromotion->id)));?>
+									</span>
 								</td>
 							</tr>
 							 <?php $i++;endforeach; ?>

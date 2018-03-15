@@ -251,15 +251,9 @@ if ($err) {
                 <th scope="col"><?= ('Sr.No') ?></th>
 				<th scope="col"><?= ('User Name') ?></th>
                 <th scope="col"><?= ('Title') ?></th>
-                <th scope="col"><?= ('Country') ?></th>
                 <th scope="col"><?= ('Duration') ?></th>
-                <th scope="col"><?= ('Likes') ?></th>
                 <th scope="col"><?= ('Visibility Date') ?></th>
-				<!--<th scope="col"><?= ('Image') ?></th>
-                <th scope="col"><?= ('Document') ?></th>-->
-               
-               
-               
+				<th scope="col"><?= ('Image') ?></th>               
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -267,19 +261,19 @@ if ($err) {
             <?php $i=1;foreach ($taxiFleetPromotions as $taxiFleetPromotion): ?>
             <tr>
                 <td><?= $i; ?></td>
-				<td><?= h($taxiFleetPromotion->user->first_name.$taxiFleetPromotion->user->last_name);?></td>
+				<td><?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?></td>
                 <td><?= h($taxiFleetPromotion->title) ?></td>
-                <td><?= h($taxiFleetPromotion->country->country_name); ?></td>
                 <td><?= h($taxiFleetPromotion->price_master->week); ?></td>              
-                <td><?= $this->Number->format($taxiFleetPromotion->like_count) ?></td>
                 <td><?= h(date('d-m-Y',strtotime($taxiFleetPromotion->visible_date))); ?></td>
-				<!--<td><?= $this->Number->format($taxiFleetPromotion->image) ?></td>
-                <td><?= $this->Number->format($taxiFleetPromotion->document) ?></td>-->
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $taxiFleetPromotion->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $taxiFleetPromotion->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $taxiFleetPromotion->id], ['confirm' => __('Are you sure you want to delete # {0}?', $taxiFleetPromotion->id)]) ?>
-                </td>
+				<td><?php echo $this->Html->image('../'.$taxiFleetPromotion->image,['style'=>'height:8%;width:100%;']);?></td>
+				<td class="actions" style="width:25%;">
+					 <span>
+						 <?php echo $this->Html->link('Details','api address'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?></i>
+						<?php echo $this->Html->link('View','api address'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+						<?php echo $this->Html->link('Follow','api address'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+						<?php echo $this->Html->link('Delete','api address'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $taxiFleetPromotion->id)));?>
+					</span>
+				</td>
             </tr>
             <?php $i++;endforeach; ?>
         </tbody>
