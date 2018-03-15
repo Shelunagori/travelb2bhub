@@ -16,7 +16,6 @@ li {
 ul li b {
 	color:#96989A;
 }
-.col-md-12 { background: #fff !important; }
 
  </style>
  
