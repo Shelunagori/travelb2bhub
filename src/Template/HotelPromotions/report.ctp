@@ -247,7 +247,6 @@ if ($err) {
                 <th scope="col"><?= ('Location') ?></th>
                 <th scope="col"><?= ('Category') ?></th>
                 <th scope="col"><?= ('Website') ?></th>
-                <th scope="col"><?= ('Image') ?></th>
                 <th scope="col"><?= ('Visibility Date') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -261,16 +260,16 @@ if ($err) {
                 <td><?= h($hotelPromotion->hotel_location) ?></td>
                 <td><?= h($hotelPromotion->hotel_category->name) ?></td>
                 <td><?= h($hotelPromotion->website) ?></td>
-                <td><?= h($hotelPromotion->hotel_pic); ?></td>
                 <td><?= h(date('d-m-Y',strtotime($hotelPromotion->visible_date))); ?></td>				
-                <td class="actions">
-				<a class="viewdetail btn btn-info btn-sm" href="<?php echo "/travelb2bhub/HotelPromotions/view/". $hotelPromotion->id;?>" > Details</a>
-				<a class="viewdetail btn btn-danger btn-sm" href="<?php echo "/travelb2bhub/HotelPromotions/delete/". $hotelPromotion->id;?>" > Remove</a>
-				<?php //$this->Html->link(__('View'), ['action' => 'view',	$hotelPromotion->id]) ?>
-				<?php // $this->Html->link(__('Edit'), ['action' => 'edit', $hotelPromotion->id]) ?>
-				<?php // $this->Form->postLink(__('Delete'), ['action' => 'delete', $hotelPromotion->id], ['confirm' => __('Are you sure you want to delete # {0}?', $hotelPromotion->id)]) ?>
-                </td>
-            </tr>
+				<td class="actions" style="width:25%;">
+					 <span>
+					 <?php echo $this->Html->link('Details','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?></i>
+					<?php echo $this->Html->link('View','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+					<?php echo $this->Html->link('Follow','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+					<?php echo $this->Html->link('Delete','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $hotelPromotion->id)));?>
+					</span>
+				</td>
+			</tr>
             <?php endforeach; ?>
         </tbody>
     </table>
