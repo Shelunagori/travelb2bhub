@@ -82,6 +82,11 @@ if ($err) {
 }
 
 ?>
+<style>
+.col-md-12 {
+	margin:5px !important;
+}
+</style>
 <section class="content">
 <div class="row">
 	<div class="col-md-12">
@@ -285,6 +290,15 @@ if ($err) {
 <script>
 	 
     $(document).ready(function () {
+		
+		/*$(document).on('change','#city,.duration',function()		
+		{
+			
+			
+		});
+		*/
+		
+		
 		$(document).on('change','.duration',function()
 		{
 			var priceVal=$('.duration option:selected').attr('priceVal');
@@ -305,55 +319,44 @@ if ($err) {
 				$('.visible_date').val(date);
 		});
 	//Calculation Of Charges //	
-	$(document).on('change','#city,.duration',function()		
+			$(document).on('change','#city,.duration',function()		
 			{
-				//var price = $('#city selected').attr('price');
-				//var price=$("#city option:selected").val();
 				var countries=[];
 				$.each($("#city option:selected"), function(){            
-					countries.push($(this).val());				 
-				})
+					countries.push($(this).val());
+ 				})
 				//alert(countries.length);
 				if(countries.length>0)
 				{
 					prices = '"'+countries+'"';
-					//alert(prices);
 					prices = String(countries);
 					charges(countries);
 					if (prices.indexOf(",") > -1)
 					{   
-						//$('#hiddencharges').val('');
-							$('.charges').val('');
-						//$('#charges1').html('0');
+						$('.charges').val('');
 						arr = prices.split(',');
-						for(i=0; i < arr.length; i++)
+ 						for(i=0; i < arr.length; i++)
 						{
-							//checkcitystatus(arr[i]);
 							charges(arr[i]);
-							
 						}
 					}
 				}
 				else
 				{
-					//removecharges(countries);
 					if (countries==null) 
 					{
-						//$('#hiddencharges').val('');
 						$('.charges').val('');
-						//$('#charges1').html('0');
 						removecharges(countries);
 					}
 					else
 					{
-						//checkcitystatus(countries);
 						charges(countries);
-						// $('option:selected', this).remove();
 					}
 				}
 			});			
 			 function charges(price)
 			 {
+				 alert(price);
 				price = String(price);
 				var totalcharge=0;
 				var price = price.substr(price.indexOf("-") + 1);
@@ -367,8 +370,8 @@ if ($err) {
 				//totalcharge =  (parseInt(getcharge)) + (parseInt(price) * parseInt(duration))	;
 				//alert(price);
 				//alert(duration);
-				//alert(getcharge);
-				totalcharge =  (parseInt(getcharge)) + (parseInt(price) * parseInt(duration));
+				alert(getcharge);
+				totalcharge =   (parseInt(getcharge))+(parseInt(price) * parseInt(duration));
 				$('.charges').val(totalcharge);
 				//alert(totalcharge);
 				/* hiddencharges = $('#hiddencharges').val()
@@ -400,26 +403,25 @@ if ($err) {
 			}	
 	});		
 </script>	
-<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
-	<script type="text/javascript">		
-		 	function checkCertificate()
-			{
-				 var file = document.getElementById("hotelImg");
-				var file_name = file.value;
-				var extension = file_name.split('.').pop().toLowerCase();
-				var size = file.files[0].size;
-				var allowedFormats = ["jpeg", "jpg", "png"];
+<script type="text/javascript">		
+		function checkCertificate()
+		{
+			var file = document.getElementById("hotelImg");
+			var file_name = file.value;
+			var extension = file_name.split('.').pop().toLowerCase();
+			var size = file.files[0].size;
+			var allowedFormats = ["jpeg", "jpg", "png"];
 
-				if (!(allowedFormats.indexOf(extension) > -1)) {
-					alert("Enter a jpg/jpeg/pdf/png file");
-
-					document.getElementById("sbmtpromotion").disabled = true;
-					return false;
-				} else if (((size / 1024) / 1024) > 2) {
-					alert("Your file should be less than 2MB");
-					return false;
-				} else {
-					document.getElementById("sbmtpromotion").disabled = false;
-				}
+			if (!(allowedFormats.indexOf(extension) > -1)) {
+				alert("Enter a jpg/jpeg/pdf/png file");
+				document.getElementById("sbmtpromotion").disabled = true;
+				return false;
+			} else if (((size / 1024) / 1024) > 2) {
+				alert("Your file should be less than 2MB");
+				document.getElementById("hotelImg").value('');
+				return false;
+			} else {
+				document.getElementById("sbmtpromotion").disabled = false;
 			}
-	</script>
+		}
+</script>

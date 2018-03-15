@@ -348,10 +348,10 @@ class PostTravlePackagesController extends AppController
 							 if($final_raiting>0){
 								$getTravelPackage->user_rating=number_format($final_raiting, 1);
 							 }else{
-								 $getTravelPackage->user_rating=0;
+								 $getTravelPackage->user_rating="0";
 							 }
 						 }else{
-							 $getTravelPackage->user_rating=0;
+							 $getTravelPackage->user_rating="0";
 						 }
 				}
 				$message = 'List Found Successfully';
@@ -422,7 +422,7 @@ class PostTravlePackagesController extends AppController
 							 if($final_raiting>0){
 								$rat->user_rating=number_format($final_raiting, 1);
 							 }else{
-								$rat->user_rating=0;
+								$rat->user_rating="0";
 							 }
 						 }  
 					 }else{

@@ -355,10 +355,10 @@ class EventPlannerPromotionsController extends AppController
 							 if($final_raiting>0){
 								$getEventPlanner->user_rating=number_format($final_raiting, 1);
 							 }else{
-								$getEventPlanner->user_rating=0;
+								$getEventPlanner->user_rating="0";
 							 }	
 						 }else{
-							$getEventPlanner->user_rating=0;
+							$getEventPlanner->user_rating="0";
 						 }	 
 				}
 				 
@@ -436,7 +436,7 @@ class EventPlannerPromotionsController extends AppController
 								 if($final_raiting>0){
 									$rat->user_rating=number_format($final_raiting, 1);
 								 }else{
-									$rat->user_rating=0;
+									$rat->user_rating="0";
 								 }
 							 }	
 						 }else{

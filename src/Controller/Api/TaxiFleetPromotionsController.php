@@ -324,10 +324,10 @@ class TaxiFleetPromotionsController extends AppController
 							 if($final_raiting>0){
 								$getTaxiFleetPromotion->user_rating=number_format($final_raiting, 1);
 							 }else{
-								$getTaxiFleetPromotion->user_rating=0;
+								$getTaxiFleetPromotion->user_rating="0";
 							 }	
 						 }else{
-							$getTaxiFleetPromotion->user_rating=0;
+							$getTaxiFleetPromotion->user_rating="0";
 						 }	 
 					 
 				}
@@ -397,7 +397,7 @@ class TaxiFleetPromotionsController extends AppController
 								 if($final_raiting>0){
 									$rat->user_rating=number_format($final_raiting, 1);
 								 }else{
-									$rat->user_rating=0;
+									$rat->user_rating="0";
 								 }
 							 }	
 						 }else{
