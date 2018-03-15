@@ -130,10 +130,10 @@ class HotelPromotionCartsController extends AppController
 							 if($final_raiting>0){
 								$data->user_rating=number_format($final_raiting, 1);
 							 }else{
-								$data->user_rating=0;
+								$data->user_rating="0";
 							 }	
 						 }else{
-								$data->user_rating=0;
+								$data->user_rating="0";
 						 }	 
 					
 				}

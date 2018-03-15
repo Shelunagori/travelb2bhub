@@ -16,7 +16,7 @@ class HotelPromotionsController extends AppController
      *
      * @return \Cake\Network\Response|null
      */
-	  public function initialize()
+	public function initialize()
 	{
 		parent::initialize();
 		$this->Auth->allow(['logout']);
@@ -100,23 +100,6 @@ class HotelPromotionsController extends AppController
 		$this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');
 		$this->set(compact('user_id'));
-       /* $hotelPromotion = $this->HotelPromotions->newEntity();
-        if ($this->request->is('post')) {
-            $hotelPromotion = $this->HotelPromotions->patchEntity($hotelPromotion, $this->request->data);
-            if ($this->HotelPromotions->save($hotelPromotion)) {
-                $this->Flash->success(__('The hotel promotion has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The hotel promotion could not be saved. Please, try again.'));
-            }
-        }
-        $users = $this->HotelPromotions->Users->find('list', ['limit' => 200]);
-        $hotelCategories = $this->HotelPromotions->HotelCategories->find('list', ['limit' => 200]);
-		//pr($hotelCategories->toArray());exit;
-        $priceMasters = $this->HotelPromotions->PriceMasters->find('list', ['limit' => 200]);
-        $this->set(compact('hotelPromotion', 'users', 'hotelCategories', 'priceMasters'));
-        $this->set('_serialize', ['hotelPromotion']);*/
     }
 
     /**
