@@ -15,7 +15,7 @@ class HotelPromotionsController extends AppController
     {
         $hotelPromotions = $this->HotelPromotions->newEntity();
         if ($this->request->is('post')) {
-            $hotelPromotions = $this->HotelPromotions->patchEntity($hotelPromotions,$this->request->data(),['associated' => ['hotelPromotionCities']]);
+            $hotelPromotions = $this->HotelPromotions->patchEntity($hotelPromotions,$this->request->data());
 
 			$message = 'PERFECT';
 			$response_code = 101;
@@ -87,11 +87,10 @@ class HotelPromotionsController extends AppController
 					$response_code = 204;				
 				}
 			}			
-        }
-		if(@$submitted_from=='web')
-		{
-			$this->Flash->success(__('message'));
-			return $this->redirect(['controller'=>'HotelPromotions','action' => 'add']);
+        } 
+		if(@$submitted_from=='web'){
+			$this->Flash->success(__('message')); 
+			return $this->redirect($this->coreVariable['SiteUrl'].'HotelPromotions/report');
 		}
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);		
@@ -154,7 +153,6 @@ class HotelPromotionsController extends AppController
 		if(!empty($user_id))
 		{
 			$getEventPlanners = $this->HotelPromotions->find()
-->contain(['HotelPromotionCities'=>['Cities']])
 			->where(['HotelPromotions.is_deleted' =>0])
 			->where(['HotelPromotions.user_id'=>$user_id])
 			->group(['HotelPromotions.id'])

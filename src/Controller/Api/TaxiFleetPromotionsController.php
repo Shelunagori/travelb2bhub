@@ -142,10 +142,9 @@ class TaxiFleetPromotionsController extends AppController
         }
  
 		if(@$submitted_from=='web'){
-			$this->Flash->success(__('message'));
-			return $this->redirect(['controller'=>'TaxiFleetPromotions','action' => 'add']);
-		}
-
+			$this->Flash->success(__('message')); 
+			return $this->redirect($this->coreVariable['SiteUrl'].'TaxiFleetPromotions/report');
+		}		
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);
     }

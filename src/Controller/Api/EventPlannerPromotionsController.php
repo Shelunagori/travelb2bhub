@@ -121,11 +121,10 @@ class EventPlannerPromotionsController extends AppController
 					$response_code = 204;				
 				}
 			}			
-        }
-		if(@$submitted_from=='web')
-		{
-			$this->Flash->success(__('message'));
-			return $this->redirect(['controller'=>'EventPlannerPromotions','action' => 'report']);
+        } 
+		if(@$submitted_from=='web'){
+			$this->Flash->success(__('message')); 
+			return $this->redirect($this->coreVariable['SiteUrl'].'EventPlannerPromotions/report');
 		}
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);		
