@@ -33,7 +33,7 @@ if ($err) {
 }
 //pr($taxiFleetPromotions); exit;
 ?>
-<div id="my_final_responses" class="container-fluid">
+<div  class="container-fluid">
 	<div class="row equal_column">
 		<div class="col-md-12" style="background-color:#fff"> 
 			<br>

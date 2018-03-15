@@ -64,6 +64,7 @@ class HotelPromotionsController extends AppController
 	}
     public function index()
     {
+		$this->viewBuilder()->layout('user_layout');
         $this->paginate = [
             'contain' => ['Users', 'HotelCategories', 'PriceMasters']
         ];
