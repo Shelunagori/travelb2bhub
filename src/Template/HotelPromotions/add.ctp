@@ -146,7 +146,30 @@ if ($err) {
 									</div>
 									
 								</div>
-							</div> 
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+										<p for="from">
+											Tariff of Cheapest Room
+											<span class="required">*</span>
+										</p>
+										<div class="input-field">
+										 <?php echo $this->Form->input('cheap_tariff',['class'=>'form-control','label'=>false,'type'=>'number','placeholder'=>"Minimum Tariff"]);?>
+											
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+										<p for="from">
+											Tariff of Most Expensive Room
+											<span class="required">*</span>
+										</p>
+										<div class="input-field">
+											 <?php echo $this->Form->input('expensive_tariff',['class'=>'form-control','label'=>false,'type'=>'number','placeholder'=>"Maximum Tariff"]);?>
+										</div>
+									</div>
+								</div>
+							</div> 	
 							<div class="row">
 								<div class="col-md-12">
 									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -183,49 +206,11 @@ if ($err) {
 								</div>
 						</fieldset><br>
 						<fieldset>
-							<legend style="color:#369FA1;"><b> &nbsp; <?= __(' Package Details') ?> &nbsp;  </b></legend>
+							<legend style="color:#369FA1;"><b> &nbsp; <?= __(' Payment Details') ?> &nbsp;  </b></legend>
+							
 							<div class="row">
 								<div class="col-md-12">
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-										<p for="from">
-											Tariff of Cheapest Room
-											<span class="required">*</span>
-										</p>
-										<div class="input-field">
-										 <?php echo $this->Form->input('cheap_tariff',['class'=>'form-control','label'=>false,'type'=>'number','placeholder'=>"Minimum Tariff"]);?>
-											
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-										<p for="from">
-											Tariff of Most Expensive Room
-											<span class="required">*</span>
-										</p>
-										<div class="input-field">
-											 <?php echo $this->Form->input('expensive_tariff',['class'=>'form-control','label'=>false,'type'=>'number','placeholder'=>"Maximum Tariff"]);?>
-										</div>
-									</div>
-								</div>
-							</div> 
-							<div class="row">
-								<div class="col-md-12">
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-											<p for="from">
-												City
-												<span class="required">*</span>
-											</p>
-											<div class="input-field">
-											 <?php
-												$options=array();
-													foreach($hotelcities as $cities)
-													{
-														$options[] = ['value'=>$cities->value.'-'.$cities->price,'text'=>$cities->label.' ('.$cities->state_name.')'];
-													}
-											 echo $this->Form->input('city_id',['class'=>'form-control select2 city ',"multiple"=>true ,'label'=>false,'options' => $options,"data-placeholder"=>"Select City",'id'=>'city']);?>
-												
-											</div>
-										</div>
-										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt">
 											<p for="from">
 												Promotion Duration
 												<span class="required">*</span>
@@ -240,11 +225,7 @@ if ($err) {
 												 echo $this->Form->input('price_master_id',['class'=>'form-control duration select2 ','options' => $options,'label'=>false,"empty"=>"Select Promotion Weeks"]);?>
 											</div>
 										</div>
-								</div>
-							</div> 
-							<div class="row">
-								<div class="col-md-12">
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt">
 											<p for="from">
 												Charges
 											</p>
@@ -252,7 +233,7 @@ if ($err) {
 										<?php echo $this->Form->input('charges', ['class'=>'form-control charges','label'=>false,"placeholder"=>"Total Charges",'readonly'=>'readonly','type'=>'text']); ?>
 										</div>
 									</div>
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt">
 											<p for="from">
 												Visible Date
 											</p>
