@@ -23,7 +23,7 @@ if ($err) {
 } else {
 	$response;
 	$List=json_decode($response);
-	//pr($List); exit;
+	pr($List); exit;
 	$postTravlePackages=$List->getTravelPackages;
 }
 //pr($List); exit;
@@ -54,7 +54,13 @@ if ($err) {
 								</tr>
 							</thead>
 							<tbody>
-								<?php $i=1; foreach ($postTravlePackages as $postTravlePackage): ?>
+								<?php $i=1; foreach ($postTravlePackages as $postTravlePackage): 
+								
+									foreach($postTravlePackage->post_travle_package_rows as $category):
+									$CategoryList[]='';
+									$x=0;
+									$category->post_travle_package_category->name;
+								?>
 								<tr>
 									<td><?= $i; ?></td>
 									<td><?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?>
