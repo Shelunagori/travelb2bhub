@@ -67,13 +67,13 @@ if ($err) {
 								?>
 								<tr>
 									<td ><?= $i; ?></td>
-									<td style="width:20%;"><?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?>
+									<td ><?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?>
 									</td>
 									<td style="width:20%;"><?= h($postTravlePackage->title) ?></td>
 									<td style="width:20%;"><?= h($CategoryList);?></td>
 									<td style="width:20%;">
-									<?php echo $this->Html->image('../'.$postTravlePackage->image,['style'=>'width:18%;']);?></td>
-									<td class="actions" style="width:20%;">
+									<?php echo $this->Html->image('../'.$postTravlePackage->image,['style'=>'height:8%;width:100%;']);?></td>
+									<td class="actions" style="width:25%;">
 										 <span>
 										 <?php echo $this->Html->link('Details','/customers/view/'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?></i>
 										<?php echo $this->Html->link('View','/customers/view/'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
