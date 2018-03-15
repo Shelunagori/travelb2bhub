@@ -247,7 +247,7 @@ if ($err) {
                 <th scope="col"><?= ('Location') ?></th>
                 <th scope="col"><?= ('Category') ?></th>
                 <th scope="col"><?= ('Website') ?></th>
-                <th scope="col"><?= ('Duration') ?></th>
+                <th scope="col"><?= ('Image') ?></th>
                 <th scope="col"><?= ('Visibility Date') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -256,12 +256,12 @@ if ($err) {
             <?php foreach ($hotelPromotions as $hotelPromotion): ?>
             <tr>
                 <td><?= $this->Number->format($hotelPromotion->id) ?></td>
-				<td><?= h($hotelPromotion->user->first_name.$hotelPromotion->user->last_name);?></td>
+				<td><?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name);?></td>
                 <td><?= h($hotelPromotion->hotel_name) ?></td>
                 <td><?= h($hotelPromotion->hotel_location) ?></td>
                 <td><?= h($hotelPromotion->hotel_category->name) ?></td>
                 <td><?= h($hotelPromotion->website) ?></td>
-                <td><?= h($hotelPromotion->price_master->week); ?></td>
+                <td><?= h($hotelPromotion->hotel_pic); ?></td>
                 <td><?= h(date('d-m-Y',strtotime($hotelPromotion->visible_date))); ?></td>				
                 <td class="actions">
 				<a class="viewdetail btn btn-info btn-sm" href="<?php echo "/travelb2bhub/HotelPromotions/view/". $hotelPromotion->id;?>" > Details</a>
