@@ -66,17 +66,21 @@ if ($err) {
 										}
 								?>
 								<tr>
-									<td><?= $i; ?></td>
-									<td><?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?>
+									<td ><?= $i; ?></td>
+									<td style="width:20%;"><?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?>
 									</td>
-									<td><?= h($postTravlePackage->title) ?></td>
-									<td><?= h($CategoryList);?></td>
-									<td>
-									<?php echo $this->Html->image('../'.$postTravlePackage->image);?></td>
-									<td class="actions" >
-										<?= $this->Html->link(__('View'), ['action' => 'view', $postTravlePackage->id]) ?>
-										<?= $this->Html->link(__('Edit'), ['action' => 'edit', $postTravlePackage->id]) ?>
-										<?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $postTravlePackage->id], ['confirm' => __('Are you sure you want to delete # {0}?', $postTravlePackage->id)]) ?> 
+									<td style="width:20%;"><?= h($postTravlePackage->title) ?></td>
+									<td style="width:20%;"><?= h($CategoryList);?></td>
+									<td style="width:20%;">
+									<?php echo $this->Html->image('../'.$postTravlePackage->image,['style'=>'width:18%;']);?></td>
+									<td class="actions" style="width:20%;">
+										 <span>
+										 <?php echo $this->Html->link('Details','/customers/view/'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?></i>
+										<?php echo $this->Html->link('View','/customers/view/'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+										<?php echo $this->Html->link('Follow','/customers/view/'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+										<?php echo $this->Html->link('Delete','/customers/delete/'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $postTravlePackage->id)));?>
+										</span>
+										
 									</td>
 								</tr>
 								<?php endforeach; ?>
