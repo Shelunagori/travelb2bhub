@@ -46,11 +46,10 @@ if ($err) {
 							<thead>
 								<tr style="background-color:#709090;color:white;">
 									<th scope="col"><?= ('Sr.No') ?></th>
-									<th scope="col"><?= ('User Name') ?></th>
+									<th scope="col"><?= ('Seller Name') ?></th>
 									<th scope="col"><?= ('Title') ?></th>
-									<th scope="col"><?= ('Country') ?></th>
-									<th scope="col"><?= ('Duration') ?></th>
-									<th scope="col"><?= ('Price') ?></th>
+									<th scope="col"><?= ('Category') ?></th>
+									<th scope="col"><?= ('Image') ?></th>
 									<th scope="col" class="actions"><?= __('Actions') ?></th>
 								</tr>
 							</thead>
@@ -58,12 +57,11 @@ if ($err) {
 								<?php $i=1; foreach ($postTravlePackages as $postTravlePackage): ?>
 								<tr>
 									<td><?= $i; ?></td>
-									<td><?= h($postTravlePackage->user->first_name.$postTravlePackage->user->last_name);?>
+									<td><?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?>
 									</td>
 									<td><?= h($postTravlePackage->title) ?></td>
-									<td><?= h($postTravlePackage->country->country_name);?></td>
-									<td><?= h($postTravlePackage->price_master->week); ?></td>
-									<td><?= h($postTravlePackage->price_master->price); ?></td>
+									<td><?= h($postTravlePackage->category);?></td>
+									<td><?= h($postTravlePackage->image); ?></td>
 									<td class="actions" >
 										<?= $this->Html->link(__('View'), ['action' => 'view', $postTravlePackage->id]) ?>
 										<?= $this->Html->link(__('Edit'), ['action' => 'edit', $postTravlePackage->id]) ?>
@@ -73,7 +71,7 @@ if ($err) {
 								<?php endforeach; ?>
 							</tbody>
 						</table>
-							<div class="paginator">
+							<!--<div class="paginator">
 								<ul class="pagination">
 									<?= $this->Paginator->first('<< ' . __('first')) ?>
 									<?= $this->Paginator->prev('< ' . __('previous')) ?>
@@ -82,7 +80,7 @@ if ($err) {
 									<?= $this->Paginator->last(__('last') . ' >>') ?>
 								</ul>
 								<p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-							</div>
+							</div>-->
 						</div>
 					</div>
 				</div>
