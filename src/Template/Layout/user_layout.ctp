@@ -226,9 +226,9 @@ $page_name=$this->request->params['action'];
   <header class="main-header">
     <!-- Logo -->
     <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo">
-      <span class="logo-mini"><?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:77%;']) ?></span>
+      <span class=""><?=  $this->Html->image('webroot/img/b2b-logo.png', ['style'=>'width:77%;']) ?></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><?=  $this->Html->image('/img/main_logo.png', ['style'=>'width:94%;']) ?></span>
+      <span class=""><?=  $this->Html->image('webroot/img/b2b-logo.png', ['style'=>'width:94%;']) ?></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">

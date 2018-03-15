@@ -207,7 +207,6 @@ if ($err) {
 						</fieldset><br>
 						<fieldset>
 							<legend style="color:#369FA1;"><b> &nbsp; <?= __(' Payment Details') ?> &nbsp;  </b></legend>
-							
 							<div class="row">
 								<div class="col-md-12">
 										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt">
@@ -230,7 +229,7 @@ if ($err) {
 												Charges
 											</p>
 											<div class="input-field">
-										<?php echo $this->Form->input('charges', ['class'=>'form-control charges','label'=>false,"placeholder"=>"Total Charges",'readonly'=>'readonly','type'=>'text']); ?>
+										<?php echo $this->Form->input('total_charges', ['class'=>'form-control charges','label'=>false,"placeholder"=>"Total Charges",'readonly'=>'readonly','type'=>'text']); ?>
 										</div>
 									</div>
 									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt">
@@ -250,6 +249,7 @@ if ($err) {
 											<center>
 											<?php echo $this->Form->button('Submit',['class'=>'btn btn-success btn-submit','value'=>'submit','style'=>'background-color:#1295A2']); ?>
 											</center>
+											<input type="hidden" name="submitted_from" value="web">
 											</div>
 										</div>
 									</div> 
