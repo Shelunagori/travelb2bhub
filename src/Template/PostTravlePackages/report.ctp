@@ -71,7 +71,8 @@ if ($err) {
 									</td>
 									<td><?= h($postTravlePackage->title) ?></td>
 									<td><?= h($CategoryList);?></td>
-									<td><?= h($postTravlePackage->image); ?></td>
+									<td>
+									<?php echo $this->Html->image('../'.$postTravlePackage->image);?></td>
 									<td class="actions" >
 										<?= $this->Html->link(__('View'), ['action' => 'view', $postTravlePackage->id]) ?>
 										<?= $this->Html->link(__('Edit'), ['action' => 'edit', $postTravlePackage->id]) ?>
