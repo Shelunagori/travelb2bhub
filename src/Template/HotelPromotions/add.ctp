@@ -209,7 +209,23 @@ if ($err) {
 							</div> 
 							<div class="row">
 								<div class="col-md-12">
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+											<p for="from">
+												City
+												<span class="required">*</span>
+											</p>
+											<div class="input-field">
+											 <?php
+												$options=array();
+													foreach($hotelcities as $cities)
+													{
+														$options[] = ['value'=>$cities->value.'-'.$cities->price,'text'=>$cities->label.' ('.$cities->state_name.')'];
+													}
+											 echo $this->Form->input('city_id',['class'=>'form-control select2 city ',"multiple"=>true ,'label'=>false,'options' => $options,"data-placeholder"=>"Select City",'id'=>'city']);?>
+												
+											</div>
+										</div>
+										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 											<p for="from">
 												Promotion Duration
 												<span class="required">*</span>
@@ -219,27 +235,11 @@ if ($err) {
 														$options=array();
 														foreach($pricemaster as $duration)
 														{
-															$options[] = ['value'=>$duration->id,'text'=>$duration->week,'priceVal'=>$duration->week];
+															$options[] = ['value'=>$duration->id,'text'=>$duration->week,'priceVal'=>$duration->week,'price'=>$duration->price];
 														};
 												 echo $this->Form->input('price_master_id',['class'=>'form-control duration select2 ','options' => $options,'label'=>false,"empty"=>"Select Promotion Weeks"]);?>
 											</div>
 										</div>
-										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-										<p for="from">
-											City
-											<span class="required">*</span>
-										</p>
-										<div class="input-field">
-										 <?php
-											$options=array();
-												foreach($hotelcities as $cities)
-												{
-													$options[] = ['value'=>$cities->value.'-'.$cities->price,'text'=>$cities->label.' ('.$cities->state_name.') ('.$cities->usercount.') - Rs.'.$cities->price,'price'=>$cities->price ];
-												}
-										 echo $this->Form->input('city_id',['class'=>'form-control select2 city ',"multiple"=>true ,'label'=>false,'options' => $options,"data-placeholder"=>"Select City",'id'=>'city']);?>
-											
-										</div>
-									</div>
 								</div>
 							</div> 
 							<div class="row">
@@ -279,7 +279,6 @@ if ($err) {
 			</div>
 		</div>
 	</div>
-	<input type="hidden" name="week_value" class="week_value">
 </section>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
@@ -288,9 +287,10 @@ if ($err) {
 		$(document).on('change','.duration',function()
 		{
 			var priceVal=$('.duration option:selected').attr('priceVal');
+			var price=$('.duration option:selected').attr('price');
 				var Result = priceVal.split(" ");
 				var weeks=Result[0];
-				$('.week_value').val(weeks);
+				var charges=weeks*price;
 				var todaydate = new Date(); // Parse date
 				for(var x=0; x < weeks; x++)
 				{
@@ -303,101 +303,8 @@ if ($err) {
 				if(mm<10){  mm='0'+mm } 
 				var date = dd+'-'+mm+'-'+yyyy;	
 				$('.visible_date').val(date);
+				$('.charges').val(charges);
 		});
-	//Calculation Of Charges //	
-	$(document).on('change','#city,.duration',function()		
-			{
-				//var price = $('#city selected').attr('price');
-				//var price=$("#city option:selected").val();
-				var countries=[];
-				$.each($("#city option:selected"), function(){            
-					countries.push($(this).val());				 
-				})
-				//alert(countries.length);
-				if(countries.length>0)
-				{
-					prices = '"'+countries+'"';
-					//alert(prices);
-					prices = String(countries);
-					charges(countries);
-					if (prices.indexOf(",") > -1)
-					{   
-						//$('#hiddencharges').val('');
-							$('.charges').val('');
-						//$('#charges1').html('0');
-						arr = prices.split(',');
-						for(i=0; i < arr.length; i++)
-						{
-							//checkcitystatus(arr[i]);
-							charges(arr[i]);
-							
-						}
-					}
-				}
-				else
-				{
-					//removecharges(countries);
-					if (countries==null) 
-					{
-						//$('#hiddencharges').val('');
-						$('.charges').val('');
-						//$('#charges1').html('0');
-						removecharges(countries);
-					}
-					else
-					{
-						//checkcitystatus(countries);
-						charges(countries);
-						// $('option:selected', this).remove();
-					}
-				}
-			});			
-			 function charges(price)
-			 {
-				price = String(price);
-				var totalcharge=0;
-				var price = price.substr(price.indexOf("-") + 1);
-				if(price==""){ price =0;}
-				duration =$('.week_value').val();
-				//alert(duration);
-				if(duration==""){duration = 1 }
-				getcharge = $('.charges').val();
-				//
-				if(getcharge==""){getcharge = 0; }
-				//totalcharge =  (parseInt(getcharge)) + (parseInt(price) * parseInt(duration))	;
-				//alert(price);
-				//alert(duration);
-				//alert(getcharge);
-				totalcharge =  (parseInt(getcharge)) + (parseInt(price) * parseInt(duration));
-				$('.charges').val(totalcharge);
-				//alert(totalcharge);
-				/* hiddencharges = $('#hiddencharges').val()
-				if(hiddencharges==""){hiddencharges = 0; }
-				totalcharge1 =  parseInt(hiddencharges)+ parseInt(price);
-				$('#hiddencharges').val(totalcharge1)
-				$('#charges1').html(totalcharge1)
-				$('#charges2').html(totalcharge1)*/
-				}
-			
-			 function removecharges(price)
-			{
-				price = String(price);
-				var price = price.substr(price.indexOf("-") + 1)
-				if(price==""){ price =0;}
-				duration = $('.week_value').val();
-				if(duration==""){duration = 1 }
-				getcharge = $('.charges').val();
-				if(getcharge==""){getcharge = 0; }
-				totalcharge =  (parseInt(getcharge)) - (parseInt(price) * parseInt(duration))	;
-				$('.charges').val(totalcharge);
-				//alert(totalcharge);
-				/*  hiddencharges = $('#hiddencharges').val()
-				if(hiddencharges==""){hiddencharges = 0; }
-				totalcharge1 =  parseInt(hiddencharges)- parseInt(price);
-				$('#hiddencharges').val(totalcharge1)
-				$('#charges1').html(totalcharge1)
-				$('#charges2').html(totalcharge1) */
-			}	
 	});		
 </script>	
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
