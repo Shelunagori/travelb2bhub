@@ -67,7 +67,7 @@ if ($err) {
 								?>
 								<tr>
 									<td ><?= $i; ?></td>
-									<td ><?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?>
+									<td ><?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.' ('.$postTravlePackage->user_rating.')');?>
 									</td>
 									<td style="width:20%;"><?= h($postTravlePackage->title) ?></td>
 									<td style="width:20%;"><?= h($CategoryList);?></td>
@@ -75,10 +75,10 @@ if ($err) {
 									<?php echo $this->Html->image('../'.$postTravlePackage->image,['style'=>'height:8%;width:100%;']);?></td>
 									<td class="actions" style="width:25%;">
 										 <span>
-										 <?php echo $this->Html->link('Details','api address'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?></i>
-										<?php echo $this->Html->link('View','api address'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
-										<?php echo $this->Html->link('Follow','api address'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
-										<?php echo $this->Html->link('Delete','api address'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $postTravlePackage->id)));?>
+										 <?php echo $this->Html->link('Likes','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?></i>
+										<?php echo $this->Html->link('Details','/PostTravlePackages/view/'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
+										<?php echo $this->Html->link('Follow','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-success btn-xs'));?>
+										<?php echo $this->Html->link('Delete','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $postTravlePackage->id)));?>
 										</span>
 									</td>
 								</tr>

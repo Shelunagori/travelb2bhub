@@ -258,7 +258,7 @@ if ($err) {
                 <td><?= h($hotelPromotion->hotel_name) ?></td>
                 <td><?= h($hotelPromotion->hotel_location) ?></td>
                 <td><?= h($hotelPromotion->hotel_category->name) ?></td>
-                <td><?php echo $this->Html->image('../'.$hotelPromotion->hotel_pic) ;?></td>
+				<td><?php echo $this->Html->image('../'.$hotelPromotion->hotel_pic,['style'=>'height:8%;width:100%;']);?></td>
 				<td class="actions" style="width:30%;">
 					 <span>
 					 <?php echo $this->Html->link('Likes','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?></i>
