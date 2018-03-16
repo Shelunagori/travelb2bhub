@@ -253,7 +253,7 @@ if ($err) {
             <?php foreach ($hotelPromotions as $hotelPromotion): ?>
             <tr>
                 <td><?= $this->Number->format($hotelPromotion->id) ?></td>
-				<td><?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name);?></td>
+				<td><?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.'( '.$hotelPromotion->user_rating.' )');?></td>
                 <td><?= h($hotelPromotion->hotel_name) ?></td>
                 <td><?= h($hotelPromotion->hotel_location) ?></td>
                 <td><?= h($hotelPromotion->hotel_category->name) ?></td>

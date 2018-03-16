@@ -6,7 +6,6 @@
 					<i class="fa fa-plus"></i> <b>View Hotel Promotion</b>
 				</div> -->
 				<div class="box-body"> 
-					<form action="<?php echo $coreVariable['SiteUrl'];?>api/hotel_promotions/add.json" method="post" enctype="multipart/form-data">
 					<center><fieldset>
 						<legend style="color:#369FA1;"><b> &nbsp; <?= __('View Hotel Details ') ?> &nbsp;  </b></legend>
 							<table class="table">
@@ -79,4 +78,11 @@
 									<td><?= h($hotelPromotion->accept_date) ?></td>
 								</tr>
 							</table>
+						</fieldset>
+					</center>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 							
