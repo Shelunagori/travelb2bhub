@@ -46,7 +46,7 @@ if ($err) {
 	<div class="box-body">
 		<div class="row">
                <div id="myModal123" class="modal fade" role="dialog">
-				  <div class="modal-dialog " style=" width: 22%;border:1px;border-radius:10px;border-style:solid;">
+				  <div class="modal-dialog " style="width: 22%;">
 					<!-- Modal content-->
 					<div class="modal-content">
 					  <div class="modal-header">
@@ -163,39 +163,6 @@ if ($err) {
 										</div>
 									</div>
 								</div>
-                              <div class="row form-group margin-b10">
-									 <div class=col-md-12>
-										 <div class=col-md-4>
-										 <label class="col-form-label"for=example-text-input>Pickup City</label>
-										 </div>
-										<div class=col-md-1>:</div>
-										<div class=col-md-7>
-											<select class=form-control  name=pickup_city id=pickup_city>
-											   <option value="">Select</option>
-											   <?php foreach($allCities1 as $city){?>
-											   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['pickup_city']) AND $_GET['pickup_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
-											   <?php }?>
-											</select>
-										</div>
-									 </div>
-                                 </div>   
-								<div class="row form-group margin-b10">								 
-									 <div class=col-md-12>
-										 <div class=col-md-4>
-										 <label class="col-form-label" for=example-text-input>Destination City</label>
-										 </div>
-										<div class="col-md-1">:</div>
-										<div class="col-md-7">
-											<select class="form-control " name=destination_city id=destination_city>
-											   <option value="">Select</option>
-											   <?php foreach($allCities1 as $city){?>
-											   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['destination_city']) AND $_GET['destination_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
-											   <?php }?>
-											</select>
-											<?php //echo $this->Form->control('preference', ["id"=>"destination_city", "type"=>"select", 'options' =>$allCities2, "class"=>"form-control"]); ?>
-										</div>
-									</div>
-                              </div>
                               <div class="row form-group margin-b10">
 									 <div class=col-md-12>
 										 <div class=col-md-4>
