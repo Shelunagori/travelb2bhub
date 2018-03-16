@@ -260,7 +260,8 @@ if ($err) {
 				<td><?php echo $this->Html->image('../'.$hotelPromotion->hotel_pic,['style'=>'height:8%;width:100%;']);?></td>
 				<td class="actions" style="width:30%;">
 					 <span>
-						 <?php echo $this->Html->link('Likes','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs likebtn'));?></i>
+						<?php echo $this->Form->button('<i class="fa fa-thumbs-up"></i>',['class'=>'btn btn-primary btn-sm','value'=>'button','style'=>'background-color:#1295A2']); ?>
+						<?php echo $this->Form->button('<i class="fa fa-eye"></i>',['class'=>'btn btn-warning btn-sm','value'=>'button']); ?>
 						<?php echo $this->Html->link('Details','/HotelPromotions/view/'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
 						<?php echo $this->Html->link('Follow','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
 						<?php echo $this->Html->link('Report','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
@@ -282,6 +283,10 @@ if ($err) {
     </div>-->
 </div>
 <script>
-document.ready( function(){
-	
+   $(document).ready(function () {
+		$(document).on('change','.likebtn',function()
+		{
+			alert();
+		});
+   });
 </script>
