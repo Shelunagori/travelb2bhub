@@ -237,59 +237,71 @@ if ($err) {
                   </div>
                </div>
             </div>
-    <table class="table" cellpadding="0" cellspacing="0">
-        <thead>
-          <tr style="background-color:#709090;color:white">
-				<th scope="col"><?= ('Sr.No') ?></th>
-                <th scope="col"><?= ('Seller Name') ?></th>
-                <th scope="col"><?= ('Hotel Name') ?></th>
-                <th scope="col"><?= ('Location') ?></th>
-                <th scope="col"><?= ('Category') ?></th>
-                <th scope="col"><?= ('Picture') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($hotelPromotions as $hotelPromotion): ?>
-            <tr>
-                <td><?= $this->Number->format($hotelPromotion->id) ?></td>
-				<td><?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.'( '.$hotelPromotion->user_rating.' )');?></td>
-                <td><?= h($hotelPromotion->hotel_name) ?></td>
-                <td><?= h($hotelPromotion->hotel_location) ?></td>
-                <td><?= h($hotelPromotion->hotel_category->name) ?></td>
-				<td><?php echo $this->Html->image('../'.$hotelPromotion->hotel_pic,['style'=>'height:8%;width:100%;']);?></td>
-				<td class="actions" style="width:30%;">
-					 <span>
-						<?php echo $this->Form->button('<i class="fa fa-thumbs-up"></i>',['class'=>'btn btn-primary btn-sm','value'=>'button','style'=>'background-color:#1295A2']); ?>
-						<?php echo $this->Form->button('<i class="fa fa-eye"></i>',['class'=>'btn btn-warning btn-sm','value'=>'button']); ?>
-						<?php echo $this->Form->button('<i class="fa fa-flag"></i>',['class'=>'btn btn-info btn-sm','value'=>'button']); ?>
-						<?php echo $this->Form->button('<i class="fa fa-bookmark"></i>',['class'=>'btn btn-success btn-sm','value'=>'button']); ?>
-						<?php //echo $this->Html->link('Details','/HotelPromotions/view/'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
-						<?php //echo $this->Html->link('Details','/HotelPromotions/view/'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
-						<?php //echo $this->Html->link('Follow','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
-						<?php //echo $this->Html->link('Report','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
-						<?php //echo $this->Html->link('Delete','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $hotelPromotion->id)));?>
-					
-					</span>
-				</td>
-			</tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-   <!-- <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
-    </div>-->
-</div>
+					<table class="table" cellpadding="0" cellspacing="0">
+						<thead>
+						  <tr style="background-color:#709090;color:white">
+								<th scope="col"><?= ('Sr.No') ?></th>
+								<th scope="col"><?= ('Seller Name') ?></th>
+								<th scope="col"><?= ('Hotel Name') ?></th>
+								<th scope="col"><?= ('Location') ?></th>
+								<th scope="col"><?= ('Category') ?></th>
+								<th scope="col"><?= ('Picture') ?></th>
+								<th scope="col" class="actions"><?= __('Actions') ?></th>
+							</tr>
+						</thead>
+						<tbody>
+						<?php foreach ($hotelPromotions as $hotelPromotion): ?>
+						<tr>
+							<td><?= $this->Number->format($hotelPromotion->id) ?></td>
+							<td><?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.'( '.$hotelPromotion->user_rating.' )');?></td>
+							<td><?= h($hotelPromotion->hotel_name) ?></td>
+							<td><?= h($hotelPromotion->hotel_location) ?></td>
+							<td><?= h($hotelPromotion->hotel_category->name) ?></td>
+							<td><?php echo $this->Html->image('../'.$hotelPromotion->hotel_pic,['style'=>'height:8%;width:100%;']);?></td>
+							<td class="actions" style="width:30%;">
+								 <span>
+									<?php echo $this->Form->button('<i class="fa fa-thumbs-up"></i>',['class'=>'btn btn-primary btn-sm likes','value'=>'button','style'=>'background-color:#1295A2']); ?>
+									<a href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>"view",$hotelPromotion->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"></i>',['class'=>'btn btn-warning btn-sm','value'=>'button']); ?></a>
+									<?php echo $this->Form->button('<i class="fa fa-flag"></i>',['class'=>'btn btn-info btn-sm','value'=>'button']); ?>
+									<?php echo $this->Form->button('<i class="fa fa-bookmark"></i>',['class'=>'btn btn-success btn-sm','value'=>'button']); ?>
+									<?php //echo $this->Html->link('Details','/HotelPromotions/view/'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+									<?php //echo $this->Html->link('Details','/HotelPromotions/view/'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+									<?php //echo $this->Html->link('Follow','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+									<?php //echo $this->Html->link('Report','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+									<?php //echo $this->Html->link('Delete','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $hotelPromotion->id)));?>
+											</span>
+										</td>
+									</tr>
+									<?php endforeach; ?>
+								</tbody>
+							</table>
+							<h2><span class="show_msg"></span></h2>
+						   <!-- <div class="paginator">
+								<ul class="pagination">
+									<?= $this->Paginator->prev('< ' . __('previous')) ?>
+									<?= $this->Paginator->numbers() ?>
+									<?= $this->Paginator->next(__('next') . ' >') ?>
+								</ul>
+								<p><?= $this->Paginator->counter() ?></p>
+							</div>-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
    $(document).ready(function () {
-		$(document).on('change','.likebtn',function()
+		$(document).on('click','.likes',function()
 		{
-			alert();
+			var txt;
+			var r = confirm("Are You Sure to Like this Promotion !");
+			if (r == true) {
+				txt = "You Liked this Promotion !";
+			} else {
+				txt = "You do not Like this promtion!";
+			}
+			$(".show_msg").text(txt);
 		});
    });
 </script>
