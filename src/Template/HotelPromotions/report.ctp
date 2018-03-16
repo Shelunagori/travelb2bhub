@@ -262,10 +262,13 @@ if ($err) {
 					 <span>
 						<?php echo $this->Form->button('<i class="fa fa-thumbs-up"></i>',['class'=>'btn btn-primary btn-sm','value'=>'button','style'=>'background-color:#1295A2']); ?>
 						<?php echo $this->Form->button('<i class="fa fa-eye"></i>',['class'=>'btn btn-warning btn-sm','value'=>'button']); ?>
-						<?php echo $this->Html->link('Details','/HotelPromotions/view/'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
-						<?php echo $this->Html->link('Follow','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
-						<?php echo $this->Html->link('Report','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
-						<?php echo $this->Html->link('Delete','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $hotelPromotion->id)));?>
+						<?php echo $this->Form->button('<i class="fa fa-flag"></i>',['class'=>'btn btn-info btn-sm','value'=>'button']); ?>
+						<?php echo $this->Form->button('<i class="fa fa-bookmark"></i>',['class'=>'btn btn-success btn-sm','value'=>'button']); ?>
+						<?php //echo $this->Html->link('Details','/HotelPromotions/view/'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+						<?php //echo $this->Html->link('Details','/HotelPromotions/view/'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+						<?php //echo $this->Html->link('Follow','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+						<?php //echo $this->Html->link('Report','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+						<?php //echo $this->Html->link('Delete','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $hotelPromotion->id)));?>
 					
 					</span>
 				</td>
