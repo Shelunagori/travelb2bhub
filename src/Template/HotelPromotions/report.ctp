@@ -242,7 +242,7 @@ if ($err) {
         <thead>
           <tr style="background-color:#709090;color:white">
 				<th scope="col"><?= ('Sr.No') ?></th>
-                <th scope="col"><?= ('User Name') ?></th>
+                <th scope="col"><?= ('Seller Name') ?></th>
                 <th scope="col"><?= ('Hotel Name') ?></th>
                 <th scope="col"><?= ('Location') ?></th>
                 <th scope="col"><?= ('Category') ?></th>
@@ -261,11 +261,12 @@ if ($err) {
                 <td><?= h($hotelPromotion->hotel_category->name) ?></td>
                 <td><?= h($hotelPromotion->website) ?></td>
                 <td><?= h(date('d-m-Y',strtotime($hotelPromotion->visible_date))); ?></td>				
-				<td class="actions" style="width:25%;">
+				<td class="actions" style="width:30%;">
 					 <span>
-					 <?php echo $this->Html->link('Details','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?></i>
-					<?php echo $this->Html->link('View','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+					 <?php echo $this->Html->link('Likes','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?></i>
+					<?php echo $this->Html->link('Details','/HotelPromotions/view/'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
 					<?php echo $this->Html->link('Follow','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+					<?php echo $this->Html->link('Report','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
 					<?php echo $this->Html->link('Delete','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $hotelPromotion->id)));?>
 					</span>
 				</td>
