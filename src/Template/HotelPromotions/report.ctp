@@ -246,8 +246,7 @@ if ($err) {
                 <th scope="col"><?= ('Hotel Name') ?></th>
                 <th scope="col"><?= ('Location') ?></th>
                 <th scope="col"><?= ('Category') ?></th>
-                <th scope="col"><?= ('Website') ?></th>
-                <th scope="col"><?= ('Visibility Date') ?></th>
+                <th scope="col"><?= ('Picture') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -259,8 +258,7 @@ if ($err) {
                 <td><?= h($hotelPromotion->hotel_name) ?></td>
                 <td><?= h($hotelPromotion->hotel_location) ?></td>
                 <td><?= h($hotelPromotion->hotel_category->name) ?></td>
-                <td><?= h($hotelPromotion->website) ?></td>
-                <td><?= h(date('d-m-Y',strtotime($hotelPromotion->visible_date))); ?></td>				
+                <td><?php echo $this->Html->image('../'.$hotelPromotion->hotel_pic) ;?></td>
 				<td class="actions" style="width:30%;">
 					 <span>
 					 <?php echo $this->Html->link('Likes','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?></i>
