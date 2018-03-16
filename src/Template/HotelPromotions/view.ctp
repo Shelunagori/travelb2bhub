@@ -47,9 +47,12 @@
 										<th scope="row"><?= __('Payment Status') ?></th>
 									<td><?= h($hotelPromotion->payment_status) ?></td>
 								</tr>
-								<tr >
+								<!--<tr >
 									<th scope="row" ><?= __('Hotel Pic') ?></th>
 									<td colspan="2"><?= $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'width:500px']) ?></td>
+								</tr>-->
+								<tr>
+							
 								</tr>
 							</table>
 						</fieldset>
