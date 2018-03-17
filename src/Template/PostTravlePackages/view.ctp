@@ -49,6 +49,17 @@ if ($err) {
 											}
 											$x++;
 										}
+										$countries='';
+									$y=0;
+									foreach($postTravlePackage->post_travle_package_countries as $country)
+										{
+											
+											$countryList.=$country->country_name;
+											if($y>1){
+												$countryList.=' , ';
+											}
+											$y++;
+										}
 						?>
 						<table class="table">
 							<tr>
@@ -84,6 +95,10 @@ if ($err) {
 											<td><?= date('d-M-Y',strtotime($postTravlePackage->visible_date) );?></td>
 											<th scope="row"><?= __('Like Count') ?></th>
 											<td><?= $this->Number->format($postTravlePackage->like_count) ?></td>
+										</tr>
+										<tr>
+											<th scope="row"><?= __('Country') ?></th>
+											<td><?= h($countryList); ?></td>
 										</tr>
 										
 									<?php endforeach; ?>
