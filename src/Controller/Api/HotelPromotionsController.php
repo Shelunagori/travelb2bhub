@@ -196,7 +196,7 @@ $getHotelPromotion=$getEventPlanners ;
         $this->set('_serialize', ['getHotelPromotion','message','response_code']);				
 	}	
 	
-	public function getHotelList($isLikedUserId = null,$category_id = null,$short=null,$rating_filter=null)
+	public function getHotelList($isLikedUserId = null,$category_id = null,$short=null,$rating_filter=null,$higestSort=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
@@ -204,6 +204,7 @@ $getHotelPromotion=$getEventPlanners ;
 			$category_id = $this->request->query('category_id');
 			$short = $this->request->query('short'); 
 			$rating_filter = $this->request->query('rating_filter');
+			$higestSort = $this->request->query('higestSort');
 			$category_id_filter = null;
 			//-- Filter 
 			if(!empty($category_id))
@@ -236,9 +237,9 @@ $getHotelPromotion=$getEventPlanners ;
 				}
 			}
 			
-			$getEventPlanners = $this->HotelPromotions->find();
+			$getHotelPromotion = $this->HotelPromotions->find();
 			
-				$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('HotelPromotionLikes.id')])
+				$getHotelPromotion->select(['total_likes'=>$getHotelPromotion->func()->count('HotelPromotionLikes.id')])
 				->contain(['HotelCategories','Users'=>function($q){
 				return $q->select(['first_name','last_name','mobile_number','company_name']);
 			}])
@@ -251,9 +252,9 @@ $getHotelPromotion=$getEventPlanners ;
 			->group(['HotelPromotions.id'])
 			->autoFields(true);
 			//pr($getEventPlanners->toArray()); exit;
-			if(!empty($getEventPlanners->toArray()))
+			if(!empty($getHotelPromotion->toArray()))
 			{
-				foreach($getEventPlanners as $getEventPlanner)
+				foreach($getHotelPromotion as $getEventPlanner)
 				{
 					$getEventPlanner->total_likes = $this->HotelPromotions->HotelPromotionLikes
 							->find()->where(['hotel_promotion_id' => $getEventPlanner->id])->count();	
@@ -276,23 +277,48 @@ $getHotelPromotion=$getEventPlanners ;
 					$testimonial=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getEventPlanner->user_id]);
 					$testimonial_count=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getEventPlanner->user_id])->count();
 						 
-						 foreach($testimonial as $test_data){
+						foreach($testimonial as $test_data){
 							 $rating=$test_data->rating;
 							 $all_raiting+=$rating;
-						 }
-						 if($testimonial_count>0){
+						}
+						if($testimonial_count>0){
 							 $final_raiting=($all_raiting/$testimonial_count);
 							 if($final_raiting>0){
 								$getEventPlanner->user_rating=number_format($final_raiting, 1);
 							 }else{
 								$getEventPlanner->user_rating="0";
 							 }	
-						 }else{
+						}else{
 							$getEventPlanner->user_rating="0";
-						 }	 
+						}
 				}
-				$getHotelPromotion=$getEventPlanners ;
-				$message = 'List Found Successfully';
+				if(!empty($higestSort))
+				{
+					
+					if($higestSort == 'total_likes')
+					{
+						$getHotelPromotion = $getHotelPromotion->toArray();
+						usort($getHotelPromotion, function ($a, $b) {
+							return $b['total_likes'] - $a['total_likes'];
+						});
+					}
+					else if($higestSort == 'total_views')
+					{
+						$getHotelPromotion = $getHotelPromotion->toArray();
+						usort($getHotelPromotion, function ($a, $b) {
+							return $b['total_views'] - $a['total_views'];
+						});					
+					}
+					else if($higestSort == 'user_rating')
+					{
+						$getHotelPromotion = $getHotelPromotion->toArray();
+						usort($getHotelPromotion, function ($a, $b) {
+							return $b['user_rating'] - $a['user_rating'];
+						});					
+					}					
+				}
+ 			
+ 				$message = 'List Found Successfully';
 				$response_code = 200;
 			}
 			else
