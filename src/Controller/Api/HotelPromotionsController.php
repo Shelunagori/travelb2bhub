@@ -196,14 +196,13 @@ $getHotelPromotion=$getEventPlanners ;
         $this->set('_serialize', ['getHotelPromotion','message','response_code']);				
 	}	
 	
-	public function getHotelList($isLikedUserId = null,$category_id = null,$starting_price_short=null,$rating_short=null,$rating_filter=null)
+	public function getHotelList($isLikedUserId = null,$category_id = null,$short=null,$rating_filter=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
 		{
 			$category_id = $this->request->query('category_id');
-			$starting_price_short = $this->request->query('starting_price_short');
-			$rating_short = $this->request->query('rating_short');
+			$short = $this->request->query('short'); 
 			$rating_filter = $this->request->query('rating_filter');
 			$category_id_filter = null;
 			//-- Filter 
@@ -222,16 +221,19 @@ $getHotelPromotion=$getEventPlanners ;
 				$Ratings = explode(',',$rating_filter);
 				$rating_filter_filter = ['HotelPromotions.hotel_rating IN'=>$Ratings];
 			}
-			//-- SHORT
+			//-- SHORTs
 			$where_short=null;
-			if(!empty($starting_price_short))
+			if(!empty($short))
 			{ 
-				$where_short = ['HotelPromotions.cheap_tariff' =>$starting_price_short];
-			}
+				if($short=='cheap_tariff')
+				{
+					$where_short = ['HotelPromotions.cheap_tariff' =>'DESC'];
+				}
 			
-			if(!empty($rating_short))
-			{
-				$where_short = ['HotelPromotions.hotel_rating' =>$rating_short];
+				if($short=='hotel_rating')
+				{
+					$where_short = ['HotelPromotions.hotel_rating' =>'DESC'];
+				}
 			}
 			
 			$getEventPlanners = $this->HotelPromotions->find();
