@@ -395,7 +395,6 @@ if ($err) {
 $( document ).ready(function() 		
 {
 	var like=$(this).closest("tr").find("td #likecount").val();
-	alert(like);
 	$(".like").val(like);
 });
 </script>
