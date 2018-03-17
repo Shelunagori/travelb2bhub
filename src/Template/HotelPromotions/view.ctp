@@ -46,8 +46,8 @@ if ($err) {
 									<td colspan="2">
 									<table class="table">
 									<tr>
-									<td ><?= __('Seller Name') ?></td>
-									<td><b><?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.'( '.$hotelPromotion->user_rating.' )');?></b></td>
+									<th ><?= __('Seller Name') ?></th>
+									<td><?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.'( '.$hotelPromotion->user_rating.' )');?></td>
 									<td ><?= __('Hotel Name') ?></td>
 									<td><?= h($hotelPromotion->hotel_name) ?></td>
 								</tr>
