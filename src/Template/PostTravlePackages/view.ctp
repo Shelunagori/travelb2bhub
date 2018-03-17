@@ -38,7 +38,7 @@ if ($err) {
 					<fieldset>
 						<legend style="color:#369FA1;"><b> &nbsp; <?= __('Post Travle Package Details ') ?> &nbsp;  </b></legend>
 						<?php foreach($postTravlePackage as $postTravlePackage):
-						$CategoryList='';
+									$CategoryList='';
 									$x=0;
 									foreach($postTravlePackage->post_travle_package_rows as $category)
 										{
@@ -49,17 +49,30 @@ if ($err) {
 											}
 											$x++;
 										}
-										$countries='';
-									$y=0;
-									foreach($postTravlePackage->post_travle_package_countries as $country)
-										{
-											
-											$countryList.=$country->country_name;
-											if($y>1){
-												$countryList.=' , ';
+											$countryList='';
+											$y=0;
+											foreach($postTravlePackage->post_travle_package_countries as $country)
+											{
+												
+												$countryList.=$country->country->country_name;
+												if($y>1){
+													$countryList.=' , ';
+												}
+												$y++;
 											}
-											$y++;
-										}
+										
+											$cityList='';
+											$z=0;
+											foreach($postTravlePackage->post_travle_package_cities as $cities)
+											{
+												
+												$cityList.=$cities->city->name;
+												if($z>1){
+													$cityList.=' , ';
+												}
+												$z++;
+											}
+								
 						?>
 						<table class="table">
 							<tr>
@@ -99,6 +112,8 @@ if ($err) {
 										<tr>
 											<th scope="row"><?= __('Country') ?></th>
 											<td><?= h($countryList); ?></td>
+											<th scope="row"><?= __('City') ?></th>
+											<td><?= h($cityList); ?></td>
 										</tr>
 										
 									<?php endforeach; ?>
