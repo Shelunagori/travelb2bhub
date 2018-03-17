@@ -217,7 +217,7 @@ if ($err) {
 								<td><?= h($eventPlannerPromotion->country->country_name); ?></td>
 								<td><?= h($eventPlannerPromotion->price_master->week); ?></td>
 								<td><?= h($eventPlannerPromotion->price_master->price); ?></td>
-								<td class="likecount"><?= $this->Number->format($eventPlannerPromotion->like_count) ?></td>
+								<td id="likecount"><?= $this->Number->format($eventPlannerPromotion->like_count) ?></td>
 								<td><?= h(date('d-m-Y',strtotime($eventPlannerPromotion->visible_date))); ?></td>	
 								<td class="actions" style="width:30%;">
 									 <span>
@@ -391,10 +391,11 @@ if ($err) {
 	</div>
 </div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
-	<script type="text/javascript">		
-(document).ready(function()
+<script type="text/javascript">
+$( document ).ready(function() 		
 {
-	var like=$(".likecount").val();
+	var like=$(this).closest("tr").find("td #likecount").val();
+	alert(like);
 	$(".like").val(like);
 });
 </script>
