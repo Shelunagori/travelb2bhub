@@ -144,7 +144,7 @@ class PostTravlePackagesController extends AppController
         $this->set('_serialize', ['message','response_code']);
     }
 
-	public function getTravelPackages($isLikedUserId=null,$category_id = null, $category_short = null,$duration_day=null,$duration_night=null,$duration_short=null,$valid_date=null,$valid_date_short=null,$starting_price=null,$starting_price_short=null,$country_id=null,$country_id_short=null,$city_id=null,$city_id_short=null,$category_name=null,$higestShort=null)
+	public function getTravelPackages($isLikedUserId=null,$category_id = null, $category_short = null,$duration_day=null,$duration_night=null,$duration_short=null,$valid_date=null,$valid_date_short=null,$starting_price=null,$starting_price_short=null,$country_id=null,$country_id_short=null,$city_id=null,$city_id_short=null,$category_name=null,$higestSort=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
@@ -163,7 +163,7 @@ class PostTravlePackagesController extends AppController
 			$city_id = $this->request->query('city_id');
 			$city_id_short = $this->request->query('city_id_short');
 			$category_name = $this->request->query('category_name');
-			$higestShort = $this->request->query('higestShort');
+			$higestSort = $this->request->query('higestSort');
 
 			// Start shorting code
 			if(empty($category_short))
@@ -354,23 +354,23 @@ class PostTravlePackagesController extends AppController
 						 }
 				}
 				
-				if(!empty($higestShort))
+				if(!empty($higestSort))
 				{
-					if($higestShort == 'total_likes')
+					if($higestSort == 'total_likes')
 					{
 						$getTravelPackages = $getTravelPackages->toArray();
 						usort($getTravelPackages, function ($a, $b) {
 							return $b['total_likes'] - $a['total_likes'];
 						});
 					}
-					else if($higestShort == 'total_views')
+					else if($higestSort == 'total_views')
 					{
 						$getTravelPackages = $getTravelPackages->toArray();
 						usort($getTravelPackages, function ($a, $b) {
 							return $b['total_views'] - $a['total_views'];
 						});					
 					}
-					else if($higestShort == 'user_rating')
+					else if($higestSort == 'user_rating')
 					{
 						$getTravelPackages = $getTravelPackages->toArray();
 						usort($getTravelPackages, function ($a, $b) {

@@ -231,7 +231,7 @@ class EventPlannerPromotionsController extends AppController
         $this->set('_serialize', ['getEventPlanners','message','response_code']);				
 	}	
 	
-	public function getEventPlanners($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$higestShort=null)
+	public function getEventPlanners($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$higestSort=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
@@ -242,7 +242,7 @@ class EventPlannerPromotionsController extends AppController
 			$state_id_short = $this->request->query('state_id_short');
 			$city_id_short = $this->request->query('city_id_short');
 			$city_id = $this->request->query('city_id');
-			$higestShort = $this->request->query('higestShort');
+			$higestSort = $this->request->query('higestSort');
 			if(!empty($country_id))
 			{
 				$country_id = ['EventPlannerPromotions.country_id'=>$country_id];
@@ -360,23 +360,23 @@ class EventPlannerPromotionsController extends AppController
 							$getEventPlanner->user_rating="0";
 						 }	 
 				}
-				if(!empty($higestShort))
+				if(!empty($higestSort))
 				{
-					if($higestShort == 'total_likes')
+					if($higestSort == 'total_likes')
 					{
 						$getEventPlanners = $getEventPlanners->toArray();
 						usort($getEventPlanners, function ($a, $b) {
 							return $b['total_likes'] - $a['total_likes'];
 						});
 					}
-					else if($higestShort == 'total_views')
+					else if($higestSort == 'total_views')
 					{
 						$getEventPlanners = $getEventPlanners->toArray();
 						usort($getEventPlanners, function ($a, $b) {
 							return $b['total_views'] - $a['total_views'];
 						});					
 					}
-					else if($higestShort == 'user_rating')
+					else if($higestSort == 'user_rating')
 					{
 						$getEventPlanners = $getEventPlanners->toArray();
 						usort($getEventPlanners, function ($a, $b) {
