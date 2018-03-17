@@ -180,7 +180,7 @@ class TaxiFleetPromotionsController extends AppController
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);		
 	}
-	public function getTaxiFleetPromotions($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$car_bus_id=null,$car_bus_short=null)
+	public function getTaxiFleetPromotions($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$car_bus_id=null,$car_bus_short=null,$higestShort=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		$country_id_short = $this->request->query('country_id_short');		
@@ -189,7 +189,7 @@ class TaxiFleetPromotionsController extends AppController
 		$state_id_short = $this->request->query('state_id_short');
 		$city_id_short = $this->request->query('city_id_short');
 		$city_id = $this->request->query('city_id');
-
+		$higestShort = $this->request->query('higestShort');
 		$car_bus_short = $this->request->query('car_bus_short');
 		$car_bus_id = $this->request->query('car_bus_id');		
 		
@@ -330,6 +330,32 @@ class TaxiFleetPromotionsController extends AppController
 						 }	 
 					 
 				}
+
+				if(!empty($higestShort))
+				{
+					if($higestShort == 'total_likes')
+					{
+						$getTaxiFleetPromotions = $getTaxiFleetPromotions->toArray();
+						usort($getTaxiFleetPromotions, function ($a, $b) {
+							return $b['total_likes'] - $a['total_likes'];
+						});
+					}
+					else if($higestShort == 'total_views')
+					{
+						$getTaxiFleetPromotions = $getTaxiFleetPromotions->toArray();
+						usort($getTaxiFleetPromotions, function ($a, $b) {
+							return $b['total_views'] - $a['total_views'];
+						});					
+					}
+					else if($higestShort == 'user_rating')
+					{
+						$getTaxiFleetPromotions = $getTaxiFleetPromotions->toArray();
+						usort($getTaxiFleetPromotions, function ($a, $b) {
+							return $b['user_rating'] - $a['user_rating'];
+						});					
+					}					
+				}
+				
 				$message = 'List Found Successfully';
 				$response_code = 200;
 			}
