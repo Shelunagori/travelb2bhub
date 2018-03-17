@@ -196,20 +196,56 @@ $getHotelPromotion=$getEventPlanners ;
         $this->set('_serialize', ['getHotelPromotion','message','response_code']);				
 	}	
 	
-	public function getHotelList($isLikedUserId = null)
+	public function getHotelList($isLikedUserId = null,$category_id = null,$starting_price_short=null,$rating_short=null,$rating_filter=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
 		{
+			$category_id = $this->request->query('category_id');
+			$starting_price_short = $this->request->query('starting_price_short');
+			$rating_short = $this->request->query('rating_short');
+			$rating_filter = $this->request->query('rating_filter');
+			$category_id_filter = null;
+			//-- Filter 
+			if(!empty($category_id))
+			{
+				$category_id = explode(',',$category_id);
+				$category_id_filter = ['HotelPromotions.hotel_category_id IN'=>$category_id];
+			}
+			else
+			{
+				$category_id_filter = null;
+			}
+			$rating_filter_filter = null;
+			if(!empty($rating_filter))
+			{
+				$Ratings = explode(',',$rating_filter);
+				$rating_filter_filter = ['HotelPromotions.hotel_rating IN'=>$Ratings];
+			}
+			//-- SHORT
+			$where_short=null;
+			if(!empty($starting_price_short))
+			{ 
+				$where_short = ['HotelPromotions.cheap_tariff' =>$starting_price_short];
+			}
+			
+			if(!empty($rating_short))
+			{
+				$where_short = ['HotelPromotions.hotel_rating' =>$rating_short];
+			}
+			
 			$getEventPlanners = $this->HotelPromotions->find();
 			
 				$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('HotelPromotionLikes.id')])
 				->contain(['HotelCategories','Users'=>function($q){
 				return $q->select(['first_name','last_name','mobile_number','company_name']);
 			}])
-				->leftJoinWith('HotelPromotionLikes')
+			->leftJoinWith('HotelPromotionLikes')
+			->where($category_id_filter)
+			->where($rating_filter_filter)
 			->where(['HotelPromotions.visible_date >=' =>date('Y-m-d')])
 			->where(['HotelPromotions.is_deleted' =>0])
+			->order($where_short)
 			->group(['HotelPromotions.id'])
 			->autoFields(true);
 			//pr($getEventPlanners->toArray()); exit;
