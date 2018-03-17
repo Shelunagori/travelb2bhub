@@ -23,6 +23,7 @@ if ($err) {
 } else {
 	$response;
 	$priceMasters=json_decode($response);
+	//pr($priceMasters);exit;
 	$priceMasters=$priceMasters->PriceMasters;
 }
  
