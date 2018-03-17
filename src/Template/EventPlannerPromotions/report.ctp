@@ -224,11 +224,12 @@ if ($err) {
 								<td><?= h($eventPlannerPromotion->price_master->price); ?></td>
 								<td><?= $this->Number->format($eventPlannerPromotion->like_count) ?></td>
 								<td><?= h(date('d-m-Y',strtotime($eventPlannerPromotion->visible_date))); ?></td>	
-								<td class="actions" style="width:25%;">
+								<td class="actions" style="width:30%;">
 									 <span>
-										 <?php echo $this->Html->link('Details','api address'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?></i>
-										<?php echo $this->Html->link('View','api address'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
-										<?php echo $this->Html->link('Follow','api address'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+										<?php echo $this->Form->button('<i class="fa fa-thumbs-up"> Likes</i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2']); ?>
+										<a href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>"view",$eventPlannerPromotion->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"> View</i>',['class'=>'btn btn-warning btn-xs','value'=>'button',]); ?></a>
+										<?php echo $this->Form->button('<i class="fa fa-flag"> Report</i>',['class'=>'btn btn-primary btn-xs','value'=>'button']); ?>
+										<?php echo $this->Form->button('<i class="fa fa-bookmark"> Save</i>',['class'=>'btn btn-success btn-xs','value'=>'button']); ?>
 										<?php echo $this->Html->link('Delete','api address'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $eventPlannerPromotion->id)));?>
 									</span>
 								</td>
