@@ -53,6 +53,7 @@ if ($err) {
 } else {
 	$masterCountry=json_decode($masterCountry);
 	$countries=$masterCountry->countryData->ResponseObject;
+	//pr($masterCountry);exit;
 	$states=$masterCountry->stateData->ResponseObject;
 	$city=$masterCountry->cityData->ResponseObject;
 }
@@ -105,6 +106,7 @@ if ($err) {
   echo "cURL Error #:" . $err;
 } else {
   $currenc=json_decode($responsecrn);
+  // pr($currenc);exit;
   $Currencies=$currenc->Currencies;
 }
 ?>
