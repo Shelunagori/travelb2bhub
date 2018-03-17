@@ -193,12 +193,7 @@ if ($err) {
                      </div>
                   </div>
                </div>
-             
-				<!-------SHORTING FILTERING--------->
-				
-				
-				
-					<table class="table" cellpadding="0" cellspacing="0">
+ 					<table class="table" cellpadding="0" cellspacing="0">
 						<thead>
 							 <tr style="background-color:#709090;color:white;">
 								<th scope="col"><?= ('Sr.No') ?></th>
@@ -222,15 +217,15 @@ if ($err) {
 								<td><?= h($eventPlannerPromotion->country->country_name); ?></td>
 								<td><?= h($eventPlannerPromotion->price_master->week); ?></td>
 								<td><?= h($eventPlannerPromotion->price_master->price); ?></td>
-								<td><?= $this->Number->format($eventPlannerPromotion->like_count) ?></td>
+								<td class="likecount"><?= $this->Number->format($eventPlannerPromotion->like_count) ?></td>
 								<td><?= h(date('d-m-Y',strtotime($eventPlannerPromotion->visible_date))); ?></td>	
 								<td class="actions" style="width:30%;">
 									 <span>
-										<?php echo $this->Form->button('<i class="fa fa-thumbs-up" > Likes</i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2','data-target'=>'#myModal123','data-toggle'=>'modal']); ?>
+										<?php echo $this->Form->button('<i class="fa fa-thumbs-up like" > Likes </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2','data-target'=>'#likemodal','data-toggle'=>'modal']); ?>
 										<a href="<?php echo $this->Url->build(["controller" => "EventPlannerPromotions",'action'=>"view",$eventPlannerPromotion->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"> View</i>',['class'=>'btn btn-warning btn-xs','value'=>'button',]); ?></a>
-										<?php echo $this->Form->button('<i class="fa fa-flag"> Report</i>',['class'=>'btn btn-primary btn-xs','value'=>'button']); ?>
-										<?php echo $this->Form->button('<i class="fa fa-bookmark"> Save</i>',['class'=>'btn btn-success btn-xs','value'=>'button']); ?>
-										<?php echo $this->Html->link('Delete','api address'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $eventPlannerPromotion->id)));?>
+										<?php echo $this->Form->button('<i class="fa fa-flag"> Report</i>',['class'=>'btn btn-primary btn-xs','value'=>'button','data-target'=>'#reportmodal','data-toggle'=>'modal']); ?>
+										<?php echo $this->Form->button('<i class="fa fa-bookmark"> Save</i>',['class'=>'btn btn-success btn-xs','value'=>'button','data-target'=>'#savemodal','data-toggle'=>'modal']); ?>
+										<?php echo $this->Html->link('Delete','api address'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal','data-toggle'=>'modal', $eventPlannerPromotion->id));?>
 									</span>
 								</td>
 							</tr>
@@ -242,6 +237,144 @@ if ($err) {
 							}							?>
 						</tbody>
 					</table>
+					
+			<!-------Like Modal Start--------->
+			<div id="likemodal" class="modal fade" role="dialog">
+				<div class="modal-dialog modal-md" >
+					<!-- Modal content-->
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title"></h4>
+						  </div>
+						<form method="get" class="filter_box">
+							<div class="modal-body" style="height:100px;">
+								<div class="col-md-12 row form-group ">
+									<div class="col-md-12 radio">
+										<h3><label>
+										Are you sure ,you want to like this promotion ? 
+										</label></h3>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer" style="height:60px;">
+								  <div class="row">
+										<div class="col-md-12 text-center">
+											<input type="submit" class="btn btn-primary btn-md" value="OK">
+											<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+										</div>
+								  </div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-------Like Modal End--------->
+			
+			<!-------Report Modal Start--------->
+			<div id="reportmodal" class="modal fade" role="dialog">
+				<div class="modal-dialog modal-md" >
+					<!-- Modal content-->
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title"></h4>
+						  </div>
+						<form method="get" class="filter_box">
+							<div class="modal-body" style="height:100px;">
+								<div class="col-md-12 row form-group ">
+									<div class="col-md-12 radio">
+										<h3>
+										<label>
+											<select><option>Select Report Reason</option></select>
+										</label>
+										</h3>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer" style="height:60px;">
+								  <div class="row">
+										<div class="col-md-12 text-center">
+											<input type="submit" class="btn btn-primary btn-md" value="OK">
+											<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+										</div>
+								  </div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-------Report Modal End--------->	
+			
+			<!-------Save Modal Start--------->
+			<div id="savemodal" class="modal fade" role="dialog">
+				<div class="modal-dialog modal-md" >
+					<!-- Modal content-->
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title"></h4>
+						  </div>
+						<form method="get" class="filter_box">
+							<div class="modal-body" style="height:100px;">
+								<div class="col-md-12 row form-group ">
+									<div class="col-md-12 radio">
+										<h3>
+										<label>
+										Are You Sure, this promotion will added to your Cart.
+										</label>
+										</h3>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer" style="height:60px;">
+								  <div class="row">
+										<div class="col-md-12 text-center">
+											<input type="submit" class="btn btn-primary btn-md" value="OK">
+											<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+										</div>
+								  </div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-------Save Modal End--------->
+			<!-------Delete Modal Start--------->
+			<div id="deletemodal" class="modal fade" role="dialog">
+				<div class="modal-dialog modal-md" >
+					<!-- Modal content-->
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title"></h4>
+						  </div>
+						<form method="get" class="filter_box">
+							<div class="modal-body" style="height:100px;">
+								<div class="col-md-12 row form-group ">
+									<div class="col-md-12 radio">
+										<h3>
+										<label>
+										Are You Sure, this promotion will be removed ??
+										</label>
+										</h3>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer" style="height:60px;">
+								  <div class="row">
+										<div class="col-md-12 text-center">
+											<input type="submit" class="btn btn-primary btn-md" value="OK">
+											<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+										</div>
+								  </div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-------Delete Modal End--------->
+			
 					<!--<div class="paginator">
 						<ul class="pagination">
 							<?= $this->Paginator->first('<< ' . __('first')) ?>
@@ -257,3 +390,11 @@ if ($err) {
 		</div>
 	</div>
 </div>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+	<script type="text/javascript">		
+(document).ready(function()
+{
+	var like=$(".likecount").val();
+	$(".like").val(like);
+});
+</script>
