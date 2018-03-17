@@ -40,53 +40,40 @@ if ($err) {
 						<?php foreach($postTravlePackage as $postTravlePackage):?>
 						<table class="table">
 							<tr>
-								<th scope="row"><?= __('Seller Name') ?></th>
-								<td><?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.'( '.$postTravlePackage->user_rating.' )');?></td>
-								<th scope="row"><?= __('Title') ?></th>
-								<td><?= h($postTravlePackage->title) ?></td>
+								<td colspan="2"><?= $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'width:300px;margin-top:-10px;height:220px;']) ?></td>
+								<td colspan="2">
+									<table class="table">
+										<tr>
+											<th scope="row"><?= __('Seller Name') ?></th>
+											<td><?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.'( '.$postTravlePackage->user_rating.' )');?></td>
+											<th scope="row"><?= __('Title') ?></th>
+											<td><?= h($postTravlePackage->title) ?></td>
+										</tr>
+										<tr>
+											<th scope="row"><?= __('Package Duration') ?></th>
+											<td><?= h($postTravlePackage->duration_night.'Night '.$postTravlePackage->duration_day.'Days') ?></td>
+											<th scope="row"><?= __('Visible Date') ?></th>
+											<td><?= date('d-M-Y',strtotime($postTravlePackage->visible_date) );?></td>
+										</tr>
+										<tr>
+											<th scope="row"><?= __('Image') ?></th>
+											<td><?= h($postTravlePackage->image) ?></td>
+										</tr>
+										<tr>
+											<th scope="row"><?= __('Promotion Duration') ?></th>
+											<td><?=h($postTravlePackage->price_master->week)?></td>
+											
+										</tr>	
+										<tr>
+											<th scope="row"><?= __('Starting Price') ?></th>
+											<td><?= $this->Number->format($postTravlePackage->starting_price).' &#8377;'; ?></td>
+											<th scope="row"><?= __('Like Count') ?></th>
+											<td><?= $this->Number->format($postTravlePackage->like_count) ?></td>
+										</tr>
+									
+									</table>
+								</td>
 							</tr>
-							<tr>
-								<th scope="row"><?= __('Duration') ?></th>
-								<td><?= h($postTravlePackage->duration_night.'Night '.$postTravlePackage->duration_day.'Days') ?></td>
-								<th scope="row"><?= __('Visible Date') ?></th>
-								<td><?= date('d-M-Y',strtotime($postTravlePackage->visible_date) );?></td>
-								
-							</tr>
-							<tr>
-								<th scope="row"><?= __('Country') ?></th>
-								<td><?= h($postTravlePackage->country->country_name); ?></td>
-							</tr>
-							<tr>
-								<th scope="row"><?= __('Image') ?></th>
-								<td><?= h($postTravlePackage->image) ?></td>
-							</tr>
-							<tr>
-								<th scope="row"><?= __('Document') ?></th>
-								<td><?= h($postTravlePackage->document) ?></td>
-							</tr>
-							<tr>
-								<th scope="row"><?= __('Price Master') ?></th>
-								<td><?=h($postTravlePackage->price_master->week)?></td>
-								<th scope="row"><?= __('Currency') ?></th>
-								<td><?= h($postTravlePackage->currency->name); ?></td>
-							</tr>	
-							<tr>
-								<th scope="row"><?= __('Starting Price') ?></th>
-								<td><?= $this->Number->format($postTravlePackage->starting_price) ?></td>
-							</tr>
-							<tr>
-								<th scope="row"><?= __('Like Count') ?></th>
-								<td><?= $this->Number->format($postTravlePackage->like_count) ?></td>
-							</tr>
-							<tr>
-								<th scope="row"><?= __('Valid Date') ?></th>
-								<td><?= h($postTravlePackage->valid_date) ?></td>
-							</tr>
-							<tr>
-								<th scope="row"><?= __('Visible Date') ?></th>
-								<td><?= h($postTravlePackage->visible_date) ?></td>
-							</tr>
-							
 						</table>
 						<div class="row">
 							<h4><?= __('Package Detail') ?></h4>
