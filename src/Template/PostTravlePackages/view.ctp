@@ -15,10 +15,15 @@
 						<legend style="color:#369FA1;"><b> &nbsp; <?= __('Post Travle Package Details ') ?> &nbsp;  </b></legend>
 						<table class="table">
 							<tr>
+								<th scope="row"><?= __('Seller Name') ?></th>
+								<td><?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.'( '.$postTravlePackage->user_rating.' )');?></td>
 								<th scope="row"><?= __('Title') ?></th>
 								<td><?= h($postTravlePackage->title) ?></td>
 							</tr>
 							<tr>
+								<th scope="row"><?= __('Duration') ?></th>
+								<td><?= h($postTravlePackage->duration_night.'Night '.$postTravlePackage->duration_day.'Days') ?></td>
+
 								<th scope="row"><?= __('Currency') ?></th>
 								<td><?= $postTravlePackage->has('currency') ? $this->Html->link($postTravlePackage->currency->name, ['controller' => 'Currencies', 'action' => 'view', $postTravlePackage->currency->id]) : '' ?></td>
 							</tr>
@@ -37,23 +42,7 @@
 							<tr>
 								<th scope="row"><?= __('Price Master') ?></th>
 								<td><?= $postTravlePackage->has('price_master') ? $this->Html->link($postTravlePackage->price_master->id, ['controller' => 'PriceMasters', 'action' => 'view', $postTravlePackage->price_master->id]) : '' ?></td>
-							</tr>
-							<tr>
-								<th scope="row"><?= __('User') ?></th>
-								<td><?= $postTravlePackage->has('user') ? $this->Html->link($postTravlePackage->user->last_name, ['controller' => 'Users', 'action' => 'view', $postTravlePackage->user->id]) : '' ?></td>
-							</tr>
-							<tr>
-								<th scope="row"><?= __('Id') ?></th>
-								<td><?= $this->Number->format($postTravlePackage->id) ?></td>
-							</tr>
-							<tr>
-								<th scope="row"><?= __('Duration Night') ?></th>
-								<td><?= $this->Number->format($postTravlePackage->duration_night) ?></td>
-							</tr>
-							<tr>
-								<th scope="row"><?= __('Duration Day') ?></th>
-								<td><?= $this->Number->format($postTravlePackage->duration_day) ?></td>
-							</tr>
+							</tr>	
 							<tr>
 								<th scope="row"><?= __('Starting Price') ?></th>
 								<td><?= $this->Number->format($postTravlePackage->starting_price) ?></td>
@@ -63,10 +52,6 @@
 								<td><?= $this->Number->format($postTravlePackage->like_count) ?></td>
 							</tr>
 							<tr>
-								<th scope="row"><?= __('Edited By') ?></th>
-								<td><?= $this->Number->format($postTravlePackage->edited_by) ?></td>
-							</tr>
-							<tr>
 								<th scope="row"><?= __('Valid Date') ?></th>
 								<td><?= h($postTravlePackage->valid_date) ?></td>
 							</tr>
@@ -74,14 +59,7 @@
 								<th scope="row"><?= __('Visible Date') ?></th>
 								<td><?= h($postTravlePackage->visible_date) ?></td>
 							</tr>
-							<tr>
-								<th scope="row"><?= __('Created On') ?></th>
-								<td><?= h($postTravlePackage->created_on) ?></td>
-							</tr>
-							<tr>
-								<th scope="row"><?= __('Edited On') ?></th>
-								<td><?= h($postTravlePackage->edited_on) ?></td>
-							</tr>
+							
 						</table>
 						<div class="row">
 							<h4><?= __('Package Detail') ?></h4>

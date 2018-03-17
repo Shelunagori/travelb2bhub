@@ -217,9 +217,9 @@ if ($err) {
 							</tr>
 						</thead>
 						<tbody>
-						<?php foreach ($hotelPromotions as $hotelPromotion): ?>
+						<?php $i=1;foreach ($hotelPromotions as $hotelPromotion): ?>
 						<tr>
-							<td><?= $this->Number->format($hotelPromotion->id) ?></td>
+							<td><?php echo $i; ?></td>
 							<td><?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.'( '.$hotelPromotion->user_rating.' )');?></td>
 							<td><?= h($hotelPromotion->hotel_name) ?></td>
 							<td><?= h($hotelPromotion->hotel_location) ?></td>
@@ -239,7 +239,7 @@ if ($err) {
 											</span>
 										</td>
 									</tr>
-									<?php endforeach; ?>
+									<?php $i++;endforeach; ?>
 								</tbody>
 							</table>
 							<h2><span class="show_msg"></span></h2>

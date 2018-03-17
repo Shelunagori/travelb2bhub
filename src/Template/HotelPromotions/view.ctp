@@ -10,7 +10,7 @@
 						<legend style="color:#369FA1;"><b> &nbsp; <?= __('View Hotel Details ') ?> &nbsp;  </b></legend>
 							<table class="table">
 								<tr>
-									<th scope="row"><?= __('User') ?></th>
+									<th scope="row"><?= __('Seller Name') ?></th>
 									<td><?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.'( '.$hotelPromotion->user_rating.' )');?></td>
 									<th scope="row"><?= __('Hotel Name') ?></th>
 									<td><?= h($hotelPromotion->hotel_name) ?></td>

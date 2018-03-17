@@ -56,27 +56,28 @@ if ($err) {
 								</tr>
 							</thead>
 							<tbody>
-								<?php $i=1; foreach ($postTravlePackages as $postTravlePackage): 
+								<?php $i=1; 
+								foreach ($postTravlePackages as $postTravlePackage): 
 									$CategoryList='';
 									$x=0;
 									foreach($postTravlePackage->post_travle_package_rows as $category)
 										{
 											
-											$CategoryList.='[ '.$category->post_travle_package_category->name.' ]';
+											$CategoryList.=$category->post_travle_package_category->name;
 											if($x>1){
 												$CategoryList.=' , ';
 											}
 										$x++;}
 								?>
 								<tr>
-									<td ><?= $i; ?></td>
-									<td ><?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.' ('.$postTravlePackage->user_rating.')');?>
+									<td style="width:5%;"><?php echo $i; ?></td>
+									<td style="width:15%;" ><?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.' ('.$postTravlePackage->user_rating.')');?>
 									</td>
-									<td style="width:20%;"><?= h($postTravlePackage->title) ?></td>
+									<td style="width:15%;"><?= h($postTravlePackage->title) ?></td>
 									<td style="width:20%;"><?= h($CategoryList);?></td>
 									<td style="width:20%;">
 									<?php echo $this->Html->image('../'.$postTravlePackage->image,['style'=>'height:8%;width:100%;']);?></td>
-									<td class="actions" style="width:25%;">
+									<td class="actions" style="25%">
 										 <span>
 										 	<?php echo $this->Form->button('<i class="fa fa-thumbs-up"></i>',['class'=>'btn btn-primary btn-md likes','value'=>'button','style'=>'background-color:#1295A2']); ?>
 											<a href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>"view",$postTravlePackage->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"></i>',['class'=>'btn btn-warning btn-md','value'=>'button']); ?></a>
@@ -89,7 +90,7 @@ if ($err) {
 										</span>
 									</td>
 								</tr>
-								<?php endforeach; ?>
+								<?php $i++;endforeach; ?>
 							</tbody>
 						</table>
 							<!--<div class="paginator">
