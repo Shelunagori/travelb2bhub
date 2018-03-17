@@ -1,7 +1,31 @@
 <?php
-/**
-  * @var \App\View\AppView $this
-  */
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/PostTravlePackages/getTravelPackageDetails.json?user_id=".$user_id ."&id=".$id,
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: 4f8087cd-6560-4ca6-5539-9499d3c5b967"
+  ),
+));
+$response = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+$posttravle_view=array();
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+	$response;
+	$List=json_decode($response);
+	//pr($List); exit;
+	$postTravlePackage=$List->getTravelPackageDetails;
+	//pr($hotelPromotion);exit;
+}
 ?>
 <section class="content">
 <div class="row">
@@ -13,6 +37,7 @@
 				<div class="box-body"> 
 					<center><fieldset>
 						<legend style="color:#369FA1;"><b> &nbsp; <?= __('Post Travle Package Details ') ?> &nbsp;  </b></legend>
+						<?php foreach($postTravlePackage as $postTravlePackage):?>
 						<table class="table">
 							<tr>
 								<th scope="row"><?= __('Seller Name') ?></th>
@@ -23,13 +48,13 @@
 							<tr>
 								<th scope="row"><?= __('Duration') ?></th>
 								<td><?= h($postTravlePackage->duration_night.'Night '.$postTravlePackage->duration_day.'Days') ?></td>
-
-								<th scope="row"><?= __('Currency') ?></th>
-								<td><?= $postTravlePackage->has('currency') ? $this->Html->link($postTravlePackage->currency->name, ['controller' => 'Currencies', 'action' => 'view', $postTravlePackage->currency->id]) : '' ?></td>
+								<th scope="row"><?= __('Visible Date') ?></th>
+								<td><?= date('d-M-Y',strtotime($postTravlePackage->visible_date) );?></td>
+								
 							</tr>
 							<tr>
 								<th scope="row"><?= __('Country') ?></th>
-								<td><?= $postTravlePackage->has('country') ? $this->Html->link($postTravlePackage->country->country_name, ['controller' => 'Countries', 'action' => 'view', $postTravlePackage->country->id]) : '' ?></td>
+								<td><?= h($postTravlePackage->country->country_name); ?></td>
 							</tr>
 							<tr>
 								<th scope="row"><?= __('Image') ?></th>
@@ -41,7 +66,9 @@
 							</tr>
 							<tr>
 								<th scope="row"><?= __('Price Master') ?></th>
-								<td><?= $postTravlePackage->has('price_master') ? $this->Html->link($postTravlePackage->price_master->id, ['controller' => 'PriceMasters', 'action' => 'view', $postTravlePackage->price_master->id]) : '' ?></td>
+								<td><?=h($postTravlePackage->price_master->week)?></td>
+								<th scope="row"><?= __('Currency') ?></th>
+								<td><?= h($postTravlePackage->currency->name); ?></td>
 							</tr>	
 							<tr>
 								<th scope="row"><?= __('Starting Price') ?></th>
@@ -69,79 +96,5 @@
 							<h4><?= __('Excluded Detail') ?></h4>
 							<?= $this->Text->autoParagraph(h($postTravlePackage->excluded_detail)); ?>
 						</div>
-						<div class="related">
-							<h4><?= __('Related Post Travle Package Cities') ?></h4>
-							<?php if (!empty($postTravlePackage->post_travle_package_cities)): ?>
-							<table cellpadding="0" cellspacing="0">
-								<tr>
-									<th scope="col"><?= __('Id') ?></th>
-									<th scope="col"><?= __('Post Travle Package Id') ?></th>
-									<th scope="col"><?= __('City Id') ?></th>
-									<th scope="col" class="actions"><?= __('Actions') ?></th>
-								</tr>
-								<?php foreach ($postTravlePackage->post_travle_package_cities as $postTravlePackageCities): ?>
-								<tr>
-									<td><?= h($postTravlePackageCities->id) ?></td>
-									<td><?= h($postTravlePackageCities->post_travle_package_id) ?></td>
-									<td><?= h($postTravlePackageCities->city_id) ?></td>
-									<td class="actions">
-										<?= $this->Html->link(__('View'), ['controller' => 'PostTravlePackageCities', 'action' => 'view', $postTravlePackageCities->id]) ?>
-										<?= $this->Html->link(__('Edit'), ['controller' => 'PostTravlePackageCities', 'action' => 'edit', $postTravlePackageCities->id]) ?>
-										<?= $this->Form->postLink(__('Delete'), ['controller' => 'PostTravlePackageCities', 'action' => 'delete', $postTravlePackageCities->id], ['confirm' => __('Are you sure you want to delete # {0}?', $postTravlePackageCities->id)]) ?>
-									</td>
-								</tr>
-								<?php endforeach; ?>
-							</table>
-							<?php endif; ?>
-						</div>
-						<div class="related">
-							<h4><?= __('Related Post Travle Package Rows') ?></h4>
-							<?php if (!empty($postTravlePackage->post_travle_package_rows)): ?>
-							<table cellpadding="0" cellspacing="0">
-								<tr>
-									<th scope="col"><?= __('Id') ?></th>
-									<th scope="col"><?= __('Post Travle Package Id') ?></th>
-									<th scope="col"><?= __('Post Travle Package Category Id') ?></th>
-									<th scope="col" class="actions"><?= __('Actions') ?></th>
-								</tr>
-								<?php foreach ($postTravlePackage->post_travle_package_rows as $postTravlePackageRows): ?>
-								<tr>
-									<td><?= h($postTravlePackageRows->id) ?></td>
-									<td><?= h($postTravlePackageRows->post_travle_package_id) ?></td>
-									<td><?= h($postTravlePackageRows->post_travle_package_category_id) ?></td>
-									<td class="actions">
-										<?= $this->Html->link(__('View'), ['controller' => 'PostTravlePackageRows', 'action' => 'view', $postTravlePackageRows->id]) ?>
-										<?= $this->Html->link(__('Edit'), ['controller' => 'PostTravlePackageRows', 'action' => 'edit', $postTravlePackageRows->id]) ?>
-										<?= $this->Form->postLink(__('Delete'), ['controller' => 'PostTravlePackageRows', 'action' => 'delete', $postTravlePackageRows->id], ['confirm' => __('Are you sure you want to delete # {0}?', $postTravlePackageRows->id)]) ?>
-									</td>
-								</tr>
-								<?php endforeach; ?>
-							</table>
-							<?php endif; ?>
-						</div>
-						<div class="related">
-							<h4><?= __('Related Post Travle Package States') ?></h4>
-							<?php if (!empty($postTravlePackage->post_travle_package_states)): ?>
-							<table cellpadding="0" cellspacing="0">
-								<tr>
-									<th scope="col"><?= __('Id') ?></th>
-									<th scope="col"><?= __('Post Travle Package Id') ?></th>
-									<th scope="col"><?= __('State Id') ?></th>
-									<th scope="col" class="actions"><?= __('Actions') ?></th>
-								</tr>
-								<?php foreach ($postTravlePackage->post_travle_package_states as $postTravlePackageStates): ?>
-								<tr>
-									<td><?= h($postTravlePackageStates->id) ?></td>
-									<td><?= h($postTravlePackageStates->post_travle_package_id) ?></td>
-									<td><?= h($postTravlePackageStates->state_id) ?></td>
-									<td class="actions">
-										<?= $this->Html->link(__('View'), ['controller' => 'PostTravlePackageStates', 'action' => 'view', $postTravlePackageStates->id]) ?>
-										<?= $this->Html->link(__('Edit'), ['controller' => 'PostTravlePackageStates', 'action' => 'edit', $postTravlePackageStates->id]) ?>
-										<?= $this->Form->postLink(__('Delete'), ['controller' => 'PostTravlePackageStates', 'action' => 'delete', $postTravlePackageStates->id], ['confirm' => __('Are you sure you want to delete # {0}?', $postTravlePackageStates->id)]) ?>
-									</td>
-								</tr>
-								<?php endforeach; ?>
-							</table>
-							<?php endif; ?>
-						</div>
-					</div>
+					<?php endforeach; ?>
+								

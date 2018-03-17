@@ -91,12 +91,8 @@ class PostTravlePackagesController extends AppController
     public function view($id = null)
     {
 		$this->viewBuilder()->layout('user_layout');
-        $postTravlePackage = $this->PostTravlePackages->get($id, [
-            'contain' => ['Currencies', 'Countries', 'PriceMasters', 'Users', 'PostTravlePackageCities', 'PostTravlePackageRows', 'PostTravlePackageStates']
-        ]);
-
-        $this->set('postTravlePackage', $postTravlePackage);
-        $this->set('_serialize', ['postTravlePackage']);
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id','id'));
     }
 
     /**
