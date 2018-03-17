@@ -1,8 +1,9 @@
 <?php
+ 
 //-- List
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => $coreVariable['SiteUrl']."api/EventPlannerPromotions/getEventPlanners.json?isLikedUserId=".$user_id,
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/EventPlannerPromotions/getEventPlanners.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&city_id=".$city_id."&state_id=".$state_id,
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -25,6 +26,36 @@ if ($err) {
 	$List=json_decode($response);
  	$eventPlannerPromotions=$List->getEventPlanners;
 }
+//--- COUNTRY STATE & CITY
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => $coreVariable['SiteUrl']."pages/masterCountry",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: 39e47dc1-a66a-2347-2fc6-3b5e0160d26d"
+  ),
+));
+$masterCountry = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+$countries=array();
+$states=array();
+$city=array();
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+	$masterCountry=json_decode($masterCountry);
+	$countries=$masterCountry->countryData->ResponseObject;
+	$states=$masterCountry->stateData->ResponseObject;
+	$city=$masterCountry->cityData->ResponseObject;
+}
+
  ?>
 <div id="my_final_responses" class="container-fluid">
 	<div class="row equal_column">
@@ -53,53 +84,39 @@ if ($err) {
 						<h4 class="modal-title">Sorting</h4>
 					  </div>
 					  <form method="get" class="filter_box">
-					  <div class="modal-body" style="height:170px;">
+					  <div class="modal-body" style="height:130px;">
 						<div class="col-md-12 row form-group ">
-							<div class="col-md-12">
-									 <input class="btn btn-info btn-sm" type="radio" name="sort" value="totalbudgethl"/>
-									 <label class="col-form-label" for=example-text-input>
-										Total Budget (Hign to Low)
-									 </label>
+							<div class="col-md-12 radio">
+								<label>
+								<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="total_likes"/>
+									Highest Likes
+								</label>
+							</div>
+                        </div>
+						 
+						
+						<div class="col-md-12 row form-group ">
+							<div class="col-md-12 radio">
+								<label>
+									<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="total_views"/>
+									Highest Views
+								</label>
 							</div>
                         </div>
 						<div class="col-md-12 row form-group ">
-							<div class="col-md-12">
-									 <input class="btn btn-info btn-sm" type="radio" name="sort" value="totalbudgetlh"/>
-									 <label class="col-form-label"for=example-text-input>
-										Total Budget (Low to High)
-									 </label>
-							</div>
-                        </div>
-						<div class="col-md-12 row form-group ">
-							<div class="col-md-12">
-									<input class="btn btn-info btn-sm" type="radio" name="sort" value="agentaz"/>
-									<label class="col-form-label"for=example-text-input>
-										No. of Responses (Hign to Low)
-									</label>
+							<div class="col-md-12 radio">
+								<label>
+									<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="user_rating"/>
+									User Rating
+								</label>
 							</div>
 						</div>
-						<div class="col-md-12 row form-group" >
-							<div class=col-md-12>
-									<input class="btn btn-info btn-sm" type="radio" name="sort" value="agentza"/>
-									<label class="col-form-label"for=example-text-input>
-										No. of Responses (Low to High)
-									</label>
-							</div>
-						</div>
-						<div class="col-md-12 row form-group" style="display:none;">
-							<div class=col-md-12>
-									<input class="btn btn-info btn-sm" type="radio" name="sort" value="requesttype"/>
-									<label class="col-form-label"for=example-text-input>
-									Request Type 
-								
-									</label>
-							</div>
-						</div>
-					 </div>
-					 <div class="modal-footer" style="height:60px;">
+					</div>
+					<div class="modal-footer" style="height:60px;">
 						  <div class="row">
 								<div class="col-md-12 text-center">
-									<input type="submit" name="submit" value="Sort"  class="btn btn-primary btn-submit">
+									<input type="submit" class="btn btn-primary btn-sm">
+									<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-primary btn-sm">Reset</a>
 								</div>
 						  </div>
 					</div>
@@ -118,89 +135,60 @@ if ($err) {
                         <div class="modal-body">
                             <div class="row form-group margin-b10">
 								<div class=col-md-12>
-									 <div class=col-md-4>
-									  <label class="col-form-label"for=example-text-input>Request Type</label>
+									 <div class=col-md-3>
+									  <label class="col-form-label"for=example-text-input>Country</label>
 									  </div>
 									  <div class=col-md-1>:</div>
 									 <div class=col-md-7>
-										<select name="req_typesearch" class="form-control"><option value="">Select Request Type</option><option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option><option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option><option value="2">Transport</option></select>
+									<?php $options=array();
+										foreach($countries as $country)
+										{
+											$options[] = ['value'=>$country->id,'text'=>$country->country_name];
+										};echo $this->Form->input('country_id', ['options' => $options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...']);
+									?>
 									</div>
                                  </div>
                                 </div>
 								<div class="row form-group margin-b10">
 									<div class=col-md-12>
-										<div class=col-md-4>
-											<label class="col-form-label"for=example-text-input>Total Budget</label>
+										<div class=col-md-3>
+											<label class="col-form-label"for=example-text-input>State</label>
 										</div>
 										<div class=col-md-1>:</div>
 										<div class=col-md-7>
-											<select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option>
-											<option value="100000-100000000000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? 'selected':''; ?>>100000-Above</option>
-											</select>
+										<?php 
+											$options=array();
+											foreach($states as $st)
+											{
+												$options[] = ['value'=>$st->id,'text'=>$st->state_name];
+											};
+											echo $this->Form->input('state_id', ['options' => $options,'class'=>'form-control select2','label'=>false,"data-placeholder"=>"Select States",'empty'=>'Select...']); 
+										?> 
 										</div>
 									 </div>
                                  </div>
 								<div class="row form-group margin-b10">
 									<div class=col-md-12>
-									  <div class=col-md-4>
-									 <label class="col-form-label" for=example-text-input>Start Date</label>
+									  <div class=col-md-3>
+									 <label class="col-form-label" for=example-text-input>City</label>
 									 </div>
 									<div class=col-md-1>:</div>
 									 <div class=col-md-7>
-									 <input class=form-control name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"id=datepicker1>
+										 <?php 
+										$options=array();
+										foreach($city->citystatefi as $cty)
+										{
+											$options[] = ['value'=>$cty->cityid,'text'=>$cty->name];
+										};
+										echo $this->Form->input('city_id', ['options' =>$options,'class'=>'form-control select2','label'=>false,"data-placeholder"=>"Select Cities",'empty'=>'Select...']); ?>
 									 </div>
 									</div>	
 								</div>
-								<div class="row form-group margin-b10">								
-									<div class=col-md-12>
-										<div class=col-md-4>
-										  <label class="col-form-label" for=example-text-input>End Date</label>
-										</div>
-										<div class=col-md-1>:</div>
-										<div class=col-md-7>
-										<input class=form-control name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"id=datepicker2>
-										</div>
-									</div>
-								</div>
-                              <div class="row form-group margin-b10">
-									 <div class=col-md-12>
-										 <div class=col-md-4>
-										 <label class="col-form-label"for=example-text-input>Pickup City</label>
-										 </div>
-										<div class=col-md-1>:</div>
-										<div class=col-md-7>
-											<select class=form-control  name=pickup_city id=pickup_city>
-											   <option value="">Select</option>
-											   <?php foreach($allCities1 as $city){?>
-											   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['pickup_city']) AND $_GET['pickup_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
-											   <?php }?>
-											</select>
-										</div>
-									 </div>
-                                 </div>   
-								<div class="row form-group margin-b10">								 
-									 <div class=col-md-12>
-										 <div class=col-md-4>
-										 <label class="col-form-label" for=example-text-input>Destination City</label>
-										 </div>
-										<div class="col-md-1">:</div>
-										<div class="col-md-7">
-											<select class="form-control " name=destination_city id=destination_city>
-											   <option value="">Select</option>
-											   <?php foreach($allCities1 as $city){?>
-											   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['destination_city']) AND $_GET['destination_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
-											   <?php }?>
-											</select>
-											<?php //echo $this->Form->control('preference', ["id"=>"destination_city", "type"=>"select", 'options' =>$allCities2, "class"=>"form-control"]); ?>
-										</div>
-									</div>
                               </div>
-                               
-                        </div>
-                        <div class="modal-footer">
-							<button class="btn btn-primary btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
-							<a href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'requestlist')) ?>"class="btn btn-primary btn-sm">Reset</a>
-						</div>
+							<div class="modal-footer">
+								<button class="btn btn-primary btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
+								<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-primary btn-sm">Reset</a>
+							</div>
 						</form>
                      </div>
                   </div>
@@ -224,7 +212,10 @@ if ($err) {
 							</tr>
 						</thead>
 						<tbody>
-							<?php $i=1; foreach ($eventPlannerPromotions as $eventPlannerPromotion): ?>
+							<?php $i=1;
+ 						
+							if(!empty($eventPlannerPromotions)){
+							foreach ($eventPlannerPromotions as $eventPlannerPromotion): ?>
 							<tr>
 								<td><?= $i; ?></td>
 								<td><?= h($eventPlannerPromotion->user->first_name.$eventPlannerPromotion->user->last_name);?></td>
@@ -242,7 +233,12 @@ if ($err) {
 									</span>
 								</td>
 							</tr>
-							 <?php $i++;endforeach; ?>
+							 <?php $i++;endforeach;
+							}
+							else
+							{
+								echo"<tr><th colspan='10' style='text-align:center'>No Record Found</th></tr>";
+							}							?>
 						</tbody>
 					</table>
 					<!--<div class="paginator">

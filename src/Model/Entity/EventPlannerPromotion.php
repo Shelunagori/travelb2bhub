@@ -49,14 +49,14 @@ class EventPlannerPromotion extends Entity
 	{
 		if(!empty($this->_properties['image']))
 		{
-			return 'http://konciergesolutions.com/travelb2bhub/webroot/'. $this->_properties['image'];
+			return 'http://13.127.63.130/travelb2bhub/webroot/'. $this->_properties['image'];
 		}
 	}
 	protected function _getFullDocument()
 	{
 		if(!empty($this->_properties['document']))
 		{
-			return 'http://konciergesolutions.com/travelb2bhub/webroot/'. $this->_properties['document'];
+			return 'http://13.127.63.130/travelb2bhub/webroot/'. $this->_properties['document'];
 		}
 	}	
 }
