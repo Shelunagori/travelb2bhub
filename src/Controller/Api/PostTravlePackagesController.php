@@ -144,7 +144,7 @@ class PostTravlePackagesController extends AppController
         $this->set('_serialize', ['message','response_code']);
     }
 
-	public function getTravelPackages($isLikedUserId=null,$category_id = null, $category_short = null,$duration_day=null,$duration_night=null,$duration_short=null,$valid_date=null,$valid_date_short=null,$starting_price=null,$starting_price_short=null,$country_id=null,$country_id_short=null,$city_id=null,$city_id_short=null,$category_name=null,$higestSort=null)
+	public function getTravelPackages($isLikedUserId=null,$category_id = null, $category_short = null,$duration_day=null,$duration_night=null,$duration_short=null,$valid_date=null,$valid_date_short=null,$starting_price=null,$starting_price_short=null,$country_id=null,$country_id_short=null,$city_id=null,$city_id_short=null,$category_name=null,$higestSort=null,$search = null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
@@ -164,6 +164,7 @@ class PostTravlePackagesController extends AppController
 			$city_id_short = $this->request->query('city_id_short');
 			$category_name = $this->request->query('category_name');
 			$higestSort = $this->request->query('higestSort');
+			$search_bar = $this->request->query('search');
 
 			// Start shorting code
 			if(empty($category_short))
@@ -283,6 +284,54 @@ class PostTravlePackagesController extends AppController
 				$country_filter = null;
 			}
 
+			
+			$search_bar_title = null;
+			$data_arr = [];
+			$data_arr_title = [];
+			if(!empty($search_bar))
+			{	
+				$search_bar_title = $this->PostTravlePackages->find()
+						->select(['id'])
+						->where(['title Like' =>'%'.$search_bar.'%'])
+						->toArray();
+		
+				if(!empty($search_bar_title)) 
+				{
+					foreach($search_bar_title as $data_bar)
+					{
+						$data_arr_title[] = $data_bar->id;
+					}					
+				}
+
+				
+				$search_bar_city = $this->PostTravlePackages->PostTravlePackageCities->Cities
+				->find()->select(['id'])->where(['name Like' =>'%'.$search_bar.'%']);
+				if(!empty($search_bar_city)) 
+				{ 
+					$search_bar_city_data = $this->PostTravlePackages->PostTravlePackageCities->find()
+					->select(['post_travle_package_id'])->where(['PostTravlePackageCities.city_id IN' =>$search_bar_city])->toArray();
+					
+					if(!empty($search_bar_city_data))
+					{
+						foreach($search_bar_city_data as $data)
+						{
+							$data_arr[] = $data->post_travle_package_id;
+						}
+					}
+					
+				}	
+				$search_bar_title = array_merge($data_arr_title,$data_arr);
+				if(!empty($search_bar_title)){
+				$search_bar_title = ['PostTravlePackages.id IN' =>$search_bar_title];
+				}else
+				{
+					$search_bar_title = ['PostTravlePackages.id IN' =>''];
+				}				
+			}
+
+			
+			
+			
 			// End Filter code
 			
 			$getTravelPackages = $this->PostTravlePackages->find()
@@ -305,6 +354,8 @@ class PostTravlePackagesController extends AppController
 			->where($where_duration)
 			->where($valid_date)
 			->where($starting_price)
+			->where($search_bar_title)
+			->where(['PostTravlePackages.is_deleted' =>0])
 			->order($where_short)
 			->order(['PostTravlePackageRows.id' => $category_short])
 			->order(['PostTravlePackageCountries.id'=>$country_id_short])

@@ -231,7 +231,7 @@ class EventPlannerPromotionsController extends AppController
         $this->set('_serialize', ['getEventPlanners','message','response_code']);				
 	}	
 	
-	public function getEventPlanners($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$higestSort=null)
+	public function getEventPlanners($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$higestSort=null,$search=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
@@ -243,6 +243,7 @@ class EventPlannerPromotionsController extends AppController
 			$city_id_short = $this->request->query('city_id_short');
 			$city_id = $this->request->query('city_id');
 			$higestSort = $this->request->query('higestSort');
+			$search_bar = $this->request->query('search');
 			if(!empty($country_id))
 			{
 				$country_id = ['EventPlannerPromotions.country_id'=>$country_id];
@@ -296,7 +297,53 @@ class EventPlannerPromotionsController extends AppController
 				$where_short = null;
 			}	
 
-			//pr($where_short);exit;	
+			$search_bar_title = null;
+			$data_arr = [];
+			$data_arr_state=[];
+			
+			if(!empty($search_bar))
+			{	
+				$search_bar_city = $this->EventPlannerPromotions->EventPlannerPromotionCities->Cities
+				->find()->select(['id'])->where(['name Like' =>'%'.$search_bar.'%']);
+				if(!empty($search_bar_city)) 
+				{ 
+					$search_bar_city_data = $this->EventPlannerPromotions->EventPlannerPromotionCities->find()
+					->select(['event_planner_promotion_id'])->where(['EventPlannerPromotionCities.city_id IN' =>$search_bar_city])->toArray();
+					
+					if(!empty($search_bar_city_data))
+					{
+						foreach($search_bar_city_data as $data)
+						{
+							$data_arr_state[] = $data->event_planner_promotion_id;
+						}
+					}
+					
+				}
+				
+				$search_bar_state = $this->EventPlannerPromotions->EventPlannerPromotionStates->States
+				->find()->select(['id'])->where(['state_name Like' =>'%'.$search_bar.'%']);
+				if(!empty($search_bar_state)) 
+				{ 
+					$search_bar_state_data = $this->EventPlannerPromotions->EventPlannerPromotionStates->find()
+					->select(['event_planner_promotion_id'])->where(['EventPlannerPromotionStates.state_id IN' =>$search_bar_state])->toArray();
+					
+					if(!empty($search_bar_state_data))
+					{
+						foreach($search_bar_state_data as $data)
+						{
+							$data_arr[] = $data->event_planner_promotion_id;
+						}
+					}
+					
+				}	
+				$search_bar_title = array_merge($data_arr,$data_arr_state);
+				if(!empty($search_bar_title)){
+				$search_bar_title = ['EventPlannerPromotions.id IN' =>$search_bar_title];
+				}else
+				{
+					$search_bar_title = ['EventPlannerPromotions.id IN' =>''];
+				}				
+			}	
 			
 			$getEventPlanners = $this->EventPlannerPromotions->find();
 			 
@@ -315,6 +362,7 @@ class EventPlannerPromotionsController extends AppController
 			->where(['EventPlannerPromotions.is_deleted' =>0])
 			->where($country_id)
 			->order($where_short)
+			->where($search_bar_title)
 			->group(['EventPlannerPromotions.id'])
 			->autoFields(true);
 			//pr($where_short);exit;	
