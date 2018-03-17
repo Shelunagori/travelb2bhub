@@ -42,7 +42,7 @@ if ($err) {
 								?>
 								<tbody>
 								<tr>
-									<td colspan="2"><?= $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'width:300px;margin-top:-10px;height:220px;']) ?></td>
+									<td colspan="2"><?= $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'width:300px;margin-top:-10px;height:220px;']) ?></td>	
 									<td colspan="2">
 									<table class="table">
 									<tr>
