@@ -84,12 +84,12 @@ class HotelPromotionsController extends AppController
     public function view($id = null)
     {
 		$this->viewBuilder()->layout('user_layout');
-        $hotelPromotion = $this->HotelPromotions->get($id, [
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id','id'));
+        /* $hotelPromotion = $this->HotelPromotions->get($id, [
             'contain' => ['Users', 'HotelCategories', 'PriceMasters', 'HotelPromotionCities', 'HotelPromotionLikes', 'HotelPromotionPriceBeforeRenews', 'HotelPromotionReports', 'HotelPromotionViews']
-        ]);
-
-        $this->set('hotelPromotion', $hotelPromotion);
-        $this->set('_serialize', ['hotelPromotion']);
+        ]); */
+		
     }
 
     /**
