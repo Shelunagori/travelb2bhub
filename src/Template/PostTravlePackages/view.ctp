@@ -35,9 +35,21 @@ if ($err) {
 					<i class="fa fa-plus"></i> <b>View Hotel Promotion</b>
 				</div> -->
 				<div class="box-body"> 
-					<center><fieldset>
+					<fieldset>
 						<legend style="color:#369FA1;"><b> &nbsp; <?= __('Post Travle Package Details ') ?> &nbsp;  </b></legend>
-						<?php foreach($postTravlePackage as $postTravlePackage):?>
+						<?php foreach($postTravlePackage as $postTravlePackage):
+						$CategoryList='';
+									$x=0;
+									foreach($postTravlePackage->post_travle_package_rows as $category)
+										{
+											
+											$CategoryList.=$category->post_travle_package_category->name;
+											if($x>1){
+												$CategoryList.=' , ';
+											}
+											$x++;
+										}
+						?>
 						<table class="table">
 							<tr>
 								<td colspan="2"><?= $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'width:300px;margin-top:-10px;height:220px;']) ?></td>
@@ -50,38 +62,56 @@ if ($err) {
 											<td><?= h($postTravlePackage->title) ?></td>
 										</tr>
 										<tr>
-											<th scope="row"><?= __('Package Duration') ?></th>
-											<td><?= h($postTravlePackage->duration_night.'Night '.$postTravlePackage->duration_day.'Days') ?></td>
-											<th scope="row"><?= __('Visible Date') ?></th>
-											<td><?= date('d-M-Y',strtotime($postTravlePackage->visible_date) );?></td>
+											<th scope="row"><?= __('Package Category') ?></th>
+											<td style="width:20%;"><?= h($CategoryList);?></td>
+											<th scope="row"><?= __('Valid Date') ?></th>
+											<td><?= date('d-M-Y',strtotime($postTravlePackage->valid_date) );?></td>
 										</tr>
 										<tr>
-											<th scope="row"><?= __('Image') ?></th>
-											<td><?= h($postTravlePackage->image) ?></td>
+											<th scope="row"><?= __('Package Duration') ?></th>
+											<td><?= h($postTravlePackage->duration_night.'Night '.$postTravlePackage->duration_day.'Days') ?></td>
+											<th scope="row"><?= __('Starting Price') ?></th>
+											<td><?= $this->Number->format($postTravlePackage->starting_price).' &#8377;'; ?></td>
 										</tr>
 										<tr>
 											<th scope="row"><?= __('Promotion Duration') ?></th>
 											<td><?=h($postTravlePackage->price_master->week)?></td>
-											
+											<th scope="row"><?= __('Total Charges') ?></th>
+											<td><?=h($postTravlePackage->price_master->price)?></td>
 										</tr>	
 										<tr>
-											<th scope="row"><?= __('Starting Price') ?></th>
-											<td><?= $this->Number->format($postTravlePackage->starting_price).' &#8377;'; ?></td>
+											<th scope="row"><?= __('Visible Date') ?></th>
+											<td><?= date('d-M-Y',strtotime($postTravlePackage->visible_date) );?></td>
 											<th scope="row"><?= __('Like Count') ?></th>
 											<td><?= $this->Number->format($postTravlePackage->like_count) ?></td>
 										</tr>
-									
+										
+									<?php endforeach; ?>
 									</table>
 								</td>
 							</tr>
 						</table>
-						<div class="row">
-							<h4><?= __('Package Detail') ?></h4>
-							<?= $this->Text->autoParagraph(h($postTravlePackage->package_detail)); ?>
-						</div>
-						<div class="row">
-							<h4><?= __('Excluded Detail') ?></h4>
-							<?= $this->Text->autoParagraph(h($postTravlePackage->excluded_detail)); ?>
-						</div>
-					<?php endforeach; ?>
+						<table>
+							<tr>
+								<th scope="row"><?= __('Package Detail') ?></th>
+								<td>
+									<div class="row">
+										<?= $this->Text->autoParagraph(h($postTravlePackage->package_detail)); ?>
+									</div>
+								</td>
+								<th scope="row"><?= __('Excluded Detail') ?></th>
+								<td>
+									<div class="row">
+										<?= $this->Text->autoParagraph(h($postTravlePackage->excluded_detail)); ?>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+		
 								
