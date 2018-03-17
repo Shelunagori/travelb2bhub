@@ -42,44 +42,43 @@ if ($err) {
 								?>
 								<tbody>
 								<tr>
-									<td colspan="2"><?= $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'width:500px']) ?></td>
+									<td colspan="2"><?= $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'width:300px;margin-top:-10px;height:220px;']) ?></td>
 									<td colspan="2">
 									<table class="table">
 									<tr>
 									<th ><?= __('Seller Name') ?></th>
 									<td><?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.'( '.$hotelPromotion->user_rating.' )');?></td>
-									<td ><?= __('Hotel Name') ?></td>
+									<th ><?= __('Hotel Name') ?></th>
 									<td><?= h($hotelPromotion->hotel_name) ?></td>
 								</tr>
 								<tr>
-									<td scope="row"><?= __('Hotel Location') ?></td>
+									<th scope="row"><?= __('Hotel Location') ?></th>
 									<td><?= h($hotelPromotion->hotel_location) ?></td>
-									<td scope="row"><?= __('Hotel Category') ?></td>
+									<th scope="row"><?= __('Hotel Category') ?></th>
 									<td><?= h($hotelPromotion->hotel_category->name); ?></td>
 								</tr>
 								<tr>
-									<td scope="row"><?= __('Website') ?></td>
+									<th scope="row"><?= __('Website') ?></th>
 									<td><?= h($hotelPromotion->website) ?></td>
-									<td scope="row"><?= __('Hotel Rating') ?></td>
+									<th scope="row"><?= __('Hotel Rating') ?></th>
 									<td><?= $this->Number->format($hotelPromotion->hotel_rating) ?></td>
 								</tr>
 								<tr>
-									<td scope="row"><?= __('Promotion Duration') ?></td>
+									<th scope="row"><?= __('Promotion Duration') ?></th>
 									<td><?=h($hotelPromotion->price_master->week); ?></td>
-									<td scope="row"><?= __('Visible Date') ?></td>
+									<th scope="row"><?= __('Visible Date') ?></th>
 									<td><?= date('d-M-Y',strtotime($hotelPromotion->visible_date)); ?></td>
 								</tr>
 								<tr>
-									<td scope="row"><?= __('Cheap Tariff') ?></td>
+									<th scope="row"><?= __('Cheap Tariff') ?></th>
 									<td><?= $this->Number->format($hotelPromotion->cheap_tariff) ?></td>
-									<td scope="row"><?= __('Expensive Tariff') ?></td>
+									<th scope="row"><?= __('Expensive Tariff') ?></th>
 									<td><?= $this->Number->format($hotelPromotion->expensive_tariff) ?></td>
 								</tr>
 								<tr>
-									
-									<td scope="row"><?= __('Total Charges') ?></td>
+									<th scope="row"><?= __('Total Charges') ?></th>
 									<td><?= $this->Number->format($hotelPromotion->total_charges) ?></td>
-										<td scope="row"><?= __('Payment Status') ?></td>
+									<th scope="row"><?= __('Payment Status') ?></th>
 									<td><?= h($hotelPromotion->payment_status) ?></td>
 								</tr>
 							</table></td></tr><?php endforeach; ?></tbody>
