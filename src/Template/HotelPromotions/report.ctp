@@ -45,8 +45,8 @@ if ($err) {
 			</div>
 	<div class="box-body">
 		<div class="row">
-               <div id="myModal123" class="modal fade" role="dialog">
-				  <div class="modal-dialog " style="width: 22%;">
+            <div id="myModal123" class="modal fade" role="dialog">
+				<div class="modal-dialog " style="width: 22%;">
 					<!-- Modal content-->
 					<div class="modal-content">
 					  <div class="modal-header">
@@ -227,10 +227,10 @@ if ($err) {
 							<td><?php echo $this->Html->image('../'.$hotelPromotion->hotel_pic,['style'=>'height:8%;width:100%;']);?></td>
 							<td class="actions" style="width:30%;">
 								 <span>
-									<?php echo $this->Form->button('<i class="fa fa-thumbs-up"></i>',['class'=>'btn btn-primary btn-sm likes','value'=>'button','style'=>'background-color:#1295A2']); ?>
-									<a href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>"view",$hotelPromotion->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"></i>',['class'=>'btn btn-warning btn-sm','value'=>'button']); ?></a>
-									<?php echo $this->Form->button('<i class="fa fa-flag"></i>',['class'=>'btn btn-info btn-sm','value'=>'button']); ?>
-									<?php echo $this->Form->button('<i class="fa fa-bookmark"></i>',['class'=>'btn btn-success btn-sm','value'=>'button']); ?>
+									<?php echo $this->Form->button('<i class="fa fa-thumbs-up"></i>',['class'=>'btn btn-primary btn-md likes','value'=>'button','style'=>'background-color:#1295A2']); ?>
+									<a href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>"view",$hotelPromotion->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"></i>',['class'=>'btn btn-warning btn-md','value'=>'button']); ?></a>
+									<?php echo $this->Form->button('<i class="fa fa-flag"></i>',['class'=>'btn btn-info btn-md','value'=>'button']); ?>
+									<?php echo $this->Form->button('<i class="fa fa-bookmark"></i>',['class'=>'btn btn-success btn-md','value'=>'button']); ?>
 									<?php //echo $this->Html->link('Details','/HotelPromotions/view/'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
 									<?php //echo $this->Html->link('Details','/HotelPromotions/view/'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
 									<?php //echo $this->Html->link('Follow','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
