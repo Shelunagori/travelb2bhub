@@ -1,37 +1,76 @@
 <?php
-/**
-  * @var \App\View\AppView $this
-  */
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/EventPlannerPromotions/getEventPlannersDetails.json?user_id=".$user_id ."&id=".$id,
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: 4f8087cd-6560-4ca6-5539-9499d3c5b967"
+  ),
+));
+$response = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+$eventplanner_view=array();
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+	$response;
+	$List=json_decode($response);
+	//pr($List); exit;
+	$eventPlannerPromotion=$List->getEventPlannersDetails;
+	//pr($hotelPromotion);exit;
+}
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Event Planner Promotion'), ['action' => 'edit', $eventPlannerPromotion->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Event Planner Promotion'), ['action' => 'delete', $eventPlannerPromotion->id], ['confirm' => __('Are you sure you want to delete # {0}?', $eventPlannerPromotion->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Event Planner Promotions'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Event Planner Promotion'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Price Masters'), ['controller' => 'PriceMasters', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Price Master'), ['controller' => 'PriceMasters', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Event Planner Promotion Cities'), ['controller' => 'EventPlannerPromotionCities', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Event Planner Promotion City'), ['controller' => 'EventPlannerPromotionCities', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Event Planner Promotion States'), ['controller' => 'EventPlannerPromotionStates', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Event Planner Promotion State'), ['controller' => 'EventPlannerPromotionStates', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="eventPlannerPromotions view large-9 medium-8 columns content">
-    <h3><?= h($eventPlannerPromotion->id) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('Image') ?></th>
-            <td><?= h($eventPlannerPromotion->image) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Document') ?></th>
-            <td><?= h($eventPlannerPromotion->document) ?></td>
-        </tr>
-        <tr>
+<section class="content">
+<div class="row">
+	<div class="col-md-12">
+			<div class="box box-primary">
+				<div class="box-body"> 
+					<fieldset>
+						<legend style="color:#369FA1;text-align:center;"><b> &nbsp; <?= __('Event Planner Promotion Details ') ?> &nbsp;  </b></legend>
+						<div class="box-body">
+<?php foreach($eventPlannerPromotion as $eventPlannerPromotion):?>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="col-md-4">
+											<?= $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'width:300px;height:220px;']) ?>
+										</div>
+										<div class="col-md-8">
+											<div class="row">
+												<div class="col-md-2">
+													<label><?= __('Seller Name') ?></label>
+													</div>
+												<div class="col-md-4">
+													<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name.'( '.$eventPlannerPromotion->user_rating.' )');?>
+												</div>
+												<div class="col-md-2">
+													<label><?= __('Duration') ?></label>
+													</div>
+												<div class="col-md-4">
+													<?= h($eventPlannerPromotion->price_master->week) ?>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-md-2">
+													<label><?= __('total Charges') ?></label>
+													</div>
+												<div class="col-md-4">
+													<?= h($eventPlannerPromotion->price_master->price);?>
+												</div>
+												<div class="col-md-2">
+													<label><?= __('Visible Date') ?></label>
+													</div>
+												<div class="col-md-4">
+													<?= h($eventPlannerPromotion->visible_date) ?>
+												</div>
+											</div>
+       
             <th scope="row"><?= __('Price Master') ?></th>
             <td><?= $eventPlannerPromotion->has('price_master') ? $this->Html->link($eventPlannerPromotion->price_master->week, ['controller' => 'PriceMasters', 'action' => 'view', $eventPlannerPromotion->price_master->id]) : '' ?></td>
         </tr>
@@ -122,4 +161,4 @@
         </table>
         <?php endif; ?>
     </div>
-</div>
+</div> <?php endforeach; ?>
