@@ -82,12 +82,9 @@ class TaxiFleetPromotionsController extends AppController
      */
     public function view($id = null)
     {
-		$this->viewBuilder()->layout('user_layout');
-        $taxiFleetPromotion = $this->TaxiFleetPromotions->get($id, [
-            'contain' => ['Countries', 'PriceMasters', 'Users', 'TaxiFleetPromotionCities'=>['Cities'], 'TaxiFleetPromotionRows', 'TaxiFleetPromotionStates'=>['States']]
-        ]);
-        $this->set('taxiFleetPromotion', $taxiFleetPromotion);
-        $this->set('_serialize', ['taxiFleetPromotion']);
+		$this->viewBuilder()->layout('user_layout');	
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id','id'));
     }
 
     /**

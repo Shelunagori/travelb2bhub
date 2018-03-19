@@ -284,18 +284,18 @@ if ($err) {
 									<td ><?= h($postTravlePackage->starting_price);?></td>
 									<td ><?= h($postTravlePackage->duration_day_night);?></td>
 									<!--<td style="width:20%;">
-									<?php echo $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'height:8%;width:100%;','id'=>'myImg']);?></td>
+									<?php //echo $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'height:8%;width:100%;','id'=>'myImg']);?></td>
 									<div id="myModal" class="modal">
 									  <span class="close">&times;</span>
 									  <img class="modal-content" id="img01">
 									  <div id="caption"></div>
 									</div>
 									-->
-									<td class="actions" style="width:25%; text-align:center">
+									<td class="actions" >
 										 <span>
 										 	<?php echo $this->Form->button('<i class="fa fa-thumbs-up"> Likes</i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2']); ?>
 											<a href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>"view",$postTravlePackage->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"> View</i>',['class'=>'btn btn-primary btn-xs','value'=>'button']); ?></a>
-											<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal'));?>	
+											<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal'));?>	
 											<!-------Report Modal Start--------->
 													<div id="reportmodal" class="modal fade" role="dialog">
 														<div class="modal-dialog modal-md" >
@@ -356,10 +356,8 @@ if ($err) {
 														</div>
 													</div>
 											<!-------Save Modal End--------->	
-											 <?php //echo $this->Html->link('Likes','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
-											<?php //echo $this->Html->link('Details','/PostTravlePackages/view/'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
 											
-											<?php //echo $this->Html->link('Delete','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $postTravlePackage->id)));?>
+											<?php echo $this->Html->link('<i class="fa fa-trash"> Remove</i>','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $postTravlePackage->id)));?>
 										</span>
 									</td>
 								</tr>
