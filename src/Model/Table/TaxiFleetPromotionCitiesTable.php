@@ -72,7 +72,7 @@ class TaxiFleetPromotionCitiesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['taxi_fleet_promotion_id'], 'TaxiFleetPromotions'));
-        $rules->add($rules->existsIn(['city_id'], 'Cities'));
+       // $rules->add($rules->existsIn(['city_id'], 'Cities'));
 
         return $rules;
     }

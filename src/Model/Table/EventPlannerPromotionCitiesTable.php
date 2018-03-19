@@ -72,7 +72,7 @@ class EventPlannerPromotionCitiesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['event_planner_promotion_id'], 'EventPlannerPromotions'));
-        $rules->add($rules->existsIn(['city_id'], 'Cities'));
+       // $rules->add($rules->existsIn(['city_id'], 'Cities'));
 
         return $rules;
     }
