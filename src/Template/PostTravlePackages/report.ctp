@@ -104,8 +104,8 @@ if ($err) {
 				<div class="box-header with-border"> 
 					<h3 class="box-title" style="color:#057F8A;padding:10px"><?= __('PostTravle Package Promotions') ?></h3>
 					<div class="box-tools pull-right">
-						<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-						<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+						<a style="font-size:20px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
+						<a style="font-size:22px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
  					</div>
  				</div>
 				<div class="box-body">
@@ -276,13 +276,13 @@ if ($err) {
 										$x++;}
 								?>
 								<tr>
-									<td style="width:1%;"><?php echo $i; ?></td>
-									<td style="width:10%;" ><?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.' ('.$postTravlePackage->user_rating.')');?>
+									<td ><?php echo $i; ?></td>
+									<td  ><?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.' ('.$postTravlePackage->user_rating.')');?>
 									</td>
-									<td style="width:10%;"><?= h($postTravlePackage->title) ?></td>
-									<td style="width:20%;"><?= h($CategoryList);?></td>
-									<td style="width:10%;"><?= h($postTravlePackage->starting_price);?></td>
-									<td style="width:10%;"><?= h($postTravlePackage->duration_day_night);?></td>
+									<td ><?= h($postTravlePackage->title) ?></td>
+									<td style=""><?= h($CategoryList);?></td>
+									<td ><?= h($postTravlePackage->starting_price);?></td>
+									<td ><?= h($postTravlePackage->duration_day_night);?></td>
 									<!--<td style="width:20%;">
 									<?php echo $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'height:8%;width:100%;','id'=>'myImg']);?></td>
 									<div id="myModal" class="modal">
@@ -293,13 +293,72 @@ if ($err) {
 									-->
 									<td class="actions" style="width:25%; text-align:center">
 										 <span>
-										 	<?php echo $this->Form->button('<i class="fa fa-thumbs-up"></i>',['class'=>'btn btn-primary btn-md likes','value'=>'button','style'=>'background-color:#1295A2']); ?>
-											<a href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>"view",$postTravlePackage->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"></i>',['class'=>'btn btn-warning btn-md','value'=>'button']); ?></a>
-											<?php echo $this->Form->button('<i class="fa fa-flag"></i>',['class'=>'btn btn-info btn-md','value'=>'button']); ?>
-											<?php echo $this->Form->button('<i class="fa fa-bookmark"></i>',['class'=>'btn btn-success btn-md','value'=>'button']); ?>
+										 	<?php echo $this->Form->button('<i class="fa fa-thumbs-up"> Likes</i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2']); ?>
+											<a href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>"view",$postTravlePackage->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"> View</i>',['class'=>'btn btn-primary btn-xs','value'=>'button']); ?></a>
+											<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal'));?>	
+											<!-------Report Modal Start--------->
+													<div id="reportmodal" class="modal fade" role="dialog">
+														<div class="modal-dialog modal-md" >
+															<!-- Modal content-->
+																<div class="modal-content">
+																  <div class="modal-header">
+																	<button type="button" class="close" data-dismiss="modal">&times;</button>
+																	<h4 class="modal-title"></h4>
+																  </div>
+																<form method="get" class="filter_box">
+																	<div class="modal-body" style="height:100px;">
+																		<div class="col-md-12 row form-group ">
+																			<div class="col-md-12 radio">
+																				<h3>
+																				<label>
+																					<select><option>Select Report Reason</option></select>
+																				</label>
+																				</h3>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="modal-footer" style="height:60px;">
+																		  <div class="row">
+																				<div class="col-md-12 text-center">
+																					<input type="submit" class="btn btn-primary btn-md" value="OK">
+																					<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																				</div>
+																		  </div>
+																	</div>
+																</form>
+															</div>
+														</div>
+													</div>
+											<!-------Report Modal End--------->	
+											<?php echo $this->Html->link('<i class="fa fa-bookmark"> Save</i>','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-success btn-xs','data-target'=>'#savemodal','data-toggle'=>'modal'));?>
+										<!-------Save Modal Start--------->
+												<div id="savemodal" class="modal fade" role="dialog">
+													<div class="modal-dialog modal-md" >
+														<!-- Modal content-->
+															<div class="modal-content">
+															  <div class="modal-header" style="height:100px;">
+																<form method="get" class="filter_box">
+																	<button type="button" class="close" data-dismiss="modal">&times;</button>
+																	<h4 class="modal-title">
+																	Are You Sure, to save this promotion in your cart ???
+																	</h4>
+															</div>
+																<div class="modal-footer" style="height:60px;">
+																	  <div class="row">
+																			<div class="col-md-12 text-center">
+																				<input type="submit" class="btn btn-primary btn-md" value="OK">
+																				<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																			</div>
+																	  </div>
+																	</div>
+																</form>
+															</div>
+														</div>
+													</div>
+											<!-------Save Modal End--------->	
 											 <?php //echo $this->Html->link('Likes','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
 											<?php //echo $this->Html->link('Details','/PostTravlePackages/view/'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
-											<?php //echo $this->Html->link('Follow','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-success btn-xs'));?>
+											
 											<?php //echo $this->Html->link('Delete','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $postTravlePackage->id)));?>
 										</span>
 									</td>

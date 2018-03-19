@@ -121,22 +121,28 @@ if ($err) {
 								</td>
 							</tr>
 						</table>
-						<table>
-							<tr>
-								<th scope="row"><?= __('Package Detail') ?></th>
-								<td>
-									<div class="row">
-										<?= $this->Text->autoParagraph(h($postTravlePackage->package_detail)); ?>
-									</div>
-								</td>
-								<th scope="row"><?= __('Excluded Detail') ?></th>
-								<td>
-									<div class="row">
+						<div class="row">
+						<div class="col-md-12">
+						<div class="col-md-3">
+						<label><?= __('Package Detail') ?></label>
+							</div>
+							<div class="col-md-9">
+									<p>	Mellissa Dunn won a silver medal for the Australia women's national wheelchair basketball team at the 2000 Sydney Paralympics. Following this, she went on to qualify as a lawyer and took a job at a law firm. Three years later, she purchased the firm.</p>
+<?= $this->Text->autoParagraph(h($postTravlePackage->package_detail)); ?>
+								</div>
+							</div>
+						</div>
+							<div class="row">
+						<div class="col-md-12">
+						<div class="col-md-3">
+							<label><?= __('Excluded Detail') ?></label>
+							</div>
+							<div class="col-md-9">
+										Mellissa Dunn won a silver medal for the Australia women's national wheelchair basketball team at the 2000 Sydney Paralympics. Following this, she went on to qualify as a lawyer and took a job at a law firm. Three years later, she purchased the firm.
 										<?= $this->Text->autoParagraph(h($postTravlePackage->excluded_detail)); ?>
 									</div>
-								</td>
-							</tr>
-						</table>
+								</div>
+							</div>
 					</fieldset>
 				</div>
 			</div>
