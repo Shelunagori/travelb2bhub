@@ -24,7 +24,7 @@ if ($err) {
 } else {
 	$response;
 	$List=json_decode($response);
-	pr($List); exit;
+	//pr($List); exit;
 	$taxiFleetPromotions=$List->getTaxiFleetPromotions;
 }
 //--- COUNTRY STATE & CITY
@@ -92,10 +92,10 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 		<div class="col-md-12" style="background-color:#fff"> 
 			<div class="box box-default">
 			<div class="box-header with-border"> 
-				<h1 class="box-title" style="padding:10px"><?= __('Taxi Fleet Promotions') ?></h1>
+				<h1 class="box-title" style="padding:10px;color:#057F8A;"><b>Taxi Fleet Promotions</b></h1>
 				<div class="box-tools pull-right">
-					<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-					<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+					<a style="font-size:25px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
+					<a style="font-size:25px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 				</div>
 				 
 			</div>
@@ -254,7 +254,7 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
             <?php $i=1;foreach ($taxiFleetPromotions as $taxiFleetPromotion): ?>
             <tr>
                 <td><?= $i; ?></td>
-				<td><?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?></td>
+				<td><?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name.' ( '.$taxiFleetPromotion->user_rating.' )');?></td>
                 <td><?= h($taxiFleetPromotion->title) ?></td>
                 <td><?= h($taxiFleetPromotion->price_master->week); ?></td>              
                 <td><?= h(date('d-m-Y',strtotime($taxiFleetPromotion->visible_date))); ?></td>
