@@ -156,10 +156,15 @@ class HotelPromotionsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-	   public function report()
+	
+	public function report($higestSort = null,$category_id = null,$rating_filter = null)
     {
-		 $this->viewBuilder()->layout('user_layout');
+		$higestSort=$this->request->query('higestSort');
+		$category_id=$this->request->query('category_id');
+		$rating_filter=$this->request->query('rating_filter');
+		
+		$this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');
-        $this->set(compact('user_id'));
+        $this->set(compact('user_id','higestSort','category_id','rating_filter'));
 	}
 }

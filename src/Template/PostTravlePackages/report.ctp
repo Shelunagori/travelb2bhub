@@ -151,7 +151,7 @@ if ($err) {
 							  <div class="row">
 									<div class="col-md-12 text-center">
 										<input type="submit" class="btn btn-primary btn-sm">
-										<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-primary btn-sm">Reset</a>
+										<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-danger btn-sm">Reset</a>
 									</div>
 							  </div>
 						</div>
@@ -159,7 +159,7 @@ if ($err) {
 						</div>
 						</div>
 					</div>
-				   <div class="fade modal form-modal" id="myModal122" role="dialog">
+				    <div class="fade modal form-modal" id="myModal122" role="dialog">
 					  <div class="modal-dialog " style="width:35%;" >
 						 <div class=modal-content>
 							<div class=modal-header>
@@ -243,7 +243,7 @@ if ($err) {
 								  </div>
 								<div class="modal-footer">
 									<button class="btn btn-primary btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
-									<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-primary btn-sm">Reset</a>
+									<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-danger btn-sm">Reset</a>
 								</div>
 							</form>
 						</div>

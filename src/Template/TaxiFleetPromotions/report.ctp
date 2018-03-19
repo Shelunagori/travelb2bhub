@@ -143,7 +143,7 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 					  <div class="row">
 							<div class="col-md-12 text-center">
 								<input type="submit" class="btn btn-primary btn-sm">
-								<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-primary btn-sm">Reset</a>
+								<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-danger btn-sm">Reset</a>
 							</div>
 					  </div>
 				</div>
@@ -231,7 +231,7 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 						  </div>
 						<div class="modal-footer">
 							<button class="btn btn-primary btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
-							<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-primary btn-sm">Reset</a>
+							<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-danger btn-sm">Reset</a>
 						</div>
 					</form>
 				 </div>

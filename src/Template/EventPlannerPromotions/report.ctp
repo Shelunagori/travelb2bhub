@@ -26,6 +26,7 @@ if ($err) {
 	$List=json_decode($response);
  	$eventPlannerPromotions=$List->getEventPlanners;
 }
+pr($eventPlannerPromotions);
 //--- COUNTRY STATE & CITY
 $curl = curl_init();
 curl_setopt_array($curl, array(
@@ -68,8 +69,8 @@ if ($err) {
 				<div class="box-header with-border"> 
 					<h3 class="box-title" style="padding:10px;color:#057F8A;"><?= __('Event Planner Promotions : ') ?></h3>
 					<div class="box-tools pull-right">
-						<a style="font-size:20px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-						<a style="font-size:22px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+						<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
+						<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
  					</div>
  				</div>
 				<div class="box-body">
@@ -97,7 +98,7 @@ if ($err) {
 							<div class="col-md-12 radio">
 								<label>
 								<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="total_likes"/>
-									 Likes
+									Likes
 								</label>
 							</div>
                         </div>
@@ -221,13 +222,23 @@ if ($err) {
 								<td id="likecount"><?= $this->Number->format($eventPlannerPromotion->like_count) ?></td>
 								<td><?= h(date('d-m-Y',strtotime($eventPlannerPromotion->visible_date))); ?></td>	
 								<td class="actions" style="width:30%;">
-									 <span>
-										<?php echo $this->Form->button('<i class="fa fa-thumbs-up like" > Likes </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2','data-target'=>'#likemodal','data-toggle'=>'modal']); ?>
-										<a href="<?php echo $this->Url->build(["controller" => "EventPlannerPromotions",'action'=>"view",$eventPlannerPromotion->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"> View</i>',['class'=>'btn btn-warning btn-xs','value'=>'button',]); ?></a>
-										<?php echo $this->Form->button('<i class="fa fa-flag"> Report</i>',['class'=>'btn btn-primary btn-xs','value'=>'button','data-target'=>'#reportmodal','data-toggle'=>'modal']); ?>
-										<?php echo $this->Form->button('<i class="fa fa-bookmark"> Save</i>',['class'=>'btn btn-success btn-xs','value'=>'button','data-target'=>'#savemodal','data-toggle'=>'modal']); ?>
-										<?php echo $this->Html->link('Delete','api address'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal','data-toggle'=>'modal', $eventPlannerPromotion->id));?>
-									</span>
+<span>
+ <?php
+	$dataUserId=$eventPlannerPromotion->user_id;
+	$isLiked=$eventPlannerPromotion->isLiked;
+	//-- LIKES DISLIKE
+	if($isLiked=='no'){
+		echo $this->Form->button('<i class="fa fa-thumbs-up like" > Likes </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2']);
+	}
+	if($isLiked=='yes'){}
+?>
+ 
+	
+	<a href="<?php echo $this->Url->build(["controller" => "EventPlannerPromotions",'action'=>"view",$eventPlannerPromotion->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"> View</i>',['class'=>'btn btn-warning btn-xs','value'=>'button',]); ?></a>
+	<?php echo $this->Form->button('<i class="fa fa-flag"> Report</i>',['class'=>'btn btn-primary btn-xs','value'=>'button','data-target'=>'#reportmodal','data-toggle'=>'modal']); ?>
+	<?php echo $this->Form->button('<i class="fa fa-bookmark"> Save</i>',['class'=>'btn btn-success btn-xs','value'=>'button','data-target'=>'#savemodal','data-toggle'=>'modal']); ?>
+	<?php echo $this->Html->link('Delete','api address'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal','data-toggle'=>'modal', $eventPlannerPromotion->id));?>
+</span>
 								</td>
 							</tr>
 							 <?php $i++;endforeach;
@@ -239,38 +250,7 @@ if ($err) {
 						</tbody>
 					</table>
 					
-			<!-------Like Modal Start--------->
-			<div id="likemodal" class="modal fade" role="dialog">
-				<div class="modal-dialog modal-md" >
-					<!-- Modal content-->
-						<div class="modal-content">
-						  <div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title"></h4>
-						  </div>
-						<form method="get" class="filter_box">
-							<div class="modal-body" style="height:100px;">
-								<div class="col-md-12 row form-group ">
-									<div class="col-md-12 radio">
-										<h3><label>
-										Are you sure ,you want to like this promotion ? 
-										</label></h3>
-									</div>
-								</div>
-							</div>
-							<div class="modal-footer" style="height:60px;">
-								  <div class="row">
-										<div class="col-md-12 text-center">
-											<input type="submit" class="btn btn-primary btn-md" value="OK">
-											<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
-										</div>
-								  </div>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			<!-------Like Modal End--------->
+			
 			
 			<!-------Report Modal Start--------->
 			<div id="reportmodal" class="modal fade" role="dialog">
