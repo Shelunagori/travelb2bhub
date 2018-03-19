@@ -129,9 +129,44 @@ if ($err) {
 													<label><?= __('State') ?></label>
 													</div>
 												<div class="col-md-4">
-													<?= h($stateList).' ('.h($taxiFleetPromotion->country->country_name).' )'; ?> 
+													<?= h($stateList); ?> 
 												</div>
 											</div>
-											<?php endforeach; ?>
+											<div class="row">
+												<div class="col-md-2">
+													<label><?= __('Country') ?></label>
+													</div>
+												<div class="col-md-4">
+													<?= h($taxiFleetPromotion->country->country_name); ?>
+												</div>
+												<div class="col-md-2">
+													<label><?= __('Total Likes') ?></label>
+													</div>
+												<div class="col-md-4">
+													<?= h($taxiFleetPromotion->total_likes); ?>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+										<br>
+											<div class="row">
+												<div class="col-md-12">
+												<div class="col-md-2">
+													<label><?= __('Fleet Details') ?></label>
+													</div>
+												<div class="col-md-10">
+													<?= $this->Text->autoParagraph(h($taxiFleetPromotion->fleet_detail)); ?>
+												</div>
+												</div>
+											</div>
+										</div>
+									</fieldset>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+<?php endforeach; ?>
 
    
