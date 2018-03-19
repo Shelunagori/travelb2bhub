@@ -150,11 +150,16 @@ class TaxiFleetPromotionsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-	public function report()
+	public function report($higestSort = null,$country_id = null,$state_id = null,$city_id = null,$car_bus_id = null)
     {
-        $this->viewBuilder()->layout('user_layout');
-		$user_id=$this->Auth->User('id');
-        $this->set(compact('user_id'));
+        $higestSort=$this->request->query('higestSort'); 
+		$country_id=$this->request->query('country_id'); 
+		$city_id=$this->request->query('city_id'); 
+		$car_bus_id=$this->request->query('car_bus_id'); 
+		$state_id=$this->request->query('state_id'); 
+		$this->viewBuilder()->layout('user_layout');
+        $user_id=$this->Auth->User('id');
+		$this->set(compact('user_id','higestSort','country_id','city_id','state_id','car_bus_id'));
     }
 	
 }

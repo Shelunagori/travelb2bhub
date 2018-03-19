@@ -2,7 +2,7 @@
 //-- List
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => $coreVariable['SiteUrl']."api/PostTravlePackages/getTravelPackages.json?isLikedUserId=".$user_id,
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/PostTravlePackages/getTravelPackages.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&category_id=".$category_id."&duration_day_night=".$duration_day_night."&starting_price=".$starting_price,
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -23,10 +23,65 @@ if ($err) {
 } else {
 	$response;
 	$List=json_decode($response);
-	//pr($List); exit;
+	//pr($postTravlePackages); exit;
 	$postTravlePackages=$List->getTravelPackages;
 }
-//pr($List); exit;
+//pr($postTravlePackages); exit;
+//--- COUNTRY STATE & CITY
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => $coreVariable['SiteUrl']."pages/masterCountry",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: 39e47dc1-a66a-2347-2fc6-3b5e0160d26d"
+  ),
+));
+$masterCountry = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+$countries=array();
+$states=array();
+$city=array();
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+	$masterCountry=json_decode($masterCountry);
+	$countries=$masterCountry->countryData->ResponseObject;
+	$states=$masterCountry->stateData->ResponseObject;
+	$city=$masterCountry->cityData->ResponseObject;
+}
+//--- Category
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/post_travle_package_categories/index.json",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: 39e85539-7745-db54-4f15-121a9d912dc7"
+  ),
+));
+$responsecat = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  $Category=json_decode($responsecat);
+  $cat=$Category->postTravlePackageCategories;
+}
 ?>
 <style type="text/css">
         img {
@@ -47,13 +102,153 @@ if ($err) {
 		<div class="col-md-12" style="background-color:#fff"> 
 			<div class="box box-default">
 				<div class="box-header with-border"> 
-					<h3 class="box-title" style="color:#057F8A "><?= __('PostTravle Package Promotions :') ?></h3>
+					<h3 class="box-title" style="color:#057F8A;padding:10px"><?= __('PostTravle Package Promotions') ?></h3>
 					<div class="box-tools pull-right">
-						<a style="font-size:20px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-						<a style="font-size:22px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+						<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
+						<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
  					</div>
  				</div>
 				<div class="box-body">
+					<div id="myModal123" class="modal fade" role="dialog">
+					  <div class="modal-dialog " style="width:22%;">
+						<!-- Modal content-->
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Sorting</h4>
+						  </div>
+						  <form method="get" class="filter_box">
+						  <div class="modal-body" style="height:130px;">
+							<div class="col-md-12 row form-group ">
+								<div class="col-md-12 radio">
+									<label>
+										<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="user_rating"/>
+										User Rating
+									</label>
+								</div>
+							</div>
+							<div class="col-md-12 row form-group ">
+								<div class="col-md-12 radio">
+									<label>
+									<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="total_likes"/>
+										 Likes
+									</label>
+								</div>
+							</div>
+							 
+							
+							<div class="col-md-12 row form-group ">
+								<div class="col-md-12 radio">
+									<label>
+										<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="total_views"/>
+										 Views
+									</label>
+								</div>
+							</div>
+							
+						</div>
+						<div class="modal-footer" style="height:60px;">
+							  <div class="row">
+									<div class="col-md-12 text-center">
+										<input type="submit" class="btn btn-primary btn-sm">
+										<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-primary btn-sm">Reset</a>
+									</div>
+							  </div>
+						</div>
+						</form>
+						</div>
+						</div>
+					</div>
+				   <div class="fade modal form-modal" id="myModal122" role="dialog">
+					  <div class="modal-dialog " style="width:35%;" >
+						 <div class=modal-content>
+							<div class=modal-header>
+							   <button class="close" data-dismiss="modal" type="button">&times;</button>
+							   <h4 class=modal-title>Filter</h4>
+							</div>
+							<form class="filter_box" method="get">
+							<div class="modal-body">
+								<div class="row form-group margin-b10">
+									<div class=col-md-12>
+										 <div class=col-md-3>
+										  <label class="col-form-label"for=example-text-input>Country</label>
+										  </div>
+										  <div class=col-md-1>:</div>
+										 <div class=col-md-7>
+										<?php $options=array();
+											foreach($countries as $country)
+											{
+												$options[] = ['value'=>$country->id,'text'=>$country->country_name];
+											};echo $this->Form->input('country_id', ['options' => $options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...']);
+										?>
+										</div>
+									 </div>
+									</div>
+									<div class="row form-group margin-b10">
+										<div class=col-md-12>
+										  <div class=col-md-3>
+										 <label class="col-form-label" for=example-text-input>Package Category</label>
+										 </div>
+										<div class=col-md-1>:</div>
+										 <div class=col-md-7>
+											<?php 
+												$options=array();
+												foreach($cat as $sts)
+												{
+													$options[] = ['value'=>$sts->id,'text'=>$sts->name];
+												};
+												echo $this->Form->control('package_category_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>'Select...']);?>
+										 </div>
+										</div>	
+									</div>
+									<div class="row form-group margin-b10">
+										<div class=col-md-12>
+										  <div class=col-md-3>
+										 <label class="col-form-label" for=example-text-input>Duration Night</label>
+										 </div>
+										<div class=col-md-1>:</div>
+										 <div class=col-md-7>
+											<select name="duration_day_night" class="form-control select2">
+												<option value="">Select...</option>
+												<option>1 Night 2 Days</option>
+												<option>2 Night 3 Days</option>
+												<option>3 Night 4 Days</option>
+												<option>4 Night 5 Days</option>
+												<option>5 Night 6 Days</option>
+												<option>6 Night 7 Days</option>
+												<option>7 Night 8 Days</option>
+												<option>8 Night 9 Days</option>
+												<option>9 Night 10 Days</option>
+												<option>10 Night 11 Days</option>
+												<option>11 Night 12 Days</option>
+												<option>12 Night 13 Days</option>
+												<option>13 Night 14 Days</option>
+												<option>14 Night 15 Days</option>
+												<option>More than 15 Days</option>
+											</select>
+										 </div>
+										</div>	
+									</div>
+									<div class="row form-group margin-b10">
+										<div class=col-md-12>
+										  <div class=col-md-3>
+										 <label class="col-form-label" for=example-text-input>Starting Price</label>
+										 </div>
+										<div class=col-md-1>:</div>
+										 <div class=col-md-7>
+											 <?php echo $this->Form->input('starting_price',['class'=>'form-control','label'=>false,'placeholder'=>'Starting Price']);?> 
+										 </div>
+										</div>	
+									</div>
+								  </div>
+								<div class="modal-footer">
+									<button class="btn btn-primary btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
+									<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-primary btn-sm">Reset</a>
+								</div>
+							</form>
+						</div>
+					  </div>
+					</div>
 						<table class="table" cellpadding="0" cellspacing="0">
 							<thead>
 								<tr style="background-color:#709090;color:white;">
@@ -61,8 +256,9 @@ if ($err) {
 									<th scope="col"><?= ('Seller Name') ?></th>
 									<th scope="col"><?= ('Title') ?></th>
 									<th scope="col"><?= ('Category') ?></th>
-									<th scope="col"><?= ('Image') ?></th>
-									<th scope="col" class="actions"><?= __('Actions') ?></th>
+									<th scope="col"><?= ('Starting Price') ?></th>
+									<th scope="col"><?= ('Package Duration') ?></th>
+									<th scope="col" class="actions" style="text-align:center"><?= __('Actions') ?></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -80,19 +276,22 @@ if ($err) {
 										$x++;}
 								?>
 								<tr>
-									<td style="width:5%;"><?php echo $i; ?></td>
-									<td style="width:15%;" ><?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.' ('.$postTravlePackage->user_rating.')');?>
+									<td style="width:1%;"><?php echo $i; ?></td>
+									<td style="width:10%;" ><?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.' ('.$postTravlePackage->user_rating.')');?>
 									</td>
-									<td style="width:15%;"><?= h($postTravlePackage->title) ?></td>
+									<td style="width:10%;"><?= h($postTravlePackage->title) ?></td>
 									<td style="width:20%;"><?= h($CategoryList);?></td>
-									<td style="width:20%;">
+									<td style="width:10%;"><?= h($postTravlePackage->starting_price);?></td>
+									<td style="width:10%;"><?= h($postTravlePackage->duration_day_night);?></td>
+									<!--<td style="width:20%;">
 									<?php echo $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'height:8%;width:100%;','id'=>'myImg']);?></td>
 									<div id="myModal" class="modal">
 									  <span class="close">&times;</span>
 									  <img class="modal-content" id="img01">
 									  <div id="caption"></div>
 									</div>
-									<td class="actions" style="25%">
+									-->
+									<td class="actions" style="width:25%; text-align:center">
 										 <span>
 										 	<?php echo $this->Form->button('<i class="fa fa-thumbs-up"></i>',['class'=>'btn btn-primary btn-md likes','value'=>'button','style'=>'background-color:#1295A2']); ?>
 											<a href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>"view",$postTravlePackage->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"></i>',['class'=>'btn btn-warning btn-md','value'=>'button']); ?></a>

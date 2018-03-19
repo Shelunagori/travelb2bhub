@@ -88,8 +88,16 @@ if ($err) {
 						<div class="col-md-12 row form-group ">
 							<div class="col-md-12 radio">
 								<label>
+									<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="user_rating"/>
+									User Rating
+								</label>
+							</div>
+						</div>
+						<div class="col-md-12 row form-group ">
+							<div class="col-md-12 radio">
+								<label>
 								<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="total_likes"/>
-									Highest Likes
+									 Likes
 								</label>
 							</div>
                         </div>
@@ -99,18 +107,11 @@ if ($err) {
 							<div class="col-md-12 radio">
 								<label>
 									<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="total_views"/>
-									Highest Views
+									 Views
 								</label>
 							</div>
                         </div>
-						<div class="col-md-12 row form-group ">
-							<div class="col-md-12 radio">
-								<label>
-									<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="user_rating"/>
-									User Rating
-								</label>
-							</div>
-						</div>
+						
 					</div>
 					<div class="modal-footer" style="height:60px;">
 						  <div class="row">

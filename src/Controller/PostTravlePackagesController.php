@@ -235,11 +235,17 @@ ory_id[$z];
 
         return $this->redirect(['action' => 'index']);
     }
-	public function report()
+	public function report($higestSort = null,$country_id = null,$category_id = null,$duration_day_night = null,$starting_price = null)
     {
+		$higestSort=$this->request->query('higestSort'); 
+		$country_id=$this->request->query('country_id'); 
+		$category_id=$this->request->query('category_id'); 
+		$duration_day_night=$this->request->query('duration_day_night'); 
+		$starting_price=$this->request->query('starting_price'); 
+		 
 		$this->viewBuilder()->layout('user_layout');
-		$user_id=$this->Auth->User('id');
-		$this->set(compact('user_id'));
+        $user_id=$this->Auth->User('id');
+		$this->set(compact('user_id','higestSort','country_id','category_id','duration_day_night','starting_price'));
     }
 
 }

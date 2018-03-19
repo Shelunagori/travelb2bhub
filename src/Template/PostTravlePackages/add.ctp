@@ -228,7 +228,6 @@ fieldset{
 												</p>
 												<div class="input-field">
 												<?php 
- 
 												$options=array();
 												foreach($cat as $sts)
 												{
