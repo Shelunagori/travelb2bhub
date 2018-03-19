@@ -306,12 +306,8 @@ if ($err) {
 								</div>
 							</div>
 							<div class="modal-footer" style="height:60px;">
-								  <div class="row">
-										<div class="col-md-12 text-center">
 											<input type="submit" class="btn btn-primary btn-md" value="OK">
 											<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
-										</div>
-								  </div>
 							</div>
 						</form>
 					</div>
@@ -341,12 +337,8 @@ if ($err) {
 								</div>
 							</div>
 							<div class="modal-footer" style="height:60px;">
-								  <div class="row">
-										<div class="col-md-12 text-center">
-											<input type="submit" class="btn btn-primary btn-md" value="OK">
-											<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
-										</div>
-								  </div>
+								<input type="submit" class="btn btn-primary btn-md" value="OK">
+								<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
 							</div>
 						</form>
 					</div>

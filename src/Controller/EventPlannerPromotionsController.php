@@ -85,12 +85,9 @@ class EventPlannerPromotionsController extends AppController
      */
     public function view($id = null)
     {
-        $eventPlannerPromotion = $this->EventPlannerPromotions->get($id, [
-            'contain' => ['Counties', 'PriceMasters', 'Users', 'EventPlannerPromotionCities', 'EventPlannerPromotionStates']
-        ]);
-
-        $this->set('eventPlannerPromotion', $eventPlannerPromotion);
-        $this->set('_serialize', ['eventPlannerPromotion']);
+        $this->viewBuilder()->layout('user_layout');
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id','id'));
     }
 
     /**

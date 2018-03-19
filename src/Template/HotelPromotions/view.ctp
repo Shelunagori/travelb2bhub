@@ -37,7 +37,7 @@ if ($err) {
 				</div> -->
 				<div class="box-body"> 
 					<center><fieldset>
-						<legend style="color:#369FA1;"><b> &nbsp; <?= __('View Hotel Details ') ?> &nbsp;  </b></legend>
+						<legend style="color:#369FA1;"><b> &nbsp; <?= __(' Hotel Promotion Details ') ?> &nbsp;  </b></legend>
 							<table class="table">
 							<?php foreach($hotelPromotion as $hotelPromotion):
 								?>
