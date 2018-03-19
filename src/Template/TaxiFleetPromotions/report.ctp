@@ -94,8 +94,8 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 			<div class="box-header with-border"> 
 				<h1 class="box-title" style="padding:10px;color:#057F8A;"><b>Taxi Fleet Promotions</b></h1>
 				<div class="box-tools pull-right">
-					<a style="font-size:25px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-					<a style="font-size:25px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+					<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
+					<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 				</div>
 				 
 			</div>
@@ -260,7 +260,7 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
                 <td><?= h(date('d-m-Y',strtotime($taxiFleetPromotion->visible_date))); ?></td>
 				<td class="actions" >
 					 <span>
-						<?php echo $this->Form->button('<i class="fa fa-thumbs-up"> Likes</i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2']); ?>
+						<?php echo $this->Form->button('<i class="fa fa-thumbs-up"> Like</i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2']); ?>
 							<a href="<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions",'action'=>"view",$taxiFleetPromotion->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"> View</i>',['class'=>'btn btn-primary btn-xs','value'=>'button']); ?></a>
 							<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal'));?>
 											<!-------Report Modal Start--------->
@@ -285,12 +285,8 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 																		</div>
 																	</div>
 																	<div class="modal-footer" style="height:60px;">
-																		  <div class="row">
-																				<div class="col-md-12 text-center">
-																					<input type="submit" class="btn btn-primary btn-md" value="OK">
-																					<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
-																				</div>
-																		  </div>
+																		<input type="submit" class="btn btn-primary btn-md" value="OK">
+																		<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
 																	</div>
 																</form>
 															</div>
@@ -311,20 +307,37 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 																	</h4>
 															</div>
 																<div class="modal-footer" style="height:60px;">
-																	  <div class="row">
-																			<div class="col-md-12 text-center">
-																				<input type="submit" class="btn btn-primary btn-md" value="OK">
-																				<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
-																			</div>
-																	  </div>
-																	</div>
+																	<input type="submit" class="btn btn-primary btn-md" value="OK">
+																	<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																</div>
 																</form>
 															</div>
 														</div>
 													</div>
 											<!-------Save Modal End--------->	
 					
-						<?php echo $this->Html->link('Delete','api address'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $taxiFleetPromotion->id)));?>
+						<?php echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal','data-toggle'=>'modal'));?>
+							<!-------Delete Modal Start--------->
+												<div id="deletemodal" class="modal fade" role="dialog">
+													<div class="modal-dialog modal-md" >
+														<!-- Modal content-->
+															<div class="modal-content">
+															  <div class="modal-header" style="height:100px;">
+																<form method="get" class="filter_box">
+																	<button type="button" class="close" data-dismiss="modal">&times;</button>
+																	<h4 class="modal-title">
+																	Are You Sure, you want to remove this promotion???
+																	</h4>
+																</div>
+																<div class="modal-footer" style="height:60px;">
+																	<input type="submit" class="btn btn-primary btn-md" value="OK">
+																	<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																</div>
+															</form>
+														</div>
+													</div>
+												</div>
+											<!-------Delete Modal End--------->	
 					</span>
 				</td>
             </tr>

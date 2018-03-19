@@ -318,12 +318,8 @@ if ($err) {
 																		</div>
 																	</div>
 																	<div class="modal-footer" style="height:60px;">
-																		  <div class="row">
-																				<div class="col-md-12 text-center">
-																					<input type="submit" class="btn btn-primary btn-md" value="OK">
-																					<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
-																				</div>
-																		  </div>
+																		<input type="submit" class="btn btn-primary btn-md" value="OK">
+																		<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
 																	</div>
 																</form>
 															</div>
@@ -344,20 +340,37 @@ if ($err) {
 																	</h4>
 															</div>
 																<div class="modal-footer" style="height:60px;">
-																	  <div class="row">
-																			<div class="col-md-12 text-center">
-																				<input type="submit" class="btn btn-primary btn-md" value="OK">
-																				<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
-																			</div>
-																	  </div>
-																	</div>
-																</form>
-															</div>
+																	<input type="submit" class="btn btn-primary btn-md" value="OK">
+																	<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																</div>
+															</form>
 														</div>
 													</div>
+												</div>
 											<!-------Save Modal End--------->	
-											
-											<?php echo $this->Html->link('<i class="fa fa-trash"> Remove</i>','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $postTravlePackage->id)));?>
+
+											<?php echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal','data-toggle'=>'modal'));?>
+							<!-------Delete Modal Start--------->
+												<div id="deletemodal" class="modal fade" role="dialog">
+													<div class="modal-dialog modal-md" >
+														<!-- Modal content-->
+															<div class="modal-content">
+															  <div class="modal-header" style="height:100px;">
+																<form method="get" class="filter_box">
+																	<button type="button" class="close" data-dismiss="modal">&times;</button>
+																	<h4 class="modal-title">
+																	Are You Sure, you want to remove this promotion???
+																	</h4>
+																</div>
+																<div class="modal-footer" style="height:60px;">
+																	<input type="submit" class="btn btn-primary btn-md" value="OK">
+																	<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																</div>
+															</form>
+														</div>
+													</div>
+												</div>
+											<!-------Delete Modal End--------->	
 										</span>
 									</td>
 								</tr>
