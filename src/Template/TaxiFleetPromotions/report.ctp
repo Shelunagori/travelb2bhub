@@ -327,7 +327,6 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 						<?php echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal'));?>
 							<!-------Delete Modal Start--------->
 												<div id="deletemodal<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
-													<input type="hidden" name="taxifleet_id1" value="<?php echo $taxiFleetPromotion->id; ?>">
 													<div class="modal-dialog modal-md" >
 														<!-- Modal content-->
 															<div class="modal-content">
