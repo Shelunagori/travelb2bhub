@@ -184,7 +184,6 @@ if ($err) {
 							<th scope="col"><?= ('Hotel Name') ?></th>
 							<th scope="col"><?= ('Location') ?></th>
 							<th scope="col"><?= ('Category') ?></th>
-							<th scope="col"><?= ('Picture') ?></th>
 							<th scope="col" class="actions"><?= __('Actions') ?></th>
 						</tr>
 					</thead>
@@ -196,7 +195,6 @@ if ($err) {
 							<td><?= h($hotelPromotion->hotel_name) ?></td>
 							<td><?= h($hotelPromotion->hotel_location) ?></td>
 							<td><?= h($hotelPromotion->hotel_category->name) ?></td>
-							<td><?php echo $this->Html->image('../'.$hotelPromotion->hotel_pic,['style'=>'height:8%;width:100%;']);?></td>
 							<td class="actions" style="width:30%;">
 								 <span>
 										<?php echo $this->Form->button('<i class="fa fa-thumbs-up"> Like</i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:#1295A2']); ?>

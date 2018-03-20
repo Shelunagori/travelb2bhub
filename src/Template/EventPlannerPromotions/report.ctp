@@ -221,7 +221,7 @@ if ($err) {
 								<td><?= h($eventPlannerPromotion->price_master->week); ?></td>
 								<td><?= h($eventPlannerPromotion->price_master->price); ?></td>
 								<td><?= h(date('d-m-Y',strtotime($eventPlannerPromotion->visible_date))); ?></td>	
-								<td class="actions" >
+								<td class="actions" style="width:30%;">
 									<form method="POST">
 										<span>
 											<input type="hidden" name="event_id" value="<?php echo $eventPlannerPromotion->id; ?>">
