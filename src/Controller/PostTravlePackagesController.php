@@ -248,12 +248,13 @@ ory_id[$z];
 		{
 			//pr($this->request->data); exit;
 			//-- REMOVE EVENT
-			if (isset($this->request->data['removeposttravle']))
+		 	if (isset($this->request->data['removeposttravle']))
 			{
  				$posttravle_id=$this->request->data('posttravle_id');
+				pr($posttravle_id);exit;
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
-				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/EventPlannerPromotions/removeEvent.json?posttravle_id=".$posttravle_id,
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/PostTravlePackages/removePostTravelPackages.json?post_travel_id=".$posttravle_id,
 				  CURLOPT_RETURNTRANSFER => true,
 				  CURLOPT_ENCODING => "",
 				  CURLOPT_MAXREDIRS => 10,
@@ -277,19 +278,19 @@ ory_id[$z];
 				$displayMessage=$removeResult->message;
 				$this->Flash->success(__($displayMessage));
 				return $this->redirect(['action' => 'report']);
-			}
-			
+			} 
 			//-- Like EVENT
 			if(isset($this->request->data['LikeEvent']))
 			{
  				$posttravle_id=$this->request->data('posttravle_id');
 				$post =[
-						'event_planner_promotion_id' => $event_id,
+						'post_travle_package_id' => $posttravle_id,
 						'user_id' =>$user_id						 							
 					];
+					//pr($post);exit;
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
-				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/PostTravlePackages/likePostTravlePackages.json",
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/PostTravlePackages/likePostTravelPackages.json",
 				  CURLOPT_RETURNTRANSFER => true,
 				  CURLOPT_ENCODING => "",
 				  CURLOPT_MAXREDIRS => 10,
