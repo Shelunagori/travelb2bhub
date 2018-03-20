@@ -148,16 +148,13 @@ if ($err) {
 											</div>
 										</div>
 									</div>
-								</div>
+								</div><br>
 											<div class="row">
 												<div class="col-md-12">
-												<div class="col-md-4">
-												</div>
-												<div class="col-md-1">
+												<div class="col-md-2">
 													<label><?= __('Fleet Details') ?></label>
 													</div>
-												<div class="col-md-7">
-												Resident Evil: Apocalypse is a 2004 science fiction action horror film filmed in Toronto, Canada, directed by Alexander Witt and written by Paul W. S. Anderson. It is the second installment in the Resident Evil film series, which is based on the video game series of the same name. Milla Jovovich (pictured) reprises her role as 
+												<div class="col-md-10">
 													<?= $this->Text->autoParagraph(h($taxiFleetPromotion->fleet_detail)); ?>
 												</div>
 												</div>
