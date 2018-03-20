@@ -194,10 +194,10 @@ class TaxiFleetPromotionsController extends AppController
 				return $this->redirect(['action' => 'report']);
 			}
 			//---Remove TaxiFleet Promotion
-			if(isset($this->request->date['removetaxifleet']))
+			if(isset($this->request->data['removetaxifleet']))
 			{
-				$taxifleet_id=$this->request->data('taxifleet_id1');
-				pr($taxifleet_id);exit;
+				$taxifleet_id=$this->request->data('taxifleet_id');
+				//pr($taxifleet_id);exit;
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
 				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotions/removeTaxFlletPromotions.json?taxi_id=".$taxifleet_id,
@@ -228,7 +228,6 @@ class TaxiFleetPromotionsController extends AppController
 			
 		}
 		$this->viewBuilder()->layout('user_layout');
-        $user_id=$this->Auth->User('id');
 		$this->set(compact('user_id','higestSort','country_id','city_id','state_id','car_bus_id'));
     }
 	

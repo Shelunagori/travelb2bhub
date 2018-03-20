@@ -188,7 +188,8 @@ if ($err) {
 						</tr>
 					</thead>
 					<tbody>
-						<?php $i=1;foreach ($hotelPromotions as $hotelPromotion): ?>
+						<?php $i=1;foreach ($hotelPromotions as $hotelPromotion): 
+						?>
 						<tr>
 							<td><?php echo $i; ?></td>
 							<td><?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.'( '.$hotelPromotion->user_rating.' )');?></td>
@@ -196,8 +197,21 @@ if ($err) {
 							<td><?= h($hotelPromotion->hotel_location) ?></td>
 							<td><?= h($hotelPromotion->hotel_category->name) ?></td>
 							<td class="actions" style="width:30%;">
+							<form method="POST">
 								 <span>
-										<?php echo $this->Form->button('<i class="fa fa-thumbs-up"> Like</i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:#1295A2']); ?>
+									<input type="hidden" name="hotelpromotion_id" value="<?php echo $hotelPromotion->id; ?>">
+									<?php
+										$dataUserId=$hotelPromotion->user_id;
+										$isLiked=$hotelPromotion->isLiked;
+										//-- LIKES DISLIKE
+										if($isLiked=='no'){
+											echo $this->Form->button('<i class="fa fa-thumbs-up like" > Likes </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'LikeEvent']);
+										}
+										if($isLiked=='yes'){
+											echo $this->Form->button('<i class="fa fa-thumbs-down like" > Dislikes </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#d6796e','type'=>'submit','name'=>'LikeEvent']);
+										}
+									?>	
+										
 										<a href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>"view",$hotelPromotion->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"> View</i>',['class'=>'btn btn-primary btn-xs','value'=>'button',]); ?></a>
 										<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal'));?>
 											<!-------Report Modal Start--------->
@@ -209,7 +223,6 @@ if ($err) {
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																	<h4 class="modal-title"></h4>
 																  </div>
-																<form method="get" class="filter_box">
 																	<div class="modal-body" style="height:100px;">
 																		<div class="col-md-12 row form-group ">
 																			<div class="col-md-12 radio">
@@ -223,9 +236,8 @@ if ($err) {
 																	</div>
 																	<div class="modal-footer" style="height:60px;">
 																		<input type="submit" class="btn btn-primary btn-md" value="OK">
-																		<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																		<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
 																	</div>
-																</form>
 															</div>
 														</div>
 													</div>
@@ -238,7 +250,6 @@ if ($err) {
 														<!-- Modal content-->
 															<div class="modal-content">
 															  <div class="modal-header" style="height:100px;">
-																<form method="get" class="filter_box">
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																	<h4 class="modal-title">
 																	Are You Sure, to save this promotion in your cart ???
@@ -246,36 +257,34 @@ if ($err) {
 															</div>
 																<div class="modal-footer" style="height:60px;">
 																	<input type="submit" class="btn btn-primary btn-md" value="OK">
-																	<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																	<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
 																</div>
-																</form>
 															</div>
 														</div>
 													</div>
 											<!-------Save Modal End--------->	
-											<?php echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal','data-toggle'=>'modal'));?>
+											<?php echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal'.$hotelPromotion->id,'data-toggle'=>'modal'));?>
 							<!-------Delete Modal Start--------->
-												<div id="deletemodal" class="modal fade" role="dialog">
+												<div id="deletemodal<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-md" >
 														<!-- Modal content-->
 															<div class="modal-content">
 															  <div class="modal-header" style="height:100px;">
-																<form method="get" class="filter_box">
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																	<h4 class="modal-title">
 																	Are You Sure, you want to remove this promotion???
 																	</h4>
 																</div>
 																<div class="modal-footer" style="height:60px;">
-																	<input type="submit" class="btn btn-primary btn-md" value="OK">
-																	<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																	<button type="submit" class="btn btn-danger" name="removehotelpromtion" value="yes" >Yes</button>
+																	<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
 																</div>
-															</form>
 														</div>
 													</div>
 												</div>
 											<!-------Delete Modal End--------->	
-								</span>
+									</span>
+								</form>
 							</td>
 						</tr>
 						<?php $i++;endforeach; ?>

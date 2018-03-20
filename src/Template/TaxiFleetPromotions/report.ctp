@@ -338,32 +338,32 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 																</div>
 																<div class="modal-footer" style="height:60px;">
 																	<button type="submit" class="btn btn-danger" name="removetaxifleet" value="yes" >Yes</button>
-																	
 																	<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
 																</div>
 														</div>
 													</div>
 												</div>
 											<!-------Delete Modal End--------->	
-					</span>
-				</form>
-				</td>
-            </tr>
-            <?php $i++;endforeach; ?>
-        </tbody>
-    </table>
-    <!--<div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>--->
-</div>
-</div>
-</div>
-</div>
-</div>
+											</span>
+										</form>
+										</td>
+									</tr>
+									<?php $i++;endforeach; ?>
+								</tbody>
+							</table>
+							<!--<div class="paginator">
+								<ul class="pagination">
+									<?= $this->Paginator->first('<< ' . __('first')) ?>
+									<?= $this->Paginator->prev('< ' . __('previous')) ?>
+									<?= $this->Paginator->numbers() ?>
+									<?= $this->Paginator->next(__('next') . ' >') ?>
+									<?= $this->Paginator->last(__('last') . ' >>') ?>
+								</ul>
+								<p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+							</div>--->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
