@@ -230,10 +230,10 @@ if ($err) {
 											$isLiked=$eventPlannerPromotion->isLiked;
 											//-- LIKES DISLIKE
 											if($isLiked=='no'){
-												echo $this->Form->button('<i class="fa fa-thumbs-up like" > Likes </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'LikeEvent']);
+												echo $this->Form->button('<i class="fa fa-thumbs-up like" > Like </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'LikeEvent']);
 											}
 											if($isLiked=='yes'){
-												echo $this->Form->button('<i class="fa fa-thumbs-down like" > Unlikes </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#d6796e','type'=>'submit','name'=>'LikeEvent']);
+												echo $this->Form->button('<i class="fa fa-thumbs-down like" > Dislike </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#d6796e','type'=>'submit','name'=>'LikeEvent']);
 											}
 										?>	
 											

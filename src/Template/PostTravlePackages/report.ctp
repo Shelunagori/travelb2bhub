@@ -23,7 +23,7 @@ if ($err) {
 } else {
 	$response;
 	$List=json_decode($response);
-	//pr($postTravlePackages); exit;
+	pr($List); exit;
 	$postTravlePackages=$List->getTravelPackages;
 }
 //pr($postTravlePackages); exit;
@@ -263,6 +263,7 @@ if ($err) {
 							</thead>
 							<tbody>
 								<?php $i=1; 
+								if(!empty($postTravlePackages)){
 								foreach ($postTravlePackages as $postTravlePackage): 
 									$CategoryList='';
 									$x=0;
@@ -292,8 +293,21 @@ if ($err) {
 									</div>
 									-->
 									<td class="actions" style="width:30%;">
+									<form method="POST">
+									<input type="hidden" name="posttravle_id" value="<?php echo $postTravlePackage->id; ?>">
 										 <span>
-										 	<?php echo $this->Form->button('<i class="fa fa-thumbs-up"> Like</i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2']); ?>
+										 <?php
+											$dataUserId=$postTravlePackage->user_id;
+											$isLiked=$postTravlePackage->isLiked;
+											//-- LIKES DISLIKE
+											if($isLiked=='no'){
+												echo $this->Form->button('<i class="fa fa-thumbs-up like" > Likes </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'LikeEvent']);
+											}
+											if($isLiked=='yes'){
+												echo $this->Form->button('<i class="fa fa-thumbs-down like" > Dislikes </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#d6796e','type'=>'submit','name'=>'LikeEvent']);
+											}
+										?>	
+										 	<?php //echo $this->Form->button('<i class="fa fa-thumbs-up"> Like</i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2']); ?>
 											<a href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>"view",$postTravlePackage->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"> View</i>',['class'=>'btn btn-primary btn-xs','value'=>'button']); ?></a>
 											<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal'));?>	
 											<!-------Report Modal Start--------->
@@ -363,8 +377,8 @@ if ($err) {
 																	</h4>
 																</div>
 																<div class="modal-footer" style="height:60px;">
-																	<input type="submit" class="btn btn-primary btn-md" value="OK">
-																	<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																	<button type="submit" class="btn btn-danger" name="removeposttravle" value="yes" >Yes</button>
+																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 																</div>
 															</form>
 														</div>
@@ -372,11 +386,16 @@ if ($err) {
 												</div>
 											<!-------Delete Modal End--------->	
 										</span>
-									</td>
-								</tr>
-								<?php $i++;endforeach; ?>
-							</tbody>
-						</table>
+									</form>
+								</td>
+							</tr>
+							<?php $i++;endforeach; 
+							}	else
+							{
+								echo"<tr><th colspan='10' style='text-align:center'>No Record Found</th></tr>";
+							}							?>
+						</tbody>
+					</table>
 							<!--<div class="paginator">
 								<ul class="pagination">
 									<?= $this->Paginator->first('<< ' . __('first')) ?>

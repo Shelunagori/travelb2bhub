@@ -235,14 +235,86 @@ ory_id[$z];
 
         return $this->redirect(['action' => 'index']);
     }
-	public function report($higestSort = null,$country_id = null,$category_id = null,$duration_day_night = null,$starting_price = null)
+	public function report($higestSort = null,$country_id = null,$category_id = null,$duration_day_night = null,$starting_price = null,$posttravle_id= null,$removeposttravle= null)
     {
 		$higestSort=$this->request->query('higestSort'); 
 		$country_id=$this->request->query('country_id'); 
 		$category_id=$this->request->query('category_id'); 
 		$duration_day_night=$this->request->query('duration_day_night'); 
 		$starting_price=$this->request->query('starting_price'); 
-		 
+		 //-- REMOVE PARAMETER
+		$user_id=$this->Auth->User('id');
+		if ($this->request->is(['patch', 'post', 'put'])) 
+		{
+			//pr($this->request->data); exit;
+			//-- REMOVE EVENT
+			if (isset($this->request->data['removeposttravle']))
+			{
+ 				$posttravle_id=$this->request->data('posttravle_id');
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/EventPlannerPromotions/removeEvent.json?posttravle_id=".$posttravle_id,
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "GET",
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 899aa26c-f697-c513-89c1-b6bba1e1fbdf"
+				  ),
+				));
+
+				$removeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				  $removeResult=json_decode($removeResponse);
+				}
+				$displayMessage=$removeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'report']);
+			}
+			
+			//-- Like EVENT
+			if(isset($this->request->data['LikeEvent']))
+			{
+ 				$posttravle_id=$this->request->data('posttravle_id');
+				$post =[
+						'event_planner_promotion_id' => $event_id,
+						'user_id' =>$user_id						 							
+					];
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/PostTravlePackages/likePostTravlePackages.json",
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "POST",
+				  CURLOPT_POSTFIELDS =>$post,
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				$displayMessage=$LikeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'report']);
+			}
+		}
 		$this->viewBuilder()->layout('user_layout');
         $user_id=$this->Auth->User('id');
 		$this->set(compact('user_id','higestSort','country_id','category_id','duration_day_night','starting_price'));
