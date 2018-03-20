@@ -165,7 +165,7 @@ class TaxiFleetPromotionsController extends AppController
 						'taxi_fleet_promotion_id' => $taxifleet_id,
 						'user_id' =>$user_id						 							
 					];
-					//pr($post);exit;
+				//pr($post);exit;
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
 				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotions/likeTaxiFleetPromotions.json",
@@ -196,7 +196,7 @@ class TaxiFleetPromotionsController extends AppController
 			//---Remove TaxiFleet Promotion
 			if(isset($this->request->date['removetaxifleet']))
 			{
-				$taxifleet_id=$this->request->data('taxifleet_id');
+				$taxifleet_id=$this->request->data('taxifleet_id1');
 				pr($taxifleet_id);exit;
 				$curl = curl_init();
 				curl_setopt_array($curl, array(

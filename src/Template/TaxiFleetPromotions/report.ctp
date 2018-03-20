@@ -260,8 +260,8 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
                 <td><?= h(date('d-m-Y',strtotime($taxiFleetPromotion->visible_date))); ?></td>
 				<td class="actions" style="width:30%;">
 					<form method="POST">
-						<input type="hidden" name="taxifleet_id" value="<?php echo $taxiFleetPromotion->id; ?>">
 					<span>
+						<input type="hidden" name="taxifleet_id" value="<?php echo $taxiFleetPromotion->id; ?>">
 							<?php
 								$dataUserId=$taxiFleetPromotion->user_id;
 								$isLiked=$taxiFleetPromotion->isLiked;
@@ -327,6 +327,7 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 						<?php echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal'));?>
 							<!-------Delete Modal Start--------->
 												<div id="deletemodal<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
+													<input type="hidden" name="taxifleet_id1" value="<?php echo $taxiFleetPromotion->id; ?>">
 													<div class="modal-dialog modal-md" >
 														<!-- Modal content-->
 															<div class="modal-content">
@@ -338,7 +339,7 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 																</div>
 																<div class="modal-footer" style="height:60px;">
 																	<button type="submit" class="btn btn-danger" name="removetaxifleet" value="yes" >Yes</button>
-																	<input type="hidden" name="taxifleet_id" value="<?php echo $taxiFleetPromotion->id; ?>">
+																	
 																	<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
 																</div>
 														</div>
@@ -346,6 +347,7 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 												</div>
 											<!-------Delete Modal End--------->	
 					</span>
+				</form>
 				</td>
             </tr>
             <?php $i++;endforeach; ?>
