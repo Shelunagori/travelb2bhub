@@ -188,7 +188,9 @@ if ($err) {
 						</tr>
 					</thead>
 					<tbody>
-						<?php $i=1;foreach ($hotelPromotions as $hotelPromotion): 
+						<?php $i=1;
+						if(!empty($hotelPromotions)){
+						foreach ($hotelPromotions as $hotelPromotion): 
 						?>
 						<tr>
 							<td><?php echo $i; ?></td>
@@ -212,7 +214,7 @@ if ($err) {
 										}
 									?>	
 										
-										<a href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>"view",$hotelPromotion->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"> View</i>',['class'=>'btn btn-primary btn-xs','value'=>'button',]); ?></a>
+									<a href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>"view",$hotelPromotion->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"> View</i>',['class'=>'btn btn-primary btn-xs','value'=>'button',]); ?></a>
 										<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal'));?>
 											<!-------Report Modal Start--------->
 													<div id="reportmodal" class="modal fade" role="dialog">
@@ -287,7 +289,10 @@ if ($err) {
 								</form>
 							</td>
 						</tr>
-						<?php $i++;endforeach; ?>
+						<?php $i++;endforeach; }
+						else {
+							echo"<tr><th colspan='10' style='text-align:center'>No Record Found</th></tr>";
+						}?>
 					</tbody>
 				</table>
 					<h2><span class="show_msg"></span></h2>

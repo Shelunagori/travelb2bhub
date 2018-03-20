@@ -251,7 +251,10 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
             </tr>
         </thead>
         <tbody>
-            <?php $i=1;foreach ($taxiFleetPromotions as $taxiFleetPromotion): ?>
+		
+            <?php $i=1;
+			if(!empty($taxiFleetPromotions)){
+			foreach ($taxiFleetPromotions as $taxiFleetPromotion): ?>
             <tr>
                 <td><?= $i; ?></td>
 				<td><?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name.' ( '.$taxiFleetPromotion->user_rating.' )');?></td>
@@ -348,7 +351,11 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 										</form>
 										</td>
 									</tr>
-									<?php $i++;endforeach; ?>
+									<?php $i++;endforeach; 
+									}else{
+										echo"<tr><th colspan='10' style='text-align:center'>No Record Found</th></tr>";
+									}
+										?>
 								</tbody>
 							</table>
 							<!--<div class="paginator">
