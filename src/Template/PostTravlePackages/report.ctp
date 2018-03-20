@@ -263,7 +263,7 @@ if ($err) {
 							</thead>
 							<tbody>
 								<?php $i=1; 
-								if(!empty($postTravlePackages)){
+							if(!empty($postTravlePackages)){
 								foreach ($postTravlePackages as $postTravlePackage): 
 									$CategoryList='';
 									$x=0;
@@ -295,7 +295,7 @@ if ($err) {
 									<td class="actions" style="width:30%;">
 									<form method="POST">
 									<input type="hidden" name="posttravle_id" value="<?php echo $postTravlePackage->id; ?>">
-										 <span>
+										<span>
 										 <?php
 											$dataUserId=$postTravlePackage->user_id;
 											$isLiked=$postTravlePackage->isLiked;
@@ -318,8 +318,7 @@ if ($err) {
 																  <div class="modal-header">
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																	<h4 class="modal-title"></h4>
-																  </div>
-																<form method="get" class="filter_box">
+																  </div> 
 																	<div class="modal-body" style="height:100px;">
 																		<div class="col-md-12 row form-group ">
 																			<div class="col-md-12 radio">
@@ -335,7 +334,7 @@ if ($err) {
 																		<input type="submit" class="btn btn-primary btn-md" value="OK">
 																		<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
 																	</div>
-																</form>
+																 
 															</div>
 														</div>
 													</div>
@@ -347,7 +346,7 @@ if ($err) {
 														<!-- Modal content-->
 															<div class="modal-content">
 															  <div class="modal-header" style="height:100px;">
-																<form method="get" class="filter_box">
+																 
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																	<h4 class="modal-title">
 																	Are You Sure, to save this promotion in your cart ???
@@ -357,20 +356,21 @@ if ($err) {
 																	<input type="submit" class="btn btn-primary btn-md" value="OK">
 																	<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
 																</div>
-															</form>
+															 
 														</div>
 													</div>
 												</div>
 											<!-------Save Modal End--------->	
 
-											<?php echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal','data-toggle'=>'modal'));?>
+											<?php echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal'.$postTravlePackage->id,'data-toggle'=>'modal'));?>
 							<!-------Delete Modal Start--------->
-												<div id="deletemodal" class="modal fade" role="dialog">
+												<div id="deletemodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-md" >
 														<!-- Modal content-->
 															<div class="modal-content">
 															  <div class="modal-header" style="height:100px;">
-																<form method="get" class="filter_box">
+																 
+																
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																	<h4 class="modal-title">
 																	Are You Sure, you want to remove this promotion???
@@ -378,9 +378,10 @@ if ($err) {
 																</div>
 																<div class="modal-footer" style="height:60px;">
 																	<button type="submit" class="btn btn-danger" name="removeposttravle" value="yes" >Yes</button>
+																	  
 																	<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
 																</div>
-															</form>
+															 
 														</div>
 													</div>
 												</div>
@@ -389,7 +390,7 @@ if ($err) {
 									</form>
 								</td>
 							</tr>
-							<?php $i++;endforeach; 
+							<?php $i++; endforeach; 
 							}	else
 							{
 								echo"<tr><th colspan='10' style='text-align:center'>No Record Found</th></tr>";

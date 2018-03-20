@@ -251,7 +251,7 @@ ory_id[$z];
 		 	if (isset($this->request->data['removeposttravle']))
 			{
  				$posttravle_id=$this->request->data('posttravle_id');
-				pr($posttravle_id);exit;
+				//pr($posttravle_id);exit;
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
 				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/PostTravlePackages/removePostTravelPackages.json?post_travel_id=".$posttravle_id,
