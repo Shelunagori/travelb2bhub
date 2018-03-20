@@ -23,7 +23,7 @@ if ($err) {
 } else {
 	$response;
 	$List=json_decode($response);
-	pr($List); exit;
+	//pr($List); exit;
 	$postTravlePackages=$List->getTravelPackages;
 }
 //pr($postTravlePackages); exit;
@@ -378,7 +378,7 @@ if ($err) {
 																</div>
 																<div class="modal-footer" style="height:60px;">
 																	<button type="submit" class="btn btn-danger" name="removeposttravle" value="yes" >Yes</button>
-																	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+																	<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
 																</div>
 															</form>
 														</div>
