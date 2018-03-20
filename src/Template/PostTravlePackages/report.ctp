@@ -311,33 +311,33 @@ if ($err) {
 											<a href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>"view",$postTravlePackage->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"> View</i>',['class'=>'btn btn-primary btn-xs','value'=>'button']); ?></a>
 											<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal'));?>	
 											<!-------Report Modal Start--------->
-													<div id="reportmodal" class="modal fade" role="dialog">
-														<div class="modal-dialog modal-md" >
-															<!-- Modal content-->
-																<div class="modal-content">
-																  <div class="modal-header">
-																	<button type="button" class="close" data-dismiss="modal">&times;</button>
-																	<h4 class="modal-title"></h4>
-																  </div> 
-																	<div class="modal-body" style="height:100px;">
-																		<div class="col-md-12 row form-group ">
-																			<div class="col-md-12 radio">
-																				<h3>
-																				<label>
-																					<select><option>Select Report Reason</option></select>
-																				</label>
-																				</h3>
-																			</div>
+												<div id="reportmodal" class="modal fade" role="dialog">
+													<div class="modal-dialog modal-md" >
+														<!-- Modal content-->
+															<div class="modal-content">
+															  <div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																<h4 class="modal-title"></h4>
+															  </div> 
+																<div class="modal-body" style="height:100px;">
+																	<div class="col-md-12 row form-group ">
+																		<div class="col-md-12 radio">
+																			<h3>
+																			<label>
+																				<select><option>Select Report Reason</option></select>
+																			</label>
+																			</h3>
 																		</div>
 																	</div>
-																	<div class="modal-footer" style="height:60px;">
-																		<input type="submit" class="btn btn-primary btn-md" value="OK">
-																		<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
-																	</div>
-																 
-															</div>
+																</div>
+																<div class="modal-footer" style="height:60px;">
+																	<input type="submit" class="btn btn-primary btn-md" value="OK">
+																	<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																</div>
+															 
 														</div>
 													</div>
+												</div>
 											<!-------Report Modal End--------->	
 											<?php echo $this->Html->link('<i class="fa fa-bookmark"> Save</i>','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-success btn-xs','data-target'=>'#savemodal','data-toggle'=>'modal'));?>
 										<!-------Save Modal Start--------->
@@ -369,8 +369,6 @@ if ($err) {
 														<!-- Modal content-->
 															<div class="modal-content">
 															  <div class="modal-header" style="height:100px;">
-																 
-																
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																	<h4 class="modal-title">
 																	Are You Sure, you want to remove this promotion???
@@ -378,13 +376,11 @@ if ($err) {
 																</div>
 																<div class="modal-footer" style="height:60px;">
 																	<button type="submit" class="btn btn-danger" name="removeposttravle" value="yes" >Yes</button>
-																	  
 																	<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
 																</div>
-															 
+															</div>
 														</div>
 													</div>
-												</div>
 											<!-------Delete Modal End--------->	
 										</span>
 									</form>

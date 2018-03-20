@@ -147,7 +147,7 @@ class TaxiFleetPromotionsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-	public function report($higestSort = null,$country_id = null,$state_id = null,$city_id = null,$car_bus_id = null,$taxifleet_id= null)
+	public function report($higestSort = null,$country_id = null,$state_id = null,$city_id = null,$car_bus_id = null,$taxifleet_id= null,$removetaxifleet=null)
     {
         $higestSort=$this->request->query('higestSort'); 
 		$country_id=$this->request->query('country_id'); 
@@ -193,6 +193,38 @@ class TaxiFleetPromotionsController extends AppController
 				$this->Flash->success(__($displayMessage));
 				return $this->redirect(['action' => 'report']);
 			}
+			//---Remove TaxiFleet Promotion
+			if(isset($this->request->date['removetaxifleet']))
+			{
+				$taxifleet_id=$this->request->data('taxifleet_id');
+				pr($taxifleet_id);exit;
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotions/removeTaxFlletPromotions.json?taxi_id=".$taxifleet_id,
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "GET",
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 899aa26c-f697-c513-89c1-b6bba1e1fbdf"
+				  ),
+				));
+
+				$removeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				  $removeResult=json_decode($removeResponse);
+				}
+				$displayMessage=$removeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'report']);
+			} 
 			
 		}
 		$this->viewBuilder()->layout('user_layout');
