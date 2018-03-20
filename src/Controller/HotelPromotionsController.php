@@ -208,7 +208,7 @@ class HotelPromotionsController extends AppController
 				//pr($taxifleet_id);exit;
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
-				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotions/removeTaxFlletPromotions.json?taxi_id=".$taxifleet_id,
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/hotel_promotions/removePromotion.json?promotion_id=".$hotelpromotion_id,
 				  CURLOPT_RETURNTRANSFER => true,
 				  CURLOPT_ENCODING => "",
 				  CURLOPT_MAXREDIRS => 10,
