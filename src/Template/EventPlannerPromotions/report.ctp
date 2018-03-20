@@ -241,9 +241,67 @@ if ($err) {
 	<a href="<?php echo $this->Url->build(["controller" => "EventPlannerPromotions",'action'=>"view",$eventPlannerPromotion->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"> View</i>',['class'=>'btn btn-warning btn-xs','value'=>'button',]); ?></a>
 	
 	<?php echo $this->Form->button('<i class="fa fa-flag"> Report</i>',['class'=>'btn btn-primary btn-xs','value'=>'button','data-target'=>'#reportmodal','data-toggle'=>'modal']); ?>
+	<!-------Report Modal Start--------->
+			<div id="reportmodal" class="modal fade" role="dialog">
+				<div class="modal-dialog modal-md" >
+					<!-- Modal content-->
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title"></h4>
+						  </div>
+						<form method="get" class="filter_box">
+							<div class="modal-body" style="height:100px;">
+								<div class="col-md-12 row form-group ">
+									<div class="col-md-12 radio">
+										<h3>
+										<label>
+											<select><option>Select Report Reason</option></select>
+										</label>
+										</h3>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer" style="height:60px;">
+											<input type="submit" class="btn btn-primary btn-md" value="OK">
+											<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+			<!-------Report Modal End--------->	
 	
 	<?php echo $this->Form->button('<i class="fa fa-bookmark"> Save</i>',['class'=>'btn btn-success btn-xs','value'=>'button','data-target'=>'#savemodal','data-toggle'=>'modal']); ?>
-	
+		<!-------Save Modal Start--------->
+			<div id="savemodal" class="modal fade" role="dialog">
+				<div class="modal-dialog modal-md" >
+					<!-- Modal content-->
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title"></h4>
+						  </div>
+						<form method="get" class="filter_box">
+							<div class="modal-body" style="height:100px;">
+								<div class="col-md-12 row form-group ">
+									<div class="col-md-12 radio">
+										<h3>
+										<label>
+										Are You Sure, this promotion will added to your Cart.
+										</label>
+										</h3>
+									</div>
+								</div>
+							</div>
+							<div class="modal-footer" style="height:60px;">
+								<input type="submit" class="btn btn-primary btn-md" value="OK">
+								<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
 	<?php 
 	if($dataUserId==$user_id){
 		echo $this->Html->link('<i class="fa fa-trash"></i>','api address'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal','data-toggle'=>'modal', $eventPlannerPromotion->id));
@@ -282,66 +340,9 @@ if ($err) {
 					
 			
 			
-			<!-------Report Modal Start--------->
-			<div id="reportmodal" class="modal fade" role="dialog">
-				<div class="modal-dialog modal-md" >
-					<!-- Modal content-->
-						<div class="modal-content">
-						  <div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title"></h4>
-						  </div>
-						<form method="get" class="filter_box">
-							<div class="modal-body" style="height:100px;">
-								<div class="col-md-12 row form-group ">
-									<div class="col-md-12 radio">
-										<h3>
-										<label>
-											<select><option>Select Report Reason</option></select>
-										</label>
-										</h3>
-									</div>
-								</div>
-							</div>
-							<div class="modal-footer" style="height:60px;">
-											<input type="submit" class="btn btn-primary btn-md" value="OK">
-											<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-			<!-------Report Modal End--------->	
 			
-			<!-------Save Modal Start--------->
-			<div id="savemodal" class="modal fade" role="dialog">
-				<div class="modal-dialog modal-md" >
-					<!-- Modal content-->
-						<div class="modal-content">
-						  <div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title"></h4>
-						  </div>
-						<form method="get" class="filter_box">
-							<div class="modal-body" style="height:100px;">
-								<div class="col-md-12 row form-group ">
-									<div class="col-md-12 radio">
-										<h3>
-										<label>
-										Are You Sure, this promotion will added to your Cart.
-										</label>
-										</h3>
-									</div>
-								</div>
-							</div>
-							<div class="modal-footer" style="height:60px;">
-								<input type="submit" class="btn btn-primary btn-md" value="OK">
-								<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
+			
+		
  			
 					<!--<div class="paginator">
 						<ul class="pagination">
