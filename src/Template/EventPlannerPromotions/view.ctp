@@ -35,130 +35,115 @@ if ($err) {
 					<fieldset>
 						<legend style="color:#369FA1;text-align:center;"><b> &nbsp; <?= __('Event Planner Promotion Details ') ?> &nbsp;  </b></legend>
 						<div class="box-body">
-<?php foreach($eventPlannerPromotion as $eventPlannerPromotion):?>
-								<div class="row">
-									<div class="col-md-12">
-										<div class="col-md-4">
-											<?= $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'width:300px;height:220px;']) ?>
-										</div>
-										<div class="col-md-8">
+							<?php foreach($eventPlannerPromotion as $eventPlannerPromotion):
+							$cityList='';
+							$x=0;
+								foreach($eventPlannerPromotion->event_planner_promotion_cities as $cities)
+								{
+									if($x>=1)
+									{
+									$cityList.=' , ';
+									}
+									@$cityList.=$cities->city->name;
+									$x++;
+								}
+								
+								$stateList='';
+								$y=0;
+								foreach($eventPlannerPromotion->event_planner_promotion_states as $states)
+								{
+									if($y>=1)
+									{
+									$stateList.=' , ';
+									}
+									$stateList.=$states->state->state_name;
+									$y++;
+								}
+								
+								
+							?>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="col-md-4">
+														<?= $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'width:300px;height:220px;']) ?>
+													</div>
+													<div class="col-md-8">
+														<div class="row">
+															<div class="col-md-2">
+																<label><?= __('Seller Name') ?></label>
+																</div>
+															<div class="col-md-4">
+																<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name.'( '.$eventPlannerPromotion->user_rating.' )');?>
+															</div>
+															<div class="col-md-2">
+																<label><?= __('Duration') ?></label>
+																</div>
+															<div class="col-md-4">
+																<?= h($eventPlannerPromotion->price_master->week) ?>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-2">
+																<label><?= __('total Charges') ?></label>
+																</div>
+															<div class="col-md-4">
+																<?= h($eventPlannerPromotion->price_master->price);?>
+															</div>
+															<div class="col-md-2">
+																<label><?= __('Visible Date') ?></label>
+																</div>
+															<div class="col-md-4">
+																<?= date('d-M-Y',strtotime($eventPlannerPromotion->visible_date)); ?>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-2">
+																<label><?= __('City') ?></label>
+																</div>
+															<div class="col-md-4">
+																<?= h($cityList);?>
+															</div>
+															<div class="col-md-2">
+																<label><?= __('State') ?></label>
+															</div>
+															<div class="col-md-4">
+																<?= h($stateList);?>
+															</div>
+														</div>
+														<div class="row">
+															<div class="col-md-2">
+																<label><?= __('Country') ?></label>
+																</div>
+															<div class="col-md-4">
+																<?= h($eventPlannerPromotion->country->country_name);?>
+															</div>
+															<div class="col-md-2">
+																<label><?= __('Like Count') ?></label>
+															</div>
+															<div class="col-md-4">
+																<?= $this->Number->format($eventPlannerPromotion->total_likes) ?>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div><br>
 											<div class="row">
 												<div class="col-md-2">
-													<label><?= __('Seller Name') ?></label>
+													<label><?= __('Event Details') ?></label>
 													</div>
-												<div class="col-md-4">
-													<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name.'( '.$eventPlannerPromotion->user_rating.' )');?>
-												</div>
-												<div class="col-md-2">
-													<label><?= __('Duration') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= h($eventPlannerPromotion->price_master->week) ?>
+												<div class="col-md-10">
+												
+													<?= h($eventPlannerPromotion->event_detail);?>
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-md-2">
-													<label><?= __('total Charges') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= h($eventPlannerPromotion->price_master->price);?>
-												</div>
-												<div class="col-md-2">
-													<label><?= __('Visible Date') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= h($eventPlannerPromotion->visible_date) ?>
-												</div>
-											</div>
-       
-            <th scope="row"><?= __('Price Master') ?></th>
-            <td><?= $eventPlannerPromotion->has('price_master') ? $this->Html->link($eventPlannerPromotion->price_master->week, ['controller' => 'PriceMasters', 'action' => 'view', $eventPlannerPromotion->price_master->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('User') ?></th>
-            <td><?= $eventPlannerPromotion->has('user') ? $this->Html->link($eventPlannerPromotion->user->last_name, ['controller' => 'Users', 'action' => 'view', $eventPlannerPromotion->user->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($eventPlannerPromotion->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Country Id') ?></th>
-            <td><?= $this->Number->format($eventPlannerPromotion->country_id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Like Count') ?></th>
-            <td><?= $this->Number->format($eventPlannerPromotion->like_count) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Edited By') ?></th>
-            <td><?= $this->Number->format($eventPlannerPromotion->edited_by) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Visible Date') ?></th>
-            <td><?= h($eventPlannerPromotion->visible_date) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Created On') ?></th>
-            <td><?= h($eventPlannerPromotion->created_on) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Edited On') ?></th>
-            <td><?= h($eventPlannerPromotion->edited_on) ?></td>
-        </tr>
-    </table>
-    <div class="row">
-        <h4><?= __('Event Detail') ?></h4>
-        <?= $this->Text->autoParagraph(h($eventPlannerPromotion->event_detail)); ?>
-    </div>
-    <div class="related">
-        <h4><?= __('Related Event Planner Promotion Cities') ?></h4>
-        <?php if (!empty($eventPlannerPromotion->event_planner_promotion_cities)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('Event Planner Promotion Id') ?></th>
-                <th scope="col"><?= __('City Id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($eventPlannerPromotion->event_planner_promotion_cities as $eventPlannerPromotionCities): ?>
-            <tr>
-                <td><?= h($eventPlannerPromotionCities->id) ?></td>
-                <td><?= h($eventPlannerPromotionCities->event_planner_promotion_id) ?></td>
-                <td><?= h($eventPlannerPromotionCities->city_id) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'EventPlannerPromotionCities', 'action' => 'view', $eventPlannerPromotionCities->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'EventPlannerPromotionCities', 'action' => 'edit', $eventPlannerPromotionCities->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'EventPlannerPromotionCities', 'action' => 'delete', $eventPlannerPromotionCities->id], ['confirm' => __('Are you sure you want to delete # {0}?', $eventPlannerPromotionCities->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-    <div class="related">
-        <h4><?= __('Related Event Planner Promotion States') ?></h4>
-        <?php if (!empty($eventPlannerPromotion->event_planner_promotion_states)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('Event Planner Promotion Id') ?></th>
-                <th scope="col"><?= __('State Id') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($eventPlannerPromotion->event_planner_promotion_states as $eventPlannerPromotionStates): ?>
-            <tr>
-                <td><?= h($eventPlannerPromotionStates->id) ?></td>
-                <td><?= h($eventPlannerPromotionStates->event_planner_promotion_id) ?></td>
-                <td><?= h($eventPlannerPromotionStates->state_id) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'EventPlannerPromotionStates', 'action' => 'view', $eventPlannerPromotionStates->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'EventPlannerPromotionStates', 'action' => 'edit', $eventPlannerPromotionStates->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'EventPlannerPromotionStates', 'action' => 'delete', $eventPlannerPromotionStates->id], ['confirm' => __('Are you sure you want to delete # {0}?', $eventPlannerPromotionStates->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-</div> <?php endforeach; ?>
+										</div> 
+									</div> 
+								</div> 
+							</div>
+						</fieldset>
+					</div> 
+				</div> 
+			</div> 
+		</div> 
+	</section> 
+<?php endforeach; ?>
