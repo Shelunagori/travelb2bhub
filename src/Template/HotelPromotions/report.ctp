@@ -64,7 +64,7 @@ if ($err) {
 		<div class="col-md-12" style="background-color:#fff"> 
 			<div class="box box-default">
 			<div class="box-header with-border"> 
-				<h1 class="box-title" style="color:#057F8A; padding:10px"><?= __('Hotel Promotions') ?></h1>
+				<h1 class="box-title" style="color:#057F8A; padding:10px"><b><?= __('Hotel Promotions') ?></b></h1>
 				<div class="box-tools pull-right">
 					<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
 					<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>

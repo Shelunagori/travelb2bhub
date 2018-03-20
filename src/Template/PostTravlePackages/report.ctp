@@ -102,7 +102,7 @@ if ($err) {
 		<div class="col-md-12" style="background-color:#fff"> 
 			<div class="box box-default">
 				<div class="box-header with-border"> 
-					<h3 class="box-title" style="color:#057F8A;padding:10px"><?= __('PostTravle Package Promotions') ?></h3>
+					<h3 class="box-title" style="color:#057F8A;padding:10px"><b><?= __('PostTravle Package Promotions') ?></b></h3>
 					<div class="box-tools pull-right">
 						<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
 						<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
@@ -255,8 +255,8 @@ if ($err) {
 									<th scope="col"><?= ('Sr.No') ?></th>
 									<th scope="col"><?= ('Seller Name') ?></th>
 									<th scope="col"><?= ('Title') ?></th>
-									<th scope="col"><?= ('Category') ?></th>
-									<th scope="col"><?= ('Starting Price') ?></th>
+									<th scope="col" style="width:%;"><?= ('Category') ?></th>
+									<th scope="col"><?= ('Starting Price') ?> (&#8377;)</th>
 									<th scope="col"><?= ('Package Duration') ?></th>
 									<th scope="col" class="actions" style="text-align:center"><?= __('Actions') ?></th>
 								</tr>
@@ -280,8 +280,8 @@ if ($err) {
 									<td  ><?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.' ('.$postTravlePackage->user_rating.')');?>
 									</td>
 									<td ><?= h($postTravlePackage->title) ?></td>
-									<td style=""><?= h($CategoryList);?></td>
-									<td ><?= h($postTravlePackage->starting_price);?></td>
+									<td ><?= h($CategoryList);?></td>
+									<td ><?= h($postTravlePackage->starting_price);?> </td>
 									<td ><?= h($postTravlePackage->duration_day_night);?></td>
 									<!--<td style="width:20%;">
 									<?php //echo $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'height:8%;width:100%;','id'=>'myImg']);?></td>
@@ -291,7 +291,7 @@ if ($err) {
 									  <div id="caption"></div>
 									</div>
 									-->
-									<td class="actions" >
+									<td class="actions" style="width:30%;">
 										 <span>
 										 	<?php echo $this->Form->button('<i class="fa fa-thumbs-up"> Like</i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2']); ?>
 											<a href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>"view",$postTravlePackage->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"> View</i>',['class'=>'btn btn-primary btn-xs','value'=>'button']); ?></a>
