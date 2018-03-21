@@ -308,7 +308,9 @@ if ($err) {
 											}
 										?>	
 										 	<?php //echo $this->Form->button('<i class="fa fa-thumbs-up"> Like</i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2']); ?>
-											<a href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>"view",$postTravlePackage->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"> View</i>',['class'=>'btn btn-primary btn-xs','value'=>'button']); ?></a>
+											<?php 
+												echo $this->Html->link('<i class="fa fa-search"> View</i>','/PostTravlePackages/view/'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+											
 											<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal'));?>	
 											<!-------Report Modal Start--------->
 												<div id="reportmodal" class="modal fade" role="dialog">

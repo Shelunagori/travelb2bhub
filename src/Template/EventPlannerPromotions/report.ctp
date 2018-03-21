@@ -236,9 +236,9 @@ if ($err) {
 												echo $this->Form->button('<i class="fa fa-thumbs-down like" > Dislike </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#d6796e','type'=>'submit','name'=>'LikeEvent']);
 											}
 										?>	
-											
 										<?php 
-											echo $this->Html->link('<i class="fa fa-eye"> view</i>','/EventPlannerPromotions/view/'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
+												echo $this->Html->link('<i class="fa fa-search"> View</i>','/EventPlannerPromotions/view/'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>	
+									
 											<?php // echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal'));?>	
 											<?php echo $this->Form->button('<i class="fa fa-flag"> Report</i>',['class'=>'btn btn-primary btn-xs','value'=>'button','data-target'=>'#reportmodal','data-toggle'=>'modal']); ?>
 											<!-------Report Modal Start--------->

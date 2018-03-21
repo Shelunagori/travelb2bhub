@@ -275,8 +275,10 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 								if($isLiked=='yes'){
 									echo $this->Form->button('<i class="fa fa-thumbs-down like" > Dislikes </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#d6796e','type'=>'submit','name'=>'LikeEvent']);
 								}
-							?>	
-							<a href="<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions",'action'=>"view",$taxiFleetPromotion->id]); ?>"><?php echo $this->Form->button('<i class="fa fa-eye"> View</i>',['class'=>'btn btn-primary btn-xs','value'=>'button']); ?></a>
+							?>
+							<!--<a href="<?php // echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'view',$taxiFleetPromotion->id)) ?>" class="btn btn-primary btn-xs"><i class="fa fa-eye"> View</i></a>-->							
+							<?php 
+							echo $this->Html->link('<i class="fa fa-search"> View</i>','/TaxiFleetPromotions/view/'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
 							<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal'));?>
 											<!-------Report Modal Start--------->
 													<div id="reportmodal" class="modal fade" role="dialog">
