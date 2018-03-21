@@ -326,8 +326,9 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 														</div>
 													</div>
 											<!-------Save Modal End--------->	
-					
-						<?php echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal'));?>
+						<?php
+						if($dataUserId==$user_id){
+						echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal'));?>
 							<!-------Delete Modal Start--------->
 												<div id="deletemodal<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-md" >
@@ -347,6 +348,7 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 													</div>
 												</div>
 											<!-------Delete Modal End--------->	
+						<?php }?>
 											</span>
 										</form>
 										</td>

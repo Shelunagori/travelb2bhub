@@ -312,7 +312,7 @@ if ($err) {
 												<div class="modal-content">
 												  <div class="modal-header">
 													<button type="button" class="close" data-dismiss="modal">&times;</button>
-													<h4 class="modal-title">Are you really want to delete this event ?</h4>
+													<h4 class="modal-title">Are you sure, you want delete this Promotion ?</h4>
 												  </div> 
 												  <div class="modal-footer">
 													<button type="submit" class="btn btn-danger" name="removeEvent" value="yes" >Yes</button>
