@@ -269,32 +269,43 @@ if ($err) {
 											<?php // echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal'));?>	
 											<?php echo $this->Form->button('<i class="fa fa-flag"> Report</i>',['class'=>'btn btn-primary btn-xs','value'=>'button','style'=>'background-color:#1295A2','data-target'=>'#reportmodal','data-toggle'=>'modal']); ?>
 											<!-------Report Modal Start--------->
-													<div id="reportmodal" class="modal fade" role="dialog">
-														<div class="modal-dialog modal-md" >
-															<!-- Modal content-->
-																<div class="modal-content">
-																  <div class="modal-header">
-																	<button type="button" class="close" data-dismiss="modal">&times;</button>
-																	<h4 class="modal-title"></h4>
-																  </div>
-																	<div class="modal-body" style="height:100px;">
-																		<div class="col-md-12 row form-group ">
-																			<div class="col-md-12 radio">
-																				<h3>
-																				<label>
-																					<select><option>Select Report Reason</option></select>
-																				</label>
-																				</h3>
-																			</div>
-																		</div>
-																	</div>
-																	<div class="modal-footer" style="height:60px;">
-																					<input type="submit" class="btn btn-primary btn-md" value="OK">
-																					<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+										<div id="reportmodal" class="modal fade" role="dialog">
+											<div class="modal-dialog modal-md" >
+												<!-- Modal content-->
+													<div class="modal-content">
+													  <div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<h4 class="modal-title"></h4>
+													  </div>
+														<div class="modal-body" style="height:60px;margin-top:30px;">
+														<div class="row">
+															<div class="col-md-12">
+																<div class="col-md-3">
+																	<label>
+																		Select Reason
+																	</label>
 																</div>
+																<div class="col-md-9">
+																	<div class="input-field">
+																		<?php 
+																		$options=array();
+																		foreach($reasonslist as $sts)
+																		{
+																			$options[] = ['value'=>$sts->id,'text'=>$sts->reason];
+																		};
+																		echo $this->Form->control('report_reason_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);?>
+																	</div>
+																</div>
+															</div>
 														</div>
 													</div>
-												</div>
+													<div class="modal-footer" style="height:60px;">
+																	<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
+																	<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																</div>
+															</div>
+														</div>
+													</div>
 												<!-------Report Modal End--------->	
 										
 										<?php 
