@@ -92,7 +92,7 @@ class HotelPromotionCartsController extends AppController
 		$user_id = $this->request->query('user_id');
 		if(!empty($user_id))
 		{
-			$hotelPromotionCarts=$this->HotelPromotionCarts->find()->where(['HotelPromotionCarts.user_id'=>$user_id, 'HotelPromotionCarts.is_deleted'=>0])->contain(['HotelPromotions'=>['HotelCategories','Users'=>function($q){
+			$hotelPromotionCarts=$this->HotelPromotionCarts->find()->where(['HotelPromotionCarts.user_id'=>$user_id, 'HotelPromotionCarts.is_deleted'=>0,'HotelPromotions.is_deleted'=>0])->contain(['HotelPromotions'=>['HotelCategories','Users'=>function($q){
 				return $q->select(['first_name','last_name','mobile_number','company_name']);
 			}]]);
 			if(!empty($hotelPromotionCarts->toArray())){
