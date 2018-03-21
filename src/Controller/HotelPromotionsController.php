@@ -157,7 +157,7 @@ class HotelPromotionsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 	
-	public function report($higestSort = null,$category_id = null,$rating_filter = null,$hotelpromotion_id= null)
+	public function report($higestSort = null,$category_id = null,$rating_filter = null,$hotelpromotion_id= null,$savehotelpromotion= null)
     {
 		$higestSort=$this->request->query('higestSort');
 		$category_id=$this->request->query('category_id');
@@ -232,7 +232,43 @@ class HotelPromotionsController extends AppController
 				$displayMessage=$removeResult->message;
 				$this->Flash->success(__($displayMessage));
 				return $this->redirect(['action' => 'report']);
-			} 
+			}
+							//-- Save Unsave
+			if(isset($this->request->data['savehotelpromotion']))
+			{
+ 				$hotelpromotion_id=$this->request->data('hotelpromotion_id');
+				$post =[
+						'hotel_promotion_id' => $hotelpromotion_id,
+						'user_id' =>$user_id						 							
+					];
+				//pr($post);exit;
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/HotelPromotionCarts/HotelPromotionCartAdd.json",
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "POST",
+				  CURLOPT_POSTFIELDS =>$post,
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				$displayMessage=$LikeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'report']);
+			}			
 			
 		}
 		$this->viewBuilder()->layout('user_layout');
