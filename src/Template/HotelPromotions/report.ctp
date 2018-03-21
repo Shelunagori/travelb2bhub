@@ -203,6 +203,7 @@ if ($err) {
 								 <span>
 									<input type="hidden" name="hotelpromotion_id" value="<?php echo $hotelPromotion->id; ?>">
 									<?php
+									
 										$dataUserId=$hotelPromotion->user_id;
 										$isLiked=$hotelPromotion->isLiked;
 										//-- LIKES DISLIKE
@@ -245,28 +246,17 @@ if ($err) {
 														</div>
 													</div>
 											<!-------Report Modal End--------->	
-					
-										<?php 
-										echo $this->Html->link('<i class="fa fa-bookmark"> Save</i>','#'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-success btn-xs','data-target'=>'#savemodal','data-toggle'=>'modal'));?>
-										<!-------Save Modal Start--------->
-												<div id="savemodal" class="modal fade" role="dialog">
-													<div class="modal-dialog modal-md" >
-														<!-- Modal content-->
-															<div class="modal-content">
-															  <div class="modal-header" style="height:100px;">
-																	<button type="button" class="close" data-dismiss="modal">&times;</button>
-																	<h4 class="modal-title">
-																	Are You Sure, to save this promotion in your cart ???
-																	</h4>
-															</div>
-																<div class="modal-footer" style="height:60px;">
-																	<input type="submit" class="btn btn-primary btn-md" value="OK">
-																	<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
-																</div>
-															</div>
-														</div>
-													</div>
-											<!-------Save Modal End--------->	
+									<?php 
+										//-- Save Unsave
+										 $issaved=$hotelPromotion->issaved;
+										if($issaved==1){
+												echo $this->Form->button('<i class="fa fa-save" > Unsave </i>',['class'=>'btn btn-danger btn-xs ','value'=>'button','type'=>'submit','name'=>'savehotelpromotion']);
+											}
+											if($issaved==0){
+												echo $this->Form->button('<i class="fa fa-save" > Save </i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'savehotelpromotion']);
+											}
+										 ?>
+									
 											<?php 
 											if($dataUserId==$user_id){
 											echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal'.$hotelPromotion->id,'data-toggle'=>'modal'));?>
