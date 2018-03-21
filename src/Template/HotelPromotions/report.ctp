@@ -215,9 +215,8 @@ if ($err) {
 										}
 									?>	
 									<?php 
-									echo $this->Html->link('<i class="fa fa-search"> View</i>','/HotelPromotions/view/'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>	
-									
-										<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal'));?>
+									echo $this->Html->link('<i class="fa fa-search"> View</i>','/HotelPromotions/view/'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs','style'=>'background-color:#1295A2'));?>	
+									<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn  btn-primary btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal','style'=>'background-color:#1295A2'));?>
 											<!-------Report Modal Start--------->
 													<div id="reportmodal" class="modal fade" role="dialog">
 														<div class="modal-dialog modal-md" >
