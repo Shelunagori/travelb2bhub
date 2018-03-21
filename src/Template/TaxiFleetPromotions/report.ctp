@@ -337,7 +337,7 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 															  <div class="modal-header" style="height:100px;">
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																	<h4 class="modal-title">
-																	Are You Sure, you want to remove this promotion???
+																	Are You Sure, you want to delete this promotion ?
 																	</h4>
 																</div>
 																<div class="modal-footer" style="height:60px;">

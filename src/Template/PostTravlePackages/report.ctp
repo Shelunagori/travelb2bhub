@@ -362,7 +362,9 @@ if ($err) {
 												</div>
 											<!-------Save Modal End--------->	
 
-											<?php echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal'.$postTravlePackage->id,'data-toggle'=>'modal'));?>
+											<?php 
+											if($dataUserId==$user_id){
+												echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal'.$postTravlePackage->id,'data-toggle'=>'modal'));?>
 							<!-------Delete Modal Start--------->
 												<div id="deletemodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-md" >
@@ -371,7 +373,7 @@ if ($err) {
 															  <div class="modal-header" style="height:100px;">
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																	<h4 class="modal-title">
-																	Are You Sure, you want to remove this promotion???
+																	Are You Sure, you want to delete this promotion ?
 																	</h4>
 																</div>
 																<div class="modal-footer" style="height:60px;">
@@ -382,6 +384,7 @@ if ($err) {
 														</div>
 													</div>
 											<!-------Delete Modal End--------->	
+											<?php }?>
 										</span>
 									</form>
 								</td>
