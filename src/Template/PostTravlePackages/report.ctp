@@ -82,6 +82,32 @@ if ($err) {
   $Category=json_decode($responsecat);
   $cat=$Category->postTravlePackageCategories;
 }
+/// -- REPOrT REASON
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/ReportReasons/reportReasonList.json?promotion_type_id=1",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: 4f8087cd-6560-4ca6-5539-9499d3c5b967"
+  ),
+));
+$response = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+$priceMasters=array();
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+	$response;
+	$List=json_decode($response);
+	$reasonslist=$List->reasonslist;
+}
 ?>
 <style type="text/css">
         img {
@@ -325,17 +351,25 @@ if ($err) {
 															  </div> 
 																<div class="modal-body" style="height:100px;">
 																	<div class="col-md-12 row form-group ">
-																		<div class="col-md-12 radio">
-																			<h3>
-																			<label>
-																				<select><option>Select Report Reason</option></select>
-																			</label>
-																			</h3>
+																		<div class="col-md-12">
+																			<p for="from">
+																				Reason
+																				<span class="required">*</span>
+																			</p>
+																			<div class="input-field">
+																			<?php 
+																			$options=array();
+																			foreach($reasonslist as $sts)
+																			{
+																				$options[] = ['value'=>$sts->id,'text'=>$sts->reason];
+																			};
+																			echo $this->Form->control('report_reason_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);?>
+																			</div>
 																		</div>
 																	</div>
 																</div>
 																<div class="modal-footer" style="height:60px;">
-																	<input type="submit" class="btn btn-primary btn-md" value="OK">
+																	<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
 																	<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
 																</div>
 															 
