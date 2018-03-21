@@ -261,7 +261,7 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
                 <td><?= h($taxiFleetPromotion->title) ?></td>
                 <td><?= h($taxiFleetPromotion->price_master->week); ?></td>              
                 <td><?= h(date('d-m-Y',strtotime($taxiFleetPromotion->visible_date))); ?></td>
-				<td class="actions" style="width:30%;">
+				<td class="actions" style="width:35%;">
 					<form method="POST">
 					<span>
 						<input type="hidden" name="taxifleet_id" value="<?php echo $taxiFleetPromotion->id; ?>">

@@ -198,7 +198,7 @@ if ($err) {
 							<td><?= h($hotelPromotion->hotel_name) ?></td>
 							<td><?= h($hotelPromotion->hotel_location) ?></td>
 							<td><?= h($hotelPromotion->hotel_category->name) ?></td>
-							<td class="actions" style="width:30%;">
+							<td class="actions" style="width:35%;">
 							<form method="POST">
 								 <span>
 									<input type="hidden" name="hotelpromotion_id" value="<?php echo $hotelPromotion->id; ?>">
