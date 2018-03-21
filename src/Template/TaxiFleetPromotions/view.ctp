@@ -52,7 +52,7 @@ if ($err) {
 									foreach($taxiFleetPromotion->taxi_fleet_promotion_cities as $cities)
 										{
 											
-											$cityList.=$cities->city->name;
+											@$cityList.=$cities->city->name;
 											if($y>1){
 												$cityList.=' , ';
 											}
