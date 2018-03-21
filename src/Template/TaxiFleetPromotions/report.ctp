@@ -275,13 +275,13 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 									echo $this->Form->button('<i class="fa fa-thumbs-up like" > Likes </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'LikeEvent']);
 								}
 								if($isLiked=='yes'){
-									echo $this->Form->button('<i class="fa fa-thumbs-down like" > Dislikes </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#F1423F','type'=>'submit','name'=>'LikeEvent']);
+									echo $this->Form->button('<i class="fa fa-thumbs-down like" > Dislikes </i>',['class'=>'btn btn-danger btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent']);
 								}
 							?>
 							<!--<a href="<?php // echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'view',$taxiFleetPromotion->id)) ?>" class="btn btn-primary btn-xs"><i class="fa fa-eye"> View</i></a>-->							
 							<?php 
-							echo $this->Html->link('<i class="fa fa-search"> View</i>','/TaxiFleetPromotions/view/'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
-							<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal','style'=>'background-color:#129565;'));?>
+							echo $this->Html->link('<i class="fa fa-search"> View</i>','/TaxiFleetPromotions/view/'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs','style'=>'background-color:#1295A2'));?>
+							<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal','style'=>'background-color:#1295A2;'));?>
 											<!-------Report Modal Start--------->
 													<div id="reportmodal" class="modal fade" role="dialog">
 														<div class="modal-dialog modal-md" >
@@ -313,7 +313,7 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 											
 											<?php 
 											if($issaved=='1'){
-											echo $this->Form->button('<i class="fa fa-save" > UnSave</i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#F67674;','type'=>'submit','name'=>'savetaxifleet']);
+											echo $this->Form->button('<i class="fa fa-save" > UnSave</i>',['class'=>'btn btn-danger btn-xs likes','value'=>'button','type'=>'submit','name'=>'savetaxifleet']);
 											}
 											if($issaved=='0'){
 												echo $this->Form->button('<i class="fa fa-save" > Save </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'savetaxifleet']);

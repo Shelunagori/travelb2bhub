@@ -311,9 +311,9 @@ if ($err) {
 										?>	
 										 	<?php //echo $this->Form->button('<i class="fa fa-thumbs-up"> Like</i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2']); ?>
 											<?php 
-												echo $this->Html->link('<i class="fa fa-search"> View</i>','/PostTravlePackages/view/'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
+												echo $this->Html->link('<i class="fa fa-search"> View</i>','/PostTravlePackages/view/'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs','style'=>'background-color:#1295A2'));?>
 											
-											<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal'));?>	
+											<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal','style'=>'background-color:#1295A2'));?>	
 											<!-------Report Modal Start--------->
 												<div id="reportmodal" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-md" >
@@ -345,10 +345,10 @@ if ($err) {
 											<?php 
 											//-- Save Unsave
 											if($issaved=='1'){
-												echo $this->Form->button('<i class="fa fa-save"> Unsave </i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'saveposttravle']);
+												echo $this->Form->button('<i class="fa fa-save"> Unsave </i>',['class'=>'btn btn-danger btn-xs ','value'=>'button','type'=>'submit','name'=>'saveposttravle']);
 											}
 											if($issaved=='0'){
-												echo $this->Form->button('<i class="fa fa-save"> save </i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:#d6796e','type'=>'submit','name'=>'saveposttravle']);
+												echo $this->Form->button('<i class="fa fa-save"> Save </i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'saveposttravle']);
 											}
 											?>
 											<?php 
