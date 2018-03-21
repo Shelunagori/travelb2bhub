@@ -308,9 +308,9 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 															</div>
 														</div>
 											<!-------Report Modal End--------->	
-											<?php echo $this->Html->link('<i class="fa fa-bookmark"> Save</i>','#'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-success btn-xs','data-target'=>'#savemodal','data-toggle'=>'modal'));?>
+											<?php echo $this->Html->link('<i class="fa fa-bookmark"> Save</i>','#'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-success btn-xs','data-target'=>'#savemodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal'));?>
 										<!-------Save Modal Start--------->
-												<div id="savemodal" class="modal fade" role="dialog">
+												<div id="savemodal<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-md" >
 														<!-- Modal content-->
 															<div class="modal-content">
@@ -321,8 +321,8 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 																	</h4>
 															</div>
 																<div class="modal-footer" style="height:60px;">
-																	<input type="submit" class="btn btn-primary btn-md" value="OK">
-																	<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																	<button type="submit" class="btn btn-danger" name="savetaxifleet" value="yes" >Yes</button>
+																	<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
 																</div>
 															</div>
 														</div>
