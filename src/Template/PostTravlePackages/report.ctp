@@ -345,10 +345,10 @@ if ($err) {
 											<?php 
 											//-- Save Unsave
 											if($issaved=='1'){
-												echo $this->Form->button('<i class="fa fa-save"> Save </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'saveposttravle']);
+												echo $this->Form->button('<i class="fa fa-save"> Unsave </i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'saveposttravle']);
 											}
 											if($issaved=='0'){
-												echo $this->Form->button('<i class="fa fa-save"> Unsave </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#d6796e','type'=>'submit','name'=>'saveposttravle']);
+												echo $this->Form->button('<i class="fa fa-save"> save </i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:#d6796e','type'=>'submit','name'=>'saveposttravle']);
 											}
 											?>
 											<?php 

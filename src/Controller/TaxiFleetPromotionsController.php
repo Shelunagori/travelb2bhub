@@ -230,33 +230,6 @@ class TaxiFleetPromotionsController extends AppController
 			if(isset($this->request->data['savetaxifleet']))
 			{
 				$user_id=$this->Auth->User('id');
-				/* //pr($user_id);exit;
-				$curl = curl_init();
-				curl_setopt_array($curl, array(
-				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotionCarts/TaxiFleetPromotionsCartAdd.json",
-				  CURLOPT_RETURNTRANSFER => true,
-				  CURLOPT_ENCODING => "",
-				  CURLOPT_MAXREDIRS => 10,
-				  CURLOPT_TIMEOUT => 30,
-				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-				  CURLOPT_CUSTOMREQUEST => "POST",
-				  CURLOPT_HTTPHEADER => array(
-					"cache-control: no-cache",
-					"postman-token: 899aa26c-f697-c513-89c1-b6bba1e1fbdf"
-				  ),
-				));
-
-				$removeResponse = curl_exec($curl);
-				$err = curl_error($curl);
-				curl_close($curl);
-				if ($err) {
-				  echo "cURL Error #:" . $err;
-				} else {
-				  $removeResult=json_decode($removeResponse);
-				}
-				$displayMessage=$removeResult->message; */
-				//--
-				
 				$taxifleet_id=$this->request->data('taxifleet_id');
 				$post =[
 						'taxi_fleet_promotion_id' => $taxifleet_id,

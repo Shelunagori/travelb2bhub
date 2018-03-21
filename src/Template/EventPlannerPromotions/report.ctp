@@ -226,8 +226,10 @@ if ($err) {
 										<span>
 											<input type="hidden" name="event_id" value="<?php echo $eventPlannerPromotion->id; ?>">
 										  <?php
+											//pr($eventPlannerPromotion);
 											$dataUserId=$eventPlannerPromotion->user_id;
 											$isLiked=$eventPlannerPromotion->isLiked;
+											$issaved=$eventPlannerPromotion->issaved;
 											//-- LIKES DISLIKE
 											if($isLiked=='no'){
 												echo $this->Form->button('<i class="fa fa-thumbs-up like" > Like </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'LikeEvent']);
@@ -272,7 +274,14 @@ if ($err) {
 												</div>
 												<!-------Report Modal End--------->	
 										
-										<?php echo $this->Form->button('<i class="fa fa-bookmark"> Save</i>',['class'=>'btn btn-success btn-xs','value'=>'button','data-target'=>'#savemodal','data-toggle'=>'modal']); ?>
+										<?php 
+										if($issaved=='1'){
+												echo $this->Form->button('<i class="fa fa-save" > Unsave </i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'saveeventplanner']);
+											}
+											if($issaved=='0'){
+												echo $this->Form->button('<i class="fa fa-save" > Save </i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:#d6796e','type'=>'submit','name'=>'saveeventplanner']);
+											}
+										echo $this->Form->button('<i class="fa fa-bookmark"> Save</i>',['class'=>'btn btn-success btn-xs','value'=>'button','data-target'=>'#savemodal','data-toggle'=>'modal']); ?>
 											<!-------Save Modal Start--------->
 												<div id="savemodal" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-md" >
