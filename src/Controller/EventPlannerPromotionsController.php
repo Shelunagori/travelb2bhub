@@ -264,7 +264,46 @@ class EventPlannerPromotionsController extends AppController
 				$displayMessage=$LikeResult->message;
 				$this->Flash->success(__($displayMessage));
 				return $this->redirect(['action' => 'report']);
-			} 
+			}
+//Report Modal
+			if(isset($this->request->data['report_submit']))
+			{
+				$user_id=$this->Auth->User('id');
+				$event_id=$this->request->data('event_id');
+				$report_reason_id=$this->request->data('report_reason_id');
+				$post =[
+						'event_planner_promotion_id' => $event_id,
+						'report_reason_id' => $report_reason_id,
+						'user_id' =>$user_id						 							
+					];
+				//pr($post);exit;
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/PostTravlePackageReports/PostTravlePackageReportAdd.json",
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "POST",
+				  CURLOPT_POSTFIELDS =>$post,
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				$displayMessage=$LikeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'report']);
+			}			
 		}
 		
 		$this->viewBuilder()->layout('user_layout');

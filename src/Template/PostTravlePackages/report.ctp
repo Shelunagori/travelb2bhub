@@ -335,7 +335,6 @@ if ($err) {
 												echo $this->Form->button('<i class="fa fa-thumbs-down like" > Dislikes </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#d6796e','type'=>'submit','name'=>'LikeEvent']);
 											}
 										?>	
-										 	<?php //echo $this->Form->button('<i class="fa fa-thumbs-up"> Like</i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2']); ?>
 											<?php 
 												echo $this->Html->link('<i class="fa fa-search"> View</i>','/PostTravlePackages/view/'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs','style'=>'background-color:#1295A2'));?>
 											

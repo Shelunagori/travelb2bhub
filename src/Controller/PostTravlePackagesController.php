@@ -352,6 +352,7 @@ ory_id[$z];
 				$this->Flash->success(__($displayMessage));
 				return $this->redirect(['action' => 'report']);
 			} 
+			//Report Modal
 			if(isset($this->request->data['report_submit']))
 			{
 				$user_id=$this->Auth->User('id');

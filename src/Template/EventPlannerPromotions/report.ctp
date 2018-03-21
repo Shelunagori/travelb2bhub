@@ -264,12 +264,10 @@ if ($err) {
 											}
 										?>	
 										<?php 
-												echo $this->Html->link('<i class="fa fa-search"> View</i>','/EventPlannerPromotions/view/'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs','style'=>'background-color:#1295A2'));?>	
-									
-											<?php // echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal'));?>	
-											<?php echo $this->Form->button('<i class="fa fa-flag"> Report</i>',['class'=>'btn btn-primary btn-xs','value'=>'button','style'=>'background-color:#1295A2','data-target'=>'#reportmodal','data-toggle'=>'modal']); ?>
+											echo $this->Html->link('<i class="fa fa-search"> View</i>','/EventPlannerPromotions/view/'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs','style'=>'background-color:#1295A2'));?>	
+											<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal','style'=>'background-color:#1295A2'));?>
 											<!-------Report Modal Start--------->
-										<div id="reportmodal" class="modal fade" role="dialog">
+										<div id="reportmodal<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
 											<div class="modal-dialog modal-md" >
 												<!-- Modal content-->
 													<div class="modal-content">
@@ -307,7 +305,6 @@ if ($err) {
 														</div>
 													</div>
 												<!-------Report Modal End--------->	
-										
 										<?php 
 										//-- Save Unsave
 										 $issaved=$eventPlannerPromotion->issaved;
