@@ -221,28 +221,28 @@ if ($err) {
 								<td><?= h($eventPlannerPromotion->price_master->week); ?></td>
 								<td><?= h($eventPlannerPromotion->price_master->price); ?></td>
 								<td><?= h(date('d-m-Y',strtotime($eventPlannerPromotion->visible_date))); ?></td>	
-								<td class="actions" style="width:30%;">
+								<td class="actions" style="width:35%;">
 									<form method="POST">
 										<span>
 											<input type="hidden" name="event_id" value="<?php echo $eventPlannerPromotion->id; ?>">
 										  <?php
-											//pr($eventPlannerPromotion);
+												//pr($eventPlannerPromotion);
 											$dataUserId=$eventPlannerPromotion->user_id;
 											$isLiked=$eventPlannerPromotion->isLiked;
-											$issaved=$eventPlannerPromotion->issaved;
+											
 											//-- LIKES DISLIKE
 											if($isLiked=='no'){
 												echo $this->Form->button('<i class="fa fa-thumbs-up like" > Like </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'LikeEvent']);
 											}
 											if($isLiked=='yes'){
-												echo $this->Form->button('<i class="fa fa-thumbs-down like" > Dislike </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#d6796e','type'=>'submit','name'=>'LikeEvent']);
+												echo $this->Form->button('<i class="fa fa-thumbs-down like" > Dislike </i>',['class'=>'btn btn-danger btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent']);
 											}
 										?>	
 										<?php 
-												echo $this->Html->link('<i class="fa fa-search"> View</i>','/EventPlannerPromotions/view/'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>	
+												echo $this->Html->link('<i class="fa fa-search"> View</i>','/EventPlannerPromotions/view/'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs','style'=>'background-color:#1295A2'));?>	
 									
 											<?php // echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal'));?>	
-											<?php echo $this->Form->button('<i class="fa fa-flag"> Report</i>',['class'=>'btn btn-primary btn-xs','value'=>'button','data-target'=>'#reportmodal','data-toggle'=>'modal']); ?>
+											<?php echo $this->Form->button('<i class="fa fa-flag"> Report</i>',['class'=>'btn btn-primary btn-xs','value'=>'button','style'=>'background-color:#1295A2','data-target'=>'#reportmodal','data-toggle'=>'modal']); ?>
 											<!-------Report Modal Start--------->
 													<div id="reportmodal" class="modal fade" role="dialog">
 														<div class="modal-dialog modal-md" >
@@ -252,7 +252,6 @@ if ($err) {
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																	<h4 class="modal-title"></h4>
 																  </div>
-																<form method="get" class="filter_box">
 																	<div class="modal-body" style="height:100px;">
 																		<div class="col-md-12 row form-group ">
 																			<div class="col-md-12 radio">
@@ -268,7 +267,6 @@ if ($err) {
 																					<input type="submit" class="btn btn-primary btn-md" value="OK">
 																					<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
 																</div>
-															</form>
 														</div>
 													</div>
 												</div>
@@ -276,11 +274,12 @@ if ($err) {
 										
 										<?php 
 										//-- Save Unsave
-										if($issaved=='1'){
-												echo $this->Form->button('<i class="fa fa-save" > Unsave </i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'saveeventplanner']);
+										 $issaved=$eventPlannerPromotion->issaved;
+										if($issaved==1){
+												echo $this->Form->button('<i class="fa fa-save" > Unsave </i>',['class'=>'btn btn-danger btn-xs ','value'=>'button','type'=>'submit','name'=>'saveeventplanner']);
 											}
-											if($issaved=='0'){
-												echo $this->Form->button('<i class="fa fa-save" > Save </i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:#d6796e','type'=>'submit','name'=>'saveeventplanner']);
+											if($issaved==0){
+												echo $this->Form->button('<i class="fa fa-save" > Save </i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'saveeventplanner']);
 											}
 										 ?>
 											
