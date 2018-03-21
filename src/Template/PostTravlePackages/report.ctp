@@ -82,7 +82,7 @@ if ($err) {
   $Category=json_decode($responsecat);
   $cat=$Category->postTravlePackageCategories;
 }
-/// -- REPOrT REASON
+/// -- REPORT REASON
 $curl = curl_init();
 curl_setopt_array($curl, array(
   CURLOPT_URL => $coreVariable['SiteUrl']."api/ReportReasons/reportReasonList.json?promotion_type_id=1",
@@ -349,21 +349,24 @@ if ($err) {
 																<button type="button" class="close" data-dismiss="modal">&times;</button>
 																<h4 class="modal-title"></h4>
 															  </div> 
-																<div class="modal-body" style="height:100px;">
-																	<div class="col-md-12 row form-group ">
+																<div class="modal-body" style="height:100px;margin-top:50px;">
+																	<div class="row">
 																		<div class="col-md-12">
-																			<p for="from">
-																				Reason
-																				<span class="required">*</span>
-																			</p>
-																			<div class="input-field">
-																			<?php 
-																			$options=array();
-																			foreach($reasonslist as $sts)
-																			{
-																				$options[] = ['value'=>$sts->id,'text'=>$sts->reason];
-																			};
-																			echo $this->Form->control('report_reason_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);?>
+																			<div class="col-md-3">
+																				<label>
+																					Select Reason
+																				</label>
+																				</div>
+																				<div class="col-md-9">
+																				<div class="input-field">
+																				<?php 
+																				$options=array();
+																				foreach($reasonslist as $sts)
+																				{
+																					$options[] = ['value'=>$sts->id,'text'=>$sts->reason];
+																				};
+																				echo $this->Form->control('report_reason_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);?>
+																				</div>
 																			</div>
 																		</div>
 																	</div>
