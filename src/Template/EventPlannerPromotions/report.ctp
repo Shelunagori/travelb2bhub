@@ -275,42 +275,15 @@ if ($err) {
 												<!-------Report Modal End--------->	
 										
 										<?php 
+										//-- Save Unsave
 										if($issaved=='1'){
 												echo $this->Form->button('<i class="fa fa-save" > Unsave </i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'saveeventplanner']);
 											}
 											if($issaved=='0'){
 												echo $this->Form->button('<i class="fa fa-save" > Save </i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:#d6796e','type'=>'submit','name'=>'saveeventplanner']);
 											}
-										echo $this->Form->button('<i class="fa fa-bookmark"> Save</i>',['class'=>'btn btn-success btn-xs','value'=>'button','data-target'=>'#savemodal','data-toggle'=>'modal']); ?>
-											<!-------Save Modal Start--------->
-												<div id="savemodal" class="modal fade" role="dialog">
-													<div class="modal-dialog modal-md" >
-														<!-- Modal content-->
-															<div class="modal-content">
-															  <div class="modal-header">
-																<button type="button" class="close" data-dismiss="modal">&times;</button>
-																<h4 class="modal-title"></h4>
-															  </div>
-															<form method="get" class="filter_box">
-																<div class="modal-body" style="height:100px;">
-																	<div class="col-md-12 row form-group ">
-																		<div class="col-md-12 radio">
-																			<h3>
-																			<label>
-																			Are You Sure, this promotion will added to your Cart.
-																			</label>
-																			</h3>
-																		</div>
-																	</div>
-																</div>
-																<div class="modal-footer" style="height:60px;">
-																	<input type="submit" class="btn btn-primary btn-md" value="OK">
-																	<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
-																</div>
-															</form>
-														</div>
-													</div>
-												</div>
+										 ?>
+											
 										<?php 
 										if($dataUserId==$user_id){
 											echo $this->Html->link('<i class="fa fa-trash"> Delete</i>','api address'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal','data-toggle'=>'modal', $eventPlannerPromotion->id));

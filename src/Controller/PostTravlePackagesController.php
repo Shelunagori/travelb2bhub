@@ -235,7 +235,7 @@ ory_id[$z];
 
         return $this->redirect(['action' => 'index']);
     }
-	public function report($higestSort = null,$country_id = null,$category_id = null,$duration_day_night = null,$starting_price = null,$posttravle_id= null,$removeposttravle= null)
+	public function report($higestSort = null,$country_id = null,$category_id = null,$duration_day_night = null,$starting_price = null,$posttravle_id= null,$removeposttravle= null,$saveposttravle= null)
     {
 		$higestSort=$this->request->query('higestSort'); 
 		$country_id=$this->request->query('country_id'); 

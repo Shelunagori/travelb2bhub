@@ -150,7 +150,7 @@ class EventPlannerPromotionsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-	public function report($higestSort = null,$country_id = null,$state_id = null,$city_id = null,$removeEvent=null,$event_id=null)
+	public function report($higestSort = null,$country_id = null,$state_id = null,$city_id = null,$removeEvent=null,$event_id=null,$saveeventplanner= null)
     {
 		$higestSort=$this->request->query('higestSort'); 
 		$country_id=$this->request->query('country_id'); 
@@ -229,10 +229,10 @@ class EventPlannerPromotionsController extends AppController
 				return $this->redirect(['action' => 'report']);
 			}
 			//---Save cart TaxiFleet Promotion
-			if(isset($this->request->data['saveposttravle']))
+			if(isset($this->request->data['saveeventplanner']))
 			{
 				$user_id=$this->Auth->User('id');
-				$posttravle_id=$this->request->data('posttravle_id');
+				$event_id=$this->request->data('event_id');
 				$post =[
 						'event_planner_promotion_id' => $event_id,
 						'user_id' =>$user_id						 							
