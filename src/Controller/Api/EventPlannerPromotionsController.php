@@ -231,11 +231,12 @@ class EventPlannerPromotionsController extends AppController
         $this->set('_serialize', ['getEventPlanners','message','response_code']);				
 	}	
 	
-	public function getEventPlanners($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$higestSort=null,$search=null)
+	public function getEventPlanners($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$higestSort=null,$search=null,$page=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
 		{
+			$limit=10;
 			$country_id = $this->request->query('country_id');
 			$country_id_short = $this->request->query('country_id_short');
 			$state_id = $this->request->query('state_id');
@@ -244,6 +245,8 @@ class EventPlannerPromotionsController extends AppController
 			$city_id = $this->request->query('city_id');
 			$higestSort = $this->request->query('higestSort');
 			$search_bar = $this->request->query('search');
+			//$page = $this->request->query('page');
+			//if(empty($page)){$page=1;}
 			if(!empty($country_id))
 			{
 				$country_id = ['EventPlannerPromotions.country_id'=>$country_id];
@@ -272,30 +275,22 @@ class EventPlannerPromotionsController extends AppController
 				$city_filter = null;
 			}
 			
-			
+			$where_short = ['EventPlannerPromotions.id' =>'DESC'];
 			if(!empty($country_id_short))
 			{
 				$where_short = ['EventPlannerPromotions.country_id' =>$country_id_short];
-			}else
-			{
-				$where_short = null;
-			}	
+			} 	
 			
 			
 			if(!empty($state_id_short))
 			{
 				$where_short = ['EventPlannerPromotionStates.id' =>$state_id_short];
-			}else
-			{
-				$where_short = null;
 			}
+			
 			if(!empty($city_id_short))
 			{
 				$where_short = ['EventPlannerPromotionCities.id' =>$city_id_short];
-			}else
-			{
-				$where_short = null;
-			}	
+			} 	
 
 			$search_bar_title = null;
 			$data_arr = [];
@@ -364,6 +359,8 @@ class EventPlannerPromotionsController extends AppController
 			->order($where_short)
 			->where($search_bar_title)
 			->group(['EventPlannerPromotions.id'])
+			//->limit($limit)
+			//->page($page)
 			->autoFields(true);
 			//pr($where_short);exit;	
 			if(!empty($getEventPlanners->toArray()))

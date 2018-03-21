@@ -196,15 +196,19 @@ $getHotelPromotion=$getEventPlanners ;
         $this->set('_serialize', ['getHotelPromotion','message','response_code']);				
 	}	
 	
-	public function getHotelList($isLikedUserId = null,$category_id = null,$short=null,$rating_filter=null,$higestSort=null)
+	public function getHotelList($isLikedUserId = null,$category_id = null,$short=null,$rating_filter=null,$higestSort=null,$page=null,$search=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
+		$limit=10;
 		if(!empty($isLikedUserId))
 		{
 			$category_id = $this->request->query('category_id');
 			$short = $this->request->query('short'); 
 			$rating_filter = $this->request->query('rating_filter');
 			$higestSort = $this->request->query('higestSort');
+			//$page = $this->request->query('page');
+			//$search_bar = $this->request->query('search');
+			//if(empty($page)){$page=1;}
 			$category_id_filter = null;
 			//-- Filter 
 			if(!empty($category_id))
@@ -223,7 +227,7 @@ $getHotelPromotion=$getEventPlanners ;
 				$rating_filter_filter = ['HotelPromotions.hotel_rating IN'=>$Ratings];
 			}
 			//-- SHORTs
-			$where_short=null;
+			$where_short=['HotelPromotions.id' =>'DESC'];
 			if(!empty($short))
 			{ 
 				if($short=='cheap_tariff')
@@ -236,7 +240,16 @@ $getHotelPromotion=$getEventPlanners ;
 					$where_short = ['HotelPromotions.hotel_rating' =>'DESC'];
 				}
 			}
-			
+			/*if(!empty($search_bar))
+			{	 	
+				$search_bar_title = array_merge($data_arr,$data_arr_state);
+				if(!empty($search_bar_title)){
+				$search_bar_title = ['EventPlannerPromotions.id IN' =>$search_bar_title];
+				}else
+				{
+					$search_bar_title = ['EventPlannerPromotions.id IN' =>''];
+				}				
+			}*/
 			$getHotelPromotion = $this->HotelPromotions->find();
 			
 				$getHotelPromotion->select(['total_likes'=>$getHotelPromotion->func()->count('HotelPromotionLikes.id')])
@@ -250,8 +263,10 @@ $getHotelPromotion=$getEventPlanners ;
 			->where(['HotelPromotions.is_deleted' =>0])
 			->order($where_short)
 			->group(['HotelPromotions.id'])
+			//->limit($limit)
+			//->page($page)
 			->autoFields(true);
-			//pr($getEventPlanners->toArray()); exit;
+			 
 			if(!empty($getHotelPromotion->toArray()))
 			{
 				foreach($getHotelPromotion as $getEventPlanner)

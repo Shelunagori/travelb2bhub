@@ -3197,10 +3197,10 @@ $delcount++;
 if($myRequestCount > $delcount) {
 $myRequestCount = $myRequestCount-$delcount;
 }   
-
+$conditionsss["Requests.status"] = 0;
 $reqcount = $this->getSettings('requestcount');
-	$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $_POST['user_id']]]);
-
+	$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $_POST['user_id'],$conditionsss]]);
+ 			
 	$myReponseCount = $queryr->count();
 	if($myReponseCount>0){
 		foreach($queryr as $req){
@@ -3216,8 +3216,8 @@ $reqcount = $this->getSettings('requestcount');
 $this->set('myReponseCount', $myReponseCount);
 
 //$myReponseCount = $queryr->count();
-$reqcount = (($reqcount['value']-$myRequestCount1)-($delcount+ $myfinalCount));
-$countarr = array();
+	$reqcount = (($reqcount['value']-$myRequestCount1)-($delcount+ $myfinalCount));
+	$countarr = array();
         $coountarr['myRequestCount'] = $myRequestCount1 ;
         $coountarr['myReponseCount'] = $myReponseCount;
         $coountarr['placereq'] = $reqcount;

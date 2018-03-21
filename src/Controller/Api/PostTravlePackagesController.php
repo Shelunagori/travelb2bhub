@@ -144,11 +144,12 @@ class PostTravlePackagesController extends AppController
         $this->set('_serialize', ['message','response_code']);
     }
 
-	public function getTravelPackages($isLikedUserId=null,$category_id = null, $category_short = null,$duration_day=null,$duration_night=null,$duration_short=null,$valid_date=null,$valid_date_short=null,$starting_price=null,$starting_price_short=null,$country_id=null,$country_id_short=null,$city_id=null,$city_id_short=null,$category_name=null,$higestSort=null,$search = null)
+	public function getTravelPackages($isLikedUserId=null,$category_id = null, $category_short = null,$duration_day=null,$duration_night=null,$duration_short=null,$valid_date=null,$valid_date_short=null,$starting_price=null,$starting_price_short=null,$country_id=null,$country_id_short=null,$city_id=null,$city_id_short=null,$category_name=null,$higestSort=null,$search = null,$page = null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
 		{
+			$limit=10;
 			$category_id = $this->request->query('category_id');
 			$category_short = $this->request->query('category_short');
 			//$duration_day = $this->request->query('duration_day');
@@ -165,7 +166,8 @@ class PostTravlePackagesController extends AppController
 			$category_name = $this->request->query('category_name');
 			$higestSort = $this->request->query('higestSort');
 			$search_bar = $this->request->query('search');
-
+			//$page = $this->request->query('page');
+			//if(empty($page)){$page=1;}
 			// Start shorting code
 			if(empty($category_short))
 			{
@@ -198,21 +200,15 @@ class PostTravlePackagesController extends AppController
 			{
 				$where_short = null;
 			} */
-			
+			$where_short=['PostTravlePackages.id' =>'DESC'];
 			if(!empty($valid_date_short))
 			{
 				$where_short = ['valid_date' =>$valid_date_short];
-			}else
-			{
-				$where_short = null;
-			}
+			} 
 			if(!empty($starting_price_short))
 			{
 				$where_short = ['starting_price' =>$starting_price_short];
-			}else
-			{
-				$where_short = null;
-			}
+			} 
 			if(empty($country_id_short))
 			{
 				$country_id_short = 'ASC';
@@ -261,11 +257,7 @@ class PostTravlePackagesController extends AppController
 			if(!empty($city_id_short))
 			{
 				$where_short = ['PostTravlePackageCities.id' =>$city_id_short];
-			}else
-			{
-				$where_short = null;
-			}
-
+			} 
 			
 			if(!empty($starting_price))
 			{
@@ -359,6 +351,8 @@ class PostTravlePackagesController extends AppController
 			->order($where_short)
 			->order(['PostTravlePackageRows.id' => $category_short])
 			->order(['PostTravlePackageCountries.id'=>$country_id_short])
+			//->limit($limit)
+			//->page($page)
 			->group(['PostTravlePackages.id'])
 			->autoFields(true);
 			

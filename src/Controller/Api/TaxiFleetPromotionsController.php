@@ -180,8 +180,9 @@ class TaxiFleetPromotionsController extends AppController
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);		
 	}
-	public function getTaxiFleetPromotions($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$car_bus_id=null,$car_bus_short=null,$higestSort=null,$search=null)
+	public function getTaxiFleetPromotions($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$car_bus_id=null,$car_bus_short=null,$higestSort=null,$search=null,$page=null)
 	{
+		$limit=10;
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		$country_id_short = $this->request->query('country_id_short');		
 		$country_id = $this->request->query('country_id');		
@@ -193,7 +194,8 @@ class TaxiFleetPromotionsController extends AppController
 		$car_bus_short = $this->request->query('car_bus_short');
 		$car_bus_id = $this->request->query('car_bus_id');	
 		$search_bar = $this->request->query('search');		
-		
+		//$page = $this->request->query('page');		
+		//if(empty($page)){$page=1;}
 		if(!empty($isLikedUserId))
 		{
 			if(!empty($country_id))
@@ -232,36 +234,24 @@ class TaxiFleetPromotionsController extends AppController
 				$car_bus_filter = null;
 			}	
 
-			
+			$where_short = ['TaxiFleetPromotions.id' =>'DESC'];
 			if(!empty($country_id_short))
 			{
 				$where_short = ['TaxiFleetPromotions.country_id' =>$country_id_short];
-			}else
-			{
-				$where_short = null;
-			}			
+			} 			
 			
 			if(!empty($state_id_short))
 			{
 				$where_short = ['TaxiFleetPromotionsStates.id' =>$state_id_short];
-			}else
-			{
-				$where_short = null;
-			}
+			} 
 			if(!empty($city_id_short))
 			{
 				$where_short = ['TaxiFleetPromotionCities.id' =>$city_id_short];
-			}else
-			{
-				$where_short = null;
-			}
+			} 
 			if(!empty($car_bus_short))
 			{
 				$where_short = ['TaxiFleetPromotionRows.id' =>$car_bus_short];
-			}else
-			{
-				$where_short = null;
-			}				
+			} 				
 
 
 			$search_bar_title = null;
@@ -354,6 +344,8 @@ class TaxiFleetPromotionsController extends AppController
 				->where(['TaxiFleetPromotions.is_deleted' =>0])
 				->order($where_short)
 				->group(['TaxiFleetPromotions.id'])
+				//->limit($limit)
+				//->page($page)
 				->autoFields(true);
 			//pr($getTravelPackages->toArray()); exit;
 			if(!empty($getTaxiFleetPromotions->toArray()))
