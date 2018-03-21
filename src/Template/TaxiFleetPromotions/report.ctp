@@ -266,20 +266,22 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 					<span>
 						<input type="hidden" name="taxifleet_id" value="<?php echo $taxiFleetPromotion->id; ?>">
 							<?php
+							//pr($taxiFleetPromotion);
 								$dataUserId=$taxiFleetPromotion->user_id;
 								$isLiked=$taxiFleetPromotion->isLiked;
+								$issaved=$taxiFleetPromotion->issaved;
 								//-- LIKES DISLIKE
 								if($isLiked=='no'){
 									echo $this->Form->button('<i class="fa fa-thumbs-up like" > Likes </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'LikeEvent']);
 								}
 								if($isLiked=='yes'){
-									echo $this->Form->button('<i class="fa fa-thumbs-down like" > Dislikes </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#d6796e','type'=>'submit','name'=>'LikeEvent']);
+									echo $this->Form->button('<i class="fa fa-thumbs-down like" > Dislikes </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#F1423F','type'=>'submit','name'=>'LikeEvent']);
 								}
 							?>
 							<!--<a href="<?php // echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'view',$taxiFleetPromotion->id)) ?>" class="btn btn-primary btn-xs"><i class="fa fa-eye"> View</i></a>-->							
 							<?php 
 							echo $this->Html->link('<i class="fa fa-search"> View</i>','/TaxiFleetPromotions/view/'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs'));?>
-							<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal'));?>
+							<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal','style'=>'background-color:#129565;'));?>
 											<!-------Report Modal Start--------->
 													<div id="reportmodal" class="modal fade" role="dialog">
 														<div class="modal-dialog modal-md" >
@@ -308,26 +310,18 @@ $TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
 															</div>
 														</div>
 											<!-------Report Modal End--------->	
-											<?php echo $this->Html->link('<i class="fa fa-bookmark"> Save</i>','#'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-success btn-xs','data-target'=>'#savemodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal'));?>
-										<!-------Save Modal Start--------->
-												<div id="savemodal<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
-													<div class="modal-dialog modal-md" >
-														<!-- Modal content-->
-															<div class="modal-content">
-															  <div class="modal-header" style="height:100px;">
-																	<button type="button" class="close" data-dismiss="modal">&times;</button>
-																	<h4 class="modal-title">
-																	Are You Sure, to save this promotion in your cart ???
-																	</h4>
-															</div>
-																<div class="modal-footer" style="height:60px;">
-																	<button type="submit" class="btn btn-danger" name="savetaxifleet" value="yes" >Yes</button>
-																	<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
-																</div>
-															</div>
-														</div>
-													</div>
-											<!-------Save Modal End--------->	
+											
+											<?php 
+											if($issaved=='1'){
+											echo $this->Form->button('<i class="fa fa-save" > UnSave</i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#F67674;','type'=>'submit','name'=>'savetaxifleet']);
+											}
+											if($issaved=='0'){
+												echo $this->Form->button('<i class="fa fa-save" > Save </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'savetaxifleet']);
+												
+											}
+											?>
+											
+										 
 						<?php
 						if($dataUserId==$user_id){
 						echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal'));?>
