@@ -240,7 +240,7 @@ class EventPlannerPromotionsController extends AppController
 				//pr($post);exit;
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
-				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/PostTravlePackageCarts/postTravlePackageCartAdd.json",
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/EventPlannerPromotionCarts/EventPlannerPromotionsCartAdd.json",
 				  CURLOPT_RETURNTRANSFER => true,
 				  CURLOPT_ENCODING => "",
 				  CURLOPT_MAXREDIRS => 10,
