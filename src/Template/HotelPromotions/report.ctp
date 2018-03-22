@@ -246,14 +246,14 @@ if ($err) {
 									<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn  btn-primary btn-xs','data-target'=>'#reportmodal'.$hotelPromotion->id,'data-toggle'=>'modal','style'=>'background-color:#1295A2'));?>
 											<!-------Report Modal Start--------->
 													<div id="reportmodal<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
-														<div class="modal-dialog modal-md" >
+														<div class="modal-dialog modal-md">
 															<!-- Modal content-->
 																<div class="modal-content">
 																  <div class="modal-header">
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																	<h4 class="modal-title">Report</h4>
 																  </div>
-																	<div class="modal-body" style="height:100px;margin-top:50px;">
+																	<div class="modal-body" style="height:150px;margin-top:30px;">
 																		<div class="row">
 																			<div class="col-md-12">
 																				<div class="col-md-3">
@@ -269,13 +269,20 @@ if ($err) {
 																							{
 																								$options[] = ['value'=>$sts->id,'text'=>$sts->reason];
 																							};
-																							echo $this->Form->control('report_reason_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2 reason","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);
+																							echo $this->Form->control('report_reason_id', ['label'=>false,"id"=>"reason_box", "type"=>"select",'options' =>$options, "class"=>"form-control select2 ","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);
 																						?>
 																					</div>
-																					<!-- <div>
-																						<label>Text area</label>
-																						<textarea id="text_area" class="form-control" type="text" name="text_area" placeholder="Write something" rows="5" cols="50" style="display: none"></textarea>
-																					</div>-->
+																				</div>
+																			</div>
+																		</div><br>
+																		<div class="row">
+																			<div class="col-md-12">
+																				<div class="col-md-3">
+																				</div>
+																				<div class="col-md-9">
+																					<div id="other" style="display: show;">
+																					<textarea class="form-control " rows="3" type="text" ></textarea>	
+																					</div>
 																				</div>
 																			</div>
 																		</div>
@@ -287,6 +294,7 @@ if ($err) {
 															</div>
 														</div>
 													</div>
+												</div>
 											<!-------Report Modal End--------->	
 									<?php 
 										//-- Save Unsave
@@ -346,4 +354,27 @@ if ($err) {
 		</div>
 	</div>
 </div>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<script type='text/javascript'>
 
+  $(document).ready(function(){
+	  $('#reason_box').change(function(){
+		if($('#reason_box').val() == '5')
+		   {
+			   alert();
+		   $('#other').css('display', 'block'); 
+			  }
+		else
+		   {
+			    alert();
+		   $('#other').css('display', 'none');
+		   }
+		});
+      /*  $('#reason_box').change(function(){
+		   var a=$(this).val();
+           if (a=='5') {
+               $('#stateText').css({'display':'show'});           
+           }
+        }); */
+  });
+</script>
