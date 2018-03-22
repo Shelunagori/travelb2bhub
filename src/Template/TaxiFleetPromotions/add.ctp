@@ -382,8 +382,7 @@ fieldset{
 			</div>
 	</form>
 </div>
- 
-<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+ <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>	 
     $(document).ready(function ()
 	{

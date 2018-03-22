@@ -54,6 +54,33 @@ if ($err) {
 	//pr($hotelcategory);exit;
 	$hotelcategory=$hotelcategory->hotelCategories;
 }
+/// -- REPORT REASON
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/ReportReasons/reportReasonList.json?promotion_type_id=1",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: 4f8087cd-6560-4ca6-5539-9499d3c5b967"
+  ),
+));
+$response = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+$priceMasters=array();
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+	$response;
+	$List=json_decode($response);
+	$reasonslist=$List->reasonslist;
+}
+
 ?>
 <div  class="container-fluid">
 	<div class="row equal_column">
@@ -216,9 +243,9 @@ if ($err) {
 									?>	
 									<?php 
 									echo $this->Html->link('<i class="fa fa-search"> View</i>','/HotelPromotions/view/'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs','style'=>'background-color:#1295A2'));?>	
-									<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn  btn-primary btn-xs','data-target'=>'#reportmodal','data-toggle'=>'modal','style'=>'background-color:#1295A2'));?>
+									<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn  btn-primary btn-xs','data-target'=>'#reportmodal'.$hotelPromotion->id,'data-toggle'=>'modal','style'=>'background-color:#1295A2'));?>
 											<!-------Report Modal Start--------->
-													<div id="reportmodal" class="modal fade" role="dialog">
+													<div id="reportmodal<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
 														<div class="modal-dialog modal-md" >
 															<!-- Modal content-->
 																<div class="modal-content">
@@ -226,20 +253,36 @@ if ($err) {
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																	<h4 class="modal-title"></h4>
 																  </div>
-																	<div class="modal-body" style="height:100px;">
-																		<div class="col-md-12 row form-group ">
-																			<div class="col-md-12 radio">
-																				<h3>
-																				<label>
-																					<select><option>Select Report Reason</option></select>
-																				</label>
-																				</h3>
+																	<div class="modal-body" style="height:100px;margin-top:50px;">
+																		<div class="row">
+																			<div class="col-md-12">
+																				<div class="col-md-3">
+																					<label>
+																						Select Reason
+																					</label>
+																				</div>
+																				<div class="col-md-9">
+																					<div class="input-field">
+																						<?php 
+																							$options=array();
+																							foreach($reasonslist as $sts)
+																							{
+																								$options[] = ['value'=>$sts->id,'text'=>$sts->reason];
+																							};
+																							echo $this->Form->control('report_reason_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2 reason","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);
+																						?>
+																					</div>
+																					<!-- <div>
+																						<label>Text area</label>
+																						<textarea id="text_area" class="form-control" type="text" name="text_area" placeholder="Write something" rows="5" cols="50" style="display: none"></textarea>
+																					</div>-->
+																				</div>
 																			</div>
 																		</div>
 																	</div>
 																	<div class="modal-footer" style="height:60px;">
-																		<input type="submit" class="btn btn-primary btn-md" value="OK">
-																		<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																		<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
+																		<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
 																	</div>
 															</div>
 														</div>

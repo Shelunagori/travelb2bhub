@@ -265,7 +265,7 @@ class EventPlannerPromotionsController extends AppController
 				$this->Flash->success(__($displayMessage));
 				return $this->redirect(['action' => 'report']);
 			}
-//Report Modal
+						//Report Modal
 			if(isset($this->request->data['report_submit']))
 			{
 				$user_id=$this->Auth->User('id');
