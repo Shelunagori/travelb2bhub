@@ -84,13 +84,22 @@ if ($err) {
 												<div class="col-md-4">
 													<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?>
 													<?php
-														echo "(";
-														for($i=0;$i<$taxiFleetPromotion->user_rating;$i++)
+														if($taxiFleetPromotion->user_rating==0)
 														{
-															
-															echo "<i class='fa fa-star' style='font-size:10px;'></i> ";
+															echo "";
 														}
-														echo ")";
+														else{
+															echo "(";
+															for($i=0;$i<$taxiFleetPromotion->user_rating;$i++)
+															{
+																echo "<i class='fa fa-star' style='font-size:10px;'></i> ";
+																if($i==0)
+																{
+																	echo "";
+																}
+															}
+															echo ")";
+															}
 													?>
 												</div>
 												<div class="col-md-2">

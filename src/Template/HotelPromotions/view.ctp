@@ -50,14 +50,23 @@ if ($err) {
 											<div class="col-md-4">
 											<?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name);?>
 											<?php
-												echo " ( ";
-												for($i=0;$i<$hotelPromotion->user_rating;$i++)
-												{
-													
-													echo "<i class='fa fa-star'></i> ";
-												}
-												echo ")";
-												?>
+														if($hotelPromotion->user_rating==0)
+														{
+															echo "";
+														}
+														else{
+															echo "(";
+															for($i=0;$i<$hotelPromotion->user_rating;$i++)
+															{
+																echo "<i class='fa fa-star' style='font-size:10px;'></i> ";
+																if($i==0)
+																{
+																	echo "";
+																}
+															}
+															echo ")";
+															}
+													?>
 												
 											</div>
 											<div class="col-md-2">
@@ -93,12 +102,23 @@ if ($err) {
 												</div>
 											<div class="col-md-4">
 											<?php
-												for($i=0;$i<$hotelPromotion->hotel_rating;$i++)
-												{
-													
-													echo "<i class='fa fa-star'></i> ";
-												}
-												?>
+														if($hotelPromotion->user_rating==0)
+														{
+															echo "No Rating";
+														}
+														else{
+															echo "(";
+															for($i=0;$i<$hotelPromotion->user_rating;$i++)
+															{
+																echo "<i class='fa fa-star' style='font-size:10px;'></i> ";
+																if($i==0)
+																{
+																	echo "";
+																}
+															}
+															echo ")";
+															}
+													?>
 											</div>
 										</div>
 										<div class="row">

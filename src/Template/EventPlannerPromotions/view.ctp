@@ -75,22 +75,21 @@ if ($err) {
 															<div class="col-md-4">
 																<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?>
 																<?php
-																
 																	if($eventPlannerPromotion->user_rating==0)
 																	{
 																		echo "";
 																	}
 																	else{
-																			echo "(";
-																			for($i=0;$i<$eventPlannerPromotion->user_rating;$i++)
+																		echo "(";
+																		for($i=0;$i<$eventPlannerPromotion->user_rating;$i++)
+																		{
+																			echo "<i class='fa fa-star' style='font-size:10px;'></i> ";
+																			if($i==0)
 																			{
-																				echo "<i class='fa fa-star' style='font-size:10px;'></i> ";
-																				if($i==0)
-																				{
-																					echo "";
-																				}
+																				echo "";
 																			}
-																			echo ")";
+																		}
+																		echo ")";
 																		}
 																?>
 															</div>
