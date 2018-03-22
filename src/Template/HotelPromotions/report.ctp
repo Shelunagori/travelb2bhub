@@ -275,7 +275,7 @@ if ($err) {
 																				</div>
 																			</div>
 																		</div><br>
-																		<div class="row" id="other" style="display: show;">
+																		<div class="row" id="other" style="display: hidden;">
 																			<div class="col-md-12">
 																				<div class="col-md-3">
 																				</div>
