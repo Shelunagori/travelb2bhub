@@ -318,31 +318,32 @@ if ($err) {
 																	<h4 class="modal-title"></h4>
 																  </div>
 																	<div class="modal-body" style="height:100px;margin-top:50px;">
-																	<div class="row">
-																		<div class="col-md-12">
-																			<div class="col-md-3">
-																				<label>
-																					Select Reason
-																				</label>
+																		<div class="row">
+																			<div class="col-md-12">
+																				<div class="col-md-3">
+																					<label>
+																						Select Reason
+																					</label>
 																				</div>
 																				<div class="col-md-9">
-																				<div class="input-field">
-																				<?php 
-																				$options=array();
-																				foreach($reasonslist as $sts)
-																				{
-																					$options[] = ['value'=>$sts->id,'text'=>$sts->reason];
-																				};
-																				echo $this->Form->control('report_reason_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2 reason","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select...",'onchange'=>'change(this)']);?>
-																				</div>
-																				 <div>
-																					<label>Text area</label>
-																					<textarea id="text_area" class="form-control" type="text" name="text_area" placeholder="Write something" rows="5" cols="50" style="display: none"></textarea>
+																					<div class="input-field">
+																						<?php 
+																							$options=array();
+																							foreach($reasonslist as $sts)
+																							{
+																								$options[] = ['value'=>$sts->id,'text'=>$sts->reason];
+																							};
+																							echo $this->Form->control('report_reason_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2 reason","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);
+																						?>
+																					</div>
+																					<!-- <div>
+																						<label>Text area</label>
+																						<textarea id="text_area" class="form-control" type="text" name="text_area" placeholder="Write something" rows="5" cols="50" style="display: none"></textarea>
+																					</div>-->
 																				</div>
 																			</div>
 																		</div>
 																	</div>
-																</div>
 																	<div class="modal-footer" style="height:60px;">
 																		<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
 																		<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
