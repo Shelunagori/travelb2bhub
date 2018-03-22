@@ -128,12 +128,16 @@ if ($err) {
 												</div>
 											</div><br>
 											<div class="row">
-												<div class="col-md-2">
+												<div class="col-md-12">
+													<div class="col-md-4">
+													</div>
+													<div class="col-md-1">
 													<label><?= __('Event Details') ?></label>
 													</div>
-												<div class="col-md-10">
-												
-													<?= h($eventPlannerPromotion->event_detail);?>
+													<div class="col-md-7">
+														<p>
+														<?= h($eventPlannerPromotion->event_detail);?></p>
+													</div>
 												</div>
 											</div>
 										</div> 

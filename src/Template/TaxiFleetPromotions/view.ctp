@@ -151,10 +151,12 @@ if ($err) {
 								</div><br>
 											<div class="row">
 												<div class="col-md-12">
-												<div class="col-md-2">
+												<div class="col-md-4">
+												</div>
+												<div class="col-md-1">
 													<label><?= __('Fleet Details') ?></label>
-													</div>
-												<div class="col-md-10">
+												</div>
+												<div class="col-md-7">
 													<?= $this->Text->autoParagraph(h($taxiFleetPromotion->fleet_detail)); ?>
 												</div>
 												</div>
