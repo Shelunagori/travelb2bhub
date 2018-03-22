@@ -295,11 +295,10 @@ if ($err) {
 									$x=0;
 									foreach($postTravlePackage->post_travle_package_rows as $category)
 										{
-											
-											$CategoryList.=$category->post_travle_package_category->name;
-											if($x>1){
+											if($x>=1){
 												$CategoryList.=' , ';
 											}
+											$CategoryList.=$category->post_travle_package_category->name;
 										$x++;}
 								?>
 								<tr>

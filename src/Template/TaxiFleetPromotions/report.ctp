@@ -277,8 +277,7 @@ if ($err) {
             </tr>
         </thead>
         <tbody>
-		
-            <?php $i=1;
+         <?php $i=1;
 			if(!empty($taxiFleetPromotions)){
 			foreach ($taxiFleetPromotions as $taxiFleetPromotion): ?>
             <tr>

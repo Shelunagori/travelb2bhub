@@ -40,22 +40,20 @@ if ($err) {
 									$x=0;
 									foreach($postTravlePackage->post_travle_package_rows as $category)
 										{
-											
-											$CategoryList.=$category->post_travle_package_category->name;
-											if($x>1){
+											if($x>=1){
 												$CategoryList.=' , ';
 											}
+											$CategoryList.=$category->post_travle_package_category->name;
 											$x++;
 										}
 											$countryList='';
 											$y=0;
 											foreach($postTravlePackage->post_travle_package_countries as $country)
 											{
-												
-												$countryList.=$country->country->country_name;
-												if($y>1){
+												if($y>=1){
 													$countryList.=' , ';
 												}
+												$countryList.=$country->country->country_name;
 												$y++;
 											}
 										
@@ -63,11 +61,10 @@ if ($err) {
 											$z=0;
 											foreach($postTravlePackage->post_travle_package_cities as $cities)
 											{
-												
-												$cityList.=$cities->city->name;
-												if($z>1){
+												if($z>=1){
 													$cityList.=' , ';
 												}
+												$cityList.=$cities->city->name;
 												$z++;
 											}
 									?>
@@ -128,7 +125,7 @@ if ($err) {
 													<label><?= __('Package Duration') ?></label>
 													</div>
 												<div class="col-md-4">
-													<?= h($postTravlePackage->duration_night.'Night '.$postTravlePackage->duration_day.'Days') ?>
+													<?= h($postTravlePackage->duration_day_night) ?>
 												</div>
 												<div class="col-md-2">
 													<label><?= __('Starting Price') ?></label>
