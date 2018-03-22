@@ -140,7 +140,7 @@ if ($err) {
 												<label><?= __('Total Charges') ?></label>
 												</div>
 											<div class="col-md-4">
-												<?= $this->Number->format($hotelPromotion->total_charges) ?>
+												<?= $this->Number->format($hotelPromotion->total_charges) ?> &#8377;
 											</div>
 											<div class="col-md-2">
 												<label><?= __('Payment Status') ?></label>

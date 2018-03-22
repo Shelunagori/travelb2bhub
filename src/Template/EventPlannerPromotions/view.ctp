@@ -105,7 +105,7 @@ if ($err) {
 																<label><?= __('total Charges') ?></label>
 																</div>
 															<div class="col-md-4">
-																<?= h($eventPlannerPromotion->price_master->price);?>
+																<?= h($eventPlannerPromotion->price_master->price);?>&#8377; 
 															</div>
 															<div class="col-md-2">
 																<label><?= __('Visible Date') ?></label>
