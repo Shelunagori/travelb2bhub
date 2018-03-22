@@ -29,68 +29,116 @@ if ($err) {
 ?> 
 
 <section class="content">
-<div class="row">
-	<div class="col-md-12">
+	<div class="row">
+		<div class="col-md-12">
 			<div class="box box-primary">
-				<!--<div class="box-header with-border">
-					<i class="fa fa-plus"></i> <b>View Hotel Promotion</b>
-				</div> -->
-				<div class="box-body"> 
-					<center><fieldset>
-						<legend style="color:#369FA1;"><b> &nbsp; <?= __(' Hotel Promotion Details ') ?> &nbsp;  </b></legend>
-							<table class="table">
-							<?php foreach($hotelPromotion as $hotelPromotion):
+					<fieldset>
+						<legend style="color:#369FA1;text-align:center;"><b> &nbsp; <?= __(' Hotel Promotion Details ') ?> &nbsp;  </b></legend>
+						<div class="box-body">
+						<?php foreach($hotelPromotion as $hotelPromotion):
 								?>
-								<tbody>
-								<tr>
-									<td colspan="2"><?= $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'width:300px;margin-top:-10px;height:220px;']) ?></td>	
-									<td colspan="2">
-									<table class="table">
-									<tr>
-									<th ><?= __('Seller Name') ?></th>
-									<td><?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.'( '.$hotelPromotion->user_rating.' )');?></td>
-									<th ><?= __('Hotel Name') ?></th>
-									<td><?= h($hotelPromotion->hotel_name) ?></td>
-								</tr>
-								<tr>
-									<th scope="row"><?= __('Hotel Location') ?></th>
-									<td><?= h($hotelPromotion->hotel_location) ?></td>
-									<th scope="row"><?= __('Hotel Category') ?></th>
-									<td><?= h($hotelPromotion->hotel_category->name); ?></td>
-								</tr>
-								<tr>
-									<th scope="row"><?= __('Website') ?></th>
-									<td><?= h($hotelPromotion->website) ?></td>
-									<th scope="row"><?= __('Hotel Rating') ?></th>
-									<td><?= $this->Number->format($hotelPromotion->hotel_rating) ?></td>
-								</tr>
-								<tr>
-									<th scope="row"><?= __('Promotion Duration') ?></th>
-									<td><?=h($hotelPromotion->price_master->week); ?></td>
-									<th scope="row"><?= __('Visible Date') ?></th>
-									<td><?= date('d-M-Y',strtotime($hotelPromotion->visible_date)); ?></td>
-								</tr>
-								<tr>
-									<th scope="row"><?= __('Cheap Tariff') ?></th>
-									<td><?= $this->Number->format($hotelPromotion->cheap_tariff) ?></td>
-									<th scope="row"><?= __('Expensive Tariff') ?></th>
-									<td><?= $this->Number->format($hotelPromotion->expensive_tariff) ?></td>
-								</tr>
-								<tr>
-									<th scope="row"><?= __('Total Charges') ?></th>
-									<td><?= $this->Number->format($hotelPromotion->total_charges) ?></td>
-									<th scope="row"><?= __('Payment Status') ?></th>
-									<td><?= h($hotelPromotion->payment_status) ?></td>
-								</tr>
-							</table></td></tr><?php endforeach; ?></tbody>
-							</table>
-						</fieldset>
-					</center>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="col-md-4">
+										<?= $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'width:300px;height:220px;']) ?>
+									</div>
+									<div class="col-md-8">
+										<div class="row">
+											<div class="col-md-2">
+												<label><?= __('Seller Name') ?></label>
+												</div>
+											<div class="col-md-4">
+											<?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name);?>
+											<?php
+												echo " ( ";
+												for($i=0;$i<$hotelPromotion->user_rating;$i++)
+												{
+													
+													echo "<i class='fa fa-star'></i> ";
+												}
+												echo ")";
+												?>
+												
+											</div>
+											<div class="col-md-2">
+												<label><?= __('Hotel Name') ?></label>
+												</div>
+											<div class="col-md-4">
+												<?= h($hotelPromotion->hotel_name) ?>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-2">
+												<label><?= __('Hotel Location') ?></label>
+												</div>
+											<div class="col-md-4">
+												<?= h($hotelPromotion->hotel_location) ?>
+											</div>
+											<div class="col-md-2">
+												<label><?= __('Hotel Category') ?></label>
+												</div>
+											<div class="col-md-4">
+												<?= h($hotelPromotion->hotel_category->name); ?>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-2">
+												<label><?= __('Website') ?></label>
+												</div>
+											<div class="col-md-4">
+												<?= h($hotelPromotion->website) ?>
+											</div>
+											<div class="col-md-2">
+												<label><?= __('Hotel Rating') ?></label>
+												</div>
+											<div class="col-md-4">
+											<?php
+												for($i=0;$i<$hotelPromotion->hotel_rating;$i++)
+												{
+													
+													echo "<i class='fa fa-star'></i> ";
+												}
+												?>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-2">
+												<label><?= __('Promotion Duration') ?></label>
+												</div>
+											<div class="col-md-4">
+												<?=h($hotelPromotion->price_master->week); ?>
+											</div>
+											<div class="col-md-2">
+												<label><?= __('Visible Date') ?></label>
+												</div>
+											<div class="col-md-4">
+												<?= date('d-M-Y',strtotime($hotelPromotion->visible_date)); ?>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-2">
+												<label><?= __('Total Charges') ?></label>
+												</div>
+											<div class="col-md-4">
+												<?= $this->Number->format($hotelPromotion->total_charges) ?>
+											</div>
+											<div class="col-md-2">
+												<label><?= __('Payment Status') ?></label>
+												</div>
+											<div class="col-md-4">
+												<?= h($hotelPromotion->payment_status) ?>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<?php endforeach;?>
+						</div>
+					</fieldset>
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
-
+	</section>
 
 							
+					

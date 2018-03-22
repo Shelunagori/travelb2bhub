@@ -82,7 +82,25 @@ if ($err) {
 													<label><?= __('Seller Name') ?></label>
 													</div>
 												<div class="col-md-4">
-													<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.'( '.$postTravlePackage->user_rating.' )');?>
+													<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?>
+													<?php
+														if($postTravlePackage->user_rating==0)
+														{
+														echo "";
+														}
+														else{
+														echo "(";
+														for($i=0;$i<$postTravlePackage->user_rating;$i++)
+														{
+															echo "<i class='fa fa-star' style='font-size:10px;'></i> ";
+															if($i==0)
+															{
+																echo "";
+															}
+														}
+														echo ")";
+														}
+													?>
 												</div>
 												<div class="col-md-2">
 													<label><?= __('Title') ?></label>

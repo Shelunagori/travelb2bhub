@@ -74,6 +74,7 @@ if ($err) {
 									<div class="col-md-12">
 										<div class="col-md-4">
 											<?= $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'width:300px;height:220px;']) ?>
+											
 										</div>
 										<div class="col-md-8">
 											<div class="row">
@@ -81,7 +82,16 @@ if ($err) {
 													<label><?= __('Seller Name') ?></label>
 													</div>
 												<div class="col-md-4">
-													<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name.'( '.$taxiFleetPromotion->user_rating.' )');?>
+													<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?>
+													<?php
+														echo "(";
+														for($i=0;$i<$taxiFleetPromotion->user_rating;$i++)
+														{
+															
+															echo "<i class='fa fa-star' style='font-size:10px;'></i> ";
+														}
+														echo ")";
+													?>
 												</div>
 												<div class="col-md-2">
 													<label><?= __('Title') ?></label>
