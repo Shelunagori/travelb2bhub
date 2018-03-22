@@ -333,7 +333,11 @@ if ($err) {
 																				{
 																					$options[] = ['value'=>$sts->id,'text'=>$sts->reason];
 																				};
-																				echo $this->Form->control('report_reason_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);?>
+																				echo $this->Form->control('report_reason_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2 reason","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select...",'onchange'=>'change(this)']);?>
+																				</div>
+																				 <div>
+																					<label>Text area</label>
+																					<textarea id="text_area" class="form-control" type="text" name="text_area" placeholder="Write something" rows="5" cols="50" style="display: none"></textarea>
 																				</div>
 																			</div>
 																		</div>
@@ -409,3 +413,23 @@ if ($err) {
 			</div>
 		</div>
 	</div>
+	<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<script>	 
+    $(document).ready(function ()
+	{
+		function change(obj) {
+			var selectBox = obj;
+			var selected = selectBox.options[selectBox.selectedIndex].value;
+			var textarea = document.getElementById("text_area");
+
+			if(selected === '5'){
+				textarea.style.display = "block";
+			}
+			else{
+				textarea.style.display = "none";
+			}
+}
+			
+	});
+	});
+</script>
