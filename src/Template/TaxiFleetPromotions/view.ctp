@@ -40,18 +40,19 @@ if ($err) {
 									$x=0;
 									foreach($taxiFleetPromotion->taxi_fleet_promotion_rows as $vehicle)
 										{
-											
-											$vehicleList.=$vehicle->taxi_fleet_car_bus->name;
-											if($x>1){
+											if($x>=1){
 												$vehicleList.=' , ';
 											}
+											$vehicleList.=$vehicle->taxi_fleet_car_bus->name;
 											$x++;
 										}
 									$cityList='';
 									$y=0;
 									foreach($taxiFleetPromotion->taxi_fleet_promotion_cities as $cities)
 										{
-											
+											if($y>=1){
+												$cityList.=' , ';
+											}
 											@$cityList.=$cities->city->name;
 											if($y>1){
 												$cityList.=' , ';
@@ -62,11 +63,10 @@ if ($err) {
 									$z=0;
 									foreach($taxiFleetPromotion->taxi_fleet_promotion_states as $states)
 										{
-											
-											$stateList.=$states->state->state_name;
-											if($z>1){
+											if($z>=1){
 												$stateList.=' , ';
 											}
+											$stateList.=$states->state->state_name;
 											$z++;
 										}
 					?>
