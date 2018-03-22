@@ -275,12 +275,12 @@ if ($err) {
 																				</div>
 																			</div>
 																		</div><br>
-																		<div class="row">
+																		<div class="row" id="other" style="display: show;">
 																			<div class="col-md-12">
 																				<div class="col-md-3">
 																				</div>
 																				<div class="col-md-9">
-																					<div id="other" style="display: show;">
+																					<div >
 																					<textarea class="form-control " rows="3" type="text" ></textarea>	
 																					</div>
 																				</div>
