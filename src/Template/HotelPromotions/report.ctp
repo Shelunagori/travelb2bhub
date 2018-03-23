@@ -359,11 +359,11 @@ if ($err) {
 
   $(document).ready(function(){
 	  $('.reason_box').on('change', function() {
-		  var b=$(this).closest("div");
+		  var b=$(this).parent("div).html();
 		  var a=$(this).closest("div").find(" option:selected").val();
 			if(a == '5')
 			  {
-				alert();
+				alert(b);
 				b.find(".business").show();
 			  }
 			  else
