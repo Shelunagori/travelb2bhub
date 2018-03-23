@@ -194,8 +194,8 @@ class TaxiFleetPromotionsController extends AppController
 		$car_bus_short = $this->request->query('car_bus_short');
 		$car_bus_id = $this->request->query('car_bus_id');	
 		$search_bar = $this->request->query('search');		
-		//$page = $this->request->query('page');		
-		//if(empty($page)){$page=1;}
+		$page = $this->request->query('page');		
+		if(empty($page)){$page=1;}
 		if(!empty($isLikedUserId))
 		{
 			if(!empty($country_id))
@@ -336,7 +336,7 @@ class TaxiFleetPromotionsController extends AppController
 						return $q->where($car_bus_filter);
 					})					
 				
-				->contain(['Users','PriceMasters','Countries','TaxiFleetPromotionCities'=>['Cities'],'TaxiFleetPromotionRows'=>['TaxiFleetCarBuses']])
+				->contain(['Users','PriceMasters','Countries','TaxiFleetPromotionCities'=>['Cities'],'TaxiFleetPromotionRows'=>['TaxiFleetCarBuses'],'TaxiFleetPromotionStates'=>['States']])
 					
 				->where(['TaxiFleetPromotions.visible_date >=' =>date('Y-m-d')])
 				->where($country_id)
@@ -344,8 +344,8 @@ class TaxiFleetPromotionsController extends AppController
 				->where(['TaxiFleetPromotions.is_deleted' =>0])
 				->order($where_short)
 				->group(['TaxiFleetPromotions.id'])
-				//->limit($limit)
-				//->page($page)
+				->limit($limit)
+				->page($page)
 				->autoFields(true);
 			//pr($getTravelPackages->toArray()); exit;
 			if(!empty($getTaxiFleetPromotions->toArray()))

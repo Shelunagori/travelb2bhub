@@ -10,7 +10,6 @@ use Cake\Filesystem\File;
  */
 class HotelPromotionsController extends AppController
 {
-
     public function add()
     {
         $hotelPromotions = $this->HotelPromotions->newEntity();
@@ -206,9 +205,9 @@ $getHotelPromotion=$getEventPlanners ;
 			$short = $this->request->query('short'); 
 			$rating_filter = $this->request->query('rating_filter');
 			$higestSort = $this->request->query('higestSort');
-			//$page = $this->request->query('page');
-			//$search_bar = $this->request->query('search');
-			//if(empty($page)){$page=1;}
+			$page = $this->request->query('page');
+			$search_bar = $this->request->query('search');
+			if(empty($page)){$page=1;}
 			$category_id_filter = null;
 			//-- Filter 
 			if(!empty($category_id))
@@ -263,8 +262,8 @@ $getHotelPromotion=$getEventPlanners ;
 			->where(['HotelPromotions.is_deleted' =>0])
 			->order($where_short)
 			->group(['HotelPromotions.id'])
-			//->limit($limit)
-			//->page($page)
+			->limit($limit)
+			->page($page)
 			->autoFields(true);
 			 
 			if(!empty($getHotelPromotion->toArray()))

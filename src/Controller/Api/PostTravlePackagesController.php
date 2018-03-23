@@ -166,8 +166,8 @@ class PostTravlePackagesController extends AppController
 			$category_name = $this->request->query('category_name');
 			$higestSort = $this->request->query('higestSort');
 			$search_bar = $this->request->query('search');
-			//$page = $this->request->query('page');
-			//if(empty($page)){$page=1;}
+			$page = $this->request->query('page');
+			if(empty($page)){$page=1;}
 			// Start shorting code
 			if(empty($category_short))
 			{
@@ -351,8 +351,8 @@ class PostTravlePackagesController extends AppController
 			->order($where_short)
 			->order(['PostTravlePackageRows.id' => $category_short])
 			->order(['PostTravlePackageCountries.id'=>$country_id_short])
-			//->limit($limit)
-			//->page($page)
+			->limit($limit)
+			->page($page)
 			->group(['PostTravlePackages.id'])
 			->autoFields(true);
 			
