@@ -275,7 +275,7 @@ if ($err) {
 																				</div>
 																			</div>
 																		</div><br>
-																		<div class="row business"  style="display: none;">
+																		<div class="row report_text"  style="display:none;">
 																			<div class="col-md-12">
 																				<div class="col-md-3">
 																				</div>
@@ -289,13 +289,12 @@ if ($err) {
 																	</div>
 																	<div class="modal-footer" style="height:60px;">
 																		<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
-																		<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																		<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
 																	</div>
+																</div>
 															</div>
 														</div>
-													</div>
-												</div>
-											<!-------Report Modal End--------->	
+												<!-------Report Modal End--------->	
 									<?php 
 										//-- Save Unsave
 										 $issaved=$hotelPromotion->issaved;
@@ -359,16 +358,15 @@ if ($err) {
 
   $(document).ready(function(){
 	  $('.reason_box').on('change', function() {
-		  var b=$(this).parent("div).html();
+		  //var b=$(this);
 		  var a=$(this).closest("div").find(" option:selected").val();
 			if(a == '5')
 			  {
-				alert(b);
-				b.find(".business").show();
+				$(".report_text").show();
 			  }
 			  else
 			  {
-				b.find(".business").hide();
+				$(".report_text").hide();
 			  }
 		});
   });
