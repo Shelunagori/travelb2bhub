@@ -262,26 +262,26 @@ if ($err) {
 																					</label>
 																				</div>
 																				<div class="col-md-9">
-																					<div class="input-field">
+																					<div class="input-field reason_list">
 																						<?php 
 																							$options=array();
 																							foreach($reasonslist as $sts)
 																							{
 																								$options[] = ['value'=>$sts->id,'text'=>$sts->reason];
 																							};
-																							echo $this->Form->control('report_reason_id', ['label'=>false,"id"=>"reason_box", "type"=>"select",'options' =>$options, "class"=>"form-control select2 ","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);
+																							echo $this->Form->control('report_reason_id', ['label'=>false, "type"=>"select",'options' =>$options, "class"=>"form-control select2 reason_box","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);
 																						?>
 																					</div>
 																				</div>
 																			</div>
 																		</div><br>
-																		<div class="row" id="other" style="display: hidden;">
+																		<div class="row business"  style="display: none;">
 																			<div class="col-md-12">
 																				<div class="col-md-3">
 																				</div>
 																				<div class="col-md-9">
 																					<div >
-																					<textarea class="form-control " rows="3" type="text" ></textarea>	
+																					<textarea class="form-control " rows="3" type="text" placeholder="Enter Your Suggestion here..." name="report_text"></textarea>	
 																					</div>
 																				</div>
 																			</div>
@@ -358,23 +358,16 @@ if ($err) {
 <script type='text/javascript'>
 
   $(document).ready(function(){
-	  $('#reason_box').change(function(){
-		if($('#reason_box').val() == '5')
-		   {
-			   alert();
-		   $('#other').css('display', 'block'); 
+	  $('.reason_box').on('change', function() {
+		  var a=$(this).closest("div").find(" option:selected").val();
+			if(a == '5')
+			  {
+				$(".business").show();
 			  }
-		else
-		   {
-			    alert();
-		   $('#other').css('display', 'none');
-		   }
+			  else
+			  {
+				$(".business").hide();
+			  }
 		});
-      /*  $('#reason_box').change(function(){
-		   var a=$(this).val();
-           if (a=='5') {
-               $('#stateText').css({'display':'show'});           
-           }
-        }); */
   });
 </script>
