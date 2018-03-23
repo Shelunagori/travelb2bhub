@@ -303,7 +303,7 @@ if ($err) {
 																				</div>
 																				<div class="col-md-9">
 																					<div >
-																					<textarea class="form-control " rows="3" type="text" placeholder="Enter Your Suggestion here..." name="report_text"></textarea>	
+																					<textarea class="form-control " rows="3" type="text" placeholder="Enter Your Suggestion here..." name="comment"></textarea>	
 																					</div>
 																				</div>
 																			</div>

@@ -271,10 +271,12 @@ class EventPlannerPromotionsController extends AppController
 				$user_id=$this->Auth->User('id');
 				$event_id=$this->request->data('event_id');
 				$report_reason_id=$this->request->data('report_reason_id');
+				$comment=$this->request->data('comment');
 				$post =[
 						'event_planner_promotion_id' => $event_id,
 						'report_reason_id' => $report_reason_id,
-						'user_id' =>$user_id						 							
+						'user_id' =>$user_id,
+						'comment' =>$comment						
 					];
 				//pr($post);exit;
 				$curl = curl_init();

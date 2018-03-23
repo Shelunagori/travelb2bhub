@@ -269,10 +269,12 @@ class TaxiFleetPromotionsController extends AppController
 				$user_id=$this->Auth->User('id');
 				$taxifleet_id=$this->request->data('taxifleet_id');
 				$report_reason_id=$this->request->data('report_reason_id');
+				$comment=$this->request->data('comment');
 				$post =[
 						'taxi_fleet_promotion_id' => $taxifleet_id,
 						'report_reason_id' => $report_reason_id,
-						'user_id' =>$user_id						 							
+						'user_id' =>$user_id,						 							
+						'comment' =>$comment						 							
 					];
 				//pr($post);exit;
 				$curl = curl_init();

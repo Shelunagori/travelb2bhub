@@ -275,10 +275,12 @@ class HotelPromotionsController extends AppController
 				$user_id=$this->Auth->User('id');
 				$hotelpromotion_id=$this->request->data('hotelpromotion_id');
 				$report_reason_id=$this->request->data('report_reason_id');
+				$comment=$this->request->data('comment');
 				$post =[
 						'hotel_promotion_id' => $hotelpromotion_id,
 						'report_reason_id' => $report_reason_id,
-						'user_id' =>$user_id						 							
+						'user_id' =>$user_id,						 							
+						'comment' =>$comment						 							
 					];
 				//pr($post);exit;
 				$curl = curl_init();
