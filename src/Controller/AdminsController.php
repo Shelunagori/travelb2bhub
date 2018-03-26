@@ -194,4 +194,11 @@ class AdminsController extends AppController
 
         return $this->redirect(['action' => 'add']);
     }
+	 public function broadcast()
+    {
+		$this->viewBuilder()->layout('admin_layout');
+		$admin = $this->Admins->newEntity();
+		$this->set(compact('admin'));
+        $this->set('_serialize', ['admin']);
+	}
 }
