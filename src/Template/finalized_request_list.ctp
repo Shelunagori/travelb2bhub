@@ -94,14 +94,12 @@ $conn = ConnectionManager::get('default');
                <input type="text" id="datepicker2" name="enddatesearch" value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"  class="form-control" >
             </div>
        </div>
-            
         <div class="form-group row margin-b10">
            <label for="example-text-input" class="col-md-3 col-form-label">Reference ID: </label>
            <div class="col-md-9">              
                 <input type="text" name="refidsearch" value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>"  class="form-control">
             </div>
         </div>
-            
         <div class="form-group row margin-b10">
            <label for="example-text-input" class="col-md-3 col-form-label">Members: </label>
            <div class="col-md-9">                

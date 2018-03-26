@@ -25,7 +25,6 @@ $conn = ConnectionManager::get('default');
 			<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
 			<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 		</div>
-		 
 	</div>
 	<div class="box-body">
 		<div class="row">
