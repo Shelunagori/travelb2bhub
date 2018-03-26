@@ -88,7 +88,7 @@
 								}
 						 
 							?>
-						<div class="containerss darker" style="background-color:#EDEDED;">
+						<div class="containerss darker" style="background-color:#F2F3F4;">
 							<?php echo $images;?>
 							<p style="text-align: right;"><b><?php echo ucwords($row["user"]["first_name"]); ?></b></p>
 							<fieldset style="text-align:left;border-radius:20px;"><p style="text-align: right;"><?php echo ucwords($row["message"]); ?></p></fieldset>
