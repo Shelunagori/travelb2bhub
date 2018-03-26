@@ -145,7 +145,7 @@ if ($err) {
 													<label><?= __('Total Charges') ?></label>
 													</div>
 												<div class="col-md-4">
-													<?=h($postTravlePackage->price_master->price)?>
+													<?= $this->Number->format($postTravlePackage->price_master->price).' &#8377;'?> 
 												</div>
 											</div>
 											<div class="row">
