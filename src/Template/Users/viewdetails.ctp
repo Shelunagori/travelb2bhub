@@ -12,9 +12,11 @@ h3 {
  
 li {
 	    margin-top: 7px;
+		text-align:left
 }
 ul li b {
 	color:#96989A;
+	text-align:left
 }
 
  </style>

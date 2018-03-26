@@ -3,7 +3,7 @@
 
 .containerss {
     border: 2px solid #dedede;
-    background-color:#F2F3F4;
+    background-color:#E4D4D0;
     border-radius: 5px;
     padding:20px;
     padding-bottom:0px;
@@ -90,8 +90,8 @@
 							?>
 						<div class="containerss darker">
 							<?php echo $images;?>
-							<p><b><?php echo ucwords($row["user"]["first_name"]); ?></b></p>
-							<p><?php echo ucwords($row["message"]); ?></p>
+							<p style="text-align: right;"><b><?php echo ucwords($row["user"]["first_name"]); ?></b></p>
+							<fieldset style="text-align:left;border-radius:20px;"><p style="text-align: right;"><?php echo ucwords($row["message"]); ?></p></fieldset>
 							<span class="time-right"><?php echo date("d M Y h:i A", strtotime($row["created"])); ?></span>
 						</div>
 						 		 
