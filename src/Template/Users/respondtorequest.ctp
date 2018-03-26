@@ -432,6 +432,7 @@ $conn = ConnectionManager::get('default');
 								  <input type="text" class="form-control" id="quotation_price" name="quotation_price" placeholder="Quote your price"/>
 							 </td>
 						</tr>
+						<br></br>
 						<tr>
 							<td>
 								 Comment
