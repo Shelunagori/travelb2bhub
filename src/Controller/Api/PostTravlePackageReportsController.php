@@ -55,10 +55,10 @@ class PostTravlePackageReportsController extends AppController
         if ($this->request->is('post')) {
             $postTravlePackageReport = $this->PostTravlePackageReports->patchEntity($postTravlePackageReport, $this->request->data);
             if ($this->PostTravlePackageReports->save($postTravlePackageReport)) {
-				$message = 'The post travel package Report has been saved';
+				$message = 'Your report has been submitted successfully';
 				$response_code = 200;
 			}else{
-				$message = 'The post travel package Report has not been saved';
+				$message = 'Your report has not been submitted successfully';
 				$response_code = 204;				
 			}
         }

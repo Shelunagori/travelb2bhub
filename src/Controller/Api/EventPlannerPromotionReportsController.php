@@ -53,14 +53,14 @@ class EventPlannerPromotionReportsController extends AppController
      */
     public function EventPlannerPromotionReportAdd()
     {
-        $eventPlannerPromotionReport = $this->EventPlannerPromotionReports->newEntity();
+        $eventPlannerPromotionReport = $this->EventPlannerPromotionReports->newEntity(); 
         if ($this->request->is('post')) {
             $eventPlannerPromotionReport = $this->EventPlannerPromotionReports->patchEntity($eventPlannerPromotionReport, $this->request->data);
             if ($this->EventPlannerPromotionReports->save($eventPlannerPromotionReport)) {
-                $message = 'The Event Planner Promotion Report has been saved';
+                $message = 'Your report has been submitted successfully';
 				$response_code = 200;
 			}else{
-				$message = 'The Event Planner Promotion Report has not been saved';
+				$message = 'Your report has not been submitted successfully';
 				$response_code = 204;
 			}
         }

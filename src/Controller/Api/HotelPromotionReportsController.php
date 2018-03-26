@@ -60,11 +60,11 @@ class HotelPromotionReportsController extends AppController
         if ($this->request->is('post')) {
             $hotelPromotionReport = $this->HotelPromotionReports->patchEntity($hotelPromotionReport, $this->request->data);
             if ($this->HotelPromotionReports->save($hotelPromotionReport)) {
-                $message = 'The Hotel Promotion Report has been saved';
+                $message = 'Your report has been submitted successfully'; 
 				$response_code = 200;
 			}else{
 				 
-				$message = 'The Hotel Promotion Report has not been saved';
+				$message = 'Your report has not been submitted successfully';
 				$response_code = 204;
 			}
         }

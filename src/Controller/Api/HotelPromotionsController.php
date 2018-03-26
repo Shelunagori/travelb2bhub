@@ -10,6 +10,7 @@ use Cake\Filesystem\File;
  */
 class HotelPromotionsController extends AppController
 {
+
     public function add()
     {
         $hotelPromotions = $this->HotelPromotions->newEntity();
@@ -195,7 +196,7 @@ $getHotelPromotion=$getEventPlanners ;
         $this->set('_serialize', ['getHotelPromotion','message','response_code']);				
 	}	
 	
-	public function getHotelList($isLikedUserId = null,$category_id = null,$short=null,$rating_filter=null,$higestSort=null,$page=null,$search=null)
+	public function getHotelList($isLikedUserId = null,$category_id = null,$short=null,$rating_filter=null,$higestSort=null,$page=null,$search=null,$starting_price=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		$limit=10;
@@ -205,6 +206,7 @@ $getHotelPromotion=$getEventPlanners ;
 			$short = $this->request->query('short'); 
 			$rating_filter = $this->request->query('rating_filter');
 			$higestSort = $this->request->query('higestSort');
+			$starting_price = $this->request->query('starting_price');
 			$page = $this->request->query('page');
 			$search_bar = $this->request->query('search');
 			if(empty($page)){$page=1;}
@@ -239,16 +241,15 @@ $getHotelPromotion=$getEventPlanners ;
 					$where_short = ['HotelPromotions.hotel_rating' =>'DESC'];
 				}
 			}
-			/*if(!empty($search_bar))
-			{	 	
-				$search_bar_title = array_merge($data_arr,$data_arr_state);
-				if(!empty($search_bar_title)){
-				$search_bar_title = ['EventPlannerPromotions.id IN' =>$search_bar_title];
-				}else
-				{
-					$search_bar_title = ['EventPlannerPromotions.id IN' =>''];
-				}				
-			}*/
+			$conditions=array();
+			if(!empty($starting_price)) {
+ 				$result = explode("-", $starting_price); 
+				$MinQuotePrice = $result[0];
+				$MaxQuotePrice = $result[1];
+				$conditions["HotelPromotions.cheap_tariff >="] = $MinQuotePrice;
+				$conditions["HotelPromotions.cheap_tariff <="] = $MaxQuotePrice;
+			}
+			
 			$getHotelPromotion = $this->HotelPromotions->find();
 			
 				$getHotelPromotion->select(['total_likes'=>$getHotelPromotion->func()->count('HotelPromotionLikes.id')])
@@ -258,6 +259,7 @@ $getHotelPromotion=$getEventPlanners ;
 			->leftJoinWith('HotelPromotionLikes')
 			->where($category_id_filter)
 			->where($rating_filter_filter)
+			->where($conditions)
 			->where(['HotelPromotions.visible_date >=' =>date('Y-m-d')])
 			->where(['HotelPromotions.is_deleted' =>0])
 			->order($where_short)

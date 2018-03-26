@@ -58,10 +58,10 @@ class TaxiFleetPromotionReportsController extends AppController
         if ($this->request->is('post')) {
             $taxiFleetPromotionReport = $this->TaxiFleetPromotionReports->patchEntity($taxiFleetPromotionReport, $this->request->data);
             if ($this->TaxiFleetPromotionReports->save($taxiFleetPromotionReport)) {
-                $message = 'The Taxi Fleet Promotion Report has been saved';
+                $message = 'Your report has been submitted successfully';
 				$response_code = 200;
 			}else{
-				$message = 'The Taxi Fleet Promotion Report has not been saved';
+				$message = 'Your report has not been submitted successfully';
 				$response_code = 204;
 			}
         }

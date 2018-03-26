@@ -936,7 +936,9 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 
 			if(!empty($_POST["chatwith"])){
 				$chatuserid = $_POST["chatwith"];
-				$conditions["Requests.user_id"] = $chatuserid;
+				//$conditions["Requests.user_id"] = $chatuserid;
+				$typeSearchArray=explode(',',$chatuserid);  
+				$conditions["Requests.user_id IN"] =  $typeSearchArray;
 			}
 			
 			if(!empty($_POST["shared_details"])) {
@@ -1004,12 +1006,16 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 //print_r($BlockedUsers); exit;
 			if(sizeof($BlockedUsers)>0){
 					$conditions["Requests.user_id NOT IN"] =  $BlockedUsers; 
-			}			
+			}
+		$limit=4;
+		$page = $_POST["page"]; 
+		if(empty($page)){$page=1;}
 		$responses = $this->Responses->find()
-				 ->contain(["Requests.Users", "UserChats","Requests.Hotels"])
-				 ->where(['Responses.user_id' => $_POST['user_id'],$conditions])->order($sort)->all();
-				 $citystate = array();
- 
+			->contain(["Requests.Users", "UserChats","Requests.Hotels"])
+			->where(['Responses.user_id' => $_POST['user_id'],$conditions])->order($sort)
+			->limit($limit)
+			->page($page);
+			$citystate = array();
 			$conn = ConnectionManager::get('default');
 			$enddatearray=array();
 			$chatcount_data = array();
@@ -1108,15 +1114,18 @@ $blockeddata['blockedUser'][$req['id']] =0;
 }
 	$reqidarray[] =$req['request']['user_id'];		
         }
-			
+		
 		$un_req_array = array_unique($reqidarray);
 		$str_reqid =  implode(",",$un_req_array);
-		
-		$sql = "SELECT u.id,u.first_name,u.last_name FROM users as u 
-		INNER JOIN requests as rs on rs.user_id=u.id
-		WHERE rs.user_id !='".$_POST['user_id']."' and u.id in($str_reqid) GROUP BY rs.user_id ";
-		$stmt = $conn->execute($sql);
-		$chatusers = $stmt->fetchAll('assoc');
+		$chatusers=array();
+		 
+		if(!empty($str_reqid)){
+ 			$sql = "SELECT u.id,u.first_name,u.last_name FROM users as u 
+			INNER JOIN requests as rs on rs.user_id=u.id
+			WHERE rs.user_id !='".$_POST['user_id']."' and u.id in($str_reqid) GROUP BY rs.user_id ";
+			$stmt = $conn->execute($sql);
+			$chatusers = $stmt->fetchAll('assoc');
+		}
 }
 		
 		$sql = "select s.state_name,c.id as city_id,c.name as city_name from cities as c 
@@ -1459,10 +1468,13 @@ $hotelcitystate[$row['id']]  = $city_state_name;
 		if(!empty($_POST["refidsearch"])) {
 		$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
 		}
-		//print_r($conditions);	  die();
+		
+		///---------------
+		
         $responses = $this->Responses->find()
-                        ->contain(["Requests.Users", "Requests","Requests.Hotels",'Requests.Cities'])
-                        ->where($conditions)->order($sort);
+			->contain(["Requests.Users", "Requests","Requests.Hotels",'Requests.Cities'])
+			->where($conditions)->order($sort);
+		//---------
 $loginId=$_POST["user_id"];
         $citystate = (object)[];
 			$review_array = array();
@@ -1608,7 +1620,7 @@ $result['BlockedUsers'] = $BlockedUsers;
         $this->loadModel('Cities');
 		$conditions["Requests.user_id"] = $_POST['user_id'];
 		$conditions["Requests.is_deleted "] = 1;
-if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
+		if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 		if(isset($_POST["budgetsearch"]) && !empty($_POST["budgetsearch"])) {
 			$QPriceRange = $_POST["budgetsearch"];
 			$result = explode("-", $QPriceRange);
@@ -1654,22 +1666,24 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
             	$da1["Requests.check_out"] =  $edate;
 			$conditions["OR"] =  $da1;
 		}
-        if ($_POST['role_id'] == 1) {
-            $requests = $this->Requests->find()
-                            ->contain(["Users","Hotels"])
-                            ->where($conditions)->order(["Requests.id" => "DESC"])->all();
-        }
-        if ($_POST['role_id'] == 2) {
-            $requests = $this->Requests->find()
-                            ->contain(["Users","Hotels"])
-                            ->where($conditions)->order(["Requests.id" => "DESC"])->all();
-        }
-        if ($_POST['role_id'] == 3) {
-			$conditions["Requests.category_id "] = 3;
-         $requests = $this->Requests->find()
-                            ->contain(["Users","Hotels"])
-                            ->where($conditions)->order(["Requests.id" => "DESC"])->all();
-        }
+		///// ROLE WISE 
+		
+	if ($_POST['role_id'] == 1) {
+		$requests = $this->Requests->find()
+			->contain(["Users","Hotels"])
+			->where($conditions)->order(["Requests.id" => "DESC"]);;
+	}
+	if ($_POST['role_id'] == 2) {
+		$requests = $this->Requests->find()
+			->contain(["Users","Hotels"])
+			->where($conditions)->order(["Requests.id" => "DESC"]);
+	}
+	if ($_POST['role_id'] == 3) {
+		$conditions["Requests.category_id "] = 3;
+		$requests = $this->Requests->find()
+			->contain(["Users","Hotels"])
+			->where($conditions)->order(["Requests.id" => "DESC"]);
+	}
 			$conn = ConnectionManager::get('default');
         $citystate = array();
 			$enddatearray=array();
@@ -1881,8 +1895,10 @@ public function removebusinessbuddyapi() {
 	$conditions["Requests.total_budget <="] = $MaxBudgetPrice;
 	}
 	if(!empty($_POST["chatwith"])) {
-	$chatuserid = $_POST["chatwith"];
-	$conditions["Responses.user_id"] = $chatuserid;
+		$chatuserid = $_POST["chatwith"];
+		//$conditions["Responses.user_id"] = $chatuserid;
+		$typeSearchArray=explode(',',$chatuserid);  
+		$conditions["Responses.user_id IN"] =  $typeSearchArray;
 	}
 	if(!empty($_POST["shared_details"])) {
 	$conditions["Responses.is_details_shared"] =  $_POST["shared_details"];
@@ -2173,8 +2189,8 @@ public function userprofileapi()
 			$membership = $TableMembership->get($user["role_id"]);
 			$membership_name = $membership["membership_name"];
 			$result['membership_name'] = $membership_name;
-
-			$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $id]]);
+//'Responses.status' =>0,'Responses.is_deleted' =>0,
+			$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.user_id' => $id]]);
 			$myReponseCount = $queryr->count();
 			$result['userrespondToRequestCount'] = $myReponseCount;
 			//$this->set('userrespondToRequestCount', $myReponseCount);
@@ -2360,7 +2376,9 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	$conditions["Requests.total_budget <="] = $MaxQuotePrice;
 	}
 	if(isset($_POST["req_typesearch"]) && !empty($_POST["req_typesearch"])) {
-	$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
+		//$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
+		$typeSearchArray=explode(',',$_POST["req_typesearch"]);  
+		$conditions["Requests.category_id IN"] =  $typeSearchArray; 
 	}
 	if(isset($_POST["refidsearch"]) && !empty($_POST["refidsearch"])) {
 	$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
@@ -2420,28 +2438,38 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	if(!empty($_POST["sort"]) && $_POST["sort"]=="totalbudgethl") {
 	$sort['Requests.total_budget'] = "DESC";
 	}
-	/*if(!empty($_POST["sort"]) && $_POST["sort"]=="resposesnolh") {
-	$sort['COUNT(Responses.request_id)'] = "ASC";
+	if(!empty($_POST["sort"]) && $_POST["sort"]=="resposesnolh") {
+		$sort['COUNT(Responses.request_id)'] = "ASC";
 	}
 	if(!empty($_POST["sort"]) && $_POST["sort"]=="resposesnohl") {
-	$sort['COUNT(Responses.request_id)'] = "DESC";
-	}*/
+		$sort['COUNT(Responses.request_id)'] = "DESC";
+	}
+	$limit=4;
+	$page = $_POST["page"]; 
+	if(empty($page)){$page=1;}
+		
 	if (isset($_POST['role_id']) AND $_POST['role_id'] == 1) {
 
 	$requests = $this->Requests->find()
 		->contain(["Users","Hotels"])
-		->where($conditions)->group('Requests.id')->order($sort)->all();
+		->where($conditions)->group('Requests.id')->order($sort)
+		->limit($limit)
+		->page($page);
 	}
 	if (isset($_POST['role_id']) AND $_POST['role_id']== 2) {
 	$requests = $this->Requests->find()
 		->contain(["Users","Hotels"])
-		->where($conditions)->order($sort)->all();
+		->where($conditions)->order($sort)
+		->limit($limit)
+		->page($page);
 	}
 	if (isset($_POST['role_id']) AND $_POST['role_id']== 3) {
 	$conditions["Requests.category_id "] = 3;
 	$requests = $this->Requests->find()
 		->contain(["Users","Hotels"])
-		->where($conditions)->order($sort)->all();
+		->where($conditions)->order($sort)
+		->limit($limit)
+		->page($page);
 	}
 	$conn = ConnectionManager::get('default');
 	$citystate = array();
@@ -2613,20 +2641,24 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	if(isset($keyword[1])) {
 	$keyword2 = $keyword[1];
 	}
-	$conditions["AND"] = array("Users.first_name LIKE "=>"%". $keyword[0]."%", "Users.last_name LIKE" => "%".$keyword2."%",);
+		$conditions["AND"] = array("Users.first_name LIKE "=>"%". $keyword[0]."%", "Users.last_name LIKE" => "%".$keyword2."%",);
 	}
 	if(!empty($_POST["destination_city"])){
-	$conditions["Requests.city_id"] =  $_POST["destination_city"];
+		$conditions["Requests.city_id"] =  $_POST["destination_city"];
 	}
 	if(!empty($_POST["pickup_city"])) {
-	$conditions["Requests.pickup_city"] =  $_POST["pickup_city"];
+		$conditions["Requests.pickup_city"] =  $_POST["pickup_city"];
 	}		
 	if($_POST['role_id']==3){
-	$conditions["Requests.category_id"] =  3;
-	}else{	
-	if(!empty($_POST["req_typesearch"])) {
-	$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
+		$conditions["Requests.category_id"] =  3;
 	}
+	else
+	{	
+		if(!empty($_POST["req_typesearch"])) {
+			//$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
+			$typeSearchArray=explode(',',$_POST["req_typesearch"]);  
+			$conditions["Requests.category_id IN"] =  $typeSearchArray; 
+		}
 	}
 if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	if(!empty($_POST["budgetsearch"])) {
@@ -2694,50 +2726,51 @@ $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField
 		array_push($BlockedUsers,$userid);
 		$BlockedUsers = array_unique($BlockedUsers);
 
-$userid=$_POST['user_id'];
+		$userid=$_POST['user_id'];
+		$limit=4;
+		$page = $_POST["page"]; 
+		if(empty($page)){$page=1;}
 	if ($_POST['role_id'] == 1) { // Travel Agent
-	if(!empty($user["preference"])) {
-	$conditionalStates = array_unique(array_merge(explode(",", $user["preference"]), array($user["state_id"])));
-	} else {
-	$conditionalStates = $user["state_id"];
-	}
-  // print_r($conditionalStates ); exit;
-	if(!empty($user["preference"])) {
-				$conditionalStates = array_unique(array_merge(explode(",", $user["preference"]), array($user["state_id"])));
-			} else {
-				$conditionalStates =  $user["state_id"];
-			}
-			$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
-			$requests = $this->Requests->find()
-			->contain(["Users", "Responses"])
-			->notMatching('Responses', function ($q)use($userid) {
-        return $q->where(['Responses.user_id' => $userid]);
-    })
-			->where(["OR"=>['Requests.state_id IN' => $conditionalStates, 'Requests.pickup_state IN' => $conditionalStates],$conditions, 'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0])
-			//->group('Requests.id')
-			->order(["Requests.id" => "DESC"]);
+	 
+		if(!empty($user["preference"])) {
+			$conditionalStates = array_unique(explode(",", $user["preference"]));
+		} else {
+			$conditionalStates =  $user["state_id"];
+		}
+		$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
+		$requests = $this->Requests->find()
+		->contain(["Users", "Responses"])
+		->notMatching('Responses', function ($q)use($userid) {
+			return $q->where(['Responses.user_id' => $userid]);
+		})
+		->where(["OR"=>['Requests.state_id IN' => $conditionalStates, 'Requests.pickup_state IN' => $conditionalStates],$conditions, 'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0])
+		->order($sort)
+		->limit($limit)
+		->page($page);
 
-	} else if ($_POST['role_id'] == 2) { /// Event Planner
-	$requests = $this->Requests->find()
-	->contain(["Users","Hotels"])
-	->where(['Requests.pickup_state' => $user["state_id"], 'Requests.category_id' => 2, "Requests.status !="=>2, "Requests.is_deleted"=>0])->order($sort)->all();
-	}else if ($_POST['role_id'] == 3) { /// Hotel
-	$requests = $this->Requests->find()
-	->contain(["Users", "Responses","Hotels"])
-	->notMatching('Responses', function ($q)use($userid) {
-        return $q->where(['Responses.user_id' => $userid]);
-    })
-	->where(['Requests.city_id' => $user['city_id'],'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
-	//->where(['Requests.category_id' => 3, "Requests.status !="=>2, "Requests.is_deleted"=>0])
-	->group('Requests.id')
-	->order($sort)->all();
+	} 
+	else if ($_POST['role_id'] == 2) { /// Event Planner
+		$requests = $this->Requests->find()
+		->contain(["Users","Hotels"])
+		->where(['Requests.pickup_state' => $user["state_id"], 'Requests.category_id' => 2, "Requests.status !="=>2, "Requests.is_deleted"=>0])->order($sort)
+		->limit($limit)
+		->page($page);
 	}
-//print_r($requests ); exit;
-/*if (in_array($_POST['user_id'], $BlockedUsers)){
-echo $_POST['user_id'];
-print_r($BlockedUsers);
-$requests=array();
-} exit;*/
+	else if ($_POST['role_id'] == 3) { /// Hotel
+	
+		$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
+		
+		$requests = $this->Requests->find()
+		->contain(["Users", "Responses","Hotels"])
+		->notMatching('Responses', function ($q)use($userid) {
+			return $q->where(['Responses.user_id' => $userid]);
+		})
+		->where(['Requests.city_id' => $user['city_id'],'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
+		->order($sort)
+		->limit($limit)
+		->page($page);
+ 	
+	} 
 	$data = array();
 	$blockeddata = array();
 	foreach($requests as $req){
@@ -2892,7 +2925,9 @@ $requests=array();
 				$conditions["Requests.total_budget <="] = $MaxQuotePrice;
 				}
 				if(isset($_POST["req_typesearch"]) && !empty($_POST["req_typesearch"])) {
-				$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
+					//$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
+					$typeSearchArray=explode(',',$_POST["req_typesearch"]);  
+					$conditions["Requests.category_id IN"] =  $typeSearchArray;
 				}
 				if(isset($_POST["refidsearch"]) && !empty($_POST["refidsearch"])) {
 				$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
@@ -3170,7 +3205,7 @@ $current_date = date("Y-m-d");
 	echo $result;
 	exit;
 	}
- public function dashboardcounterapi()
+ public function dashboardcounterapi() 
  {
  if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
         $this->loadModel('Requests');
@@ -3197,10 +3232,11 @@ $delcount++;
 if($myRequestCount > $delcount) {
 $myRequestCount = $myRequestCount-$delcount;
 }   
-$conditionsss["Requests.status"] = 0;
+
 $reqcount = $this->getSettings('requestcount');
+	$conditionsss["Requests.status"] = 0;
 	$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $_POST['user_id'],$conditionsss]]);
- 			
+
 	$myReponseCount = $queryr->count();
 	if($myReponseCount>0){
 		foreach($queryr as $req){
@@ -3216,8 +3252,8 @@ $reqcount = $this->getSettings('requestcount');
 $this->set('myReponseCount', $myReponseCount);
 
 //$myReponseCount = $queryr->count();
-	$reqcount = (($reqcount['value']-$myRequestCount1)-($delcount+ $myfinalCount));
-	$countarr = array();
+$reqcount = (($reqcount['value']-$myRequestCount1)-($delcount+ $myfinalCount));
+$countarr = array();
         $coountarr['myRequestCount'] = $myRequestCount1 ;
         $coountarr['myReponseCount'] = $myReponseCount;
         $coountarr['placereq'] = $reqcount;
@@ -3255,7 +3291,7 @@ exit;
 
 		if ($user['role_id'] == 1) { // Travel Agent
 			if(!empty($user["preference"])) {
-				$conditionalStates = array_unique(array_merge(explode(",", $user["preference"]), array($user["state_id"])));
+				$conditionalStates = array_unique(explode(",", $user["preference"]));
 			} else {
 				$conditionalStates =  $user["state_id"];
 			}
@@ -3271,16 +3307,25 @@ exit;
 			->order(["Requests.id" => "DESC"])->count();
 		} 
 		else if($user['role_id']== 3) { /// Hotel d
-			$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
+			/*$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
 			$requests = $this->Requests->find()
-			->contain(["Users", "Responses"])
+			->contain(["Users", "Responses","Hotels"])
 			->notMatching('Responses', function ($q)use($userid) {
-        return $q->where(['Responses.user_id' => $userid]);
-    })
+				return $q->where(['Responses.user_id' => $userid]);
+			})
 			->where(['Requests.city_id' => $user['city_id'], 'Requests.category_id' => 3, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
 			//->group('Requests.id')
-			->order(["Requests.id" => "DESC"])->count();
-		}
+			->order(["Requests.id" => "DESC"])->count();*/
+			$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
+		
+			$requests = $this->Requests->find()
+			->contain(["Users", "Responses","Hotels"])
+			->notMatching('Responses', function ($q)use($userid) {
+				return $q->where(['Responses.user_id' => $userid]);
+			})
+			->where(['Requests.city_id' => $user['city_id'],'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])->count();
+			 
+		} 
 		 
 	 return  $requests;
 		  

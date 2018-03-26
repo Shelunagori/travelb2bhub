@@ -261,7 +261,13 @@ class PostTravlePackagesController extends AppController
 			
 			if(!empty($starting_price))
 			{
-				$starting_price = ['starting_price'=>$starting_price];
+				//$starting_price = ['starting_price'=>$starting_price];
+  				$result = explode("-", $starting_price); 
+				$MinQuotePrice = $result[0];
+				$MaxQuotePrice = $result[1];
+				$starting_price["PostTravlePackageCities.starting_price >="] = $MinQuotePrice;
+				$starting_price["PostTravlePackageCities.starting_price <="] = $MaxQuotePrice;
+			 
 			}else
 			{
 				$starting_price = null;
