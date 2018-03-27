@@ -4,7 +4,7 @@
 		<div class="box box-primary">
 			<div class="box-header with-border">
 				<fieldset>
-							<legend style="color:#369FA1;text-align:center;"><b><?= __('BroadCast Message') ?></b></legend>
+							<legend style="color:#369FA1;text-align:left;"><b><?= __('BroadCast Message') ?></b></legend>
 					<div class="box-body"> 
 						<div class="form-group">
 						<?= $this->Form->create($admin,['id'=>'CityForm']) ?>

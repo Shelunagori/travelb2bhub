@@ -178,4 +178,6 @@ $this->loadComponent('Auth', [
 		$email = $this->Model->query("SELECT value FROM setting where field='email'" );
 		echo $email ;
 	}
+	
+	
 }

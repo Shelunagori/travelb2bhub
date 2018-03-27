@@ -194,11 +194,89 @@ class AdminsController extends AppController
 
         return $this->redirect(['action' => 'add']);
     }
-	 public function broadcast()
+	public function broadcast()
     {
 		$this->viewBuilder()->layout('admin_layout');
-		$admin = $this->Admins->newEntity();
+		$admin = $this->Admins->UserChats->newEntity();
+		if ($this->request->is('post')) {
+			
+			$broadcast_msg=$this->request->data['broadcast_msg'];
+			$Users=$this->Users->find()->where(['device_id !='=>'0'])->toArray();
+ 			foreach($Users as $user){
+				$admin = $this->Admins->UserChats->newEntity();
+ 				$admin->request_id = '0';
+				$admin->user_id = 1;
+				$admin->send_to_user_id = $user["id"];
+				$admin['type'] = 'Broadcast';
+				$admin->message = $broadcast_msg;
+				$admin->created = date("Y-m-d h:i:s");
+				$admin->notification = 1;
+
+				if ($this->Admins->UserChats->save($admin)) {
+					$id = $admin->id;
+					$message_data='';
+					$this->Admins->UserChats->updateAll(['type' => 'Broadcast'], ['id' => $id]);
+					$this->sendpushnotification($user["id"],$admin->message,$message_data);
+				}
+			}
+			return $this->redirect(['action' => 'broadcast']);
+		}
+		
 		$this->set(compact('admin'));
         $this->set('_serialize', ['admin']);
 	}
+	public function sendpushnotification($userid,$message,$message_data)
+	{
+		$Users=$this->Users->find()->where(['id'=>$userid])->toArray();
+		 
+		$deviceid=$Users[0]['device_id'];
+ 		if(!empty($deviceid)){
+
+		/* $sql1 = "Select count(*) as countchat FROM user_chats as c 
+		INNER JOIN users as u on u.id=c.user_id
+		where c.is_read='0' AND c.send_to_user_id='".$userid."'
+		order by c.created DESC ";
+		$stmt1 = $conn->execute($sql1);
+		$countchat = $stmt1 ->fetch('assoc');
+		 */
+		$API_ACCESS_KEY='AIzaSyA5mzBqngPlq220FYB8Cr2O4y79RH4i9s4';
+
+		$registrationIds =  $deviceid;
+		$msg = array
+		(
+		'body' 	=> $message,
+		'title'	=> 'Travelb2bhub Notification',
+		'icon'	=> 'myicon',/*Default Icon*/
+		'sound' => 'mySound',/*Default sound*/
+		'unread_count' => 0,
+		'message' => $message_data
+		);
+		$data = array
+		(
+
+		"unread_count" => 0
+		);
+		$fields = array('to'=> $registrationIds,
+		'notification'=> $msg,
+		'data' => $msg
+		);
+		$headers = array(
+		'Authorization: key='.$API_ACCESS_KEY,
+		'Content-Type: application/json'
+		);
+
+		$ch = curl_init();
+		curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
+		curl_setopt( $ch,CURLOPT_POST, true );
+		curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
+		curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
+		curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
+		curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
+		$result = curl_exec($ch );
+		curl_close( $ch );
+		//print_r($result); die();
+		return $result;
+		}
+	}	
+	
 }

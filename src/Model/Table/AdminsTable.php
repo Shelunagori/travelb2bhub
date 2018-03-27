@@ -41,6 +41,8 @@ class AdminsTable extends Table
         ]);
 		$this->hasMany('UserRights');
 		$this->hasMany('Modules');
+		$this->belongsTo('Users');
+		$this->belongsTo('UserChats');
     }
 
     /**
