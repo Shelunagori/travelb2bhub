@@ -512,7 +512,6 @@ $page_name=$this->request->params['action'];
    
   <div class="control-sidebar-bg"></div>
 </div>
-</div>
 
 <footer class="main-footer hide_print">
     2016 &copy; <a href="http://www.phppoets.com" target="_blank"> PHP POETS IT SOLUTION PRIVATE LTD.</a> All Rights Reserved.
