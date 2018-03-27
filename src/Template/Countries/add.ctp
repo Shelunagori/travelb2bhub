@@ -56,7 +56,7 @@
 			</div> 
 		<div class="box-body"> 
 		<form method="get">
-			<fieldset><legend><button type="button" class="btn btn-xs btn-info collapsed" data-toggle="collapse" data-target="#demo" aria-expanded="false">Click here to search</button></legend>
+			<fieldset style="text-align:center;"><legend><button type="button" class="btn btn-xs btn-info collapsed" data-toggle="collapse" data-target="#demo" aria-expanded="false">Click here to search</button></legend>
 				<div class="col-md-12 collapse"  id="demo" aria-expanded="false">
 					<div class="row"> 
 						<div class="col-md-12">
