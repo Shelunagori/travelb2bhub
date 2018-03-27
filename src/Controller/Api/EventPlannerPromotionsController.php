@@ -597,4 +597,66 @@ class EventPlannerPromotionsController extends AppController
 	}		
 
 	
+	public function EventPlannerViews($event_planner_promotion_id=null,$page=null)
+	{
+		$event_planner_promotion_id = $this->request->query('event_planner_promotion_id');
+		$page = $this->request->query('page');
+		$limit=10;
+		if(empty($page)){$page=1;}
+		$COunt = $this->EventPlannerPromotions->EventPlannerPromotionViews->find()->where(['event_planner_promotion_id'=>$event_planner_promotion_id])->count();
+		if($COunt>0)
+		{
+			$getTravelPackages = $this->EventPlannerPromotions->EventPlannerPromotionViews->find()
+				->contain(['Users'=>function($q){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id']);
+				}])
+				->where(['event_planner_promotion_id'=>$event_planner_promotion_id])
+				->limit($limit)
+				->page($page);
+			$response_object = $getTravelPackages;
+			$response_code = 200;
+			$message = '';
+		}
+		else{
+			$response_object = array();
+			$response_code = 204;
+			$message = 'No data found';
+		}
+			
+		$this->set(compact('message','response_code','response_object'));
+        $this->set('_serialize', ['message','response_code','response_object']);		
+		
+	}
+	
+	public function EventPlannerLikes($event_planner_promotion_id=null,$page=null)
+	{
+		$event_planner_promotion_id = $this->request->query('event_planner_promotion_id');
+		$page = $this->request->query('page');
+		$limit=10;
+		if(empty($page)){$page=1;}
+		$COunt = $this->EventPlannerPromotions->EventPlannerPromotionLikes->find()->where(['event_planner_promotion_id'=>$event_planner_promotion_id])->count();
+		if($COunt>0)
+		{
+			$getTravelPackages = $this->EventPlannerPromotions->EventPlannerPromotionLikes->find()
+				->contain(['Users'=>function($q){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id']);
+				}])
+				->where(['event_planner_promotion_id'=>$event_planner_promotion_id])
+				->limit($limit)
+				->page($page);
+			$response_object = $getTravelPackages;
+			$response_code = 200;
+			$message = '';
+		}
+		else{
+			$response_object = array();
+			$response_code = 204;
+			$message = 'No data found';
+		}
+			
+		$this->set(compact('message','response_code','response_object'));
+        $this->set('_serialize', ['message','response_code','response_object']);		
+		
+	}
+	
 }

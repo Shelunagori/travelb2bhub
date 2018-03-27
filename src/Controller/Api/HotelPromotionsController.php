@@ -530,12 +530,71 @@ $getHotelPromotion=$getEventPlanners ;
 			$response_code = 204;
 			$message='Success';
 		}
-		 
-		 
 	 
 		$this->set(compact('response_code','message'));
         $this->set('_serialize', ['response_code','message']);		
 		 
+	}
+	public function HotelPromotionsViews($hotel_promotion_id=null,$page=null)
+	{
+		$hotel_promotion_id = $this->request->query('hotel_promotion_id');
+		$page = $this->request->query('page');
+		$limit=10;
+		if(empty($page)){$page=1;}
+		$COunt = $this->HotelPromotions->HotelPromotionViews->find()->where(['hotel_promotion_id'=>$hotel_promotion_id])->count();
+		if($COunt>0)
+		{
+			$getTravelPackages = $this->HotelPromotions->HotelPromotionViews->find()
+				->contain(['Users'=>function($q){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id']);
+				}])
+				->where(['hotel_promotion_id'=>$hotel_promotion_id])
+				->limit($limit)
+				->page($page);
+			$response_object = $getTravelPackages;
+			$response_code = 200;
+			$message = '';
+		}
+		else{
+			$response_object = array();
+			$response_code = 204;
+			$message = 'No data found';
+		}
+			
+		$this->set(compact('message','response_code','response_object'));
+        $this->set('_serialize', ['message','response_code','response_object']);		
+		
+	}
+	
+	public function HotelPromotionsLikes($hotel_promotion_id=null,$page=null)
+	{
+		$hotel_promotion_id = $this->request->query('hotel_promotion_id');
+		$page = $this->request->query('page');
+		$limit=10;
+		if(empty($page)){$page=1;}
+		$COunt = $this->HotelPromotions->HotelPromotionLikes->find()->where(['hotel_promotion_id'=>$hotel_promotion_id])->count();
+		if($COunt>0)
+		{
+			$getTravelPackages = $this->HotelPromotions->HotelPromotionLikes->find()
+				->contain(['Users'=>function($q){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id']);
+				}])
+				->where(['hotel_promotion_id'=>$hotel_promotion_id])
+				->limit($limit)
+				->page($page);
+			$response_object = $getTravelPackages;
+			$response_code = 200;
+			$message = '';
+		}
+		else{
+			$response_object = array();
+			$response_code = 204;
+			$message = 'No data found';
+		}
+			
+		$this->set(compact('message','response_code','response_object'));
+        $this->set('_serialize', ['message','response_code','response_object']);		
+		
 	}
 	
 }

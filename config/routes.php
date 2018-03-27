@@ -190,6 +190,14 @@ Router::scope('/', function (RouteBuilder $routes) {
 						   'renewTaxiFleet' => [
 							   'action' => 'renewTaxiFleet',
 							   'method' => 'GET'
+						   ],
+						   'TexiPromotionLikes' => [
+							   'action' => 'TexiPromotionLikes',
+							   'method' => 'GET'
+						   ],
+						   'TexiPromotionViews' => [
+							   'action' => 'TexiPromotionViews',
+							   'method' => 'GET'
 						   ]
 					   ]
 					]
@@ -223,6 +231,14 @@ Router::scope('/', function (RouteBuilder $routes) {
 						   ],
 						   'renewEventPlanner' => [
 							   'action' => 'renewEventPlanner',
+							   'method' => 'GET'
+						   ],
+						   'EventPlannerLikes' => [
+							   'action' => 'EventPlannerLikes',
+							   'method' => 'GET'
+						   ],
+						   'EventPlannerViews' => [
+							   'action' => 'EventPlannerViews',
 							   'method' => 'GET'
 						   ]
 					   ]
@@ -258,6 +274,14 @@ Router::scope('/', function (RouteBuilder $routes) {
 						   ],
 						   'renewPostTravelPackage' => [
 							   'action' => 'renewPostTravelPackage',
+							   'method' => 'GET'
+						   ],
+						   'PostTravelPackageViews' => [
+							   'action' => 'PostTravelPackageViews',
+							   'method' => 'GET'
+						   ],
+						   'PostTravelPackageLikes' => [
+							   'action' => 'PostTravelPackageLikes',
 							   'method' => 'GET'
 						   ]					   
 					   ]
@@ -402,6 +426,14 @@ Router::scope('/', function (RouteBuilder $routes) {
 						   ],
 						   'checkCityStatus' => [
 							   'action' => 'checkCityStatus',
+							   'method' => 'GET'
+						   ],
+						   'HotelPromotionsLikes' => [
+							   'action' => 'HotelPromotionsLikes',
+							   'method' => 'GET'
+						   ],
+						   'HotelPromotionsViews' => [
+							   'action' => 'HotelPromotionsViews',
 							   'method' => 'GET'
 						   ]
 					   ]

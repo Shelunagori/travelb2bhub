@@ -700,4 +700,66 @@ class PostTravlePackagesController extends AppController
 
 	}
 	
+	public function PostTravelPackageViews($post_travel_id=null,$page=null)
+	{
+		$post_travel_id = $this->request->query('post_travel_id');
+		$page = $this->request->query('page');
+		$limit=10;
+		if(empty($page)){$page=1;}
+		$COunt = $this->PostTravlePackages->PostTravlePackageViews->find()->where(['post_travle_package_id'=>$post_travel_id])->count();
+		if($COunt>0)
+		{
+			$getTravelPackages = $this->PostTravlePackages->PostTravlePackageViews->find()
+				->contain(['Users'=>function($q){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id']);
+				}])
+				->where(['post_travle_package_id'=>$post_travel_id])
+				->limit($limit)
+				->page($page);
+			$response_object = $getTravelPackages;
+			$response_code = 200;
+			$message = '';
+		}
+		else{
+			$response_object = array();
+			$response_code = 204;
+			$message = 'No data found';
+		}
+			
+		$this->set(compact('message','response_code','response_object'));
+        $this->set('_serialize', ['message','response_code','response_object']);		
+		
+	}
+	
+	public function PostTravelPackageLikes($post_travel_id=null,$page=null)
+	{
+		$post_travel_id = $this->request->query('post_travel_id');
+		$page = $this->request->query('page');
+		$limit=10;
+		if(empty($page)){$page=1;}
+		$COunt = $this->PostTravlePackages->PostTravlePackageLikes->find()->where(['post_travle_package_id'=>$post_travel_id])->count();
+		if($COunt>0)
+		{
+			$getTravelPackages = $this->PostTravlePackages->PostTravlePackageLikes->find()
+				->contain(['Users'=>function($q){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id']);
+				}])
+				->where(['post_travle_package_id'=>$post_travel_id])
+				->limit($limit)
+				->page($page);
+			$response_object = $getTravelPackages;
+			$response_code = 200;
+			$message = '';
+		}
+		else{
+			$response_object = array();
+			$response_code = 204;
+			$message = 'No data found';
+		}
+			
+		$this->set(compact('message','response_code','response_object'));
+        $this->set('_serialize', ['message','response_code','response_object']);		
+		
+	}
+	
 }
