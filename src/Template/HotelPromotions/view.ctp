@@ -102,13 +102,13 @@ if ($err) {
 												</div>
 											<div class="col-md-4">
 											<?php
-														if($hotelPromotion->user_rating==0)
+														if($hotelPromotion->hotel_rating==0)
 														{
 															echo "No Rating";
 														}
 														else{
-															echo "(";
-															for($i=0;$i<$hotelPromotion->user_rating;$i++)
+															
+															for($i=0;$i<$hotelPromotion->hotel_rating;$i++)
 															{
 																echo "<i class='fa fa-star' style='font-size:10px;'></i> ";
 																if($i==0)
@@ -116,7 +116,7 @@ if ($err) {
 																	echo "";
 																}
 															}
-															echo ")";
+															
 															}
 													?>
 											</div>
