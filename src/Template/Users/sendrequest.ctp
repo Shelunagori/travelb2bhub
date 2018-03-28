@@ -497,7 +497,7 @@ $(document).ready(function($){
 										</p>
 									</div>
 									<div class="col-md-12 input-group">
-									<input autocomplete="off" type="text" name="check_in" class="form-control date-picker" id="datepicker7" data-date-format="dd/mm/yyyy" placeholder="dd/mm/yyyy"/>
+									<input autocomplete="off" type="text" name="check_in" class="form-control date-picker" id="datepicker7" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
 									<p class="input-group-addon btn">
 									<span class="fa fa-calendar"></span>
 									</p>                    
@@ -511,7 +511,7 @@ $(document).ready(function($){
 												</p>
 									</div>
 									<div class="col-md-12 input-group">
-										<input autocomplete="off" type="text" name="check_out" class="form-control date-picker" id="datepicker8" data-date-format="dd/mm/yyyy" placeholder="dd/mm/yyyy" />
+										<input autocomplete="off" type="text" name="check_out" class="form-control date-picker" id="datepicker8" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
 										<p class="input-group-addon btn" >
 										<span class="fa fa-calendar"></span>
 										</p>                    
@@ -528,14 +528,12 @@ $(document).ready(function($){
 												<div class="col-md-12">
 													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
 														<div class="input-field">
-															<p for="from"></p>
-															<textarea name="comment" class="form-control mt" cols="" rows="4"></textarea>
+															<textarea name="comment" class="form-control mt" cols="" rows="4" placeholder="Enter Comment"></textarea>
 														</div>
 													</div> 
 												</div>
 											</div>
 									</fieldset>
-										 			
 											<div class="row">
 												<div class="col-md-12">
 													<div class="input-field">
@@ -695,7 +693,7 @@ $(document).ready(function($){
 						<div class="col-md-12 main_row">
 							<div class="col-md-4">
 								<p>Locality</p>
-									<input type="text" autocomplete="off" class="form-control" name="locality" id="locality" placeholder="Enter Locality or Village or Town"/>
+									<input type="text" autocomplete="off" class="form-control" name="locality" id="locality" placeholder="Enter Locality, Village or Town"/>
 							</div>
 						 
 							<div class="col-md-4">
@@ -719,7 +717,7 @@ $(document).ready(function($){
 									</div>
 									<div>
 										<input type='hidden' id='state_id' name="state_id"/>
-										<input type='text' autocomplete="off" name='state_name'  placeholder="Destination Source" class="form-control input-large" />
+										<input type='text' autocomplete="off" name='state_name'  placeholder="Auto Populated" class="form-control input-large" />
 									</div>
 								</div>
 							</div>
@@ -730,15 +728,15 @@ $(document).ready(function($){
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt" style="display:none;">
 									<div class="input-field">
 										<p for="from">Destination Country</p>
-										<input type="text" class="form-control" id ="country_name" name="country_name" placeholder="Country" readonly/>
+										<input type="text" class="form-control" id ="country_name" name="country_name" placeholder="Auto Populated" readonly/>
 										<input type='hidden' id='country_id' name="country_id"/>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="row">
-						<div class=" col-md-12">
-								<div class="col-md-6">
+						<div class=" col-md-12 main_row">
+								<div class="col-md-4">
 									<div class="input-field">
 										<p for="from">
 											Check In
@@ -746,13 +744,13 @@ $(document).ready(function($){
 										</p>
 									</div>
 									<div class="col-md-12 input-group">
-									<input autocomplete="off" type="text" name="check_in" class="form-control date-picker" id="datepicker7" data-date-format="dd/mm/yyyy" placeholder="dd/mm/yyyy"/>
+									<input autocomplete="off" type="text" name="check_in" class="form-control date-picker" id="datepicker7" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
 									<p class="input-group-addon btn">
 									<span class="fa fa-calendar"></span>
 									</p>                    
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-4">
 									<div class="input-field">
 												<p for="from">
 													Check Out
@@ -760,23 +758,24 @@ $(document).ready(function($){
 												</p>
 									</div>
 									<div class="col-md-12 input-group">
-										<input autocomplete="off" type="text" name="check_out" class="form-control date-picker" id="datepicker8" data-date-format="dd/mm/yyyy" placeholder="dd-mm-yyyy" />
+										<input autocomplete="off" type="text" name="check_out" class="form-control date-picker" id="datepicker8" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
 										<p class="input-group-addon btn" >
 										<span class="fa fa-calendar"></span>
 										</p>                    
 									</div>
 								</div>
-							</div>
-						</div>
-						<span class="help-block"></span><hr></hr>
+								<div class="col-md-4">
+									<div class="row">
+										<div class="col-md-12 input-group" style="margin-top:30px;text-align:center;">
+											<button class="btn btn-primary btn-sm add_field_button2 but " style="background-color:#1295A2;width:50px;"><i class="fa fa-plus"></i></button>
+										</div>
+									</div>
+								</div>
+						<span class="help-block"></span>
 						  <div class="input_fields_wrap1">
                      				  
 						</div> <span class="help-block"></span><hr></hr>
-						<div class="row">
-							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt padding text-center">
-									<button class="btn btn-primary btn-sm add_field_button2 but " style="background-color:#1295A2">Add More Destination</button>
-                             </div>
-                        </div>
+						
 			</fieldset>
 				 
 								 
@@ -1397,6 +1396,7 @@ function selectCountry(value,city_code,state,noofrows) {
 		$("#h_city_id").val(city_code);
 		var m_data = new FormData();
 		m_data.append('state_id',state_id);	
+		//$("#h_state_name").attr( 'readonly', 'readonly' );
 		m_data.append('noofrows',noofrows);		
 		m_data.append('taxboxname','');		
 		$.ajax({
