@@ -1,3 +1,4 @@
+
 <style>
 .hr{
 	margin-top:25px !important;
@@ -59,6 +60,10 @@ fieldset{
 .plus_minus_btn{
 	height:30px;
 	width:40px;
+}
+.col-md-6
+{
+		margin-top:10px !important;
 }
 </style> 
 <!--------- <script>
@@ -522,7 +527,7 @@ $(document).ready(function($){
 					</fieldset>
 							<fieldset>
 								<legend style="color:#369FA1;"><b> &nbsp;  Comment Box &nbsp; </b></legend>
-									<div class="row">
+									<div class="row" style="margin-bottom: 10px;">
 										<div class="col-md-12">
 											<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
 												<div class="input-field">
@@ -767,7 +772,7 @@ $(document).ready(function($){
 						<span class="help-block"></span>
 						<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">
-								<button class="btn btn-primary btn-sm add_field_button2 but " style="background-color:#1295A2;width:50px;"><i class="fa fa-plus"></i></button>
+								<button type="button" class="btn btn-primary btn-sm add_field_button2 but " style="background-color:#1295A2;width:50px;"><i class="fa fa-plus"></i></button>
 							</div>
 						</div>
 						<span class="help-block"></span>
@@ -1234,6 +1239,7 @@ $(document).ready(function($){
 </div>
 </div> 
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+
 <?php echo $this->Html->script(['jquery.validate']);?>		 
 <script>
 
@@ -1837,9 +1843,11 @@ var gg = 1;
         var max_fields = 10;
         var add_button = $(".add_field_button2");
         var x = 1;
-        $(add_button).click(function (e) {
+		$(document).on('.add_field_button2','click',function(){
+		 
+       // $('.add_field_button2').click(function () {
 			alert();
-            e.preventDefault();
+          
 			var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'addNewDestinationRow')) ?>";
 			var number = Math.floor((Math.random() * 100000) + 1);
 			$.ajax({
