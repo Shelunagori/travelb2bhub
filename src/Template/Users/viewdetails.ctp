@@ -45,16 +45,16 @@ ul li b {
         <div class="modal-body">
 			<div class="col-md-12">
 			<br>
-				<div class="head_of_popup"><h3>General Requirements</h3></div>
+				<div class="head_of_popup"><h3 style="color:#1295A2;">General Requirements</h3></div>
 				<ul>
 					<li class="col-md-6"><p>Reference ID : &nbsp;<span style="color:#FB6542"><?php
 					echo $details['reference_id']; ?></span></li>
 					<li class="col-md-6"><p>Total Budget : &nbsp;<span style="color:#1295A2">  Rs. <?php
 					echo number_format($details['total_budget'] . ""); ?></span></li>
-					<li class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><p>Adult : &nbsp;<?php
-					echo $details['adult']; ?></li>
-					<li class="col-xs-6 col-lg-6 col-md-6 col-sm-6	"><p>Children below 6 : &nbsp;<?php
-					echo $details['children']; ?></li>
+					<li class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><p>Adult : &nbsp; <?php
+					echo "<b>".$details['adult']."</b>"; ?></li>
+					<li class="col-xs-6 col-lg-6 col-md-6 col-sm-6	"><p>Children below 6 : &nbsp; <b><?php
+					echo $details['children']; ?></b></li>
 				</ul>
 			 </div>
 			
@@ -66,13 +66,13 @@ ul li b {
 				if (count($details['hotels']) >= 1)
 				{ ?>
 			<div class="col-md-12">
-					<div class="head_of_popup"><h3>Stay Requirements</h3></div> 
+					<div class="head_of_popup"><h3 style="color:#1295A2;">Stay Requirements</h3></div> 
 					<?php
 					$ds_count = 1;
 					foreach($details['hotels'] as $row)
 					{ ?>
 					<fieldset>
-					<legend style="text-align:left !important; color:#1395A2;"><h5> &nbsp; Destination <?php
+					<legend style="text-align:left !important; color:#EAE184;"><h5> &nbsp; Destination <?php
 						echo $ds_count; ?> &nbsp;  </h5></legend>
  						<ul>
 						<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p>Single :&nbsp;<?php
@@ -191,7 +191,7 @@ ul li b {
 				} ?> <br />
 				</div>
 		<div class="col-md-12">
-				    <div class="head_of_popup"><h3>Transport Requirements</h3></div>
+				    <div class="head_of_popup"><h3 style="color:#1295A2;">Transport Requirements</h3></div>
 			<ul>
 				<li class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
 				<p>Transport :&nbsp;
@@ -275,7 +275,7 @@ ul li b {
 		elseif ($details['category_id'] == '3')
 		{ ?>
 			<div class="col-md-12">
-			<div class="head_of_popup"><h3>Stay Requirements</h3></div>
+			<div class="head_of_popup"><h3 style="color:#1295A2;">Stay Requirements</h3></div>
 			
 			<?php
 			$ds_count = 1;
@@ -424,7 +424,7 @@ ul li b {
 	if ($details['category_id'] == 2)
 	{ ?>
 		<div class="col-md-12">
-		<div class="head_of_popup"><h3>Transport Requirements</h3></div>
+		<div class="head_of_popup"><h3 style="color:#1295A2;">Transport Requirements</h3></div>
 			<ul>
 				<li class="col-md-6">
 				<p>Transport :&nbsp;<?php
@@ -514,7 +514,7 @@ ul li b {
 
 	?>
 	
-		<div class="col-md-12"><div class="head_of_popup"><h3>Comments</h3></div>
+		<div class="col-md-12"><div class="head_of_popup"><h3 style="color:#1295A2;">Comments</h3></div>
 			<ul>
 				<li class="col-xs-12 col-lg-12 col-md-12 col-sm-12 comment text-left">
 					<p><?php echo $details['comment']; ?>
