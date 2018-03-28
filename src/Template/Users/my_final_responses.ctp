@@ -20,97 +20,57 @@ $conn = ConnectionManager::get('default');
 
 <div class="box box-default">
 	<div class="box-header with-border"> 
-		<h3 class="box-title" style="padding:20px">Finalized Responses</h3>
+		<h3 class="box-title" style="padding:5px">Finalized Responses</h3>
 		<div class="box-tools pull-right">
-			<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-			<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+			<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 		</div>
 		 
 	</div>
 	<div class="box-body">
 		<div class="row">
-   
-	 
-	  <div id="myModal123" class="modal fade form-modal" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Sorting</h4>
-      </div>
-      <div class="modal-body">
-         
-		  <table width="90%" class="shotrs">
-			<tr>
-				<td>
-				<a class="btn btn-info btn-sm"href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'my-final-responses')) ?>?sort=totalbudgethl">Total Budget (High To Low) <span class="arrow"></span></a>
-
-				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'my-final-responses')) ?>?sort=totalbudgetlh"> Total Budget (Low To High)<span class="arrow"></span></a>
-				
-				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'my-final-responses')) ?>?sort=quotationhl">Quoted Price (High To Low) <span class="arrow"></span></a>
-				
-				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'my-final-responses')) ?>?sort=quotationlh"> Quoted Price (Low To High)<span class="arrow"></span></a>
-				
-				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'my-final-responses')) ?>?sort=chatshl">Chats (High To Low) <span class="arrow"></span></a>
-				
-				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'my-final-responses')) ?>?sort=chatslh"> Chats (Low To High)<span class="arrow"></span></a>
-				
-				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'my-final-responses')) ?>?sort=agentaz"> Agent Name (A To Z) <span class="arrow"></span></a>
-				
-				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'my-final-responses')) ?>?sort=agentza"> Agent Name (Z To A)<span class="arrow"></span></a>
-			</td>
-		</tr>
-	</table>
-      </div>
-      <div class="modal-footer">
-      </div>
-    </div>
-  </div>
-</div>
-<div id="myModal122" class="modal fade form-modal" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Filter</h4>
-      </div>
-      <div class="modal-body" style="height:180px">
-		   <form method="get" class="filter_box" style="margin-top:5px">
-		   <div class="col-md-12">
-			   <label for="example-text-input" class="col-md-3 col-form-label">Agent Name: </label> 
-			   <div class="col-md-9">           
-				   <input type="text" name="agentnamesearch" value="<?php echo isset($_GET['agentnamesearch'])? $_GET['agentnamesearch']:''; ?>"  class="form-control">
-			   </div>
-		   </div>
-		   <div class="col-md-12">
-			   <label for="example-text-input" class="col-md-3 col-form-label">Total Budget: </label>
-			   <div class="col-md-9">             
-				   <select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
-			   </div>
-		   </div>
-				   
-		   <div class="col-md-12">
-			   <label for="example-text-input" class="col-md-3 col-form-label">Quoted Price: </label> 
-			   <div class="col-md-9">            
-				   <select name="quotesearch" class="form-control"><option value="">Select Quoted Price</option><option value="0-10000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option>
-				   <option value="100000-100000000000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="100000-100000000000")? 'selected':''; ?>>100000-Above</option>
-					</select>
-			   </div>
-		   </div>
-				   
-		<div class="col-md-12 text-center">
-		<hr></hr>
-		  <input type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">
-		   <a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'my-final-responses')) ?>">Reset</a>
-	   </div>
-	   </form>
-		</div>
-		<div class="modal-footer">
-      </div>
-    </div>
-  </div>
-</div>
+			<div id="myModal122" class="modal fade form-modal" role="dialog">
+			  <div class="modal-dialog">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Filter</h4>
+				  </div>
+				  <div class="modal-body" style="height:180px">
+					   <form method="get" class="filter_box" style="margin-top:5px">
+					   <div class="col-md-12">
+						   <label for="example-text-input" class="col-md-3 col-form-label">Agent Name: </label> 
+						   <div class="col-md-9">           
+							   <input type="text" name="agentnamesearch" value="<?php echo isset($_GET['agentnamesearch'])? $_GET['agentnamesearch']:''; ?>"  class="form-control">
+						   </div>
+					   </div>
+					   <div class="col-md-12">
+						   <label for="example-text-input" class="col-md-3 col-form-label">Total Budget: </label>
+						   <div class="col-md-9">             
+							   <select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
+						   </div>
+					   </div>
+							   
+					   <div class="col-md-12">
+						   <label for="example-text-input" class="col-md-3 col-form-label">Quoted Price: </label> 
+						   <div class="col-md-9">            
+							   <select name="quotesearch" class="form-control"><option value="">Select Quoted Price</option><option value="0-10000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option>
+							   <option value="100000-100000000000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="100000-100000000000")? 'selected':''; ?>>100000-Above</option>
+								</select>
+						   </div>
+					   </div>
+							   
+					<div class="col-md-12 text-center">
+					<hr></hr>
+					  <input type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">
+					   <a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'my-final-responses')) ?>">Reset</a>
+				   </div>
+				   </form>
+					</div>
+					<div class="modal-footer">
+				  </div>
+				</div>
+			  </div>
+			</div>
 <!------------ Main -------------->	
 	<?php 
 		if(count($responses) >0) {
