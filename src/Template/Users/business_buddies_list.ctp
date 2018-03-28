@@ -20,16 +20,31 @@
 		<div class="row">
 		<?php
 		if(count($BusinessBuddies) >0) {
-			foreach($BusinessBuddies as $row){ ?>
+			foreach($BusinessBuddies as $row){
+				//pr($BusinessBuddies->toArray());exit;
+			?>
 				<div class="col-md-12">
 				<div class="box box-primary">
 					<div class="box-body">
 						<div>
 							<div class="form-group col-md-12">
-								  <div class="col-md-8">
+								  <div class="col-md-4">
 							<b>Name :</b> <?php echo $row['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $row['user']['last_name']; ?><br>
 							<b>Company Name :</b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?><br>
-							<b>Website :</b> <?php echo ($row['user']['website'])?$row['user']['website']:"-- --"; ?>
+							<b>Role :</b> <?php if ($row['user']['role_id']==1){ echo "Travel Agent"; }
+							
+							else if($row['user']['role_id']==2){
+								echo "Event Planner";
+							}
+							else{
+								echo "Hotelier";
+							}?>
+							
+						</div>
+						<div class="col-md-4">
+						<b>Mobile Number :</b> <?php echo ($row['user']['mobile_number'])?$row['user']['mobile_number']:"-- --"; ?><br>
+						<b>Email :</b> <?php echo ($row['user']['email'])?$row['user']['email']:"-- --"; ?><br>
+						<b>Locality :</b> <?php echo ($row['user']['locality'])?$row['user']['locality']:"-- --"; ?>
 						</div>
 						<div class="col-md-4">
 							<br>
