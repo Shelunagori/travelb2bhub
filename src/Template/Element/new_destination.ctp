@@ -146,7 +146,8 @@
 	</div>
 	</div>
 	<div class="col-md-12" align="right">
-		<a href="java:script(0);" class="remove_field btn btn-danger btn-sm" style="width:70px;"><i class="fa fa-minus"></i></a>
+		<a href="java:script(0);" class="remove_field btn btn-danger btn-sm" style="width:50px;"><i class="fa fa-minus"></i></a>
+		<button class="btn btn-primary btn-sm add_field_button2 but " style="background-color:#1295A2;width:50px;"><i class="fa fa-plus"></i></button>
 		<br/><br/><hr></hr>
 	</div>
 	

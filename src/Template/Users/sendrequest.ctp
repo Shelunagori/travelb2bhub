@@ -736,7 +736,7 @@ $(document).ready(function($){
 						</div>
 						<div class="row">
 						<div class=" col-md-12 main_row">
-								<div class="col-md-4">
+								<div class="col-md-6">
 									<div class="input-field">
 										<p for="from">
 											Check In
@@ -750,7 +750,7 @@ $(document).ready(function($){
 									</p>                    
 									</div>
 								</div>
-								<div class="col-md-4">
+								<div class="col-md-6">
 									<div class="input-field">
 												<p for="from">
 													Check Out
@@ -764,13 +764,14 @@ $(document).ready(function($){
 										</p>                    
 									</div>
 								</div>
-								<div class="col-md-4">
-									<div class="row">
-										<div class="col-md-12 input-group" style="margin-top:30px;" align="right">
-											<button class="btn btn-primary btn-sm add_field_button2 but " style="background-color:#1295A2;width:70px;"><i class="fa fa-plus"></i></button>
-										</div>
-									</div>
-								</div>
+							</div>
+						</div>
+						<span class="help-block"></span>
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">
+								<button class="btn btn-primary btn-sm add_field_button2 but " style="background-color:#1295A2;width:50px;"><i class="fa fa-plus"></i></button>
+							</div>
+						</div>
 						<span class="help-block"></span>
 						  <div class="input_fields_wrap1">
                      				  
@@ -808,7 +809,7 @@ $(document).ready(function($){
 												</p>
 											</div>
 											<div class="input-group">
-												 <input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd/mm/yyyy" id="datepicker3" placeholder="dd/mm/yyyy"/>
+												 <input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker3" placeholder="DD-MM-YYYY"/>
 												<p class="input-group-addon btn" for="testdate">
 												<span class="fa fa-calendar"></span>
 												</p>                    
@@ -821,7 +822,7 @@ $(document).ready(function($){
 														</p>
 											</div>
 											<div class="input-group">
-												 <input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd/mm/yyyy" id="datepicker4" placeholder="dd/mm/yyyy"/>
+												 <input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker4" placeholder="DD-MM-YYYY"/>
 												<p class="input-group-addon btn" for="testdate">
 												<span class="fa fa-calendar"></span>
 												</p>                    
@@ -838,7 +839,7 @@ $(document).ready(function($){
 												<p for="from">Pickup Locality
 													
 												</p>
-												<input autocomplete="off" type="text" class="form-control" name="pickup_locality" id="pickup_locality" placeholder="Enter Locality or Village or Town"/>
+												<input autocomplete="off" type="text" class="form-control" name="pickup_locality" id="pickup_locality" placeholder="Enter Locality, Village or Town"/>
 												</div>
 										</div>
 										 <div class="col-md-4 mt">
@@ -854,7 +855,7 @@ $(document).ready(function($){
 													<div class="input-field">
 													<p for="from">Pickup State</p>
 													<input type='hidden' id='pickup_state_id' name="pickup_state_id"/>
-													<input type="text" class="form-control"  id="pickup_state_name" name="pickup_state_name" placeholder="State">
+													<input type="text" class="form-control"  id="pickup_state_name" name="pickup_state_name" placeholder="Auto Populated" readonly>
 													</div>
 											</div>
 										
@@ -875,8 +876,8 @@ $(document).ready(function($){
 								</div>
 								<span class="help-block"></span><hr></hr>
 								<div class="row">
-										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-												<button class="btn btn-primary btn-sm package-stop-add " style="background-color:#1295A2">Add Stop</button>
+										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">
+												<button class="btn btn-primary btn-sm package-stop-add " style="background-color:#1295A2;width:50px;"><i class="fa fa-plus"></i></button>
 											<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 											<div class="col-xxs-12 text-center">
 													<div class="input_fields_wrap">
