@@ -305,13 +305,19 @@ legend
 							else
 							{?>
 								<p>Destination City : &nbsp;
-									<span class="details"><?php echo ($request['city_id'])?$allCities[$request['city_id']]:"-- --"; ?><?php echo ($request['state_id'])?' ('.$allStates[$request['state_id']].')':""; ?>
+									<span class="details">
+									
+									<?php 
+									$a=$request['city_id']?$allCities[$request['city_id']]:"-- --"; 
+									$b=$request['state_id']?' ('.$allStates[$request['state_id']].')':"";
+									echo mb_strimwidth($a.$b, 0,20, "...");?>
 									<?php
 										if($request['category_id'] == 1){
 											if(count($request['hotels']) >1) {
 												unset($request['hotels'][0]);?><?php
 												foreach($request['hotels'] as $row) { ?>
-													<?php echo ($row['city_id'])?', '.$allCities[$row['city_id']]:""; ?><?php echo ($row['state_id'])?' ('.$allStates[$row['state_id']].')':"";  
+													<?php echo ($row['city_id'])?', '.$allCities[$row['city_id']]:""; ?>
+													<?php echo ($row['state_id'])?' ('.$allStates[$row['state_id']].')':"";  
 												}  
 											}  
 										}?>
