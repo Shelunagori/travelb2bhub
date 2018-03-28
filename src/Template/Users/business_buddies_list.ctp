@@ -28,10 +28,13 @@
 					<div class="box-body">
 						<div>
 							<div class="form-group col-md-12">
-								  <div class="col-md-4">
+								  <div class="col-md-3">
 							<b>Name :</b> <?php echo $row['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $row['user']['last_name']; ?><br>
 							<b>Company Name :</b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?><br>
-							<b>Role :</b> <?php if ($row['user']['role_id']==1){ echo "Travel Agent"; }
+							
+						</div>
+						<div class="col-md-3">
+						<b>Role :</b> <?php if ($row['user']['role_id']==1){ echo "Travel Agent"; }
 							
 							else if($row['user']['role_id']==2){
 								echo "Event Planner";
@@ -39,15 +42,13 @@
 							else{
 								echo "Hotelier";
 							}?>
-							
-						</div>
-						<div class="col-md-4">
 						<b>Mobile Number :</b> <?php echo ($row['user']['mobile_number'])?$row['user']['mobile_number']:"-- --"; ?><br>
+						</div>
+						<div class="col-md-3">
 						<b>Email :</b> <?php echo ($row['user']['email'])?$row['user']['email']:"-- --"; ?><br>
 						<b>Locality :</b> <?php echo ($row['user']['locality'])?$row['user']['locality']:"-- --"; ?>
 						</div>
-						<div class="col-md-4">
-							<br>
+						<div class="col-md-3">
 							<a href="javascript:void(0);" class="unfollow btn btn-danger btn-sm" follow_id = "<?php echo $row['id']; ?>"> Unfollow</a>
 						</div>
 							</div>
