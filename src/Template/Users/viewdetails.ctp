@@ -15,8 +15,9 @@ li {
 		text-align:left
 }
 ul li b {
-	color:#96989A;
-	text-align:left
+	color:black;
+	text-align:left;
+	font-style:bold;
 }
 
  </style>
@@ -72,10 +73,15 @@ ul li b {
 					foreach($details['hotels'] as $row)
 					{ ?>
 					<fieldset>
-					<legend style="text-align:left !important; color:#EAE184;"><h5> &nbsp; Destination <?php
+					<legend style="text-align:left !important; color:#B1AB75;"><h5> &nbsp; Destination <?php
 						echo $ds_count; ?> &nbsp;  </h5></legend>
+						<div class="col-md-12">
+						<p>Number of Rooms :</p>
+						</div>
  						<ul>
-						<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p>Single :&nbsp;<?php
+						<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p>Single :&nbsp;
+						<b>
+						<?php
 						if ($row['room1'] != '')
 						{
 							echo $row['room1'];
@@ -84,8 +90,11 @@ ul li b {
 						{
 							echo "--";
 						} ?>
+						</b>
 						</li>
-						<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p>Double :&nbsp;<?php
+						<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p>Double :&nbsp;
+						<b>
+						<?php
 						if ($row['room2'] != '')
 						{
 							echo $row['room2'];
@@ -93,9 +102,11 @@ ul li b {
 						else
 						{
 							echo "--";
-						} ?>
+						} ?></b>
 						</li>
-						<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p>Triple :&nbsp;<?php
+						<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p>Triple :&nbsp;
+						<b>
+						<?php
 						if ($row['room3'] != '')
 						{
 							echo $row['room3'];
@@ -104,9 +115,11 @@ ul li b {
 						{
 							echo "--";
 						} ?>
+						</b>
 						</li>
-						
-						<li class="col-md-4"><p>Child With Bed :&nbsp;<?php
+						<li class="col-md-4"><p>Child With Bed :&nbsp;
+						<b>
+						<?php
 						if ($row['child_with_bed'] != '')
 						{
 							echo $row['child_with_bed'];
@@ -115,9 +128,12 @@ ul li b {
 						{
 							echo "-- --";
 						} ?>
+						</b>
 						</li>
 						<li class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></li>
-						<li class="col-md-4"><p>Child Without Bed :&nbsp;<?php
+						<li class="col-md-4"><p>Child Without Bed :&nbsp;
+						<b>
+						<?php
 						if ($row['child_without_bed'] != '')
 						{
 							echo $row['child_without_bed'];
@@ -126,8 +142,11 @@ ul li b {
 						{
 							echo "-- --";
 						} ?>
+						</b>
 						</li>
-						<li class="col-md-12"><p>Hotel Category :&nbsp;<?php
+						<li class="col-md-12"><p>Hotel Category :&nbsp;
+						<b>
+						<?php
 						if (!empty($row['hotel_category']))
 						{
 							$result = explode(",", $row['hotel_category']);
@@ -135,7 +154,7 @@ ul li b {
 							$hotel_category = "";
 							foreach($result as $row1)
 							{
-								$hotel_category.= "" . $hotelCategories[$row1] . " or ";
+								$hotel_category.= "" . $hotelCategories[$row1] . " , ";
 
 								// echo $count.". ".$hotelCategories[$row1].", ";
 
@@ -147,30 +166,30 @@ ul li b {
 						else
 						{
 							echo "-- --";
-						} ?>
+						} ?><b>
 						</li>
 						<li class="col-md-6"><p>Hotel Rating :&nbsp;<?php
 						if ($row['hotel_rating'] > 0)
 						{
 							for ($i = $row['hotel_rating']; $i > 0; $i--)
 							{
-								echo '<i class="fa fa-star"></i>';
+								echo '<i class="fa fa-star" style="color:#F5EA81;"></i>';
 							}
 						}
 						else
 						{
 						}
- 
+						</b>
 						?></li>
 						<li class="col-md-6"><p>Meal :&nbsp;<?php
 						echo ($row['meal_plan']) ? $mealPlanArray[$row['meal_plan']] : "-- --"; ?>
 						</li>
 						<li class="col-md-6"><p>Check In :&nbsp;<?php
-						echo ($row['check_in']) ? date("d/m/Y", strtotime($row['check_in'])) : "-- --"; ?>
+						echo ($row['check_in']) ? date("d-m-Y", strtotime($row['check_in'])) : "-- --"; ?>
 						</li>
 						<li class="col-md-6">
 							<p>Check Out :&nbsp;<?php
-						echo ($row['check_out']) ? date("d/m/Y", strtotime($row['check_out'])) : "-- --"; ?>
+						echo ($row['check_out']) ? date("d-m-Y", strtotime($row['check_out'])) : "-- --"; ?>
 						</li>
 						<li class="col-md-6"><p>Locality :&nbsp;<?php
 						echo ($row['locality']) ? $row['locality'] : "-- --"; ?>
