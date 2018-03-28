@@ -421,7 +421,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 	else 
 	{ 
 		?>
-		<div class="col-md-12">
+		<!--<div class="col-md-12">
 			<div class="row">
 			<?php if($users['role_id'] == 1 || $users['role_id'] == 2) { 
 			?>
@@ -450,9 +450,9 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 				</a>
 			</div>
 			<!-- ./col -->
-			<div class="col-lg-3 col-xs-6">
+			<!--<div class="col-lg-3 col-xs-6">
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>">
-				  <!-- small box -->
+				   
 				  <div class="small-box bg-yellow">
 					<div class="inner">
 						<table width="100%" border="0"  height="120px" style="text-align:center">
@@ -478,9 +478,9 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 			if($users['role_id'] == 1 || $users['role_id'] == 3) { 
 			?>
 			<!-- COls -->
-			<div class="col-lg-3 col-xs-6">
+			<!--<div class="col-lg-3 col-xs-6">
 			<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>">
- 				  <!-- small box -->
+ 				  
 				  <div class="small-box bg-green">
 					<div class="inner">
 						<table width="100%" border="0"  height="120px" style="text-align:center">
@@ -503,9 +503,9 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 				</a>
 			</div>
 			<!---COls--->
-			<div class="col-lg-3 col-xs-6">
+			<!--<div class="col-lg-3 col-xs-6">
 			<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'myresponselist')) ?>">
-				  <!-- small box -->
+				  
 				  <div class="small-box bg-blue">
 					<div class="inner">
 						<table width="100%" border="0" height="120px" style="text-align:center">
@@ -532,7 +532,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 		if($users['role_id'] == 2 ) { 
 			?>
 				<!-- COls -->
-				<div class="col-lg-3 col-xs-6">
+				<!--<div class="col-lg-3 col-xs-6">
 					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'finalized-request-list')) ?>">
 					  <div class="small-box bg-green">
 						<div class="inner">
@@ -557,7 +557,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 					</a>
 				</div>
 				<!---COls--->
-				<div class="col-lg-3 col-xs-6">
+				<!--<div class="col-lg-3 col-xs-6">
 					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'removed-request-list')) ?>">
 					  <div class="small-box bg-blue">
 						<div class="inner">
@@ -612,9 +612,9 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 					</a>
 				</div>
 				<!-- ./col -->
-				<div class="col-lg-3 col-xs-6">
+				<!--<div class="col-lg-3 col-xs-6">
 					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'blocked-user-list')) ?>">
-						<!-- small box -->
+						 
 					  <div class="small-box bg-yellow">
 						<div class="inner">
 							<table width="100%" border="0" height="120px" style="text-align:center">
@@ -640,5 +640,5 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 			}
 			?>
  		  </div>
-		</div>
+		</div>--->
 <?php } ?>
