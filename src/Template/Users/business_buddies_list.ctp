@@ -6,8 +6,8 @@
 		<?php echo $this->element('subheader');?>
 		<?php echo  $this->Flash->render() ?>
 	</div>
-	<div class="col-md-12" style="background-color:#fff"> 
-
+<div class="row">
+<div class="col-md-12" style="background-color:#fff"> 
 <div class="box box-default">
 	<div class="box-header with-border"> 
 		<h3 class="box-title" style="padding:20px">Following</h3>
@@ -18,45 +18,47 @@
 	</div>
 	<div class="box-body">
 		<div class="row">
-				<div class="col-md-12">
+			<div class="col-md-12">
 				<div class="box box-primary">
 					<div class="box-body">
 					<?php
-		if(count($BusinessBuddies) >0) {
-			foreach($BusinessBuddies as $row){
-				//pr($BusinessBuddies->toArray());exit;
-			?>
-						<div>
+						if(count($BusinessBuddies) >0) {
+							foreach($BusinessBuddies as $row){
+								//pr($BusinessBuddies->toArray());exit;
+							?>
+						<div class="row">
 							<div class="form-group col-md-12">
-								  <div class="col-md-3">
-							<b>Name :</b> <?php echo $row['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $row['user']['last_name']; ?><br>
-							<b>Company Name :</b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?><br>
 							
-						</div>
-						<div class="col-md-3">
-						<b>Role :</b> <?php if ($row['user']['role_id']==1){ echo "Travel Agent"; }
-							
-							else if($row['user']['role_id']==2){
-								echo "Event Planner";
-							}
-							else{
-								echo "Hotelier";
-							}?>
-						<b>Mobile Number :</b> <?php echo ($row['user']['mobile_number'])?$row['user']['mobile_number']:"-- --"; ?><br>
-						</div>
-						<div class="col-md-3">
-						<b>Email :</b> <?php echo ($row['user']['email'])?$row['user']['email']:"-- --"; ?><br>
-						<b>Locality :</b> <?php echo ($row['user']['locality'])?$row['user']['locality']:"-- --"; ?>
-						</div>
-						<div class="col-md-3">
-							<a href="javascript:void(0);" class="unfollow btn btn-danger btn-sm" follow_id = "<?php echo $row['id']; ?>"> Unfollow</a>
-						</div>
+								 <div class="col-md-3">
+									<b>Name :</b> <?php echo $row['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $row['user']['last_name']; ?><br>
+									<b>Company Name :</b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?><br>
+									
+								</div>
+								<div class="col-md-3">
+								<b>Role :</b> <?php if ($row['user']['role_id']==1){ echo "Travel Agent"; }
+									
+									else if($row['user']['role_id']==2){
+										echo "Event Planner";
+									}
+									else{
+										echo "Hotelier";
+									}?>
+								<b>Mobile Number :</b> <?php echo ($row['user']['mobile_number'])?$row['user']['mobile_number']:"-- --"; ?><br>
+								</div>
+								<div class="col-md-3">
+								<b>Email :</b> <?php echo ($row['user']['email'])?$row['user']['email']:"-- --"; ?><br>
+								<b>Locality :</b> <?php echo ($row['user']['locality'])?$row['user']['locality']:"-- --"; ?>
+								</div>
+								<div class="col-md-3">
+									<a href="javascript:void(0);" class="unfollow btn btn-danger btn-sm" follow_id = "<?php echo $row['id']; ?>"> Unfollow</a>
+								</div>
 							</div>
 						</div>
+						<?php } ?>
 					</div>
 				</div>
-				</div>
-			<?php } ?>
+			</div>
+			
       <div class="pages"></div>
 		<?php } else {?>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
@@ -79,6 +81,7 @@
       </div>
     </div>
     </div>
+</div>
 </div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
