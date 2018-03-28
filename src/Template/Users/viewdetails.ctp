@@ -72,7 +72,7 @@ ul li b {
 					foreach($details['hotels'] as $row)
 					{ ?>
 					<fieldset>
-					<legend style="text-align:left !important; color:#B1AB75;"><h5> &nbsp; Destination <?php
+					<legend style="text-align:left !important; color:#A99E36;"><h5> &nbsp; Destination <?php
 						echo $ds_count; ?> &nbsp;  </h5></legend>
 						<div class="col-md-12">
 						<p>Number of Rooms :</p>
@@ -223,12 +223,12 @@ ul li b {
 				</li>
 				<li class="col-md-6">
 				<p>Start Date :&nbsp;<b><?php
-					echo ($details['start_date']) ? date("d/m/Y", strtotime($details['start_date'])) : "-- --"; ?>
+					echo ($details['start_date']) ? date("d-m-Y", strtotime($details['start_date'])) : "-- --"; ?>
 				</b></p>
 				</li>
 				<li class="col-md-6">
 				<p>End Date :&nbsp;<b><?php
-					echo ($details['end_date']) ? date("d/m/Y", strtotime($details['end_date'])) : "-- --"; ?>
+					echo ($details['end_date']) ? date("d-m-Y", strtotime($details['end_date'])) : "-- --"; ?>
 				</b></p>
 				</li>
 				<li class="col-md-6">
@@ -405,21 +405,21 @@ ul li b {
 					</li>
 					<li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 					<p>Check In :&nbsp;<b><?php
-					echo ($row['check_in']) ? date("d/m/Y", strtotime($row['check_in'])) : "-- --"; ?>
+					echo ($row['check_in']) ? date("d-m-Y", strtotime($row['check_in'])) : "-- --"; ?>
 					</b></p>
 					</li>
 					<li class="col-xs-6 col-lg-6 col-md-6 col-sm-6">
-					<p>Check Out :&nbsp;<?php
-					echo ($row['check_out']) ? date("d/m/Y", strtotime($row['check_out'])) : "-- --"; ?>
-					</p>
+					<p>Check Out :&nbsp;<b><?php
+					echo ($row['check_out']) ? date("d-m-Y", strtotime($row['check_out'])) : "-- --"; ?>
+					</b></p>
 					</li>
 					<li class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
-					<p>Locality :&nbsp;<?php
+					<p>Locality :&nbsp;<b><?php
 					echo ($row['locality']) ? $row['locality'] : "-- --"; ?>
-					</p>
+					</b></p>
 					</li>
 					<li class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
-					<p>Destination City :&nbsp;<?php
+					<p>Destination City :&nbsp;<b><?php
 					if (empty($row['city_id']))
 					{
 						echo $allCities[$details['city_id']];
@@ -428,9 +428,9 @@ ul li b {
 					{
 						$allCities[$row['city_id']];
 					} ?>
-					</p>
+					</b></p>
 					</li>
-					<li class="col-xs-12 col-lg-6 col-md-6 col-sm-6"><p>Destination State :&nbsp;<?php
+					<li class="col-xs-12 col-lg-6 col-md-6 col-sm-6"><p>Destination State :&nbsp;<b><?php
 					if (empty($row['state_id']))
 					{
 						echo $allStates[$details['state_id']];
@@ -439,7 +439,7 @@ ul li b {
 					{
 						$allStates[$row['state_id']];
 					} ?>
-					</p>
+					</b></p>
 					</li>
 				</ul><?php
 				$ds_count++;
@@ -454,34 +454,34 @@ ul li b {
 		<div class="head_of_popup"><h3 style="color:#1295A2;">Transport Requirements</h3></div>
 			<ul>
 				<li class="col-md-6">
-				<p>Transport :&nbsp;<?php
+				<p>Transport :&nbsp;<b><?php
 					echo ($details['transport_requirement']) ? $transpoartRequirmentArray[$details['transport_requirement']] : "-- --"; ?>
-				</p>
+				</b></p>
 				</li>
 				<li class="col-md-6">
-				<p>Start Date :&nbsp;<?php
-					echo ($details['start_date']) ? date("d/m/Y", strtotime($details['start_date'])) : "-- --"; ?>
-				</p>
+				<p>Start Date :&nbsp;<b><?php
+					echo ($details['start_date']) ? date("d-m-Y", strtotime($details['start_date'])) : "-- --"; ?>
+				</b></p>
 				</li>
 				<li class="col-md-6">
-				<p>End Date :&nbsp;<?php
-					echo ($details['end_date']) ? date("d/m/Y", strtotime($details['end_date'])) : "-- --"; ?>
-				</p>
+				<p>End Date :&nbsp;<b><?php
+					echo ($details['end_date']) ? date("d-m-Y", strtotime($details['end_date'])) : "-- --"; ?>
+				</b></p>
 				</li>
 				<li class="col-md-6">
-				<p>Pickup Locality :&nbsp;<?php
+				<p>Pickup Locality :&nbsp;<b><?php
 					echo ($details['pickup_locality']) ? $details['pickup_locality'] : "-- --"; ?>
-				</p>
+				</b></p>
 				</li>
 				<li class="col-md-6">
-				<p>Pickup City :&nbsp;<?php
+				<p>Pickup City :&nbsp;<b><?php
 					echo ($details['pickup_city']) ? $allCities[$details['pickup_city']] : "-- --"; ?>
-				</p>
+				</b></p>
 				</li>
 				<li class="col-md-6">
-				<p>Pickup State :&nbsp;<?php
+				<p>Pickup State :&nbsp;<b><?php
 					echo ($details['pickup_state']) ? $allStates[$details['pickup_state']] : "-- --"; ?>
-				</p>
+				</b></p>
 				</li><?php
 				if (!empty($details['request_stops']))
 				{ ?><?php
@@ -490,38 +490,38 @@ ul li b {
 					{ ?>
 					<fieldset><legend>Stop <?php echo $stop_count; ?></legend>
 						<li class="col-md-6">
-							<p>Stop Locality :&nbsp;<?php
+							<p>Stop Locality :&nbsp;<b><?php
 							echo ($stops['locality']) ? $stops['locality'] : "-- --"; ?>
-							</p>
+							</b></p>
 						</li>
 						<li class="col-md-6">
-							<p>Stop City :&nbsp;<?php
+							<p>Stop City :&nbsp;<b><?php
 							echo ($stops['city_id']) ? $allCities[$stops['city_id']] : "-- --"; ?>
-							</p>
+							</b></p>
 						</li>
 						<li class="col-md-6">
-							<p>Stop State :&nbsp;<?php
+							<p>Stop State :&nbsp;<b><?php
 							echo ($stops['state_id']) ? $allStates[$stops['state_id']] : "-- --"; ?>
-							</p>
+							</b></p>
 						</li> 
 						</fieldset><?php
 						$stop_count++;
 					}
 				} ?>
 				<li class="col-md-6">
-				<p>Final Locality :&nbsp;<?php
+				<p>Final Locality :&nbsp;<b><?php
 				echo ($details['final_locality']) ? $details['final_locality'] : "-- --"; ?>
-				</p>
+				</b></p>
 				</li>
 				<li class="col-md-6">
-				<p>Final City :&nbsp;<?php
+				<p>Final City :&nbsp;<b><?php
 				echo ($details['final_city']) ? $allCities[$details['final_city']] : "-- --"; ?>
-				</p>
+				</b></p>
 				</li>
 				<li class="col-md-6">
-				<p>Final State :&nbsp;<?php
+				<p>Final State :&nbsp;<b><?php
 				echo ($details['final_state']) ? $allStates[$details['final_state']] : "-- --"; ?>
-				</p>
+				</b></p>
 				</li>
 			</ul>
 		</div>
@@ -544,8 +544,8 @@ ul li b {
 		<div class="col-md-12"><div class="head_of_popup"><h3 style="color:#1295A2;">Comments</h3></div>
 			<ul>
 				<li class="col-xs-12 col-lg-12 col-md-12 col-sm-12 comment text-left">
-					<p><?php echo $details['comment']; ?>
-					</p>
+					<p><b><?php echo $details['comment']; ?>
+					</b></p>
 				</li>
 			</ul>
 		</div>
