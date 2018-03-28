@@ -58,7 +58,7 @@ fieldset{
 }
 .plus_minus_btn{
 	height:30px;
-	width:50px;
+	width:40px;
 }
 </style> 
 <!--------- <script>
@@ -319,7 +319,8 @@ $(document).ready(function($){
 							<div class="input-field">
 								<p for="from" >
 									Reference ID  
-									<span class="required">*</span>
+									<span class="required" >*</i></span>
+									(This is for your reference )
 								</p>
 								<input autocomplete="off" name="reference_id" type="text" class="form-control ref2" id="reference_id" required placeholder="Reference ID" autofocus/>
 							</div>
@@ -356,11 +357,11 @@ $(document).ready(function($){
 								<p for="from">Children below 6  <span class="required">*</span></p>
 									<div class="col-md-6 input-group">
 									<p class="input-group-addon btn" >
-									<button type="button" class="fa fa-minus-square" id="btnminus1" value=""></button>
+									<button type="button" class="fa fa-minus-square plus_minus_btn" id="btnminus1" value=""></button>
 									</p>                    
-									 <input type='text' autocomplete="off" name='hotelChildren'  value='1' class="form-control input-large" id="textcounter1"/>	
+									 <input type='text' autocomplete="off" style="height:50px;" name='hotelChildren'  value='1' class="form-control input-large" id="textcounter1"/>	
 									<p class="input-group-addon btn">
-									<button type="button" class="fa fa-plus-square" id="btnplus1" value=""></button>
+									<button type="button" class="fa fa-plus-square plus_minus_btn" id="btnplus1" value=""></button>
 									</p>                    
 									</div>
 								</div>
@@ -426,7 +427,7 @@ $(document).ready(function($){
 										<div class="input-field">
 											<p for="from">Hotel Category </p>
 												<div>
-													<?php echo $this->Form->control('hotel_category', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Hotel Category","style"=>"height:125px;"]);?>
+													<?php echo $this->Form->control('hotel_category', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
 
 											   </div>
 										</div>
@@ -443,7 +444,7 @@ $(document).ready(function($){
 						<div class="col-md-12">
 							<div class="col-md-4">
 								<p>Locality</p>
-								<input autocomplete="off" type="text" class="form-control" name="locality" placeholder="Enter Locality or Village or Town"/>
+								<input autocomplete="off" type="text" class="form-control" name="locality" placeholder="Enter Locality, Village or Town"/>
 							</div>
 						 
 							<div class="col-md-4">
@@ -568,8 +569,9 @@ $(document).ready(function($){
 						  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 								<div class="input-field">
 									<p for="from" >
-										Reference ID  
+										Reference ID 
 										<span class="required">*</span>
+										(This is for your reference )
 									</p>
 									<input name="reference_id" type="text" class="form-control ref2" id="Reference ID" placeholder="Reference ID" autocomplete="off" />
 									 
@@ -593,11 +595,11 @@ $(document).ready(function($){
 								<span class="required">*</span></p>
 								<div class="col-md-6 input-group">
 									<p class="input-group-addon btn" >
-									<button type="button" class="fa fa-minus-square"  id="btn_pack_minus" value="-"></button>
+									<button type="button" class="fa fa-minus-square plus_minus_btn"  id="btn_pack_minus" value="-"></button>
 									</p>
-									<input type='text' autocomplete="off" name='adult' value='1' class="form-control input-large" id="text_counter_pack"/>
+									<input type='text' autocomplete="off" name='adult' value='1' class="form-control input-large" id="text_counter_pack" style="height:50px;"/>
 									<p class="input-group-addon btn">
-									<button type="button" class="fa fa-plus-square" id="btn_pack_plus" value=""></button>
+									<button type="button" class="fa fa-plus-square plus_minus_btn" id="btn_pack_plus" value=""></button>
 								   </p>    
 								</div>
 							</div>
@@ -607,11 +609,11 @@ $(document).ready(function($){
 									</p>
 									<div class="col-md-6 input-group">
 									<p class="input-group-addon btn" >
-									<button type="button" class="fa fa-minus-square" id="btn_pack_minus1" value=""></button>
+									<button type="button" class="fa fa-minus-square plus_minus_btn" id="btn_pack_minus1" value=""></button>
 									</p>                    
-									 <input type='text' autocomplete="off" name='children' value='1' class="form-control input-large" id="text_counter_pack1"/>	
+									 <input type='text' autocomplete="off" name='children' value='1' class="form-control input-large" id="text_counter_pack1" style="height:50px;"/>	
 									<p class="input-group-addon btn">
-									<button type="button" class="fa fa-plus-square" id="btn_pack_plus1" value=""></button>
+									<button type="button" class="fa fa-plus-square plus_minus_btn" id="btn_pack_plus1" value=""></button>
 									</p>                    
 									</div>
 							</div>
@@ -677,7 +679,7 @@ $(document).ready(function($){
 										<div class="input-field">
 											<p for="from">Hotel Category </p>
 												<div>
-												<?php echo $this->Form->control('hotel_category', ["id"=>"hotel_category", "type"=>"select",'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Hotel Category","style"=>"height:125px;"]);?>
+												<?php echo $this->Form->control('hotel_category', ["id"=>"hotel_category", "type"=>"select",'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options","style"=>"height:125px;"]);?>
 											   </div>
 										</div>
 									</div>
@@ -1009,11 +1011,11 @@ $(document).ready(function($){
 																<span class="required">*</span></p>
 																<div class="col-md-6 input-group">
 																	<p class="input-group-addon btn" >
-																	<button type="button" class="fa fa-minus-square" id="btn_tran_minus" value=""  field='transportAdult'></button>
+																	<button type="button" class="fa fa-minus-square plus_minus_btn" id="btn_tran_minus" value=""  field='transportAdult'></button>
 																	</p>                    
-																	<input type='text' autocomplete="off" name='transportAdult' value='1' class="form-control input-large" id="text_trans_counter"/>	
+																	<input type='text' autocomplete="off" name='transportAdult' value='1' class="form-control input-large" id="text_trans_counter" style="height:50px;"/>	
 																	<p class="input-group-addon btn" >
-																	<button type="button" class="fa fa-plus-square " id="btn_tran_plus" value=""    field='transportAdult'></button>
+																	<button type="button" class="fa fa-plus-square plus_minus_btn " id="btn_tran_plus" value=""    field='transportAdult'></button>
 																	</p>                    
 																</div>
 															</div>
@@ -1023,11 +1025,11 @@ $(document).ready(function($){
 																<span class="required">*</span> </p>
 																	<div class="col-md-6 input-group">
 																	<p class="input-group-addon btn" >
-																	<button type="button" class="fa fa-minus-square" id="btn_tran_minus1" value="" field='transportChildren'></button>
+																	<button type="button" class="fa fa-minus-square plus_minus_btn" id="btn_tran_minus1" value="" field='transportChildren'></button>
 																	</p>                    
-																	 <input type='text' autocomplete="off" name='transportChildren' value='1' class="form-control input-large" id="text_trans_counter1"/>	
+																	 <input type='text' style="height:50px;" autocomplete="off" name='transportChildren' value='1' class="form-control input-large" id="text_trans_counter1"/>	
 																	<p class="input-group-addon btn">
-																	<button type="button" class="fa fa-plus-square" id="btn_tran_plus1" value=""  field='transportChildren'></button>
+																	<button type="button" class="fa fa-plus-square plus_minus_btn" id="btn_tran_plus1" value=""  field='transportChildren'></button>
 																	</p>                    
 																	</div>
 															</div>
