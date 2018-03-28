@@ -18,14 +18,14 @@
 	</div>
 	<div class="box-body">
 		<div class="row">
-		<?php
+				<div class="col-md-12">
+				<div class="box box-primary">
+					<div class="box-body">
+					<?php
 		if(count($BusinessBuddies) >0) {
 			foreach($BusinessBuddies as $row){
 				//pr($BusinessBuddies->toArray());exit;
 			?>
-				<div class="col-md-12">
-				<div class="box box-primary">
-					<div class="box-body">
 						<div>
 							<div class="form-group col-md-12">
 								  <div class="col-md-3">
