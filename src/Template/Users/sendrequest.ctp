@@ -280,14 +280,8 @@ $(document).ready(function($){
 		<br> 
 		<?php echo $this->element('subheader');?>
  	</div>
-<div class="col-md-12" style="background-color:#fff"> 
+<div class="col-md-12" style="background-color:#fff;"> 
 <div class="box box-default">
-	<div class="box-header with-border"> 
-		<h3 class="box-title" style="padding:10px">Place Request</h3>
-		<div class="box-tools pull-right">
- 		</div>
-		 
-	</div>
 	<div class="box-body">
 		<div class="row"> 
 		<div id="tra-sendrequest" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background:#FFF">
@@ -311,9 +305,8 @@ $(document).ready(function($){
 ?>
 <input autocomplete="off" name="category_id" type="hidden" value="3" class="form-control" id="date-start" placeholder="Reference id"/>
 <div class="form-box">
-	<div class="panel-group" id="HotelAccordion" style="background-color:white;">
-		<div class="panel panel-default">
-				
+	<div class="panel-group" id="HotelAccordion" style="background-color:white;margin-top:-20px;">
+		<div class="panel">
 				<fieldset>
 					  <legend style="color:#369FA1;"><b> &nbsp; GENERAL REQUIREMENTS &nbsp;  </b></legend>
 					  <div class="row">
@@ -562,9 +555,8 @@ $(document).ready(function($){
 <input name="category_id" type="hidden" value="1" class="form-control" id="date-start" placeholder="Reference id"/>
 <input type="hidden" name="user_id" value="<?php echo $users['id']; ?>"/>
 <div class="form-box" >
-	<div class="panel-group" id="accordion" style="background-color:white;">
-		<div class="panel panel-default">
-			  
+	<div class="panel-group" id="accordion" style="background-color:white;margin-top:-20px;">
+		<div class="panel ">
 			<fieldset>
 				  <legend style="color:#369FA1;"><b>  &nbsp; GENERAL REQUIREMENTS &nbsp; </b></legend>
 					<div class="row">
@@ -978,8 +970,8 @@ $(document).ready(function($){
 					<input name="category_id" autocomplete="off" type="hidden" value="2" class="form-control" id="date-start" />
                             <!--Form Box for Hotel-->
 							<div class="form-box">
-								<div class="panel-group" id="TransportAccordion" style="background-color:white;">
-									<div class="panel panel-default">
+								<div class="panel-group" id="TransportAccordion" style="background-color:white;margin-top:-20px;">
+									<div class="panel">
 										 
 											<fieldset>
 												  <legend style="color:#369FA1;"><b> &nbsp;  GENERAL REQUIREMENTS  &nbsp; </b></legend>
