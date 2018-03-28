@@ -1,7 +1,7 @@
  <style>
 .head_of_popup 
 {
- background-color: #E6E7E8;
+ background-color: #EAE8D4;
  text-align:left !important;
  padding:10px !important;
 }
@@ -49,7 +49,7 @@ ul li b {
 				<ul>
 					<li class="col-md-6"><p>Reference ID : &nbsp;<span style="color:#FB6542"><?php
 					echo $details['reference_id']; ?></span></li>
-					<li class="col-md-6"><p>Total Budget : &nbsp;<span style="color:#1295A2">  Rs. <?php
+					<li class="col-md-6"><p>Total Budget : &nbsp;<span style="color:#1295A2">  &#8377; <?php
 					echo number_format($details['total_budget'] . ""); ?></span></li>
 					<li class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><p>Adult : &nbsp; <?php
 					echo "<b>".$details['adult']."</b>"; ?></li>
@@ -231,6 +231,7 @@ ul li b {
 					echo ($details['end_date']) ? date("d-m-Y", strtotime($details['end_date'])) : "-- --"; ?>
 				</b></p>
 				</li>
+				<li class="col-md-12" style="color:#EDE489;">Pickup Location<hr></hr></li>
 				<li class="col-md-6">
 				<p>Pickup Locality :&nbsp;<b><?php
 				echo ($details['pickup_locality']) ? $details['pickup_locality'] : "-- --"; ?>
@@ -274,7 +275,7 @@ ul li b {
 						$stop_count++;
 					}
 				} ?>
-				
+				<li class="col-md-12" style="color:#EDE489;">Final Location<hr></hr></li>
 				<li class="col-md-6">
 					<p>Final Locality :&nbsp;<b><?php
 						echo ($details['final_locality']) ? $details['final_locality'] : "-- --"; ?>
@@ -468,6 +469,7 @@ ul li b {
 					echo ($details['end_date']) ? date("d-m-Y", strtotime($details['end_date'])) : "-- --"; ?>
 				</b></p>
 				</li>
+				<li class="col-md-12" style="color:#EDE489;">Pickup Location<hr></hr></li>
 				<li class="col-md-6">
 				<p>Pickup Locality :&nbsp;<b><?php
 					echo ($details['pickup_locality']) ? $details['pickup_locality'] : "-- --"; ?>
@@ -508,6 +510,7 @@ ul li b {
 						$stop_count++;
 					}
 				} ?>
+				<li class="col-md-12" style="color:#EDE489;">Final Location<hr></hr></li>
 				<li class="col-md-6">
 				<p>Final Locality :&nbsp;<b><?php
 				echo ($details['final_locality']) ? $details['final_locality'] : "-- --"; ?>
