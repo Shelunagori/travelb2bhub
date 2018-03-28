@@ -766,8 +766,8 @@ $(document).ready(function($){
 								</div>
 								<div class="col-md-4">
 									<div class="row">
-										<div class="col-md-12 input-group" style="margin-top:30px;text-align:center;">
-											<button class="btn btn-primary btn-sm add_field_button2 but " style="background-color:#1295A2;width:50px;"><i class="fa fa-plus"></i></button>
+										<div class="col-md-12 input-group" style="margin-top:30px;" align="right">
+											<button class="btn btn-primary btn-sm add_field_button2 but " style="background-color:#1295A2;width:70px;"><i class="fa fa-plus"></i></button>
 										</div>
 									</div>
 								</div>

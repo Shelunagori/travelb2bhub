@@ -57,7 +57,7 @@
 					<div class="input-field">
 						<p for="from">Hotel Catrgory </p>
 							<div>
-								<?php echo $this->Form->control('hh_hotel_category['.$randomNumber.']', ["id"=>"hotel_category", "type"=>"select", 'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Hotel Category",]);?>
+								<?php echo $this->Form->control('hh_hotel_category['.$randomNumber.']', ["id"=>"hotel_category", "type"=>"select", 'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options",]);?>
 						   </div>
 					</div>
 				</div>
@@ -73,7 +73,7 @@
 		<div class="col-md-12 main_row">
 			<div class="col-md-4">
 				<p>Locality</p>
-				 <input type="text" autocomplete="off" class="form-control" name="hh_locality[<?php echo $randomNumber; ?>]" id="locality" placeholder="Enter Locality or Village or Town"/>
+				 <input type="text" autocomplete="off" class="form-control" name="hh_locality[<?php echo $randomNumber; ?>]" id="locality" placeholder="Enter Locality,Village or Town"/>
 			</div>
 			<div class="col-md-4">
 					<div class="input-field">
@@ -96,7 +96,7 @@
 					</div>
 					<div>
 						<input type='hidden' value="0" name="hh_state_id[<?php echo $randomNumber; ?>]" id="hh_state_id[<?php echo $randomNumber; ?>]"/>
-						<input type="text" class="form-control" name="hh_state_name[<?php echo $randomNumber; ?>]" id="hh_state_id[<?php echo $randomNumber; ?>]" placeholder="Select State" readonly/>
+						<input type="text" class="form-control" name="hh_state_name[<?php echo $randomNumber; ?>]" id="hh_state_id[<?php echo $randomNumber; ?>]" placeholder="Auto Populated" readonly/>
 					</div>
 				</div>
 			</div>
@@ -122,7 +122,7 @@
 						</p>
 					</div>
 					<div class="col-md-12 input-group">
-					<input require type="text" required="true" name="hh_check_in[<?php echo $randomNumber; ?>]" id="hh_check_in[<?php echo $randomNumber; ?>]" class="form-control date-picker"  data-date-format="dd/mm/yyyy"  placeholder="dd/mm/yyyy"/>
+					<input require type="text" required="true" name="hh_check_in[<?php echo $randomNumber; ?>]" id="hh_check_in[<?php echo $randomNumber; ?>]" class="form-control date-picker"  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>
 					<p class="input-group-addon btn">
 					<span class="fa fa-calendar"></span>
 					</p>                    
@@ -135,7 +135,7 @@
 								</p>
 					</div>
 					<div class="col-md-12 input-group">
-						<input type="text" required="true" name="hh_check_out[<?php echo $randomNumber; ?>]" id ="hh_check_out[<?php echo $randomNumber; ?>]" class="form-control enddate date-picker"  data-date-format="dd/mm/yyyy"  placeholder="dd/mm/yyyy"/>
+						<input type="text" required="true" name="hh_check_out[<?php echo $randomNumber; ?>]" id ="hh_check_out[<?php echo $randomNumber; ?>]" class="form-control enddate date-picker"  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>
 						<p class="input-group-addon btn" >
 						<span class="fa fa-calendar"></span>
 						</p>                    
@@ -146,7 +146,7 @@
 	</div>
 	</div>
 	<div class="col-md-12" align="right">
-		<a href="java:script(0);" class="remove_field btn btn-danger btn-sm">Remove</a>
+		<a href="java:script(0);" class="remove_field btn btn-danger btn-sm" style="width:70px;"><i class="fa fa-minus"></i></a>
 		<br/><br/><hr></hr>
 	</div>
 	
