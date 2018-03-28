@@ -902,6 +902,7 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 				$result = explode("-", $QPriceRange);
 				$MinQuotePrice = $result[0];
 				$MaxQuotePrice = $result[1];
+				if($MaxQuotePrice==100000){$MaxQuotePrice=100000000000;}
 				$conditions["Requests.total_budget >="] = $MinQuotePrice;
 				$conditions["Requests.total_budget <="] = $MaxQuotePrice;
 			}
@@ -923,7 +924,8 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 			}
 	
 			if(!empty( $_POST["refidsearch"])) {
-				$conditions["Requests.reference_id"] =  $_POST["refidsearch"]; 
+				//$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
+		$conditions["Requests.reference_id Like"] =  '%'.$_POST["refidsearch"].'%';				
 			}
 
 			if(!empty($_POST["destination_city"])) {
@@ -1451,6 +1453,7 @@ $hotelcitystate[$row['id']]  = $city_state_name;
 			$result = explode("-", $QPriceRange);
 			$MinQuotePrice = $result[0];
 			$MaxQuotePrice = $result[1];
+			if($MaxQuotePrice==100000){$MaxQuotePrice=100000000000;}
 			$conditions["Responses.quotation_price >="] = $MinQuotePrice;
 			$conditions["Responses.quotation_price <="] = $MaxQuotePrice;
 		}
@@ -1466,7 +1469,8 @@ $hotelcitystate[$row['id']]  = $city_state_name;
 		}
 		//print_r($conditions);	  die();
 		if(!empty($_POST["refidsearch"])) {
-		$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
+		//$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
+		$conditions["Requests.reference_id Like"] =  '%'.$_POST["refidsearch"].'%';
 		}
 		
 		///---------------
@@ -1633,7 +1637,8 @@ $result['BlockedUsers'] = $BlockedUsers;
 		$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
 		}
 		if(isset($_POST["refidsearch"]) && !empty($_POST["refidsearch"])) {
-		$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
+		//$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
+		$conditions["Requests.reference_id Like"] =  '%'.$_POST["refidsearch"].'%';
 		}
 		
 		
@@ -1881,6 +1886,7 @@ public function removebusinessbuddyapi() {
 	$result = explode("-", $QPriceRange);
 	$MinQuotePrice = $result[0];
 	$MaxQuotePrice = $result[1];
+	if($MaxQuotePrice==100000){$MaxQuotePrice=100000000000;}
 	$conditions["Responses.quotation_price >="] = $MinQuotePrice;
 	$conditions["Responses.quotation_price <="] = $MaxQuotePrice;
 	}
@@ -1904,7 +1910,8 @@ public function removebusinessbuddyapi() {
 	$conditions["Responses.is_details_shared"] =  $_POST["shared_details"];
 	}
 	if(!empty($_POST['refidsearch'])) {
-	$conditions["Requests.reference_id"] =  $_POST['refidsearch'];
+	//$conditions["Requests.reference_id"] =  $_POST['refidsearch'];
+	$conditions["Requests.reference_id Like"] =  '%'.$_POST["refidsearch"].'%';
 	}
 	$sortorder ='';
 	if(!empty($_POST['sort'])) {
@@ -2372,6 +2379,7 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	$result = explode("-", $QPriceRange);
 	$MinQuotePrice = $result[0];
 	$MaxQuotePrice = $result[1];
+	if($MaxQuotePrice==100000){$MaxQuotePrice=100000000000;}
 	$conditions["Requests.total_budget >="] = $MinQuotePrice;
 	$conditions["Requests.total_budget <="] = $MaxQuotePrice;
 	}
@@ -2381,7 +2389,7 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 		$conditions["Requests.category_id IN"] =  $typeSearchArray; 
 	}
 	if(isset($_POST["refidsearch"]) && !empty($_POST["refidsearch"])) {
-	$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
+	$conditions["Requests.reference_id Like"] =  '%'.$_POST["refidsearch"].'%';
 	}
 
 	if(isset($_POST["destination_city"]) && !empty($_POST["destination_city"])) {
@@ -2404,8 +2412,8 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	}
 	if(!empty($_POST["startdatesearch"])) {
 
-	$da["Requests.start_date"] =  $sdate;
-	$da["Requests.check_in"] =  $sdate;
+	$da["Requests.start_date >= "] =  $sdate;
+	$da["Requests.check_in >= "] =  $sdate;
 	$conditions["OR"] =  $da;
 	}
 	if(isset($_POST["enddatesearch"]) && !empty($_POST["enddatesearch"])) {
@@ -2416,17 +2424,17 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	}
 
 	if(!empty($_POST["enddatesearch"])) {
-	$da1["Requests.end_date"] =  $edate;
-	$da1["Requests.check_out"] =  $edate;
+	$da1["Requests.end_date <= "] =  $edate;
+	$da1["Requests.check_out <= "] =  $edate;
 	if(!empty($sdate)){
-	$da1["Requests.start_date"] =  $sdate;
-	$da1["Requests.check_in"] =  $sdate;
+	$da1["Requests.start_date >= "] =  $sdate;
+	$da1["Requests.check_in >= "] =  $sdate;
 	}
 	$conditions["OR"] =  $da1;
 	}
 	//print_r($conditions); die();
-	$sort='';
-	if(! isset($_POST["sort"])) {
+	 
+	if(empty($_POST["sort"])) {
 	$sort['Requests.id'] = "DESC";
 	}
 	if(!empty($_POST["sort"]) && $_POST["sort"]=="requesttype") {
@@ -2438,11 +2446,12 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	if(!empty($_POST["sort"]) && $_POST["sort"]=="totalbudgethl") {
 	$sort['Requests.total_budget'] = "DESC";
 	}
+	$sortq='';
 	if(!empty($_POST["sort"]) && $_POST["sort"]=="resposesnolh") {
-		$sort['COUNT(Responses.request_id)'] = "ASC";
+		$sortq['COUNT(Responses.request_id)'] = "ASC";
 	}
 	if(!empty($_POST["sort"]) && $_POST["sort"]=="resposesnohl") {
-		$sort['COUNT(Responses.request_id)'] = "DESC";
+		$sortq['COUNT(Responses.request_id)'] = "DESC";
 	}
 	$limit=4;
 	$page = $_POST["page"]; 
@@ -2451,14 +2460,18 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	if (isset($_POST['role_id']) AND $_POST['role_id'] == 1) {
 
 	$requests = $this->Requests->find()
-		->contain(["Users","Hotels"])
+		->contain(["Users","Hotels","Responses"=>function($q){
+			return $q->order($sortq);
+		}])
 		->where($conditions)->group('Requests.id')->order($sort)
 		->limit($limit)
 		->page($page);
 	}
 	if (isset($_POST['role_id']) AND $_POST['role_id']== 2) {
 	$requests = $this->Requests->find()
-		->contain(["Users","Hotels"])
+		->contain(["Users","Hotels","Responses"=>function($q){
+			return $q->order($sortq);
+		}])
 		->where($conditions)->order($sort)
 		->limit($limit)
 		->page($page);
@@ -2466,7 +2479,9 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	if (isset($_POST['role_id']) AND $_POST['role_id']== 3) {
 	$conditions["Requests.category_id "] = 3;
 	$requests = $this->Requests->find()
-		->contain(["Users","Hotels"])
+		->contain(["Users","Hotels","Responses"=>function($q){
+			return $q->order($sortq);
+		}])
 		->where($conditions)->order($sort)
 		->limit($limit)
 		->page($page);
@@ -2666,11 +2681,13 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	$result = explode("-", $QPriceRange);
 	$MinQuotePrice = $result[0];
 	$MaxQuotePrice = $result[1];
+	if($MaxQuotePrice==100000){$MaxQuotePrice=100000000000;}
 	$conditions["Requests.total_budget >="] = $MinQuotePrice;
 	$conditions["Requests.total_budget <="] = $MaxQuotePrice;
 	}
 	if(!empty($_POST["refidsearch"])) {
-	$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
+	//$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
+	$conditions["Requests.reference_id Like"] =  '%'.$_POST["refidsearch"].'%';
 	}
 	if(isset($_POST["members"]) && !empty($_POST["members"])) {
 	$conditions["Requests.children+Requests.adult"] =  $_POST["members"];
@@ -2921,6 +2938,7 @@ $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField
 				$result = explode("-", $QPriceRange);
 				$MinQuotePrice = $result[0];
 				$MaxQuotePrice = $result[1];
+				if($MaxQuotePrice==100000){$MaxQuotePrice=100000000000;}
 				$conditions["Requests.total_budget >="] = $MinQuotePrice;
 				$conditions["Requests.total_budget <="] = $MaxQuotePrice;
 				}
@@ -2930,7 +2948,8 @@ $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField
 					$conditions["Requests.category_id IN"] =  $typeSearchArray;
 				}
 				if(isset($_POST["refidsearch"]) && !empty($_POST["refidsearch"])) {
-				$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
+					//$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
+					$conditions["Requests.reference_id Like"] =  '%'.$_POST["refidsearch"].'%';
 				}
 				if(isset($_POST["members"]) && !empty($_POST["members"])) {
 				$conditions["Requests.children+Requests.adult"] =  $_POST["members"];

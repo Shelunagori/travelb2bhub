@@ -42,7 +42,6 @@ legend
 			<!--<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>-->
 			<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 		</div>
-		 
 	</div>
 	<div class="box-body">
 		<div class="row">
@@ -118,6 +117,17 @@ legend
                         </div>
 						<form class="filter_box" method="get">
                         <div class="modal-body">
+							<div class="row form-group margin-b10">
+								 <div class=col-md-12>
+									 <div class=col-md-4>
+									 <label class="col-form-label"for=example-text-input>Reference ID</label>
+									 </div>
+									<div class=col-md-1>:</div>
+									 <div class=col-md-7>
+									 <input class=form-control name=refidsearch value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>">
+									 </div>
+								 </div>
+							</div>
                             <div class="row form-group margin-b10">
 								<div class=col-md-12>
 									 <div class=col-md-4>
@@ -197,26 +207,14 @@ legend
 										</div>
 									</div>
                               </div>
-                              <div class="row form-group margin-b10">
-									 <div class=col-md-12>
-										 <div class=col-md-4>
-										 <label class="col-form-label"for=example-text-input>Reference ID</label>
-										 </div>
-										<div class=col-md-1>:</div>
-										 <div class=col-md-7>
-										 <input class=form-control name=refidsearch value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>">
-										 </div>
-									 </div>
-								</div>
+                              
                                <div class="row form-group margin-b10">
                                  <div class=col-md-12>
-                                 <div class=col-md-4>
-								 <label class="col-form-label "for=example-text-input>Members</label>
-								 </div>
-								 <div class=col-md-1>:</div>
-								 <div class=col-md-7>
-								 <input class=form-control name=memberssearch value="<?php echo isset($_GET['memberssearch'])? $_GET['memberssearch']:''; ?>">
-								 </div>
+								 <div style="margin-left:20px;" >
+                                 <input class="input-checkbox100" type="checkbox" value="resposesnohl" name="sort">
+									<label class="label-checkbox100" for="ckb1">
+										Response (High to Low)
+									</label>
 								</div>
                               </div>                         
                         </div>
@@ -293,10 +291,33 @@ legend
 							<p>Reference ID : &nbsp;
 								<span class="details"><?php echo $request['reference_id']; ?></span>
 							</p>
-							<p>Total Budget : &nbsp;
-								<span class="details"><?php echo $request['total_budget']; ?></span>
+							<p>Total Budget : &nbsp; 
+								<span class="details">&#8377; <?php echo $request['total_budget']; ?></span>
 							</p>
+							<?php
+							if($request['category_id']==2){ ?>
+								<p>Pickup City : &nbsp;
+									<span class="details"><?php echo ($request['pickup_city'])?$allCities[$request['pickup_city']]:"-- --"; ?><?php echo ($request['pickup_state'])?' ('.$allStates[$request['pickup_state']].')':"";  ?></span>
+								</p>
 							<?php 
+							}
+							else
+							{?>
+								<p>Destination City : &nbsp;
+									<span class="details"><?php echo ($request['city_id'])?$allCities[$request['city_id']]:"-- --"; ?><?php echo ($request['state_id'])?' ('.$allStates[$request['state_id']].')':""; ?>
+									<?php
+										if($request['category_id'] == 1){
+											if(count($request['hotels']) >1) {
+												unset($request['hotels'][0]);?><?php
+												foreach($request['hotels'] as $row) { ?>
+													<?php echo ($row['city_id'])?', '.$allCities[$row['city_id']]:""; ?><?php echo ($row['state_id'])?' ('.$allStates[$row['state_id']].')':"";  
+												}  
+											}  
+										}?>
+									</span>
+								</p>
+							<?php
+							}
 							if($request['category_id'] == 3 ) { ?>
 								<p>Start Date : &nbsp;
 									<span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
@@ -336,29 +357,6 @@ legend
 								<span class="details"><?php echo $request['adult'] +   $request['children']; ?></span>
 							</p>
 							<?php 
-							if($request['category_id']==2){ ?>
-								<p>Pickup City : &nbsp;
-									<span class="details"><?php echo ($request['pickup_city'])?$allCities[$request['pickup_city']]:"-- --"; ?><?php echo ($request['pickup_state'])?' ('.$allStates[$request['pickup_state']].')':"";  ?></span>
-								</p>
-							<?php 
-							}
-							else
-							{?>
-								<p>Destination City : &nbsp;
-									<span class="details"><?php echo ($request['city_id'])?$allCities[$request['city_id']]:"-- --"; ?><?php echo ($request['state_id'])?' ('.$allStates[$request['state_id']].')':""; ?>
-									<?php
-										if($request['category_id'] == 1){
-											if(count($request['hotels']) >1) {
-												unset($request['hotels'][0]);?><?php
-												foreach($request['hotels'] as $row) { ?>
-													<?php echo ($row['city_id'])?', '.$allCities[$row['city_id']]:""; ?><?php echo ($row['state_id'])?' ('.$allStates[$row['state_id']].')':"";  
-												}  
-											}  
-										}?>
-									</span>
-								</p>
-							<?php
-							}
 							$pid=$request['id'];
 							?>
 							<p>Comment : &nbsp;
@@ -366,11 +364,11 @@ legend
 								<?php echo mb_strimwidth($request['comment'], 0, 25, "...");?></span>
 							</p>
 							<hr></hr> 
-							<div class="col-md-12">
-							<table width="100%">
+							 
+							<table width="100%" border="0">
 							<tr>
-								<td>
-									<a class="viewdetail btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"data-target="#myModal1<?php echo $request['id']; ?>"data-toggle=modal> Details</a>
+								<td width="33%">
+									<a style="width:99%" class="viewdetail btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"data-target="#myModal1<?php echo $request['id']; ?>"data-toggle=modal> Details</a>
 									<div class="fade modal"id="myModal1<?php echo $request['id']; ?>"role=dialog>
 										<div class=modal-dialog>
 											<div class=modal-content>
@@ -383,26 +381,26 @@ legend
 										</div>
 									</div>
 								</td>
-								<td>
-									<a href=javascript:void(0); class="removeRequest btn btn-danger btn-sm" request_id="<?php echo $request['id']; ?>">Remove</a>
+								<td width="33%">
+									<a style="width:99%" href=javascript:void(0); class="removeRequest btn btn-danger btn-sm" request_id="<?php echo $request['id']; ?>">Remove</a>
 								</td>
-								<td>
+								<td width="33%">
 									<div class="check_responses" id="checkresponse_<?php echo $request['id'];?>">
 										<?php if($data['responsecount'][$pid] > 0 ) 
 										{ ?>
-											 <a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$pid)) ?>"class="check_responses_btn btn btn-success btn-sm"> Check Response (<strong><?php echo $data['responsecount'][$pid]; ?></strong>) </a>
+											 <a style="width:99%" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$pid)) ?>"class="check_responses_btn btn btn-success btn-sm"> Check Response (<strong><?php echo $data['responsecount'][$pid]; ?></strong>) </a>
 										  <?php 
 										} 
 										else 
 										{ ?>
-											<a href=# class="check_responses_btn btn btn-success btn-sm"> No Response</a>
+											<a style="width:99%" class="check_responses_btn btn btn-warning btn-sm"> No Response</a>
 										<?php 
 										} ?>
 									</div>
 								</td>
 							</tr>
 							</table>
-							</div>
+							 
 					</fieldset>
                   </div>
                   <?php } ?>

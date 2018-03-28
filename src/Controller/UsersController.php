@@ -1543,6 +1543,14 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgethl") {
 		$sort['Requests.total_budget'] = "DESC";
 		}
+		//--
+		if(!empty($this->request->query("sort")) && $this->request->query("sort")=="resposesnolh") {
+			$sortq['COUNT(Responses.request_id)'] = "ASC";
+		}
+		if(!empty($this->request->query("sort")) && $this->request->query("sort")=="resposesnohl") {
+			$sortq['COUNT(Responses.request_id)'] = "DESC";
+		}
+		//--
 		if ($this->Auth->user('role_id') == 1) {
 		$requests = $this->Requests->find()
 		->contain(["Users","Hotels"])
@@ -1550,13 +1558,17 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		}
 		if ($this->Auth->user('role_id') == 2) {
 			$requests = $this->Requests->find()
-				->contain(["Users","Hotels"])
+				->contain(["Users","Hotels","Responses"=>function($q){
+					return $q->order($sortq);
+				}])
 				->where($conditions)->order($sort)->all();
 		}
 		if ($this->Auth->user('role_id') == 3) {
 			$conditions["Requests.category_id "] = 3;
 			$requests = $this->Requests->find()
-				->contain(["Users","Hotels"])
+				->contain(["Users","Hotels","Responses"=>function($q){
+					return $q->order($sortq);
+				}])
 				->where($conditions)->order($sort)->all();
 		}
 		$data = array();
