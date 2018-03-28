@@ -69,6 +69,7 @@ hr { margin-top:0px!important;}
 	<?php echo $this->Html->css('/assets/login/daterangepicker/daterangepicker.css'); ?>
 	<?php echo $this->Html->css('/assets/login/css/util.css'); ?>
 	<?php echo $this->Html->css('/assets/login/css/main.css'); ?>
+	<?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Raleway'); ?>
 	<style>
 		.bgdiv { background-image: url('../webroot/assets/login/login_background.jpg'); }
 		.p-b-34 { padding-bottom: 10px !important; }

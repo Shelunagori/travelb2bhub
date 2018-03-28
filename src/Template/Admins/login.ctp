@@ -1,35 +1,83 @@
-<div class="container">
-	<div class="row">
-		<div class="col-md-4 col-md-offset-4">
-			
-			<div class="mes-box"><?= $this->Flash->render() ?></div>
-			<div class="login-panel panel panel-default animated fadeInDown">
-				<div class="panel-heading">
-					 <h3 class="panel-title">Please Sign In</h3></div>
-				<div class="panel-body">
-					<div class="logo-holder">
-					<?php echo $this->Html->Image('/packages/serverfireteam/panel/img/logo.png'); ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Travel B2B HUB</title>
+	 <?php echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?> 	
+	<?php echo $this->Html->css('/assets/login/fonts/iconic/css/material-design-iconic-font.min.css'); ?>
+	<?php echo $this->Html->css('/assets/login/animate/animate.css'); ?>
+	<?php echo $this->Html->css('/assets/login/css-hamburgers/hamburgers.min.css'); ?>
+	<?php echo $this->Html->css('/assets/login/animsition/css/animsition.min.css'); ?>
+	<?php echo $this->Html->css('/assets/login/select2/select2.min.css'); ?>
+	<?php echo $this->Html->css('/assets/login/daterangepicker/daterangepicker.css'); ?>
+	<?php echo $this->Html->css('/assets/login/daterangepicker/daterangepicker.css'); ?>
+	<?php echo $this->Html->css('/assets/login/css/util.css'); ?>
+	<?php echo $this->Html->css('/assets/login/css/main.css'); ?>
+	<?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Raleway'); ?>
+	<style>
+		.bgdiv { background-image: url('../webroot/assets/login/login_background.jpg'); }
+		.p-b-34 { padding-bottom: 10px !important; }
+		.login100-form-title { font-size:25px; }
+		.wrap-login100 { background:#1f222db8 !important; width:420px !important; padding: 18px 55px 37px 55px; }
+		.p-t-27 { padding-top: 10px; }
+		.error { color: #ff9898; text-align:center; }
+		.alert-warning{ color:#FFF !important;}
+		.alert-danger{ width:95% !important;}
+	</style>
+</head>
+<body>
+	<div class="limiter">
+		<div class="container-login100 bgdiv">
+			<div class="wrap-login100">
+					<center>
+						<?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:20%;']) ?>
+					</center>
+					<span class="login100-form-title p-b-34 p-t-27">
+						TRAVEL B2b HUB
+					</span>			
+				 <?php echo $this->Flash->render(); ?> 
+				 
+                <?php  echo $this->Form->create(null, ['url' => ['controller' => 'Admins', 'action' => 'login'],'id'=>"UserLoginForm", 'class'=>'login100-form validate-form']); ?>
+					<div class="wrap-input100 validate-input" data-validate = "Enter username">
+						<input class="input100" type="text" name="email" placeholder="Email">
 					</div>
-					<form method="POST" accept-charset="UTF-8">
-						<fieldset>
-							<div class="form-group">
-								<input class="form-control" placeholder="Email" name="email" type="text" autofocus="">
-							</div>
-							<div class="form-group">
-								<input class="form-control" placeholder="Password" name="password" type="password" value="">
-							</div>
-							<div class="checkbox">
-								<label>
-									<input name="remember" type="checkbox" value="Remember Me">
-									Remember Me
-								</label>
-							</div>
-							<!-- Change this to a button or input when using this as a form -->
-							<input type="submit" class="btn btn-lg btn-success btn-block" value="Login ">
-						</fieldset>
-					</form>
-				</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" type="password" name="password" placeholder="Password">
+					</div>
+
+					<div class="contact100-form-checkbox">
+						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+						<label class="label-checkbox100" for="ckb1">
+							Keep me singed in
+						</label>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" style="width: 100%;">
+							Login
+						</button>
+ 					</div>
+
+					<div class="text-center p-t-90" style="padding-top: 20px; visibility:hidden">
+						<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'forgotPassword')) ?>">
+							Forgot your password?
+						</a>
+					</div>
+					 					
+				<?php echo $this->Form->end();?>
 			</div>
 		</div>
 	</div>
-</div>
+	<div id="dropDownSelect1"></div>
+
+<?php echo $this->Html->script('/assets/login/jquery/jquery-3.2.1.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/animsition/js/animsition.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/bootstrap/js/popper.js'); ?>
+<?php echo $this->Html->script('/assets/login/bootstrap/js/bootstrap.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/select2/select2.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/daterangepicker/moment.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/daterangepicker/daterangepicker.js'); ?>
+<?php echo $this->Html->script('/assets/login/countdowntime/countdowntime.js'); ?>
+<?php echo $this->Html->script('/assets/login/js/main.js'); ?>
+</body>
+</html>

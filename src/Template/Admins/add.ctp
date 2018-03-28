@@ -11,6 +11,7 @@
 			</div>
 			<div class="box-body"> 
 				<div class="form-group">
+				<?php echo $this->Flash->render(); ?> 
 				<?= $this->Form->create($admin,['id'=>'CityForm']) ?>
 					<div class="row">
 						<div class="col-md-4">

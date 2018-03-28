@@ -37,10 +37,10 @@ legend
 
 <div class="box box-default">
 	<div class="box-header with-border"> 
-		<h3 class="box-title" style="padding:20px">My Requests</h3>
+		<h3 class="box-title" style="padding:5px">My Requests</h3>
 		<div class="box-tools pull-right">
-			<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-			<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+			<!--<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>-->
+			<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 		</div>
 		 
 	</div>
@@ -110,7 +110,7 @@ legend
 				</div>
 			</div>
                <div class="fade modal form-modal" id="myModal122" role="dialog">
-                  <div class="modal-dialog " style="width:35%;" >
+                  <div class="modal-dialog " style="width:35%;">
                      <div class=modal-content>
                         <div class=modal-header>
                            <button class="close" data-dismiss="modal" type="button">&times;</button>
@@ -290,6 +290,9 @@ legend
 						<div class="contain">
 							
 							<p>Request Type : &nbsp;<?php echo $text; ?></p>
+							<p>Reference ID : &nbsp;
+								<span class="details"><?php echo $request['reference_id']; ?></span>
+							</p>
 							<p>Total Budget : &nbsp;
 								<span class="details"><?php echo $request['total_budget']; ?></span>
 							</p>
@@ -328,9 +331,7 @@ legend
 							<?php
 							}
 							?>
-							<p>Reference ID : &nbsp;
-								<span class="details"><?php echo $request['reference_id']; ?></span>
-							</p>
+							
 							<p>Members : &nbsp;
 								<span class="details"><?php echo $request['adult'] +   $request['children']; ?></span>
 							</p>

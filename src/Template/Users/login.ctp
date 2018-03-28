@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
 	<title>Travel B2B HUB</title>
-	 <?php echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
+	 <?php echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?> 	
 	<?php echo $this->Html->css('/assets/login/fonts/iconic/css/material-design-iconic-font.min.css'); ?>
 	<?php echo $this->Html->css('/assets/login/animate/animate.css'); ?>
 	<?php echo $this->Html->css('/assets/login/css-hamburgers/hamburgers.min.css'); ?>
@@ -22,6 +21,7 @@
 		.p-t-27 { padding-top: 10px; }
 		.error { color: #ff9898; text-align:center; }
 		.alert-warning{ color:#FFF !important;}
+		.alert-danger{ width:95% !important;}
 	</style>
 </head>
 <body>

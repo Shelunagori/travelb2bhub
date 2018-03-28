@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+<?php
+ 
+?><!DOCTYPE html>
 <html>
 <head>
   <?php  echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
@@ -122,10 +124,7 @@ margin-top: 5px !important;
    }
 }
 .nav navbar-nav li {color:#848688 !important;}
-.skin-blue sidebar-mini.user-panel {
-	height: 160px !important;
-	
-}
+ 
 .user-panel img
 {
 	border-radius: 100%;
@@ -191,8 +190,7 @@ margin-top: 5px !important;
 	.user-panel
 	{
 		background: #057F8A !important;
-		height: 169px;
-	}
+ 	}
 </style>
 <style>
  
@@ -226,9 +224,9 @@ $page_name=$this->request->params['action'];
   <header class="main-header">
     <!-- Logo -->
     <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo">
-      <span class="logo-mini"><?=  $this->Html->image('webroot/img/b2b-logo.png', ['style'=>'width:77%;']) ?></span>
+      <span class="logo-mini"><?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:77%;']) ?></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><?=  $this->Html->image('webroot/img/b2b-logo.png', ['style'=>'width:94%;']) ?></span>
+      <span class="logo-lg"><?=  $this->Html->image('/img/main_logo.png', ['style'=>'width:92%;']) ?></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -415,23 +413,9 @@ $page_name=$this->request->params['action'];
 		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'profileedit/'.$loginId]); ?>" class="logo">Edit Profile</a> | &nbsp;
 		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'change_password']); ?>" class="logo">Reset Password</a>
         </div>
-      </div>
-      
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu">
-       <!-- <li class="active treeview">
-          <a href="#">
-            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-          </ul>
-        </li> -->
-		
+    </div>
+    <ul class="sidebar-menu">
+ 		
 		<li <?php if($page_name=='dashboard'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 		<?php
 		if($roleId == 1 || $roleId == 2)

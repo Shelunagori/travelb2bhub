@@ -301,8 +301,7 @@ margin-top: 5px !important;
 <div class="content-wrapper">
 	 <section class="content">
 		<div class="row">
-		<?= $this->Flash->render() ?>
-
+			<?php echo $this->Flash->render(); ?>
 			<?php echo $this->fetch('content'); ?>
 		</div>
 	 </section>
