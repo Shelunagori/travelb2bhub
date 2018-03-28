@@ -153,9 +153,10 @@ ul li b {
 							$hotel_category = "";
 							foreach($result as $row1)
 							{
+								
 								$hotel_category.= "" . $hotelCategories[$row1] . " , ";
 
-								// echo $count.". ".$hotelCategories[$row1].", ";
+								//echo $count.". ".$hotelCategories[$row1].", ";
 
 								$count++;
 							}
