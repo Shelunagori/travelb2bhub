@@ -817,9 +817,9 @@ $(document).ready(function($){
 										</div>
 										<div class="col-md-4">
 											<div class="input-field">
-														<p for="from">
-															End Date
-														</p>
+												<p for="from">
+													End Date
+												</p>
 											</div>
 											<div class="input-group">
 												 <input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker4" placeholder="DD-MM-YYYY"/>
@@ -1805,10 +1805,10 @@ $(document).ready(function () {
         
             e.preventDefault();
             var strHtml = '<div class="stop col-md-12 main_row"><div class="stop-title"><b>Stop ' +packageI+ '</b> </div><div class="row"> <br>';
-        	strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="stops[' +packageI+ ']"></div></div>';
+        	strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality,Village or Town" name="stops[' +packageI+ ']"></div></div>';
         	strHtml += '<div class="col-sm-4 mt"><p for="from">Stop City</p><input class="trans_city form-control city_select ctynamerecord" noofrows="5" taxboxname="state_id_package_stop_city[' +packageI+ ']" type="text" placeholder="Select City or Nearest City" use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" class="ctyIDname" name="id_package_stop_city[' +packageI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div> ';
         	strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly></div></div></div></div>';
-        	strHtml += '<div align="right" style="margin-top:10px"><button aligh="right" class="btn btn-danger btn-sm package_remove_stop">Remove Stop</button></div>';
+        	strHtml += '<div align="right" style="margin-top:10px"><button aligh="right" class="btn btn-danger btn-sm package_remove_stop"><i class="fa fa-minus" style="width:20px;"></i></button></div>';
          strHtml += ' <hr class="hr"></hr></div>';
         $(".package-stops").append(strHtml);
         	packageI++;
@@ -1831,10 +1831,10 @@ var gg = 1;
         $(".transport-stop-add").click(function(e){
 				e.preventDefault();
 				var strHtml = '<div class="stop col-md-12"><div class="stop-title"> <b> Stop ' +transI+ '</b></div><br><div class="row main_row">';
-				strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="stops[' +transI+ ']"></div></div>';
+				strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality, Village or Town" name="stops[' +transI+ ']"></div></div>';
 				strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control ctynamerecord city_select" type="text" noofrows="4" taxboxname="state_id_trasport_stop_city[' +transI+ ']" placeholder="Select City or Nearest City" use_for = "trasport" numCount = ' +transI+ ' id="trasport_stop_city[' +transI+ ']" name="trasport_stop_city[' +transI+ ']"><input type="hidden" class="ctyIDname" id="id_trasport_stop_city[' +transI+ ']" name="id_trasport_stop_city[' +transI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div></div>';
 				strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_trasport_stop_city[' +transI+ ']" name="state_id_trasport_stop_city[' +transI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_trasport_stop_city[' +transI+ ']" name="state_name_trasport_stop_city[' +transI+ ']" readonly></div></div></div></div>';
-				strHtml += '<div align="right" style="margin-top:10px;"><button class="btn btn-danger btn-sm transport_remove_stop but"> Remove Stop </button></div>';
+				strHtml += '<div align="right" style="margin-top:10px;"><button class="btn btn-danger btn-sm transport_remove_stop but"> <i class="fa fa-minus"></i> </button><button class="btn btn-primary btn-sm package-stop-add " style="background-color:#1295A2;width:50px;"><i class="fa fa-plus"></i></button></div>';
 				strHtml += ' <hr class="hr"></hr></div>';
 				$(".transport-stops").append(strHtml);
 				transI++;
