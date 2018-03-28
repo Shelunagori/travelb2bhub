@@ -2776,7 +2776,6 @@ $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField
 	else if ($_POST['role_id'] == 3) { /// Hotel
 	
 		$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
-		
 		$requests = $this->Requests->find()
 		->contain(["Users", "Responses","Hotels"])
 		->notMatching('Responses', function ($q)use($userid) {

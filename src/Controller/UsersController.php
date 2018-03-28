@@ -1892,54 +1892,54 @@ $sort['Users.last_name'] = "DESC";
 }
 $conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
 if(!empty($this->request->query("agentnamesearch"))) {
-$keyword1 = '';
-$keyword2 = '';
-$keyword = trim($this->request->query("agentnamesearch"));
-$keyword = explode(' ',$keyword);
-if(isset($keyword[1])) {
-$keyword2 = $keyword[1];
-}
-$conditions["AND"] = array("Users.first_name LIKE "=>"%". $keyword[0]."%", "Users.last_name LIKE" => "%".$keyword2."%",);
+	$keyword1 = '';
+	$keyword2 = '';
+	$keyword = trim($this->request->query("agentnamesearch"));
+	$keyword = explode(' ',$keyword);
+	if(isset($keyword[1])) {
+		$keyword2 = $keyword[1];
+	}
+	$conditions["AND"] = array("Users.first_name LIKE "=>"%". $keyword[0]."%", "Users.last_name LIKE" => "%".$keyword2."%",);
 }
 if(!empty($this->request->query("destination_city"))) {
-$conditions["Requests.city_id"] =  $this->request->query("destination_city");
+	$conditions["Requests.city_id"] =  $this->request->query("destination_city");
 }
 if(!empty($this->request->query("pickup_city"))) {
-$conditions["Requests.pickup_city"] =  $this->request->query("pickup_city");
+	$conditions["Requests.pickup_city"] =  $this->request->query("pickup_city");
 }
 if(!empty($this->request->query("req_typesearch"))) {
-$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
+	$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
 }
 if(!empty($this->request->query("budgetsearch"))) {
-$QPriceRange = $this->request->query("budgetsearch");
-$result = explode("-", $QPriceRange);
-$MinQuotePrice = $result[0];
-$MaxQuotePrice = $result[1];
-$conditions["Requests.total_budget >="] = $MinQuotePrice;
-$conditions["Requests.total_budget <="] = $MaxQuotePrice;
+	$QPriceRange = $this->request->query("budgetsearch");
+	$result = explode("-", $QPriceRange);
+	$MinQuotePrice = $result[0];
+	$MaxQuotePrice = $result[1];
+	$conditions["Requests.total_budget >="] = $MinQuotePrice;
+	$conditions["Requests.total_budget <="] = $MaxQuotePrice;
 }
 if(!empty($this->request->query("refidsearch"))) {
-$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
+	$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
 }
 $sdate = $this->request->query("startdatesearch");
 $sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
 if(!empty($this->request->query("startdatesearch"))) {
-$da["Requests.start_date"] =  $sdate;
-$da["Requests.check_in"] =  $sdate;
-$conditions["OR"] =  $da;
+	$da["Requests.start_date"] =  $sdate;
+	$da["Requests.check_in"] =  $sdate;
+	$conditions["OR"] =  $da;
 }
 $edate = $this->request->query("enddatesearch");
 if(isset($edate) AND !empty($edate)){
-$date = str_replace('/', '-', $edate);
-$edate = date('Y-m-d', strtotime($date));
+	$date = str_replace('/', '-', $edate);
+	$edate = date('Y-m-d', strtotime($date));
 }else{
-$edate = null;		
+	$edate = null;		
 }
 //echo  $edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
 if(!empty($this->request->query("enddatesearch"))) {
-$da1["Requests.end_date"] =  $edate;
-$da1["Requests.check_out"] = $edate;
-$conditions["OR"] =  $da1;
+	$da1["Requests.end_date"] =  $edate;
+	$da1["Requests.check_out"] = $edate;
+	$conditions["OR"] =  $da1;
 }
 $allStates = $this->States->find('list',['keyField' => 'id', 'valueField' => 'state_name'])
 ->hydrate(false)
@@ -1956,34 +1956,40 @@ if(!empty($BlockedUsers)) {
 $BlockedUsers = array_values($BlockedUsers);
 }
 array_push($BlockedUsers,$this->Auth->user('id'));
+$userid=$this->Auth->user('id');
 $BlockedUsers = array_unique($BlockedUsers);
-if ($this->Auth->user('role_id') == 1) { // Travel Agent
-if(!empty($user["preference"])) {
-$conditionalStates = array_unique(array_merge(explode(",", $user["preference"]), array($user["state_id"])));
-} else {
-$conditionalStates = $user["state_id"];
-}
-$requests = $this->Requests->find()
-->contain(["Users", "Responses","Hotels"])
-->notMatching('Responses', function(\Cake\ORM\Query $q) {
-return $q->where(['Responses.user_id' => $this->Auth->user('id')]);
-})
-->where(["OR"=>['Requests.state_id IN' => $conditionalStates, 'Requests.pickup_state IN' => $conditionalStates], 'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
-->group('Requests.id')
-->order($sort)->all();
-} else if ($this->Auth->user('role_id') == 2) { /// Event Planner
-$requests = $this->Requests->find()
-->contain(["Users","Hotels"])
-->where(['Requests.pickup_state' => $user["state_id"], 'Requests.category_id' => 2, "Requests.status !="=>2, "Requests.is_deleted"=>0, $conditions])->order($sort)->all();
-}else if ($this->Auth->user('role_id') == 3) {
-$requests = $this->Requests->find()
-->contain(["Users", "Responses","Hotels"])
-->notMatching('Responses', function(\Cake\ORM\Query $q) {
-return $q->where(['Responses.user_id' => $this->Auth->user('id')]);
-})
-->where(['Requests.city_id' => $user['city_id'], 'Requests.category_id' => 3, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
-->order($sort)->all();
-}
+	if ($this->Auth->user('role_id') == 1) { // Travel Agent
+		if(!empty($user["preference"])) {
+			$conditionalStates = array_unique(explode(",", $user["preference"]));
+		} else {
+			$conditionalStates =  $user["state_id"];
+		}
+		$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
+		$requests = $this->Requests->find()
+		->contain(["Users", "Responses"])
+		->notMatching('Responses', function ($q)use($userid) {
+			return $q->where(['Responses.user_id' => $userid]);
+		})
+		->where(["OR"=>['Requests.state_id IN' => $conditionalStates, 'Requests.pickup_state IN' => $conditionalStates],$conditions, 'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0])
+		->order($sort);
+	} 
+	else if ($this->Auth->user('role_id') == 2) { /// Event Planner
+		$requests = $this->Requests->find()
+			->contain(["Users","Hotels"])
+			->where(['Requests.pickup_state' => $user["state_id"], 'Requests.category_id' => 2, "Requests.status !="=>2, "Requests.is_deleted"=>0])
+			->order($sort);
+	}
+	else if ($this->Auth->user('role_id') == 3) {
+		$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
+		$requests = $this->Requests->find()
+		->contain(["Users", "Responses","Hotels"])
+		->notMatching('Responses', function ($q)use($userid) {
+			return $q->where(['Responses.user_id' => $userid]);
+		})
+		->where(['Requests.city_id' => $user['city_id'],'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
+		->order($sort);
+	}
+	 
 $loggedinid = $this->Auth->user('id');
 $data = array();
 foreach($requests as $req){

@@ -3,6 +3,10 @@
 legend{
 	text-align: center;
 }
+.details {color:#000 !important; font-weight: 400;}	
+	li > p{
+		color:#96989A !important;
+	}
 </style>
 <?php
 use Cake\Datasource\ConnectionManager; 
@@ -11,17 +15,16 @@ $conn = ConnectionManager::get('default');
 <div class=container-fluid id="requestlist">
 <div class="row equal_column" > 
     <div class="col-md-12" style="background-color:#fff"> 
-		<br>
-		<?php echo $this->element('subheader');?>
+		<br> 
 		<?php echo  $this->Flash->render() ?>
 	</div>
 <div class="col-md-12" style="background-color:#fff"> 
 	<div class="box box-default">
 		<div class="box-header with-border"> 
-			<h3 class="box-title" style="padding:20px">My Responses</h3>
+			<h3 class="box-title" style="padding:5px">My Responses</h3>
 				<div class="box-tools pull-right">
-					<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-					<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+					<!--<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>-->
+					<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 				</div>
 			</div>
 <div class="box-body">
@@ -259,7 +262,7 @@ $conn = ConnectionManager::get('default');
 								   <a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'myresponselist')) ?>">Reset</a>
 								</div>
 							</div>
-							 <script>
+							<script>
 									   $('#datepicker1').datepicker({
 												dateFormat: 'dd/mm/yy',
 												changeMonth: true,
@@ -308,7 +311,7 @@ $(document).ready(function(){
 									
 		if(count($responses) >0) {
 			$total_responses = count($responses);
-		$m =0;
+			$m =0;
 			foreach($responses as $response){
 			//$blockedUser['blockedUser'][$response['id']]
 			$totmem = $response['request']['adult'] +  $response['request']['children']; 
@@ -319,7 +322,7 @@ $(document).ready(function(){
 				continue;
 			}
 			if($blockedUser['blockedUser'][$response['id']]==1) { $total_responses--; }else{
-			if($m%3==0) { echo '<div class="clearfix"></div>'; }
+			if($m%3==0) { echo ''; }
 			$m++;
  			?>
             <div class="col-md-4">
@@ -345,40 +348,40 @@ $(document).ready(function(){
 					 <span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
 					 <div class="contain">
                  <ul>
-                 <li class="col-md-12">
-                    <p>
-                        <b>Request Type  : </b> <?php echo $text; ?>
-                    </p>
-                 </li>
-				<li class="col-md-12">
+				 <li class="">
 					<p>
-						<b>Total Budget : </b> <?php echo ($response['request']['total_budget'])? "Rs. ". $response['request']['total_budget'] :"-- --" ?>
-					</p>
-				 </li>
-				 <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-				 <p>
                         <?php if($response['is_details_shared']==1){
 								$hrefurl =  "viewprofile/".$response['request']['user_id']."/1";                      
                         }else{
 								$hrefurl =  "viewprofile/".$response['request']['user_id']."/";                       
                         }?>
-                            <b>Agent Name:</b> <a href="<?php echo $hrefurl;?>"><?php echo $response['request']['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $response['request']['user']['last_name']; ?></a>
-							
-                            <?php if(in_array($response['request']['user_id'],$BusinessBuddies)) {  echo $this->Html->image('friend-ico1.png', [ "height"=>20]); } ?> 
+                            To : <span class="details"> <a href="<?php echo $hrefurl;?>"><?php echo $response['request']['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $response['request']['user']['last_name']; ?></a>
+							<?php if(in_array($response['request']['user_id'],$BusinessBuddies)) {  echo $this->Html->image('friend-ico1.png', [ "height"=>20]); } ?> 
 					
 					</p>
 				</li>
-				<li class="col-md-12">
-					 <p><b>Quotation Price : </b> <?php echo ($response['quotation_price'])? " Rs. ".$response['quotation_price']:"-- --" ?></p>
+                 <li>
+                    <p>
+                        Request Type  : <span class="details"> <?php echo $text; ?>
+                    </p>
+                 </li>
+				<li >
+					<p>
+						Total Budget : <span class="details"> &#8377; <?php echo ($response['request']['total_budget'])? "Rs. ". $response['request']['total_budget'] :"-- --" ?>
+					</p>
+				 </li>
+				 
+				<li class="">
+					 <p>Quotation Price : <span class="details"> <?php echo ($response['quotation_price'])? " &#8377; ".$response['quotation_price']:"-- --" ?></p>
 				</li>
-                <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 destination">
+                <li class=" destination">
 				   <?php if($response['request']['category_id']==2){ ?>
                   <p>
-                   <b>Pickup City : </b><span> <?php echo ($response['request']['pickup_city'])?$allCities[$response['request']['pickup_city']]:"-- --"; ?><?php echo ($response['request']['pickup_state'])?' ('.$allStates[$response['request']['pickup_state']].')':"";  ?></span>
+                   Pickup City : <span class="details"><span> <?php echo ($response['request']['pickup_city'])?$allCities[$response['request']['pickup_city']]:"-- --"; ?><?php echo ($response['request']['pickup_state'])?' ('.$allStates[$response['request']['pickup_state']].')':"";  ?></span>
 
                   <?php } else { ?>
                         <p>
-                        <b>Destination City : </b> <span><?php echo ($response['request']['city_id'])?$allCities[$response['request']['city_id']]:"-- --"; ?> <?php echo ($response['request']['state_id'])?' ('.$allStates[$response['request']['state_id']].')':""; ?>
+                        Destination City : <span class="details"> <span><?php echo ($response['request']['city_id'])?$allCities[$response['request']['city_id']]:"-- --"; ?> <?php echo ($response['request']['state_id'])?' ('.$allStates[$response['request']['state_id']].')':""; ?>
                         <?php if($response['request']['category_id'] == 1){
 						if(count($response['request']['hotels']) >1) {
 							unset($response['request']['hotels'][0]);
@@ -392,72 +395,78 @@ $(document).ready(function(){
                         <?php } ?>
                  </li>
 				<?php if($response['request']['category_id'] == 3 ) { ?>
-					<li class="col-md-12">
+					<li class="">
                         <p>
-                            <b>Start Date : </b> <?php echo ($response['request']['check_in'])?date("d/m/Y", strtotime($response['request']['check_in'])):"-- --"; ?>
+                            Start Date : <span class="details"> <?php echo ($response['request']['check_in'])?date("d/m/Y", strtotime($response['request']['check_in'])):"-- --"; ?>
                         </p>
                      </li>
-					<li class="col-md-12">
+					<li class="">
                         <p>
-                            <b>End Date : </b> <?php echo ($response['request']['check_out'])?date("d/m/Y", strtotime($response['request']['check_out'])):"-- --"; ?>
+                            End Date : <span class="details"> <?php echo ($response['request']['check_out'])?date("d/m/Y", strtotime($response['request']['check_out'])):"-- --"; ?>
                         </p>
                     </li>
 				<?php } elseif($response['request']['category_id'] == 1 ) {
-$sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$response['request']['id']."'";
+					$sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$response['request']['id']."'";
 						$stmt = $conn->execute($sql);
 						$result = $stmt ->fetch('assoc');						
 					?>
-					<li class="col-md-12">
+					<li class="">
                         <p>
-                            <b>Start Date : </b> <?php echo ($response['request']['check_in'])?date("d/m/Y", strtotime($response['request']['check_in'])):"-- --"; ?>
+                            Start Date : <span class="details"> <?php echo ($response['request']['check_in'])?date("d/m/Y", strtotime($response['request']['check_in'])):"-- --"; ?>
                         </p>
                      </li>
-					<li class="col-md-12">
+					<li class="">
                         <p>
                         <?php if(!empty($result['TopDate'])) { ?>
-                        <b>End Date : </b> <?php echo date('d/m/Y',strtotime($result['TopDate'])); ?>
+                        End Date : <span class="details"> <?php echo date('d/m/Y',strtotime($result['TopDate'])); ?>
                         <?php }else{?>
-                        <b>End Date :</b> <?php echo ($response['request']['check_out'])?date("d/m/Y", strtotime($response['request']['check_out'])):"-- --"; ?>
+                        End Date :<span class="details"> <?php echo ($response['request']['check_out'])?date("d/m/Y", strtotime($response['request']['check_out'])):"-- --"; ?>
                         <?php }?>
                             
                         </p>
                      </li>
 				<?php } elseif($response['request']['category_id'] == 2 ) { ?>
-					<li class="col-md-12">
+					<li class="">
                         <p>
-                            <b>Start Date : </b> <?php echo ($response['request']['start_date'])?date("d/m/Y", strtotime($response['request']['start_date'])):"-- --"; ?>
+                            Start Date : <span class="details"> <?php echo ($response['request']['start_date'])?date("d/m/Y", strtotime($response['request']['start_date'])):"-- --"; ?>
                         </p>
                     </li>
-					<li class="col-md-12">
+					<li class="">
                         <p>
-                            <b>End Date : </b> <?php echo ($response['request']['end_date'])?date("d/m/Y", strtotime($response['request']['end_date'])):"-- --"; ?>
+                            End Date : <span class="details"> <?php echo ($response['request']['end_date'])?date("d/m/Y", strtotime($response['request']['end_date'])):"-- --"; ?>
                         </p>
                     </li>
 				<?php } ?>
-				                <li class="col-md-12">
+				                <li class="">
                         <p>
-                            <b>Members : </b> <?php echo $response['request']['adult'] +  $response['request']['children']; ?>
+                            Members : <span class="details"> <?php echo $response['request']['adult'] +  $response['request']['children']; ?>
                      </p>
                  </li>
 				 
 				
 	
 					
-                   <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comment">
-                       <p> <b>Comment :</b><span><?php echo $response['comment']; ?></span></p>
+                   <li class="">
+                       <p> Comment :<span class="details"><?php echo mb_strimwidth($response['comment'], 0, 25, "...");?></span></p>
                      </li>
                    </ul>
-				   </div>
+				   <hr></hr>
+				   
 				   <div class="">
-					<table width="100%" style="text-align:center">
+					<table width="100%" border="0" style="text-align:center">
 						<tr>
-							<td>
+							<td width="33%">
 							<?php $id = $response['request']['id'];
 							if( !array_key_exists($response["request"]["user_id"], $BusinessBuddies)) {?>
-								<a href="javascript:void(0);" class="businessBuddy btn btn-warning btn-sm" user_id = "<?php echo $response["request"]["user_id"]; ?>"> Business Buddy</a>
-							<?php }?>
-							<a data-toggle="modal" class="btn btn-info btn-sm" data-target="#myModal1<?php echo $response['id'];?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$id)) ?>"> Details</a>
-							
+								<a href="#" style="width:99%" class="btn btn-warning btn-sm"> Following</a>
+							<?php } 
+							else{ ?>
+								<a style="width:99%" href="javascript:void(0);" class="businessBuddy btn btn-warning btn-sm" user_id = "<?php echo $response["request"]["user_id"]; ?>"> Follow User</a><?php 
+							}
+							?>
+							</td>
+							<td width="33%">
+							<a style="width:99%" data-toggle="modal" class="btn btn-info btn-sm" data-target="#myModal1<?php echo $response['id'];?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$id)) ?>"> Details</a>
 							<div class="modal fade" id="myModal1<?php echo $response['id'];?>" role="dialog">
 								<div class="modal-dialog">
 								  <!-- Modal content-->
@@ -472,14 +481,10 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 								</div>
 							</div>
 						 <?php $userChats = $this->Response->getUserChats($response['request_id']); ?>
-							
-						<?php if(count($userChats) > 0) { ?>
-							<a data-toggle="modal" class="btn btn-success btn-sm" data-target="#myModalChat<?php echo $id; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $response['request_id'], $response["request"]["user_id"],2)) ?>">
+						</td>
+						<td width="33%">
+							<a style="width:99%" data-toggle="modal" class="btn btn-success btn-sm" data-target="#myModalChat<?php echo $id; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $response['request_id'], $response["request"]["user_id"],2)) ?>">
 							Chat ( <strong><?php echo $chatdata['chat_count'][$response['id']]; ?> </strong> )</a>
-							
-							<?php 
-							} ?>
-							
 							<div class="modal fade" id="myModalChat<?php echo $id; ?>" role="dialog">
 								<div class="modal-dialog">
 								
@@ -496,39 +501,43 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 								  
 								</div>
 							</div>
+							
 						</td>
 					</tr>
 				</table>
+				
 				<?php if($response['is_details_shared'] == 1) { ?>
-					<fieldset><legend><h4 class="text-center">User Contact Details</h4></legend>
+				<hr></hr>
+					<legend><h5 class="text-center">USER CONTACT DETAIL </h5></legend>
                         <ul>
-                       <li class="col-md-12">
+                       <li class="">
                             <p>
                                 <strong>Name :</strong> <?php echo $response['request']['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $response['request']['user']['last_name']; ?>  
                            </p>
                         </li>
-						<li class="col-md-12">
+						<li class="">
                             <p>
                                 <strong>Company Name :</strong> <?php echo ($response['request']['user']['company_name'])?$response['request']['user']['company_name']:"-- --"; ?>
                             </p>
                         </li>
-						<li class="col-md-12">
+						<li class="">
                             <p>
                                 <strong>Email :</strong> <?php echo ($response['request']['user']['email'])?$response['request']['user']['email']:"-- --"; ?>
                             </p>
                         </li>
-						<li class="col-md-12">
+						<li class="">
                             <p>
                                 <strong>Mobile No. :</strong> <?php echo ($response['request']['user']['mobile_number'])?$response['request']['user']['mobile_number']:"-- --"; ?>
                             </p>
                         </li>
-						<li class="col-md-12">
+						<li class="">
                             <p>
                                 <strong>Website :</strong> <?php echo ($response['request']['user']['web_url'])?$response['request']['user']['web_url']:"-- --"; ?>
                             </p>
                         </li>
-					</fieldset>
+					 
 				<?php  } ?>
+				</div>
 				</div>
 				</fieldset>
                   </div>
@@ -541,7 +550,7 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 		<?php }
 		
 		else {?>
-             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+             <div class=" ">
                 <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 box-event">
 					 <?php if(isset($_GET['req_typesearch'])){ echo "No matching data.";}else{ echo "You have not responded to any requests.";}?>
                 </div>
@@ -549,7 +558,7 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 		<?php } ?>
 		
 		<?php if(isset($total_responses) AND $total_responses==0){?>
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+				<div class=" ">
                 <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 box-event">
 					<?php if(isset($_GET['req_typesearch'])){ echo "No matching data.";}else{ echo "You have not responded to any requests.";}?>
                 </div>
