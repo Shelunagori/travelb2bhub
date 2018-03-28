@@ -21,10 +21,10 @@ $conn = ConnectionManager::get('default');
 
 <div class="box box-default">
 	<div class="box-header with-border"> 
-		<h3 class="box-title" style="padding:20px">Finalized Requests</h3>
+		<h3 class="box-title" style="padding:5px">Finalized Requests</h3>
 		<div class="box-tools pull-right">
-			<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-			<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+			<!--<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>-->
+			<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 		</div>
 		 
 	</div>
@@ -67,6 +67,10 @@ $conn = ConnectionManager::get('default');
         <form method="get" class="filter_box">
             
         <div class="col-md-12">
+			<div class="col-md-6">
+				<label for="example-text-input" class=" col-form-label">Reference ID: </label>
+                <input type="text" name="refidsearch" value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>"  class="form-control">
+            </div>
            <div class="col-md-6">            
            <label for="example-text-input" class=" col-form-label">Request Type: </label>
 			   <select name="req_typesearch" class="form-control"><option value="">Select Request Type</option><option value="1">Package</option><option value="3">Hotel</option><option value="2">Transport</option></select>
@@ -83,35 +87,38 @@ $conn = ConnectionManager::get('default');
            
            <div class="col-md-6">
 			<label for="example-text-input" class=" col-form-label">Start Date: </label>
-                <input type="text" id="datepicker1"  name="startdatesearch" value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"  class="form-control">
+                <input type="text" id="datepicker1"  name="startdatesearch" value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"  class="form-control datepicker">
            </div>
         
            <div class="col-md-6">  
 			<label for="example-text-input" class=" col-form-label">End Date: </label>           
-               <input type="text" id="datepicker2" name="enddatesearch" value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"  class="form-control" >
+               <input type="text" id="datepicker2" name="enddatesearch" value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"  class="form-control datepicker" >
             </div>
     
            
-           <div class="col-md-6">
-			<label for="example-text-input" class=" col-form-label">Reference ID: </label>
-                <input type="text" name="refidsearch" value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>"  class="form-control">
-            </div>
+			
       
           
-           <div class="col-md-6">  
+           <!--<div class="col-md-6">  
 			 <label for="example-text-input" class=" col-form-label">Members: </label>		   
                 <input type="text" name="memberssearch" value="<?php echo isset($_GET['memberssearch'])? $_GET['memberssearch']:''; ?>"  class="form-control">
-           </div>
+           </div>-->
        </div>
-            
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <input type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">
-        <a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'finalized-request-list')) ?>">Reset</a>
+          
+    <div class="modal-footer">
+		<div class="row form-group">			  
+			<div class="col-md-12 text-center" style="margin-top:10px">
+	
+			<input type="submit" name="submit" value="Apply"  class="btn btn-primary btn-submit">
+			<a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'finalized-request-list')) ?>">Reset</a>
+		</div>
+	</div>
    </div>
    </form>
    <script>
    $(document).ready(function(){
-   $('#datepicker1').datepicker({
+	   $('.datepicker').datepicker();
+		$('#datepicker1').datepicker({
 			dateFormat: 'dd/mm/yy',
 			changeMonth: true,
 			changeYear: true,
@@ -192,35 +199,35 @@ $(".req").sort(function (a, b) {
 				<legend><?php echo $image; ?></legend>
 				<span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
                     <ul>
-                      <li class="col-md-12">
+                      <li >
                      <p>
 						Request Type : <span class="details"><?php  echo $text; ?></span>
                     </p>
                     </li>
                     
-                     <li class="col-md-12">
+                     <li >
                         <p>
                             Total Budget : <span class="details">Rs. <?php echo $request['total_budget']; ?></span>
                         </p>
                     </li>
-                    <li class="col-md-12">
+                    <li >
                         <p>
                             Agent Name : <span class="details"><a href="viewprofile/<?php echo $finalresponse[$request['id']]['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$finalresponse[$request['id']]['user_id']]); ?></a></span>
                         </p>
                      </li>
-                     <li class="col-md-12">
+                     <li >
                         <p>
                             Quotation Price : <span class="details">Rs. <?php echo $finalresponse[$request['id']]['quotation_price']; ?></span>
                         </p>
                     </li>
                    
                     <?php if($request['category_id'] == 3 ) { ?>
-                    <li class="col-md-12">
+                    <li >
                         <p>
                             Start Date : <span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
                         </p>
                     </li>
-                    <li class="col-md-12">
+                    <li >
                         <p>
                             End Date : <span class="details"><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?></p></span>
                     </li>
@@ -229,12 +236,12 @@ $(".req").sort(function (a, b) {
 						$stmt = $conn->execute($sql);
 						$result = $stmt ->fetch('assoc');	                    	
                     	?>
-                    <li class="col-md-12">
+                    <li >
                         <p>
                             Start Date : <span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
                         </p>
                     </li>
-                    <li class="col-md-12">
+                    <li >
                         <p>
                         <?php if(!empty($result['TopDate'])) { ?>
                         End Date :  <span class="details"><?php echo date('d/m/Y',strtotime($result['TopDate'])); ?></span>
@@ -244,42 +251,45 @@ $(".req").sort(function (a, b) {
                         </p>
                     </li>
                     <?php } elseif($request['category_id'] == 2 ) {?>
-                    <li class="col-md-12">
+                    <li >
                         <p>
                             Start Date : <span class="details"><?php echo ($request['start_date'])?date('d/m/Y',strtotime($request['start_date'])):"-- --"; ?>
                         </p>
                     </li>
-                     <li class="col-md-12">
+                     <li >
                         <p>
                             End Date : <span class="details"><?php echo ($request['end_date'])?date('d/m/Y',strtotime($request['end_date'])):"-- --"; ?><span class="budy right" style="display:none;"><a href="#" ><?php echo $this->Html->image('friend-ico.png'); ?></a></span></span>
                         </p>
                     </li>
                     <?php } ?>
-							<li class="col-md-12">
+							<li >
                         <p>
                             Reference ID : <span class="details"><?php echo $request['reference_id']; ?></span>
                         </p>
                     </li>
-                     <li class="col-md-12">
+                     <li >
                         <p>
                             Members : <span class="details"><?php echo $request['adult'] +   $request['children']; ?></span>
                         </p>
                     </li>
-                    <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comment">
-                        <p>Response Comment : <span class="details"><?php echo $finalresponse[$request['id']]['comment']; ?></span></p>
+                    <li>
+                        <p>Response Comment : <span class="details">
+						<?php echo mb_strimwidth($finalresponse[$request['id']]['comment'], 0, 25, "...");?></span></p>
                      </li>
                     </ul>
-                      <table width="100%" style="text-align:center">
-						<tr>
-							<td>
-                      <a data-toggle="modal"  class="btn btn-info btn-sm" data-target="#myModal1<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'viewdetails',$request['id'])) ?>"> Details</a>
-                         
-						<a data-toggle="modal"  class="btn btn-success btn-sm" data-target="#myModalchat<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat',$request['id'], $finalresponse[$request['id']]['user_id'],3)) ?>"> Chat</a>                        
-                        
+			  <table width="100%" style="text-align:center">
+				<tr>
+					<td width="33%">
+						<a style="width:99%" data-toggle="modal"  class="btn btn-info btn-sm" data-target="#myModal1<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'viewdetails',$request['id'])) ?>"> Details</a>
+                    </td>
+					<td width="33%">
+						<a style="width:99%" data-toggle="modal"  class="btn btn-success btn-sm" data-target="#myModalchat<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat',$request['id'], $finalresponse[$request['id']]['user_id'],3)) ?>"> Chat</a>                        
+                    </td>
+					<td width="33%">
                         
                         
                         <?php $reviewi = $request['responses'][0]['user_id']."-".$request['id']; ?>
-                         <a data-toggle="modal" class="btn btn-warning btn-sm" data-target="#myModal1review<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi )) ?>"> Review </a>
+                         <a style="width:99%" data-toggle="modal" class="btn btn-warning btn-sm" data-target="#myModal1review<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi )) ?>"> Review </a>
                        
                        
 						</td>

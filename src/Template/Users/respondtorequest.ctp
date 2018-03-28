@@ -159,7 +159,7 @@ $conn = ConnectionManager::get('default');
 													 </div>
 													<div class=col-md-1>:</div>
 													 <div class=col-md-7>
-													 <input class=form-control name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" id="datepicker1">
+													 <input class="form-control datepicker" name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" id="datepicker1">
 													 </div>
 													</div>	
 												</div>
@@ -170,7 +170,7 @@ $conn = ConnectionManager::get('default');
 														</div>
 														<div class=col-md-1>:</div>
 														<div class=col-md-7>
-														<input class=form-control name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>" id="datepicker2">
+														<input class="form-control datepicker" name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>" id="datepicker2">
 														</div>
 													</div>
 												</div>
@@ -234,9 +234,9 @@ $conn = ConnectionManager::get('default');
 										  </div>----------->
 										</div>
 										<div class="modal-footer">
-											<div class="row form-group">			  
+											<div class="row form-group">										
 												<div class="col-md-12 text-center">
-												   <input type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">
+												   <input type="submit" name="submit" value="Apply"  class="btn btn-primary btn-submit">
 												   <a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'respondtorequest')) ?>">Reset</a>
 												</div>
 											</div>
@@ -499,10 +499,11 @@ $conn = ConnectionManager::get('default');
 			</div>
 		</div>
 
-
-<?php echo $this->element('footer');?>
-<?php echo $this->Html->script(['ap.pagination.js']);?>
+ 
 <script>
+$(document).ready(function () {
+	$('.datepicker').datepicker();
+});
 	$("#responsesWrap").apPagination({
 		targets: ".box-event",
 		pagesWrap: ".pages",

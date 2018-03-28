@@ -1935,8 +1935,8 @@ public function removebusinessbuddyapi() {
 	$sortorder['Users.last_name'] = "ASC";
 	}
 	if($sortfield =="agentza"){
-	$sortorder['Users.first_name'] = "DESC";
-	$sortorder['Users.last_name'] = "DESC";
+		$sortorder['Users.first_name'] = "DESC";
+		$sortorder['Users.last_name'] = "DESC";
 	}		
 
 	}
@@ -1959,10 +1959,24 @@ public function removebusinessbuddyapi() {
 		if(sizeof($BlockedUsers)>0){
 				$conditions["Responses.user_id NOT IN"] =  $BlockedUsers; 
 		}
- 
+		
+		//--- Folow SEARCH
+		$user_id=$_POST['user_id'];
+		$BBCOND=array();
+		if(!empty($_POST['followsearch'])){
+			if($followsearch == 1)
+			{
+				$BBCOND['BusinessBuddies.bb_user_id IN']=$user_id; 
+			}
+		}
+		
+		//--
+
 //---
 	$responses = $this->Responses->find()
-	->contain(["Users", "Requests","Requests.Hotels","Testimonial"])
+	->contain(["Users",'BusinessBuddies'=>function($q)use($user_id){
+		return $q->where($BBCOND);
+	},"Requests","Requests.Hotels","Testimonial"])
 	->where($conditions)
 	->order($sortorder)
 	->all();
@@ -1977,14 +1991,14 @@ public function removebusinessbuddyapi() {
 	$data = array();
 	$BusinessBuddies = array();
 	$blockeddata = array();
-$rating = array();
+	$rating = array();
 	if(count($responses)>0) {
 	foreach($responses as $row){ 
 	$request_id = $row['request']['id'];
 	$loggedinid = $row['request']['user_id'];
 
-$query = $this->Testimonial->find();
-$userRating = $query->select(["average_rating" => $query->func()->avg("rating")])
+		$query = $this->Testimonial->find();
+		$userRating = $query->select(["average_rating" => $query->func()->avg("rating")])
 						->where(['user_id' => $row['user_id']])
 						->order(["id" => "DESC"]);
 					$rating['rating'][$row['user_id']]  = $userRating;
@@ -2064,19 +2078,19 @@ $userRating = $query->select(["average_rating" => $query->func()->avg("rating")]
 		}
 	}else{
 		if($req['check_out']>$end_data){
-	$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['request']['check_out']));
+		$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['request']['check_out']));
 		}else{
-	$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['request']['end_date']));	
+		$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['request']['end_date']));	
 		}
 	}
 	}elseif($cit['request']['category_id'] == 2 ) {
-	$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['request']['end_date']));
+		$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['request']['end_date']));
 	}elseif($cit['request']['category_id'] == 3 ) {
-	$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['request']['check_out']));
+		$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['request']['check_out']));
 	} 
 
 	}
-
+	
 	$result['response_code'] = 200;
 	$result['response_object'] = $responses;
 	$result['citystate'] = $citystate;

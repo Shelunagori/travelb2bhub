@@ -97,7 +97,7 @@ class UsersTable extends Table
 		if (!$user) {
 			throw new \RuntimeException('Unable to save new user');
 		}
-
+		
 		return $user;
 	
     }

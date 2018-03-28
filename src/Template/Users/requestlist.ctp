@@ -219,6 +219,7 @@ legend
                               </div>                         
                         </div>
                         <div class="modal-footer">
+						 
 							<button class="btn btn-primary btn-sm" name="submit" value="Submit" type="submit">Apply</button> 
 							<a href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'requestlist')) ?>"class="btn btn-primary btn-sm">Reset</a>
 						   <script>

@@ -102,6 +102,29 @@ $conn = ConnectionManager::get('default');
       </div>
 	 <form method="get" class="filter_box" style="margin-top:5px">
      <div class="modal-body">
+	 <div class="row form-group">
+		<div class="col-md-12">
+		<div class=col-md-4>
+			<label for="example-text-input" class="  col-form-label">Agent Name</label>
+		</div>
+		<div class=col-md-1>:</div>
+		 <div class=col-md-7>
+		  <input type="text" name="agentnamesearch" value="<?php echo isset($_GET['agentnamesearch'])? $_GET['agentnamesearch']:''; ?>"  class="form-control">
+		</div>
+		</div>
+		</div>
+		<div class="row form-group">
+			 <div class=col-md-12>
+				 <div class=col-md-4>
+				 <label class="col-form-label"for=example-text-input>Reference ID</label>
+				 </div>
+				<div class=col-md-1>:</div>
+				 <div class=col-md-7>
+				 <input class=form-control name=refidsearch value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>">
+				 </div>
+			 </div>
+		</div>
+
 						 <div class="row form-group ">
 							<div class=col-md-12>
 								 <div class=col-md-4>
@@ -110,6 +133,23 @@ $conn = ConnectionManager::get('default');
 								  <div class=col-md-1>:</div>
 								 <div class=col-md-7>
 									<select name="req_typesearch" class="form-control"><option value="">Select Request Type</option><option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option><option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option><option value="2">Transport</option></select>
+								</div>
+							 </div>
+						</div>
+						<div class="row form-group ">
+							<div class=col-md-12>
+								 <div class=col-md-4>
+								  <label class="col-form-label"for=example-text-input>Chat With </label>
+								  </div>
+								  <div class=col-md-1>:</div>
+								 <div class=col-md-7>
+									 <select name="chatwith" class="form-control"><option value="">Select Chat With</option>
+									   <?php if(!empty($UserResponse)){ 
+											foreach($UserResponse as $user){               
+									   ?>
+									   <option <?php echo (isset($_GET['chatwith']) && $_GET['chatwith'] ==$user['id'])? 'selected':''; ?> value="<?php echo $user['id']?>"><?php echo $user['first_name'].' '.$user['last_name']?></option>
+									   <?php }}?>
+									  </select>
 								</div>
 							 </div>
 						</div>
@@ -133,7 +173,7 @@ $conn = ConnectionManager::get('default');
 									 </div>
 									<div class=col-md-1>:</div>
 									 <div class=col-md-7>
-									 <input class=form-control name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" id="datepicker1">
+									 <input class="form-control datepicker" name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" id="datepicker1">
 									 </div>
 									</div>	
 								</div>
@@ -144,7 +184,7 @@ $conn = ConnectionManager::get('default');
 										</div>
 										<div class=col-md-1>:</div>
 										<div class=col-md-7>
-										<input class=form-control name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>" id="datepicker2">
+										<input class="form-control datepicker" name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>" id="datepicker2">
 										</div>
 									</div>
 								</div>
@@ -155,7 +195,7 @@ $conn = ConnectionManager::get('default');
 										 </div>
 										<div class=col-md-1>:</div>
 										<div class=col-md-7>
-											<select class=form-control  name=pickup_city id=pickup_city>
+											<select class="form-control select2"  name=pickup_city id=pickup_city>
 											   <option value="">Select</option>
 											   <?php foreach($allCities1 as $city){?>
 											   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['pickup_city']) AND $_GET['pickup_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
@@ -171,7 +211,7 @@ $conn = ConnectionManager::get('default');
 										 </div>
 										<div class="col-md-1">:</div>
 										<div class="col-md-7">
-											<select class="form-control " name=destination_city id=destination_city>
+											<select class="form-control select2" name=destination_city id=destination_city>
 											   <option value="">Select</option>
 											   <?php foreach($allCities1 as $city){?>
 											   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['destination_city']) AND $_GET['destination_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
@@ -181,57 +221,20 @@ $conn = ConnectionManager::get('default');
 										</div>
 									</div>
                               </div>
-                              <div class="row form-group">
+                               <!--<div class="row form-group">
 									 <div class=col-md-12>
-										 <div class=col-md-4>
-										 <label class="col-form-label"for=example-text-input>Reference ID</label>
-										 </div>
-										<div class=col-md-1>:</div>
-										 <div class=col-md-7>
-										 <input class=form-control name=refidsearch value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>">
-										 </div>
+									 <div class=col-md-4>
+									 <label class="col-form-label "for=example-text-input>Members</label>
 									 </div>
-								</div>
-                               <div class="row form-group">
-                                 <div class=col-md-12>
-                                 <div class=col-md-4>
-								 <label class="col-form-label "for=example-text-input>Members</label>
-								 </div>
-								 <div class=col-md-1>:</div>
-								 <div class=col-md-7>
-								 <input class=form-control name=memberssearch value="<?php echo isset($_GET['memberssearch'])? $_GET['memberssearch']:''; ?>">
-								 </div>
-								</div>
-                              </div>                         
+									 <div class=col-md-1>:</div>
+									 <div class=col-md-7>
+									 <input class=form-control name=memberssearch value="<?php echo isset($_GET['memberssearch'])? $_GET['memberssearch']:''; ?>">
+									 </div>
+									</div>
+								  </div>                         
 
-						 <div class="row form-group">
-							  <div class="col-md-12">
-								<div class=col-md-4>
-									<label for="example-text-input" class="  col-form-label">Agent Name</label>
-								</div>
-								<div class=col-md-1>:</div>
-								 <div class=col-md-7>
-								  <input type="text" name="agentnamesearch" value="<?php echo isset($_GET['agentnamesearch'])? $_GET['agentnamesearch']:''; ?>"  class="form-control">
-								</div>
-							  </div>
-						  </div>
-						  <div class="row form-group ">
-							<div class=col-md-12>
-								 <div class=col-md-4>
-								  <label class="col-form-label"for=example-text-input>Chat With </label>
-								  </div>
-								  <div class=col-md-1>:</div>
-								 <div class=col-md-7>
-									 <select name="chatwith" class="form-control"><option value="">Select Chat With</option>
-									   <?php if(!empty($UserResponse)){ 
-											foreach($UserResponse as $user){               
-									   ?>
-									   <option <?php echo (isset($_GET['chatwith']) && $_GET['chatwith'] ==$user['id'])? 'selected':''; ?> value="<?php echo $user['id']?>"><?php echo $user['first_name'].' '.$user['last_name']?></option>
-									   <?php }}?>
-									  </select>
-								</div>
-							 </div>
-						</div>
+							 -->
+						  
 						 <div class="row form-group">
 							<div class="col-md-12">
 								<div class=col-md-4>
@@ -258,7 +261,8 @@ $conn = ConnectionManager::get('default');
 						<div class="modal-footer">
 							<div class="row form-group">			  
 								<div class="col-md-12 text-center">
-								   <input type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">
+							 
+								   <input type="submit" name="submit" value="Apply"  class="btn btn-primary btn-submit">
 								   <a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'myresponselist')) ?>">Reset</a>
 								</div>
 							</div>
@@ -572,6 +576,7 @@ $(document).ready(function(){
 </div>
 <script>
 $(document).ready(function () {
+	$('.datepicker').datepicker();
 	/*
 	$("#responsesWrap").apPagination({
 		targets: ".responses-list",

@@ -61,6 +61,7 @@ class ResponsesTable extends Table
         $this->hasMany('Testimonial', [
             'foreignKey' => 'response_id'
         ]);
+		$this->belongsTo('BusinessBuddies');
     }
 
     /**
