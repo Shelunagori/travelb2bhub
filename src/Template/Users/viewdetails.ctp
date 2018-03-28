@@ -15,7 +15,7 @@ li {
 		text-align:left
 }
 ul li b {
-	color:black;
+	color:#595855;
 	text-align:left;
 	font-style:bold;
 }
@@ -166,9 +166,11 @@ ul li b {
 						else
 						{
 							echo "-- --";
-						} ?><b>
+						} ?>
+						</b>
 						</li>
-						<li class="col-md-6"><p>Hotel Rating :&nbsp;<?php
+						<li class="col-md-6"><p>Hotel Rating :&nbsp;
+						<?php
 						if ($row['hotel_rating'] > 0)
 						{
 							for ($i = $row['hotel_rating']; $i > 0; $i--)
@@ -179,28 +181,30 @@ ul li b {
 						else
 						{
 						}
-						</b>
-						?></li>
-						<li class="col-md-6"><p>Meal :&nbsp;<?php
+						?>
+						</li>
+						<li class="col-md-6"><p>Meal :&nbsp;
+						<b>
+						<?php
 						echo ($row['meal_plan']) ? $mealPlanArray[$row['meal_plan']] : "-- --"; ?>
-						</li>
-						<li class="col-md-6"><p>Check In :&nbsp;<?php
+						</b></li>
+						<li class="col-md-6"><p>Check In :&nbsp; <b><?php
 						echo ($row['check_in']) ? date("d-m-Y", strtotime($row['check_in'])) : "-- --"; ?>
-						</li>
+						</b></li>
 						<li class="col-md-6">
-							<p>Check Out :&nbsp;<?php
+							<p>Check Out :&nbsp;<b><?php
 						echo ($row['check_out']) ? date("d-m-Y", strtotime($row['check_out'])) : "-- --"; ?>
-						</li>
-						<li class="col-md-6"><p>Locality :&nbsp;<?php
+						</b></li>
+						<li class="col-md-6"><p>Locality :&nbsp;<b><?php
 						echo ($row['locality']) ? $row['locality'] : "-- --"; ?>
-						</li>
+						</b></li>
 						<li class="col-md-6">
-							<p>Destination City :&nbsp;<?php
+							<p>Destination City :&nbsp;<b><?php
 						echo ($row['city_id']) ? $allCities[$row['city_id']] : "-- --"; ?>
-						</li>
-						<li class="col-md-6"><p>Destination State :&nbsp;<?php
+						</b></li>
+						<li class="col-md-6"><p>Destination State :&nbsp;<b><?php
 						echo ($row['state_id']) ? $allStates[$row['state_id']] : "-- --"; ?>
-						</ul>
+						</b></ul>
 					</fieldset>	 
 						<?php
 						$ds_count++;
