@@ -56,6 +56,10 @@ fieldset{
 	margin:10px !important;
 	border-radius: 6px;
 }
+.plus_minus_btn{
+	height:30px;
+	width:50px;
+}
 </style> 
 <!--------- <script>
 	var cityData = '<?php echo $allCities; ?>';
@@ -338,12 +342,12 @@ $(document).ready(function($){
 								<span class="required">*</span>
 								</p>
 								<div class="col-md-6 input-group">
-									<p class="input-group-addon btn" >
-									<button type="button" class="fa fa-minus-square" id="btnminus" value=""></button>
+									<p class="input-group-addon btn " >
+									<button type="button" class="fa fa-minus plus_minus_btn" id="btnminus" value=""></button>
 									</p>                    
-									<input type='text' autocomplete="off" name='hotelAdult' value='1' class="form-control input-large" id="textcounter"/>	
-									<p class="input-group-addon btn" >
-									<button type="button" class="fa fa-plus-square" id="btnplus" value=""></button>
+									<input type='text' style="height:50px;" autocomplete="off" name='hotelAdult' value='1' class="form-control input-large " id="textcounter"/>	
+									<p class="input-group-addon btn " >
+									<button type="button" class="fa fa-plus plus_minus_btn" id="btnplus" value=""></button>
 									</p>                    
 									</div>
 									</div>
@@ -1009,7 +1013,7 @@ $(document).ready(function($){
 																	</p>                    
 																	<input type='text' autocomplete="off" name='transportAdult' value='1' class="form-control input-large" id="text_trans_counter"/>	
 																	<p class="input-group-addon btn" >
-																	<button type="button" class="fa fa-plus-square" id="btn_tran_plus" value=""    field='transportAdult'></button>
+																	<button type="button" class="fa fa-plus-square " id="btn_tran_plus" value=""    field='transportAdult'></button>
 																	</p>                    
 																</div>
 															</div>
