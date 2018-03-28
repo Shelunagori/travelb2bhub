@@ -1,7 +1,8 @@
 <div>
 	<div class="destination newdiv">
-	<div class="stop col-md-12"><div class="stop-title"> <b> Destination </b></div><br><div class="row main_row"> 
-	
+	<div class="stop col-md-12">
+	<div class="stop-title"> <b> Destination </b></div><br>
+	<div class="row main_row"> 
 	  <div class="row">
 			<div class="col-md-12">
 				<div class="col-md-12">
@@ -143,14 +144,14 @@
 				</div>
 			</div>
 		</div><span class="help-block"></span>
-	</div>
-	</div>
+	<div class="row">
 	<div class="col-md-12" align="right">
 		<a href="java:script(0);" class="remove_field btn btn-danger btn-sm" style="width:50px;"><i class="fa fa-minus"></i></a>
-		<button type="button" class="btn btn-primary btn-sm add_field_button2 but " style="background-color:#1295A2;width:50px;"><i class="fa fa-plus"></i></button>
 		<br/><br/><hr></hr>
 	</div>
-	
+	</div>
+	</div>
+	</div>
 	<script>
 	$('.select2').select2();
 	$('.date-picker').datepicker();

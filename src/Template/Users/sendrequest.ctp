@@ -773,7 +773,8 @@ $(document).ready(function($){
 						<span class="help-block"></span>
 						  <div class="input_fields_wrap1">
                      				  
-						</div> <span class="help-block"></span><hr></hr>
+						</div>
+						<span class="help-block"></span>
 						
 			</fieldset>
 				 
@@ -1772,7 +1773,7 @@ $(document).ready(function () {
         	strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality,Village or Town" name="stops[' +packageI+ ']"></div></div>';
         	strHtml += '<div class="col-sm-4 mt"><p for="from">Stop City</p><input class="trans_city form-control city_select ctynamerecord" noofrows="5" taxboxname="state_id_package_stop_city[' +packageI+ ']" type="text" placeholder="Select City or Nearest City" use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" class="ctyIDname" name="id_package_stop_city[' +packageI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div> ';
         	strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly></div></div></div></div>';
-        	strHtml += '<div align="right" style="margin-top:10px"><button aligh="right" class="btn btn-danger btn-sm package_remove_stop"><i class="fa fa-minus" style="width:30px;"></i></button><button class="btn btn-primary btn-sm package-stop-add " style="background-color:#1295A2;width:50px;"><i class="fa fa-plus"></i></button></div>';
+        	strHtml += '<div align="right" style="margin-top:10px"><button aligh="right" class="btn btn-danger btn-sm package_remove_stop"><i class="fa fa-minus" style="width:30px;"></i></button></div>';
          strHtml += ' <hr class="hr"></hr></div>';
         $(".package-stops").append(strHtml);
         	packageI++;
@@ -1829,7 +1830,7 @@ var gg = 1;
         var wrapper = $(".input_fields_wrap1");
 		$(wrapper).on("click", ".remove_field", function (e) {
             e.preventDefault();
-            $(this).parent('div').parent('div').slideUp(function(){
+            $(this).parent('div').parent('div')my.slideUp(function(){
 				$(this).remove();
 			});
         });
