@@ -59,7 +59,7 @@ body {
 } 
 sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a {
     color: #fff;
-    background: #66cad5e3;
+    background: #FB6542;
     border-left-color: #DA3E2E;
 }
 .required {
