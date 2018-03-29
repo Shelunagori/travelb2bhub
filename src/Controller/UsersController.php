@@ -1072,10 +1072,39 @@ if($this->request->is('post')){
 $d = $this->request->data;
 
 //Change input date format to mysql date format
+if(isset($d['check_in']) && !empty($d['check_in']))
+{
+$d['check_in']=date('Y-m-d',strtotime($d['check_in']));
+}
+else{
+$d['check_in']	='0000-00-00';
+}
+if(isset($d['check_out']) && !empty($d['check_out']))
+{
+$d['check_out']=date('Y-m-d',strtotime($d['check_out']));
+}
+else{
+$d['check_out']	='0000-00-00';
+}
+if(isset($d['start_date']) && !empty($d['start_date']))
+{
+$d['start_date']=date('Y-m-d',strtotime($d['start_date']));
+}
+else{
+$d['start_date']	='0000-00-00';
+}
+if(isset($d['end_date']) && !empty($d['end_date']))
+{
+$d['end_date']=date('Y-m-d',strtotime($d['end_date']));
+}
+else{
+$d['end_date']	='0000-00-00';
+}
+/* 
 $d['check_in'] = (isset($d['check_in']) && !empty($d['check_in']))?$this->ymdFormatByDateFormat($d['check_in'], "d-m-Y", $dateSeparator="/"):null;
 $d['check_out'] = (isset($d['check_out']) && !empty($d['check_out']))?$this->ymdFormatByDateFormat($d['check_out'], "d-m-Y", $dateSeparator="/"):null;
 $d['start_date'] = (isset($d['start_date']) && !empty($d['start_date']))?$this->ymdFormatByDateFormat($d['start_date'], "d-m-Y", $dateSeparator="/"):null;
-$d['end_date'] = (isset($d['end_date']) && !empty($d['start_date']))?$this->ymdFormatByDateFormat($d['end_date'], "d-m-Y", $dateSeparator="/"):null;
+$d['end_date'] = (isset($d['end_date']) && !empty($d['start_date']))?$this->ymdFormatByDateFormat($d['end_date'], "d-m-Y", $dateSeparator="/"):null; */
 
 	if($this->request->data['category_id'] == 2 ){
 		$p['transport_requirement'] = $d['transport_requirement'];
@@ -1223,8 +1252,26 @@ $hotalExtraData['city_id'] = $d['hh_city_id'][$key];
 $hotalExtraData['state_id'] = $d['hh_state_id'][$key];
 $hotalExtraData['country_id'] = $d['hh_country_id'][$key];
 $hotalExtraData['locality'] = $d['hh_locality'][$key];
-$hotalExtraData['check_in'] =  ($d['hh_check_in'][$key])?$this->ymdFormatByDateFormat($d['hh_check_in'][$key], "d-m-Y", $dateSeparator="/"):null;
-$hotalExtraData['check_out'] =  ($d['hh_check_out'][$key])?$this->ymdFormatByDateFormat($d['hh_check_out'][$key], "d-m-Y", $dateSeparator="/"):null;
+
+if(isset($hotalExtraData['check_in']) && !empty($hotalExtraData['check_in']))
+{
+$hotalExtraData['check_in']=date('Y-m-d',strtotime($hotalExtraData['check_in']));
+}
+else{
+$hotalExtraData['check_in']	='0000-00-00';
+}
+
+if(isset($hotalExtraData['check_out']) && !empty($hotalExtraData['check_out']))
+{
+$hotalExtraData['check_out']=date('Y-m-d',strtotime($hotalExtraData['check_out']));
+}
+else{
+$hotalExtraData['check_out']	='0000-00-00';
+}
+
+
+/* $hotalExtraData['check_in'] =  ($d['hh_check_in'][$key])?$this->ymdFormatByDateFormat($d['hh_check_in'][$key], "d-m-Y", $dateSeparator="/"):null;
+$hotalExtraData['check_out'] =  ($d['hh_check_out'][$key])?$this->ymdFormatByDateFormat($d['hh_check_out'][$key], "d-m-Y", $dateSeparator="/"):null; */
 $result = $this->Hotels->newEntity($hotalExtraData);
 $this->Hotels->save($result);
 }

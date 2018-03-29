@@ -232,7 +232,7 @@ ul li b {
 					echo ($details['end_date']) ? date("d-m-Y", strtotime($details['end_date'])) : "-- --"; ?>
 				</b></p>
 				</li>
-				<li class="col-md-12" style="color:#EDE489;">Pickup Location<hr></hr></li>
+				<li class="col-md-12" style="color:#6B7120;">Pickup Location<hr></hr></li>
 				<li class="col-md-6">
 				<p>Pickup Locality :&nbsp;<b><?php
 				echo ($details['pickup_locality']) ? $details['pickup_locality'] : "-- --"; ?>
@@ -276,7 +276,7 @@ ul li b {
 						$stop_count++;
 					}
 				} ?>
-				<li class="col-md-12" style="color:#EDE489;">Final Location<hr></hr></li>
+				<li class="col-md-12" style="color:#6B7120;">Final Location<hr></hr></li>
 				<li class="col-md-6">
 					<p>Final Locality :&nbsp;<b><?php
 						echo ($details['final_locality']) ? $details['final_locality'] : "-- --"; ?>
@@ -373,7 +373,7 @@ ul li b {
 						$hotel_category = "";
 						foreach($result as $row1)
 						{
-							$hotel_category.= "" . $hotelCategories[$row1] . " or ";
+							$hotel_category.= "" . $hotelCategories[$row1] . " , ";
 							$count++;
 						}
 						echo substr($hotel_category, 0, -3);
@@ -470,7 +470,7 @@ ul li b {
 					echo ($details['end_date']) ? date("d-m-Y", strtotime($details['end_date'])) : "-- --"; ?>
 				</b></p>
 				</li>
-				<li class="col-md-12" style="color:#EDE489;">Pickup Location<hr></hr></li>
+				<li class="col-md-12" style="color:#6B7120;">Pickup Location<hr></hr></li>
 				<li class="col-md-6">
 				<p>Pickup Locality :&nbsp;<b><?php
 					echo ($details['pickup_locality']) ? $details['pickup_locality'] : "-- --"; ?>
@@ -481,7 +481,7 @@ ul li b {
 					echo ($details['pickup_city']) ? $allCities[$details['pickup_city']] : "-- --"; ?>
 				</b></p>
 				</li>
-				<li class="col-md-6">
+				<li class="col-md-12">
 				<p>Pickup State :&nbsp;<b><?php
 					echo ($details['pickup_state']) ? $allStates[$details['pickup_state']] : "-- --"; ?>
 				</b></p>
@@ -511,7 +511,7 @@ ul li b {
 						$stop_count++;
 					}
 				} ?>
-				<li class="col-md-12" style="color:#EDE489;">Final Location<hr></hr></li>
+				<li class="col-md-12" style="color:#6B7120;">Final Location<hr></hr></li>
 				<li class="col-md-6">
 				<p>Final Locality :&nbsp;<b><?php
 				echo ($details['final_locality']) ? $details['final_locality'] : "-- --"; ?>
