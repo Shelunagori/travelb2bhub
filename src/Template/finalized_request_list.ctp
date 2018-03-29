@@ -3,8 +3,19 @@
 use Cake\Datasource\ConnectionManager; 
 $conn = ConnectionManager::get('default');
 ?>
+<style>
+legend{
+	text-align: center;
+}
+.details {color:#000 !important; font-weight: 400;}	
+	li > p{
+		color:#96989A !important;
+		margin: 0 0 4px !important;
+	}
+</style>
 	<div id ="finalized_request_list" class="container-fluid">
 	<div class="row equal_column">
+	 <div class="col-md-12">
       <?php echo $this->element('left_panel');?>
 	  <?php $this->Flash->render() ?>
 		<!--Page Title-->
@@ -21,40 +32,40 @@ $conn = ConnectionManager::get('default');
  <a href="javascript:void(0);" class="link-icon" data-toggle="modal" data-target="#myModal122" ><img src="/img/white-filter.png" alt=""></a> </li>
 <li class="notification_list">
  <a href="javascript:void(0);" id="chat_icon" class="link-icon"><span class="chat_count"><?php echo $chatCount;?></span><img src="/img/notify.png" alt=""></a>
-                            <div class="ap-subs">
-                                <ul class="list-unstyled msg_list" role="menu">
-
+	<div class="ap-subs">
+		<ul class="list-unstyled msg_list" role="menu">
                   <?php echo $this->element('subheader');?>
           <hr class="hr_bordor">
           <div id="myModal123" class="modal fade form-modal" role="dialog">
-  <div class="modal-dialog">
+				  <div class="modal-dialog">
+					<!-- Modal content-->
+					<div class="modal-content">
+					  <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Sorting</h4>
+					  </div>
+					  <div class="modal-body">
+				 
+						  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+							  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 box-event">
+					 <ul class="sorting_ul">
+				<li class="col-md-12 col-xs-12 col-sm-12"> <a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'finalized-request-list')) ?>?sort=totalbudgethl">Total Budget (High To Low) <span class="arrow"><span></span></span></a> </li>
+				<li class="col-md-12 col-xs-12 col-sm-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'finalized-request-list')) ?>?sort=totalbudgetlh"> Total Budget (Low To High)<span class="arrow"><span></span></span></a></li>
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Sorting</h4>
-      </div>
-      <div class="modal-body">
- 
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 box-event">
-     <ul class="sorting_ul">
-<li class="col-md-12 col-xs-12 col-sm-12"> <a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'finalized-request-list')) ?>?sort=totalbudgethl">Total Budget (High To Low) <span class="arrow"><span></span></span></a> </li>
-<li class="col-md-12 col-xs-12 col-sm-12"><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'finalized-request-list')) ?>?sort=totalbudgetlh"> Total Budget (Low To High)<span class="arrow"><span></span></span></a></li>
+				<li class="col-md-12 col-xs-12 col-sm-12"> <a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'finalized-request-list')) ?>?sort=requesttype">Request Type  <span class="arrow"><span></span></span></a> </li>
+								  </ul>
+							  </div>
+						  </div>
+					  </div>
+					  <div class="modal-footer">
 
-<li class="col-md-12 col-xs-12 col-sm-12"> <a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'finalized-request-list')) ?>?sort=requesttype">Request Type  <span class="arrow"><span></span></span></a> </li>
-                  </ul>
-              </div>
-          </div>
-      </div>
-      <div class="modal-footer">
-
-      </div>
-    </div>
-  </div>
-</div>
-          <div id="myModal122" class="modal fade form-modal" role="dialog">
+					  </div>
+					</div>
+				  </div>
+			</div>
+		</hr>
+	</ul>
+  <div id="myModal122" class="modal fade form-modal" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
@@ -140,13 +151,11 @@ $conn = ConnectionManager::get('default');
 		});
 		</script>
       </div>
-      <div class="modal-footer">
-      
-      </div>
-    </div>
-
-  </div>
-</div>
+				<div class="modal-footer">
+				</div>
+			</div>
+		</div>
+	</div>
 
 <?php if(isset($_GET['sort']) && $_GET['sort']=="requesttype") { ?>
 <script>
@@ -174,8 +183,8 @@ $(".req").sort(function (a, b) {
  continue;
        }
  ?>
- <div id="cat">
-				<div class=" req col-lg-6 col-md-6 col-sm-12 col-xs-12" id="<?php if($request['category_id']==1){ echo "1";} if($request['category_id']==2){ echo "3";}if($request['category_id']==3){ echo "2";} ?>">
+		<div id="cat">
+			<div class=" req col-lg-6 col-md-6 col-sm-12 col-xs-12" id="<?php if($request['category_id']==1){ echo "1";} if($request['category_id']==2){ echo "3";}if($request['category_id']==3){ echo "2";} ?>">
                 <div class="box-event">
                     <ul>
                       <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
@@ -260,74 +269,72 @@ $(".req").sort(function (a, b) {
                       <a data-toggle="modal" data-target="#myModal1<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'viewdetails',$request['id'])) ?>"><?php echo $this->Html->image('detail-ico.png'); ?> Details</a>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 padding0">
- <a data-toggle="modal" data-target="#myModalchat<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat',$request['id'], $request['user_id'])) ?>"><?php echo $this->Html->image('chat-ico.png'); ?> Chat</a>                        
-                        
-                        
+						<a data-toggle="modal" data-target="#myModalchat<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat',$request['id'], $request['user_id'])) ?>"><?php echo $this->Html->image('chat-ico.png'); ?> Chat</a>                        
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 padding0">
                         <?php $reviewi = $request['responses'][0]['user_id']."-".$request['id']; ?>
                          <a data-toggle="modal" data-target="#myModal1review<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi )) ?>"><?php echo $this->Html->image('testimonial-icon.png'); ?> Review <?php echo $this->Html->image('testimonial-icon-back.png'); ?></a>
                         </div>
                         <div class="modal fade" id="myModalchat<?php echo $request['id']; ?>" role="dialog">
-		<div class="modal-dialog">
-		  <!-- Modal content-->
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">Chat</h4>
+							<div class="modal-dialog">
+							  <!-- Modal content-->
+							  <div class="modal-content">
+								<div class="modal-header">
+								  <button type="button" class="close" data-dismiss="modal">&times;</button>
+								  <h4 class="modal-title">Chat</h4>
+								</div>
+								<div class="modal-body">
+								
+								</div>
+							  </div>
+							</div>
+						</div>
+						<div class="modal fade" id="myModal1review<?php echo $request['id']; ?>" role="dialog">
+							<div class="modal-dialog">
+							  <!-- Modal content-->
+							  <div class="modal-content">
+								<div class="modal-header">
+								  <button type="button" class="close" data-dismiss="modal">&times;</button>
+								  <h4 class="modal-title">Review</h4>
+								</div>
+								<div class="modal-body">
+								</div>
+							  </div>
+							</div>
+						</div>
+						<div class="modal fade" id="myModal1<?php echo $request['id']; ?>" role="dialog">
+								<div class="modal-dialog">
+								<!-- Modal content-->
+								  <div class="modal-content">
+									<div class="modal-header">
+									  <button type="button" class="close" data-dismiss="modal">&times;</button>
+									  <h4 class="modal-title">Details</h4>
+									</div>
+									<div class="modal-body">
+									</div>
+								  </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<div class="modal-body">
-			
-			</div>
-		  </div>
-		</div>
-	</div>
-	<div class="modal fade" id="myModal1review<?php echo $request['id']; ?>" role="dialog">
-		<div class="modal-dialog">
-		  <!-- Modal content-->
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">Review</h4>
-			</div>
-			<div class="modal-body">
-			</div>
-		  </div>
-		</div>
-	</div>
-<div class="modal fade" id="myModal1<?php echo $request['id']; ?>" role="dialog">
-		<div class="modal-dialog">
-		<!-- Modal content-->
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">Details</h4>
-			</div>
-			<div class="modal-body">
-			</div>
-		  </div>
-		</div>
-	</div>
-	</div>
-   </div>
-   </div>
-			</div>
-		<?php } ?>
-		<div class="pages"></div>
-		<?php }else {?>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 text-center box-event">
- <?php if(isset($_GET['req_typesearch'])){ echo "No matching data.";}else{ echo "There are no finalized requests in the mailbox.";}?>
-                </div>
-			</div>
-		<?php } ?>
+					<?php } ?>
+						<div class="pages"></div>
+					<?php }else {?>
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+								<div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 text-center box-event">
+								<?php if(isset($_GET['req_typesearch'])){ echo "No matching data.";}else{ echo "There are no finalized requests in the mailbox.";}?>
+								</div>
+							</div>
+							<?php } ?>
 
-      </div>
-	
-	
-	
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-</div>
 </div>
 <?php echo $this->element('footer');?>
 <?php echo $this->Html->script(['ap.pagination.js']);?>

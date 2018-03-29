@@ -8,9 +8,15 @@ $conn = ConnectionManager::get('default');
 	legend {
 		text-align:center;
 	}
+	.details {color:#000 !important; font-weight: 400;}	
+		li > p{
+		color:#96989A !important;
+		margin: 0 0 4px !important;
+	}
 </style>
 <div id="my_final_responses" class="container-fluid">
 	<div class="row equal_column">
+	<div class="col-md-12">
 	<div class="col-md-12" style="background-color:#fff"> 
 		<br>
 		<?php echo $this->element('subheader');?>
@@ -77,7 +83,7 @@ $conn = ConnectionManager::get('default');
 			//pr($responses);
 			foreach($responses as $row){
 			?>
-            <div class="col-md-4">
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 			<?php 
                if($row['request']['category_id']==1){ 
 					$image=$this->Html->image('/img/slider/package-icon.png');
@@ -100,30 +106,30 @@ $conn = ConnectionManager::get('default');
                  <ul>
                  <li class="col-md-12">
                     <p>
-                        <b>Request Type  : </b> <?php echo $text; ?>
+                        Request Type  : <?php echo $text; ?>
                     </p>
                  </li>
 				<li class="col-md-12">
 					<p>
-						<b>Total Budget : </b> <?php echo ($row['request']['total_budget'])? "Rs. ". $row['request']['total_budget'] :"-- --" ?>
+						Total Budget :  <?php echo ($row['request']['total_budget'])? "Rs. ". $row['request']['total_budget'] :"-- --" ?>
 					</p>
 				 </li>
 				 <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<p>
-						<b>Agent Name : </b> <a href="viewprofile/<?php echo $row['request']['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$row['request']['user_id']]); ?></a>
+						Agent Name :  <a href="viewprofile/<?php echo $row['request']['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$row['request']['user_id']]); ?></a>
 					</p>
 				</li>
 				<li class="col-md-12">
-					 <p><b>Quotation Price : </b> <?php echo ($row['quotation_price'])? " Rs. ".$row['quotation_price']:"-- --" ?></p>
+					 <p>Quotation Price :  <?php echo ($row['quotation_price'])? " Rs. ".$row['quotation_price']:"-- --" ?></p>
 				</li>
                 <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 destination">
 				   <?php if($row['request']['category_id']==2){ ?>
                   <p>
-                   <b>Pickup City : </b><span> <?php echo ($row['request']['pickup_city'])?$allCities[$row['request']['pickup_city']]:"-- --"; ?><?php echo ($row['request']['pickup_state'])?' ('.$allStates[$row['request']['pickup_state']].')':"";  ?></span>
+                   Pickup City : <span> <?php echo ($row['request']['pickup_city'])?$allCities[$row['request']['pickup_city']]:"-- --"; ?><?php echo ($row['request']['pickup_state'])?' ('.$allStates[$row['request']['pickup_state']].')':"";  ?></span>
 
                   <?php } else { ?>
                         <p>
-                        <b>Destination City : </b> <span><?php echo ($row['request']['city_id'])?$allCities[$row['request']['city_id']]:"-- --"; ?> <?php echo ($row['request']['state_id'])?' ('.$allStates[$row['request']['state_id']].')':""; ?>
+                        Destination City :  <span><?php echo ($row['request']['city_id'])?$allCities[$row['request']['city_id']]:"-- --"; ?> <?php echo ($row['request']['state_id'])?' ('.$allStates[$row['request']['state_id']].')':""; ?>
                         <?php if($row['request']['category_id'] == 1){
 						if(count($row['request']['hotels']) >1) {
 							unset($row['request']['hotels'][0]);
@@ -139,12 +145,12 @@ $conn = ConnectionManager::get('default');
 				<?php if($row['request']['category_id'] == 3 ) { ?>
 					<li class="col-md-12">
                         <p>
-                            <b>Start Date : </b> <?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?>
+                            Start Date :  <?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?>
                         </p>
                      </li>
 					<li class="col-md-12">
                         <p>
-                            <b>End Date : </b> <?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?>
+                            End Date :  <?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?>
                         </p>
                     </li>
 				<?php } elseif($row['request']['category_id'] == 1 ) {
@@ -154,15 +160,15 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 					?>
 					<li class="col-md-12">
                         <p>
-                            <b>Start Date : </b> <?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?>
+                            Start Date :  <?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?>
                         </p>
                      </li>
 					<li class="col-md-12">
                         <p>
                         <?php if(!empty($result['TopDate'])) { ?>
-                        <b>End Date : </b> <?php echo date('d/m/Y',strtotime($result['TopDate'])); ?>
+                        End Date :  <?php echo date('d/m/Y',strtotime($result['TopDate'])); ?>
                         <?php }else{?>
-                        <b>End Date :</b> <?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?>
+                        End Date : <?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?>
                         <?php }?>
                             
                         </p>
@@ -170,18 +176,18 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 				<?php } elseif($row['request']['category_id'] == 2 ) { ?>
 					<li class="col-md-12">
                         <p>
-                            <b>Start Date : </b> <?php echo ($row['request']['start_date'])?date("d/m/Y", strtotime($row['request']['start_date'])):"-- --"; ?>
+                            Start Date :  <?php echo ($row['request']['start_date'])?date("d/m/Y", strtotime($row['request']['start_date'])):"-- --"; ?>
                         </p>
                     </li>
 					<li class="col-md-12">
                         <p>
-                            <b>End Date : </b> <?php echo ($row['request']['end_date'])?date("d/m/Y", strtotime($row['request']['end_date'])):"-- --"; ?>
+                            End Date :  <?php echo ($row['request']['end_date'])?date("d/m/Y", strtotime($row['request']['end_date'])):"-- --"; ?>
                         </p>
                     </li>
 				<?php } ?>
 				                <li class="col-md-12">
                         <p>
-                            <b>Members : </b> <?php echo $row['request']['adult'] +  $row['request']['children']; ?>
+                            Members :  <?php echo $row['request']['adult'] +  $row['request']['children']; ?>
                      </p>
                  </li>
 				 
@@ -189,7 +195,7 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 	
 					
                    <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comment">
-                       <p> <b>Comment :</b><span><?php echo $row['comment']; ?></span></p>
+                       <p> Comment :<span><?php echo $row['comment']; ?></span></p>
                      </li>
                    </ul>
 				   <div>

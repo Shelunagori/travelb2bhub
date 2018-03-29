@@ -6,18 +6,22 @@ $conn = ConnectionManager::get('default');
 	legend {
 		text-align:center;
 	}
-	.details {color:#000 !important; font-weight: 400;}	
+	.details {color:#000 !important; font-weight: 400;}
+li > p{
+		color:#96989A !important;
+		margin: 0 0 4px !important;
+	}	
 </style>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <div id="removed_request_list" class="container-fluid">
 <div class="row equal_column" > 
+<div class="col-md-12" > 
     <div class="col-md-12" style="background-color:#fff"> 
 		<br>
 		<?php echo $this->element('subheader');?>
 		<?php echo  $this->Flash->render() ?>
 	</div>
-	<div class="col-md-12" style="background-color:#fff"> 
-
+	
 <div class="box box-default">
 	<div class="box-header with-border"> 
 		<h3 class="box-title" style="padding:20px">Removed Requests</h3>
@@ -28,68 +32,68 @@ $conn = ConnectionManager::get('default');
 	</div>
 	<div class="box-body">
 		<div class="row">
+		<div class="col-md-12">
+         
+					<div id="myModal122" class="modal fade form-modal" role="dialog">
+					  <div class="modal-dialog">
 
-          
-<div id="myModal122" class="modal fade form-modal" role="dialog">
-  <div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+						  <div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Filter</h4>
+						  </div>
+						  <div class="modal-body">
+							  <form method="get" class="filter_box">
+								  
+						  <div class="col-md-12">
+							   
+							   <div class="col-md-6">
+						<label for="example-text-input" class="col-form-label">Request Type: </label>		   
+								   <select name="req_typesearch" class="form-control"><option value="">Select Request Type</option><option value="1">Package</option><option value="3">Hotel</option><option value="2">Transport</option></select>
+							   </div>
+						   
+							   
+							<div class="col-md-6">
+							 <label for="example-text-input" class="col-form-label">Total Budget: </label>           
+								   <select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option   value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option>
+								   <option value="100000-100000000000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? 'selected':''; ?>>100000-Above</option>
+								   </select>
+							   </div>
+						   
+							   
+							   <div class="col-md-6">     
+					<label for="example-text-input" class="col-form-label">Start Date: </label>		   
+								   <input type="text" id="datepicker1"  name="startdatesearch" value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"  class="form-control">
+							   </div>
+						
+								
+							   <div class="col-md-6"> 
+					<label for="example-text-input" class="col-form-label">End Date: </label>           
+								   <input type="text" id="datepicker2" name="enddatesearch" value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"  class="form-control" >
+							  </div>
+						
+							   
+							   <div class="col-md-6">   
+							<label for="example-text-input" class="col-form-label">Reference ID: </label>		   
+								   <input type="text" name="refidsearch" value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>"  class="form-control">
+							   </div>
+						  </div>
+								  
+						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+							<input type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">
+							<a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'removed-request-list')) ?>">Reset</a>
+					   </div>
+					   </form>
+					 
+							   </div>
+						  <div class="modal-footer">
+						  
+						  </div>
+						</div>
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Filter</h4>
-      </div>
-      <div class="modal-body">
-          <form method="get" class="filter_box">
-              
-      <div class="col-md-12">
-           
-           <div class="col-md-6">
-	<label for="example-text-input" class="col-form-label">Request Type: </label>		   
-               <select name="req_typesearch" class="form-control"><option value="">Select Request Type</option><option value="1">Package</option><option value="3">Hotel</option><option value="2">Transport</option></select>
-           </div>
-       
-           
-        <div class="col-md-6">
-		 <label for="example-text-input" class="col-form-label">Total Budget: </label>           
-               <select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option   value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option>
-               <option value="100000-100000000000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? 'selected':''; ?>>100000-Above</option>
-               </select>
-           </div>
-       
-           
-           <div class="col-md-6">     
-<label for="example-text-input" class="col-form-label">Start Date: </label>		   
-               <input type="text" id="datepicker1"  name="startdatesearch" value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"  class="form-control">
-           </div>
-    
-            
-           <div class="col-md-6"> 
-<label for="example-text-input" class="col-form-label">End Date: </label>           
-               <input type="text" id="datepicker2" name="enddatesearch" value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"  class="form-control" >
-          </div>
-    
-           
-           <div class="col-md-6">   
-		<label for="example-text-input" class="col-form-label">Reference ID: </label>		   
-               <input type="text" name="refidsearch" value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>"  class="form-control">
-           </div>
-      </div>
-              
-    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-        <input type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">
-        <a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'removed-request-list')) ?>">Reset</a>
-   </div>
-   </form>
- 
-           </div>
-      <div class="modal-footer">
-      
-      </div>
-    </div>
-
-  </div>
-</div>
+					  </div>
+					</div>
 
 		<?php
 		if(count($requests) >0) {
@@ -100,7 +104,6 @@ $m =0;
                   $m++;	
  ?>
 			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-				<div class="box-event">
 				<?php 
 					   if($request['category_id']==1){ 
 							$image=$this->Html->image('/img/slider/package-icon.png');
@@ -212,7 +215,7 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 						<div class=" " >
 							<table width="100%" style="text-align:center">
 							<tr>
-								<td  width="100%">
+								<td >
 									<a style="width:100%" class="viewdetail btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"data-target="#myModal1<?php echo $request['id']; ?>" data-toggle=modal> Details</a>
 									
 								</td>
@@ -232,15 +235,17 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 							</div>				
 				</fieldset>
 			</div>
-			</div>
+	
        <?php } ?>
        <div class="pages"></div>
 	   <?php } else {?>
+	   <div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 box-event">
                     There are no Removed Requests. 
                 </div>
 			</div>
+		</div>
 		<?php } ?>
        
        
@@ -255,9 +260,10 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 </ul></div>-->
         
         
-      </div>
-    </div>
-</div>
+			  </div>
+			</div>
+		</div>
+	</div>
 </div>
   
 <?php echo $this->element('footer');?>

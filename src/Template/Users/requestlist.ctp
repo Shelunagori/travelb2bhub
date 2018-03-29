@@ -20,6 +20,7 @@ legend
 }
 .contain>p{
 	color:#96989A !important;
+	margin: 0 0 5px !important;
 }
 .details {color:#000 !important; font-weight: 400;}	
 .btn-block { width:40% !important;}

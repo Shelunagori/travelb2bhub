@@ -11,6 +11,7 @@ $conn = ConnectionManager::get('default');
 	.details {color:#000 !important; font-weight: 400;}	
 	li > p{
 		color:#96989A !important;
+		margin: 0 0 5px !important;
 	}
 </style>
 <div id="my_final_responses" class="container-fluid">
