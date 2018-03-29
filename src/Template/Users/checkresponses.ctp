@@ -233,7 +233,7 @@ legend
 	
 </div>
 <!--------------END LAYOUT-------------->
-<div id="myModal123" class="modal fade form-modal" role="dialog">
+<div id="myModal123" class="modal fade form-modal" role="dialog" style="display:none;">
 	<div class="modal-dialog">
 
 	<!-- Modal content-->
