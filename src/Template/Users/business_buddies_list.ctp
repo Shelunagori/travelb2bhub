@@ -41,6 +41,7 @@
 									else{
 										echo "Hotelier";
 									}?>
+									<br>
 								<b>Mobile Number :</b> <?php echo ($row['user']['mobile_number'])?$row['user']['mobile_number']:"-- --"; ?><br>
 								</div>
 								<div class="col-md-3">

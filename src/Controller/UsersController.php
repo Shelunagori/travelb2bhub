@@ -1253,26 +1253,26 @@ $hotalExtraData['state_id'] = $d['hh_state_id'][$key];
 $hotalExtraData['country_id'] = $d['hh_country_id'][$key];
 $hotalExtraData['locality'] = $d['hh_locality'][$key];
 
-if(isset($hotalExtraData['check_in']) && !empty($hotalExtraData['check_in']))
+if(isset($d['hh_check_in'][$key]) && !empty($d['hh_check_in'][$key]))
 {
-$hotalExtraData['check_in']=date('Y-m-d',strtotime($hotalExtraData['check_in']));
+$hotalExtraData['check_in']=date('Y-m-d',strtotime($d['hh_check_in'][$key]));
 }
 else{
 $hotalExtraData['check_in']	='0000-00-00';
 }
 
-if(isset($hotalExtraData['check_out']) && !empty($hotalExtraData['check_out']))
+if(isset($d['hh_check_out'][$key]) && !empty($d['hh_check_out'][$key]))
 {
-$hotalExtraData['check_out']=date('Y-m-d',strtotime($hotalExtraData['check_out']));
+$hotalExtraData['check_out']=date('Y-m-d',strtotime($d['hh_check_out'][$key]));
 }
 else{
 $hotalExtraData['check_out']	='0000-00-00';
 }
 
-
 /* $hotalExtraData['check_in'] =  ($d['hh_check_in'][$key])?$this->ymdFormatByDateFormat($d['hh_check_in'][$key], "d-m-Y", $dateSeparator="/"):null;
 $hotalExtraData['check_out'] =  ($d['hh_check_out'][$key])?$this->ymdFormatByDateFormat($d['hh_check_out'][$key], "d-m-Y", $dateSeparator="/"):null; */
 $result = $this->Hotels->newEntity($hotalExtraData);
+//pr($result->toArray());exit;
 $this->Hotels->save($result);
 }
 }

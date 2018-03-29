@@ -61,21 +61,19 @@
 						<textarea name="comment" class="form-control" id="comment"><?php echo $comment; ?></textarea>
 						</div>
 						</div>
-
+						<div class="form-group">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<div class="form-group margin-t30 margin-b15 text-center">
 						<ul class="btn_on_prmotion"> 
 						<li align="center">
 						<input type="submit" name="submittestimonial" id="submittestimonial" class="btn btn-primary" value="Submit ">
 						</li>
-
-					</ul>
+						</ul>
+						</div>
+					</div>
 				</div>
 			</div>
-			
-		</form>
-	</div>
-	<script>
+		<script>
 function addtestimonial() {  
     var radios = document.getElementsByName("rating");
 	

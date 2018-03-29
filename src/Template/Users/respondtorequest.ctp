@@ -304,7 +304,7 @@ $conn = ConnectionManager::get('default');
 				}
 				else{
 					if($m%3==0) {
-						echo ' '; 
+						echo ' <div class="clearfix"></div>'; 
 					}
 				$m++;
 			// echo $resdata['responsecount'][$request['id']];

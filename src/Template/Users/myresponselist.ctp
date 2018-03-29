@@ -326,7 +326,7 @@ $(document).ready(function(){
 				continue;
 			}
 			if($blockedUser['blockedUser'][$response['id']]==1) { $total_responses--; }else{
-			if($m%3==0) { echo ''; }
+			if($m%3==0) { echo '<div class="clearfix"></div>'; }
 			$m++;
  			?>
             <div class="col-md-4">
@@ -455,7 +455,6 @@ $(document).ready(function(){
                      </li>
                    </ul>
 				   <hr></hr>
-				   
 				   <div class="">
 					<table width="100%" border="0" style="text-align:center">
 						<tr>

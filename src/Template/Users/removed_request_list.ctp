@@ -182,15 +182,24 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
                       Pickup City:<span class="details"> <span><?php echo ($request['pickup_city'])?$allCities[$request['pickup_city']]:"-- --"; ?><?php echo ($request['pickup_state'])?' ('.$allStates[$request['pickup_state']].')':"";  ?></span></span>
                   <?php } else { ?>
                             <p>
-                                Destination City: <span class="details"> <span><?php echo ($request['city_id'])?$allCities[$request['city_id']]:"-- --"; ?><?php echo ($request['state_id'])?' ('.$allStates[$request['state_id']].')':""; ?><?php if($request['category_id'] == 1){
-if(count($request['hotels']) >1) {
-unset($request['hotels'][0]);?><?php foreach($request['hotels'] as $row) { ?>
-<?php echo ($row['city_id'])?', '.$allCities[$row['city_id']]:""; ?><?php echo ($row['state_id'])?' ('.$allStates[$row['state_id']].')':""; ?><?php } ?>
-<?php } ?>
-<?php } ?>
-                                </span></span>
+                                Destination City: <span class="details"> <span>
+								<?php 
+									$a=$request['city_id']?$allCities[$request['city_id']]:"-- --"; 
+									$b=$request['state_id']?' ('.$allStates[$request['state_id']].')':"";
+									echo mb_strimwidth($a.$b, 0,20, "...");?>
+								
+													<?php  /*if($request['category_id'] == 1){
+													if(count($request['hotels']) >1) {
+													unset($request['hotels'][0]);?>
+													<?php foreach($request['hotels'] as $row) { ?>
+													<?php echo ($row['city_id'])?', '.$allCities[$row['city_id']]:""; ?>
+													<?php echo ($row['state_id'])?' ('.$allStates[$row['state_id']].')':""; ?>
+													<?php } ?>
+													<?php } ?>
+													<?php } ?> */?>
+                               
+                            <?php } ?> </span></span>
                             </p>
-                            <?php } ?>
                        </li>
 
              

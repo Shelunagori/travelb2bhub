@@ -487,11 +487,11 @@ ul li b {
 				</b></p>
 				</li><?php
 				if (!empty($details['request_stops']))
-				{ ?><?php
+				{ ?><?php
 					$stop_count = 1;
 					foreach($details['request_stops'] as $stops)
 					{ ?>
-					<fieldset><legend>Stop <?php echo $stop_count; ?></legend>
+					<fieldset><legend style="color:#272907;">Stop <?php echo $stop_count; ?></legend>
 						<li class="col-md-6">
 							<p>Stop Locality :&nbsp;<b><?php
 							echo ($stops['locality']) ? $stops['locality'] : "-- --"; ?>
