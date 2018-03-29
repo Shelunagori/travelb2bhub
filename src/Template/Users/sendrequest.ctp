@@ -2,8 +2,7 @@
 <style>
 .hr{
 	margin-top:25px !important;
-}
-/*	
+}	
 a:hover,a:focus{
     outline: none !important;
     text-decoration: none !important;
@@ -52,7 +51,7 @@ a:hover,a:focus{
 .tab .tab-content h3{
     font-size: 22px !important;
     color: #5b5a5a !important;
-}*/ 
+}
 fieldset{
 	margin:10px !important;
 	border-radius: 6px;
@@ -74,15 +73,11 @@ fieldset{
 		margin-top:10px !important;
 } 
 </style> 
-	 
-<div class="row equal_column">
-	 
-<div class="col-md-12" style="background-color:#fff;"> 
-<div class="box box-default">
 	<div class="box-body">
 		<div class="row"> 
+		<div class="col-md-12"> 
+		<div class="col-md-12"> 
 		<div id="tra-sendrequest" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background:#FFF">
-			
 			<div class="content">
 			<div class="tab-content tab">
 				<div align="center">
@@ -150,11 +145,11 @@ fieldset{
 								<p for="from">Children below 6  <span class="required">*</span></p>
 									<div class="col-md-6 input-group">
 									<p class="input-group-addon btn" >
-									<button type="button" class="fa fa-minus-square plus_minus_btn" id="btnminus1" value=""></button>
+									<button type="button" class="fa fa-minus plus_minus_btn" id="btnminus1" value=""></button>
 									</p>                    
 									 <input type='text' autocomplete="off" style="height:50px;" name='hotelChildren'  value='1' class="form-control input-large" id="textcounter1"/>	
 									<p class="input-group-addon btn">
-									<button type="button" class="fa fa-plus-square plus_minus_btn" id="btnplus1" value=""></button>
+									<button type="button" class="fa fa-plus plus_minus_btn" id="btnplus1" value=""></button>
 									</p>                    
 									</div>
 								</div>
@@ -384,11 +379,11 @@ fieldset{
 								<span class="required">*</span></p>
 								<div class="col-md-6 input-group">
 									<p class="input-group-addon btn" >
-									<button type="button" class="fa fa-minus-square plus_minus_btn"  id="btn_pack_minus" value="-"></button>
+									<button type="button" class="fa fa-minus plus_minus_btn"  id="btn_pack_minus" value="-"></button>
 									</p>
 									<input type='text' autocomplete="off" name='adult' value='1' class="form-control input-large" id="text_counter_pack" style="height:50px;"/>
 									<p class="input-group-addon btn">
-									<button type="button" class="fa fa-plus-square plus_minus_btn" id="btn_pack_plus" value=""></button>
+									<button type="button" class="fa fa-plus plus_minus_btn" id="btn_pack_plus" value=""></button>
 								   </p>    
 								</div>
 							</div>
@@ -398,11 +393,11 @@ fieldset{
 									</p>
 									<div class="col-md-6 input-group">
 									<p class="input-group-addon btn" >
-									<button type="button" class="fa fa-minus-square plus_minus_btn" id="btn_pack_minus1" value=""></button>
+									<button type="button" class="fa fa-minus plus_minus_btn" id="btn_pack_minus1" value=""></button>
 									</p>                    
 									 <input type='text' autocomplete="off" name='children' value='1' class="form-control input-large" id="text_counter_pack1" style="height:50px;"/>	
 									<p class="input-group-addon btn">
-									<button type="button" class="fa fa-plus-square plus_minus_btn" id="btn_pack_plus1" value=""></button>
+									<button type="button" class="fa fa-plus plus_minus_btn" id="btn_pack_plus1" value=""></button>
 									</p>                    
 									</div>
 							</div>
@@ -806,11 +801,11 @@ fieldset{
 																<span class="required">*</span></p>
 																<div class="col-md-6 input-group">
 																	<p class="input-group-addon btn" >
-																	<button type="button" class="fa fa-minus-square plus_minus_btn" id="btn_tran_minus" value=""  field='transportAdult'></button>
+																	<button type="button" class="fa fa-minus plus_minus_btn" id="btn_tran_minus" value=""  field='transportAdult'></button>
 																	</p>                    
 																	<input type='text' autocomplete="off" name='transportAdult' value='1' class="form-control input-large" id="text_trans_counter" style="height:50px;"/>	
 																	<p class="input-group-addon btn" >
-																	<button type="button" class="fa fa-plus-square plus_minus_btn " id="btn_tran_plus" value=""    field='transportAdult'></button>
+																	<button type="button" class="fa fa-plus plus_minus_btn " id="btn_tran_plus" value=""    field='transportAdult'></button>
 																	</p>                    
 																</div>
 															</div>
@@ -820,11 +815,11 @@ fieldset{
 																<span class="required">*</span> </p>
 																	<div class="col-md-6 input-group">
 																	<p class="input-group-addon btn" >
-																	<button type="button" class="fa fa-minus-square plus_minus_btn" id="btn_tran_minus1" value="" field='transportChildren'></button>
+																	<button type="button" class="fa fa-minus plus_minus_btn" id="btn_tran_minus1" value="" field='transportChildren'></button>
 																	</p>                    
 																	 <input type='text' style="height:50px;" autocomplete="off" name='transportChildren' value='1' class="form-control input-large" id="text_trans_counter1"/>	
 																	<p class="input-group-addon btn">
-																	<button type="button" class="fa fa-plus-square plus_minus_btn" id="btn_tran_plus1" value=""  field='transportChildren'></button>
+																	<button type="button" class="fa fa-plus plus_minus_btn" id="btn_tran_plus1" value=""  field='transportChildren'></button>
 																	</p>                    
 																	</div>
 															</div>
@@ -1029,6 +1024,7 @@ fieldset{
 		</div>
 	</div>
 </div>
+</div> 
 </div> 
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <?php echo $this->Html->script(['jquery.validate']);?>		 

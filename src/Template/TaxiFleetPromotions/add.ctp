@@ -113,7 +113,7 @@ if ($err) {
 .hr{
 	margin-top:25px !important;
 }
-/*	
+	
 a:hover,a:focus{
     outline: none !important;
     text-decoration: none !important;
@@ -162,7 +162,7 @@ a:hover,a:focus{
 .tab .tab-content h3{
     font-size: 22px !important;
     color: #5b5a5a !important;
-}*/ 
+} 
 fieldset{
 	margin:10px !important;
 }
@@ -174,7 +174,6 @@ fieldset{
 	<form action="<?php echo $coreVariable['SiteUrl'];?>api/taxi_fleet_promotions/add.json" method="post" enctype="multipart/form-data">	
 	<div class="row"> 
 		<div class="col-md-12"> 
-
 			<div class="form-box">
 				<div class="panel-group" style="background-color:white;">
 					<div class="panel panel-default">
