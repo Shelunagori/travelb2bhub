@@ -47,7 +47,7 @@ legend
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top:5px">
 		<!--<a data-toggle="modal" data-target="#detailModal" href="#" class="btn btn-success btn-sm">Details</a>-->
 		
-		
+		<a class="viewdetail btn btn-success btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$responseid)) ?>"data-target="#myModal1<?php echo $responseid; ?>" data-toggle=modal> Details</a>
 		<div class="fade modal"id="myModal1<?php echo $responseid; ?>"role=dialog>
 			<div class=modal-dialog>
 				<div class=modal-content>
@@ -60,23 +60,8 @@ legend
 			</div>
 		</div>
 	</div>
-	
-				<table class="table" cellpadding="0" cellspacing="0">
-					<thead>
-						<tr style="background-color:#709090;color:white">
-							<th scope="col"><?= ('Sr.No') ?></th>
-							<th scope="col"><?= ('Request Type') ?></th>
-							<th scope="col"><?= ('Total Budget') ?></th>
-							<th scope="col"><?= ('Agent Name') ?></th>
-							<th scope="col"><?= ('Quoted Price') ?></th>
-							<th scope="col" class="actions"><?= __('Actions') ?></th>
-						</tr>
-					</thead>
-					<tbody>
-					<tr>
-					<?php $i=0;	
-		if(count($responses) >0) {
-			$i++;
+	<?php
+		if(count($responses) >0) { 
 			foreach($responses as $row){ ?>
 			<div id="cat">
             <?php if(isset($_GET['sort']) && $_GET['sort']=="requesttype")
@@ -85,7 +70,7 @@ legend
 			<?php } 
 			else 
 			{ ?>
-				<div class="col-md-12" id="<?php echo $data['chat_count'][$row['id']]; ?>">
+				<div class="col-md-4" id="<?php echo $data['chat_count'][$row['id']]; ?>">
 		<?php }
 				if($row['request']['category_id']==1){ 
 					$image=$this->Html->image('/img/slider/package-icon.png');
@@ -103,123 +88,194 @@ legend
 				$created=$row['created'];
 				$org_created=date('d-M-Y', strtotime($created));
 				?>
-					 <td><?= $i; ?></td>
-					 <td><?php echo $text; ?></td>
-					 <td><?php echo $row['request']['total_budget']; ?></td>
-					 <?php if($row['response']['is_details_shared']==1){
+				<fieldset>
+					<legend><?php echo $image; ?></legend>
+					<span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
+					<div class="contain">
+						<p>Request Type : &nbsp;<?php echo $text; ?></p>
+						<p>Total Budget : &nbsp;
+							<span class="details"><?php echo $row['request']['total_budget']; ?></span>
+						</p>
+						<?php if($row['response']['is_details_shared']==1){
 								$hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$row['user']['id'],1));                    
                         }else{
 								$hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$row['user']['id'],1));                   
                         }?>
-						<td><a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></a></td>
-						<td><?php echo ($row['quotation_price'])?"Rs. ".$row['quotation_price']:"-- --" ?></td>
-						<td>
-						<table width="100%">
-						<tr>
-								<td width="33%">
-									<a style="width:99%" class="btn btn-warning btn-sm " id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>"> 
-									Chat ( <strong><?php echo $data['chat_count'][$row['id']]; ?> </strong> )</a>
-									<div class="modal fade" id="myModal11<?php echo  $row['request']['id']; ?>" role="dialog">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal">&times;</button>
-													<h4 class="modal-title">Chat</h4>
-												</div>
-												<div class="modal-body">
-												</div>
-											</div>
-										</div>
-									</div>
-								</td>
-							<td width="33%">					
-								<?php if($row['is_details_shared'] != 1) { ?>
-									<a style="width:99%" href="javascript:void(0);" user_id="<?php echo $row['user']['id']; ?>" class="shareDetails btn btn-info btn-sm " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
-									Share Details</a>
-								 
-								<?php }
-								else{
-									?>
-										<a style="width:99%" href="javascript:void(0);" class=" btn btn-info btn-sm ">
-										Shared</a>
-									 
-									<?php 
-								}	?>
-									
-								</td>
-							<td width="33%">	
-								<?php
-									if( !array_key_exists($row['user']['id'], $BusinessBuddies)) {?>
-										<a href="javascript:void(0);" class="businessBuddy btn btn-sm " style="background-color:#1295A2;color:#FFF;width:99%" user_id = "<?php echo $row['user']['id']; ?>"> Follow</a>
-								<?php }
-									else{
-									?>
-										<a  href="javascript:void(0);" class="btn btn-sm " style="background-color:#1295A2;color:#FFF;width:99%" user_id = "<?php echo $row['user']['id']; ?>"> Following</a>
-														<?php
-									}	?>
-									
-							</td>
-							</tr>
-							</table>
-							<table width="100%" style="margin-top:5px">
-							<tr>
-								<td width="33%">	
-								<?php
-								$sql="Select count(*) as block_count from blocked_users where blocked_user_id='".$row['user']['id']."' AND blocked_by='".$row['request']['user_id']."'";
-								$stmt = $conn->execute($sql);
-								$bresult = $stmt ->fetch('assoc'); 
-								if($bresult['block_count']>0){
-									$blocked = 1;
-								}
-								else{
-									$blocked = 0;
-								}
-								?>	
+						<p>Agent Name : &nbsp;
+							<span class="details"><a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></a></span>
+						</p>
+						
+						<p>Reference ID : &nbsp;
+							<span class="details"><?php echo $row['request']['reference_id']; ?></span>
+						</p>
+						
+						<p>Quoted Price : &nbsp;
+							<span class="details"><?php echo ($row['quotation_price'])?"Rs. ".$row['quotation_price']:"-- --" ?></span>
+						</p>
+						<?php if($row['request']['category_id']==2){ ?>
+							<p>Pickup City : &nbsp;
+								<span class="details"><?php echo ($row['request']['pickup_city'])?$allCities[$row['request']['pickup_city']]:"-- --"; ?><?php echo ($row['request']['pickup_state'])?' ('.$allStates[$row['request']['pickup_state']].')':"";  ?></span>
+							</p>
+						<?php } else { ?>
+							<p>Destination City : &nbsp;
+								<span class="details"><?php echo ($row['request']['city_id'])?$allCities[$row['request']['city_id']]:"-- --"; ?> <?php echo ($row['request']['state_id'])?' ('.$allStates[$row['request']['state_id']].')':""; ?>
 								<?php 
-								if($blocked==1)
-								{?>
-									<a style="width:99%" href="javascript:void(0);" class="unblockUser btn btn-danger btn-sm " user_id = "<?php echo $row['user']['id']; ?>">
-									Blocked </a>
-								<?php }
-								else
-								{?>
-									<a style="width:99%" href="javascript:void(0);" class="blockUser btn btn-danger btn-sm " user_id = "<?php echo $row['user']['id']; ?>">
-									Block User </a>
-								<?php } ?>
-								</td>
-							<td width="33%">
-									<a style="width:99%" href="javascript:void(0);" class="acceptOffer btn btn-success btn-sm " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
-									Accept Offer</a>
-									
-							<?php $reviewi =  $row['user']['id']."-".$row['request']['id']; ?>
-								<a data-toggle="modal" class="btn btn-info btn-sm" style="display:none;" data-target="#myModal_accept<?php echo $row['id']; ?>" id="add_review" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">
-							Test</a>
-								<div class="modal fade" id="myModal_accept<?php echo $row['id']; ?>" role="dialog">
-									<div class="modal-dialog">
-									  <div class="modal-content">
-										<div class="modal-header">
-										  <button type="button" class="close" data-dismiss="modal">&times;</button>
-										  <h4 class="modal-title">Add Review</h4>
-										</div>
-										<div class="modal-body">
-										</div>
-									  </div>
+								if($row['request']['category_id'] == 1){
+									if(count($row['request']['hotels']) >1) {
+										unset($row['request']['hotels'][0]);
+									 
+										foreach($row['request']['hotels'] as $rowc) 
+										{ ?>
+											<?php echo ($rowc['city_id'])?','.$allCities[$rowc['city_id']]:""; ?><?php echo ($rowc['state_id'])?' ('.$allStates[$rowc['state_id']].')':""; ?>
+										  <?php  
+										}  
+									}  
+								} 
+								?>
+							 </span>
+                        </p>
+                        <?php } ?>
+						<?php if($row['request']['category_id'] == 3 ) { ?>
+							<p>Start Date : &nbsp;
+								<span class="details"><?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?></span>
+							</p>
+							<p>End Date : &nbsp;
+								<span class="details"><?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?></span>
+							</p>
+ 						<?php } ?>
+						<?php if($row['request']['category_id'] == 1 ) {?>
+							<p>Start Date : &nbsp;
+								<span class="details"><?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?></span>
+							</p>
+							<p>End Date : &nbsp;
+								<span class="details"><?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?></span>
+							</p>
+						<?php }
+							if($row['request']['category_id'] == 2 ) { ?>
+							<p>Start Date : &nbsp;
+								<span class="details"><?php echo ($row['request']['start_date'])?date("d/m/Y", strtotime($row['request']['start_date'])):"-- --"; ?></span>
+							</p>
+							<p>End Date : &nbsp;
+								<span class="details"><?php echo ($row['request']['end_date'])?date("d/m/Y", strtotime($row['request']['end_date'])):"-- --"; ?></span>
+							</p>
+ 						<?php } ?>
+						<p>Members : &nbsp;
+							<span class="details"><?php echo $row['request']['adult'] +  $row['request']['children']; ?></span>
+						</p>
+						<p>Comment : &nbsp;
+							<span class="details"><?php echo mb_strimwidth($row['comment'], 0, 25, "...");?></span>
+						</p>
+ 						 
+						
+						
+					</div>
+							
+				 
+			<?php if(empty($row['request']['final_id'])) { ?>
+			<?php $id = $row['id'];?>
+			<hr></hr>
+				<div>
+				<table width="100%">
+				<tr>
+					<td width="33%">
+						<a style="width:99%" class="btn btn-warning btn-sm " id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>"> 
+						Chat ( <strong><?php echo $data['chat_count'][$row['id']]; ?> </strong> )</a>
+						<div class="modal fade" id="myModal11<?php echo  $row['request']['id']; ?>" role="dialog">
+							<div class="modal-dialog">
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">Chat</h4>
+									</div>
+									<div class="modal-body">
 									</div>
 								</div>
-								</td>
-								<td width="33%">
-								<a style="width:99%" class="viewdetail btn btn-success btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$responseid)) ?>"data-target="#myModal1<?php echo $responseid; ?>" data-toggle=modal> Details</a>
-								</td>
-							</tr>
-							</table>
-						</td>
-					</tr>
-					<?php $i++;} ?>
-				</tbody>
-			</table>
- 		</div>
+							</div>
+						</div>
+					</td>
+				<td width="33%">					
+					<?php if($row['is_details_shared'] != 1) { ?>
+						<a style="width:99%" href="javascript:void(0);" user_id="<?php echo $row['user']['id']; ?>" class="shareDetails btn btn-info btn-sm " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
+						Share Details</a>
+					 
+					<?php }
+					else{
+						?>
+							<a style="width:99%" href="javascript:void(0);" class=" btn btn-info btn-sm ">
+							Shared</a>
+						 
+						<?php 
+					}	?>
+						
+					</td>
+				<td width="33%">	
+					<?php
+						if( !array_key_exists($row['user']['id'], $BusinessBuddies)) {?>
+							<a href="javascript:void(0);" class="businessBuddy btn btn-sm " style="background-color:#1295A2;color:#FFF;width:99%" user_id = "<?php echo $row['user']['id']; ?>"> Follow</a>
+					<?php }
+else{
+?>
+							<a  href="javascript:void(0);" class="btn btn-sm " style="background-color:#1295A2;color:#FFF;width:99%" user_id = "<?php echo $row['user']['id']; ?>"> Following</a>
+					<?php
+}	?>
+						
+				</td>
+				</tr>
+				</table>
+				<table width="100%" style="margin-top:5px">
+				<tr>
+					<td width="50%">	
+					<?php
+					$sql="Select count(*) as block_count from blocked_users where blocked_user_id='".$row['user']['id']."' AND blocked_by='".$row['request']['user_id']."'";
+					$stmt = $conn->execute($sql);
+					$bresult = $stmt ->fetch('assoc'); 
+					if($bresult['block_count']>0){
+						$blocked = 1;
+					}
+					else{
+						$blocked = 0;
+					}
+					?>	
+					<?php 
+					if($blocked==1)
+					{?>
+						<a style="width:99%" href="javascript:void(0);" class="unblockUser btn btn-danger btn-sm " user_id = "<?php echo $row['user']['id']; ?>">
+						Blocked </a>
+					<?php }
+					else
+					{?>
+						<a style="width:99%" href="javascript:void(0);" class="blockUser btn btn-danger btn-sm " user_id = "<?php echo $row['user']['id']; ?>">
+						Block User </a>
+					<?php } ?>
+					</td>
+				<td width="50%">
+						<a style="width:99%" href="javascript:void(0);" class="acceptOffer btn btn-success btn-sm " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
+						Accept Offer</a>
+						
+				<?php $reviewi =  $row['user']['id']."-".$row['request']['id']; ?>
+					<a data-toggle="modal" class="btn btn-info btn-sm" style="display:none;" data-target="#myModal_accept<?php echo $row['id']; ?>" id="add_review" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">
+				Test</a>
+					<div class="modal fade" id="myModal_accept<?php echo $row['id']; ?>" role="dialog">
+						<div class="modal-dialog">
+						  <div class="modal-content">
+							<div class="modal-header">
+							  <button type="button" class="close" data-dismiss="modal">&times;</button>
+							  <h4 class="modal-title">Add Review</h4>
+							</div>
+							<div class="modal-body">
+							</div>
+						  </div>
+						</div>
+					</div>
+					</td>
+				</tr>
+				</table>
+ 				</div>
+				
+			<?php } ?>
+			</fieldset>
 		<?php } 
-		
+		}
 		else 
 		{?>
 			<div class="col-md-12">

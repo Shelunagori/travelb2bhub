@@ -263,7 +263,11 @@ if ($err) {
 				 </div>
 			  </div>
 		   </div>
-			
+	<div class="col-md-12">
+		<div class="col-md-4">
+		<?= $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'width:300px;height:220px;']) ?>
+		</div>
+		<div class="col-md-8">		
 			
 	<table class="table" cellpadding="0" cellspacing="0">
         <thead>
