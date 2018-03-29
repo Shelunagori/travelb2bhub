@@ -597,22 +597,36 @@ class EventPlannerPromotionsController extends AppController
 	}		
 
 	
-	public function EventPlannerViews($event_planner_promotion_id=null,$page=null)
+	public function EventPlannerViews($event_planner_promotion_id=null,$page=null,$user_id=null,$search=null)
 	{
 		$event_planner_promotion_id = $this->request->query('event_planner_promotion_id');
+		$user_id = $this->request->query('user_id');
+		$search_bar = $this->request->query('search');
 		$page = $this->request->query('page');
+		$filter_search=array();
+		if(!empty($search_bar)){
+			$filter_search["OR"] = array("Users.first_name Like"=> '%'.$search_bar.'%',"Users.last_name Like"=> '%'.$search_bar.'%',"Users.company_name Like"=> '%'.$search_bar.'%');
+ 		}
 		$limit=10;
 		if(empty($page)){$page=1;}
 		$COunt = $this->EventPlannerPromotions->EventPlannerPromotionViews->find()->where(['event_planner_promotion_id'=>$event_planner_promotion_id])->count();
 		if($COunt>0)
 		{
 			$getTravelPackages = $this->EventPlannerPromotions->EventPlannerPromotionViews->find()
-				->contain(['Users'=>function($q){
-					return $q->select(['first_name','last_name','mobile_number','company_name','role_id']);
+				->contain(['Users'=>function($q)use($filter_search){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id'])->where($filter_search);
 				}])
 				->where(['event_planner_promotion_id'=>$event_planner_promotion_id])
 				->limit($limit)
 				->page($page);
+			foreach($getTravelPackages as $packages){
+				$Follow = $this->EventPlannerPromotions->EventPlannerPromotionViews->Users->BusinessBuddies->exists(['user_id'=>$user_id,'bb_user_id'=>$packages->user_id]);  
+				if($Follow==0){
+					$packages->isfollow=false;
+				}else{
+					$packages->isfollow=true;
+				}
+ 			}
 			$response_object = $getTravelPackages;
 			$response_code = 200;
 			$message = '';
@@ -628,22 +642,36 @@ class EventPlannerPromotionsController extends AppController
 		
 	}
 	
-	public function EventPlannerLikes($event_planner_promotion_id=null,$page=null)
+	public function EventPlannerLikes($event_planner_promotion_id=null,$page=null,$user_id=null,$search=null)
 	{
 		$event_planner_promotion_id = $this->request->query('event_planner_promotion_id');
+		$user_id = $this->request->query('user_id');
+		$search_bar = $this->request->query('search');
 		$page = $this->request->query('page');
+		$filter_search=array();
+		if(!empty($search_bar)){
+			$filter_search["OR"] = array("Users.first_name Like"=> '%'.$search_bar.'%',"Users.last_name Like"=> '%'.$search_bar.'%',"Users.company_name Like"=> '%'.$search_bar.'%');
+ 		}
 		$limit=10;
 		if(empty($page)){$page=1;}
 		$COunt = $this->EventPlannerPromotions->EventPlannerPromotionLikes->find()->where(['event_planner_promotion_id'=>$event_planner_promotion_id])->count();
 		if($COunt>0)
 		{
 			$getTravelPackages = $this->EventPlannerPromotions->EventPlannerPromotionLikes->find()
-				->contain(['Users'=>function($q){
-					return $q->select(['first_name','last_name','mobile_number','company_name','role_id']);
+				->contain(['Users'=>function($q)use($filter_search){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id'])->where($filter_search);
 				}])
 				->where(['event_planner_promotion_id'=>$event_planner_promotion_id])
 				->limit($limit)
 				->page($page);
+			foreach($getTravelPackages as $packages){
+				$Follow = $this->EventPlannerPromotions->EventPlannerPromotionLikes->Users->BusinessBuddies->exists(['user_id'=>$user_id,'bb_user_id'=>$packages->user_id]);  
+				if($Follow==0){
+					$packages->isfollow=false;
+				}else{
+					$packages->isfollow=true;
+				}
+ 			}
 			$response_object = $getTravelPackages;
 			$response_code = 200;
 			$message = '';

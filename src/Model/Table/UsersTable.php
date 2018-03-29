@@ -85,6 +85,7 @@ class UsersTable extends Table
             'foreignKey' => 'user_id',
             'dependent' => TRUE
         ]);
+		$this->hasMany('BusinessBuddies');
         
     }
     public function createUser(\Cake\Event\Event $event) {

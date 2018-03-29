@@ -182,7 +182,7 @@ class PostTravlePackagesController extends AppController
 			
 			if(!empty($valid_date))
 			{ 
-				$valid_date = ['valid_date =' =>date('Y-m-d',strtotime($valid_date))];
+				$valid_date = ['valid_date <=' =>date('Y-m-d',strtotime($valid_date))];
 			}
 			else
 			{ 
@@ -262,16 +262,15 @@ class PostTravlePackagesController extends AppController
 			if(!empty($starting_price))
 			{
 				//$starting_price = ['starting_price'=>$starting_price];
-  				$result = explode("-", $starting_price); 
-				$MinQuotePrice = $result[0];
-				$MaxQuotePrice = $result[1];
-				$starting_price["PostTravlePackages.starting_price >="] = $MinQuotePrice;
-				$starting_price["PostTravlePackages.starting_price <="] = $MaxQuotePrice;
+  				$results = explode("-", $starting_price); 
+			 	$MinQuotePrices = $results[0];
+			 	$MaxQuotePrice = $results[1];
+				if($MaxQuotePrice=='200000'){ $MaxQuotePrice='100000000';}
+				$starting_price_Filter["PostTravlePackages.starting_price >="] = $MinQuotePrices;
+				$starting_price_Filter["PostTravlePackages.starting_price <="] = $MaxQuotePrice;
 			 
-			}else
-			{
-				$starting_price = null;
 			}
+			//print_r($starting_price_Filter); exit;
 			$country_filter=null;
 			if(!empty($country_id))
 			{
@@ -351,7 +350,7 @@ class PostTravlePackagesController extends AppController
 					})				
 			->where($where_duration)
 			->where($valid_date)
-			->where($starting_price)
+			->where($starting_price_Filter)
 			->where($search_bar_title)
 			->where(['PostTravlePackages.is_deleted' =>0])
 			->order($where_short)
@@ -700,22 +699,36 @@ class PostTravlePackagesController extends AppController
 
 	}
 	
-	public function PostTravelPackageViews($post_travel_id=null,$page=null)
+	public function PostTravelPackageViews($post_travel_id=null,$page=null,$user_id=null,$search=null)
 	{
 		$post_travel_id = $this->request->query('post_travel_id');
+		$user_id = $this->request->query('user_id');
+		$search_bar = $this->request->query('search');
 		$page = $this->request->query('page');
+		$filter_search=array();
+		if(!empty($search_bar)){
+			$filter_search["OR"] = array("Users.first_name Like"=> '%'.$search_bar.'%',"Users.last_name Like"=> '%'.$search_bar.'%',"Users.company_name Like"=> '%'.$search_bar.'%');
+ 		}
 		$limit=10;
 		if(empty($page)){$page=1;}
 		$COunt = $this->PostTravlePackages->PostTravlePackageViews->find()->where(['post_travle_package_id'=>$post_travel_id])->count();
 		if($COunt>0)
 		{
 			$getTravelPackages = $this->PostTravlePackages->PostTravlePackageViews->find()
-				->contain(['Users'=>function($q){
-					return $q->select(['first_name','last_name','mobile_number','company_name','role_id']);
+				->contain(['Users'=>function($q)use($filter_search){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id'])->where($filter_search);
 				}])
 				->where(['post_travle_package_id'=>$post_travel_id])
 				->limit($limit)
 				->page($page);
+			foreach($getTravelPackages as $packages){
+				$Follow = $this->PostTravlePackages->PostTravlePackageViews->Users->BusinessBuddies->exists(['user_id'=>$user_id,'bb_user_id'=>$packages->user_id]);  
+				if($Follow==0){
+					$packages->isfollow=false;
+				}else{
+					$packages->isfollow=true;
+				}
+ 			}
 			$response_object = $getTravelPackages;
 			$response_code = 200;
 			$message = '';
@@ -731,22 +744,38 @@ class PostTravlePackagesController extends AppController
 		
 	}
 	
-	public function PostTravelPackageLikes($post_travel_id=null,$page=null)
+	public function PostTravelPackageLikes($post_travel_id=null,$page=null,$user_id=null,$search=null)
 	{
 		$post_travel_id = $this->request->query('post_travel_id');
+		$user_id = $this->request->query('user_id');
+		$search_bar = $this->request->query('search');
 		$page = $this->request->query('page');
-		$limit=10;
+		$filter_search=array();
+		if(!empty($search_bar)){
+			$filter_search["OR"] = array("Users.first_name Like"=> '%'.$search_bar.'%',"Users.last_name Like"=> '%'.$search_bar.'%',"Users.company_name Like"=> '%'.$search_bar.'%');
+ 		}
 		if(empty($page)){$page=1;}
+		$limit=10;
 		$COunt = $this->PostTravlePackages->PostTravlePackageLikes->find()->where(['post_travle_package_id'=>$post_travel_id])->count();
 		if($COunt>0)
 		{
 			$getTravelPackages = $this->PostTravlePackages->PostTravlePackageLikes->find()
-				->contain(['Users'=>function($q){
-					return $q->select(['first_name','last_name','mobile_number','company_name','role_id']);
+				->contain(['Users'=>function($q)use($filter_search){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id'])->where($filter_search);
 				}])
 				->where(['post_travle_package_id'=>$post_travel_id])
 				->limit($limit)
 				->page($page);
+ 			
+			foreach($getTravelPackages as $packages){
+				$Follow = $this->PostTravlePackages->PostTravlePackageLikes->Users->BusinessBuddies->exists(['user_id'=>$user_id,'bb_user_id'=>$packages->user_id]);  
+				if($Follow==0){
+					$packages->isfollow=false;
+				}else{
+					$packages->isfollow=true;
+				}
+ 			}
+			
 			$response_object = $getTravelPackages;
 			$response_code = 200;
 			$message = '';

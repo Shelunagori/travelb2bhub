@@ -647,22 +647,36 @@ class TaxiFleetPromotionsController extends AppController
 
 	}
 	
-	public function TexiPromotionViews($texifleet_promotion_id=null,$page=null)
+	public function TexiPromotionViews($texifleet_promotion_id=null,$page=null,$user_id=null,$search=null)
 	{
 		$texifleet_promotion_id = $this->request->query('texifleet_promotion_id');
+		$user_id = $this->request->query('user_id');
+		$search_bar = $this->request->query('search');
 		$page = $this->request->query('page');
+		$filter_search=array();
+		if(!empty($search_bar)){
+			$filter_search["OR"] = array("Users.first_name Like"=> '%'.$search_bar.'%',"Users.last_name Like"=> '%'.$search_bar.'%',"Users.company_name Like"=> '%'.$search_bar.'%');
+ 		}
 		$limit=10;
 		if(empty($page)){$page=1;}
 		$COunt = $this->TaxiFleetPromotions->TaxiFleetPromotionViews->find()->where(['taxi_fleet_promotion_id'=>$texifleet_promotion_id])->count();
 		if($COunt>0)
 		{
 			$getTravelPackages = $this->TaxiFleetPromotions->TaxiFleetPromotionViews->find()
-				->contain(['Users'=>function($q){
-					return $q->select(['first_name','last_name','mobile_number','company_name','role_id']);
+				->contain(['Users'=>function($q)use($filter_search){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id'])->where($filter_search);
 				}])
 				->where(['taxi_fleet_promotion_id'=>$texifleet_promotion_id])
 				->limit($limit)
 				->page($page);
+			foreach($getTravelPackages as $packages){
+				$Follow = $this->TaxiFleetPromotions->TaxiFleetPromotionViews->Users->BusinessBuddies->exists(['user_id'=>$user_id,'bb_user_id'=>$packages->user_id]);  
+				if($Follow==0){
+					$packages->isfollow=false;
+				}else{
+					$packages->isfollow=true;
+				}
+ 			}
 			$response_object = $getTravelPackages;
 			$response_code = 200;
 			$message = '';
@@ -678,22 +692,36 @@ class TaxiFleetPromotionsController extends AppController
 		
 	}
 	
-	public function TexiPromotionLikes($texifleet_promotion_id=null,$page=null)
+	public function TexiPromotionLikes($texifleet_promotion_id=null,$page=null,$user_id=null,$search=null)
 	{
 		$texifleet_promotion_id = $this->request->query('texifleet_promotion_id');
+		$user_id = $this->request->query('user_id');
+		$search_bar = $this->request->query('search');
 		$page = $this->request->query('page');
+		$filter_search=array();
+		if(!empty($search_bar)){
+			$filter_search["OR"] = array("Users.first_name Like"=> '%'.$search_bar.'%',"Users.last_name Like"=> '%'.$search_bar.'%',"Users.company_name Like"=> '%'.$search_bar.'%');
+ 		}
 		$limit=10;
 		if(empty($page)){$page=1;}
 		$COunt = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->find()->where(['taxi_fleet_promotion_id'=>$texifleet_promotion_id])->count();
 		if($COunt>0)
 		{
 			$getTravelPackages = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->find()
-				->contain(['Users'=>function($q){
-					return $q->select(['first_name','last_name','mobile_number','company_name','role_id']);
+				->contain(['Users'=>function($q)use($filter_search){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id'])->where($filter_search);
 				}])
 				->where(['taxi_fleet_promotion_id'=>$texifleet_promotion_id])
 				->limit($limit)
 				->page($page);
+			foreach($getTravelPackages as $packages){
+				$Follow = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->Users->BusinessBuddies->exists(['user_id'=>$user_id,'bb_user_id'=>$packages->user_id]);  
+				if($Follow==0){
+					$packages->isfollow=false;
+				}else{
+					$packages->isfollow=true;
+				}
+ 			}
 			$response_object = $getTravelPackages;
 			$response_code = 200;
 			$message = '';

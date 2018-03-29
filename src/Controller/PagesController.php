@@ -896,38 +896,32 @@ $data['country_id'] =  $cityapi->country_id;
 			}       
        
 			$conditions ='';
-if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
+			if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 			if(!empty($_POST["budgetsearch"])) {
 				$QPriceRange = $_POST["budgetsearch"];
 				$result = explode("-", $QPriceRange);
 				$MinQuotePrice = $result[0];
 				$MaxQuotePrice = $result[1];
 				if($MaxQuotePrice==100000){$MaxQuotePrice=100000000000;}
-				$conditions["Requests.total_budget >="] = $MinQuotePrice;
-				$conditions["Requests.total_budget <="] = $MaxQuotePrice;
+				$conditions["Responses.quotation_price >="] = $MinQuotePrice;
+				$conditions["Responses.quotation_price <="] = $MaxQuotePrice;
 			}
-
-			if(!empty($_POST["agentnamesearch"])){
-				$keyword1 = '';
-				$keyword2 = '';
-				$keyword = trim($_POST["agentnamesearch"]);
-				$keyword = explode(' ',$keyword);
-				if(isset($keyword[1])) {
-					$keyword2 = $keyword[1];
-				}
-				$conditions["OR"] = array("Users.first_name LIKE "=>"%". $keyword[0]."%", "Users.last_name LIKE" => "%".$keyword[0]."%",);
-			}			
-
-
+			
+		if(isset($_POST["refidsearch"]) && !empty($_POST["refidsearch"])) {
+			$RefSearchArray=explode(',',$_POST["refidsearch"]);  
+			$conditions["Requests.reference_id in"] =  $RefSearchArray;
+		}
+		if(isset($_POST["agentnamesearch"]) && !empty($_POST["agentnamesearch"])) {
+			$keyword = $_POST["agentnamesearch"];
+			$AjentArray = explode(',',$keyword);
+			$AjentArray=array_filter($AjentArray);
+			$conditions["OR"] = array("Users.first_name IN "=>$AjentArray, "Users.last_name IN" => $AjentArray);
+		}
+ 
 			if(!empty($_POST["req_typesearch"])) {
 				$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
 			}
-	
-			if(!empty( $_POST["refidsearch"])) {
-				//$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
-		$conditions["Requests.reference_id Like"] =  '%'.$_POST["refidsearch"].'%';				
-			}
-
+ 
 			if(!empty($_POST["destination_city"])) {
 				$conditions["Requests.city_id"] =  $_POST["destination_city"];
 			}
@@ -1437,15 +1431,16 @@ $hotelcitystate[$row['id']]  = $city_state_name;
 		  
 		  $conditions["Responses.user_id"] = $_POST['user_id'];
 		  $conditions["Responses.status"] = 1;
-		if(!empty($_POST["agentnamesearch"])) {
-			$keyword1 = '';
-			$keyword2 = '';
-			$keyword = trim($_POST["agentnamesearch"]);
-			$keyword = explode(' ',$keyword);
-			if(isset($keyword[1])) {
-			$keryword2 = $keyword[1];
-			}
-			$conditions["OR"] = array("Users.first_name LIKE "=>"%".$keyword[0]."%", "Users.last_name LIKE" => "%$keyword[0]%",);
+		  
+		if(isset($_POST["refidsearch"]) && !empty($_POST["refidsearch"])) {
+			$RefSearchArray=explode(',',$_POST["refidsearch"]);  
+			$conditions["Requests.reference_id in"] =  $RefSearchArray;
+		}
+		if(isset($_POST["agentnamesearch"]) && !empty($_POST["agentnamesearch"])) {
+			$keyword = $_POST["agentnamesearch"];
+			$AjentArray = explode(',',$keyword);
+			$AjentArray=array_filter($AjentArray);
+			$conditions["OR"] = array("Users.first_name IN "=>$AjentArray, "Users.last_name IN" => $AjentArray);
 		}
 		
 		if(!empty($_POST["quotesearch"])) {
@@ -1459,7 +1454,7 @@ $hotelcitystate[$row['id']]  = $city_state_name;
 		}
 		//print_r($conditions); die();
 		if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
-		if(!empty($_POST["budgetsearch"])) {
+		if(!empty($_POST["respondtorequestapi"])) {
 			$QPriceRange = $_POST["budgetsearch"];
 			$result = explode("-", $QPriceRange);
 			$MinbudgetPrice = $result[0];
@@ -1467,14 +1462,7 @@ $hotelcitystate[$row['id']]  = $city_state_name;
 			$conditions["Requests.total_budget >="] = $MinbudgetPrice;
 			$conditions["Requests.total_budget <="] = $MaxbudgetPrice;
 		}
-		//print_r($conditions);	  die();
-		if(!empty($_POST["refidsearch"])) {
-		//$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
-		$conditions["Requests.reference_id Like"] =  '%'.$_POST["refidsearch"].'%';
-		}
-		
-		///---------------
-		
+		 
         $responses = $this->Responses->find()
 			->contain(["Requests.Users", "Requests","Requests.Hotels",'Requests.Cities'])
 			->where($conditions)->order($sort);
@@ -1935,8 +1923,8 @@ public function removebusinessbuddyapi() {
 	$sortorder['Users.last_name'] = "ASC";
 	}
 	if($sortfield =="agentza"){
-		$sortorder['Users.first_name'] = "DESC";
-		$sortorder['Users.last_name'] = "DESC";
+	$sortorder['Users.first_name'] = "DESC";
+	$sortorder['Users.last_name'] = "DESC";
 	}		
 
 	}
@@ -1959,24 +1947,10 @@ public function removebusinessbuddyapi() {
 		if(sizeof($BlockedUsers)>0){
 				$conditions["Responses.user_id NOT IN"] =  $BlockedUsers; 
 		}
-		
-		//--- Folow SEARCH
-		$user_id=$_POST['user_id'];
-		$BBCOND=array();
-		if(!empty($_POST['followsearch'])){
-			if($followsearch == 1)
-			{
-				$BBCOND['BusinessBuddies.bb_user_id IN']=$user_id; 
-			}
-		}
-		
-		//--
-
+ 
 //---
 	$responses = $this->Responses->find()
-	->contain(["Users",'BusinessBuddies'=>function($q)use($user_id){
-		return $q->where($BBCOND);
-	},"Requests","Requests.Hotels","Testimonial"])
+	->contain(["Users", "Requests","Requests.Hotels","Testimonial"])
 	->where($conditions)
 	->order($sortorder)
 	->all();
@@ -1991,14 +1965,14 @@ public function removebusinessbuddyapi() {
 	$data = array();
 	$BusinessBuddies = array();
 	$blockeddata = array();
-	$rating = array();
+$rating = array();
 	if(count($responses)>0) {
 	foreach($responses as $row){ 
 	$request_id = $row['request']['id'];
 	$loggedinid = $row['request']['user_id'];
 
-		$query = $this->Testimonial->find();
-		$userRating = $query->select(["average_rating" => $query->func()->avg("rating")])
+$query = $this->Testimonial->find();
+$userRating = $query->select(["average_rating" => $query->func()->avg("rating")])
 						->where(['user_id' => $row['user_id']])
 						->order(["id" => "DESC"]);
 					$rating['rating'][$row['user_id']]  = $userRating;
@@ -2078,19 +2052,19 @@ public function removebusinessbuddyapi() {
 		}
 	}else{
 		if($req['check_out']>$end_data){
-		$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['request']['check_out']));
+	$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['request']['check_out']));
 		}else{
-		$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['request']['end_date']));	
+	$enddatearray[$cit['id']]  = date('Y-m-d', strtotime($cit['request']['end_date']));	
 		}
 	}
 	}elseif($cit['request']['category_id'] == 2 ) {
-		$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['request']['end_date']));
+	$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['request']['end_date']));
 	}elseif($cit['request']['category_id'] == 3 ) {
-		$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['request']['check_out']));
+	$enddatearray[$cit['id']] = date('Y-m-d', strtotime($cit['request']['check_out']));
 	} 
 
 	}
-	
+
 	$result['response_code'] = 200;
 	$result['response_object'] = $responses;
 	$result['citystate'] = $citystate;
@@ -2174,7 +2148,7 @@ public function userprofileapi()
 			$result['userReponseCount'] = $userReponseCount;
 
 
-		$user = $this->Users->find()->where(['id' => $id])->first();
+		$user = $this->Users->find()->contain(['Cities','States'])->where(['Users.id' => $id])->first();
 		if(empty($user)){
 			$finalresult['response_code'] = 200;
 			$finalresult['response_object'] = "No User Found";
@@ -2397,13 +2371,19 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	$conditions["Requests.total_budget >="] = $MinQuotePrice;
 	$conditions["Requests.total_budget <="] = $MaxQuotePrice;
 	}
-	if(isset($_POST["req_typesearch"]) && !empty($_POST["req_typesearch"])) {
-		//$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
+	if(isset($_POST["req_typesearch"]) && !empty($_POST["req_typesearch"])) { 
 		$typeSearchArray=explode(',',$_POST["req_typesearch"]);  
 		$conditions["Requests.category_id IN"] =  $typeSearchArray; 
 	}
 	if(isset($_POST["refidsearch"]) && !empty($_POST["refidsearch"])) {
-	$conditions["Requests.reference_id Like"] =  '%'.$_POST["refidsearch"].'%';
+		$RefSearchArray=explode(',',$_POST["refidsearch"]);  
+		$conditions["Requests.reference_id in"] =  $RefSearchArray;
+	}
+	if(isset($_POST["agentnamesearch"]) && !empty($_POST["agentnamesearch"])) {
+		$keyword = $_POST["agentnamesearch"];
+		$AjentArray = explode(',',$keyword);
+		$AjentArray=array_filter($AjentArray);
+		$conditions["OR"] = array("Users.first_name IN "=>$AjentArray, "Users.last_name IN" => $AjentArray);
 	}
 
 	if(isset($_POST["destination_city"]) && !empty($_POST["destination_city"])) {
@@ -2662,16 +2642,7 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 
 	$conditions ='';
 	$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
-	if(!empty($_POST["agentnamesearch"])) {
-	$keyword1 = '';
-	$keyword2 = '';
-	$keyword = trim($_POST["agentnamesearch"]);
-	$keyword = explode(' ',$keyword);
-	if(isset($keyword[1])) {
-	$keyword2 = $keyword[1];
-	}
-		$conditions["AND"] = array("Users.first_name LIKE "=>"%". $keyword[0]."%", "Users.last_name LIKE" => "%".$keyword2."%",);
-	}
+	 
 	if(!empty($_POST["destination_city"])){
 		$conditions["Requests.city_id"] =  $_POST["destination_city"];
 	}
@@ -2695,14 +2666,22 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	$result = explode("-", $QPriceRange);
 	$MinQuotePrice = $result[0];
 	$MaxQuotePrice = $result[1];
-	if($MaxQuotePrice==100000){$MaxQuotePrice=100000000000;}
+	if($MaxQuotePrice==100000){$MaxQuotePrice=100000000000;} 
 	$conditions["Requests.total_budget >="] = $MinQuotePrice;
 	$conditions["Requests.total_budget <="] = $MaxQuotePrice;
 	}
-	if(!empty($_POST["refidsearch"])) {
-	//$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
-	$conditions["Requests.reference_id Like"] =  '%'.$_POST["refidsearch"].'%';
+ 	
+	if(isset($_POST["refidsearch"]) && !empty($_POST["refidsearch"])) {
+		$RefSearchArray=explode(',',$_POST["refidsearch"]);  
+		$conditions["Requests.reference_id in"] =  $RefSearchArray;
 	}
+	if(isset($_POST["agentnamesearch"]) && !empty($_POST["agentnamesearch"])) {
+		$keyword = $_POST["agentnamesearch"];
+		$AjentArray = explode(',',$keyword);
+		$AjentArray=array_filter($AjentArray);
+		$conditions["OR"] = array("Users.first_name IN "=>$AjentArray, "Users.last_name IN" => $AjentArray);
+	}
+	 
 	if(isset($_POST["members"]) && !empty($_POST["members"])) {
 	$conditions["Requests.children+Requests.adult"] =  $_POST["members"];
 	}
@@ -2738,7 +2717,7 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	}
 	$conditions["OR"] =  $da1;	
 	}
-
+	
 	$allStates = $this->States->find('list',['keyField' => 'id', 'valueField' => 'state_name'])
 	->hydrate(false)
 	->toArray();
@@ -2768,7 +2747,7 @@ $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField
 		} else {
 			$conditionalStates =  $user["state_id"];
 		}
-		$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
+		//$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
 		$requests = $this->Requests->find()
 		->contain(["Users", "Responses"])
 		->notMatching('Responses', function ($q)use($userid) {
@@ -2778,6 +2757,7 @@ $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField
 		->order($sort)
 		->limit($limit)
 		->page($page);
+		 
 
 	} 
 	else if ($_POST['role_id'] == 2) { /// Event Planner
@@ -2789,7 +2769,8 @@ $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField
 	}
 	else if ($_POST['role_id'] == 3) { /// Hotel
 	
-		$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
+		
+		
 		$requests = $this->Requests->find()
 		->contain(["Users", "Responses","Hotels"])
 		->notMatching('Responses', function ($q)use($userid) {
@@ -2926,49 +2907,54 @@ $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField
 				$sort='';
 
 				if(!isset($_POST["sort"])) {
-				//$sort['Requests.accept_date'] = "DESC";
-				$sort['Requests.id'] = "DESC";
+					$sort['Requests.id'] = "DESC";
 				}
 				if(!empty($_POST["sort"]) && $_POST["sort"]=="requesttype") {
-				$sort['Requests.category_id'] = "ASC";
+					$sort['Requests.category_id'] = "ASC";
 				}
 				if(!empty($_POST["sort"]) && $_POST["sort"]=="totalbudgetlh") {
-				$sort['Requests.total_budget'] = "ASC";
+					$sort['Requests.total_budget'] = "ASC";
 				}
 				if(!empty($_POST["sort"]) && $_POST["sort"]=="totalbudgethl") {
-				$sort['Requests.total_budget'] = "DESC";
+					$sort['Requests.total_budget'] = "DESC";
 				}
-
 				$conditions["Requests.user_id"] = $_POST['user_id'];
-
 				$conditions["Requests.status"] = 2;
 				$conditions["Requests.is_deleted "] = 0;
-				//$conditions["Requests.status"] = 1;
 
 				if(isset($_POST["budgetsearch"]) && !empty($_POST["budgetsearch"])) {
-			if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
-				$QPriceRange = $_POST["budgetsearch"];
-				$result = explode("-", $QPriceRange);
-				$MinQuotePrice = $result[0];
-				$MaxQuotePrice = $result[1];
-				if($MaxQuotePrice==100000){$MaxQuotePrice=100000000000;}
-				$conditions["Requests.total_budget >="] = $MinQuotePrice;
-				$conditions["Requests.total_budget <="] = $MaxQuotePrice;
+					if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
+					$QPriceRange = $_POST["budgetsearch"];
+					$result = explode("-", $QPriceRange);
+					$MinQuotePrice = $result[0];
+					$MaxQuotePrice = $result[1];
+					if($MaxQuotePrice==100000){$MaxQuotePrice=100000000000;}
+					$conditions["Requests.total_budget >="] = $MinQuotePrice;
+					$conditions["Requests.total_budget <="] = $MaxQuotePrice;
 				}
+				
 				if(isset($_POST["req_typesearch"]) && !empty($_POST["req_typesearch"])) {
-					//$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
-					$typeSearchArray=explode(',',$_POST["req_typesearch"]);  
+ 					$typeSearchArray=explode(',',$_POST["req_typesearch"]);  
 					$conditions["Requests.category_id IN"] =  $typeSearchArray;
 				}
+				
 				if(isset($_POST["refidsearch"]) && !empty($_POST["refidsearch"])) {
-					//$conditions["Requests.reference_id"] =  $_POST["refidsearch"];
-					$conditions["Requests.reference_id Like"] =  '%'.$_POST["refidsearch"].'%';
+					$RefSearchArray=explode(',',$_POST["refidsearch"]);  
+					$conditions["Requests.reference_id in"] =  $RefSearchArray;
 				}
+				
+				if(isset($_POST["agentnamesearch"]) && !empty($_POST["agentnamesearch"])) {
+					$keyword = $_POST["agentnamesearch"];
+					$AjentArray = explode(',',$keyword);
+					$AjentArray=array_filter($AjentArray);
+					$conditions["OR"] = array("Users.first_name IN "=>$AjentArray, "Users.last_name IN" => $AjentArray);
+				}
+				
 				if(isset($_POST["members"]) && !empty($_POST["members"])) {
-				$conditions["Requests.children+Requests.adult"] =  $_POST["members"];
+					$conditions["Requests.children+Requests.adult"] =  $_POST["members"];
 				}
 				if(isset($_POST["startdatesearch"])){
-				$sdate = $_POST["startdatesearch"];
+					$sdate = $_POST["startdatesearch"];
 				}
 				if(isset($sdate) && !empty($sdate)){
 				$date = str_replace('/', '-', $sdate);
@@ -2976,50 +2962,31 @@ $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField
 				}
 
 				if(!empty($_POST["startdatesearch"])) {
-				$da["Requests.start_date"] =  $sdate;
-				$da["Requests.check_in"] =  $sdate;
-				$conditions["OR"] =  $da;
+					$da["Requests.start_date"] =  $sdate;
+					$da["Requests.check_in"] =  $sdate;
+					$conditions["OR"] =  $da;
 				}
 
 				if(isset($_POST["enddatesearch"])){
-				$edate = $_POST["enddatesearch"];
+					$edate = $_POST["enddatesearch"];
 				}
+				
 				if(isset($edate) && !empty($edate)){
-				$date = str_replace('/', '-', $edate);
-				$edate = date('Y-m-d', strtotime($date));
+					$date = str_replace('/', '-', $edate);
+					$edate = date('Y-m-d', strtotime($date));
 				}
-
+				
 				if(!empty($_POST["enddatesearch"])) {
 					$da1["Requests.end_date"] =  $edate;
 					$da1["Requests.check_out"] =  $edate;
 					if(!empty($sdate)){
-					$da1["Requests.start_date"] =  $sdate;
-					$da1["Requests.check_in"] =  $sdate;
+						$da1["Requests.start_date"] =  $sdate;
+						$da1["Requests.check_in"] =  $sdate;
 					}
 					$conditions["OR"] =  $da1;
 				}
 				$this->loadModel('BlockedUsers');
-			/*
-				$BlockedUsers = $this->BlockedUsers->find()
-					->where(['blocked_by' => $_POST['user_id']])
-					->toArray();	*/
-
-		//--- Block
-			/*
-				
-				$myBlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_by'])
-					->hydrate(false)
-					->where(['blocked_user_id' => $_POST['user_id']])
-					->toArray();
-				if(!empty($BlockedUsers)) {
-					$BlockedUsers = array_values($BlockedUsers);
-				}
-				//array_push($BlockedUsers,$_POST['user_id']);
-				$BlockedUsers = array_unique($BlockedUsers);
-				//$BlockedUsers=array_merge($BlockedUsers,$myBlockedUsers);
-
-				//$cond //---
-			*/
+			
 				if ($_POST['role_id'] == 1) {
 				$requests = $this->Requests->find()
 						->contain(["Users","Responses"=>function($q){

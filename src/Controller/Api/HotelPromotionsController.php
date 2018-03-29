@@ -212,6 +212,10 @@ $getHotelPromotion=$getEventPlanners ;
 			if(empty($page)){$page=1;}
 			$category_id_filter = null;
 			//-- Filter 
+			if(!empty($search_bar))
+			{
+				$Searchbox = ['HotelPromotions.hotel_location LIKE'=> '%'.$search_bar.'%'];
+			}
 			if(!empty($category_id))
 			{
 				$category_id = explode(',',$category_id);
@@ -246,6 +250,7 @@ $getHotelPromotion=$getEventPlanners ;
  				$result = explode("-", $starting_price); 
 				$MinQuotePrice = $result[0];
 				$MaxQuotePrice = $result[1];
+				if($MaxQuotePrice=='100000'){ $MaxQuotePrice='1000000000';}
 				$conditions["HotelPromotions.cheap_tariff >="] = $MinQuotePrice;
 				$conditions["HotelPromotions.cheap_tariff <="] = $MaxQuotePrice;
 			}
@@ -258,6 +263,7 @@ $getHotelPromotion=$getEventPlanners ;
 			}])
 			->leftJoinWith('HotelPromotionLikes')
 			->where($category_id_filter)
+			->where($Searchbox)
 			->where($rating_filter_filter)
 			->where($conditions)
 			->where(['HotelPromotions.visible_date >=' =>date('Y-m-d')])
@@ -535,22 +541,36 @@ $getHotelPromotion=$getEventPlanners ;
         $this->set('_serialize', ['response_code','message']);		
 		 
 	}
-	public function HotelPromotionsViews($hotel_promotion_id=null,$page=null)
+	public function HotelPromotionsViews($hotel_promotion_id=null,$page=null,$user_id=null,$search=null)
 	{
 		$hotel_promotion_id = $this->request->query('hotel_promotion_id');
+		$user_id = $this->request->query('user_id');
+		$search_bar = $this->request->query('search');
 		$page = $this->request->query('page');
+		$filter_search=array();
+		if(!empty($search_bar)){
+			$filter_search["OR"] = array("Users.first_name Like"=> '%'.$search_bar.'%',"Users.last_name Like"=> '%'.$search_bar.'%',"Users.company_name Like"=> '%'.$search_bar.'%');
+ 		}
 		$limit=10;
 		if(empty($page)){$page=1;}
 		$COunt = $this->HotelPromotions->HotelPromotionViews->find()->where(['hotel_promotion_id'=>$hotel_promotion_id])->count();
 		if($COunt>0)
 		{
 			$getTravelPackages = $this->HotelPromotions->HotelPromotionViews->find()
-				->contain(['Users'=>function($q){
-					return $q->select(['first_name','last_name','mobile_number','company_name','role_id']);
+				->contain(['Users'=>function($q)use($filter_search){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id'])->where($filter_search);
 				}])
 				->where(['hotel_promotion_id'=>$hotel_promotion_id])
 				->limit($limit)
 				->page($page);
+			foreach($getTravelPackages as $packages){
+				$Follow = $this->HotelPromotions->HotelPromotionViews->Users->BusinessBuddies->exists(['user_id'=>$user_id,'bb_user_id'=>$packages->user_id]);  
+				if($Follow==0){
+					$packages->isfollow=false;
+				}else{
+					$packages->isfollow=true;
+				}
+ 			}
 			$response_object = $getTravelPackages;
 			$response_code = 200;
 			$message = '';
@@ -566,22 +586,36 @@ $getHotelPromotion=$getEventPlanners ;
 		
 	}
 	
-	public function HotelPromotionsLikes($hotel_promotion_id=null,$page=null)
+	public function HotelPromotionsLikes($hotel_promotion_id=null,$page=null,$user_id=null,$search=null)
 	{
 		$hotel_promotion_id = $this->request->query('hotel_promotion_id');
+		$user_id = $this->request->query('user_id');
+		$search_bar = $this->request->query('search');
 		$page = $this->request->query('page');
+		$filter_search=array();
+		if(!empty($search_bar)){
+			$filter_search["OR"] = array("Users.first_name Like"=> '%'.$search_bar.'%',"Users.last_name Like"=> '%'.$search_bar.'%',"Users.company_name Like"=> '%'.$search_bar.'%');
+ 		}
 		$limit=10;
 		if(empty($page)){$page=1;}
 		$COunt = $this->HotelPromotions->HotelPromotionLikes->find()->where(['hotel_promotion_id'=>$hotel_promotion_id])->count();
 		if($COunt>0)
 		{
 			$getTravelPackages = $this->HotelPromotions->HotelPromotionLikes->find()
-				->contain(['Users'=>function($q){
-					return $q->select(['first_name','last_name','mobile_number','company_name','role_id']);
+				->contain(['Users'=>function($q)use($filter_search){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id'])->where($filter_search);
 				}])
 				->where(['hotel_promotion_id'=>$hotel_promotion_id])
 				->limit($limit)
 				->page($page);
+			foreach($getTravelPackages as $packages){
+				$Follow = $this->HotelPromotions->HotelPromotionLikes->Users->BusinessBuddies->exists(['user_id'=>$user_id,'bb_user_id'=>$packages->user_id]);  
+				if($Follow==0){
+					$packages->isfollow=false;
+				}else{
+					$packages->isfollow=true;
+				}
+ 			}
 			$response_object = $getTravelPackages;
 			$response_code = 200;
 			$message = '';

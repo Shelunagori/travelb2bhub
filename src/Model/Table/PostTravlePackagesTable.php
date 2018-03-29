@@ -82,6 +82,7 @@ class PostTravlePackagesTable extends Table
 		 $this->hasMany('PostTravlePackageCarts', [
             'foreignKey' => 'post_travle_package_id'
         ]);
+		
     }
 
     /**
