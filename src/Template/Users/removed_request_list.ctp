@@ -200,26 +200,26 @@ unset($request['hotels'][0]);?><?php foreach($request['hotels'] as $row) { ?>
 						 <?php echo mb_strimwidth($request['comment'], 0, 25, "...");?></span></p>
                      </li>
                   </ul>
-						<div class="col-md-12" >
+						<div class=" " >
 							<table width="100%" style="text-align:center">
 							<tr>
-								<td>
-									<a class="viewdetail btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"data-target="#myModal1<?php echo $request['id']; ?>" data-toggle=modal> Details</a>
+								<td  width="100%">
+									<a style="width:100%" class="viewdetail btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"data-target="#myModal1<?php echo $request['id']; ?>" data-toggle=modal> Details</a>
 									
 								</td>
 							</tr>
 							</table>
-									<div class="fade modal"id="myModal1<?php echo $request['id']; ?>"role=dialog>
-										<div class=modal-dialog>
-											<div class=modal-content>
-											   <div class=modal-header>
-												  <button class=close data-dismiss=modal type=button>×</button>
-												  <h4 class=modal-title>Details</h4>
-											   </div>
-											   <div class=modal-body></div>
-											</div>
+								<div class="fade modal"id="myModal1<?php echo $request['id']; ?>"role=dialog>
+									<div class=modal-dialog>
+										<div class=modal-content>
+										   <div class=modal-header>
+											  <button class=close data-dismiss=modal type=button>×</button>
+											  <h4 class=modal-title>Details</h4>
+										   </div>
+										   <div class=modal-body></div>
 										</div>
 									</div>
+								</div>
 							</div>				
 				</fieldset>
 			</div>

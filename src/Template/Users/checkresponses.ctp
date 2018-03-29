@@ -1,5 +1,4 @@
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
-<?php //echo $this->Html->script(['jquery.validate']);?>
 <?php
 use Cake\Datasource\ConnectionManager; 
 $conn = ConnectionManager::get('default');
@@ -22,7 +21,7 @@ legend
 .contain>p{
 	color:#96989A !important;
 } 
-.details {color:#000 !important; font-weight: 600;}	
+.details {color:#000 !important; font-weight: 400;}	
 .btn-block { width:40% !important;}
 .margin {margin-top:5px;}
 .shotrs a {margin:5px;;}
@@ -38,15 +37,28 @@ legend
 
 <div class="box box-default">
 <div class="box-header with-border"> 
-	<h3 class="box-title" style="padding:20px">Check Responses</h3>
+	<h3 class="box-title" style="padding:5px">Check Responses</h3>
 	<div class="box-tools pull-right">
-		<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-		<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+		<!--<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>-->
+		<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 	</div>
 </div>
 <div class="box-body">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top:5px">
-		<a data-toggle="modal" data-target="#detailModal" href="#" class="btn btn-success btn-sm">Details</a>
+		<!--<a data-toggle="modal" data-target="#detailModal" href="#" class="btn btn-success btn-sm">Details</a>-->
+		
+		<a class="viewdetail btn btn-success btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$responseid)) ?>"data-target="#myModal1<?php echo $responseid; ?>" data-toggle=modal> Details</a>
+		<div class="fade modal"id="myModal1<?php echo $responseid; ?>"role=dialog>
+			<div class=modal-dialog>
+				<div class=modal-content>
+				   <div class=modal-header>
+					  <button class=close data-dismiss=modal type=button>×</button>
+					  <h4 class=modal-title>Details</h4>
+				   </div>
+				   <div class=modal-body></div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<?php
 		if(count($responses) >0) { 
@@ -80,8 +92,8 @@ legend
 					<legend><?php echo $image; ?></legend>
 					<span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
 					<div class="contain">
-						<p><b>Request Type : </b>&nbsp;<?php echo $text; ?></p>
-						<p><b>Total Budget : </b>&nbsp;
+						<p>Request Type : &nbsp;<?php echo $text; ?></p>
+						<p>Total Budget : &nbsp;
 							<span class="details"><?php echo $row['request']['total_budget']; ?></span>
 						</p>
 						<?php if($row['response']['is_details_shared']==1){
@@ -89,23 +101,23 @@ legend
                         }else{
 								$hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$row['user']['id'],1));                   
                         }?>
-						<p><b>Agent Name : </b>&nbsp;
+						<p>Agent Name : &nbsp;
 							<span class="details"><a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></a></span>
 						</p>
 						
-						<p><b>Reference ID : </b>&nbsp;
+						<p>Reference ID : &nbsp;
 							<span class="details"><?php echo $row['request']['reference_id']; ?></span>
 						</p>
 						
-						<p><b>Quoted Price : </b>&nbsp;
+						<p>Quoted Price : &nbsp;
 							<span class="details"><?php echo ($row['quotation_price'])?"Rs. ".$row['quotation_price']:"-- --" ?></span>
 						</p>
 						<?php if($row['request']['category_id']==2){ ?>
-							<p><b>Pickup City : </b>&nbsp;
+							<p>Pickup City : &nbsp;
 								<span class="details"><?php echo ($row['request']['pickup_city'])?$allCities[$row['request']['pickup_city']]:"-- --"; ?><?php echo ($row['request']['pickup_state'])?' ('.$allStates[$row['request']['pickup_state']].')':"";  ?></span>
 							</p>
 						<?php } else { ?>
-							<p><b>Destination City : </b>&nbsp;
+							<p>Destination City : &nbsp;
 								<span class="details"><?php echo ($row['request']['city_id'])?$allCities[$row['request']['city_id']]:"-- --"; ?> <?php echo ($row['request']['state_id'])?' ('.$allStates[$row['request']['state_id']].')':""; ?>
 								<?php 
 								if($row['request']['category_id'] == 1){
@@ -124,33 +136,33 @@ legend
                         </p>
                         <?php } ?>
 						<?php if($row['request']['category_id'] == 3 ) { ?>
-							<p><b>Start Date : </b>&nbsp;
+							<p>Start Date : &nbsp;
 								<span class="details"><?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?></span>
 							</p>
-							<p><b>End Date : </b>&nbsp;
+							<p>End Date : &nbsp;
 								<span class="details"><?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?></span>
 							</p>
  						<?php } ?>
 						<?php if($row['request']['category_id'] == 1 ) {?>
-							<p><b>Start Date : </b>&nbsp;
+							<p>Start Date : &nbsp;
 								<span class="details"><?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?></span>
 							</p>
-							<p><b>End Date : </b>&nbsp;
+							<p>End Date : &nbsp;
 								<span class="details"><?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?></span>
 							</p>
 						<?php }
 							if($row['request']['category_id'] == 2 ) { ?>
-							<p><b>Start Date : </b>&nbsp;
+							<p>Start Date : &nbsp;
 								<span class="details"><?php echo ($row['request']['start_date'])?date("d/m/Y", strtotime($row['request']['start_date'])):"-- --"; ?></span>
 							</p>
-							<p><b>End Date : </b>&nbsp;
+							<p>End Date : &nbsp;
 								<span class="details"><?php echo ($row['request']['end_date'])?date("d/m/Y", strtotime($row['request']['end_date'])):"-- --"; ?></span>
 							</p>
  						<?php } ?>
-						<p><b>Members : </b>&nbsp;
+						<p>Members : &nbsp;
 							<span class="details"><?php echo $row['request']['adult'] +  $row['request']['children']; ?></span>
 						</p>
-						<p><b>Comment : </b>&nbsp;
+						<p>Comment : &nbsp;
 							<span class="details"><?php echo mb_strimwidth($row['comment'], 0, 25, "...");?></span>
 						</p>
  						 
@@ -162,11 +174,11 @@ legend
 			<?php if(empty($row['request']['final_id'])) { ?>
 			<?php $id = $row['id'];?>
 			<hr></hr>
-				<div class="col-md-12">
+				<div>
 				<table width="100%">
 				<tr>
-					<td>
-						<a class="btn btn-warning btn-sm margin" id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>"> 
+					<td width="33%">
+						<a style="width:99%" class="btn btn-warning btn-sm " id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>"> 
 						Chat ( <strong><?php echo $data['chat_count'][$row['id']]; ?> </strong> )</a>
 						<div class="modal fade" id="myModal11<?php echo  $row['request']['id']; ?>" role="dialog">
 							<div class="modal-dialog">
@@ -180,20 +192,39 @@ legend
 								</div>
 							</div>
 						</div>
-						
+					</td>
+				<td width="33%">					
 					<?php if($row['is_details_shared'] != 1) { ?>
-						<a href="javascript:void(0);" user_id="<?php echo $row['user']['id']; ?>" class="shareDetails btn btn-info btn-sm margin" request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
+						<a style="width:99%" href="javascript:void(0);" user_id="<?php echo $row['user']['id']; ?>" class="shareDetails btn btn-info btn-sm " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
 						Share Details</a>
 					 
-					<?php } ?>
+					<?php }
+					else{
+						?>
+							<a style="width:99%" href="javascript:void(0);" class=" btn btn-info btn-sm ">
+							Shared</a>
+						 
+						<?php 
+					}	?>
 						
-						
+					</td>
+				<td width="33%">	
 					<?php
 						if( !array_key_exists($row['user']['id'], $BusinessBuddies)) {?>
-							<a href="javascript:void(0);" class="businessBuddy btn btn-sm margin" style="background-color:#1295A2;color:#FFF" user_id = "<?php echo $row['user']['id']; ?>"> Follow</a>
-					<?php } ?>
+							<a href="javascript:void(0);" class="businessBuddy btn btn-sm " style="background-color:#1295A2;color:#FFF;width:99%" user_id = "<?php echo $row['user']['id']; ?>"> Follow</a>
+					<?php }
+else{
+?>
+							<a  href="javascript:void(0);" class="btn btn-sm " style="background-color:#1295A2;color:#FFF;width:99%" user_id = "<?php echo $row['user']['id']; ?>"> Following</a>
+					<?php
+}	?>
 						
-						
+				</td>
+				</tr>
+				</table>
+				<table width="100%" style="margin-top:5px">
+				<tr>
+					<td width="50%">	
 					<?php
 					$sql="Select count(*) as block_count from blocked_users where blocked_user_id='".$row['user']['id']."' AND blocked_by='".$row['request']['user_id']."'";
 					$stmt = $conn->execute($sql);
@@ -206,23 +237,24 @@ legend
 					}
 					?>	
 					<?php 
-					if($blocked==10)
+					if($blocked==1)
 					{?>
-						<a href="javascript:void(0);" class="unblockUser btn btn-danger btn-sm margin" user_id = "<?php echo $row['user']['id']; ?>">
+						<a style="width:99%" href="javascript:void(0);" class="unblockUser btn btn-danger btn-sm " user_id = "<?php echo $row['user']['id']; ?>">
 						Blocked </a>
 					<?php }
 					else
 					{?>
-						<a href="javascript:void(0);" class="blockUser btn btn-danger btn-sm margin" user_id = "<?php echo $row['user']['id']; ?>">
+						<a style="width:99%" href="javascript:void(0);" class="blockUser btn btn-danger btn-sm " user_id = "<?php echo $row['user']['id']; ?>">
 						Block User </a>
 					<?php } ?>
-					
-						<a href="javascript:void(0);" class="acceptOffer btn btn-success btn-sm margin" request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
+					</td>
+				<td width="50%">
+						<a style="width:99%" href="javascript:void(0);" class="acceptOffer btn btn-success btn-sm " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
 						Accept Offer</a>
 						
-					<?php $reviewi =  $row['user']['id']."-".$row['request']['id']; ?>
-						<a data-toggle="modal" class="btn btn-info btn-sm" style="display:none;" data-target="#myModal_accept<?php echo $row['id']; ?>" id="add_review" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">
-					Test</a>
+				<?php $reviewi =  $row['user']['id']."-".$row['request']['id']; ?>
+					<a data-toggle="modal" class="btn btn-info btn-sm" style="display:none;" data-target="#myModal_accept<?php echo $row['id']; ?>" id="add_review" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">
+				Test</a>
 					<div class="modal fade" id="myModal_accept<?php echo $row['id']; ?>" role="dialog">
 						<div class="modal-dialog">
 						  <div class="modal-content">
@@ -238,12 +270,7 @@ legend
 					</td>
 				</tr>
 				</table>
-				<?php if( !array_key_exists($row["user"]["id"], $BusinessBuddies)) {?>
-					<div class="buttons padding0">  
-						<span class="budy right"><a href="javascript:void(0);" class="businessBuddy" user_id = "<?php echo $row["user"]["id"]; ?>"><?php echo $this->Html->image('friend-ico.png'); ?></a></span>
-					</div>
-				<?php } ?>
-				</div>
+ 				</div>
 				
 			<?php } ?>
 			</fieldset>
@@ -464,13 +491,13 @@ legend
 					<fieldset>
 						<legend style="text-align:left !important"><h3>General Requirements</h3></legend>
 						<ul>
-							<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p><b>Reference ID:&nbsp;</b><?php
+							<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p>Reference ID:&nbsp;<?php
 							echo $requestDetails['reference_id']; ?>
-							<li class="col-xs-6 col-lg-6 col-md-6 col-sm-6"><p><b>Total Budget:&nbsp;</b><?php
+							<li class="col-xs-6 col-lg-6 col-md-6 col-sm-6"><p>Total Budget:&nbsp;<?php
 							echo $requestDetails['total_budget'] . " Rs."; ?>
-							<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p><b>Adult:&nbsp;</b><?php
+							<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p>Adult:&nbsp;<?php
 							echo $requestDetails['adult']; ?>
-							<li class="col-xs-6 col-lg-6 col-md-6 col-sm-6	"><p><b>Children below 6:&nbsp;</b><?php
+							<li class="col-xs-6 col-lg-6 col-md-6 col-sm-6	"><p>Children below 6:&nbsp;<?php
 							echo $requestDetails['children']; ?></li>
 						</ul>
 					</fieldset>
@@ -492,7 +519,7 @@ legend
 								echo $ds_count; ?></h5></legend>
 								 
 								<ul>
-								<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Single:&nbsp;</b><?php
+								<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p>Single:&nbsp;<?php
 								if ($row['room1'] != '')
 								{
 									echo $row['room1'];
@@ -500,7 +527,7 @@ legend
 								else
 								{
 									echo "--";
-								} ?><li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Double:&nbsp;</b><?php
+								} ?><li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p>Double:&nbsp;<?php
 								if ($row['room2'] != '')
 								{
 									echo $row['room2'];
@@ -508,7 +535,7 @@ legend
 								else
 								{
 									echo "--";
-								} ?><li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Triple:&nbsp;</b><?php
+								} ?><li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p>Triple:&nbsp;<?php
 								if ($row['room3'] != '')
 								{
 									echo $row['room3'];
@@ -516,7 +543,7 @@ legend
 								else
 								{
 									echo "--";
-								} ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Child With Bed:&nbsp;</b><?php
+								} ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p>Child With Bed:&nbsp;<?php
 								if ($row['child_with_bed'] != '')
 								{
 									echo $row['child_with_bed'];
@@ -524,7 +551,7 @@ legend
 								else
 								{
 									echo "-- --";
-								} ?><li class="col-xs-12 col-sm-6 col-lg-6 col-md-6"><p><b>Child Without Bed:&nbsp;</b><?php
+								} ?><li class="col-xs-12 col-sm-6 col-lg-6 col-md-6"><p>Child Without Bed:&nbsp;<?php
 								if ($row['child_without_bed'] != '')
 								{
 									echo $row['child_without_bed'];
@@ -532,7 +559,7 @@ legend
 								else
 								{
 									echo "-- --";
-								} ?><li class="col-xs-12 col-lg-12 col-md-12 col-sm-12"><p><b>Hotel Category:&nbsp;</b><?php
+								} ?><li class="col-xs-12 col-lg-12 col-md-12 col-sm-12"><p>Hotel Category:&nbsp;<?php
 								if (!empty($row['hotel_category']))
 								{
 									$result = explode(",", $row['hotel_category']);
@@ -552,7 +579,7 @@ legend
 								else
 								{
 									echo "-- --";
-								} ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Hotel Rating:&nbsp;</b><?php
+								} ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p>Hotel Rating:&nbsp;<?php
 								if ($row['hotel_rating'] > 0)
 								{
 									for ($i = $row['hotel_rating']; $i > 0; $i--)
@@ -564,12 +591,12 @@ legend
 								{
 								}
 		 
-				?><li class="col-xs-12 col-sm-6 col-lg-6 col-md-6 col-offset-right-1"><p><b>Meal:&nbsp;</b><?php
-								echo ($row['meal_plan']) ? $mealPlanArray[$row['meal_plan']] : "-- --"; ?><li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p><b>Check In:&nbsp;</b><?php
-								echo ($row['check_in']) ? date("d/m/Y", strtotime($row['check_in'])) : "-- --"; ?><li class="col-xs-6 col-lg-6 col-md-6 col-sm-6"><p><b>Check Out:&nbsp;</b><?php
-								echo ($row['check_out']) ? date("d/m/Y", strtotime($row['check_out'])) : "-- --"; ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Locality:&nbsp;</b><?php
-								echo ($row['locality']) ? $row['locality'] : "-- --"; ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Destination City:&nbsp;</b><?php
-								echo ($row['city_id']) ? $allCities[$row['city_id']] : "-- --"; ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Destination State:&nbsp;</b><?php
+				?><li class="col-xs-12 col-sm-6 col-lg-6 col-md-6 col-offset-right-1"><p>Meal:&nbsp;<?php
+								echo ($row['meal_plan']) ? $mealPlanArray[$row['meal_plan']] : "-- --"; ?><li class="col-lg-4 col-md-4 col-sm-4 col-xs-6"><p>Check In:&nbsp;<?php
+								echo ($row['check_in']) ? date("d/m/Y", strtotime($row['check_in'])) : "-- --"; ?><li class="col-xs-6 col-lg-6 col-md-6 col-sm-6"><p>Check Out:&nbsp;<?php
+								echo ($row['check_out']) ? date("d/m/Y", strtotime($row['check_out'])) : "-- --"; ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p>Locality:&nbsp;<?php
+								echo ($row['locality']) ? $row['locality'] : "-- --"; ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p>Destination City:&nbsp;<?php
+								echo ($row['city_id']) ? $allCities[$row['city_id']] : "-- --"; ?><li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p>Destination State:&nbsp;<?php
 								echo ($row['state_id']) ? $allStates[$row['state_id']] : "-- --"; ?>
 								</ul>
 								</fieldset>
@@ -582,33 +609,33 @@ legend
 					<fieldset><legend style="text-align:left !important"><h3>Transport Requirements</h3></legend>
 					<ul>
 						<li class="col-xs-12 col-lg-12 col-md-12 col-sm-6">
-						<p><b>Transport:&nbsp;</b>
+						<p>Transport:&nbsp;
 							<?php
 							echo ($requestDetails['transport_requirement']) ? $transpoartRequirmentArray[$requestDetails['transport_requirement']] : "-- --"; ?>
 						</p>
 						</li>
 						<li class="col-md-6">
-						<p><b>Start Date:&nbsp;</b><?php
+						<p>Start Date:&nbsp;<?php
 							echo ($requestDetails['start_date']) ? date("d/m/Y", strtotime($requestDetails['start_date'])) : "-- --"; ?>
 						</p>
 						</li>
 						<li class="col-md-6">
-						<p><b>End Date:&nbsp;</b><?php
+						<p>End Date:&nbsp;<?php
 							echo ($requestDetails['end_date']) ? date("d/m/Y", strtotime($requestDetails['end_date'])) : "-- --"; ?>
 						</p>
 						</li>
 						<li class="col-md-6">
-						<p><b>Pickup Locality:&nbsp;</b><?php
+						<p>Pickup Locality:&nbsp;<?php
 						echo ($requestDetails['pickup_locality']) ? $requestDetails['pickup_locality'] : "-- --"; ?>
 						</p>
 						</li>
 						<li class="col-md-6">
-						<p><b>Pickup City:&nbsp;</b><?php
+						<p>Pickup City:&nbsp;<?php
 						echo ($requestDetails['pickup_city']) ? $allCities[$requestDetails['pickup_city']] : "-- --"; ?>
 						</p>
 						</li>
 						<li class="col-md-6">
-						<p><b>Pickup State:&nbsp;</b><?php
+						<p>Pickup State:&nbsp;<?php
 						echo ($requestDetails['pickup_state']) ? $allStates[$requestDetails['pickup_state']] : "-- --"; ?>
 						</p>
 						</li>
@@ -621,17 +648,17 @@ legend
 							<fieldset><legend>Stop <?php	echo $stop_count; ?></legend>
 								 
 								<li class="col-md-6">
-									<p><b>Stop Locality:&nbsp;</b><?php
+									<p>Stop Locality:&nbsp;<?php
 										echo ($stops['locality']) ? $stops['locality'] : "-- --"; ?>
 									</p>
 								</li>
 								<li class="col-md-6">
-									<p><b>Stop City:&nbsp;</b><?php
+									<p>Stop City:&nbsp;<?php
 										echo ($stops['city_id']) ? $allCities[$stops['city_id']] : "-- --"; ?>
 									</p>
 								</li>
 								<li class="col-md-6">
-									<p><b>Stop State:&nbsp;</b><?php
+									<p>Stop State:&nbsp;<?php
 										echo ($stops['state_id']) ? $allStates[$stops['state_id']] : "-- --"; ?>
 									</p>
 								</li>
@@ -642,17 +669,17 @@ legend
 						} ?>
 						
 						<li class="col-md-6">
-							<p><b>Final Locality:&nbsp;</b><?php
+							<p>Final Locality:&nbsp;<?php
 								echo ($requestDetails['final_locality']) ? $requestDetails['final_locality'] : "-- --"; ?>
 							</p>
 						</li>
 						<li class="col-md-6">
-							<p><b>Final City:&nbsp;</b><?php
+							<p>Final City:&nbsp;<?php
 								echo ($requestDetails['final_city']) ? $allCities[$requestDetails['final_city']] : "-- --"; ?>
 							</p>
 						</li>
 						<li class="col-md-6">
-							<p><b>Final State:&nbsp;</b><?php
+							<p>Final State:&nbsp;<?php
 								echo ($requestDetails['final_state']) ? $allStates[$requestDetails['final_state']] : "-- --"; ?>
 							</p>
 						</li>
@@ -668,7 +695,7 @@ legend
 					foreach($requestDetails['hotels'] as $row)
 					{ ?>
 						<ul>
-							<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Single:&nbsp;</b><?php
+							<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p>Single:&nbsp;<?php
 							if ($row['room1'] != '')
 							{
 								echo $row['room1'];
@@ -679,7 +706,7 @@ legend
 							} ?>
 							</p>
 							</li>
-							<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Double:&nbsp;</b><?php
+							<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p>Double:&nbsp;<?php
 							if ($row['room2'] != '')
 							{
 								echo $row['room2'];
@@ -690,7 +717,7 @@ legend
 							} ?>
 							</p>
 							</li>
-							<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p><b>Triple:&nbsp;</b><?php
+							<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p>Triple:&nbsp;<?php
 							if ($row['room3'] != '')
 							{
 								echo $row['room3'];
@@ -701,7 +728,7 @@ legend
 							} ?>
 							</p>
 							</li>
-							<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Child With Bed:&nbsp;</b><?php
+							<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p>Child With Bed:&nbsp;<?php
 							if ($row['child_with_bed'] != '')
 							{
 								echo $row['child_with_bed'];
@@ -712,7 +739,7 @@ legend
 							} ?>
 							</p>
 							</li>
-							<li class="col-xs-12 col-sm-6 col-lg-6 col-md-6"><p><b>Child Without Bed:&nbsp;</b><?php
+							<li class="col-xs-12 col-sm-6 col-lg-6 col-md-6"><p>Child Without Bed:&nbsp;<?php
 							if ($row['child_without_bed'] != '')
 							{
 								echo $row['child_without_bed'];
@@ -723,7 +750,7 @@ legend
 							} ?>
 							</p>
 							</li>
-							<li class="col-xs-12 col-lg-12 col-md-12 col-sm-12"><p><b>Hotel Category:&nbsp;</b><?php
+							<li class="col-xs-12 col-lg-12 col-md-12 col-sm-12"><p>Hotel Category:&nbsp;<?php
 							if (!empty($row['hotel_category']))
 							{
 								$result = explode(",", $row['hotel_category']);
@@ -742,7 +769,7 @@ legend
 							} ?>
 							</p>
 							</li>
-							<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Hotel Rating:&nbsp;</b><?php
+							<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p>Hotel Rating:&nbsp;<?php
 							if ($row['hotel_rating'] > 0)
 							{
 								for ($i = $row['hotel_rating']; $i > 0; $i--)
@@ -758,27 +785,27 @@ legend
 							</p>
 							</li>
 							<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4 col-offset-right-1">
-							<p><b>Meal:&nbsp;</b><?php
+							<p>Meal:&nbsp;<?php
 							echo ($row['meal_plan']) ? $mealPlanArray[$row['meal_plan']] : "-- --"; ?>
 							</p>
 							</li>
 							<li class="col-lg-4 col-md-4 col-sm-4 col-xs-6">
-							<p><b>Check In:&nbsp;</b><?php
+							<p>Check In:&nbsp;<?php
 							echo ($row['check_in']) ? date("d/m/Y", strtotime($row['check_in'])) : "-- --"; ?>
 							</p>
 							</li>
 							<li class="col-xs-6 col-lg-6 col-md-6 col-sm-6">
-							<p><b>Check Out:&nbsp;</b><?php
+							<p>Check Out:&nbsp;<?php
 							echo ($row['check_out']) ? date("d/m/Y", strtotime($row['check_out'])) : "-- --"; ?>
 							</p>
 							</li>
 							<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4">
-							<p><b>Locality:&nbsp;</b><?php
+							<p>Locality:&nbsp;<?php
 							echo ($row['locality']) ? $row['locality'] : "-- --"; ?>
 							</p>
 							</li>
 							<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4">
-							<p><b>Destination City:&nbsp;</b><?php
+							<p>Destination City:&nbsp;<?php
 							if (empty($row['city_id']))
 							{
 								echo $allCities[$requestDetails['city_id']];
@@ -789,7 +816,7 @@ legend
 							} ?>
 							</p>
 							</li>
-							<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p><b>Destination State:&nbsp;</b><?php
+							<li class="col-xs-12 col-lg-4 col-md-4 col-sm-4"><p>Destination State:&nbsp;<?php
 							if (empty($row['state_id']))
 							{
 								echo $allStates[$requestDetails['state_id']];
@@ -812,32 +839,32 @@ legend
 				<fieldset><legend style="text-align:left !important"><h3>Transport Requirements</h3></legend>
 					<ul>
 						<li class="col-md-6">
-						<p><b>Transport:&nbsp;</b><?php
+						<p>Transport:&nbsp;<?php
 							echo ($requestDetails['transport_requirement']) ? $transpoartRequirmentArray[$requestDetails['transport_requirement']] : "-- --"; ?>
 						</p>
 						</li>
 						<li class="col-md-6">
-						<p><b>Start Date:&nbsp;</b><?php
+						<p>Start Date:&nbsp;<?php
 							echo ($requestDetails['start_date']) ? date("d/m/Y", strtotime($requestDetails['start_date'])) : "-- --"; ?>
 						</p>
 						</li>
 						<li class="col-md-6">
-						<p><b>End Date:&nbsp;</b><?php
+						<p>End Date:&nbsp;<?php
 							echo ($requestDetails['end_date']) ? date("d/m/Y", strtotime($requestDetails['end_date'])) : "-- --"; ?>
 						</p>
 						</li>
 						<li class="col-md-6">
-						<p><b>Pickup Locality:&nbsp;</b><?php
+						<p>Pickup Locality:&nbsp;<?php
 							echo ($requestDetails['pickup_locality']) ? $requestDetails['pickup_locality'] : "-- --"; ?>
 						</p>
 						</li>
 						<li class="col-md-6">
-						<p><b>Pickup City:&nbsp;</b><?php
+						<p>Pickup City:&nbsp;<?php
 							echo ($requestDetails['pickup_city']) ? $allCities[$requestDetails['pickup_city']] : "-- --"; ?>
 						</p>
 						</li>
 						<li class="col-md-6">
-						<p><b>Pickup State:&nbsp;</b><?php
+						<p>Pickup State:&nbsp;<?php
 							echo ($requestDetails['pickup_state']) ? $allStates[$requestDetails['pickup_state']] : "-- --"; ?>
 						</p>
 						</li><?php
@@ -848,17 +875,17 @@ legend
 							{ ?>
 							<fieldset><legend>Stop <?php echo $stop_count; ?></legend>
 								<li class="col-md-6">
-									<p><b>Stop Locality:&nbsp;</b><?php
+									<p>Stop Locality:&nbsp;<?php
 									echo ($stops['locality']) ? $stops['locality'] : "-- --"; ?>
 									</p>
 								</li>
 								<li class="col-md-6">
-									<p><b>Stop City:&nbsp;</b><?php
+									<p>Stop City:&nbsp;<?php
 									echo ($stops['city_id']) ? $allCities[$stops['city_id']] : "-- --"; ?>
 									</p>
 								</li>
 								<li class="col-md-6">
-									<p><b>Stop State:&nbsp;</b><?php
+									<p>Stop State:&nbsp;<?php
 									echo ($stops['state_id']) ? $allStates[$stops['state_id']] : "-- --"; ?>
 									</p>
 								</li> 
@@ -867,17 +894,17 @@ legend
 							}
 						} ?>
 						<li class="col-md-6">
-						<p><b>Final Locality:&nbsp;</b><?php
+						<p>Final Locality:&nbsp;<?php
 						echo ($requestDetails['final_locality']) ? $requestDetails['final_locality'] : "-- --"; ?>
 						</p>
 						</li>
 						<li class="col-md-6">
-						<p><b>Final City:&nbsp;</b><?php
+						<p>Final City:&nbsp;<?php
 						echo ($requestDetails['final_city']) ? $allCities[$requestDetails['final_city']] : "-- --"; ?>
 						</p>
 						</li>
 						<li class="col-md-6">
-						<p><b>Final State:&nbsp;</b><?php
+						<p>Final State:&nbsp;<?php
 						echo ($requestDetails['final_state']) ? $allStates[$requestDetails['final_state']] : "-- --"; ?>
 						</p>
 						</li>

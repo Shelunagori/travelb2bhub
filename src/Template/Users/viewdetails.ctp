@@ -1,7 +1,7 @@
  <style>
 .head_of_popup 
 {
- background-color: #EAE8D4;
+ background-color: #eaeaea;
  text-align:left !important;
  padding:10px !important;
 }
@@ -45,7 +45,7 @@ ul li b {
         <div class="modal-body">
 			<div class="col-md-12">
 			<br>
-				<div class="head_of_popup"><h3 style="color:#1295A2;">General Requirements</h3></div>
+				<div class="head_of_popup"><h3 style="color:#1295A2;font-weight: 100;">General Requirements</h3></div>
 				<ul>
 					<li class="col-md-6"><p>Reference ID : &nbsp;<span style="color:#FB6542"><?php
 					echo $details['reference_id']; ?></span></li>
@@ -66,7 +66,7 @@ ul li b {
 				if (count($details['hotels']) >= 1)
 				{ ?>
 			<div class="col-md-12">
-					<div class="head_of_popup"><h3 style="color:#1295A2;">Stay Requirements</h3></div> 
+					<div class="head_of_popup"><h3 style="color:#1295A2;font-weight: 100;">Stay Requirements</h3></div> 
 					<?php
 					$ds_count = 1;
 					foreach($details['hotels'] as $row)
@@ -214,7 +214,7 @@ ul li b {
 				} ?> <br />
 				</div>
 		<div class="col-md-12">
-				    <div class="head_of_popup"><h3 style="color:#1295A2;">Transport Requirements</h3></div>
+				    <div class="head_of_popup"><h3 style="color:#1295A2;font-weight: 100;">Transport Requirements</h3></div>
 			<ul>
 				<li class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
 				<p>Transport :&nbsp;
@@ -299,7 +299,7 @@ ul li b {
 		elseif ($details['category_id'] == '3')
 		{ ?>
 			<div class="col-md-12">
-			<div class="head_of_popup"><h3 style="color:#1295A2;">Stay Requirements</h3></div>
+			<div class="head_of_popup"><h3 style="color:#1295A2;font-weight: 100;">Stay Requirements</h3></div>
 			
 			<?php
 			$ds_count = 1;
@@ -453,7 +453,7 @@ ul li b {
 	if ($details['category_id'] == 2)
 	{ ?>
 		<div class="col-md-12">
-		<div class="head_of_popup"><h3 style="color:#1295A2;">Transport Requirements</h3></div>
+		<div class="head_of_popup"><h3 style="color:#1295A2;font-weight: 100;">Transport Requirements</h3></div>
 			<ul>
 				<li class="col-md-6">
 				<p>Transport :&nbsp;<b><?php
@@ -545,7 +545,7 @@ ul li b {
 
 	?>
 	
-		<div class="col-md-12"><div class="head_of_popup"><h3 style="color:#1295A2;">Comments</h3></div>
+		<div class="col-md-12"><div class="head_of_popup"><h3 style="color:#1295A2;font-weight: 100;">Comments</h3></div>
 			<ul>
 				<li class="col-xs-12 col-lg-12 col-md-12 col-sm-12 comment text-left">
 					<p><b><?php echo $details['comment']; ?>

@@ -192,12 +192,12 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
                        <p> <b>Comment :</b><span><?php echo $row['comment']; ?></span></p>
                      </li>
                    </ul>
-				   <div class="col-md-12">
+				   <div>
 					<table width="100%" style="text-align:center">
 						<tr>
-							<td>
+							<td width="50%">
 					 
-							<a data-toggle="modal" class="btn btn-info btn-sm" data-target="#myModal1<?php echo $row['request']['id'];?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$row['request']['id'])) ?>"> Details</a>
+							<a style="width:99%" data-toggle="modal" class="btn btn-info btn-sm" data-target="#myModal1<?php echo $row['request']['id'];?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$row['request']['id'])) ?>"> Details</a>
 							<div class="modal fade" id="myModal1<?php echo $row['request']['id'];?>" role="dialog">
 							<div class="modal-dialog">
 								  <!-- Modal content-->
@@ -211,9 +211,10 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 								  </div>
 								</div>
 							</div>
-						 
+						 </td>
+						 <td width="50%">
 						  <?php $reviewi =  $row['request']['user_id']."-".$row['request']['id']; ?>
-						   <a class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal1review<?php echo $row['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">Review </a>
+						   <a style="width:99%" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal1review<?php echo $row['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">Review </a>
 											   
 						<div class="modal fade" id="myModal1review<?php echo $row['id']; ?>" role="dialog">
 								<div class="modal-dialog">
