@@ -1,6 +1,7 @@
 <div>
 	<div class="destination newdiv">
 	<div class="stop col-md-12">
+	<hr></hr>
 	<div class="stop-title"> <b> Destination </b></div><br>
 	<div class="row main_row"> 
 	  <div class="row">
@@ -144,13 +145,11 @@
 				</div>
 			</div>
 		</div><span class="help-block"></span>
-	<div class="row">
-	<div class="col-md-12" align="right">
-		<a href="java:script(0);" class="remove_field btn btn-danger btn-sm" style="width:50px;"><i class="fa fa-minus"></i></a>
-		<br/><br/><hr></hr>
-	</div>
-	</div>
-	</div>
+			<div class="col-md-12" align="right">
+				<a href="java:script(0);" class="remove_field btn btn-danger btn-sm" style="width:50px;"><i class="fa fa-minus"></i></a>
+				<br/><br/>
+			</div>
+		</div>
 	</div>
 	<script>
 	$('.select2').select2();

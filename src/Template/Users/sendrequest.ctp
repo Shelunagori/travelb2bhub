@@ -65,230 +65,18 @@ fieldset{
 {
 		margin-top:10px !important;
 }
+.col-md-4
+{
+		margin-top:10px !important;
+}
+.col-md-3
+{
+		margin-top:10px !important;
+} 
 </style> 
-<!--------- <script>
-	var cityData = '<?php echo $allCities; ?>';
-	$(document).ready(function () {
-		$("#city_name").autocomplete({
-			source: JSON.parse(cityData),
-			select: function (e, ui) {
-				e.preventDefault();
-				$("#city_id").val(ui.item.value);
-				$(this).val(ui.item.p);
-				$("#state_id").val(ui.item.state_id);
-				$("#state_name").val(ui.item.state_name);
-				$("#country_id").val(ui.item.country_id);
-				$("#country_name").val(ui.item.country_name);
-                                $("#city_id-error").hide();
-			}
-		});
-		$("#h_city_name").autocomplete({
-			source: JSON.parse(cityData),
-			select: function (e, ui) {
-				e.preventDefault();
-				$("#h_city_id").val(ui.item.value);
-				$(this).val(ui.item.p);
-				$("#h_state_id").val(ui.item.state_id);
-				$("#h_state_name").val(ui.item.state_name);
-				$("#h_country_id").val(ui.item.country_id);
-				$("#h_country_name").val(ui.item.country_name);
-$("#h_city_id-error").hide();
-			}
-		});
-		$("#pickup_city_name").autocomplete({
-			source: JSON.parse(cityData),
-			select: function (e, ui) {
-				e.preventDefault();
-				$("#pickup_city_id").val(ui.item.value);
-				$(this).val(ui.item.p);
-				$("#pickup_state_id").val(ui.item.state_id);
-				$("#pickup_state_name").val(ui.item.state_name);
-				$("#pickup_country_id").val(ui.item.country_id);
-				$("#pickup_country_name").val(ui.item.country_name);
-			}
-		});
-
-		$("#t_pickup_city_name").autocomplete({
-			source: JSON.parse(cityData),
-			select: function (e, ui) {
-				e.preventDefault();
-				$("#t_pickup_city_id").val(ui.item.value);
-				$(this).val(ui.item.p);
-				$("#t_pickup_state_id").val(ui.item.state_id);
-				$("#t_pickup_state_name").val(ui.item.state_name);
-				$("#t_pickup_country_id").val(ui.item.country_id);
-				$("#t_pickup_country_name").val(ui.item.country_name);
-$("#t_pickup_city_id-error").hide();	
-			
-			}
-		});
-		$(document).on('keyup', ".trans_city", function(e){
-			e.preventDefault();
-			var useFor = $(this).attr("use_for");
-			var numCount = $(this).attr("numCount");
-			autoComplete(this, useFor, numCount);
-		});
-		function autoComplete(input, useFor="package", numCount=1){
-			$(input).autocomplete({
-				source: JSON.parse(cityData),
-				select: function (e, ui) {
-					e.preventDefault();
-					$(this).val(ui.item.p);
-					if(useFor=="package") {
-						var wrapper = $(".package-stops");
-						$(wrapper).find("input:hidden[name='id_package_stop_city["+numCount+"]']").val(ui.item.value);
-						$(wrapper).find("input:hidden[name='state_id_package_stop_city["+numCount+"]']").val(ui.item.state_id);
-						$(wrapper).find("input:text[name='state_name_package_stop_city["+numCount+"]']").val(ui.item.state_name);
-					} else if(useFor=="trasport") {
-						var wrapper = $(".transport-stops");
-						$(wrapper).find("input:hidden[name='id_trasport_stop_city["+numCount+"]']").val(ui.item.value);
-						$(wrapper).find("input:hidden[name='state_id_trasport_stop_city["+numCount+"]']").val(ui.item.state_id);
-						$(wrapper).find("input:text[name='state_name_trasport_stop_city["+numCount+"]']").val(ui.item.state_name);
-					}
-				}
-			});
-		}
-		$("#t_final_city_name").autocomplete({
-			source: JSON.parse(cityData),
-			select: function (e, ui) {
-				e.preventDefault();
-				$("#t_final_city_id").val(ui.item.value);
-				$(this).val(ui.item.p);
-				$("#t_final_state_id").val(ui.item.state_id);
-				$("#t_final_state_name").val(ui.item.state_name);
-				$("#t_final_country_id").val(ui.item.country_id);
-				$("#t_final_country_name").val(ui.item.country_name);
-$("#t_final_city_id-error").hide();
-			
-			}
-		});
-		$("#p_final_city_name").autocomplete({
-			source: JSON.parse(cityData),
-			select: function (e, ui) {
-				e.preventDefault();
-				$("#p_final_city_id").val(ui.item.value);
-				$(this).val(ui.item.p);
-				$("#p_final_state_id").val(ui.item.state_id);
-				$("#p_final_state_name").val(ui.item.state_name);
-			
-			}
-		});
-
-		// Overrides the default autocomplete filter function to search only from the beginning of the string
-		$.ui.autocomplete.filter = function (array, term) {
-			var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
-			return $.grep(array, function (value) {
-				return matcher.test(value.p);
-			});
-		};
-		$('#datepicker1').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				$( "#datepicker2" ).datepicker( "option", "minDate",selected);
-				$('#datepicker2').val("");
-			}
-		});
-		$('#datepicker2').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				var checkInDate = $('#datepicker1').val();
-				if(checkInDate == "") {
-					alert("Please select check-in date first.");
-					$('#datepicker2').val("");
-				}
-			}
-		});
-
-		
-		$('#datepicker3').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				$( "#datepicker4" ).datepicker( "option", "minDate",selected);
-				$('#datepicker4').val("");
-			}
-		});
-		$('#datepicker4').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				var checkInDate = $('#datepicker3').val();
-				if(checkInDate == "") {
-					alert("Please select start date first.");
-					$('#datepicker4').val("");
-				}
-			}
-		});
-		$('#datepicker5').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				$( "#datepicker6" ).datepicker( "option", "minDate",selected);
-				$('#datepicker6').val("");
-			}
-		});
-		$('#datepicker6').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				var checkInDate = $('#datepicker5').val();
-				if(checkInDate == "") {
-					alert("Please select start date first.");
-					$('#datepicker6').val("");
-				}
-			}
-		});
-
-		$('#datepicker7').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				$( "#datepicker8" ).datepicker( "option", "minDate",selected);
-				$('#datepicker8').val("");
-			}
-		});
-		$('#datepicker8').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				var checkInDate = $('#datepicker7').val();
-				if(checkInDate == "") {
-					alert("Please select check-in date first.");
-					$('#datepicker8').val("");
-				}
-			}
-		});
-	});
-</script>
-<script type="text/javascript">
-$(document).ready(function($){
-	//$(".chosen-select").chosen();
-});
-</script>
------------->	 
+	 
 <div class="row equal_column">
-	<div class="col-md-12" style="background-color:#fff"> 
-		<br> 
-		<?php echo $this->element('subheader');?>
- 	</div>
+	 
 <div class="col-md-12" style="background-color:#fff;"> 
 <div class="box box-default">
 	<div class="box-body">
@@ -772,7 +560,7 @@ $(document).ready(function($){
 						<span class="help-block"></span>
 						<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">
-								<button type="button" class="btn btn-primary btn-sm add_field_button2 but " style="background-color:#1295A2;width:50px;"><i class="fa fa-plus"></i></button>
+								<button class="btn btn-primary btn-sm add_field_button2 " style="background-color:#1295A2;width:50px;"><i class="fa fa-plus"></i></button>
 							</div>
 						</div>
 						<span class="help-block"></span>
@@ -846,7 +634,7 @@ $(document).ready(function($){
 												<input autocomplete="off" type="text" class="form-control" name="pickup_locality" id="pickup_locality" placeholder="Enter Locality, Village or Town"/>
 												</div>
 										</div>
-										 <div class="col-md-4 mt">
+										 <div class="col-md-3 mt">
 												<div class="input-field">
 													<p for="from">Pickup City</p>
 													<input type="text" class="form-control city_select ctynamerecord" id="pickup_city_name" name="pickup_city_name"  placeholder="Select City or Nearest City" taxboxname="pickup_state_id" noofrows="5" />
@@ -871,6 +659,10 @@ $(document).ready(function($){
 												</div>
 											</div>
 										</div>
+										<div class="col-md-1" style="margin-top:10px">
+											<p for="from">&nbsp;</p>
+											<button class="btn btn-primary btn-sm package-stop-add " style="background-color:#1295A2;"><i class="fa fa-plus"></i></button>
+										</div>
 									</div>
 								</div>
 								<span class="help-block"></span>
@@ -881,7 +673,7 @@ $(document).ready(function($){
 								<span class="help-block"></span><hr></hr>
 								<div class="row">
 										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">
-												<button class="btn btn-primary btn-sm package-stop-add " style="background-color:#1295A2;width:50px;"><i class="fa fa-plus"></i></button>
+												
 											<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 											<div class="col-xxs-12 text-center">
 													<div class="input_fields_wrap">
@@ -1239,7 +1031,6 @@ $(document).ready(function($){
 </div>
 </div> 
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
-
 <?php echo $this->Html->script(['jquery.validate']);?>		 
 <script>
 
@@ -1685,7 +1476,6 @@ function selectCountry(value,city_code,state) {
 </script>
 <script>
 $(document).ready(function () {
-	
     	$('#tabtransport').click(function (e) {
     		$('.newdiv').remove();
 			$('.remove_field').remove();
@@ -1764,7 +1554,7 @@ $(document).ready(function () {
     $('.btnPrevious').click(function () {
         $('.nav-tabs > .active').prev('li').find('a').trigger('click');
     });
-</script>
+</script> 
 <script>
     $(document).ready(function () {
         var max_fields = 10;
@@ -1777,9 +1567,9 @@ $(document).ready(function () {
             e.preventDefault();
             var strHtml = '<div class="stop col-md-12 main_row"><div class="stop-title"><b>Stop ' +packageI+ '</b> </div><div class="row"> <br>';
         	strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality,Village or Town" name="stops[' +packageI+ ']"></div></div>';
-        	strHtml += '<div class="col-sm-4 mt"><p for="from">Stop City</p><input class="trans_city form-control city_select ctynamerecord" noofrows="5" taxboxname="state_id_package_stop_city[' +packageI+ ']" type="text" placeholder="Select City or Nearest City" use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" class="ctyIDname" name="id_package_stop_city[' +packageI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div> ';
-        	strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly></div></div></div></div>';
-        	strHtml += '<div align="right" style="margin-top:10px"><button aligh="right" class="btn btn-danger btn-sm package_remove_stop"><i class="fa fa-minus" style="width:30px;"></i></button></div>';
+        	strHtml += '<div class="col-sm-3 mt"><p for="from">Stop City</p><input class="trans_city form-control city_select ctynamerecord" noofrows="5" taxboxname="state_id_package_stop_city[' +packageI+ ']" type="text" placeholder="Select City or Nearest City" use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" class="ctyIDname" name="id_package_stop_city[' +packageI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div> ';
+        	strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly></div></div></div><div class="col-md-1"><p for="from">&nbsp;</p><button aligh="right" class="btn btn-danger btn-sm package_remove_stop"><i class="fa fa-minus" ></i></button></div></div>';
+        	 
          strHtml += ' <hr class="hr"></hr></div>';
         $(".package-stops").append(strHtml);
         	packageI++;
@@ -1787,9 +1577,9 @@ $(document).ready(function () {
         $(document).on("click", ".package_remove_stop", function (e) {
             e.preventDefault();
             packageI--;
-            $(this).parent('div').parent('.stop').slideUp(function(){
+            $(this).closest('div.stop').slideUp(function(){
 				$(this).remove();
-var gg = 1;
+		var gg = 1;
 		$( ".stop-title" ).each(function() {
 		var htmlString = 'Stop '+gg;
   		$( this ).text( htmlString );
@@ -1830,9 +1620,127 @@ var gg = 1;
     });
 </script>
 <script>
-	 
+	$(window).on("load", function(){
+		$("#h_hotel_category").multiselect();
+		$("#hotel_category").multiselect();
+
+	});
     $(document).ready(function () {
 
+        var wrapper = $(".input_fields_wrap1");
+		$(wrapper).on("click", ".remove_field", function (e) {
+            e.preventDefault();
+			$(this).closest('div.stop').slideUp(function(){
+				$(this).remove();
+			});
+         });
+        var max_fields = 10;
+        var add_button = $(".add_field_button2");
+
+        var x = 1;
+        $(add_button).click(function (e) {
+            e.preventDefault();
+			var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'addNewDestinationRow')) ?>";
+			var number = Math.floor((Math.random() * 100000) + 1);
+			$.ajax({
+				url:url,
+				type: 'POST',
+				data: {"number":number},
+				async:false
+			}).done(function(result){
+				$(wrapper).append(result);
+
+				$(wrapper).find("input[name='hh_room1["+number+"]']").val($("#room1").val());
+				$(wrapper).find("input[name='hh_room2["+number+"]']").val($("#room2").val());
+				$(wrapper).find("input[name='hh_room3["+number+"]']").val($("#room3").val());
+				$(wrapper).find("input[name='hh_child_with_bed["+number+"]']").val($("#child_with_bed").val());
+				$(wrapper).find("input[name='hh_child_without_bed["+number+"]']").val($("#child_without_bed").val());
+$(".hh_hotel_category").multiselect();
+				$(wrapper).find("input:text[name='hh_city_name["+number+"]']").autocomplete({
+					source: JSON.parse(cityData),
+					select: function (e, ui) {
+						e.preventDefault();
+
+						$(this).val(ui.item.label);
+						$(wrapper).find("input:hidden[name='hh_city_id["+number+"]']").val(ui.item.value);
+
+						$(wrapper).find("input:hidden[name='hh_state_id["+number+"]']").val(ui.item.state_id);
+						$(wrapper).find("input:text[name='hh_state_name["+number+"]']").val(ui.item.state_name);
+
+						$(wrapper).find("input:hidden[name='hh_country_id["+number+"]']").val(ui.item.country_id);
+						$(wrapper).find("input:text[name='hh_country_name["+number+"]']").val(ui.item.country_name);
+					}
+				});
+				//$(wrapper).find("input:text[name='hh_check_in["+number+"]']").datepicker();
+				//$(wrapper).find("input:text[name='hh_check_out["+number+"]']").datepicker();
+
+				var checkInDatePicker = $(wrapper).find("input:text[name='hh_check_in["+number+"]']");
+				var checkOutDatePicker = $(wrapper).find("input:text[name='hh_check_out["+number+"]']");
+				//checkInDatePicker.datepicker();
+				//checkOutDatePicker.datepicker();
+
+				var lastdate = '';
+							
+				
+				var enddate ='';
+				var enddate2 = $('#datepicker8').val();
+				var enddate1 = $(".enddate").val();
+				if (enddate1 == '' || enddate1==null)
+				{
+				var enddate =enddate2;
+				}else{
+				$("#collapse2 .enddate").each(function() {
+					if ($(this).val()=='' || $(this).val()==null) {
+					x=1	
+					}else{
+						lastdate = $(this).val();
+					}
+				});	
+				var enddate =enddate1;
+				}
+				if (lastdate=='' || lastdate==null) {
+				var k=1;
+				}else{
+				enddate	= lastdate;
+				}
+				checkInDatePicker.datepicker({
+					dateFormat: 'dd/mm/yy',
+					changeMonth: true,
+					changeYear: true,
+					//minDate: '<?php echo date("d/m/Y"); ?>',
+					minDate: enddate,
+					onSelect: function(selected) {
+						checkOutDatePicker.datepicker( "option", "minDate",selected);
+						checkOutDatePicker.val("");
+					}
+				});
+				checkOutDatePicker.datepicker({
+					dateFormat: 'dd/mm/yy',
+					changeMonth: true,
+					changeYear: true,
+					//minDate: '<?php echo date("d/m/Y"); ?>',
+					minDate: enddate,
+					onSelect: function(selected) {
+						var checkInDate = checkInDatePicker.val();
+						if(checkInDate == "") {
+							alert("Please select check-in date first.");
+							checkOutDatePicker.val("");
+						}
+					}
+				});
+			});
+			return false;
+        });
+        $(wrapper).on("click", ".remove_field1", function (e) {
+            e.preventDefault();
+            $(this).parent('div').remove();
+            x--;
+        })
+    });
+</script>
+<!--<script>
+	 
+    $(document).ready(function () {
         var wrapper = $(".input_fields_wrap1");
 		$(wrapper).on("click", ".remove_field", function (e) {
             e.preventDefault();
@@ -1843,11 +1751,11 @@ var gg = 1;
         var max_fields = 10;
         var add_button = $(".add_field_button2");
         var x = 1;
-		$(document).on('.add_field_button2','click',function(){
+		//$(document).on('click','.add_field_button2',function(){
 		 
-       // $('.add_field_button2').click(function () {
+        $(add_button).click(function () {
 			alert();
-          
+         /* 
 			var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'addNewDestinationRow')) ?>";
 			var number = Math.floor((Math.random() * 100000) + 1);
 			$.ajax({
@@ -1936,7 +1844,7 @@ var gg = 1;
 					}
 				});
 			});
-			return false;
+			return false;*/
         });
         $(wrapper).on("click", ".remove_field1", function (e) {
             e.preventDefault();
@@ -1944,6 +1852,6 @@ var gg = 1;
             x--;
         })
     });
-</script>
+</script>--->
  
 	
