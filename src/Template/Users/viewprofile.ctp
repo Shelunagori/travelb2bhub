@@ -1,6 +1,4 @@
 <style>
- 
-
 .checked {
     color: orange;
 }
@@ -33,9 +31,7 @@
         <div class="col-md-12">
           <!-- general form elements -->
           <div class="box box-primary">
-            <div class="box-header with-border">
-              <h3 class="box-title">Edit Profile</h3>
-            </div>
+            
             <!-- /.box-header -->
             <!-- form start -->
             <form role="form">
@@ -45,10 +41,16 @@
 						<div class="form-group col-md-12">
 						<div class="form-group col-md-3">
 							<?php
-							if( $users['profile_pic']=="" ){
-								echo $this->Html->image('no-profile-image.jpg', ["alt"=>"Profile Pic", "height"=>150]); 
-							}else {
-								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['profile_pic'], ["alt"=>"Profile Pic", "height"=>150,"class"=>"profile_img"]);
+							if($users['profile_pic']==""){
+								echo $this->Html->image('no-profile-image.jpg', ["alt"=>"Profile Pic", "height"=>150, 'style'=>'border-radius: 50%;',"width"=>160]); 
+							}
+							else {
+								if(file_exists('img/user_docs/'.$users['id'].'/'.$users['profile_pic'])>0){
+									echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['profile_pic'], ["alt"=>"Profile Pic", "height"=>150,"width"=>160, "class"=>"profile_img", 'style'=>'border-radius: 50%;']);
+								}
+								else{
+									echo $this->Html->image('no-profile-image.jpg', ["alt"=>"Profile Pic", "height"=>150,"width"=>160, 'style'=>'border-radius: 50%;']); 
+								}
 							} 
 							?>
 						</div> 
@@ -64,8 +66,7 @@
 						
 			}
 			else if($users['role_id'] == 2) {
-						$profilePercentage += 16;
-						
+				$profilePercentage += 16;
 			}
 			else {
 				$profilePercentage += 5;
@@ -385,7 +386,7 @@
 			<div class="box box-primary">
 				<div class="box-body">
 					<div>
-						<div class="form-group col-md-12">
+						<div class="form-group col-md-12" style="min-height: 120px !important;'">
 							<?php echo $users['description']; ?>
 						</div>
 					</div>

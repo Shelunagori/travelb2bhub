@@ -4536,8 +4536,10 @@ $x++;
 	public function apiVersion()
     {
 		$this->loadModel('ApiVersions');
+		$this->loadModel('Cities');
         $apiVersions = $this->ApiVersions->find()->first();
-
+        $CitiesCOunt = $this->Cities->find()->count();
+ 		$apiVersions['CityCount']=$CitiesCOunt;
         $data =   json_encode($apiVersions);
 		echo  $data;
 		exit;

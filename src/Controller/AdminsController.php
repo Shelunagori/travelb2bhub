@@ -207,7 +207,7 @@ class AdminsController extends AppController
  				$admin->request_id = '0';
 				$admin->user_id = 1;
 				$admin->send_to_user_id = $user["id"];
-				$admin['type'] = 'Broadcast';
+				$admin['type'] = 'Announcement';
 				$admin->message = $broadcast_msg;
 				$admin->created = date("Y-m-d h:i:s");
 				$admin->notification = 1;
@@ -215,7 +215,7 @@ class AdminsController extends AppController
 				if ($this->Admins->UserChats->save($admin)) {
 					$id = $admin->id;
 					$message_data='';
-					$this->Admins->UserChats->updateAll(['type' => 'Broadcast'], ['id' => $id]);
+					$this->Admins->UserChats->updateAll(['type' => 'Announcement'], ['id' => $id]);
 					$this->sendpushnotification($user["id"],$admin->message,$message_data);
 				}
 			}
@@ -249,7 +249,8 @@ class AdminsController extends AppController
 		'icon'	=> 'myicon',/*Default Icon*/
 		'sound' => 'mySound',/*Default sound*/
 		'unread_count' => 0,
-		'message' => $message_data
+		'message' => $message,
+		'type'=>"Announcement"
 		);
 		$data = array
 		(
