@@ -74,7 +74,7 @@ fieldset{
 } 
 </style> 
 <div class="container-fluid">
-	<div class="box box-primary">
+		<div class="box box-primary">
 		<div class="box-body">
 		<div class="row"> 
 		<div class="col-md-12"> 

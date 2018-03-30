@@ -112,8 +112,7 @@ if ($err) {
 <style>
 .hr{
 	margin-top:25px !important;
-}
-	
+}	
 a:hover,a:focus{
     outline: none !important;
     text-decoration: none !important;
@@ -162,17 +161,52 @@ a:hover,a:focus{
 .tab .tab-content h3{
     font-size: 22px !important;
     color: #5b5a5a !important;
-} 
+}
 fieldset{
 	margin:10px !important;
 	border-radius: 6px;
 }
-.col-md-12 {
-	margin:5px !important;
+.plus_minus_btn{
+	height:30px;
+	width:40px;
 }
+.col-md-6
+{
+		margin-top:10px !important;
+}
+.col-md-4
+{
+		margin-top:10px !important;
+}
+.col-md-3
+{
+		margin-top:10px !important;
+} 
 </style> 
 <div class="container-fluid">
 	<div class="box box-primary">
+		<div class="box-body">
+			<div class="row"> 
+				<div class="col-md-12">
+ 				<!--	<div id="tra-sendrequest" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background:#FFF">
+							<div class="content">
+								<div class="tab-content tab">
+									<div align="center">
+										<ul class="nav nav-tabs" >
+											<li class="active"><a href="#tab1" data-toggle="tab">TaxtFleet</a></li>
+											<li><a id="tabtransport" href="#tab2" data-toggle="tab">PostTravle</a></li>
+											<li><a href="#tab3" data-toggle="tab">EventPlanner</a></li>
+											<li><a href="#tab4" data-toggle="tab">Hotel</a></li>
+										</ul>
+									</div>
+									</br></br>
+<div class="tab-pane active" id="tab1">
+<?php
+/*  echo $this->Form->create(null, [
+	'type' => 'file',
+	'url' => ['controller' => 'TaxiFleetPromotions', 'action' => 'add'], "id"=>"HotelRequestForm"
+]); */
+?> -->
 			<div class="box-body">
 				<form action="<?php echo $coreVariable['SiteUrl'];?>api/taxi_fleet_promotions/add.json" method="post" enctype="multipart/form-data">	
 				<div class="row"> 
@@ -366,26 +400,29 @@ fieldset{
 											</div>
 										</div>
 									</fieldset>
-											<div class="row">
-												<div class="col-md-12">
-													<div class="input-field">
-														<div class="margin text-center">
-														<center>
-														<?php echo $this->Form->button('Submit',['class'=>'btn btn-primary btn-submit','value'=>'submit','style'=>'background-color:#1295A2']); ?>
-														</center>
-														</div>
+													<div class="row">
+														<div class="col-md-12">
+															<div class="input-field">
+																<div class="margin text-center">
+																<center>
+																<?php echo $this->Form->button('Submit',['class'=>'btn btn-primary btn-submit','value'=>'submit','style'=>'background-color:#1295A2']); ?>
+																</center>
+																</div>
+															</div>
+														</div> 
 													</div>
-												</div> 
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-				</form>
+						</form>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+</div>
  <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>	 
     $(document).ready(function ()
