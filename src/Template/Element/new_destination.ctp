@@ -129,8 +129,8 @@
 					<span class="fa fa-calendar"></span>
 					</p>                    
 					</div>
-				</div>
-				<div class="col-md-6">
+				</div><span class="help-block"></span>
+				<div class="col-md-5">
 					<div class="input-field">
 								<p for="from">
 									Check Out
@@ -143,12 +143,14 @@
 						</p>                    
 					</div>
 				</div>
+				<div class="col-md-1" style="margin-top:px">
+					<p for="from">&nbsp;</p>
+					<a href="java:script(0);" class="remove_field btn btn-danger btn-sm" style="width:30px;"><i class="fa fa-minus"></i></a>
+				</div>
 			</div>
-		</div><span class="help-block"></span>
-			<div class="col-md-12" align="right">
-				<a href="java:script(0);" class="remove_field btn btn-danger btn-sm" style="width:50px;"><i class="fa fa-minus"></i></a>
-				<br/><br/>
-			</div>
+		</div>
+		<span class="help-block"></span>
+			
 		</div>
 	</div>
 	<script>

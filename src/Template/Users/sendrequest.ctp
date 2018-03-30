@@ -523,7 +523,7 @@ fieldset{
 						</div><span class="help-block"></span>	
 						<div class="row">
 						<div class=" col-md-12 main_row">
-								<div class="col-md-5">
+								<div class="col-md-6">
 									<div class="input-field">
 										<p for="from">
 											Check In
@@ -551,20 +551,20 @@ fieldset{
 										</p>                    
 									</div>
 								</div><span class="help-block"></span>	
-								<div class="col-md-2" style="margin-top:10px">
+								<div class="col-md-1" style="margin-top:px">
 									<p for="from">&nbsp;</p>
-									<button class="btn btn-primary btn-sm add_field_button2 " style="background-color:#1295A2;width:50px;"><i class="fa fa-plus"></i></button>
+									<button class="btn btn-primary btn-sm add_field_button2 " style="background-color:#1295A2;"><i class="fa fa-plus"></i></button>
 								</div><span class="help-block"></span>	
-						</div>
+								</div>
 							</div>
-						</div>
+						
 						
 						<span class="help-block"></span>	
 						  <div class="input_fields_wrap1">
                      				  
 						</div>
 						<span class="help-block"></span>
-						
+						</div>
 			</fieldset>
 				 
 								 
@@ -755,7 +755,6 @@ fieldset{
 						</div>
 					</div>
 				</div>
-			</div>
 <?= $this->Form->end()?>
 <div class="tab-pane " id="tab3">
 							<?php
@@ -1019,15 +1018,14 @@ fieldset{
 								</div>
 							</div>	
 			<?= $this->Form->end()?>							
-</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-</div> 
-</div> 
+
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <?php echo $this->Html->script(['jquery.validate']);?>		 
 <script>
