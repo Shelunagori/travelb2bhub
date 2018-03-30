@@ -73,9 +73,10 @@ fieldset{
 		margin-top:10px !important;
 } 
 </style> 
-	<div class="box-body">
+<div class="container-fluid">
+		<div class="box box-primary">
+		<div class="box-body">
 		<div class="row"> 
-		<div class="col-md-12"> 
 		<div class="col-md-12"> 
 		<div id="tra-sendrequest" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background:#FFF">
 			<div class="content">
@@ -519,10 +520,10 @@ fieldset{
 									</div>
 								</div>
 							</div>
-						</div>
+						</div><span class="help-block"></span>	
 						<div class="row">
 						<div class=" col-md-12 main_row">
-								<div class="col-md-6">
+								<div class="col-md-5">
 									<div class="input-field">
 										<p for="from">
 											Check In
@@ -535,8 +536,8 @@ fieldset{
 									<span class="fa fa-calendar"></span>
 									</p>                    
 									</div>
-								</div>
-								<div class="col-md-6">
+									</div><span class="help-block"></span>	
+								<div class="col-md-5">
 									<div class="input-field">
 												<p for="from">
 													Check Out
@@ -549,16 +550,16 @@ fieldset{
 										<span class="fa fa-calendar"></span>
 										</p>                    
 									</div>
-								</div>
+								</div><span class="help-block"></span>	
+								<div class="col-md-2" style="margin-top:10px">
+									<p for="from">&nbsp;</p>
+									<button class="btn btn-primary btn-sm add_field_button2 " style="background-color:#1295A2;width:50px;"><i class="fa fa-plus"></i></button>
+								</div><span class="help-block"></span>	
+						</div>
 							</div>
 						</div>
-						<span class="help-block"></span>
-						<div class="row">
-							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">
-								<button class="btn btn-primary btn-sm add_field_button2 " style="background-color:#1295A2;width:50px;"><i class="fa fa-plus"></i></button>
-							</div>
-						</div>
-						<span class="help-block"></span>
+						
+						<span class="help-block"></span>	
 						  <div class="input_fields_wrap1">
                      				  
 						</div>
@@ -894,7 +895,7 @@ fieldset{
                                                             <input autocomplete="off" type="text" class="form-control" name="pickup_locality" id="pickup_locality" placeholder="Enter Locality,Village or Town"/>
                                                             </div>
                                                     </div>
-                                                     <div class="col-md-4 mt">
+                                                     <div class="col-md-3 mt">
 														<div class="input-field">
 															<p for="from">Pickup City
 															<span class="required">*</span>
@@ -912,6 +913,11 @@ fieldset{
 														<input type="text" class="form-control" id ="t_pickup_state_name" name="t_pickup_state_name" placeholder="Auto Populated">
 														</div>
 													</div>
+													</div>
+													<div class="col-md-1" style="margin-top:10px">
+														<p for="from">&nbsp;</p>
+														<button class="btn btn-primary btn-sm transport-stop-add " style="background-color:#1295A2;width:30px;"><i class="fa fa-plus"></i></button>	
+													</div>
 												</div>
 												
 														<!--  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
@@ -922,16 +928,12 @@ fieldset{
 															</div>
 														</div>-->
 												</div> 
-											</div>
 											<span class="help-block"></span>
 											  <div class="transport-stops">
 															
 											</div>
 											<span class="help-block"></span><hr></hr>
-											<div class="row">
-											<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">
-															<button class="btn btn-primary btn-sm transport-stop-add " style="background-color:#1295A2;width:50px;"><i class="fa fa-plus"></i></button>	
-											</div>
+											
 													<!-- <div class="col-xxs-12 text-center">
 															<div class="input_fields_wrap">
 																<button class="add_field_button but">Add Stop</button>
@@ -943,7 +945,7 @@ fieldset{
 																</div>
 															</div>
 														</div>  -->
-												</div>
+												
 											<span class="help-block"></span>
 											<div class="row">
 												<div class="col-md-12">
@@ -1587,11 +1589,10 @@ $(document).ready(function () {
         var transI = 1;
         $(".transport-stop-add").click(function(e){
 				e.preventDefault();
-				var strHtml = '<div class="stop col-md-12"><div class="stop-title"> <b> Stop ' +transI+ '</b></div><br><div class="row main_row">';
+				var strHtml = '<div class="stop col-md-12 main_row"><div class="stop-title"> <b> Stop ' +transI+ '</b></div><div class="row main_row"><br>';
 				strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality, Village or Town" name="stops[' +transI+ ']"></div></div>';
-				strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control ctynamerecord city_select" type="text" noofrows="4" taxboxname="state_id_trasport_stop_city[' +transI+ ']" placeholder="Select City or Nearest City" use_for = "trasport" numCount = ' +transI+ ' id="trasport_stop_city[' +transI+ ']" name="trasport_stop_city[' +transI+ ']"><input type="hidden" class="ctyIDname" id="id_trasport_stop_city[' +transI+ ']" name="id_trasport_stop_city[' +transI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div></div>';
-				strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_trasport_stop_city[' +transI+ ']" name="state_id_trasport_stop_city[' +transI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_trasport_stop_city[' +transI+ ']" name="state_name_trasport_stop_city[' +transI+ ']" readonly></div></div></div></div>';
-				strHtml += '<div align="right" style="margin-top:10px;"><button class="btn btn-danger btn-sm transport_remove_stop but"> <i class="fa fa-minus" style="width:30px;margin-right:-10px;"></i> </button></div>';
+				strHtml += '<div class="col-sm-3 mt"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control ctynamerecord city_select" type="text" noofrows="4" taxboxname="state_id_trasport_stop_city[' +transI+ ']" placeholder="Select City or Nearest City" use_for = "trasport" numCount = ' +transI+ ' id="trasport_stop_city[' +transI+ ']" name="trasport_stop_city[' +transI+ ']"><input type="hidden" class="ctyIDname" id="id_trasport_stop_city[' +transI+ ']" name="id_trasport_stop_city[' +transI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div></div>';
+				strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_trasport_stop_city[' +transI+ ']" name="state_id_trasport_stop_city[' +transI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_trasport_stop_city[' +transI+ ']" name="state_name_trasport_stop_city[' +transI+ ']" readonly></div></div></div><div class="col-md-1"><p for="from">&nbsp;</p><button class="btn btn-danger btn-sm transport_remove_stop but"> <i class="fa fa-minus" ></i> </button></div></div>';
 				strHtml += ' <hr class="hr"></hr></div>';
 				$(".transport-stops").append(strHtml);
 				transI++;
@@ -1601,7 +1602,7 @@ $(document).ready(function () {
 
             e.preventDefault();
             transI--;
-            $(this).parent('div').parent('.stop').slideUp(function(){
+           $(this).closest('div.stop').slideUp(function(){
 				$(this).remove();
 		var f = 1;
 		$( ".stop-title" ).each(function() {
