@@ -1,3 +1,4 @@
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <?php
 use Cake\Datasource\ConnectionManager; 
 $conn = ConnectionManager::get('default');
@@ -12,28 +13,26 @@ li > p{
 		margin: 0 0 4px !important;
 	}	
 </style>
-<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <div id="removed_request_list" class="container-fluid">
 <div class="row equal_column" > 
-<div class="col-md-12" > 
-    <div class="col-md-12" style="background-color:#fff"> 
-		<br>
-		<?php echo $this->element('subheader');?>
-		<?php echo  $this->Flash->render() ?>
-	</div>
-	
-<div class="box box-default">
+	<div class="col-md-12" > 
+		<div class="col-md-12" style="background-color:#"> 
+			<br>
+			<?php echo $this->element('subheader');?>
+			<?php echo  $this->Flash->render() ?>
+		</div>
+	</div>	
+</div>	
+<div class="box box-primary">
 	<div class="box-header with-border"> 
-		<h3 class="box-title" style="padding:20px">Removed Requests</h3>
+		<h3 class="box-title" style="padding:5px">Removed Requests</h3>
 		<div class="box-tools pull-right">
  			<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 		</div>
-		 
 	</div>
 	<div class="box-body">
 		<div class="row">
 		<div class="col-md-12">
-         
 					<div id="myModal122" class="modal fade form-modal" role="dialog">
 					  <div class="modal-dialog">
 
@@ -102,8 +101,8 @@ $m =0;
 			if($m%3==0) { echo '<div class="clearfix"></div>'; 
                   }
                   $m++;	
- ?>
-			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+ ?>		<div id="cat" >
+			<div class="col-md-4">
 				<?php 
 					   if($request['category_id']==1){ 
 							$image=$this->Html->image('/img/slider/package-icon.png');
@@ -120,23 +119,23 @@ $m =0;
 						?>
                 <fieldset><legend><?php echo $image; ?></legend>
 				 <ul>
-                    <li class="col-md-12">
+                    <li >
                     <p>
                         Request Type : <span class="details"> <?php  echo $text ; ?></span>
                     </p>
                 </li>
-				 <li class="col-md-12">
+				 <li >
                      <p>
                         Total Budget : <span class="details">  Rs. <?php echo $request['total_budget']; ?></span>
                      </p>
                  </li>
 				<?php if($request['category_id'] == 3 ) { ?>
-					<li class="col-md-12">
+					<li >
                         <p>
                             Start Date :<span class="details"> <?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
                         </p>
                      </li>
-					<li class="col-md-12">
+					<li >
                         <p>
                             End Date :<span class="details"> <?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?></span>
                         </p>
@@ -146,21 +145,21 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
                                  $stmt = $conn->execute($sql);
                                  $result = $stmt ->fetch('assoc');
 ?>
-					<li class="col-md-12">
+					<li >
                         <p>
                             Start Date :<span class="details"> <?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
                         </p>
                      </li>
-					<li class="col-md-12">
+					<li >
                         <p><?php if(!empty($result['TopDate'])) { ?>End Date : <span class="details"> <?php echo date('d/m/Y',strtotime($result['TopDate'])); ?></span><?php }else{?>End Date : <span class="details"><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?><?php }?></span>
                    </li>
 				<?php } elseif($request['category_id'] == 2 ) {?>
-					<li class="col-md-12">
+					<li >
                         <p>
                             Start Date :<span class="details"> <?php echo ($request['start_date'])?date('d/m/Y',strtotime($request['start_date'])):"-- --"; ?></span>
                         </p>
                      </li>
-					<li class="col-md-12">
+					<li >
                         <p>
                             End Date :<span class="details"> <?php echo ($request['end_date'])?date('d/m/Y',strtotime($request['end_date'])):"-- --"; ?></span>
                         </p>
@@ -168,18 +167,18 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 			<?php } ?>
 
 				
-				<li class="col-md-12">
+				<li >
                     <p>
                         Reference ID : <span class="details"> <?php echo $request['reference_id']; ?></span>
                     </p>
                  </li>
-               <li class="col-md-12">
+               <li >
                      <p>
                         Members : <span class="details"> <?php echo $request['adult'] +   $request['children']; ?> </span> 
                      </p>
                  </li>
                
-                     <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 destination">
+                     <li >
                   <?php if($request['category_id']==2){ ?>
                   <p>
                       Pickup City:<span class="details"> <span><?php echo ($request['pickup_city'])?$allCities[$request['pickup_city']]:"-- --"; ?><?php echo ($request['pickup_state'])?' ('.$allStates[$request['pickup_state']].')':"";  ?></span></span>
@@ -206,13 +205,12 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
                        </li>
 
              
-                     <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comment">
+                     <li >
                          <p>Comment :<span class="details">
 					 
 						 <?php echo mb_strimwidth($request['comment'], 0, 25, "...");?></span></p>
                      </li>
                   </ul>
-						<div class=" " >
 							<table width="100%" style="text-align:center">
 							<tr>
 								<td >
@@ -232,9 +230,9 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 										</div>
 									</div>
 								</div>
-							</div>				
-				</fieldset>
-			</div>
+						</fieldset>
+					</div>
+				</div>
 	
        <?php } ?>
        <div class="pages"></div>

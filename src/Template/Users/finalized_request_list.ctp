@@ -9,6 +9,11 @@ $conn = ConnectionManager::get('default');
 		text-align:center;
 	}
 	.details {color:#000 !important; font-weight: 400;}	
+	li > p{
+		color:#96989A !important;
+		margin: 0 0 4px !important;
+	}	
+		
 </style>
 <div class="container-fluid" id="finalized_request_list">
 <div class="row equal_column" > 
@@ -18,16 +23,13 @@ $conn = ConnectionManager::get('default');
 	</div>
 </div>
 <div class="box box-primary">
-<div class="row">
-	<div class="col-md-12">
 		<div class="box-header with-border"> 
 		<h3 class="box-title" style="padding:5px;">Finalized Requests</h3>
 			<div class="box-tools pull-right">
 				<!--<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>-->
 				<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 			</div>
-		</div>
-	</div>
+		
 </div>
 <div class="box-body">
 <div class="row">

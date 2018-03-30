@@ -16,24 +16,26 @@ $conn = ConnectionManager::get('default');
 </style>
 <div id="my_final_responses" class="container-fluid">
 	<div class="row equal_column">
-	<div class="col-md-12">
-	<div class="col-md-12" style="background-color:#fff"> 
+	<div class="col-md-12" style="background-color:#"> 
 		<br>
 		<?php echo $this->element('subheader');?>
 		<?php echo  $this->Flash->render() ?>
 	</div>
-	<div class="col-md-12" style="background-color:#fff"> 
-
-<div class="box box-default">
-	<div class="box-header with-border"> 
-		<h3 class="box-title" style="padding:5px">Finalized Responses</h3>
-		<div class="box-tools pull-right">
-			<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+	</div>
+<div class="box box-primary">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box-header with-border"> 
+				<h3 class="box-title" style="padding:5px">Finalized Responses</h3>
+				<div class="box-tools pull-right">
+					<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+				</div>
+			</div>
 		</div>
-		 
 	</div>
 	<div class="box-body">
 		<div class="row">
+		<div class="col-md-12">
 			<div id="myModal122" class="modal fade form-modal" role="dialog">
 			  <div class="modal-dialog">
 				<div class="modal-content">
@@ -153,8 +155,8 @@ $conn = ConnectionManager::get('default');
                             End Date :  <?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?>
                         </p>
                     </li>
-				<?php } elseif($row['request']['category_id'] == 1 ) {
-$sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$row['request']['id']."'";
+					<?php } elseif($row['request']['category_id'] == 1 ) {
+						$sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$row['request']['id']."'";
 						$stmt = $conn->execute($sql);
 						$result = $stmt ->fetch('assoc');						
 					?>
@@ -185,21 +187,17 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
                         </p>
                     </li>
 				<?php } ?>
-				                <li class="col-md-12">
+				     <li class="col-md-12">
                         <p>
                             Members :  <?php echo $row['request']['adult'] +  $row['request']['children']; ?>
                      </p>
-                 </li>
-				 
-				
-	
-					
+					</li>
                    <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comment">
                        <p> Comment :<span><?php echo $row['comment']; ?></span></p>
                      </li>
                    </ul>
 				   <div>
-					<table width="100%" style="text-align:center">
+					<table width="100%" style="text-align:center" class>
 						<tr>
 							<td width="50%">
 					 
@@ -260,25 +258,26 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 		} 
 		?>
 
+			</div>
+				<div class="modal fade" id="myModal" role="dialog">
+					<div class="modal-dialog">
+					  <!-- Modal content-->
+					  <div class="modal-content">
+						<div class="modal-header">
+						  <button type="button" class="close" data-dismiss="modal">&times;</button>
+						  <h4 class="modal-title">Chat</h4>
+						</div>
+						<div class="modal-body">
+							
+						</div>
+					  </div>
+					</div>
+				</div>
           </div>
       </div>
     </div>
-</div>
  
-	<div class="modal fade" id="myModal" role="dialog">
-		<div class="modal-dialog">
-		  <!-- Modal content-->
-		  <div class="modal-content">
-			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal">&times;</button>
-			  <h4 class="modal-title">Chat</h4>
-			</div>
-			<div class="modal-body">
-				
-			</div>
-		  </div>
-		</div>
-	</div>
+	
 <?php echo $this->element('footer');?> 
 <script>
 	$("#responsesWrap").apPagination({

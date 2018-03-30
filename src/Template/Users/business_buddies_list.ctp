@@ -8,15 +8,11 @@
 	</div>
 </div>
  <div class="box box-primary">
-<div class="row">
-	<div class="col-md-12">
 		<div class="box-header with-border"> 
 		<h3 class="box-title" style="padding:5px;">Following</h3>
 			<div class="box-tools pull-right">
 			</div>
 		</div>
-	</div>
-</div>
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-12">
