@@ -13,14 +13,14 @@ legend{
 use Cake\Datasource\ConnectionManager; 
 $conn = ConnectionManager::get('default');
 ?>
-<div class=container-fluid id="requestlist">
+<div class="container-fluid" id="requestlist">
 <div class="row equal_column" > 
-    <div class="col-md-12" style="background-color:#fff"> 
+    <div class="col-md-12" style="background-color:#"> 
 		<br> 
 		<?php echo  $this->Flash->render() ?>
 	</div>
-<div class="col-md-12" style="background-color:#fff"> 
-	<div class="box box-default">
+<div class="col-md-12" style="background-color:#"> 
+	<div class="box box-primary">
 		<div class="box-header with-border"> 
 			<h3 class="box-title" style="padding:5px">My Responses</h3>
 				<div class="box-tools pull-right">
