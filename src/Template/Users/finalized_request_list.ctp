@@ -10,27 +10,30 @@ $conn = ConnectionManager::get('default');
 	}
 	.details {color:#000 !important; font-weight: 400;}	
 </style>
-	<div id ="finalized_request_list" class="container-fluid">
+<div class="container">
+<div class="box box-primary">
+<div class="container-fluid" id="finalized_request_list">
 <div class="row equal_column" > 
     <div class="col-md-12" style="background-color:#fff"> 
 		<br>
 		<?php echo $this->element('subheader');?>
 		<?php echo  $this->Flash->render() ?>
 	</div>
-	<div class="col-md-12" style="background-color:#fff"> 
-
-<div class="box box-default">
-	<div class="box-header with-border"> 
-		<h3 class="box-title" style="padding:5px">Finalized Requests</h3>
-		<div class="box-tools pull-right">
-			<!--<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>-->
-			<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+</div>
+<div class="box-body">
+<div class="row">
+	<div class="col-md-12" > 
+		<div class="box-header with-border"> 
+			<h3 class="box-title" style="padding:-5px">Finalized Requests</h3>
+			<div class="box-tools pull-right">
+				<!--<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>-->
+				<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+			</div>
 		</div>
-		 
 	</div>
-	<div class="box-body">
-		<div class="row">
-	 
+</div>
+<div class="row">
+<div class="col-md-12">
 <div id="myModal123" class="modal fade form-modal" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -166,198 +169,193 @@ $(".req").sort(function (a, b) {
 
    })
 </script>
-<?php } ?>
-		<?php  
-		if(count($requests) >0) {
-			
-		 foreach($requests as $request){
-		 
-		 	$totmem = $request['adult'] +   $request['children']; 
-		   if(isset($_GET['memberssearch']) && $_GET['memberssearch']!="" && $_GET['memberssearch'] !=$totmem ){
-			continue;
-		   }
-		 ?>
-		 <div id="cat" >
-						<div class="col-md-4" id="<?php if($request['category_id']==1){ echo "1";} if($request['category_id']==2){ echo "3";}if($request['category_id']==3){ echo "2";} ?>">
-						<?php 
-					   if($request['category_id']==1){ 
-							$image=$this->Html->image('/img/slider/package-icon.png');
-							$text="<span class='requestType'>Package</span>";
-						} 
-						if($request['category_id']==2){
-							$image= $this->Html->image('/img/slider/transport-icon.png');
-							$text="<span class='requestType'>Transport</span>";
-						}
-						if($request['category_id']==3){
-							$image= $this->Html->image('/img/slider/hotelier-icon.png');
-							$text="<span class='requestType'>Hotel</span>";
-						} 
-						$created=$request['created'];
-						$org_created=date('d-M-Y', strtotime($created));
-						?>
-                <fieldset>
-				<legend><?php echo $image; ?></legend>
-				<span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
-                    <ul>
-                      <li >
-                     <p>
-						Request Type : <span class="details"><?php  echo $text; ?></span>
-                    </p>
-                    </li>
-                    
-                     <li >
-                        <p>
-                            Total Budget : <span class="details">Rs. <?php echo $request['total_budget']; ?></span>
-                        </p>
-                    </li>
-                    <li >
-                        <p>
-                            Agent Name : <span class="details"><a href="viewprofile/<?php echo $finalresponse[$request['id']]['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$finalresponse[$request['id']]['user_id']]); ?></a></span>
-                        </p>
-                     </li>
-                     <li >
-                        <p>
-                            Quotation Price : <span class="details">Rs. <?php echo $finalresponse[$request['id']]['quotation_price']; ?></span>
-                        </p>
-                    </li>
-                   
-                    <?php if($request['category_id'] == 3 ) { ?>
-                    <li >
-                        <p>
-                            Start Date : <span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
-                        </p>
-                    </li>
-                    <li >
-                        <p>
-                            End Date : <span class="details"><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?></p></span>
-                    </li>
-                    <?php } elseif($request['category_id'] == 1 ) {
-							$sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$request['id']."'";
-						$stmt = $conn->execute($sql);
-						$result = $stmt ->fetch('assoc');	                    	
-                    	?>
-                    <li >
-                        <p>
-                            Start Date : <span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
-                        </p>
-                    </li>
-                    <li >
-                        <p>
-                        <?php if(!empty($result['TopDate'])) { ?>
-                        End Date :  <span class="details"><?php echo date('d/m/Y',strtotime($result['TopDate'])); ?></span>
-                        <?php }else{?>
-                            End Date :  <span class="details"><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?></span>
-                            <?php }?>
-                        </p>
-                    </li>
-                    <?php } elseif($request['category_id'] == 2 ) {?>
-                    <li >
-                        <p>
-                            Start Date : <span class="details"><?php echo ($request['start_date'])?date('d/m/Y',strtotime($request['start_date'])):"-- --"; ?>
-                        </p>
-                    </li>
-                     <li >
-                        <p>
-                            End Date : <span class="details"><?php echo ($request['end_date'])?date('d/m/Y',strtotime($request['end_date'])):"-- --"; ?><span class="budy right" style="display:none;"><a href="#" ><?php echo $this->Html->image('friend-ico.png'); ?></a></span></span>
-                        </p>
-                    </li>
-                    <?php } ?>
-							<li >
-                        <p>
-                            Reference ID : <span class="details"><?php echo $request['reference_id']; ?></span>
-                        </p>
-                    </li>
-                     <li >
-                        <p>
-                            Members : <span class="details"><?php echo $request['adult'] +   $request['children']; ?></span>
-                        </p>
-                    </li>
-                    <li>
-                        <p>Response Comment : <span class="details">
-						<?php echo mb_strimwidth($finalresponse[$request['id']]['comment'], 0, 25, "...");?></span></p>
-                     </li>
-                    </ul>
-			  <table width="100%" style="text-align:center">
-				<tr>
-					<td width="33%">
-						<a style="width:99%" data-toggle="modal"  class="btn btn-info btn-sm" data-target="#myModal1<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'viewdetails',$request['id'])) ?>"> Details</a>
-                    </td>
-					<td width="33%">
-						<a style="width:99%" data-toggle="modal"  class="btn btn-success btn-sm" data-target="#myModalchat<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat',$request['id'], $finalresponse[$request['id']]['user_id'],3)) ?>"> Chat</a>                        
-                    </td>
-					<td width="33%">
-                        
-                        
-                        <?php $reviewi = $request['responses'][0]['user_id']."-".$request['id']; ?>
-                         <a style="width:99%" data-toggle="modal" class="btn btn-warning btn-sm" data-target="#myModal1review<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi )) ?>"> Review </a>
-                       
-                       
-						</td>
-					</tr>
-				</table>
-				 <div class="modal fade" id="myModalchat<?php echo $request['id']; ?>" role="dialog">
-						<div class="modal-dialog">
-						  <!-- Modal content-->
-						  <div class="modal-content">
-							<div class="modal-header">
-							  <button type="button" class="close" data-dismiss="modal">&times;</button>
-							  <h4 class="modal-title">Chat</h4>
-							</div>
-							<div class="modal-body">
-							
-							</div>
-						  </div>
+			<?php } ?>
+					<?php  
+					if(count($requests) >0) {
+						
+					 foreach($requests as $request){
+					 
+						$totmem = $request['adult'] +   $request['children']; 
+					   if(isset($_GET['memberssearch']) && $_GET['memberssearch']!="" && $_GET['memberssearch'] !=$totmem ){
+						continue;
+					   }
+					 ?>
+					 <div id="cat" >
+									<div class="col-md-4" id="<?php if($request['category_id']==1){ echo "1";} if($request['category_id']==2){ echo "3";}if($request['category_id']==3){ echo "2";} ?>">
+									<?php 
+								   if($request['category_id']==1){ 
+										$image=$this->Html->image('/img/slider/package-icon.png');
+										$text="<span class='requestType'>Package</span>";
+									} 
+									if($request['category_id']==2){
+										$image= $this->Html->image('/img/slider/transport-icon.png');
+										$text="<span class='requestType'>Transport</span>";
+									}
+									if($request['category_id']==3){
+										$image= $this->Html->image('/img/slider/hotelier-icon.png');
+										$text="<span class='requestType'>Hotel</span>";
+									} 
+									$created=$request['created'];
+									$org_created=date('d-M-Y', strtotime($created));
+									?>
+							<fieldset>
+							<legend><?php echo $image; ?></legend>
+							<span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
+								<ul>
+								  <li >
+								 <p>
+									Request Type : <span class="details"><?php  echo $text; ?></span>
+								</p>
+								</li>
+								
+								 <li >
+									<p>
+										Total Budget : <span class="details">Rs. <?php echo $request['total_budget']; ?></span>
+									</p>
+								</li>
+								<li >
+									<p>
+										Agent Name : <span class="details"><a href="viewprofile/<?php echo $finalresponse[$request['id']]['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$finalresponse[$request['id']]['user_id']]); ?></a></span>
+									</p>
+								 </li>
+								 <li >
+									<p>
+										Quotation Price : <span class="details">Rs. <?php echo $finalresponse[$request['id']]['quotation_price']; ?></span>
+									</p>
+								</li>
+							   
+								<?php if($request['category_id'] == 3 ) { ?>
+								<li >
+									<p>
+										Start Date : <span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
+									</p>
+								</li>
+								<li >
+									<p>
+										End Date : <span class="details"><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?></p></span>
+								</li>
+								<?php } elseif($request['category_id'] == 1 ) {
+										$sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$request['id']."'";
+									$stmt = $conn->execute($sql);
+									$result = $stmt ->fetch('assoc');	                    	
+									?>
+								<li >
+									<p>
+										Start Date : <span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
+									</p>
+								</li>
+								<li >
+									<p>
+									<?php if(!empty($result['TopDate'])) { ?>
+									End Date :  <span class="details"><?php echo date('d/m/Y',strtotime($result['TopDate'])); ?></span>
+									<?php }else{?>
+										End Date :  <span class="details"><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?></span>
+										<?php }?>
+									</p>
+								</li>
+								<?php } elseif($request['category_id'] == 2 ) {?>
+								<li >
+									<p>
+										Start Date : <span class="details"><?php echo ($request['start_date'])?date('d/m/Y',strtotime($request['start_date'])):"-- --"; ?>
+									</p>
+								</li>
+								 <li >
+									<p>
+										End Date : <span class="details"><?php echo ($request['end_date'])?date('d/m/Y',strtotime($request['end_date'])):"-- --"; ?><span class="budy right" style="display:none;"><a href="#" ><?php echo $this->Html->image('friend-ico.png'); ?></a></span></span>
+									</p>
+								</li>
+								<?php } ?>
+										<li >
+									<p>
+										Reference ID : <span class="details"><?php echo $request['reference_id']; ?></span>
+									</p>
+								</li>
+								 <li >
+									<p>
+										Members : <span class="details"><?php echo $request['adult'] +   $request['children']; ?></span>
+									</p>
+								</li>
+								<li>
+									<p>Response Comment : <span class="details">
+									<?php echo mb_strimwidth($finalresponse[$request['id']]['comment'], 0, 25, "...");?></span></p>
+								 </li>
+								</ul>
+						  <table width="100%" style="text-align:center">
+							<tr>
+								<td width="33%">
+									<a style="width:99%" data-toggle="modal"  class="btn btn-info btn-sm" data-target="#myModal1<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'viewdetails',$request['id'])) ?>"> Details</a>
+								</td>
+								<td width="33%">
+									<a style="width:99%" data-toggle="modal"  class="btn btn-success btn-sm" data-target="#myModalchat<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat',$request['id'], $finalresponse[$request['id']]['user_id'],3)) ?>"> Chat</a>                        
+								</td>
+								<td width="33%">
+									
+									
+									<?php $reviewi = $request['responses'][0]['user_id']."-".$request['id']; ?>
+									 <a style="width:99%" data-toggle="modal" class="btn btn-warning btn-sm" data-target="#myModal1review<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi )) ?>"> Review </a>
+								   
+								   
+									</td>
+								</tr>
+							</table>
+							 <div class="modal fade" id="myModalchat<?php echo $request['id']; ?>" role="dialog">
+									<div class="modal-dialog">
+									  <!-- Modal content-->
+									  <div class="modal-content">
+										<div class="modal-header">
+										  <button type="button" class="close" data-dismiss="modal">&times;</button>
+										  <h4 class="modal-title">Chat</h4>
+										</div>
+										<div class="modal-body">
+										
+										</div>
+									  </div>
+									</div>
+									</div>
+									<div class="modal fade" id="myModal1review<?php echo $request['id']; ?>" role="dialog">
+										<div class="modal-dialog">
+										  <!-- Modal content-->
+										  <div class="modal-content">
+											<div class="modal-header">
+											  <button type="button" class="close" data-dismiss="modal">&times;</button>
+											  <h4 class="modal-title">Review</h4>
+											</div>
+											<div class="modal-body">
+											</div>
+										  </div>
+										</div>
+									</div>
+									<div class="modal fade" id="myModal1<?php echo $request['id']; ?>" role="dialog">
+										<div class="modal-dialog">
+										<!-- Modal content-->
+										  <div class="modal-content">
+											<div class="modal-header">
+											  <button type="button" class="close" data-dismiss="modal">&times;</button>
+											  <h4 class="modal-title">Details</h4>
+											</div>
+											<div class="modal-body">
+											</div>
+										  </div>
+										</div>
+									</div>
+								</fieldset>
+							   </div>
+							 </div>
+							<?php } ?>
 						</div>
-						</div>
-						<div class="modal fade" id="myModal1review<?php echo $request['id']; ?>" role="dialog">
-							<div class="modal-dialog">
-							  <!-- Modal content-->
-							  <div class="modal-content">
-								<div class="modal-header">
-								  <button type="button" class="close" data-dismiss="modal">&times;</button>
-								  <h4 class="modal-title">Review</h4>
+					</div>
+						<div class="pages"></div>
+						<?php }else {?>
+							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
+								<div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 text-center box-event">
+				 <?php if(isset($_GET['req_typesearch'])){ echo "No matching data.";}else{ echo "There are no finalized requests in the mailbox.";}?>
 								</div>
-								<div class="modal-body">
-								</div>
-							  </div>
 							</div>
-						</div>
-						<div class="modal fade" id="myModal1<?php echo $request['id']; ?>" role="dialog">
-							<div class="modal-dialog">
-							<!-- Modal content-->
-							  <div class="modal-content">
-								<div class="modal-header">
-								  <button type="button" class="close" data-dismiss="modal">&times;</button>
-								  <h4 class="modal-title">Details</h4>
-								</div>
-								<div class="modal-body">
-								</div>
-							  </div>
-							</div>
-						</div>
-	</fieldset>
-   </div>
-   </div>
-			 
-		<?php } ?>
-		</div>
-		</div>
-		<div class="pages"></div>
-		<?php }else {?>
-			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 text-center box-event">
- <?php if(isset($_GET['req_typesearch'])){ echo "No matching data.";}else{ echo "There are no finalized requests in the mailbox.";}?>
-                </div>
+						<?php } ?>
+					</div>
+				</div>
 			</div>
-		<?php } ?>
-
-      </div>
-	
-	
-	
-	</div>
-</div>
-</div>
+		</div>
 <?php echo $this->element('footer');?>
 <?php echo $this->Html->script(['ap.pagination.js']);?>
 <script>
