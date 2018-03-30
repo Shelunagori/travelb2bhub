@@ -1,11 +1,12 @@
-
-<div class=container-fluid id="business_buddies_list">
+<div class="container">
+<div class="container-fluid" id="business_buddies_list">
 <div class="row equal_column" > 
     <div class="col-md-12" style="background-color:#fff"> 
 		<br>
 		<?php echo $this->element('subheader');?>
 		<?php echo  $this->Flash->render() ?>
 	</div>
+</div>
 <div class="row">
 <div class="col-md-12" style="background-color:#fff"> 
 <div class="box box-default">
@@ -77,10 +78,14 @@
     <li><a href="#">&raquo;</a></li>
 	</ul>
 	</div>-->
-      </div>
-    </div>
-    </div>
-</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
