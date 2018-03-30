@@ -331,6 +331,7 @@ fieldset{
 			foreach ($taxiFleetPromotions as $taxiFleetPromotion){ ?>
 			<fieldset>
 				<form >
+				<div class="row">
 				<div class="col-md-4">
 				<?= $this->Html->image('../images/8.jpg',['style'=>'width:100%;margin-left:-10px;']) ?>
 				</div>
@@ -357,7 +358,8 @@ fieldset{
 						<li class="col-md-3"><?= h(date('d-m-Y',strtotime($taxiFleetPromotion->visible_date))); ?></li>
 						</ul>						
 					</div>
-					</h4><span class="help-block"></span>
+					</h4>
+					<span class="help-block"></span>
 					<div class="row ">
 						<div class="col-md-1">
 							<input type="hidden" name="taxifleet_id" value="<?php echo $taxiFleetPromotion->id; ?>">
@@ -461,9 +463,10 @@ fieldset{
 									</div>
 								</div>	
 							</div>	
-						</div>
-				</fieldset>
-			</form>				
+						</div>	
+					</div>
+			</fieldset>
+		</form>				
 			<?php }}
 								}else{
 										echo"<tr><th colspan='10' style='text-align:center'>No Record Found</th></tr>";
