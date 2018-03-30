@@ -1,4 +1,7 @@
 <style>
+h1,h2,h3,h4,h5,h6{
+	font-family: 'Raleway', sans-serif !important;
+}
 li { list-style: none;}
 .review-block .block-text {
     background-color: #eee;
@@ -355,7 +358,6 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 												<div class="rating">
 													<?php
 													$userRating =  $testimo['rating1'];
-													//echo $userRating;
 													if($userRating>0){
 														for($i=$userRating; $i>0; $i--){
 															echo '<i class="fa fa-star"></i>';
