@@ -16,21 +16,23 @@ $conn = ConnectionManager::get('default');
 </style>
 <div id="my_final_responses" class="container-fluid">
 	<div class="row equal_column">
-	<div class="col-md-12" style="background-color:#fff"> 
-		<br>
-		<?php echo $this->element('subheader');?>
-		<?php echo  $this->Flash->render() ?>
-	</div>
-	<div class="col-md-12" style="background-color:#fff"> 
-
-<div class="box box-default">
-	<div class="box-header with-border"> 
-		<h3 class="box-title" style="padding:5px">Respond To Request</h3>
-		<div class="box-tools pull-right">
-			<!--<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>-->
-			<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+		<div class="col-md-12" style="background-color:"> 
+			<br>
+			<?php echo $this->element('subheader');?>
+			<?php echo  $this->Flash->render() ?>
 		</div>
-		 
+	</div>
+<div class="box box-primary">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="box-header with-border"> 
+				<h3 class="box-title" style="padding:5px">Respond To Request</h3>
+				<div class="box-tools pull-right">
+					<!--<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>-->
+					<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div class="box-body">
 		<div class="row">

@@ -10,21 +10,18 @@ $conn = ConnectionManager::get('default');
 	}
 	.details {color:#000 !important; font-weight: 400;}	
 </style>
-<div class="container">
-<div class="box box-primary">
 <div class="container-fluid" id="finalized_request_list">
 <div class="row equal_column" > 
-    <div class="col-md-12" style="background-color:#fff"> 
-		<br>
+    <div class="col-md-12" > 
 		<?php echo $this->element('subheader');?>
 		<?php echo  $this->Flash->render() ?>
 	</div>
 </div>
-<div class="box-body">
+<div class="box box-primary">
 <div class="row">
-	<div class="col-md-12" > 
+	<div class="col-md-12">
 		<div class="box-header with-border"> 
-			<h3 class="box-title" style="padding:-5px">Finalized Requests</h3>
+		<h3 class="box-title" style="padding:5px;">Finalized Requests</h3>
 			<div class="box-tools pull-right">
 				<!--<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>-->
 				<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
@@ -32,8 +29,9 @@ $conn = ConnectionManager::get('default');
 		</div>
 	</div>
 </div>
+<div class="box-body">
 <div class="row">
-<div class="col-md-12">
+<div class="col-md-12" >
 <div id="myModal123" class="modal fade form-modal" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -355,7 +353,6 @@ $(".req").sort(function (a, b) {
 					</div>
 				</div>
 			</div>
-		</div>
 <?php echo $this->element('footer');?>
 <?php echo $this->Html->script(['ap.pagination.js']);?>
 <script>

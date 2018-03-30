@@ -25,25 +25,26 @@ legend
 .details {color:#000 !important; font-weight: 400;}	
 .btn-block { width:40% !important;}
 </style>
-
-
-<div class=container-fluid id="requestlist">
+<div class="container-fluid" id="requestlist">
 <div class="row equal_column" > 
-    <div class="col-md-12" style="background-color:#fff"> 
+    <div class="col-md-12"> 
 		<br>
 		<?php echo $this->element('subheader');?>
 		<?php echo  $this->Flash->render() ?>
 	</div>
-	<div class="col-md-12" style="background-color:#fff"> 
-
-<div class="box box-default">
-	<div class="box-header with-border"> 
-		<h3 class="box-title" style="padding:5px">My Requests</h3>
-		<div class="box-tools pull-right">
+</div>
+ <div class="box box-primary">
+<div class="row">
+	<div class="col-md-12">
+		<div class="box-header with-border"> 
+		<h3 class="box-title" style="padding:5px;">My Requests</h3>
+			<div class="box-tools pull-right">
 			<!--<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>-->
 			<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+			</div>
 		</div>
 	</div>
+</div>
 	<div class="box-body">
 		<div class="row">
                <div id="myModal123" class="modal fade" role="dialog">
@@ -373,7 +374,7 @@ legend
 							</p>
 							<hr></hr> 
 							 
-							<table width="100%" border="0">
+							<table width="100%" border="0" class="table-responsive">
 							<tr>
 								<td width="33%">
 									<a style="width:99%" class="viewdetail btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"data-target="#myModal1<?php echo $request['id']; ?>"data-toggle=modal> Details</a>

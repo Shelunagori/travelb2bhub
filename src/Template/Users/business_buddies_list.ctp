@@ -1,25 +1,25 @@
-<div class="container">
+
 <div class="container-fluid" id="business_buddies_list">
 <div class="row equal_column" > 
-    <div class="col-md-12" style="background-color:#fff"> 
+    <div class="col-md-12" > 
 		<br>
 		<?php echo $this->element('subheader');?>
 		<?php echo  $this->Flash->render() ?>
 	</div>
 </div>
+ <div class="box box-primary">
 <div class="row">
-<div class="col-md-12" style="background-color:#fff"> 
-<div class="box box-default">
-	<div class="box-header with-border"> 
-		<h3 class="box-title" style="padding:5px">Following</h3>
-		<div class="box-tools pull-right">
- 		</div>
- 	</div>
+	<div class="col-md-12">
+		<div class="box-header with-border"> 
+		<h3 class="box-title" style="padding:5px;">Following</h3>
+			<div class="box-tools pull-right">
+			</div>
+		</div>
+	</div>
+</div>
 	<div class="box-body">
 		<div class="row">
 			<div class="col-md-12">
-				<div class="box box-primary">
-					<div class="box-body">
 					<?php
 						if(count($BusinessBuddies) >0) {
 							foreach($BusinessBuddies as $row){
