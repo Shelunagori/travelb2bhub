@@ -46,7 +46,7 @@ legend
 <div id="cat" >
   <div class="row" >
 	<div class="col-md-12" >
-		<!--<a data-toggle="modal" data-target="#detailModal" href="#" class="btn btn-success btn-xs">Details</a>-->
+		<!--<a data-toggle="modal" data-target="#detailModal" href="#" class="btn btn-success btn-sm">Details</a>-->
 		
 		<div class="fade modal"id="myModal1<?php echo $responseid; ?>"role=dialog>
 			<div class=modal-dialog>
@@ -59,8 +59,18 @@ legend
 				</div>
 			</div>
 		</div>
-		<?php 
+		<div class="col-md-2"><p><?= ('Request Type') ?></p></div>
+		<div class="col-md-2"><p><?= ('Total Budget') ?></p></div>
+		<div class="col-md-2"><p><?= ('Agent Name') ?></p></div>
+		<div class="col-md-2"><p><?= ('Quoted Price') ?></p></div>
+		<div class="col-md-4"><p><?= ('Actions') ?></p></div>
+		</div>
+		</div>
+		
+		
+			<?php $i=0;	
 		if(count($responses) >0) {
+			$i++;
 			foreach($responses as $row){ ?>
             <?php if(isset($_GET['sort']) && $_GET['sort']=="requesttype")
 			{ ?>
@@ -86,30 +96,25 @@ legend
 				$created=$row['created'];
 				$org_created=date('d-M-Y', strtotime($created));
 				?>
-		<div class="col-md-2">
-		<b>Request Type :</b> <?php echo $text; ?>
-		</div>
-		<div class="col-md-2">
-		<b>Total Budget :</b> <?php echo $row['request']['total_budget']; ?>
-		</div>
-		<div class="col-md-3">
-		<b>Agent Name :</b>
-
-			<?php if($row['response']['is_details_shared']==1){
+				<div class="row">
+						<div class="col-md-2"><?php echo $text; ?></div>
+						<div class="col-md-2"><?php echo $row['request']['total_budget']; ?></div>
+						<div class="col-md-2">
+						<?php if($row['response']['is_details_shared']==1){
 								$hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$row['user']['id'],1));                    
                         }else{
 								$hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$row['user']['id'],1));                   
                         }?>
 						<a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></a>
-		</div>
-		<div class="col-md-2">
-		<b>Quoted Price :</b> <?php echo ($row['quotation_price'])?"&#8377; ".$row['quotation_price']:"-- --" ?>
-		</div>
-		<div class="col-md-3">
-		<ul>
-		<li>
+						</div>
+						<div class="col-md-2">
+						<?php echo ($row['quotation_price'])?"Rs. ".$row['quotation_price']:"-- --" ?>
+						</div>
+						<div class="col-md-4">
+						<ul>
+						<li>
 									<!---button Chat --->
-									<a class="btn btn-warning btn-xs " id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>"> 
+									<a class="btn btn-warning btn-sm " id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>"> 
 									Chat ( <strong><?php echo $data['chat_count'][$row['id']]; ?> </strong> )</a>
 									<div class="modal fade" id="myModal11<?php echo  $row['request']['id']; ?>" role="dialog">
 										<div class="modal-dialog">
@@ -125,13 +130,13 @@ legend
 									</div>
 										<!---button Share --->
 										<?php if($row['is_details_shared'] != 1) { ?>
-											<a  href="javascript:void(0);" user_id="<?php echo $row['user']['id']; ?>" class="shareDetails btn btn-info btn-xs " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
+											<a  href="javascript:void(0);" user_id="<?php echo $row['user']['id']; ?>" class="shareDetails btn btn-info btn-sm " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
 												Share Details</a>
 								 
 											<?php }
 											else{
 												?>
-													<a  href="javascript:void(0);" class=" btn btn-info btn-xs ">
+													<a  href="javascript:void(0);" class=" btn btn-info btn-sm ">
 													Shared</a>
 												 
 												<?php 
@@ -139,14 +144,14 @@ legend
 										<!---button Follow--->
 											<?php
 												if( !array_key_exists($row['user']['id'], $BusinessBuddies)) {?>
-													<a href="javascript:void(0);" class="businessBuddy btn btn-xs " style="background-color:#1295A2;color:#FFF;" user_id = "<?php echo $row['user']['id']; ?>"> Follow</a>
+													<a href="javascript:void(0);" class="businessBuddy btn btn-sm " style="background-color:#1295A2;color:#FFF;" user_id = "<?php echo $row['user']['id']; ?>"> Follow</a>
 											<?php }
 												else{
 												?>
-													<a  href="javascript:void(0);" class="btn btn-xs " style="background-color:#1295A2;color:#FFF; user_id = "<?php echo $row['user']['id']; ?>"> Following</a>
+													<a  href="javascript:void(0);" class="btn btn-sm " style="background-color:#1295A2;color:#FFF; user_id = "<?php echo $row['user']['id']; ?>"> Following</a>
 																	<?php	}	?>
 												</li>
-											<li style="margin-top:5px;">
+												<li style="margin-top:5px;">
 												<!---button Block--->
 												<?php
 													$sql="Select count(*) as block_count from blocked_users where blocked_user_id='".$row['user']['id']."' AND blocked_by='".$row['request']['user_id']."'";
@@ -162,20 +167,20 @@ legend
 													<?php 
 													if($blocked==1)
 													{?>
-														<a  href="javascript:void(0);" class="unblockUser btn btn-danger btn-xs " user_id = "<?php echo $row['user']['id']; ?>">
+														<a  href="javascript:void(0);" class="unblockUser btn btn-danger btn-sm " user_id = "<?php echo $row['user']['id']; ?>">
 														Blocked </a>
 													<?php }
 													else
 													{?>
-														<a  href="javascript:void(0);" class="blockUser btn btn-danger btn-xs " user_id = "<?php echo $row['user']['id']; ?>">
+														<a  href="javascript:void(0);" class="blockUser btn btn-danger btn-sm " user_id = "<?php echo $row['user']['id']; ?>">
 														Block User </a>
 													<?php } ?>
 													<!---button Accept Offer--->
-															<a  href="javascript:void(0);" class="acceptOffer btn btn-success btn-xs " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
+															<a  href="javascript:void(0);" class="acceptOffer btn btn-success btn-sm " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
 																Accept Offer</a>
 																
 														<?php $reviewi =  $row['user']['id']."-".$row['request']['id']; ?>
-															<a data-toggle="modal" class="btn btn-info btn-xs" style="display:none;" data-target="#myModal_accept<?php echo $row['id']; ?>" id="add_review" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">
+															<a data-toggle="modal" class="btn btn-info btn-sm" style="display:none;" data-target="#myModal_accept<?php echo $row['id']; ?>" id="add_review" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">
 														Test</a>
 														<div class="modal fade" id="myModal_accept<?php echo $row['id']; ?>" role="dialog">
 															<div class="modal-dialog">
@@ -190,15 +195,13 @@ legend
 															</div>
 														</div>
 														<!---button Details--->
-														<a  class="viewdetail btn btn-success btn-xs" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$responseid)) ?>"data-target="#myModal1<?php echo $responseid; ?>" data-toggle=modal> Details</a>
+														<a  class="viewdetail btn btn-success btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$responseid)) ?>"data-target="#myModal1<?php echo $responseid; ?>" data-toggle=modal> Details</a>
 														</li>
 														</ul>
 													</div>
 												</div>
 											</div>
-										</div>
-									</div>
-								<?php } ?>
+								<?php $i++;} ?>
 									</div>
 								<?php } 
 								
@@ -229,25 +232,25 @@ legend
 		<table width="90%" class="shotrs">
 			<tr>
 				<td>
-				<a class="btn btn-info btn-xs"href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=totalbudgethl">Total Budget (High To Low) <span class="arrow"></span></a>
+				<a class="btn btn-info btn-sm"href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=totalbudgethl">Total Budget (High To Low) <span class="arrow"></span></a>
 
-				<a class="btn btn-info btn-xs" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=totalbudgetlh"> Total Budget (Low To High)<span class="arrow"></span></a>
+				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=totalbudgetlh"> Total Budget (Low To High)<span class="arrow"></span></a>
 				
-				<a class="btn btn-info btn-xs" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=quotedpricehl">Quoted Price (High To Low) <span class="arrow"></span></a>
+				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=quotedpricehl">Quoted Price (High To Low) <span class="arrow"></span></a>
 				
-				<a class="btn btn-info btn-xs" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=quotedpricelh"> Quoted Price (Low To High)<span class="arrow"></span></a>
+				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=quotedpricelh"> Quoted Price (Low To High)<span class="arrow"></span></a>
 				
-				<a class="btn btn-info btn-xs" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=chatshl">Chats (High To Low) <span class="arrow"></span></a>
+				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=chatshl">Chats (High To Low) <span class="arrow"></span></a>
 				
-				<a class="btn btn-info btn-xs" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=chatslh"> Chats (Low To High)<span class="arrow"></span></a>
+				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=chatslh"> Chats (Low To High)<span class="arrow"></span></a>
 				
-				<a class="btn btn-info btn-xs" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=chatslh"> Chats (Low To High)<span class="arrow"></span></a>
+				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=chatslh"> Chats (Low To High)<span class="arrow"></span></a>
 				
-				<a class="btn btn-info btn-xs" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=chatslh"> Chats (Low To High)<span class="arrow"></span></a>
+				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=chatslh"> Chats (Low To High)<span class="arrow"></span></a>
 				
-				<a class="btn btn-info btn-xs" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=agentaz"> Agent Name (A To Z) <span class="arrow"></span></a>
+				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=agentaz"> Agent Name (A To Z) <span class="arrow"></span></a>
 				
-				<a class="btn btn-info btn-xs" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=agentza"> Agent Name (Z To A)<span class="arrow"></span></a>
+				<a class="btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$responseid)) ?>?sort=agentza"> Agent Name (Z To A)<span class="arrow"></span></a>
 			</td>
 		</tr>
 	</table>

@@ -85,7 +85,8 @@ $conn = ConnectionManager::get('default');
 			//pr($responses);
 			foreach($responses as $row){
 			?>
-			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+			<div id="cat" >
+			<div class="col-md-4">
 			<?php 
                if($row['request']['category_id']==1){ 
 					$image=$this->Html->image('/img/slider/package-icon.png');
@@ -106,25 +107,25 @@ $conn = ConnectionManager::get('default');
 					<legend><?php echo $image; ?></legend>
 					<span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
                  <ul>
-                 <li class="col-md-12">
+                 <li >
                     <p>
                         Request Type  : <?php echo $text; ?>
                     </p>
                  </li>
-				<li class="col-md-12">
+				<li >
 					<p>
 						Total Budget :  <?php echo ($row['request']['total_budget'])? "Rs. ". $row['request']['total_budget'] :"-- --" ?>
 					</p>
 				 </li>
-				 <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				 <li >
 					<p>
 						Agent Name :  <a href="viewprofile/<?php echo $row['request']['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$row['request']['user_id']]); ?></a>
 					</p>
 				</li>
-				<li class="col-md-12">
+				<li >
 					 <p>Quotation Price :  <?php echo ($row['quotation_price'])? " Rs. ".$row['quotation_price']:"-- --" ?></p>
 				</li>
-                <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 destination">
+                <li class="destination">
 				   <?php if($row['request']['category_id']==2){ ?>
                   <p>
                    Pickup City : <span> <?php echo ($row['request']['pickup_city'])?$allCities[$row['request']['pickup_city']]:"-- --"; ?><?php echo ($row['request']['pickup_state'])?' ('.$allStates[$row['request']['pickup_state']].')':"";  ?></span>
@@ -145,12 +146,12 @@ $conn = ConnectionManager::get('default');
                         <?php } ?>
                  </li>
 				<?php if($row['request']['category_id'] == 3 ) { ?>
-					<li class="col-md-12">
+					<li >
                         <p>
                             Start Date :  <?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?>
                         </p>
                      </li>
-					<li class="col-md-12">
+					<li >
                         <p>
                             End Date :  <?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?>
                         </p>
@@ -160,12 +161,12 @@ $conn = ConnectionManager::get('default');
 						$stmt = $conn->execute($sql);
 						$result = $stmt ->fetch('assoc');						
 					?>
-					<li class="col-md-12">
+					<li >
                         <p>
                             Start Date :  <?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?>
                         </p>
                      </li>
-					<li class="col-md-12">
+					<li >
                         <p>
                         <?php if(!empty($result['TopDate'])) { ?>
                         End Date :  <?php echo date('d/m/Y',strtotime($result['TopDate'])); ?>
@@ -176,18 +177,18 @@ $conn = ConnectionManager::get('default');
                         </p>
                      </li>
 				<?php } elseif($row['request']['category_id'] == 2 ) { ?>
-					<li class="col-md-12">
+					<li >
                         <p>
                             Start Date :  <?php echo ($row['request']['start_date'])?date("d/m/Y", strtotime($row['request']['start_date'])):"-- --"; ?>
                         </p>
                     </li>
-					<li class="col-md-12">
+					<li >
                         <p>
                             End Date :  <?php echo ($row['request']['end_date'])?date("d/m/Y", strtotime($row['request']['end_date'])):"-- --"; ?>
                         </p>
                     </li>
 				<?php } ?>
-				     <li class="col-md-12">
+				     <li >
                         <p>
                             Members :  <?php echo $row['request']['adult'] +  $row['request']['children']; ?>
                      </p>

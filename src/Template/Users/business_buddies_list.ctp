@@ -14,13 +14,12 @@
 			</div>
 		</div>
 	<div class="box-body">
-		<div class="row">
-			<div class="col-md-12">
 					<?php
 						if(count($BusinessBuddies) >0) {
 							foreach($BusinessBuddies as $row){
 								//pr($BusinessBuddies->toArray());exit;
 							?>
+					<div id="cat" >
 						<div class="row">
 							<div class="form-group col-md-12">
 							
@@ -45,11 +44,11 @@
 								<b>Email :</b> <?php echo ($row['user']['email'])?$row['user']['email']:"-- --"; ?><br>
 								<b>Locality :</b> <?php echo ($row['user']['locality'])?$row['user']['locality']:"-- --"; ?>
 								</div>
-								<div class="col-md-3">
+								<div class="col-md-3 text-center ">
 									<a href="javascript:void(0);" class="unfollow btn btn-danger btn-sm" follow_id = "<?php echo $row['id']; ?>"> Unfollow</a>
 								</div>
 							</div>
-						</div>
+						</div><hr></hr>
 						<?php } ?>
 					</div>
 				</div>

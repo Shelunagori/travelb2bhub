@@ -10,45 +10,45 @@ $conn = ConnectionManager::get('default');
 	}
 </style>
 <div id="my_final_responses" class="container-fluid">
-	<div class="row equal_column">
-	<div class="col-md-12" style="background-color:#fff"> 
+<div class="row equal_column">
+	<div class="col-md-12" style="background-color:"> 
 		<br>
 		<?php echo $this->element('subheader');?>
 		<?php echo  $this->Flash->render() ?>
 	</div>
-	<div class="col-md-12" style="background-color:#fff"> 
-     <div class="box box-default">
+</div>
+<div class="box box-primary">
 	<div class="box-header with-border"> 
-		<h3 class="box-title" style="padding:20px">Blocked User</h3>
+		<h3 class="box-title" style="padding:5px;">Blocked User</h3>
 		<div class="box-tools pull-right">
 			
 		</div>
 	</div>
 	<div class="box-body">
+	<div id="cat">
 		<div class="row">
-	  
+			<div class="col-md-12">
 		<?php
 		if(count($blockedUsers) >0) { 
 			foreach($blockedUsers as $row){ ?>
-			
-			<div class="col-md-6">
-				<div class="box box-primary">
-					<div class="box-body">
-						<div>
 							<div class="form-group col-md-12">
-								<div class="col-md-8">
+								<div class="col-md-2">
 									<?php 
 										$hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$row['user']['id']));
 									?>
-									<b>Name :</b> <?php //echo $row['user']['first_name']; ?>&nbsp;&nbsp;<?php //echo $row['user']['last_name']; ?>
-									<a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $row['user']['last_name']; ?></a>
-									<br>
-									<b>Email :</b> <?php echo ($row['user']['email'])?$row['user']['email']:"-- --"; ?><br>
-									<b>Mobile No. :</b> <?php echo ($row['user']['mobile_number'])?$row['user']['mobile_number']:"-- --"; ?><br>
+									<b>Name :</b>
+									<a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></a>
+								</div>
+								<div class="col-md-2">
+									<b>Email :</b> <?php echo ($row['user']['email'])?$row['user']['email']:"-- --"; ?>
+								</div>
+								<div class="col-md-3">
+									<b>Mobile No. :</b> <?php echo ($row['user']['mobile_number'])?$row['user']['mobile_number']:"-- --"; ?>
+								</div>
+								<div class="col-md-3">
 									<b>Company Name :</b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?>
 								</div>
-								<div class="col-md-4">
-									<br><br>
+								<div class="col-md-2 text-center">
 									<a href="javascript:void(0);" class="unblockUser btn btn-success btn-sm" user_id = "<?php echo $row['user']['id']; ?>" > Unfollow</a>
 								</div>
 							</div>
@@ -99,7 +99,6 @@ $conn = ConnectionManager::get('default');
         </div>
       </div>
    </div>
-</div>
 </div>
 </div>
 <?php echo $this->element('footer');?>
