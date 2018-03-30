@@ -429,7 +429,7 @@ $data['country_id'] =  $cityapi->country_id;
 			$this->loadModel('Membership');
 			if($_POST) {
 				$d = $_POST;
-				$checkUsers = $this->Users->find()->where(['email' => $d['email']])->count();
+				$checkUsers = $this->Users->find()->where(['mobile_no' => $d['mobile_no']])->count();
 				if ($checkUsers < 1) {
 					if(isset($_POST['device_id'])){
 						$d['device_id'] = $_POST['device_id'];
@@ -438,15 +438,16 @@ $data['country_id'] =  $cityapi->country_id;
 					$d['mobile_verified'] = 0;
 					$d['reset_password_token'] = 0;
 					$d['verification_token'] = 0;
-					$d['mobile_otp'] = rand('1010', '9999');
+					$rendomCode=rand('1010', '9999');
+					$d['mobile_otp'] = $rendomCode;
 					$d['status'] = 0;
 					$d['create_at'] = date("Y-m-d H:i:s");
 					if(isset($_POST['image'])){
-					$d['image']=$_POST['image'];
-					$file = $d['image'];
-					$path = WWW_ROOT . "userimages" . DS . $file['name'];
-					move_uploaded_file($file['tmp_name'], $path);
-					$d['image'] = $file['name'];
+						$d['image']=$_POST['image'];
+						$file = $d['image'];
+						$path = WWW_ROOT . "userimages" . DS . $file['name'];
+						move_uploaded_file($file['tmp_name'], $path);
+						$d['image'] = $file['name'];
 					}
 
 					if(isset($_POST["preference"]) && !empty($_POST["preference"])) {
@@ -454,7 +455,13 @@ $data['country_id'] =  $cityapi->country_id;
 					}
 					$user = $this->Users->newEntity($d);
 					if ($res = $this->Users->save($user)) {
-						$subject="TravelB2Bhub registration";
+						//--			
+						$mobile_no=$d['mobile_no'];
+						$sms_sender='B2BHUB';
+						$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
+						file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
+						//--
+						/*$subject="TravelB2Bhub registration";'Thank you for registering with Travelb2bhub.com! Please activate your account by clicking on the link sent to your e-mail address.'
 						$to=$d['email'];
 						$headers  = 'MIME-Version: 1.0' . "\r\n";
 						$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
@@ -489,13 +496,14 @@ $data['country_id'] =  $cityapi->country_id;
 							->viewVars(array('msg' => $message))
 							->send($message);
 						//@mail($to, $subject, $message, $headers);
+						*/
 						$uid = $res->id;
 						$c['credit'] = 60;
 						$c['user_Id'] = $uid;
 						$creditd = $this->Credits->newEntity($c);
 						$this->Credits->save($creditd);
 						$result['response_code'] = 200;
-						$result['msg'] = 'Thank you for registering with Travelb2bhub.com! Please activate your account by clicking on the link sent to your e-mail address.';
+						$result['msg'] = 'Thank you for registering with Travelb2bhub.com! Please activate your account by verify your mobile no.';
 					} 
 					else 
 					{
@@ -506,7 +514,7 @@ $data['country_id'] =  $cityapi->country_id;
 				else 
 				{
 					$result['response_code'] =  501;
-					$result['msg'] = 'Email ID already exists. Please enter another Email ID to register.';
+					$result['msg'] = 'Mobile No. already exists. Please enter another Mobile No. to register.';
 				}
 			}
 			$data =  json_encode($result);
@@ -519,7 +527,65 @@ $data['country_id'] =  $cityapi->country_id;
 			exit;
 		}
 	}
-    
+    public function reSendOtp() {
+		
+		$mobile_no=$this->request->data['mobile_no'];
+		$checkUsers = $this->Users->find()->where(['mobile_no' => $mobile_no])->count();
+		if($checkUsers>0){
+			$Users = $this->Users->find()->where(['mobile_no' => $mobile_no])->first();
+			$mobile_otp=$Users->mobile_otp;
+			if(!empty($mobile_otp))
+			{
+				//--			
+				$sms_sender='B2BHUB';
+				$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$mobile_otp);
+				file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
+				//--
+			}
+			else{
+				//--	
+				$rendomCode=rand('1010', '9999');
+				$sms_sender='B2BHUB';
+				$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
+				file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
+				//--
+				$this->Users->updateAll(array('mobile_otp'=>$rendomCode), array('mobile_no'=>$mobile_no));
+			}
+		}
+		else{
+			//--			
+			$rendomCode=rand('1010', '9999');
+			$sms_sender='B2BHUB';
+			$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
+			file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
+			//--
+			$this->Users->updateAll(array('mobile_otp'=>$rendomCode), array('mobile_no'=>$mobile_no));
+		}
+		$result['response_code']=200;
+		$result['message']='OTP send Successfully';
+		$data =  json_encode($result);
+		echo $data;
+		exit;
+	}
+	public function otpVerify() {
+		
+		$mobile_no=$this->request->data['mobile_no'];
+		$otp=$this->request->data['otp'];
+		$checkUsers = $this->Users->find()->where(['mobile_otp' => $otp,'mobile_no' => $mobile_no])->count();
+		if($checkUsers>0){
+			$this->Users->updateAll(array('mobile_otp'=>'','status'=>1,'mobile_verified'=>1), array('mobile_no'=>$mobile_no));
+			$result['response_code']=200;
+			$result['message']='OTP verified';
+		}
+		else{
+			$result['response_code']=204;
+			$result['message']='Mobile no not registered';
+		}
+		$data =  json_encode($result);
+		echo $data;
+		exit;
+	}
+	
 	public function forgotPasswordapi() {
 		//Configure::write('debug',2);
 		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
