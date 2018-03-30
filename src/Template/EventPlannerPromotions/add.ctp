@@ -111,24 +111,75 @@ if ($err) {
 
 ?>
 <style>
+.hr{
+	margin-top:25px !important;
+}
+	
+a:hover,a:focus{
+    outline: none !important;
+    text-decoration: none !important;
+}
+.tab .nav-tabs{
+    display: inline-block !important;
+    background: #F0F0F0 !important;
+    border-radius: 50px !important;
+    border: none !important;
+    padding: 1px !important;
+}
+.tab .nav-tabs li{
+    float: none !important;
+    display: inline-block !important;
+    position: relative !important;
+}
+.tab .nav-tabs li a{
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    background: none !important;
+    color: #999 !important;
+    border: none !important;
+    padding: 10px 15px !important;
+    border-radius: 50px !important;
+    transition: all 0.5s ease 0s !important;
+}
+.tab .nav-tabs li a:hover{
+    background: #1295A2 !important;
+    color: #fff !important;
+    border: none !important;
+}
+.tab .nav-tabs li.active a,
+.tab .nav-tabs li.active a:focus,
+.tab .nav-tabs li.active a:hover{
+    border: none !important;
+    background: #1295A2 !important;
+    color: #fff !important;
+}
+.tab .tab-content{
+    font-size: 14px !important;
+    color: #686868 !important;
+    line-height: 25px !important;
+    text-align: left !important;
+    padding: 5px 20px !important;
+}
+.tab .tab-content h3{
+    font-size: 22px !important;
+    color: #5b5a5a !important;
+} 
+fieldset{
+	margin:10px !important;
+	border-radius: 6px;
+}
 .col-md-12 {
 	margin:5px !important;
 }
-</style>
-
-<div id="my_final_responses" class="container-fluid">
-	<div class="row equal_column"  style="background-color:#fff">
-		<div class="col-md-12"> 
-			 
-			<?php echo  $this->Flash->render() ?>
-		</div>
-		<form action="<?php echo $coreVariable['SiteUrl'];?>api/event_planner_promotions/add.json" method="post" enctype="multipart/form-data">	
-		<div class="col-md-12"> 
-			<div class="box box-default">
-				<div class="box-header with-border"> 
-					<h3 class="box-title" style="padding:0px">Event Planner Promotion</h3>
-					<div class="box-tools pull-right">
- 					</div>
+</style> 
+<div class="container-fluid">
+	<div class="box box-primary">
+		<div class="box-body">
+		<div class="row equal_column"  style="background-color:">
+				<div class="col-md-12"> 
+					<?php echo  $this->Flash->render() ?>
+				</div>
+				<form action="<?php echo $coreVariable['SiteUrl'];?>api/event_planner_promotions/add.json" method="post" enctype="multipart/form-data">	
  				</div>
 				<div class="box-body">
 					<fieldset>

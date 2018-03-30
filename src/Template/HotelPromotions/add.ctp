@@ -80,16 +80,75 @@ if ($err) {
 	//pr($pricemaster);exit;
 	$pricemaster=$pricemaster->PriceMasters;
 }
-
 ?>
+<style>
+.hr{
+	margin-top:25px !important;
+}
+	
+a:hover,a:focus{
+    outline: none !important;
+    text-decoration: none !important;
+}
+.tab .nav-tabs{
+    display: inline-block !important;
+    background: #F0F0F0 !important;
+    border-radius: 50px !important;
+    border: none !important;
+    padding: 1px !important;
+}
+.tab .nav-tabs li{
+    float: none !important;
+    display: inline-block !important;
+    position: relative !important;
+}
+.tab .nav-tabs li a{
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    background: none !important;
+    color: #999 !important;
+    border: none !important;
+    padding: 10px 15px !important;
+    border-radius: 50px !important;
+    transition: all 0.5s ease 0s !important;
+}
+.tab .nav-tabs li a:hover{
+    background: #1295A2 !important;
+    color: #fff !important;
+    border: none !important;
+}
+.tab .nav-tabs li.active a,
+.tab .nav-tabs li.active a:focus,
+.tab .nav-tabs li.active a:hover{
+    border: none !important;
+    background: #1295A2 !important;
+    color: #fff !important;
+}
+.tab .tab-content{
+    font-size: 14px !important;
+    color: #686868 !important;
+    line-height: 25px !important;
+    text-align: left !important;
+    padding: 5px 20px !important;
+}
+.tab .tab-content h3{
+    font-size: 22px !important;
+    color: #5b5a5a !important;
+} 
+fieldset{
+	margin:10px !important;
+	border-radius: 6px;
+}
+.col-md-12 {
+	margin:5px !important;
+}
+</style> 
 <section class="content">
-<div class="row">
-	<div class="col-md-12">
-			<div class="box box-primary">
-				<div class="box-header with-border">
-					<i class="fa fa-plus"></i> <b> Hotel Promotion</b>
-				</div> 
-				<div class="box-body"> 
+<div class="container-fluid">
+	<div class="box box-primary">
+		<div class="box-body">
+			<div class="row">
+				<div class="col-md-12">
 					<form action="<?php echo $coreVariable['SiteUrl'];?>api/hotel_promotions/add.json" method="post" enctype="multipart/form-data">
 					<fieldset>
 						<legend style="color:#369FA1;"><b> &nbsp; <?= __('Hotel Details ') ?> &nbsp;  </b></legend>
@@ -98,13 +157,13 @@ if ($err) {
 									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 										<p for="from">
 											Hotel Name
-											<span class="required">*</span>
-										</p>
-										<div class="input-field">
-											 <?php echo $this->Form->input('hotel_name',['class'=>'form-control','label'=>false,'placeholder'=>"Enter Your Hotel Name",'required']);?>
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+								<span class="required">*</span>
+							</p>
+							<div class="input-field">
+								 <?php echo $this->Form->input('hotel_name',['class'=>'form-control','label'=>false,'placeholder'=>"Enter Your Hotel Name",'required']);?>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 										<p for="from">
 											Hotel Category
 											<span class="required">*</span>
@@ -260,6 +319,7 @@ if ($err) {
 			</div>
 		</div>
 	</div>
+</div>
 </section>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
