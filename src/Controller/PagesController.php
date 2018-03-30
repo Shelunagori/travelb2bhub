@@ -1,6 +1,5 @@
 <?php 
 namespace App\Controller;
-
 use Cake\Core\Configure;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
@@ -8,8 +7,6 @@ use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 use Cake\Datasource\ConnectionManager;
 use Cake\Network\Email\Email;
-
-
 class PagesController extends AppController
 {
 	public function beforeFilter(Event $event) {
@@ -18,13 +15,7 @@ class PagesController extends AppController
 		parent::beforeFilter($event);
 		$this->Auth->allow();
 	}
-    /**
-     * Displays a view
-     *
-     * @return void|\Cake\Network\Response
-     * @throws \Cake\Network\Exception\NotFoundException When the view file could not
-     *   be found or \Cake\View\Exception\MissingTemplateException in debug mode.
-     */
+     
     public function display()
     {
         $path = func_get_args();
@@ -70,24 +61,7 @@ class PagesController extends AppController
 		exit;
     }    
     public function home(){
-		$this->loadModel('Requests');
-		$this->loadModel('Slider');
-		$travelAgentCount = $this->Users->find()->where(['role_id' => 1])->count();
-		$eventPlannerCount = $this->Users->find()->where(['role_id' => 2])->count();
-		$hotelierCount = $this->Users->find()->where(['role_id' => 3])->count();
-		$overview = $this->Pages->find()->where(['id' => 1])->first();
-		$benifits1 = $this->Pages->find()->where(['id' => 2])->first();
-		$benifits2 = $this->Pages->find()->where(['id' => 3])->first();
-		$benifits3 = $this->Pages->find()->where(['id' => 4])->first();
-		$benifits4 = $this->Pages->find()->where(['id' => 5])->first();
-		$benifits5 = $this->Pages->find()->where(['id' => 6])->first();
-		$benifits6 = $this->Pages->find()->where(['id' => 7])->first();
-		$sliders = $this->Slider->find()->where(['status' => 1])->all();
-		$requests = $this->Requests->find()
-				->contain(["Users", "Cities"])
-				->where(["Requests.status !="=>2, "Requests.is_deleted"=>0])->all();
-		$userId = $this->Auth->user('id');
-		$this->set(compact("travelAgentCount", "eventPlannerCount", "hotelierCount", "userId", "requests","overview","benifits1","benifits2","benifits3","benifits4","benifits5","benifits6","sliders"));
+ 		$this->redirect('/Users/index');
     }
 	
     public function aboutus(){	
