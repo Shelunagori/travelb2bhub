@@ -91,17 +91,12 @@ class UsersController extends AppController {
 	}
 	
 	public function index() {
-		/*$this->paginate = [
-		'contain' => ['Users']
-		];
-		$users = $this->paginate($this->Users);
-		$this->set(compact('users'));
-		$this->set('_serialize', ['users']);*/
+		
 		$this->redirect('/users/dashboard');
 	}
 	
 	
-	    public function promotions(){
+	public function promotions(){
 		$this->viewBuilder()->layout('user_layout');
 		$this->loadModel('Users');
 		$this->loadModel('States');
@@ -110,12 +105,6 @@ class UsersController extends AppController {
 		$states = $this->States->getAllStates();
 		$allstates = array();
 		$allstatesList = array();
-		/* if(!empty($states)) {
-			foreach($states as $state) {
-				$allstates[] = array("label"=>str_replace("'", "", $state['state_name']), "value"=>$state['id']);
-				$allstatesList[$state['id']] = $state['state_name'];
-			}
-		}*/
 		$allStates = json_encode($allstates);
 		$allCities = array();
 		$allCityList = array();

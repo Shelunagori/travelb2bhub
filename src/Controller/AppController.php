@@ -84,7 +84,7 @@ class AppController extends Controller {
 		}
 		else
 		{
-$this->loadComponent('Auth', [
+			$this->loadComponent('Auth', [
 			 'authenticate' => [
 					'Form' => [
 						'fields' => [
