@@ -63,8 +63,9 @@ li > p{
     border-radius: 2px;
 }
 .button:hover{
-	background-color:#1295A2;
+	background-color:#FB6542;
 }
+
 </style>
 <section class="content-header">
 <div class="container-fluid">
@@ -82,7 +83,7 @@ li > p{
 				<div class="box-body">
 					<div class="row">
 						<div class="col-md-12"> 
-							<div class="col-md-4" > 
+							<div class="col-md-4 neww" > 
 								<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/Hotel.png);height:200px;width:100%;background-repeat:round;">
 								  <!-- small box -->
 								  <div class="small-box" >
