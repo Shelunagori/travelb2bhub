@@ -77,13 +77,13 @@ li > p{
 <span class="help-block"></span>
 		<div class="box box-primary">
 				<div class="box-header with-border"> 
-				<h3 class="box-title" style="padding:5px;">Our Work</h3>
+				<h3 class="box-title" style="padding:5px;">Promotions</h3>
 				</div>
 				<div class="box-body">
 					<div class="row">
 						<div class="col-md-12"> 
 							<div class="col-md-4" > 
-								<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/Hotel.png);height:200px;width:100%;background-attachment:fixed;">
+								<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/Hotel.png);height:200px;width:100%;background-repeat:round;">
 								  <!-- small box -->
 								  <div class="small-box" >
 									<div class="inner">
@@ -110,7 +110,7 @@ li > p{
 								</li>
 							</div>
 							<div class="col-md-4"> 
-							<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/Travel.png);height:200px;width:300px;background-attachment:fixed;">
+							<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/Travel.png);height:200px;width:100%;background-repeat:round;">
 								  <!-- small box -->
 								  <div class="small-box" >
 									<div class="inner">
@@ -137,8 +137,8 @@ li > p{
 								  </div>
 								</li>
 							</div>
-							<div class="col-md-4"> 
-							<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/Taxi.png);height:200px;width:300px;background-attachment:fixed;">
+							<div class="col-md-4">
+							<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/Taxi.png);height:200px;width:100%;background-repeat:round;">
 								  <!-- small box -->
 								  <div class="small-box" >
 									<div class="inner">
@@ -149,7 +149,7 @@ li > p{
 								  <div class="small-box " style="margin-top:20px;">
 									<table class="table">
 											<tr>
-											<span>Taxi Fleet</span>	
+											<span >Taxi Fleet</span>	
 											</tr><span class="help-block"></span>
 											<tr>
 											<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>">
