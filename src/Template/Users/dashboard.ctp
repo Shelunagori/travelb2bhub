@@ -83,7 +83,7 @@ li > p{
 					<div class="row">
 						<div class="col-md-12"> 
 							<div class="col-md-4" > 
-								<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/Hotel.png);height:200px;width:300px;background-attachment:fixed;">
+								<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/Hotel.png);height:200px;width:100%;background-attachment:fixed;">
 								  <!-- small box -->
 								  <div class="small-box" >
 									<div class="inner">
