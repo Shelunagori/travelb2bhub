@@ -180,11 +180,11 @@ fieldset{
 			<?php echo  $this->Flash->render() ?>
 		</div>
 	</div>
-	<div class="row" style="padding:5px;">
+	<div class="row" >
 		<div class="col-md-12">
 			<div class="box-header with-border"> 
 				<h1 class="box-title" style="color:#057F8A;"><b>Taxi Fleet Promotions</b></h1>
-				<div class="box-tools pull-right">
+				<div class="box-tools pull-right" style="margin-top:-5px;">
 					<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
 					<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 				</div>
