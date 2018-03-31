@@ -391,7 +391,6 @@ legend
 									</div>
 								</td>
 								<td width="33%">
-										
 											<a style="width:99%"  class=" btn btn-danger btn-sm"  request_id="<?php echo $request['id']; ?>"  data-target="#deletemodal<?php echo $request['id']; ?>"data-toggle=modal>Remove</a>
 											
 													<!-------Delete Modal Start--------->
@@ -452,9 +451,6 @@ legend
 					</fieldset>
                   </div>
                   <?php } ?>
-				  
-				  
-				  
                   <div class=pages></div>
                   <?php }else {?>
                   <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
