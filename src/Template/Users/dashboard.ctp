@@ -62,6 +62,9 @@ li > p{
     padding: 0.75rem 1rem;
     border-radius: 2px;
 }
+.button:hover{
+	background-color:#1295A2;
+}
 </style>
 <section class="content-header">
 <div class="container-fluid">
@@ -94,13 +97,13 @@ li > p{
 											<span>hotel Promotion</span>	
 											</tr><span class="help-block"></span>
 											<tr>
-											<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'add')) ?>">
-												<button class=" button " style="background-color:transparent;" >Load Package</button></a>
+											<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>">
+												<button class="button" >View Details</button></a>
 											</tr>
 											<span class="help-block"></span>
 											<tr>
-											<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>">
-												<button class="button" >View Details</button></a>
+											<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'add')) ?>">
+												<button class="button"  >Load Package</button></a>
 											</tr>
 										</table>
 								  </div>
@@ -121,14 +124,15 @@ li > p{
 											<span>travel Package</span>	
 											</tr><span class="help-block"></span>
 											<tr>
-											<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'add')) ?>">
-												<button class=" button " style="background-color:transparent;" >Load Package</button></a>
+											<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>">
+												<button class="button" >View Details</button></a>
 											</tr>
 											<span class="help-block"></span>
 											<tr>
-											<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>">
-												<button class="button" >View Details</button></a>
+											<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'add')) ?>">
+												<button class="button"  >Load Package</button></a>
 											</tr>
+											
 										</table>
 								  </div>
 								</li>
@@ -148,13 +152,12 @@ li > p{
 											<span>Taxi Fleet</span>	
 											</tr><span class="help-block"></span>
 											<tr>
-											<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'add')) ?>">
-												<button class=" button " style="background-color:transparent;" >Load Package</button></a>
-											</tr>
-											<span class="help-block"></span>
-											<tr>
-											<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>">
+											<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>">
 												<button class="button" >View Details</button></a>
+											</tr><span class="help-block"></span>
+											<tr>
+											<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'add')) ?>">
+												<button class="button"  >Load Package</button></a>
 											</tr>
 										</table>
 								  </div>
