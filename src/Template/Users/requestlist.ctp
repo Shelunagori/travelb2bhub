@@ -391,7 +391,46 @@ legend
 									</div>
 								</td>
 								<td width="33%">
-									<a style="width:99%" href=javascript:void(0); class="removeRequest btn btn-danger btn-sm" request_id="<?php echo $request['id']; ?>">Remove</a>
+										
+											<a style="width:99%"  class=" btn btn-danger btn-sm"  request_id="<?php echo $request['id']; ?>"  data-target="#deletemodal<?php echo $request['id']; ?>"data-toggle=modal>Remove</a>
+											
+													<!-------Delete Modal Start--------->
+												<div id="deletemodal<?php echo $request['id']; ?>" class="modal fade" role="dialog">
+													<div class="modal-dialog modal-md" >
+													<form method="post">
+														<!-- Modal content-->
+															<div class="modal-content">
+															  <div class="modal-header" style="height:100px;">
+																	<button type="button" class="close" data-dismiss="modal">&times;</button>
+																	<h4 class="modal-title">
+																	Are You Sure, you want to delete this request ?
+																	</h4>
+																</div>
+																<div class="modal-footer" style="height:60px;">
+																	<button request_id="<?php echo $request['id']; ?>" type="button" class="removeRequest btn btn-danger btn-sm" name="removerequest" value="yes" >Yes</button>
+																	<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
+																</div>
+															</div>
+														</form>
+													</div>
+												</div>
+											<!-------Delete Modal End--------->
+										
+								
+								
+									<!--<a style="width:99%" class="removeRequest btn btn-danger btn-sm" request_id="<?php //echo $request['id']; ?>" data-target="#delete<?php //echo $request['id']; ?>"data-toggle=modal>Remove</a>
+									<div class="fade modal"id="delete<?php //echo $request['id']; ?>"role=dialog>
+										<div class=modal-dialog>
+											<div class=modal-content>
+											   <div class=modal-header>
+												  <button class=close data-dismiss=modal type=button>×</button>
+												  <h4 class=modal-title>Remove Request</h4>
+											   </div>
+											   <div class=modal-body></div>
+											   
+											</div>
+										</div>
+									</div>-->
 								</td>
 								<td width="33%">
 									<div class="check_responses" id="checkresponse_<?php echo $request['id'];?>">
@@ -442,13 +481,14 @@ if($servername =='192.168.3.82' OR $servername=='192.168.3.52' OR $servername=='
 	}
 ?>
 <script>
-    $(document).ready(function() {
+     $(document).ready(function() {
         $(".removeRequest").click(function(e) {
+			alert();
 			$('#ajaxcount').val('100000');
 			var box=$(this);
             e.preventDefault();
             var t = $(this).attr("request_id");
-            confirm("Are you sure want to remove this request?") && $.ajax({
+			alert(t);
                 url: "<?php echo $this->Url->build(array('controller'=>'users','action'=>'removeRequest')) ?>",
                 type: "POST",
                 data: {
@@ -459,7 +499,7 @@ if($servername =='192.168.3.82' OR $servername=='192.168.3.52' OR $servername=='
 					box.closest('div.col-md-4.req').hide();
 				}
              })
-        });
+        }); 
 		
 	getmyrequestlistsapi(5000);
 		

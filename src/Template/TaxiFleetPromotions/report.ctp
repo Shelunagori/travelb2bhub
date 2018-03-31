@@ -173,21 +173,24 @@ fieldset{
 
 </style> 
 <div  class="container-fluid">
+<div class="box box-primary">
 	<div class="row equal_column">
-		<div class="col-md-12" style="background-color:#fff"> 
+		<div class="col-md-12" style="background-color:#"> 
 			<br>
 			<?php echo  $this->Flash->render() ?>
 		</div>
-		<div class="col-md-12" style="background-color:#fff"> 
-			<div class="box box-default">
+	</div>
+	<div class="row" style="padding:5px;">
+		<div class="col-md-12">
 			<div class="box-header with-border"> 
-				<h1 class="box-title" style="padding:10px;color:#057F8A;"><b>Taxi Fleet Promotions</b></h1>
+				<h1 class="box-title" style="color:#057F8A;"><b>Taxi Fleet Promotions</b></h1>
 				<div class="box-tools pull-right">
-					<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-					<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+					<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
+					<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 				</div>
-				 
 			</div>
+		</div>
+	</div>
 	<div class="box-body">
 		<div class="row">
 		    <div id="myModal123" class="modal fade" role="dialog">
@@ -328,41 +331,42 @@ fieldset{
 		   </div>
 		    <?php $i=1;
 			if(!empty($taxiFleetPromotions)){
-			foreach ($taxiFleetPromotions as $taxiFleetPromotion){ ?>
+			foreach ($taxiFleetPromotions as $taxiFleetPromotion){ $i++; ?>
 			<fieldset>
 				<form >
-				<div class="row">
+				<div class="row col-md-12">
 				<div class="col-md-4">
 				<?= $this->Html->image('../images/8.jpg',['style'=>'width:100%;margin-left:-10px;']) ?>
 				</div>
 				<div class="col-md-8">			
 					<div class="row">
-					<div class="col-md-12">
-					<legend><h3><?= h($taxiFleetPromotion->title) ?></h3></legend>
-					</div>
-					<h4>
-					<div class="row">
-						<ul>
-						<li class="col-md-2">Duration</li>		
-						<li class="col-md-2"><?= h($taxiFleetPromotion->price_master->week); ?></b></li>
-						<li class="col-md-3">User Name</li>		
-						<li class="col-md-3"><?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name.' ( '.$taxiFleetPromotion->user_rating.' )');?>
-						</li>
-						</ul>						
-					</div><span class="help-block"></span>
-					<div class="row">
-						<ul>
-						<li class="col-md-2">Price</li>		
-						<li class="col-md-2"><?= h($taxiFleetPromotion->price_master->price);?> &#8377;</li>						
-						<li class="col-md-3">Visibility Date</li>		
-						<li class="col-md-3"><?= h(date('d-m-Y',strtotime($taxiFleetPromotion->visible_date))); ?></li>
-						</ul>						
-					</div>
-					</h4>
-					<span class="help-block"></span>
+						<div class="col-md-12">
+							<legend><h3><?= h($taxiFleetPromotion->title) ?></h3></legend>
+						</div>
+						<h4>
+							<div class="row">
+								<ul>
+								<li class="col-md-2">Duration</li>		
+								<li class="col-md-2"><?= h($taxiFleetPromotion->price_master->week); ?></b></li>
+								<li class="col-md-3">User Name</li>		
+								<li class="col-md-3"><?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name.' ( '.$taxiFleetPromotion->user_rating.' )');?>
+								</li>
+								</ul>						
+							</div><span class="help-block"></span>
+							<div class="row">
+								<ul>
+								<li class="col-md-2">Price</li>		
+								<li class="col-md-2"><?= h($taxiFleetPromotion->price_master->price);?> &#8377;</li>						
+								<li class="col-md-3">Visibility Date</li>		
+								<li class="col-md-3"><?= h(date('d-m-Y',strtotime($taxiFleetPromotion->visible_date))); ?></li>
+								</ul>						
+							</div>
+						</h4>
+						<span class="help-block"></span>
 					<div class="row ">
-						<div class="col-md-1">
-							<input type="hidden" name="taxifleet_id" value="<?php echo $taxiFleetPromotion->id; ?>">
+						<div class="col-md-12">
+							<div class="col-md-1">
+								<input type="hidden" name="taxifleet_id" value="<?php echo $taxiFleetPromotion->id; ?>">
 							<?php
 							//pr($taxiFleetPromotion);
 								$dataUserId=$taxiFleetPromotion->user_id;
@@ -384,56 +388,56 @@ fieldset{
 							<div class="col-md-1">
 							<?php echo $this->Html->link('<i class="fa fa-flag"> Report</i>','#'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#reportmodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal','style'=>'background-color:#1295A2;'));?>
 											<!-------Report Modal Start--------->
-													<div id="reportmodal<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
-														<div class="modal-dialog modal-md">
-															<!-- Modal content-->
-																<div class="modal-content">
-																  <div class="modal-header">
-																	<button type="button" class="close" data-dismiss="modal">&times;</button>
-																	<h4 class="modal-title">Report</h4>
-																  </div>
-																	<div class="modal-body" style="height:150px;margin-top:30px;">
-																		<div class="row">
-																			<div class="col-md-12">
-																				<div class="col-md-3">
-																					<label>
-																						Select Reason
-																					</label>
-																				</div>
-																				<div class="col-md-9">
-																					<div class="input-field reason_list">
-																						<?php 
-																							$options=array();
-																							foreach($reasonslist as $sts)
-																							{
-																								$options[] = ['value'=>$sts->id,'text'=>$sts->reason];
-																							};
-																							echo $this->Form->control('report_reason_id', ['label'=>false, "type"=>"select",'options' =>$options, "class"=>"form-control select2 reason_box","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);
-																						?>
-																					</div>
-																				</div>
-																			</div>
-																		</div><br>
-																		<div class="row report_text"  style="display:none;">
-																			<div class="col-md-12">
-																				<div class="col-md-3">
-																				</div>
-																				<div class="col-md-9">
-																					<div >
-																					<textarea class="form-control " rows="3" type="text" placeholder="Enter Your Suggestion here..." name="comment"></textarea>	
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																	<div class="modal-footer" style="height:60px;">
-																		<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
-																		<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
-																	</div>
+								<div id="reportmodal<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
+									<div class="modal-dialog modal-md">
+										<!-- Modal content-->
+											<div class="modal-content">
+											  <div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">Report</h4>
+											  </div>
+												<div class="modal-body" style="height:150px;margin-top:30px;">
+													<div class="row">
+														<div class="col-md-12">
+															<div class="col-md-3">
+																<label>
+																	Select Reason
+																</label>
+															</div>
+															<div class="col-md-9">
+																<div class="input-field reason_list">
+																	<?php 
+																		$options=array();
+																		foreach($reasonslist as $sts)
+																		{
+																			$options[] = ['value'=>$sts->id,'text'=>$sts->reason];
+																		};
+																		echo $this->Form->control('report_reason_id', ['label'=>false, "type"=>"select",'options' =>$options, "class"=>"form-control select2 reason_box","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);
+																	?>
+																</div>
+															</div>
+														</div>
+													</div><br>
+													<div class="row report_text"  style="display:none;">
+														<div class="col-md-12">
+															<div class="col-md-3">
+															</div>
+															<div class="col-md-9">
+																<div >
+																<textarea class="form-control " rows="3" type="text" placeholder="Enter Your Suggestion here..." name="comment"></textarea>	
 																</div>
 															</div>
 														</div>
 													</div>
+												</div>
+												<div class="modal-footer" style="height:60px;">
+													<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
+													<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 											<!-------Report Modal End--------->	
 											<div class="col-md-1">
 											<?php
@@ -458,17 +462,19 @@ fieldset{
 													</div>
 												</div>
 											<!-------Delete Modal End--------->	
+												<?php }?>
 											</div>
 										</div>
 									</div>
 								</div>	
 							</div>	
+						 
 						</div>	
-					</div>
-			</fieldset>
-		</form>				
-			<?php }}
-								}else{
+					</form>	
+				</fieldset>
+					
+			<?php      }
+								} else{
 										echo"<tr><th colspan='10' style='text-align:center'>No Record Found</th></tr>";
 									}
 										?>
@@ -487,6 +493,7 @@ fieldset{
 							</div>
 						</div>
 					</div>
+				</div>
 				</div>
 
 	<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>

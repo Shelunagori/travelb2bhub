@@ -45,7 +45,29 @@
 								<b>Locality :</b> <?php echo ($row['user']['locality'])?$row['user']['locality']:"-- --"; ?>
 								</div>
 								<div class="col-md-3 text-center ">
-									<a href="javascript:void(0);" class="unfollow btn btn-danger btn-sm" follow_id = "<?php echo $row['id']; ?>"> Unfollow</a>
+									<!-- <a href="javascript:void(0);" class=" btn btn-danger btn-sm" follow_id = "<?php echo $row['id']; ?>"> Unfollow</a> -->
+									<a follow_id="<?php echo $row['id']; ?>" class=" btn btn-danger btn-sm"  data-target="#unfollow<?php echo $row['id']; ?>" data-toggle=modal>Unfollow</a>
+									<!-------Delete Modal Start--------->
+												<div id="unfollow<?php echo $row['id']; ?>" class="modal fade" role="dialog">
+													<div class="modal-dialog modal-md" >
+													<form method="post">
+														<!-- Modal content-->
+															<div class="modal-content">
+															  <div class="modal-header" style="height:100px;">
+																	<button type="button" class="close" data-dismiss="modal">&times;</button>
+																	<h4 class="modal-title">
+																	Are You Sure, you want to delete this request ?
+																	</h4>
+																</div>
+																<div class="modal-footer" style="height:60px;">
+																	<button type="button" follow_id="<?php echo $row['id']; ?>" class="unfollow btn btn-danger" value="yes" >Yes</button>
+																	<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
+																</div>
+															</div>
+														</form>
+													</div>
+												</div>
+											<!-------Delete Modal End--------->
 								</div>
 							</div>
 						</div><hr></hr>

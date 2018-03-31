@@ -309,7 +309,7 @@ if ($err) {
 											<?php 
 											if($dataUserId==$user_id){
 											echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal'.$hotelPromotion->id,'data-toggle'=>'modal'));?>
-							<!-------Delete Modal Start--------->
+													<!-------Delete Modal Start--------->
 												<div id="deletemodal<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-md" >
 														<!-- Modal content-->
