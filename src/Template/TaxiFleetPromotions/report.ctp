@@ -180,11 +180,11 @@ fieldset{
 			<?php echo  $this->Flash->render() ?>
 		</div>
 	</div>
-	<div class="row" style="padding:5px;">
+	<div class="row" >
 		<div class="col-md-12">
 			<div class="box-header with-border"> 
 				<h1 class="box-title" style="color:#057F8A;"><b>Taxi Fleet Promotions</b></h1>
-				<div class="box-tools pull-right">
+				<div class="box-tools pull-right" style="margin-top:-5px;">
 					<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
 					<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 				</div>
@@ -333,10 +333,10 @@ fieldset{
 			if(!empty($taxiFleetPromotions)){
 			foreach ($taxiFleetPromotions as $taxiFleetPromotion){ $i++; ?>
 			<fieldset>
-				<form >
-				<div class="row col-md-12">
+				<form method="post">
+				<div class="row">
 				<div class="col-md-4">
-				<?= $this->Html->image('../images/8.jpg',['style'=>'width:100%;margin-left:-10px;']) ?>
+				<?= $this->Html->image('../images/8.jpg',['style'=>'width:100%;']) ?>
 				</div>
 				<div class="col-md-8">			
 					<div class="row">
@@ -344,7 +344,7 @@ fieldset{
 							<legend><h3><?= h($taxiFleetPromotion->title) ?></h3></legend>
 						</div>
 						<h4>
-							<div class="row">
+							<div class="row col-md-12">
 								<ul>
 								<li class="col-md-2">Duration</li>		
 								<li class="col-md-2"><?= h($taxiFleetPromotion->price_master->week); ?></b></li>
@@ -353,7 +353,7 @@ fieldset{
 								</li>
 								</ul>						
 							</div><span class="help-block"></span>
-							<div class="row">
+							<div class="row col-md-12">
 								<ul>
 								<li class="col-md-2">Price</li>		
 								<li class="col-md-2"><?= h($taxiFleetPromotion->price_master->price);?> &#8377;</li>						
@@ -374,10 +374,10 @@ fieldset{
 								$issaved=$taxiFleetPromotion->issaved;
 								//-- LIKES DISLIKE
 								if($isLiked=='no'){
-									echo $this->Form->button('<i class="fa fa-thumbs-up like" > Likes </i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'LikeEvent']);
+									echo $this->Form->button('<i class="fa fa-thumbs-up like" > Like</i>',['class'=>'btn btn-primary btn-xs likes','value'=>'button','style'=>'background-color:#1295A2','type'=>'submit','name'=>'LikeEvent']);
 								}
 								if($isLiked=='yes'){
-									echo $this->Form->button('<i class="fa fa-thumbs-down like" > Dislikes </i>',['class'=>'btn btn-danger btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent']);
+									echo $this->Form->button('<i class="fa fa-thumbs-down like" > Unlike</i>',['class'=>'btn btn-danger btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent']);
 								}
 							?>
 							</div>

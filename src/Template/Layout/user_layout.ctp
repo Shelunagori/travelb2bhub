@@ -455,15 +455,17 @@ $controller=$this->request->params['controller'];
 		<li <?php if($page_name=='blockedUserList'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'blockedUserList']); ?>"><i class="fa fa-users"></i> <span>Blocked Users</span></a></li>
 		<hr class="breakline"></hr>
 		<li <?php if($page_name=='add' && $controller=='TaxiFleetPromotions'){ echo 'class="active"';}?>>
-			<a href="<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions",'action'=>'add']); ?>"><i class="fa fa-bullhorn"></i> <span> Taxi Fleet</span></a>
+			<a href="<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions",'action'=>'add']); ?>"><i class="fa fa-bullhorn"></i> <span> Taxi/Fleet Promotions</span></a>
 		</li>
 		<li <?php if($page_name=='add' && $controller=='PostTravlePackages'){ echo 'class="active"';}?>>
-			<a href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>'add']); ?>"><i class="fa fa-bullhorn"></i> <span>Post Travel</span></a>
+			<a href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>'add']); ?>"><i class="fa fa-bullhorn"></i> <span>Package Promotions</span></a>
 		</li>
+		<?php  
+			if($roleId==2) {?>
 		<li <?php if($page_name=='add' && $controller=='EventPlannerPromotions'){ echo 'class="active"';}?>>
-			<a href="<?php echo $this->Url->build(["controller" => "EventPlannerPromotions",'action'=>'add']); ?>"><i class="fa fa-bullhorn"></i> <span> Event Planner</span></a>
+			<a href="<?php echo $this->Url->build(["controller" => "EventPlannerPromotions",'action'=>'add']); ?>"><i class="fa fa-bullhorn"></i> <span> Event Planner Promotions</span></a>
 		</li>
-			<?php  
+			<?php } 
 			if($roleId==3) {?>
 				<li <?php if($page_name=='add' && $controller=='HotelPromotions'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>'add']); ?>"><i class="fa fa-bullhorn"></i> <span>Hotel Promotions</span></a></li>
 			<?php }?>

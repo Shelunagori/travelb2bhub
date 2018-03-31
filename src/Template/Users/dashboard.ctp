@@ -44,12 +44,134 @@ hr { margin-top:0px!important;}
     top: 40%;
     bottom: 52%;
 }
- 
+li > p{
+		color:#96989A !important;
+		margin: 0 0 4px !important;
+	}	
+ .button {
+    width: 50%;
+    font-size: 14px;
+    max-width: 214px;
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background: none;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgb(255, 255, 255);
+    border-image: initial;
+    padding: 0.75rem 1rem;
+    border-radius: 2px;
+}
+.button:hover{
+	background-color:#1295A2;
+}
 </style>
 <section class="content-header">
-<?php
-    echo $this->element('subheader');
+<div class="container-fluid">
+<div class="row equal_column" > 
+    <div class="col-md-12" > 
+		<?php echo $this->element('subheader');?>
+		<?php echo  $this->Flash->render() ?>
+	</div>
+</div>
+<span class="help-block"></span>
+		<div class="box box-primary">
+				<div class="box-header with-border"> 
+				<h3 class="box-title" style="padding:5px;">Our Work</h3>
+				</div>
+				<div class="box-body">
+					<div class="row">
+						<div class="col-md-12"> 
+							<div class="col-md-4" > 
+								<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/Hotel.png);height:200px;width:100%;background-attachment:fixed;">
+								  <!-- small box -->
+								  <div class="small-box" >
+									<div class="inner">
+										<p>hotel Promotion</p>	
+										 
+									</div>
+								  </div>
+								  <div class="small-box " style="margin-top:20px;">
+									<table class="table">
+											<tr>
+											<span>hotel Promotion</span>	
+											</tr><span class="help-block"></span>
+											<tr>
+											<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>">
+												<button class="button" >View Details</button></a>
+											</tr>
+											<span class="help-block"></span>
+											<tr>
+											<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'add')) ?>">
+												<button class="button"  >Load Package</button></a>
+											</tr>
+										</table>
+								  </div>
+								</li>
+							</div>
+							<div class="col-md-4"> 
+							<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/Travel.png);height:200px;width:300px;background-attachment:fixed;">
+								  <!-- small box -->
+								  <div class="small-box" >
+									<div class="inner">
+										<p>travel Package</p>	
+										 
+									</div>
+								  </div>
+								  <div class="small-box " style="margin-top:20px;">
+									<table class="table">
+											<tr>
+											<span>travel Package</span>	
+											</tr><span class="help-block"></span>
+											<tr>
+											<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>">
+												<button class="button" >View Details</button></a>
+											</tr>
+											<span class="help-block"></span>
+											<tr>
+											<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'add')) ?>">
+												<button class="button"  >Load Package</button></a>
+											</tr>
+											
+										</table>
+								  </div>
+								</li>
+							</div>
+							<div class="col-md-4"> 
+							<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/Taxi.png);height:200px;width:300px;background-attachment:fixed;">
+								  <!-- small box -->
+								  <div class="small-box" >
+									<div class="inner">
+										<p>Taxi Fleet</p>	
+										 
+									</div>
+								  </div>
+								  <div class="small-box " style="margin-top:20px;">
+									<table class="table">
+											<tr>
+											<span>Taxi Fleet</span>	
+											</tr><span class="help-block"></span>
+											<tr>
+											<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>">
+												<button class="button" >View Details</button></a>
+											</tr><span class="help-block"></span>
+											<tr>
+											<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'add')) ?>">
+												<button class="button"  >Load Package</button></a>
+											</tr>
+										</table>
+								  </div>
+								</li>
+							</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</section>
 
+	<!-- hide section for hotelier--->
+
+<?php
 	if($users['role_id'] != 3 && count($advertisement1) > 0){
 	?>
 		<div class="col-md-12" style="background-color:#FFF; margin-top:10px">

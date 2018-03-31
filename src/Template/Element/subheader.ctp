@@ -56,7 +56,7 @@ hr { margin-top:0px!important;}
 $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);
 	if($lastword=="dashboard"  ) {
 		?>
-		<div class="">
+		<div class="row">
 		<div class="col-md-7">
 			<div class="row">
 			<?php
@@ -399,7 +399,6 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 					<p style="font-size:20px;padding-top:10px">Reviews</p>
 					<hr></hr>
 					<div class="">
-					
 						<div class="carousel-reviews broun-block" style="height: 214px;">
 							<div id="carousel-reviews" class="carousel slide carousel1" data-ride="carousel">
 								<div class="carousel-inner">
