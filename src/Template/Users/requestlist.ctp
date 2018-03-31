@@ -390,9 +390,8 @@ legend
 										</div>
 									</div>
 								</td>
-								<td width="33%">
-										
-											<a style="width:99%"  class=" btn btn-danger btn-sm"  request_id="<?php echo $request['id']; ?>"  data-target="#deletemodal<?php echo $request['id']; ?>"data-toggle=modal>Remove</a>
+								<td width="33%">										
+											<a style="width:99%"  class=" btn btn-danger btn-sm" request_id="<?php echo $request['id']; ?>" data-target="#deletemodal<?php echo $request['id']; ?>"data-toggle=modal >Remove</a>
 											
 													<!-------Delete Modal Start--------->
 												<div id="deletemodal<?php echo $request['id']; ?>" class="modal fade" role="dialog">
@@ -407,7 +406,7 @@ legend
 																	</h4>
 																</div>
 																<div class="modal-footer" style="height:60px;">
-																	<button request_id="<?php echo $request['id']; ?>" type="button" class="removeRequest btn btn-danger btn-sm" name="removerequest" value="yes" >Yes</button>
+																	<a request_id="<?php echo $request['id']; ?>" type="button"  href=javascript:void(0); class="removeRequest btn btn-danger btn-sm" name="removerequest">Yes</a>
 																	<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
 																</div>
 															</div>
@@ -470,58 +469,26 @@ legend
 		</div>
 	</div>
 </div>
-				  
-<?php echo $this->element('footer');?>
-					  <?php
-$servername = $_SERVER['HTTP_HOST'];
-if($servername =='192.168.3.82' OR $servername=='192.168.3.52' OR $servername=='localhost'){
-	$serverurl = 'http://'.$servername.'/travelb2bhub/';
-	}else{
-	$serverurl = 'http://'.$servername.'/';
-	}
-?>
+
 <script>
      $(document).ready(function() {
-        $(".removeRequest").click(function(e) {
-			alert();
+        $(".removeRequest").on('click',function(e) {
 			$('#ajaxcount').val('100000');
 			var box=$(this);
             e.preventDefault();
             var t = $(this).attr("request_id");
-			alert(t);
+            $.ajax({
                 url: "<?php echo $this->Url->build(array('controller'=>'users','action'=>'removeRequest')) ?>",
                 type: "POST",
                 data: {
                     request_id: t
                 }
             }).done(function(e) {
-                if(e==1){alert("Request has been removed successfully.");
+                if(e==1){  $('.modal').toggle();
+				location.reload();
 					box.closest('div.col-md-4.req').hide();
 				}
              })
         }); 
-		
-	getmyrequestlistsapi(5000);
-		
-	function getmyrequestlistsapi(){
-	var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'getmyrequestlistsapi')) ?>";
-	$.ajax({ url:url,
-			 type: 'POST',
-			 data: {getres:'1'}
-			}).done(function(result){
-		var object = JSON.parse(result);
-		//console.log(result);
-		$.each(object, function(index, value) {
-			var chres_id = "#chatcounts_"+index;
-			if(value>0)
-			{
-			var res_html = '<a href="<?php echo $serverurl;?>users/checkresponses/'+index+'" class="check_responses_btn"><?php echo $this->Html->image("tick-ico.png"); ?> Check Responses ( <strong>'+value+'</strong> ) </a>';
-			$(chres_id).html(res_html);	
-			}
-			
-			});
-		});
-    setTimeout(getmyrequestlistsapi, 5000);
-		}
     });
 </script>
