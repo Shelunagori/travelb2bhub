@@ -347,7 +347,7 @@ fieldset{
 						</div>				
 					<div class="row">
 						<div class="col-md-12">
-							<legend><h3><?= h($taxiFleetPromotion->title) ?></h3></legend>
+							<legend><b><?= h($taxiFleetPromotion->title) ?></b></legend>
 						</div>
 							
 							<div class="row col-md-12">
