@@ -44,8 +44,7 @@
 								<b>Email :</b> <?php echo ($row['user']['email'])?$row['user']['email']:"-- --"; ?><br>
 								<b>Locality :</b> <?php echo ($row['user']['locality'])?$row['user']['locality']:"-- --"; ?>
 								</div>
-								<div class="col-md-3 text-center ">
-									<!-- <a href="javascript:void(0);" class=" btn btn-danger btn-sm" follow_id = "<?php echo $row['id']; ?>"> Unfollow</a> -->
+								<div class="col-md-3">
 									<a follow_id="<?php echo $row['id']; ?>" class=" btn btn-danger btn-sm"  data-target="#unfollow<?php echo $row['id']; ?>" data-toggle=modal>Unfollow</a>
 									<!-------Delete Modal Start--------->
 												<div id="unfollow<?php echo $row['id']; ?>" class="modal fade" role="dialog">
@@ -107,33 +106,23 @@
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
 $(document).ready(function () {
-/*$("#responsesWrap").apPagination({
-    targets: ".box-event",
-    pagesWrap: ".pages",
-    ulClass: "pagination",
-    perPage: 5,
-    nextText: '<i class="glyphicon glyphicon-menu-right"></i><i class="glyphicon glyphicon-menu-right"></i>',
-    prevText: '<i class="glyphicon glyphicon-menu-left"></i><i class="glyphicon glyphicon-menu-left"></i>'
-  });
-*/
 	$(".unfollow").click(function (e) {
 		e.preventDefault();
 		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'remove-business-buddy')) ?>";
 		var follow_id = $(this).attr("follow_id");
-		if(confirm("Are you sure want to unfollow this user?")) {
-			$.ajax({
-				url:url,
-				type: 'POST',
-				data: {follow_id:follow_id}
-			}).done(function(result){
-				if(result == 1) {
-					alert("This user has been unfollowed successfully.");
-					location.reload();
-				} else {
-					alert("There is some problem, please try again.");
-				}
-			});
-		}
+		$.ajax({
+			url:url,
+			type: 'POST',
+			data: {follow_id:follow_id}
+		}).done(function(result){
+			if(result == 1) {
+				$('.modal').toggle();
+				location.reload();
+			} else {
+				alert("There is some problem, please try again.");
+			}
+		});
+		 
 	});
 });
 </script>

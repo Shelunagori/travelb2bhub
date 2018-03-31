@@ -395,8 +395,10 @@ $this->set(compact('cities', 'states', 'countries', 'allCities', 'allStates','me
 					$res2= mkdir($fullpath, 0777, true);
 				}
 				move_uploaded_file($this->request->data['profile_pic']['tmp_name'],$fullpath.DS.$photo);
-				$this->request->data['profile_pic'] = $photo;
-				/*if(!empty($user['profile_pic']) && file_exists($fullpath.DS.$user['profile_pic'])) {
+				$this->request->data['profile_pic'] = $photo; 
+		 
+				$this->request->session()->write('Auth.User.profile_pic', $photo);
+ 				/*if(!empty($user['profile_pic']) && file_exists($fullpath.DS.$user['profile_pic'])) {
 				unlink($fullpath.DS.$user['profile_pic']);
 				}*/
 			}
