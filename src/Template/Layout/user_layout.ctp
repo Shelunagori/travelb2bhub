@@ -214,7 +214,6 @@ margin-top: 5px !important;
 $page_name=$this->request->params['action'];  
 ?>
 <div class="wrapper">
-
   <header class="main-header">
     <!-- Logo -->
     <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo" >
