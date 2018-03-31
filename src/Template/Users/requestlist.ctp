@@ -390,13 +390,9 @@ legend
 										</div>
 									</div>
 								</td>
-<<<<<<< HEAD
-								<td width="33%">										
-											<a style="width:99%"  class=" btn btn-danger btn-sm" request_id="<?php echo $request['id']; ?>" data-target="#deletemodal<?php echo $request['id']; ?>"data-toggle=modal >Remove</a>
-=======
+
 								<td width="33%">
 											<a style="width:99%"  class=" btn btn-danger btn-sm"  request_id="<?php echo $request['id']; ?>"  data-target="#deletemodal<?php echo $request['id']; ?>"data-toggle=modal>Remove</a>
->>>>>>> origin/master
 											
 													<!-------Delete Modal Start--------->
 												<div id="deletemodal<?php echo $request['id']; ?>" class="modal fade" role="dialog">
