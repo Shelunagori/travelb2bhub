@@ -727,21 +727,18 @@ fieldset{
 									</div>
 								</div>
 						</fieldset>
-											 
-										 
 						<fieldset>
-							<legend style="color:#369FA1;"><b> &nbsp;  Comment Box  &nbsp; </b></legend>
-							<div class="row">
-									<div class="col-md-12">
-										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
-											<div class="input-field">
-												<textarea name="comment" class="form-control mt" cols="" rows="4" placeholder="Enter Comment"></textarea>
-											</div>
-										</div> 
+								<legend style="color:#369FA1;"><b> &nbsp;  Comment Box &nbsp; </b></legend>
+									<div class="row" style="margin-bottom: 10px;">
+										<div class="col-md-12">
+											<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
+												<div class="input-field">
+													<textarea name="comment" class="form-control mt" cols="" rows="4" placeholder="Enter Comment"></textarea>
+												</div>
+											</div> 
+										</div>
 									</div>
-								</div>
-						</fieldset>
-										 			
+							</fieldset>
 							<div class="row">
 								 
 								<div class="col-md-12">
@@ -989,19 +986,18 @@ fieldset{
 												</div>
 											</div>
 											</fieldset>
-											 
-												<fieldset>
-													<legend style="color:#369FA1;"><b> &nbsp; Comment Box  &nbsp; </b></legend>
-														<div class="row">
-															<div class="col-md-12">
-																<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
-																	<div class="input-field">
-																		<textarea name="comment" class="form-control mt" cols="" rows="4" placeholder="Enter Comment"></textarea>
-																	</div>
-																</div> 
-															</div>
+											 <fieldset>
+												<legend style="color:#369FA1;"><b> &nbsp;  Comment Box &nbsp; </b></legend>
+													<div class="row" style="margin-bottom: 10px;">
+														<div class="col-md-12">
+															<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
+																<div class="input-field">
+																	<textarea name="comment" class="form-control mt" cols="" rows="4" placeholder="Enter Comment"></textarea>
+																</div>
+															</div> 
 														</div>
-													</fieldset>
+													</div>
+											</fieldset>
 											<div class="row">
 											 
 													<div class="col-md-12">

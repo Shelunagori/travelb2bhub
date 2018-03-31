@@ -226,7 +226,7 @@ $page_name=$this->request->params['action'];
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo">
+    <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo" >
       <span class="logo-mini"><?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:77%;']) ?></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg"><?=  $this->Html->image('/img/main_logo.png', ['style'=>'width:92%;']) ?></span>
@@ -391,7 +391,7 @@ $page_name=$this->request->params['action'];
     <section class="sidebar">
       <!-- Sidebar user panel -->
       <div class="user-panel" align="center">
-        <div class='imaage'>
+        <div class='imaage' >
           <?php
 			
 			if(!empty($profile_pic)){
