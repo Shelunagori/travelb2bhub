@@ -1551,18 +1551,18 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		if(!empty($this->request->query("pickup_city"))) {
 		$conditions["Requests.pickup_city"] =  $this->request->query("pickup_city");
 		}
-		$sdate = $this->request->query("startdatesearch");
-		$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
-		if(!empty($this->request->query("startdatesearch"))) {
-			$da["Requests.start_date"] =  $sdate;
-			$da["Requests.check_in"] =  $sdate;
+  		if(!empty($this->request->query("startdatesearch"))) {
+			$sdate = $this->request->query("startdatesearch");
+			$sdate=date('Y-m-d',strtotime($sdate));
+			$da["Requests.start_date >="] =  $sdate;
+			$da["Requests.check_in >="] =  $sdate;
 			$conditions["OR"] =  $da;
 		}
-		$edate = $this->request->query("enddatesearch");
-		$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
-		if(!empty($this->request->query("enddatesearch"))) {
-			$da1["Requests.end_date"] =  $edate;
-			$da1["Requests.check_out"] =  $edate;
+ 		if(!empty($this->request->query("enddatesearch"))) {
+			$edate = $this->request->query("enddatesearch");
+			$edate=date('Y-m-d',strtotime($edate));
+			$da1["Requests.end_date <="] =  $edate;
+			$da1["Requests.check_out <="] =  $edate;
 			$conditions["OR"] =  $da1;
 		}
 		$conditions["Requests.user_id"] = $this->Auth->user('id');
@@ -1707,18 +1707,21 @@ if(!empty($this->request->query("req_typesearch"))) {
 if(!empty($this->request->query("refidsearch"))) {
 	$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
 }
-	$sdate = $this->request->query("startdatesearch");
-	$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+	
+	 
 if(!empty($this->request->query("startdatesearch"))) {
-	$da["Requests.start_date"] =  $sdate;
-	$da["Requests.check_in"] =  $sdate;
+	$sdate = $this->request->query("startdatesearch");
+	$sdate=date('Y-m-d',strtotime($sdate));
+	$da["Requests.start_date >="] =  $sdate;
+	$da["Requests.check_in >="] =  $sdate;
 	$conditions["OR"] =  $da;
 }
-	$edate = $this->request->query("enddatesearch");
-	$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+ 
 if(!empty($this->request->query("enddatesearch"))) {
-	$da["Requests.end_date"] =  $edate;
-	$da["Requests.check_out"] =  $edate;
+	$edate = $this->request->query("enddatesearch");
+	$edate=date('Y-m-d',strtotime($edate));
+	$da["Requests.end_date <="] =  $edate;
+	$da["Requests.check_out <="] =  $edate;
 	$conditions["OR"] =  $da;
 }
 if(!empty($this->request->query("keyword"))) {
@@ -1818,21 +1821,22 @@ $conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
 if(!empty($this->request->query("refidsearch"))) {
 $conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
 }
-$sdate = $this->request->query("startdatesearch");
-$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
-echo $sdate;
+ 
 if(!empty($this->request->query("startdatesearch"))) {
-$da["Requests.start_date"] =  $sdate;
-$da["Requests.check_in"] =  $sdate;
-$conditions["OR"] =  $da;
+	$sdate = $this->request->query("startdatesearch");
+	$sdate=date('Y-m-d',strtotime($sdate));
+	$da["Requests.start_date >="] =  $sdate;
+	$da["Requests.check_in >="] =  $sdate;
+	$conditions["OR"] =  $da;
 }
-$edate = $this->request->query("enddatesearch");
-$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
-if(!empty($this->request->query("enddatesearch"))) {
-$da1["Requests.end_date"] =  $edate;
-$da1["Requests.check_out"] =  $edate;
-$conditions["OR"] =  $da1;
+ if(!empty($this->request->query("enddatesearch"))) {
+	$edate = $this->request->query("enddatesearch");
+	$edate=date('Y-m-d',strtotime($edate));
+	$da1["Requests.end_date <= "] =  $edate;
+	$da1["Requests.check_out <= "] =  $edate;
+	$conditions["OR"] =  $da1;
 }
+//pr($conditions); exit;
 if ($this->Auth->user('role_id') == 1) {
 $requests = $this->Requests->find()
 ->contain(["Users","Hotels"])
@@ -1937,7 +1941,8 @@ if(!empty($this->request->query("agentnamesearch"))) {
 	if(isset($keyword[1])) {
 		$keyword2 = $keyword[1];
 	}
-	$conditions["AND"] = array("Users.first_name LIKE "=>"%". $keyword[0]."%", "Users.last_name LIKE" => "%".$keyword2."%",);
+	$conditions["OR"] = array("Users.first_name LIKE "=>"%". $keyword[0]."%", "Users.last_name LIKE" => "%".$keyword2."%");
+	
 }
 if(!empty($this->request->query("destination_city"))) {
 	$conditions["Requests.city_id"] =  $this->request->query("destination_city");
@@ -1959,24 +1964,20 @@ if(!empty($this->request->query("budgetsearch"))) {
 if(!empty($this->request->query("refidsearch"))) {
 	$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
 }
-$sdate = $this->request->query("startdatesearch");
-$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+ 
 if(!empty($this->request->query("startdatesearch"))) {
-	$da["Requests.start_date"] =  $sdate;
-	$da["Requests.check_in"] =  $sdate;
+	$sdate = $this->request->query("startdatesearch");
+	$sdate=date('Y-m-d',strtotime($sdate));
+	$da["Requests.start_date >="] =  $sdate;
+	$da["Requests.check_in >="] =  $sdate;
 	$conditions["OR"] =  $da;
 }
-$edate = $this->request->query("enddatesearch");
-if(isset($edate) AND !empty($edate)){
-	$date = str_replace('/', '-', $edate);
-	$edate = date('Y-m-d', strtotime($date));
-}else{
-	$edate = null;		
-}
-//echo  $edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+ 
 if(!empty($this->request->query("enddatesearch"))) {
-	$da1["Requests.end_date"] =  $edate;
-	$da1["Requests.check_out"] = $edate;
+	$edate = $this->request->query("enddatesearch");
+	$edate=date('Y-m-d',strtotime($edate));
+	$da1["Requests.end_date <="] =  $edate;
+	$da1["Requests.check_out <="] = $edate;
 	$conditions["OR"] =  $da1;
 }
 $allStates = $this->States->find('list',['keyField' => 'id', 'valueField' => 'state_name'])
@@ -2010,6 +2011,7 @@ $BlockedUsers = array_unique($BlockedUsers);
 		})
 		->where(["OR"=>['Requests.state_id IN' => $conditionalStates, 'Requests.pickup_state IN' => $conditionalStates],$conditions, 'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0])
 		->order($sort);
+		 
 	} 
 	else if ($this->Auth->user('role_id') == 2) { /// Event Planner
 		$requests = $this->Requests->find()
@@ -2653,25 +2655,20 @@ public function myresponselist() {
 	if(!empty($this->request->query("shared_details"))) {
 		$conditions["Responses.is_details_shared"] =  $this->request->query("shared_details");
 	}
-	$sdate = $this->request->query("startdatesearch");
-	$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+	 
 	if(!empty($this->request->query("startdatesearch"))) {
-		$da["Requests.start_date"] =  $sdate;
-		$da["Requests.check_in"] =  $sdate;
+		$sdate = $this->request->query("startdatesearch");
+		$sdate=date('Y-m-d',strtotime($sdate));
+		$da["Requests.start_date >="] =  $sdate;
+		$da["Requests.check_in >="] =  $sdate;
 		$conditions["OR"] =  $da;
 	}
-	$edate = $this->request->query("enddatesearch");
-	if(isset($edate) AND !empty($edate)){
-		$date = str_replace('/', '-', $edate);
-		$edate = date('Y-m-d', strtotime($date));
-	}
-	else{
-		$edate = null;		
-	}
-//$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+	 
 	if(!empty($this->request->query("enddatesearch"))) {
-		$da1["Requests.end_date"] =  $edate;
-		$da1["Requests.check_out"] =  $edate;
+		$edate = $this->request->query("enddatesearch");
+		$edate=date('Y-m-d',strtotime($edate));
+		$da1["Requests.end_date <="] =  $edate;
+		$da1["Requests.check_out <="] =  $edate;
 		$conditions["OR"] =  $da1;
 	}
 	$conditions["Responses.is_deleted "] = 0;

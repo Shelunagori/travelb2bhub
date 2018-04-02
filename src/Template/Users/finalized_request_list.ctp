@@ -80,7 +80,7 @@ $conn = ConnectionManager::get('default');
            </div>
          
            
-           <div class="col-md-6">
+           <div class="col-md-12">
 			<label for="example-text-input" class=" col-form-label">Total Budget: </label>
                <select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option>
                <option value="100000-100000000000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? 'selected':''; ?>>100000-Above</option>
@@ -90,12 +90,12 @@ $conn = ConnectionManager::get('default');
            
            <div class="col-md-6">
 			<label for="example-text-input" class=" col-form-label">Start Date: </label>
-                <input type="text" id="datepicker1"  name="startdatesearch" value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"  class="form-control datepicker">
+                <input type="text" id="datepicker1"  name="startdatesearch" value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"  class="form-control datepicker" data-date-format="dd-mm-yyyy">
            </div>
         
            <div class="col-md-6">  
 			<label for="example-text-input" class=" col-form-label">End Date: </label>           
-               <input type="text" id="datepicker2" name="enddatesearch" value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"  class="form-control datepicker" >
+               <input type="text" id="datepicker2" name="enddatesearch" value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"  class="form-control datepicker" data-date-format="dd-mm-yyyy">
             </div>
     
            
@@ -286,18 +286,15 @@ $(".req").sort(function (a, b) {
 									<a style="width:99%" data-toggle="modal"  class="btn btn-info btn-sm" data-target="#myModal1<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'viewdetails',$request['id'])) ?>"> Details</a>
 								</td>
 								<td width="33%">
-									<a style="width:99%" data-toggle="modal"  class="btn btn-success btn-sm" data-target="#myModalchat<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat',$request['id'], $finalresponse[$request['id']]['user_id'],3)) ?>"> Chat</a>                        
-								</td>
-								<td width="33%">
-									
 									
 									<?php $reviewi = $request['responses'][0]['user_id']."-".$request['id']; ?>
-									 <a style="width:99%" data-toggle="modal" class="btn btn-warning btn-sm" data-target="#myModal1review<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi )) ?>"> Review </a>
-								   
-								   
-									</td>
-								</tr>
-							</table>
+									 <a style="width:99%" data-toggle="modal" class="btn btn-danger btn-sm" data-target="#myModal1review<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi )) ?>"> Review </a>
+								</td>
+								<td width="33%">
+									<a style="width:99%" data-toggle="modal"  class="btn btn-success btn-sm" data-target="#myModalchat<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat',$request['id'], $finalresponse[$request['id']]['user_id'],3)) ?>"> Chat</a>                        
+								</td>								
+							</tr>
+						</table>
 							 <div class="modal fade" id="myModalchat<?php echo $request['id']; ?>" role="dialog">
 									<div class="modal-dialog">
 									  <!-- Modal content-->

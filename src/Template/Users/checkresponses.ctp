@@ -28,12 +28,7 @@ legend
 .modal-body {padding:2px!important;}
 </style>
 <div class="container-fluid" id="checkresponses">
-    <div class="row equal_column"> 
-		<div class="col-md-12" style="background-color:"> 
-			<br>
-			<?php echo $this->element('subheader');?>
-		</div>
-	</div>
+     
 <div class="box box-primary">
 <div class="box-header with-border"> 
 	<h3 class="box-title" style="padding:5px">Check Responses</h3>
@@ -45,7 +40,7 @@ legend
 <div class="box-body">
 <div id="cat" >
   <div class="row" >
-	<div class="col-md-12" >
+	<div class=" " >
 		<!--<a data-toggle="modal" data-target="#detailModal" href="#" class="btn btn-success btn-xs">Details</a>-->
 		
 		<div class="fade modal"id="myModal1<?php echo $responseid; ?>"role=dialog>
@@ -108,98 +103,98 @@ legend
 		<div class="col-md-3">
 		<ul>
 		<li>
-									<!---button Chat --->
-									<a class="btn btn-warning btn-xs " id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>"> 
-									Chat ( <strong><?php echo $data['chat_count'][$row['id']]; ?> </strong> )</a>
-									<div class="modal fade" id="myModal11<?php echo  $row['request']['id']; ?>" role="dialog">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal">&times;</button>
-													<h4 class="modal-title">Chat</h4>
-												</div>
-												<div class="modal-body">
-												</div>
-											</div>
-										</div>
+		<!---button Chat --->
+		<a class="btn btn-danger btn-xs " id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>"> 
+		Chat ( <strong><?php echo $data['chat_count'][$row['id']]; ?> </strong> )</a>
+		<div class="modal fade" id="myModal11<?php echo  $row['request']['id']; ?>" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Chat</h4>
+					</div>
+					<div class="modal-body">
+					</div>
+				</div>
+			</div>
+		</div>
+			<!---button Share --->
+			<?php if($row['is_details_shared'] != 1) { ?>
+				<a  href="javascript:void(0);" user_id="<?php echo $row['user']['id']; ?>" class="shareDetails btn btn-successtoNew btn-xs " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
+					Share Details</a>
+	 
+				<?php }
+				else{
+					?>
+						<a  href="javascript:void(0);" class=" btn btn-successtoNew btn-xs ">
+						Shared</a>
+					 
+					<?php 
+				}	?>
+			<!---button Follow--->
+				<?php
+					if( !array_key_exists($row['user']['id'], $BusinessBuddies)) {?>
+						<a href="javascript:void(0);" class="businessBuddy btn btn-xs btn-successto" user_id = "<?php echo $row['user']['id']; ?>"> Follow</a>
+				<?php }
+					else{
+					?>
+						<a  href="javascript:void(0);" class="btn btn-xs btn-successto" user_id = "<?php echo $row['user']['id']; ?>"> Following</a>
+										<?php	}	?>
+					</li>
+				<li style="margin-top:5px;">
+					<!---button Block--->
+					<?php
+						$sql="Select count(*) as block_count from blocked_users where blocked_user_id='".$row['user']['id']."' AND blocked_by='".$row['request']['user_id']."'";
+						$stmt = $conn->execute($sql);
+						$bresult = $stmt ->fetch('assoc'); 
+						if($bresult['block_count']>0){
+							$blocked = 1;
+						}
+						else{
+							$blocked = 0;
+						}
+						?>
+<a  href="javascript:void(0);" class="acceptOffer btn btn-success btn-xs " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
+									Accept Offer</a>						
+						<?php 
+						if($blocked==1)
+						{?>
+							<a  href="javascript:void(0);" class="unblockUser btn btn-warning btn-xs " user_id = "<?php echo $row['user']['id']; ?>">
+							Blocked </a>
+						<?php }
+						else
+						{?>
+							<a  href="javascript:void(0);" class="blockUser btn btn-warning btn-xs " user_id = "<?php echo $row['user']['id']; ?>">
+							Block User </a>
+						<?php } ?>
+						<!---button Accept Offer--->
+								
+									
+							<?php $reviewi =  $row['user']['id']."-".$row['request']['id']; ?>
+								<a data-toggle="modal" class="btn btn-info btn-xs" style="display:none;" data-target="#myModal_accept<?php echo $row['id']; ?>" id="add_review" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">
+							Test</a>
+							<div class="modal fade" id="myModal_accept<?php echo $row['id']; ?>" role="dialog">
+								<div class="modal-dialog">
+								  <div class="modal-content">
+									<div class="modal-header">
+									  <button type="button" class="close" data-dismiss="modal">&times;</button>
+									  <h4 class="modal-title">Add Review</h4>
 									</div>
-										<!---button Share --->
-										<?php if($row['is_details_shared'] != 1) { ?>
-											<a  href="javascript:void(0);" user_id="<?php echo $row['user']['id']; ?>" class="shareDetails btn btn-info btn-xs " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
-												Share Details</a>
-								 
-											<?php }
-											else{
-												?>
-													<a  href="javascript:void(0);" class=" btn btn-info btn-xs ">
-													Shared</a>
-												 
-												<?php 
-											}	?>
-										<!---button Follow--->
-											<?php
-												if( !array_key_exists($row['user']['id'], $BusinessBuddies)) {?>
-													<a href="javascript:void(0);" class="businessBuddy btn btn-xs " style="background-color:#1295A2;color:#FFF;" user_id = "<?php echo $row['user']['id']; ?>"> Follow</a>
-											<?php }
-												else{
-												?>
-													<a  href="javascript:void(0);" class="btn btn-xs " style="background-color:#1295A2;color:#FFF; user_id = "<?php echo $row['user']['id']; ?>"> Following</a>
-																	<?php	}	?>
-												</li>
-											<li style="margin-top:5px;">
-												<!---button Block--->
-												<?php
-													$sql="Select count(*) as block_count from blocked_users where blocked_user_id='".$row['user']['id']."' AND blocked_by='".$row['request']['user_id']."'";
-													$stmt = $conn->execute($sql);
-													$bresult = $stmt ->fetch('assoc'); 
-													if($bresult['block_count']>0){
-														$blocked = 1;
-													}
-													else{
-														$blocked = 0;
-													}
-													?>	
-													<?php 
-													if($blocked==1)
-													{?>
-														<a  href="javascript:void(0);" class="unblockUser btn btn-danger btn-xs " user_id = "<?php echo $row['user']['id']; ?>">
-														Blocked </a>
-													<?php }
-													else
-													{?>
-														<a  href="javascript:void(0);" class="blockUser btn btn-danger btn-xs " user_id = "<?php echo $row['user']['id']; ?>">
-														Block User </a>
-													<?php } ?>
-													<!---button Accept Offer--->
-															<a  href="javascript:void(0);" class="acceptOffer btn btn-success btn-xs " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
-																Accept Offer</a>
-																
-														<?php $reviewi =  $row['user']['id']."-".$row['request']['id']; ?>
-															<a data-toggle="modal" class="btn btn-info btn-xs" style="display:none;" data-target="#myModal_accept<?php echo $row['id']; ?>" id="add_review" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">
-														Test</a>
-														<div class="modal fade" id="myModal_accept<?php echo $row['id']; ?>" role="dialog">
-															<div class="modal-dialog">
-															  <div class="modal-content">
-																<div class="modal-header">
-																  <button type="button" class="close" data-dismiss="modal">&times;</button>
-																  <h4 class="modal-title">Add Review</h4>
-																</div>
-																<div class="modal-body">
-																</div>
-															  </div>
-															</div>
-														</div>
-														<!---button Details--->
-														<a  class="viewdetail btn btn-success btn-xs" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$responseid)) ?>"data-target="#myModal1<?php echo $responseid; ?>" data-toggle=modal> Details</a>
-														</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</div>
+									<div class="modal-body">
 									</div>
+								  </div>
+								</div>
+							</div>
+							<!---button Details--->
+								<a  class="viewdetail btn btn-info btn-xs" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$responseid)) ?>"data-target="#myModal1<?php echo $responseid; ?>" data-toggle=modal> Details</a>
+							</li>
+							</ul>
+						</div>
+					</div>
+											 
+										 
 								<?php } ?>
-									</div>
+								 
 								<?php } 
 								
 								else 
@@ -253,99 +248,92 @@ legend
 	</table>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	</div>
 </div>
-	</div>
 </div>
-	</div>
+</div>
+</div>
+</div>
 	
-	<div class="fade modal" id="myModal122" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-			   <div class="modal-header">
-				  <button class="close data-dismiss=modal" type="button">×</button>
-				  <h4 class="modal-title">Filter</h4>
-			   </div>
-			   <div class="modal-body" style="height:300px">
-				<form method="get" class="filter_box">
-					<div class="col-md-6">
-					   <div class="col-md-12">
-						<label for="example-text-input" class=" col-form-label">Name: </label> 
-						   <input type="text" name="agentname" value="<?php echo isset($_GET['agentname'])? $_GET['agentname']:''; ?>"  class="form-control">
-					   </div>
-					</div>
-					 
-				    <div class="col-md-6">
-					  
-					   <div class="col-md-12"> 
-						 <label for="example-text-input" class=" col-form-label">Reference ID: </label>
-						   <input type="text" name="refidsearch" value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>"  class="form-control">
-					  </div>
-					</div>
-						   
-						   
-					<div class="col-md-6">
-					   
-					   <div class="col-md-12">
-						<label for="example-text-input" class=" col-form-label">Budget: </label> 
-						   <select name="budgetsearch" class="form-control"><option value="">Select Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
-					   </div>
-					</div>
-						   
-						   
-					<div class="col-md-6">
-					   
-					   <div class="col-md-12">
-						<label for="example-text-input" class=" col-form-label">Quoted Price: </label>
-						   <select name="quotesearch" class="form-control"><option value="">Select Quoted Price</option><option value="0-10000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="30000-50000")? 'selected':''; ?>>30000- 50000</option><option value="50000-100000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
-						</div>
-					</div>
-					<div class="col-md-6">
-					  
-					   <div class="col-md-12">
-						 <label for="example-text-input" class=" col-form-label">Chat With: </label>
-						   <select name="chatwith" class="form-control"><option value="">Select Chat With</option>
-						   <?php if(!empty($UserResponse)){ 
-								foreach($UserResponse as $user){               
-						   ?>
-						   <option <?php echo (isset($_GET['chatwith']) && $_GET['chatwith'] ==$user['user']['id'])? 'selected':''; ?> value="<?php echo $user['user']['id']?>"><?php echo $user['user']['first_name'].' '.$user['user']['last_name']?></option>
-						   <?php }}?>
-						   </select>
-						</div>
-					</div>
-					<div class="col-md-6">
-					   
-					   <div class="col-md-12">
-							<label for="example-text-input" class=" col-form-label">Following: </label> 
-						   <input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['followsearch'])? "checked":''; ?>  >
-					   </div>
-				   </div>
-					<div class="col-md-6">
-					   
-					   <div class="col-md-12">
-						<label for="example-text-input" class=" col-form-label">Shared Details: </label>
-						   <input type="checkbox" name="shared_details" value="1" <?php echo isset($_GET['shared_details'])? "checked":''; ?>  >
-					   </div>
-				   </div>
-						   
-					<div class="col-md-12 text-center">
-					<hr></hr>
-						<button type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">Filter</button>
-						<a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'checkresponses',$responseid)) ?>">Reset</a>
-					</div>
-			   </form>
+<!--ap filters-->
+  
+<div id="myModal122" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+	  <form method="get" class="filter_box">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Filter</h4>
+      </div>
+      <div class="modal-body">
+			<div class="col-md-6">
+			   <div class="col-md-12">
+				<label for="example-text-input" class=" col-form-label">Name: </label> 
+				   <input type="text" name="agentname" value="<?php echo isset($_GET['agentname'])? $_GET['agentname']:''; ?>"  class="form-control">
 			   </div>
 			</div>
-		</div>
-	</div>
- 	
-      
-
-      
-
-      <!--ap filters-->
-  
-		
+			 
+			<div class="col-md-6">
+			  
+			   <div class="col-md-12"> 
+				 <label for="example-text-input" class=" col-form-label">Reference ID: </label>
+				   <input type="text" name="refidsearch" value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>"  class="form-control">
+			  </div>
+			</div>
+				   
+				   
+			<div class="col-md-6">
+			   
+			   <div class="col-md-12">
+				<label for="example-text-input" class=" col-form-label">Budget: </label> 
+				   <select name="budgetsearch" class="form-control"><option value="">Select Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
+			   </div>
+			</div>
+				   
+				   
+			<div class="col-md-6">
+			   
+			   <div class="col-md-12">
+				<label for="example-text-input" class=" col-form-label">Quoted Price: </label>
+				   <select name="quotesearch" class="form-control"><option value="">Select Quoted Price</option><option value="0-10000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="30000-50000")? 'selected':''; ?>>30000- 50000</option><option value="50000-100000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
+				</div>
+			</div>
+			<div class="col-md-6">
+			  
+			   <div class="col-md-12">
+				 <label for="example-text-input" class=" col-form-label">Chat With: </label>
+				   <select name="chatwith" class="form-control"><option value="">Select Chat With</option>
+				   <?php if(!empty($UserResponse)){ 
+						foreach($UserResponse as $user){               
+				   ?>
+				   <option <?php echo (isset($_GET['chatwith']) && $_GET['chatwith'] ==$user['user']['id'])? 'selected':''; ?> value="<?php echo $user['user']['id']?>"><?php echo $user['user']['first_name'].' '.$user['user']['last_name']?></option>
+				   <?php }}?>
+				   </select>
+				</div>
+			</div>
+			<div class="col-md-6">
+ 				&nbsp;
+ 			</div>
+			<div class="col-md-6">
+			<div class="col-md-12">
+			   <label for="example-text-input" class=" col-form-label">Following: </label> 
+				<input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['followsearch'])? "checked":''; ?>>
+				
+				<label for="example-text-input" class=" col-form-label">Shared Details: </label>
+				<input type="checkbox" name="shared_details" value="1" <?php echo isset($_GET['shared_details'])? "checked":''; ?>>
+			</div>
+			</div>
+       </div>
+      <div class="modal-footer">
+        <hr></hr>
+		<button type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">Filter</button>
+		<a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'checkresponses',$responseid)) ?>">Reset</a>
+      </div>
+	  </form>
+    </div>
+   </div>
+</div>	
 		 
 		 
 	<div class="modal fade" id="myModal2" role="dialog">
