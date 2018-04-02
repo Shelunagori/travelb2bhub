@@ -95,7 +95,7 @@ $conn = ConnectionManager::get('default');
 		  </div>
 	</div>
 <div id="myModal122" class="modal fade form-modal" role="dialog">
-  <div class="modal-dialog" style="width:35%;">
+  <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
@@ -175,7 +175,7 @@ $conn = ConnectionManager::get('default');
 									 </div>
 									<div class=col-md-1>:</div>
 									 <div class=col-md-7>
-									 <input class="form-control datepicker" name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" id="datepicker1">
+									 <input class="form-control datepicker" name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" id="datepicker1" data-date-format="dd-mm-yyyy">
 									 </div>
 									</div>	
 								</div>
@@ -186,7 +186,7 @@ $conn = ConnectionManager::get('default');
 										</div>
 										<div class=col-md-1>:</div>
 										<div class=col-md-7>
-										<input class="form-control datepicker" name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>" id="datepicker2">
+										<input class="form-control datepicker" name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>" id="datepicker2" data-date-format="dd-mm-yyyy">
 										</div>
 									</div>
 								</div>
@@ -463,10 +463,10 @@ $(document).ready(function(){
 							<td width="33%">
 							<?php $id = $response['request']['id'];
 							if( !array_key_exists($response["request"]["user_id"], $BusinessBuddies)) {?>
-								<a href="#" style="width:99%" class="btn btn-warning btn-sm"> Following</a>
+								<a href="#" style="width:99%" class="btn btn-danger btn-sm"> Following</a>
 							<?php } 
 							else{ ?>
-								<a style="width:99%" href="javascript:void(0);" class="businessBuddy btn btn-warning btn-sm" user_id = "<?php echo $response["request"]["user_id"]; ?>"> Follow User</a><?php 
+								<a style="width:99%" href="javascript:void(0);" class="businessBuddy btn btn-danger btn-sm" user_id = "<?php echo $response["request"]["user_id"]; ?>"> Follow User</a><?php 
 							}
 							?>
 							</td>

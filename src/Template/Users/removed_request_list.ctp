@@ -42,8 +42,9 @@ li > p{
 							<button type="button" class="close" data-dismiss="modal">&times;</button>
 							<h4 class="modal-title">Filter</h4>
 						  </div>
+						  <form method="get" class="filter_box">
 						  <div class="modal-body">
-							  <form method="get" class="filter_box">
+							  
 								  
 						  <div class="col-md-12">
 							   
@@ -63,13 +64,13 @@ li > p{
 							   
 							   <div class="col-md-6">     
 					<label for="example-text-input" class="col-form-label">Start Date: </label>		   
-								   <input type="text" id="datepicker1"  name="startdatesearch" value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"  class="form-control">
+								   <input type="text" id="datepicker1"  name="startdatesearch" value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"  class="form-control" data-date-format="dd-mm-yyyy">
 							   </div>
 						
 								
 							   <div class="col-md-6"> 
 					<label for="example-text-input" class="col-form-label">End Date: </label>           
-								   <input type="text" id="datepicker2" name="enddatesearch" value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"  class="form-control" >
+								   <input type="text" id="datepicker2" name="enddatesearch" value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"  class="form-control" data-date-format="dd-mm-yyyy">
 							  </div>
 						
 							   
@@ -78,17 +79,14 @@ li > p{
 								   <input type="text" name="refidsearch" value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>"  class="form-control">
 							   </div>
 						  </div>
-								  
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-							<input type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">
-							<a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'removed-request-list')) ?>">Reset</a>
-					   </div>
-					   </form>
+					   
 					 
-							   </div>
+						</div>
 						  <div class="modal-footer">
-						  
+							<input type="submit" name="submit" value="Apply"  class="btn btn-primary btn-submit">
+							<a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'removed-request-list')) ?>">Reset</a>
 						  </div>
+						  </form>
 						</div>
 
 					  </div>

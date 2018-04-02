@@ -14,15 +14,11 @@ $conn = ConnectionManager::get('default');
 		margin: 0 0 4px !important;
 	}
 </style>
+<div class="row">
+	<?php echo  $this->Flash->render() ?>
+</div>
 <div id="my_final_responses" class="container-fluid">
-	<div class="row equal_column">
-	<div class="col-md-12" style="background-color:#"> 
-		<br>
-		<?php echo $this->element('subheader');?>
-		<?php echo  $this->Flash->render() ?>
-	</div>
-	</div>
-<div class="box box-primary">
+ <div class="box box-primary">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box-header with-border"> 
@@ -43,22 +39,22 @@ $conn = ConnectionManager::get('default');
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-title">Filter</h4>
 				  </div>
-				  <div class="modal-body" style="height:180px">
+				  <div class="modal-body">
 					   <form method="get" class="filter_box" style="margin-top:5px">
-					   <div class="col-md-12">
+					   <div class="col-md-12 margin">
 						   <label for="example-text-input" class="col-md-3 col-form-label">Agent Name: </label> 
 						   <div class="col-md-9">           
 							   <input type="text" name="agentnamesearch" value="<?php echo isset($_GET['agentnamesearch'])? $_GET['agentnamesearch']:''; ?>"  class="form-control">
 						   </div>
 					   </div>
-					   <div class="col-md-12">
+					   <div class="col-md-12 margin">
 						   <label for="example-text-input" class="col-md-3 col-form-label">Total Budget: </label>
 						   <div class="col-md-9">             
 							   <select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
 						   </div>
 					   </div>
 							   
-					   <div class="col-md-12">
+					   <div class="col-md-12 margin">
 						   <label for="example-text-input" class="col-md-3 col-form-label">Quoted Price: </label> 
 						   <div class="col-md-9">            
 							   <select name="quotesearch" class="form-control"><option value="">Select Quoted Price</option><option value="0-10000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option>
@@ -69,7 +65,7 @@ $conn = ConnectionManager::get('default');
 							   
 					<div class="col-md-12 text-center">
 					<hr></hr>
-					  <input type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">
+					  <input type="submit" name="submit" value="Apply"  class="btn btn-primary btn-submit">
 					   <a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'my-final-responses')) ?>">Reset</a>
 				   </div>
 				   </form>
@@ -219,7 +215,7 @@ $conn = ConnectionManager::get('default');
 						 </td>
 						 <td width="50%">
 						  <?php $reviewi =  $row['request']['user_id']."-".$row['request']['id']; ?>
-						   <a style="width:99%" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal1review<?php echo $row['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">Review </a>
+						   <a style="width:99%" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal1review<?php echo $row['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">Review </a>
 											   
 						<div class="modal fade" id="myModal1review<?php echo $row['id']; ?>" role="dialog">
 								<div class="modal-dialog">
@@ -260,20 +256,7 @@ $conn = ConnectionManager::get('default');
 		?>
 
 			</div>
-				<div class="modal fade" id="myModal" role="dialog">
-					<div class="modal-dialog">
-					  <!-- Modal content-->
-					  <div class="modal-content">
-						<div class="modal-header">
-						  <button type="button" class="close" data-dismiss="modal">&times;</button>
-						  <h4 class="modal-title">Chat</h4>
-						</div>
-						<div class="modal-body">
-							
-						</div>
-					  </div>
-					</div>
-				</div>
+				
           </div>
       </div>
     </div>
