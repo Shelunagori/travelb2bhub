@@ -427,10 +427,9 @@ $data['country_id'] =  $cityapi->country_id;
 			$this->loadModel('States');
 			$this->loadModel('Cities');
 			$this->loadModel('Membership');
-			$condition['OR']=array('mobile_no'=> $d['mobile_no'],'email'=> $d['email']);
 			if($_POST) {
 				$d = $_POST;
-				$checkUsers = $this->Users->find()->where($condition)->count();
+				$checkUsers = $this->Users->find()->where(['mobile_no' => $d['mobile_no']])->count();
 				if ($checkUsers < 1) {
 					if(isset($_POST['device_id'])){
 						$d['device_id'] = $_POST['device_id'];

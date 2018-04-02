@@ -15,8 +15,13 @@ $conn = ConnectionManager::get('default');
 	}
 </style>
 <div id="my_final_responses" class="container-fluid">
-<?php echo  $this->Flash->render() ?>
-		 
+	<div class="row equal_column">
+		<div class="col-md-12" style="background-color:"> 
+			<br>
+			<?php echo $this->element('subheader');?>
+			<?php echo  $this->Flash->render() ?>
+		</div>
+	</div>
 <div class="box box-primary">
 	<div class="row">
 		<div class="col-md-12">
@@ -95,7 +100,7 @@ $conn = ConnectionManager::get('default');
 					</div>
 				</div>
 				<div id="myModal122" class="modal fade form-modal" role="dialog">
-				  <div class="modal-dialog">
+				  <div class="modal-dialog" style="width:35%;">
 					<!-- Modal content-->
 						<div class="modal-content">
 							<div class="modal-header">
@@ -157,7 +162,7 @@ $conn = ConnectionManager::get('default');
 													 </div>
 													<div class=col-md-1>:</div>
 													 <div class=col-md-7>
-													 <input class="form-control datepicker" name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" id="datepicker1" data-date-format="dd-mm-yyyy">
+													 <input class="form-control datepicker" name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" id="datepicker1">
 													 </div>
 													</div>	
 												</div>
@@ -168,7 +173,7 @@ $conn = ConnectionManager::get('default');
 														</div>
 														<div class=col-md-1>:</div>
 														<div class=col-md-7>
-														<input class="form-control datepicker" name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>" id="datepicker2" data-date-format="dd-mm-yyyy">
+														<input class="form-control datepicker" name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>" id="datepicker2">
 														</div>
 													</div>
 												</div>
@@ -240,20 +245,20 @@ $conn = ConnectionManager::get('default');
 											</div>
 											 <script>
 													   $('#datepicker1').datepicker({
-																dateFormat: 'dd-mm-yy',
+																dateFormat: 'dd/mm/yy',
 																changeMonth: true,
 																changeYear: true,
-																minDate: '<?php echo date("d-m-Y"); ?>',
+																minDate: '<?php echo date("d/m/Y"); ?>',
 																onSelect: function(selected) {
 																	$( "#datepicker1" ).datepicker( "option", "minDate",selected);
 																	$('#datepicker1').val("");
 																}
 															});
 															$('#datepicker2').datepicker({
-																dateFormat: 'dd-mm-yy',
+																dateFormat: 'dd/mm/yy',
 																changeMonth: true,
 																changeYear: true,
-																minDate: '<?php echo date("d-m-Y"); ?>',
+																minDate: '<?php echo date("d/m/Y"); ?>',
 																onSelect: function(selected) {
 																	var checkInDate = $('#datepicker1').val();
 																	if(checkInDate == "") {
@@ -445,13 +450,13 @@ $conn = ConnectionManager::get('default');
 									 Comment
 								 </td>
 								 <td>
-									  <textarea name="comment" class="form-control" id="comment" placeholder="Enter comment here" style=" resize:none;" col="10" row="10"></textarea>
+									  <textarea name="comment" class="form-control" id="comment" placeholder="Enter comment here" col="10" row="10"></textarea>
 								 </td>
 							</tr>
 						</table>
 					  </div>
-					  <div class="modal-footer" style="margin-top:10px">
-						 <div style="float:right ">
+					  <div class="modal-footer">
+						 <div style="float:right">
 							<input type="submit" name="submit" class="btn btn-info btn-sm" width="20px" style="width:70px !important;" value="Submit">
 						 </div>
 					  </div>

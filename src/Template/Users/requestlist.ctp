@@ -111,7 +111,7 @@ legend
 				</div>
 			</div>
                <div class="fade modal form-modal" id="myModal122" role="dialog">
-                  <div class="modal-dialog md">
+                  <div class="modal-dialog " style="width:35%;">
                      <div class=modal-content>
                         <div class=modal-header>
                            <button class="close" data-dismiss="modal" type="button">&times;</button>
@@ -161,7 +161,7 @@ legend
 									 </div>
 									<div class=col-md-1>:</div>
 									 <div class=col-md-7>
-									 <input class=form-control name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"id=datepicker1 data-date-format="dd-mm-yyyy">
+									 <input class=form-control name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"id=datepicker1>
 									 </div>
 									</div>	
 								</div>
@@ -172,7 +172,7 @@ legend
 										</div>
 										<div class=col-md-1>:</div>
 										<div class=col-md-7>
-										<input class=form-control name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"id="datepicker2" data-date-format="dd-mm-yyyy">
+										<input class=form-control name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"id=datepicker2>
 										</div>
 									</div>
 								</div>
@@ -226,10 +226,10 @@ legend
 							<a href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'requestlist')) ?>"class="btn btn-primary btn-sm">Reset</a>
 						   <script>
 								$(document).ready(function(){
-								$("#datepicker1").datepicker({dateFormat:"dd-mm-yyyy",changeMonth:!0,changeYear:!0,minDate:"<?php echo date("d-m-Y"); ?>",onSelect:function(e){
+								$("#datepicker1").datepicker({dateFormat:"dd/mm/yy",changeMonth:!0,changeYear:!0,minDate:"<?php echo date("d/m/Y"); ?>",onSelect:function(e){
 								$("#datepicker2").datepicker("option","minDate",e),
 								$("#datepicker2").val("")}});
-								$("#datepicker2").datepicker({dateFormat:"dd-mm-yyyy",changeMonth:!0,changeYear:!0,minDate:"<?php echo date("d-m-Y"); ?>",onSelect:function(e){""==$("#datepicker1").val()&&(alert("Please select check-in date first."),$("#datepicker2").val(""))}});
+								$("#datepicker2").datepicker({dateFormat:"dd/mm/yy",changeMonth:!0,changeYear:!0,minDate:"<?php echo date("d/m/y"); ?>",onSelect:function(e){""==$("#datepicker1").val()&&(alert("Please select check-in date first."),$("#datepicker2").val(""))}});
 							});
 						   </script>
 						</div>

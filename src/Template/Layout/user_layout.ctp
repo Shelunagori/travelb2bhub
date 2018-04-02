@@ -184,43 +184,6 @@ margin-top: 5px !important;
 	{
 		background: #057F8A !important;
  	}
-	
-.btn-info
-{
-	background-color:#1295A2 !important;
-	color:#FFF;
-	border-color:#1295A2 !important;
-}
-.btn-danger
-{
-	background-color:#FB6542 !important;
-	color:#FFF;
-	border-color:#FB6542 !important;
-}
-.btn-warning
-{
-	background-color:#606062 !important;
-	color:#FFF;
-	border-color:#606062 !important;
-}
-.btn-success
-{
-	background-color:#6FB98F !important;
-	color:#FFF;
-	border-color:#6FB98F !important;
-}
-.btn-successto
-{
-	background-color:#C9A66B !important;
-	color:#FFF;
-	border-color:#C9A66B !important;
-}
-.btn-successtoNew
-{
-	background-color:#66A5AD !important;
-	color:#FFF;
-	border-color:#66A5AD !important;
-}
 </style>
 <style>
  
