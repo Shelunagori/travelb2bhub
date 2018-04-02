@@ -75,7 +75,7 @@ fieldset {
 }
 legend{
 	margin-left: 20px;	
-	 color:#144277; 
+	 //color:black; 
 	//color:#144277c9; 
 	font-size: 17px;
 	margin-bottom: 0px;
@@ -481,7 +481,7 @@ $controller=$this->request->params['controller'];
   <div class="content-wrapper">
 	 <section class="content">
 		<div class="row">
-			<?= $this->Flash->render() ?>
+			<?php echo  $this->Flash->render() ?>
 			<?php echo $this->fetch('content'); ?>
 		</div>
 	 </section>

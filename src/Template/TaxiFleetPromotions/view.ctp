@@ -32,9 +32,6 @@ if ($err) {
 	<div class="col-md-12">
 			<div class="box box-primary">
 				<div class="box-body"> 
-					<fieldset>
-						<legend style="color:#369FA1;text-align:center;"><b> &nbsp; <?= __('TaxiFleet Promotion Details ') ?> &nbsp;  </b></legend>
-					<div class="box-body">
 					<?php foreach($taxiFleetPromotion as $taxiFleetPromotion):
 									$vehicleList='';
 									$x=0;
@@ -69,44 +66,48 @@ if ($err) {
 											$stateList.=$states->state->state_name;
 											$z++;
 										}
-					?>
-						<div class="row">
-									<div class="col-md-12">
-										<div class="col-md-4">
-											<?= $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'width:300px;height:220px;']) ?>
-											
+										?>
+									<div class="row">
+										<div class="col-md-12">
+											<h3><?= h($taxiFleetPromotion->title) ?></h3>
 										</div>
-										<div class="col-md-8">
-											<div class="row">
-												<div class="col-md-2">
-													<label><?= __('Seller Name') ?></label>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="col-md-6">
+												<?= $this->Html->image('../images/8.jpg',['style'=>'width:100%;']) ?>
+											</div>
+										
+										<div class="col-md-6">
+										<fieldset>
+												<div class="row col-md-12">
+													<div class="col-md-3">Seller Name </div><div class="col-md-1">:</div>		
+														<div class="col-md-8"><label><u>
+														<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?></u>
+																	<?php
+																		if($taxiFleetPromotion->user_rating==0)
+																		{
+																			echo "";
+																		}
+																		else{
+																			echo "( ";
+																			for($i=0;$i<$taxiFleetPromotion->user_rating;$i++)
+																			{
+																				echo "<i class='fa fa-star' style='font-size:10px;color:#959191;'></i>";
+																				if($i==0)
+																				{
+																					echo "";
+																				}
+																			}
+																			echo " )";
+																			}
+																	?>
+														</label>
+														</div>					
 													</div>
-												<div class="col-md-4">
-													<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?>
-													<?php
-														if($taxiFleetPromotion->user_rating==0)
-														{
-															echo "";
-														}
-														else{
-															echo "(";
-															for($i=0;$i<$taxiFleetPromotion->user_rating;$i++)
-															{
-																echo "<i class='fa fa-star' style='font-size:10px;'></i> ";
-																if($i==0)
-																{
-																	echo "";
-																}
-															}
-															echo ")";
-															}
-													?>
-												</div>
-												<div class="col-md-2">
-													<label><?= __('Title') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= h($taxiFleetPromotion->title) ?>
+											<div class="row col-md-12">
+												<div class="col-md-2"><?= __('Vehicle Type') ?></div><div class="col-md-1">:</div>		
+												<div class="col-md-9"><label style="color:#1295A2"><?= h($taxiFleetPromotion->price_master->price);?> &#8377;</label>
 												</div>
 											</div>
 											<div class="row">
@@ -166,8 +167,9 @@ if ($err) {
 												</div>
 											</div>
 										</div>
-									</div>
-								</div><br>
+									</fieldset>
+								</div>
+							</div>
 											<div class="row">
 												<div class="col-md-12">
 												<div class="col-md-4">
