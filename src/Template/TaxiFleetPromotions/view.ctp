@@ -27,6 +27,25 @@ if ($err) {
 	//pr($hotelPromotion);exit;
 }
 ?>
+<style>
+.col-md-3{
+	
+	color:#838784;
+	font-weight:bold;
+}
+.contact{
+	border-radius:20px;
+	width:130px;
+	text-align:center;
+	background-color:#1295A2;
+}
+.fleet{
+	font-size:25px;	
+	background-color:white;
+	color:#909591;
+	border:0px;
+}
+</style>
 <section class="content">
 <div class="row">
 	<div class="col-md-12">
@@ -50,10 +69,7 @@ if ($err) {
 											if($y>=1){
 												$cityList.=' , ';
 											}
-											@$cityList.=$cities->city->name;
-											if($y>1){
-												$cityList.=' , ';
-											}
+											$cityList.=$cities->city->name;
 											$y++;
 										}
 									$stateList='';
@@ -67,128 +83,260 @@ if ($err) {
 											$z++;
 										}
 										?>
-									<div class="row">
-										<div class="col-md-12">
-											<h3><?= h($taxiFleetPromotion->title) ?></h3>
+										<div class="row">
+											<div class="col-md-6">
+												<h3><?= h($taxiFleetPromotion->title) ?></h3>
+											</div>
+											<div class="col-md-6">
+												<div class="row pull-right">
+													<input type="hidden" name="taxifleet_id" value="<?php echo $taxiFleetPromotion->id; ?>">
+														<div class="row col-md-12">
+														<div class="col-md-3">
+														<?php 
+														echo $this->Html->link('<i class="fa fa-eye fleet"></i>','/TaxiFleetPromotions/view/'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs ','style'=>'background-color:white;border:0px;'));?>
+														</div>
+														<div class="col-md-3">
+														<?php
+														//pr($taxiFleetPromotion);
+															$dataUserId=$taxiFleetPromotion->user_id;
+															$isLiked=$taxiFleetPromotion->isLiked;
+															$issaved=$taxiFleetPromotion->issaved;
+															//-- LIKES DISLIKE
+															if($isLiked=='no'){
+																echo $this->Form->button('<i class="fa fa-heart-o like fleet" > </i>',['class'=>'btn btn-xs likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
+															}
+															if($isLiked=='yes'){
+																echo $this->Form->button('<i class="fa fa-heart-o like fleet" > </i>',['class'=>'btn btn-danger btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
+															}
+														?>
+														</div>
+														<div class="col-md-3">
+															<?php 
+															//-- Save Unsave
+															if($issaved=='1'){
+																echo $this->Form->button('<i class="fa fa-bookmark-o fleet"></i>',['class'=>'btn btn-danger btn-xs  ','value'=>'button','type'=>'submit','name'=>'savetaxifleet','style'=>'background-color:white;color:black;border:0px;']);
+															}
+															if($issaved=='0'){
+																echo $this->Form->button('<i class="fa fa-bookmark-o fleet"></i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'savetaxifleet']);
+															}
+															?>
+														</div>
+														<div class="col-md-3">
+											<?php echo $this->Html->link('<i class="fa fa-flag-o fleet"></i>','#'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#reportmodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>
+															<!-------Report Modal Start--------->
+												<div id="reportmodal<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
+													<div class="modal-dialog modal-md">
+														<!-- Modal content-->
+															<div class="modal-content">
+															  <div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																<h3 class="modal-title">Report</h3>
+															  </div>
+																<div class="modal-body" style="height:150px;margin-top:30px;">
+																	<div class="row">
+																		<div class="col-md-12">
+																			<div class="col-md-3">
+																				<label>
+																					Select Reason
+																				</label>
+																			</div>
+																			<div class="col-md-9">
+																				<div class="input-field reason_list">
+																					<?php 
+																						$options=array();
+																						foreach($reasonslist as $sts)
+																						{
+																							$options[] = ['value'=>$sts->id,'text'=>$sts->reason];
+																						};
+																						echo $this->Form->control('report_reason_id', ['label'=>false, "type"=>"select",'options' =>$options, "class"=>"form-control select2 reason_box","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);
+																					?>
+																				</div>
+																			</div>
+																		</div>
+																	</div><br>
+																	<div class="row report_text"  style="display:none;">
+																		<div class="col-md-12">
+																			<div class="col-md-3">
+																			</div>
+																			<div class="col-md-9">
+																				<div >
+																				<textarea class="form-control " rows="3" type="text" placeholder="Enter Your Suggestion here..." name="comment"></textarea>	
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																</div>
+																<div class="modal-footer" style="height:60px;">
+																	<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
+																	<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																</div>
+															</div>
+														</div>
+													</div>
+												</div>
+											<!-------Report Modal End--------->	
+												</div>
+											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-12">
 											<div class="col-md-6">
-												<?= $this->Html->image('../images/8.jpg',['style'=>'width:100%;']) ?>
+												<?= $this->Html->image($taxiFleetPromotion->full_image,['style'=>'width:100%;height:300px;']) ?>
 											</div>
-										
 										<div class="col-md-6">
 										<fieldset>
-												<div class="row col-md-12">
-													<div class="col-md-3">Seller Name </div><div class="col-md-1">:</div>		
-														<div class="col-md-8"><label><u>
-														<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?></u>
-																	<?php
-																		if($taxiFleetPromotion->user_rating==0)
-																		{
-																			echo "";
-																		}
-																		else{
-																			echo "( ";
-																			for($i=0;$i<$taxiFleetPromotion->user_rating;$i++)
-																			{
-																				echo "<i class='fa fa-star' style='font-size:10px;color:#959191;'></i>";
-																				if($i==0)
-																				{
-																					echo "";
-																				}
-																			}
-																			echo " )";
-																			}
-																	?>
-														</label>
-														</div>					
-													</div>
 											<div class="row col-md-12">
-												<div class="col-md-2"><?= __('Vehicle Type') ?></div><div class="col-md-1">:</div>		
-												<div class="col-md-9"><label style="color:#1295A2"><?= h($taxiFleetPromotion->price_master->price);?> &#8377;</label>
+												<div class="col-md-3">Seller Name </div><div class="col-md-1">:</div>		
+													<div class="col-md-8">
+													<label>
+													<u>
+													<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?>
+													</u>
+														<?php
+															if($taxiFleetPromotion->user_rating==0)
+															{
+																echo "";
+															}
+															else{
+																echo "( ";
+																for($i=0;$i<$taxiFleetPromotion->user_rating;$i++)
+																{
+																	echo "<i class='fa fa-star' style='font-size:10px;color:#959191;'></i>";
+																	if($i==0)
+																	{
+																		echo "";
+																	}
+																}
+																echo " )";
+																}
+															?>
+													</label>
+												</div>					
+											</div>
+											<div class="row col-md-12">
+												<div class="col-md-3"><?= __('Vehicle Type') ?></div><div class="col-md-1">:</div>		
+												<div class="col-md-8"><label><?= h($vehicleList);?></label>
+											</div>
+											</div>
+											<div class="row col-md-12">
+												<div class="col-md-3"><?= __('Duration') ?></div><div class="col-md-1">:</div>		
+												<div class="col-md-8"><label><?= h($taxiFleetPromotion->price_master->week);?></label>
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-md-2">
-													<label><?= __('Vehicle Type') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= h($vehicleList);?>
-												</div>
-												<div class="col-md-2">
-													<label><?= __('Promotion Duration') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= h($taxiFleetPromotion->price_master->week); ?>
+											<div class="row col-md-12">
+												<div class="col-md-3"><?= __('Total Charges') ?></div><div class="col-md-1">:</div>		
+												<div class="col-md-8"><label  style="color:#1295A2"><?= h($taxiFleetPromotion->price_master->price);?> &#8377;</label>
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-md-2">
-													<label><?= __('Total Charges') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= h($taxiFleetPromotion->price_master->price); ?> &#8377;
-												</div>
-												<div class="col-md-2">
-													<label><?= __('Visible Date') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= date('d-M-Y',strtotime($taxiFleetPromotion->visible_date)); ?>
+											<div class="row col-md-12">
+												<div class="col-md-3"><?= __('Visible Date') ?></div><div class="col-md-1">:</div>		
+												<div class="col-md-8"><label ><?= date('d-M-Y',strtotime($taxiFleetPromotion->visible_date)); ?></label>
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-md-2">
-													<label><?= __('Cities') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= h($cityList); ?> 
-													</div>
-												<div class="col-md-2">
-													<label><?= __('State') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= h($stateList); ?> 
+											<div class="row col-md-12">
+												<div class="col-md-3"><?= __('Cities') ?></div><div class="col-md-1">:</div>		
+												<div class="col-md-8"><label ><?= h($cityList); ?></label>
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-md-2">
-													<label><?= __('Country') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= h($taxiFleetPromotion->country->country_name); ?>
+											<div class="row col-md-12">
+												<div class="col-md-3"><?= __('States') ?></div><div class="col-md-1">:</div>		
+												<div class="col-md-8"><label ><?= h($stateList); ?> </label>
 												</div>
-												<div class="col-md-2">
-													<label><?= __('Total Likes') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= h($taxiFleetPromotion->total_likes); ?>
+											</div>
+											<div class="row col-md-12">
+												<div class="col-md-3"><?= __('Country') ?></div><div class="col-md-1">:</div>		
+												<div class="col-md-8"><label ><?= h($taxiFleetPromotion->country->country_name); ?> </label>
 												</div>
+											</div><br>
+											<div class="row col-md-12 text-center">
+											<?php
+											echo $this->Html->link('<b>Contact Info</b>','address'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-success btn-md contact','data-target'=>'#deletemodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal'));?>
+											</div>
+												<!-------Contact Details Modal --------->
+												<div id="deletemodal<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
+													<div class="modal-dialog" style="width:30%">
+														<!-- Modal content-->
+															<div class="modal-content">
+															  <div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																	<h4 class="modal-title">
+																	Seller Details
+																	</h4>
+																	</div>
+																	<div class="modal-body" style="height:100px;">
+																		<div class="row col-md-12">
+																			<div class="col-md-3">Seller Name </div><div class="col-md-1">:</div>		
+																			<div class="col-md-8">
+																				<label>
+																					<u>
+																					<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?>
+																					</u>
+																					<?php
+																					if($taxiFleetPromotion->user_rating==0)
+																					{
+																						echo "";
+																					}
+																					else{
+																						echo "( ";
+																						for($i=0;$i<$taxiFleetPromotion->user_rating;$i++)
+																						{
+																							echo "<i class='fa fa-star' style='font-size:10px;color:#959191;'></i>";
+																							if($i==0)
+																							{
+																								echo "";
+																							}
+																						}
+																						echo " )";
+																						}
+																					?>
+																				</label>
+																			</div>					
+																		</div>
+																		<div class="row col-md-12">
+																			<div class="col-md-3">Mobile No </div>
+																			<div class="col-md-1">:	</div>
+																			<div class="col-md-8">
+																			<label><?= h($taxiFleetPromotion->user->mobile_number);?></label>
+																			</div>
+																		</div>
+																		<div class="row col-md-12">
+																			<div class="col-md-3">Email</div>
+																			<div class="col-md-1">:	</div>
+																			<div class="col-md-8">
+																			<label><?= h($taxiFleetPromotion->user->email);?></label>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="modal-footer" style="height:60px;">
+																	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
+																</div>
+																</div>
+															</div>
+														</div>
+											<!-------Contact Details Modal End--------->	
+												</fieldset>
 											</div>
 										</div>
-									</fieldset>
+									</div>
+								<div class="row">
+									<div class="col-md-12">
+											<label><b><?= __('Fleet Details') ?></b></label>
+									</div>
 								</div>
-							</div>
-											<div class="row">
-												<div class="col-md-12">
-												<div class="col-md-4">
-												</div>
-												<div class="col-md-1">
-													<label><?= __('Fleet Details') ?></label>
-												</div>
-												<div class="col-md-7">
-													<?= $this->Text->autoParagraph(h($taxiFleetPromotion->fleet_detail)); ?>
-												</div>
-												</div>
-											</div>
-										</div>
-									</fieldset>
+								<div class="row">
+									<div class="col-md-12">
+										<?= $this->Text->autoParagraph(h($taxiFleetPromotion->fleet_detail)); ?>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</section>
+					</fieldset>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 <?php endforeach; ?>
 
    

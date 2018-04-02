@@ -293,7 +293,7 @@ fieldset{
 					<div class="row">
 						<div class="col-md-12">
 							<div class="col-md-4">
-							<?= $this->Html->image('../images/8.jpg',['style'=>'width:100%;']) ?>
+							<?= $this->Html->image($taxiFleetPromotion->full_image,['style'=>'width:100%;height:250px;']) ?>
 							</div>
 							<div class="col-md-8">
 							<input type="hidden" name="taxifleet_id" value="<?php echo $taxiFleetPromotion->id; ?>">
@@ -381,7 +381,7 @@ fieldset{
 																</div>
 																<div class="modal-footer" style="height:60px;">
 																	<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
-																	<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																	<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
 																</div>
 															</div>
 														</div>
@@ -457,8 +457,8 @@ fieldset{
 											</div>					
 										</div>
 										<div class="row pull-right ">
-										<span style="color:#1295A2;border:0px; font-size:22px;" ><b>View Details </b>
-										<i class="fa fa-chevron-right" style="font-size:15px;"></i></span>
+										<a href="view/<?php echo $taxiFleetPromotion->id; ?>" ><span style="color:#1295A2;border:0px; font-size:22px;" ><b>View Details </b>
+										<i class="fa fa-chevron-right" style="font-size:15px;"></i></span></a>
 										</div>
 									</div>	
 								</div>	
