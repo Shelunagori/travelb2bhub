@@ -69,7 +69,7 @@ if ($err) {
 											if($y>=1){
 												$cityList.=' , ';
 											}
-											$cityList.=$cities->city->name;
+											@$cityList.=$cities->city->name;
 											$y++;
 										}
 									$stateList='';
@@ -318,7 +318,7 @@ if ($err) {
 												</fieldset>
 											</div>
 										</div>
-									</div>
+									</div><span class="help-block"></span>
 								<div class="row">
 									<div class="col-md-12">
 											<label><b><?= __('Fleet Details') ?></b></label>

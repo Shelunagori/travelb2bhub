@@ -28,7 +28,8 @@ if ($err) {
 }
 ?>
 <style>
-.col-md-3{
+
+.col-md-4{
 	
 	color:#838784;
 	font-weight:bold;
@@ -51,8 +52,7 @@ if ($err) {
 	<div class="col-md-12">
 			<div class="box box-primary">
 				<div class="box-body"> 
-						<div class="box-body">
-						<?php foreach($postTravlePackage as $postTravlePackage):
+							<?php foreach($postTravlePackage as $postTravlePackage):
 									$CategoryList='';
 									$x=0;
 									foreach($postTravlePackage->post_travle_package_rows as $category)
@@ -183,137 +183,192 @@ if ($err) {
 									</div>
 								<div class="row">
 									<div class="col-md-12">
-										<div class="col-md-4">
+										<div class="col-md-6">
 											<?= $this->Html->image($postTravlePackage->full_image,['style'=>'width:100%;height:300px;']) ?>
 										</div>
-										<div class="col-md-8">
-											<div class="row">
-												<div class="col-md-2">
-													<label><?= __('Seller Name') ?></label>
+										<div class="col-md-6">
+											<fieldset>
+												<div class="row col-md-12">
+													<div class="col-md-4">Seller Name </div><div class="col-md-1">:</div>		
+													<div class="col-md-7">
+														<label>
+															<u >
+															<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?>
+															</u>
+																<?php
+																	if($postTravlePackage->user_rating==0)
+																	{
+																		echo "";
+																	}
+																	else{
+																		echo "( ";
+																		for($i=0;$i<$postTravlePackage->user_rating;$i++)
+																		{
+																			echo "<i class='fa fa-star' style='font-size:10px;color:#959191;'></i>";
+																			if($i==0)
+																			{
+																				echo "";
+																			}
+																		}
+																		echo " )";
+																		}
+																	?>
+														</label>
+													</div>					
+												</div>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Category') ?></div>
+													<div class="col-md-1">:</div>		
+													<div class="col-md-7">
+														<label><?= h($CategoryList);?></label>
 													</div>
-												<div class="col-md-4">
-													<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?>
+												</div>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Cities') ?></div>
+													<div class="col-md-1">:</div>		
+													<div class="col-md-7">
+														<label><?= h($cityList); ?></label>
+													</div>
+												</div>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Package Duration') ?></div>
+													<div class="col-md-1">:</div>		
+													<div class="col-md-7">
+														<label style="color:#FB6542">	<?= h($postTravlePackage->duration_day_night) ?></label>
+													</div>
+												</div>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Starting Price') ?></div>
+													<div class="col-md-1">:</div>		
+													<div class="col-md-7">
+														<label style="color:#1295A2"><?= $this->Number->format($postTravlePackage->starting_price).' &#8377;'; ?></label>
+													</div>
+												</div>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Valid Till') ?></div>
+													<div class="col-md-1">:</div>		
+													<div class="col-md-7">
+														<label><?= date('d-M-Y',strtotime($postTravlePackage->valid_date) );?></label>
+													</div>
+												</div>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Promotion Duration') ?></div>
+													<div class="col-md-1">:</div>		
+													<div class="col-md-7">
+														<label>	<?=h($postTravlePackage->price_master->week)?></label>
+													</div>
+												</div>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Total Charges') ?></div>
+													<div class="col-md-1">:</div>		
+													<div class="col-md-7">
+														<label>	<?= $this->Number->format($postTravlePackage->price_master->price).' &#8377;'?> </label>
+													</div>
+												</div>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Visible Date') ?></div>
+													<div class="col-md-1">:</div>		
+													<div class="col-md-7">
+														<label>	<?= date('d-M-Y',strtotime($postTravlePackage->visible_date) );?> </label>
+													</div>
+												</div>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Country') ?></div>
+													<div class="col-md-1">:</div>		
+													<div class="col-md-7">
+														<label>	<?= h($countryList); ?></label>
+													</div>
+												</div>
+												<div class="row col-md-12 text-center">
 													<?php
-														if($postTravlePackage->user_rating==0)
-														{
-														echo "";
-														}
-														else{
-														echo "(";
-														for($i=0;$i<$postTravlePackage->user_rating;$i++)
-														{
-															echo "<i class='fa fa-star' style='font-size:10px;'></i> ";
-															if($i==0)
-															{
-																echo "";
-															}
-														}
-														echo ")";
-														}
-													?>
+													echo $this->Html->link('<b>Contact Info</b>','address'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-success btn-md contact','data-target'=>'#deletemodal'.$postTravlePackage->id,'data-toggle'=>'modal'));?>
 												</div>
-												<div class="col-md-2">
-													<label><?= __('Title') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= h($postTravlePackage->title) ?>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-2">
-													<label><?= __('Package Category') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= h($CategoryList);?>
-												</div>
-												<div class="col-md-2">
-													<label><?= __('Valid Date') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= date('d-M-Y',strtotime($postTravlePackage->valid_date) );?>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-2">
-													<label><?= __('Package Duration') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= h($postTravlePackage->duration_day_night) ?>
-												</div>
-												<div class="col-md-2">
-													<label><?= __('Starting Price') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= $this->Number->format($postTravlePackage->starting_price).' &#8377;'; ?>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-2">
-													<label><?= __('Promotion Duration') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?=h($postTravlePackage->price_master->week)?>
-												</div>
-												<div class="col-md-2">
-													<label><?= __('Total Charges') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= $this->Number->format($postTravlePackage->price_master->price).' &#8377;'?> 
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-2">
-													<label><?= __('Visible Date') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= date('d-M-Y',strtotime($postTravlePackage->visible_date) );?>
-												</div>
-												<div class="col-md-2">
-													<label><?= __('Like Count') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= $this->Number->format($postTravlePackage->like_count) ?>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-md-2">
-													<label><?= __('Country') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= h($countryList); ?>
-												</div>
-												<div class="col-md-2">
-													<label><?= __('City') ?></label>
-													</div>
-												<div class="col-md-4">
-													<?= h($cityList); ?>
-												</div>
-											</div>
+												<!-------Contact Details Modal --------->
+												<div id="deletemodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
+													<div class="modal-dialog" style="width:30%">
+														<!-- Modal content-->
+															<div class="modal-content">
+															  <div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																	<h4 class="modal-title">
+																	Seller Details
+																	</h4>
+																	</div>
+																	<div class="modal-body" style="height:100px;">
+																		<div class="row col-md-12">
+																			<div class="col-md-3">Seller Name </div><div class="col-md-1">:</div>		
+																			<div class="col-md-8">
+																				<label>
+																					<u>
+																					<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?>
+																					</u>
+																					<?php
+																					if($postTravlePackage->user_rating==0)
+																					{
+																						echo "";
+																					}
+																					else{
+																						echo "( ";
+																						for($i=0;$i<$postTravlePackage->user_rating;$i++)
+																						{
+																							echo "<i class='fa fa-star' style='font-size:10px;color:#959191;'></i>";
+																							if($i==0)
+																							{
+																								echo "";
+																							}
+																						}
+																						echo " )";
+																						}
+																					?>
+																				</label>
+																			</div>					
+																		</div>
+																		<div class="row col-md-12">
+																			<div class="col-md-3">Mobile No </div>
+																			<div class="col-md-1">:	</div>
+																			<div class="col-md-8">
+																			<label><?= h($postTravlePackage->user->mobile_number);?></label>
+																			</div>
+																		</div>
+																		<div class="row col-md-12">
+																			<div class="col-md-3">Email</div>
+																			<div class="col-md-1">:	</div>
+																			<div class="col-md-8">
+																			<label><?= h($postTravlePackage->user->email);?></label>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="modal-footer" style="height:60px;">
+																	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
+																</div>
+																</div>
+															</div>
+														</div>
+											<!-------Contact Details Modal End--------->	
+											</fieldset>
 										</div>
 									</div>
-								</div>
-							<br>
-							<div class="row">
-								<div class="col-md-4">
-								</div>
-								<div class="col-md-1">
-									<label><?= __('Package Detail') ?></label>
-								</div>
-								<div class="col-md-7">
-									<?= $this->Text->autoParagraph(h($postTravlePackage->package_detail)); ?>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-4">
-								</div>
-									<div class="col-md-1">
-									<label><?= __('Excluded Detail') ?></label>
-									</div>
-									<div class="col-md-7">
-											<?= $this->Text->autoParagraph(h($postTravlePackage->excluded_detail)); ?>
+								</div><span class="help-block"></span>
+								<div class="row">
+									<div class="col-md-12">
+											<label><b><?= __('Package Details') ?></b></label>
 									</div>
 								</div>
-							</div>
+								<div class="row">
+									<div class="col-md-12">
+										<?= $this->Text->autoParagraph(h($postTravlePackage->package_detail)); ?>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+											<label><b><?= __('Excluded Details') ?></b></label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<?= $this->Text->autoParagraph(h($postTravlePackage->excluded_detail)); ?>
+									</div>
+								</div>
 						<?php endforeach; ?>
 					</fieldset>
 				</div>

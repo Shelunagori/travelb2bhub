@@ -310,6 +310,7 @@ fieldset{
 									$CategoryList.=$category->post_travle_package_category->name;
 								$x++;}
 						?>
+						
 						<fieldset>
 							<form method="post">
 								<div class="row">
