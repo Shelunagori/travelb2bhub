@@ -16,7 +16,7 @@ $conn = ConnectionManager::get('default');
 <div class="container-fluid" id="requestlist">
 <div class="row equal_column" > 
     <div class="col-md-12" style="background-color:#"> 
-		<br> 
+		 
 		<?php echo  $this->Flash->render() ?>
 	</div>
 	</div>

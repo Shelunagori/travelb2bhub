@@ -28,7 +28,7 @@ legend
 <div class="container-fluid" id="requestlist">
 <div class="row equal_column" > 
     <div class="col-md-12"> 
-		<br>
+		 
 		<?php echo $this->element('subheader');?>
 		<?php echo  $this->Flash->render() ?>
 	</div>
