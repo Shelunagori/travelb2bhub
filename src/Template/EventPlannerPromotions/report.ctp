@@ -444,7 +444,7 @@ fieldset{
 							<?php }}					
 							else
 							{
-								echo"<tr><th colspan='10' style='text-align:center'>No Record Found</th></tr>";
+								echo"<div class='row col-md-12 text-center'><tr><th colspan='10' ><span>No Record Found</span></th></tr></div>";
 							}							?>
 						</tbody>
 					</table>
