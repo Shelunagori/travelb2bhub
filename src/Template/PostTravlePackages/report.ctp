@@ -127,20 +127,27 @@ fieldset{
 	margin:5px !important;
 }
 .fleet{
-	font-size:25px;	
+	font-size:21px;	
 	background-color:white;
 	color:#909591;
 	border:0px;
 }
-.p{
-	color:#909591;
+.unfleet{
+	font-size:21px;	
+	background-color:white;
+	color:#d33c44;
+	border:0px;
+}
+p{ 
+	text-align:center;
+	font-size:10px;
 }
 </style>
 <div class="row" >
-		<div class="col-md-12">
-		
-		</div>
+	<div class="col-md-12">
+	
 	</div>
+</div>
 <div  class="container-fluid">
 <div class="box box-primary">
 	<div class="row" >
@@ -197,8 +204,8 @@ fieldset{
 				<div class="modal-footer" style="height:60px;">
 					  <div class="row">
 							<div class="col-md-12 text-center">
-								<input type="submit" class="btn btn-primary btn-sm">
-								<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-danger btn-sm">Reset</a>
+								<input type="submit" class="btn btn-info btn-sm">
+								<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-warning  btn-sm">Reset</a>
 							</div>
 					  </div>
 				</div>
@@ -244,7 +251,7 @@ fieldset{
 										{
 											$options[] = ['value'=>$sts->id,'text'=>$sts->name];
 										};
-										echo $this->Form->control('package_category_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>'Select...']);?>
+										echo $this->Form->control('category_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>'Select...']);?>
 								 </div>
 								</div>	
 							</div>
@@ -289,15 +296,16 @@ fieldset{
 							</div>
 						  </div>
 						<div class="modal-footer">
-							<button class="btn btn-primary btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
-							<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-danger btn-sm">Reset</a>
+							<button class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
+							<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-warning  btn-sm">Reset</a>
 						</div>
 					</form>
 				</div>
 			  </div>
 			</div>
 			
-			<?php $i=1; 
+			<?php $i=1;
+//pr($postTravlePackages); exit;			
 					if(!empty($postTravlePackages)){
 						foreach ($postTravlePackages as $postTravlePackage): 
 							$CategoryList='';
@@ -308,190 +316,201 @@ fieldset{
 										$CategoryList.=' , ';
 									}
 									$CategoryList.=$category->post_travle_package_category->name;
-								$x++;}
+									$x++;
+								}
 						?>
 						
-						<fieldset>
-							<form method="post">
-								<div class="row">
-									<div class="col-md-12">
-										<div class="col-md-4">
-										<?= $this->Html->image($postTravlePackage->full_image,['style'=>'width:100%;height:250px;']) ?>
-										</div>
-										<div class="col-md-8">
-										<input type="hidden" name="posttravle_id" value="<?php echo $postTravlePackage->id; ?>">
-											<div class="row">
-												<div class="col-md-6 pull-left">
-														<h3><?= h($postTravlePackage->title) ?></h3>
-												</div>
-												<div class="col-md-6 pull-right">
-													<div class="row col-md-12">
-														<div class="col-md-3">
-														<?php 
-														echo $this->Html->link('<i class="fa fa-eye fleet"></i>','/PostTravlePackages/view/'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs ','style'=>'background-color:white;border:0px;'));?>
-														</div>
-														<div class="col-md-3">
-														<?php
-														//pr($taxiFleetPromotion);
-															$dataUserId=$postTravlePackage->user_id;
-															$isLiked=$postTravlePackage->isLiked;
-															$issaved=$postTravlePackage->issaved;
-															//-- LIKES DISLIKE
-															if($isLiked=='no'){
-																echo $this->Form->button('<i class="fa fa-heart-o like fleet" > </i>',['class'=>'btn btn-xs likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
-															}
-															if($isLiked=='yes'){
-																echo $this->Form->button('<i class="fa fa-heart-o like fleet" > </i>',['class'=>'btn btn-danger btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
-															}
-														?>
-														</div>
-														<div class="col-md-3">
-															<?php 
-															//-- Save Unsave
-															if($issaved=='1'){
-																echo $this->Form->button('<i class="fa fa-bookmark-o fleet"></i>',['class'=>'btn btn-danger btn-xs  ','value'=>'button','type'=>'submit','name'=>'saveposttravle','style'=>'background-color:white;color:black;border:0px;']);
-															}
-															if($issaved=='0'){
-																echo $this->Form->button('<i class="fa fa-bookmark-o fleet"></i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'saveposttravle']);
-															}
-															?>
-															</div>
-														<div class="col-md-3">
-															<?php echo $this->Html->link('<i class="fa fa-flag-o fleet"></i>','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#reportmodal'.$postTravlePackage->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>
-																			<!-------Report Modal Start--------->
-																<div id="reportmodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
-																	<div class="modal-dialog modal-md">
-																		<!-- Modal content-->
-																			<div class="modal-content">
-																			  <div class="modal-header">
-																				<button type="button" class="close" data-dismiss="modal">&times;</button>
-																				<h3 class="modal-title">Report</h3>
-																			  </div>
-																				<div class="modal-body" style="height:150px;margin-top:30px;">
-																					<div class="row">
-																						<div class="col-md-12">
-																							<div class="col-md-3">
-																								<label>
-																									Select Reason
-																								</label>
-																							</div>
-																							<div class="col-md-9">
-																								<div class="input-field reason_list">
-																									<?php 
-																										$options=array();
-																										foreach($reasonslist as $sts)
-																										{
-																											$options[] = ['value'=>$sts->id,'text'=>$sts->reason];
-																										};
-																										echo $this->Form->control('report_reason_id', ['label'=>false, "type"=>"select",'options' =>$options, "class"=>"form-control select2 reason_box","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);
-																									?>
-																								</div>
-																							</div>
-																						</div>
-																					</div><br>
-																					<div class="row report_text"  style="display:none;">
-																						<div class="col-md-12">
-																							<div class="col-md-3">
-																							</div>
-																							<div class="col-md-9">
-																								<div >
-																								<textarea class="form-control " rows="3" type="text" placeholder="Enter Your Suggestion here..." name="comment"></textarea>	
-																								</div>
-																							</div>
-																						</div>
-																					</div>
-																				</div>
-																				<div class="modal-footer" style="height:60px;">
-																					<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
-																					<a href="<?php echo $this->Url->build(array('controller'=>'PostTravelPackages','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															<!-------Report Modal End--------->	
-															<div style="display:none;">
-															<?php 
-																if($dataUserId==$user_id){
-																	echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal'.$postTravlePackage->id,'data-toggle'=>'modal'));?>
-												<!-------Delete Modal Start--------->
-																	<div id="deletemodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
-																		<div class="modal-dialog modal-md" >
-																			<!-- Modal content-->
-																				<div class="modal-content">
-																				  <div class="modal-header" style="height:100px;">
-																						<button type="button" class="close" data-dismiss="modal">&times;</button>
-																						<h4 class="modal-title">
-																						Are You Sure, you want to delete this promotion ?
-																						</h4>
-																					</div>
-																					<div class="modal-footer" style="height:60px;">
-																						<button type="submit" class="btn btn-danger" name="removeposttravle" value="yes" >Yes</button>
-																						<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
-																					</div>
-																				</div>
-																			</div>
-																		</div>
-																<!-------Delete Modal End--------->	
-																<?php }?>
-															</div>
-														</div>
+<fieldset>
+	<form method="post">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="col-md-4">
+				<?= $this->Html->image($postTravlePackage->full_image,['style'=>'width:100%;height:250px;']) ?>
+				</div>
+				<div class="col-md-8">
+				<input type="hidden" name="posttravle_id" value="<?php echo $postTravlePackage->id; ?>">
+				<div class="row">
+					
+					<div class="col-md-6 pull-right text-center ">
+						 
+						<div class="col-md-3">
+						 <i style="font-size: 24px !important;" class="fa fa-eye fleet"></i> 
+ 						<p>
+							<?php echo $postTravlePackage->total_views; ?>
+							<br> 
+							Views
+						</p>
+						</div>
+						<div class="col-md-3">
+						<?php
+						//
+							$dataUserId=$postTravlePackage->user_id;
+							$isLiked=$postTravlePackage->isLiked;
+							$issaved=$postTravlePackage->issaved;
+							//-- LIKES DISLIKE
+							if($isLiked=='no'){
+								echo $this->Form->button('<i class="fa fa-heart-o like fleet" > </i>',['class'=>'btn btn-xs likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
+							}
+							if($isLiked=='yes'){
+								echo $this->Form->button('<i class="fa fa-heart-o like unfleet" > </i>',['class'=>'btn  btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#000;border:0px;']);
+							}
+						?>
+						<p style="text-align:center">
+							<?php echo $postTravlePackage->total_likes; ?>
+							<br> 
+							Likes
+						</p>
+						</div>
+						<div class="col-md-3">
+							<?php 
+							//-- Save Unsave
+							if($issaved=='1'){
+								echo $this->Form->button('<i class="fa fa-bookmark-o unfleet"></i>',['class'=>'btn  btn-xs  ','value'=>'button','type'=>'submit','name'=>'saveposttravle','style'=>'background-color:white;color:black;border:0px;']);
+							}
+							if($issaved=='0'){
+								echo $this->Form->button('<i class="fa fa-bookmark-o fleet"></i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'saveposttravle']);
+							}
+							?>
+						</div>
+						<div class="col-md-3">
+						<?php echo $this->Html->link('<i class="fa fa-flag-o fleet"></i>','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn  btn-xs','data-target'=>'#reportmodal'.$postTravlePackage->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>
+										<!-------Report Modal Start--------->
+ 						</div>
+							<!-------Report Modal End--------->	
+							<div style="display:none;">
+							<?php 
+								if($dataUserId==$user_id){
+									echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn  btn-xs','data-target'=>'#deletemodal'.$postTravlePackage->id,'data-toggle'=>'modal'));?>
+				<!-------Delete Modal Start--------->
+									<div id="deletemodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
+										<div class="modal-dialog modal-md" >
+											<!-- Modal content-->
+												<div class="modal-content">
+												  <div class="modal-header" style="height:100px;">
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<h4 class="modal-title">
+														Are You Sure, you want to delete this promotion ?
+														</h4>
+													</div>
+													<div class="modal-footer" style="height:60px;">
+														<button type="submit" class="btn btn-danger" name="removeposttravle" value="yes" >Yes</button>
+														<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
 													</div>
 												</div>
-											<div class="row col-md-12">
-												<div class="col-md-3">Duration</div><div class="col-md-1">:</div>		
-												<div class="col-md-8"><label style="color:#FB6542">	<?= h($postTravlePackage->duration_day_night) ?></label>
-												</div>
-											</div>
-											<div class="row col-md-12">
-												<div class="col-md-3">Starting From</div><div class="col-md-1">:</div>		
-												<div class="col-md-8"><label style="color:#1295AB">&#8377; <?php echo number_format(h($postTravlePackage->starting_price)) ;?></label>
-												</div>
-											</div>
-											<div class="row col-md-12">
-												<div class="col-md-3">Seller Name </div><div class="col-md-1">:</div>		
-												<div class="col-md-8"><label><u>
-												<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?></u>
-															<?php
-																if($postTravlePackage->user_rating==0)
-																{
-																	echo "";
-																}
-																else{
-																	echo "( ";
-																	for($i=0;$i<$postTravlePackage->user_rating;$i++)
-																	{
-																		echo "<i class='fa fa-star' style='font-size:10px;color:#959191;'></i>";
-																		if($i==0)
-																		{
-																			echo "";
-																		}
-																	}
-																	echo " )";
-																	}
-															?>
-												</label>
-												</div>					
-											</div>
-											<div class="row col-md-12">
-												<div class="col-md-3">Category</div><div class="col-md-1">:</div>		
-												<div class="col-md-8"><label >	<?= h($CategoryList); ?></label>
-												</div>
-											</div>
-											<div class="row col-md-12">
-											<div class="col-md-3" >Visible Date</div><div class="col-md-1">:</div>		
-											<div class="col-md-8"><label><?= h(date('d-m-Y',strtotime($postTravlePackage->visible_date))); ?></label>
-											</div>					
-											</div>			
-											<div class="row pull-right ">
-											<a href="view/<?php echo $postTravlePackage->id; ?>" ><span style="color:#1295A2;border:0px; font-size:22px;" ><b>View Details </b>
-											<i class="fa fa-chevron-right" style="font-size:15px;"></i></span></a>
 											</div>
 										</div>
-									</div>
-								</div>
-							</form>
-						</fieldset>
+								<!-------Delete Modal End--------->	
+								<?php }?>
+							</div>
+						 
+					</div>
+					<div class="col-md-6 pull-left">
+						<h3><?= h($postTravlePackage->title) ?></h3>
+					</div>
+					<div id="reportmodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
+<div class="modal-dialog modal-md">
+	<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 class="modal-title">Report</h3>
+		  </div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="col-md-3">
+							<label>
+								Select Reason
+							</label>
+						</div>
+						<div class="col-md-9">
+							<div class="input-field reason_list">
+								<?php 
+									$options=array();
+									foreach($reasonslist as $sts)
+									{
+										$options[] = ['value'=>$sts->id,'text'=>$sts->reason];
+									};
+									echo $this->Form->control('report_reason_id', ['label'=>false, "type"=>"select",'options' =>$options, "class"=>"form-control select2 reason_box","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);
+								?>
+							</div>
+						</div>
+					</div>
+				</div><br>
+				<div class="row report_text"  style="display:none;">
+					<div class="col-md-12">
+						<div class="col-md-3">
+						</div>
+						<div class="col-md-9">
+							<div >
+							<textarea class="form-control " rows="3" type="text" placeholder="Enter your reason here..." name="comment"></textarea>	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer" style="height:60px;">
+				<input type="submit" class="btn btn-info btn-md" name="report_submit" value="Report">
+ 				<button type="button" class="btn btn-warning" data-dismiss="modal">Cancle</button>
+			</div>
+		</div>
+	</div>
+</div>
+					</div>
+					<div class="row col-md-12">
+						<div class="col-md-3">Duration</div><div class="col-md-1">:</div>		
+						<div class="col-md-8"><label style="color:#FB6542">	<?= h($postTravlePackage->duration_day_night) ?></label>
+						</div>
+					</div>
+					<div class="row col-md-12">
+						<div class="col-md-3">Starting From</div><div class="col-md-1">:</div>		
+						<div class="col-md-8"><label style="color:#1295AB">&#8377; <?php echo number_format(h($postTravlePackage->starting_price)) ;?></label>
+						</div>
+					</div>
+					<div class="row col-md-12">
+						<div class="col-md-3">Seller Name </div><div class="col-md-1">:</div>		
+						<div class="col-md-8"><label><u>
+						<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?></u>
+									<?php
+										if($postTravlePackage->user_rating==0)
+										{
+											echo "";
+										}
+										else{
+											echo "( ";
+											for($i=0;$i<$postTravlePackage->user_rating;$i++)
+											{
+												echo "<i class='fa fa-star' style='font-size:10px;color:#959191;'></i>";
+												if($i==0)
+												{
+													echo "";
+												}
+											}
+											echo " )";
+											}
+									?>
+						</label>
+						</div>					
+					</div>
+					<div class="row col-md-12">
+						<div class="col-md-3">Category</div><div class="col-md-1">:</div>		
+						<div class="col-md-8"><label >	<?= h($CategoryList); ?></label>
+						</div>
+					</div>
+					<div class="row col-md-12">
+					<div class="col-md-3" >Visible Date</div><div class="col-md-1">:</div>		
+					<div class="col-md-8"><label><?= h(date('d-m-Y',strtotime($postTravlePackage->visible_date))); ?></label>
+					</div>					
+					</div>			
+					<div class="row pull-right ">
+					<a href="view/<?php echo $postTravlePackage->id; ?>" ><span style="color:#1295A2;border:0px; font-size:22px;" ><b>View Details </b>
+					<i class="fa fa-chevron-right" style="font-size:15px;"></i></span></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</fieldset>
 					<?php $i++; endforeach; 
 					}	else
 					{

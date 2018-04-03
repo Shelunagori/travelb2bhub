@@ -64,37 +64,164 @@ class EventPlannerPromotionsController extends AppController
 		
 	}
 	
-    public function index()
-    {
-		$this->viewBuilder()->layout('user_layout');
-        $this->paginate = [
-            'contain' => ['Countries', 'PriceMasters', 'Users']
-        ];
-        $eventPlannerPromotions = $this->paginate($this->EventPlannerPromotions);
-
-        $this->set(compact('eventPlannerPromotions'));
-        $this->set('_serialize', ['eventPlannerPromotions']);
-    }
-
-    /**
-     * View method
-     *
-     * @param string|null $id Event Planner Promotion id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
+     
     public function view($id = null)
     {
         $this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');
+		if ($this->request->is(['patch', 'post', 'put'])) 
+		{
+			//pr($this->request->data); exit;
+			//-- REMOVE EVENT
+			if (isset($this->request->data['removeEvent']))
+			{
+ 				$event_id=$this->request->data('event_id');
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/EventPlannerPromotions/removeEvent.json?event_id=".$event_id,
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "GET",
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 899aa26c-f697-c513-89c1-b6bba1e1fbdf"
+				  ),
+				));
+
+				$removeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				  $removeResult=json_decode($removeResponse);
+				}
+				$displayMessage=$removeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'view/'.$event_id]);
+			}
+			
+			//-- Like EVENT
+			if(isset($this->request->data['LikeEvent']))
+			{  
+ 				$event_id=$this->request->data('event_id');
+				$post =[
+						'event_planner_promotion_id' => $event_id,
+						'user_id' =>$user_id						 							
+					];
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/EventPlannerPromotions/likeEventPlannerPromotions.json",
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "POST",
+				  CURLOPT_POSTFIELDS =>$post,
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				$displayMessage=$LikeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'view/'.$event_id]);
+			}
+			//---Save cart TaxiFleet Promotion
+			if(isset($this->request->data['saveeventplanner']))
+			{
+				$user_id=$this->Auth->User('id');
+				$event_id=$this->request->data('event_id');
+				$post =[
+						'event_planner_promotion_id' => $event_id,
+						'user_id' =>$user_id						 							
+					];
+				//pr($post);exit;
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/EventPlannerPromotionCarts/EventPlannerPromotionsCartAdd.json",
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "POST",
+				  CURLOPT_POSTFIELDS =>$post,
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				$displayMessage=$LikeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'view/'.$event_id]);
+			}
+						//Report Modal
+			if(isset($this->request->data['report_submit']))
+			{
+				$user_id=$this->Auth->User('id');
+				$event_id=$this->request->data('event_id');
+				$report_reason_id=$this->request->data('report_reason_id');
+				$comment=$this->request->data('comment');
+				$post =[
+						'event_planner_promotion_id' => $event_id,
+						'report_reason_id' => $report_reason_id,
+						'user_id' =>$user_id,
+						'comment' =>$comment						
+					];
+				//pr($post);exit;
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/PostTravlePackageReports/PostTravlePackageReportAdd.json",
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "POST",
+				  CURLOPT_POSTFIELDS =>$post,
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				$displayMessage=$LikeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'view/'.$event_id]);
+			}			
+		}
+		
 		$this->set(compact('user_id','id'));
     }
-
-    /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise.
-     */
+ 
     public function add()
     {
 		$this->viewBuilder()->layout('user_layout');
@@ -102,13 +229,7 @@ class EventPlannerPromotionsController extends AppController
 		$this->set(compact('user_id'));
     }
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Event Planner Promotion id.
-     * @return \Cake\Network\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
+     
     public function edit($id = null)
     {
         $eventPlannerPromotion = $this->EventPlannerPromotions->get($id, [
