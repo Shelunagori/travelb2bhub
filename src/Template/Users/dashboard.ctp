@@ -72,7 +72,9 @@ li > p{
 <div class="row equal_column" > 
     <div class="col-md-12" > 
 		<?php echo $this->element('subheader');?>
-		<?php echo  $this->Flash->render() ?>
+		<?php echo  $this->Flash->render();
+			$role_id=$users->role_id 
+		?>
 	</div>
 </div>
 <span class="help-block"></span>
@@ -82,34 +84,8 @@ li > p{
 				</div>
 				<div class="box-body">
 					<div class="row">
-						<div class="col-md-12"> 
-							<div class="col-md-4 neww" > 
-								<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/Hotel.png);height:200px;width:100%;background-repeat:round;">
-								  <!-- small box -->
-								  <div class="small-box" >
-									<div class="inner">
-										<p>hotel Promotion</p>	
-										 
-									</div>
-								  </div>
-								  <div class="small-box " style="margin-top:20px;">
-									<table class="table">
-											<tr>
-											<span>hotel Promotion</span>	
-											</tr><span class="help-block"></span>
-											<tr>
-											<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>">
-												<button class="button" >View Details</button></a>
-											</tr>
-											<span class="help-block"></span>
-											<tr>
-											<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'add')) ?>">
-												<button class="button"  >Load Package</button></a>
-											</tr>
-										</table>
-								  </div>
-								</li>
-							</div>
+						<div class="col-md-12">
+							<?php if($role_id==1) {?>
 							<div class="col-md-4"> 
 							<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/Travel.png);height:200px;width:100%;background-repeat:round;">
 								  <!-- small box -->
@@ -126,18 +102,81 @@ li > p{
 											</tr><span class="help-block"></span>
 											<tr>
 											<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>">
-												<button class="button" >View Details</button></a>
+												<button class="button" >View </button></a>
 											</tr>
 											<span class="help-block"></span>
-											<tr>
+ 											<tr>
 											<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'add')) ?>">
-												<button class="button"  >Load Package</button></a>
+												<button class="button"  >Load </button></a>
 											</tr>
-											
+ 										</table>
+								  </div>
+								</li>
+							</div>
+							<?php } ?>
+							<?php if($role_id==2 || $role_id==3) { ?>
+								<div class="col-md-4"> 
+							<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/event.jpg);height:200px;width:100%;background-repeat:round;">
+								  <!-- small box -->
+								  <div class="small-box" >
+									<div class="inner">
+										<p>Event Planners</p>	
+										 
+									</div>
+								  </div>
+								  <div class="small-box " style="margin-top:20px;">
+									<table class="table">
+											<tr>
+											<span>Event Planners</span>	
+											</tr><span class="help-block"></span>
+											<tr>
+											<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>">
+												<button class="button" >View </button></a>
+											</tr>
+											<span class="help-block"></span>
+											<?php if($role_id==2){ ?>
+ 											<tr>
+											<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'add')) ?>">
+												<button class="button"  >Load </button></a>
+											</tr>
+											<?php } ?>
+ 										</table>
+								  </div>
+								</li>
+							</div>
+							<?php } ?>
+							
+							
+							<div class="col-md-4 neww" > 
+								<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/Hotel.png);height:200px;width:100%;background-repeat:round;">
+								  <!-- small box -->
+								  <div class="small-box" >
+									<div class="inner">
+										<p>hotel Promotion</p>	
+										 
+									</div>
+								  </div>
+								  <div class="small-box " style="margin-top:20px;">
+									<table class="table">
+											<tr>
+											<span>hotel Promotion</span>	
+											</tr><span class="help-block"></span>
+											<tr>
+											<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>">
+												<button class="button" >View </button></a>
+											</tr>
+											<span class="help-block"></span>
+											<?php if($role_id==3){ ?>
+											<tr>
+											<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'add')) ?>">
+												<button class="button"  >Load </button></a>
+											</tr>
+											<?php } ?>
 										</table>
 								  </div>
 								</li>
 							</div>
+							
 							<div class="col-md-4">
 							<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/Taxi.png);height:200px;width:100%;background-repeat:round;">
 								  <!-- small box -->
@@ -154,12 +193,14 @@ li > p{
 											</tr><span class="help-block"></span>
 											<tr>
 											<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>">
-												<button class="button" >View Details</button></a>
+												<button class="button" >View </button></a>
 											</tr><span class="help-block"></span>
+											<?php if($role_id==1){ ?>
 											<tr>
 											<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'add')) ?>">
-												<button class="button"  >Load Package</button></a>
+												<button class="button"  >Load </button></a>
 											</tr>
+											<?php } ?>
 										</table>
 								  </div>
 								</li>
