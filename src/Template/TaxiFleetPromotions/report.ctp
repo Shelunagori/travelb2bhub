@@ -157,7 +157,7 @@ p{
 	<div class="box-body">
 		<div class="row">
 		    <div id="myModal123" class="modal fade" role="dialog" >
-			  <div class="modal-dialog " style=" width: 22%;">
+			  <div class="modal-dialog modal-sm" >
 				<!-- Modal content-->
 				<div class="modal-content">
 				  <div class="modal-header">
@@ -207,7 +207,7 @@ p{
 				</div>
 			</div>
 		   <div class="fade modal form-modal" id="myModal122" role="dialog">
-			  <div class="modal-dialog " style="width:35%;" >
+			  <div class="modal-dialog " >
 				 <div class=modal-content>
 					<div class=modal-header>
 					   <button class="close" data-dismiss="modal" type="button">&times;</button>
