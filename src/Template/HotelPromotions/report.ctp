@@ -370,7 +370,7 @@ p{
 																						</div>
 																						<div class="modal-footer" style="height:60px;">
 																							<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
-																							<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																							<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancle</button>
 																						</div>
 																					</div>
 																				</div>

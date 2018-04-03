@@ -66,6 +66,7 @@ if ($err) {
 	width:130px;
 	text-align:center;
 	background-color:#1295A2;
+	color:white;
 }
 .fleet{
 	font-size:20px;	
@@ -181,6 +182,7 @@ p{
 												<h3 class="modal-title">Report</h3>
 											  </div>
 												<div class="modal-body">
+												<span class="help-block"></span>
 													<div class="row">
 														<div class="col-md-12">
 															<div class="col-md-3">
@@ -216,14 +218,15 @@ p{
 												</div>
 												<div class="modal-footer" style="height:60px;">
 													<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
-													<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
+													<button type="button" class="btn btn-danger btn-default" data-dismiss="modal">Cancle</button>
 												</div>
 											</div>
 										</div>
 									</div>
 									</form>
 								</div>
-							<!-------Report Modal End--------->						<div class="row">
+							<!-------Report Modal End--------->	
+								<div class="row">
 									<div class="col-md-12">
 										<div class="col-md-6">
 											<?= $this->Html->image($eventPlannerPromotion->full_image,['style'=>'width:100%;height:300px;']) ?>
@@ -302,7 +305,7 @@ p{
 												</div>
 												<div class="row col-md-12 text-center">
 													<?php
-													echo $this->Html->link('<b>Contact Info</b>','address'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn btn-success btn-md contact','data-target'=>'#deletemodal'.$eventPlannerPromotion->id,'data-toggle'=>'modal'));?>
+													echo $this->Html->link('<b>Contact Info</b>','address'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn  btn-md contact','data-target'=>'#deletemodal'.$eventPlannerPromotion->id,'data-toggle'=>'modal'));?>
 												</div>
 												<!-------Contact Details Modal --------->
 												<div id="deletemodal<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
@@ -316,13 +319,12 @@ p{
 																	</h4>
 																	</div>
 																	<div class="modal-body" style="height:100px;">
+																	<span class="help-block"></span>
 																		<div class="row col-md-12">
 																			<div class="col-md-3">Seller Name </div><div class="col-md-1">:</div>		
 																			<div class="col-md-8">
 																				<label>
-																					<u>
 																					<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?>
-																					</u>
 																					<?php
 																					if($eventPlannerPromotion->user_rating==0)
 																					{
@@ -358,7 +360,7 @@ p{
 																			<label><?= h($eventPlannerPromotion->user->email);?></label>
 																			</div>
 																		</div>
-																	</div>
+																	</div><span class="help-block"></span>
 																	<div class="modal-footer" style="height:60px;">
 																	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
 																</div>

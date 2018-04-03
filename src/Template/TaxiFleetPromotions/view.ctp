@@ -64,9 +64,10 @@ if ($err) {
 	width:130px;
 	text-align:center;
 	background-color:#1295A2;
+	color:white;
 }
 .fleet{
-	font-size:25px;	
+	font-size:21px;	
 	background-color:white;
 	color:#909591;
 	border:0px;
@@ -145,7 +146,7 @@ p{
 																echo $this->Form->button('<i class="fa fa-heart-o like fleet" > </i>',['class'=>'btn btn-xs likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
 															}
 															if($isLiked=='yes'){
-																echo $this->Form->button('<i class="fa fa-heart-o like unfleet" > </i>',['class'=>'btn btn-danger btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
+																echo $this->Form->button('<i class="fa fa-heart-o like unfleet" > </i>',['class'=>'btn btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
 															}
 														?><p><?= h($taxiFleetPromotion->total_likes);?><br>Likes</p>
 														</div>
@@ -153,7 +154,7 @@ p{
 															<?php 
 															//-- Save Unsave
 															if($issaved=='1'){
-																echo $this->Form->button('<i class="fa fa-bookmark-o unfleet"></i>',['class'=>'btn btn-danger btn-xs  ','value'=>'button','type'=>'submit','name'=>'savetaxifleet','style'=>'background-color:white;color:black;border:0px;']);
+																echo $this->Form->button('<i class="fa fa-bookmark-o unfleet"></i>',['class'=>'btn  btn-xs  ','value'=>'button','type'=>'submit','name'=>'savetaxifleet','style'=>'background-color:white;color:black;border:0px;']);
 															}
 															if($issaved=='0'){
 																echo $this->Form->button('<i class="fa fa-bookmark-o fleet"></i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'savetaxifleet']);
@@ -161,7 +162,7 @@ p{
 															?>
 														</div>
 														<div class="col-md-3">
-														<?php echo $this->Html->link('<i class="fa fa-flag-o fleet"></i>','#'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#reportmodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>
+														<?php echo $this->Html->link('<i class="fa fa-flag-o fleet"></i>','#'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn  btn-xs','data-target'=>'#reportmodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>
 													
 														</div>
 											</div>
@@ -212,7 +213,7 @@ p{
 																</div>
 																<div class="modal-footer" style="height:60px;">
 																	<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
-																	<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																	<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancle</button>
 																</div>
 															</div>
 														</div>
@@ -292,7 +293,7 @@ p{
 											</div><br>
 											<div class="row col-md-12 text-center">
 											<?php
-											echo $this->Html->link('<b>Contact Info</b>','address'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-success btn-md contact','data-target'=>'#deletemodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal'));?>
+											echo $this->Html->link('<b>Contact Info</b>','address'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn  btn-md contact','data-target'=>'#deletemodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal'));?>
 											</div>
 												<!-------Contact Details Modal --------->
 												<div id="deletemodal<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
@@ -306,6 +307,7 @@ p{
 																	</h4>
 																	</div>
 																	<div class="modal-body" style="height:100px;">
+																	<span class="help-block"></span>
 																		<div class="row col-md-12">
 																			<div class="col-md-4">Seller Name </div><div class="col-md-1">:</div>		
 																			<div class="col-md-7">

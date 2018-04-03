@@ -205,7 +205,7 @@ p{
 					  <div class="row">
 							<div class="col-md-12 text-center">
 								<input type="submit" class="btn btn-info btn-sm">
-								<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-warning  btn-sm">Reset</a>
+								<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-danger  btn-sm">Reset</a>
 							</div>
 					  </div>
 				</div>
@@ -297,7 +297,7 @@ p{
 						  </div>
 						<div class="modal-footer">
 							<button class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
-							<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-warning  btn-sm">Reset</a>
+							<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-danger  btn-sm">Reset</a>
 						</div>
 					</form>
 				</div>
@@ -319,7 +319,6 @@ p{
 									$x++;
 								}
 						?>
-						
 <fieldset>
 	<form method="post">
 		<div class="row">
@@ -330,9 +329,7 @@ p{
 				<div class="col-md-8">
 				<input type="hidden" name="posttravle_id" value="<?php echo $postTravlePackage->id; ?>">
 				<div class="row">
-					
 					<div class="col-md-6 pull-right text-center ">
-						 
 						<div class="col-md-3">
 						 <i style="font-size: 24px !important;" class="fa fa-eye fleet"></i> 
  						<p>
@@ -368,7 +365,7 @@ p{
 								echo $this->Form->button('<i class="fa fa-bookmark-o unfleet"></i>',['class'=>'btn  btn-xs  ','value'=>'button','type'=>'submit','name'=>'saveposttravle','style'=>'background-color:white;color:black;border:0px;']);
 							}
 							if($issaved=='0'){
-								echo $this->Form->button('<i class="fa fa-bookmark-o fleet"></i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'saveposttravle']);
+								echo $this->Form->button('<i class="fa fa-bookmark-o fleet"></i>',['class'=>'btn  btn-xs ','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'saveposttravle']);
 							}
 							?>
 						</div>
@@ -381,7 +378,7 @@ p{
 							<?php 
 								if($dataUserId==$user_id){
 									echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn  btn-xs','data-target'=>'#deletemodal'.$postTravlePackage->id,'data-toggle'=>'modal'));?>
-				<!-------Delete Modal Start--------->
+								<!-------Delete Modal Start--------->
 									<div id="deletemodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 										<div class="modal-dialog modal-md" >
 											<!-- Modal content-->
@@ -408,54 +405,55 @@ p{
 						<h3><?= h($postTravlePackage->title) ?></h3>
 					</div>
 					<div id="reportmodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
-<div class="modal-dialog modal-md">
-	<!-- Modal content-->
-		<div class="modal-content">
-		  <div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h3 class="modal-title">Report</h3>
-		  </div>
-			<div class="modal-body">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="col-md-3">
-							<label>
-								Select Reason
-							</label>
-						</div>
-						<div class="col-md-9">
-							<div class="input-field reason_list">
-								<?php 
-									$options=array();
-									foreach($reasonslist as $sts)
-									{
-										$options[] = ['value'=>$sts->id,'text'=>$sts->reason];
-									};
-									echo $this->Form->control('report_reason_id', ['label'=>false, "type"=>"select",'options' =>$options, "class"=>"form-control select2 reason_box","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);
-								?>
+					<div class="modal-dialog modal-md">
+						<!-- Modal content-->
+							<div class="modal-content">
+							  <div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h3 class="modal-title">Report</h3>
+							  </div>
+								<div class="modal-body">
+								<span class="help-block"></span>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="col-md-3">
+												<label>
+													Select Reason
+												</label>
+											</div>
+											<div class="col-md-9">
+												<div class="input-field reason_list">
+													<?php 
+														$options=array();
+														foreach($reasonslist as $sts)
+														{
+															$options[] = ['value'=>$sts->id,'text'=>$sts->reason];
+														};
+														echo $this->Form->control('report_reason_id', ['label'=>false, "type"=>"select",'options' =>$options, "class"=>"form-control select2 reason_box","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);
+													?>
+												</div>
+											</div>
+										</div>
+									</div><br>
+									<div class="row report_text"  style="display:none;">
+										<div class="col-md-12">
+											<div class="col-md-3">
+											</div>
+											<div class="col-md-9">
+												<div >
+												<textarea class="form-control " rows="3" type="text" placeholder="Enter your reason here..." name="comment"></textarea>	
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="modal-footer" style="height:60px;">
+									<input type="submit" class="btn btn-info btn-md" name="report_submit" value="Report">
+									<button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div><br>
-				<div class="row report_text"  style="display:none;">
-					<div class="col-md-12">
-						<div class="col-md-3">
-						</div>
-						<div class="col-md-9">
-							<div >
-							<textarea class="form-control " rows="3" type="text" placeholder="Enter your reason here..." name="comment"></textarea>	
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="modal-footer" style="height:60px;">
-				<input type="submit" class="btn btn-info btn-md" name="report_submit" value="Report">
- 				<button type="button" class="btn btn-warning" data-dismiss="modal">Cancle</button>
-			</div>
-		</div>
-	</div>
-</div>
 					</div>
 					<div class="row col-md-12">
 						<div class="col-md-3">Duration</div><div class="col-md-1">:</div>		
@@ -469,8 +467,8 @@ p{
 					</div>
 					<div class="row col-md-12">
 						<div class="col-md-3">Seller Name </div><div class="col-md-1">:</div>		
-						<div class="col-md-8"><label><u>
-						<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?></u>
+						<div class="col-md-8"><label>
+						<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?>
 									<?php
 										if($postTravlePackage->user_rating==0)
 										{
