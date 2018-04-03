@@ -287,7 +287,7 @@ p{
 																<?php 
 																//-- Save Unsave
 																if($issaved=='1'){
-																	echo $this->Form->button('<i class="fa fa-bookmark-o unfleet"></i>',['class'=>'btn btn-danger btn-xs  ','value'=>'button','type'=>'submit','name'=>'savehotelpromotion','style'=>'background-color:white;color:black;border:0px;']);
+																	echo $this->Form->button('<i class="fa fa-bookmark-o unfleet"></i>',['class'=>'btn  btn-xs  ','value'=>'button','type'=>'submit','name'=>'savehotelpromotion','style'=>'background-color:white;color:black;border:0px;']);
 																}
 																if($issaved=='0'){
 																	echo $this->Form->button('<i class="fa fa-bookmark-o fleet"></i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'savehotelpromotion']);
@@ -295,12 +295,12 @@ p{
 																?>
 																</div>
 																<div class="col-md-3">
-																	<?php echo $this->Html->link('<i class="fa fa-flag-o fleet"></i>','#'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#reportmodal'.$hotelPromotion->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>
+																	<?php echo $this->Html->link('<i class="fa fa-flag-o fleet"></i>','#'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn  btn-xs','data-target'=>'#reportmodal'.$hotelPromotion->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>
 																</div>		
 																<div style="display:none;">
 																<?php 
 																if($dataUserId==$user_id){
-																echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#deletemodal'.$hotelPromotion->id,'data-toggle'=>'modal'));?>
+																echo $this->Html->link('<i class="fa fa-trash" > Delete</i>','api address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-xs','data-target'=>'#deletemodal'.$hotelPromotion->id,'data-toggle'=>'modal'));?>
 																		<!-------Delete Modal Start--------->
 																	<div id="deletemodal<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
 																		<div class="modal-dialog modal-md" >
@@ -370,7 +370,11 @@ p{
 																						</div>
 																						<div class="modal-footer" style="height:60px;">
 																							<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
+<<<<<<< HEAD
 																							<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancle</button>
+=======
+<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
+>>>>>>> 71193f34905f97b254eebbf839ec15d382358d23
 																						</div>
 																					</div>
 																				</div>

@@ -84,6 +84,7 @@ class HotelPromotionsController extends AppController
     public function view($id = null)
     {
 		$this->viewBuilder()->layout('user_layout');
+		$user_id=$this->Auth->User('id');
 		if ($this->request->is(['patch', 'post', 'put'])) 
 		{
 			//-- Like EVENT
@@ -94,7 +95,7 @@ class HotelPromotionsController extends AppController
 						'hotel_promotion_id' => $hotelpromotion_id,
 						'user_id' =>$user_id						 							
 					];
-				//pr($post);exit;
+				 
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
 				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/hotel_promotions/likeHotelPromotions.json",
@@ -202,7 +203,7 @@ class HotelPromotionsController extends AppController
 			}			
 			
 		}
-		$user_id=$this->Auth->User('id');
+		
 		$this->set(compact('user_id','id'));
         /* $hotelPromotion = $this->HotelPromotions->get($id, [
             'contain' => ['Users', 'HotelCategories', 'PriceMasters', 'HotelPromotionCities', 'HotelPromotionLikes', 'HotelPromotionPriceBeforeRenews', 'HotelPromotionReports', 'HotelPromotionViews']
