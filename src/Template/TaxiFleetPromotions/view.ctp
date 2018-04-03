@@ -26,9 +26,35 @@ if ($err) {
 	$taxiFleetPromotion=$List->getTaxiFleetPromotionsDetails;
 	//pr($hotelPromotion);exit;
 }
+/// -- REPORT REASON
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/ReportReasons/reportReasonList.json?promotion_type_id=1",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: 4f8087cd-6560-4ca6-5539-9499d3c5b967"
+  ),
+));
+$response = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+$priceMasters=array();
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+	$response;
+	$List=json_decode($response);
+	$reasonslist=$List->reasonslist;
+}
 ?>
 <style>
-.col-md-3{
+.col-md-4{
 	
 	color:#838784;
 	font-weight:bold;
@@ -45,12 +71,23 @@ if ($err) {
 	color:#909591;
 	border:0px;
 }
+.unfleet{
+	font-size:21px;	
+	background-color:white;
+	color:#d33c44;
+	border:0px;
+}
+p{
+	text-align:center;
+	font-size:12px;
+}
 </style>
 <section class="content">
 <div class="row">
 	<div class="col-md-12">
 			<div class="box box-primary">
 				<div class="box-body"> 
+				<form method="post">
 					<?php foreach($taxiFleetPromotion as $taxiFleetPromotion):
 									$vehicleList='';
 									$x=0;
@@ -88,12 +125,14 @@ if ($err) {
 												<h3><?= h($taxiFleetPromotion->title) ?></h3>
 											</div>
 											<div class="col-md-6">
-												<div class="row pull-right">
+												<div class="row pull-right text-center">
 													<input type="hidden" name="taxifleet_id" value="<?php echo $taxiFleetPromotion->id; ?>">
 														<div class="row col-md-12">
 														<div class="col-md-3">
+														<i class="fa fa-eye fleet" style="font-size:24px;	"></i>
+														<p><?= h($taxiFleetPromotion->total_views);?><br>Views</p>
 														<?php 
-														echo $this->Html->link('<i class="fa fa-eye fleet"></i>','/TaxiFleetPromotions/view/'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs ','style'=>'background-color:white;border:0px;'));?>
+														//echo $this->Html->link('<i class="fa fa-eye fleet"></i>','/TaxiFleetPromotions/view/'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs ','style'=>'background-color:white;border:0px;'));?>
 														</div>
 														<div class="col-md-3">
 														<?php
@@ -106,15 +145,15 @@ if ($err) {
 																echo $this->Form->button('<i class="fa fa-heart-o like fleet" > </i>',['class'=>'btn btn-xs likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
 															}
 															if($isLiked=='yes'){
-																echo $this->Form->button('<i class="fa fa-heart-o like fleet" > </i>',['class'=>'btn btn-danger btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
+																echo $this->Form->button('<i class="fa fa-heart-o like unfleet" > </i>',['class'=>'btn btn-danger btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
 															}
-														?>
+														?><p><?= h($taxiFleetPromotion->total_likes);?><br>Likes</p>
 														</div>
 														<div class="col-md-3">
 															<?php 
 															//-- Save Unsave
 															if($issaved=='1'){
-																echo $this->Form->button('<i class="fa fa-bookmark-o fleet"></i>',['class'=>'btn btn-danger btn-xs  ','value'=>'button','type'=>'submit','name'=>'savetaxifleet','style'=>'background-color:white;color:black;border:0px;']);
+																echo $this->Form->button('<i class="fa fa-bookmark-o unfleet"></i>',['class'=>'btn btn-danger btn-xs  ','value'=>'button','type'=>'submit','name'=>'savetaxifleet','style'=>'background-color:white;color:black;border:0px;']);
 															}
 															if($issaved=='0'){
 																echo $this->Form->button('<i class="fa fa-bookmark-o fleet"></i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'savetaxifleet']);
@@ -122,8 +161,12 @@ if ($err) {
 															?>
 														</div>
 														<div class="col-md-3">
-											<?php echo $this->Html->link('<i class="fa fa-flag-o fleet"></i>','#'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#reportmodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>
-															<!-------Report Modal Start--------->
+														<?php echo $this->Html->link('<i class="fa fa-flag-o fleet"></i>','#'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#reportmodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>
+													
+														</div>
+											</div>
+										</div>
+												<!-------Report Modal Start--------->
 												<div id="reportmodal<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-md">
 														<!-- Modal content-->
@@ -132,7 +175,8 @@ if ($err) {
 																<button type="button" class="close" data-dismiss="modal">&times;</button>
 																<h3 class="modal-title">Report</h3>
 															  </div>
-																<div class="modal-body" style="height:150px;margin-top:30px;">
+																<div class="modal-body" >
+																<span class="help-block"></span>
 																	<div class="row">
 																		<div class="col-md-12">
 																			<div class="col-md-3">
@@ -160,7 +204,7 @@ if ($err) {
 																			</div>
 																			<div class="col-md-9">
 																				<div >
-																				<textarea class="form-control " rows="3" type="text" placeholder="Enter Your Suggestion here..." name="comment"></textarea>	
+																				<textarea class="form-control " rows="3" type="text" placeholder="Enter Your Reason..." name="comment"></textarea>	
 																				</div>
 																			</div>
 																		</div>
@@ -175,9 +219,6 @@ if ($err) {
 													</div>
 												</div>
 											<!-------Report Modal End--------->	
-												</div>
-											</div>
-										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-12">
@@ -187,12 +228,12 @@ if ($err) {
 										<div class="col-md-6">
 										<fieldset>
 											<div class="row col-md-12">
-												<div class="col-md-3">Seller Name </div><div class="col-md-1">:</div>		
-													<div class="col-md-8">
+												<div class="col-md-4">Seller Name </div><div class="col-md-1">:</div>		
+													<div class="col-md-7">
 													<label>
-													<u>
+													
 													<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?>
-													</u>
+												
 														<?php
 															if($taxiFleetPromotion->user_rating==0)
 															{
@@ -215,38 +256,38 @@ if ($err) {
 												</div>					
 											</div>
 											<div class="row col-md-12">
-												<div class="col-md-3"><?= __('Vehicle Type') ?></div><div class="col-md-1">:</div>		
-												<div class="col-md-8"><label><?= h($vehicleList);?></label>
+												<div class="col-md-4"><?= __('Vehicle Type') ?></div><div class="col-md-1">:</div>		
+												<div class="col-md-7"><label><?= h($vehicleList);?></label>
 											</div>
 											</div>
 											<div class="row col-md-12">
-												<div class="col-md-3"><?= __('Duration') ?></div><div class="col-md-1">:</div>		
-												<div class="col-md-8"><label><?= h($taxiFleetPromotion->price_master->week);?></label>
+												<div class="col-md-4"><?= __('Duration') ?></div><div class="col-md-1">:</div>		
+												<div class="col-md-7"><label style="color:#FB6542"><?= h($taxiFleetPromotion->price_master->week);?></label>
 												</div>
 											</div>
 											<div class="row col-md-12">
-												<div class="col-md-3"><?= __('Total Charges') ?></div><div class="col-md-1">:</div>		
-												<div class="col-md-8"><label  style="color:#1295A2"><?= h($taxiFleetPromotion->price_master->price);?> &#8377;</label>
+												<div class="col-md-4"><?= __('Total Charges') ?></div><div class="col-md-1">:</div>		
+												<div class="col-md-7"><label  style="color:#1295A2"><?= h($taxiFleetPromotion->price_master->price);?> &#8377;</label>
 												</div>
 											</div>
 											<div class="row col-md-12">
-												<div class="col-md-3"><?= __('Visible Date') ?></div><div class="col-md-1">:</div>		
-												<div class="col-md-8"><label ><?= date('d-M-Y',strtotime($taxiFleetPromotion->visible_date)); ?></label>
+												<div class="col-md-4"><?= __('Visible Date') ?></div><div class="col-md-1">:</div>		
+												<div class="col-md-7"><label ><?= date('d-M-Y',strtotime($taxiFleetPromotion->visible_date)); ?></label>
 												</div>
 											</div>
 											<div class="row col-md-12">
-												<div class="col-md-3"><?= __('Cities') ?></div><div class="col-md-1">:</div>		
-												<div class="col-md-8"><label ><?= h($cityList); ?></label>
+												<div class="col-md-4"><?= __('Cities of Operation') ?></div><div class="col-md-1">:</div>		
+												<div class="col-md-7"><label ><?= h($cityList); ?></label>
 												</div>
 											</div>
 											<div class="row col-md-12">
-												<div class="col-md-3"><?= __('States') ?></div><div class="col-md-1">:</div>		
-												<div class="col-md-8"><label ><?= h($stateList); ?> </label>
+												<div class="col-md-4"><?= __('States') ?></div><div class="col-md-1">:</div>		
+												<div class="col-md-7"><label ><?= h($stateList); ?> </label>
 												</div>
 											</div>
 											<div class="row col-md-12">
-												<div class="col-md-3"><?= __('Country') ?></div><div class="col-md-1">:</div>		
-												<div class="col-md-8"><label ><?= h($taxiFleetPromotion->country->country_name); ?> </label>
+												<div class="col-md-4"><?= __('Country') ?></div><div class="col-md-1">:</div>		
+												<div class="col-md-7"><label ><?= h($taxiFleetPromotion->country->country_name); ?> </label>
 												</div>
 											</div><br>
 											<div class="row col-md-12 text-center">
@@ -266,12 +307,12 @@ if ($err) {
 																	</div>
 																	<div class="modal-body" style="height:100px;">
 																		<div class="row col-md-12">
-																			<div class="col-md-3">Seller Name </div><div class="col-md-1">:</div>		
-																			<div class="col-md-8">
+																			<div class="col-md-4">Seller Name </div><div class="col-md-1">:</div>		
+																			<div class="col-md-7">
 																				<label>
-																					<u>
+																				
 																					<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?>
-																					</u>
+																			
 																					<?php
 																					if($taxiFleetPromotion->user_rating==0)
 																					{
@@ -294,16 +335,16 @@ if ($err) {
 																			</div>					
 																		</div>
 																		<div class="row col-md-12">
-																			<div class="col-md-3">Mobile No </div>
+																			<div class="col-md-4">Mobile No </div>
 																			<div class="col-md-1">:	</div>
-																			<div class="col-md-8">
+																			<div class="col-md-7">
 																			<label><?= h($taxiFleetPromotion->user->mobile_number);?></label>
 																			</div>
 																		</div>
 																		<div class="row col-md-12">
-																			<div class="col-md-3">Email</div>
+																			<div class="col-md-4">Email</div>
 																			<div class="col-md-1">:	</div>
-																			<div class="col-md-8">
+																			<div class="col-md-7">
 																			<label><?= h($taxiFleetPromotion->user->email);?></label>
 																			</div>
 																		</div>
@@ -326,9 +367,10 @@ if ($err) {
 								</div>
 								<div class="row">
 									<div class="col-md-12">
-										<?= $this->Text->autoParagraph(h($taxiFleetPromotion->fleet_detail)); ?>
+										<?= (h($taxiFleetPromotion->fleet_detail)); ?>
 									</div>
 								</div>
+								</form>
 							</div>
 						</div>
 					</fieldset>
@@ -338,5 +380,21 @@ if ($err) {
 	</div>
 </section>
 <?php endforeach; ?>
-
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<script>	 
+  $(document).ready(function(){
+	  $('.reason_box').on('change', function() {
+		  //var b=$(this);
+		  var a=$(this).closest("div").find(" option:selected").val();
+			if(a == '5')
+			  {
+				$(".report_text").show();
+			  }
+			  else
+			  {
+				$(".report_text").hide();
+			  }
+		});
+  });
+</script>
    

@@ -26,6 +26,33 @@ if ($err) {
 	$hotelPromotion=$List->getEventPlannersDetails;
 	//pr($hotelPromotion);exit;
 }
+/// -- REPORT REASON
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/ReportReasons/reportReasonList.json?promotion_type_id=1",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: 4f8087cd-6560-4ca6-5539-9499d3c5b967"
+  ),
+));
+$response = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+$priceMasters=array();
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+	$response;
+	$List=json_decode($response);
+	$reasonslist=$List->reasonslist;
+}
+
 ?> 
 <style>
 
@@ -41,32 +68,51 @@ if ($err) {
 	background-color:#1295A2;
 }
 .fleet{
-	font-size:25px;	
+	font-size:21px;	
 	background-color:white;
 	color:#909591;
 	border:0px;
 }
+.unfleet{
+	font-size:21px;	
+	background-color:white;
+	color:#d33c44;
+	border:0px;
+}
+p{
+	text-align:center;
+	font-size:12px;
+}
+.col-md-3{
+	font-weight:bold;
+}
 </style>
+<div class="row" >
+	<div class="col-md-12">
+		
+	</div>
+</div>
 <section class="content">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="box box-primary">
 						<div class="box-body">
-						<?php foreach($hotelPromotion as $hotelPromotion):
+						<?php foreach($hotelPromotion as $hotelPromotion){
 								?>
 							<div class="row">
+							<form method="post">
 								<div class="col-md-12">
 									<div class="row">
 										<div class="col-md-6">
 											<h3><?php echo ($hotelPromotion->hotel_name) ?></h3>
 										</div>
 										<div class="col-md-6">
-											<div class="row pull-right">
-											<input type="hidden" name="taxifleet_id" value="<?php echo $hotelPromotion->id; ?>">
+											<div class="row pull-right text-center">
+											<input type="hidden" name="hotelpromotion_id" value="<?php echo $hotelPromotion->id; ?>">
 												<div class="col-md-12">
 													<div class="col-md-3">
-														<?php 
-														echo $this->Html->link('<i class="fa fa-eye fleet"></i>','/EventPlannerPromotions/view/'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-primary btn-xs ','style'=>'background-color:white;border:0px;'));?>
+														<i class="fa fa-eye fleet" style="font-size:24px;	"></i>
+														<p><?= h($hotelPromotion->total_views);?><br>Views</p>
 													</div>
 													<div class="col-md-3">
 														<?php
@@ -78,24 +124,29 @@ if ($err) {
 																echo $this->Form->button('<i class="fa fa-heart-o like fleet" > </i>',['class'=>'btn btn-xs likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
 															}
 															if($isLiked=='yes'){
-																echo $this->Form->button('<i class="fa fa-heart-o like fleet" > </i>',['class'=>'btn btn-danger btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
+																echo $this->Form->button('<i class="fa fa-heart-o like unfleet" > </i>',['class'=>'btn btn-danger btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
 															}
 														?>
+														<p><?= h($hotelPromotion->total_likes);?><br>Likes</p>
 													</div>
 													<div class="col-md-3">
 														<?php 
 														//-- Save Unsave
 														if($issaved=='1'){
-															echo $this->Form->button('<i class="fa fa-bookmark-o fleet"></i>',['class'=>'btn btn-danger btn-xs  ','value'=>'button','type'=>'submit','name'=>'saveeventplanner','style'=>'background-color:white;color:black;border:0px;']);
+															echo $this->Form->button('<i class="fa fa-bookmark-o unfleet"></i>',['class'=>'btn btn-danger btn-xs  ','value'=>'button','type'=>'submit','name'=>'savehotelpromotion','style'=>'background-color:white;color:black;border:0px;']);
 														}
 														if($issaved=='0'){
-															echo $this->Form->button('<i class="fa fa-bookmark-o fleet"></i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'saveeventplanner']);
+															echo $this->Form->button('<i class="fa fa-bookmark-o fleet"></i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'savehotelpromotion']);
 														}
 														?>
 													</div>
 													<div class="col-md-3">
 													<?php echo $this->Html->link('<i class="fa fa-flag-o fleet"></i>','#'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','data-target'=>'#reportmodal'.$hotelPromotion->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>
-																	<!-------Report Modal Start--------->
+														
+														</div>
+												</div>
+											</div>
+														<!-------Report Modal Start--------->
 														<div id="reportmodal<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
 															<div class="modal-dialog modal-md">
 																<!-- Modal content-->
@@ -104,8 +155,9 @@ if ($err) {
 																		<button type="button" class="close" data-dismiss="modal">&times;</button>
 																		<h3 class="modal-title">Report</h3>
 																	  </div>
-																		<div class="modal-body" style="height:150px;margin-top:30px;">
-																			<div class="row">
+																		<div class="modal-body" >
+																		<span class="help-block"></span>
+																			<div class="row ">
 																				<div class="col-md-12">
 																					<div class="col-md-3">
 																						<label>
@@ -132,7 +184,7 @@ if ($err) {
 																					</div>
 																					<div class="col-md-9">
 																						<div >
-																						<textarea class="form-control " rows="3" type="text" placeholder="Enter Your Suggestion here..." name="comment"></textarea>	
+																						<textarea class="form-control " rows="3" type="text" placeholder="Enter Your  Reason..." name="comment"></textarea>	
 																						</div>
 																					</div>
 																				</div>
@@ -140,21 +192,19 @@ if ($err) {
 																		</div>
 																		<div class="modal-footer" style="height:60px;">
 																			<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
-																			<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-danger btn-md">Cancle</a>
+																			<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancle</button>
+																			
 																		</div>
 																	</div>
 																</div>
 															</div>
-														</div>
-													<!-------Report Modal End--------->	
-												</div>
-											</div>
+															<!-------Report Modal End--------->	
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-12">
 											<div class="col-md-6">
-												<?= $this->Html->image($hotelPromotion->full_image,['style'=>'width:100%;height:300px;']) ?>
+												<?= $this->Html->image($hotelPromotion->full_image,['style'=>'width:100%;height:285px;']) ?>
 											</div>
 										<div class="col-md-6">
 											<fieldset>
@@ -162,9 +212,9 @@ if ($err) {
 													<div class="col-md-4">Seller Name </div><div class="col-md-1">:</div>		
 													<div class="col-md-7">
 														<label>
-															<u >
+															
 															<?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name);?>
-															</u>
+															
 																<?php
 																	if($hotelPromotion->user_rating==0)
 																	{
@@ -186,75 +236,32 @@ if ($err) {
 														</label>
 													</div>					
 												</div>
-								</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-									<div class="col-md-4">
-										<?= $this->Html->image('../images/PostTravelPackages/8/test/image/8.jpg',['style'=>'width:300px;height:220px;']) ?>
-									</div>
-									<div class="col-md-8">
-										<div class="row">
-											<div class="col-md-2">
-												<label><?= __('Seller Name') ?></label>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Location') ?></div>
+													<div class="col-md-1">:</div>		
+													<div class="col-md-7">
+														<label >	<?= h($hotelPromotion->hotel_location) ?></label>
+													</div>
 												</div>
-											<div class="col-md-4">
-											<?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name);?>
-											<?php
-														if($hotelPromotion->user_rating==0)
-														{
-															echo "";
-														}
-														else{
-															echo "(";
-															for($i=0;$i<$hotelPromotion->user_rating;$i++)
-															{
-																echo "<i class='fa fa-star' style='font-size:10px;'></i> ";
-																if($i==0)
-																{
-																	echo "";
-																}
-															}
-															echo ")";
-															}
-													?>
-												
-											</div>
-											<div class="col-md-2">
-												<label><?= __('Hotel Name') ?></label>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Hotel Category') ?></div>
+													<div class="col-md-1">:</div>		
+													<div class="col-md-7">
+														<label ><?= h($hotelPromotion->hotel_category->name); ?></label>
+													</div>
 												</div>
-											<div class="col-md-4">
-												<?= h($hotelPromotion->hotel_name) ?>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-2">
-												<label><?= __('Hotel Location') ?></label>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Website') ?></div>
+													<div class="col-md-1">:</div>		
+													<div class="col-md-7">
+														<label ><?= h($hotelPromotion->website); ?></label>
+													</div>
 												</div>
-											<div class="col-md-4">
-												<?= h($hotelPromotion->hotel_location) ?>
-											</div>
-											<div class="col-md-2">
-												<label><?= __('Hotel Category') ?></label>
-												</div>
-											<div class="col-md-4">
-												<?= h($hotelPromotion->hotel_category->name); ?>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-2">
-												<label><?= __('Website') ?></label>
-												</div>
-											<div class="col-md-4">
-												<?= h($hotelPromotion->website) ?>
-											</div>
-											<div class="col-md-2">
-												<label><?= __('Hotel Rating') ?></label>
-												</div>
-											<div class="col-md-4">
-											<?php
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Hotel Rating') ?></div>
+													<div class="col-md-1">:</div>		
+													<div class="col-md-7">
+														<label ><?php
 														if($hotelPromotion->hotel_rating==0)
 														{
 															echo "No Rating";
@@ -263,7 +270,7 @@ if ($err) {
 															
 															for($i=0;$i<$hotelPromotion->hotel_rating;$i++)
 															{
-																echo "<i class='fa fa-star' style='font-size:10px;'></i> ";
+																echo "<i class='fa fa-star' style='font-size:10px;color:#959191;'></i> ";
 																if($i==0)
 																{
 																	echo "";
@@ -271,47 +278,129 @@ if ($err) {
 															}
 															
 															}
-													?>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-2">
-												<label><?= __('Promotion Duration') ?></label>
+													?></label>
+													</div>
 												</div>
-											<div class="col-md-4">
-												<?=h($hotelPromotion->price_master->week); ?>
-											</div>
-											<div class="col-md-2">
-												<label><?= __('Visible Date') ?></label>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Promotion Duration') ?></div>
+													<div class="col-md-1">:</div>		
+													<div class="col-md-7">
+														<label style="color:#FB6542"><?=h($hotelPromotion->price_master->week); ?></label>
+													</div>
 												</div>
-											<div class="col-md-4">
-												<?= date('d-M-Y',strtotime($hotelPromotion->visible_date)); ?>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-2">
-												<label><?= __('Total Charges') ?></label>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Total Charges') ?></div>
+													<div class="col-md-1">:</div>		
+													<div class="col-md-7">
+														<label style="color:#1295AB"><?= $this->Number->format($hotelPromotion->total_charges) ?> &#8377;</label>
+													</div>
 												</div>
-											<div class="col-md-4">
-												<?= $this->Number->format($hotelPromotion->total_charges) ?> &#8377;
-											</div>
-											<div class="col-md-2">
-												<label><?= __('Payment Status') ?></label>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Visible Date') ?></div>
+													<div class="col-md-1">:</div>		
+													<div class="col-md-7">
+														<label ><?= date('d-M-Y',strtotime($hotelPromotion->visible_date)); ?></label>
+													</div>
 												</div>
-											<div class="col-md-4">
-												<?= h($hotelPromotion->payment_status) ?>
+												<div class="help-block">
+												<div class="row col-md-12 text-center">
+											<?php
+											echo $this->Html->link('<b>Contact Info</b>','address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-success btn-md contact','data-target'=>'#deletemodal'.$hotelPromotion->id,'data-toggle'=>'modal'));?>
+											</div>
+												<!-------Contact Details Modal --------->
+												<div id="deletemodal<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
+													<div class="modal-dialog" style="width:30%">
+														<!-- Modal content-->
+															<div class="modal-content">
+															  <div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																	<h4 class="modal-title">
+																	Seller Details
+																	</h4>
+																	</div>
+																	<div class="modal-body" style="height:100px;">
+																		<div class="row col-md-12">
+																			<div class="col-md-4">Seller Name </div><div class="col-md-1">:</div>		
+																			<div class="col-md-7">
+																				<label>
+																					<u>
+																					<?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name);?>
+																					</u>
+																					<?php
+																					if($hotelPromotion->user_rating==0)
+																					{
+																						echo "";
+																					}
+																					else{
+																						echo "( ";
+																						for($i=0;$i<$hotelPromotion->user_rating;$i++)
+																						{
+																							echo "<i class='fa fa-star' style='font-size:10px;color:#959191;'></i>";
+																							if($i==0)
+																							{
+																								echo "";
+																							}
+																						}
+																						echo " )";
+																						}
+																					?>
+																				</label>
+																			</div>					
+																		</div>
+																		<div class="row col-md-12">
+																			<div class="col-md-4">Mobile No </div>
+																			<div class="col-md-1">:	</div>
+																			<div class="col-md-7">
+																			<label><?= h($hotelPromotion->user->mobile_number);?></label>
+																			</div>
+																		</div>
+																		<div class="row col-md-12">
+																			<div class="col-md-4">Email</div>
+																			<div class="col-md-1">:	</div>
+																			<div class="col-md-7">
+																			<label><?= h($hotelPromotion->user->email);?></label>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="modal-footer" style="height:60px;">
+																	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
+																</div>
+																</div>
+															</div>
+														</div>
+											<!-------Contact Details Modal End--------->	
+												
+												</fieldset>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<?php endforeach;?>
+						</form>
 						</div>
-					</fieldset>
+						<?php }?>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<script type='text/javascript'>
 
+  $(document).ready(function(){
+	  $('.reason_box').on('change', function() {
+		  //var b=$(this);
+		  var a=$(this).closest("div").find(" option:selected").val();
+			if(a == '5')
+			  {
+				$(".report_text").show();
+			  }
+			  else
+			  {
+				$(".report_text").hide();
+			  }
+		});
+  });
+</script>
 							
 					

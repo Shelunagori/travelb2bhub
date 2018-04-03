@@ -111,6 +111,11 @@ fieldset{
 .p{
 	color:#909591;
 }
+.col-md-3{
+	
+	color:#838784;
+	font-weight:bold;
+}
 </style>
 <div class="row" >
 	<div class="col-md-12">
