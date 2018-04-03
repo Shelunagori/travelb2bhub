@@ -306,7 +306,7 @@ p{
 												<div class="help-block">
 												<div class="row col-md-12 text-center">
 											<?php
-											echo $this->Html->link('<b>Contact Info</b>','address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-success btn-md contact','data-target'=>'#deletemodal'.$hotelPromotion->id,'data-toggle'=>'modal'));?>
+											echo $this->Html->link('<b>Contact Info</b>','address'.$hotelPromotion->id,array('escape'=>false,'class'=>'btn btn-info btn-md contact','data-target'=>'#deletemodal'.$hotelPromotion->id,'data-toggle'=>'modal'));?>
 											</div>
 												<!-------Contact Details Modal --------->
 												<div id="deletemodal<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">

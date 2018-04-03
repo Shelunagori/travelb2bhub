@@ -370,11 +370,7 @@ p{
 																						</div>
 																						<div class="modal-footer" style="height:60px;">
 																							<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
-<<<<<<< HEAD
 																							<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancle</button>
-=======
-<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
->>>>>>> 71193f34905f97b254eebbf839ec15d382358d23
 																						</div>
 																					</div>
 																				</div>
