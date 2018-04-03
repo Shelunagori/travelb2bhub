@@ -214,7 +214,7 @@ p{
 				</div>
 			</div>
 			<div class="fade modal form-modal" id="myModal122" role="dialog">
-			  <div class="modal-dialog md">
+			  <div class="modal-dialog modal-md">
 				 <div class=modal-content>
 					<div class=modal-header>
 					   <button class="close" data-dismiss="modal" type="button">&times;</button>

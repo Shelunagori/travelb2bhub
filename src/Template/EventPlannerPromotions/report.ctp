@@ -365,6 +365,7 @@ p{
 								<h3 class="modal-title">Report</h3>
 							  </div>
 								<div class="modal-body">
+								<span class="help-block"></span>
 									<div class="row">
 										<div class="col-md-12">
 											<div class="col-md-3">

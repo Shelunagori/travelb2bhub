@@ -622,7 +622,7 @@ fieldset{
 							 
 								<div class="row">
 									<div class="col-md-12 main_row">
-										<div class="col-md-4 col-xs-6 mt">
+										<div class="col-md-4  mt">
 												<div class="input-field">
 												<p for="from">Pickup Locality
 													
@@ -662,9 +662,7 @@ fieldset{
 									</div>
 								</div>
 								<span class="help-block"></span>
-								
 								<div class="package-stops">
-												
 								</div>
 								<span class="help-block"></span><hr></hr>
 								<div class="row">
@@ -685,7 +683,6 @@ fieldset{
 											
 									</div>
 								</div>
-								<span class="help-block"></span>
 								<div class="row">
 									<div class="col-md-12">
 										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
@@ -700,11 +697,11 @@ fieldset{
 													<p for="from">Final City
 														 
 													</p>
-													<input type="text" class="form-control city_select" id="p_final_city_name" noofrows="2" name="p_final_city_name" placeholder="Select City or Nearest City"/>
+													<input type="text" class="form-control city_select" id="p_final_city_name" nofrows="2" name="p_final_city_name" placeholder="Select City or Nearest City"/>
 													<input type='hidden' id='p_final_city_id' name="p_final_city_id" />
 													<div class="suggesstion-box" style="margin-top:-10px"></div>
 													
-												</div>
+													</div>
 											</div>
 									</div>
 								</div>
@@ -964,7 +961,6 @@ fieldset{
 																
 															</div>
 														</div>
-												 
 													<div class="rw2">
 														<div class="col-md-4 mt">
 																<div class="input-field">
