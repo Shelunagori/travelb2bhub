@@ -273,7 +273,9 @@ margin-top: 5px !important;
 </style>
 </head>
 
-<body class="hold-transition skin-blue fixed sidebar-mini">
+<!--<body class="hold-transition skin-blue fixed sidebar-mini">-->
+
+<body class="hold-transition skin-blue sidebar-mini">
 <?php $this->Form->templates([
 		'inputContainer' => '{{content}}'
 	]); 
@@ -484,11 +486,11 @@ $controller=$this->request->params['controller'];
 		{?>
 			<li <?php if($page_name=='sendrequest'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'sendrequest']); ?>"><i class="fa fa-paper-plane"></i> <span>Place Request</span></a></li>
 			
-			<li <?php if($page_name=='requestlist'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'requestlist']); ?>"><i class="fa fa-envelope"></i> <span>My Request</span></a></li>
+			<li <?php if($page_name=='requestlist'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'requestlist']); ?>"><i class="fa fa-envelope"></i> <span>My Requests</span></a></li>
 		<?php } 
 		if($roleId == 1 || $roleId == 3)
 		{?>
-			<li <?php if($page_name=='respondtorequest'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'respondtorequest']); ?>"><i class="fa fa-mail-reply"></i> <span>Respond To Request</span></a></li>
+			<li <?php if($page_name=='respondtorequest'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'respondtorequest']); ?>"><i class="fa fa-mail-reply"></i> <span>Respond To Requests</span></a></li>
 			
 			<li <?php if($page_name=='myresponselist'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'myresponselist']); ?>"><i class="fa  fa-briefcase"></i> <span>My Responses</span></a></li>
 		<?php } ?>
