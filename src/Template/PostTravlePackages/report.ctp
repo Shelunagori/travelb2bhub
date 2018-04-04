@@ -113,10 +113,10 @@ if ($err) {
 .lbwidth{
 	color:#838784;
 	font-weight:bold;
-	font-size:13px;
+
 	}
 	.lbwidth11{
-	font-size:13px;
+
 	}
 fieldset{
 	margin:10px !important;
@@ -528,7 +528,7 @@ p{
 										</table>
 									</div>
 									<div class="col-md-5 pull-right">
-											<i class="btn btn-info btn-md fa fa-book" data-target="#fleetdetail<?php echo $postTravlePackage->id;?>" data-toggle="modal"> Package Details</i>
+									<i class="btn btn-info btn-md fa fa-book" data-target="#fleetdetail<?php echo $postTravlePackage->id;?>" data-toggle="modal"> Package Details</i>
 										<!-------Report Modal Start--------->
 										<div id="fleetdetail<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 											<div class="modal-dialog modal-md">
