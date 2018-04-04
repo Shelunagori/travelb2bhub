@@ -218,8 +218,9 @@ p{
 															</div>
 														</div>
 													</div>
-												</div>
+											
 											<!-------Report Modal End--------->	
+										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-12">

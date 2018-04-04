@@ -263,86 +263,51 @@ p{
 						</div>
 					  </div>
 					</div>
-						<fieldset style="background-color:#fff;">
-							<form method="post">
-								<div class="row">
-									<div class="col-md-12">
-									<span style="font-size:18px;"><b>
-									<?php echo $hotelPromotion->hotel_name.' ( <i class="fa fa-star" style="color:#efea65;"></i> '.$hotelPromotion->hotel_rating.' Star Hotel )';?>
-									</b></span>
-									</div>
-								</div><span class="help-block"></span>
-								<div class="row">						
-									<div class="col-md-3">
-									<?= $this->Html->image($hotelPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:150px;']) ?>
-									</div>
-									<!--------------------image modal--------------------->
-									<div id="myModal" class="modal1" style="display:none;">
-										  <span class="close">&times;</span>
-										  <img class="modal-content1" id="img01">
-										  <div id="caption"></div>
-									</div>
-									<!--------------------image modal End--------------------->
-									<div class="col-md-9">
-										<div class="col-md-5">
-											<div class="row ">
-												<div class="col-md-4 lbwidth">Seller :</div>		
-												<div class="col-md-8 lbwidth11"><label>
-												<?php echo $hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.' ( '.$hotelPromotion->user_rating.' <i class="fa fa-star"></i> )';?>
-															
-												</label>
-												</div>					
-											</div>
-											<div class="row">
-												<div class="col-md-4 lbwidth">Category :</div>		
-												<div class="col-md-8 lbwidth11"><label><?= h($hotelPromotion->hotel_category->name); ?></label>
-												</div>
-											</div>
-											<div class="row ">
-												<div class="col-md-4 lbwidth">Cheapest Room:</div>		
-												<div class="col-md-8 lbwidth11"><label style="color:#1295AB">&#8377; <?= h($hotelPromotion->cheap_tariff) ?></label>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-5">
-											<div class="row ">
-												<div class="col-md-4 lbwidth">Expensive Room:</div>		
-												<div class="col-md-8 lbwidth11"><label style="color:#1295AB">&#8377; <?= h($hotelPromotion->expensive_tariff) ?></label>
-												</div>
-											</div>
-											<div class="row ">
-												<div class="col-md-4 lbwidth">Location:</div>		
-												<div class="col-md-8 lbwidth11"><label ><?= h($hotelPromotion->hotel_location) ?></label>
-												</div>
-											</div>
-											<div class="row ">
-												<div class="col-md-4 lbwidth">Website:</div>		
-												<div class="col-md-8 lbwidth11"><label style="color:blue"><u><?= h($hotelPromotion->website) ?></u></label>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</form>
-						</fieldset>
-					</div>
+
+	<fieldset style="background-color:#fff;">
+		<form method="post">
+			<div class="row">
+				<div class="col-md-12">
+				<span style="font-size:18px;"><b><?= h($hotelPromotion->hotel_name) ?></b></span>
 				</div>
-				<?php }
-				}
-				else {
-				echo"<div class='row col-md-12 text-center'><tr><th colspan='10' ><span>No Record Found</span></th></tr></div>";
-				}?>
+		</div><span class="help-block"></span>
+		<div class="row">						
+			<div class="col-md-3">
+			<?= $this->Html->image($hotelPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:150px;']) ?>
 			</div>
-<h2><span class="show_msg"></span></h2>
-<!-- <div class="paginator">
-<ul class="pagination">
-<?= $this->Paginator->prev('< ' . __('previous')) ?>
-<?= $this->Paginator->numbers() ?>
-<?= $this->Paginator->next(__('next') . ' >') ?>
-</ul>
-<p><?= $this->Paginator->counter() ?></p>
-</div>-->
-</div>
+			<!--------------------image modal--------------------->
+			<div id="myModal" class="modal1" style="display:none;">
+				  <span class="close">&times;</span>
+				  <img class="modal-content1" id="img01">
+				  <div id="caption"></div>
+			</div>
+			<!--------------------image modal End--------------------->
+			<div class="col-md-9">
+				
+			</div>
+		</div>
+		
+						</form>
+					</fieldset>
+				</div>
+		<?php }
+		}
+			else {
+				echo"<div class='row col-md-12 text-center'><tr><th colspan='10' ><span>No Record Found</span></th></tr></div>";
+			}?>
+		</div>
+	</div>
+	
+		<h2><span class="show_msg"></span></h2>
+	   <!-- <div class="paginator">
+			<ul class="pagination">
+				<?= $this->Paginator->prev('< ' . __('previous')) ?>
+				<?= $this->Paginator->numbers() ?>
+				<?= $this->Paginator->next(__('next') . ' >') ?>
+			</ul>
+			<p><?= $this->Paginator->counter() ?></p>
+		</div>-->
+	</div>
 </div>
 </div>
 </div>
