@@ -282,7 +282,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){ ?>
 								</label>
 								</div>
 						</div>
-						<div class="row ">
+						<div class="row">
 							<div class="col-md-4 lbwidth">Duration :</div>
 							<div class="col-md-8"><label style="color:#FB6542">	<?= h($eventPlannerPromotion->price_master->week) ?></label>
 							</div>
