@@ -128,31 +128,12 @@ fieldset{
 						<div class="row">
 							<div class="col-md-12">
 								<div class="col-md-6">
-								<p for="from">Adults
-								<span class="required">*</span>
-								</p>
-								<div class="col-md-6 input-group">
-									<p class="input-group-addon btn " >
-									<button type="button" class="fa fa-minus plus_minus_btn" id="btnminus" value=""></button>
-									</p>                    
-									<input type='text' style="height:50px;" autocomplete="off" name='hotelAdult' value='1' class="form-control input-large " id="textcounter"/>	
-									<p class="input-group-addon btn " >
-									<button type="button" class="fa fa-plus plus_minus_btn" id="btnplus" value=""></button>
-									</p>                    
-									</div>
-									</div>
-				   
+									<p for="from">Adults <span class="required">*</span></p>
+									<?php echo $this->Form->control('hotelAdult', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'style'=>'width:40%']); ?>
+								</div>
 								<div class="col-md-6">
-								<p for="from">Children below 6  <span class="required">*</span></p>
-									<div class="col-md-6 input-group">
-									<p class="input-group-addon btn" >
-									<button type="button" class="fa fa-minus plus_minus_btn" id="btnminus1" value=""></button>
-									</p>                    
-									 <input type='text' autocomplete="off" style="height:50px;" name='hotelChildren'  value='1' class="form-control input-large" id="textcounter1"/>	
-									<p class="input-group-addon btn">
-									<button type="button" class="fa fa-plus plus_minus_btn" id="btnplus1" value=""></button>
-									</p>                    
-									</div>
+									<p for="from">Children below 6  <span class="required">*</span></p>
+									<?php echo $this->Form->control('hotelChildren', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'style'=>'width:40%']); ?>
 								</div>
 							</div>
 						</div>
@@ -376,32 +357,13 @@ fieldset{
 					<div class="row">
 						<div class="col-md-12">
 							<div class="col-md-6">
-								<p for="from">Adults
-								<span class="required">*</span></p>
-								<div class="col-md-6 input-group">
-									<p class="input-group-addon btn" >
-									<button type="button" class="fa fa-minus plus_minus_btn"  id="btn_pack_minus" value="-"></button>
-									</p>
-									<input type='text' autocomplete="off" name='adult' value='1' class="form-control input-large" id="text_counter_pack" style="height:50px;"/>
-									<p class="input-group-addon btn">
-									<button type="button" class="fa fa-plus plus_minus_btn" id="btn_pack_plus" value=""></button>
-								   </p>    
-								</div>
-							</div>
+								<p for="from">Adults <span class="required">*</span></p>
+								<?php echo $this->Form->control('adult', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'style'=>'width:40%']); ?>
+ 							</div>
 							<div class="col-md-6">
-								<p for="from">Children below 6 
-									<span class="required">*</span>
-									</p>
-									<div class="col-md-6 input-group">
-									<p class="input-group-addon btn" >
-									<button type="button" class="fa fa-minus plus_minus_btn" id="btn_pack_minus1" value=""></button>
-									</p>                    
-									 <input type='text' autocomplete="off" name='children' value='1' class="form-control input-large" id="text_counter_pack1" style="height:50px;"/>	
-									<p class="input-group-addon btn">
-									<button type="button" class="fa fa-plus plus_minus_btn" id="btn_pack_plus1" value=""></button>
-									</p>                    
-									</div>
-							</div>
+								<p for="from">Children below 6 <span class="required">*</span></p>
+								<?php echo $this->Form->control('children', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'style'=>'width:40%']); ?>
+ 							</div>
 						</div>
 					</div>
 			</fieldset>
@@ -788,35 +750,19 @@ fieldset{
 															</div>
 														</div>
 													</div>
+													
 													<div class="row">
 														<div class="col-md-12">
-															<div class="col-md-6">
-																<p for="from">Adults
-																<span class="required">*</span></p>
-																<div class="col-md-6 input-group">
-																	<p class="input-group-addon btn" >
-																	<button type="button" class="fa fa-minus plus_minus_btn" id="btn_tran_minus" value=""  field='transportAdult'></button>
-																	</p>                    
-																	<input type='text' autocomplete="off" name='transportAdult' value='1' class="form-control input-large" id="text_trans_counter" style="height:50px;"/>	
-																	<p class="input-group-addon btn" >
-																	<button type="button" class="fa fa-plus plus_minus_btn " id="btn_tran_plus" value=""    field='transportAdult'></button>
-																	</p>                    
-																</div>
-															</div>
-												   
-															<div class="col-md-6">
-																<p for="from">Children below 6
-																<span class="required">*</span> </p>
-																	<div class="col-md-6 input-group">
-																	<p class="input-group-addon btn" >
-																	<button type="button" class="fa fa-minus plus_minus_btn" id="btn_tran_minus1" value="" field='transportChildren'></button>
-																	</p>                    
-																	 <input type='text' style="height:50px;" autocomplete="off" name='transportChildren' value='1' class="form-control input-large" id="text_trans_counter1"/>	
-																	<p class="input-group-addon btn">
-																	<button type="button" class="fa fa-plus plus_minus_btn" id="btn_tran_plus1" value=""  field='transportChildren'></button>
-																	</p>                    
-																	</div>
-															</div>
+														<div class="col-md-6">
+															<p for="from">Adults <span class="required">*</span></p>
+															<?php echo $this->Form->control('transportAdult', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'style'=>'width:40%']); ?>
+														</div>
+														<div class="col-md-6">
+															<p for="from">Children below 6 <span class="required">*</span></p>
+															<?php echo $this->Form->control('transportChildren', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'style'=>'width:40%']); ?>
+														</div>
+															 
+												     
 														</div>
 													</div>
 											</fieldset>

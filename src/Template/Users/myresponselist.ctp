@@ -387,16 +387,12 @@ $(document).ready(function(){
 
                   <?php } else { ?>
                         <p>
-                        Destination City : <span class="details"> <span><?php echo ($response['request']['city_id'])?$allCities[$response['request']['city_id']]:"-- --"; ?> <?php echo ($response['request']['state_id'])?' ('.$allStates[$response['request']['state_id']].')':""; ?>
-                        <?php if($response['request']['category_id'] == 1){
-						if(count($response['request']['hotels']) >1) {
-							unset($response['request']['hotels'][0]);
-							//unset($details['hotels'][0]);?>
-							<?php foreach($response['request']['hotels'] as $rowc) { ?>
-							<?php echo ($rowc['city_id'])?','.$allCities[$rowc['city_id']]:""; ?><?php echo ($rowc['state_id'])?' ('.$allStates[$rowc['state_id']].')':""; ?>
-							<?php } ?>
-							<?php } ?>
-							<?php } ?></span>
+                        Destination City : <span class="details"> <span>
+						<?php 
+							$a=$response['request']['city_id']?$allCities[$response['request']['city_id']]:"-- --"; 
+							$b=$response['request']['state_id']?' ('.$allStates[$response['request']['state_id']].')':"";
+							echo mb_strimwidth($a.$b, 0,17, "...");?>
+						</span>
                         </p>
                         <?php } ?>
                  </li>

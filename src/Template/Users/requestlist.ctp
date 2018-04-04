@@ -308,7 +308,6 @@ legend
 							{?>
 								<p>Destination City : &nbsp;
 									<span class="details">
-									
 									<?php 
 									$a=$request['city_id']?$allCities[$request['city_id']]:"-- --"; 
 									$b=$request['state_id']?' ('.$allStates[$request['state_id']].')':"";

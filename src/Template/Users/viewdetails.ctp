@@ -19,7 +19,7 @@ ul li b {
 	text-align:left;
 }
 
- </style>
+</style>
  
       <div class="modal-content">
         <div class="modal-header">
@@ -51,9 +51,9 @@ ul li b {
 					echo $details['reference_id']; ?></span></li>
 					<li class="col-md-6"><p>Total Budget : &nbsp;<span style="color:#1295A2">  &#8377; <?php
 					echo number_format($details['total_budget'] . ""); ?></span></li>
-					<li class="col-lg-6 col-md-6 col-sm-6 col-xs-6"><p>Adult : &nbsp; <?php
+					<li class="col-md-6"><p>Adult : &nbsp; <?php
 					echo "<b>".$details['adult']."</b>"; ?></li>
-					<li class="col-xs-6 col-lg-6 col-md-6 col-sm-6	"><p>Children below 6 : &nbsp; <b><?php
+					<li class="col-md-6"><p>Children below 6 : &nbsp; <b><?php
 					echo $details['children']; ?></b></li>
 				</ul>
 			 </div>
@@ -78,7 +78,7 @@ ul li b {
 						<p>Number of Rooms :</p>
 						</div>
  						<ul>
-						<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p>Single :&nbsp;
+						<li class="col-md-4"><p>Single :&nbsp;
 						<b>
 						<?php
 						if ($row['room1'] != '')
@@ -91,7 +91,7 @@ ul li b {
 						} ?>
 						</b>
 						</li>
-						<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p>Double :&nbsp;
+						<li class="col-md-4"><p>Double :&nbsp;
 						<b>
 						<?php
 						if ($row['room2'] != '')
@@ -103,7 +103,7 @@ ul li b {
 							echo "--";
 						} ?></b>
 						</li>
-						<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p>Triple :&nbsp;
+						<li class="col-md-4"><p>Triple :&nbsp;
 						<b>
 						<?php
 						if ($row['room3'] != '')
@@ -129,7 +129,7 @@ ul li b {
 						} ?>
 						</b>
 						</li>
-						<li class="col-lg-2 col-md-2 col-sm-2 col-xs-2"></li>
+						<li class="col-md-2"></li>
 						<li class="col-md-4"><p>Child Without Bed :&nbsp;
 						<b>
 						<?php
@@ -216,7 +216,7 @@ ul li b {
 		<div class="col-md-12">
 				    <div class="head_of_popup"><span style="color:#1295A2;font-weight: 100;font-size:18px">Transport Requirements</span></div>
 			<ul>
-				<li class="col-xs-12 col-lg-12 col-md-12 col-sm-12">
+				<li class="col-md-12 ">
 				<p>Transport :&nbsp;
 					<b><?php
 					echo ($details['transport_requirement']) ? $transpoartRequirmentArray[$details['transport_requirement']] : "-- --"; ?>
@@ -306,7 +306,7 @@ ul li b {
 			foreach($details['hotels'] as $row)
 			{ ?>
 				<ul>
-					<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p>Single :&nbsp;<b><?php
+					<li class="col-md-4"><p>Single :&nbsp;<b><?php
 					if ($row['room1'] != '')
 					{
 						echo $row['room1'];
@@ -318,7 +318,7 @@ ul li b {
 					</b>
 					</p>
 					</li>
-					<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p>Double :&nbsp;<b><?php
+					<li class="col-md-4"><p>Double :&nbsp;<b><?php
 					if ($row['room2'] != '')
 					{
 						echo $row['room2'];
@@ -330,7 +330,7 @@ ul li b {
 					</b>
 					</p>
 					</li>
-					<li class="col-lg-4 col-md-4 col-sm-4 col-xs-4"><p>Triple :&nbsp;<b><?php
+					<li class="col-md-4"><p>Triple :&nbsp;<b><?php
 					if ($row['room3'] != '')
 					{
 						echo $row['room3'];
@@ -342,7 +342,7 @@ ul li b {
 					</b>
 					</p>
 					</li>
-					<li class="col-xs-6 col-lg-6 col-md-6 col-sm-6"><p>Child With Bed :&nbsp;<b><?php
+					<li class=" col-md-6 "><p>Child With Bed :&nbsp;<b><?php
 					if ($row['child_with_bed'] != '')
 					{
 						echo $row['child_with_bed'];
@@ -354,7 +354,7 @@ ul li b {
 					</b>
 					</p>
 					</li>
-					<li class="col-xs-6 col-sm-6 col-lg-6 col-md-6"><p>Child Without Bed :&nbsp;<b><?php
+					<li class="  col-md-6"><p>Child Without Bed :&nbsp;<b><?php
 					if ($row['child_without_bed'] != '')
 					{
 						echo $row['child_without_bed'];
@@ -365,7 +365,7 @@ ul li b {
 					} ?></b>
 					</p>
 					</li>
-					<li class="col-xs-12 col-lg-12 col-md-12 col-sm-12"><p>Hotel Category :&nbsp;<b><?php
+					<li class="col-md-12 "><p>Hotel Category :&nbsp;<b><?php
 					if (!empty($row['hotel_category']))
 					{
 						$result = explode(",", $row['hotel_category']);
@@ -385,7 +385,7 @@ ul li b {
 					</b>
 					</p>
 					</li>
-					<li class="col-xs-12 col-lg-6 col-md-6 col-sm-6"><p>Hotel Rating :&nbsp;<?php
+					<li class="col-md-6 "><p>Hotel Rating :&nbsp;<?php
 					if ($row['hotel_rating'] > 0)
 					{
 						for ($i = $row['hotel_rating']; $i > 0; $i--)
@@ -400,27 +400,27 @@ ul li b {
 					?>
 					</p>
 					</li>
-					<li class="col-xs-12 col-lg-6 col-md-6 col-sm-6 col-offset-right-1">
+					<li class="col-md-6  col-offset-right-1">
 					<p>Meal :&nbsp;<b><?php
 					echo ($row['meal_plan']) ? $mealPlanArray[$row['meal_plan']] : "-- --"; ?>
 					</b></p>
 					</li>
-					<li class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<li class="col-md-6 ">
 					<p>Check In :&nbsp;<b><?php
 					echo ($row['check_in']) ? date("d-m-Y", strtotime($row['check_in'])) : "-- --"; ?>
 					</b></p>
 					</li>
-					<li class="col-xs-6 col-lg-6 col-md-6 col-sm-6">
+					<li class=" col-md-6 ">
 					<p>Check Out :&nbsp;<b><?php
 					echo ($row['check_out']) ? date("d-m-Y", strtotime($row['check_out'])) : "-- --"; ?>
 					</b></p>
 					</li>
-					<li class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
+					<li class="col-md-6 ">
 					<p>Locality :&nbsp;<b><?php
 					echo ($row['locality']) ? $row['locality'] : "-- --"; ?>
 					</b></p>
 					</li>
-					<li class="col-xs-12 col-lg-6 col-md-6 col-sm-6">
+					<li class="col-md-6 ">
 					<p>Destination City :&nbsp;<b><?php
 					if (empty($row['city_id']))
 					{
@@ -432,7 +432,7 @@ ul li b {
 					} ?>
 					</b></p>
 					</li>
-					<li class="col-xs-12 col-lg-6 col-md-6 col-sm-6"><p>Destination State :&nbsp;<b><?php
+					<li class="col-md-6 "><p>Destination State :&nbsp;<b><?php
 					if (empty($row['state_id']))
 					{
 						echo $allStates[$details['state_id']];
@@ -547,7 +547,7 @@ ul li b {
 	
 		<div class="col-md-12"><div class="head_of_popup"><span style="color:#1295A2;font-weight: 100;font-size:18px">Comments</span></div>
 			<ul>
-				<li class="col-xs-12 col-lg-12 col-md-12 col-sm-12 comment text-left">
+				<li class="col-md-12  comment text-left">
 					<p><b><?php echo $details['comment']; ?>
 					</b></p>
 				</li>

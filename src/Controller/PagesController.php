@@ -1,5 +1,6 @@
 <?php 
 namespace App\Controller;
+
 use Cake\Core\Configure;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
@@ -7,6 +8,8 @@ use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 use Cake\Datasource\ConnectionManager;
 use Cake\Network\Email\Email;
+
+
 class PagesController extends AppController
 {
 	public function beforeFilter(Event $event) {
@@ -15,7 +18,13 @@ class PagesController extends AppController
 		parent::beforeFilter($event);
 		$this->Auth->allow();
 	}
-     
+    /**
+     * Displays a view
+     *
+     * @return void|\Cake\Network\Response
+     * @throws \Cake\Network\Exception\NotFoundException When the view file could not
+     *   be found or \Cake\View\Exception\MissingTemplateException in debug mode.
+     */
     public function display()
     {
         $path = func_get_args();
@@ -61,7 +70,24 @@ class PagesController extends AppController
 		exit;
     }    
     public function home(){
- 		$this->redirect('/Users/index');
+		$this->loadModel('Requests');
+		$this->loadModel('Slider');
+		$travelAgentCount = $this->Users->find()->where(['role_id' => 1])->count();
+		$eventPlannerCount = $this->Users->find()->where(['role_id' => 2])->count();
+		$hotelierCount = $this->Users->find()->where(['role_id' => 3])->count();
+		$overview = $this->Pages->find()->where(['id' => 1])->first();
+		$benifits1 = $this->Pages->find()->where(['id' => 2])->first();
+		$benifits2 = $this->Pages->find()->where(['id' => 3])->first();
+		$benifits3 = $this->Pages->find()->where(['id' => 4])->first();
+		$benifits4 = $this->Pages->find()->where(['id' => 5])->first();
+		$benifits5 = $this->Pages->find()->where(['id' => 6])->first();
+		$benifits6 = $this->Pages->find()->where(['id' => 7])->first();
+		$sliders = $this->Slider->find()->where(['status' => 1])->all();
+		$requests = $this->Requests->find()
+				->contain(["Users", "Cities"])
+				->where(["Requests.status !="=>2, "Requests.is_deleted"=>0])->all();
+		$userId = $this->Auth->user('id');
+		$this->set(compact("travelAgentCount", "eventPlannerCount", "hotelierCount", "userId", "requests","overview","benifits1","benifits2","benifits3","benifits4","benifits5","benifits6","sliders"));
     }
 	
     public function aboutus(){	
@@ -427,9 +453,11 @@ $data['country_id'] =  $cityapi->country_id;
 			$this->loadModel('States');
 			$this->loadModel('Cities');
 			$this->loadModel('Membership');
+			
 			if($_POST) {
 				$d = $_POST;
-				$checkUsers = $this->Users->find()->where(['mobile_no' => $d['mobile_no']])->count();
+				$condition['OR']=array('mobile_number'=> $d['mobile_number'],'email'=> $d['email']);
+				$checkUsers = $this->Users->find()->where($condition)->count();
 				if ($checkUsers < 1) {
 					if(isset($_POST['device_id'])){
 						$d['device_id'] = $_POST['device_id'];
@@ -456,7 +484,7 @@ $data['country_id'] =  $cityapi->country_id;
 					$user = $this->Users->newEntity($d);
 					if ($res = $this->Users->save($user)) {
 						//--			
-						$mobile_no=$d['mobile_no'];
+						$mobile_no=$d['mobile_number'];
 						$sms_sender='B2BHUB';
 						$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
 						file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
@@ -514,7 +542,7 @@ $data['country_id'] =  $cityapi->country_id;
 				else 
 				{
 					$result['response_code'] =  501;
-					$result['msg'] = 'Mobile No. already exists. Please enter another Mobile No. to register.';
+					$result['msg'] = 'Mobile Number or Email already exists. Please enter another Mobile Number or Email to register.';
 				}
 			}
 			$data =  json_encode($result);
@@ -527,12 +555,13 @@ $data['country_id'] =  $cityapi->country_id;
 			exit;
 		}
 	}
-    public function reSendOtp() {
+    
+	public function reSendOtp() {
 		
 		$mobile_no=$this->request->data['mobile_no'];
-		$checkUsers = $this->Users->find()->where(['mobile_no' => $mobile_no])->count();
+		$checkUsers = $this->Users->find()->where(['mobile_number' => $mobile_no])->count();
 		if($checkUsers>0){
-			$Users = $this->Users->find()->where(['mobile_no' => $mobile_no])->first();
+			$Users = $this->Users->find()->where(['mobile_number' => $mobile_no])->first();
 			$mobile_otp=$Users->mobile_otp;
 			if(!empty($mobile_otp))
 			{
@@ -549,20 +578,16 @@ $data['country_id'] =  $cityapi->country_id;
 				$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
 				file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
 				//--
-				$this->Users->updateAll(array('mobile_otp'=>$rendomCode), array('mobile_no'=>$mobile_no));
+				$this->Users->updateAll(array('mobile_otp'=>$rendomCode), array('mobile_number'=>$mobile_no));
 			}
+			$result['response_code']=200;
+			$result['message']='OTP send Successfully';
 		}
 		else{
-			//--			
-			$rendomCode=rand('1010', '9999');
-			$sms_sender='B2BHUB';
-			$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
-			file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
-			//--
-			$this->Users->updateAll(array('mobile_otp'=>$rendomCode), array('mobile_no'=>$mobile_no));
+			$result['response_code']=204;
+			$result['message']='Mobile Number not Registered';
 		}
-		$result['response_code']=200;
-		$result['message']='OTP send Successfully';
+		
 		$data =  json_encode($result);
 		echo $data;
 		exit;
@@ -571,42 +596,47 @@ $data['country_id'] =  $cityapi->country_id;
 		
 		$mobile_no=$this->request->data['mobile_no'];
 		$otp=$this->request->data['otp'];
-		$checkUsers = $this->Users->find()->where(['mobile_otp' => $otp,'mobile_no' => $mobile_no])->count();
+		$checkUsers = $this->Users->find()->where(['mobile_otp' => $otp,'mobile_number' => $mobile_no])->count();
 		if($checkUsers>0){
-			$this->Users->updateAll(array('mobile_otp'=>'','status'=>1,'mobile_verified'=>1), array('mobile_no'=>$mobile_no));
+			$this->Users->updateAll(array('mobile_otp'=>'','status'=>1), array('mobile_number'=>$mobile_no));
 			$result['response_code']=200;
 			$result['message']='OTP verified';
 		}
 		else{
 			$result['response_code']=204;
-			$result['message']='Mobile no not registered';
+			$result['message']='Invalide OTP';
 		}
 		$data =  json_encode($result);
 		echo $data;
 		exit;
 	}
-	
-	public function forgotPasswordapi() {
+	//-----
+	/*public function forgotPasswordapi() {
 		//Configure::write('debug',2);
 		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
 			if ($this->request->is('post')) {
 				$d = $this->request->data;
 				$user = $this->Users
 					->find()
-					->where(['email' =>$d['email']])
+					->where(['mobile_number' =>$d['mobile_number']])
 					->first();
 				$result = array();
 				if (!empty($user)) {
+					$userId = $user["id"];
+					$mobile_no=$user["mobile_number"];
+					$first_name=$user["first_name"];
+					$last_name=$user["last_name"];
+					$full_name=ucwords($first_name.' '.$last_name);
 					$usernumber = $user["mobile_number"].''.$user["id"];
 					$theKey = sha1($usernumber);
-					//$theKey = $this->getActivationKey($user["mobile_number"]);
-					$userId = $user["id"];
-					$tablename = TableRegistry::get("Users");
-					$query = $tablename->query();
-					$res = $query->update()
-						->set(['activation' => $theKey])
-						->where(['id' => $userId])
-						->execute();
+					
+				//--
+			$rendomCode=rand('1010', '9999');		
+			$sms_sender='B2BHUB';
+			$sms=str_replace(' ', '+', 'Dear '.$full_name.', Your one time password is '.$rendomCode);
+			file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
+			$this->Users->updateAll(array('mobile_otp'=>$rendomCode,'activation' => $theKey), array('id' => $userId));		
+								/* 
 					$subject="TravelB2Bhub Reset Password";
 					$to = $user["email"];
 					$headers  = 'MIME-Version: 1.0' . "\r\n";
@@ -628,16 +658,17 @@ $data['country_id'] =  $cityapi->country_id;
 						->viewVars(array('msg' => $message))
 						->send($message);
 				//	@mail($to, $subject, $message, $headers);
-					$result = array();
+				*/
+				/*	$result = array();
 					$result['response_code'] = 200;
-					$result['msg'] = "Please check your email to reset your password";
+					$result['msg'] = "We have send OPT on you mobile number";
 					$data =  json_encode($result);
 					echo $data;
 					exit;
 				} 
 				else 
 				{
-					$result['msg'] = "Incorrect Email.";
+					$result['msg'] = "Incorrect Mobile Number.";
 					$result['response_code'] = 501;
 					$data =  json_encode($result);
 					echo $data;
@@ -651,7 +682,45 @@ $data['country_id'] =  $cityapi->country_id;
 			echo json_encode($result);
 			exit;
 		}
-	}
+	}*/
+	public function forgotPassword() {
+		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
+			$this->loadModel('Requests');
+			$this->loadModel('Responses');
+			$user = $this->Users->find()->where(['mobile_number' => $this->request->data['mobile_number']])->first();
+			$this->set('users', $user);
+			$result1 = array();
+			if(!empty($user)) {
+				if ($this->request->is('post')) {
+					 
+					$result = $this->Users->patchEntity($user, ['password' => $this->request->data['password']]);
+					if ($this->Users->save($result)) {
+						$result1['msg'] = 'Your password has been changed successfully.';
+						$result1['response_code'] = 200;
+						$data =  json_encode($result1);
+						echo $data;
+						exit;		
+					}
+ 				}
+			} 
+			else 
+			{
+				$result['response_code'] = 501;
+				$result['msg'] = 'Please login to access this location.';
+				$result['response_code']= 403;
+				 echo json_encode($result);
+				 exit;
+			}
+		}
+		else
+		{
+			$result['response_code']= 403;
+			echo json_encode($result);
+			exit;
+		}
+    }
+	
+	
 	
     public function changepasswordapi() {
 		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
@@ -778,6 +847,9 @@ $data['country_id'] =  $cityapi->country_id;
 				} 
 				else 
 				{
+					$email=$this->request->data['email'];
+					$user=$this->Users->find()->where(['email'=>$email]);
+					$result['response_object'] = $user;
 					$result['response_code'] = 501;
 					$result['msg'] = 'failed';
 					$data =  json_encode($result);
@@ -974,6 +1046,7 @@ $data['country_id'] =  $cityapi->country_id;
 				$chatuserid = $_POST["chatwith"];
 				//$conditions["Requests.user_id"] = $chatuserid;
 				$typeSearchArray=explode(',',$chatuserid);  
+				$typeSearchArray=array_filter($typeSearchArray);
 				$conditions["Requests.user_id IN"] =  $typeSearchArray;
 			}
 			
@@ -995,8 +1068,8 @@ $data['country_id'] =  $cityapi->country_id;
 			}
 		
 			if(!empty($_POST["startdatesearch"])) {	
-				$da["Requests.start_date"] =  $sdate;
-				$da["Requests.check_in"] =  $sdate;
+				$da["Requests.start_date >="] =  $sdate;
+				$da["Requests.check_in >="] =  $sdate;
 				$conditions["OR"] =  $da;
 			}
 		
@@ -1010,11 +1083,11 @@ $data['country_id'] =  $cityapi->country_id;
 			}
 		 
 			if(!empty($_POST["enddatesearch"])) {
-				$da1["Requests.end_date"] =  $edate;
-				$da1["Requests.check_out"] =  $edate;
+				$da1["Requests.end_date <="] =  $edate;
+				$da1["Requests.check_out <="] =  $edate;
 				if(!empty($sdate)){
-					$da1["Requests.start_date"] =  $sdate;
-					$da1["Requests.check_in"] =  $sdate;
+					$da1["Requests.start_date >="] =  $sdate;
+					$da1["Requests.check_in >="] =  $sdate;
 				}
 				$conditions["OR"] =  $da1;
 			}
@@ -1471,10 +1544,46 @@ $hotelcitystate[$row['id']]  = $city_state_name;
 		  
 		  $conditions["Responses.user_id"] = $_POST['user_id'];
 		  $conditions["Responses.status"] = 1;
-		  
+		  $cond=array();
+			if(isset($_POST["startdatesearch"])){
+				$sdate = $_POST["startdatesearch"];
+			}
+			if(isset($sdate) && !empty($sdate)){
+				$date = str_replace('/', '-', $sdate);
+				$sdate = date('Y-m-d', strtotime($date));
+			}
+
+			if(!empty($_POST["startdatesearch"])) {
+				$da["Requests.start_date <="] =  $sdate;
+				$da["Requests.check_in <="] =  $sdate;
+				$cond["OR"] =  $da;
+			}
+
+			if(isset($_POST["enddatesearch"])){
+				$edate = $_POST["enddatesearch"];
+			}
+			
+			if(isset($edate) && !empty($edate)){
+				$date = str_replace('/', '-', $edate);
+				$edate = date('Y-m-d', strtotime($date));
+			}
+			
+			if(!empty($_POST["enddatesearch"])) {
+				$da1["Requests.end_date <="] =  $edate;
+				$da1["Requests.check_out <="] =  $edate;
+				if(!empty($sdate)){
+					$da1["Requests.start_date >="] =  $sdate;
+					$da1["Requests.check_in >="] =  $sdate;
+				}
+				$cond["OR"] =  $da1;
+			} 
 		if(isset($_POST["refidsearch"]) && !empty($_POST["refidsearch"])) {
 			$RefSearchArray=explode(',',$_POST["refidsearch"]);  
-			$conditions["Requests.reference_id in"] =  $RefSearchArray;
+			$cond["Requests.reference_id in"] =  $RefSearchArray;
+		}
+		if(isset($_POST["req_typesearch"]) && !empty($_POST["req_typesearch"])) {
+			$typeSearchArray=explode(',',$_POST["req_typesearch"]);  
+			$cond["Requests.category_id IN"] =  $typeSearchArray;
 		}
 		if(isset($_POST["agentnamesearch"]) && !empty($_POST["agentnamesearch"])) {
 			$keyword = $_POST["agentnamesearch"];
@@ -1502,9 +1611,11 @@ $hotelcitystate[$row['id']]  = $city_state_name;
 			$conditions["Requests.total_budget >="] = $MinbudgetPrice;
 			$conditions["Requests.total_budget <="] = $MaxbudgetPrice;
 		}
-		 
+		//print_r($cond); exit; 
         $responses = $this->Responses->find()
-			->contain(["Requests.Users", "Requests","Requests.Hotels",'Requests.Cities'])
+			->contain(["Requests"=>function($q) use($cond){
+				return $q->where($cond)->contain(['Users','Hotels','Cities']);
+			}])
 			->where($conditions)->order($sort);
 		//---------
 $loginId=$_POST["user_id"];
@@ -1887,15 +1998,15 @@ public function removebusinessbuddyapi() {
 	$this->loadModel('User_Chats');
 	$this->loadModel('Testimonial');
 	$conditions["Responses.request_id"] = $_POST['request_id'];
-	if(!empty($_POST['agentnamesearch'])) {
-	$keyword1 = '';
-	$keyword2 = '';
-	$keyword = trim($_POST['agentnamesearch']);
-	$keyword = explode(' ',$keyword);
-	if(isset($keyword[0]) && !isset($keyword[1])) {
-	$keyword1 = $keyword[0];
-	$conditions["Users.first_name"] =$keyword1;
+	  
+	if(isset($_POST["agentnamesearch"]) && !empty($_POST["agentnamesearch"])) {
+		$keyword = $_POST["agentnamesearch"];
+		$AjentArray = explode(',',$keyword);
+		$AjentArray=array_filter($AjentArray);
+		$conditions["OR"] = array("Users.first_name IN "=>$AjentArray, "Users.last_name IN" => $AjentArray);
 	}
+ 
+	/*
 	if(isset($keyword[1])) {
 	$keyword1 = trim($keyword[0]);
 	$keyword2 = trim($keyword[1]);
@@ -1903,8 +2014,8 @@ public function removebusinessbuddyapi() {
 	$da["Users.first_name"] =  $keyword1;
 	$da["Users.last_name"] =  $keyword2;
 	$conditions["AND"] =  $da;
-	}
-	}
+	}*/
+	
 	if(!empty($_POST["acceptdeals"])) {
 	$conditions["Responses.status"] = 1;
 	$acceptDeals = 1;
@@ -1930,8 +2041,8 @@ public function removebusinessbuddyapi() {
 	}
 	if(!empty($_POST["chatwith"])) {
 		$chatuserid = $_POST["chatwith"];
-		//$conditions["Responses.user_id"] = $chatuserid;
-		$typeSearchArray=explode(',',$chatuserid);  
+		$typeSearchArray=explode(',',$chatuserid);
+		$typeSearchArray=array_filter($typeSearchArray);
 		$conditions["Responses.user_id IN"] =  $typeSearchArray;
 	}
 	if(!empty($_POST["shared_details"])) {
@@ -2401,7 +2512,7 @@ $data =   json_encode($result);
 	$conditions["Requests.user_id"] = $_POST['user_id'];
 	$conditions["Requests.status !="] = 2;
 	$conditions["Requests.is_deleted "] = 0;
-if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
+	if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	if(isset($_POST["budgetsearch"]) && !empty($_POST["budgetsearch"])) {
 	$QPriceRange = $_POST["budgetsearch"]; 
 	$result = explode("-", $QPriceRange);
@@ -2429,6 +2540,7 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 	if(isset($_POST["destination_city"]) && !empty($_POST["destination_city"])) {
 	$conditions["Requests.city_id"] =  $_POST["destination_city"];
 	}
+	
 	if(isset($_POST["pickup_city"]) && !empty($_POST["pickup_city"])) {
 	$conditions["Requests.pickup_city"] =  $_POST["pickup_city"];
 	}
@@ -2439,16 +2551,15 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 
 
 	if(isset($_POST["startdatesearch"]) && !empty($_POST["startdatesearch"])) {
-	$sdate = $_POST["startdatesearch"];
-	$date = str_replace('/', '-', $sdate);
-	$sdate = date('Y-m-d', strtotime($date));
-	//$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+		$sdate = $_POST["startdatesearch"];
+		$date = str_replace('/', '-', $sdate);
+		$sdate = date('Y-m-d', strtotime($date));
+		//$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
 	}
 	if(!empty($_POST["startdatesearch"])) {
-
-	$da["Requests.start_date >= "] =  $sdate;
-	$da["Requests.check_in >= "] =  $sdate;
-	$conditions["OR"] =  $da;
+		$da["Requests.start_date >= "] =  $sdate;
+		$da["Requests.check_in >= "] =  $sdate;
+		$conditions["OR"] =  $da;
 	}
 	if(isset($_POST["enddatesearch"]) && !empty($_POST["enddatesearch"])) {
 	$edate =  $_POST["enddatesearch"]; 
@@ -2596,13 +2707,13 @@ if($_POST["budgetsearch"]=='Select Total Budget'){$_POST["budgetsearch"]=0;}
 			$BlockedUsers = array_values($BlockedUsers);
 		}
 		$BlockedUsers = array_unique($BlockedUsers);
- if(sizeof($BlockedUsers))
-	 {
+	if(sizeof($BlockedUsers))
+	{
 		$conditionsA["Responses.user_id NOT IN"] =  $BlockedUsers; 
-	 }
-	 else{
-		 $conditionsA=array();
-	 }
+	}
+	else{
+		$conditionsA=array();
+	}
 	
 		$queryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id'],$conditionsA]]);
 		$countarr['responsecount'][$req['id']]  = $queryr->count();
@@ -2982,12 +3093,12 @@ $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField
 					$RefSearchArray=explode(',',$_POST["refidsearch"]);  
 					$conditions["Requests.reference_id in"] =  $RefSearchArray;
 				}
-				
+				$conditionsAJENT=array();
 				if(isset($_POST["agentnamesearch"]) && !empty($_POST["agentnamesearch"])) {
 					$keyword = $_POST["agentnamesearch"];
 					$AjentArray = explode(',',$keyword);
 					$AjentArray=array_filter($AjentArray);
-					$conditions["OR"] = array("Users.first_name IN "=>$AjentArray, "Users.last_name IN" => $AjentArray);
+					$conditionsAJENT["OR"] = array("Users.first_name IN "=>$AjentArray, "Users.last_name IN" => $AjentArray);
 				}
 				
 				if(isset($_POST["members"]) && !empty($_POST["members"])) {
@@ -2997,13 +3108,13 @@ $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField
 					$sdate = $_POST["startdatesearch"];
 				}
 				if(isset($sdate) && !empty($sdate)){
-				$date = str_replace('/', '-', $sdate);
-				$sdate = date('Y-m-d', strtotime($date));
+					$date = str_replace('/', '-', $sdate);
+					$sdate = date('Y-m-d', strtotime($date));
 				}
 
 				if(!empty($_POST["startdatesearch"])) {
-					$da["Requests.start_date"] =  $sdate;
-					$da["Requests.check_in"] =  $sdate;
+					$da["Requests.start_date >="] =  $sdate;
+					$da["Requests.check_in >="] =  $sdate;
 					$conditions["OR"] =  $da;
 				}
 
@@ -3017,37 +3128,35 @@ $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField
 				}
 				
 				if(!empty($_POST["enddatesearch"])) {
-					$da1["Requests.end_date"] =  $edate;
-					$da1["Requests.check_out"] =  $edate;
+					$da1["Requests.end_date <="] =  $edate;
+					$da1["Requests.check_out <="] =  $edate;
 					if(!empty($sdate)){
-						$da1["Requests.start_date"] =  $sdate;
-						$da1["Requests.check_in"] =  $sdate;
+						$da1["Requests.start_date >="] =  $sdate;
+						$da1["Requests.check_in >="] =  $sdate;
 					}
 					$conditions["OR"] =  $da1;
 				}
-				$this->loadModel('BlockedUsers');
-			
+				$this->loadModel('BlockedUsers'); 
 				if ($_POST['role_id'] == 1) {
 				$requests = $this->Requests->find()
-						->contain(["Users","Responses"=>function($q){
-							return $q->find('all')->where(['Responses.status'=>1])->contain(['Users']);
+						->contain(["Users","Responses"=>function($q)use($conditionsAJENT){
+							return $q->find('all')->where(['Responses.status'=>1,$conditionsAJENT])->contain(['Users']);
 						}
 						,"Hotels"])
 						->where($conditions)->order($sort)->all();
- 
 				}
 				if ($_POST['role_id'] == 2) {
 				$requests = $this->Requests->find()
-				->contain(["Users","Responses"=>function($q){
-							return $q->find('all')->where(['Responses.status'=>1])->contain(['Users']);
+				->contain(["Users","Responses"=>function($q)use($conditionsAJENT){
+							return $q->find('all')->where(['Responses.status'=>1,$conditionsAJENT])->contain(['Users']);
 						}
 						,"Hotels"])
 				->where($conditions)->order($sort)->all();
 				}
 				if ($_POST['role_id'] == 3) {
 				$requests = $this->Requests->find()
-				->contain(["Users","Responses"=>function($q){
-							return $q->find('all')->where(['Responses.status'=>1])->contain(['Users']);
+				->contain(["Users","Responses"=>function($q)use($conditionsAJENT){
+							return $q->find('all')->where(['Responses.status'=>1,$conditionsAJENT])->contain(['Users']);
 						}
 						,"Hotels"])
 				->where($conditions)->order($sort)->all();
@@ -3068,37 +3177,42 @@ $BlockedUsers=array();
 			$this->loadModel('BusinessBuddies');
 			if($requests->count()>0)
 			{
- 
+				$cdx=0;
 				foreach($requests as $cit)
 				{ 
+					/* if(empty($cit['responses'])){
+						 echo 'das';
+ 						unset($cit[$cdx]);
+					}
+					$cdx++;  */
 					$query = $this->Testimonial->find();
 					$userRating = $query->select(["average_rating" => $query->func()->avg("rating")])
 						->where(['user_id' => $cit['responses'][0]['user_id']])
 						->order(["id" => "DESC"]);
 					$rating['rating'][$cit['responses'][0]['user_id']]  = $userRating;
 				 
-				 //-- 
-		$user_id = $cit['responses'][0]['user_id'];
-		$sql = "SELECT *,COUNT(*) as ch_count FROM user_chats 
-		WHERE request_id='".$cit['id']."' AND (user_id in ('".$loginId."','".$user_id."') 
-		AND notification='0'
-		ANd send_to_user_id in ('".$loginId."','".$user_id."')) ";
-		$stmt1 = $conn->execute($sql);
-		$results1 = $stmt1->fetch('assoc');			 
-		$data[$cit['id']] =$results1['ch_count'];
-		
-		
-		//---
+								 //-- 
+						$user_id = $cit['responses'][0]['user_id'];
+						$sql = "SELECT *,COUNT(*) as ch_count FROM user_chats 
+						WHERE request_id='".$cit['id']."' AND (user_id in ('".$loginId."','".$user_id."') 
+						AND notification='0'
+						ANd send_to_user_id in ('".$loginId."','".$user_id."')) ";
+						$stmt1 = $conn->execute($sql);
+						$results1 = $stmt1->fetch('assoc');			 
+						$data[$cit['id']] =$results1['ch_count'];
+						
+						
+						//---
 				 
 					/*$sql = "SELECT * FROM testimonial WHERE request_id='".$cit['id']."' AND author_id='".$_POST['user_id']."' order by created_at DESC";
 					$stmt = $conn->execute($sql);
 					$reviews = $stmt ->fetch('assoc');
 					$review_array[]=$reviews;*/
-$RVCount= $this->Testimonial->find()->where(['request_id'=>$cit['id'] , 'author_id' =>$_POST['user_id']  ])->order(['created_at ' => 'DESC'])->count();
-if($RVCount>0){
-$reviews= $this->Testimonial->find()->where(['request_id'=>$cit['id'] , 'author_id' =>$_POST['user_id']  ])->order(['created_at ' => 'DESC'])->toArray();
-$review_array=array_merge($review_array,$reviews);
-}  
+						$RVCount= $this->Testimonial->find()->where(['request_id'=>$cit['id'] , 'author_id' =>$_POST['user_id']  ])->order(['created_at ' => 'DESC'])->count();
+						if($RVCount>0){
+						$reviews= $this->Testimonial->find()->where(['request_id'=>$cit['id'] , 'author_id' =>$_POST['user_id']  ])->order(['created_at ' => 'DESC'])->toArray();
+						$review_array=array_merge($review_array,$reviews);
+					}  
 					if($cit['category_id']==2)
 					{
 						$cityname = $this->cityname($cit['pickup_city']);
@@ -3162,21 +3276,23 @@ $review_array=array_merge($review_array,$reviews);
 					$resultd = $stmtd ->fetch('assoc');
 					$final_res_array[$cit['id']]  = $resultd;	 
 					 
-					if($cit['responses'][0]['status']==1){
-
-						$RequestUserId=$cit['responses'][0]['user_id'];
-						$BusinessBuddiesCount=$this->BusinessBuddies->find()->where(['user_id'=>$loginId,'bb_user_id'=>$RequestUserId])->count();
-					}
-$BusinessBuddies['Buddies'][$cit['responses'][0]['user_id']]  = $BusinessBuddiesCount;
-
-$BlockedUsersCunt = $this->BlockedUsers->find()->where(['blocked_by' => $loginId,'blocked_user_id'=>$RequestUserId])->count();	
-$BlockedUsers['Blocked'][$cit['responses'][0]['user_id']]  = $BlockedUsersCunt ;
-
-$rw++;
-				}
+	if($cit['responses'][0]['status']==1){
+		$BusinessBuddiesCount=0;
+		if(!empty($cit['responses'][0]['user_id'])){
+			$RequestUserId=$cit['responses'][0]['user_id'];
+			$BusinessBuddiesCount=$this->BusinessBuddies->find()->where(['user_id'=>$loginId,'bb_user_id'=>$RequestUserId])->count();
+		}
+	}
+	if(!empty($cit['responses'][0]['user_id'])){
+		$BusinessBuddies['Buddies'][$cit['responses'][0]['user_id']]  = $BusinessBuddiesCount;
+	}
+	$BlockedUsersCunt = $this->BlockedUsers->find()->where(['blocked_by' => $loginId,'blocked_user_id'=>$RequestUserId])->count();
+	if(!empty($cit['responses'][0]['user_id'])){	
+		$BlockedUsers['Blocked'][$cit['responses'][0]['user_id']]  = $BlockedUsersCunt ;
+	}
+ 				} 
 			}
-
-
+ 
 				$sql = "select s.state_name,c.id as city_id,c.name as city_name from cities as c 
 				INNER JOIN states as s on s.id=c.state_id
 				INNER JOIN requests as r on r.city_id=c.id
@@ -3807,11 +3923,11 @@ $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField
 			$d["screen_id"] = $_POST['screen_id'];
 				if($d["screen_id"]==1)
 				{
-					$res_text = "Click here to go MY RESPONSES to view it.";
+					$res_text = "Click here to go to MY RESPONSES to view it.";
 				}
 				elseif($d["screen_id"]==2)
 				{
-					$res_text = "Click here to go CHECK RESPONSES to view it.";
+					$res_text = "Click here to go to CHECK RESPONSES to view it.";
 				}
 				else
 				{
@@ -3823,7 +3939,7 @@ $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField
 			}
 			$d["user_id"] = $_POST['user_id'];
 			$d["send_to_user_id"] = $d['chat_user_id'];
-			$d["created"] = date("Y-m-d h:i:s");
+			$d["created"] = date("Y-m-d H:i:s");
 //$response_id=$_POST['response_id'];
 			$UserChat = $this->UserChats->newEntity($d);
 			if ($re = $this->UserChats->save($UserChat)) {
@@ -3895,15 +4011,15 @@ $this->UserChats->updateAll(['type' => 'Chat'], ['id' => $ChatId]);
 			$SendToUser = $TableUser->get($send_to_user_id);
 			$SendToUserName = $SendToUser['first_name'].' '.$SendToUser['last_name'];
 			
-			$message = "$name has accepted your offer. Click here to go Finalized Requests/Reponses to add a Review for $SendToUserName";
-			$msg = "$name has accepted your offer. Click here to go Finalized Requests/Reponses to add a Review for $SendToUserName.";
+			$message = "$name has accepted your offer. Click here to go to Finalized Requests/Reponses to add a Review for $SendToUserName";
+			$msg = "$name has accepted your offer. Click here to go to Finalized Requests/Reponses to add a Review for $SendToUserName.";
 			$userchatTable = TableRegistry::get('User_Chats');
 			$userchats = $userchatTable->newEntity();
 			$userchats->request_id = $request_id;
 			$userchats->user_id = $user_from_id;
 			$userchats->send_to_user_id = $send_to_user_id;
 			$userchats->message = $message;
-			$userchats->created = date("Y-m-d h:i:s");
+			$userchats->created = date("Y-m-d H:i:s");
 			$userchats->notification = 1;
 			$message_data='';
 			if ($userchatTable->save($userchats)) {
@@ -3947,8 +4063,8 @@ $this->User_Chats->updateAll(['type' => 'Final Response'], ['id' => $ChatId]);
 				$user = $TableUser->get($user_from_id);
 				$name = $user['first_name'].' '.$user['last_name'];
 				/* $message = "<span class='rec_name'>".$name."</span> has shared his Contact Info. Click here to go MY RESPONSES tab to view it."; */
-				$message = $name." has shared his Contact Info. Click here to go MY RESPONSES tab to view it.";
-				$msg = "$name has shared his Contact Info. Click here to go MY RESPONSES tab to view it.";
+				$message = $name." has shared his Contact Info. Click here to go to MY RESPONSES tab to view it.";
+				$msg = "$name has shared his Contact Info. Click here to go to MY RESPONSES tab to view it.";
 				$send_to_user_id = $_POST['sharewith_user_id'];
 				$userchatTable = TableRegistry::get('User_Chats');
 				$userchats = $userchatTable->newEntity();
@@ -3956,7 +4072,7 @@ $this->User_Chats->updateAll(['type' => 'Final Response'], ['id' => $ChatId]);
 				$userchats->user_id = $user_from_id;
 				$userchats->send_to_user_id = $send_to_user_id;
 				$userchats->message = $message;
-				$userchats->created = date("Y-m-d h:i:s");
+				$userchats->created = date("Y-m-d H:i:s");
 				$userchats->notification = 1;
 				$message_data='';
 					if ($userchatTable->save($userchats)) {
@@ -4067,14 +4183,14 @@ $this->UserChats->updateAll(['type' => 'Detail Share'], ['id' => $ChatId]);
 				if ($re = $this->Responses->save($response)) {
 					$name = $user['first_name'].' '.$user['last_name'];
 					$ref_id = $request['reference_id'];
-					$message = "You have received a Response for Reference ID: $ref_id. Click here to go MY REQUESTS tab to view it.";	
+					$message = "You have received a Response for Reference ID: $ref_id. Click here to go to MY REQUESTS tab to view it.";	
 					$userchatTable = TableRegistry::get('User_Chats');
 					$userchats = $userchatTable->newEntity();
 					$userchats->request_id = $request["id"];
 					$userchats->user_id = $d["user_id"];
 					$userchats->send_to_user_id = $request["user_id"];
 					$userchats->message = $message;
-					$userchats->created = date("Y-m-d h:i:s");
+					$userchats->created = date("Y-m-d H:i:s");
 					$userchats->notification = 1;
 					if ($userchatTable->save($userchats)) {
 $ChatId= $userchats->id;
@@ -4395,7 +4511,7 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 
 		 
 	public function getchatNotification()
-	{
+	{	 
 		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
 			$user_id = $_POST['user_id'];
 			$unreadnotification = array();
@@ -4407,6 +4523,9 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 $x=0;
 foreach($unreadnotification as $data){
  				$SenderID=$data['user_id'];
+ 				//$created=$data['created'];
+				//$change_time=date('Y-m-d h:i A',strtotime($created));
+				//$unreadnotification[$x]['created']=$change_time;
 				$Users=$this->Users->find()->where(['id'=>$SenderID])->first();
  				$first_name=$Users['first_name'];
 				$last_name=$Users['last_name'];
@@ -4743,8 +4862,8 @@ $response=array('success'=>$success,'error'=>$error,'response'=>$response);
 							$userchats->user_id = $_POST['user_id'];
 								$userchats->type = 'Request';
 							$userchats->send_to_user_id = $usr["id"];
-							$userchats->message = "You have received a Request! Click here to go RESPOND TO REQUEST tab to view it.";
-							$userchats->created = date("Y-m-d h:i:s");
+							$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+							$userchats->created = date("Y-m-d H:i:s");
 							$userchats->notification = 1;;
 							if ($userchatTable->save($userchats)) {
 								$id = $userchats->id;
@@ -4898,8 +5017,8 @@ $result['response_object'] = "Congratulations! Your request has been submitted s
 							$userchats->user_id = $_POST['user_id'];
 								$userchats->type = 'Request';
 							$userchats->send_to_user_id = $usr["id"];
-							$userchats->message = "You have received a Request! Click here to go RESPOND TO REQUEST tab to view it.";
-							$userchats->created = date("Y-m-d h:i:s");
+							$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+							$userchats->created = date("Y-m-d H:i:s");
 							$userchats->notification = 1;;
 							if ($userchatTable->save($userchats)) {
 								$message_data='';
@@ -5045,8 +5164,8 @@ $result['response_object'] = "Congratulations! Your request has been submitted s
 						$userchats->user_id = $_POST['user_id'];
 						$userchats->send_to_user_id = $usr["id"];
 						$userchats['type'] = 'Request';
-						$userchats->message = "You have received a Request! Click here to go RESPOND TO REQUEST tab to view it.";
-						$userchats->created = date("Y-m-d h:i:s");
+						$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+						$userchats->created = date("Y-m-d H:i:s");
 						$userchats->notification = 1;
  
 						if ($userchatTable->save($userchats)) {
@@ -5071,8 +5190,8 @@ $this->User_Chats->updateAll(['type' => 'Request'], ['id' => $id]);
 						$userchats->request_id = $ui;
 						$userchats->user_id = $_POST['user_id'];
 						$userchats->send_to_user_id = $usrh["id"]; 
-						$userchats->message = "You have received a Request! Click here to go RESPOND TO REQUEST tab to view it.";
-						$userchats->created = date("Y-m-d h:i:s");
+						$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+						$userchats->created = date("Y-m-d H:i:s");
 						$userchats->notification = 1;;
 						if ($userchatTable->save($userchats)) {
 							$id = $userchats->id;

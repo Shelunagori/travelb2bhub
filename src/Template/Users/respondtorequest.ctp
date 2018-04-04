@@ -348,17 +348,11 @@ $conn = ConnectionManager::get('default');
 							Pickup City : <span class="details"><?php echo ($request['pickup_city'])?$allCities[$request['pickup_city']]:"-- --"; ?><?php echo ($request['pickup_state'])?' ('.$allStates[$request['pickup_state']].')':"";  ?>
 						<?php } else { ?>
 						<p>
-							Destination City : <span class="details"><?php echo ($request['city_id'])?$allCities[$request['city_id']]:"-- --"; ?>
-							<?php echo ($request['state_id'])?' ('.$allStates[$request['state_id']].')':""; ?> 	
-							<?php if($request['category_id'] == 1){
-								if(count($request['hotels']) >1) {
-								unset($request['hotels'][0]);?>
-								<?php
-								foreach($request['hotels'] as $row) { ?>
-									<?php echo ($row['city_id'])?', '.$allCities[$row['city_id']]:""; ?><?php echo ($row['state_id'])?' ('.$allStates[$row['state_id']].')':""; ?> 	
-								<?php } ?>
-								<?php } ?>
-							<?php } ?>
+							Destination City : <span class="details">
+							<?php 
+							$a=$request['city_id']?$allCities[$request['city_id']]:"-- --"; 
+							$b=$request['state_id']?' ('.$allStates[$request['state_id']].')':"";
+							echo mb_strimwidth($a.$b, 0,17, "...");?>
 						</p>
 					<?php } ?>
 					</li>

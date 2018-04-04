@@ -32,7 +32,7 @@ li > p{
 	</div>
 	<div class="box-body">
 		<div class="row">
-		<div class="col-md-12">
+		<div class="">
 					<div id="myModal122" class="modal fade form-modal" role="dialog">
 					  <div class="modal-dialog">
 
@@ -116,7 +116,7 @@ $m =0;
 							$image= $this->Html->image('/img/slider/hotelier-icon.png');
 							$text="<span class='requestType'>Hotel</span>";
 						} 
-						?>
+					?>
                 <fieldset><legend><?php echo $image; ?></legend>
 				 <ul>
                     <li >
@@ -181,10 +181,10 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
                      <li >
                   <?php if($request['category_id']==2){ ?>
                   <p>
-                      Pickup City:<span class="details"> <span><?php echo ($request['pickup_city'])?$allCities[$request['pickup_city']]:"-- --"; ?><?php echo ($request['pickup_state'])?' ('.$allStates[$request['pickup_state']].')':"";  ?></span></span>
+                      Pickup City :<span class="details"> <span><?php echo ($request['pickup_city'])?$allCities[$request['pickup_city']]:"-- --"; ?><?php echo ($request['pickup_state'])?' ('.$allStates[$request['pickup_state']].')':"";  ?></span></span>
                   <?php } else { ?>
                             <p>
-                                Destination City: <span class="details"> <span>
+                                Destination City : <span class="details"> <span>
 								<?php 
 									$a=$request['city_id']?$allCities[$request['city_id']]:"-- --"; 
 									$b=$request['state_id']?' ('.$allStates[$request['state_id']].')':"";
@@ -211,6 +211,7 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 						 <?php echo mb_strimwidth($request['comment'], 0, 25, "...");?></span></p>
                      </li>
                   </ul>
+				  <hr></hr>
 							<table width="100%" style="text-align:center">
 							<tr>
 								<td >

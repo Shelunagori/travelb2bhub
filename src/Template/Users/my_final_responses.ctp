@@ -35,7 +35,7 @@ $conn = ConnectionManager::get('default');
 	</div>
 	<div class="box-body">
 		<div class="row">
-		<div class="col-md-12">
+		<div class="">
 			<div id="myModal122" class="modal fade form-modal" role="dialog">
 			  <div class="modal-dialog">
 				<div class="modal-content">
@@ -132,16 +132,12 @@ $conn = ConnectionManager::get('default');
 
                   <?php } else { ?>
                         <p>
-                        Destination City :  <span><?php echo ($row['request']['city_id'])?$allCities[$row['request']['city_id']]:"-- --"; ?> <?php echo ($row['request']['state_id'])?' ('.$allStates[$row['request']['state_id']].')':""; ?>
-                        <?php if($row['request']['category_id'] == 1){
-						if(count($row['request']['hotels']) >1) {
-							unset($row['request']['hotels'][0]);
-							//unset($details['hotels'][0]);?>
-							<?php foreach($row['request']['hotels'] as $rowc) { ?>
-							<?php echo ($rowc['city_id'])?','.$allCities[$rowc['city_id']]:""; ?><?php echo ($rowc['state_id'])?' ('.$allStates[$rowc['state_id']].')':""; ?>
-							<?php } ?>
-							<?php } ?>
-							<?php } ?></span>
+                        Destination City :  <span>
+						<?php 
+							$a=$row['request']['city_id']?$allCities[$row['request']['city_id']]:"-- --"; 
+							$b=$row['request']['state_id']?' ('.$allStates[$row['request']['state_id']].')':"";
+							echo mb_strimwidth($a.$b, 0,17, "...");?>
+							</span>
                         </p>
                         <?php } ?>
                  </li>
@@ -193,10 +189,11 @@ $conn = ConnectionManager::get('default');
                             Members :  <?php echo $row['request']['adult'] +  $row['request']['children']; ?>
                      </p>
 					</li>
-                   <li class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comment">
-                       <p> Comment :<span><?php echo $row['comment']; ?></span></p>
-                     </li>
+					<li>
+                       <p> Comment : <span ><?php echo mb_strimwidth($row['comment'], 0, 25, "...");?></span></p>
+                    </li>
                    </ul>
+				   <hr></hr>
 				   <div>
 					<table width="100%" style="text-align:center" class>
 						<tr>
