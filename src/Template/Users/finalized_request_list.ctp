@@ -33,7 +33,7 @@ $conn = ConnectionManager::get('default');
 </div>
 <div class="box-body">
 <div class="row">
-<div class="col-md-12" >
+<div class="" >
 <div id="myModal123" class="modal fade form-modal" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -180,7 +180,7 @@ $(".req").sort(function (a, b) {
 						continue;
 					   }
 					 ?>
-					 <div id="cat" >
+							<div id="cat" >
 									<div class="col-md-4" id="<?php if($request['category_id']==1){ echo "1";} if($request['category_id']==2){ echo "3";}if($request['category_id']==3){ echo "2";} ?>">
 									<?php 
 								   if($request['category_id']==1){ 
@@ -279,7 +279,8 @@ $(".req").sort(function (a, b) {
 									<p>Response Comment : <span class="details">
 									<?php echo mb_strimwidth($finalresponse[$request['id']]['comment'], 0, 25, "...");?></span></p>
 								 </li>
-								</ul>
+							</ul>
+							<hr></hr>
 						  <table width="100%" style="text-align:center">
 							<tr>
 								<td width="33%">
@@ -348,7 +349,7 @@ $(".req").sort(function (a, b) {
 						<?php }else {?>
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
 								<div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 text-center box-event">
-				 <?php if(isset($_GET['req_typesearch'])){ echo "No matching data.";}else{ echo "There are no finalized requests in the mailbox.";}?>
+					<?php if(isset($_GET['req_typesearch'])){ echo "No matching data.";}else{ echo "There are no finalized requests in the mailbox.";}?>
 								</div>
 							</div>
 						<?php } ?>

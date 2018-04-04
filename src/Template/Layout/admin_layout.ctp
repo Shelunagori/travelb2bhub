@@ -116,9 +116,9 @@ margin-top: 5px !important;
 
 <body class="hold-transition skin-blue fixed sidebar-mini">
 <?php $this->Form->templates([
-				'inputContainer' => '{{content}}'
-			]); 
-		?>
+		'inputContainer' => '{{content}}'
+	]); 
+?>
 <div id="wrapper">
 <header class="main-header no-print" >
    <a href="<?php echo $this->Url->build(["controller" => "Admins",'action'=>'add']); ?>" class="logo">
@@ -301,14 +301,14 @@ margin-top: 5px !important;
 		</aside>
 
   
-<div class="content-wrapper">
-	 <section class="content">
-		<div class="row">
-			<?php echo $this->Flash->render(); ?>
-			<?php echo $this->fetch('content'); ?>
-		</div>
-	 </section>
-</div>
+	<div class="content-wrapper">
+		 <section class="content">
+			<div class="row">
+				<?php echo $this->Flash->render(); ?>
+				<?php echo $this->fetch('content'); ?>
+			</div>
+		 </section>
+	</div>
 </div>
 <footer class="main-footer hide_print">
     2016 &copy; <a href="http://www.phppoets.com" target="_blank"> PHP POETS IT SOLUTION PRIVATE LTD.</a> All Rights Reserved.

@@ -1,10 +1,13 @@
-<?php
- 
-?><!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
-  <?php  echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
-	
+<meta charset="utf-8">
+<title>TB2B</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<meta content="" name="description">
+<meta content="" name="author"> 
+	<?php  echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
 	<?php echo $this->Html->css('/assets/plugins/bootstrap-datepicker/css/datepicker3.css'); ?> 
 	<?php echo $this->Html->css('/assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css'); ?> 
 	<?php echo $this->Html->css('/assets/plugins/timepicker/bootstrap-timepicker.min.css'); ?> 
@@ -54,7 +57,9 @@ body {
     background: -moz-linear-gradient(right,  #DA0845, #DB7E14); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to right,  #DA0845 , #DB7E14); /* Standard syntax (must be last) */
 }
-
+.slimScrollDiv{
+	overflow: inherit !important;
+}
 .box.box-primary {
     border-top-color: #66cad5 !important;
 } 
@@ -246,17 +251,40 @@ margin-top: 5px !important;
 	margin-bottom:0px !important;
 	margin-top:0px !important;
 }
+
+@media all and (max-width: 520px) {
+	/* Logo for Mobile */
+	.logo-lg {
+		width: 220px;
+		height: 60px;
+		background-image: url(‘http://wordpress.coastalrepro.com/wp-content/uploads/2013/06/coastalcreative-logo-mobile.png’);
+		background-size: 250px 47px;
+	}
+}
+@media all and (min-width: 520px) {
+	/* Logo for Mobile */
+	.logo-lg {
+		width: 210px;
+		height: 60px;
+		background-image: url(‘http://wordpress.coastalrepro.com/wp-content/uploads/2013/06/coastalcreative-logo-mobile.png’);
+		background-size: 250px 47px;
+	}
+}
 </style>
 </head>
-<title>Travel B2B Hub</title>
-<body class="hold-transition skin-blue sidebar-mini">
+
+<body class="hold-transition skin-blue fixed sidebar-mini">
+<?php $this->Form->templates([
+		'inputContainer' => '{{content}}'
+	]); 
+?>
 <?php 
 $page_name=$this->request->params['action']; 
 $controller=$this->request->params['controller']; 
  ?>
-<div class="wrapper">
-  <header class="main-header">
-    <!-- Logo -->
+<div id="wrapper">
+	<header class="main-header  no-print">
+    <!-- Logo background: #1295a2; -->
     <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo" >
       <span class="logo-mini"><?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:77%;']) ?></span>
       <!-- logo for regular state and mobile devices -->
@@ -416,9 +444,8 @@ $controller=$this->request->params['controller'];
       </div>
     </nav>
   </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
+	<aside class="main-sidebar no-print">
+	<!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
       <div class="user-panel" align="center">
@@ -444,7 +471,7 @@ $controller=$this->request->params['controller'];
         <div class="info">
           <?php echo ucwords(strtolower($MemberName));?>
 		  <br>
-		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'profileedit/'.$loginId]); ?>" class="logo">Edit Profile</a> | &nbsp;
+		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'viewprofile/'.$loginId]); ?>" class="logo">My Profile</a> | &nbsp;
 		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'change_password']); ?>" class="logo">Reset Password</a>
         </div>
     </div>
@@ -510,25 +537,22 @@ $controller=$this->request->params['controller'];
       </ul>
     </section>
     <!-- /.sidebar -->
-  </aside>
+	
+	</aside>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-	 <section class="content">
-		<div class="row">
-			<?php echo  $this->Flash->render() ?>
-			<?php echo $this->fetch('content'); ?>
-		</div>
-	 </section>
+  
+	<div class="content-wrapper">
+		 <section class="content">
+			<div class="row">
+				<?php echo $this->Flash->render(); ?>
+				<?php echo $this->fetch('content'); ?>
+			</div>
+		 </section>
+	</div>
 </div>
-   
-  <div class="control-sidebar-bg"></div>
-</div>
-
 <footer class="main-footer hide_print">
     2016 &copy; <a href="http://www.phppoets.com" target="_blank"> PHP POETS IT SOLUTION PRIVATE LTD.</a> All Rights Reserved.
 </footer>
-`
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
 $(document).ready(function (){
@@ -563,8 +587,7 @@ $(document).ready(function (){
 
 <?php echo $this->Html->script('/assets/plugins/fastclick/fastclick.js'); ?>
 <?php echo $this->Html->script('/assets/dist/js/app.min.js'); ?>
-<?php echo $this->Html->script('/assets/dist/js/demo.js'); ?>
-<?php //echo $this->Html->script('/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'); ?>
+<?php echo $this->Html->script('/assets/dist/js/demo.js'); ?> 
 <?php echo $this->Html->script('/assets/plugins/WYSIWYG/editor.js'); ?>
 <script>
  

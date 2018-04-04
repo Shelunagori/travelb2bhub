@@ -49,8 +49,8 @@ li > p{
 		margin: 0 0 4px !important;
 	}	
  .button {
-    width: 50%;
-    font-size: 14px;
+    width: 70%;
+    font-size: 12px;
     max-width: 214px;
     text-align: center;
     color: rgb(255, 255, 255);
@@ -58,13 +58,18 @@ li > p{
     border-width: 1px;
     border-style: solid;
     border-color: rgb(255, 255, 255);
-    border-image: initial;
-    padding: 0.75rem 1rem;
-    border-radius: 2px;
+    border-image: initial; 
+    border-radius: 50px;
 }
 .button:hover{
 	background-color:#FB6542;
+} 
+.inner{
+	color:#FFF !important;		
 }
+.textpormoition {
+	font-size:10px!important;
+}	
 
 </style>
 <section class="content-header">
@@ -87,136 +92,126 @@ li > p{
 						<div class="col-md-12">
 							<?php if($role_id==1) {?>
 							<div class="col-md-4"> 
-							<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/Travel.png);height:200px;width:100%;background-repeat:round;">
+ 							<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Travel.jpg);height:200px;width:100%;background-repeat:round;padding: 25px;">
 								  <!-- small box -->
 								  <div class="small-box" >
 									<div class="inner">
-										<p>travel Package</p>	
-										 
-									</div>
-								  </div>
-								  <div class="small-box " style="margin-top:20px;">
-									<table class="table">
+										<table border="0" height="130px">
 											<tr>
-											<span>travel Package</span>	
-											</tr><span class="help-block"></span>
+												<td colspan="2" style="font-size:16px"><b>Listed Packages</b></td>	
+											</tr>
 											<tr>
-											<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>">
-												<button class="button" >View </button></a>
+												<td colspan="2" class="textpormoition">Click on the buttons below to View Promote Travel Packages </td>	
 											</tr>
-											<span class="help-block"></span>
- 											<tr>
-											<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'add')) ?>">
-												<button class="button"  >Load </button></a>
-											</tr>
- 										</table>
+											 
+											<tr>
+												<td><a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>">
+												<button class="button btn-sm btn-info" >View </button></a></td>
+												
+												<td><a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'add')) ?>">
+													<button class="button btn-sm btn-danger"  >Load </button></a></td>
+												
+											</tr>											 
+										</table>	
+ 									</div>
 								  </div>
+								   
 								</li>
 							</div>
 							<?php } ?>
-							<?php if($role_id==2 || $role_id==3) { ?>
-								<div class="col-md-4"> 
-							<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/event.jpg);height:200px;width:100%;background-repeat:round;">
-								  <!-- small box -->
-								  <div class="small-box" >
-									<div class="inner">
-										<p>Event Planners</p>	
-										 
-									</div>
-								  </div>
-								  <div class="small-box " style="margin-top:20px;">
-									<table class="table">
-											<tr>
-											<span>Event Planners</span>	
-											</tr><span class="help-block"></span>
-											<tr>
-											<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>">
-												<button class="button" >View </button></a>
-											</tr>
-											<span class="help-block"></span>
-											<?php if($role_id==2){ ?>
- 											<tr>
-											<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'add')) ?>">
-												<button class="button"  >Load </button></a>
-											</tr>
-											<?php } ?>
- 										</table>
-								  </div>
-								</li>
-							</div>
-							<?php } ?>
-							
-							
 							<div class="col-md-4 neww" > 
-								<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/Hotel.png);height:200px;width:100%;background-repeat:round;">
+								<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Hotel.jpg);height:200px;width:100%;background-repeat:round;padding: 25px;">
 								  <!-- small box -->
 								  <div class="small-box" >
 									<div class="inner">
-										<p>hotel Promotion</p>	
-										 
-									</div>
-								  </div>
-								  <div class="small-box " style="margin-top:20px;">
-									<table class="table">
+										<table border="0" height="130px">
 											<tr>
-											<span>hotel Promotion</span>	
-											</tr><span class="help-block"></span>
-											<tr>
-											<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>">
-												<button class="button" >View </button></a>
+												<td colspan="2" style="font-size:16px"><b>Hotel Promotions</b></td>	
 											</tr>
-											<span class="help-block"></span>
-											<?php if($role_id==3){ ?>
 											<tr>
-											<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'add')) ?>">
-												<button class="button"  >Load </button></a>
+												<td colspan="2" class="textpormoition">Click on the buttons below to View <?php if($role_id==3){ ?>or Post<?php } ?> Hotel Promotions </td>	
 											</tr>
-											<?php } ?>
-										</table>
+											 
+											<tr>
+												<td><a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>">
+												<button <?php if($role_id!=3){ ?> style="width:35% !important;"<?php }?> class="button btn-sm btn-info" >View </button></a></td>
+												
+												<td><?php if($role_id==3){ ?><a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'add')) ?>">
+													<button class="button btn-sm btn-danger"  >Load </button></a><?php }?></td>
+												
+											</tr>											 
+										</table>	
+ 									</div>
 								  </div>
+								   
 								</li>
 							</div>
 							
 							<div class="col-md-4">
-							<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp" style="background-image:url(../images/Taxi.png);height:200px;width:100%;background-repeat:round;">
+							<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Taxi.jpg);height:200px;width:100%;background-repeat:round;padding: 25px;">
 								  <!-- small box -->
 								  <div class="small-box" >
 									<div class="inner">
-										<p>Taxi Fleet</p>	
-										 
-									</div>
-								  </div>
-								  <div class="small-box " style="margin-top:20px;">
-									<table class="table">
+										<table border="0" height="130px">
 											<tr>
-											<span >Taxi Fleet</span>	
-											</tr><span class="help-block"></span>
-											<tr>
-											<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>">
-												<button class="button" >View </button></a>
-											</tr><span class="help-block"></span>
-											<?php if($role_id==1){ ?>
-											<tr>
-											<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'add')) ?>">
-												<button class="button"  >Load </button></a>
+												<td colspan="2" style="font-size:16px"><b>Listed Taxi/Fleet Services</b></td>	
 											</tr>
-											<?php } ?>
-										</table>
+											<tr>
+												<td colspan="2" class="textpormoition">Click on the buttons below to View <?php if($role_id==1){ ?> or Promote <?php } ?> Taxi/Fleet Services </td>	
+											</tr>
+											<tr>
+												<td><a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>">
+												<button <?php if($role_id!=1){ ?> style="width:50% !important;"<?php } ?> class="button btn-sm btn-info" >View </button></a></td>
+												
+												<td><?php if($role_id==1){ ?><a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'add')) ?>">
+													<button class="button btn-sm btn-danger"  >Load </button></a> <?php } ?></td>
+											</tr>
+										</table>	
+ 									</div>
 								  </div>
 								</li>
 							</div>
+							<?php if($role_id==2 || $role_id==3) { ?>
+							<div class="col-md-4"> 
+								<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Event.jpg);height:200px;width:100%;background-repeat:round;padding: 25px;">
+								  <!-- small box -->
+								  <div class="small-box" >
+									<div class="inner">
+										<table border="0" height="130px">
+											<tr>
+												<td colspan="2" style="font-size:16px"><b>Event Promotions</b></td>	
+											</tr>
+											<tr>
+												<td colspan="2" class="textpormoition">Click on the buttons below to View <?php if($role_id==2){ ?> or Promote <?php }?> Event Planning Services </td>	
+											</tr>
+											 
+											<tr>
+												<td><a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>">
+												<button <?php if($role_id!=2){ ?> style="width:35% !important;"<?php }?> class="button btn-sm btn-info" >View </button></a></td>
+												
+												<td><?php if($role_id==2){ ?><a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'add')) ?>">
+													<button class="button btn-sm btn-danger"  >Load </button></a><?php }?></td>
+												
+											</tr>											 
+										</table>	
+ 									</div>
+								  </div>
+								   
+								</li> 
+							</div>
+							<?php } ?>
 					</div>
 				</div>
 			</div>
 		</div>
-</section>
+	</section>
 
 	<!-- hide section for hotelier--->
 
 <?php
 	if($users['role_id'] != 3 && count($advertisement1) > 0){
 	?>
-		<div class="col-md-12" style="background-color:#FFF; margin-top:10px">
+		<div class="col-md-12" style="background-color:#FFF; margin-top:10px; display:none">
 			<div style="padding:10px">
 				<p style="font-size:20px;padding-top:10px;color:#4B4B4D">Hoteliers Interested in You</p>
 			</div>
