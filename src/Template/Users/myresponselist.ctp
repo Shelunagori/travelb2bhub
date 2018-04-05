@@ -454,7 +454,7 @@ $(document).ready(function(){
                    </ul>
 				   <hr></hr>
 				   <div class="">
-					<table width="100%" border="0" style="text-align:center">
+					<table width="100%" border="0" >
 						<tr>
 							<td width="33%">
 							<?php $id = $response['request']['id'];

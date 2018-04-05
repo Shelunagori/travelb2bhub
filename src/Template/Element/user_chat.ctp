@@ -1,6 +1,4 @@
 <style>
- 
-
 .containerss {
     border: 2px solid #dedede;
     background-color:#;
@@ -54,7 +52,7 @@
 		</div>
 		<div class="modal-body">
 			<!--Chat history-->
-			<div class="chat-wrap" style="overflow-y: scroll; height: 400px;">
+			<div class="chat-wrap" style="overflow-y: scroll; height: 380px;">
 				<?php 
 				foreach($UserChats as $row){
 					if($row["user_id"] == $this->request->session()->read('Auth.User.id')) {?>
@@ -99,11 +97,10 @@
 			<?php } ?>
 			</div>
 			<!--Chat history/-->
-			<div class="form">
+			<div class="form" style="padding:10px">
 				<?php  echo $this->Form->create("Users", ['type' => 'file', 'url' => ['controller' => 'Users', 'action' => 'addChat'], 'id'=>"UserChatForm"]); ?>
 				<input type="hidden" name="request_id" id="chat_request_id" value="<?php echo $requestId; ?>">
 				<input type="hidden" name="chat_user_id" id="chat_user_id" value="<?php echo $chatUserId; ?>">
-				<div class="ap-border"></div>
 				<label for="message">Message</label>
 				<div class="input-group">
 					<input id="message"  name="message" type="text" class="form-control input-sm" autocomplete="off" placeholder="Type your message here..." />

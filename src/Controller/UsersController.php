@@ -696,7 +696,7 @@ if ($user) {
 $this->Auth->setUser($user);
 date_default_timezone_set('Asia/Kolkata');
 $loggedinid = $this->Auth->user('id');
-$logintime = date("Y-m-d h:i:s");
+$logintime = date("Y-m-d H:i:s");
 $current_date = date("Y-m-d");
 $conn = ConnectionManager::get('default');
 	
@@ -1154,8 +1154,9 @@ $d['end_date'] = (isset($d['end_date']) && !empty($d['start_date']))?$this->ymdF
 					$userchats->request_id = $ui;
 					$userchats->user_id = $this->Auth->user('id');
 					$userchats->send_to_user_id = $usr["id"];
-					$userchats->message = "You have received a Request! Click here to go RESPOND TO REQUEST tab to view it.";
-					$userchats->created = date("Y-m-d h:i:s");
+					$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+					$userchats->created = date("Y-m-d H:i:s");
+					$userchats->type = 'Request';
 					$userchats->notification = 1;;
 					if ($userchatTable->save($userchats)) {
 						$id = $userchats->id;
@@ -1294,9 +1295,10 @@ $Userlist = $stmt ->fetchAll('assoc');
 					$userchats->request_id = $ui;
 					$userchats->user_id = $this->Auth->user('id');
 					$userchats->send_to_user_id = $usr["id"];
-					$userchats->message = "You have received a Request! Click here to go RESPOND TO REQUEST tab to view it.";
-					$userchats->created = date("Y-m-d h:i:s");
-					$userchats->notification = 1;;
+					$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+					$userchats->created = date("Y-m-d H:i:s");
+					$userchats->type = 'Request';
+ 					$userchats->notification = 1;
 					if ($userchatTable->save($userchats)) {
 						$id = $userchats->id;
 					}
@@ -1358,8 +1360,9 @@ elseif($this->request->data['category_id'] == 3 ){
 				$userchats->request_id = $ui;
 				$userchats->user_id = $this->Auth->user('id');
 				$userchats->send_to_user_id = $usr["id"];
-				$userchats->message = "You have received a Request! Click here to go RESPOND TO REQUEST tab to view it.";
-				$userchats->created = date("Y-m-d h:i:s");
+				$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+				$userchats->type = 'Request';
+				$userchats->created = date("Y-m-d H:i:s");
 				$userchats->notification = 1;
 				if ($userchatTable->save($userchats)) {
 				$id = $userchats->id;
@@ -1383,9 +1386,10 @@ $Userlisth = $stmth->fetchAll('assoc');
 				$userchats->request_id = $ui;
 				$userchats->user_id = $this->Auth->user('id');
 				$userchats->send_to_user_id = $usrh["id"];
-				$userchats->message = "You have received a Request! Click here to go RESPOND TO REQUEST tab to view it.";
-				$userchats->created = date("Y-m-d h:i:s");
+				$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+				$userchats->created = date("Y-m-d H:i:s");
 				$userchats->notification = 1;
+				$userchats->type = 'Request';
 				if ($userchatTable->save($userchats)) {
 				$id = $userchats->id;
 				}	
@@ -1408,8 +1412,9 @@ foreach($Userlist as $usr){
 $userchats->request_id = $d['req_id'];
 $userchats->user_id = $this->Auth->user('id');
 $userchats->send_to_user_id = $usr["id"];
-$userchats->message = "You have received a Request! Click here to go RESPOND TO REQUEST tab to view it.";
-$userchats->created = date("Y-m-d h:i:s");
+$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+$userchats->type = 'Request';
+$userchats->created = date("Y-m-d H:i:s");
 $userchats->notification = 1;;
 if ($userchatTable->save($userchats)) {
 $id = $userchats->id;
@@ -2455,14 +2460,19 @@ if($res==1)
 $TableUser = TableRegistry::get('Users');
 $user = $TableUser->get($user_from_id);
 $name = $user['first_name'].' '.$user['last_name'];
-$message = "<span class='rec_name'>$name</span> has accepted your offer. Please CLICK HERE to add a Review for $name";
+///--- Sender 
+$SendToUser = $TableUser->get($send_to_user_id);
+$SendToUserName = $SendToUser['first_name'].' '.$SendToUser['last_name'];
+
+$message = "$name has accepted your offer. Click here to go to Finalized Requests/Reponses to add a Review for $SendToUserName";
 $userchatTable = TableRegistry::get('User_Chats');
 $userchats = $userchatTable->newEntity();
 $userchats->request_id = $request_id;
 $userchats->user_id = $user_from_id;
 $userchats->send_to_user_id = $send_to_user_id;
 $userchats->message = $message;
-$userchats->created = date("Y-m-d h:i:s");
+$userchats->type = 'Final Response';
+$userchats->created = date("Y-m-d H:i:s");
 $userchats->notification = 1;;
 if ($userchatTable->save($userchats)) {
 $id = $userchats->id;
@@ -3060,17 +3070,17 @@ href="<?php echo $serverurl;?>users/addtestimonial/<?php echo $res_userid; ?>"
 			<li><a class="chat_notification" href="#"><strong><?php echo $allchat['message']; ?></strong></a></li>	
 			<?php } }else{
 	 if($allchat['screen_id']==1)
-											  {
-												  $c=2;
-											 $res_text = "Click here to go MY RESPONSES to view it.";
-											  }elseif($allchat['screen_id']==2)
-											  {
-												  $c=1;
-											  $res_text = "Click here to go CHECK RESPONSES to view it.";
-											  }else{
-												  $c=0;
-											  $res_text = "";
-											  }
+	  {
+		$c=2;
+		$res_text = "Click here to go to MY RESPONSES to view it.";
+	  }elseif($allchat['screen_id']==2)
+	  {
+			$c=1;
+			$res_text = "Click here to go to CHECK RESPONSES to view it.";
+	  }else{
+			$c=0;
+			$res_text = "";
+	  }
 	 			?>
 			<li><a data-toggle="modal" class="chat_message" data-target="#myModal<?php echo $allchat['request_id']; ?>" href="<?php echo $serverurl;?>users/user-chat/<?php echo $allchat['request_id']; ?>/<?php echo $allchat['user_id']; ?>/<?php echo $c; ?>">
                        <?php $name = $allchat['sender_name'];   
@@ -3366,14 +3376,15 @@ if ($re = $this->Responses->save($response)) {
 $name = $user['first_name'].' '.$user['last_name'];
 //$message = "$name has responded to your request";
 $ref_id = $request['reference_id'];
-$message = "You have received a Response for Reference ID: $ref_id. Click here to go MY REQUESTS tab to view it.";
+$message = "You have received a Response for Reference ID: $ref_id. Click here to go to MY REQUESTS tab to view it.";
 $userchatTable = TableRegistry::get('User_Chats');
 $userchats = $userchatTable->newEntity();
 $userchats->request_id = $request["id"];
 $userchats->user_id = $this->Auth->user('id');
 $userchats->send_to_user_id = $request["user_id"];
 $userchats->message = $message;
-$userchats->created = date("Y-m-d h:i:s");
+$userchats->type = 'Response';
+$userchats->created = date("Y-m-d H:i:s");
 $userchats->notification = 1;;
 if ($userchatTable->save($userchats)) {
 $id = $userchats->id;
@@ -3610,8 +3621,7 @@ $d["send_to_user_id"] = $d['chat_user_id'];
 $d["created"] = date("Y-m-d H:i:s");
 	
 $sql = "Insert into user_chats SET user_id='".$this->Auth->user('id')."',send_to_user_id='".$d['chat_user_id']."',
-	created='".date("Y-m-d H:i:s")."',request_id='".$d['request_id']."',screen_id='".$d['screen_id']."',
-	message='".$_POST['message']."'";
+	created='".date("Y-m-d H:i:s")."',request_id='".$d['request_id']."',screen_id='".$d['screen_id']."',message='".$_POST['message']."',type='Chat'";
 $stmt = $conn->execute($sql);
 /*if(isset($d['screen_id']))
 	{
@@ -3660,15 +3670,17 @@ $user_from_id = $this->Auth->user('id');
 $TableUser = TableRegistry::get('Users');
 $user = $TableUser->get($user_from_id);
 $name = $user['first_name'].' '.$user['last_name'];
-$message = "<span class='rec_name'>".$name."</span> has shared his Contact Info. Click here to go MY RESPONSES tab to view it.";
+$message = $name." has shared his Contact Info. Click here to go to MY RESPONSES tab to view it.";
+$msg = "$name has shared his Contact Info. Click here to go to MY RESPONSES tab to view it.";
 $send_to_user_id = $_POST["user_id"];
 $userchatTable = TableRegistry::get('User_Chats');
 $userchats = $userchatTable->newEntity();
 $userchats->request_id = $_POST["request_id"];
 $userchats->user_id = $user_from_id;
 $userchats->send_to_user_id = $send_to_user_id;
+$userchats->type = 'Detail Share';
 $userchats->message = $message;
-$userchats->created = date("Y-m-d h:i:s");
+$userchats->created = date("Y-m-d H:i:s");
 $userchats->notification = 1;
 if ($userchatTable->save($userchats)) {
 $id = $userchats->id;
@@ -3684,7 +3696,7 @@ public function userChat($requestId, $chatUserId,$screenid=null) {
 	Configure::write('debug',2);
 	date_default_timezone_set('Asia/Kolkata');
 	$this->loadModel('UserChats');
-	$readtime = date("Y-m-d h:i:s");
+	$readtime = date("Y-m-d H:i:s");
 	$loggedinid = $this->Auth->user('id');
 		
 	$conn = ConnectionManager::get('default');
