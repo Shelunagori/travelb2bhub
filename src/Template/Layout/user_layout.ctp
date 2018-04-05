@@ -288,9 +288,9 @@ margin-top: 5px !important;
 	<header class="main-header  no-print">
     <!-- Logo background: #1295a2; -->
     <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo" >
-      <span class="logo-mini"><?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:77%;']) ?></span>
+      <span class="logo-mini" style="font-size:0px !important;"><?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:77%;']) ?></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><?=  $this->Html->image('/img/main_logo.png', ['style'=>'width:92%;','class'=>'image-responsive']) ?></span>
+      <span class="logo-lg" style="font-size:0px !important;"><?=  $this->Html->image('/img/main_logo.png', ['style'=>'width:92%;','class'=>'image-responsive']) ?></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">

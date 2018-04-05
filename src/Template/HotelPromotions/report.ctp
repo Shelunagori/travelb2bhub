@@ -392,7 +392,7 @@ p{
 											<div class="row ">
 												<div class="col-md-4 lbwidth">Seller :</div>		
 												<div class="col-md-8 lbwidth11"><label>
-												<?php echo $hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.' ( '.$hotelPromotion->user_rating.' <i class="fa fa-star"></i> )';?>
+												<?php echo $hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.' ( '.$hotelPromotion->user_rating.' <i class="fa fa-star" style="color:#efea65;"></i> )';?>
 															
 												</label>
 												</div>					
@@ -404,14 +404,15 @@ p{
 											</div>
 											<div class="row ">
 												<div class="col-md-4 lbwidth">Cheapest Room:</div>		
-												<div class="col-md-8 lbwidth11"><label style="color:#1295AB">&#8377; <?= h($hotelPromotion->cheap_tariff) ?></label>
+												<div class="col-md-8 lbwidth11"><label style="color:#1295AB">&#8377; <?= number_format(h($hotelPromotion->cheap_tariff)) ?></label>
 												</div>
 											</div>
 										</div>
 										<div class="col-md-5">
 											<div class="row ">
 												<div class="col-md-4 lbwidth">Expensive Room:</div>		
-												<div class="col-md-8 lbwidth11"><label style="color:#1295AB">&#8377; <?= h($hotelPromotion->expensive_tariff) ?></label>
+												<div class="col-md-8 lbwidth11"><label style="color:#1295AB">&#8377; <?= 
+												number_format(h($hotelPromotion->expensive_tariff)) ?></label>
 												</div>
 											</div>
 											<div class="row ">
@@ -453,7 +454,7 @@ p{
 																	echo "( ";
 																	for($i=0;$i<$hotelPromotion->user_rating;$i++)
 																	{
-																		echo "<i class='fa fa-star' style='font-size:10px;color:#959191;'></i>";
+																		echo "<i class='fa fa-star' style='font-size:10px;color:#efea65;'></i>";
 																		if($i==0)
 																		{
 																			echo "";
