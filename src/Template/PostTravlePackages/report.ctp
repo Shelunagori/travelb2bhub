@@ -522,7 +522,6 @@ p{
 							<div class="col-md-8 lbwidth11"><label >India<?php //echo $postTravlePackage->country->country_name; ?></label>
 							</div>
 						</div>
-								
 					</div>
 				<div class="row">						
 					<div class="col-md-12 ">
