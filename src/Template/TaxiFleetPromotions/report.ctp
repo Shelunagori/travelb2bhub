@@ -172,7 +172,7 @@ p{
 					foreach($taxiFleetPromotion->taxi_fleet_promotion_rows as $vehicle)
 						{
 							if($x>=1){
-								$vehicleList.=' , ';
+								$vehicleList.=', ';
 							}
 							$vehicleList.=$vehicle->taxi_fleet_car_bus->name;
 							$x++;
@@ -182,19 +182,20 @@ p{
 						foreach($taxiFleetPromotion->taxi_fleet_promotion_cities as $cities)
 							{
 								if($y>=1){
-									$cityList.=' , ';
+									$cityList.=', ';
 								}
 								@$cityList.=$cities->city->name;
+								if($cities->city_id==0){@$cityList.='All Cities';}
 								$y++;
 							}
 						$stateList='';
 						$z=0;
-						foreach($taxiFleetPromotion->taxi_fleet_promotion_states as $states)
+						foreach($taxiFleetPromotion->taxi_fleet_promotion_states as $statess)
 							{
 								if($z>=1){
-									$stateList.=' , ';
+									$stateList.=', ';
 								}
-								$stateList.=$states->state->state_name;
+								$stateList.=$statess->state->state_name;
 								$z++;
 							}
 
@@ -367,6 +368,7 @@ p{
 									//-- LIKES DISLIKE
 									if($isLiked=='no'){
 										echo $this->Form->button('<i class="fa fa-heart-o like fleet" > </i>',['class'=>'likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
+										
 									}
 									if($isLiked=='yes'){
 										echo $this->Form->button('<img src="../images/like.png" height="15px"/>',['class'=>' likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);

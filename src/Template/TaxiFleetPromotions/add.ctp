@@ -287,7 +287,9 @@ fieldset{
 												foreach($city->citystatefi as $cty)
 												{
 													$options[] = ['value'=>$cty->cityid,'text'=>$cty->name];
+													
 												};
+												$options[] = ['value'=>'0','text'=>'All Cities'];
 												echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
 												
 											</div>
