@@ -2,7 +2,7 @@
 //-- List
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => $coreVariable['SiteUrl']."api/PostTravlePackages/getTravelPackages.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&category_id=".$category_id."&duration_day_night=".$duration_day_night."&starting_price=".$starting_price,
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/PostTravlePackages/getTravelPackages.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&category_id=".$category_id."&duration_day_night=".$duration_day_night."&starting_price=".$starting_price."&submitted_from=web",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -168,36 +168,7 @@ p{
 			</div>
 		</div>
 	</div>
-		<?php $i=1;
-					//pr($postTravlePackages); exit;			
-					if(!empty($postTravlePackages)){
-						foreach ($postTravlePackages as $postTravlePackage): 
-							$CategoryList='';
-							$x=0;
-							foreach($postTravlePackage->post_travle_package_rows as $category)
-								{
-									if($x>=1){
-										$CategoryList.=' , ';
-									}
-									$CategoryList.=$category->post_travle_package_category->name;
-									$x++;
-								}
-											
-										
-											$cityList='';
-											$z=0;
-											foreach($postTravlePackage->post_travle_package_cities as $cities)
-											{
-												if($z>=1){
-													$cityList.=' , ';
-												}
-												$cityList.=$cities->city->name;
-												$z++;
-											}
-						?>
-	<div class="">
-		<div class="row">
-			<div id="myModal123" class="modal fade" role="dialog">
+	<div id="myModal123" class="modal fade" role="dialog">
 			  <div class="modal-dialog modal-sm">
 				<!-- Modal content-->
 				<div class="modal-content">
@@ -337,7 +308,36 @@ p{
 				</div>
 			  </div>
 			</div>
-<fieldset style="background-color:#fff;">
+		<?php $i=1;
+					//pr($postTravlePackages); exit;			
+					if(!empty($postTravlePackages)){
+						foreach ($postTravlePackages as $postTravlePackage): 
+							$CategoryList='';
+							$x=0;
+							foreach($postTravlePackage->post_travle_package_rows as $category)
+								{
+									if($x>=1){
+										$CategoryList.=', ';
+									}
+									$CategoryList.=$category->post_travle_package_category->name;
+									$x++;
+								}
+											
+										
+											$cityList='';
+											$z=0;
+											foreach($postTravlePackage->post_travle_package_cities as $cities)
+											{
+												if($z>=1){
+													$cityList.=', ';
+												}
+												$cityList.=$cities->city->name;
+												$z++;
+											}
+						?>
+	<div class="">
+		<div class="row">
+ <fieldset style="background-color:#fff;">
 	<form method="post">
 		<div class="row">
 			<div class="col-md-12">
@@ -664,25 +664,67 @@ p{
 					{
 						echo"<div class='row col-md-12 text-center'><tr><th colspan='10' ><span>No Record Found</span></th></tr></div>";
 					}							?>
-		
-					<!--<div class="paginator">
-						<ul class="pagination">
-							<?= $this->Paginator->first('<< ' . __('first')) ?>
-							<?= $this->Paginator->prev('< ' . __('previous')) ?>
-							<?= $this->Paginator->numbers() ?>
-							<?= $this->Paginator->next(__('next') . ' >') ?>
-							<?= $this->Paginator->last(__('last') . ' >>') ?>
-						</ul>
-						<p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-					</div>-->
+			<table class="maintbl" width="100%">
+				<tbody>
+				</tbody>
+			</table>
+			<div class="col-md-12 text-center loading" style="display:none">
+				<?=  $this->Html->image('/img/loading.gif', ['style'=>'width:5%;']) ?> .
+			</div>
 				</div>
 			</div>
-
-	<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
-	<script type="text/javascript">	
+<input type="hiddens" id="page" value="2">
+<input type="hidden" value="<?php $user_id; ?>" id="user_id">
+<input type="hidden" value="<?php $higestSort; ?>" id="higestSort">
+<input type="hidden" value="<?php $country_id; ?>" id="country_id">
+<input type="hidden" value="<?php $category_id; ?>" id="category_id">
+<input type="hidden" value="<?php $duration_day_night; ?>" id="duration_day_night">
+<input type="hidden" value="<?php $starting_price; ?>" id="starting_price">
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<script type="text/javascript">	
 	
 	$(document).ready(function(){
-	  $('.reason_box').on('change', function() {
+		/*$(window).scroll(function() {
+			var schorll = $(this).scrollTop();
+			var scrollTop = $(window).scrollTop();
+			var docHeight = $(document).height();
+			var winHeight = $(window).height();
+			var scrollPercent = (scrollTop) / (docHeight - winHeight);
+			var scrollPercentRounded = Math.round(scrollPercent*100);
+ 			if ( scrollPercentRounded == 70 ) {
+ 				var t = $("#page").val();
+				$('.loading').show();
+ 				var starting_price = $("#starting_price").val();
+				var duration_day_night = $("#duration_day_night").val();
+				var category_id = $("#category_id").val();
+				var country_id = $("#country_id").val();
+				var higestSort = $("#higestSort").val();
+				var user_id = $("#user_id").val();
+				$.ajax({
+					url: "<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'moredata')) ?>",
+					type: "POST",
+					data: {
+						user_id: user_id,
+						higestSort: higestSort,
+						country_id: country_id,
+						category_id: category_id,
+						duration_day_night: duration_day_night,
+						starting_price: starting_price, 
+						page: t
+					}
+				}).done(function(e) {
+ 					$('.loading').hide();
+					var pagenew = parseInt(t)+1;
+					if(e=='No More Data'){
+					}
+					else{
+					$('.maintbl').find('tbody').append(e);
+					}
+					$("#page").val(pagenew);
+				});
+			}
+		});*/
+		$('.reason_box').on('change', function() {
 		  //var b=$(this);
 		  var a=$(this).closest("div").find(" option:selected").val();
 			if(a == '5')
