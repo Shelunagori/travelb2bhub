@@ -322,7 +322,7 @@ class TaxiFleetPromotionsController extends AppController
 			$getTaxiFleetPromotions = $this->TaxiFleetPromotions->find();
 			$getTaxiFleetPromotions->select(['total_likes'=>$getTaxiFleetPromotions->func()->count('TaxiFleetPromotionLikes.id')])
 				->contain(['Users'=>function($q){
-					return $q->select(['first_name','last_name','mobile_number','company_name']);
+					return $q->select(['first_name','last_name','mobile_number','company_name','email']);
 				}])
 				->leftJoinWith('TaxiFleetPromotionLikes')
 				

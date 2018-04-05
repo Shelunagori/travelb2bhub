@@ -440,5 +440,9 @@ class PostTravlePackagesController extends AppController
         $user_id=$this->Auth->User('id');
 		$this->set(compact('user_id','higestSort','country_id','category_id','duration_day_night','starting_price'));
     }
-
+	
+	public function moredata()
+	{
+		$this->request->data['page'];
+	}
 }
