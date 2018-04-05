@@ -183,7 +183,7 @@ fieldset{
 										<legend style="color:#369FA1;"><b><?= __('Load Package') ?></b></legend>
 											<div class="row">
 												<div class="col-md-12">
-													<div class="col-md-4">
+													<div class="col-md-6">
 														<p for="from">
 															Package Title
 															<span class="required">*</span>
@@ -192,7 +192,7 @@ fieldset{
 															 <?php echo $this->Form->input('title',['class'=>'form-control','label'=>false,'placeholder'=>"Package Title",]);?>
 														</div>
 													</div>
-														<div class="col-md-4">
+														<div class="col-md-6">
 															<p for="from">
 																Upload Image of the Promotion
 																<span class="required">*</span>
@@ -200,16 +200,6 @@ fieldset{
 															
 															<div class="input-field">
 																<?php  echo $this->Form->input('image',['class'=>'form-control','label'=>false,'type'=>'file']); ?>
-															</div>
-														</div>
-														<div class="col-md-4 ">
-														<p for="from">
-																Upload Document
-																<span class="required">*</span>
-															</p>
-															
-															<div class="input-field">
-																<?php  echo $this->Form->input('document',['class'=>'form-control','label'=>false,'type'=>'file']); ?>
 															</div>
 														</div>
 													</div>

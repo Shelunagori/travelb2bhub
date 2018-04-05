@@ -26,32 +26,7 @@ if ($err) {
 	$priceMasters=$priceMasters->PriceMasters;
 }
 
-//-- BUSES LIST 
-$curl = curl_init();
 
-curl_setopt_array($curl, array(
-  CURLOPT_URL => $coreVariable['SiteUrl']."api/taxi_fleet_car_buses/index.json",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 30,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "GET",
-  CURLOPT_HTTPHEADER => array(
-    "cache-control: no-cache",
-    "postman-token: f0bdc3fd-dd35-cc7d-9c8b-a8ebdcf4b05e"
-  ),
-));
-$Result = curl_exec($curl);
-$err = curl_error($curl);
-curl_close($curl);
-$TaxiFleetCarBuses=array();
-if ($err) {
-  echo "cURL Error #:" . $err;
-} else {
-$TaxiFleetCarBuses=json_decode($Result);
-$TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
-}
 //---- Company Name
 $curl = curl_init();
 curl_setopt_array($curl, array(
@@ -107,6 +82,7 @@ if ($err) {
 	$countries=$masterCountry->countryData->ResponseObject;
 	$states=$masterCountry->stateData->ResponseObject;
 	$city=$masterCountry->cityData->ResponseObject;
+	//pr($city);exit;
 }
 
 ?>
@@ -186,7 +162,7 @@ fieldset{
 					<legend style="color:#369FA1;"><b> &nbsp; Load Package &nbsp;  </b></legend>
 						<div class="row">
 							<div class="col-md-12">
-								<div class="col-md-4">
+								<div class="col-md-6">
 									<p for="from">
 										Company Name
 										<span class="required">*</span>
@@ -197,22 +173,13 @@ fieldset{
 								</div>
 								<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
 								<input type="hidden" name="submitted_from" value="web">
-								<div class="col-md-4">
+								<div class="col-md-6">
 									<p for="from">
 										Upload Image of the Promotion
 										<span class="required">*</span>
 									</p>
 									<div class="input-field">
 										<?php  echo $this->Form->input('image',['class'=>'form-control','label'=>false,'type'=>'file']); ?>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<p for="from">
-										Upload Document
-										<span class="required">*</span>
-									</p>
-									<div class="input-field">
-										<?php  echo $this->Form->input('document',['class'=>'form-control','label'=>false,'type'=>'file']); ?>
 									</div>
 								</div>
 							</div>

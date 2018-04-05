@@ -337,8 +337,6 @@ p{
 				</div>
 			  </div>
 			</div>
-			
-		
 <fieldset style="background-color:#fff;">
 	<form method="post">
 		<div class="row">
@@ -349,62 +347,8 @@ p{
 			<div class="row">						
 				<div class="col-md-3">
 				<?= $this->Html->image($postTravlePackage->full_image,['id'=>'myImg','style'=>'width:100%;height:150px;']) ?>
-				</div>
-				<!--------------------image modal--------------------->
-				<div id="myModal" class="modal1" style="display:none;">
-					  <span class="close">&times;</span>
-					  <img class="modal-content1" id="img01">
-					  <div id="caption"></div>
-				</div>
-				<!--------------------image modal End--------------------->
-				<div class="col-md-9">
-					<div class="col-md-5">
-						<div class="row ">
-							<div class="col-md-4 lbwidth">Seller :</div>		
-							<div class="col-md-8 lbwidth11"><label>
-							<?php echo $postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.' ( '.$postTravlePackage->user_rating.'<i class="fa fa-star"></i> )';?>
-										
-							</label>
-							</div>					
-						</div>
-						<div class="row ">
-							<div class="col-md-4 lbwidth">Category :</div>		
-							<div class="col-md-8 lbwidth11"><label><?= h($CategoryList); ?></label>
-							</div>
-						</div>
-						<div class="row ">
-							<div class="col-md-4 lbwidth">Package Duration :</div>		
-							<div class="col-md-8 lbwidth11"><label style="color:#FB6542"><?= h($postTravlePackage->duration_day_night) ?></label>
-							</div>
-						</div>
-						<div class="row ">
-							<div class="col-md-4 lbwidth">Valid Till :</div>	
-							<div class="col-md-8 lbwidth11"><label><?= h(date('d-M-Y',strtotime($postTravlePackage->valid_date))); ?></label>
-							</div>					
-						</div>		
-					</div>
-					<div class="col-md-4">
-						<div class="row ">
-							<div class="col-md-4 lbwidth">Starting Price :</div>
-							<div class="col-md-8 lbwidth11"><label style="color:#1295AB">&#8377; <?php echo number_format(h($postTravlePackage->starting_price)) ;?></label>
-							</div>
-						</div>
-						<div class="row ">
-							<div class="col-md-4 lbwidth">Cities :</div>		
-							<div class="col-md-8 lbwidth11"><label ><?= h($cityList); ?></label>
-							</div>
-						</div>
-						<div class="row ">
-							<div class="col-md-4 lbwidth">Country :</div>		
-							<div class="col-md-8 lbwidth11"><label >India<?php //echo $postTravlePackage->country->country_name; ?></label>
-							</div>
-						</div>
-								
-					</div>
-				</div>
-			</div>
-				<div class="row">						
-					<div class="col-md-3">
+				<div class="row">
+					<div class="">
 						<input type="hidden" name="posttravle_id" value="<?php echo $postTravlePackage->id; ?>">
 							<table class="table" width="100%" style="text-align:center;" >
 								<tr>
@@ -423,7 +367,7 @@ p{
 												echo $this->Form->button('<i class="fa fa-heart-o like fleet" > </i>',['class'=>'btn btn-xs likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
 											}
 											if($isLiked=='yes'){
-												echo $this->Form->button('<i class="fa fa-heart-o like unfleet" > </i>',['class'=>'btn  btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#000;border:0px;']);
+												echo $this->Form->button('<img src="../images/like.png" height="15px"/>',['class'=>'btn btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#000;border:0px;']);
 											}
 										?>
 										<p style="text-align:center">
@@ -436,10 +380,10 @@ p{
 										<?php 
 											//-- Save Unsave
 											if($issaved=='1'){
-												echo $this->Form->button('<i class="fa fa-bookmark-o unfleet"></i>',['class'=>'btn  btn-xs  ','value'=>'button','type'=>'submit','name'=>'saveposttravle','style'=>'background-color:white;color:black;border:0px;']);
+												echo $this->Form->button('<img src="../images/save.png" height="15px"/>',['class'=>'btn btn-xs','value'=>'button','type'=>'submit','name'=>'saveposttravle','style'=>'background-color:white;color:black;border:0px;']);
 											}
 											if($issaved=='0'){
-												echo $this->Form->button('<i class="fa fa-bookmark-o fleet"></i>',['class'=>'btn  btn-xs ','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'saveposttravle']);
+												echo $this->Form->button('<i class="fa fa-bookmark-o fleet"></i>',['class'=>'btn  btn-xs','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'saveposttravle']);
 											}
 											?><p><i style="visibility:hidden;">3<br>Likes</i></p>
 									</td>
@@ -527,7 +471,61 @@ p{
 											</tr>
 										</table>
 									</div>
-									<div class="col-md-5 pull-right">
+						</div>
+				</div>
+				<!--------------------image modal--------------------->
+				<div id="myModal" class="modal1" style="display:none;">
+					  <span class="close">&times;</span>
+					  <img class="modal-content1" id="img01">
+					  <div id="caption"></div>
+				</div>
+				<!--------------------image modal End--------------------->
+				<div class="col-md-9">
+					<div class="col-md-5">
+						<div class="row ">
+							<div class="col-md-4 lbwidth">Seller :</div>		
+							<div class="col-md-8 lbwidth11"><label>
+							<?php echo $postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.' ( '.$postTravlePackage->user_rating.'<i class="fa fa-star"></i> )';?>
+										
+							</label>
+							</div>					
+						</div>
+						<div class="row ">
+							<div class="col-md-4 lbwidth">Category :</div>		
+							<div class="col-md-8 lbwidth11"><label><?= h($CategoryList); ?></label>
+							</div>
+						</div>
+						<div class="row ">
+							<div class="col-md-4 lbwidth">Package Duration :</div>		
+							<div class="col-md-8 lbwidth11"><label style="color:#FB6542"><?= h($postTravlePackage->duration_day_night) ?></label>
+							</div>
+						</div>
+						<div class="row ">
+							<div class="col-md-4 lbwidth">Valid Till :</div>	
+							<div class="col-md-8 lbwidth11"><label><?= h(date('d-M-Y',strtotime($postTravlePackage->valid_date))); ?></label>
+							</div>					
+						</div>		
+					</div>
+					<div class="col-md-4">
+						<div class="row ">
+							<div class="col-md-4 lbwidth">Starting Price :</div>
+							<div class="col-md-8 lbwidth11"><label style="color:#1295AB">&#8377; <?php echo number_format(h($postTravlePackage->starting_price)) ;?></label>
+							</div>
+						</div>
+						<div class="row ">
+							<div class="col-md-4 lbwidth">Cities :</div>		
+							<div class="col-md-8 lbwidth11"><label ><?= h($cityList); ?></label>
+							</div>
+						</div>
+						<div class="row ">
+							<div class="col-md-4 lbwidth">Country :</div>		
+							<div class="col-md-8 lbwidth11"><label >India<?php //echo $postTravlePackage->country->country_name; ?></label>
+							</div>
+						</div>
+								
+					</div>
+				<div class="row">						
+					<div class="col-md-12 ">
 									<i class="btn btn-info btn-md fa fa-book" data-target="#fleetdetail<?php echo $postTravlePackage->id;?>" data-toggle="modal"> Package Details</i>
 										<!-------Report Modal Start--------->
 										<div id="fleetdetail<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
@@ -576,7 +574,7 @@ p{
 													</div>
 												</div>
 											</div>
-										<i class="btn btn-danger btn-md fa fa-phone" data-target="#contactdetails<?php echo $postTravlePackage->id;?>" data-toggle="modal"> User Details</i>
+										<i class="btn btn-danger btn-md fa fa-phone" data-target="#contactdetails<?php echo $postTravlePackage->id;?>" data-toggle="modal"> Seller Details</i>
 												<!-------Contact Details Modal --------->
 												<div id="contactdetails<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-md" >
@@ -655,6 +653,9 @@ p{
 						
 											</div>
 										</div>
+				</div>
+			</div>
+
 									</form>
 								</fieldset>
 							</div>

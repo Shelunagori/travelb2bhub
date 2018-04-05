@@ -106,13 +106,13 @@ fieldset{
 #myImg:hover {opacity: 0.7;}
 
 .fleet{
-	font-size:21px;	
+	font-size:15px;	
 	background-color:white;
 	color:#909591;
 	border:0px;
 }
 .unfleet{
-	font-size:21px;	
+	font-size:15px;	
 	background-color:white;
 	color:#d33c44;
 	border:0px;
@@ -121,11 +121,7 @@ p{
 	text-align:center;
 	font-size:10px;
 }
-.col-md-3{
-	
-	color:#838784;
-	font-weight:bold;
-}
+
 .lbwidth{
 	color:#838784;
 	font-weight:bold;
@@ -338,7 +334,7 @@ p{
 												echo $this->Form->button('<i class="fa fa-heart-o like fleet" > </i>',['class'=>'btn btn-xs likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
 											}
 											if($isLiked=='yes'){
-												echo $this->Form->button('<i class="fa fa-heart-o like unfleet" > </i>',['class'=>'btn  btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
+												echo $this->Form->button('<img src="../images/like.png" height="15px"/>',['class'=>'btn  btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
 											}?>
 											<p><?= h($hotelPromotion->total_likes);?><br>Likes</p>
 										</td>
@@ -346,7 +342,7 @@ p{
 											<?php 
 											//-- Save Unsave
 											if($issaved=='1'){
-												echo $this->Form->button('<i class="fa fa-bookmark-o unfleet"></i>',['class'=>'btn  btn-xs  ','value'=>'button','type'=>'submit','name'=>'savehotelpromotion','style'=>'background-color:white;color:black;border:0px;']);
+												echo $this->Form->button('<img src="../images/save.png" height="15px"/>',['class'=>'btn  btn-xs  ','value'=>'button','type'=>'submit','name'=>'savehotelpromotion','style'=>'background-color:white;color:black;border:0px;']);
 											}
 											if($issaved=='0'){
 												echo $this->Form->button('<i class="fa fa-bookmark-o fleet"></i>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'savehotelpromotion']);

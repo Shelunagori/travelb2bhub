@@ -155,7 +155,7 @@ p{
 		<div class="row" >
 			<div class="col-md-12">
 				<div class="box-header with-border"> 
-					<span class="box-title" style="color:#057F8A;"><b>Taxi Fleet Promotions</b></span>
+					<span class="box-title" style="color:#057F8A;"><b>Taxi/Fleet Promotions</b></span>
 					<div class="box-tools pull-right" style="margin-top:-5px;">
 						<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
 						<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
@@ -400,7 +400,7 @@ p{
 										echo $this->Form->button('<i class="fa fa-heart-o like fleet" > </i>',['class'=>'likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
 									}
 									if($isLiked=='yes'){
-										echo $this->Form->button('<i class="fa fa-heart-o like unfleet" > </i>',['class'=>' likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
+										echo $this->Form->button('<img src="../images/like.png" height="15px"/>',['class'=>' likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
 									}?>
 									<p><?= h($taxiFleetPromotion->total_likes);?><br>Likes</p>
 								</td>
@@ -408,7 +408,7 @@ p{
 								<?php 
 									//-- Save Unsave
 									if($issaved=='1'){
-										echo $this->Form->button('<i class="fa fa-bookmark-o unfleet"></i>',['class'=>' ','value'=>'button','type'=>'submit','name'=>'savetaxifleet','style'=>'background-color:white;color:black;border:0px;']);
+										echo $this->Form->button('<img src="../images/save.png" height="15px"/>',['class'=>' ','value'=>'button','type'=>'submit','name'=>'savetaxifleet','style'=>'background-color:white;color:black;border:0px;']);
 									}
 									if($issaved=='0'){
 										echo $this->Form->button('<i class="fa fa-bookmark-o fleet"></i>',['class'=>'','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'savetaxifleet']);
@@ -501,73 +501,73 @@ p{
 									</div>
 								</div>
 						<!-------Report Modal End--------->	
-						<i class="btn btn-danger btn-md fa fa-phone" data-target="#contactdetails<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal"> Call</i>
+						<i class="btn btn-danger btn-md fa fa-phone" data-target="#contactdetails<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal"> Seller Details</i>
 						<!-------Contact Details Modal --------->
-												<div id="contactdetails<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
-													<div class="modal-dialog modal-md" >
-														<!-- Modal content-->
-															<div class="modal-content">
-															  <div class="modal-header">
-																<button type="button" class="close" data-dismiss="modal">&times;</button>
-																	<h3 class="modal-title">
-																	Seller Details
-																	</h3>
-																	</div>
-																	<div class="modal-body">
-																		<span class="help-block"></span>
-																		<div class="row">
-																			<div class="col-md-12">
-																				<div class="col-md-4">Seller Name :</div>
-																				<div class="col-md-8">
-																					<label>
-																					
-																						<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?>
-																				
-																						<?php
-																						if($taxiFleetPromotion->user_rating==0)
-																						{
-																							echo "";
-																						}
-																						else{
-																							echo "( ";
-																							for($i=0;$i<$taxiFleetPromotion->user_rating;$i++)
-																							{
-																								echo "<i class='fa fa-star' style='font-size:10px;color:#959191;'></i>";
-																								if($i==0)
-																								{
-																									echo "";
-																								}
-																							}
-																							echo " )";
-																							}
-																						?>
-																					</label>
-																				</div>					
-																			</div>
-																		</div>
-																		<div class="row">
-																			<div class="col-md-12">
-																			<div class="col-md-4">Mobile No :</div>
-																			<div class="col-md-8">
-																			<label><?= h($taxiFleetPromotion->user->mobile_number);?></label>
-																			</div>
-																			</div>
-																		</div>
-																		<div class="row">
-																			<div class="col-md-12">
-																				<div class="col-md-4">Email :</div>
-																				<div class="col-md-8">
-																				<label><?= h($taxiFleetPromotion->user->email);?></label>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																	<div class="modal-footer">
-																	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
+									<div id="contactdetails<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
+										<div class="modal-dialog modal-md" >
+											<!-- Modal content-->
+												<div class="modal-content">
+												  <div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<h3 class="modal-title">
+														Seller Details
+														</h3>
+														</div>
+														<div class="modal-body">
+															<span class="help-block"></span>
+															<div class="row">
+																<div class="col-md-12">
+																	<div class="col-md-4">Seller Name :</div>
+																	<div class="col-md-8">
+																		<label>
+																		
+																			<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?>
+																	
+																			<?php
+																			if($taxiFleetPromotion->user_rating==0)
+																			{
+																				echo "";
+																			}
+																			else{
+																				echo "( ";
+																				for($i=0;$i<$taxiFleetPromotion->user_rating;$i++)
+																				{
+																					echo "<i class='fa fa-star' style='font-size:10px;color:#959191;'></i>";
+																					if($i==0)
+																					{
+																						echo "";
+																					}
+																				}
+																				echo " )";
+																				}
+																			?>
+																		</label>
+																	</div>					
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-md-12">
+																<div class="col-md-4">Mobile No :</div>
+																<div class="col-md-8">
+																<label><?= h($taxiFleetPromotion->user->mobile_number);?></label>
+																</div>
+																</div>
+															</div>
+															<div class="row">
+																<div class="col-md-12">
+																	<div class="col-md-4">Email :</div>
+																	<div class="col-md-8">
+																	<label><?= h($taxiFleetPromotion->user->email);?></label>
 																	</div>
 																</div>
 															</div>
 														</div>
+														<div class="modal-footer">
+														<button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
+														</div>
+													</div>
+												</div>
+											</div>
 											<!-------Contact Details Modal End--------->	
 										</div>
 									</div>

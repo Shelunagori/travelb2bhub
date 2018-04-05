@@ -184,7 +184,7 @@ fieldset{
 										<legend style="color:#369FA1;"><b><?= __('Load Package') ?></b></legend> 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt">
 											<p for="from">
 												Company Name
 												<span class="required">*</span>
@@ -194,7 +194,7 @@ fieldset{
 												 echo $this->Form->input('company_name',['class'=>'form-control','label'=>false,'autocomplete'=> "off",'placeholder'=>"Company Name",'readonly'=>'readonly','value'=>$user[0]->company_name]);?>
 											</div>
 										</div>
-										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt">
 											<p for="from">
 												Promotion Title
 												<span class="required">*</span>
@@ -203,13 +203,9 @@ fieldset{
 												 <?php echo $this->Form->input('title',['class'=>'form-control','label'=>false]);?>
 											</div>
 										</div>
-									</div>
-								</div> 
-								<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
-								<input type="hidden" name="submitted_from" value="web">
-								<div class="row">
-									<div class="col-md-12">
-										<div class="col-md-6">
+										<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
+										<input type="hidden" name="submitted_from" value="web">
+										<div class="col-md-4">
 											<p for="from">
 												Upload Image of the Promotion
 												<span class="required">*</span>
@@ -217,16 +213,6 @@ fieldset{
 											
 											<div class="input-field">
 												<?php  echo $this->Form->input('image',['class'=>'form-control','label'=>false,'type'=>'file']); ?>
-											</div>
-										</div>
-										<div class="col-md-6 ">
-										<p for="from">
-												Upload Document
-												<span class="required">*</span>
-											</p>
-											
-											<div class="input-field">
-												<?php  echo $this->Form->input('document',['class'=>'form-control','label'=>false,'type'=>'file']); ?>
 											</div>
 										</div>
 									</div>
