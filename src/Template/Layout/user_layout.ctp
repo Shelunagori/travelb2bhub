@@ -281,9 +281,9 @@ margin-top: 5px !important;
 	]); 
 ?>
 <?php 
-$page_name=$this->request->params['action']; 
-$controller=$this->request->params['controller']; 
- ?>
+	$page_name=$this->request->params['action']; 
+	$controller=$this->request->params['controller']; 
+?>
 <div id="wrapper">
 	<header class="main-header  no-print">
     <!-- Logo background: #1295a2; -->

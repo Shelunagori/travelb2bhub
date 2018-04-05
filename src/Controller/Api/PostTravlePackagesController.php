@@ -149,7 +149,7 @@ class PostTravlePackagesController extends AppController
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
 		{
-			$limit=10;
+			$limit=4;
 			$category_id = $this->request->query('category_id');
 			$category_short = $this->request->query('category_short');
 			//$duration_day = $this->request->query('duration_day');
