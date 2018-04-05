@@ -3,7 +3,7 @@
 //-- LIST 
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => $coreVariable['SiteUrl']."api/TaxiFleetPromotions/getTaxiFleetPromotions.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&city_id=".$city_id."&state_id=".$state_id."&car_bus_id=".$car_bus_id,
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/TaxiFleetPromotions/getTaxiFleetPromotions.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&city_id=".$city_id."&state_id=".$state_id."&car_bus_id=".$car_bus_id."&submitted_from=web",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -347,7 +347,24 @@ p{
 					</div><span class="help-block"></span>
 					<div class="row">						
 					<div class="col-md-3">
-					<?= $this->Html->image($taxiFleetPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:150px;']) ?>
+					<?= $this->Html->image($taxiFleetPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:150px;','data-target'=>'#imagemodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal',]) ?>
+					
+					<div id="imagemodal<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
+					<div class="modal-dialog modal-md">
+						<!-- Modal content-->
+							<div class="modal-content">
+							  <div class="modal-header" style="height:20px;">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							  </div>
+								<div class="modal-body" >
+								<?= $this->Html->image($taxiFleetPromotion->full_image,['style'=>'width:100%;height:300px;']) ?>
+								</div>
+								<div class="modal-footer" style="height:20px;">
+								<button style="visibility:hidden;" type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+							</div>
+						</div>
+					</div>
 					<div class="row">						
 						<div class="">
 								<input type="hidden" name="taxifleet_id" value="<?php echo $taxiFleetPromotion->id; ?>">
