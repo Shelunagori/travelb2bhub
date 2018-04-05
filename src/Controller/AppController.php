@@ -19,7 +19,8 @@ use Cake\Controller\Controller;
 
 use Cake\Event\Event;
 use Cake\Routing\Router;
-
+set_time_limit(0);
+ini_set('memory_limit','2048M');
 //namespace App\View;
 //use Cake\View\View;
 /**

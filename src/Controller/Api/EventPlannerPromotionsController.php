@@ -344,7 +344,7 @@ class EventPlannerPromotionsController extends AppController
 			 
 				$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('EventPlannerPromotionLikes.id')])
 				->contain(['Users'=>function($q){
-				return $q->select(['first_name','last_name','mobile_number','company_name']);
+				return $q->select(['first_name','last_name','mobile_number','company_name','email']);
 			},'PriceMasters','Countries','EventPlannerPromotionStates'=>['States'],'EventPlannerPromotionCities'=>['Cities']])
 				->leftJoinWith('EventPlannerPromotionLikes')
 				->innerJoinWith('EventPlannerPromotionStates',function($q) use($state_filter){ 

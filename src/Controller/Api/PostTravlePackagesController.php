@@ -144,7 +144,7 @@ class PostTravlePackagesController extends AppController
         $this->set('_serialize', ['message','response_code']);
     }
 
-	public function getTravelPackages($isLikedUserId=null,$category_id = null, $category_short = null,$duration_day=null,$duration_night=null,$duration_short=null,$valid_date=null,$valid_date_short=null,$starting_price=null,$starting_price_short=null,$country_id=null,$country_id_short=null,$city_id=null,$city_id_short=null,$category_name=null,$higestSort=null,$search = null,$page = null)
+	public function getTravelPackages($isLikedUserId=null,$category_id = null, $category_short = null,$duration_day=null,$duration_night=null,$duration_short=null,$valid_date=null,$valid_date_short=null,$starting_price=null,$starting_price_short=null,$country_id=null,$country_id_short=null,$city_id=null,$city_id_short=null,$category_name=null,$higestSort=null,$search = null,$page = null,$submitted_from=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
@@ -167,6 +167,7 @@ class PostTravlePackagesController extends AppController
 			$higestSort = $this->request->query('higestSort');
 			$search_bar = $this->request->query('search');
 			$page = $this->request->query('page');
+			$submitted_from = $this->request->query('submitted_from');
 			if(empty($page)){$page=1;}
 			// Start shorting code
 			if(empty($category_short))
@@ -220,7 +221,9 @@ class PostTravlePackagesController extends AppController
 			
 			if(!empty($duration_day_night))
 			{
-				$where_duration = ['duration_day_night'=>$duration_day_night];
+				$duration_day_nightArray = explode(',',$duration_day_night);
+				$where_duration = ['PostTravlePackages.duration_day_night IN'=>$duration_day_nightArray];
+				//$where_duration = ['duration_day_night'=>$duration_day_night];
 			}
 			else
 			{
@@ -333,7 +336,7 @@ class PostTravlePackagesController extends AppController
 			
 			$getTravelPackages = $this->PostTravlePackages->find()
 			->contain(['Users'=>function($q){
-				return $q->select(['first_name','last_name','mobile_number','company_name']);
+				return $q->select(['first_name','last_name','mobile_number','company_name','email']);
 			},'PostTravlePackageCities'=>['Cities'],'PostTravlePackageRows'=>['PostTravlePackageCategories']])
 			->innerJoinWith('PostTravlePackageRows',function($q)use($category_id_filter,$category_short,$category_search){
 				return $q->where($category_id_filter)
@@ -444,10 +447,10 @@ class PostTravlePackagesController extends AppController
 			$message = 'isLikedUserId is empty';
 			$getTravelPackages = [];
 			$response_code = 204;			
-		}		
-		$this->set(compact('getTravelPackages','message','response_code'));
-        $this->set('_serialize', ['getTravelPackages','message','response_code']);		
-	}
+		}
+ 		$this->set(compact('getTravelPackages','message','response_code'));
+		$this->set('_serialize', ['getTravelPackages','message','response_code']);
+ 	}
 
 
 	public function getTravelPackageDetails($id = null,$user_id = null)
