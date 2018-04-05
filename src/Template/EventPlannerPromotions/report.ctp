@@ -167,8 +167,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 									$y++;
 								}
 	?>
-<div class="">
-<!-------SHORTING FILTERING--------->
+	<!-------SHORTING FILTERING--------->
 <div id="myModal123" class="modal fade" role="dialog">
   <div class="modal-dialog modal-sm">
 	<!-- Modal content-->
@@ -285,6 +284,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 	 </div>
   </div>
 </div>		
+<div class="">
 	<div class="row">
 		<fieldset style="background-color:#fff;">
 			<form method="post">
@@ -296,38 +296,8 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 				<div class="row">
 					<div class="col-md-3">
 					<?= $this->Html->image($eventPlannerPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:150px;']) ?>
-					</div>
-					<div class="col-md-9">
-						<div class="row ">
-							<div class="col-md-4 lbwidth">Seller :</div>		
-								<div class="col-md-8 lbwidth11"><label>
-								<?php echo $eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name.' ( '.$eventPlannerPromotion->user_rating.' <i class="fa fa-star"></i> )';?>
-								</label>
-								</div>
-						</div>
-						<div class="row ">
-							<div class="col-md-4 lbwidth">Cities of Operation :</div>		
-								<div class="col-md-8 lbwidth11"><label>
-								<?= h($cityList);?> 
-								</label>
-								</div>
-						</div>
-						<div class="row ">
-							<div class="col-md-4 lbwidth">States of Operation :</div>		
-								<div class="col-md-8 lbwidth11"><label>
-								<?= h($stateList);?> 
-								</label>
-								</div>
-						</div>
-						<div class="row">
-							<div class="col-md-4 lbwidth">Country :</div>
-							<div class="col-md-8"><label >	<?= h($eventPlannerPromotion->country->country_name);?></label>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">						
-					<div class="col-md-3">
+					<div class="row">						
+					<div class="">
 						<input type="hidden" name="event_id" value="<?php echo $eventPlannerPromotion->id; ?>">
 						<table class="table" width="100%" style="text-align:center;" >
 								<tr>
@@ -424,94 +394,126 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 							<!-------Report Modal End--------->	
 						</table>
 					</div>
-					<div class="col-md-3 pull-right">
-					<i class="btn btn-info btn-md fa fa-book" data-target="#eventdetail<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal"> Event Details</i>
-						<!-------Report Modal Start--------->
-						<div id="eventdetail<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
-								<div class="modal-dialog modal-md">
-									<!-- Modal content-->
-										<div class="modal-content">
-										  <div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h3 class="modal-title">Event Details</h3>
-										  </div>
-											<div class="modal-body" >
-												<span class="help-block"></span>
-												<div class="row">
-													<div class="col-md-12">
-														<label style="padding:20px;"><?= h($eventPlannerPromotion->event_detail); ?></label>
+				</div>
+					</div>
+					<div class="col-md-9">
+						<div class="row ">
+							<div class="col-md-4 lbwidth">Seller :</div>		
+								<div class="col-md-8 lbwidth11"><label>
+								<?php echo $eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name.' ( '.$eventPlannerPromotion->user_rating.' <i class="fa fa-star"></i> )';?>
+								</label>
+								</div>
+						</div>
+						<div class="row ">
+							<div class="col-md-4 lbwidth">Cities of Operation :</div>		
+								<div class="col-md-8 lbwidth11"><label>
+								<?= h($cityList);?> 
+								</label>
+								</div>
+						</div>
+						<div class="row ">
+							<div class="col-md-4 lbwidth">States of Operation :</div>		
+								<div class="col-md-8 lbwidth11"><label>
+								<?= h($stateList);?> 
+								</label>
+								</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4 lbwidth">Country :</div>
+							<div class="col-md-8"><label >	<?= h($eventPlannerPromotion->country->country_name);?></label>
+							</div>
+						</div>
+					<div class="row">
+							<div class="col-md-12">
+							<i class="btn btn-info btn-md fa fa-book" data-target="#eventdetail<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal"> Event Details</i>
+								<!-------Report Modal Start--------->
+								<div id="eventdetail<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
+										<div class="modal-dialog modal-md">
+											<!-- Modal content-->
+												<div class="modal-content">
+												  <div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h3 class="modal-title">Event Details</h3>
+												  </div>
+													<div class="modal-body" >
+														<span class="help-block"></span>
+														<div class="row">
+															<div class="col-md-12">
+																<label style="padding:20px;"><?= h($eventPlannerPromotion->event_detail); ?></label>
+															</div>
+														</div>
+													</div>
+													<div class="modal-footer" >
+														<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancle</button>
 													</div>
 												</div>
 											</div>
-											<div class="modal-footer" >
-												<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancle</button>
-											</div>
 										</div>
-									</div>
-								</div>
-						<!-------Report Modal End--------->	
-						<i class="btn btn-danger btn-md fa fa-phone" data-target="#contactdetails<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal"> Seller Details</i>
-						<!-------Contact Details Modal --------->
-						<div id="contactdetails<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
-							<div class="modal-dialog modal-md" >
-							<div class="modal-content">
-							  <div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h3 class="modal-title">
-									Seller Details
-									</h3>
-									</div>
-									<div class="modal-body">
-										<span class="help-block"></span>
-										<div class="row">
-											<div class="col-md-12">
-												<div class="col-md-4">Seller Name :</div>
-												<div class="col-md-8">
-													<label>
-													
-														<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?>
-												
-														<?php
-														if($eventPlannerPromotion->user_rating==0)
-														{
-															echo "";
-														}
-														else{
-															echo "( ";
-															for($i=0;$i<$eventPlannerPromotion->user_rating;$i++)
-															{
-																echo "<i class='fa fa-star' style='font-size:10px;color:#959191;'></i>";
-																if($i==0)
+								<!-------Report Modal End--------->	
+								<i class="btn btn-danger btn-md fa fa-phone" data-target="#contactdetails<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal"> Seller Details</i>
+								<!-------Contact Details Modal --------->
+								<div id="contactdetails<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
+									<div class="modal-dialog modal-md" >
+									<div class="modal-content">
+									  <div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h3 class="modal-title">
+											Seller Details
+											</h3>
+											</div>
+											<div class="modal-body">
+												<span class="help-block"></span>
+												<div class="row">
+													<div class="col-md-12">
+														<div class="col-md-4">Seller Name :</div>
+														<div class="col-md-8">
+															<label>
+															
+																<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?>
+														
+																<?php
+																if($eventPlannerPromotion->user_rating==0)
 																{
 																	echo "";
 																}
-															}
-															echo " )";
-															}
-														?>
-													</label>
-												</div>					
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-12">
-											<div class="col-md-4">Mobile No :</div>
-											<div class="col-md-8">
-											<label><?= h($eventPlannerPromotion->user->mobile_number);?></label>
-											</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-12">
-												<div class="col-md-4">Email :</div>
-												<div class="col-md-8">
-												<label><?= h($eventPlannerPromotion->user->email);?></label>
+																else{
+																	echo "( ";
+																	for($i=0;$i<$eventPlannerPromotion->user_rating;$i++)
+																	{
+																		echo "<i class='fa fa-star' style='font-size:10px;color:#959191;'></i>";
+																		if($i==0)
+																		{
+																			echo "";
+																		}
+																	}
+																	echo " )";
+																	}
+																?>
+															</label>
+														</div>					
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-12">
+													<div class="col-md-4">Mobile No :</div>
+													<div class="col-md-8">
+													<label><?= h($eventPlannerPromotion->user->mobile_number);?></label>
+													</div>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-12">
+														<div class="col-md-4">Email :</div>
+														<div class="col-md-8">
+														<label><?= h($eventPlannerPromotion->user->email);?></label>
+														</div>
+													</div>
 												</div>
 											</div>
+											<div class="modal-footer">
+											<button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
+											</div>
 										</div>
-									</div>
-									<div class="modal-footer">
-									<button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
 									</div>
 								</div>
 							</div>

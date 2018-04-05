@@ -146,13 +146,7 @@ p{
 			</div>
 		</div>
 	</div>
-		<?php $i=1;
-				if(!empty($hotelPromotions)){
-				foreach ($hotelPromotions as $hotelPromotion){
-				?>
-	<div class="">
-		<div class="row">
-            <div id="myModal123" class="modal fade" role="dialog">
+	 <div id="myModal123" class="modal fade" role="dialog">
 					  <div class="modal-dialog modal-sm" >
 						<!-- Modal content-->
 						<div class="modal-content">
@@ -255,6 +249,13 @@ p{
 						</div>
 					  </div>
 					</div>
+		<?php $i=1;
+				if(!empty($hotelPromotions)){
+				foreach ($hotelPromotions as $hotelPromotion){
+				?>
+	<div class="">
+		<div class="row">
+           
 						<fieldset style="background-color:#fff;">
 							<form method="post">
 								<div class="row">
@@ -267,56 +268,8 @@ p{
 								<div class="row">						
 									<div class="col-md-3">
 									<?= $this->Html->image($hotelPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:150px;']) ?>
-									</div>
-									<!--------------------image modal--------------------->
-									<div id="myModal" class="modal1" style="display:none;">
-										  <span class="close">&times;</span>
-										  <img class="modal-content1" id="img01">
-										  <div id="caption"></div>
-									</div>
-									<!--------------------image modal End--------------------->
-									<div class="col-md-9">
-										<div class="col-md-5">
-											<div class="row ">
-												<div class="col-md-4 lbwidth">Seller :</div>		
-												<div class="col-md-8 lbwidth11"><label>
-												<?php echo $hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.' ( '.$hotelPromotion->user_rating.' <i class="fa fa-star"></i> )';?>
-															
-												</label>
-												</div>					
-											</div>
-											<div class="row">
-												<div class="col-md-4 lbwidth">Category :</div>		
-												<div class="col-md-8 lbwidth11"><label><?= h($hotelPromotion->hotel_category->name); ?></label>
-												</div>
-											</div>
-											<div class="row ">
-												<div class="col-md-4 lbwidth">Cheapest Room:</div>		
-												<div class="col-md-8 lbwidth11"><label style="color:#1295AB">&#8377; <?= h($hotelPromotion->cheap_tariff) ?></label>
-												</div>
-											</div>
-										</div>
-										<div class="col-md-5">
-											<div class="row ">
-												<div class="col-md-4 lbwidth">Expensive Room:</div>		
-												<div class="col-md-8 lbwidth11"><label style="color:#1295AB">&#8377; <?= h($hotelPromotion->expensive_tariff) ?></label>
-												</div>
-											</div>
-											<div class="row ">
-												<div class="col-md-4 lbwidth">Location:</div>		
-												<div class="col-md-8 lbwidth11"><label ><?= h($hotelPromotion->hotel_location) ?></label>
-												</div>
-											</div>
-											<div class="row ">
-												<div class="col-md-4 lbwidth">Website:</div>		
-												<div class="col-md-8 lbwidth11"><label style="color:blue"><u><?= h($hotelPromotion->website) ?></u></label>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="row">						
-									<div class="col-md-3">
+									<div class="row">						
+									<div class="">
 									<input type="hidden" name="hotelpromotion_id" value="<?php echo $hotelPromotion->id; ?>">
 									<table class="table" width="100%" style="text-align:center;" >
 									<tr>
@@ -409,7 +362,55 @@ p{
 									<!-------Report Modal End--------->	
 									</table>
 									</div>
-									<div class="col-md-3 pull-right">
+								</div>
+									</div>
+									<!--------------------image modal--------------------->
+									<div id="myModal" class="modal1" style="display:none;">
+										  <span class="close">&times;</span>
+										  <img class="modal-content1" id="img01">
+										  <div id="caption"></div>
+									</div>
+									<!--------------------image modal End--------------------->
+									<div class="col-md-9">
+										<div class="col-md-5">
+											<div class="row ">
+												<div class="col-md-4 lbwidth">Seller :</div>		
+												<div class="col-md-8 lbwidth11"><label>
+												<?php echo $hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.' ( '.$hotelPromotion->user_rating.' <i class="fa fa-star"></i> )';?>
+															
+												</label>
+												</div>					
+											</div>
+											<div class="row">
+												<div class="col-md-4 lbwidth">Category :</div>		
+												<div class="col-md-8 lbwidth11"><label><?= h($hotelPromotion->hotel_category->name); ?></label>
+												</div>
+											</div>
+											<div class="row ">
+												<div class="col-md-4 lbwidth">Cheapest Room:</div>		
+												<div class="col-md-8 lbwidth11"><label style="color:#1295AB">&#8377; <?= h($hotelPromotion->cheap_tariff) ?></label>
+												</div>
+											</div>
+										</div>
+										<div class="col-md-5">
+											<div class="row ">
+												<div class="col-md-4 lbwidth">Expensive Room:</div>		
+												<div class="col-md-8 lbwidth11"><label style="color:#1295AB">&#8377; <?= h($hotelPromotion->expensive_tariff) ?></label>
+												</div>
+											</div>
+											<div class="row ">
+												<div class="col-md-4 lbwidth">Location:</div>		
+												<div class="col-md-8 lbwidth11"><label ><?= h($hotelPromotion->hotel_location) ?></label>
+												</div>
+											</div>
+											<div class="row ">
+												<div class="col-md-4 lbwidth">Website:</div>		
+												<div class="col-md-8 lbwidth11"><label style="color:blue"><u><?= h($hotelPromotion->website) ?></u></label>
+												</div>
+											</div>
+										</div>
+								<div class="row">
+									<div class="col-md-12">
 									<i class="btn btn-danger btn-md fa fa-phone" data-target="#contactdetails<?php echo $hotelPromotion->id;?>" data-toggle="modal"> User Details</i>
 									<!-------Contact Details Modal --------->
 									<div id="contactdetails<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
@@ -482,6 +483,9 @@ p{
 								</div>
 							</div>
 						</div>
+					</div>
+				</div>
+								
 					</form>
 				</fieldset>
 			</div>

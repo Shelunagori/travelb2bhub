@@ -29,11 +29,9 @@
 		<div class="container-login100 bgdiv">
 			<div class="wrap-login100">
 					<center>
-						<?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:20%;']) ?>
+						<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:50%;']) ?>
 					</center>
-					<span class="login100-form-title p-b-34 p-t-27">
-						TRAVEL B2b HUB
-					</span>			
+							
 				<p style="color:#ff9898 !important;"><?php echo $this->Flash->render(); ?></p>
 				<br />
                 <?php  echo $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'login'],'id'=>"UserLoginForm", 'class'=>'login100-form validate-form']); ?>
