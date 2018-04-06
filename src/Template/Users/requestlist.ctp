@@ -10,7 +10,8 @@ legend
 }
 fieldset
 {
-	border-radius: 15px;
+	border-radius: 7px;
+	box-shadow: 0 1px 9px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 .requestType {	
 	color: #f87200;
@@ -379,6 +380,22 @@ fieldset
 							 
 							<table width="100%" border="0" class="table-responsive">
 							<tr>
+								
+								<td width="33%">
+									<div class="check_responses" id="checkresponse_<?php echo $request['id'];?>">
+										<?php if($data['responsecount'][$pid] > 0 ) 
+										{ ?>
+											 <a style="width:99%" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$pid)) ?>"class="check_responses_btn btn btn-success btn-sm"> Responses (<strong><?php echo $data['responsecount'][$pid]; ?></strong>) </a>
+										  <?php 
+										} 
+										else 
+										{ ?>
+											<a style="width:99%" class="check_responses_btn btn btn-warning btn-sm"> No Response</a>
+										<?php 
+										} ?>
+									</div>
+								</td>
+								
 								<td width="33%">
 									<a style="width:99%;" class="viewdetail btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"data-target="#myModal1<?php echo $request['id']; ?>"data-toggle=modal> Details</a>
 									<div class="fade modal"id="myModal1<?php echo $request['id']; ?>"role=dialog>
@@ -435,20 +452,7 @@ fieldset
 										</div>
 									</div>-->
 								</td>
-								<td width="33%">
-									<div class="check_responses" id="checkresponse_<?php echo $request['id'];?>">
-										<?php if($data['responsecount'][$pid] > 0 ) 
-										{ ?>
-											 <a style="width:99%" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'checkresponses',$pid)) ?>"class="check_responses_btn btn btn-success btn-sm"> Responses (<strong><?php echo $data['responsecount'][$pid]; ?></strong>) </a>
-										  <?php 
-										} 
-										else 
-										{ ?>
-											<a style="width:99%" class="check_responses_btn btn btn-warning btn-sm"> No Response</a>
-										<?php 
-										} ?>
-									</div>
-								</td>
+								
 							</tr>
 							</table>
 							 
