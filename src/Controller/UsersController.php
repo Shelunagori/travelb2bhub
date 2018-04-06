@@ -900,7 +900,7 @@ public function viewuserprofile(){
 		$taxboxname=$this->request->data['taxboxname'];
 		$cities=$this->Users->Cities->find()
 		->contain(['States'])
-		->where(['Cities.name Like'=>'%'.$name.'%']);
+		->where(['Cities.name Like'=>'%'.$name.'%','cities.is_deleted'=>0]);
 		?>
 		<ul id="country-list">
 			<?php foreach($cities as $show){ ?>

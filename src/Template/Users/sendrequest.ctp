@@ -80,7 +80,15 @@ fieldset{
 {
 	margin-top:6px !important;
 }
-	
+.newColmd4{
+	width:33.33333333%;
+	float: left;
+	position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+	 margin-top: 6px;
+}	
 .box-room {
     border: 2px solid #eee;
     padding: 5px;
@@ -224,7 +232,7 @@ fieldset{
 									<div>
 										<input autocomplete="off" type="text" class="form-control city_select" id="h_city_name" name="h_city_name" noofrows="1" placeholder="Select City or Nearest City"/>
 										<input type='hidden' id='h_city_id' class="ctyidd" name="h_city_id" />
-										<div class="suggesstion-box" style="margin-top:-10px"></div>
+										<div class="suggesstion-box" style="margin-top:-10px;"></div>
 									</div>
 							</div>
 							<span class="shw">
@@ -323,18 +331,22 @@ fieldset{
 				  <legend style="color:#369FA1;"><b>  &nbsp; GENERAL REQUIREMENTS &nbsp; </b></legend>
 					<div class="row">
 						<div class="col-md-12">
-						  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+						    <div class="col-md-12">
 								<div class="input-field">
 									<p for="from" >
 										Reference ID 
 										<span class="required">*</span>
 										(This is for your reference )
 									</p>
-									<input name="reference_id" type="text" class="form-control ref2" id="Reference ID" placeholder="Reference ID" autocomplete="off" />
+									<input name="reference_id" type="text" class="form-control ref2" id="Reference ID" placeholder="Reference ID" autocomplete="off" style="width:40%" />
 									 
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-4">
 								<div class="input-field">
 									<p for="from">
 										Total Budget 
@@ -343,17 +355,13 @@ fieldset{
 									<input autocomplete="off" name="total_budget" type="number" min="1" class="form-control" id="total_budget" placeholder="Total Budget"/>
 								</div>
 							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<p for="from">Adults <span class="required">*</span></p>
-								<?php echo $this->Form->control('adult', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'style'=>'width:40%']); ?>
+								<?php echo $this->Form->control('adult', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
  							</div>
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<p for="from">Children below 6 <span class="required">*</span></p>
-								<?php echo $this->Form->control('children', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'style'=>'width:40%']); ?>
+								<?php echo $this->Form->control('children', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
  							</div>
 						</div>
 					</div>
@@ -518,11 +526,10 @@ fieldset{
 												<p for="from">
 													Start Date
 												</p>
-											</div>
-											<div class="input-group">
-												 <input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker3" placeholder="DD-MM-YYYY"/>
+											</div> 
+											<input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker3" placeholder="DD-MM-YYYY"/>
 												                   
-											</div>
+											 
 										</div>
 										<div class="col-md-4">
 											<div class="input-field">
@@ -530,10 +537,7 @@ fieldset{
 													End Date
 												</p>
 											</div>
-											<div class="input-group">
-												 <input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker4" placeholder="DD-MM-YYYY"/>
-												                     
-											</div>
+											<input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker4" placeholder="DD-MM-YYYY"/>
 										</div>	
 											
 										</div>
@@ -612,7 +616,7 @@ fieldset{
 													<p for="from">Final City
 														 
 													</p>
-													<input type="text" class="form-control city_select" id="p_final_city_name" nofrows="2" name="p_final_city_name" placeholder="Select City or Nearest City"/>
+													<input type="text" class="form-control city_select" id="p_final_city_name" noofrows="2" name="p_final_city_name" placeholder="Select City or Nearest City"/>
 													<input type='hidden' id='p_final_city_id' name="p_final_city_id" />
 													<div class="suggesstion-box" style="margin-top:-10px"></div>
 													
@@ -622,14 +626,14 @@ fieldset{
 								</div>
 								<div class="row">
 									<div class="col-md-12 rw">
-											<div class="col-lg-6 col-md-12 col-sm-6 col-xs-12 mt">
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
 												<div class="input-field">
 												<p for="from">Final State</p>
 													<input type='hidden' id='p_final_state_id' name="p_final_state_id"/>
 													<input type="text" class="form-control" id ="p_final_state_name" name="p_final_state_name" placeholder="Select State" readonly/>
 												</div>
 											</div>
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
 												<div class="input-field">
 													<p for="from">Final Country</p>
 													<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
@@ -863,7 +867,6 @@ fieldset{
 											</div>
 										</div> 
 									</div>	
-																					
 								</div>
 							</div>
 						</div>
@@ -885,27 +888,29 @@ $(document).ready(function(){
 	$(document).on('keyup',".city_select",function(){
 		
  		var input=$(this).val();
-		var noofrows=$(this).attr('noofrows');
-		var taxboxname=$(this).attr('taxboxname');
-  		var master=$(this);
-		var m_data = new FormData();
-		m_data.append('input',input);			
-		m_data.append('noofrows',noofrows);			
-		m_data.append('taxboxname',taxboxname);			
-		$.ajax({
-			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_city"]); ?>",
-			data: m_data,
-			processData: false,
-			contentType: false,
-			type: 'POST',
-			dataType:'text',
-			success: function(data)
-			{
-				master.closest('div').find('div.suggesstion-box').show();
-				master.closest('div').find('div.suggesstion-box').html(data);
-				master.css("background","#FFF");
-			}
-		});
+		if(input.length>3){
+			var noofrows=$(this).attr('noofrows');
+			var taxboxname=$(this).attr('taxboxname');
+			var master=$(this);
+			var m_data = new FormData();
+			m_data.append('input',input);			
+			m_data.append('noofrows',noofrows);			
+			m_data.append('taxboxname',taxboxname);			
+			$.ajax({
+				url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_city"]); ?>",
+				data: m_data,
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				dataType:'text',
+				success: function(data)
+				{
+					master.closest('div').find('div.suggesstion-box').show();
+					master.closest('div').find('div.suggesstion-box').html(data);
+					master.css("background","#FFF");
+				}
+			});
+		}
 	});
 	
 	
