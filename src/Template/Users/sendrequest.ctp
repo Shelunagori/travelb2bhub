@@ -62,16 +62,30 @@ fieldset{
 }
 .col-md-6
 {
-		margin-top:10px !important;
+	margin-top:10px !important;
 }
 .col-md-4
 {
-		margin-top:10px !important;
+	margin-top:10px !important;
 }
 .col-md-3
 {
-		margin-top:10px !important;
-} 
+	margin-top:10px !important;
+}
+.col-md-5
+{
+	margin-top:6px !important;
+}
+.col-md-7
+{
+	margin-top:6px !important;
+}
+	
+.box-room {
+    border: 2px solid #eee;
+    padding: 2px 0;
+    float: left;
+}
 </style> 
 <div class="container-fluid">
 	<div class="box box-primary">
@@ -103,113 +117,171 @@ fieldset{
 				<fieldset>
 					  <legend style="color:#369FA1;"><b> &nbsp; GENERAL REQUIREMENTS &nbsp;  </b></legend>
 					  <div class="row">
-					  <div class="col-md-12">
-					  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-							<div class="input-field">
-								<p for="from" >
-									Reference ID  
-									<span class="required" >*</i></span>
-									(This is for your reference )
-								</p>
-								<input autocomplete="off" name="reference_id" type="text" class="form-control ref2" id="reference_id" required placeholder="Reference ID" autofocus/>
-							</div>
-						</div>
-						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-							<div class="input-field">
-								<p for="from">
-									Total Budget  
-									<span class="required">*</span>
-								</p>
-								<input autocomplete="off" name="total_budget" type="number" min="1" class="form-control" id="total_budget" placeholder="Total Budget"/>
-							</div>
-							</div>
-						</div>
-						</div> 
-						<div class="row">
-							<div class="col-md-12">
-								<div class="col-md-6">
-									<p for="from">Adults <span class="required">*</span></p>
-									<?php echo $this->Form->control('hotelAdult', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'style'=>'width:40%']); ?>
-								</div>
-								<div class="col-md-6">
-									<p for="from">Children below 6  <span class="required">*</span></p>
-									<?php echo $this->Form->control('hotelChildren', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'style'=>'width:40%']); ?>
-								</div>
-							</div>
-						</div>
-					</fieldset>
-				 
-				 
-			<fieldset>
-				<legend style="color:#369FA1;"><b> &nbsp;  STAY REQUIREMENTS  &nbsp; </b></legend>
-					  <div class="row">
-							<div class="col-md-12">
-								<div class="col-md-12">
+ 						<div class="col-md-12 ">
+							<div class="col-md-12 ">
+								<div class="input-field">
 									<p for="from" >
-										No. of Rooms
+										Reference ID <span class="required" >*</i></span>
+										(This is for your reference )
 									</p>
+									<input autocomplete="off" name="reference_id" type="text" class="form-control ref2 " id="reference_id" required placeholder="Reference ID" style=
+									"width:40%" autofocus/>
 								</div>
-								<div class="col-lg-2">
+							</div>
+						</div>
+					</div> 
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-4">
+								<div class="input-field">
+									<p for="from">
+										Total Budget  <span class="required">*</span>
+									</p>
+									<input autocomplete="off" name="total_budget" type="number" min="1" class="form-control" id="total_budget" placeholder="Total Budget"/>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<p for="from">Adults <span class="required">*</span></p>
+								<?php echo $this->Form->control('hotelAdult', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
+							</div>
+							<div class="col-md-4">
+								<p for="from">Children below 6  <span class="required">*</span></p>
+								<?php echo $this->Form->control('hotelChildren', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
+							</div>							 
+						</div>
+					</div>
+				</fieldset>
+				<fieldset>
+					<legend style="color:#369FA1;"><b> &nbsp;  STAY REQUIREMENTS  &nbsp; </b></legend>
+					
+					
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+						<div class="input-field">
+							<label for="from">No. of Rooms</label>
+							<div class="box-room">
+								<div class="col-md-7"> Single</div>
+								<div class="col-md-5"><input autocomplete="off" name="room1" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+
+								<div class="col-md-7"> Double</div>
+								<div class="col-md-5"><input autocomplete="off" name="room2" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+
+								<div class="col-md-7"> Triple</div>
+								<div class="col-md-5"><input autocomplete="off" name="room3" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+
+								<div class="col-md-7"> Child with bed</div>
+								<div class="col-md-5"><input autocomplete="off" name="child_with_bed" style="height: 27px;" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
+
+								<div class="col-md-7"> Child without bed</div>
+								<div class="col-md-5"><input autocomplete="off" name="child_without_bed" style="height: 27px;" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+						<div class="input-field">
+							Hotel Rating	
+							<div style=" width: 200px;" >
+								<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
+								<input class="star star-5" id="star-5-21" type="radio" value="5" name="hotel_rating"/>
+								<label class="star star-5" for="star-5-21"></label>
+								<input class="star star-4" id="star-4-21" type="radio" value="4" name="hotel_rating"/>
+								<label class="star star-4" for="star-4-21"></label>
+								<input class="star star-3" id="star-3-21" type="radio" value="3" name="hotel_rating"/>
+								<label class="star star-3" for="star-3-21"></label>
+								<input class="star star-2" id="star-2-21" type="radio" value="2" name="hotel_rating"/>
+								<label class="star star-2" for="star-2-21"></label>
+								<input class="star star-1" id="star-1-21" type="radio" value="1" name="hotel_rating"/>
+								<label class="star star-1" for="star-1-21"></label>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+						<div class="input-field hotel_category">
+							Hotel Category 
+							<?php echo $this->Form->control('hotel_category', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+						<div class="input-field">
+							Meal Plan
+							<select name="meal_plan" class="form-control">
+								<option value="" selected>Select Meal Plan</option>
+								<option value="1">EP - European Plan</option>
+								<option value="2">CP - Contenental Plan</option>
+								<option value="3">MAP - Modified American Plan</option>
+								<option value="4">AP - American Plan</option>
+							</select>
+						</div>
+					</div>
+
+
+
+					
+					<!--<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-6">
+							<fieldset><legend style="color:#369FA1;"> No. of Rooms</legend>
+								<div class="col-lg-12">
 									<p>Single</p>
 									<?php echo $this->Form->control('room1', ["id"=>"room1", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 								</div>
-								<div class="col-lg-2">
+								<div class="col-lg-12">
 									<p>Double</p>
 									<?php echo $this->Form->control('room2', ["id"=>"room2", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 								</div>
-								<div class="col-lg-2">
+								<div class="col-lg-12">
 									<p>Triple</p>
 									<?php echo $this->Form->control('room3', ["id"=>"room3", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 								</div>
-								<div class="col-lg-3">
+								<div class="col-lg-6">
 									<p>Child with Bed</p>
 									<?php echo $this->Form->control('child_with_bed', ["id"=>"child_with_bed", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 								</div>
-								<div class="col-lg-3">
+								<div class="col-lg-6">
 									<p>Child without Bed</p>
 									<?php echo $this->Form->control('child_without_bed', ["id"=>"child_without_bed", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 								</div>
+							</fieldset>
 							</div>
-						</div>
-						<div class="row" style="margin-top:10px">
+							<div class="col-md-6">
 								<div class="col-md-12">
-									<div class="col-md-4">
-										<div class="input-field">
-											<p for="from">
-												Hotel Rating
-											</p>
-										</div>
-										<div style=" width: 200px;" class="stars">
-										<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
-										   <input class="star star-5" id="star-5-21" type="radio" value="5" name="hotel_rating"/>
-										   <label class="star star-5" for="star-5-21"></label>
-										   <input class="star star-4" id="star-4-21" type="radio" value="4" name="hotel_rating"/>
-										   <label class="star star-4" for="star-4-21"></label>
-										   <input class="star star-3" id="star-3-21" type="radio" value="3" name="hotel_rating"/>
-										   <label class="star star-3" for="star-3-21"></label>
-										   <input class="star star-2" id="star-2-21" type="radio" value="2" name="hotel_rating"/>
-										   <label class="star star-2" for="star-2-21"></label>
-										   <input class="star star-1" id="star-1-21" type="radio" value="1" name="hotel_rating"/>
-										   <label class="star star-1" for="star-1-21"></label>
+									<div class="input-field">
+										<p for="from">
+											Hotel Rating
+										</p>
+									</div>
+									<div style=" width: 200px;" class="stars">
+									<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
+									   <input class="star star-5" id="star-5-21" type="radio" value="5" name="hotel_rating"/>
+									   <label class="star star-5" for="star-5-21"></label>
+									   <input class="star star-4" id="star-4-21" type="radio" value="4" name="hotel_rating"/>
+									   <label class="star star-4" for="star-4-21"></label>
+									   <input class="star star-3" id="star-3-21" type="radio" value="3" name="hotel_rating"/>
+									   <label class="star star-3" for="star-3-21"></label>
+									   <input class="star star-2" id="star-2-21" type="radio" value="2" name="hotel_rating"/>
+									   <label class="star star-2" for="star-2-21"></label>
+									   <input class="star star-1" id="star-1-21" type="radio" value="1" name="hotel_rating"/>
+									   <label class="star star-1" for="star-1-21"></label>
+									   </div>
+								</div>
+								<div class="col-md-12 ">
+									<div class="input-field">
+										<p for="from">Hotel Category </p>
+											<div>
+												<?php echo $this->Form->control('hotel_category', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
+
 										   </div>
 									</div>
-									<div class="col-md-4 ">
-										<div class="input-field">
-											<p for="from">Hotel Category </p>
-												<div>
-													<?php echo $this->Form->control('hotel_category', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
-
-											   </div>
-										</div>
+								</div>
+								<div class="col-md-12 ">
+									<div class="input-field">
+										<p for="from">Meal Plan </p>
+										<div><?php echo $this->Form->control('meal_plan', ["type"=>"select", "empty"=>"Select Meal Plan", 'options' =>array("1"=>"EP - European Plan", "2"=>"CP - Contenental Plan", "3"=>"MAP - Modified American Plan", "4"=>"AP - American Plan") , "class"=>"form-control"]);?></div>
 									</div>
-									<div class="col-md-4 ">
-										<div class="input-field">
-											<p for="from">Meal Plan </p>
-											<div><?php echo $this->Form->control('meal_plan', ["type"=>"select", "empty"=>"Select Meal Plan", 'options' =>array("1"=>"EP - European Plan", "2"=>"CP - Contenental Plan", "3"=>"MAP - Modified American Plan", "4"=>"AP - American Plan") , "class"=>"form-control"]);?></div>
-										</div>
-									</div>
+								</div>
 							</div>
 						</div>
+					</div>--->
 					<div class="row">
 						<div class="col-md-12">
 							<div class="col-md-4">
@@ -234,8 +306,7 @@ fieldset{
 								<div class="col-md-4 ">
 									<div class="input-field">
 										<p for="from">
-													Destination State
-													
+										Destination State
 										</p>
 									</div>
 									<div>
@@ -268,9 +339,6 @@ fieldset{
 									</div>
 									<div class="col-md-12 input-group">
 									<input autocomplete="off" type="text" name="check_in" class="form-control date-picker" id="datepicker7" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
-									<p class="input-group-addon btn">
-									<span class="fa fa-calendar"></span>
-									</p>                    
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -282,9 +350,7 @@ fieldset{
 									</div>
 									<div class="col-md-12 input-group">
 										<input autocomplete="off" type="text" name="check_out" class="form-control date-picker" id="datepicker8" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
-										<p class="input-group-addon btn" >
-										<span class="fa fa-calendar"></span>
-										</p>                    
+										                     
 									</div>
 								</div>
 							</div>
@@ -494,9 +560,6 @@ fieldset{
 									</div>
 									<div class="col-md-12 input-group">
 									<input autocomplete="off" type="text" name="check_in" class="form-control date-picker" id="datepicker7" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
-									<p class="input-group-addon btn">
-									<span class="fa fa-calendar"></span>
-									</p>                    
 									</div>
 									</div><span class="help-block"></span>	
 								<div class="col-md-5">
@@ -508,9 +571,7 @@ fieldset{
 									</div>
 									<div class="col-md-12 input-group">
 										<input autocomplete="off" type="text" name="check_out" class="form-control date-picker" id="datepicker8" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
-										<p class="input-group-addon btn" >
-										<span class="fa fa-calendar"></span>
-										</p>                    
+										                    
 									</div>
 								</div><span class="help-block"></span>	
 								<div class="col-md-1" style="margin-top:px">
@@ -541,16 +602,8 @@ fieldset{
 													</p>
 												</div>
 												<div class="input-field">
-													<select name="transport_requirement" class="form-control">
-														<option value="" selected>Select Transport</option>
-														<option value="1">Luxury Car</option>
-														<option value="2">Sedan</option>
-														<option value="3">Innova/ Tavera</option>
-														<option value="4">Tempo Traveller</option>
-														<option value="5">AC Coach</option>
-														<option value="6">Non AC Bus</option>
-													</select>
-												</div>
+												<?php echo $this->Form->control('transport_requirement', ["type"=>"select",'options' =>$postTravlePackageCategories, "class"=>"form-control select2","data-placeholder"=>"Select Options", "empty"=>'Select Options']);?>
+ 												</div>
 											</div>
 											<div class="col-md-4">
 											<div class="input-field">
@@ -560,9 +613,7 @@ fieldset{
 											</div>
 											<div class="input-group">
 												 <input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker3" placeholder="DD-MM-YYYY"/>
-												<p class="input-group-addon btn" for="testdate">
-												<span class="fa fa-calendar"></span>
-												</p>                    
+												                   
 											</div>
 										</div>
 										<div class="col-md-4">
@@ -573,9 +624,7 @@ fieldset{
 											</div>
 											<div class="input-group">
 												 <input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker4" placeholder="DD-MM-YYYY"/>
-												<p class="input-group-addon btn" for="testdate">
-												<span class="fa fa-calendar"></span>
-												</p>                    
+												                     
 											</div>
 										</div>	
 											
@@ -779,16 +828,7 @@ fieldset{
 																	</p>
 																</div>
 																<div class="input-field">
-																	<select name="transport_requirement" class="form-control">
-																		<option value="" selected>Select Transport</option>
-																		<option value="1">Luxury Car</option>
-																		<option value="2">Sedan</option>
-																		<option value="3">Innova/ Tavera</option>
-																		<option value="4">Tempo Traveller</option>
-																		<option value="5">AC Coach</option>
-																		<option value="6">Non AC Bus</option>
-																	</select>
-																</div>
+																<?php echo $this->Form->control('transport_requirement', ["type"=>"select",'options' =>$postTravlePackageCategories, "class"=>"form-control select2","data-placeholder"=>"Select Options","empty"=>'Select Options']);?></div>
 															</div>
 															<div class="col-md-4">
 															<div class="input-field">
@@ -799,9 +839,7 @@ fieldset{
 															</div>
 															<div class="col-md-12 input-group">
 																 <input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker5" placeholder="DD-MM-YYYY"/>
-																<p class="input-group-addon btn" for="testdate">
-																<span class="fa fa-calendar"></span>
-																</p>                    
+																                  
 															</div>
 														</div>
 														<div class="col-md-4">
@@ -813,9 +851,7 @@ fieldset{
 														</div>
 														<div class="col-md-12 input-group">
 															 <input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker6" placeholder="DD-MM-YYYY"/>
-															<p class="input-group-addon btn" for="testdate">
-															<span class="fa fa-calendar"></span>
-															</p>                    
+															                    
 														</div>
 													</div>	
 															

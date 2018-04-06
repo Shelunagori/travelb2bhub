@@ -56,7 +56,6 @@ class EventPlannerPromotionCartsController extends AppController
             $eventPlannerPromotionCart = $this->EventPlannerPromotionCarts->patchEntity($eventPlannerPromotionCart, $this->request->data);
             if ($this->EventPlannerPromotionCarts->save($eventPlannerPromotionCart)) {
                 $this->Flash->success(__('The event planner promotion cart has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The event planner promotion cart could not be saved. Please, try again.'));

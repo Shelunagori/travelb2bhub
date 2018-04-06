@@ -146,6 +146,9 @@ margin-top: 5px !important;
 {
 	height: 339px !important;	
 }
+p {
+	margin:0px !important;
+}
 </style>
 <!--- Star style ---->
 <style>
