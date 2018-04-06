@@ -204,7 +204,20 @@ $(".req").sort(function (a, b) {
 									} 
 									$created=$request['created'];
 									$org_created=date('d-M-Y', strtotime($created));
-									?>
+				?>
+				<?php 
+					$total_rating=0;
+					$rate_count=0;
+					$sql1="Select * from `testimonial` where `author_id`='".$finalresponse[$request['id']]['user_id']."' ";
+					$stmt1 = $conn->execute($sql1);
+					foreach($stmt1 as $bresul){
+						$rate_count++;
+						$rating=$bresul['rating'];
+						$total_rating+=$rating;
+					} 
+					@$final_rating=$total_rating/$rate_count;
+					 
+					?>
 							<fieldset>
 							<legend><?php echo $image; ?></legend>
 							<span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
@@ -222,7 +235,7 @@ $(".req").sort(function (a, b) {
 								</li>
 								<li >
 									<p>
-										Agent Name : <span class="details"><a href="viewprofile/<?php echo $finalresponse[$request['id']]['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$finalresponse[$request['id']]['user_id']]); ?></a></span>
+										Agent Name : <span class="details"><a href="viewprofile/<?php echo $finalresponse[$request['id']]['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$finalresponse[$request['id']]['user_id']]); ?></a> <font color="#1295AB"> (<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font></span>
 									</p>
 								 </li>
 								 <li >
@@ -288,24 +301,57 @@ $(".req").sort(function (a, b) {
 								 </li>
 							</ul>
 							<hr></hr>
-						  <table width="100%" style="text-align:center">
+						<table width="100%" style="text-align:center">
 							<tr>
+								<td width="33%">
+									<a style="width:99%" data-toggle="modal"  class="btn btn-success btn-sm" data-target="#myModalchat<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat',$request['id'], $finalresponse[$request['id']]['user_id'],3)) ?>"> Chat </a>                        
+								</td>
 								<td width="33%">
 									<a style="width:99%" data-toggle="modal"  class="btn btn-info btn-sm" data-target="#myModal1<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'viewdetails',$request['id'])) ?>"> Details</a>
 								</td>
+								
 								<td width="33%">
-									<a style="width:99%" data-toggle="modal"  class="btn btn-success btn-sm" data-target="#myModalchat<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat',$request['id'], $finalresponse[$request['id']]['user_id'],3)) ?>"> Chat</a>                        
+ 									<?php $reviewi = $request['responses'][0]['user_id']."-".$request['id']; ?> 
+									<?php 
+									if(array_key_exists($finalresponse[$request['id']]['user_id'], $BusinessBuddies)) {?>
+										<a href="#" style="width:99%" class="btn btn-warning btn-sm"> Following</a>
+									<?php } 
+									else{ ?>
+										<a style="width:99%" href="javascript:void(0);" class="businessBuddy btn btn-warning btn-sm" user_id = "<?php echo $finalresponse[$request['id']]['user_id']; ?>"> Follow User</a><?php 
+									}?>
 								</td>
-								<td width="33%">
-									
-									
-									<?php $reviewi = $request['responses'][0]['user_id']."-".$request['id']; ?>
-									 <a style="width:99%" data-toggle="modal" class="btn btn-warning btn-sm" data-target="#myModal1review<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi )) ?>"> Review </a>
-								   
-								   
-									</td>
-								</tr>
-							</table>
+							</tr>
+						</table>
+						<table width="100%" style="text-align:center; margin-top:5px;">
+							<tr>
+								<td width="50%">
+ 									<?php $reviewi = $request['responses'][0]['user_id']."-".$request['id']; ?>
+									 <a style="width:99%" data-toggle="modal" class="btn btn-successto btn-sm" data-target="#myModal1review<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi )) ?>"> Review </a>
+								</td>
+								<td width="50%">
+									<a style="width:99%" data-toggle="modal" class="btn btn-danger btn-sm" data-target="#block<?php echo $request['id']; ?>"  > Block User </a>
+								</td>
+								
+							</tr>
+						</table>
+						
+							<div id="block<?php echo $request['id']; ?>" class="modal fade" role="dialog">
+								<div class="modal-dialog modal-md" >
+									<!-- Modal content-->
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">
+													<font color="red">Are you sure you want to block this user?</font>
+												</h4>
+											</div>
+												<div class="modal-footer">
+												<button type="button"  href="javascript:void(0);" class="blockUser btn btn-danger" user_id = "<?php echo $finalresponse[$request['id']]['user_id']; ?>">Block</button>
+												<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+												</div>
+											</div>
+										</div>
+									</div>  
 							 <div class="modal fade" id="myModalchat<?php echo $request['id']; ?>" role="dialog">
 									<div class="modal-dialog">
 									  <!-- Modal content-->
@@ -366,6 +412,43 @@ $(".req").sort(function (a, b) {
 <?php echo $this->element('footer');?>
 <?php echo $this->Html->script(['ap.pagination.js']);?>
 <script>
+	$(".blockUser").click(function (e) {
+		e.preventDefault();
+		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'blockUser')) ?>";
+		var user_id = $(this).attr("user_id");
+		 
+			$.ajax({
+				url:url,
+				type: 'POST',
+				data: {user_id:user_id}
+			}).done(function(result){
+				if(result == 1) {
+					location.reload();
+				}else if(result == 2){
+				 
+				} else {
+					 
+				}
+			});
+		 
+	});
+	$(".businessBuddy").on('click',function () {
+ 		var datas = $(this);
+		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'addBusinessBuddy')) ?>";
+		var user_id = $(this).attr("user_id");
+		$.ajax({
+			url:url,
+			type: 'POST',
+			data: {user_id:user_id}
+		}).done(function(result){
+			if(result == 1) {
+				location.reload();
+			} else {
+				alert("There is some problem, please try again.");
+			}
+		});
+	});
+	
 	$("#responsesWrap").apPagination({
 		targets: ".box-event",
 		pagesWrap: ".pages",

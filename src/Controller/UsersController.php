@@ -1682,128 +1682,135 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		->toArray();
 		$this->set('allStates', $allStates);
 	}
-public function finalizedRequestList() {
-$this->loadModel('Responses');
-$this->loadModel('Hotels');
-$this->loadModel('Requests');
-$this->loadModel('Cities');
-$this->viewBuilder()->layout('user_layout');
-$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
-$this->set('users', $user);
-$sort='';
-if(empty($this->request->query("sort"))) {
-//$sort['Requests.accept_date'] = "DESC";
-	$sort['Requests.id'] = "DESC";
-}
-if(!empty($this->request->query("sort")) && $this->request->query("sort")=="requesttype") {
-$sort['Requests.category_id'] = "ASC";
-}
-if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgetlh") {
-$sort['Requests.total_budget'] = "ASC";
-}
-if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgethl") {
-$sort['Requests.total_budget'] = "DESC";
-}
-if(!empty($this->request->query("budgetsearch"))) {
-	$QPriceRange = $this->request->query("budgetsearch");
-	$result = explode("-", $QPriceRange);
-	$MinQuotePrice = $result[0];
-	$MaxQuotePrice = $result[1];
-	$conditions["Requests.total_budget >="] = $MinQuotePrice;
-	$conditions["Requests.total_budget <="] = $MaxQuotePrice;
-}
-if(!empty($this->request->query("req_typesearch"))) {
-	$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
-}
-if(!empty($this->request->query("refidsearch"))) {
-	$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
-}
-	$sdate = $this->request->query("startdatesearch");
-	$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
-if(!empty($this->request->query("startdatesearch"))) {
-	$da["Requests.start_date"] =  $sdate;
-	$da["Requests.check_in"] =  $sdate;
-	$conditions["OR"] =  $da;
-}
-	$edate = $this->request->query("enddatesearch");
-	$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
-if(!empty($this->request->query("enddatesearch"))) {
-	$da["Requests.end_date"] =  $edate;
-	$da["Requests.check_out"] =  $edate;
-	$conditions["OR"] =  $da;
-}
-if(!empty($this->request->query("keyword"))) {
-	$conditions["Requests.reference_id LIKE "] = "%".$this->request->query("keyword")."%";
-}
-$conditions["Requests.user_id"] = $this->Auth->user('id');
-$conditions["Requests.status"] = 2;
-$conditions["Requests.is_deleted "] = 0;
+	public function finalizedRequestList() {
+		$this->loadModel('Responses');
+		$this->loadModel('Hotels');
+		$this->loadModel('Requests');
+		$this->loadModel('Cities');
+		$this->loadModel('BusinessBuddies');
+		$this->viewBuilder()->layout('user_layout');
+		$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
+		$this->set('users', $user);
+		$login_user_id=$this->Auth->user('id');
+		$BusinessBuddies = $this->BusinessBuddies->find('list',['keyField' => "bb_user_id",'valueField' => 'bb_user_id'])
+		->hydrate(false)
+		->where(['user_id' => $this->Auth->user('id')])
+		->toArray();
+		$this->set('BusinessBuddies', $BusinessBuddies);
+		$sort='';
+		if(empty($this->request->query("sort"))) {
+		//$sort['Requests.accept_date'] = "DESC";
+			$sort['Requests.id'] = "DESC";
+		}
+		if(!empty($this->request->query("sort")) && $this->request->query("sort")=="requesttype") {
+		$sort['Requests.category_id'] = "ASC";
+		}
+		if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgetlh") {
+		$sort['Requests.total_budget'] = "ASC";
+		}
+		if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgethl") {
+		$sort['Requests.total_budget'] = "DESC";
+		}
+		if(!empty($this->request->query("budgetsearch"))) {
+			$QPriceRange = $this->request->query("budgetsearch");
+			$result = explode("-", $QPriceRange);
+			$MinQuotePrice = $result[0];
+			$MaxQuotePrice = $result[1];
+			$conditions["Requests.total_budget >="] = $MinQuotePrice;
+			$conditions["Requests.total_budget <="] = $MaxQuotePrice;
+		}
+		if(!empty($this->request->query("req_typesearch"))) {
+			$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
+		}
+		if(!empty($this->request->query("refidsearch"))) {
+			$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
+		}
+			$sdate = $this->request->query("startdatesearch");
+			$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+		if(!empty($this->request->query("startdatesearch"))) {
+			$da["Requests.start_date"] =  $sdate;
+			$da["Requests.check_in"] =  $sdate;
+			$conditions["OR"] =  $da;
+		}
+			$edate = $this->request->query("enddatesearch");
+			$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+		if(!empty($this->request->query("enddatesearch"))) {
+			$da["Requests.end_date"] =  $edate;
+			$da["Requests.check_out"] =  $edate;
+			$conditions["OR"] =  $da;
+		}
+		if(!empty($this->request->query("keyword"))) {
+			$conditions["Requests.reference_id LIKE "] = "%".$this->request->query("keyword")."%";
+		}
+		$conditions["Requests.user_id"] = $this->Auth->user('id');
+		$conditions["Requests.status"] = 2;
+		$conditions["Requests.is_deleted "] = 0;
 
-if ($this->Auth->user('role_id') == 1) {
-	$requests = $this->Requests->find()
-		->contain(["Users","Responses"])
-		->where($conditions)->order($sort)->all();
-}
-if ($this->Auth->user('role_id') == 2) {
-	$requests = $this->Requests->find()
-		->contain(["Users","Responses"])
-		->where($conditions)->order($sort)->all();
-}
-if ($this->Auth->user('role_id') == 3) {
-	$conditions["Requests.category_id "] = 3;
-	$requests = $this->Requests->find()
-		->contain(["Users","Requests","Responses"])
-		->where($conditions)->order($sort)->all();
-}
- 
-	$final_res_array = array();
-	 $conn = ConnectionManager::get('default');
-foreach($requests as $row){
-	$sql = "SELECT r.*,u.first_name,u.last_name FROM responses as r
-inner JOIN users u on u.id=r.user_id
-WHERE r.request_id='".$row['id']."' AND r.id='".$row['final_id']."'"; 
-$stmt = $conn->execute($sql);
-$resultt = $stmt ->fetch('assoc');
-	$final_res_array[$row['id']]  = $resultt;
-}
-	$this->set('finalresponse', $final_res_array);
-//pr($requests);die();
-$this->set('requests', $requests);
-$myRequestCount = $myReponseCount = 0;
-$myfinalCount  = 0;
-$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status "=>2]]);
-$myfinalCount = $query3 ->count();
-$this->set('myfinalCount', $myfinalCount );
-$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
-$myRequestCount = $query->count();
-$myRequestCount1 = $query->count(); 
-$delcount=0;
-$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
-foreach($requests as $req){
-$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
-if($rqueryr->count()!=0){
-$delcount++;
-}
-}
-if($myRequestCount > $delcount) {
-$myRequestCount = $myRequestCount-$delcount;
-}	
-$this->set('myRequestCountdel', $delcount);
-$this->set('myRequestCount', $myRequestCount1);
-$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]]);
-$myReponseCount = $queryr->count();
-$this->set('myReponseCount', $myReponseCount);
-$allUsers = $this->Users->find('list',['keyField' => 'id', 'valueField' => 'first_name'])
-->hydrate(false)
-->toArray();
-$this->set('allUsers', $allUsers);
-$this->loadModel('User_Chats');
-$csort['created'] = "DESC";
-$allUnreadChat = $this->User_Chats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->order($csort)->limit(10)->all();
-$chatCount = $allUnreadChat->count();
-$this->set('chatCount',$chatCount); 
-$this->set('allunreadchat',$allUnreadChat);
-}
+		if ($this->Auth->user('role_id') == 1) {
+			$requests = $this->Requests->find()
+				->contain(["Users","Responses"])
+				->where($conditions)->order($sort)->all();
+		}
+		if ($this->Auth->user('role_id') == 2) {
+			$requests = $this->Requests->find()
+				->contain(["Users","Responses"])
+				->where($conditions)->order($sort)->all();
+		}
+		if ($this->Auth->user('role_id') == 3) {
+			$conditions["Requests.category_id "] = 3;
+			$requests = $this->Requests->find()
+				->contain(["Users","Requests","Responses"])
+				->where($conditions)->order($sort)->all();
+		}
+		 
+			$final_res_array = array();
+			 $conn = ConnectionManager::get('default');
+		foreach($requests as $row){
+			$sql = "SELECT r.*,u.first_name,u.last_name FROM responses as r
+		inner JOIN users u on u.id=r.user_id
+		WHERE r.request_id='".$row['id']."' AND r.id='".$row['final_id']."'"; 
+		$stmt = $conn->execute($sql);
+		$resultt = $stmt ->fetch('assoc');
+			$final_res_array[$row['id']]  = $resultt;
+		}
+			$this->set('finalresponse', $final_res_array);
+		//pr($requests);die();
+		$this->set('requests', $requests);
+		$myRequestCount = $myReponseCount = 0;
+		$myfinalCount  = 0;
+		$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status "=>2]]);
+		$myfinalCount = $query3 ->count();
+		$this->set('myfinalCount', $myfinalCount );
+		$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
+		$myRequestCount = $query->count();
+		$myRequestCount1 = $query->count(); 
+		$delcount=0;
+		$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
+		foreach($requests as $req){
+		$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
+		if($rqueryr->count()!=0){
+		$delcount++;
+		}
+		}
+		if($myRequestCount > $delcount) {
+		$myRequestCount = $myRequestCount-$delcount;
+		}	
+		$this->set('myRequestCountdel', $delcount);
+		$this->set('myRequestCount', $myRequestCount1);
+		$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]]);
+		$myReponseCount = $queryr->count();
+		$this->set('myReponseCount', $myReponseCount);
+		$allUsers = $this->Users->find('list',['keyField' => 'id', 'valueField' => 'first_name'])
+		->hydrate(false)
+		->toArray();
+		$this->set('allUsers', $allUsers);
+		$this->loadModel('User_Chats');
+		$csort['created'] = "DESC";
+		$allUnreadChat = $this->User_Chats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->order($csort)->limit(10)->all();
+		$chatCount = $allUnreadChat->count();
+		$this->set('chatCount',$chatCount); 
+		$this->set('allunreadchat',$allUnreadChat);
+	}
 public function removedRequestList() {
 $this->loadModel('Responses');
 $this->loadModel('Hotels');
