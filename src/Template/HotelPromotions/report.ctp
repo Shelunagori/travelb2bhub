@@ -83,49 +83,32 @@ if ($err) {
 
 ?>
 <style type="text/css">
-        img {
-            cursor: pointer;
-        transition: -webkit-transform 0.1s ease
-        }
-    img:focus {
-        -webkit-transform: scale(4);
-        -ms-transform: scale(2);
-    }
-	
+.lbwidth{
+	color:#838784;
+	font-weight:bold;
+
+	}
 fieldset{
-	margin:10px !important;
+	margin-bottom:5px !important;
 	border-radius: 6px;
-
 }
-#myImg {
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-#myImg:hover {opacity: 0.7;}
-
-.fleet{
-	font-size:15px;	
-	background-color:white;
-	color:#909591;
-	border:0px;
-}
-.unfleet{
-	font-size:15px;	
-	background-color:white;
-	color:#d33c44;
-	border:0px;
-}
+.
 p{
 	text-align:center;
 	font-size:10px;
 }
 
-.lbwidth{
-	color:#838784;
-	font-weight:bold;
+.row{
+	line-height:15.0px;
+}
+.btnlayout{
+	border-radius:20px !important;
 	}
+#myImg:hover {opacity: 0.7;}
+.bbb{
+	padding:0px!important;
+	pading-bottom:10px!important;
+}
 </style>
 <div class="row" >
 	<div class="col-md-12">
@@ -133,7 +116,7 @@ p{
 	</div>
 </div>
 <div  class="container-fluid">
-	<div class="box box-primary">
+	<div class="box box-primary" style="margin-bottom:5px;">
 		<div class="row" >
 			<div class="col-md-12">
 				<div class="box-header with-border"> 
@@ -253,51 +236,123 @@ p{
 				if(!empty($hotelPromotions)){
 				foreach ($hotelPromotions as $hotelPromotion){
 				?>
-	<div class="">
-		<div class="row">
-           
-						<fieldset style="background-color:#fff;">
-							<form method="post">
-								<div class="row">
-									<div class="col-md-12">
-									<span style="font-size:18px;"><b>
-									<?php echo $hotelPromotion->hotel_name.' ( <i class="fa fa-star" style="color:#efea65;"></i> '.$hotelPromotion->hotel_rating.' Star Hotel )';?>
-									</b></span>
-									</div>
-								</div><span class="help-block"></span>
-								<div class="row">						
-									<div class="col-md-3">
-									<?= $this->Html->image($hotelPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:150px;','data-target'=>'#imagemodal'.$hotelPromotion->id,'data-toggle'=>'modal',]) ?>
-									<div id="imagemodal<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
-									<div class="modal-dialog modal-md">
-										<!-- Modal content-->
-											<div class="modal-content">
-											  <div class="modal-header" style="height:20px;">
-												<button type="button" class="close" data-dismiss="modal">&times;</button>
-											  </div>
-												<div class="modal-body" >
-												<?= $this->Html->image($hotelPromotion->full_image,['style'=>'width:100%;height:300px;']) ?>
+	<div class="box-body bbb">	
+		<fieldset style="background-color:#fff;">
+			<form method="post">
+				<div class="row">
+					<div class="col-md-5" style="padding-top:5px;">
+						<span style="font-size:18px;"><b>
+					<?php echo $hotelPromotion->hotel_name.' ( <i class="fa fa-star" style="color:#efea65;"></i> '.$hotelPromotion->hotel_rating.' Star Hotel )';?>
+					</b></span>
+					</div>
+					<div class="col-md-4 pull-right">
+							<div class="row" style="padding-top:5px;">
+										<i class="btn btn-danger btn-md fa fa-phone" data-target="#contactdetails<?php echo $hotelPromotion->id;?>" data-toggle="modal"> User Details</i>
+									<!-------Contact Details Modal --------->
+									<div id="contactdetails<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
+									<div class="modal-dialog modal-md" >
+										<div class="modal-content">
+											<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h3 class="modal-title">Seller Details</h3>
+											</div>
+											<div class="modal-body">
+											<span class="help-block"></span>
+												<div class="row">
+													<div class="col-md-12">
+														<div class="col-md-4">Seller Name :</div>
+														<div class="col-md-8">
+															<label>
+																<?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name);?>
+																<?php
+																if($hotelPromotion->user_rating==0)
+																{
+																	echo "";
+																}
+																else{
+																	echo "( ";
+																	for($i=0;$i<$hotelPromotion->user_rating;$i++)
+																	{
+																		echo "<i class='fa fa-star' style='font-size:10px;color:#efea65;'></i>";
+																		if($i==0)
+																		{
+																			echo "";
+																		}
+																	}
+																	echo " )";
+																	}
+																?>
+															</label>
+														</div>					
+													</div>
 												</div>
-												<div class="modal-footer" style="height:20px;">
-												<button style="visibility:hidden;" type="button" class="close" data-dismiss="modal">&times;</button>
+												<div class="row">
+													<div class="col-md-12">
+														<div class="col-md-4">Mobile No :</div>
+														<div class="col-md-8">
+														<label><?= h($hotelPromotion->user->mobile_number);?></label>
+														</div>
+													</div>
 												</div>
+												<div class="row">
+													<div class="col-md-12">
+														<div class="col-md-4">Email :</div>
+														<div class="col-md-8">
+														<label><?= h($hotelPromotion->user->email);?></label>
+														</div>
+													</div>
+												</div>
+												<div class="row" style="display:none;">
+													<div class="col-md-12">
+														<div class="col-md-4">Location :</div>
+														<div class="col-md-8">
+														<label><?= h($hotelPromotion->user->location);?></label>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer">
+											<button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
 											</div>
 										</div>
 									</div>
-									<div class="row">						
-									<div class="">
-									<input type="hidden" name="hotelpromotion_id" value="<?php echo $hotelPromotion->id; ?>">
-									<table class="table" width="100%" style="text-align:center;" >
-									<tr>
-										<td width="25%">
-											<i class="fa fa-eye fleet"></i>
-											<p><?= h($hotelPromotion->total_views);?><br>Views</p>
-										</td>
-										<td width="25%">
-											<?php //pr($taxiFleetPromotion);
-											$dataUserId=$hotelPromotion->user_id;
-											$isLiked=$hotelPromotion->isLiked;
-											$issaved=$hotelPromotion->issaved;
+								</div>
+							</div>
+					</div>
+
+				<div class="row">						
+					<div class="col-md-3">
+					<?= $this->Html->image($hotelPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:150px;','data-target'=>'#imagemodal'.$hotelPromotion->id,'data-toggle'=>'modal',]) ?>
+					<div id="imagemodal<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
+					<div class="modal-dialog modal-md">
+						<!-- Modal content-->
+							<div class="modal-content">
+							  <div class="modal-header" style="height:20px;">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							  </div>
+								<div class="modal-body" >
+								<?= $this->Html->image($hotelPromotion->full_image,['style'=>'width:100%;height:300px;']) ?>
+								</div>
+								<div class="modal-footer" style="height:20px;">
+								<button style="visibility:hidden;" type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">						
+					<div class="">
+					<input type="hidden" name="hotelpromotion_id" value="<?php echo $hotelPromotion->id; ?>">
+					<table class="table" width="100%" style="text-align:center;" >
+					<tr>
+						<td width="25%">
+							<i class="fa fa-eye fleet"></i>
+							<p><?= h($hotelPromotion->total_views);?><br>Views</p>
+						</td>
+						<td width="25%">
+							<?php //pr($taxiFleetPromotion);
+							$dataUserId=$hotelPromotion->user_id;
+							$isLiked=$hotelPromotion->isLiked;
+							$issaved=$hotelPromotion->issaved;
 											//-- LIKES DISLIKE
 											if($isLiked=='no'){
 												echo $this->Form->button('<i class="fa fa-heart-o like fleet" > </i>',['class'=>'btn btn-xs likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
@@ -428,76 +483,7 @@ p{
 										</div>
 								<div class="row">
 									<div class="col-md-12">
-									<i class="btn btn-danger btn-md fa fa-phone" data-target="#contactdetails<?php echo $hotelPromotion->id;?>" data-toggle="modal"> User Details</i>
-									<!-------Contact Details Modal --------->
-									<div id="contactdetails<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
-									<div class="modal-dialog modal-md" >
-										<div class="modal-content">
-											<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h3 class="modal-title">Seller Details</h3>
-											</div>
-											<div class="modal-body">
-											<span class="help-block"></span>
-												<div class="row">
-													<div class="col-md-12">
-														<div class="col-md-4">Seller Name :</div>
-														<div class="col-md-8">
-															<label>
-																<?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name);?>
-																<?php
-																if($hotelPromotion->user_rating==0)
-																{
-																	echo "";
-																}
-																else{
-																	echo "( ";
-																	for($i=0;$i<$hotelPromotion->user_rating;$i++)
-																	{
-																		echo "<i class='fa fa-star' style='font-size:10px;color:#efea65;'></i>";
-																		if($i==0)
-																		{
-																			echo "";
-																		}
-																	}
-																	echo " )";
-																	}
-																?>
-															</label>
-														</div>					
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-12">
-														<div class="col-md-4">Mobile No :</div>
-														<div class="col-md-8">
-														<label><?= h($hotelPromotion->user->mobile_number);?></label>
-														</div>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-12">
-														<div class="col-md-4">Email :</div>
-														<div class="col-md-8">
-														<label><?= h($hotelPromotion->user->email);?></label>
-														</div>
-													</div>
-												</div>
-												<div class="row" style="display:none;">
-													<div class="col-md-12">
-														<div class="col-md-4">Location :</div>
-														<div class="col-md-8">
-														<label><?= h($hotelPromotion->user->location);?></label>
-														</div>
-													</div>
-												</div>
-											</div>
-											<div class="modal-footer">
-											<button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
-											</div>
-										</div>
-									</div>
-								</div>
+						
 							</div>
 						</div>
 					</div>

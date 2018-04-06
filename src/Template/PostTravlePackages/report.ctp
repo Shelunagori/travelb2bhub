@@ -400,9 +400,7 @@ p{
 																			<div class="col-md-4">Seller Name :</div>
 																			<div class="col-md-8">
 																				<label>
-																				
 																					<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?>
-																			
 																					<?php
 																					if($postTravlePackage->user_rating==0)
 																					{
@@ -412,7 +410,7 @@ p{
 																						echo "( ";
 																						for($i=0;$i<$postTravlePackage->user_rating;$i++)
 																						{
-																							echo "<i class='fa fa-star' style='font-size:10px;color:#959191;'></i>";
+																							echo "<i class='fa fa-star' style='font-size:10px;color:#efea65;'></i>";
 																							if($i==0)
 																							{
 																								echo "";
@@ -543,7 +541,6 @@ p{
 												<!-------Delete Modal End--------->	
 												<?php }?>
 											</div>
-											
 											<div id="reportmodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 												<div class="modal-dialog modal-md">
 													<!-- Modal content-->

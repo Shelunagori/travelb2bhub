@@ -380,35 +380,33 @@ p{
 																	<div class="modal-body">
 																		<span class="help-block"></span>
 																		<div class="row">
-																			<div class="col-md-12">
-																				<div class="col-md-4">Seller Name :</div>
-																				<div class="col-md-8">
-																					<label>
-																					
-																						<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?>
-																				
-																						<?php
-																						if($taxiFleetPromotion->user_rating==0)
+																		<div class="col-md-12">
+																			<div class="col-md-4">Seller Name :</div>
+																			<div class="col-md-8">
+																				<label>
+																					<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?>
+																					<?php
+																					if($taxiFleetPromotion->user_rating==0)
+																					{
+																						echo "";
+																					}
+																					else{
+																						echo "( ";
+																						for($i=0;$i<$taxiFleetPromotion->user_rating;$i++)
 																						{
-																							echo "";
-																						}
-																						else{
-																							echo "( ";
-																							for($i=0;$i<$taxiFleetPromotion->user_rating;$i++)
+																							echo "<i class='fa fa-star' style='font-size:10px;color:#efea65;'></i>";
+																							if($i==0)
 																							{
-																								echo "<i class='fa fa-star' style='font-size:10px;color:#959191;'></i>";
-																								if($i==0)
-																								{
-																									echo "";
-																								}
+																								echo "";
 																							}
-																							echo " )";
-																							}
-																						?>
-																					</label>
-																				</div>					
-																			</div>
+																						}
+																						echo " )";
+																						}
+																					?>
+																				</label>
+																			</div>					
 																		</div>
+																	</div>
 																		<div class="row">
 																			<div class="col-md-12">
 																			<div class="col-md-4">Mobile No :</div>
@@ -421,7 +419,7 @@ p{
 																			<div class="col-md-12">
 																				<div class="col-md-4">Email :</div>
 																				<div class="col-md-8">
-																				<label><?= h($taxiFleetPromotion->user->email);?></label>
+																				<label><a href="mailto:<?php echo $taxiFleetPromotion->user->email;?>"><?= h($taxiFleetPromotion->user->email);?></a></label>
 																				</div>
 																			</div>
 																		</div>
@@ -532,7 +530,7 @@ p{
 														</div>
 														<div class="col-md-9">
 															<div >
-															<textarea class="form-control " rows="3" type="text" placeholder="Enter Your Reason..." name="comment"></textarea>	
+															<textarea class="form-control " rows="3" type="text" placeholder="Enter Your Reason here..." name="comment"></textarea>	
 															</div>
 														</div>
 													</div>
@@ -573,10 +571,13 @@ p{
 									</div>
 									<div class="row ">
 										<div class="col-md-4 lbwidth">Seller :</div>		
-											<div class="col-md-8 lbwidth11"><label>
-											<?php echo $taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name.' ( '.$taxiFleetPromotion->user_rating.' <i class="fa fa-star"></i> )';?>
-											</label>
-										</div>
+										<div class="col-md-8 lbwidth11"><label>
+										<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
+										<a href="<?php echo $hrefurl; ?>"> 
+										<?php echo $taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name.' ( '.$taxiFleetPromotion->user_rating.'<i class="fa fa-star"></i> )';?>
+										</a>
+										</label>
+										</div>					
 									</div>
 								</div>
 							</div>
