@@ -1020,11 +1020,14 @@ public function sendrequest() {
 	$this->loadModel('RequestStops');
 	$this->loadModel('Hotels');
 	$this->loadModel('User_Chats');
-	$this->loadModel('postTravlePackageCategories');
+	$this->loadModel('taxi_fleet_car_buses');
+	$this->loadModel('MealPlans');
 	$this->viewBuilder()->layout('user_layout');
 	$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first(); 
-	$postTravlePackageCategories = $this->postTravlePackageCategories->find('list', ['limit' => 200]);
+	$postTravlePackageCategories = $this->taxi_fleet_car_buses->find('list', ['limit' => 200]);
+	$MealPlans = $this->MealPlans->find('list', ['limit' => 200])->where(['is_deleted'=>0]);
 	$this->set('postTravlePackageCategories', $postTravlePackageCategories);
+	$this->set('MealPlans', $MealPlans);
 	$this->set('users', $user);
 	$myRequestCount = $myReponseCount =  0;
 	$myfinalCount  = 0;
@@ -3356,6 +3359,9 @@ return array("1"=>"EP - European Plan", "2"=>"CP - Contenental Plan", "3"=>"MAP 
 function addNewDestinationRow() {
 	$this->set("hotelCategories", $this->_getHotelCategoriesArray());
 	$this->set("randomNumber", $_POST["number"]);
+	$this->loadModel('MealPlans');
+	$MealPlans = $this->MealPlans->find('list', ['limit' => 200])->where(['is_deleted'=>0]); 
+	$this->set('MealPlans', $MealPlans);
 	$this->render('/Element/new_destination');
 }
 public function addresponse() {
