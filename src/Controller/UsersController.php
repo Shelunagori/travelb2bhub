@@ -2609,9 +2609,11 @@ public function myresponselist() {
 	$this->loadModel('Cities');
 	$this->loadModel('States');
 	$this->loadModel('Hotels'); 
+	$this->loadModel('Testimonial'); 
 	$this->viewBuilder()->layout('user_layout');
 	$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
 	$this->set('users', $user);
+	$login_user_id=$this->Auth->user('id');
 	$conditions ='';
 	if(!empty($this->request->query("budgetsearch"))) {
 		$QPriceRange = $this->request->query("budgetsearch");
@@ -2694,6 +2696,29 @@ public function myresponselist() {
 	}
 	$conditions["Responses.is_deleted "] = 0;
 	$conditions["Responses.status "] = 0;
+	
+		$this->loadModel('BlockedUsers');
+		$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
+			->hydrate(false)
+			->where(['blocked_by' => $login_user_id])
+			->toArray();
+		$myBlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_by'])
+			->hydrate(false)
+			->where(['blocked_user_id' => $login_user_id])
+			->toArray();
+		if(!empty($BlockedUsers)) {
+			$BlockedUsers = array_values($BlockedUsers);
+		}
+		if(!empty($myBlockedUsers)) {
+			$myBlockedUsers = array_values($myBlockedUsers);
+		}
+		$BlockedUsers=array_merge($BlockedUsers,$myBlockedUsers);
+		$BlockedUsers = array_unique($BlockedUsers);
+	//print_r($BlockedUsers); exit;
+		if(sizeof($BlockedUsers)>0){
+				$conditions["Requests.user_id NOT IN"] =  $BlockedUsers; 
+		}
+ 	
 	$responses = $this->Responses->find()
 		->contain([ "Requests.Users", "UserChats","Requests.Hotels"])
 		->where(['Responses.user_id' => $this->Auth->user('id'),$conditions])->order($sort)->all();
@@ -2705,6 +2730,7 @@ public function myresponselist() {
 	$loggedinid = $this->Auth->user('id');
 	if(count($responses)>0){
 		foreach($responses as $req){
+ 				 
 			$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$req['user_id']."' AND blocked_by='".$req['request']['user_id']."'";
 			$stmt = $conn->execute($sql1);
 			$bresult = $stmt ->fetch('assoc');
@@ -2725,7 +2751,10 @@ public function myresponselist() {
 			$resultsch = $stmtc ->fetch('assoc');		
 			$chatdata['chat_count'][$req['id']] =$resultsch['ch_count'];
 		}
+		
+
 	}
+	  
 	$this->set('chatdata', $chatdata);
 	$this->set('blockedUser', $blockeddata);
 	//debug($responses);
