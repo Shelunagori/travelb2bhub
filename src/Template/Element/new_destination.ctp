@@ -1,8 +1,8 @@
 <div>
 	<div class="destination newdiv">
 	<div class="stop col-md-12">
-	<hr></hr>
-	<div class="stop-title"> <b> Destination </b></div><br>
+	<hr  style="margin-top: 8px; margin-bottom: 8px;"></hr>
+	<div class="Destination-title"> <b> Destination </b></div> 
 	<div class="row main_row"> 
 	  <div class="row">
 			<div class="col-md-12">
@@ -106,7 +106,7 @@
 			</div>
 		</div>
 		<div class="row">
-		<div class=" col-md-12">
+			<div class=" col-md-12">
 				<div class="col-md-6">
 					<div class="input-field">
 						<p for="from">
@@ -114,29 +114,24 @@
 						</p>
 					</div>
 					<div class="col-md-12 input-group">
-					<input require type="text" required="true" name="hh_check_in[<?php echo $randomNumber; ?>]" id="hh_check_in[<?php echo $randomNumber; ?>]" class="form-control date-picker"  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>
-					<p class="input-group-addon btn">
-					<span class="fa fa-calendar"></span>
-					</p>                    
+						<input require type="text" required="true" name="hh_check_in[<?php echo $randomNumber; ?>]" id="hh_check_in[<?php echo $randomNumber; ?>]" class="form-control date-picker"  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>                     
 					</div>
-				</div><span class="help-block"></span>
-				<div class="col-md-5">
+				</div> 
+				<div class="col-md-6">
 					<div class="input-field">
-								<p for="from">
-									Check Out
-								</p>
+					<p for="from">
+						Check Out
+					</p>
 					</div>
 					<div class="col-md-12 input-group">
-						<input type="text" required="true" name="hh_check_out[<?php echo $randomNumber; ?>]" id ="hh_check_out[<?php echo $randomNumber; ?>]" class="form-control enddate date-picker"  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>
-						<p class="input-group-addon btn" >
-						<span class="fa fa-calendar"></span>
-						</p>                    
+						<input type="text" required="true" name="hh_check_out[<?php echo $randomNumber; ?>]" id ="hh_check_out[<?php echo $randomNumber; ?>]" class="form-control enddate date-picker"  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>                     
 					</div>
 				</div>
-				<div class="col-md-1" style="margin-top:px">
-					<p for="from">&nbsp;</p>
-					<a href="java:script(0);" class="remove_field btn btn-danger btn-sm" style="width:30px;"><i class="fa fa-minus"></i></a>
-				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div style="margin-top:5px" align="right">
+				<a href="java:script(0);" class="remove_field btn btn-danger btn-sm"><i class="fa fa-trash"></i> Remove </a>
 			</div>
 		</div>
 		<span class="help-block"></span>

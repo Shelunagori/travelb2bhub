@@ -437,7 +437,7 @@ fieldset{
 								<div class="col-md-4">
 									<div class="input-field">
 										<p for="from">
-													Destination State
+											Destination State
 										</p>
 									</div>
 									<div>
@@ -460,7 +460,7 @@ fieldset{
 							</div>
 						</div><span class="help-block"></span>	
 						<div class="row">
-						<div class=" col-md-12 main_row">
+							<div class=" col-md-12 main_row">
 								<div class="col-md-6">
 									<div class="input-field">
 										<p for="from">
@@ -471,34 +471,32 @@ fieldset{
 									<div class="col-md-12 input-group">
 									<input autocomplete="off" type="text" name="check_in" class="form-control date-picker" id="datepicker7" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
 									</div>
-									</div><span class="help-block"></span>	
-								<div class="col-md-5">
+									</div> 
+								<div class="col-md-6">
 									<div class="input-field">
-												<p for="from">
-													Check Out
-													<span class="required">*</span>
-												</p>
+										<p for="from">
+											Check Out
+											<span class="required">*</span>
+										</p>
 									</div>
 									<div class="col-md-12 input-group">
 										<input autocomplete="off" type="text" name="check_out" class="form-control date-picker" id="datepicker8" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
 										                    
 									</div>
-								</div><span class="help-block"></span>	
-								<div class="col-md-1" style="margin-top:px">
-									<p for="from">&nbsp;</p>
-									<button class="btn btn-primary btn-sm add_field_button2 " style="background-color:#1295A2;"><i class="fa fa-plus"></i></button>
-								</div><span class="help-block"></span>	
-								</div>
+								</div> 
 							</div>
-						
-						
-						<span class="help-block"></span>	
-						  <div class="input_fields_wrap1">
-                     				  
 						</div>
-						<span class="help-block"></span>
-						</div>
-			</fieldset>
+							
+						<div class="input_fields_wrap1"></div>
+						<div class="row">
+							<div class="col-md-12" style="margin-top:5px">  
+								<div class="col-md-12">  
+									<button class="btn btn-primary btn-sm add_field_button2 " style="background-color:#1295A2;"><i class="fa fa-plus"></i> Add Destination</button>
+								</div>
+ 							</div>
+						</div> 
+					</div>
+				</fieldset>
 				 
 								 
 								<fieldset>
@@ -544,28 +542,26 @@ fieldset{
 								<div class="row">
 									<div class="col-md-12 main_row">
 										<div class="col-md-4  mt">
-												<div class="input-field">
-												<p for="from">Pickup Locality
-													
-												</p>
-												<input autocomplete="off" type="text" class="form-control" name="pickup_locality" id="pickup_locality" placeholder="Enter Locality, Village or Town"/>
-												</div>
+											<div class="input-field">
+											<p for="from">Pickup Locality</p>
+											<input autocomplete="off" type="text" class="form-control" name="pickup_locality" id="pickup_locality" placeholder="Enter Locality, Village or Town"/>
+											</div>
 										</div>
-										 <div class="col-md-3 mt">
-												<div class="input-field">
-													<p for="from">Pickup City</p>
-													<input type="text" class="form-control city_select ctynamerecord" id="pickup_city_name" name="pickup_city_name"  placeholder="Select City or Nearest City" taxboxname="pickup_state_id" noofrows="5" />
-													<input type='hidden' class="ctyIDname" id='pickup_city_id' name="pickup_city_id" />
-													<div class="suggesstion-box" style="margin-top:-10px"></div>
-												</div>
+										<div class="col-md-4 mt">
+											<div class="input-field">
+												<p for="from">Pickup City</p>
+												<input type="text" class="form-control city_select ctynamerecord" id="pickup_city_name" name="pickup_city_name"  placeholder="Select City or Nearest City" taxboxname="pickup_state_id" noofrows="5" />
+												<input type='hidden' class="ctyIDname" id='pickup_city_id' name="pickup_city_id" />
+												<div class="suggesstion-box" style="margin-top:-10px"></div>
+											</div>
 										</div>	
-										<div class="stateRpl">										
+										<div class="stateRpl">		
 											<div class="col-md-4 mt">
-													<div class="input-field">
+												<div class="input-field">
 													<p for="from">Pickup State</p>
 													<input type='hidden' id='pickup_state_id' name="pickup_state_id"/>
 													<input type="text" class="form-control"  id="pickup_state_name" name="pickup_state_name" placeholder="Auto Populated" readonly>
-													</div>
+												</div>
 											</div>
 										
 											<div class="col-md-4 mt" style="display:none">
@@ -575,17 +571,15 @@ fieldset{
 												<input type="text" class="form-control" id ="pickup_country_name" name="pickup_country_name" placeholder="Select Country" />
 												</div>
 											</div>
-										</div>
-										<div class="col-md-1" style="margin-top:10px">
-											<p for="from">&nbsp;</p>
-											<button class="btn btn-primary btn-sm package-stop-add " style="background-color:#1295A2;"><i class="fa fa-plus"></i></button>
-										</div>
+										</div> 
 									</div>
 								</div>
 								<span class="help-block"></span>
 								<div class="package-stops">
 								</div>
-								<span class="help-block"></span><hr></hr>
+								<div class="col-md-12"> 
+									<button class="btn btn-primary btn-sm package-stop-add " style="background-color:#1295A2;"><i class="fa fa-plus"></i> Add Stop</button>
+								</div> 
 								<div class="row">
 										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">
 												
@@ -1074,50 +1068,7 @@ function selectCountry(value,city_code,state,noofrows) {
 	 
 	
 } 
-//--- Second  Transport Menu
-/*$(document).ready(function(){ 
-	$("#p_final_city_name").keyup(function(){
-		var input=$("#p_final_city_name").val();
-		var m_data = new FormData();
-		m_data.append('input',input);			
-		$.ajax({
-			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_city"]); ?>",
-			data: m_data,
-			processData: false,
-			contentType: false,
-			type: 'POST',
-			dataType:'text',
-			success: function(data)
-			{
-				$(".suggesstion-box2").show();
-				$(".suggesstion-box2").html(data);
-				$(".p_final_city_name").css("background","#FFF");
-			}
-		});
-	});
-});
-function selectCountry(value,city_code,state) {
-	var state_id=state;
-	$("#p_final_city_name").val(value);
-	$(".suggesstion-box2").hide();
-	$("#p_final_city_id").val(city_code);
-			
-	var m_data = new FormData();
-	m_data.append('state_id',state_id);			
-	$.ajax({
-		url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_state_show_new"]); ?>",
-		data: m_data,
-		processData: false,
-		contentType: false,
-		type: 'POST',
-		dataType:'text',
-		success: function(data)
-		{
-			$(".shw").html(data);
-		}
-	});	
-}*/
-//------
+//--- Seco 
 	$('#PackgeRequestForm').validate({
 		rules: {
 			"reference_id" : {
@@ -1418,11 +1369,11 @@ $(document).ready(function () {
         $(".package-stop-add").click(function (e) {
         
             e.preventDefault();
-            var strHtml = '<div class="stop col-md-12 main_row"><div class="stop-title"><b>Stop ' +packageI+ '</b> </div><div class="row"> <br>';
+            var strHtml = '<div class="stop col-md-12 main_row" style="margin-top:5px"><hr  style="margin-top: 8px; margin-bottom: 8px;"></hr> <div class="stop-title" style="font-weight:bold"> Stop ' +packageI+ ' </div><div class="row main_row">';
         	strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality,Village or Town" name="stops[' +packageI+ ']"></div></div>';
-        	strHtml += '<div class="col-sm-3 mt"><p for="from">Stop City</p><input class="trans_city form-control city_select ctynamerecord" noofrows="5" taxboxname="state_id_package_stop_city[' +packageI+ ']" type="text" placeholder="Select City or Nearest City" use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" class="ctyIDname" name="id_package_stop_city[' +packageI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div> ';
-        	strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly></div></div></div><div class="col-md-1"><p for="from">&nbsp;</p><button aligh="right" class="btn btn-danger btn-sm package_remove_stop"><i class="fa fa-minus" ></i></button></div></div>';
-        strHtml += ' <hr class="hr"></hr></div>';
+        	strHtml += '<div class="col-sm-4 mt"><p for="from">Stop City</p><input class="trans_city form-control city_select ctynamerecord" noofrows="5" taxboxname="state_id_package_stop_city[' +packageI+ ']" type="text" placeholder="Select City or Nearest City" use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" class="ctyIDname" name="id_package_stop_city[' +packageI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div> ';
+        	strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly></div></div></div></div>';
+        strHtml += '<div class="row"><div class="col-md-12" align="right" style="margin-top:5px"> <button class="btn btn-danger btn-sm package_remove_stop but"> <i class="fa fa-trash" ></i> Remove Stop</button> </div></div></div>';
         $(".package-stops").append(strHtml);
         	packageI++;
         });
@@ -1586,120 +1537,3 @@ $(".hh_hotel_category").multiselect();
         })
     });
 </script>
-<!--<script>
-	 
-    $(document).ready(function () {
-        var wrapper = $(".input_fields_wrap1");
-		$(wrapper).on("click", ".remove_field", function (e) {
-            e.preventDefault();
-            $(this).parent('div').parent('div')my.slideUp(function(){
-				$(this).remove();
-			});
-        });
-        var max_fields = 10;
-        var add_button = $(".add_field_button2");
-        var x = 1;
-		//$(document).on('click','.add_field_button2',function(){
-		 
-        $(add_button).click(function () {
-			alert();
-         /* 
-			var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'addNewDestinationRow')) ?>";
-			var number = Math.floor((Math.random() * 100000) + 1);
-			$.ajax({
-				url:url,
-				type: 'POST',
-				data: {"number":number},
-				async:false
-			}).done(function(result){
-				$(wrapper).append(result);
-				$(wrapper).find("input[name='hh_room1["+number+"]']").val($("#room1").val());
-				$(wrapper).find("input[name='hh_room2["+number+"]']").val($("#room2").val());
-				$(wrapper).find("input[name='hh_room3["+number+"]']").val($("#room3").val());
-				$(wrapper).find("input[name='hh_child_with_bed["+number+"]']").val($("#child_with_bed").val());
-				$(wrapper).find("input[name='hh_child_without_bed["+number+"]']").val($("#child_without_bed").val());
-				$(".hh_hotel_category").multiselect();
-				$(wrapper).find("input:text[name='hh_city_name["+number+"]']").autocomplete({
-					source: JSON.parse(cityData),
-					select: function (e, ui) {
-						e.preventDefault();
-						$('.select2').select2();
- 						$(this).val(ui.item.p);
-						$(wrapper).find("input:hidden[name='hh_city_id["+number+"]']").val(ui.item.value);
-
-						$(wrapper).find("input:hidden[name='hh_state_id["+number+"]']").val(ui.item.state_id);
-						$(wrapper).find("input:text[name='hh_state_name["+number+"]']").val(ui.item.state_name);
-
-						$(wrapper).find("input:hidden[name='hh_country_id["+number+"]']").val(ui.item.country_id);
-						$(wrapper).find("input:text[name='hh_country_name["+number+"]']").val(ui.item.country_name);
-					}
-				});
-				//$(wrapper).find("input:text[name='hh_check_in["+number+"]']").datepicker();
-				//$(wrapper).find("input:text[name='hh_check_out["+number+"]']").datepicker();
-
-				var checkInDatePicker = $(wrapper).find("input:text[name='hh_check_in["+number+"]']");
-				var checkOutDatePicker = $(wrapper).find("input:text[name='hh_check_out["+number+"]']");
-				//checkInDatePicker.datepicker();
-				//checkOutDatePicker.datepicker();
-
-				var lastdate = '';
-				
-				var enddate ='';
-				var enddate2 = $('#datepicker8').val();
-				var enddate1 = $(".enddate").val();
-				if (enddate1 == '' || enddate1==null)
-				{
-					var enddate =enddate2;
-				}
-				else{
-				$("#collapse2 .enddate").each(function() {
-					if ($(this).val()=='' || $(this).val()==null) {
-					x=1	
-					}else{
-						lastdate = $(this).val();
-					}
-				});	
-				var enddate =enddate1;
-				}
-				if (lastdate=='' || lastdate==null) {
-				var k=1;
-				}else{
-				enddate	= lastdate;
-				}
-				checkInDatePicker.datepicker({
-					dateFormat: 'dd/mm/yy',
-					changeMonth: true,
-					changeYear: true,
-					//minDate: '<?php echo date("d/m/Y"); ?>',
-					minDate: enddate,
-					onSelect: function(selected) {
-						checkOutDatePicker.datepicker( "option", "minDate",selected);
-						checkOutDatePicker.val("");
-					}
-				});
-				checkOutDatePicker.datepicker({
-					dateFormat: 'dd/mm/yy',
-					changeMonth: true,
-					changeYear: true,
-					//minDate: '<?php echo date("d/m/Y"); ?>',
-					minDate: enddate,
-					onSelect: function(selected) {
-						var checkInDate = checkInDatePicker.val();
-						if(checkInDate == "") {
-							alert("Please select check-in date first.");
-							checkOutDatePicker.val("");
-						}
-					}
-				});
-			});
-			return false;*/
-        });
-        $(wrapper).on("click", ".remove_field1", function (e) {
-            e.preventDefault();
-            $(this).parent('div').remove();
-            x--;
-        })
-    });
-</script>--->
- 
-	

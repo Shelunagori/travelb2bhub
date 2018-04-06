@@ -164,8 +164,8 @@ p {
 	 
 	label.star {
 	  float: right;
-	  padding: 10px;
-	  font-size: 20px;
+	  padding: 0 5px;
+	  font-size: 31px;
 	  color: #444;
 	  transition: all .2s;
 	}
@@ -285,7 +285,7 @@ p {
 
 <!--<body class="hold-transition skin-blue fixed sidebar-mini">-->
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue  sidebar-mini">
 <?php $this->Form->templates([
 		'inputContainer' => '{{content}}'
 	]); 
