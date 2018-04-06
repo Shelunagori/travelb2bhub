@@ -225,7 +225,7 @@ fieldset{
 									<div class="col-md-12">
 										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 											<p for="from">
-												Vehicle Type
+												Select Cars or Buses in the Fleet
 												<span class="required">*</span>
 											</p>
 											<div class="input-field">
@@ -235,7 +235,7 @@ fieldset{
 												{
 													$options[] = ['value'=>$Buses->id,'text'=>$Buses->name];
 												};
-												echo $this->Form->control('vehicle_type', ['label'=>false,"id"=>"multi_vehicle", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Vehicle ","style"=>"height:125px;"]);?>
+												echo $this->Form->control('vehicle_type', ['label'=>false,"id"=>"multi_vehicle", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
 											</div>
 										</div>
 										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
