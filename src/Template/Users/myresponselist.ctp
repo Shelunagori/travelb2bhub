@@ -5,7 +5,7 @@ legend{
 }
 fieldset
 	{
-		border-radius: 15px;
+		border-radius: 7px;
 	}
 .details {color:#000 !important; font-weight: 400;}	
 	li > p{
@@ -378,7 +378,8 @@ $(document).ready(function(){
                         }else{
 								$hrefurl =  "viewprofile/".$response['request']['user_id']."/";                       
                         }?>
-                            To : <span class="details"> <a href="<?php echo $hrefurl;?>"><?php echo $response['request']['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $response['request']['user']['last_name']; ?></a> <font color="#1295AB">(<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font>
+                            To : <span class="details"> <a href="<?php echo $hrefurl;?>"><?php echo $response['request']['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $response['request']['user']['last_name']; ?></a> 
+							<font color="#1295AB">(<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font>
 							<?php if(in_array($response['request']['user_id'],$BusinessBuddies)) { 
 								//echo $this->Html->image('friend-ico1.png', [ "height"=>20]); 
 							} ?> 
@@ -521,11 +522,41 @@ $(document).ready(function(){
 						
 						<td <?php if($response['is_details_shared'] == 1) { echo 'width="33%"'; }else{ echo 'width="50%"'; } ?> >
 							<?php
-							if( !array_key_exists($response["request"]["user_id"], $BusinessBuddies)) {?>
+							if(array_key_exists($response["request"]["user_id"], $BusinessBuddies)) {?>
 								<a href="#" style="width:99%" class="btn btn-warning btn-sm"> Following</a>
 							<?php } 
 							else{ ?>
-								<a style="width:99%" href="javascript:void(0);" class="businessBuddy btn btn-warning btn-sm" user_id = "<?php echo $response["request"]["user_id"]; ?>"> Follow User</a><?php 
+								  
+								<a style="width:99%" data-toggle="modal" class="btn btn-warning btn-sm" data-target="#follow<?php echo $id; ?>" > Follow User </a>
+							<!-------Contact Details Modal --------->
+							<div id="follow<?php echo $id; ?>" class="modal fade" role="dialog">
+								<div class="modal-dialog modal-md" >
+									<!-- Modal content-->
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h3 class="modal-title">
+													<font color="black">Follow User</font>
+												</h3>
+											</div>
+												<div class="modal-body">
+													<span class="help-block"></span>
+													<div class="row">
+														<div class="col-md-12">
+															<div class="col-md-4">Confirm Follow User ?</div>
+															 					
+														</div>
+													</div>
+												</div>
+												<div class="modal-footer">
+												<button type="button"  href="javascript:void(0);" class="businessBuddy btn btn-warning btn-sm" user_id = "<?php echo $response["request"]["user_id"]; ?>" >Follow</button>
+												<button type="button" class="btn btn-successto" data-dismiss="modal">Cancel</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								
+								<?php 
 							}
 							?>
 						</td>
@@ -637,22 +668,12 @@ $(document).ready(function(){
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<h3 class="modal-title">
-													<font color="red">User Block</font>
+													<h4><font color="red">Are you sure you want to block this user ?</font></h4>
 												</h3>
 											</div>
-												<div class="modal-body">
-													<span class="help-block"></span>
-													<div class="row">
-														<div class="col-md-12">
-															<div class="col-md-4">Confirm Block This User ?</div>
-															 					
-														</div>
-													</div>
-													 
-												</div>
 												<div class="modal-footer">
-												<button type="button"  href="javascript:void(0);" class="blockUser btn btn-danger btn-sm " user_id = "<?php echo $response['request']['user']['id']; ?>">Block</button>
-												<button type="button" class="btn btn-successto" data-dismiss="modal">Cancel</button>
+													<button type="button"  href="javascript:void(0);" class="blockUser btn btn-danger" user_id = "<?php echo $response['request']['user']['id']; ?>">Block</button>
+													<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
 												</div>
 											</div>
 										</div>
@@ -738,20 +759,19 @@ $(document).ready(function () {
  		var datas = $(this);
 		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'addBusinessBuddy')) ?>";
 		var user_id = $(this).attr("user_id");
-		if(confirm("Are you sure want to follow this user?")) {
+		 
 			$.ajax({
 				url:url,
 				type: 'POST',
 				data: {user_id:user_id}
 			}).done(function(result){
 				if(result == 1) {
-					alert("This user has been added to your following list successfully.");
-					datas.parent().remove();
+					location.reload();
 				} else {
-					alert("There is some problem, please try again.");
+					
 				}
 			});
-		}
+		 
 	});
 });
 
