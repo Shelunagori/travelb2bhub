@@ -7,6 +7,10 @@ $conn = ConnectionManager::get('default');
 	legend {
 		text-align:center;
 	}
+	fieldset
+	{
+		border-radius: 15px;
+	}
 	.details {color:#000 !important; font-weight: 400;}
 li > p{
 		color:#96989A !important;
@@ -188,7 +192,7 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 								<?php 
 									$a=$request['city_id']?$allCities[$request['city_id']]:"-- --"; 
 									$b=$request['state_id']?' ('.$allStates[$request['state_id']].')':"";
-									echo mb_strimwidth($a.$b, 0,20, "...");?>
+									echo mb_strimwidth($a.$b, 0,28, "...");?>
 								
 													<?php  /*if($request['category_id'] == 1){
 													if(count($request['hotels']) >1) {

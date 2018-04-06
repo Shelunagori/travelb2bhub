@@ -6,7 +6,11 @@ $conn = ConnectionManager::get('default');
 ?>
 <style>
 	legend {
-		text-align:center;
+		text-align:center !important;
+	}
+	fieldset
+	{
+		border-radius: 15px;
 	}
 	.details {color:#000 !important; font-weight: 400;}	
 	li > p{
@@ -323,7 +327,9 @@ $conn = ConnectionManager::get('default');
 					<li class="">
 						<p>
 							Form : <span class="details"><a href="viewprofile/<?php echo $request['user_id']; ?>"><?php echo $request['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $request['user']['last_name']; ?></a>
-							<?php if(in_array($request['user_id'],$BusinessBuddies)) {  echo $this->Html->image('friend-ico1.png', [ "height"=>20]); } ?>
+							<?php if(in_array($request['user_id'],$BusinessBuddies)) {  
+							//echo $this->Html->image('friend-ico1.png', [ "height"=>20]);
+							} ?>
 						</p>
 					</li>
 					<li class="">
@@ -352,7 +358,7 @@ $conn = ConnectionManager::get('default');
 							<?php 
 							$a=$request['city_id']?$allCities[$request['city_id']]:"-- --"; 
 							$b=$request['state_id']?' ('.$allStates[$request['state_id']].')':"";
-							echo mb_strimwidth($a.$b, 0,17, "...");?>
+							echo mb_strimwidth($a.$b, 0,28, "...");?>
 						</p>
 					<?php } ?>
 					</li>

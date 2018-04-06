@@ -8,6 +8,10 @@ legend
 {
 	text-align: center;
 }
+fieldset
+{
+	border-radius: 15px;
+}
 .requestType {	
 	color: #f87200;
     font-weight: 600;
@@ -285,8 +289,8 @@ legend
 					$created=$request['created'];
 					$org_created=date('d-M-Y', strtotime($created));
 					?>
-					<fieldset>
-						<legend><?php echo $image; ?></legend>
+					<fieldset >
+						<legend align="center"><?php echo $image; ?></legend>
 						 <span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
 						<div class="contain">
 							
@@ -311,7 +315,7 @@ legend
 									<?php 
 									$a=$request['city_id']?$allCities[$request['city_id']]:"-- --"; 
 									$b=$request['state_id']?' ('.$allStates[$request['state_id']].')':"";
-									echo mb_strimwidth($a.$b, 0,17, "...");?>
+									echo mb_strimwidth($a.$b, 0,28, "...");?>
 									<?php
 										/* if($request['category_id'] == 1){
 											if(count($request['hotels']) >1) {
@@ -376,7 +380,7 @@ legend
 							<table width="100%" border="0" class="table-responsive">
 							<tr>
 								<td width="33%">
-									<a style="width:99%" class="viewdetail btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"data-target="#myModal1<?php echo $request['id']; ?>"data-toggle=modal> Details</a>
+									<a style="width:99%;" class="viewdetail btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"data-target="#myModal1<?php echo $request['id']; ?>"data-toggle=modal> Details</a>
 									<div class="fade modal"id="myModal1<?php echo $request['id']; ?>"role=dialog>
 										<div class=modal-dialog>
 											<div class=modal-content>
@@ -391,7 +395,7 @@ legend
 								</td>
 
 								<td width="33%">
-											<a style="width:99%"  class=" btn btn-danger btn-sm"  request_id="<?php echo $request['id']; ?>"  data-target="#deletemodal<?php echo $request['id']; ?>"data-toggle=modal>Remove</a>
+											<a style="width:99%;" class=" btn btn-danger btn-sm"  request_id="<?php echo $request['id']; ?>"  data-target="#deletemodal<?php echo $request['id']; ?>"data-toggle=modal>Remove</a>
 											
 													<!-------Delete Modal Start--------->
 												<div id="deletemodal<?php echo $request['id']; ?>" class="modal fade" role="dialog">

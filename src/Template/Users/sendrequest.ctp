@@ -80,11 +80,20 @@ fieldset{
 {
 	margin-top:6px !important;
 }
-	
+.newColmd4{
+	width:33.33333333%;
+	float: left;
+	position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+	 margin-top: 6px;
+}	
 .box-room {
     border: 2px solid #eee;
-    padding: 2px 0;
+    padding: 5px;
     float: left;
+	padding-bottom: 8px;
 }
 </style> 
 <div class="container-fluid">
@@ -153,8 +162,6 @@ fieldset{
 				</fieldset>
 				<fieldset>
 					<legend style="color:#369FA1;"><b> &nbsp;  STAY REQUIREMENTS  &nbsp; </b></legend>
-					
-					
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 						<div class="input-field">
 							<label for="from">No. of Rooms</label>
@@ -204,84 +211,10 @@ fieldset{
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 						<div class="input-field">
 							Meal Plan
-							<select name="meal_plan" class="form-control">
-								<option value="" selected>Select Meal Plan</option>
-								<option value="1">EP - European Plan</option>
-								<option value="2">CP - Contenental Plan</option>
-								<option value="3">MAP - Modified American Plan</option>
-								<option value="4">AP - American Plan</option>
-							</select>
-						</div>
+ 							<?php echo $this->Form->control('meal_plan', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$MealPlans, "class"=>"form-control select2","data-placeholder"=>"Select Options "]);?>
+ 						</div>
 					</div>
 
-
-
-					
-					<!--<div class="row">
-						<div class="col-md-12">
-							<div class="col-md-6">
-							<fieldset><legend style="color:#369FA1;"> No. of Rooms</legend>
-								<div class="col-lg-12">
-									<p>Single</p>
-									<?php echo $this->Form->control('room1', ["id"=>"room1", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
-								</div>
-								<div class="col-lg-12">
-									<p>Double</p>
-									<?php echo $this->Form->control('room2', ["id"=>"room2", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
-								</div>
-								<div class="col-lg-12">
-									<p>Triple</p>
-									<?php echo $this->Form->control('room3', ["id"=>"room3", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
-								</div>
-								<div class="col-lg-6">
-									<p>Child with Bed</p>
-									<?php echo $this->Form->control('child_with_bed', ["id"=>"child_with_bed", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
-								</div>
-								<div class="col-lg-6">
-									<p>Child without Bed</p>
-									<?php echo $this->Form->control('child_without_bed', ["id"=>"child_without_bed", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
-								</div>
-							</fieldset>
-							</div>
-							<div class="col-md-6">
-								<div class="col-md-12">
-									<div class="input-field">
-										<p for="from">
-											Hotel Rating
-										</p>
-									</div>
-									<div style=" width: 200px;" class="stars">
-									<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
-									   <input class="star star-5" id="star-5-21" type="radio" value="5" name="hotel_rating"/>
-									   <label class="star star-5" for="star-5-21"></label>
-									   <input class="star star-4" id="star-4-21" type="radio" value="4" name="hotel_rating"/>
-									   <label class="star star-4" for="star-4-21"></label>
-									   <input class="star star-3" id="star-3-21" type="radio" value="3" name="hotel_rating"/>
-									   <label class="star star-3" for="star-3-21"></label>
-									   <input class="star star-2" id="star-2-21" type="radio" value="2" name="hotel_rating"/>
-									   <label class="star star-2" for="star-2-21"></label>
-									   <input class="star star-1" id="star-1-21" type="radio" value="1" name="hotel_rating"/>
-									   <label class="star star-1" for="star-1-21"></label>
-									   </div>
-								</div>
-								<div class="col-md-12 ">
-									<div class="input-field">
-										<p for="from">Hotel Category </p>
-											<div>
-												<?php echo $this->Form->control('hotel_category', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
-
-										   </div>
-									</div>
-								</div>
-								<div class="col-md-12 ">
-									<div class="input-field">
-										<p for="from">Meal Plan </p>
-										<div><?php echo $this->Form->control('meal_plan', ["type"=>"select", "empty"=>"Select Meal Plan", 'options' =>array("1"=>"EP - European Plan", "2"=>"CP - Contenental Plan", "3"=>"MAP - Modified American Plan", "4"=>"AP - American Plan") , "class"=>"form-control"]);?></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>--->
 					<div class="row">
 						<div class="col-md-12">
 							<div class="col-md-4">
@@ -299,7 +232,7 @@ fieldset{
 									<div>
 										<input autocomplete="off" type="text" class="form-control city_select" id="h_city_name" name="h_city_name" noofrows="1" placeholder="Select City or Nearest City"/>
 										<input type='hidden' id='h_city_id' class="ctyidd" name="h_city_id" />
-										<div class="suggesstion-box" style="margin-top:-10px"></div>
+										<div class="suggesstion-box" style="margin-top:-10px;"></div>
 									</div>
 							</div>
 							<span class="shw">
@@ -398,18 +331,22 @@ fieldset{
 				  <legend style="color:#369FA1;"><b>  &nbsp; GENERAL REQUIREMENTS &nbsp; </b></legend>
 					<div class="row">
 						<div class="col-md-12">
-						  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+						    <div class="col-md-12">
 								<div class="input-field">
 									<p for="from" >
 										Reference ID 
 										<span class="required">*</span>
 										(This is for your reference )
 									</p>
-									<input name="reference_id" type="text" class="form-control ref2" id="Reference ID" placeholder="Reference ID" autocomplete="off" />
+									<input name="reference_id" type="text" class="form-control ref2" id="Reference ID" placeholder="Reference ID" autocomplete="off" style="width:40%" />
 									 
 								</div>
 							</div>
-							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="col-md-4">
 								<div class="input-field">
 									<p for="from">
 										Total Budget 
@@ -418,17 +355,13 @@ fieldset{
 									<input autocomplete="off" name="total_budget" type="number" min="1" class="form-control" id="total_budget" placeholder="Total Budget"/>
 								</div>
 							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<p for="from">Adults <span class="required">*</span></p>
-								<?php echo $this->Form->control('adult', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'style'=>'width:40%']); ?>
+								<?php echo $this->Form->control('adult', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
  							</div>
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<p for="from">Children below 6 <span class="required">*</span></p>
-								<?php echo $this->Form->control('children', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'style'=>'width:40%']); ?>
+								<?php echo $this->Form->control('children', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
  							</div>
 						</div>
 					</div>
@@ -437,74 +370,59 @@ fieldset{
 		 
 			<fieldset>
 				<legend style="color:#369FA1;"><b> &nbsp; STAY REQUIREMENTS &nbsp; </b></legend>
-					  <div class="row">
-							<div class="col-md-12">
-								<div class="col-md-12">
-									<p for="from" >
-										No. of Rooms
-									</p>
-								</div>
-								<div class="col-lg-2">
-									<p>Single</p>
-									<?php echo $this->Form->control('room1', ["id"=>"room1", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
-								</div>
-								<div class="col-lg-2">
-									<p>Double</p>
-									<?php echo $this->Form->control('room2', ["id"=>"room2", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
-								</div>
-								<div class="col-lg-2">
-									<p>Triple</p>
-									<?php echo $this->Form->control('room3', ["id"=>"room3", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
-								</div>
-								<div class="col-lg-3">
-									<p>Child with Bed</p>
-									<?php echo $this->Form->control('child_with_bed', ["id"=>"child_with_bed", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
-								</div>
-								<div class="col-lg-3">
-									<p>Child without Bed</p>
-									<?php echo $this->Form->control('child_without_bed', ["id"=>"child_without_bed", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
-								</div>
-							</div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+					<div class="input-field">
+						<label for="from">No. of Rooms</label>
+						<div class="box-room">
+							<div class="col-md-7"> Single</div>
+							<div class="col-md-5"><input autocomplete="off" name="room1" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+
+							<div class="col-md-7"> Double</div>
+							<div class="col-md-5"><input autocomplete="off" name="room2" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+
+							<div class="col-md-7"> Triple</div>
+							<div class="col-md-5"><input autocomplete="off" name="room3" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+
+							<div class="col-md-7"> Child with bed</div>
+							<div class="col-md-5"><input autocomplete="off" name="child_with_bed" style="height: 27px;" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
+
+							<div class="col-md-7"> Child without bed</div>
+							<div class="col-md-5"><input autocomplete="off" name="child_without_bed" style="height: 27px;" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
 						</div>
-						<div class="row" style="margin-top:10px">
-								<div class="col-md-12">
-									<div class="col-md-4">
-										<div class="input-field">
-											<p for="from">
-												Hotel Rating
-											</p>
-										</div>
-										<div style="width: 200px;" class="stars">
-											<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
-										   <input class="star star-5" id="star-5-2" type="radio" value="5" name="hotel_rating"/>
-										   <label class="star star-5" for="star-5-2"></label>
-										   <input class="star star-4" id="star-4-2" type="radio" value="4" name="hotel_rating"/>
-										   <label class="star star-4" for="star-4-2"></label>
-										   <input class="star star-3" id="star-3-2" type="radio" value="3" name="hotel_rating"/>
-										   <label class="star star-3" for="star-3-2"></label>
-										   <input class="star star-2" id="star-2-2" type="radio" value="2" name="hotel_rating"/>
-										   <label class="star star-2" for="star-2-2"></label>
-										   <input class="star star-1" id="star-1-2" type="radio" value="1" name="hotel_rating"/>
-										   <label class="star star-1" for="star-1-2"></label>
-										 </div>
-									</div>
-									<div class="col-md-4 ">
-										<div class="input-field">
-											<p for="from">Hotel Category </p>
-												<div>
-												<?php echo $this->Form->control('hotel_category', ["id"=>"hotel_category", "type"=>"select",'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options","style"=>"height:125px;"]);?>
-											   </div>
-										</div>
-									</div>
-								<div class="col-md-4 ">
-									<div class="input-field">
-										<p for="from">Meal Plan </p>
-										<div><?php echo $this->Form->control('meal_plan', ["type"=>"select", "empty"=>"Select Meal Plan", 'options' =>array("1"=>"EP - European Plan", "2"=>"CP - Contenental Plan", "3"=>"MAP - Modified American Plan", "4"=>"AP - American Plan") , "class"=>"form-control"]);?></div>
-									</div>
-								</div>
-							</div>
-						</div>
-					<div class="row">
+					</div>
+				</div>
+
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+					<div class="input-field">
+						<p>Hotel Rating</p>	
+						<div style="width: 200px;" class="stars">
+							<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
+						    <input class="star star-5" id="star-5-2" type="radio" value="5" name="hotel_rating"/>
+						    <label class="star star-5" for="star-5-2"></label>
+						    <input class="star star-4" id="star-4-2" type="radio" value="4" name="hotel_rating"/>
+						    <label class="star star-4" for="star-4-2"></label>
+						    <input class="star star-3" id="star-3-2" type="radio" value="3" name="hotel_rating"/>
+						    <label class="star star-3" for="star-3-2"></label>
+						    <input class="star star-2" id="star-2-2" type="radio" value="2" name="hotel_rating"/>
+						    <label class="star star-2" for="star-2-2"></label>
+						    <input class="star star-1" id="star-1-2" type="radio" value="1" name="hotel_rating"/>
+						    <label class="star star-1" for="star-1-2"></label>
+						 </div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+					<div class="input-field hotel_category">
+						Hotel Category 
+						<?php echo $this->Form->control('hotel_category', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+					<div class="input-field">
+						Meal Plan
+						<?php echo $this->Form->control('meal_plan', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$MealPlans, "class"=>"form-control select2","data-placeholder"=>"Select Options "]);?>
+					</div>
+				</div>
+ 					<div class="row">
 						<div class="col-md-12 main_row">
 							<div class="col-md-4">
 								<p>Locality</p>
@@ -527,7 +445,7 @@ fieldset{
 								<div class="col-md-4">
 									<div class="input-field">
 										<p for="from">
-													Destination State
+											Destination State
 										</p>
 									</div>
 									<div>
@@ -550,7 +468,7 @@ fieldset{
 							</div>
 						</div><span class="help-block"></span>	
 						<div class="row">
-						<div class=" col-md-12 main_row">
+							<div class=" col-md-12 main_row">
 								<div class="col-md-6">
 									<div class="input-field">
 										<p for="from">
@@ -561,34 +479,32 @@ fieldset{
 									<div class="col-md-12 input-group">
 									<input autocomplete="off" type="text" name="check_in" class="form-control date-picker" id="datepicker7" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
 									</div>
-									</div><span class="help-block"></span>	
-								<div class="col-md-5">
+									</div> 
+								<div class="col-md-6">
 									<div class="input-field">
-												<p for="from">
-													Check Out
-													<span class="required">*</span>
-												</p>
+										<p for="from">
+											Check Out
+											<span class="required">*</span>
+										</p>
 									</div>
 									<div class="col-md-12 input-group">
 										<input autocomplete="off" type="text" name="check_out" class="form-control date-picker" id="datepicker8" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
 										                    
 									</div>
-								</div><span class="help-block"></span>	
-								<div class="col-md-1" style="margin-top:px">
-									<p for="from">&nbsp;</p>
-									<button class="btn btn-primary btn-sm add_field_button2 " style="background-color:#1295A2;"><i class="fa fa-plus"></i></button>
-								</div><span class="help-block"></span>	
-								</div>
+								</div> 
 							</div>
-						
-						
-						<span class="help-block"></span>	
-						  <div class="input_fields_wrap1">
-                     				  
 						</div>
-						<span class="help-block"></span>
-						</div>
-			</fieldset>
+							
+						<div class="input_fields_wrap1"></div>
+						<div class="row">
+							<div class="col-md-12" style="margin-top:5px">  
+								<div class="col-md-12">  
+									<button class="btn btn-primary btn-sm add_field_button2 " style="background-color:#1295A2;"><i class="fa fa-plus"></i> Add Destination</button>
+								</div>
+ 							</div>
+						</div> 
+					</div>
+				</fieldset>
 				 
 								 
 								<fieldset>
@@ -610,11 +526,10 @@ fieldset{
 												<p for="from">
 													Start Date
 												</p>
-											</div>
-											<div class="input-group">
-												 <input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker3" placeholder="DD-MM-YYYY"/>
+											</div> 
+											<input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker3" placeholder="DD-MM-YYYY"/>
 												                   
-											</div>
+											 
 										</div>
 										<div class="col-md-4">
 											<div class="input-field">
@@ -622,10 +537,7 @@ fieldset{
 													End Date
 												</p>
 											</div>
-											<div class="input-group">
-												 <input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker4" placeholder="DD-MM-YYYY"/>
-												                     
-											</div>
+											<input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker4" placeholder="DD-MM-YYYY"/>
 										</div>	
 											
 										</div>
@@ -634,28 +546,26 @@ fieldset{
 								<div class="row">
 									<div class="col-md-12 main_row">
 										<div class="col-md-4  mt">
-												<div class="input-field">
-												<p for="from">Pickup Locality
-													
-												</p>
-												<input autocomplete="off" type="text" class="form-control" name="pickup_locality" id="pickup_locality" placeholder="Enter Locality, Village or Town"/>
-												</div>
+											<div class="input-field">
+											<p for="from">Pickup Locality</p>
+											<input autocomplete="off" type="text" class="form-control" name="pickup_locality" id="pickup_locality" placeholder="Enter Locality, Village or Town"/>
+											</div>
 										</div>
-										 <div class="col-md-3 mt">
-												<div class="input-field">
-													<p for="from">Pickup City</p>
-													<input type="text" class="form-control city_select ctynamerecord" id="pickup_city_name" name="pickup_city_name"  placeholder="Select City or Nearest City" taxboxname="pickup_state_id" noofrows="5" />
-													<input type='hidden' class="ctyIDname" id='pickup_city_id' name="pickup_city_id" />
-													<div class="suggesstion-box" style="margin-top:-10px"></div>
-												</div>
+										<div class="col-md-4 mt">
+											<div class="input-field">
+												<p for="from">Pickup City</p>
+												<input type="text" class="form-control city_select ctynamerecord" id="pickup_city_name" name="pickup_city_name"  placeholder="Select City or Nearest City" taxboxname="pickup_state_id" noofrows="5" />
+												<input type='hidden' class="ctyIDname" id='pickup_city_id' name="pickup_city_id" />
+												<div class="suggesstion-box" style="margin-top:-10px"></div>
+											</div>
 										</div>	
-										<div class="stateRpl">										
+										<div class="stateRpl">		
 											<div class="col-md-4 mt">
-													<div class="input-field">
+												<div class="input-field">
 													<p for="from">Pickup State</p>
 													<input type='hidden' id='pickup_state_id' name="pickup_state_id"/>
 													<input type="text" class="form-control"  id="pickup_state_name" name="pickup_state_name" placeholder="Auto Populated" readonly>
-													</div>
+												</div>
 											</div>
 										
 											<div class="col-md-4 mt" style="display:none">
@@ -665,17 +575,15 @@ fieldset{
 												<input type="text" class="form-control" id ="pickup_country_name" name="pickup_country_name" placeholder="Select Country" />
 												</div>
 											</div>
-										</div>
-										<div class="col-md-1" style="margin-top:10px">
-											<p for="from">&nbsp;</p>
-											<button class="btn btn-primary btn-sm package-stop-add " style="background-color:#1295A2;"><i class="fa fa-plus"></i></button>
-										</div>
+										</div> 
 									</div>
 								</div>
 								<span class="help-block"></span>
 								<div class="package-stops">
 								</div>
-								<span class="help-block"></span><hr></hr>
+								<div class="col-md-12"> 
+									<button class="btn btn-primary btn-sm package-stop-add " style="background-color:#1295A2;"><i class="fa fa-plus"></i> Add Stop</button>
+								</div> 
 								<div class="row">
 										<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-right">
 												
@@ -708,7 +616,7 @@ fieldset{
 													<p for="from">Final City
 														 
 													</p>
-													<input type="text" class="form-control city_select" id="p_final_city_name" nofrows="2" name="p_final_city_name" placeholder="Select City or Nearest City"/>
+													<input type="text" class="form-control city_select" id="p_final_city_name" noofrows="2" name="p_final_city_name" placeholder="Select City or Nearest City"/>
 													<input type='hidden' id='p_final_city_id' name="p_final_city_id" />
 													<div class="suggesstion-box" style="margin-top:-10px"></div>
 													
@@ -718,14 +626,14 @@ fieldset{
 								</div>
 								<div class="row">
 									<div class="col-md-12 rw">
-											<div class="col-lg-6 col-md-12 col-sm-6 col-xs-12 mt">
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
 												<div class="input-field">
 												<p for="from">Final State</p>
 													<input type='hidden' id='p_final_state_id' name="p_final_state_id"/>
 													<input type="text" class="form-control" id ="p_final_state_name" name="p_final_state_name" placeholder="Select State" readonly/>
 												</div>
 											</div>
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
 												<div class="input-field">
 													<p for="from">Final Country</p>
 													<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
@@ -774,223 +682,195 @@ fieldset{
 								<div class="panel-group" id="TransportAccordion" style="background-color:white;margin-top:-20px;">
 									<div class="panel">
 										 
-											<fieldset>
-												  <legend style="color:#369FA1;"><b> &nbsp;  GENERAL REQUIREMENTS  &nbsp; </b></legend>
-													<div class="row">
-														<div class="col-md-12">
-														  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-																<div class="input-field">
-																	<p for="from" >
-																		Reference ID  
-																		<span class="required">*</span>(This is for your reference )
-																	</p>
-																	<input  name="reference_id" type="text" class="form-control ref1" id="reference_id" placeholder="Reference ID" autocomplete="off" />
-																	 
-																</div>
-															</div>
-															<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-																<div class="input-field ">
-																	<p for="from">
-																		Total Budget 
-																		<span class="required">*</span>
-																	</p>
-																	<input name="total_budget" type="number" min="1" class="form-control " id="total_budget" placeholder="Total Budget" autocomplete="off" />
-																</div>
-															</div>
-														</div>
+									<fieldset>
+									  <legend style="color:#369FA1;"><b> &nbsp;  GENERAL REQUIREMENTS  &nbsp; </b></legend>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
+													<div class="input-field">
+														<p for="from" >
+															Reference ID  
+															<span class="required">*</span>(This is for your reference )
+														</p>
+														<input  name="reference_id" type="text" class="form-control ref1" id="reference_id" placeholder="Reference ID" autocomplete="off" style="width:40%" />
+														 
 													</div>
-													
-													<div class="row">
-														<div class="col-md-12">
-														<div class="col-md-6">
-															<p for="from">Adults <span class="required">*</span></p>
-															<?php echo $this->Form->control('transportAdult', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'style'=>'width:40%']); ?>
-														</div>
-														<div class="col-md-6">
-															<p for="from">Children below 6 <span class="required">*</span></p>
-															<?php echo $this->Form->control('transportChildren', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'style'=>'width:40%']); ?>
-														</div>
-															 
-												     
-														</div>
-													</div>
-											</fieldset>
-											 
-											<fieldset>
-													<legend style="color:#369FA1;"><b> &nbsp;  TRANSPORT REQUIREMENTS &nbsp; </b></legend>
-													<div class="row">
-														<div class="col-md-12 ">
-															<div class="col-md-4 ">
-																<div class="input-field">
-																	<p for="from">
-																		Select Transport
-																		<span class="required">*</span>
-																	</p>
-																</div>
-																<div class="input-field">
-																<?php echo $this->Form->control('transport_requirement', ["type"=>"select",'options' =>$postTravlePackageCategories, "class"=>"form-control select2","data-placeholder"=>"Select Options","empty"=>'Select Options']);?></div>
-															</div>
-															<div class="col-md-4">
-															<div class="input-field">
-																<p for="from">
-																	Start Date
-																	<span class="required">*</span>
-																</p>
-															</div>
-															<div class="col-md-12 input-group">
-																 <input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker5" placeholder="DD-MM-YYYY"/>
-																                  
-															</div>
-														</div>
-														<div class="col-md-4">
-														<div class="input-field">
-																	<p for="from">
-																		End Date
-																		<span class="required">*</span>
-																	</p>
-														</div>
-														<div class="col-md-12 input-group">
-															 <input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker6" placeholder="DD-MM-YYYY"/>
-															                    
-														</div>
-													</div>	
-															
-														</div>
-													</div>
-													<input type='hidden' id='t_pickup_country_id' name="t_pickup_country_id"/>
-														<input type="hidden" class="form-control" id ="t_pickup_country_name" name="t_pickup_country_name" placeholder="Country" readonly/>
-												<span class="help-block"></span>
-											<div class="row">
-												<div class="col-md-12 main_row">
-												    <div class="col-md-4 mt">
-                                                            <div class="input-field">
-                                                            <p for="from">Pickup Locality
-                                                             <span class="required">*</span>   
-                                                            </p>
-                                                            <input autocomplete="off" type="text" class="form-control" name="pickup_locality" id="pickup_locality" placeholder="Enter Locality,Village or Town"/>
-                                                            </div>
-                                                    </div>
-                                                     <div class="col-md-3 mt">
-														<div class="input-field">
-															<p for="from">Pickup City
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="col-md-4">
+													<div class="input-field ">
+														<p for="from">
+															Total Budget 
 															<span class="required">*</span>
-															</p>
-															<input type="text" class="form-control city_select ctynamerecord" id="t_pickup_city_name"  noofrows="4" taxboxname="t_pickup_state_id" name="t_pickup_city_name"  placeholder="Select City or Nearest City"/>
-															<input class="ctyIDname" type='hidden' id='t_pickup_city_id' name="t_pickup_city_id" />
-															<div class="suggesstion-box" style="margin-top:-10px"></div>
-														</div>
-                                                    </div>										
-												<div class="stateRpl">
-													<div class="col-md-4 mt">
-														<div class="input-field">
-														<p for="from">Pickup State</p>
-															<input type='hidden' id='t_pickup_state_id' name="t_pickup_state_id"/>
-														<input type="text" class="form-control" id ="t_pickup_state_name" name="t_pickup_state_name" placeholder="Auto Populated">
-														</div>
-													</div>
-													</div>
-													<div class="col-md-1" style="margin-top:10px">
-														<p for="from">&nbsp;</p>
-														<button class="btn btn-primary btn-sm transport-stop-add " style="background-color:#1295A2;width:30px;"><i class="fa fa-plus"></i></button>	
+														</p>
+														<input name="total_budget" type="number" min="1" class="form-control " id="total_budget" placeholder="Total Budget" autocomplete="off" />
 													</div>
 												</div>
-												
-														<!--  <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
-															<div class="input-field">
-															<p for="from">Pickup Country</p>
-																<input type='hidden' id='t_pickup_country_id' name="t_pickup_country_id"/>
-																<input type="text" class="form-control" id ="t_pickup_country_name" name="t_pickup_country_name" placeholder="Select Country" />
-															</div>
-														</div>-->
-												</div> 
-											<span class="help-block"></span>
-											  <div class="transport-stops">
-															
-											</div>
-											<span class="help-block"></span><hr></hr>
-											
-													<!-- <div class="col-xxs-12 text-center">
-															<div class="input_fields_wrap">
-																<button class="add_field_button but">Add Stop</button>
-																<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-																	<div class="input-field">
-																		<p for="from" style="float:left;">Stop Name</p>
-																		<input class="form-control" type="text" placeholder="Stop Name" name="stops[]">
-																	</div>
-																</div>
-															</div>
-														</div>  -->
-												
-											<span class="help-block"></span>
-											<div class="row">
-												<div class="col-md-12">
-													<div class="col-md-4 mt">
-														<div class="input-field">
-															<p for="from">Final Locality
-                                                                  
-                                                                </p>
-															<input class="form-control" type="text" placeholder="Enter Locality,Village or Town" name="finalLocality">
-														</div>
-													</div>
-													<div class="col-md-4 mt">
-															<div class="input-field">
-																<p for="from">Final City
-                                                                 <span class="required">*</span>    
-                                                                </p>
-																<input type="text" class="form-control city_select" id="t_final_city_name" noofrows="3" name="t_final_city_name" placeholder="Select City or Nearest City"/>
-																<input type='hidden' id='t_final_city_id' name="t_final_city_id" />
-													<div class="suggesstion-box" style="margin-top:-10px"></div>
-																
-															</div>
-														</div>
-													<div class="rw2">
-														<div class="col-md-4 mt">
-																<div class="input-field">
-																<p for="from">Final State</p>
-																	<input type='hidden' id='t_final_state_id' name="t_final_state_id"/>
-																<input type="text" class="form-control" id ="t_final_state_name" name="t_final_state_name" placeholder="Auto Populated" readonly/>
-																</div>
-															</div>
-															<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
-															<input type="hidden" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" readonly/>
-															<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-																<div class="input-field">
-																<p for="from">Final Country</p>
-																	<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
-																	<input type="text" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" />
-																</div>
-															</div>-->
-													</div>
+												<div class="col-md-4">
+													<p for="from">Adults <span class="required">*</span></p>
+													<?php echo $this->Form->control('transportAdult', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
+												</div>
+												<div class="col-md-4">
+													<p for="from">Children below 6 <span class="required">*</span></p>
+													<?php echo $this->Form->control('transportChildren', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 												</div>
 											</div>
-											</fieldset>
-											 <fieldset>
-												<legend style="color:#369FA1;"><b> &nbsp;  Comment Box &nbsp; </b></legend>
-													<div class="row" style="margin-bottom: 10px;">
-														<div class="col-md-12">
-															<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
-																<div class="input-field">
-																	<textarea name="comment" class="form-control mt" cols="" rows="4" placeholder="Enter Comment"></textarea>
-																</div>
-															</div> 
-														</div>
-													</div>
-											</fieldset>
-											<div class="row">
-											 
-													<div class="col-md-12">
-														<div class="input-field">
-															<div class="margin text-center">
-															<center><input type="submit" class="btn btn-primary btn-submit btn-submit" value="Submit" style="background-color:#1295A2"></center>
-															</div>
-														</div>
-													</div> 
+										</div>
+									</fieldset>
+									 
+									<fieldset>
+									<legend style="color:#369FA1;"><b> &nbsp;  TRANSPORT REQUIREMENTS &nbsp; </b></legend>
+									<div class="row">
+										<div class="col-md-12 ">
+											<div class="col-md-4 ">
+												<div class="input-field">
+													<p for="from">
+														Select Transport
+														<span class="required">*</span>
+													</p>
+												</div>
+												<div class="input-field">
+												<?php echo $this->Form->control('transport_requirement', ["type"=>"select",'options' =>$postTravlePackageCategories, "class"=>"form-control select2","data-placeholder"=>"Select Options","empty"=>'Select Options']);?></div>
+											</div>
+											<div class="col-md-4">
+												<div class="input-field">
+													<p for="from">
+														Start Date
+														<span class="required">*</span>
+													</p>
+												</div>
+												<div class="col-md-12 input-group">
+													 <input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker5" placeholder="DD-MM-YYYY"/>
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="input-field">
+												<p for="from">
+													End Date
+													<span class="required">*</span>
+												</p>
+												</div>
+												<div class="col-md-12 input-group">
+													 <input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker6" placeholder="DD-MM-YYYY"/>
+												</div>
 											</div>	
-																							
+													
+												</div>
+											</div>
+											<input type='hidden' id='t_pickup_country_id' name="t_pickup_country_id"/>
+												<input type="hidden" class="form-control" id ="t_pickup_country_name" name="t_pickup_country_name" placeholder="Country" readonly/>
+										<span class="help-block"></span>
+									<div class="row">
+										<div class="col-md-12 main_row">
+											<div class="col-md-4 mt">
+													<div class="input-field">
+													<p for="from">Pickup Locality
+													 <span class="required">*</span>   
+													</p>
+													<input autocomplete="off" type="text" class="form-control" name="pickup_locality" id="pickup_locality" placeholder="Enter Locality,Village or Town"/>
+													</div>
+											</div>
+											 <div class="col-md-4 mt">
+												<div class="input-field">
+													<p for="from">Pickup City
+													<span class="required">*</span>
+													</p>
+													<input type="text" class="form-control city_select ctynamerecord" id="t_pickup_city_name"  noofrows="4" taxboxname="t_pickup_state_id" name="t_pickup_city_name"  placeholder="Select City or Nearest City"/>
+													<input class="ctyIDname" type='hidden' id='t_pickup_city_id' name="t_pickup_city_id" />
+													<div class="suggesstion-box" style="margin-top:-10px"></div>
+												</div>
+											</div>										
+											<div class="stateRpl">
+											<div class="col-md-4 mt">
+												<div class="input-field">
+												<p for="from">Pickup State</p>
+													<input type='hidden' id='t_pickup_state_id' name="t_pickup_state_id"/>
+												<input type="text" class="form-control" id ="t_pickup_state_name" name="t_pickup_state_name" placeholder="Auto Populated">
+												</div>
+											</div>
+											</div>
+										</div>
+									</div>  
+									<div class="transport-stops">
+ 									</div>
+									<div class="row">
+										<div class="col-md-12" style="margin-top:10px"> 
+											<div class="col-md-12"> 
+												<button class="btn btn-primary btn-sm transport-stop-add " style="background-color:#1295A2;"><i class="fa fa-plus"></i> Add Stop</button>	
+											</div>			
+										</div>	
+									</div>	
+									<span class="help-block"></span>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="col-md-4 mt">
+												<div class="input-field">
+													<p for="from">Final Locality
+														  
+														</p>
+													<input class="form-control" type="text" placeholder="Enter Locality,Village or Town" name="finalLocality">
+												</div>
+											</div>
+											<div class="col-md-4 mt">
+													<div class="input-field">
+														<p for="from">Final City
+														 <span class="required">*</span>    
+														</p>
+														<input type="text" class="form-control city_select" id="t_final_city_name" noofrows="3" name="t_final_city_name" placeholder="Select City or Nearest City"/>
+														<input type='hidden' id='t_final_city_id' name="t_final_city_id" />
+											<div class="suggesstion-box" style="margin-top:-10px"></div>
+														
+													</div>
+												</div>
+											<div class="rw2">
+												<div class="col-md-4 mt">
+														<div class="input-field">
+														<p for="from">Final State</p>
+															<input type='hidden' id='t_final_state_id' name="t_final_state_id"/>
+														<input type="text" class="form-control" id ="t_final_state_name" name="t_final_state_name" placeholder="Auto Populated" readonly/>
+														</div>
+													</div>
+													<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
+													<input type="hidden" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" readonly/>
+													<!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+														<div class="input-field">
+														<p for="from">Final Country</p>
+															<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
+															<input type="text" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" />
+														</div>
+													</div>-->
+											</div>
 										</div>
 									</div>
+									</fieldset>
+									<fieldset>
+										<legend style="color:#369FA1;"><b> &nbsp;  Comment Box &nbsp; </b></legend>
+											<div class="row" style="margin-bottom: 10px;">
+												<div class="col-md-12">
+													<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt">
+														<div class="input-field">
+															<textarea name="comment" class="form-control mt" cols="" rows="4" placeholder="Enter Comment"></textarea>
+														</div>
+													</div> 
+												</div>
+											</div>
+									</fieldset>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="input-field">
+												<div class="margin text-center">
+												<center><input type="submit" class="btn btn-primary btn-submit btn-submit" value="Submit" style="background-color:#1295A2"></center>
+												</div>
+											</div>
+										</div> 
+									</div>	
 								</div>
-							</div>	
+							</div>
+						</div>
+					</div>	
 			<?= $this->Form->end()?>							
 						</div>
 					</div>
@@ -1008,27 +888,29 @@ $(document).ready(function(){
 	$(document).on('keyup',".city_select",function(){
 		
  		var input=$(this).val();
-		var noofrows=$(this).attr('noofrows');
-		var taxboxname=$(this).attr('taxboxname');
-  		var master=$(this);
-		var m_data = new FormData();
-		m_data.append('input',input);			
-		m_data.append('noofrows',noofrows);			
-		m_data.append('taxboxname',taxboxname);			
-		$.ajax({
-			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_city"]); ?>",
-			data: m_data,
-			processData: false,
-			contentType: false,
-			type: 'POST',
-			dataType:'text',
-			success: function(data)
-			{
-				master.closest('div').find('div.suggesstion-box').show();
-				master.closest('div').find('div.suggesstion-box').html(data);
-				master.css("background","#FFF");
-			}
-		});
+		if(input.length>3){
+			var noofrows=$(this).attr('noofrows');
+			var taxboxname=$(this).attr('taxboxname');
+			var master=$(this);
+			var m_data = new FormData();
+			m_data.append('input',input);			
+			m_data.append('noofrows',noofrows);			
+			m_data.append('taxboxname',taxboxname);			
+			$.ajax({
+				url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_city"]); ?>",
+				data: m_data,
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				dataType:'text',
+				success: function(data)
+				{
+					master.closest('div').find('div.suggesstion-box').show();
+					master.closest('div').find('div.suggesstion-box').html(data);
+					master.css("background","#FFF");
+				}
+			});
+		}
 	});
 	
 	
@@ -1191,50 +1073,7 @@ function selectCountry(value,city_code,state,noofrows) {
 	 
 	
 } 
-//--- Second  Transport Menu
-/*$(document).ready(function(){ 
-	$("#p_final_city_name").keyup(function(){
-		var input=$("#p_final_city_name").val();
-		var m_data = new FormData();
-		m_data.append('input',input);			
-		$.ajax({
-			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_city"]); ?>",
-			data: m_data,
-			processData: false,
-			contentType: false,
-			type: 'POST',
-			dataType:'text',
-			success: function(data)
-			{
-				$(".suggesstion-box2").show();
-				$(".suggesstion-box2").html(data);
-				$(".p_final_city_name").css("background","#FFF");
-			}
-		});
-	});
-});
-function selectCountry(value,city_code,state) {
-	var state_id=state;
-	$("#p_final_city_name").val(value);
-	$(".suggesstion-box2").hide();
-	$("#p_final_city_id").val(city_code);
-			
-	var m_data = new FormData();
-	m_data.append('state_id',state_id);			
-	$.ajax({
-		url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_state_show_new"]); ?>",
-		data: m_data,
-		processData: false,
-		contentType: false,
-		type: 'POST',
-		dataType:'text',
-		success: function(data)
-		{
-			$(".shw").html(data);
-		}
-	});	
-}*/
-//------
+//--- Seco 
 	$('#PackgeRequestForm').validate({
 		rules: {
 			"reference_id" : {
@@ -1535,12 +1374,11 @@ $(document).ready(function () {
         $(".package-stop-add").click(function (e) {
         
             e.preventDefault();
-            var strHtml = '<div class="stop col-md-12 main_row"><div class="stop-title"><b>Stop ' +packageI+ '</b> </div><div class="row"> <br>';
+            var strHtml = '<div class="stop col-md-12 main_row" style="margin-top:5px"><hr  style="margin-top: 8px; margin-bottom: 8px;"></hr> <div class="stop-title" style="font-weight:bold"> Stop ' +packageI+ ' </div><div class="row main_row">';
         	strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality,Village or Town" name="stops[' +packageI+ ']"></div></div>';
-        	strHtml += '<div class="col-sm-3 mt"><p for="from">Stop City</p><input class="trans_city form-control city_select ctynamerecord" noofrows="5" taxboxname="state_id_package_stop_city[' +packageI+ ']" type="text" placeholder="Select City or Nearest City" use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" class="ctyIDname" name="id_package_stop_city[' +packageI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div> ';
-        	strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly></div></div></div><div class="col-md-1"><p for="from">&nbsp;</p><button aligh="right" class="btn btn-danger btn-sm package_remove_stop"><i class="fa fa-minus" ></i></button></div></div>';
-        	 
-         strHtml += ' <hr class="hr"></hr></div>';
+        	strHtml += '<div class="col-sm-4 mt"><p for="from">Stop City</p><input class="trans_city form-control city_select ctynamerecord" noofrows="5" taxboxname="state_id_package_stop_city[' +packageI+ ']" type="text" placeholder="Select City or Nearest City" use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" class="ctyIDname" name="id_package_stop_city[' +packageI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div> ';
+        	strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly></div></div></div></div>';
+        strHtml += '<div class="row"><div class="col-md-12" align="right" style="margin-top:5px"> <button class="btn btn-danger btn-sm package_remove_stop but"> <i class="fa fa-trash" ></i> Remove Stop</button> </div></div></div>';
         $(".package-stops").append(strHtml);
         	packageI++;
         });
@@ -1549,43 +1387,40 @@ $(document).ready(function () {
             packageI--;
             $(this).closest('div.stop').slideUp(function(){
 				$(this).remove();
-		var gg = 1;
-		$( ".stop-title" ).each(function() {
-		var htmlString = 'Stop '+gg;
-  		$( this ).text( htmlString );
-	    gg++;
-		});
+				var gg = 1;
+				$( ".stop-title" ).each(function() {
+					var htmlString = 'Stop '+gg;
+					$( this ).text( htmlString );
+					gg++;
+				});
 			});
         });
-
+    
         var transI = 1;
         $(".transport-stop-add").click(function(e){
 				e.preventDefault();
-				var strHtml = '<div class="stop col-md-12 main_row"><div class="stop-title"> <b> Stop ' +transI+ '</b></div><div class="row main_row"><br>';
+				var strHtml = '<div class="stop col-md-12 main_row" style="margin-top:5px"><hr  style="margin-top: 8px; margin-bottom: 8px;"></hr> <div class="stop-title" style="font-weight:bold"> Stop ' +transI+ ' </div><div class="row main_row">';
 				strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality, Village or Town" name="stops[' +transI+ ']"></div></div>';
-				strHtml += '<div class="col-sm-3 mt"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control ctynamerecord city_select" type="text" noofrows="4" taxboxname="state_id_trasport_stop_city[' +transI+ ']" placeholder="Select City or Nearest City" use_for = "trasport" numCount = ' +transI+ ' id="trasport_stop_city[' +transI+ ']" name="trasport_stop_city[' +transI+ ']"><input type="hidden" class="ctyIDname" id="id_trasport_stop_city[' +transI+ ']" name="id_trasport_stop_city[' +transI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div></div>';
-				strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_trasport_stop_city[' +transI+ ']" name="state_id_trasport_stop_city[' +transI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_trasport_stop_city[' +transI+ ']" name="state_name_trasport_stop_city[' +transI+ ']" readonly></div></div></div><div class="col-md-1"><p for="from">&nbsp;</p><button class="btn btn-danger btn-sm transport_remove_stop but"> <i class="fa fa-minus" ></i> </button></div></div>';
-				strHtml += ' <hr class="hr"></hr></div>';
+				strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control ctynamerecord city_select" type="text" noofrows="4" taxboxname="state_id_trasport_stop_city[' +transI+ ']" placeholder="Select City or Nearest City" use_for = "trasport" numCount = ' +transI+ ' id="trasport_stop_city[' +transI+ ']" name="trasport_stop_city[' +transI+ ']"><input type="hidden" class="ctyIDname" id="id_trasport_stop_city[' +transI+ ']" name="id_trasport_stop_city[' +transI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div></div>';
+				strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_trasport_stop_city[' +transI+ ']" name="state_id_trasport_stop_city[' +transI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_trasport_stop_city[' +transI+ ']" name="state_name_trasport_stop_city[' +transI+ ']" readonly></div></div></div></div>';
+				strHtml += '<div class="row"><div class="col-md-12" align="right" style="margin-top:5px"> <button class="btn btn-danger btn-sm transport_remove_stop but"> <i class="fa fa-trash" ></i> Remove Stop</button> </div></div></div>';
 				$(".transport-stops").append(strHtml);
 				transI++;
-        })
+        });
 
         $(document).on("click", ".transport_remove_stop", function (e) {
-
             e.preventDefault();
             transI--;
-           $(this).closest('div.stop').slideUp(function(){
+            $(this).closest('div.stop').slideUp(function(){
 				$(this).remove();
-		var f = 1;
-		$( ".stop-title" ).each(function() {
-		var htmlString = 'Stop '+f;
-  		$( this ).text( htmlString );
-	    f++;
-		});
+				var f = 1;
+				$( ".stop-title" ).each(function() {
+					var htmlString = 'Stop '+f;
+					$( this ).text( htmlString );
+					f++;
+				});
 			});
         });
-        
-        
     });
 </script>
 <script>
@@ -1707,120 +1542,3 @@ $(".hh_hotel_category").multiselect();
         })
     });
 </script>
-<!--<script>
-	 
-    $(document).ready(function () {
-        var wrapper = $(".input_fields_wrap1");
-		$(wrapper).on("click", ".remove_field", function (e) {
-            e.preventDefault();
-            $(this).parent('div').parent('div')my.slideUp(function(){
-				$(this).remove();
-			});
-        });
-        var max_fields = 10;
-        var add_button = $(".add_field_button2");
-        var x = 1;
-		//$(document).on('click','.add_field_button2',function(){
-		 
-        $(add_button).click(function () {
-			alert();
-         /* 
-			var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'addNewDestinationRow')) ?>";
-			var number = Math.floor((Math.random() * 100000) + 1);
-			$.ajax({
-				url:url,
-				type: 'POST',
-				data: {"number":number},
-				async:false
-			}).done(function(result){
-				$(wrapper).append(result);
-				$(wrapper).find("input[name='hh_room1["+number+"]']").val($("#room1").val());
-				$(wrapper).find("input[name='hh_room2["+number+"]']").val($("#room2").val());
-				$(wrapper).find("input[name='hh_room3["+number+"]']").val($("#room3").val());
-				$(wrapper).find("input[name='hh_child_with_bed["+number+"]']").val($("#child_with_bed").val());
-				$(wrapper).find("input[name='hh_child_without_bed["+number+"]']").val($("#child_without_bed").val());
-				$(".hh_hotel_category").multiselect();
-				$(wrapper).find("input:text[name='hh_city_name["+number+"]']").autocomplete({
-					source: JSON.parse(cityData),
-					select: function (e, ui) {
-						e.preventDefault();
-						$('.select2').select2();
- 						$(this).val(ui.item.p);
-						$(wrapper).find("input:hidden[name='hh_city_id["+number+"]']").val(ui.item.value);
-
-						$(wrapper).find("input:hidden[name='hh_state_id["+number+"]']").val(ui.item.state_id);
-						$(wrapper).find("input:text[name='hh_state_name["+number+"]']").val(ui.item.state_name);
-
-						$(wrapper).find("input:hidden[name='hh_country_id["+number+"]']").val(ui.item.country_id);
-						$(wrapper).find("input:text[name='hh_country_name["+number+"]']").val(ui.item.country_name);
-					}
-				});
-				//$(wrapper).find("input:text[name='hh_check_in["+number+"]']").datepicker();
-				//$(wrapper).find("input:text[name='hh_check_out["+number+"]']").datepicker();
-
-				var checkInDatePicker = $(wrapper).find("input:text[name='hh_check_in["+number+"]']");
-				var checkOutDatePicker = $(wrapper).find("input:text[name='hh_check_out["+number+"]']");
-				//checkInDatePicker.datepicker();
-				//checkOutDatePicker.datepicker();
-
-				var lastdate = '';
-				
-				var enddate ='';
-				var enddate2 = $('#datepicker8').val();
-				var enddate1 = $(".enddate").val();
-				if (enddate1 == '' || enddate1==null)
-				{
-					var enddate =enddate2;
-				}
-				else{
-				$("#collapse2 .enddate").each(function() {
-					if ($(this).val()=='' || $(this).val()==null) {
-					x=1	
-					}else{
-						lastdate = $(this).val();
-					}
-				});	
-				var enddate =enddate1;
-				}
-				if (lastdate=='' || lastdate==null) {
-				var k=1;
-				}else{
-				enddate	= lastdate;
-				}
-				checkInDatePicker.datepicker({
-					dateFormat: 'dd/mm/yy',
-					changeMonth: true,
-					changeYear: true,
-					//minDate: '<?php echo date("d/m/Y"); ?>',
-					minDate: enddate,
-					onSelect: function(selected) {
-						checkOutDatePicker.datepicker( "option", "minDate",selected);
-						checkOutDatePicker.val("");
-					}
-				});
-				checkOutDatePicker.datepicker({
-					dateFormat: 'dd/mm/yy',
-					changeMonth: true,
-					changeYear: true,
-					//minDate: '<?php echo date("d/m/Y"); ?>',
-					minDate: enddate,
-					onSelect: function(selected) {
-						var checkInDate = checkInDatePicker.val();
-						if(checkInDate == "") {
-							alert("Please select check-in date first.");
-							checkOutDatePicker.val("");
-						}
-					}
-				});
-			});
-			return false;*/
-        });
-        $(wrapper).on("click", ".remove_field1", function (e) {
-            e.preventDefault();
-            $(this).parent('div').remove();
-            x--;
-        })
-    });
-</script>--->
- 
-	

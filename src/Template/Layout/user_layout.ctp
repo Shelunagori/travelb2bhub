@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta content="" name="description">
-<meta content="" name="author"> 
+<meta content="" name="author">
 	<?php  echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
 	<?php echo $this->Html->css('/assets/plugins/bootstrap-datepicker/css/datepicker3.css'); ?> 
 	<?php echo $this->Html->css('/assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css'); ?> 
@@ -62,7 +62,7 @@ body {
 }
 .box.box-primary {
     border-top-color: #66cad5 !important;
-} 
+}
 sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a {
     color: #fff;
     background: #FB6542;
@@ -72,19 +72,22 @@ sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a {
 	color:#ea3733;
 }
  
- 
+ textarea {
+	resize: none !important;
+}
 fieldset {
 	padding: 10px ;
 	border: 1px solid #bfb7b7f7;
 	margin: 0px;
 }
 legend{
-	margin-left: 20px;	
+	margin-left: 20px;
 	 //color:black; 
-	//color:#144277c9; 
+	//color:#144277c9;
 	font-size: 17px;
 	margin-bottom: 0px;
 	border:none;
+	
 }
 span.select2 {
 	width :100% !important;
@@ -161,8 +164,8 @@ p {
 	 
 	label.star {
 	  float: right;
-	  padding: 10px;
-	  font-size: 20px;
+	  padding: 0 5px;
+	  font-size: 31px;
 	  color: #444;
 	  transition: all .2s;
 	}
@@ -191,44 +194,51 @@ p {
 	.user-panel
 	{
 		background: #057F8A !important;
- 	}
-	
-.btn-info
-{
-	background-color:#1295A2 !important;
-	color:#FFF;
-	border-color:#1295A2 !important;
-}
-.btn-danger
-{
-	background-color:#FB6542 !important;
-	color:#FFF;
-	border-color:#FB6542 !important;
-}
-.btn-warning
-{
-	background-color:#606062 !important;
-	color:#FFF;
-	border-color:#606062 !important;
-}
-.btn-success
-{
-	background-color:#6FB98F !important;
-	color:#FFF;
-	border-color:#6FB98F !important;
-}
-.btn-successto
-{
-	background-color:#C9A66B !important;
-	color:#FFF;
-	border-color:#C9A66B !important;
-}
-.btn-successtoNew
-{
-	background-color:#66A5AD !important;
-	color:#FFF;
-	border-color:#66A5AD !important;
-}
+	}
+
+	.btn-info
+	{
+		background-color:#1295A2 !important;
+		color:#FFF;
+		border-color:#1295A2 !important;
+	}
+	.btn-danger
+	{
+		background-color:#FB6542 !important;
+		color:#FFF;
+		border-color:#FB6542 !important;
+	}
+	.btn-warning
+	{
+		background-color:#606062 !important;
+		color:#FFF;
+		border-color:#606062 !important;
+	}
+	.btn-success
+	{
+		background-color:#6FB98F !important;
+		color:#FFF;
+		border-color:#6FB98F !important;
+	}
+	.btn-successto
+	{
+		background-color:#C9A66B !important;
+		color:#FFF;
+		border-color:#C9A66B !important;
+	}
+	.btn-successtoNew
+	{
+		background-color:#66A5AD !important;
+		color:#FFF;
+		border-color:#66A5AD !important;
+	}
+	.btn
+	{
+		border-radius: 6px;
+	}
+	textarea {
+		resize:none !important;
+	}
 </style>
 <style>
  
@@ -278,7 +288,7 @@ p {
 
 <!--<body class="hold-transition skin-blue fixed sidebar-mini">-->
 
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue  sidebar-mini">
 <?php $this->Form->templates([
 		'inputContainer' => '{{content}}'
 	]); 
