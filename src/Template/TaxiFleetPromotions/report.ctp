@@ -111,9 +111,9 @@ if ($err) {
 ?>
 <style>
 .lbwidth{
-	color:#838784;
+	color:#716D6F;
 	font-weight:bold;
-
+	white-space: nowrap;
 	}
 fieldset{
 	margin-bottom:5px !important;
@@ -143,7 +143,7 @@ p{
 		</div>
 	</div>
 <div  class="container-fluid">
-	<div class="box box-primary " style="margin-bottom:5px;">
+	<div class="box box-primary" style="margin-bottom:5px;">
 		<div class="row" >
 			<div class="col-md-12">
 				<div class="box-header with-border"> 
@@ -215,6 +215,7 @@ p{
 					</div>
 					<form class="filter_box" method="get">
 					<div class="modal-body">
+						<span class="help-block"></span>
 						<div class="row form-group margin-b10">
 							<div class=col-md-12>
 								 <div class=col-md-3>
@@ -326,8 +327,7 @@ p{
 								$stateList.=$statess->state->state_name;
 								$z++;
 							}
-
-			$i++; ?>
+						$i++; ?>
 	
 	<div class="box-body bbb">	
 			<fieldset style="background-color:#fff;">
@@ -339,7 +339,7 @@ p{
 						<div class="col-md-4 pull-right">
 							<div class="row" style="padding-top:5px;">
 								<div class="col-md-12 ">
-								<button class="btn btn-info btn-md btnlayout" data-target="#fleetdetail<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal">Fleet Details</button>
+								<button class="btn btn-info btn-md btnlayout" data-target="#fleetdetail<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Fleet Details</button>
 									<!-------Report Modal Start--------->
 										<div id="fleetdetail<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
 											<div class="modal-dialog modal-md">
@@ -364,7 +364,7 @@ p{
 												</div>
 											</div>
 									<!-------Report Modal End--------->	
-									<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal">Contact Info</button>
+									<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
 									
 									<!-------Contact Details Modal --------->
 												<div id="contactdetails<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
@@ -484,7 +484,9 @@ p{
 									if($issaved=='0'){
 										echo $this->Form->button('<img src="../images/unsave.png" height="15px"/>',['class'=>'','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'savetaxifleet']);
 									}
-									?><span style="visibility:hidden;">3</span>
+									?>
+									
+									<span style="visibility:hidden;">3</span>
 								</td>
 								<td width="25%">
 								<?php echo $this->Html->link('<img src="../images/flag.png" height="15px"/>','#'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'','data-target'=>'#reportmodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>

@@ -111,9 +111,9 @@ if ($err) {
 ?>
 <style type="text/css">
 .lbwidth{
-	color:#838784;
+	color:#716D6F;
 	font-weight:bold;
-
+	white-space: nowrap;
 	}
 fieldset{
 	margin-bottom:5px !important;
@@ -213,7 +213,8 @@ p{
 					   <h4 class=modal-title>Filter</h4>
 					</div>
 					<form class="filter_box" method="get">
-					<div class="modal-body">
+					<div class="modal-body ">
+					<span class="help-block"></span>
 						<div class="row form-group margin-b10">
 							<div class=col-md-12>
 								 <div class=col-md-3>
@@ -333,7 +334,7 @@ p{
 			<div class="col-md-4 pull-right" >
 			<div class="row" style="padding-top:5px;">						
 					<div class="col-md-12 ">
-						<button class="btn btn-info btn-md btnlayout" data-target="#Inclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal">&nbsp;&nbsp;Inclusion</button>
+						<button class="btn btn-info btn-md btnlayout" data-target="#Inclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal" type="button">Inclusion</button>
 							<!-------Report Modal Start--------->
 							<div id="Inclusion<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-md">
@@ -357,7 +358,7 @@ p{
 										</div>
 									</div>
 								</div>
-								<button class="btn btn-danger btn-md btnlayout" data-target="#Exclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal">&nbsp;&nbsp;Exclusion</button>
+								<button class="btn btn-warning btn-md btnlayout" data-target="#Exclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal" type="button">Exclusion</button>
 								<!-------Report Modal Start--------->
 								<div id="Exclusion<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 									<div class="modal-dialog modal-md">
@@ -381,7 +382,7 @@ p{
 											</div>
 										</div>
 									</div>
-									<button class="btn btn-warning btn-md  btnlayout" data-target="#contactdetails<?php echo $postTravlePackage->id;?>" data-toggle="modal">&nbsp;&nbsp;Contact Info</button>
+									<button class="btn btn-danger btn-md  btnlayout" data-target="#contactdetails<?php echo $postTravlePackage->id;?>" data-toggle="modal" type="button">Contact Info</button>
 											<!-------Contact Details Modal --------->
 											<div id="contactdetails<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 												<div class="modal-dialog modal-md" >
@@ -435,7 +436,7 @@ p{
 																		<div class="col-md-12">
 																			<div class="col-md-4">Email :</div>
 																			<div class="col-md-8">
-																			<label><?= h($postTravlePackage->user->email);?></label>
+																			<label><a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a></label>
 																			</div>
 																		</div>
 																	</div>
