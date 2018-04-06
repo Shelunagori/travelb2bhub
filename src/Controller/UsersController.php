@@ -1020,9 +1020,11 @@ public function sendrequest() {
 	$this->loadModel('RequestStops');
 	$this->loadModel('Hotels');
 	$this->loadModel('User_Chats');
+	$this->loadModel('postTravlePackageCategories');
 	$this->viewBuilder()->layout('user_layout');
-	$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
-	//print_r($user);
+	$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first(); 
+	$postTravlePackageCategories = $this->postTravlePackageCategories->find('list', ['limit' => 200]);
+	$this->set('postTravlePackageCategories', $postTravlePackageCategories);
 	$this->set('users', $user);
 	$myRequestCount = $myReponseCount =  0;
 	$myfinalCount  = 0;
