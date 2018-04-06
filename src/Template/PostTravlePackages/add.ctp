@@ -183,7 +183,7 @@ fieldset{
 										<legend style="color:#369FA1;"><b><?= __('Load Package') ?></b></legend>
 											<div class="row">
 												<div class="col-md-12">
-													<div class="col-md-6">
+													<div class="col-md-4">
 														<p for="from">
 															Package Title
 															<span class="required">*</span>
@@ -192,7 +192,22 @@ fieldset{
 															 <?php echo $this->Form->input('title',['class'=>'form-control','label'=>false,'placeholder'=>"Package Title",]);?>
 														</div>
 													</div>
-														<div class="col-md-6">
+													<div class="col-md-4">
+																<p for="from">
+																	Package Category
+																	<span class="required">*</span>
+																</p>
+																<div class="input-field">
+																<?php 
+																$options=array();
+																foreach($cat as $sts)
+																{
+																	$options[] = ['value'=>$sts->id,'text'=>$sts->name];
+																};
+																echo $this->Form->control('package_category_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Category ","style"=>"height:125px;"]);?>
+																</div>
+															</div>
+														<div class="col-md-4">
 															<p for="from">
 																Upload Image of the Promotion
 																<span class="required">*</span>
@@ -212,34 +227,7 @@ fieldset{
 														<div class="col-md-12">
 															<div class="col-md-4">
 																<p for="from">
-																	Package Category
-																	<span class="required">*</span>
-																</p>
-																<div class="input-field">
-																<?php 
-																$options=array();
-																foreach($cat as $sts)
-																{
-																	$options[] = ['value'=>$sts->id,'text'=>$sts->name];
-																};
-																echo $this->Form->control('package_category_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Category ","style"=>"height:125px;"]);?>
-																</div>
-															</div>
-															<div class="col-md-4">
-																<p for="from">
-																	Valid Till
-																	<span class="required">*</span>
-																</p>
-																<div class="input-field input-group">
-																	<?php echo $this->Form->input('valid_date',['class'=>'form-control date-picker date','label'=>false,'data-date-format'=>'dd-mm-yyyy','placeholder'=>'dd-mm-yyyy']);?>
-																	<p class="input-group-addon btn" >
-																	<span class="fa fa-calendar"></span>
-																	</p>
-																</div>
-															</div>
-															<div class="col-md-4">
-																<p for="from">
-																	Duration Night
+																	Duration of Package
 																	<span class="required">*</span>
 																</p>
 																<div class="input-field"> 
@@ -262,7 +250,28 @@ fieldset{
 																	<option>More than 15 Days</option>
 																	</select>
 																</div>
-															</div>											 
+															</div>			
+															<div class="col-md-4">
+																<p for="from">
+																	Package Valid Till
+																	<span class="required">*</span>
+																</p>
+																<div class="input-field input-group">
+																	<?php echo $this->Form->input('valid_date',['class'=>'form-control date-picker date','label'=>false,'data-date-format'=>'dd-mm-yyyy','placeholder'=>'dd-mm-yyyy']);?>
+																	<p class="input-group-addon btn" >
+																	<span class="fa fa-calendar"></span>
+																	</p>
+																</div>
+															</div>
+																<div class="col-md-4">
+																<p for="from">
+																	Starting Price
+																	<span class="required">*</span>
+																</p>
+																<div class="input-field">
+																	<?php echo $this->Form->input('starting_price',['class'=>'form-control','label'=>false,'placeholder'=>'Starting Price']);?>
+																</div>
+															</div>							 
 														</div>
 													</div>
 												<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
@@ -271,30 +280,29 @@ fieldset{
 														<div class="col-md-12">
 															<div class="col-md-4">
 																<p for="from">
-																	Starting Price
-																	<span class="required">*</span>
+																Package Type
 																</p>
 																<div class="input-field">
-																	<?php echo $this->Form->input('starting_price',['class'=>'form-control','label'=>false,'placeholder'=>'Starting Price']);?>
+																	 <label class="radio-inline">
+																	  <input id="pack_type" type="radio" name="package_type" value="0" checked="checked"/>Domestic
+																	</label>
+																	<label class="radio-inline">
+																	  <input id="pack_type" type="radio" name="package_type" value="1"/>International
+																	</label>
 																</div>
 															</div>
-															<div class="col-md-4">
+															<div class="col-md-4 newlist" style="display:none;>
 																<p for="from">
-																	Currency
+																	Choose Country
 																	<span class="required">*</span>
 																</p>
 																<div class="input-field">
-																	 <?php $options=array();
-																	foreach($Currencies as $sdat)
-																	{
-																		$options[] = ['value'=>$sdat->id,'text'=>$sdat->name];
-																	};
-																	echo $this->Form->input('currency_id',['options' => $options,'class'=>'form-control','label'=>false,'empty'=>'Select...']);?>
-																	
+																 <?php $options=array();
+																	$options[] = ['value'=>'101','text'=>'India'];
+																	echo $this->Form->input('country_id',["class"=>"form-control " ,'options' => $options,'label'=>false]);?>
 																</div>
 															</div>
-														 
-															<div class="col-md-4">
+															<div class="col-md-4 newlist1" style="display:none;>
 																<p for="from">
 																	Choose Country
 																	<span class="required">*</span>
@@ -308,12 +316,7 @@ fieldset{
 																	echo $this->Form->input('country_id',["class"=>"form-control select2", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select City "]);?>
 																</div>
 																</div>
-														</div>
-													</div> 
-													
-													<div class="row">
-														<div class="col-md-12">
-															<div class="col-md-4">
+																<div class="col-md-4">
 																<p for="from">
 																Choose City
 																<span class="required">*</span>
@@ -328,36 +331,42 @@ fieldset{
 																echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
 																</div>
 															</div>
-															<div class="col-md-8">
-																<p for="from">
-																Package Details				
+														</div>
+													</div> 
+													<div class="row">
+														<div class="col-md-12">
+															<div class="col-md-12">
+															<p for="from">
+																Included In Package
 																	<span class="required">*</span>
 																</p>
+																</div>
+																<div class="col-md-12">
 																<div class="input-field">
 																	 <?php echo $this->Form->textarea('package_detail',['class'=>'form-control','label'=>false,'rows'=>2]);?>
 																	
 																</div>
 															</div>
 														</div>
-													</div> 
+														</div>
 													<div class="row">
 														<div class="col-md-12">
-															 
-															<div class="col-md-12">
-																<p for="from">
-																	Excluded Details
+														<div class="col-md-12">
+															<p for="from">
+																	Excluded From Package
 																<span class="required">*</span>
-																</p>
+															</p>
+															</div>
+															<div class="col-md-12">
 																<div class="input-field">
 																	 <?php echo $this->Form->textarea('excluded_detail',['class'=>'form-control','label'=>false,'rows'=>2]);?>
 																</div>
 															</div>
 														</div>
 													</div>
-													
 												</fieldset>
 											<br>
-								<fieldset>
+									<fieldset>
 										<legend style="color:#369FA1;"><b><?= __('Payment ') ?></b></legend> 
 											<div class="row">
 												<div class="col-md-12">
@@ -418,6 +427,7 @@ fieldset{
 						</div>
 					</div>
 				</div>
+
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
 	 
@@ -444,6 +454,20 @@ fieldset{
 			$('.visible_date').val(date);
 			$('.payment_amount').val(price);
 		})
+		$(document).on('change','#pack_type',function()
+		{
+			var pack_type=$(this).val();
+			//alert(pack_type);
+			if(pack_type==0)
+			{
+				$(".newlist").show();
+				$(".newlist1").hide();				
+			}	
+			else{
+				$(".newlist1").show();
+				$(".newlist").hide();
+				}	
+		});
 $("#multi_city").multiselect();
 $("#multi_states").multiselect();
 $("#multi_category").multiselect();
