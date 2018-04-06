@@ -158,7 +158,7 @@ fieldset{
 									<?php echo $this->Form->control('room2', ["id"=>"room2", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 								</div>
 								<div class="col-lg-2">
-									<p>Tripple</p>
+									<p>Triple</p>
 									<?php echo $this->Form->control('room3', ["id"=>"room3", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 								</div>
 								<div class="col-lg-3">
@@ -387,7 +387,7 @@ fieldset{
 									<?php echo $this->Form->control('room2', ["id"=>"room2", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 								</div>
 								<div class="col-lg-2">
-									<p>Tripple</p>
+									<p>Triple</p>
 									<?php echo $this->Form->control('room3', ["id"=>"room3", "type"=>"number","min"=>0, "class"=>"form-control", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 								</div>
 								<div class="col-lg-3">
