@@ -8,6 +8,10 @@ $conn = ConnectionManager::get('default');
 	legend {
 		text-align:center;
 	}
+	fieldset
+	{
+		border-radius: 15px;
+	}
 	.details {color:#000 !important; font-weight: 400;}	
 		li > p{
 		color:#96989A !important;
@@ -136,7 +140,7 @@ $conn = ConnectionManager::get('default');
 						<?php 
 							$a=$row['request']['city_id']?$allCities[$row['request']['city_id']]:"-- --"; 
 							$b=$row['request']['state_id']?' ('.$allStates[$row['request']['state_id']].')':"";
-							echo mb_strimwidth($a.$b, 0,17, "...");?>
+							echo mb_strimwidth($a.$b, 0,33, "...");?>
 							</span>
                         </p>
                         <?php } ?>

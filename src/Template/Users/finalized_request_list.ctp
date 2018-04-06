@@ -6,12 +6,18 @@ $conn = ConnectionManager::get('default');
 ?>
 <style>
 	legend {
-		text-align:center;
+		text-align:center !important;
+		align:center !important;
+	}
+	fieldset
+	{
+		border-radius: 15px;
 	}
 	.details {color:#000 !important; font-weight: 400;}	
 	li > p{
 		color:#96989A !important;
 		margin: 0 0 4px !important;
+		line-height:15px; 	
 	}	
 		
 </style>

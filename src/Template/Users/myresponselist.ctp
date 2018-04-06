@@ -3,6 +3,10 @@
 legend{
 	text-align: center;
 }
+fieldset
+	{
+		border-radius: 15px;
+	}
 .details {color:#000 !important; font-weight: 400;}	
 	li > p{
 		color:#96989A !important;
@@ -391,7 +395,7 @@ $(document).ready(function(){
 						<?php 
 							$a=$response['request']['city_id']?$allCities[$response['request']['city_id']]:"-- --"; 
 							$b=$response['request']['state_id']?' ('.$allStates[$response['request']['state_id']].')':"";
-							echo mb_strimwidth($a.$b, 0,17, "...");?>
+							echo mb_strimwidth($a.$b, 0,28, "...");?>
 						</span>
                         </p>
                         <?php } ?>
@@ -455,35 +459,9 @@ $(document).ready(function(){
 				   <hr></hr>
 				   <div class="">
 					<table width="100%" border="0" >
+						<?php $id = $response['request']['id']; ?>
 						<tr>
-							<td width="33%">
-							<?php $id = $response['request']['id'];
-							if( !array_key_exists($response["request"]["user_id"], $BusinessBuddies)) {?>
-								<a href="#" style="width:99%" class="btn btn-warning btn-sm"> Following</a>
-							<?php } 
-							else{ ?>
-								<a style="width:99%" href="javascript:void(0);" class="businessBuddy btn btn-warning btn-sm" user_id = "<?php echo $response["request"]["user_id"]; ?>"> Follow User</a><?php 
-							}
-							?>
-							</td>
-							<td width="33%">
-							<a style="width:99%" data-toggle="modal" class="btn btn-info btn-sm" data-target="#myModal1<?php echo $response['id'];?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$id)) ?>"> Details</a>
-							<div class="modal fade" id="myModal1<?php echo $response['id'];?>" role="dialog">
-								<div class="modal-dialog">
-								  <!-- Modal content-->
-								  <div class="modal-content">
-									<div class="modal-header">
-									  <button type="button" class="close" data-dismiss="modal">&times;</button>
-									  <h4 class="modal-title">Details</h4>
-									</div>
-									<div class="modal-body">
-									</div>
-								  </div>
-								</div>
-							</div>
-						 <?php $userChats = $this->Response->getUserChats($response['request_id']); ?>
-						</td>
-						<td width="33%">
+							<td width="25%">
 							<a style="width:99%" data-toggle="modal" class="btn btn-success btn-sm" data-target="#myModalChat<?php echo $id; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $response['request_id'], $response["request"]["user_id"],2)) ?>">
 							Chat ( <strong><?php echo $chatdata['chat_count'][$response['id']]; ?> </strong> )</a>
 							<div class="modal fade" id="myModalChat<?php echo $id; ?>" role="dialog">
@@ -502,42 +480,143 @@ $(document).ready(function(){
 								  
 								</div>
 							</div>
-							
 						</td>
+						
+						<td width="25%">
+							<a style="width:99%" data-toggle="modal" class="btn btn-info btn-sm" data-target="#myModal1<?php echo $response['id'];?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$id)) ?>"> Details</a>
+							<div class="modal fade" id="myModal1<?php echo $response['id'];?>" role="dialog">
+								<div class="modal-dialog">
+								  <!-- Modal content-->
+								  <div class="modal-content">
+									<div class="modal-header">
+									  <button type="button" class="close" data-dismiss="modal">&times;</button>
+									  <h4 class="modal-title">Details</h4>
+									</div>
+									<div class="modal-body">
+									</div>
+								  </div>
+								</div>
+							</div>
+						 <?php $userChats = $this->Response->getUserChats($response['request_id']); ?>
+						</td>
+						
+						<td width="25%">
+							<?php
+							if( !array_key_exists($response["request"]["user_id"], $BusinessBuddies)) {?>
+								<a href="#" style="width:99%" class="btn btn-warning btn-sm"> Following</a>
+							<?php } 
+							else{ ?>
+								<a style="width:99%" href="javascript:void(0);" class="businessBuddy btn btn-warning btn-sm" user_id = "<?php echo $response["request"]["user_id"]; ?>"> Follow User</a><?php 
+							}
+							?>
+						</td>
+						</tr>
+						
+						<tr>
+						
+						<?php if($response['is_details_shared'] == 1) { ?>
+						<td >
+							<a style="width:99%" data-toggle="modal" class="btn btn-successto btn-sm" data-target="#contactdetails<?php echo $id; ?>"  > User Contact</a>
+							<!-------Contact Details Modal --------->
+							<div id="contactdetails<?php echo $id; ?>" class="modal fade" role="dialog">
+								<div class="modal-dialog modal-md" >
+									<!-- Modal content-->
+										<div class="modal-content">
+										  <div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h3 class="modal-title">
+												USER CONTACT DETAIL
+												</h3>
+												</div>
+												<div class="modal-body">
+													<span class="help-block"></span>
+													<div class="row">
+														<div class="col-md-12">
+															<div class="col-md-4"> Name :</div>
+															<div class="col-md-8">
+																<label>
+																	<?php echo $response['request']['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $response['request']['user']['last_name']; ?> 
+																</label>
+															</div>					
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-md-12">
+														<div class="col-md-4">Company Name :</div>
+															<div class="col-md-8">
+																<label>
+																	<?php echo ($response['request']['user']['company_name'])?$response['request']['user']['company_name']:"-- --"; ?>
+																</label>
+															</div>
+														</div>
+													</div>
+													<div class="row">
+														<div class="col-md-12">
+															<div class="col-md-4">Email :</div>
+															<div class="col-md-8">
+																<label>
+																	<?php echo ($response['request']['user']['email'])?$response['request']['user']['email']:"-- --"; ?>
+																</label>
+															</div>
+														</div>
+													</div>
+													<div class="row" style="display:none;">
+														<div class="col-md-12">
+															<div class="col-md-4">Mobile No. :</div>
+															<div class="col-md-8">
+																<label>
+																	<?php echo ($response['request']['user']['mobile_number'])?$response['request']['user']['mobile_number']:"-- --"; ?>
+																</label>
+															</div>
+														</div>
+													</div>
+													<div class="row" style="display:none;">
+														<div class="col-md-12">
+															<div class="col-md-4">Website :</div>
+															<div class="col-md-8">
+																<label>
+																	<?php echo ($response['request']['user']['web_url'])?$response['request']['user']['web_url']:"-- --"; ?>
+																</label>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
+												</div>
+											</div>
+										</div>
+									</div>
+						</td>
+						 
+					<?php } ?>
+					<?php
+					$sql="Select count(*) as block_count from blocked_users where blocked_user_id='".$response['request']['user']['id']."' AND blocked_by='".$response['user_id']."'";
+					$stmt = $conn->execute($sql);
+					$bresult = $stmt ->fetch('assoc'); 
+					if($bresult['block_count']>0){
+						$blocked = 1;
+					}
+					else{
+						$blocked = 0;
+					}
+					?>
+					<td style="padding:3px !important;">
+					<?php 
+							if($blocked==1)
+							{?>
+								<a  href="javascript:void(0);" class="unblockUser btn btn-danger btn-sm " user_id = "<?php echo $response['request']['user']['id']; ?>">
+								Blocked </a>
+							<?php }
+							else
+							{?>
+								<a  href="javascript:void(0);" class="blockUser btn btn-danger btn-sm " user_id = "<?php echo $response['request']['user']['id']; ?>">
+								Block User </a>
+							<?php } ?>
+					</td>
 					</tr>
 				</table>
-				
-				<?php if($response['is_details_shared'] == 1) { ?>
-				<hr></hr>
-					<legend><h5 class="text-center">USER CONTACT DETAIL </h5></legend>
-                        <ul>
-                       <li class="">
-                            <p>
-                                <strong>Name :</strong> <?php echo $response['request']['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $response['request']['user']['last_name']; ?>  
-                           </p>
-                        </li>
-						<li class="">
-                            <p>
-                                <strong>Company Name :</strong> <?php echo ($response['request']['user']['company_name'])?$response['request']['user']['company_name']:"-- --"; ?>
-                            </p>
-                        </li>
-						<li class="">
-                            <p>
-                                <strong>Email :</strong> <?php echo ($response['request']['user']['email'])?$response['request']['user']['email']:"-- --"; ?>
-                            </p>
-                        </li>
-						<li class="">
-                            <p>
-                                <strong>Mobile No. :</strong> <?php echo ($response['request']['user']['mobile_number'])?$response['request']['user']['mobile_number']:"-- --"; ?>
-                            </p>
-                        </li>
-						<li class="">
-                            <p>
-                                <strong>Website :</strong> <?php echo ($response['request']['user']['web_url'])?$response['request']['user']['web_url']:"-- --"; ?>
-                            </p>
-                        </li>
-					 
-				<?php  } ?>
+				 
 				</div>
 				</div>
 				</fieldset>
@@ -573,6 +652,28 @@ $(document).ready(function(){
 </div>
 <script>
 $(document).ready(function () {
+	$(".blockUser").click(function (e) {
+		e.preventDefault();
+		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'blockUser')) ?>";
+		var user_id = $(this).attr("user_id");
+		if(confirm("Are you sure want to block this user?")) {
+			$.ajax({
+				url:url,
+				type: 'POST',
+				data: {user_id:user_id}
+			}).done(function(result){
+				if(result == 1) {
+					alert("This user has been blocked successfully.");
+					location.reload();
+				}else if(result == 2){
+				alert("This user has already blocked.");
+				} else {
+					alert("There is some problem, please try again.");
+				}
+			});
+		}
+	});
+	
 	$('.datepicker').datepicker();
 	/*
 	$("#responsesWrap").apPagination({
