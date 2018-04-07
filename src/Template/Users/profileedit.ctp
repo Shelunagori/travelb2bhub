@@ -153,7 +153,7 @@ hr { margin-top:0px!important;}
 				</div> 
 				
 				<div class="form-group col-md-12">
-                  <label>Select Preference</label>
+                  <label>States of Operation</label>
                    <?php 
 					$selectedPreferenceStates = "";
 					if(!empty($users['preference'])) 
@@ -570,11 +570,9 @@ $(document).ready(function(){
 			}
 		}
 	});
-		
-});
+ });
 	function selectCountry(value,city_code,state) {
-		
-		var state_id=state;
+ 		var state_id=state;
 		$("#city-search-box").val(value);
 		$(".suggesstion-box").hide();
 		$(".cityCode").val(city_code);
@@ -593,4 +591,4 @@ $(document).ready(function(){
 			}
 		});	
 	}
-</script>
+ </script>

@@ -213,17 +213,15 @@ hr { margin-top:0px!important;}
 				</div>	
 				<div class="row col-md-12">
 					<div class="col-md-12" id="preferenceStateDiv">
-						 
-							<div class="mt" tooltip="Select upto 5 states">
-								<div class="wrap-input100 validate-input">
-									<label for="Preference_States" style="color:#fff;">States where you operate</label>
-									<span style="font-size:11px;color:#fff;">(Select upto 5 states )</span>
-									<div class="input-field">
-										<?php echo $this->Form->control('preference', ["id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select", "data-placeholder"=>"Select upto 5 states where you operate", "style"=>"height:125px;"]); ?>
-									</div>
+						<div class="mt" tooltip="Select upto 5 states">
+							<div class="wrap-input100 validate-input">
+								<label for="Preference_States" style="color:#fff;">States where you operate</label>
+								<span style="font-size:11px;color:#fff;">(Select upto 5 states )</span>
+								<div class="input-field">
+									<?php echo $this->Form->control('preference', ["id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select", "data-placeholder"=>"Select upto 5 states where you operate", "style"=>"height:125px;"]); ?>
 								</div>
 							</div>
-															
+						</div>
 					</div>					
 				</div>
 				<div class="row col-md-12">
