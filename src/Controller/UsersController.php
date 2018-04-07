@@ -2862,6 +2862,7 @@ public function myresponselist() {
 		$this->loadModel('Cities');
 		$this->loadModel('States');
 		$this->loadModel('User_Chats');
+		$this->loadModel('BusinessBuddies');
 		$this->viewBuilder()->layout('user_layout');
 		$user = $this->Users->find()
 			->contain(["Credits"])
@@ -2926,12 +2927,61 @@ public function myresponselist() {
 			$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
 		}
 		$conditions["Responses.user_id"] = $this->Auth->user('id');
+		$loggedinid=$this->Auth->user('id');
+		$this->loadModel('BlockedUsers');
+		$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
+			->hydrate(false)
+			->where(['blocked_by' => $loggedinid])
+			->toArray();
+		$myBlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_by'])
+			->hydrate(false)
+			->where(['blocked_user_id' => $loggedinid])
+			->toArray();
+		if(!empty($BlockedUsers)) {
+			$BlockedUsers = array_values($BlockedUsers);
+		}
+		if(!empty($myBlockedUsers)) {
+			$myBlockedUsers = array_values($myBlockedUsers);
+		}
+		$BlockedUsers=array_merge($BlockedUsers,$myBlockedUsers);
+		$BlockedUsers = array_unique($BlockedUsers);
+	//print_r($BlockedUsers); exit;
+		if(sizeof($BlockedUsers)>0){
+				$conditions["Requests.user_id NOT IN"] =  $BlockedUsers; 
+		}
+		
 		$conditions["Responses.status"] = 1;
 		$responses = $this->Responses->find()
 			->contain(["Requests.Users", "Requests"])
 			->where($conditions)->order($sort)->all();
-		//pr($responses); EXIT;
+		
+		$conn = ConnectionManager::get('default');
+		$chatdata = array();
+		if(count($responses)>0){
+			foreach($responses as $res){
+				 
+				$request_id = $res['request_id'];	
+					$user_id = $res['request']['user_id'];
+					
+					
+				$sqlc = "SELECT *,COUNT(*) as ch_count FROM user_chats 
+				WHERE request_id='".$request_id."' AND (user_id in ('".$loggedinid."','".$user_id."') 
+				AND notification='0'
+				ANd send_to_user_id in ('".$loggedinid."','".$user_id."')) ";
+				$stmtc = $conn->execute($sqlc);
+				$resultsch = $stmtc ->fetch('assoc');		
+				$chatdata['chat_count'][$res['id']] =$resultsch['ch_count'];
+			}
+		}
+		$this->set('chatdata', $chatdata);
 		$this->set('responses', $responses);
+		
+		$BusinessBuddies = $this->BusinessBuddies->find('list',['keyField' => "bb_user_id",'valueField' => 'bb_user_id'])
+		->hydrate(false)
+		->where(['user_id' => $loggedinid])
+		->toArray();
+		$this->set('BusinessBuddies', $BusinessBuddies);
+	
 		//pr($responses);exit;
 		$allCities = $this->Cities->find('list',['keyField' => 'id', 'valueField' => 'name'])
 			->hydrate(false)

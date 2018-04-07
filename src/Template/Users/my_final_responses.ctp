@@ -10,7 +10,8 @@ $conn = ConnectionManager::get('default');
 	}
 	fieldset
 	{
-		border-radius: 15px;
+		border-radius: 7px;
+		box-shadow: 0 1px 9px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	}
 	.details {color:#000 !important; font-weight: 400;}	
 		li > p{
@@ -123,7 +124,20 @@ $conn = ConnectionManager::get('default');
 				 </li>
 				 <li >
 					<p>
+						<?php 
+							$total_rating=0;
+							$rate_count=0;
+							$sql1="Select * from `testimonial` where `author_id`='".$row['request']['user']['id']."' ";
+							$stmt1 = $conn->execute($sql1);
+								foreach($stmt1 as $bresul){
+									$rate_count++;
+									$rating=$bresul['rating'];
+									$total_rating+=$rating;
+								} 
+							@$final_rating=$total_rating/$rate_count;
+						?>
 						Agent Name :  <a href="viewprofile/<?php echo $row['request']['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$row['request']['user_id']]); ?></a>
+						<font color="#1295AB"> (<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font>
 					</p>
 				</li>
 				<li >
@@ -199,52 +213,138 @@ $conn = ConnectionManager::get('default');
                    </ul>
 				   <hr></hr>
 				   <div>
+				   <?php $id=$row['id']; ?>
 					<table width="100%" style="text-align:center" class>
-						<tr>
-							<td width="50%">
-					 
-							<a style="width:99%" data-toggle="modal" class="btn btn-info btn-sm" data-target="#myModal1<?php echo $row['request']['id'];?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$row['request']['id'])) ?>"> Details</a>
-							<div class="modal fade" id="myModal1<?php echo $row['request']['id'];?>" role="dialog">
-							<div class="modal-dialog">
-								  <!-- Modal content-->
-								  <div class="modal-content">
-									<div class="modal-header">
-									  <button type="button" class="close" data-dismiss="modal">&times;</button>
-									  <h4 class="modal-title">Details</h4>
+							<tr>
+								<td width="50%">
+									<a style="width:99%" data-toggle="modal" class="btn btn-success btn-sm" data-target="#myModalChat<?php echo $id; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row['request']['user_id'],2)) ?>">
+									Chat ( <strong><?php echo $chatdata['chat_count'][$row['id']]; ?> </strong> )</a>
+									<div class="modal fade" id="myModalChat<?php echo $id; ?>" role="dialog">
+										<div class="modal-dialog">
+										
+										  <!-- Modal content-->
+										  <div class="modal-content">
+											<div class="modal-header">
+											  <button type="button" class="close" data-dismiss="modal">&times;</button>
+											  <h4 class="modal-title">Chat</h4>
+											</div>
+											<div class="modal-body">
+												
+											</div>
+										  </div>
+										</div>
 									</div>
-									<div class="modal-body">
+								</td>
+								<td width="50%">
+									<a style="width:99%" data-toggle="modal" class="btn btn-info btn-sm" data-target="#myModal1<?php echo $row['request']['id'];?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$row['request']['id'])) ?>"> Details</a>
+									<div class="modal fade" id="myModal1<?php echo $row['request']['id'];?>" role="dialog">
+									<div class="modal-dialog">
+										  <!-- Modal content-->
+										  <div class="modal-content">
+											<div class="modal-header">
+											  <button type="button" class="close" data-dismiss="modal">&times;</button>
+											  <h4 class="modal-title">Details</h4>
+											</div>
+											<div class="modal-body">
+											</div>
+										  </div>
+										</div>
 									</div>
-								  </div>
-								</div>
-							</div>
-						 </td>
-						 <td width="50%">
-						  <?php $reviewi =  $row['request']['user_id']."-".$row['request']['id']; ?>
-						   <a style="width:99%" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal1review<?php echo $row['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">Review </a>
-											   
-						<div class="modal fade" id="myModal1review<?php echo $row['id']; ?>" role="dialog">
-								<div class="modal-dialog">
-								  <!-- Modal content-->
-								  <div class="modal-content">
-									<div class="modal-header">
-									  <button type="button" class="close" data-dismiss="modal">&times;</button>
-									  <h4 class="modal-title">Review</h4>
+							 </td>
+							 </tr>
+						</table>
+						
+						
+						 <table width="100%"   class>
+							<tr>
+								<td width="33%" style="padding-top:5px;">
+									<?php
+									if(array_key_exists($row['request']['user_id'], $BusinessBuddies)) {?>
+										<a href="#" style="width:99%" class="btn btn-warning btn-sm"> Following</a>
+									<?php } 
+									else{ ?>
+										  
+										<a style="width:99%" data-toggle="modal" class="btn btn-warning btn-sm" data-target="#follow<?php echo $id; ?>" > Follow User </a>
+									<!-------Contact Details Modal --------->
+									<div id="follow<?php echo $id; ?>" class="modal fade" role="dialog">
+										<div class="modal-dialog modal-md" >
+											<!-- Modal content-->
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<h3 class="modal-title">
+															<font color="black">Follow User</font>
+														</h3>
+													</div>
+														<div class="modal-body">
+															<span class="help-block"></span>
+															<div class="row">
+																<div class="col-md-12">
+																	<div class="col-md-4">Confirm Follow User ?</div>
+																						
+																</div>
+															</div>
+														</div>
+														<div class="modal-footer">
+														<button type="button"  href="javascript:void(0);" class="businessBuddy btn btn-warning btn-sm" user_id = "<?php echo $row['request']['user_id']; ?>" >Follow</button>
+														<button type="button" class="btn btn-successto" data-dismiss="modal">Cancel</button>
+														</div>
+													</div>
+												</div>
+											</div>
+										
+										<?php 
+									}
+									?>
+								</td>
+								 
+							<td width="33%" style="padding-top:5px;">
+							<a style="width:99%" data-toggle="modal" class="btn btn-danger btn-sm" data-target="#block<?php echo $id; ?>"  > Block User </a>
+							<!-------Contact Details Modal --------->
+							<div id="block<?php echo $id; ?>" class="modal fade" role="dialog">
+								<div class="modal-dialog modal-md" >
+									<!-- Modal content-->
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h3 class="modal-title">
+													<h4><font color="red">Are you sure you want to block this user ?</font></h4>
+												</h3>
+											</div>
+												<div class="modal-footer">
+													<button type="button"  href="javascript:void(0);" class="blockUser btn btn-danger" user_id = "<?php echo $row['request']['user']['id']; ?>">Block</button>
+													<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+												</div>
+											</div>
+										</div>
 									</div>
-									<div class="modal-body">
+								</td>
+					
+								<td width="33%" style="padding-top:5px;">
+									<?php $reviewi =  $row['request']['user_id']."-".$row['request']['id']; ?>
+									<a style="width:99%" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal1review<?php echo $row['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">Review </a>
+									<div class="modal fade" id="myModal1review<?php echo $row['id']; ?>" role="dialog">
+										<div class="modal-dialog">
+										  <!-- Modal content-->
+										  <div class="modal-content">
+											<div class="modal-header">
+											  <button type="button" class="close" data-dismiss="modal">&times;</button>
+											  <h4 class="modal-title">Review</h4>
+											</div>
+											<div class="modal-body">
+											</div>
+										  </div>
+										</div>
 									</div>
-								  </div>
-								</div>
-							</div>
-						</td>
-					</tr>
-				</table>
-				</div>
+								</td>
+							</tr>
+						</table>
+					</div>
 				</fieldset>
-                  </div>
-               
-			<?php } ?>
 			</div>
-			<div class="pages"></div>
+		<?php } ?>
+	</div>
+<div class="pages"></div>
 		
 		<?php 
 		}
@@ -320,4 +420,44 @@ function f1(res){
 	$('#chat_request_id').val(result[0]);
 	$('#chat_user_id').val(result[1]);
 }
+</script>
+<script>
+$(document).ready(function () {
+	$(".businessBuddy").on('click',function () {
+ 		var datas = $(this);
+		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'addBusinessBuddy')) ?>";
+		var user_id = $(this).attr("user_id");
+		
+		$.ajax({
+			url:url,
+			type: 'POST',
+			data: {user_id:user_id}
+		}).done(function(result){
+			if(result == 1) {
+				location.reload();
+			} else {
+				
+			}
+		});
+	});
+	
+	$(".blockUser").click(function (e) {
+		e.preventDefault();
+		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'blockUser')) ?>";
+		var user_id = $(this).attr("user_id");
+			$.ajax({
+				url:url,
+				type: 'POST',
+				data: {user_id:user_id}
+			}).done(function(result){
+				if(result == 1) {
+					location.reload();
+				}else if(result == 2){
+				 
+				} else {
+					 
+				}
+			});
+		});
+});
 </script>
