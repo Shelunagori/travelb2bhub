@@ -159,7 +159,7 @@ fieldset{
  				</div>
 				<div class="box-body">
 					<fieldset>
-					<legend style="color:#369FA1;"><b> &nbsp; Load Package &nbsp;  </b></legend>
+					<legend style="color:#369FA1;"><b>Load Package</b></legend>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="col-md-6">
@@ -186,7 +186,7 @@ fieldset{
 						</div>
 					</fieldset>
 					<fieldset>
-					<legend style="color:#369FA1;"><b> &nbsp; Package Details &nbsp;  </b></legend>
+					<legend style="color:#369FA1;"><b>Promotion Details</b></legend>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="col-md-4">

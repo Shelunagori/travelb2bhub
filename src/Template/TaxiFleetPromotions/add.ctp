@@ -200,7 +200,7 @@ fieldset{
 												<span class="required">*</span>
 											</p>
 											<div class="input-field">
-												 <?php echo $this->Form->input('title',['class'=>'form-control','label'=>false]);?>
+												 <?php echo $this->Form->input('title',['class'=>'form-control','label'=>false,'placeholder'=>"Enter Promotion Title"]);?>
 											</div>
 										</div>
 										<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
@@ -220,105 +220,127 @@ fieldset{
 							</fieldset>
 							<br>
 						<fieldset>
-						<legend style="color:#369FA1;"><b><?= __('Package Details') ?></b></legend> 
+						<legend style="color:#369FA1;"><b><?= __('Area of Operation ') ?></b></legend> 
+						<div class="row">
+							<div class="col-md-12">
+								<div class="col-md-6">
+									<p for="from">
+										Country
+										<span class="required">*</span>
+									</p>
+									<div class="input-field">
+									 <?php $options=array();
+										$options[] = ['value'=>'101','text'=>'India'];
+										echo $this->Form->input('country_id',["class"=>"form-control " ,'options' => $options,'label'=>false]);?>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<p for="from">
+												Choose State
+												<span class="required">*</span>
+									</p>
+									
+									<div class="input-field">
+								
+										<?php 
+										$options=array();
+										foreach($states as $st)
+										{
+											$options[] = ['value'=>$st->id,'text'=>$st->state_name];
+										};
+										echo $this->Form->control('state_id', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select State","style"=>"height:125px;"]);?>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="col-md-6" >
+									<p for="from">
+									Select Option
+									</p>
+									<div class="input-field">
+										 <label class="radio-inline">
+										  <input id="city_type" type="radio" name="package_type" value="0" checked="checked"/>All Cities
+										</label>
+										<label class="radio-inline">
+										  <input id="city_type" type="radio" name="package_type" value="1"/>Specific Cities
+										</label>
+									</div>
+								</div>
+								<div class="col-md-6 newlist" >
+									<p for="from">
+										Cities of Operation
+										<span class="required">*</span>
+									</p>
+									<div class="input-field">
+									 <?php $options=array();
+										$options[] = ['value'=>'0','text'=>'All Cities'];
+										echo $this->Form->input('city_id',["class"=>"form-control " ,'options' => $options,'label'=>false]);?>
+									</div>
+								</div>
+								<div class="col-md-6 newlist1" style="display:none;>
+									<p for="from">
+												Cities of Operation
+												<span class="required">*</span>
+									</p>
+									<div class="input-field">
+									<?php 
+										$options=array();
+										foreach($city->citystatefi as $cty)
+										{
+											$options[] = ['value'=>$cty->cityid,'text'=>$cty->name];
+											
+										};
+										$options[] = ['value'=>'0','text'=>'All Cities'];
+										echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+						</fieldset>
+						<fieldset>
+						<legend style="color:#369FA1;"><b><?= __('Promotion Details') ?></b></legend> 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-											<p for="from">
-												Select Cars or Buses in the Fleet
-												<span class="required">*</span>
-											</p>
-											<div class="input-field">
-												<?php 
-												$options=array();
-												foreach($TaxiFleetCarBuses as $Buses)
-												{
-													$options[] = ['value'=>$Buses->id,'text'=>$Buses->name];
-												};
-												echo $this->Form->control('vehicle_type', ['label'=>false,"id"=>"multi_vehicle", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
-											</div>
-										</div>
-										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-											<div class="input-field">
-												<p for="from">
-													Choose Country
-													<span class="required">*</span>
-												</p>
-												<?php 
-												$options=array();
-												foreach($countries as $country)
-												{
-													$options[] = ['value'=>$country->id,'text'=>$country->country_name];
-												};
-												echo $this->Form->input('country_id',['class'=>'form-control select2','options' => $options,'label'=>false,"empty"=>"Select Country"]);?>
-											</div>
+										<p for="from">
+											Select Cars or Buses in the Fleet
+											<span class="required">*</span>
+										</p>
+										<div class="input-field">
+											<?php 
+											$options=array();
+											foreach($TaxiFleetCarBuses as $Buses)
+											{
+												$options[] = ['value'=>$Buses->id,'text'=>$Buses->name];
+											};
+											echo $this->Form->control('vehicle_type', ['label'=>false,"id"=>"multi_vehicle", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
 										</div>
 									</div>
 								</div> 
-								
+								<br>
 								<div class="row">
-									<div class="col-md-12">
-										<div class="col-md-6">
-											<p for="from">
-														Choose State
-														<span class="required">*</span>
-											</p>
-											
-											<div class="input-field">
-										
-												<?php 
-												$options=array();
-												foreach($states as $st)
-												{
-													$options[] = ['value'=>$st->id,'text'=>$st->state_name];
-												};
-												echo $this->Form->control('state_id', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select State","style"=>"height:125px;"]);?>
-												
-											</div>
-										</div>
-										<div class="col-md-6">
-											<p for="from">
-														Cities of Operation
-														<span class="required">*</span>
-											</p>
-											<div class="input-field">
-											<?php 
-												$options=array();
-												foreach($city->citystatefi as $cty)
-												{
-													$options[] = ['value'=>$cty->cityid,'text'=>$cty->name];
-													
-												};
-												$options[] = ['value'=>'0','text'=>'All Cities'];
-												echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
-												
-											</div>
-										</div>
-										
-									</div>
-								</div><br>
-								<div class="row">
-									<div class="col-md-12">
 									<div class="col-md-12">
 										<p for="from">
 											Fleet Details
 											
 										</p>
 										<div class="input-field">
-												<?php echo $this->Form->input('fleet_detail',['class'=>'form-control','label'=>false,'rows'=>'5']);?>
-											</div>
+											<?php echo $this->Form->input('fleet_detail',['class'=>'form-control','label'=>false,'rows'=>'2']);?>
 										</div>
 									</div>
 								</div>
 							</fieldset>
-						<br>
+							<br>
 								<fieldset>
-									<legend style="color:#369FA1;"><b><?= __('Payment ') ?></b></legend> 
+									<legend style="color:#369FA1;"><b><?= __('Promotion Period ') ?></b></legend> 
 										<div class="row">
 											<div class="col-md-12">
 												<div class="col-md-4">
 													<p for="from">
-														Payment Duration
+													Select Duration of Promotion
 													</p>
 													<div class="input-field">
 															 
@@ -399,6 +421,20 @@ fieldset{
 			var date = dd+'-'+mm+'-'+yyyy;	
 			$('.visible_date').val(date);
 			$('.payment_amount').val(price);
+		})
+		$(document).on('change','#city_type',function()
+		{
+			var city_type=$(this).val();
+			//alert(city_type);
+			if(city_type==0)
+			{
+				$(".newlist").show();
+				$(".newlist1").hide();				
+			}	
+			else{
+				$(".newlist1").show();
+				$(".newlist").hide();
+				}	
 		})
 $("#multi_city").multiselect();
 $("#multi_states").multiselect();
