@@ -86,6 +86,8 @@ $conn = ConnectionManager::get('default');
 									</div>
 								</div>
 							</div>
+								<?php } ?>
+							
 						</div>
 					</div>
 				</div>
@@ -120,7 +122,7 @@ $conn = ConnectionManager::get('default');
 					</div>
 				  </div>
 				</div-->
-			<?php } ?>
+		
       <div class="pages"></div>
 		<?php } else {?>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
