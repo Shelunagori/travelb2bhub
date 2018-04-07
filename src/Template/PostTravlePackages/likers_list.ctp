@@ -30,7 +30,7 @@ if ($err) {
 .lbwidth{
 	color:#716D6F;
 	font-weight:bold;
-	font-size:20px;
+	font-size:18px;
 	white-space: nowrap;
 	}
 fieldset{
@@ -54,6 +54,9 @@ p{
 	padding:0px!important;
 	pading-bottom:10px!important;
 }
+.unfollow{
+	width:70px;
+}
 </style>
 <div class="container-fluid">
 	<div class="box box-primary" style="margin-bottom:5px;">
@@ -70,20 +73,23 @@ p{
 		<fieldset style="background-color:#fff;">
 			<form method="post" class="formSubmit">
 				<div class="row col-md-12">
-				<table class="table">	
+				<table class="table lbwidth">	
 				<thead>
 				<tr style="background-color:#ECDEE5;">
+				<th>Sr.NO</th>
 				<th>Name</th>
 				<th>Company</th>
 				<th>Actions</th>
 				</tr>
 				</thead>
-				<?php //pr($postTravlePackages); exit;			
+				<?php $i=0;		
 					if(!empty($postTravlePackages)){
 						foreach ($postTravlePackages as $postTravlePackage){ 
+						$i++;
 						?>
 				<tbody>
 				<tr>
+				<td><?php echo $i;?></td>
 				<td>
 					<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
 					<a href="<?php echo $hrefurl; ?>"> 
@@ -93,7 +99,8 @@ p{
 				<label><?php echo $postTravlePackage->user->company_name;?></label>
 				</td>
 				<td>
-					<a follow_id="<?php echo $postTravlePackage->user_id; ?>" class=" btn btn-danger btn-sm"  data-target="#unfollow<?php echo $postTravlePackage->user_id; ?>" data-toggle=modal>Unfollow</a>
+					<a follow_id="<?php echo $postTravlePackage->user_id; ?>" class=" 
+				btn btn-danger btn-sm"  data-target="#unfollow<?php echo $postTravlePackage->user_id; ?>" data-toggle=modal>Unfollow</a>
 		<!-------Follow Modal Start--------->
 					<div id="unfollow<?php echo $postTravlePackage->user_id; ?>" class="modal fade" role="dialog">
 						<div class="modal-dialog modal-md" >
@@ -107,8 +114,8 @@ p{
 										</h4>
 									</div>
 									<div class="modal-footer" style="height:60px;">
-										<button type="button" follow_id="<?php echo $postTravlePackage->user_id; ?>" class="unfollow btn btn-danger" value="yes" >Yes</button>
-										<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
+										<button type="button" follow_id="<?php echo $postTravlePackage->user_id; ?>" class="unfollow btn btn-info" value="yes" >Yes</button>
+										<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 									</div>
 								</div>
 							</form>

@@ -50,12 +50,15 @@ fieldset{
 }
 </style>
 <div class="container-fluid">
-	<div class="box box-primary" >
+	<div class="box box-primary" style="margin-bottom:5px;">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="box-header with-border"> 
 					<span class="box-title" style="color:#057F8A;"><b><?= __('Package Reports') ?></b></span>
-					
+					<div class="box-tools pull-right" style="margin-top:-5px;">
+						<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
+						<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -67,8 +70,8 @@ fieldset{
 	<div class="box-body bbb">
 		<fieldset style="background-color:#fff;">
 			<form method="post" class="formSubmit">
-				<div class="row col-md-12" style="padding-top:10px;padding-bottom:10px;">						
-					<div class="col-md-3">
+				<div class="row col-md-12" style="padding:25px;">						
+					<div class="col-md-4">
 						<?= $this->Html->image($postTravlePackage->full_image,['id'=>'myImg','style'=>'width:100%;height:150px;','data-target'=>'#imagemodal'.$postTravlePackage->id,'data-toggle'=>'modal',]) ?>
 						<div id="imagemodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-md">
@@ -82,7 +85,7 @@ fieldset{
 							</div>
 						</div>
 					</div>
-					<div class="col-md-5"  style="padding-left:30px;">
+					<div class="col-md-4"  style="padding-left:30px;">
 						<div class="row">
 							<div class="col-md-12 ">
 							<span style="color:black;font-size:25px;"><?php echo $postTravlePackage->title?></span>
@@ -93,7 +96,7 @@ fieldset{
 							</div>
 							<div class="col-md-12 lbwidth ">
 							Views :
-							<a  style="color:#1295AB;" href="likers_list/<?php echo $postTravlePackage->id?>"><label><?php echo $postTravlePackage->total_views;?></label></a>
+							<a  style="color:#1295AB;" href="viewers_list/<?php echo $postTravlePackage->id?>"><label><?php echo $postTravlePackage->total_views;?></label></a>
 							</div>
 							<div class="col-md-12 lbwidth">
 							Date Posted :
