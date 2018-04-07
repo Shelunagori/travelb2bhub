@@ -142,6 +142,19 @@ legend
 					<div class="col-md-3">
 						<b>Agent Name : <br></b>
 						<?php 
+					$total_rating=0;
+					$rate_count=0;
+					$sql1="Select * from `testimonial` where `author_id`='".$row['user']['id']."' ";
+					$stmt1 = $conn->execute($sql1);
+					foreach($stmt1 as $bresul){
+						$rate_count++;
+						$rating=$bresul['rating'];
+						$total_rating+=$rating;
+					} 
+					@$final_rating=$total_rating/$rate_count;
+					 
+					?>
+						<?php 
 						if($row['response']['is_details_shared']==1){
 								$hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$row['user']['id'],1));                    
 						}
@@ -150,6 +163,7 @@ legend
 						}
 						?>
 						<a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></a>
+						<font color="#1295AB">(<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font>
 					</div>
 					<div class="col-md-3">
 						<b>Total Budget : <br></b> <?php echo $row['request']['total_budget']; ?>
