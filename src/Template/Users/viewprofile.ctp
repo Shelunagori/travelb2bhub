@@ -1,6 +1,10 @@
 <style>
 .checked {
-    color: orange;
+    color: #1295AB;
+}
+.vl {
+    border-left: 6px solid green;
+    height: 300px;
 }
 .review-block .block-text {
     background-color: #eee;
@@ -43,7 +47,7 @@
 			     
 					<div>
 						<div class="form-group">
-						<div class="form-group col-md-4 text-center">
+						<div class="form-group col-md-4 text-center" style="border-right:2px solid #eee;height:320px;">
 							<?php
 							if($users['profile_pic']==""){
 								echo $this->Html->image('no-profile-image.jpg', ["alt"=>"Profile Pic", "height"=>110, 'style'=>'border-radius: 50%;',"width"=>110]); 
@@ -219,7 +223,7 @@
 			<p style="font-size: 16px;"><font color="#4B4B4D">Profile Completeness</font></p>
 			<div class="progress">
 				<div class="progress-bar"  role="progressbar" aria-valuenow="<?php echo $profilePercentage; ?>"
-				aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $profilePercentage; ?>%">
+				aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $profilePercentage; ?>%;background-color: #1295AB !important;">
 					<?php echo $profilePercentage; ?>%
 				</div>
 			</div>
@@ -228,71 +232,91 @@
 						<div class="col-md-4">
 							<?php 
 							if($users['role_id'] == 1){ ?>
-								<strong>
+								 
+								<span style="font-size: 30px;">
+									<font color="#1295A2">
+										<?php echo $userRequestCount;?>
+									</font>
+								</span>
+								<br>
+								<strong style="font-size:13px;">
 									Finalized Requests
 								</strong>
-								<br>
-								<span style="font-size: 30px;">
-									<font color="#1295A2">
-										<?php echo $userRequestCount;?>
-									</font>
-								</span>
 							 <?php }
 							 else if($users['role_id'] == 2){ ?>
-								<strong>
-								Finalized Requests
-								</strong><br>
+								
 								<span style="font-size: 30px;">
 									<font color="#1295A2">
 										<?php echo $userRequestCount;?>
 									</font>
 								</span>
+								<br>
+								<strong style="font-size:13px;">
+									Finalized Requests
+								</strong>
 							 <?php } ?>
 						</div>		
 						<div class="col-md-4">
 							<?php 
 							if($users['role_id'] == 1){ ?>
-								<strong>
-								Responded Requests
-								</strong><br>
+								
 								<span style="font-size: 30px;">
 									<font color="#1295A2">
 										<?php echo $userrespondToRequestCount;?>
 									</font>	
 								</span>
+								<br>
+								<strong style="font-size:13px;">
+									Responded Requests
+								</strong>
 							<?php }
 							 else if($users['role_id'] == 3){ ?>
-								<strong>Responded Requests</strong><br>
+								
 								<span style="font-size: 30px;">
-								<font color="#1295A2">
-									<?php echo $userrespondToRequestCount;?></span>
-								</font>
+									<font color="#1295A2">
+										<?php echo $userrespondToRequestCount;?>
+									</font>	
+								</span>
+								<br>
+								<strong style="font-size:13px;">
+									Responded Requests
+								</strong>
 							 <?php } ?>
 						</div>
 						<div class="col-md-4">
 							<?php 
 							if($users['role_id'] == 1){ ?>
-								<strong>Finalized Responses</strong><br>
+								
 								<span style="font-size: 30px;">
-								<font color="#1295A2">
-								<?php echo $userReponseCount;?>
-								</font>
+									<font color="#1295A2">
+										<?php echo $userReponseCount;?>
+									</font>
 								</span>
+								<br>
+								<strong style="font-size:13px;">
+									Finalized Responses
+								</strong>
 							<?php }
 							 else if($users['role_id'] == 3){ ?>
-								<strong>Finalized Responses</strong><br>
+								
 								<span style="font-size:30px;">
-								<font color="#1295A2">
-								<?php echo $userReponseCount;?>
-								</font>
+									<font color="#1295A2">
+									<?php echo $userReponseCount;?>
+									</font>
 								</span>
+								<br>
+								<strong style="font-size:13px;">
+									Finalized Responses
+								</strong>
 							 <?php } ?>
 						</div>
 						</font>
 				   </div>
 						</div> 
  
-		<div class="col-md-4"> 
+		 
+		<div class="col-md-4" style="border-right:2px solid #eee;height:320px;"> 
+			
 			<div class="rating-block">
 				<h5 >Average user rating &nbsp; <font color="#1295A2" ><?php echo number_format($average_rating,1);?> <small> ( <?php echo $testimonialcount;?> ) </font> </small>&nbsp; 
 					<span <?php if($average_rating==1 OR $average_rating>1){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
@@ -319,24 +343,25 @@
 				  $var = "star$i";
 				  $count = $$var;
 				   $percent = $count * 100 / $tot_stars;?>
-					<div class="col-md-3">
+				   <div class="row">
+					<div class="col-md-2" style="text-align:right;">
 						<div><?php echo $i;?> 
 						<span <?php if($average_rating==$i OR $average_rating>$i){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
 						</div>
 					</div>
-					<div class="col-md-7" >
+					<div class="col-md-8" >
 						<div class="progress">         
-							<div <?php if($average_rating==$i OR $average_rating>$i){ ?>style="width: 100%; height: 18px; background-color: #ff9800;"<?php } ?>></div>	
+							<div <?php if($average_rating==$i OR $average_rating>$i){ ?>style="width: 100%; height: 18px; background-color: #1295AB;border-radius:9px;"<?php } ?>></div>	
 						</div>
 					</div>
-					<div class="col-md-2" ><?php if($average_rating==$i OR 	$average_rating>$i){ echo "100"; }else{ echo "0"; }  ?>%
+					<div class="col-md-2"  ><?php if($average_rating==$i OR 	$average_rating>$i){ echo "100"; }else{ echo "0"; }  ?>%
 					</div>
-					
+					</div>
 				  <?php }?> 
 				   </div> 
 				
 			</div>
- 		</div>
+ 		</div> 
 		<div class="col-md-4">
 		 
 		<?php  if($testimonialcount > 0) { 
@@ -453,7 +478,7 @@
       </div>
       <!-- /.row -->
 			<div class="box box-primary">
-			<span style="font-size:15px; padding:10px;padding-top:10px">Description</span>
+			<span style="font-size:18px; padding:10px;padding-top:10px">Description</span>
 			<hr style="margin-top:2px !important"></hr>
 				<div class="box-body">
 					<div>
@@ -465,7 +490,7 @@
 			</div>
 		 
 			<div class="box box-primary">
-			<span style="font-size:15px; padding:10px;padding-top:10px">Certificates</span>
+			<span style="font-size:18px; padding:10px;padding-top:10px">Certificates</span>
 			<hr style="margin-top:2px !important"></hr>
 				<div class="box-body">
 					<div>
@@ -564,7 +589,7 @@
 		 
 			
 			<div class="box box-primary">
-				<span style="font-size:15px; padding:10px;padding-top:10px">Office Photographs</span>
+				<span style="font-size:18px; padding:10px;padding-top:10px">Office Photographs</span>
 				<hr style="margin-top:2px !important"></hr>
 				<div class="box-body">
 					<div>
