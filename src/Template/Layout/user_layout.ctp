@@ -526,7 +526,7 @@ p {
 		}?>
 		<hr class="breakline"></hr>
 		<?php
-		if($roleId==1 || $roleId==3) {
+		if($roleId==1 || $roleId==3 || $roleId==2) {
 		?>
 			<li <?php if($page_name=='businessBuddiesList'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'businessBuddiesList']); ?>"><i class="fa fa-users"></i> <span>Following</span></a></li>
 		<?php
@@ -535,22 +535,56 @@ p {
 		
 		<li <?php if($page_name=='blockedUserList'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'blockedUserList']); ?>"><i class="fa fa-users"></i> <span>Blocked Users</span></a></li>
 		<hr class="breakline"></hr>
-		<!--<li <?php if($page_name=='add' && $controller=='TaxiFleetPromotions'){ echo 'class="active"';}?>>
-			<a href="<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions",'action'=>'add']); ?>"><i class="fa fa-bullhorn"></i> <span> Taxi/Fleet Promotions</span></a>
-		</li>
+		<?php if($roleId==1) { ?>
 		<li <?php if($page_name=='add' && $controller=='PostTravlePackages'){ echo 'class="active"';}?>>
 			<a href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>'add']); ?>"><i class="fa fa-bullhorn"></i> <span>Package Promotions</span></a>
 		</li>
-		<?php  
-			if($roleId==2) {?>
-		<li <?php if($page_name=='add' && $controller=='EventPlannerPromotions'){ echo 'class="active"';}?>>
-			<a href="<?php echo $this->Url->build(["controller" => "EventPlannerPromotions",'action'=>'add']); ?>"><i class="fa fa-bullhorn"></i> <span> Event Planner Promotions</span></a>
+		<?php } ?>
+		<?php if($roleId==1) { ?>
+		<li <?php if($page_name=='add' && $controller=='TaxiFleetPromotions'){ echo 'class="active"';}?>>
+			<a href="<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions",'action'=>'add']); ?>"><i class="fa fa-bullhorn"></i> <span>Taxi/Fleet Promotions</span></a>
 		</li>
-			<?php } 
-			if($roleId==3) {?>
-				<li <?php if($page_name=='add' && $controller=='HotelPromotions'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>'add']); ?>"><i class="fa fa-bullhorn"></i> <span>Hotel Promotions</span></a></li>
-			<?php }?>
-		----->
+		<?php } ?>
+		
+		<?php if($roleId==2) {?>
+		<li <?php if($page_name=='add' && $controller=='EventPlannerPromotions'){ echo 'class="active"';}?>>
+			<a href="<?php echo $this->Url->build(["controller" => "EventPlannerPromotions",'action'=>'add']); ?>"><i class="fa fa-bullhorn"></i> <span> Promote Event Planner</span></a>
+		</li>
+		
+		<li <?php if($page_name=='add' && $controller=='EventPlannerPromotions'){ echo 'class="active"';}?>>
+			<a href="<?php echo $this->Url->build(["controller" => "EventPlannerPromotions",'action'=>'promotionReports']); ?>"><i class="fa fa-book"></i> <span>Promotion Reports</span></a>
+		</li>
+		<?php } 
+		if($roleId==3) {?>
+			<li <?php if($page_name=='add' && $controller=='HotelPromotions'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>'add']); ?>"><i class="fa fa-bullhorn"></i> <span> Promote Your Hotel</span></a></li>
+			
+			<li <?php if($page_name=='add' && $controller=='HotelPromotions'){ echo 'class="active"';}?>>
+			
+				<a href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>'promotionReports']); ?>"><i class="fa fa-book"></i> <span>Promotion Reports</span></a>
+			</li>
+		<?php } ?>
+		<?php if($roleId==1) { ?>
+			<hr class="breakline"></hr>
+			<li <?php if($page_name=='add' && $controller=='HotelPromotions'){ echo 'class="active"';}?>>
+			
+				<a href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>'promotionReports']); ?>"><i class="fa fa-book"></i> <span>Package Reports</span></a>
+			</li>
+			<li <?php if($page_name=='add' && $controller=='HotelPromotions'){ echo 'class="active"';}?>>
+				<a href="<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions",'action'=>'promotionReports']); ?>"><i class="fa fa-book"></i> <span>Taxi/Fleet Reports</span></a>
+			</li>
+		<?php }
+		$WEBURL='';
+		if($roleId==1){$WEBURL='travel-agent';}
+		if($roleId==2){$WEBURL='event-planner';}
+		if($roleId==3){$WEBURL='hotelier';}
+		?>
+			<hr class="breakline"></hr>
+			<li><a target="_blank" href="http://ecotourismrajasthan.com/travelb2bhub/contact/"><i class="fa fa-phone"></i> <span>Contact Us</span></a></li>
+			<li><a target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/terms-and-conditions/"><i class="fa fa-edit"></i> <span>Terms & Conditions</span></a></li>
+			<li><a target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/privacy-policy/"><i class="fa fa-lock"></i> <span>Privacy Policy</span></a></li>
+			<li><a target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/<?php echo $WEBURL; ?>"><i class="fa fa-question-circle"></i> <span>FAQs</span></a></li>
+			
+	 
       </ul>
     </section>
     <!-- /.sidebar -->
@@ -603,7 +637,7 @@ $(document).ready(function (){
 
 
 <?php echo $this->Html->script('/assets/plugins/fastclick/fastclick.js'); ?>
-<?php echo $this->Html->script('/assets/dist/js/app.min.js'); ?>
+<?php echo $this->Html->script('/assets/dist/js/app.js'); ?>
 <?php echo $this->Html->script('/assets/dist/js/demo.js'); ?> 
 <?php echo $this->Html->script('/assets/plugins/WYSIWYG/editor.js'); ?>
 <script>
