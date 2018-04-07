@@ -372,11 +372,10 @@ p {
               <li class="footer"><a href="#">View all</a></li>
             </ul>
           </li>
-          
+           
           <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <!--<img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">-->
-              <span class="hidden-xs"><?php echo ucwords(strtolower($MemberName));?></span>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+               <i class="fa fa-cogs"></i>  
             </a>
             <ul class="dropdown-menu">
 			  <li><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'logout')) ?>" class="btn btn-default signup_btn">Log Out</a></li>
