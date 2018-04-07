@@ -437,10 +437,10 @@ $conn = ConnectionManager::get('default');
 				<td width="50%">
 				<?php if($users['role_id'] == 3 || $users['role_id'] == 1){
 				if(count($request["responses"]) < 20) {?>
-				<a style="width:99%" data-toggle="modal" class="btn btn-success btn-sm" data-target="#myModal<?php echo $request['id']; ?>" href="javascript:void(0);" onclick="f1('<?php echo $request['id']; ?>');" id="<?php echo $request['id']; ?>"> Show interest</a>
+				<a style="width:99%" data-toggle="modal" class="btn btn-success btn-sm" data-target="#myModalshow<?php echo $request['id']; ?>" href="javascript:void(0);" onclick="f1('<?php echo $request['id']; ?>');" id="<?php echo $request['id']; ?>"> Show interest</a>
 				<?php } } ?>
 			 
-				<div id="myModal<?php echo $request['id']; ?>" class="modal fade form-modal" role="dialog">
+				<div id="myModalshow<?php echo $request['id']; ?>" class="modal fade form-modal" role="dialog">
 				  <div class="modal-dialog">
 					<!-- Modal content-->
 					<div class="modal-content">
