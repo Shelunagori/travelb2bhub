@@ -189,16 +189,18 @@ fieldset{
 					<legend style="color:#369FA1;"><b>Promotion Details</b></legend>
 						<div class="row">
 							<div class="col-md-12">
-								<div class="col-md-4">
-									<p> Country </p>
-									<?php $options=array();
-									foreach($countries as $country)
-									{
-										$options[] = ['value'=>$country->id,'text'=>$country->country_name];
-									};echo $this->Form->input('country_id', ['options' => $options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...']); ?> 
+								<div class="col-md-6">
+									<p for="from">
+										Country
+										<span class="required">*</span>
+									</p>
+									<div class="input-field">
+									 <?php $options=array();
+										$options[] = ['value'=>'101','text'=>'India'];
+										echo $this->Form->input('country_id',["class"=>"form-control " ,'options' => $options,'label'=>false]);?>
+									</div>
 								</div>
-								
-								<div class="col-md-4">
+								<div class="col-md-6">
 									<p> States <span class="required">*</span></p>
 									<?php 
 									$options=array();
@@ -208,7 +210,35 @@ fieldset{
 									};
 									echo $this->Form->input('state_id', ['options' => $options,'class'=>'form-control select2','label'=>false,"data-placeholder"=>"Select States",'multiple'=>true]); ?> 										 
 								</div>
-								<div class="col-md-4">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="col-md-6" >
+									<p for="from">
+									Select Option
+									</p>
+									<div class="input-field">
+										 <label class="radio-inline">
+										  <input id="city_type" type="radio" name="package_type" value="0" checked="checked"/>All Cities
+										</label>
+										<label class="radio-inline">
+										  <input id="city_type" type="radio" name="package_type" value="1"/>Specific Cities
+										</label>
+									</div>
+								</div>
+								<div class="col-md-6 newlist">
+									<p for="from">
+										Cities of Operation
+										<span class="required">*</span>
+									</p>
+									<div class="input-field">
+									 <?php $options=array();
+										$options[] = ['value'=>'0','text'=>'All Cities'];
+										echo $this->Form->input('city_id',["class"=>"form-control " ,'options' => $options,'label'=>false]);?>
+									</div>
+								</div>
+								<div class="col-md-6 newlist1" style="display:none;">
 									<p> Cities of Operation </p>
 									<?php 
 									$options=array();
@@ -220,12 +250,11 @@ fieldset{
 								</div>
  							</div>
 						</div>
-						 
 						<div class="row">
 							<div class="col-md-12">
 								<div class="col-md-12">
-									<p> Description </p>
-									<?php echo $this->Form->textarea('event_detail', ['class'=>'form-control','label'=>false,"placeholder"=>"Please Provide Event Description",'rows'=>3,'style'=>'resize:none']); ?> 	 
+									<p>Event Details </p>
+									<?php echo $this->Form->textarea('event_detail', ['class'=>'form-control','label'=>false,"placeholder"=>"Enter Description of Your Company",'rows'=>3,'style'=>'resize:none']); ?> 	 
 								</div>
 							</div>
 						</div>
@@ -286,6 +315,20 @@ $(document).ready(function (){
 		if(mm<10){  mm='0'+mm } 
 		var date = dd+'-'+mm+'-'+yyyy;	
 		$('.visible_date').val(date);
+	})
+	$(document).on('click','#city_type', function()
+	{
+		var city_type=$(this).val();
+		//alert(city_type);
+		if(city_type==0)
+		{
+			$(".newlist").show();
+			$(".newlist1").hide();
+		}
+		else{
+			$(".newlist1").show();
+			$(".newlist").hide();
+		}
 	})
 });
 </script>

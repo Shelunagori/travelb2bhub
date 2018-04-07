@@ -479,4 +479,10 @@ class PostTravlePackagesController extends AppController
 		$this->set(compact('postTravlePackages'));
 		
 	}
+	 public function promotionreports()
+    {
+		$this->viewBuilder()->layout('user_layout');
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id'));
+    }
 }

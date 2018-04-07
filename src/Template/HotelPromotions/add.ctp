@@ -165,7 +165,7 @@ fieldset{
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 										<p for="from">
-											Hotel Category
+											Select Hotel Category
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
@@ -185,7 +185,7 @@ fieldset{
 								<div class="col-md-12">
 									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 										<p for="from">
-											Hotel Location
+											Hotel Location (Address, City, State)
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
@@ -210,21 +210,21 @@ fieldset{
 								<div class="col-md-12">
 									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 										<p for="from">
-											Tariff of Cheapest Room
+											Cheapest Room Rate
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
-										 <?php echo $this->Form->input('cheap_tariff',['class'=>'form-control','label'=>false,'type'=>'number','placeholder'=>"Minimum Tariff"]);?>
+										 <?php echo $this->Form->input('cheap_tariff',['class'=>'form-control','label'=>false,'type'=>'number','placeholder'=>"Cheapest Room Rate"]);?>
 											
 										</div>
 									</div>
 									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 										<p for="from">
-											Tariff of Most Expensive Room
+											Most Expensive Room Rate
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
-											 <?php echo $this->Form->input('expensive_tariff',['class'=>'form-control','label'=>false,'type'=>'number','placeholder'=>"Maximum Tariff"]);?>
+											 <?php echo $this->Form->input('expensive_tariff',['class'=>'form-control','label'=>false,'type'=>'number','placeholder'=>"Most Expensive Room Rate"]);?>
 										</div>
 									</div>
 								</div>
@@ -270,7 +270,7 @@ fieldset{
 								<div class="col-md-12">
 										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt">
 											<p for="from">
-												Promotion Duration
+												Select Promotion Duration
 												<span class="required">*</span>
 											</p>
 											<div class="input-field">
@@ -280,7 +280,7 @@ fieldset{
 														{
 															$options[] = ['value'=>$duration->id,'text'=>$duration->week,'priceVal'=>$duration->week,'price'=>$duration->price];
 														};
-												 echo $this->Form->input('price_master_id',['class'=>'form-control duration select2 ','options' => $options,'label'=>false,"empty"=>"Select Promotion Weeks"]);?>
+												 echo $this->Form->input('price_master_id',['class'=>'form-control duration select2 ','options' => $options,'label'=>false]);?>
 											</div>
 										</div>
 								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt">
