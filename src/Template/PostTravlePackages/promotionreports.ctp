@@ -31,22 +31,17 @@ if ($err) {
 .lbwidth{
 	color:#716D6F;
 	font-weight:bold;
-	font-size:20px;
+	font-size:16px;
 	white-space: nowrap;
 	}
 fieldset{
 	margin-bottom:5px !important;
 	border-radius: 6px;
 }
-.
-p{
-	text-align:center;
-	font-size:10px;
-}
-
 
 .btnlayout{
 	border-radius:15px !important;
+	width:150px;
 	}
 #myImg:hover {opacity: 0.7;}
 .bbb{
@@ -55,7 +50,7 @@ p{
 }
 </style>
 <div class="container-fluid">
-	<div class="box box-primary" style="margin-bottom:5px;">
+	<div class="box box-primary" >
 		<div class="row">
 			<div class="col-md-12">
 				<div class="box-header with-border"> 
@@ -72,9 +67,9 @@ p{
 	<div class="box-body bbb">
 		<fieldset style="background-color:#fff;">
 			<form method="post" class="formSubmit">
-				<div class="row" style="padding-top:5px;">						
+				<div class="row col-md-12" style="padding-top:10px;padding-bottom:10px;">						
 					<div class="col-md-3">
-						<?= $this->Html->image($postTravlePackage->full_image,['id'=>'myImg','style'=>'width:100%;height:120px;','data-target'=>'#imagemodal'.$postTravlePackage->id,'data-toggle'=>'modal',]) ?>
+						<?= $this->Html->image($postTravlePackage->full_image,['id'=>'myImg','style'=>'width:100%;height:150px;','data-target'=>'#imagemodal'.$postTravlePackage->id,'data-toggle'=>'modal',]) ?>
 						<div id="imagemodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-md">
 							<!-- Modal content-->
@@ -89,26 +84,37 @@ p{
 					</div>
 					<div class="col-md-5 ">
 						<div class="row">
-							<div class="col-md-12 lbwidth">
-							<label style="color:black;"><?php echo $postTravlePackage->title?></label>
+							<div class="col-md-12 ">
+							<span style="color:black;font-size:25px;"><?php echo $postTravlePackage->title?></span>
 							</div>
 							<div class="col-md-12 lbwidth">
 							Likes :
-							<a href="likers_list/<?php echo $postTravlePackage->id?>"><label><?php echo $postTravlePackage->total_likes;?></label></a>
+							<a style="color:#1295AB;" href="likers_list/<?php echo $postTravlePackage->id?>"><label><?php echo $postTravlePackage->total_likes;?></label></a>
 							</div>
-							<div class="col-md-12 lbwidth">
+							<div class="col-md-12 lbwidth ">
 							Views :
-							<a href="likers_list/<?php echo $postTravlePackage->id?>"><label><?php echo $postTravlePackage->total_views;?></label></a>
+							<a  style="color:#1295AB;" href="likers_list/<?php echo $postTravlePackage->id?>"><label><?php echo $postTravlePackage->total_views;?></label></a>
 							</div>
 							<div class="col-md-12 lbwidth">
-							<?php echo ($postTravlePackage->created_on);?>
+							Date Posted :
+							<label style="color:black;"><?php echo date('d-M-y',strtotime($postTravlePackage->created_on));?></label>
 							</div>
 							<div class="col-md-12 lbwidth">
+							Expiring On :
+							<label style="color:#FB6542;"><?php echo date('d-M-y',strtotime($postTravlePackage->visible_date));?></label>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4 ">
-					
+					<div class="col-md-4">
+						<div class="row col-md-12">
+						<label><button type="button" class="btn btn-info btn-lg btnlayout">Renew</button></label>
+						</div>
+						<div class="row col-md-12">
+						<label><button type="button" class="btn btn-danger btn-lg btnlayout">Remove</button></label>
+						</div>
+						<div class="row col-md-12">
+						<label><button type="button" class="btn btn-warning btn-lg btnlayout">Details</button></label>
+						</div>
 					</div>
 				</div>
 			</form>
