@@ -429,5 +429,10 @@ class TaxiFleetPromotionsController extends AppController
 		$this->viewBuilder()->layout('user_layout');
 		$this->set(compact('user_id','higestSort','country_id','city_id','state_id','car_bus_id'));
     }
-	
+	 public function promotionreports()
+    {
+		$this->viewBuilder()->layout('user_layout');
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id'));
+    }
 }

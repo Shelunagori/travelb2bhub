@@ -1,4 +1,4 @@
-<?php echo $this->Html->css('/assets/loader-1.css'); ?>
+<?php //echo $this->Html->css('/assets/loader-1.css'); ?>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <?php
 //-- LIST 

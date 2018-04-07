@@ -1,4 +1,4 @@
-<?php echo $this->Html->css('/assets/loader-1.css'); ?>
+<?php //echo $this->Html->css('/assets/loader-1.css'); ?>
 <?php
 //-- List
 $curl = curl_init();
