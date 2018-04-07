@@ -551,8 +551,8 @@ p {
 			<a href="<?php echo $this->Url->build(["controller" => "EventPlannerPromotions",'action'=>'add']); ?>"><i class="fa fa-bullhorn"></i> <span> Promote Event Planner</span></a>
 		</li>
 		
-		<li <?php if($page_name=='add' && $controller=='EventPlannerPromotions'){ echo 'class="active"';}?>>
-			<a href="<?php echo $this->Url->build(["controller" => "EventPlannerPromotions",'action'=>'promotionReports']); ?>"><i class="fa fa-book"></i> <span>Promotion Reports</span></a>
+		<li <?php if($page_name=='promotionreports' && $controller=='EventPlannerPromotions'){ echo 'class="active"';}?>>
+			<a href="<?php echo $this->Url->build(["controller" => "EventPlannerPromotions",'action'=>'promotionreports']); ?>"><i class="fa fa-book"></i> <span>Promotion Reports</span></a>
 		</li>
 		<?php } 
 		if($roleId==3) {?>
@@ -565,12 +565,12 @@ p {
 		<?php } ?>
 		<?php if($roleId==1) { ?>
 			<hr class="breakline"></hr>
-			<li <?php if($page_name=='add' && $controller=='HotelPromotions'){ echo 'class="active"';}?>>
+			<li <?php if($page_name=='promotionreports' && $controller=='PostTravlePackages'){ echo 'class="active"';}?>>
 			
 				<a href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>'promotionReports']); ?>"><i class="fa fa-book"></i> <span>Package Reports</span></a>
 			</li>
-			<li <?php if($page_name=='add' && $controller=='HotelPromotions'){ echo 'class="active"';}?>>
-				<a href="<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions",'action'=>'promotionReports']); ?>"><i class="fa fa-book"></i> <span>Taxi/Fleet Reports</span></a>
+			<li <?php if($page_name=='promotionreports' && $controller=='TaxiFleetPromotions'){ echo 'class="active"';}?>>
+				<a href="<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions",'action'=>'promotionreports']); ?>"><i class="fa fa-book"></i> <span>Taxi/Fleet Reports</span></a>
 			</li>
 		<?php }
 		$WEBURL='';
