@@ -1,3 +1,4 @@
+<?php echo $this->Html->css('/assets/loader-1.css'); ?>
 <?php
 //-- List
 $curl = curl_init();
@@ -129,7 +130,7 @@ p{
 	line-height:15.0px;
 }
 .btnlayout{
-	border-radius:20px !important;
+	border-radius:15px !important;
 	}
 #myImg:hover {opacity: 0.7;}
 .bbb{
@@ -326,7 +327,7 @@ p{
 
 <div class="box-body bbb">
  <fieldset style="background-color:#fff;">
-	<form method="post">
+	<form method="post" class="formSubmit">
 		<div class="row" >
 			<div class="col-md-5" style="padding-top:5px;">
 			<span style="font-size:18px;"><b><?= h($postTravlePackage->title) ?></b></span>
@@ -461,7 +462,7 @@ p{
 									</div>
 								</div>
 						</div>
-	
+					
 			<div class="row">						
 				<div class="col-md-3">
 				<?= $this->Html->image($postTravlePackage->full_image,['id'=>'myImg','style'=>'width:100%;height:120px;','data-target'=>'#imagemodal'.$postTravlePackage->id,'data-toggle'=>'modal',]) ?>
@@ -650,6 +651,9 @@ p{
 											</div>
 										</div>
 									</div>
+									<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
+									<div id="loader"></div>
+									</div>
 								</form>
 							</fieldset>
 						</div>
@@ -665,8 +669,8 @@ p{
 			<div class="col-md-12 text-center loading" style="display:none">
 				<?=  $this->Html->image('/img/loading.gif', ['style'=>'width:5%;']) ?> .
 			</div>
+			
 				</div>
-			</div>
 <input type="hidden" id="page" value="2">
 <input type="hidden" value="<?php $user_id; ?>" id="user_id">
 <input type="hidden" value="<?php $higestSort; ?>" id="higestSort">
@@ -736,5 +740,8 @@ p{
             if (el.tabIndex <= 0) el.tabIndex = 10000;
         });
     });
+			jQuery(".formSubmit").submit(function(){
+						jQuery("#loader-1").show();
+					});
   });
 </script>

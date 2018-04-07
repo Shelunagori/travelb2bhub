@@ -1,5 +1,5 @@
+<?php echo $this->Html->css('/assets/loader-1.css'); ?>
 <?php
-
 //-- List
 $curl = curl_init();
 curl_setopt_array($curl, array(
@@ -279,7 +279,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 	?>
 	<div class="box-body bbb">	
 		<fieldset style="background-color:#fff;">
-			<form method="post">
+			<form method="post" class="formSubmit">
 				<div class="row">
 					<div class="col-md-5" style="padding-top:5px;">
 					<span style="font-size:18px;"><b><?php echo $eventPlannerPromotion->user->company_name; ?></b></span>
@@ -527,6 +527,9 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 							</div>
 						</div>
 					</div>
+					<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
+					<div id="loader"></div>
+					</div>
 				</form>
 			</fieldset>
 		</div>	
@@ -561,5 +564,8 @@ $('.reason_box').on('change', function() {
 		$(".report_text").hide();
 	  }
 });
+	jQuery(".formSubmit").submit(function(){
+						jQuery("#loader-1").show();
+					});
 });
 </script>

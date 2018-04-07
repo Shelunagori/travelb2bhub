@@ -291,7 +291,7 @@ fieldset{
 																	</label>
 																</div>
 															</div>
-															<div class="col-md-4 newlist" style="display:none;>
+															<div class="col-md-4 newlist" >
 																<p for="from">
 																	Choose Country
 																	<span class="required">*</span>
