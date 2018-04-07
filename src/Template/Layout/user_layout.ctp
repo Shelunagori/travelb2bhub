@@ -320,114 +320,41 @@ p {
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle chat_clear" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning"><?php echo $countchat = count($allunreadchat); ?></span>
+              <span class="label label-warning"><?php echo $chatCount; ?></span>
             </a>
             <ul class="dropdown-menu">
 			<li>
-			
-                <ul class="menu">
+                 <ul class="menu">
 				<?php use Cake\Datasource\ConnectionManager; 
 					$conn = ConnectionManager::get('default');
 					$lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);
-					if($countchat > 0) {
-						foreach($allunreadchat as $allchat) {
-							if($allchat['notification']==1) { 
-								if(strpos($allchat['message'],"accepted")){
-									$req_id = $allchat['request_id'];
-									$sql = "SELECT re.id,rs.id as responseid FROM requests as re inner join `responses` as rs on rs.request_id=re.id 
-									where re.id='".$req_id."' and re.status=2";
-									$stmt = $conn->execute($sql);
-									$results = $stmt ->fetch('assoc');
-									$res_userid = 	$allchat['user_id'].'-'.$req_id;
-									?>
-									<li>
-										<a class="notify" href="#">
-										  <i class="fa fa-book"></i> <?php echo $allchat['message']; ?>
-										</a>
-									</li>
-									<!--
-									<li>
-										<a data-target="#myModal1review<?php echo $allchat['id']; ?>" 
-									href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $res_userid)) ?>" data-toggle="modal" class="chat_notification chat_message" ><?php echo $allchat['message']; ?></a>
-									</li>
-									
-									<div class="modal fade" id="myModal1review<?php echo $allchat['id']; ?>" role="dialog">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal">&times;</button>
-													<h4 class="modal-title">Review</h4>
-												</div>
-												<div class="modal-body"></div>
-											</div>
-										</div>
-									</div> ---->                        
-								<?php 
-								}
-								else
-								{ ?>
-									<li>
-										<a class="notify" href="#">
-										  <i class="fa fa-book"></i> <?php echo $allchat['message']; ?>
-										</a>
-									</li>
-								 <?php 
-								} 
-							}
-							else 
-							{ ?>
+					if($chatCount > 0) {
+						 
+						foreach($NewNotifications as $allchat) {
+							$request_id = $allchat['request_id'];
+							$send_to_user_id = $allchat['send_to_user_id'];
+							$message = $allchat['message'];
+							$is_read = $allchat['is_read'];
+							$created = $allchat['created'];
+							$type = $allchat['type']; 
+							$userid = $allchat['user_id'];
+							$url='#';
+							if($type=='Request'){ $url=$this->Url->build(array('controller'=>'users','action'=>'respondtorequest')); }
+							
+							if($type=='Final Response'){ $url=$this->Url->build(array('controller'=>'users','action'=>'myFinalResponses')); }
+							
+							if($type=='Detail Share'){ $url=$this->Url->build(array('controller'=>'users','action'=>'myresponselist')); }
+							
+							if($type=='Response'){ $url=$this->Url->build(array('controller'=>'users','action'=>'checkresponses/'.$request_id)); }
+ 							
+							?>
 								<li>
-									<?php
-									if($allchat['screen_id']==1)
-									{
-										$c=2;
-										$res_text = "Please go to MY RESPONSES to view it.";
-									}
-									elseif($allchat['screen_id']==2)
-									{
-										$c=1;
-										$res_text = "Please go to CHECK RESPONSES to view it.";
-									}
-									else{
-										$c=0;
-										$res_text = "";
-									}
-									?>
-									 
-									<a class="notify" href="#">
-									<?php 
-									$userid = $allchat['user_id'];
-									$sql = "SELECT first_name,last_name FROM users	where id='".$userid."'";
-									$stmt = $conn->execute($sql);
-									$result = $stmt ->fetch('assoc');   
-									$name = $result['first_name'].' '.$result['last_name'];?>
-									  <i class="fa fa-book"></i> <?php echo "You have received a CHAT MESSAGE from: <span class='rec_name'>$name</span>. $res_text";  ?>
+  									<a class="notify" href="<?php echo $url; ?>">
+									    <i class="fa fa-book"></i><?php echo $message;  ?>
 									</a>
-									 
-									<!--<a data-toggle="modal" class="chat_message" data-target="#myModal<?php echo $allchat['request_id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $allchat['request_id'], $allchat["user_id"],$c)) ?>">
-									<?php 
-									$userid = $allchat['user_id'];
-									$sql = "SELECT first_name,last_name FROM users	where id='".$userid."'";
-									$stmt = $conn->execute($sql);
-									$result = $stmt ->fetch('assoc');   
-									$name = $result['first_name'].' '.$result['last_name'];
-
-									echo "You have received a CHAT MESSAGE from: <span class='rec_name'>$name</span>. $res_text"; ?></a>-->
-								</li>
-								<!--<div class="modal fade" id="myModal<?php echo $allchat['request_id']; ?>" role="dialog">
-									<div class="modal-dialog">
-									 
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h4 class="modal-title">Chat</h4>
-											</div>
-											<div class="modal-body"></div>
-										</div>
-									</div>
-								</div>-->
-								<?php  
-							} 
+ 								</li>
+ 								<?php  
+							   
 						}
 					} 
 					else { 
@@ -607,7 +534,7 @@ p {
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
 $(document).ready(function (){
-	$(".chat_clear").on('click',function () {  
+	/*$(".chat_clear").on('click',function () {  
 		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'clearreadChats')) ?>";
 		$.ajax({
 			url:url,
@@ -618,7 +545,7 @@ $(document).ready(function (){
 				$(".chat_count").html('0');
 			}
 		});
-	});
+	});*/
 });
 </script>
 <?php echo $this->Html->script('/assets/bootstrap/js/bootstrap.min.js'); ?>
