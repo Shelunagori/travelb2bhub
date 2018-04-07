@@ -567,7 +567,7 @@ p {
 			<hr class="breakline"></hr>
 			<li <?php if($page_name=='promotionreports' && $controller=='PostTravlePackages'){ echo 'class="active"';}?>>
 			
-				<a href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>'promotionReports']); ?>"><i class="fa fa-book"></i> <span>Package Reports</span></a>
+				<a href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>'promotionreports']); ?>"><i class="fa fa-book"></i> <span>Package Reports</span></a>
 			</li>
 			<li <?php if($page_name=='promotionreports' && $controller=='TaxiFleetPromotions'){ echo 'class="active"';}?>>
 				<a href="<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions",'action'=>'promotionreports']); ?>"><i class="fa fa-book"></i> <span>Taxi/Fleet Reports</span></a>
