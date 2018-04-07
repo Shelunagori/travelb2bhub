@@ -499,8 +499,8 @@ $(document).ready(function(){
 						</td>
 						
 						<td width="50%">
-							<a style="width:99%" data-toggle="modal" class="btn btn-info btn-sm" data-target="#myModal1<?php echo $response['id'];?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$id)) ?>"> Details</a>
-							<div class="modal fade" id="myModal1<?php echo $response['id'];?>" role="dialog">
+							<a style="width:99%" data-toggle="modal" class="btn btn-info btn-sm" data-target="#myModal1<?php echo $id;?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$id)) ?>"> Details</a>
+							<div class="modal fade" id="myModal1<?php echo $id;?>" role="dialog">
 								<div class="modal-dialog">
 								  <!-- Modal content-->
 								  <div class="modal-content">

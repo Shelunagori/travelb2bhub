@@ -37,15 +37,84 @@ legend
 	<div class="box box-primary">
 		<div class="box-header with-border"> 
 			<h3 class="box-title" style="padding:5px">Check Responses </h3>
-			<div class="col-md-12" align="center"><a  class="viewdetail btn btn-info btn-xs" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$responseid)) ?>"data-target="#myModal1<?php echo $responseid; ?>" data-toggle=modal> Details</a></div>
+			
 			<div class="box-tools pull-right">
 				<!--<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>-->
 				<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 			</div>
 		</div>
 		<div class="box-body">
-		
-		<?php 
+			<?php 
+				//pr($responses->toArray());
+				foreach($responses as $ro){
+				
+					 $reference_id=$ro['request']['reference_id'];
+					 $total_budget=$ro['request']['total_budget'];
+					 $locality=$ro['request']['locality'];
+					 $comment=$ro['request']['comment'];
+					 $check_in=$ro['request']['check_in'];
+					 $check_out=$ro['request']['check_out'];
+					 $org_check_in=date('d-M-Y', strtotime($check_in));
+					 $org_check_out=date('d-M-Y', strtotime($check_out));
+					 $adult=$ro['request']['adult'];
+					 $children=$ro['request']['children'];
+					 $category_id=$ro['request']['category_id'];
+					 $members=$adult+$children;
+					 if($category_id==1){
+						 $category_name="Package";
+						 $image1=$this->Html->image('/img/slider/package-icon.png',['style'=>'height:20px']);
+					 }
+					 if($category_id==2){
+						 $category_name="Transport";
+						 $image1=$this->Html->image('/img/slider/transport-icon.png');
+					 }
+					 if($category_id==3){
+						 $category_name="Hotel";
+						 $image1=$this->Html->image('/img/slider/hotelier-icon.png',['style'=>'height:30px']);
+					 }
+				}
+				?>
+			<fieldset>
+				<legend><?php echo $image1; ?></legend>
+			<div class="col-md-12">
+				
+				<div class="col-md-3">
+						<b>Request Type : </b> <?php echo $category_name; ?>
+				</div>
+				<div class="col-md-3">
+						<b>Reference ID : </b> <?php echo $reference_id; ?>
+				</div>
+				<div class="col-md-2">
+						<b>Total Budget : </b> <?php echo $total_budget; ?>
+				</div>
+				<div class="col-md-3">
+						<b>Destination City : </b> <?php echo $locality; ?>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="col-md-3">
+						<b>Start Date : </b> <?php echo $org_check_in; ?>
+				</div>
+				<div class="col-md-3">
+						<b>End Date : </b> <?php echo $org_check_out; ?>
+				</div>
+				<div class="col-md-2">
+						<b>Members : </b> <?php echo $members; ?>
+				</div>
+				<div class="col-md-3">
+						<b>Comment : </b> <?php echo $comment; ?>
+				</div>
+				<div class="col-md-1">
+						<a  class="viewdetail btn btn-info btn-xs" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$responseid)) ?>"data-target="#myModal1<?php echo $responseid; ?>" data-toggle=modal> Details</a>
+				</div>
+			</div>
+			<div class="col-md-12" align="center">
+				
+			</div>
+			<br>
+			</fieldset>
+			<hr>
+		<?php
 		if(count($responses) >0) {
 			foreach($responses as $row){
 				if($row['request']['category_id']==1){ 
@@ -66,14 +135,25 @@ legend
 				
 				?>
 				<div class="col-md-12">
-					<div class="col-md-2" style="width:9.666667%;">
-						<?php echo $image; ?> <br><?php echo $text; ?>
-					</div>
-					<div class="col-md-2">
-						<b>Total Budget : <br></b> <?php echo $row['request']['total_budget']; ?>
-					</div>
+					<!--div class="col-md-2" style="width:9.666667%;">
+						<?php //echo $image; ?> <br><?php //echo $text; ?>
+					</div-->
+					
 					<div class="col-md-3">
 						<b>Agent Name : <br></b>
+						<?php 
+					$total_rating=0;
+					$rate_count=0;
+					$sql1="Select * from `testimonial` where `author_id`='".$row['user']['id']."' ";
+					$stmt1 = $conn->execute($sql1);
+					foreach($stmt1 as $bresul){
+						$rate_count++;
+						$rating=$bresul['rating'];
+						$total_rating+=$rating;
+					} 
+					@$final_rating=$total_rating/$rate_count;
+					 
+					?>
 						<?php 
 						if($row['response']['is_details_shared']==1){
 								$hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$row['user']['id'],1));                    
@@ -83,14 +163,19 @@ legend
 						}
 						?>
 						<a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></a>
+						<font color="#1295AB">(<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font>
 					</div>
-					<div class="col-md-3" style="width:22%;">
+					<div class="col-md-3">
+						<b>Total Budget : <br></b> <?php echo $row['request']['total_budget']; ?>
+					</div>
+					<div class="col-md-2" style="width:22%;">
 						<b>Quoted Price : <br></b> <?php echo ($row['quotation_price'])?"&#8377; ".$row['quotation_price']:"-- --" ?>
 					</div>
 					<div class="col-md-3">
-		<ul>
-		<li>
-			<a class="btn btn-warning btn-xs " id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>"> 
+		 <table width="100%" >
+		 <tr>
+			<td width="50%">
+			<a style="width:99%" class="btn btn-warning btn-xs " id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>"> 
 			Chat ( <strong><?php echo $data['chat_count'][$row['id']]; ?> </strong> )</a>
 			<div class="modal fade" id="myModal11<?php echo  $row['request']['id']; ?>" role="dialog">
 				<div class="modal-dialog">
@@ -104,28 +189,78 @@ legend
 					</div>
 				</div>
 			</div>
+			</td>
+			<td width="50%">
 				<!---button Share --->
 			<?php if($row['is_details_shared'] != 1) { ?>
-				<a  href="javascript:void(0);" user_id="<?php echo $row['user']['id']; ?>" class="shareDetails btn btn-info btn-xs " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
-						Share Details</a>
+				<!--a style="width:99%" href="javascript:void(0);" user_id="<?php echo $row['user']['id']; ?>" class="shareDetails btn btn-info btn-xs " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
+						Share Details</a-->
+						
+						<a style="width:99%" data-toggle="modal" class="btn btn-info btn-xs" data-target="#share<?php echo $row['id']; ?>" > Share Details </a>
+							<!-------Contact Details Modal --------->
+							<div id="share<?php echo $row['id']; ?>" class="modal fade" role="dialog">
+								<div class="modal-dialog modal-md" >
+									<!-- Modal content-->
+										<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h3 class="modal-title">
+														<font color="black">Share Details</font>
+													</h3>
+												</div>
+												<div class="modal-footer">
+													<button type="button"  href="javascript:void(0);" class="shareDetails btn btn-info" request_id = "<?php echo $row['request']['id']; ?>" user_id="<?php echo $row['user']['id']; ?>" response_id = "<?php echo $row['id']; ?>" >Shared</button>
+													<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+												</div>
+											</div>
+										</div>
+									</div>
 				<?php }
 				else{
 					?>
-						<a  href="javascript:void(0);" class=" btn btn-info btn-xs ">
+						<a style="width:99%" href="javascript:void(0);" class=" btn btn-info btn-xs ">
 						Shared</a>
 					<?php 
 				} ?>
+				</td>
+				</tr>
+			</table>
+			<table width="100%">
+			<tr>
+				<td width="33%"  style="padding-top:5px !important;">
 				<!---button Follow--->
 				<?php
 				if( !array_key_exists($row['user']['id'], $BusinessBuddies)) {?>
-						<a href="javascript:void(0);" class="businessBuddy btn btn-xs " style="background-color:#1295A2;color:#FFF;" user_id = "<?php echo $row['user']['id']; ?>"> Follow</a>
+						<!--a style="width:99%;" href="javascript:void(0);" class="businessBuddy btn btn-successto btn-xs "   user_id = "<?php echo $row['user']['id']; ?>"> Follow</a-->
+						
+						<a style="width:99%" data-toggle="modal" class="btn btn-successto btn-xs" data-target="#follow<?php echo $row['id']; ?>" > Follow User </a>
+							<!-------Contact Details Modal --------->
+							<div id="follow<?php echo $row['id']; ?>" class="modal fade" role="dialog">
+								<div class="modal-dialog modal-md" >
+									<!-- Modal content-->
+										<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h3 class="modal-title">
+														<font color="black">Follow User</font>
+													</h3>
+												</div>
+												<div class="modal-footer">
+													<button type="button"  href="javascript:void(0);" class="businessBuddy btn btn-successto" user_id = "<?php echo $row['user']['id']; ?>" >Follow</button>
+													<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									
 				<?php }
 				else {
 				?>
-					<a  href="javascript:void(0);" class="btn btn-xs " style="background-color:#1295A2;color:#FFF;": user_id = "<?php echo $row['user']['id']; ?>"> Following</a>
+					<a  href="javascript:void(0);" class="btn btn-successto btn-xs " user_id = "<?php echo $row['user']['id']; ?>"> Following</a>
 				<?php }	?>
-			</li>
-			<li>
+			</td>
+			
+			<td width="33%" style="padding-top:5px !important;">
 			
 				<!---button Block--->
 				<?php
@@ -141,42 +276,74 @@ legend
 					?>	
 					
 					<!---button Accept Offer--->
-							<a  href="javascript:void(0);" class="acceptOffer btn btn-success btn-xs " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
-								Accept Offer</a>
+							<!--a  href="javascript:void(0);" class="acceptOffer btn btn-success btn-xs " request_id = "<?php //echo $row['request']['id']; ?>" response_id = "<?php //echo $row['id']; ?>">
+								Accept Offer</a> -->
 								
 						<?php $reviewi =  $row['user']['id']."-".$row['request']['id']; ?>
-							<a data-toggle="modal" class="btn btn-info btn-xs" style="display:none;" data-target="#myModal_accept<?php echo $row['id']; ?>" id="add_review" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">
-						Test</a>
-						<div class="modal fade" id="myModal_accept<?php echo $row['id']; ?>" role="dialog">
-							<div class="modal-dialog">
-							  <div class="modal-content">
-								<div class="modal-header">
-								  <button type="button" class="close" data-dismiss="modal">&times;</button>
-								  <h4 class="modal-title">Add Review</h4>
-								</div>
-								<div class="modal-body">
-								</div>
-							  </div>
-							</div>
-						</div>
+						
+							<a style="width:99%" data-toggle="modal" class="btn btn-success btn-xs" data-target="#accept<?php echo $row['id']; ?>"  > Accept Offer </a>
+							<!-------Contact Details Modal --------->
+							<div id="accept<?php echo $row['id']; ?>" class="modal fade" role="dialog">
+								<div class="modal-dialog modal-md" >
+									<!-- Modal content-->
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h3 class="modal-title">
+													<h4><font color="blue">Are you sure you want to Accept Offer ?</font></h4>
+												</h3>
+											</div>
+												<div class="modal-footer">
+													<button type="button"  href="javascript:void(0);" class="acceptOffer btn btn-info "request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">Accept</button>
+													<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+												</div>
+											</div>
+										</div>
+									</div>
+							 
+						</td>
+						<td width="33%" style="padding-top:5px !important;">
 						<?php 
 							if($blocked==1)
 							{?>
-								<a  href="javascript:void(0);" class="unblockUser btn btn-danger btn-xs " user_id = "<?php echo $row['user']['id']; ?>">
+								<a style="width:99%;" href="javascript:void(0);" class="unblockUser btn btn-danger btn-xs " user_id = "<?php echo $row['user']['id']; ?>">
 								Blocked </a>
 							<?php }
 							else
 							{?>
-								<a  href="javascript:void(0);" class="blockUser btn btn-danger btn-xs " user_id = "<?php echo $row['user']['id']; ?>">
-								Block User </a>
+								<!--a  href="javascript:void(0);" class="blockUser btn btn-danger btn-xs " user_id = "<?php echo $row['id']; ?>">
+								Block User </a-->
+							
+							<a style="width:99%" data-toggle="modal" class="btn btn-danger btn-xs" data-target="#block<?php echo $row['id']; ?>"  > Block User </a>
+							<!-------Contact Details Modal --------->
+							<div id="block<?php echo $row['id']; ?>" class="modal fade" role="dialog">
+								<div class="modal-dialog modal-md" >
+									<!-- Modal content-->
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h3 class="modal-title">
+													<h4><font color="red">Are you sure you want to block this user ?</font></h4>
+												</h3>
+											</div>
+												<div class="modal-footer">
+													<button type="button"  href="javascript:void(0);" class="blockUser btn btn-danger" user_id = "<?php echo $row['user']['id']; ?>">Block</button>
+													<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+												</div>
+											</div>
+										</div>
+									</div>
 							<?php } ?>
 						<!---button Details--->
 						
-					<li>
-				</ul>
+					</td>
+					</tr>
+					</table>
 					</div>
 				</div>
-				
+				<br>
+				<br>
+				<hr>
 			<?php 
 			}
 		}
@@ -406,22 +573,21 @@ $(document).ready(function () {
 		e.preventDefault();
 		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'blockUser')) ?>";
 		var user_id = $(this).attr("user_id");
-		if(confirm("Are you sure want to block this user?")) {
-			$.ajax({
-				url:url,
-				type: 'POST',
-				data: {user_id:user_id}
-			}).done(function(result){
-				if(result == 1) {
-					alert("This user has been blocked successfully.");
-					location.reload();
-				}else if(result == 2){
-				alert("This user has already blocked.");
-				} else {
-					alert("There is some problem, please try again.");
-				}
-			});
-		}
+		 
+		$.ajax({
+			url:url,
+			type: 'POST',
+			data: {user_id:user_id}
+		}).done(function(result){
+			if(result == 1) {
+				 
+				location.reload();
+			}else if(result == 2){
+			 
+			} else {
+				alert("There is some problem, please try again.");
+			}
+		});
 	});
 	
 	$(".businessBuddy").click(function (e) {
@@ -429,20 +595,18 @@ $(document).ready(function () {
 		var __this = $(this);
 		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'addBusinessBuddy')) ?>";
 		var user_id = $(this).attr("user_id");
-		if(confirm("Are you sure want to follow this user?")) {
+		 
 			$.ajax({
 				url:url,
 				type: 'POST',
 				data: {user_id:user_id}
 			}).done(function(result){
 				if(result == 1) {
-					alert("This user has been added to your following list successfully.");
-					__this.parent().remove();
+					location.reload();
 				} else {
 					alert("There is some problem, please try again.");
 				}
 			});
-		}
 	});
 	
 	$(".acceptOffer").click(function (e) {
@@ -451,22 +615,20 @@ $(document).ready(function () {
 		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'acceptOffer')) ?>";
 		var request_id = $(this).attr("request_id");
 		var response_id = $(this).attr("response_id");
-		if(confirm("Are you sure want to accept this offer?")) {
 			$.ajax({
 				url:url,
 				type: 'POST',
 				data: {request_id:request_id, response_id:response_id}
 			}).done(function(result){
 				if(result == 1) {
-					alert("This offer has been accepted successfully.");
-					//$('#myModal_accept').modal('show');
+					 
 					$('#add_review').click();
-					__this.remove();
+					var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>";
+					 window.location.href=url;
 				} else {
 					alert("There is some problem, please try again.");
 				}
 			});
-		}
 	});
 	$(".shareDetails").click(function (e) {
 		e.preventDefault();
@@ -475,20 +637,17 @@ $(document).ready(function () {
 		var request_id = $(this).attr("request_id");
 		var response_id = $(this).attr("response_id");
 		var user_id = $(this).attr("user_id");
-		if(confirm("Are you sure want to share your details with this user?")) {
 			$.ajax({
 				url:url,
 				type: 'POST',
 				data: {request_id:request_id, response_id:response_id,user_id:user_id}
 			}).done(function(result){
 				if(result == 1) {
-					alert("Your details has been shared successfully.");
-					__this.remove();
+					 location.reload();
 				} else {
 					alert("There is some problem, please try again.");
 				}
 			});
-		}
 	});
 });
 </script>
@@ -578,20 +737,17 @@ $(document).ready(function () {
  		var datas = $(this);
 		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'addBusinessBuddy')) ?>";
 		var user_id = $(this).attr("user_id");
-		if(confirm("Are you sure want to follow this user?")) {
-			$.ajax({
-				url:url,
-				type: 'POST',
-				data: {user_id:user_id}
-			}).done(function(result){
-				if(result == 1) {
-					alert("This user has been added to your following list successfully.");
-					datas.parent().remove();
-				} else {
-					alert("There is some problem, please try again.");
-				}
-			});
-		}
+		$.ajax({
+			url:url,
+			type: 'POST',
+			data: {user_id:user_id}
+		}).done(function(result){
+			if(result == 1) {
+				location.reload();
+			} else {
+				alert("There is some problem, please try again.");
+			}
+		});
 	});
 	
 });

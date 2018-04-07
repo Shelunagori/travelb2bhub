@@ -32,26 +32,62 @@ $conn = ConnectionManager::get('default');
 		if(count($blockedUsers) >0) { 
 			foreach($blockedUsers as $row){ ?>
 							<div class="form-group col-md-12">
-								<div class="col-md-2">
+								<div class="col-md-3">
+									<?php 
+										$total_rating=0;
+										$rate_count=0;
+										$sql1="Select * from `testimonial` where `author_id`='".$row['user']['id']."' ";
+										$stmt1 = $conn->execute($sql1);
+										foreach($stmt1 as $bresul){
+											$rate_count++;
+											$rating=$bresul['rating'];
+											$total_rating+=$rating;
+										} 
+										@$final_rating=$total_rating/$rate_count;
+										 
+										?>
 									<?php 
 										$hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$row['user']['id']));
 									?>
 									<b>Name :</b>
 									<a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></a>
-								</div>
-								<div class="col-md-2">
-									<b>Email :</b> <?php echo ($row['user']['email'])?$row['user']['email']:"-- --"; ?>
+									<font color="#1295AB">(<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font>
 								</div>
 								<div class="col-md-3">
-									<b>Mobile No. :</b> <?php echo ($row['user']['mobile_number'])?$row['user']['mobile_number']:"-- --"; ?>
+									<b>Email :</b> <?php echo ($row['user']['email'])?$row['user']['email']:"-- --"; ?>
 								</div>
+								<!--div class="col-md-3">
+									<b>Mobile No. :</b> <?php echo ($row['user']['mobile_number'])?$row['user']['mobile_number']:"-- --"; ?>
+								</div-->
 								<div class="col-md-3">
 									<b>Company Name :</b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?>
 								</div>
-								<div class="col-md-2 text-center">
-									<a href="javascript:void(0);" class="unblockUser btn btn-success btn-sm" user_id = "<?php echo $row['user']['id']; ?>" > Unfollow</a>
+								<div class="col-md-3">
+									<!--a href="javascript:void(0);" class="unblockUser btn btn-success btn-sm" user_id = "<?php //echo $row['user']['id']; ?>" > Unfollow</a-->
+									
+									<a style="width:70%" data-toggle="modal" class="btn btn-success btn-sm" data-target="#block<?php echo $row['user']['id']; ?>"  > Unblock User </a>
+							<!-------Contact Details Modal --------->
+							<div id="block<?php echo $row['user']['id']; ?>" class="modal fade" role="dialog">
+								<div class="modal-dialog modal-md" >
+									<!-- Modal content-->
+										<div class="modal-content">
+											<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h3 class="modal-title">
+													<h4><font color="green">Are you sure you want to Unblock this user ?</font></h4>
+												</h3>
+											</div>
+												<div class="modal-footer">
+													<button type="button"  href="javascript:void(0);" class="unblockUser btn btn-success" user_id = "<?php echo $row['user']['id']; ?>">Unblock</button>
+													<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
+								<?php } ?>
+							
 						</div>
 					</div>
 				</div>
@@ -86,11 +122,11 @@ $conn = ConnectionManager::get('default');
 					</div>
 				  </div>
 				</div-->
-			<?php } ?>
+		
       <div class="pages"></div>
 		<?php } else {?>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 box-event">
+                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 box-event" style="text-align:center;">
                    There are no blocked users.
                 </div>
 			</div>
@@ -117,20 +153,20 @@ $(document).ready(function () {
 		e.preventDefault();
 		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'unblockUser')) ?>";
 		var user_id = $(this).attr("user_id");
-		if(confirm("Are you sure want to unblock this user?")) {
+	 
 			$.ajax({
 				url:url,
 				type: 'POST',
 				data: {user_id:user_id, user_id:user_id}
 			}).done(function(result){
 				if(result == 1) {
-					alert("This user has been unblocked successfully.");
+					 
 					location.reload();
 				} else {
 					alert("There is some problem, please try again.");
 				}
 			});
-		}
+	 
 	});
 });
 </script>
