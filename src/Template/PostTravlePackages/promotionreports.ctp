@@ -82,7 +82,7 @@ fieldset{
 							</div>
 						</div>
 					</div>
-					<div class="col-md-5 ">
+					<div class="col-md-5"  style="padding-left:30px;">
 						<div class="row">
 							<div class="col-md-12 ">
 							<span style="color:black;font-size:25px;"><?php echo $postTravlePackage->title?></span>
