@@ -4285,20 +4285,7 @@ $responses = $this->Responses->find()
 $userchatTable = TableRegistry::get('User_Chats');
 $conn = ConnectionManager::get('default');
 $data = array();
-foreach($responses as $row){ 
-$request_id = $row['request']['id'];
-$user_id = $row['user']['id'];
-$sql = "SELECT *,COUNT(*) as ch_count FROM user_chats 
-WHERE request_id='".$request_id."' AND (user_id in ('".$loggedinid."','".$user_id."') 
-AND notification='0'
-ANd send_to_user_id in ('".$loggedinid."','".$user_id."')) ";
-$stmt = $conn->execute($sql);
-$results = $stmt ->fetch('assoc');			
-//$row["request"]["chat_count"]=$results['ch_count'];
-$data[$row['id']] =$results['ch_count'];
-	echo json_encode($data);
-	die();
-}	
+	
 	
 }
 
