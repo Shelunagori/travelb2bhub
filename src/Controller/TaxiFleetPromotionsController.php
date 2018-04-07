@@ -435,4 +435,17 @@ class TaxiFleetPromotionsController extends AppController
 		$user_id=$this->Auth->User('id');
 		$this->set(compact('user_id'));
     }
+	public function likersList($taxifleet_id = null)
+    {
+		$this->viewBuilder()->layout('user_layout');
+		$user_id=$this->Auth->User('id');
+		//$post_travel_id=$this->request->data['post_travel_id'];
+		$this->set(compact('user_id','taxifleet_id'));
+    }
+	public function viewersList($taxifleet_id = null)
+    {
+		$this->viewBuilder()->layout('user_layout');
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id','taxifleet_id'));
+    }
 }
