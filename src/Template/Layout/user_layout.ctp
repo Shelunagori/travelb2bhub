@@ -2,7 +2,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 <meta charset="utf-8">
-<title>TB2B</title>
+<title>TB2B</title    line-height: 60px;
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta content="" name="description">
@@ -21,6 +21,7 @@
 	<?php echo $this->Html->css('/assets/dist/css/skins/_all-skins.min.css'); ?> 
 	<?php echo $this->Html->css('/assets/plugins/WYSIWYG/editor.css'); ?>
 	<?php echo $this->Html->css('/assets/demo-styles.css'); ?>
+	<?php echo $this->Html->css('/assets/loader-1.css'); ?>
 	<?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Raleway'); ?>
  	<?php echo $this->Html->css('//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'); ?> 
 	<?php
@@ -137,6 +138,7 @@ margin-top: 5px !important;
 	height:35px !important; 
 	border-radius: 100%;
 	border: 1px solid #1295A2 !important;
+	width:100% !important;
 } 
 .notify {
   white-space: unset !important;
@@ -288,7 +290,7 @@ p {
 
 <!--<body class="hold-transition skin-blue fixed sidebar-mini">-->
 
-<body class="hold-transition skin-blue  sidebar-mini">
+<body class="hold-transition skin-blue fixed sidebar-mini">
 <?php $this->Form->templates([
 		'inputContainer' => '{{content}}'
 	]); 
@@ -300,7 +302,7 @@ p {
 <div id="wrapper">
 	<header class="main-header  no-print">
     <!-- Logo background: #1295a2; -->
-    <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo" >
+    <a style="line-height: 60px;" href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo" >
       <span class="logo-mini" style="font-size:0px !important;"><?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:77%;']) ?></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg" style="font-size:0px !important;"><?=  $this->Html->image('/img/main_logo.png', ['style'=>'width:92%;','class'=>'image-responsive']) ?></span>
@@ -463,7 +465,7 @@ p {
 	<!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
       <!-- Sidebar user panel -->
-      <div class="user-panel" align="center">
+      <div class="user-panel" align="center" style="margin-top:10px">
         <div class='imaage' >
           <?php
 			
