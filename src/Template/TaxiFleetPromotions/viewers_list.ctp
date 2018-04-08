@@ -1,7 +1,7 @@
 <?php 
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => $coreVariable['SiteUrl']."api/TaxiFleetPromotions/TexiPromotionLikes.json?texifleet_promotion_id=".$taxifleet_id."&user_id=".$user_id,
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/TaxiFleetPromotions/TexiPromotionViews.json?texifleet_promotion_id=".$taxifleet_id."&user_id=".$user_id,
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -63,7 +63,7 @@ p{
 		<div class="row">
 			<div class="col-md-12">
 				<div class="box-header with-border"> 
-					<span class="box-title" style="color:#057F8A;"><b><?= __('Total Likes') ?></b></span>
+					<span class="box-title" style="color:#057F8A;"><b><?= __('Total Views') ?></b></span>
 					
 				</div>
 			</div>
@@ -82,7 +82,7 @@ p{
 				<th>Actions</th>
 				</tr>
 				</thead>
-				<?php $i=0;		
+				<?php $i=0;
 					if(!empty($texifleetpromotion)){
 						foreach ($texifleetpromotion as $texifleetpromotion){ 
 						$i++;
@@ -99,8 +99,7 @@ p{
 				<label><?php echo $texifleetpromotion->user->company_name;?></label>
 				</td>
 				<td>
-					<a follow_id="<?php echo $texifleetpromotion->user_id; ?>" class=" 
-				btn btn-danger btn-sm"  data-target="#unfollow<?php echo $texifleetpromotion->user_id; ?>" data-toggle=modal>Unfollow</a>
+					<a follow_id="<?php echo $texifleetpromotion->user_id; ?>" class=" btn btn-danger btn-sm"  data-target="#unfollow<?php echo $texifleetpromotion->user_id; ?>" data-toggle=modal>Unfollow</a>
 		<!-------Follow Modal Start--------->
 					<div id="unfollow<?php echo $texifleetpromotion->user_id; ?>" class="modal fade" role="dialog">
 						<div class="modal-dialog modal-md" >
@@ -110,19 +109,19 @@ p{
 								  <div class="modal-header" style="height:100px;">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
 										<h4 class="modal-title">
-										Are You Sure, you want to delete this request ?
+										Are you sure, you want to unfollow these user ?
 										</h4>
 									</div>
 									<div class="modal-footer" style="height:60px;">
-										<button type="button" follow_id="<?php echo $texifleetpromotion->user_id; ?>" class="unfollow btn btn-info" value="yes" >Yes</button>
-										<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+										<button type="button" follow_id="<?php echo $texifleetpromotion->user_id; ?>" class="unfollow btn btn-info btn-md " value="yes" >Yes</button>
+										<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
 									</div>
 								</div>
 							</form>
 						</div>
 					</div>
 				</td>
-				</tr><?php }} ?>
+				</tr><?php } } ?>
 				</tbody>
 				</table>
 				</div>
