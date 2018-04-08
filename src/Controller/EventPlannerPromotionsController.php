@@ -438,4 +438,16 @@ class EventPlannerPromotionsController extends AppController
 		$user_id=$this->Auth->User('id');
 		$this->set(compact('user_id'));
     }
+	public function likersList($event_id = null)
+    {
+		$this->viewBuilder()->layout('user_layout');
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id','event_id'));
+    }
+	public function viewersList($event_id = null)
+    {
+		$this->viewBuilder()->layout('user_layout');
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id','event_id'));
+    }
 }

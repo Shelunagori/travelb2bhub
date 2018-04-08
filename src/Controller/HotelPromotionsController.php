@@ -436,10 +436,22 @@ class HotelPromotionsController extends AppController
 		$user_id=$this->Auth->User('id');
         $this->set(compact('user_id','higestSort','category_id','rating_filter'));
 	}
-	 public function promotionreports()
+	  public function promotionreports()
     {
 		$this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');
 		$this->set(compact('user_id'));
+    }
+	public function likersList($hotelpromotion_id = null)
+    {
+		$this->viewBuilder()->layout('user_layout');
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id','hotelpromotion_id'));
+    }
+	public function viewersList($hotelpromotion_id = null)
+    {
+		$this->viewBuilder()->layout('user_layout');
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id','hotelpromotion_id'));
     }
 }

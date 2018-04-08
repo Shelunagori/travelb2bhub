@@ -439,7 +439,6 @@ class TaxiFleetPromotionsController extends AppController
     {
 		$this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');
-		//$post_travel_id=$this->request->data['post_travel_id'];
 		$this->set(compact('user_id','taxifleet_id'));
     }
 	public function viewersList($taxifleet_id = null)
