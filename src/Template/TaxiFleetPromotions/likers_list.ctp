@@ -99,7 +99,7 @@ p{
 				<label><?php echo $texifleetpromotion->user->company_name;?></label>
 				</td>
 				<td>
-					<a follow_id="<?php echo $texifleetpromotion->user_id; ?>" class=" 
+				<a follow_id="<?php echo $texifleetpromotion->user_id; ?>" class=" 
 				btn btn-danger btn-sm"  data-target="#unfollow<?php echo $texifleetpromotion->user_id; ?>" data-toggle=modal>Unfollow</a>
 		<!-------Follow Modal Start--------->
 					<div id="unfollow<?php echo $texifleetpromotion->user_id; ?>" class="modal fade" role="dialog">
