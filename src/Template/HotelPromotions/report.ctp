@@ -88,7 +88,6 @@ if ($err) {
 	color:#716D6F;
 	font-weight:bold;
 	 white-space: nowrap;
-
 	}
 fieldset{
 	margin-bottom:5px !important;
@@ -97,7 +96,7 @@ fieldset{
 .
 p{
 	text-align:center;
-	font-size:10px;
+	font-size:15px;
 }
 
 .row{

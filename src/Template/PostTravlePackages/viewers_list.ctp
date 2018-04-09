@@ -99,7 +99,11 @@ p{
 				<label><?php echo $postTravlePackage->user->company_name;?></label>
 				</td>
 				<td>
+				<?php if ($user_id!=$postTravlePackage->user_id)
+					{
+						?>
 					<a follow_id="<?php echo $postTravlePackage->user_id; ?>" class=" btn btn-danger btn-sm"  data-target="#unfollow<?php echo $postTravlePackage->user_id; ?>" data-toggle=modal>Unfollow</a>
+					<?php } ?>
 		<!-------Follow Modal Start--------->
 					<div id="unfollow<?php echo $postTravlePackage->user_id; ?>" class="modal fade" role="dialog">
 						<div class="modal-dialog modal-md" >
