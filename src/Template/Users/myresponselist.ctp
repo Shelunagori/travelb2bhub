@@ -644,7 +644,7 @@ $(document).ready(function(){
 					<?php 
 							if($blocked==1)
 							{?>
-								<a  style="width:99%" href="javascript:void(0);" class="unblockUser btn btn-danger btn-sm " user_id = "<?php echo $response['request']['user']['id']; ?>">
+								<a  style="width:99%" class=" btn btn-danger btn-sm ">
 								Blocked </a>
 							<?php }
 							else
