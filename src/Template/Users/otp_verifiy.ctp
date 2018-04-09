@@ -32,13 +32,13 @@
 					</center>
 					<span class="login100-form-title p-b-34 p-t-27">
 						TRAVEL B2b HUB
-					</span>			
+					</span>
 				<?php  echo $this->Form->create("User", ['id'=>"UserRegisterForm",'class'=>'login100-form validate-form']); ?>
 					<div class="text-center">
-						<p style="color:#fff"> Forgot Password </p>
+						<p style="color:#fff"> Otp Verification </p>
 					</div> <br />
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="text" name="mobile_number" placeholder="Mobile no.">
+						<input class="input100" type="text" name="mobile_otp" autofocus="on">
 					</div>
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" style="width: 100%;">
@@ -47,7 +47,13 @@
 					</div>
 					<br />
 					<p style="color:#fff !important;"><?php echo $this->Flash->render(); ?></p>
-				
+					<div class="text-center p-t-90" style="padding-top: 20px;">
+						<p style="color:#fff">Otp resend ?
+							<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'otp_resend/'.$user_id)) ?>" style="color:#5ba7a4;">
+								Re-Send
+							</a>
+						</p>
+					</div>
 					<div class="text-center p-t-90" style="padding-top: 20px;">
 						<p style="color:#fff">Already have an account ?
 							<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'login')) ?>" style="color:#5ba7a4;">

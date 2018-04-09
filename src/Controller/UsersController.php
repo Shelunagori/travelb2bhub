@@ -21,7 +21,7 @@ class UsersController extends AppController {
 	var $helpers = array('Html', 'Form', 'Response');
 	public function beforeFilter(\Cake\Event\Event $event) {
 		parent::beforeFilter($event);
-		$this->Auth->allow(['register', 'login','getcitylist', 'userVerification', 'forgotPassword', 'activatePassword', 'cakeVersion', 'deleteAllCache', 'addNewsLatter']);
+		$this->Auth->allow(['register', 'login','getcitylist', 'userVerification', 'forgotPassword', 'activatePassword', 'cakeVersion', 'deleteAllCache', 'addNewsLatter', 'otpVerifiy', 'otpResend', 'passwordotpVerifiy']);
 	}
 	
 	public function beforeRender(\Cake\Event\Event $event) {
@@ -51,28 +51,61 @@ class UsersController extends AppController {
 		$this->set('profile_pic', $profile_pic);
 		$this->set('loginId',$loginId);
 		$this->set('roleId',$role_id);
-		
-		//----	 FInalized
 		$this->loadModel('Requests');
-		$finalreq["Requests.user_id"] = $this->Auth->user('id');
+		$this->loadModel('Responses');
+		
+		$this->loadModel('BlockedUsers');
+		$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
+			->hydrate(false)
+			->where(['blocked_by' => $loginId])
+			->toArray();
+		$myBlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_by'])
+			->hydrate(false)
+			->where(['blocked_user_id' => $loginId])
+			->toArray();
+		if(!empty($BlockedUsers)) {
+			$BlockedUsers = array_values($BlockedUsers);
+		}
+		if(!empty($myBlockedUsers)) {
+			$myBlockedUsers = array_values($myBlockedUsers);
+		}
+		$BlockedUsers=array_merge($BlockedUsers,$myBlockedUsers);
+		$BlockedUsers = array_unique($BlockedUsers);
+		array_push($BlockedUsers,$loginId);
+		if(sizeof($BlockedUsers)>0){
+			$conditions["Requests.user_id NOT IN"] =  $BlockedUsers; 
+		}
+		
+		$myRequestCount = 0;
+ 		$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
+		$myRequestCount = $query->count(); 
+		$reqcountNew = $this->getSettings('requestcount');
+ 		$this->set('reqcountNew', $reqcountNew);
+ 		$this->set('myRequestCountNew', $myRequestCount);
+ 		$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->where(["Requests.user_id NOT IN"=>$BlockedUsers]);
+		$myReponseCount = $queryr->count(); 
+		
+		$this->set('myReponseCountNew', $myReponseCount);
+ 		//----	 FInalized
+ 		$finalreq["Requests.user_id"] = $this->Auth->user('id');
 		$finalreq["Requests.status"] = 2;
 		$finalreq["Requests.is_deleted "] = 0;
 		$finalizeRequest = $this->Requests->find()->where($finalreq)->count();
-		$this->set('finalizeRequest', $finalizeRequest);
+		$this->set('finalizeRequestNew', $finalizeRequest);
 		//--- Removed Request
 		$remoev["Requests.user_id"] = $this->Auth->user('id');
 		$remoev["Requests.is_deleted "] = 1;
 		$RemovedReqest = $this->Requests->find()->where($remoev)->count();
-		$this->set('RemovedReqest', $RemovedReqest);
+		$this->set('RemovedReqestNew', $RemovedReqest);
 		//--- Blocked User
 		$this->loadModel('blocked_users');
 		$blk["blocked_users.blocked_by"] = $this->Auth->user('id');
 		$blockedUserscount = $this->blocked_users->find()->where($blk)->count();
-		$this->set('blockedUserscount', $blockedUserscount);
+		$this->set('blockedUserscountnew', $blockedUserscount);
 		//--- Finalize Response;
-		$this->loadModel('Responses');
+		
 		$FInalResponseCount = $this->Responses->find('all', ['conditions' => ['Responses.status' =>1,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->count();
-		$this->set('FInalResponseCount', $FInalResponseCount);
+		$this->set('FInalResponseCountNew', $FInalResponseCount);
 		//*--- UserChats
 		$this->loadModel('UserChats');
 		$csort['created'] = "DESC";
@@ -281,6 +314,8 @@ if(isset($this->request->data["preference"]) && !empty($this->request->data["pre
 $d['country_id'] = 101;
 $d['state_id'] = 877;
 $d['city_id'] = 33;
+$rendomCode=rand('1010', '9999');
+$d['mobile_otp'] = $rendomCode;
 
 $user = $this->Users->newEntity($d);
 	if ($res = $this->Users->save($user)) {
@@ -313,24 +348,30 @@ $user = $this->Users->newEntity($d);
 		$message.='<p>We are committed to enhance your trading experience!</p>';
 		$message.='<p>Sincerely,<br>The TravelB2Bhub Team</p>';
 		// Mail it
-		$email = new Email();    
+		/* $email = new Email();    
 			   $email->transport('gmail')
 					->from(['webmaster@travelb2bhub.com'=>'TravelB2Bhub'])
 					->to($to)
 					->subject($subject)
 					 ->emailFormat('html')
 					->viewVars(array('msg' => $message))
-					->send($message);
+					->send($message); */
 
 
 		//mail($to, $subject, $message, $headers);
+		
+		$mobile_no=$d['mobile_number'];
+		$sms_sender='B2BHUB';
+		$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
+		file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
+						
 		$uid = $res->id;
 		$c['credit'] = 60;
 		$c['user_Id'] = $uid;
 		$creditd = $this->Credits->newEntity($c);
 		$this->Credits->save($creditd);
 		$this->Flash->success(__('Thank you for registering with Travelb2bhub.com! Please activate your account by clicking on the link sent to your e-mail address. If you do not receive an e-mail in your inbox, please check SPAM or JUNK folder.'));
-		$this->redirect('/users/dashboard/');
+		$this->redirect('/users/otpVerifiy/'.$userId);
 	} 
 	else {
 	$this->Flash->error(__('The user could not be saved. Please, try again.'));
@@ -3293,50 +3334,28 @@ $this->loadModel('Users');
 $d = $this->request->data;
 $user = $this->Users
 ->find()
-->where(['email' =>$d['email']])
+->where(['mobile_number' =>$d['mobile_number']])
 ->first();
 if (!empty($user)) {
-// check for unverified account
-/*if ($user['email_verified']==0) {
-$this->Flash->error(__('Your registration has not been confirmed yet please verify your email before reset password'));
-$this->redirect('/users/forgotPassword');
-} else {*/
-$usernumber = $user["mobile_number"].''.$user["id"];
-$theKey = sha1($usernumber);
-//die();
-//	$theKey = $this->getActivationKey($user["mobile_number"]);
-$userId = $user["id"];
-$tablename = TableRegistry::get("Users");
-$query = $tablename->query();
-$result = $query->update()
-->set(['activation' => $theKey])
-->where(['id' => $userId])
-->execute();
-$subject="TravelB2Bhub Reset Password";
-$to = $user["email"];
-$headers  = 'MIME-Version: 1.0' . "\r\n";
-$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-$headers .= 'From: TravelB2Bhub <contactus@travelb2bhub.com>' . "\r\n";
-$message='<p>Dear '.$user['first_name'].',</p>';
-$message.="<p>Reset your password, and we'll get you on your way.</p>";
-$message.='<p>To change your TravelB2Bhub password, click the following link into your browser:
-<a href="https://www.travelb2bhub.com/users/activatePassword?ident='.$userId.'&activate='.$theKey.'">click here</a></p>';
-$message.='<p>Sincerely,<br>The TravelB2Bhub Team</p>';
-// Mail it
-	$email = new Email();    
-    $email->transport('gmail')
-            ->from(['webmaster@travelb2bhub.com'=>'TravelB2Bhub'])
-            ->to($to)
-            ->subject($subject)
-             ->emailFormat('html')
-            ->viewVars(array('msg' => $message))
-            ->send($message);
-//@mail($to, $subject, $message, $headers);
-$this->Flash->success(__('Please check your email to reset your password.'));
-$this->redirect('/users/forgot-password');
-//}
+	$user_id=$user["id"];
+	$mobile_no=$d['mobile_number'];
+	
+	$rendomCode=rand('1010', '9999');
+	$TableResponse = TableRegistry::get("Users");
+	$query = $TableResponse->query();
+		$result = $query->update()
+			->set(['mobile_otp' => $rendomCode])
+			->where(['id' => $user_id])
+			->execute();
+			
+	$sms_sender='B2BHUB';
+	$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
+	file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
+	 
+	$this->redirect('/users/passwordotp-verifiy/'.$user_id);
+	
 } else {
-$this->Flash->error(__('Incorrect Email.'));
+$this->Flash->error(__('Incorrect Mobile no.'));
 }
 }
 }
@@ -3346,6 +3365,86 @@ $this->Flash->error(__('Incorrect Email.'));
 * @access public
 * @return void
 */
+public function otpResend($user_id) {
+	
+	if(!empty($user_id)){
+		$users=$this->Users->find()->where(['id'=>$user_id])->first();
+		 $mobile_no=$users->mobile_number;
+		 
+		$rendomCode=rand('1010', '9999');
+		$TableResponse = TableRegistry::get("Users");
+		$query = $TableResponse->query();
+			$result = $query->update()
+				->set(['mobile_otp' => $rendomCode])
+				->where(['id' => $user_id])
+				->execute();
+			
+		$sms_sender='B2BHUB';
+		$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
+		file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
+	}
+	$this->redirect('/users/otp-verifiy/'.$user_id);
+}
+
+
+public function otpVerifiy($user_id) {
+$this->viewBuilder()->layout('');
+Configure::write('debug',2);
+ 
+if ($this->request->is('post')) {
+$this->loadModel('Users');
+$mobile_otp = $this->request->data['mobile_otp'];
+$user_count = $this->Users
+->find()
+->where(['id' =>$user_id,'mobile_otp'=>$mobile_otp])
+->count();
+if($user_count>0){
+	$TableResponse = TableRegistry::get("Users");
+	$query = $TableResponse->query();
+		$result = $query->update()
+			->set(['status' => '1'])
+			->where(['id' => $user_id])
+			->execute();
+		
+		// $UserS=$this->Users->find()->where(['id'=>$user_id])->first();
+		$this->Auth=$UserS;
+		// $this->request->session()->write('Auth', $UserS);
+		// $this->redirect('/users/dashboard'); 
+ 	 
+	}else{
+		$this->Flash->error(__('Otp is not correct try again'));
+	}
+}
+$this->set('user_id',$user_id);
+}
+
+public function passwordotpVerifiy($user_id) {
+$this->viewBuilder()->layout('');
+Configure::write('debug',2);
+ 
+if ($this->request->is('post')) {
+$this->loadModel('Users');
+$mobile_otp = $this->request->data['mobile_otp'];
+$user_count = $this->Users
+->find()
+->where(['id' =>$user_id,'mobile_otp'=>$mobile_otp])
+->count();
+if($user_count>0){
+	$TableResponse = TableRegistry::get("Users");
+	$query = $TableResponse->query();
+		$result = $query->update()
+			->set(['status' => '1'])
+			->where(['id' => $user_id])
+			->execute();
+			
+		$this->redirect('/users/activatePassword/'.$user_id);	
+	}else{
+		$this->Flash->error(__('Otp is not correct try again'));
+	}
+}
+$this->set('user_id',$user_id);
+}
+
 public function activatePassword() {
 	$this->viewBuilder()->layout('');
 	
