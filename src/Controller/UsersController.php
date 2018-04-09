@@ -2867,7 +2867,9 @@ public function myresponselist() {
 			->where(['Users.id' => $this->Auth->user('id')])->first();
 		$this->set('users', $user);
 		$this->set('userProfile', $user);
-		$sort='';
+		if(empty($this->request->query("sort"))) {
+			$sort['Requests.id'] = "DESC";
+		}
 		if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgetlh") {
 			$sort['Requests.total_budget'] = "ASC";
 		}
