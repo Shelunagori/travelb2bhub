@@ -181,7 +181,7 @@ $(".req").sort(function (a, b) {
 					if(count($requests) >0) {
 						
 					 foreach($requests as $request){
-					 
+					 $id=$request['id'];
 						$totmem = $request['adult'] +   $request['children']; 
 					   if(isset($_GET['memberssearch']) && $_GET['memberssearch']!="" && $_GET['memberssearch'] !=$totmem ){
 						continue;
@@ -310,15 +310,35 @@ $(".req").sort(function (a, b) {
 									<a style="width:99%" data-toggle="modal"  class="btn btn-info btn-sm" data-target="#myModal1<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'viewdetails',$request['id'])) ?>"> Details</a>
 								</td>
 								
-								<td width="33%">
+								<td width="33%" align="left">
  									<?php $reviewi = $request['responses'][0]['user_id']."-".$request['id']; ?> 
 									<?php 
 									if(array_key_exists($finalresponse[$request['id']]['user_id'], $BusinessBuddies)) {?>
 										<a href="#" style="width:99%" class="btn btn-warning btn-sm"> Following</a>
 									<?php } 
 									else{ ?>
-										<a style="width:99%" href="javascript:void(0);" class="businessBuddy btn btn-warning btn-sm" user_id = "<?php echo $finalresponse[$request['id']]['user_id']; ?>"> Follow User</a><?php 
-									}?>
+										<!--a style="width:99%" href="javascript:void(0);" class="businessBuddy btn btn-warning btn-sm" user_id = "<?php //echo $finalresponse[$request['id']]['user_id']; ?>"> Follow User</a-->
+										
+										<a style="width:99%" data-toggle="modal" class="btn btn-warning btn-sm" data-target="#follow<?php echo $id; ?>" > Follow User </a>
+										<!-------Contact Details Modal --------->
+										<div id="follow<?php echo $id; ?>" class="modal fade" role="dialog">
+											<div class="modal-dialog modal-md" >
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<h3 class="modal-title">
+															<font color="black">Confirm Follow User ?</font>
+														</h3>
+													</div>
+													<div class="modal-footer">
+													<button type="button"  href="javascript:void(0);" class="businessBuddy btn btn-warning" user_id = "<?php echo $finalresponse[$request['id']]['user_id']; ?>" >Follow</button>
+													<button type="button" class="btn btn-successto" data-dismiss="modal">Cancel</button>
+													</div>
+												</div>
+											</div>
+										</div>
+										 
+										<?php } ?>
 								</td>
 							</tr>
 						</table>
@@ -328,30 +348,33 @@ $(".req").sort(function (a, b) {
  									<?php $reviewi = $request['responses'][0]['user_id']."-".$request['id']; ?>
 									 <a style="width:99%" data-toggle="modal" class="btn btn-successto btn-sm" data-target="#myModal1review<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi )) ?>"> Review </a>
 								</td>
-								<td width="50%">
+								<td width="50%" align="left">
+								
 									<a style="width:99%" data-toggle="modal" class="btn btn-danger btn-sm" data-target="#block<?php echo $request['id']; ?>"  > Block User </a>
+									
+									<div id="block<?php echo $request['id']; ?>" class="modal fade" role="dialog">
+										<div class="modal-dialog modal-md" >
+											<!-- Modal content-->
+												<div class="modal-content">
+													<div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<h4 class="modal-title">
+															<font color="red">Are you sure you want to block this user?</font>
+														</h4>
+													</div>
+														<div class="modal-footer">
+														<button type="button"  href="javascript:void(0);" class="blockUser btn btn-danger" user_id = "<?php echo $finalresponse[$request['id']]['user_id']; ?>">Block</button>
+														<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+														</div>
+													</div>
+												</div>
+									</div>
 								</td>
 								
 							</tr>
 						</table>
 						
-							<div id="block<?php echo $request['id']; ?>" class="modal fade" role="dialog">
-								<div class="modal-dialog modal-md" >
-									<!-- Modal content-->
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h4 class="modal-title">
-													<font color="red">Are you sure you want to block this user?</font>
-												</h4>
-											</div>
-												<div class="modal-footer">
-												<button type="button"  href="javascript:void(0);" class="blockUser btn btn-danger" user_id = "<?php echo $finalresponse[$request['id']]['user_id']; ?>">Block</button>
-												<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
-												</div>
-											</div>
-										</div>
-									</div>  
+							  
 							 <div class="modal fade" id="myModalchat<?php echo $request['id']; ?>" role="dialog">
 									<div class="modal-dialog">
 									  <!-- Modal content-->

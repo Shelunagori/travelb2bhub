@@ -52,13 +52,13 @@
 													<form method="post">
 														<!-- Modal content-->
 															<div class="modal-content">
-															  <div class="modal-header" style="height:100px;">
+															  <div class="modal-header"  >
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																	<h4 class="modal-title">
 																	Are You Sure, you want to delete this request ?
 																	</h4>
 																</div>
-																<div class="modal-footer" style="height:60px;">
+																<div class="modal-footer" >
 																	<button type="button" follow_id="<?php echo $row['id']; ?>" class="unfollow btn btn-danger" value="yes" >Yes</button>
 																	<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
 																</div>
