@@ -60,11 +60,13 @@ p{
 </style>
 <div class="container-fluid">
 	<div class="box box-primary" style="margin-bottom:5px;">
-		<div class="row">
+		<div class="row" style="padding-bottom:5px;">
 			<div class="col-md-12">
-				<div class="box-header with-border"> 
+				<div class="box-header"> 
 					<span class="box-title" style="color:#057F8A;"><b><?= __('Total Likes') ?></b></span>
-					
+					<div class="box-tools pull-right " >
+					<input type="text" id="search" placeholder="Type to search" class="">
+					 <button type="submit"><i class="fa fa-search"></i></button>
 				</div>
 			</div>
 		</div>
@@ -73,7 +75,7 @@ p{
 		<fieldset style="background-color:#fff;">
 			<form method="post" class="formSubmit">
 				<div class="row col-md-12">
-				<table class="table lbwidth">	
+				<table class="table lbwidth" id="table">	
 				<thead>
 				<tr style="background-color:#ECDEE5;">
 				<th>Sr.NO</th>
@@ -135,3 +137,15 @@ p{
 	</div>			
 </div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<script>
+ $(document).ready(function () {
+ var $rows = $('#table tbody');
+$('#search').keyup(function() { 
+    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+    $rows.show().filter(function() {
+        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+        return !~text.indexOf(val);
+    }).hide();
+});
+});
+</script>
