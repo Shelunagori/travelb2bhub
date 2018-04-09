@@ -179,7 +179,7 @@ $(".req").sort(function (a, b) {
 			<?php } ?>
 					<?php  
 					if(count($requests) >0) {
-						
+						//pr($requests->toArray()); 
 					 foreach($requests as $request){
 					 $id=$request['id'];
 						$totmem = $request['adult'] +   $request['children']; 
@@ -349,7 +349,24 @@ $(".req").sort(function (a, b) {
 									 <a style="width:99%" data-toggle="modal" class="btn btn-successto btn-sm" data-target="#myModal1review<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi )) ?>"> Review </a>
 								</td>
 								<td width="50%" align="left">
-								
+									<?php
+										$sql="Select count(*) as block_count from blocked_users where blocked_user_id='".$finalresponse[$request['id']]['user_id']."' AND blocked_by='".$request['user']['id']."'";
+										$stmt = $conn->execute($sql);
+										$bresult = $stmt ->fetch('assoc');
+										if($bresult['block_count']>0){
+											@$blocked = 1;
+										}
+										else{
+											@$blocked = 0;
+										}
+									 
+									if($blocked==1)
+									{ ?>
+										<a  style="width:99%"  class="btn btn-danger btn-sm " ">
+										Blocked </a>
+									<?php }
+									else
+									{ ?>
 									<a style="width:99%" data-toggle="modal" class="btn btn-danger btn-sm" data-target="#block<?php echo $request['id']; ?>"  > Block User </a>
 									
 									<div id="block<?php echo $request['id']; ?>" class="modal fade" role="dialog">
@@ -369,6 +386,7 @@ $(".req").sort(function (a, b) {
 													</div>
 												</div>
 									</div>
+									<?php } ?>
 								</td>
 								
 							</tr>
