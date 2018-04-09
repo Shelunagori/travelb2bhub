@@ -75,7 +75,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 										<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:40px;width:50px')); ?>
 									</td>
 									<td  align="left" style="padding-top:20px; font-size:20px">
-										<?php echo ($reqcount['value']-$myRequestCount); ?>
+										<?php echo ($reqcountNew['value']-$myRequestCountNew); ?>
 									</td>
 								</tr>
 								<tr>
@@ -104,7 +104,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 										<?php echo $this->Html->image('white-my-request-icon.png',array('style'=>'height:40px;width:50px')); ?>
 									</td>
 									<td  align="left" style="padding-top:20px; font-size:20px">
-										<?php echo $myRequestCount; ?>
+										<?php echo $myRequestCountNew; ?>
 									</td>
 								</tr>
 								<tr>
@@ -166,7 +166,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 										<?php echo $this->Html->image('white-my-resposes-head.png',array('style'=>'height:40px;width:50px')); ?>
 									</td>
 									<td  align="left" style="padding-top:20px; font-size:20px">
-										<?php echo $myReponseCount; ?>
+										<?php echo $myReponseCountNew; ?>
 									</td>
 								</tr>
 								<tr>
@@ -200,7 +200,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 										<i style='font-size:46px' class="fa fa-check-square"></i>
 									</td>
 									<td  align="left" style="padding-top:20px; font-size:20px">
-										<?php echo $finalizeRequest; ?>
+										<?php echo $finalizeRequestNew; ?>
 									</td>
 								</tr>
 								<tr>
@@ -229,7 +229,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 										<i style='font-size:46px' class="fa fa-trash"></i>
 									</td>
 									<td  align="left" style="padding-top:20px; font-size:20px">
-										<?php echo $RemovedReqest; ?>
+										<?php echo $RemovedReqestNew; ?>
 									</td>
 								</tr>
 								<tr>
@@ -261,7 +261,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 										<i style='font-size:46px' class="fa fa-check-square"></i>
 									</td>
 									<td  align="left" style="padding-top:20px; font-size:20px">
-										<?php echo ($FInalResponseCount); ?>
+										<?php echo $FInalResponseCountNew; ?>
 									</td>
 								</tr>
 								<tr>
@@ -290,7 +290,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 										<i style='font-size:46px' class="fa fa-users"></i>
 									</td>
 									<td  align="left" style="padding-top:20px; font-size:20px">
-										<?php echo $blockedUserscount; ?>
+										<?php echo $blockedUserscountnew; ?>
 									</td>
 								</tr>
 								<tr>
@@ -447,7 +447,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 								</td>
 							</tr>
 							<tr>
-								<td style="font-size:17px"><?php echo ($reqcount['value']-$myRequestCount); ?></td>
+								<td style="font-size:17px"><?php echo ($reqcountNew['value']-$myRequestCountNew); ?></td>
 							</tr>
 						</table>		
 						 
