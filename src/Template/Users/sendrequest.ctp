@@ -90,9 +90,9 @@ fieldset{
 	 margin-top: 6px;
 }	
 .box-room {
-    border: 2px solid #eee;
-    padding: 5px;
-    float: left;
+    border: 1px solid #eee;
+    padding: 5px; 
+	float:left;
 	padding-bottom: 8px;
 }
 </style> 
@@ -133,8 +133,7 @@ fieldset{
 										Reference ID <span class="required" >*</i></span>
 										(This is for your reference )
 									</p>
-									<input autocomplete="off" name="reference_id" type="text" class="form-control ref2 " id="reference_id" required placeholder="Reference ID" style=
-									"width:40%" autofocus/>
+									<input autocomplete="off" name="reference_id" type="text" class="form-control ref2 " id="reference_id" required placeholder="Reference ID" autofocus/>
 								</div>
 							</div>
 						</div>
@@ -162,6 +161,8 @@ fieldset{
 				</fieldset>
 				<fieldset>
 					<legend style="color:#369FA1;"><b> &nbsp;  STAY REQUIREMENTS  &nbsp; </b></legend>
+				<div class="row">
+				<div class="col-md-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 						<div class="input-field">
 							<label for="from">No. of Rooms</label>
@@ -183,6 +184,7 @@ fieldset{
 							</div>
 						</div>
 					</div>
+			
 
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 						<div class="input-field">
@@ -214,7 +216,8 @@ fieldset{
  							<?php echo $this->Form->control('meal_plan', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$MealPlans, "class"=>"form-control select2","data-placeholder"=>"Select Options "]);?>
  						</div>
 					</div>
-
+				</div>
+				</div>
 					<div class="row">
 						<div class="col-md-12">
 							<div class="col-md-4">
@@ -270,7 +273,7 @@ fieldset{
 											<span class="required">*</span>
 										</p>
 									</div>
-									<div class="col-md-12 input-group">
+									<div class="">
 									<input autocomplete="off" type="text" name="check_in" class="form-control date-picker" id="datepicker7" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
 									</div>
 								</div>
@@ -281,7 +284,7 @@ fieldset{
 													<span class="required">*</span>
 												</p>
 									</div>
-									<div class="col-md-12 input-group">
+									<div class="">
 										<input autocomplete="off" type="text" name="check_out" class="form-control date-picker" id="datepicker8" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
 										                     
 									</div>
@@ -338,7 +341,7 @@ fieldset{
 										<span class="required">*</span>
 										(This is for your reference )
 									</p>
-									<input name="reference_id" type="text" class="form-control ref2" id="Reference ID" placeholder="Reference ID" autocomplete="off" style="width:40%" />
+									<input name="reference_id" type="text" class="form-control ref2" id="Reference ID" placeholder="Reference ID" autocomplete="off" />
 									 
 								</div>
 							</div>
@@ -370,58 +373,63 @@ fieldset{
 		 
 			<fieldset>
 				<legend style="color:#369FA1;"><b> &nbsp; STAY REQUIREMENTS &nbsp; </b></legend>
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-					<div class="input-field">
-						<label for="from">No. of Rooms</label>
-						<div class="box-room">
-							<div class="col-md-7"> Single</div>
-							<div class="col-md-5"><input autocomplete="off" name="room1" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+				<div class="row">
+				<div class="col-md-12">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+						<div class="input-field">
+							<label for="from">No. of Rooms</label>
+							<div class="box-room">
+								<div class="col-md-7"> Single</div>
+								<div class="col-md-5"><input autocomplete="off" name="room1" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
 
-							<div class="col-md-7"> Double</div>
-							<div class="col-md-5"><input autocomplete="off" name="room2" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-7"> Double</div>
+								<div class="col-md-5"><input autocomplete="off" name="room2" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
 
-							<div class="col-md-7"> Triple</div>
-							<div class="col-md-5"><input autocomplete="off" name="room3" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-7"> Triple</div>
+								<div class="col-md-5"><input autocomplete="off" name="room3" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
 
-							<div class="col-md-7"> Child with bed</div>
-							<div class="col-md-5"><input autocomplete="off" name="child_with_bed" style="height: 27px;" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-7"> Child with bed</div>
+								<div class="col-md-5"><input autocomplete="off" name="child_with_bed" style="height: 27px;" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
 
-							<div class="col-md-7"> Child without bed</div>
-							<div class="col-md-5"><input autocomplete="off" name="child_without_bed" style="height: 27px;" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-7"> Child without bed</div>
+								<div class="col-md-5"><input autocomplete="off" name="child_without_bed" style="height: 27px;" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+						<div class="input-field">
+							<p>Hotel Rating</p>	
+							<div style="width: 200px;" class="stars">
+								<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
+								<input class="star star-5" id="star-5-2" type="radio" value="5" name="hotel_rating"/>
+								<label class="star star-5" for="star-5-2"></label>
+								<input class="star star-4" id="star-4-2" type="radio" value="4" name="hotel_rating"/>
+								<label class="star star-4" for="star-4-2"></label>
+								<input class="star star-3" id="star-3-2" type="radio" value="3" name="hotel_rating"/>
+								<label class="star star-3" for="star-3-2"></label>
+								<input class="star star-2" id="star-2-2" type="radio" value="2" name="hotel_rating"/>
+								<label class="star star-2" for="star-2-2"></label>
+								<input class="star star-1" id="star-1-2" type="radio" value="1" name="hotel_rating"/>
+								<label class="star star-1" for="star-1-2"></label>
+							 </div>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+						<div class="input-field hotel_category">
+							Hotel Category 
+							<?php echo $this->Form->control('hotel_category', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+						<div class="input-field">
+							Meal Plan
+							<?php echo $this->Form->control('meal_plan', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$MealPlans, "class"=>"form-control select2","data-placeholder"=>"Select Options "]);?>
 						</div>
 					</div>
 				</div>
-
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-					<div class="input-field">
-						<p>Hotel Rating</p>	
-						<div style="width: 200px;" class="stars">
-							<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
-						    <input class="star star-5" id="star-5-2" type="radio" value="5" name="hotel_rating"/>
-						    <label class="star star-5" for="star-5-2"></label>
-						    <input class="star star-4" id="star-4-2" type="radio" value="4" name="hotel_rating"/>
-						    <label class="star star-4" for="star-4-2"></label>
-						    <input class="star star-3" id="star-3-2" type="radio" value="3" name="hotel_rating"/>
-						    <label class="star star-3" for="star-3-2"></label>
-						    <input class="star star-2" id="star-2-2" type="radio" value="2" name="hotel_rating"/>
-						    <label class="star star-2" for="star-2-2"></label>
-						    <input class="star star-1" id="star-1-2" type="radio" value="1" name="hotel_rating"/>
-						    <label class="star star-1" for="star-1-2"></label>
-						 </div>
-					</div>
 				</div>
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-					<div class="input-field hotel_category">
-						Hotel Category 
-						<?php echo $this->Form->control('hotel_category', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-					<div class="input-field">
-						Meal Plan
-						<?php echo $this->Form->control('meal_plan', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$MealPlans, "class"=>"form-control select2","data-placeholder"=>"Select Options "]);?>
-					</div>
-				</div>
+				
  					<div class="row">
 						<div class="col-md-12 main_row">
 							<div class="col-md-4">
@@ -476,7 +484,7 @@ fieldset{
 											<span class="required">*</span>
 										</p>
 									</div>
-									<div class="col-md-12 input-group">
+									<div class="">
 									<input autocomplete="off" type="text" name="check_in" class="form-control date-picker" id="datepicker7" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
 									</div>
 									</div> 
@@ -487,7 +495,7 @@ fieldset{
 											<span class="required">*</span>
 										</p>
 									</div>
-									<div class="col-md-12 input-group">
+									<div class="">
 										<input autocomplete="off" type="text" name="check_out" class="form-control date-picker" id="datepicker8" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
 										                    
 									</div>
@@ -604,42 +612,41 @@ fieldset{
 								</div>
 								<div class="row">
 									<div class="col-md-12">
-										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
+										<div class="col-md-6">
 											<div class="input-field">
 												<p for="from">Final Locality
 													</p>
 												<input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="finalLocality"/>
 											</div>
 										</div>
-										<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
-												<div class="input-field">
-													<p for="from">Final City
-														 
-													</p>
-													<input type="text" class="form-control city_select" id="p_final_city_name" noofrows="2" name="p_final_city_name" placeholder="Select City or Nearest City"/>
-													<input type='hidden' id='p_final_city_id' name="p_final_city_id" />
-													<div class="suggesstion-box" style="margin-top:-10px"></div>
-													
-													</div>
+										<div class="col-md-6">
+											<div class="input-field">
+												<p for="from">Final City
+													 
+												</p>
+												<input type="text" class="form-control city_select" id="p_final_city_name" noofrows="2" name="p_final_city_name" placeholder="Select City or Nearest City"/>
+												<input type='hidden' id='p_final_city_id' name="p_final_city_id" />
+												<div class="suggesstion-box" style="margin-top:-10px"></div>
 											</div>
+										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-12 rw">
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
-												<div class="input-field">
-												<p for="from">Final State</p>
-													<input type='hidden' id='p_final_state_id' name="p_final_state_id"/>
-													<input type="text" class="form-control" id ="p_final_state_name" name="p_final_state_name" placeholder="Select State" readonly/>
-												</div>
+										<div class="col-md-6">
+											<div class="input-field">
+											<p for="from">Final State</p>
+												<input type='hidden' id='p_final_state_id' name="p_final_state_id"/>
+												<input type="text" class="form-control" id ="p_final_state_name" name="p_final_state_name" placeholder="Select State" readonly/>
 											</div>
-											<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 mt">
-												<div class="input-field">
-													<p for="from">Final Country</p>
-													<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
-													<input type="text" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" readonly/>
-												</div>
+										</div>
+										<div class="col-md-6">
+											<div class="input-field">
+												<p for="from">Final Country</p>
+												<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
+												<input type="text" class="form-control" id ="t_final_country_name" name="t_final_country_name" placeholder="Select Country" readonly/>
 											</div>
+										</div>
 									</div>
 								</div>
 						</fieldset>
@@ -692,7 +699,7 @@ fieldset{
 															Reference ID  
 															<span class="required">*</span>(This is for your reference )
 														</p>
-														<input  name="reference_id" type="text" class="form-control ref1" id="reference_id" placeholder="Reference ID" autocomplete="off" style="width:40%" />
+														<input  name="reference_id" type="text" class="form-control ref1" id="reference_id" placeholder="Reference ID" autocomplete="off" />
 														 
 													</div>
 												</div>
@@ -742,7 +749,7 @@ fieldset{
 														<span class="required">*</span>
 													</p>
 												</div>
-												<div class="col-md-12 input-group">
+												<div class="">
 													 <input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker5" placeholder="DD-MM-YYYY"/>
 												</div>
 											</div>
@@ -753,7 +760,7 @@ fieldset{
 													<span class="required">*</span>
 												</p>
 												</div>
-												<div class="col-md-12 input-group">
+												<div class="">
 													 <input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker6" placeholder="DD-MM-YYYY"/>
 												</div>
 											</div>	

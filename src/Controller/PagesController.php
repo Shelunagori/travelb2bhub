@@ -2919,9 +2919,6 @@ $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField
 		->page($page);
 	}
 	else if ($_POST['role_id'] == 3) { /// Hotel
-	
-		
-		
 		$requests = $this->Requests->find()
 		->contain(["Users", "Responses","Hotels"])
 		->notMatching('Responses', function ($q)use($userid) {
@@ -3504,7 +3501,7 @@ exit;
 		$BlockedUsers = array_unique($BlockedUsers);
 
 */
-$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
+		$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
 			->hydrate(false)
 			->where(['blocked_by' => $_POST['user_id']])
 			->toArray();

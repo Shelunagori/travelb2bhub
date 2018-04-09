@@ -532,30 +532,20 @@ $(document).ready(function(){
 							<!-------Contact Details Modal --------->
 							<div id="follow<?php echo $id; ?>" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-md" >
-									<!-- Modal content-->
-										<div class="modal-content">
-											<div class="modal-header">
-												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h3 class="modal-title">
-													<font color="black">Follow User</font>
-												</h3>
-											</div>
-												<div class="modal-body">
-													<span class="help-block"></span>
-													<div class="row">
-														<div class="col-md-12">
-															<div class="col-md-4">Confirm Follow User ?</div>
-															 					
-														</div>
-													</div>
-												</div>
-												<div class="modal-footer">
-												<button type="button"  href="javascript:void(0);" class="businessBuddy btn btn-warning btn-sm" user_id = "<?php echo $response["request"]["user_id"]; ?>" >Follow</button>
-												<button type="button" class="btn btn-successto" data-dismiss="modal">Cancel</button>
-												</div>
-											</div>
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h3 class="modal-title">
+												<font color="black">Confirm Follow User ?</font>
+											</h3>
+										</div>
+										<div class="modal-footer">
+										<button type="button"  href="javascript:void(0);" class="businessBuddy btn btn-warning" user_id = "<?php echo $response["request"]["user_id"]; ?>" >Follow</button>
+										<button type="button" class="btn btn-successto" data-dismiss="modal">Cancel</button>
 										</div>
 									</div>
+								</div>
+							</div>
 								
 								<?php 
 							}
@@ -654,7 +644,7 @@ $(document).ready(function(){
 					<?php 
 							if($blocked==1)
 							{?>
-								<a  style="width:99%" href="javascript:void(0);" class="unblockUser btn btn-danger btn-sm " user_id = "<?php echo $response['request']['user']['id']; ?>">
+								<a  style="width:99%" class=" btn btn-danger btn-sm ">
 								Blocked </a>
 							<?php }
 							else

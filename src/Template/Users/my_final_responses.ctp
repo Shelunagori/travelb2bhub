@@ -87,7 +87,7 @@ $conn = ConnectionManager::get('default');
 <!------------ Main -------------->	
 	<?php 
 		if(count($responses) >0) {
-			//pr($responses);
+			//pr($responses->toArray());
 			foreach($responses as $row){
 			?>
 			<div id="cat" >
@@ -273,18 +273,9 @@ $conn = ConnectionManager::get('default');
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
 														<h3 class="modal-title">
-															<font color="black">Follow User</font>
+															<font color="black">Confirm Follow User ?</font>
 														</h3>
 													</div>
-														<div class="modal-body">
-															<span class="help-block"></span>
-															<div class="row">
-																<div class="col-md-12">
-																	<div class="col-md-4">Confirm Follow User ?</div>
-																						
-																</div>
-															</div>
-														</div>
 														<div class="modal-footer">
 														<button type="button"  href="javascript:void(0);" class="businessBuddy btn btn-warning btn-sm" user_id = "<?php echo $row['request']['user_id']; ?>" >Follow</button>
 														<button type="button" class="btn btn-successto" data-dismiss="modal">Cancel</button>
@@ -299,6 +290,23 @@ $conn = ConnectionManager::get('default');
 								</td>
 								 
 							<td width="33%" style="padding-top:5px;">
+							<?php
+								$sql="Select count(*) as block_count from blocked_users where blocked_user_id='".$row['request']['user']['id']."' AND blocked_by='".$row['user_id']."'";
+								$stmt = $conn->execute($sql);
+								$bresult = $stmt ->fetch('assoc'); 
+								if($bresult['block_count']>0){
+									$blocked = 1;
+								}
+								else{
+									$blocked = 0;
+								}
+							if($blocked==1)
+							{?>
+								<a  style="width:99%" class=" btn btn-danger btn-sm ">
+								Blocked </a>
+							<?php }
+							else
+							{ ?>
 							<a style="width:99%" data-toggle="modal" class="btn btn-danger btn-sm" data-target="#block<?php echo $id; ?>"  > Block User </a>
 							<!-------Contact Details Modal --------->
 							<div id="block<?php echo $id; ?>" class="modal fade" role="dialog">
@@ -318,13 +326,14 @@ $conn = ConnectionManager::get('default');
 											</div>
 										</div>
 									</div>
+							<?php } ?>	
 								</td>
 					
 								<td width="33%" style="padding-top:5px;">
 									<?php $reviewi =  $row['request']['user_id']."-".$row['request']['id']; ?>
 									<a style="width:99%" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal1review<?php echo $row['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">Review </a>
 									<div class="modal fade" id="myModal1review<?php echo $row['id']; ?>" role="dialog">
-										<div class="modal-dialog">
+										<div class="modal-dialog" align="center">
 										  <!-- Modal content-->
 										  <div class="modal-content">
 											<div class="modal-header">

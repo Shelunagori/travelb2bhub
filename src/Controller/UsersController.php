@@ -1743,7 +1743,7 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		$conditions["Requests.user_id"] = $this->Auth->user('id');
 		$conditions["Requests.status"] = 2;
 		$conditions["Requests.is_deleted "] = 0;
-
+		
 		if ($this->Auth->user('role_id') == 1) {
 			$requests = $this->Requests->find()
 				->contain(["Users","Responses"])
@@ -2867,7 +2867,9 @@ public function myresponselist() {
 			->where(['Users.id' => $this->Auth->user('id')])->first();
 		$this->set('users', $user);
 		$this->set('userProfile', $user);
-		$sort='';
+		if(empty($this->request->query("sort"))) {
+			$sort['Requests.id'] = "DESC";
+		}
 		if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgetlh") {
 			$sort['Requests.total_budget'] = "ASC";
 		}
@@ -2926,7 +2928,7 @@ public function myresponselist() {
 		}
 		$conditions["Responses.user_id"] = $this->Auth->user('id');
 		$loggedinid=$this->Auth->user('id');
-		$this->loadModel('BlockedUsers');
+		/*$this->loadModel('BlockedUsers');
 		$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
 			->hydrate(false)
 			->where(['blocked_by' => $loggedinid])
@@ -2947,7 +2949,7 @@ public function myresponselist() {
 		if(sizeof($BlockedUsers)>0){
 				$conditions["Requests.user_id NOT IN"] =  $BlockedUsers; 
 		}
-		
+		*/
 		$conditions["Responses.status"] = 1;
 		$responses = $this->Responses->find()
 			->contain(["Requests.Users", "Requests"])
