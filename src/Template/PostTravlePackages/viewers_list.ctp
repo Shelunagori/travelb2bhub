@@ -239,7 +239,7 @@ $('#search').keyup(function() {
         return !~text.indexOf(val);
     }).hide();
 });
-			jQuery(".formSubmit").submit(function(){
+					jQuery(".formSubmit").submit(function(){
 						jQuery("#loader-1").show();
 					});
 					jQuery(".formSubmit1").submit(function(){

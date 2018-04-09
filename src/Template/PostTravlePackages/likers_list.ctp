@@ -163,16 +163,15 @@ input[type=text]:focus {
 						if (in_array($postTravlePackage->user_id,$follower_list))
 						{
 						?>
-					<a follow_id="<?php echo $postTravlePackage->user_id; ?>" class=" 
-				btn btn-danger btn-md"  data-target="#unfollow<?php echo $postTravlePackage->user_id; ?>" data-toggle=modal>Unfollow</a>
+					<a  class=" btn btn-danger btn-md"  data-target="#unfollow<?php echo $postTravlePackage->id; ?>" data-toggle="modal" >Unfollow</a>
 					<?php }
 					else{
 						?>
-						<a follow_id="<?php echo $postTravlePackage->user_id; ?>" class=" 
-				btn btn-success btn-md"  data-target="#follow<?php echo $postTravlePackage->user_id; ?>" data-toggle=modal>follow</a>
+				<a follow_id="<?php echo $postTravlePackage->user_id; ?>" class=" 
+				btn btn-success btn-md"  data-target="#follow<?php echo $postTravlePackage->id; ?>" data-toggle=modal>follow</a>
 					<?php }}?>
 					<!-------UnFollow Modal Start--------->
-					<div id="unfollow<?php echo $postTravlePackage->user_id; ?>" class="modal fade" role="dialog">
+					<div id="unfollow<?php echo $postTravlePackage->id; ?>" class="modal fade" role="dialog">
 						<div class="modal-dialog modal-md" >
 							<!-- Modal content-->
 							<form method="post" class="formSubmit">
@@ -193,7 +192,7 @@ input[type=text]:focus {
 						</div>
 					</div>
 					<!-------Follow Modal Start--------->
-					<div id="follow<?php echo $postTravlePackage->user_id; ?>" class="modal fade" role="dialog">
+					<div id="follow<?php echo $postTravlePackage->id; ?>" class="modal fade" role="dialog">
 						<div class="modal-dialog modal-md" >
 							<!-- Modal content-->
 							<form method="post" class="formSubmit">
@@ -239,9 +238,7 @@ $('#search').keyup(function() {
 					jQuery(".formSubmit").submit(function(){
 						jQuery("#loader-1").show();
 					});
-					jQuery(".formSubmit1").submit(function(){
-						jQuery("#loader-1").show();
-					});
+					
 					
 });
 </script>
