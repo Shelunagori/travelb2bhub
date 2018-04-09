@@ -125,6 +125,7 @@ input[type=text]:focus {
 				</div>
 			</div>
 		</div>
+	</div>
 	<div class="box-body bbb">
 		<fieldset style="background-color:#fff;">
 				<div class="row col-md-12">

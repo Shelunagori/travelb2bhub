@@ -120,7 +120,7 @@ input[type=text]:focus {
 			<div class="col-md-12">
 				<div class="box-header "> 
 					<span class="box-title" style="color:#057F8A;"><b><?= __('Total Views') ?></b></span>
-					<div class="box-tools pull-right " >
+					<div class="box-tools pull-right ">
 					<input type="text" id="search" placeholder="Search here">
 					</div>
 				</div>
