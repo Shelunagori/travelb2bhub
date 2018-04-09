@@ -112,7 +112,7 @@ hr { margin-top:0px!important;}
 						</div>
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input "  data-validate = "Company Name">
-						 <input class=" input100 trim_space_valid " id="company_name" type="text" name="company_name" placeholder="Company Name">
+						 <input class=" input100 trim_space_valid " required=""  id="company_name" type="text" name="company_name" placeholder="Company Name">
 							</div>				
 						</div>										
 					</div>
@@ -121,12 +121,12 @@ hr { margin-top:0px!important;}
 					<div class="col-md-12">
 						<div class="col-md-6">
 								<div class="wrap-input100 validate-input" data-validate = "First name">
-									<input class="input100 trim_space_valid" type="text" name="first_name" placeholder="First Name"/>
+									<input class="input100 trim_space_valid"  required="" type="text" name="first_name" placeholder="First Name"/>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Last name">
-									<input class="input100 trim_space_valid" type="text" name="last_name" placeholder="Last Name">
+									<input class="input100 trim_space_valid"  required="" type="text" name="last_name" placeholder="Last Name">
 								</div>						
 						</div>
 					</div>
@@ -135,12 +135,12 @@ hr { margin-top:0px!important;}
 					<div class="col-md-12">
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Email">
-									<input class="input100 trim_space_valid" type="email" name="email" placeholder="Email">
+									<input class="input100 trim_space_valid"  required="" type="email" name="email" placeholder="Email">
 								</div>
 						</div>
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Contact No">
-									<input class="input100 trim_space_valid" id="mobile_number" type="text" name="mobile_number" placeholder="Contact No.">
+									<input class="input100 trim_space_valid"  required="" id="mobile_number" type="text" name="mobile_number" placeholder="Contact No.">
 							</div>										
 						</div>
 					</div>
@@ -149,12 +149,12 @@ hr { margin-top:0px!important;}
 					<div class="col-md-12">
 							<div class="col-md-6">
 								<div class="wrap-input100 validate-input" data-validate = "Password">
-										<input class="input100 trim_space_valid" type="password" name="password" placeholder="Password" id="password">
+										<input class="input100 trim_space_valid" required=""  type="password" name="password" placeholder="Password" id="password">
 									</div>	
 								</div>						
 							<div class="col-md-6">
 								<div class="wrap-input100 validate-input" data-validate = "Confirm Password">
-											<input class="input100 trim_space_valid" type="password" name="cpassword" placeholder=" Confirm Password" id="cpassword">
+											<input class="input100 trim_space_valid" required=""  type="password" name="cpassword" placeholder=" Confirm Password" id="cpassword">
 										</div>
 									</div>	
 					</div>
@@ -162,14 +162,14 @@ hr { margin-top:0px!important;}
 				<div class="row col-md-12">
 					<div class="col-md-12">
 							<div class="wrap-input100 validate-input" data-validate = "Address">
-										<input class="input100 trim_space_valid" type="text" name="address" placeholder="Address" id="address">
+										<input class="input100 trim_space_valid"  required="" type="text" name="address" placeholder="Address" id="address">
 									</div>
 					</div>
 				</div>
 				<div class="row col-md-12">
 					<div class="col-md-12">
 							<div class="wrap-input100 validate-input" data-validate = "Address1">
-										<input class="input100 trim_space_valid" type="text" name="address1" placeholder="Address1" id="address1">
+										<input class="input100 trim_space_valid"  required="" type="text" name="address1" placeholder="Address1" id="address1">
 								</div>	
 					</div>
 				</div>
@@ -177,12 +177,12 @@ hr { margin-top:0px!important;}
 					<div class="col-md-12">
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Locality">
-										<input class="input100 trim_space_valid" type="text" name="locality" placeholder="Locality or Village or Town" id="locality">
+										<input class="input100 trim_space_valid"  required="" type="text" name="locality" placeholder="Locality or Village or Town" id="locality">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "City">
-								<input class="input100 trim_space_valid" name="city_name" type="text" placeholder="City or Nearest City" id="city-search-box" autocomplete="off" >
+								<input class="input100 trim_space_valid" name="city_name"  required="" type="text" placeholder="City or Nearest City" id="city-search-box" autocomplete="off" >
 								<div class="suggesstion-box" style="margin-top:-10px"></div>
 							</div>	
 						</div>				
@@ -192,13 +192,13 @@ hr { margin-top:0px!important;}
 					<div class="col-md-12">
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "State">
-								<input class="input100 trim_space_valid" type="text" id ="state_name" name="state_name" placeholder="State" >
+								<input class="input100 trim_space_valid" type="text"  required="" id ="state_name" name="state_name" placeholder="State" >
 								<input type='hidden' id='state_id' value="Rajsthan" name="state_id"/>
 							</div>						
 						</div>
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Pincode">
-								<input class="input100 trim_space_valid" placeholder="Pin Code" type="text" name="pincode" id="pincode">
+								<input class="input100 trim_space_valid"  required="" placeholder="Pin Code" type="text" name="pincode" id="pincode">
 							</div>
 						</div>	
 					</div>	
@@ -206,7 +206,7 @@ hr { margin-top:0px!important;}
 				<div class="row col-md-12">
 					<div class="col-md-12">
 							<div class="wrap-input100 validate-input" data-validate = "Country">
-										<input class="input100 trim_space_valid" type="text" id ="country_name" name="country_name" placeholder="Country" >
+										<input class="input100 trim_space_valid"  required="" type="text" id ="country_name" name="country_name" placeholder="Country" >
 										<input type='hidden' id='country_id' value='india' name="country_id"/>
 							</div>										
 						</div>	
@@ -218,7 +218,7 @@ hr { margin-top:0px!important;}
 								<label for="Preference_States" style="color:#fff;">States where you operate</label>
 								<span style="font-size:11px;color:#fff;">(Select upto 5 states )</span>
 								<div class="input-field">
-									<?php echo $this->Form->control('preference', ["id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select", "data-placeholder"=>"Select upto 5 states where you operate", "style"=>"height:125px;"]); ?>
+									<?php echo $this->Form->control('preference', ["required","id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select", "data-placeholder"=>"Select upto 5 states where you operate", "style"=>"height:125px;"]); ?>
 								</div>
 							</div>
 						</div>
@@ -227,21 +227,22 @@ hr { margin-top:0px!important;}
 				<div class="row col-md-12">
 					<div class="col-md-12">
 						<div class="contact100-form-checkbox col-md-12">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+							<input class="input-checkbox100 chk_input"  id="ckb1" type="checkbox" required  name="remember-me">
 							<label class="label-checkbox100" for="ckb1">
 								I accept your Privacy Policy and  Terms and Conditions
 							</label>
+							<span id="chk_cond" style="color:red;">Please Checked Terms and Condition</span>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-12">
 					<div class="col-xs-12" align="center">
-						<input type="submit" class="btn btn-primary" value="Register">
+						<input type="submit" class="btn btn-primary" id="ckb1"  value="Register">
 					</div>
 				</div>
 				<div class="col-md-12 text-center" style="margin-top: 20px;">
 					<p style="color:#fff">Do you have an account ?
-						<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'login')) ?>" style="color:#5ba7a4;">
+						<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'login')) ?>" style="color:#5ba7a4;" >
 							Sign in
 						</a>
 					</p>
@@ -261,6 +262,19 @@ hr { margin-top:0px!important;}
 <?php echo $this->Html->script('/assets/login/js/main.js'); ?>
 <script>
 $(document).ready(function(){	 
+
+$(document).on('click',"#ckb1",function(){
+var va = +$('.chk_input').is( ':checked' );
+if(va==0)
+	{
+		$("#chk_cond").show();
+	}
+else
+	{
+		$("#chk_cond").hide();
+	}
+ });
+  
 	/*$("#city-search-box").keyup(function(){
 		var input=$("#city-search-box").val();
  		var m_data = new FormData();
