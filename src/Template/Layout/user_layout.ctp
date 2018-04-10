@@ -413,6 +413,10 @@ p {
         </div>
         <div class="info">
           <?php echo ucwords(strtolower($MemberName));?>
+		  </br>
+		  <?php if($roleId==1){echo "Travel Agent";}?>
+		  <?php if($roleId==2){echo "Event Planner";}?>
+		  <?php if($roleId==2){echo "Hotelier";}?>
 		  <br>
 		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'viewprofile/'.$loginId]); ?>" class="logo">My Profile</a> | &nbsp;
 		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'change_password']); ?>" class="logo">Reset Password</a>

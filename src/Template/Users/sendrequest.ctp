@@ -153,7 +153,7 @@ fieldset{
 								<?php echo $this->Form->control('hotelAdult', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 							</div>
 							<div class="col-md-4">
-								<p for="from">Children below 6  <span class="required">*</span></p>
+								<p for="from">Children below 6 </p>
 								<?php echo $this->Form->control('hotelChildren', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 							</div>							 
 						</div>
@@ -165,7 +165,7 @@ fieldset{
 				<div class="col-md-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 						<div class="input-field">
-							<label for="from">No. of Rooms</label>
+							<p for="from">No. of Rooms <span class="required">*</span></p>
 							<div class="box-room">
 								<div class="col-md-7"> Single</div>
 								<div class="col-md-5"><input autocomplete="off" name="room1" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
@@ -213,7 +213,7 @@ fieldset{
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 						<div class="input-field">
 							Meal Plan
- 							<?php echo $this->Form->control('meal_plan', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$MealPlans, "class"=>"form-control select2","data-placeholder"=>"Select Options "]);?>
+ 							<?php echo $this->Form->control('meal_plan', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$MealPlans, "class"=>"form-control select2","data-placeholder"=>"Select Options ",'empty'=>'Select Options']);?>
  						</div>
 					</div>
 				</div>
@@ -363,7 +363,7 @@ fieldset{
 								<?php echo $this->Form->control('adult', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
  							</div>
 							<div class="col-md-4">
-								<p for="from">Children below 6 <span class="required">*</span></p>
+								<p for="from">Children below 6  </p>
 								<?php echo $this->Form->control('children', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
  							</div>
 						</div>
@@ -377,7 +377,7 @@ fieldset{
 				<div class="col-md-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 						<div class="input-field">
-							<label for="from">No. of Rooms</label>
+							<p for="from">No. of Rooms <span class="required">*</span></p>
 							<div class="box-room">
 								<div class="col-md-7"> Single</div>
 								<div class="col-md-5"><input autocomplete="off" name="room1" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
@@ -424,7 +424,7 @@ fieldset{
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 						<div class="input-field">
 							Meal Plan
-							<?php echo $this->Form->control('meal_plan', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$MealPlans, "class"=>"form-control select2","data-placeholder"=>"Select Options "]);?>
+							<?php echo $this->Form->control('meal_plan', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$MealPlans, "class"=>"form-control select2","data-placeholder"=>"Select Options ",'empty'=>'Select Options']);?>
 						</div>
 					</div>
 				</div>
@@ -721,7 +721,7 @@ fieldset{
 													<?php echo $this->Form->control('transportAdult', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 												</div>
 												<div class="col-md-4">
-													<p for="from">Children below 6 <span class="required">*</span></p>
+													<p for="from">Children below 6  </p>
 													<?php echo $this->Form->control('transportChildren', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
 												</div>
 											</div>
@@ -1093,10 +1093,10 @@ function selectCountry(value,city_code,state,noofrows) {
 			required : true,
 			min: 1
 			},
-			"children":{
+			/*"children":{
 			required : true,
 			min: 0
-			},
+			},*/
 			"check_in" : {
 				required : true
 			},
@@ -1121,9 +1121,9 @@ function selectCountry(value,city_code,state,noofrows) {
 			"adult" : {
 				required : "Please enter number of adults."
 			},
-			"children" : {
+			/*"children" : {
 				required : "Please enter number of children."
-			},
+			},*/
 			"check_in" : {
 				required : "Please select check-in date."
 			},
@@ -1146,13 +1146,13 @@ function selectCountry(value,city_code,state,noofrows) {
 				required : true
 			},
 			"hotelAdult":{
-			required : true,
-			min: 1
-			},
-			"hotelChildren":{
 				required : true,
-			min: 0
+				min: 1
 			},
+			/*"hotelChildren":{
+				required : true,
+				min: 0
+			},*/
 			"total_budget" : {
 				required : true
 			},
@@ -1177,9 +1177,9 @@ function selectCountry(value,city_code,state,noofrows) {
 			"hotelAdult" : {
 				required : "Please enter number of adults."
 			},
-			"hotelChildren" : {
+			/*"hotelChildren" : {
 				required : "Please enter number of children."
-			},
+			},*/
 			"check_in" : {
 				required : "Please select check-in date."
 			},
@@ -1207,10 +1207,10 @@ function selectCountry(value,city_code,state,noofrows) {
 			required : true,
 			min: 1
 			},
-			"transportChildren":{
+			/*"transportChildren":{
 			required : true,
 			min: 0
-			},
+			},*/
 			"start_date" : {
 				required : true
 			},
@@ -1237,9 +1237,9 @@ function selectCountry(value,city_code,state,noofrows) {
 			"transportAdult" : {
 				required : "Please enter number of adults."
 			},
-			"transportChildren" : {
+			/*"transportChildren" : {
 				required : "Please enter number of children."
-			},
+			},*/
 			"start_date" : {
 				required : "Please select start date."
 			},
