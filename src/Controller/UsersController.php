@@ -371,7 +371,11 @@ $user = $this->Users->newEntity($d);
 		$creditd = $this->Credits->newEntity($c);
 		$this->Credits->save($creditd);
 		$this->Flash->success(__('Thank you for registering with Travelb2bhub.com! Please activate your account by clicking on the link sent to your e-mail address. If you do not receive an e-mail in your inbox, please check SPAM or JUNK folder.'));
-		$this->redirect('/users/otpVerifiy/'.$userId);
+		
+		
+		$encrypted_data=$this->encode($userId,'B2BHUB');
+		$dummy_user_id=$encrypted_data;
+		$this->redirect('/users/otpVerifiy/'.$dummy_user_id);
 	} 
 	else {
 	$this->Flash->error(__('The user could not be saved. Please, try again.'));
@@ -3352,7 +3356,10 @@ if (!empty($user)) {
 	$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
 	file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
 	 
-	$this->redirect('/users/passwordotp-verifiy/'.$user_id);
+	 $encrypted_data=$this->encode($user_id,'B2BHUB');
+	 $dummy_user_id=$encrypted_data;
+			
+	$this->redirect('/users/passwordotp-verifiy/'.$dummy_user_id);
 	
 } else {
 $this->Flash->error(__('Incorrect Mobile no.'));
@@ -3365,7 +3372,10 @@ $this->Flash->error(__('Incorrect Mobile no.'));
 * @access public
 * @return void
 */
-public function otpResend($user_id) {
+public function otpResend($dummy_user_id) {
+	
+	$decrypted_data=$this->decode($dummy_user_id,'B2BHUB');
+	$user_id=$decrypted_data;
 	
 	if(!empty($user_id)){
 		$users=$this->Users->find()->where(['id'=>$user_id])->first();
@@ -3383,11 +3393,15 @@ public function otpResend($user_id) {
 		$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
 		file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
 	}
-	$this->redirect('/users/otp-verifiy/'.$user_id);
+	$this->redirect('/users/otp-verifiy/'.$dummy_user_id);
 }
 
 
-public function otpVerifiy($user_id) {
+public function otpVerifiy($dummy_user_id) {
+	
+	$decrypted_data=$this->decode($dummy_user_id,'B2BHUB');
+	$user_id=$decrypted_data;
+	
 $this->viewBuilder()->layout('');
 Configure::write('debug',2);
  
@@ -3407,9 +3421,9 @@ if($user_count>0){
 			->execute();
 		
 		// $UserS=$this->Users->find()->where(['id'=>$user_id])->first();
-		$this->Auth=$UserS;
+		//$this->Auth=$UserS;
 		// $this->request->session()->write('Auth', $UserS);
-		// $this->redirect('/users/dashboard'); 
+	 $this->redirect('/users/login'); 
  	 
 	}else{
 		$this->Flash->error(__('Otp is not correct try again'));
@@ -3418,10 +3432,13 @@ if($user_count>0){
 $this->set('user_id',$user_id);
 }
 
-public function passwordotpVerifiy($user_id) {
+public function passwordotpVerifiy($dummy_user_id) {
 $this->viewBuilder()->layout('');
 Configure::write('debug',2);
  
+	$decrypted_data=$this->decode($dummy_user_id,'B2BHUB');
+	$user_id=$decrypted_data;
+	
 if ($this->request->is('post')) {
 $this->loadModel('Users');
 $mobile_otp = $this->request->data['mobile_otp'];
@@ -3437,7 +3454,10 @@ if($user_count>0){
 			->where(['id' => $user_id])
 			->execute();
 			
-		$this->redirect('/users/activatePassword/'.$user_id);	
+			$encrypted_data=$this->encode($user_id,'B2BHUB');
+			$dummy_user_id=$encrypted_data;
+			
+		$this->redirect('/users/activatePassword/'.$dummy_user_id);	
 	}else{
 		$this->Flash->error(__('Otp is not correct try again'));
 	}
@@ -3445,67 +3465,32 @@ if($user_count>0){
 $this->set('user_id',$user_id);
 }
 
-public function activatePassword() {
+public function activatePassword($dummy_user_id) {
 	$this->viewBuilder()->layout('');
 	
+	$decrypted_data=$this->decode($dummy_user_id,'B2BHUB');
+	$user_id=$decrypted_data;
+	
 if ($this->request->is('post')) {
-if (!empty($this->request->data['ident']) && !empty($this->request->data['activate'])) {
-$this->set('ident',$this->request->data['ident']);
-$this->set('activate',$this->request->data['activate']);
-$userId= $this->request->data['ident'];
-$activateKey= $this->request->data['activate'];
-$user = $this->Users
-->find()
-->where(['id' =>$userId])
-->first();
-if (!empty($user)) {
-$mobile_number = $user['mobile_number'];
-$usernumber = $user["mobile_number"].''.$userId;
-$theKey = sha1($usernumber);
-//	$theKey = $this->getActivationKey($mobile_number);
-if ($activateKey==$theKey) {
-$user = $this->Users->patchEntity($user, ['password' => $this->request->data['password'],'activation'=>'']);
-if ($this->Users->save($user)) {
-$this->Flash->success(__('Your password has been reset successfully.'));
-/*$subject="TravelB2Bhub Changed Password";
-$to = $user["email"];
-$headers  = 'MIME-Version: 1.0' . "\r\n";
-$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-$headers .= 'From: TravelB2Bhub <contactus@travelb2bhub.com>' . "\r\n";
-$message='<p>Dear '.$user['first_name'].'</p>';
-$message.="<p>Your Password has been reset successfully.</p>";
-$message.='<p><a href="https://www.travelb2bhub.com">Click here<a>, to login to your account.</p>';
-$message.='<p>Sincerely,<br>The TravelB2Bhub Team</p>';
-// Mail it
-@mail($to, $subject, $message, $headers);*/
-$this->redirect('/users/login');
-} else {
-$this->Flash->error(__('Something went wrong, please send password reset link again'));
-}
-} else {
-$this->Flash->error(__('Something went wrong, please send password reset link again.'));
-}
-} else {
-$this->Flash->error(__('Something went wrong, please click again on the link in email.'));
-}
-} else {
-$this->Flash->error(__('Something went wrong, please click again on the link in email.'));
-}
-} else {
-if (isset($_GET['ident']) && isset($_GET['activate'])) {
-$user = $this->Users
-->find()
-->where(['id' =>$_GET['ident'],'activation'=>$_GET['activate']])
-->first();
-if (!empty($user)) {
-$this->set('ident',$_GET['ident']);
-$this->set('activate',$_GET['activate']);
-}else{
-$this->Flash->error(__('Something went wrong, please click again on the link in email.'));
-}
-//$this->redirect('/users/activate_password');
-}
-}
+	if (!empty($this->request->data['password']) && !empty($this->request->data['cpassword'])) {
+	
+		 $password=$this->request->data['password'];
+		 $cpassword=$this->request->data['cpassword'];
+				 $user = $this->Users->get($user_id);
+			 if($password==$cpassword){
+				$user = $this->Users->patchEntity($user, $this->request->data);
+				 
+					if($this->Users->save($user)) {
+						$this->Flash->success(__('Your password has been reset successfully.'));
+						$this->redirect('/users/login');
+					}else{
+						$this->Flash->error(__('Password Not Saved, Please Try Again.'));
+					}
+			 }else{
+				$this->Flash->error(__('Password Not Match, Please Try Again.'));
+			 }
+		}
+	}
 }
 public function deleteAllCache() {
 $iterator = new RecursiveDirectoryIterator(CACHE);
@@ -4399,6 +4384,34 @@ $data[$row['id']] =$results['ch_count'];
 	die();
 }	
 	
+}
+
+public function encode($string,$key) {
+$key = sha1($key);
+$strLen = strlen($string);
+$keyLen = strlen($key);
+for ($i = 0; $i < $strLen; $i++) {
+$ordStr = ord(substr($string,$i,1));
+if (@$j == $keyLen) { $j = 0; }
+$ordKey = ord(substr($key,@$j,1));
+@$j++;
+@$hash .= strrev(base_convert(dechex($ordStr + $ordKey),16,36));
+}
+return @$hash;
+}
+
+public function decode($string,$key) {
+$key = sha1($key);
+$strLen = strlen($string);
+$keyLen = strlen($key);
+for ($i = 0; $i < $strLen; $i+=2) {
+$ordStr = hexdec(base_convert(strrev(substr($string,$i,2)),36,16));
+if (@$j == $keyLen) { @$j = 0; }
+$ordKey = ord(substr($key,@$j,1));
+@$j++;
+@$hash .= chr($ordStr - $ordKey);
+}
+return @$hash;
 }
 
 }

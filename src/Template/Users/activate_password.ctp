@@ -44,11 +44,11 @@
 						<p style="color:#fff"> Reset Password </p>
 					</div> <br />
 					<div class="wrap-input100 validate-input" data-validate = "password">
-						<input class="input100" type="password" name="password" placeholder="New Password">
+						<input class="input100" autocomplete="off" type="password" name="password" placeholder="New Password">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate = "cpassword">
-						<input class="input100" type="password" name="cpassword" placeholder="Confirm New Password">
+						<input class="input100" autocomplete="off" type="password" name="cpassword" placeholder="Confirm New Password">
 						<span class="focus-input100" data-placeholder="&#xf191;"></span>
 					</div>					
 					<div class="container-login100-form-btn">
