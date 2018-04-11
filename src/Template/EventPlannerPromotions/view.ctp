@@ -117,8 +117,8 @@ p{
 								
 								
 							?>
-			<div class="row">
 			<form method="post">
+				<div class="row">
 				<div class="col-md-6">
 					<h3>Event Planner<?php //echo ($eventPlannerPromotion->title) ?></h3>
 				</div>
@@ -223,7 +223,7 @@ p{
 											</div>
 										</div>
 									</div>
-									</form>
+									
 								</div>
 							<!-------Report Modal End--------->	
 								<div class="row">
@@ -383,18 +383,13 @@ p{
 										<?= (h($eventPlannerPromotion->event_detail)); ?>
 									</div>
 								</div>
-								
-<?php endforeach; ?>
+									<?php endforeach; ?>
+									</form>
 									</div> 
 								</div> 
 							</div> 
 						</div>
-					</fieldset>
-				</div> 
-			</div> 
-		</div> 
-	</div> 
-</section> 
+					</section> 
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>	 
   $(document).ready(function(){

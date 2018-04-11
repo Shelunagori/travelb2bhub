@@ -75,6 +75,9 @@ fieldset{
 	padding:0px!important;
 	pading-bottom:10px!important;
 }
+.unfollow{
+	width:70px;
+}
 </style>
 <div class="row" >
 	<div class="col-md-12">
@@ -221,7 +224,7 @@ fieldset{
 											</h3>
 										</div>
 										<div class="modal-footer" style="height:60px;">
-											<button type="button"  class=" btn btn-success btn-md" value="yes" name="remove_promotion">Yes</button>
+											<button type="submit"  class="unfollow btn btn-success btn-md " value="yes" name="remove_promotion">Yes</button>
 											<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
 										</div>
 									</div>
@@ -230,28 +233,8 @@ fieldset{
 							</div>
 						</div>
 						<div class="row col-md-12">
-						<label><button type="button" class="btn btn-warning btn-lg btnlayout" data-target="#details<?php echo $eventplanners->user_id; ?>" data-toggle=modal>Details</button></label>
+						<label><a href="view/<?php echo $eventplanners->id; ?>" class="btn btn-warning btn-lg btnlayout" >Details</a></label>
 						</div>
-						<!------------------------- Details Modal--------------------------->
-						<div id="details<?php echo $eventplanners->user_id; ?>" class="modal fade" role="dialog">
-							<div class="modal-dialog modal-md" >
-								<!-- Modal content-->
-									<div class="modal-content">
-									  <div class="modal-header" >
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h3 class="modal-title">
-											Details
-											</h3>
-										</div>
-										<div class="modal-body" >
-										
-										</div>
-										<div class="modal-footer" style="height:60px;">
-											<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
-										</div>
-									</div>
-								</div>
-							</div>
 					</div>
 				</div>
 				<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
