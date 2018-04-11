@@ -127,13 +127,14 @@ $conn = ConnectionManager::get('default');
 						Total Budget :  <?php echo ($row['request']['total_budget'])? "Rs. ". $row['request']['total_budget'] :"-- --" ?>
 					</p>
 				 </li>
+				 
 				 <li >
 					<p>
 						<?php 
 							$total_rating=0;
 							$rate_count=0;
 							$final_rating=0;
-							$sql1="Select * from `testimonial` where `author_id`='".$row['request']['user']['id']."' ";
+							$sql1="Select * from `testimonial` where `user_id`='".$row['request']['user']['id']."' ";
 							$stmt1 = $conn->execute($sql1);
 								foreach($stmt1 as $bresul){
 									$rate_count++;
@@ -167,6 +168,12 @@ $conn = ConnectionManager::get('default');
                         </p>
                         <?php } ?>
                  </li>
+                 <li>
+					<p>Reference ID : &nbsp;
+						<span class="details"><?php echo $row['request']['reference_id']; ?></span>
+					</p>
+                 </li>
+				
 				<?php if($row['request']['category_id'] == 3 ) { ?>
 					<li >
                         <p>

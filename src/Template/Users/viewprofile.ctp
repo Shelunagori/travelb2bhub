@@ -65,84 +65,81 @@
 							<span style="font-size: 15px;"><font color="#848688"><?php echo $membership_name;?></font></span>
 							<?php
 			$profilePercentage = 0;
-			if(!empty($users['pancard_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['pancard_pic'])) {
-					if($users['role_id'] == 3) {
-						$profilePercentage += 10;
-						
-			}
-			else if($users['role_id'] == 2) {
-				$profilePercentage += 16;
-			}
-			else {
-				$profilePercentage += 5;
-			}
+			if(!empty($users['pancard_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.	$users['id'].DS.$users['pancard_pic'])) {
+				if($users['role_id'] == 3) {
+					$profilePercentage += 10;
+				}
+				else if($users['role_id'] == 2) {
+					$profilePercentage += 16;
+				}
+				else {
+					$profilePercentage += 5;
+				}
 			}
 			if(!empty($users['company_shop_registration_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_shop_registration_pic'])) {
 				if($users['role_id'] == 3) {
-						$profilePercentage += 10;
-						
-			}
-			else if($users['role_id'] == 2) {
-						$profilePercentage += 15;
-						
-			}
-			else {
-				$profilePercentage += 5;
-			}
+					$profilePercentage += 10;
+				}
+				else if($users['role_id'] == 2) {
+					$profilePercentage += 15;
+				}
+				else {
+					$profilePercentage += 5;
+				}
 			}
 			if(!empty($users['company_img_1_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_img_1_pic'])) {
 				if($users['role_id'] == 3 || $users['role_id'] == 2) {
-						$profilePercentage += 10;
-						
-			} else {
-				$profilePercentage += 5;
-			}
+					$profilePercentage += 10;
+				} 
+				else {
+					$profilePercentage += 5;
+				}
 			}
 			if(!empty($users['id_card_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['id_card_pic'])) {
 				if($users['role_id'] == 3 || $users['role_id'] == 2) {
-						$profilePercentage += 10;
-						
-			} else {
-				$profilePercentage += 5;
-			}
+					$profilePercentage += 10;
+							
+				} else {
+					$profilePercentage += 5;
+				}
 			}
 			if(!empty($users['profile_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['profile_pic'])) {
 				if($users['role_id'] == 3 || $users['role_id'] == 2) {
-						$profilePercentage += 10;
-						
-			} else {
-				$profilePercentage += 5;
-			}
+					$profilePercentage += 10;
+							
+				} else {
+					$profilePercentage += 5;
+				}
 			}		
 			if(!empty($users['first_name'])) {
 				
-					if($users['role_id'] == 3 || $users['role_id'] == 2) {
+				if($users['role_id'] == 3 || $users['role_id'] == 2) {
 					$profilePercentage += 3;
-			}
-			else {
-				$profilePercentage += 2;
-			}
+				}
+				else {
+					$profilePercentage += 2;
+				}
 			}
 			if(!empty($users['company_name'])) {
 				
-					if($users['role_id'] == 3 || $users['role_id'] == 2) {
+				if($users['role_id'] == 3 || $users['role_id'] == 2) {
 					$profilePercentage += 3;
-			}
-			else {
-				$profilePercentage += 2;
-			}
+				}
+				else {
+					$profilePercentage += 2;
+				}
 			}
 			if(!empty($users['email'])) {
 				$profilePercentage += 3;
 			}
 			if(!empty($users['mobile_number'])) {
 				
-					if($users['role_id'] == 3 || $users['role_id'] == 2) {
+				if($users['role_id'] == 3 || $users['role_id'] == 2) {
 					$profilePercentage += 4;
-			}
-			else {
-				$profilePercentage += 3;
-			}
+				}
+				else {
+					$profilePercentage += 3;
+				}
 			}
 			if(!empty($users['p_contact'])) {
 				$profilePercentage += 3;
@@ -151,14 +148,12 @@
 				$profilePercentage += 3;
 			}
 			if(!empty($users['locality'])) {
-				
-					if($users['role_id'] == 3) {
+				if($users['role_id'] == 3) {
 					$profilePercentage += 3;
-			}
-			else {
-				$profilePercentage += 2;
-
-			}
+				}
+				else {
+					$profilePercentage += 2;
+				}
 			}
 			if(!empty($users['city_id'])) {
 				$profilePercentage += 3;
@@ -177,13 +172,13 @@
 			}
 			if(!empty($users['description'])) {
 				
-					if($users['role_id'] == 3 || $users['role_id'] == 2) {
+				if($users['role_id'] == 3 || $users['role_id'] == 2) {
 					$profilePercentage += 3;
-			}
-			else {
-				$profilePercentage += 2;
+				}
+				else {
+					$profilePercentage += 2;
 
-			}
+				}
 			}
 			if($users['role_id'] == 3 ) {
 				if(!empty($users['hotel_rating'])) {
@@ -207,7 +202,7 @@
 				if(!empty($users['iato_pic'])) {
 					$profilePercentage += 5;
 				}
-            if(!empty($users['adyoi_pic'])) {
+				if(!empty($users['adyoi_pic'])) {
 					$profilePercentage += 5;
 				}
 				if(!empty($users['iso9001_pic'])) {
@@ -488,7 +483,7 @@
 					</div>
 				</div>
 			</div>
-		 
+		 <?php if($users['role_id'] == 1){ ?>
 			<div class="box box-primary">
 			<span style="font-size:18px; padding:10px;padding-top:10px">Certificates</span>
 			<hr style="margin-top:2px !important"></hr>
@@ -586,7 +581,7 @@
 					</div>
 				</div>
 			</div>
-		 
+		 <?php } ?>
 			
 			<div class="box box-primary">
 				<span style="font-size:18px; padding:10px;padding-top:10px">Office Photographs</span>

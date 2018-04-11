@@ -1955,98 +1955,98 @@ $this->set('allStates', $allStates);
 }
 public function respondtorequest() {
 	
-$this->viewBuilder()->layout('user_layout');
-date_default_timezone_set('Asia/Kolkata');
-$current_time = date("Y-m-d");
-Configure::write('debug',2);
-$conditions ='';
-$this->loadModel('Testimonial');
-$this->loadModel('Transports');
-$this->loadModel('Hotels');
-$this->loadModel('Responses');
-$this->loadModel('Requests');
-$this->loadModel('Cities');
-$this->loadModel('States');
-$this->loadModel('User_Chats');
-$this->loadModel('BusinessBuddies');
-$this->loadModel('BlockedUsers');
-$sort='';
-if(empty($this->request->query("sort"))) {
-$sort['Requests.id'] = "DESC";
-}
-if(!empty($this->request->query("sort")) && $this->request->query("sort")=="requesttype") {
-$sort['Requests.category_id'] = "ASC";
-}
-if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgetlh") {
-$sort['Requests.total_budget'] = "ASC";
-}
-if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgethl") {
-$sort['Requests.total_budget'] = "DESC";
-}
-if(!empty($this->request->query("sort")) && $this->request->query("sort")=="agentaz") {
-$sort['Users.first_name'] = "ASC";
-$sort['Users.last_name'] = "ASC";
-}
-if(!empty($this->request->query("sort")) && $this->request->query("sort")=="agentza") {
-$sort['Users.first_name'] = "DESC";
-$sort['Users.last_name'] = "DESC";
-}
-$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
-if(!empty($this->request->query("agentnamesearch"))) {
-	$keyword1 = '';
-	$keyword2 = '';
-	$keyword = trim($this->request->query("agentnamesearch"));
-	$keyword = explode(' ',$keyword);
-	if(isset($keyword[1])) {
-		$keyword2 = $keyword[1];
+	$this->viewBuilder()->layout('user_layout');
+	date_default_timezone_set('Asia/Kolkata');
+	$current_time = date("Y-m-d");
+	Configure::write('debug',2);
+	$conditions ='';
+	$this->loadModel('Testimonial');
+	$this->loadModel('Transports');
+	$this->loadModel('Hotels');
+	$this->loadModel('Responses');
+	$this->loadModel('Requests');
+	$this->loadModel('Cities');
+	$this->loadModel('States');
+	$this->loadModel('User_Chats');
+	$this->loadModel('BusinessBuddies');
+	$this->loadModel('BlockedUsers');
+	$sort='';
+	if(empty($this->request->query("sort"))) {
+	$sort['Requests.id'] = "DESC";
 	}
-	$conditions["AND"] = array("Users.first_name LIKE "=>"%". $keyword[0]."%", "Users.last_name LIKE" => "%".$keyword2."%",);
-}
-if(!empty($this->request->query("destination_city"))) {
-	$conditions["Requests.city_id"] =  $this->request->query("destination_city");
-}
-if(!empty($this->request->query("pickup_city"))) {
-	$conditions["Requests.pickup_city"] =  $this->request->query("pickup_city");
-}
-if(!empty($this->request->query("req_typesearch"))) {
-	$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
-}
-if(!empty($this->request->query("budgetsearch"))) {
-	$QPriceRange = $this->request->query("budgetsearch");
-	$result = explode("-", $QPriceRange);
-	$MinQuotePrice = $result[0];
-	$MaxQuotePrice = $result[1];
-	$conditions["Requests.total_budget >="] = $MinQuotePrice;
-	$conditions["Requests.total_budget <="] = $MaxQuotePrice;
-}
-if(!empty($this->request->query("refidsearch"))) {
-	$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
-}
-$sdate = $this->request->query("startdatesearch");
-$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
-if(!empty($this->request->query("startdatesearch"))) {
-	$da["Requests.start_date"] =  $sdate;
-	$da["Requests.check_in"] =  $sdate;
-	$conditions["OR"] =  $da;
-}
-$edate = $this->request->query("enddatesearch");
-if(isset($edate) AND !empty($edate)){
-	$date = str_replace('/', '-', $edate);
-	$edate = date('Y-m-d', strtotime($date));
-}else{
-	$edate = null;		
-}
-//echo  $edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
-if(!empty($this->request->query("enddatesearch"))) {
-	$da1["Requests.end_date"] =  $edate;
-	$da1["Requests.check_out"] = $edate;
-	$conditions["OR"] =  $da1;
-}
-$allStates = $this->States->find('list',['keyField' => 'id', 'valueField' => 'state_name'])
-->hydrate(false)
-->toArray();
-$this->set('allStates', $allStates);
-$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
+	if(!empty($this->request->query("sort")) && $this->request->query("sort")=="requesttype") {
+	$sort['Requests.category_id'] = "ASC";
+	}
+	if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgetlh") {
+	$sort['Requests.total_budget'] = "ASC";
+	}
+	if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgethl") {
+	$sort['Requests.total_budget'] = "DESC";
+	}
+	if(!empty($this->request->query("sort")) && $this->request->query("sort")=="agentaz") {
+	$sort['Users.first_name'] = "ASC";
+	$sort['Users.last_name'] = "ASC";
+	}
+	if(!empty($this->request->query("sort")) && $this->request->query("sort")=="agentza") {
+		$sort['Users.first_name'] = "DESC";
+		$sort['Users.last_name'] = "DESC";
+	}
+	$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
+	if(!empty($this->request->query("agentnamesearch"))) {
+		$keyword1 = '';
+		$keyword2 = '';
+		$keyword = trim($this->request->query("agentnamesearch"));
+		$keyword = explode(' ',$keyword);
+		if(isset($keyword[1])) {
+			$keyword2 = $keyword[1];
+		}
+		$conditions["AND"] = array("Users.first_name LIKE "=>"%". $keyword[0]."%", "Users.last_name LIKE" => "%".$keyword2."%",);
+	}
+	if(!empty($this->request->query("destination_city"))) {
+		$conditions["Requests.city_id"] =  $this->request->query("destination_city");
+	}
+	if(!empty($this->request->query("pickup_city"))) {
+		$conditions["Requests.pickup_city"] =  $this->request->query("pickup_city");
+	}
+	if(!empty($this->request->query("req_typesearch"))) {
+		$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
+	}
+	if(!empty($this->request->query("budgetsearch"))) {
+		$QPriceRange = $this->request->query("budgetsearch");
+		$result = explode("-", $QPriceRange);
+		$MinQuotePrice = $result[0];
+		$MaxQuotePrice = $result[1];
+		$conditions["Requests.total_budget >="] = $MinQuotePrice;
+		$conditions["Requests.total_budget <="] = $MaxQuotePrice;
+	}
+	if(!empty($this->request->query("refidsearch"))) {
+		$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
+	}
+	$sdate = $this->request->query("startdatesearch");
+	$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+	if(!empty($this->request->query("startdatesearch"))) {
+		$da["Requests.start_date"] =  $sdate;
+		$da["Requests.check_in"] =  $sdate;
+		$conditions["OR"] =  $da;
+	}
+	$edate = $this->request->query("enddatesearch");
+	if(isset($edate) AND !empty($edate)){
+		$date = str_replace('/', '-', $edate);
+		$edate = date('Y-m-d', strtotime($date));
+	}else{
+		$edate = null;		
+	}
+	//echo  $edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+	if(!empty($this->request->query("enddatesearch"))) {
+		$da1["Requests.end_date"] =  $edate;
+		$da1["Requests.check_out"] = $edate;
+		$conditions["OR"] =  $da1;
+	}
+	$allStates = $this->States->find('list',['keyField' => 'id', 'valueField' => 'state_name'])
+	->hydrate(false)
+	->toArray();
+	$this->set('allStates', $allStates);
+	$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
 $this->set('users', $user);
 $this->loadModel('BlockedUsers');
 $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
@@ -2087,8 +2087,9 @@ $BlockedUsers = array_unique($BlockedUsers);
 		->notMatching('Responses', function ($q)use($userid) {
 			return $q->where(['Responses.user_id' => $userid]);
 		})
-		->where(['Requests.city_id' => $user['city_id'],'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
+		->where(['Requests.city_id' => $user['city_id'],'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2,"Requests.category_id"=>3, "Requests.is_deleted"=>0,$conditions])
 		->order($sort);
+ 
 	}
 	 
 $loggedinid = $this->Auth->user('id');
@@ -3545,43 +3546,49 @@ function addNewDestinationRow() {
 }
 public function addresponse() {
 	date_default_timezone_set('Asia/Kolkata');
-$this->loadModel('Responses');
-$this->loadModel('Requests');
-$this->loadModel('User_Chats');
-$this->loadModel('BlockedUsers');
-$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
-$this->set('users', $user);
-if($this->request->is('post')){
-$d = $this->request->data;
-$TableRequest = TableRegistry::get('Requests');
-$request = $TableRequest->get($_POST["request_id"]);
-$d["user_id"] = $this->Auth->user('id');
-//$checkblockedUsers = $this->BlockedUsers->find()->where(['blocked_by' => $request['user_id'],'blocked_user_id'=>$d["user_id"]])->count();
-$d["status"] = 0;
-$response = $this->Responses->newEntity($d);
-if ($re = $this->Responses->save($response)) {
-$name = $user['first_name'].' '.$user['last_name'];
-//$message = "$name has responded to your request";
-$ref_id = $request['reference_id'];
-$message = "You have received a Response for Reference ID: $ref_id. Click here to go to MY REQUESTS tab to view it.";
-$userchatTable = TableRegistry::get('User_Chats');
-$userchats = $userchatTable->newEntity();
-$userchats->request_id = $request["id"];
-$userchats->user_id = $this->Auth->user('id');
-$userchats->send_to_user_id = $request["user_id"];
-$userchats->message = $message;
-$userchats->type = 'Response';
-$userchats->created = date("Y-m-d H:i:s");
-$userchats->notification = 1;;
-if ($userchatTable->save($userchats)) {
-$id = $userchats->id;
-}
-$this->Flash->success(__('Your response has bee submitted successfully.'));
-} else {
-$this->Flash->error(__('Sorry.'));
-}
-}
-return $this->redirect('/users/respondtorequest?success');
+	$this->loadModel('Responses');
+	$this->loadModel('Requests');
+	$this->loadModel('User_Chats');
+	$this->loadModel('BlockedUsers');
+	$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
+	$this->set('users', $user);
+	if($this->request->is('post')){
+		$d = $this->request->data;
+		$TableRequest = TableRegistry::get('Requests');
+		$request = $TableRequest->get($_POST["request_id"]);
+		$d["user_id"] = $this->Auth->user('id');
+		
+		$d["status"] = 0;
+		$response = $this->Responses->newEntity($d);
+		if ($re = $this->Responses->save($response)) {
+			$name = $user['first_name'].' '.$user['last_name'];
+			
+			$Requests = $this->Requests->find()->where(['id' => $_POST["request_id"]])->first();
+			$total_response=$Requests['total_response'];
+			$Resaftshow=$total_response+1;
+			$this->Requests->updateAll(['total_response' => $Resaftshow], ['id' => $_POST["request_id"]]);
+			
+			$ref_id = $request['reference_id'];
+			$message = "You have received a Response for Reference ID: $ref_id. Click here to go to MY REQUESTS tab to view it.";
+			$userchatTable = TableRegistry::get('User_Chats');
+			$userchats = $userchatTable->newEntity();
+			$userchats->request_id = $request["id"];
+			$userchats->user_id = $this->Auth->user('id');
+			$userchats->send_to_user_id = $request["user_id"];
+			$userchats->message = $message;
+			$userchats->type = 'Response';
+			$userchats->created = date("Y-m-d H:i:s");
+			$userchats->notification = 1;;
+			if ($userchatTable->save($userchats)) {
+				$id = $userchats->id;
+			}
+			$this->Flash->success(__('Your response has bee submitted successfully.'));
+		} 
+		else {
+			$this->Flash->error(__('Sorry.'));
+		}
+	}
+	return $this->redirect('/users/respondtorequest?success');
 }
 public function addNewsLatter() {
 $this->loadModel('NewsLatters');

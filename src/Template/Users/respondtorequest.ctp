@@ -332,7 +332,7 @@ $conn = ConnectionManager::get('default');
 								$total_rating=0;
 								$rate_count=0;
 								$final_rating=0;
-								$sql1="Select * from `testimonial` where `author_id`='".$request['user']['id']."' ";
+								$sql1="Select * from `testimonial` where `user_id`='".$request['user']['id']."' ";
 								$stmt1 = $conn->execute($sql1);
 								foreach($stmt1 as $bresul){
 									$rate_count++;
@@ -399,18 +399,18 @@ $conn = ConnectionManager::get('default');
 						$stmt = $conn->execute($sql);
 						$result = $stmt->fetch('assoc');					
 					?>
-						<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<li class="">
                             <p>
                                 Start Date :<span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?>
                             </p>
                          </li>
 						<li class="">
-                            <p>
-                        <?php if(!empty($result['TopDate'])) { ?>
+                        <p>
+							<?php if(!empty($result['TopDate'])) { ?>
                         End Date :  <span class="details"><?php echo date('d/m/Y',strtotime($result['TopDate'])); ?>
                         <?php }else{?>
                             End Date : <span class="details"> <?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?>
-                            <?php }?>
+                            <?php } ?>
                         </p>
                         </li>
 					<?php } elseif($request['category_id'] == 2 ) {?>
