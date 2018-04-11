@@ -3,7 +3,7 @@
 //-- List
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => $coreVariable['SiteUrl']."api/hotel_promotions/getHotelList.json?isLikedUserId=".$user_id.'&higestSort='.$higestSort.'&category_id='.$category_id.'&rating_filter='.$rating_filter."&submitted_from=web",
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/HotelPromotionCarts/HotelPromotionCartlist.json?user_id=".$user_id,
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -25,7 +25,7 @@ if ($err) {
 	$response;
 	$List=json_decode($response);
 	//pr($List); exit;
-	$hotelPromotions=$List->getHotelPromotion;
+	$hotelPromotions=$List->hotelPromotionCarts;
 }
 //pr($hotelPromotions); 
 //-- hotelcategory
@@ -121,123 +121,18 @@ p{
 		<div class="row" >
 			<div class="col-md-12">
 				<div class="box-header with-border"> 
-					<span class="box-title" style="color:#057F8A;"><b><?= __('Hotel Promotions') ?></b></span>
-					<div class="box-tools pull-right" style="margin-top:-5px;">
-						<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-						<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
-						<!--<a href="" style="font-size:26px" class="btn btn-box-tool" > <img src="../images/save.png" height="15px"></img></a>-->
-					</div>
+					<span class="box-title" style="color:#057F8A;"><b><?= __('Saved Promotions') ?></b></span>
+					
 				</div>
 			</div>
 		</div>
 	</div>
-	 <div id="myModal123" class="modal fade" role="dialog">
-					  <div class="modal-dialog modal-sm" >
-						<!-- Modal content-->
-						<div class="modal-content">
-						  <div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">&times;</button>
-							<h4 class="modal-title">Sorting</h4>
-						  </div>
-						  <form method="get" class="filter_box">
-						  <div class="modal-body" style="height:130px;">
-							<div class="col-md-12 row form-group ">
-								<div class="col-md-12 radio">
-									<label>
-										<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="user_rating"/>
-										User Rating
-									</label>
-								</div>
-							</div>
-							<div class="col-md-12 row form-group ">
-								<div class="col-md-12 radio">
-									<label>
-									<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="total_likes"/>
-										 Likes
-									</label>
-								</div>
-							</div>
-							 
-							
-							<div class="col-md-12 row form-group ">
-								<div class="col-md-12 radio">
-									<label>
-										<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="total_views"/>
-										 Views
-									</label>
-								</div>
-							</div>
-							
-						</div>
-						<div class="modal-footer" style="height:60px;">
-							  <div class="row">
-									<div class="col-md-12 text-center">
-										<input type="submit" class="btn btn-primary btn-sm">
-										<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>"class="btn btn-danger btn-sm">Reset</a>
-									</div>
-							  </div>
-						</div>
-						</form>
-						</div>
-						</div>
-					</div>
-            <div class="fade modal form-modal" id="myModal122" role="dialog">
-					  <div class="modal-dialog modal-md">
-						 <div class=modal-content>
-							<div class=modal-header>
-							   <button class="close" data-dismiss="modal" type="button">&times;</button>
-							   <h4 class=modal-title>Filter</h4>
-							</div>
-							<form class="filter_box" method="get">
-							<div class="modal-body">
-								<span class="help-block"></span>
-								<div class="row form-group margin-b10">
-									<div class=col-md-12>
-										 <div class=col-md-3>
-										  <label class="col-form-label"for=example-text-input>Category</label>
-										  </div>
-										  <div class=col-md-1>:</div>
-										 <div class=col-md-7>
-										<?php $options=array();
-											foreach($hotelcategory as $country)
-											{
-												$options[] = ['value'=>$country->id,'text'=>$country->name];
-											};echo $this->Form->input('category_id', ['options' => $options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...']);
-										?>
-										</div>
-									 </div>
-									</div>
-									<div class="row form-group margin-b10">
-										<div class=col-md-12>
-										  <div class=col-md-3>
-										 <label class="col-form-label" for=example-text-input>Rating</label>
-										 </div>
-										<div class=col-md-1>:</div>
-										 <div class=col-md-7>
-											<select name="rating_filter" class="form-control select2">
-												<option value="">Select...</option>
-												<option>1 </option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>							
-											</select>
-										 </div>
-										</div>	
-									</div>
-								
-								  </div>
-								<div class="modal-footer">
-									<button class="btn btn-primary btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
-									<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>"class="btn btn-danger btn-sm">Reset</a>
-								</div>
-							</form>
-						</div>
-					  </div>
-					</div>
+	
 		<?php $i=1;
 				if(!empty($hotelPromotions)){
-				foreach ($hotelPromotions as $hotelPromotion){
+					//pr($hotelPromotions);exit;
+				foreach ($hotelPromotions as $hotelPromotionss){
+					$hotelPromotion=$hotelPromotionss->hotel_promotion;
 				?>
 	<div class="box-body bbb">	
 		<fieldset style="background-color:#fff;">

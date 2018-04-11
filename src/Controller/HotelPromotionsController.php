@@ -672,4 +672,12 @@ class HotelPromotionsController extends AppController
 		}
 		$this->set(compact('user_id','hotelpromotion_id'));
     }
+	  public function savedList()
+    {
+		
+		$this->viewBuilder()->layout('user_layout');
+		
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id'));
+    }
 }
