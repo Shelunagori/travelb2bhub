@@ -1,4 +1,3 @@
-<?php //echo $this->Html->css('/assets/loader-1.css'); ?>
 <?php
 //-- List
 $curl = curl_init();
@@ -165,13 +164,13 @@ p{
 															<label>
 																<?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name);?>
 																<?php
-																if($hotelPromotion->user_rating==0)
+																if($hotelPromotionss->user_rating==0)
 																{
 																	echo "";
 																}
 																else{
 																	echo "( ";
-																	for($i=0;$i<$hotelPromotion->user_rating;$i++)
+																	for($i=0;$i<$hotelPromotionss->user_rating;$i++)
 																	{
 																		echo "<i class='fa fa-star' style='font-size:10px;color:#efea65;'></i>";
 																		if($i==0)
@@ -240,13 +239,13 @@ p{
 					<tr>
 						<td width="25%">
 							<span><img src="../images/view.png" height="15px"/>
-							<?= h($hotelPromotion->total_views);?></span>
+							<?= h($hotelPromotionss->total_views);?></span>
 						</td>
 						<td width="25%">
 							<span><?php //pr($taxiFleetPromotion);
-							$dataUserId=$hotelPromotion->user_id;
-							$isLiked=$hotelPromotion->isLiked;
-							$issaved=$hotelPromotion->issaved;
+							$dataUserId=$hotelPromotionss->user_id;
+							$isLiked=$hotelPromotionss->isLiked;
+							$issaved=$hotelPromotionss->issaved;
 											//-- LIKES DISLIKE
 											if($isLiked=='no'){
 												echo $this->Form->button('<img src="../images/unlike.png" height="15px"/>',['class'=>'btn btn-xs likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
@@ -254,7 +253,7 @@ p{
 											if($isLiked=='yes'){
 												echo $this->Form->button('<img src="../images/like.png" height="15px"/>',['class'=>'btn  btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
 											}?>
-											<?= h($hotelPromotion->total_likes);?></span>
+											<?= h($hotelPromotionss->total_likes);?></span>
 										</td>
 										<td width="25%">
 											<?php 
@@ -363,7 +362,7 @@ p{
 													<div class="col-md-8 lbwidth11"><label>
 													<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$hotelPromotion->user_id),1);?>
 													<a href="<?php echo $hrefurl; ?>"> 
-													<?php echo $hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.' ( '.$hotelPromotion->user_rating.'<i class="fa fa-star"></i> )';?>
+													<?php echo $hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.' ( '.$hotelPromotionss->user_rating.' <i class="fa fa-star"></i> )';?>
 													</a>
 													</label>
 													</div>					

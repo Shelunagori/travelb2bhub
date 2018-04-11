@@ -1,10 +1,9 @@
-<?php //echo $this->Html->css('/assets/loader-1.css'); ?>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <?php
 //-- LIST 
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => $coreVariable['SiteUrl']."api/TaxiFleetPromotions/getTaxiFleetPromotions.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&city_id=".$city_id."&state_id=".$state_id."&car_bus_id=".$car_bus_id."&submitted_from=web",
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/TaxiFleetPromotionCarts/TaxiFleetPromotionsCartlist.json?user_id=".$user_id,
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -26,7 +25,7 @@ if ($err) {
 	$response;
 	$List=json_decode($response);
 	//pr($List); exit;
-	$taxiFleetPromotions=$List->getTaxiFleetPromotions;
+	$taxiFleetPromotions=$List->taxiFleetPromotionCarts;
 }
 //--- COUNTRY STATE & CITY
 $curl = curl_init();
@@ -152,7 +151,6 @@ p{
 					<div class="box-tools pull-right" style="margin-top:-5px;">
 						<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
 						<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
-						<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'savedList',$user_id),1);?>"  class="btn btn-box-tool" > <img src="../images/unsave.png" height="22px"/></a>
 					</div>
 				</div>
 			</div>
