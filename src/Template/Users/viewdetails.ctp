@@ -11,8 +11,8 @@ h3 {
 }
  
 li {
-	    margin-top: 7px;
-		text-align:left
+	margin-top: 7px;
+	text-align:left
 }
 ul li b {
 	color:#424242;
@@ -153,12 +153,9 @@ ul li b {
 							$hotel_category = "";
 							foreach($result as $row1)
 							{
-								
-								$hotel_category.= "" . $hotelCategories[$row1] . " , ";
-
-								//echo $count.". ".$hotelCategories[$row1].", ";
-
-								$count++;
+ 								$hotel_category.= "" . $hotelCategories[$row1]; 
+ 								$count++;
+								if($count>1){ $hotel_category.=', ';}
 							}
 
 							echo substr($hotel_category, 0, -3);
