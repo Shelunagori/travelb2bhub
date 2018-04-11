@@ -699,7 +699,7 @@ $this->set(compact('cities', 'states', 'countries', 'allCities', 'allStates','me
 			$user = $this->Users->patchEntity($userDetails, $this->request->data);
 			//pr($user); exit;
 			if ($this->Users->save($user)) {
-				$this->Flash->error(__('User has been updated successfully.'));
+				$this->Flash->success(__('User has been updated successfully.'));
 				$result['msg'] = "User has been updated successfully";
 				$this->redirect('/users/profileedit');
 			} else {
@@ -950,6 +950,25 @@ public function viewuserprofile(){
 		<ul id="country-list">
 			<?php foreach($cities as $show){ ?>
 				<li onClick="selectCountry('<?php echo $show->name .' ('. $show->state->state_name .')'; ?>','<?php echo $show->id; ?>','<?php echo $show->state_id; ?>','<?php echo $noofrows; ?>');"  class="selectCountry" cty_nm="<?php echo $show->name .' ('. $show->state->state_name .')'; ?>" cty_id="<?php echo $show->id; ?>" stat_id="<?php echo $show->state_id; ?>" noofrows="<?php echo $noofrows; ?>" taxboxname="<?php echo $taxboxname; ?>">
+					<?php echo $show->name .' ('. $show->state->state_name .')';  ?>
+				</li>
+			<?php } ?>
+		</ul>
+		<?php
+		 exit;  
+    }
+	public function ajaxCity1()
+    {
+		
+		$name=$this->request->data['input'];
+		
+		$cities=$this->Users->Cities->find()
+		->contain(['States'])
+		->where(['Cities.name Like'=>'%'.$name.'%','cities.is_deleted'=>0]);
+		?>
+		<ul id="country-list">
+			<?php foreach($cities as $show){ ?>
+				<li onClick="selectCountry('<?php echo $show->name .' ('. $show->state->state_name .')'; ?>','<?php echo $show->id; ?>','<?php echo $show->state_id; ?>');"  class="selectCountry">
 					<?php echo $show->name .' ('. $show->state->state_name .')';  ?>
 				</li>
 			<?php } ?>
