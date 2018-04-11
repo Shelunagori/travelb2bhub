@@ -138,6 +138,7 @@ p{
 				<td>
 				<?php if ($user_id!=$eventplanner->user_id)
 					{
+						//pr($follower_list);exit;
 						if (in_array($eventplanner->user_id,$follower_list))
 						{
 						?>

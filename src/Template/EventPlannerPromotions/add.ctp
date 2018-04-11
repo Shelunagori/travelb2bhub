@@ -261,23 +261,45 @@ fieldset{
 					</fieldset>
 					<fieldset>
 					<legend style="color:#369FA1;"><b> &nbsp; Payment &nbsp;  </b></legend>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="col-md-6">
-									<p> Payment Duration <span class="required">*</span></p>
-									<?php
-									$options=array();
-									foreach($priceMasters as $Price){
-										$options[] = ['value'=>$Price->id,'text'=>$Price->week,'priceVal'=>$Price->week];
-									}
-									echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters','label'=>false,'empty'=>'Select ...']); ?>
-								</div>
-								<div class="col-md-6">
-									<p> Visible Date </p>
-									<?php echo $this->Form->input('visible_date', ['class'=>'form-control visible_date','label'=>false,"placeholder"=>"Visible Date",'readonly'=>'readonly','type'=>'text']); ?> 	 
-								</div>
-							</div>
-						</div>
+								<div class="row">
+											<div class="col-md-12">
+												<div class="col-md-4">
+													<p for="from">
+													Select Duration of Promotion
+													</p>
+													<div class="input-field">
+															 
+													<?php				 
+														$options=array();
+														foreach($priceMasters as $Price)
+														{
+														 
+															$options[] = ['value'=>$Price->id,'text'=>$Price->week,'priceVal'=>$Price->week,'price'=>$Price->price];
+														};
+														echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters','label'=>false,'empty'=>'Select ...']);?>
+														<?php // echo $this->Form->input('duration', ['options' => $priceMasters,'class'=>'form-control','label'=>false]); ?>
+													</div>
+												</div>
+												<div class="col-md-4">
+													<p for="from">
+																Promotion Amount
+																<span class="required">*</span>
+													</p>
+													<div class="input-field">
+													<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text']);?> 
+													</div>
+												</div>
+												<div class="col-md-4">
+													<p for="from">
+																Visibility Date
+																<span class="required">*</span>
+													</p>
+													<div class="input-field">
+													<?php echo $this->Form->input('visible_date', ['data-date-format'=>'dd/mm/yyyy','class'=>'form-control visible_date','label'=>false,"placeholder"=>"Visible Date",'readonly'=>'readonly','type'=>'text']); ?>
+													</div>
+												</div>
+											</div>
+										</div>
 					</fieldset>
 								<div class="row">
 									<div class="col-md-12">
@@ -299,23 +321,28 @@ fieldset{
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
 $(document).ready(function (){
-	$(document).on('change','.priceMasters',function(){
-		var priceVal=$('.priceMasters option:selected').attr('priceVal');
-		var Result = priceVal.split(" ");
-		var weeks=Result[0];
-		
-		var todaydate = new Date(); // Parse date
-		for(var x=0; x < weeks; x++){
-			todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
- 		}
-		var dd = todaydate .getDate();
-		var mm = todaydate .getMonth()+1; //January is 0!
-		var yyyy = todaydate .getFullYear();
-		if(dd<10){  dd='0'+dd } 
-		if(mm<10){  mm='0'+mm } 
-		var date = dd+'-'+mm+'-'+yyyy;	
-		$('.visible_date').val(date);
-	})
+	$(document).on('change','.priceMasters',function()
+		{
+			var priceVal=$('.priceMasters option:selected').attr('priceVal');
+			var price=$('.priceMasters option:selected').attr('price');
+			var Result = priceVal.split(" ");
+			var Result1 = price.split(" ");
+			var weeks=Result[0];
+			var price=Result1[0];
+			
+			var todaydate = new Date(); // Parse date
+			for(var x=0; x < weeks; x++){
+				todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
+			}
+			var dd = todaydate .getDate();
+			var mm = todaydate .getMonth()+1; //January is 0!
+			var yyyy = todaydate .getFullYear();
+			if(dd<10){  dd='0'+dd } 
+			if(mm<10){  mm='0'+mm } 
+			var date = dd+'-'+mm+'-'+yyyy;	
+			$('.visible_date').val(date);
+			$('.payment_amount').val(price);
+		})
 	$(document).on('click','#city_type', function()
 	{
 		var city_type=$(this).val();

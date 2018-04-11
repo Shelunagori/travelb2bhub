@@ -329,9 +329,11 @@ fieldset{
 		{
 			var priceVal=$('.duration option:selected').attr('priceVal');
 			var price=$('.duration option:selected').attr('price');
+			//alert(price);
 				var Result = priceVal.split(" ");
 				var weeks=Result[0];
-				var charges=weeks*price;
+				//alert(weeks);
+				//var charges=weeks*price;
 				var todaydate = new Date(); // Parse date
 				for(var x=0; x < weeks; x++)
 				{
@@ -344,7 +346,7 @@ fieldset{
 				if(mm<10){  mm='0'+mm } 
 				var date = dd+'-'+mm+'-'+yyyy;	
 				$('.visible_date').val(date);
-				$('.charges').val(charges);
+				$('.charges').val(price);
 		});
 	});		
 </script>	

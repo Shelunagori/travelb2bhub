@@ -387,20 +387,20 @@ fieldset{
 													</div>
 													<div class="col-md-4">
 														<p for="from">
-																	Visibility Date
-																	<span class="required">*</span>
-														</p>
-														<div class="input-field">
-														<?php echo $this->Form->input('visible_date', ['data-date-format'=>'dd/mm/yyyy','class'=>'form-control visible_date','label'=>false,"placeholder"=>"Visible Date",'readonly'=>'readonly','type'=>'text']); ?>
-														</div>
-													</div>
-													<div class="col-md-4">
-														<p for="from">
 																	Promotion Amount
 																	<span class="required">*</span>
 														</p>
 														<div class="input-field">
 														<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text']);?> 
+														</div>
+													</div>
+												<div class="col-md-4">
+														<p for="from">
+																	Visibility Date
+																	<span class="required">*</span>
+														</p>
+														<div class="input-field">
+														<?php echo $this->Form->input('visible_date', ['data-date-format'=>'dd/mm/yyyy','class'=>'form-control visible_date','label'=>false,"placeholder"=>"Visible Date",'readonly'=>'readonly','type'=>'text']); ?>
 														</div>
 													</div>
 												</div>
