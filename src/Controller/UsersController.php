@@ -385,6 +385,8 @@ $this->Flash->error(__('Mobile Number or Email already exists. Please enter anot
 }
 }
 $cities = $this->Cities->getAllCities();
+$cities1 = $this->Cities->find()->contain(['States'=>['Countries']]);
+$this->set('cities1',$cities1);
 $states = $this->States->find()->where(['country_id' => '101'])->all();
 $allStates = array();
 foreach($states as $state){

@@ -70,6 +70,8 @@ hr { margin-top:0px!important;}
 	<?php echo $this->Html->css('/assets/login/css/util.css'); ?>
 	<?php echo $this->Html->css('/assets/login/css/main.css'); ?>
 	<?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Raleway'); ?>
+	
+	<?php echo $this->Html->css('/assets/plugins/select2/select2.min.css'); ?>
 	<style>
 		.bgdiv { background-image: url('../webroot/assets/login/login_background.jpg'); }
 		.p-b-34 { padding-bottom: 10px !important; }
@@ -182,11 +184,15 @@ hr { margin-top:0px!important;}
 						</div>
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "City">
-								<select name="city_id" id="city_id" class="form-control input100" required="" style="height: 35px;margin-top: 11px;" >
-									<option value="" disabled selected>Select</option>
-									<?php foreach($cities as $city) {  ?>
-											<option style="color:black;" state_id="<?php echo $city['state_id']; ?>" country_id="<?php echo $city['country_id']; ?>" value="<?php echo  $city['id']; ?>">
+								<select name="city_id" id="city_id" class="form-control select2 input100" required="" style="height: 35px;margin-top: 11px;" >
+									<option value="" >Select</option>
+									<?php foreach($cities1 as $city) { 
+										$state_name=$city->state->state_name;
+										$country_name=$city->state->country->country_name;
+									?>
+											<option style="color:black;" state_name="<?php echo $state_name; ?>" state_id="<?php echo $city['state_id']; ?>" country_name="<?php echo $country_name; ?>" country_id="<?php echo $city['country_id']; ?>" value="<?php echo  $city['id']; ?>">
 												<?php echo  $city['name']; ?>
+												 (<?php echo $state_name; ?>)
 											</option>
 									  <?php } ?>
 								</select>
@@ -199,7 +205,7 @@ hr { margin-top:0px!important;}
 					<div class="col-md-12">
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "State">
-								<input class="input100 trim_space_valid" type="text"  required="" id ="state_name" name="state_name" placeholder="State" >
+								<input readonly class="input100 trim_space_valid" type="text"  required="" id ="state_name" name="state_name" placeholder="State" >
 								<input type='hidden' id='state_id' name="state_id"/>
 							</div>						
 						</div>
@@ -213,7 +219,7 @@ hr { margin-top:0px!important;}
 				<div class="row col-md-12">
 					<div class="col-md-12">
 							<div class="wrap-input100 validate-input" data-validate = "Country">
-										<input class="input100 trim_space_valid"  required="" type="text" id ="country_name" name="country_name" placeholder="Country" >
+										<input class="input100 trim_space_valid"  required="" type="text" readonly id ="country_name" name="country_name" placeholder="Country" >
 										<input type='hidden' id='country_id' name="country_id"/>
 							</div>										
 						</div>	
@@ -262,20 +268,25 @@ hr { margin-top:0px!important;}
 <?php echo $this->Html->script('/assets/login/animsition/js/animsition.min.js'); ?>
 <?php echo $this->Html->script('/assets/login/bootstrap/js/popper.js'); ?>
 <?php echo $this->Html->script('/assets/login/bootstrap/js/bootstrap.min.js'); ?>
-<?php echo $this->Html->script('/assets/login/select2/select2.min.js'); ?>
+
+<?php echo $this->Html->script('/assets/plugins/select2/select2.full.min.js'); ?>
 <?php echo $this->Html->script('/assets/login/daterangepicker/moment.min.js'); ?>
 <?php echo $this->Html->script('/assets/login/daterangepicker/daterangepicker.js'); ?>
 <?php echo $this->Html->script('/assets/login/countdowntime/countdowntime.js'); ?>
 <?php echo $this->Html->script('/assets/login/js/main.js'); ?>
 <script>
 $(document).ready(function(){	 
-
+$('.select2').select2();
 $(document).on('change',"#city_id",function(){
 	var city_id=$(this, 'option: selected').val();
 	var state_id=parseFloat($('option:selected', this).attr('state_id'));
+	var state_name=$('option:selected', this).attr('state_name');
 	var country_id=parseFloat($('option:selected', this).attr('country_id'));
+	var country_name=$('option:selected', this).attr('country_name');
 	$("#state_id").val(state_id);
+	$("#state_name").val(state_name);
 	$("#country_id").val(country_id);
+	$("#country_name").val(country_name);
 });
 $(document).on('click',"#ckb1",function(){
 var va = +$('.chk_input').is( ':checked' );
