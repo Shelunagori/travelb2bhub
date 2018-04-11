@@ -314,6 +314,7 @@ fieldset{
 									</div> 
 								</div>							
 						</fieldset>
+						<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
 					</form>
 				</div>
 			</div>

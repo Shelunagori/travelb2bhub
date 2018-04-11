@@ -90,9 +90,9 @@ class HotelPromotionsController extends AppController
 			//-- Like EVENT
 			if(isset($this->request->data['LikeEvent']))
 			{
- 				$hotelpromotion_id=$this->request->data('hotelpromotion_id');
+ 				$hotel_id=$this->request->data('hotel_id');
 				$post =[
-						'hotel_promotion_id' => $hotelpromotion_id,
+						'hotel_promotion_id' => $hotel_id,
 						'user_id' =>$user_id						 							
 					];
 				 
@@ -121,15 +121,15 @@ class HotelPromotionsController extends AppController
 				} 
 				$displayMessage=$LikeResult->message;
 				$this->Flash->success(__($displayMessage));
-				return $this->redirect(['action' => 'view/'.$hotelpromotion_id]);
+				return $this->redirect(['action' => 'view/'.$hotel_id]);
 			}
 		
 							//-- Save Unsave
 			if(isset($this->request->data['savehotelpromotion']))
 			{
- 				$hotelpromotion_id=$this->request->data('hotelpromotion_id');
+ 				$hotel_id=$this->request->data('hotel_id');
 				$post =[
-						'hotel_promotion_id' => $hotelpromotion_id,
+						'hotel_promotion_id' => $hotel_id,
 						'user_id' =>$user_id						 							
 					];
 				//pr($post);exit;
@@ -158,17 +158,17 @@ class HotelPromotionsController extends AppController
 				} 
 				$displayMessage=$LikeResult->message;
 				$this->Flash->success(__($displayMessage));
-				return $this->redirect(['action' => 'view/'.$hotelpromotion_id]);
+				return $this->redirect(['action' => 'view/'.$hotel_id]);
 			}
 								//Report Modal//
 			if(isset($this->request->data['report_submit']))
 			{
 				$user_id=$this->Auth->User('id');
-				$hotelpromotion_id=$this->request->data('hotelpromotion_id');
+				$hotel_id=$this->request->data('hotel_id');
 				$report_reason_id=$this->request->data('report_reason_id');
 				$comment=$this->request->data('comment');
 				$post =[
-						'hotel_promotion_id' => $hotelpromotion_id,
+						'hotel_promotion_id' => $hotel_id,
 						'report_reason_id' => $report_reason_id,
 						'user_id' =>$user_id,						 							
 						'comment' =>$comment						 							
@@ -199,7 +199,7 @@ class HotelPromotionsController extends AppController
 				} 
 				$displayMessage=$LikeResult->message;
 				$this->Flash->success(__($displayMessage));
-				return $this->redirect(['action' => 'view/'.$hotelpromotion_id]);
+				return $this->redirect(['action' => 'view/'.$hotel_id]);
 			}			
 			
 		}
@@ -514,12 +514,162 @@ class HotelPromotionsController extends AppController
     {
 		$this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');
+		if ($this->request->is(['patch', 'post', 'put'])) 
+		{
+				//-- Follow User
+			if(isset($this->request->data['follow_user']))
+			{
+ 				$follow_id=$this->request->data('follow_id');
+				$post =[
+						'follow_id' => $follow_id,
+						'user_id' =>$user_id						 							
+					];
+					//pr($post);exit;
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				 CURLOPT_URL => $this->coreVariable['SiteUrl']."pages/addbusinessbuddyapi?token=MzIxNDU2NjU0NTY0cGhmZmpoZGZqaA==",
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "POST",
+				  CURLOPT_POSTFIELDS =>$post,
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				$displayMessage="You have been successfully followed this user  ";
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'likersList/'.$hotelpromotion_id]);
+			}
+			//-- UnFollow User
+			if(isset($this->request->data['unfollow_user']))
+			{
+ 				$follow_id=$this->request->data('follow_id');
+				$post =[
+						'follow_id' => $follow_id,
+						'user_id' =>$user_id						 							
+					];
+					//pr($post);exit;
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				 CURLOPT_URL => $this->coreVariable['SiteUrl']."pages/removebusinessbuddyapi?token=MzIxNDU2NjU0NTY0cGhmZmpoZGZqaA==",
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "POST",
+				  CURLOPT_POSTFIELDS =>$post,
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				$displayMessage="You have been successfully unfollowed this user  ";
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'likersList/'.$hotelpromotion_id]);
+			}
+		}
 		$this->set(compact('user_id','hotelpromotion_id'));
     }
 	public function viewersList($hotelpromotion_id = null)
     {
 		$this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');
+		if ($this->request->is(['patch', 'post', 'put'])) 
+		{
+				//-- Follow User
+			if(isset($this->request->data['follow_user']))
+			{
+ 				$follow_id=$this->request->data('follow_id');
+				$post =[
+						'follow_id' => $follow_id,
+						'user_id' =>$user_id						 							
+					];
+					//pr($post);exit;
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				 CURLOPT_URL => $this->coreVariable['SiteUrl']."pages/addbusinessbuddyapi?token=MzIxNDU2NjU0NTY0cGhmZmpoZGZqaA==",
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "POST",
+				  CURLOPT_POSTFIELDS =>$post,
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				$displayMessage="You have been successfully followed this user  ";
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'viewersList/'.$hotelpromotion_id]);
+			}
+			//-- UnFollow User
+			if(isset($this->request->data['unfollow_user']))
+			{
+ 				$follow_id=$this->request->data('follow_id');
+				$post =[
+						'follow_id' => $follow_id,
+						'user_id' =>$user_id						 							
+					];
+					//pr($post);exit;
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				 CURLOPT_URL => $this->coreVariable['SiteUrl']."pages/removebusinessbuddyapi?token=MzIxNDU2NjU0NTY0cGhmZmpoZGZqaA==",
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "POST",
+				  CURLOPT_POSTFIELDS =>$post,
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				$displayMessage="You have been successfully unfollowed this user  ";
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'viewersList/'.$hotelpromotion_id]);
+			}
+		}
 		$this->set(compact('user_id','hotelpromotion_id'));
     }
 }
