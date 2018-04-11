@@ -239,7 +239,6 @@ fieldset{
 </div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
-	 
     $(document).ready(function () {
 		$(document).on('change','.priceMasters',function()
 		{
@@ -269,7 +268,7 @@ fieldset{
 			}
 			else{
 				$(this).closest('div.mainrow').find('.visible_date').val("dd-mm-yyyy");
-				$(this).closest('div.mainrow').find('.payment_amount').val(0);
+				$(this).closest('div.mainrow').find('.payment_amount').val(0);-
 			}
 		})
 		});

@@ -76,6 +76,10 @@ fieldset{
 	pading-bottom:10px!important;
 }
 </style>
+<div class="row" >
+	<div class="col-md-12">
+	</div>
+</div>
 <div class="container-fluid">
 	<div class="box box-primary" style="margin-bottom:5px;">
 		<div class="row">
@@ -96,7 +100,6 @@ fieldset{
 						?>
 	<div class="box-body bbb">
 		<fieldset style="background-color:#fff;">
-			<form method="post" class="formSubmit">
 				<div class="row col-md-12" style="padding:25px;">						
 					<div class="col-md-4">
 						<?= $this->Html->image($eventplanners->full_image,['id'=>'myImg','style'=>'width:100%;height:150px;','data-target'=>'#imagemodal'.$eventplanners->id,'data-toggle'=>'modal',]) ?>
@@ -137,12 +140,13 @@ fieldset{
 					</div>
 					<div class="col-md-4">
 						<div class="row col-md-12">
-						<label><button type="button" class="btn btn-info btn-lg btnlayout" data-target="#renew<?php echo $eventplanners->user_id; ?>" data-toggle=modal>Renew</button></label>
+						<label><button type="button" class="btn btn-info btn-lg btnlayout" data-target="#renew<?php echo $eventplanners->id; ?>" data-toggle=modal>Renew</button></label>
 						</div>
 						<!------------------------- Renew Modal--------------------------->
-						<div id="renew<?php echo $eventplanners->user_id; ?>" class="modal fade" role="dialog">
+						<div id="renew<?php echo $eventplanners->id; ?>" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-md" >
 								<!-- Modal content-->
+								<form method="post" class="formSubmit">
 									<div class="modal-content">
 									  <div class="modal-header" >
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -150,36 +154,53 @@ fieldset{
 											Do you want to renew promotion ?
 											</h3>
 										</div>
-										<div class="modal-body" style="height:80px;">
+									<div class="modal-body" style="height:80px;">
 										<br>
-											<div class="row">
+											<div class="row mainrow">
 												<div class="col-md-12">
-													<div class="col-md-6">
-														<label>
-														Select Promotion Duration
-														</label>
-														</div>
-														<div class="col-md-6">
+													<div class="col-md-4">
+														<p for="from">
+															Payment Duration
+														</p>
 														<div class="input-field">
+																 
 														<?php				 
 															$options=array();
 															foreach($priceMasters as $Price)
 															{
-															 
-																$options[] = ['value'=>$Price->id,'text'=>$Price->week.' @ '.$Price->price,'priceVal'=>$Price->week,'price'=>$Price->price];
+																$options[] = ['value'=>$Price->id,'text'=>$Price->week,'priceVal'=>$Price->week,'price'=>$Price->price];
 															};
 															echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters','label'=>false,'empty'=>'Select ...']);?>
-															<?php // echo $this->Form->input('duration', ['options' => $priceMasters,'class'=>'form-control','label'=>false]); ?>
+														</div>
+													</div>
+													<div class="col-md-4">
+														<p for="from">
+																	Visibility Date
+																	<span class="required">*</span>
+														</p>
+														<div class="input-field">
+														<?php echo $this->Form->input('visible_date', ['data-date-format'=>'dd/mm/yyyy','class'=>'form-control visible_date','label'=>false,"placeholder"=>"Visible Date",'readonly'=>'readonly','type'=>'text']); ?>
+														</div>
+													</div>
+													<div class="col-md-4">
+														<p for="from">
+																	Promotion Amount
+																	<span class="required">*</span>
+														</p>
+														<div class="input-field">
+														<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text']);?> 
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
 										<div class="modal-footer" style="height:60px;">
-											<button type="button"  name="pay_now" class=" btn btn-success btn-md" value="yes" >Pay Now</button>
+											<button type="submit"  name="pay_now" class=" btn btn-success btn-md" value="yes" >Pay Now</button>
 											<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
+											</div>
 										</div>
-									</div>
+									<input type="hidden" name="event_id" value="<?php echo $eventplanners->id; ?>">
+									</form>
 								</div>
 							</div>
 						<div class="row col-md-12">
@@ -230,8 +251,49 @@ fieldset{
 							</div>
 					</div>
 				</div>
-			</form>
+				<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
+				<div id="loader"></div></div>
 		</fieldset>
 	</div>
 					<?php }} ?>
 </div>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<script>
+	 
+    $(document).ready(function () {
+		$(document).on('change','.priceMasters',function()
+		{
+			var ab=$(this).closest('div').find('.priceMasters option:selected').val();
+			//alert(ab);
+			if(ab!=0)
+			{
+			var priceVal=$(this).closest('div').find('.priceMasters option:selected').attr('priceVal');
+			var price=$(this).closest('div').find('.priceMasters option:selected').attr('price');
+			var Result = priceVal.split(" ");
+			var Result1 = price.split(" ");
+			var weeks=Result[0];
+			var price=Result1[0];
+			var todaydate = new Date(); // Parse date
+			for(var x=0; x < weeks; x++){
+				todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
+			}
+			var dd = todaydate .getDate();
+			var mm = todaydate .getMonth()+1; //January is 0!
+			var yyyy = todaydate .getFullYear();
+			if(dd<10){  dd='0'+dd } 
+			if(mm<10){  mm='0'+mm } 
+			var date = dd+'-'+mm+'-'+yyyy;	
+			$(this).closest('div.mainrow').find('.visible_date').val(date);
+			$(this).closest('div.mainrow').find('.payment_amount').val(price);
+			//alert($(this).closest('div.mainrow').html());
+			}
+			else{
+				$(this).closest('div.mainrow').find('.visible_date').val("dd-mm-yyyy");
+				$(this).closest('div.mainrow').find('.payment_amount').val(0);
+			}
+		})
+			jQuery(".formSubmit").submit(function(){
+						jQuery("#loader-1").show();
+					});
+		});
+</script>
