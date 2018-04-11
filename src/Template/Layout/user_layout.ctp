@@ -493,10 +493,10 @@ p {
 			<a href="<?php echo $this->Url->build(["controller" => "EventPlannerPromotions",'action'=>'promotionreports']); ?>"><i class="fa fa-book"></i> <span>Promotion Reports</span></a>
 		</li>
 		<?php } 
-		if($roleId==3) {?>
+		if($roleId==3) { ?>
 			<li <?php if($page_name=='add' && $controller=='HotelPromotions'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>'add']); ?>"><i class="fa fa-bullhorn"></i> <span> Promote Your Hotel</span></a></li>
 			
-			<li <?php if($page_name=='add' && $controller=='HotelPromotions'){ echo 'class="active"';}?>>
+			<li <?php if($page_name=='promotionreports' && $controller=='HotelPromotions'){ echo 'class="active"';}?>>
 			
 				<a href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>'promotionreports']); ?>"><i class="fa fa-book"></i> <span>Promotion Reports</span></a>
 			</li>
