@@ -209,7 +209,7 @@ $(".req").sort(function (a, b) {
 					$total_rating=0;
 					$rate_count=0;
 					$final_rating=0;
-					$sql1="Select * from `testimonial` where `author_id`='".$finalresponse[$request['id']]['user_id']."' ";
+					$sql1="Select * from `testimonial` where `user_id`='".$finalresponse[$request['id']]['user_id']."' ";
 					$stmt1 = $conn->execute($sql1);
 					foreach($stmt1 as $bresul){
 						$rate_count++;
@@ -246,7 +246,11 @@ $(".req").sort(function (a, b) {
 										Quotation Price : <span class="details">Rs. <?php echo $finalresponse[$request['id']]['quotation_price']; ?></span>
 									</p>
 								</li>
-							   
+							   <li >
+									<p>
+										Reference ID : <span class="details"><?php echo $request['reference_id']; ?></span>
+									</p>
+								</li>
 								<?php if($request['category_id'] == 3 ) { ?>
 								<li >
 									<p>
@@ -288,11 +292,7 @@ $(".req").sort(function (a, b) {
 									</p>
 								</li>
 								<?php } ?>
-								<li >
-									<p>
-										Reference ID : <span class="details"><?php echo $request['reference_id']; ?></span>
-									</p>
-								</li>
+								
 								 <li >
 									<p>
 										Members : <span class="details"><?php echo $request['adult'] +   $request['children']; ?></span>
