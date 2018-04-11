@@ -178,10 +178,10 @@ hr { margin-top:0px!important;}
 								} ?>
 							<p>
 								<?php echo $this->Form->input('IATA Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'iata_pic']); ?>
-								IATA
+								 
 							</p>
 						</div>
-						<div class="img_show col-md-3" UPLOAD PHOTOalign="center">
+						<div class="img_show col-md-3" UPLOAD PHOTO align="center">
 							<?php if(!empty($users['tafi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['tafi_pic'])) {
                                 echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['tafi_pic'], ["alt"=>"T A F I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
                             <?php }else{ 
@@ -189,7 +189,7 @@ hr { margin-top:0px!important;}
 								} ?>
 							<p>
 								<?php echo $this->Form->input('T A F I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'tafi_pic']); ?>
-								TAFI
+								 
 							</p>
 						</div>
 						
@@ -201,7 +201,7 @@ hr { margin-top:0px!important;}
 								} ?>
 							<p>
 								<?php echo $this->Form->input('T A A I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'taai_pic']); ?>
-								TAAI
+								 
 							</p>
 						</div>
 						
@@ -213,7 +213,7 @@ hr { margin-top:0px!important;}
 								} ?>
 							<p>
 								<?php echo $this->Form->input('IATO Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'iato_pic']); ?>
-								IATO
+								 
 							</p>
 						</div>
 						
@@ -225,7 +225,7 @@ hr { margin-top:0px!important;}
 								} ?>
 							<p>
 								<?php echo $this->Form->input('A D Y O I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'adyoi_pic']); ?>
-								ADYOI
+								 
 							</p>
 						</div>
 						
@@ -237,7 +237,7 @@ hr { margin-top:0px!important;}
 								} ?>
 							<p>
 								<?php echo $this->Form->input('I S O 9001 Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'iso9001_pic']); ?>
-								ISO
+								 
 							</p>
 						</div>
 						
@@ -249,7 +249,7 @@ hr { margin-top:0px!important;}
 								} ?>
 							<p>
 								<?php echo $this->Form->input('U F T A A Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'uftaa_pic']); ?>
-								UFTAA
+								 
 							</p>
 						</div>
 						
@@ -261,7 +261,7 @@ hr { margin-top:0px!important;}
 								} ?>
 							<p>
 								<?php echo $this->Form->input('A D T O I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'adtoi_pic']); ?>
-								ADTOI
+								 
 							</p>
 						</div>
 						
@@ -389,7 +389,7 @@ $(document).ready(function(){
  		var m_data = new FormData();
 		m_data.append('input',input);			
 		$.ajax({
-			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajaxStateShow"]); ?>",
+			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajaxCity1"]); ?>",
 			data: m_data,
 			processData: false,
 			contentType: false,
@@ -465,6 +465,12 @@ $(document).ready(function(){
 				email : "Please enter valid email."
 			},
 			"mobile_number": {
+				required : "Please enter contact number.",
+				number: "Please enter only number",
+				minlength: "Please enter at least 10 digit",
+				maxlength: "Please enter no more than 10 digit"
+			},
+			"p_contact": {
 				required : "Please enter contact number.",
 				number: "Please enter only number",
 				minlength: "Please enter at least 10 digit",
@@ -579,7 +585,7 @@ $(document).ready(function(){
 		var m_data = new FormData();
 		m_data.append('state_id',state_id);			
 		$.ajax({
-			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajaxStateShowNew"]); ?>",
+			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajaxStateShow"]); ?>",
 			data: m_data,
 			processData: false,
 			contentType: false,
