@@ -182,7 +182,14 @@ hr { margin-top:0px!important;}
 						</div>
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "City">
-								<input class="input100 trim_space_valid" name="city_name"  required="" type="text" placeholder="City or Nearest City" id="city-search-box" autocomplete="off" >
+								<select name="city_id" id="city_id" class="form-control input100" required="" style="height: 35px;margin-top: 11px;" >
+									<option value="" disabled selected>Select</option>
+									<?php foreach($cities as $city) {  ?>
+											<option style="color:black;" state_id="<?php echo $city['state_id']; ?>" country_id="<?php echo $city['country_id']; ?>" value="<?php echo  $city['id']; ?>">
+												<?php echo  $city['name']; ?>
+											</option>
+									  <?php } ?>
+								</select>
 								<div class="suggesstion-box" style="margin-top:-10px"></div>
 							</div>	
 						</div>				
@@ -193,7 +200,7 @@ hr { margin-top:0px!important;}
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "State">
 								<input class="input100 trim_space_valid" type="text"  required="" id ="state_name" name="state_name" placeholder="State" >
-								<input type='hidden' id='state_id' value="Rajsthan" name="state_id"/>
+								<input type='hidden' id='state_id' name="state_id"/>
 							</div>						
 						</div>
 						<div class="col-md-6">
@@ -207,7 +214,7 @@ hr { margin-top:0px!important;}
 					<div class="col-md-12">
 							<div class="wrap-input100 validate-input" data-validate = "Country">
 										<input class="input100 trim_space_valid"  required="" type="text" id ="country_name" name="country_name" placeholder="Country" >
-										<input type='hidden' id='country_id' value='india' name="country_id"/>
+										<input type='hidden' id='country_id' name="country_id"/>
 							</div>										
 						</div>	
 				</div>	
@@ -218,7 +225,7 @@ hr { margin-top:0px!important;}
 								<label for="Preference_States" style="color:#fff;">States where you operate</label>
 								<span style="font-size:11px;color:#fff;">(Select upto 5 states )</span>
 								<div class="input-field">
-									<?php echo $this->Form->control('preference', ["required","id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select", "data-placeholder"=>"Select upto 5 states where you operate", "style"=>"height:125px;"]); ?>
+									<?php echo $this->Form->control('preference', ["id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select", "data-placeholder"=>"Select upto 5 states where you operate", "style"=>"height:125px;"]); ?>
 								</div>
 							</div>
 						</div>
@@ -263,6 +270,13 @@ hr { margin-top:0px!important;}
 <script>
 $(document).ready(function(){	 
 
+$(document).on('change',"#city_id",function(){
+	var city_id=$(this, 'option: selected').val();
+	var state_id=parseFloat($('option:selected', this).attr('state_id'));
+	var country_id=parseFloat($('option:selected', this).attr('country_id'));
+	$("#state_id").val(state_id);
+	$("#country_id").val(country_id);
+});
 $(document).on('click',"#ckb1",function(){
 var va = +$('.chk_input').is( ':checked' );
 if(va==0)

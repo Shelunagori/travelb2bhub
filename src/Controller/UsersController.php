@@ -295,7 +295,7 @@ $this->loadModel('Cities');
 $this->loadModel('Membership');
 if ($this->request->is('post')) {
 $d = $this->request->data;
-$checkUsers = $this->Users->find()->where(['email' => $d['email']])->count();
+$checkUsers = $this->Users->find()->where(['mobile_number'=> $d['mobile_number'],'email' => $d['email']])->count();
 if ($checkUsers < 1) {
 $d['email_verified'] = 0;
 $d['mobile_verified'] = 0;
@@ -370,7 +370,7 @@ $user = $this->Users->newEntity($d);
 		$c['user_Id'] = $uid;
 		$creditd = $this->Credits->newEntity($c);
 		$this->Credits->save($creditd);
-		$this->Flash->success(__('Thank you for registering with Travelb2bhub.com! Please activate your account by clicking on the link sent to your e-mail address. If you do not receive an e-mail in your inbox, please check SPAM or JUNK folder.'));
+		$this->Flash->success(__('Thank you for registering with Travelb2bhub.com! Please activate your account by verify your mobile no.'));
 		
 		
 		$encrypted_data=$this->encode($userId,'B2BHUB');
@@ -381,7 +381,7 @@ $user = $this->Users->newEntity($d);
 	$this->Flash->error(__('The user could not be saved. Please, try again.'));
 	}
 } else {
-$this->Flash->error(__('Email ID already exists. Please enter another Email ID to register.'));
+$this->Flash->error(__('Mobile Number or Email already exists. Please enter another Mobile Number or Email to register.'));
 }
 }
 $cities = $this->Cities->getAllCities();
@@ -3393,6 +3393,9 @@ public function otpResend($dummy_user_id) {
 		$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
 		file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
 	}
+	 $encrypted_data=$this->encode($user_id,'B2BHUB');
+	 $dummy_user_id=$encrypted_data;
+	 
 	$this->redirect('/users/otp-verifiy/'.$dummy_user_id);
 }
 
@@ -3423,13 +3426,16 @@ if($user_count>0){
 		// $UserS=$this->Users->find()->where(['id'=>$user_id])->first();
 		//$this->Auth=$UserS;
 		// $this->request->session()->write('Auth', $UserS);
-	 $this->redirect('/users/login'); 
+	 $this->redirect('/users/login');
  	 
 	}else{
 		$this->Flash->error(__('Otp is not correct try again'));
 	}
 }
+$encrypted_data=$this->encode($user_id,'B2BHUB');
+			$dummy_user_id=$encrypted_data;
 $this->set('user_id',$user_id);
+$this->set('dummy_user_id',$dummy_user_id);
 }
 
 public function passwordotpVerifiy($dummy_user_id) {
@@ -3463,6 +3469,7 @@ if($user_count>0){
 	}
 }
 $this->set('user_id',$user_id);
+$this->set('dummy_user_id',$dummy_user_id);
 }
 
 public function activatePassword($dummy_user_id) {

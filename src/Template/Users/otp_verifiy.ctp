@@ -49,7 +49,7 @@
 					<p style="color:#fff !important;"><?php echo $this->Flash->render(); ?></p>
 					<div class="text-center p-t-90" style="padding-top: 20px;">
 						<p style="color:#fff">Otp resend ?
-							<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'otp_resend/'.$user_id)) ?>" style="color:#5ba7a4;">
+							<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'otp_resend/'.$dummy_user_id)) ?>" style="color:#5ba7a4;">
 								Re-Send
 							</a>
 						</p>
