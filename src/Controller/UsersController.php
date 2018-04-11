@@ -3603,26 +3603,38 @@ echo $res;
 exit;
 }
 public function blockUser() {
-$this->loadModel('BlockedUsers');
-$res = 0;
-if(isset($_POST["user_id"]) && !empty($_POST["user_id"]) && !empty($this->Auth->user('id'))) {
-$d["blocked_user_id"] = $_POST["user_id"];
-$d["blocked_by"] = $this->Auth->user('id');
-$d["created"] = date("Y-m-d H:i:s");
-$checkBlockedUsers = $this->BlockedUsers->find()->where(['blocked_user_id' => $d['blocked_user_id'],'blocked_by' => $d['blocked_by']])->count();			
-if($checkBlockedUsers >=1) {
-$res = 2;
-}else {
-$BlockUser = $this->BlockedUsers->newEntity($d);
-if($this->BlockedUsers->save($BlockUser)) {
-$res = 1;
-} else {
-$res = 0;
-}
-}
-}
-echo $res;
-exit;
+	$this->loadModel('BlockedUsers');
+	$this->loadModel('BusinessBuddies');
+	$res = 0;
+	if(isset($_POST["user_id"]) && !empty($_POST["user_id"]) && !empty($this->Auth->user('id'))) {
+	$d["blocked_user_id"] = $_POST["user_id"];
+	$d["blocked_by"] = $this->Auth->user('id');
+	$d["created"] = date("Y-m-d H:i:s");
+	$user_idd=$this->Auth->user('id');
+	$Bcount=$this->BusinessBuddies->find()->where(['bb_user_id'=>$_POST['user_id'],'user_id' => $user_idd])->count();
+		if($Bcount>0){
+			$BusinessBuddies=$this->BusinessBuddies->find()->where(['bb_user_id'=>$_POST['user_id'],'user_id' => $user_idd])->toArray();
+			$delete_id=$BusinessBuddies[0]['id'];
+			$BusinessBuddies = $this->BusinessBuddies->get($delete_id);
+			$this->BusinessBuddies->delete($BusinessBuddies);
+		}
+
+		$checkBlockedUsers = $this->BlockedUsers->find()->where(['blocked_user_id' => $d['blocked_user_id'],'blocked_by' => $d['blocked_by']])->count();			
+		if($checkBlockedUsers >=1) {
+			$res = 2;
+		}
+		else 
+		{
+			$BlockUser = $this->BlockedUsers->newEntity($d);
+			if($this->BlockedUsers->save($BlockUser)) {
+				$res = 1;
+			} else {
+				$res = 0;
+			}
+		}
+	}
+	echo $res;
+	exit;
 }
 public function addBusinessBuddy() {
 $this->loadModel('BusinessBuddies');
