@@ -205,13 +205,14 @@ fieldset{
 							</div>
 						<div class="row col-md-12">
 						<label>
-						<button type="button" class="btn btn-danger btn-lg btnlayout" data-target="#remove<?php echo $eventplanners->user_id; ?>" data-toggle=modal>Remove</button>
+						<button type="button" class="btn btn-danger btn-lg btnlayout" data-target="#remove<?php echo $eventplanners->id; ?>" data-toggle=modal>Remove</button>
 						</label>
 						</div>
 						<!------------------------- Remove Modal--------------------------->
-						<div id="remove<?php echo $eventplanners->user_id; ?>" class="modal fade" role="dialog">
+						<div id="remove<?php echo $eventplanners->id; ?>" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-md" >
 								<!-- Modal content-->
+								<form method="post" class="formSubmit">
 									<div class="modal-content">
 									  <div class="modal-header" style="height:100px;">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -224,8 +225,10 @@ fieldset{
 											<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
 										</div>
 									</div>
-								</div>
+									<input type="hidden" name="event_id" value="<?php echo $eventplanners->id; ?>">
+								</form>
 							</div>
+						</div>
 						<div class="row col-md-12">
 						<label><button type="button" class="btn btn-warning btn-lg btnlayout" data-target="#details<?php echo $eventplanners->user_id; ?>" data-toggle=modal>Details</button></label>
 						</div>
