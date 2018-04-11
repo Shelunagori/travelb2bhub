@@ -3,7 +3,7 @@
 {
  background-color: #eaeaea;
  text-align:left !important;
- padding:10px !important;
+ padding:5px !important;
 }
 h3 {
 	margin:0px !important;
