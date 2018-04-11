@@ -129,7 +129,7 @@ li > p{
 												<td colspan="2" style="font-size:16px"><b>Hotel Promotions</b></td>	
 											</tr>
 											<tr>
-												<td colspan="2" class="textpormoition">Click on the buttons below to View <?php if($role_id==3){ ?>or Post<?php } ?> Hotel Promotions </td>	
+												<td colspan="2" class="textpormoition">Click on the <?php if($role_id==3){ ?>buttons<?php } else{echo"button";} ?> below to View <?php if($role_id==3){ ?>or Post<?php } ?> Hotel Promotions </td>	
 											</tr>
 											 
 											<tr>
@@ -157,7 +157,7 @@ li > p{
 												<td colspan="2" style="font-size:16px"><b>Listed Taxi/Fleet Services</b></td>	
 											</tr>
 											<tr>
-												<td colspan="2" class="textpormoition">Click on the buttons below to View <?php if($role_id==1){ ?> or Promote <?php } ?> Taxi/Fleet Services </td>	
+												<td colspan="2" class="textpormoition">Click on the <?php if($role_id==1){ ?>buttons<?php } else{echo"button";} ?> below to View <?php if($role_id==1){ ?> or Promote <?php } ?> Taxi/Fleet Services </td>	
 											</tr>
 											<tr>
 												<td><a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>">
@@ -182,7 +182,7 @@ li > p{
 												<td colspan="2" style="font-size:16px"><b>Event Promotions</b></td>	
 											</tr>
 											<tr>
-												<td colspan="2" class="textpormoition">Click on the buttons below to View <?php if($role_id==2){ ?> or Promote <?php }?> Event Planning Services </td>	
+												<td colspan="2" class="textpormoition">Click on the <?php if($role_id==2){ ?>buttons<?php } else{echo"button";} ?> below to View <?php if($role_id==2){ ?> or Promote <?php }?> Event Planning Services </td>	
 											</tr>
 											 
 											<tr>

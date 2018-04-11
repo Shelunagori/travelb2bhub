@@ -498,7 +498,7 @@ p {
 			
 			<li <?php if($page_name=='add' && $controller=='HotelPromotions'){ echo 'class="active"';}?>>
 			
-				<a href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>'promotionReports']); ?>"><i class="fa fa-book"></i> <span>Promotion Reports</span></a>
+				<a href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>'promotionreports']); ?>"><i class="fa fa-book"></i> <span>Promotion Reports</span></a>
 			</li>
 		<?php } ?>
 		<?php if($roleId==1) { ?>
