@@ -390,7 +390,11 @@ p{
 							<?= (h($taxiFleetPromotion->fleet_detail)); ?>
 						</div>
 					</div>
+					
 					</form>
+					<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
+								<div id="loader"></div>
+								</div>
 				</div>
 			</div>
 		</fieldset>
@@ -415,6 +419,9 @@ p{
 				$(".report_text").hide();
 			  }
 		});
+				jQuery(".formSubmit").submit(function(){
+						jQuery("#loader-1").show();
+					});
   });
 </script>
    

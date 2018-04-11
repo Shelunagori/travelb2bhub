@@ -220,7 +220,7 @@ fieldset{
 									  <div class="modal-header" style="height:100px;">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 											<h3 class="modal-title">
-											Are you sure ? You want to delete this
+											Are you sure ? You want to delete this promotion?
 											</h3>
 										</div>
 										<div class="modal-footer" style="height:60px;">
