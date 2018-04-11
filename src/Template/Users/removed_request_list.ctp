@@ -12,9 +12,10 @@ $conn = ConnectionManager::get('default');
 		border-radius: 15px;
 	}
 	.details {color:#000 !important; font-weight: 400;}
-li > p{
+	li > p{
 		color:#96989A !important;
 		margin: 0 0 4px !important;
+		line-height:17px !important; 
 	}	
 </style>
 <div id="removed_request_list" class="container-fluid">

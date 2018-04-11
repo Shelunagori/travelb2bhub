@@ -8,10 +8,11 @@ fieldset
 		border-radius: 7px;
 		box-shadow: 0 1px 9px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	}
-.details {color:#000 !important; font-weight: 400;}	
+	.details {color:#000 !important; font-weight: 400;}	
 	li > p{
 		color:#96989A !important;
 		margin: 0 0 4px !important;
+		line-height:17px !important; 
 	}
 </style>
 <?php
@@ -338,18 +339,18 @@ $(document).ready(function(){
  			?>
             <div class="col-md-4">
 			<?php 
-               if($response['request']['category_id']==1){ 
+				if($response['request']['category_id']==1){ 
 					$image=$this->Html->image('/img/slider/package-icon.png');
-					$text="<span class='requestType'>Package</span>";
+					$text="<span class='packageType'>Package</span>";
 				} 
 				if($response['request']['category_id']==2){
 					$image= $this->Html->image('/img/slider/transport-icon.png');
-					$text="<span class='requestType'>Transport</span>";
+					$text="<span class='transportType'>Transport</span>";
 				}
 				if($response['request']['category_id']==3){
 					$image= $this->Html->image('/img/slider/hotelier-icon.png');
-					$text="<span class='requestType'>Hotel</span>";
-				} 
+					$text="<span class='hotelType'>Hotel</span>";
+				}
 				 
 				$created=$response['created'];
 				$org_created=date('d-M-Y', strtotime($created));
@@ -364,14 +365,20 @@ $(document).ready(function(){
 					<?php 
 					$total_rating=0;
 					$rate_count=0;
+					$final_rating=0;
 					$sql1="Select * from `testimonial` where `author_id`='".$response['request']['user']['id']."' ";
 					$stmt1 = $conn->execute($sql1);
 					foreach($stmt1 as $bresul){
 						$rate_count++;
 						$rating=$bresul['rating'];
 						$total_rating+=$rating;
-					} 
-					@$final_rating=$total_rating/$rate_count;
+					}
+					if($total_rating>0){
+						@$final_rating=round($total_rating/$rate_count);
+					}						
+					 
+					
+					 
 					 
 					?>
                         <?php if($response['is_details_shared']==1){
@@ -380,7 +387,7 @@ $(document).ready(function(){
 								$hrefurl =  "viewprofile/".$response['request']['user_id']."/";                       
                         }?>
                             To : <span class="details"> <a href="<?php echo $hrefurl;?>"><?php echo $response['request']['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $response['request']['user']['last_name']; ?></a> 
-							<font color="#1295AB">(<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font>
+							<font color="#1295AB">(<?php echo $final_rating; ?> <i class="fa fa-star"></i>)</font>
 							<?php if(in_array($response['request']['user_id'],$BusinessBuddies)) { 
 								//echo $this->Html->image('friend-ico1.png', [ "height"=>20]); 
 							} ?> 
@@ -400,6 +407,11 @@ $(document).ready(function(){
 				 
 				<li class="">
 					 <p>Quotation Price : <span class="details"> <?php echo ($response['quotation_price'])? " &#8377; ".$response['quotation_price']:"-- --" ?></p>
+				</li>
+				<li >
+					<p>
+						Reference ID : <span class="details"><?php echo $response['request']['reference_id']; ?></span>
+					</p>
 				</li>
                 <li class=" destination">
 				   <?php if($response['request']['category_id']==2){ ?>

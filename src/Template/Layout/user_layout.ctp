@@ -244,7 +244,15 @@ p {
 </style>
 <style>
  
-.requestType {	
+.hotelType {	
+	color: #0095A1;
+    font-weight: 600;
+}
+.transportType {	
+	color: #D7A82F;
+    font-weight: 600;
+}
+.packageType {	
 	color: #f87200;
     font-weight: 600;
 }

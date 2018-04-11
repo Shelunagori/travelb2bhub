@@ -18,7 +18,7 @@ $conn = ConnectionManager::get('default');
 	li > p{
 		color:#96989A !important;
 		margin: 0 0 4px !important;
-		line-height:15px; 	
+		line-height:17px !important; 	
 	}	
 		
 </style>
@@ -190,17 +190,17 @@ $(".req").sort(function (a, b) {
 							<div id="cat" >
 									<div class="col-md-4" id="<?php if($request['category_id']==1){ echo "1";} if($request['category_id']==2){ echo "3";}if($request['category_id']==3){ echo "2";} ?>">
 									<?php 
-								   if($request['category_id']==1){ 
+								    if($request['category_id']==1){ 
 										$image=$this->Html->image('/img/slider/package-icon.png');
-										$text="<span class='requestType'>Package</span>";
+										$text="<span class='packageType'>Package</span>";
 									} 
 									if($request['category_id']==2){
 										$image= $this->Html->image('/img/slider/transport-icon.png');
-										$text="<span class='requestType'>Transport</span>";
+										$text="<span class='transportType'>Transport</span>";
 									}
 									if($request['category_id']==3){
 										$image= $this->Html->image('/img/slider/hotelier-icon.png');
-										$text="<span class='requestType'>Hotel</span>";
+										$text="<span class='hotelType'>Hotel</span>";
 									} 
 									$created=$request['created'];
 									$org_created=date('d-M-Y', strtotime($created));
@@ -208,6 +208,7 @@ $(".req").sort(function (a, b) {
 				<?php 
 					$total_rating=0;
 					$rate_count=0;
+					$final_rating=0;
 					$sql1="Select * from `testimonial` where `author_id`='".$finalresponse[$request['id']]['user_id']."' ";
 					$stmt1 = $conn->execute($sql1);
 					foreach($stmt1 as $bresul){
@@ -215,7 +216,9 @@ $(".req").sort(function (a, b) {
 						$rating=$bresul['rating'];
 						$total_rating+=$rating;
 					} 
-					@$final_rating=$total_rating/$rate_count;
+					if($total_rating>0){
+						@$final_rating=round($total_rating/$rate_count);
+					}
 					 
 					?>
 							<fieldset>
@@ -285,7 +288,7 @@ $(".req").sort(function (a, b) {
 									</p>
 								</li>
 								<?php } ?>
-										<li >
+								<li >
 									<p>
 										Reference ID : <span class="details"><?php echo $request['reference_id']; ?></span>
 									</p>

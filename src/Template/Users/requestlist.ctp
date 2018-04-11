@@ -26,6 +26,7 @@ fieldset
 .contain>p{
 	color:#96989A !important;
 	margin: 0 0 5px !important;
+	line-height:17px !important; 
 }
 .details {color:#000 !important; font-weight: 400;}	
 .btn-block { width:40% !important;}
@@ -251,6 +252,7 @@ fieldset
 			<?php
             if(count($requests) >0) {
                 $m =0;
+				
                 foreach($requests as $request){ 
 					$totmem = $request['adult'] +   $request['children']; 
 					  if(isset($_GET['memberssearch']) && $_GET['memberssearch']!="" && $_GET['memberssearch'] !=$totmem ){
@@ -260,7 +262,8 @@ fieldset
 						echo '<div class="clearfix"></div>'; 
 					  }
                   $m++;
-                  ?>
+                 // pr($request); exit;
+				  ?>
 				  
                <div id=cat>
 					<?php 
@@ -275,17 +278,17 @@ fieldset
 					<?php 
 					}
 					if($request['category_id']==1){ 
-						$image="<img src='../img/slider/package-icon.png'>";
-						$text="<span class='requestType'>Package</span>";
+						$image=$this->Html->image('/img/slider/package-icon.png');
+						$text="<span class='packageType'>Package</span>";
 					} 
 					if($request['category_id']==2){
-						$image= "<img src='../img/slider/transport-icon.png'>";
-						$text="<span class='requestType'>Transport</span>";
+						$image= $this->Html->image('/img/slider/transport-icon.png');
+						$text="<span class='transportType'>Transport</span>";
 					}
 					if($request['category_id']==3){
-						$image= "<img src='../img/slider/hotelier-icon.png'>";
-						$text="<span class='requestType'>Hotel</span>";
-					} 
+						$image= $this->Html->image('/img/slider/hotelier-icon.png');
+						$text="<span class='hotelType'>Hotel</span>";
+					}
 					
 					$created=$request['created'];
 					$org_created=date('d-M-Y', strtotime($created));
@@ -489,9 +492,9 @@ fieldset
                     request_id: t
                 }
             }).done(function(e) {
-                if(e==1){  $('.modal').toggle();
+                if(e==1){  //$('.modal').toggle();
 				location.reload();
-					box.closest('div.col-md-4.req').hide();
+					//box.closest('div.col-md-4.req').hide();
 				}
              })
         }); 

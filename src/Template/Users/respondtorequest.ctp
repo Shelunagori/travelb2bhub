@@ -17,6 +17,7 @@ $conn = ConnectionManager::get('default');
 	li > p{
 		color:#96989A !important;
 		margin: 0 0 5px !important;
+		line-height:17px !important; 
 	}
 </style>
 <div id="my_final_responses" class="container-fluid">
@@ -288,16 +289,16 @@ $conn = ConnectionManager::get('default');
 				$id=$request['id'];
 				if($request['category_id']==1){ 
 					$image=$this->Html->image('/img/slider/package-icon.png');
-					$text="<span class='requestType'>Package</span>";
+					$text="<span class='packageType'>Package</span>";
 				} 
 				if($request['category_id']==2){
 					$image= $this->Html->image('/img/slider/transport-icon.png');
-					$text="<span class='requestType'>Transport</span>";
+					$text="<span class='transportType'>Transport</span>";
 				}
 				if($request['category_id']==3){
 					$image= $this->Html->image('/img/slider/hotelier-icon.png');
-					$text="<span class='requestType'>Hotel</span>";
-				} 
+					$text="<span class='hotelType'>Hotel</span>";
+				}
 				
 				$totmem = $request['adult'] +   $request['children']; 
 				if(isset($_GET['memberssearch'])  && $_GET['memberssearch']!="" && $_GET['memberssearch'] !=$totmem ){
@@ -330,6 +331,7 @@ $conn = ConnectionManager::get('default');
 							<?php 
 								$total_rating=0;
 								$rate_count=0;
+								$final_rating=0;
 								$sql1="Select * from `testimonial` where `author_id`='".$request['user']['id']."' ";
 								$stmt1 = $conn->execute($sql1);
 								foreach($stmt1 as $bresul){
@@ -337,7 +339,10 @@ $conn = ConnectionManager::get('default');
 									$rating=$bresul['rating'];
 									$total_rating+=$rating;
 								} 
-								@$final_rating=$total_rating/$rate_count;
+								 
+								if($total_rating>0){
+									@$final_rating=round($total_rating/$rate_count);
+								}	
 
 							?>
 					

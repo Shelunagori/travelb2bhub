@@ -17,6 +17,7 @@ $conn = ConnectionManager::get('default');
 		li > p{
 		color:#96989A !important;
 		margin: 0 0 4px !important;
+		line-height:17px !important; 
 	}
 </style>
 <div id="my_final_responses" class="container-fluid">
@@ -93,18 +94,19 @@ $conn = ConnectionManager::get('default');
 			<div id="cat" >
 			<div class="col-md-4">
 			<?php 
-               if($row['request']['category_id']==1){ 
+               
+				if($row['request']['category_id']==1){ 
 					$image=$this->Html->image('/img/slider/package-icon.png');
-					$text="<span class='requestType'>Package</span>";
+					$text="<span class='packageType'>Package</span>";
 				} 
 				if($row['request']['category_id']==2){
 					$image= $this->Html->image('/img/slider/transport-icon.png');
-					$text="<span class='requestType'>Transport</span>";
+					$text="<span class='transportType'>Transport</span>";
 				}
 				if($row['request']['category_id']==3){
 					$image= $this->Html->image('/img/slider/hotelier-icon.png');
-					$text="<span class='requestType'>Hotel</span>";
-				} 
+					$text="<span class='hotelType'>Hotel</span>";
+				}
 				$created=$row['created'];
 				$org_created=date('d-M-Y', strtotime($created));
 				?>
@@ -127,6 +129,7 @@ $conn = ConnectionManager::get('default');
 						<?php 
 							$total_rating=0;
 							$rate_count=0;
+							$final_rating=0;
 							$sql1="Select * from `testimonial` where `author_id`='".$row['request']['user']['id']."' ";
 							$stmt1 = $conn->execute($sql1);
 								foreach($stmt1 as $bresul){
@@ -134,7 +137,9 @@ $conn = ConnectionManager::get('default');
 									$rating=$bresul['rating'];
 									$total_rating+=$rating;
 								} 
-							@$final_rating=$total_rating/$rate_count;
+								if($total_rating>0){
+									@$final_rating=round($total_rating/$rate_count);
+								}
 						?>
 						Agent Name :  <a href="viewprofile/<?php echo $row['request']['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$row['request']['user_id']]); ?></a>
 						<font color="#1295AB"> (<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font>

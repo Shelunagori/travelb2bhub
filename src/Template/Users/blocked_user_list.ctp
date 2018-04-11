@@ -1,5 +1,4 @@
- <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
-
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <?php
 use Cake\Datasource\ConnectionManager; 
 $conn = ConnectionManager::get('default');
@@ -36,6 +35,7 @@ $conn = ConnectionManager::get('default');
 									<?php 
 										$total_rating=0;
 										$rate_count=0;
+										$final_rating=0;
 										$sql1="Select * from `testimonial` where `author_id`='".$row['user']['id']."' ";
 										$stmt1 = $conn->execute($sql1);
 										foreach($stmt1 as $bresul){
@@ -43,7 +43,9 @@ $conn = ConnectionManager::get('default');
 											$rating=$bresul['rating'];
 											$total_rating+=$rating;
 										} 
-										@$final_rating=$total_rating/$rate_count;
+										if($total_rating>0){
+											@$final_rating=$total_rating/$rate_count;
+										}
 										 
 										?>
 									<?php 

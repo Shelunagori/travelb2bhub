@@ -15,16 +15,35 @@
 		</div>
 	<div class="box-body">
 					<?php
+						use Cake\Datasource\ConnectionManager; 
+						$conn = ConnectionManager::get('default');
 						if(count($BusinessBuddies) >0) {
 							foreach($BusinessBuddies as $row){
-								//pr($BusinessBuddies->toArray());exit;
-							?>
+									$total_rating=0;
+									$rate_count=0;
+									$final_rating=0;
+									$sql1="Select * from `testimonial` where `author_id`='".$row['user']['id']."' ";
+									$stmt1 = $conn->execute($sql1);
+									foreach($stmt1 as $bresul){
+										$rate_count++;
+										$rating=$bresul['rating'];
+										$total_rating+=$rating;
+									} 
+									if($total_rating>0){
+										@$final_rating=$total_rating/$rate_count;
+									}
+									 
+									?>
+								<?php 
+									$hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$row['user']['id']));
+								?>
+							 
 					<div id="cat" >
 						<div class="row">
 							<div class="form-group col-md-12">
 							
 								 <div class="col-md-3">
-									<b>Name :</b> <?php echo $row['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $row['user']['last_name']; ?><br>
+									<b>Name :</b> <a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></a><font color="#1295AB">(<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font> <br>
 									<b>Company Name :</b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?><br>
 									
 								</div>
