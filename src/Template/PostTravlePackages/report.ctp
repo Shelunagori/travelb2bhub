@@ -143,6 +143,9 @@ hr{
 	margin-top: 15px !important;
     margin-bottom: 4px !important;
 }
+.col-md-4{
+	color:#727e8a;
+}
 </style>
 <div class="row" >
 	<div class="col-md-12">
@@ -174,28 +177,28 @@ hr{
 				  <div class="modal-body" style="height:130px;">
 					<div class="col-md-12 row form-group ">
 						<div class="col-md-12 radio">
-							<label>
+							<span>
 								<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="user_rating"/>
 								User Rating
-							</label>
+							</span>
 						</div>
 					</div>
 					<div class="col-md-12 row form-group ">
 						<div class="col-md-12 radio">
-							<label>
+							<span>
 							<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="total_likes"/>
 								 Likes
-							</label>
+							</span>
 						</div>
 					</div>
 					 
 					
 					<div class="col-md-12 row form-group ">
 						<div class="col-md-12 radio">
-							<label>
+							<span>
 								<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="total_views"/>
 								 Views
-							</label>
+							</span>
 						</div>
 					</div>
 					
@@ -225,7 +228,7 @@ hr{
 						<div class="row form-group margin-b10">
 							<div class=col-md-12>
 								 <div class=col-md-3>
-								  <label class="col-form-label"for=example-text-input>Country</label>
+								  <span class="col-form-span"for=example-text-input>Country</span>
 								  </div>
 								  <div class=col-md-1>:</div>
 								 <div class=col-md-7>
@@ -233,7 +236,7 @@ hr{
 									foreach($countries as $country)
 									{
 										$options[] = ['value'=>$country->id,'text'=>$country->country_name];
-									};echo $this->Form->input('country_id', ['options' => $options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...']);
+									};echo $this->Form->input('country_id', ['options' => $options,'class'=>'form-control select2','span'=>false,'empty'=>'Select...']);
 								?>
 								</div>
 							 </div>
@@ -241,7 +244,7 @@ hr{
 							<div class="row form-group margin-b10">
 								<div class=col-md-12>
 								  <div class=col-md-3>
-								 <label class="col-form-label" for=example-text-input>Package Category</label>
+								 <span class="col-form-span" for=example-text-input>Package Category</span>
 								 </div>
 								<div class=col-md-1>:</div>
 								 <div class=col-md-7>
@@ -251,14 +254,14 @@ hr{
 										{
 											$options[] = ['value'=>$sts->id,'text'=>$sts->name];
 										};
-										echo $this->Form->control('category_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>'Select...']);?>
+										echo $this->Form->control('category_id', ['span'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>'Select...']);?>
 								 </div>
 								</div>	
 							</div>
 							<div class="row form-group margin-b10">
 								<div class=col-md-12>
 								  <div class=col-md-3>
-								 <label class="col-form-label" for=example-text-input>Duration Night</label>
+								 <span class="col-form-span" for=example-text-input>Duration Night</span>
 								 </div>
 								<div class=col-md-1>:</div>
 								 <div class=col-md-7>
@@ -286,11 +289,11 @@ hr{
 							<div class="row form-group margin-b10">
 								<div class=col-md-12>
 								  <div class=col-md-3>
-								 <label class="col-form-label" for=example-text-input>Starting Price</label>
+								 <span class="col-form-span" for=example-text-input>Starting Price</span>
 								 </div>
 								<div class=col-md-1>:</div>
 								 <div class=col-md-7>
-									 <?php echo $this->Form->input('starting_price',['class'=>'form-control','label'=>false,'placeholder'=>'Starting Price']);?> 
+									 <?php echo $this->Form->input('starting_price',['class'=>'form-control','span'=>false,'placeholder'=>'Starting Price']);?> 
 								 </div>
 								</div>	
 							</div>
@@ -444,7 +447,7 @@ hr{
 																					{
 																						$options[] = ['value'=>$sts->id,'text'=>$sts->reason];
 																					};
-																					echo $this->Form->control('report_reason_id', ['label'=>false, "type"=>"select",'options' =>$options, "class"=>"form-control select2 reason_box","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);
+																					echo $this->Form->control('report_reason_id', ['span'=>false, "type"=>"select",'options' =>$options, "class"=>"form-control select2 reason_box","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>"Select..."]);
 																				?>
 																			</div>
 																		</div>
@@ -483,23 +486,25 @@ hr{
 										<!--------------------image modal End--------------------->
 										<div class="col-md-9" style="padding-top:5px;">
 											<div class="row col-md-12 rowspace">
-													<div class="col-md-12">Category :
-														<?= h($CategoryList); ?>
+													<div class="col-md-12">
+													<span style="color:#727e8a;">Category :</span>
+													<span ><?= h($CategoryList); ?></span>
 													</div>
 											</div>
 											<div class="col-md-6">
 												<div class="row rowspace">
-													<div class="col-md-12 ">Duration :	
+													<div class="col-md-12 "><span style="color:#727e8a;">Duration :</span> 
 													<span style="color:#FB6542"><?= h($postTravlePackage->duration_day_night) ?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
-													<div class="col-md-12 ">Starting Price :
+													<div class="col-md-12 ">
+													<span style="color:#727e8a;"> Starting Price :</span>
 													<span style="color:#1295AB">&#8377; <?php echo number_format(h($postTravlePackage->starting_price)) ;?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
-													<div class="col-md-12 ">Seller :
+													<div class="col-md-12 "><span style="color:#727e8a;">Seller :</span>
 													<span>
 														<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
 														<a href="<?php echo $hrefurl; ?>"> 
@@ -512,17 +517,17 @@ hr{
 											</div>
 											<div class="col-md-6">
 												<div class="row rowspace">
-													<div class="col-md-12 ">Cities :	
+													<div class="col-md-12 "><span style="color:#727e8a;">Cities :</span>
 													<span ><?= h($cityList); ?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
-													<div class="col-md-12">Country :	
+													<div class="col-md-12"><span style="color:#727e8a;">Country :</span>	
 													<span ><?php echo "India"//$postTravlePackage->country->country_name; ?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
-													<div class="col-md-12">Valid Till :
+													<div class="col-md-12"><span style="color:#727e8a;">Valid Till :</span>
 													<span><?= h(date('d-M-Y',strtotime($postTravlePackage->valid_date))); ?></span>
 													</div>					
 												</div>	
@@ -597,7 +602,7 @@ hr{
 																		<div class="col-md-12">
 																			<div class="col-md-4">Seller Name :</div>
 																			<div class="col-md-8">
-																				<label>
+																				<span>
 																					<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?>
 																					<?php
 																					if($postTravlePackage->user_rating==0)
@@ -617,7 +622,7 @@ hr{
 																						echo " )";
 																						}
 																					?>
-																				</label>
+																				</span>
 																			</div>					
 																		</div>
 																	</div>
@@ -625,7 +630,7 @@ hr{
 																		<div class="col-md-12">
 																		<div class="col-md-4">Mobile No :</div>
 																		<div class="col-md-8">
-																		<label><?= h($postTravlePackage->user->mobile_number);?></label>
+																		<span><?= h($postTravlePackage->user->mobile_number);?></span>
 																		</div>
 																		</div>
 																	</div>
@@ -633,7 +638,7 @@ hr{
 																		<div class="col-md-12">
 																			<div class="col-md-4">Email :</div>
 																			<div class="col-md-8">
-																			<label><a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a></label>
+																			<span><a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a></span>
 																			</div>
 																		</div>
 																	</div>
@@ -641,10 +646,11 @@ hr{
 																		<div class="col-md-12">
 																			<div class="col-md-4">Location :</div>
 																			<div class="col-md-8">
-																			<label><?= h($postTravlePackage->user->location);?></label>
+																			<span><?= h($postTravlePackage->user->location);?></span>
 																			</div>
 																		</div>
 																	</div>
+																	<span class="help-block"></span>
 																</div>
 																<div class="modal-footer">
 																<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
