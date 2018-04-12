@@ -88,7 +88,7 @@ fieldset{
 		<div class="row">
 			<div class="col-md-12">
 				<div class="box-header with-border"> 
-					<span class="box-title" style="color:#057F8A;"><b><?= __('Texi/Fleet Reports') ?></b></span>
+					<span class="box-title" style="color:#057F8A;"><b><?= __('Taxi/Fleet Reports') ?></b></span>
 					<div class="box-tools pull-right" style="margin-top:-5px;">
 						<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
 						<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
