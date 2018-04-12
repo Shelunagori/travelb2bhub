@@ -274,7 +274,7 @@ fieldset{
 										</p>
 									</div>
 									<div class="">
-									<input autocomplete="off" type="text" name="check_in" class="form-control date-picker" id="datepicker7" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
+									<input autocomplete="off" type="text" name="check_in" class="form-control date-picker"s data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -877,8 +877,8 @@ fieldset{
 								</div>
 							</div>
 						</div>
-					</div>	
-			<?= $this->Form->end()?>							
+					</div>
+			<?= $this->Form->end()?>
 						</div>
 					</div>
 				</div>
@@ -892,6 +892,12 @@ fieldset{
 <script>
 
 $(document).ready(function(){ 
+
+	$(document).on('blur',".city_select",function(){
+		var master=$(this);
+		master.closest('div').find('div.suggesstion-box').delay(2000).fadeOut(1000);
+	});
+
 	$(document).on('keyup',".city_select",function(){
 		
  		var input=$(this).val();
