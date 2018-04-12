@@ -167,7 +167,7 @@ fieldset
 									 </div>
 									<div class=col-md-1>:</div>
 									 <div class=col-md-7>
-									 <input class=form-control name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"id=datepicker1>
+									 <input class=form-control name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"id=datepicker1 data-date-format="dd-mm-yyyy">
 									 </div>
 									</div>	
 								</div>
@@ -178,7 +178,7 @@ fieldset
 										</div>
 										<div class=col-md-1>:</div>
 										<div class=col-md-7>
-										<input class=form-control name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"id=datepicker2>
+										<input class=form-control name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"id=datepicker2 data-date-format="dd-mm-yyyy">
 										</div>
 									</div>
 								</div>

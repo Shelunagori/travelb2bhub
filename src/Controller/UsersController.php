@@ -1608,15 +1608,17 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		$conditions["Requests.pickup_city"] =  $this->request->query("pickup_city");
 		}
 		$sdate = $this->request->query("startdatesearch");
-		$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
-		if(!empty($this->request->query("startdatesearch"))) {
+		//$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+ 		if(!empty($this->request->query("startdatesearch"))) {
+			$sdate=date('Y-m-d', strtotime($sdate));
 			$da["Requests.start_date"] =  $sdate;
 			$da["Requests.check_in"] =  $sdate;
 			$conditions["OR"] =  $da;
 		}
 		$edate = $this->request->query("enddatesearch");
-		$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+		//$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
 		if(!empty($this->request->query("enddatesearch"))) {
+			$edate=date('Y-m-d', strtotime($edate));
 			$da1["Requests.end_date"] =  $edate;
 			$da1["Requests.check_out"] =  $edate;
 			$conditions["OR"] =  $da1;
@@ -1772,15 +1774,17 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 			$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
 		}
 			$sdate = $this->request->query("startdatesearch");
-			$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+			//$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
 		if(!empty($this->request->query("startdatesearch"))) {
+			$sdate=date('Y-m-d', strtotime($sdate));
 			$da["Requests.start_date"] =  $sdate;
 			$da["Requests.check_in"] =  $sdate;
 			$conditions["OR"] =  $da;
 		}
 			$edate = $this->request->query("enddatesearch");
-			$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+			//$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
 		if(!empty($this->request->query("enddatesearch"))) {
+			$edate=date('Y-m-d', strtotime($edate));
 			$da["Requests.end_date"] =  $edate;
 			$da["Requests.check_out"] =  $edate;
 			$conditions["OR"] =  $da;
@@ -1894,16 +1898,18 @@ if(!empty($this->request->query("refidsearch"))) {
 $conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
 }
 $sdate = $this->request->query("startdatesearch");
-$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+//$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
 echo $sdate;
 if(!empty($this->request->query("startdatesearch"))) {
+	$sdate=date('Y-m-d', strtotime($sdate));
 $da["Requests.start_date"] =  $sdate;
 $da["Requests.check_in"] =  $sdate;
 $conditions["OR"] =  $da;
 }
 $edate = $this->request->query("enddatesearch");
-$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+//$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
 if(!empty($this->request->query("enddatesearch"))) {
+	$edate=date('Y-m-d', strtotime($edate));
 $da1["Requests.end_date"] =  $edate;
 $da1["Requests.check_out"] =  $edate;
 $conditions["OR"] =  $da1;
@@ -2035,20 +2041,18 @@ public function respondtorequest() {
 		$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
 	}
 	$sdate = $this->request->query("startdatesearch");
-	$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
-	if(!empty($this->request->query("startdatesearch"))) {
+ 	if(!empty($this->request->query("startdatesearch"))) {
+		$sdate=date('Y-m-d', strtotime($sdate));
 		$da["Requests.start_date"] =  $sdate;
 		$da["Requests.check_in"] =  $sdate;
 		$conditions["OR"] =  $da;
 	}
 	$edate = $this->request->query("enddatesearch");
 	if(isset($edate) AND !empty($edate)){
-		$date = str_replace('/', '-', $edate);
-		$edate = date('Y-m-d', strtotime($date));
+  		$edate = date('Y-m-d', strtotime($edate));
 	}else{
 		$edate = null;		
-	}
-	//echo  $edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+	} ;
 	if(!empty($this->request->query("enddatesearch"))) {
 		$da1["Requests.end_date"] =  $edate;
 		$da1["Requests.check_out"] = $edate;
@@ -2739,16 +2743,17 @@ public function myresponselist() {
 		$conditions["Responses.is_details_shared"] =  $this->request->query("shared_details");
 	}
 	$sdate = $this->request->query("startdatesearch");
-	$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+	//$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
 	if(!empty($this->request->query("startdatesearch"))) {
+		$sdate=date('Y-m-d', strtotime($sdate));
 		$da["Requests.start_date"] =  $sdate;
 		$da["Requests.check_in"] =  $sdate;
 		$conditions["OR"] =  $da;
 	}
 	$edate = $this->request->query("enddatesearch");
 	if(isset($edate) AND !empty($edate)){
-		$date = str_replace('/', '-', $edate);
-		$edate = date('Y-m-d', strtotime($date));
+		//$date = str_replace('/', '-', $edate);
+		$edate = date('Y-m-d', strtotime($edate));
 	}
 	else{
 		$edate = null;		
@@ -4307,15 +4312,17 @@ if(!empty($_POST["pickup_city"])) {
 $conditions["Requests.pickup_city"] =  $_POST["pickup_city"];
 }
 $sdate = $_POST["startdatesearch"];
-$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+//$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
 if(!empty($_POST["startdatesearch"])) {
+	$sdate=date('Y-m-d', strtotime($sdate));
 $da["Requests.start_date"] =  $sdate;
 $da["Requests.check_in"] =  $sdate;
 $conditions["OR"] =  $da;
 }
 $edate = $_POST["enddatesearch"];
-$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+//$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
 if(!empty($_POST["enddatesearch"])) {
+	$edate=date('Y-m-d', strtotime($edate));
 $da1["Requests.end_date"] =  $edate;
 $da1["Requests.check_out"] =  $edate;
 $conditions["OR"] =  $da1;
