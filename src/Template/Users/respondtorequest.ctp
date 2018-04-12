@@ -144,7 +144,10 @@ $conn = ConnectionManager::get('default');
 												  </div>
 												  <div class=col-md-1>:</div>
 												 <div class=col-md-7>
-													<select name="req_typesearch" class="form-control"><option value="">Select Request Type</option><option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option><option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option><option value="2">Transport</option></select>
+													<select name="req_typesearch" multiple="multiple" class="form-control  select2">
+													<option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option>
+													<option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option>
+													<option value="2">Transport</option></select>
 												</div>
 											 </div>
 										</div>
@@ -168,7 +171,7 @@ $conn = ConnectionManager::get('default');
 													 </div>
 													<div class=col-md-1>:</div>
 													 <div class=col-md-7>
-													 <input class="form-control datepicker" name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" id="datepicker1">
+													 <input class="form-control datepicker" data-date-format="dd-mm-yyyy" name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" id="datepicker1">
 													 </div>
 													</div>	
 												</div>
@@ -179,7 +182,7 @@ $conn = ConnectionManager::get('default');
 														</div>
 														<div class=col-md-1>:</div>
 														<div class=col-md-7>
-														<input class="form-control datepicker" name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>" id="datepicker2">
+														<input class="form-control datepicker" data-date-format="dd-mm-yyyy" name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>" id="datepicker2">
 														</div>
 													</div>
 												</div>
