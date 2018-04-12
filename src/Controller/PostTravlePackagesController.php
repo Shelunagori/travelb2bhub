@@ -635,7 +635,7 @@ class PostTravlePackagesController extends AppController
 		}
 		$this->set(compact('user_id','post_travel_id'));
     }
-	public function viewersList($post_travel_id = null)
+	public function viewersList($user_id = null)
     {
 		$this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');
@@ -715,6 +715,160 @@ class PostTravlePackagesController extends AppController
 			}
 		}
 		$this->set(compact('user_id','post_travel_id'));
+    }
+	 public function savedList($user_id = null)
+    {
+		$this->viewBuilder()->layout('user_layout');
+		$user_id=$this->Auth->User('id');
+			if ($this->request->is(['patch', 'post', 'put'])) 
+		{
+			//-- Like EVENT
+			if(isset($this->request->data['LikeEvent']))
+			{
+ 				$hotelpromotion_id=$this->request->data('hotelpromotion_id');
+				$post =[
+						'hotel_promotion_id' => $hotelpromotion_id,
+						'user_id' =>$user_id						 							
+					];
+				//pr($post);exit;
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/hotel_promotions/likeHotelPromotions.json",
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "POST",
+				  CURLOPT_POSTFIELDS =>$post,
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				$displayMessage=$LikeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'savedList/'.$user_id]);
+			}
+			//---Remove Hotel  Promotion
+			if(isset($this->request->data['removehotelpromtion']))
+			{
+				$hotelpromotion_id=$this->request->data('hotelpromotion_id');
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/hotel_promotions/removePromotion.json?promotion_id=".$hotelpromotion_id,
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "GET",
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 899aa26c-f697-c513-89c1-b6bba1e1fbdf"
+				  ),
+				));
+
+				$removeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				  $removeResult=json_decode($removeResponse);
+				}
+				$displayMessage=$removeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'savedList/'.$user_id]);
+			}
+							//-- Save Unsave
+			if(isset($this->request->data['savehotelpromotion']))
+			{
+ 				$hotelpromotion_id=$this->request->data('hotelpromotion_id');
+				$post =[
+						'hotel_promotion_id' => $hotelpromotion_id,
+						'user_id' =>$user_id						 							
+					];
+				//pr($post);exit;
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/HotelPromotionCarts/HotelPromotionCartAdd.json",
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "POST",
+				  CURLOPT_POSTFIELDS =>$post,
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				$displayMessage=$LikeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'savedList/'.$user_id]);
+			}
+								//Report Modal//
+			if(isset($this->request->data['report_submit']))
+			{
+				$user_id=$this->Auth->User('id');
+				$hotelpromotion_id=$this->request->data('hotelpromotion_id');
+				$report_reason_id=$this->request->data('report_reason_id');
+				$comment=$this->request->data('comment');
+				$post =[
+						'hotel_promotion_id' => $hotelpromotion_id,
+						'report_reason_id' => $report_reason_id,
+						'user_id' =>$user_id,						 							
+						'comment' =>$comment						 							
+					];
+				//pr($post);exit;
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/HotelPromotionReports/HotelPromotionReportAdd.json",
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "POST",
+				  CURLOPT_POSTFIELDS =>$post,
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				$displayMessage=$LikeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'savedList/'.$user_id]);
+			}			
+			
+		}
+		$this->set(compact('user_id'));
     }
     
 }

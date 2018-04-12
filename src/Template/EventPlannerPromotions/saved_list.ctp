@@ -3,7 +3,7 @@
 //-- List
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => $coreVariable['SiteUrl']."api/EventPlannerPromotions/getEventPlanners.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&city_id=".$city_id."&state_id=".$state_id."&submitted_from=web",
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/EventPlannerPromotionCarts/EventPlannerPromotionsCartlist.json?user_id=".$user_id,
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -25,7 +25,7 @@ if ($err) {
 	$response;
 	$List=json_decode($response);
 	//pr($List);exit;
- 	$eventPlannerPromotions=$List->getEventPlanners;
+ 	$eventPlannerPromotions=$List->eventPlannerPromotionCarts;
 }
 //pr($eventPlannerPromotions);
 //--- COUNTRY STATE & CITY
@@ -145,127 +145,11 @@ hr{
 			</div>
 		</div>
 	</div>
-<!-------SHORTING FILTERING--------->
-<div id="myModal123" class="modal fade" role="dialog">
-  <div class="modal-dialog modal-sm">
-	<!-- Modal content-->
-	<div class="modal-content">
-	  <div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		<h4 class="modal-title">Sorting</h4>
-	  </div>
-			  <form method="get" class="filter_box">
-				  <div class="modal-body" style="height:130px;">
-					<div class="col-md-12 row form-group ">
-						<div class="col-md-12 radio">
-							<label>
-								<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="user_rating"/>
-								User Rating
-							</label>
-						</div>
-					</div>
-					<div class="col-md-12 row form-group ">
-						<div class="col-md-12 radio">
-							<label>
-							<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="total_likes"/>
-								Likes
-							</label>
-						</div>
-					</div>
-					<div class="col-md-12 row form-group ">
-						<div class="col-md-12 radio">
-							<label>
-								<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="total_views"/>
-								 Views
-							</label>
-						</div>
-					</div>
-				</div>
-				<div class="modal-footer" style="height:60px;">
-					  <div class="row">
-							<div class="col-md-12 text-center">
-								<input type="submit" class="btn btn-info btn-sm">
-								<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-sm">Reset</a>
-							</div>
-					  </div>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-<div class="fade modal form-modal" id="myModal122" role="dialog">
-  <div class="modal-dialog modal-md"  >
-	 <div class=modal-content>
-		<div class=modal-header>
-		   <button class="close" data-dismiss="modal" type="button">&times;</button>
-		   <h4 class=modal-title>Filter</h4>
-		</div>
-		<form class="filter_box" method="get">
-		<div class="modal-body">
-			<span class="help-block"></span>
-			<div class="row form-group margin-b10">
-				<div class=col-md-12>
-					 <div class=col-md-3>
-					  <span class="label1">Country</span>
-					  </div>
-					  <div class=col-md-1>:</div>
-					 <div class=col-md-7>
-					<?php $options=array();
-						foreach($countries as $country)
-						{
-							$options[] = ['value'=>$country->id,'text'=>$country->country_name];
-						};echo $this->Form->input('country_id', ['options' => $options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...']);
-					?>
-					</div>
-				 </div>
-				</div>
-				<div class="row form-group margin-b10">
-					<div class=col-md-12>
-						<div class=col-md-3>
-							 <span class="label1">State</span>
-						</div>
-						<div class=col-md-1>:</div>
-						<div class=col-md-7>
-						<?php 
-							$options=array();
-							foreach($states as $st)
-							{
-								$options[] = ['value'=>$st->id,'text'=>$st->state_name];
-							};
-							echo $this->Form->input('state_id', ['options' => $options,'class'=>'form-control select2','label'=>false,"data-placeholder"=>"Select States",'empty'=>'Select...']); 
-						?> 
-						</div>
-					 </div>
-				 </div>
-				<div class="row form-group margin-b10">
-					<div class=col-md-12>
-					  <div class=col-md-3>
-					  <span class="label1">City</span>
-					 </div>
-					<div class=col-md-1>:</div>
-					 <div class=col-md-7>
-						 <?php 
-						$options=array();
-						foreach($city->citystatefi as $cty)
-						{
-							$options[] = ['value'=>$cty->cityid,'text'=>$cty->name];
-						};
-						echo $this->Form->input('city_id', ['options' =>$options,'class'=>'form-control select2','label'=>false,"data-placeholder"=>"Select Cities",'empty'=>'Select...']); ?>
-					 </div>
-					</div>	
-				</div>
-			  </div>
-			<div class="modal-footer">
-				<button class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
-				<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-sm">Reset</a>
-			</div>
-		</form>
-	 </div>
-  </div>
-</div>		
-<?php $i=1;
-if(!empty($eventPlannerPromotions)){
-foreach ($eventPlannerPromotions as $eventPlannerPromotion){
+	<?php $i=1;
+				if(!empty($eventPlannerPromotions)){
+					//pr($hotelPromotions);exit;
+				foreach ($eventPlannerPromotions as $eventPlannerPromotionss){
+					$eventPlannerPromotion=$eventPlannerPromotionss->event_planner_promotion;
 							$cityList='';
 							$x=0;
 								foreach($eventPlannerPromotion->event_planner_promotion_cities as $cities)
@@ -294,7 +178,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 	<div class="box-body bbb">	
 		<fieldset style="background-color:#fff;">
 			<form method="post" class="formSubmit">
-			<input type="hidden" name="event_id" value="<?php echo $hotelPromotion->id; ?>">
+			<input type="hidden" name="event_id" value="<?php echo $eventPlannerPromotion->id; ?>">
 				<div class="row">
 					<div class="col-md-12" style="padding-top:5px;">
 					<span style="font-size:18px;"><b><?php echo $eventPlannerPromotion->user->company_name; ?></b></span>
@@ -322,22 +206,21 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 								<tr>
 								<td width="25%" >
 									<span><img src="../images/view.png" height="15px"/>
-									<?= h($eventPlannerPromotion->total_views);?></span>
+									<?= h($eventPlannerPromotionss->total_views);?></span>
 								</td>
 								<td width="25%">
 								<span><?php
-									$dataUserId=$eventPlannerPromotion->user_id;
-									$isLiked=$eventPlannerPromotion->isLiked;
-									$issaved=$eventPlannerPromotion->issaved;
+									$dataUserId=$eventPlannerPromotionss->user_id;
+									$isLiked=$eventPlannerPromotionss->isLiked;
+									$issaved=$eventPlannerPromotionss->issaved;
 									//-- LIKES DISLIKE
 									if($isLiked=='no'){
-										echo $this->Form->button('<img src="../images/unlike.png" height="15px"/>',['class'=>'btn btn-xs likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
-									}
-									if($isLiked=='yes'){
-										echo $this->Form->button('<img src="../images/like.png" height="15px"/>',['class'=>'btn btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
-									}
-									?>
-									<?php echo $eventPlannerPromotion->total_likes; ?>
+												echo $this->Form->button('<img src="../images/unlike.png" height="15px"/>',['class'=>'btn btn-xs likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
+											}
+											if($isLiked=='yes'){
+												echo $this->Form->button('<img src="../images/like.png" height="15px"/>',['class'=>'btn  btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
+											}?>
+									<?php echo $eventPlannerPromotionss->total_likes; ?>
 								</span>
 								</td>
 								<td width="25%">
@@ -436,7 +319,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 										<span class="label11">
 											<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$eventPlannerPromotion->user_id),1);?>
 											<a href="<?php echo $hrefurl; ?>"> 
-											<?php echo $eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name.' ( '.$eventPlannerPromotion->user_rating.'<i class="fa fa-star"></i> )';?>
+											<?php echo $eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name.' ( '.$eventPlannerPromotionss->user_rating.'<i class="fa fa-star"></i> )';?>
 											</a>
 										</span>
 									</div>
@@ -562,8 +445,8 @@ else
 			</div>--->
 		</div>
 		<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
-					<div id="loader"></div>
-					</div>
+		<div id="loader"></div>
+		</div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>	 
 $(document).ready(function(){

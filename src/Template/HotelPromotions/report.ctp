@@ -117,6 +117,7 @@ hr{
 }
 .col-md-4{
 	color:#727e8a;
+	 white-space: nowrap;
 }
 </style>
 <div class="row" >
@@ -260,7 +261,7 @@ hr{
 					<span class="help-block"></span>
 					<div class="row">						
 					<div class="col-md-3">
-					<?= $this->Html->image($hotelPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:120px;','data-target'=>'#imagemodal'.$hotelPromotion->id,'data-toggle'=>'modal',]) ?>
+					<?= $this->Html->image($hotelPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:80px;','data-target'=>'#imagemodal'.$hotelPromotion->id,'data-toggle'=>'modal',]) ?>
 					<div id="imagemodal<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-md">
 						<!-- Modal content-->
@@ -371,35 +372,25 @@ hr{
 							</div>
 						</div>
 							<div class="col-md-9" style="padding-top:5px;">
-								<div class="row col-md-12 rowspace">
-									<div class="col-md-12"><span style="color:#727e8a;">Category :</span>
-										<?= h($hotelPromotion->hotel_category->name); ?>
-									</div>
-								</div>
-								<div class="col-md-6">
-									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#727e8a;">Cheapest Room :</span>
-										<span style="color:#1295AB">&#8377;<?= number_format(h($hotelPromotion->cheap_tariff)) ?></span>
+								<div class="col-md-5">
+										<div class="row rowspace">
+											<div class="col-md-12"><span style="color:#727e8a;">Category :</span>
+												<?= h($hotelPromotion->hotel_category->name); ?>
+											</div>
 										</div>
-									</div>
+										<div class="row rowspace">
+											<div class="col-md-12"><span style="color:#727e8a;">Cheapest Room :</span>
+											<span style="color:#1295AB">&#8377;<?= number_format(h($hotelPromotion->cheap_tariff)) ?></span>
+											</div>
+										</div>
 									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#727e8a;">Expensive Room :</span>
+										<div class="col-md-12"><span style="color:#727e8a;">Most Expensive Room :</span>
 										<span style="color:#1295AB">&#8377;<?= number_format(h($hotelPromotion->expensive_tariff)) ?></span>
 										</div>
 									</div>
-									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#727e8a;"><?= __(' Location') ?> :</span>
-										<span ><?= h($hotelPromotion->hotel_location) ?></span>
-										</div>
-									</div>
 								</div>
-								<div class="col-md-6">
-									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#727e8a;"><?= __(' Website') ?> :</span>
-										<span ><a style="color:#AD4175;" href="http://<?php echo $hotelPromotion->website; ?>" target="blank"><u><?= h($hotelPromotion->website) ?></u></a> </span>
-										</div>
-									</div>
-									<div class="row rowspace">
+								<div class="col-md-7">
+								<div class="row rowspace">
 										<div class="col-md-12 "><span style="color:#727e8a;"><?= __(' Hotelier') ?> :</span>	
 										<span>
 										<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$hotelPromotion->user_id),1);?>
@@ -409,9 +400,20 @@ hr{
 										</span>
 										</div>					
 									</div>
+									<div class="row rowspace">
+										<div class="col-md-12"><span style="color:#727e8a;"><?= __(' Website') ?> :</span>
+										<span ><a style="color:#AD4175;" href="http://<?php echo $hotelPromotion->website; ?>" target="blank"><u><?= h($hotelPromotion->website) ?></u></a> </span>
+										</div>
+									</div>
+									<div class="row rowspace">
+										<div class="col-md-12"><span style="color:#727e8a;"><?= __(' Location') ?> :</span>
+										<span ><?= h($hotelPromotion->hotel_location) ?></span>
+										</div>
+									</div>
+									</div>
 									<!-----button list-->
-							<div class="row" style="padding-top:5px;">
-								<div class="col-md-12 ">
+							<div class="row" >
+								<div class="col-md-12 text-center" style="padding-top:15px;">
 									<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $hotelPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
 									
 									<!-------Contact Details Modal --------->

@@ -144,6 +144,7 @@ hr{
 }
 .col-md-4{
 	color:#727e8a;
+	 white-space: nowrap;
 }
 </style> 
 	<div class="row" >
@@ -350,7 +351,7 @@ hr{
 					<span class="help-block"></span>
 					<div class="row">						
 					<div class="col-md-3">
-					<?= $this->Html->image($taxiFleetPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:120px;','data-target'=>'#imagemodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal',]) ?>
+					<?= $this->Html->image($taxiFleetPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:80px;','data-target'=>'#imagemodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal',]) ?>
 					<div id="imagemodal<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-md">
 						<!-- Modal content-->
@@ -495,7 +496,7 @@ hr{
 										</div>					
 									</div>
 									<!-----button list-->
-							<div class="row" style="padding-top:5px;">
+							<div class="row" style="padding-top:15px;">
 								<div class="col-md-12 ">
 								<button class="btn btn-info btn-md btnlayout" data-target="#fleetdetail<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Fleet Details</button>
 									<!-------Report Modal Start--------->
