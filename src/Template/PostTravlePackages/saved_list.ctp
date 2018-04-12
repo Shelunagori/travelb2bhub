@@ -470,7 +470,7 @@ hr{
 																					}
 																					else{
 																						echo "( ";
-																						for($i=0;$i<$postTravlePackage->user_rating;$i++)
+																						for($i=0;$i<$postTravlePackagess->user_rating;$i++)
 																						{
 																							echo "<i class='fa fa-star' style='font-size:10px;color:#efea65;'></i>";
 																							if($i==0)
@@ -523,9 +523,6 @@ hr{
 										</div>
 									</div>
 								</div>
-									<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
-									<div id="loader"></div>
-									</div>
 								</form>
 							</fieldset>
 						</div>
@@ -541,7 +538,9 @@ hr{
 			<div class="col-md-12 text-center loading" style="display:none">
 				<?=  $this->Html->image('/img/loading.gif', ['style'=>'width:5%;']) ?> .
 			</div>
-			
+			<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
+									<div id="loader"></div>
+									</div>
 				</div>
 <input type="hidden" id="page" value="2">
 <input type="hidden" value="<?php $user_id; ?>" id="user_id">
