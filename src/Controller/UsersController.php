@@ -1732,6 +1732,7 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		$this->loadModel('Hotels');
 		$this->loadModel('Requests');
 		$this->loadModel('Cities');
+		$this->loadModel('States');
 		$this->loadModel('BusinessBuddies');
 		$this->viewBuilder()->layout('user_layout');
 		$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
@@ -1855,6 +1856,17 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		$chatCount = $allUnreadChat->count();
 		$this->set('chatCount',$chatCount); 
 		$this->set('allunreadchat',$allUnreadChat);
+		
+		$allCities = $this->Cities->find('list',['keyField' => 'id', 'valueField' => 'name'])
+		->hydrate(false)
+		->toArray();
+		$cities = $this->Cities->getAllCities();
+		$this->set('allCities', $allCities);
+		
+		$allStates = $this->States->find('list',['keyField' => 'id', 'valueField' => 'state_name'])
+		->hydrate(false)
+		->toArray();
+		$this->set('allStates', $allStates);
 	}
 public function removedRequestList() {
 $this->loadModel('Responses');
