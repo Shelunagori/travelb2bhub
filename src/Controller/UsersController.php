@@ -1596,7 +1596,9 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		$conditions["Requests.total_budget <="] = $MaxQuotePrice;
 		}
 		if(!empty($this->request->query("req_typesearch"))) {
-		$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
+			$typeSearchArray=$this->request->query("req_typesearch");  
+			$conditions["Requests.category_id IN"] =  $typeSearchArray; 
+			//$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
 		}
 		if(!empty($this->request->query("refidsearch"))) {
 		$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
@@ -1768,7 +1770,8 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 			$conditions["Requests.total_budget <="] = $MaxQuotePrice;
 		}
 		if(!empty($this->request->query("req_typesearch"))) {
-			$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
+			$typeSearchArray=$this->request->query("req_typesearch");  
+			$conditions["Requests.category_id IN"] =  $typeSearchArray; 
 		}
 		if(!empty($this->request->query("refidsearch"))) {
 			$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
@@ -1892,7 +1895,8 @@ $conditions["Requests.total_budget >="] = $MinQuotePrice;
 $conditions["Requests.total_budget <="] = $MaxQuotePrice;
 }
 if(!empty($this->request->query("req_typesearch"))) {
-$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
+	$typeSearchArray=$this->request->query("req_typesearch");  
+	$conditions["Requests.category_id IN"] =  $typeSearchArray; 
 }
 if(!empty($this->request->query("refidsearch"))) {
 $conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
@@ -2027,7 +2031,8 @@ public function respondtorequest() {
 		$conditions["Requests.pickup_city"] =  $this->request->query("pickup_city");
 	}
 	if(!empty($this->request->query("req_typesearch"))) {
-		$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
+		$typeSearchArray=$this->request->query("req_typesearch");  
+		$conditions["Requests.category_id IN"] =  $typeSearchArray; 
 	}
 	if(!empty($this->request->query("budgetsearch"))) {
 		$QPriceRange = $this->request->query("budgetsearch");
@@ -2724,7 +2729,8 @@ public function myresponselist() {
 		$conditions["AND"] = array("Users.first_name LIKE "=>"%". $keyword[0]."%", "Users.last_name LIKE" => "%".$keyword2."%",);
 	}
 	if(!empty($this->request->query("req_typesearch"))) {
-		$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
+		$typeSearchArray=$this->request->query("req_typesearch");  
+			$conditions["Requests.category_id IN"] =  $typeSearchArray; 
 	}
 	if(!empty($this->request->query("refidsearch"))) {
 		$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
@@ -4300,8 +4306,10 @@ $conditions["Requests.total_budget >="] = $MinQuotePrice;
 $conditions["Requests.total_budget <="] = $MaxQuotePrice;
 }
 	if(!empty($_POST["req_typesearch"])) {
-$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
-}
+		//$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
+		$typeSearchArray=$_POST["req_typesearch"];  
+		$conditions["Requests.category_id IN"] =  $typeSearchArray; 
+	}
 if(!empty($_POST["refidsearch"])) {
 $conditions["Requests.reference_id"] =  $_POST["refidsearch"];
 }

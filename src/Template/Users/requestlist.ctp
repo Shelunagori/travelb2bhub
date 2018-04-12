@@ -143,7 +143,12 @@ fieldset
 									  </div>
 									  <div class=col-md-1>:</div>
 									 <div class=col-md-7>
-										<select name="req_typesearch" class="form-control"><option value="">Select Request Type</option><option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option><option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option><option value="2">Transport</option></select>
+										<select name="req_typesearch[]" multiple class="form-control select2">
+											<option value="">Select Request Type</option>
+											<option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option>
+											<option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option>
+											<option value="2">Transport</option>
+										</select>
 									</div>
                                  </div>
                                 </div>
