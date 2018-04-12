@@ -24,45 +24,71 @@ class EventPlannerPromotionsController extends AppController
 		$this->set('profile_pic', $profile_pic);
 		$this->set('loginId',$loginId);
 		$this->set('roleId',$role_id);
-		
-		//----	 FInalized
 		$this->loadModel('Requests');
-		$finalreq["Requests.user_id"] = $this->Auth->user('id');
+		$this->loadModel('Responses');
+		
+		$this->loadModel('BlockedUsers');
+		$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
+			->hydrate(false)
+			->where(['blocked_by' => $loginId])
+			->toArray();
+		$myBlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_by'])
+			->hydrate(false)
+			->where(['blocked_user_id' => $loginId])
+			->toArray();
+		if(!empty($BlockedUsers)) {
+			$BlockedUsers = array_values($BlockedUsers);
+		}
+		if(!empty($myBlockedUsers)) {
+			$myBlockedUsers = array_values($myBlockedUsers);
+		}
+		$BlockedUsers=array_merge($BlockedUsers,$myBlockedUsers);
+		$BlockedUsers = array_unique($BlockedUsers);
+		array_push($BlockedUsers,$loginId);
+		if(sizeof($BlockedUsers)>0){
+			$conditions["Requests.user_id NOT IN"] =  $BlockedUsers; 
+		}
+		
+		$myRequestCount = 0;
+ 		$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
+		$myRequestCount = $query->count(); 
+		$reqcountNew = $this->getSettings('requestcount');
+ 		$this->set('reqcountNew', $reqcountNew);
+ 		$this->set('myRequestCountNew', $myRequestCount);
+ 		$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->where(["Requests.user_id NOT IN"=>$BlockedUsers]);
+		$myReponseCount = $queryr->count(); 
+		
+		$this->set('myReponseCountNew', $myReponseCount);
+ 		//----	 FInalized
+ 		$finalreq["Requests.user_id"] = $this->Auth->user('id');
 		$finalreq["Requests.status"] = 2;
 		$finalreq["Requests.is_deleted "] = 0;
 		$finalizeRequest = $this->Requests->find()->where($finalreq)->count();
-		$this->set('finalizeRequest', $finalizeRequest);
+		$this->set('finalizeRequestNew', $finalizeRequest);
 		//--- Removed Request
 		$remoev["Requests.user_id"] = $this->Auth->user('id');
 		$remoev["Requests.is_deleted "] = 1;
 		$RemovedReqest = $this->Requests->find()->where($remoev)->count();
-		$this->set('RemovedReqest', $RemovedReqest);
+		$this->set('RemovedReqestNew', $RemovedReqest);
 		//--- Blocked User
 		$this->loadModel('blocked_users');
 		$blk["blocked_users.blocked_by"] = $this->Auth->user('id');
 		$blockedUserscount = $this->blocked_users->find()->where($blk)->count();
-		$this->set('blockedUserscount', $blockedUserscount);
+		$this->set('blockedUserscountnew', $blockedUserscount);
 		//--- Finalize Response;
-		$this->loadModel('Responses');
+		
 		$FInalResponseCount = $this->Responses->find('all', ['conditions' => ['Responses.status' =>1,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->count();
-		$this->set('FInalResponseCount', $FInalResponseCount);
+		$this->set('FInalResponseCountNew', $FInalResponseCount);
 		//*--- UserChats
 		$this->loadModel('UserChats');
 		$csort['created'] = "DESC";
-		$allUnreadChat = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->order($csort)->all();
-		$chatCount = $allUnreadChat->count();
-		$this->set('chatCount',$chatCount); 
-		$this->set('allunreadchat',$allUnreadChat);
-		//*---
-		$this->loadModel('UserChats');
-		$csort['created'] = "DESC";
-		$allUnreadChat = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->order($csort)->limit(10)->all();
-		$chatCount = $allUnreadChat->count();
-		$this->set('chatCount',$chatCount); 
-		$this->set('allunreadchat',$allUnreadChat);
-		//--
-		
-	}
+		$NewNotifications = $this->UserChats->find()->where(['send_to_user_id'=> $this->Auth->user('id')])->order($csort)->all();
+		$chatCount = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->count();
+ 		$this->set('chatCount',$chatCount); 
+		$this->set('NewNotifications',$NewNotifications);
+		//pr($NewNotifications); exit;
+		//---
+ 	}
 	
      
     public function view($id = null)
