@@ -98,11 +98,11 @@ fieldset{
 </style> 
 <div class="container-fluid">
 	<div class="box box-primary">
-		<div class="box-body">
+		<div class="box-body" style="padding:15px !important;">
 		<div class="row"> 
-		<div class="col-md-12"> 
-		<div id="tra-sendrequest" class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="background:#FFF">
-			<div class="content">
+		<div class=" "> 
+		<div id="tra-sendrequest" class=" " style="background:#FFF">
+			<div class=" ">
 			<div class="tab-content tab">
 				<div align="center">
 					<ul class="nav nav-tabs" >

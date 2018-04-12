@@ -227,6 +227,11 @@ p {
 		background-color:#C9A66B !important;
 		color:#FFF;
 		border-color:#C9A66B !important;
+		
+	}
+	.btn-successto:hover 
+	{ 
+		color: white;
 	}
 	.btn-successtoNew
 	{
@@ -382,12 +387,8 @@ p {
           </li>
            
           <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-               <i class="fa fa-cogs"></i>  
+            <a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'logout')) ?>" ><i class="fa fa-power-off "> Log Out </i>  
             </a>
-            <ul class="dropdown-menu">
-			  <li><a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'logout')) ?>" class="btn btn-default signup_btn">Log Out</a></li>
-            </ul>
           </li>
           <!-- Control Sidebar Toggle Button -->
            

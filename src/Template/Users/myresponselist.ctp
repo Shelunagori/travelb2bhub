@@ -490,7 +490,7 @@ $(document).ready(function(){
 					<table width="100%" border="0" >
 						<?php $id = $response['request']['id']; ?>
 						<tr>
-							<td width="50%">
+							<td width="50%" style="padding:3px !important;">
 							<a style="width:99%" data-toggle="modal" class="btn btn-success btn-sm" data-target="#myModalChat<?php echo $id; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $response['request_id'], $response["request"]["user_id"],2)) ?>">
 							Chat ( <strong><?php echo $chatdata['chat_count'][$response['id']]; ?> </strong> )</a>
 							<div class="modal fade" id="myModalChat<?php echo $id; ?>" role="dialog">
@@ -510,7 +510,7 @@ $(document).ready(function(){
 							</div>
 						</td>
 						
-						<td width="50%">
+						<td width="50%" style="padding:3px !important;">
 							<a style="width:99%" data-toggle="modal" class="btn btn-info btn-sm" data-target="#myModal1<?php echo $id;?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$id)) ?>"> Details</a>
 							<div class="modal fade" id="myModal1<?php echo $id;?>" role="dialog">
 								<div class="modal-dialog">
@@ -533,7 +533,7 @@ $(document).ready(function(){
 						<table width="100%">
 						<tr>
 						
-						<td <?php if($response['is_details_shared'] == 1) { echo 'width="33%"'; }else{ echo 'width="50%"'; } ?> >
+						<td style="padding:3px !important;" <?php if($response['is_details_shared'] == 1) { echo 'width="33%"'; }else{ echo 'width="50%"'; } ?> >
 							<?php
 							if(array_key_exists($response["request"]["user_id"], $BusinessBuddies)) {?>
 								<a href="#" style="width:99%" class="btn btn-warning btn-sm"> Following</a>
@@ -566,7 +566,7 @@ $(document).ready(function(){
 						
 						
 						<?php if($response['is_details_shared'] == 1) { ?>
-						<td width="33%">
+						<td width="33%" style="padding:3px !important;">
 							<a style="width:99%" data-toggle="modal" class="btn btn-successto btn-sm" data-target="#contactdetails<?php echo $id; ?>"  > User Contact</a>
 							<!-------Contact Details Modal --------->
 							<div id="contactdetails<?php echo $id; ?>" class="modal fade" role="dialog">

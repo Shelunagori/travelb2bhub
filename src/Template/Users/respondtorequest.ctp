@@ -439,7 +439,7 @@ $conn = ConnectionManager::get('default');
 				<hr></hr>	  
 		 <table width="100%" border="0">
 			<tr>
-				<td width="50%">
+				<td width="50%" style="padding:3px !important;">
 				<?php if($users['role_id'] == 3 || $users['role_id'] == 1){
 				if(count($request["responses"]) < 20) {?>
 				<a style="width:99%" data-toggle="modal" class="btn btn-success btn-sm" data-target="#myModalshow<?php echo $request['id']; ?>" href="javascript:void(0);" onclick="f1('<?php echo $request['id']; ?>');" id="<?php echo $request['id']; ?>"> Show interest</a>
@@ -486,7 +486,7 @@ $conn = ConnectionManager::get('default');
 				  </div>
 				</div>	
 			</td>
-			<td width="50%"> 
+			<td width="50%" style="padding:3px !important;"> 
 				<a style="width:99%" data-toggle="modal" class="btn btn-info btn-sm"  data-target="#myModal1<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"> Details</a>
 			 
 				<div class="modal fade" id="myModal1<?php echo $request['id']; ?>" role="dialog">
@@ -507,7 +507,7 @@ $conn = ConnectionManager::get('default');
 			</table>
 			 <table width="100%" border="0">
 				<tr>
-					<td width="50%">
+					<td width="50%" style="padding:3px !important;">
 						<?php
 						if(array_key_exists($request["user_id"], $BusinessBuddies)) {?>
 							<a href="#" style="width:99%" class="btn btn-warning btn-sm"> Following</a>

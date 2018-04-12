@@ -231,7 +231,7 @@ $conn = ConnectionManager::get('default');
 				   <?php $id=$row['id']; ?>
 					<table width="100%" style="text-align:center" class>
 							<tr>
-								<td width="50%">
+								<td width="50%" style="padding:3px !important;">
 									<a style="width:99%" data-toggle="modal" class="btn btn-success btn-sm" data-target="#myModalChat<?php echo $id; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row['request']['user_id'],2)) ?>">
 									Chat ( <strong><?php echo $chatdata['chat_count'][$row['id']]; ?> </strong> )</a>
 									<div class="modal fade" id="myModalChat<?php echo $id; ?>" role="dialog">
@@ -250,7 +250,7 @@ $conn = ConnectionManager::get('default');
 										</div>
 									</div>
 								</td>
-								<td width="50%">
+								<td width="50%" style="padding:3px !important;">
 									<a style="width:99%" data-toggle="modal" class="btn btn-info btn-sm" data-target="#myModal1<?php echo $id;?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$row['request']['id'])) ?>"> Details</a>
 									<div class="modal fade" id="myModal1<?php echo $id;?>" role="dialog">
 									<div class="modal-dialog">
@@ -272,7 +272,7 @@ $conn = ConnectionManager::get('default');
 						
 						 <table width="100%"   class>
 							<tr>
-								<td width="33%" style="padding-top:5px;">
+								<td width="33%" style="padding:3px !important;">
 									<?php
 									if(array_key_exists($row['request']['user_id'], $BusinessBuddies)) {?>
 										<a href="#" style="width:99%" class="btn btn-warning btn-sm"> Following</a>
@@ -304,7 +304,7 @@ $conn = ConnectionManager::get('default');
 									?>
 								</td>
 								 
-							<td width="33%" style="padding-top:5px;">
+							<td width="33%" style="padding:3px !important;">
 							<?php
 								$sql="Select count(*) as block_count from blocked_users where blocked_user_id='".$row['request']['user']['id']."' AND blocked_by='".$row['user_id']."'";
 								$stmt = $conn->execute($sql);
@@ -344,7 +344,7 @@ $conn = ConnectionManager::get('default');
 							<?php } ?>	
 								</td>
 					
-								<td width="33%" style="padding-top:5px;">
+								<td width="33%" style="padding:3px !important;">
 									<?php $reviewi =  $row['request']['user_id']."-".$row['request']['id']; ?>
 									<a style="width:99%" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal1review<?php echo $row['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi)) ?>">Review </a>
 									<div class="modal fade" id="myModal1review<?php echo $row['id']; ?>" role="dialog">

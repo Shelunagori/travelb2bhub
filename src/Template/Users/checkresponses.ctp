@@ -174,7 +174,7 @@ legend
 					<div class="col-md-3">
 		 <table width="100%" >
 		 <tr>
-			<td width="50%">
+			<td width="50%" style="padding:3px !important;">
 			<a style="width:99%" class="btn btn-warning btn-xs " id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>"> 
 			Chat ( <strong><?php echo $data['chat_count'][$row['id']]; ?> </strong> )</a>
 			<div class="modal fade" id="myModal11<?php echo  $row['request']['id']; ?>" role="dialog">
@@ -190,7 +190,7 @@ legend
 				</div>
 			</div>
 			</td>
-			<td width="50%">
+			<td width="50%" style="padding:3px !important;">
 				<!---button Share --->
 			<?php if($row['is_details_shared'] != 1) { ?>
 				<!--a style="width:99%" href="javascript:void(0);" user_id="<?php echo $row['user']['id']; ?>" class="shareDetails btn btn-info btn-xs " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
@@ -227,7 +227,7 @@ legend
 			</table>
 			<table width="100%">
 			<tr>
-				<td width="33%"  style="padding-top:5px !important;">
+				<td width="33%" style="padding:3px !important;">
 				<!---button Follow--->
 				<?php
 				if( !array_key_exists($row['user']['id'], $BusinessBuddies)) {?>
@@ -260,7 +260,7 @@ legend
 				<?php }	?>
 			</td>
 			
-			<td width="33%" style="padding-top:5px !important;">
+			<td width="33%" style="padding:3px !important;">
 			
 				<!---button Block--->
 				<?php
@@ -302,7 +302,7 @@ legend
 									</div>
 							 
 						</td>
-						<td width="33%" style="padding-top:5px !important;">
+						<td width="33%" style="padding:3px !important;">
 						<?php 
 							if($blocked==1)
 							{?>
