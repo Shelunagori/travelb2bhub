@@ -46,7 +46,7 @@
 					<div class="contact100-form-checkbox">
 						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
 						<label class="label-checkbox100" for="ckb1">
-							Keep me singed in
+							Keep me signed in
 						</label>
 					</div>
 

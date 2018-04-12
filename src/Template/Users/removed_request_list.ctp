@@ -9,7 +9,8 @@ $conn = ConnectionManager::get('default');
 	}
 	fieldset
 	{
-		border-radius: 15px;
+		border-radius: 7px;
+		box-shadow: 0 1px 9px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	}
 	.details {color:#000 !important; font-weight: 400;}
 	li > p{
