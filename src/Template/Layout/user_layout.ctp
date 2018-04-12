@@ -396,11 +396,11 @@ p {
       </div>
     </nav>
   </header>
-	<aside class="main-sidebar no-print">
+	<aside class="main-sidebar no-print" >
 	<!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
+    <section class="sidebar"> 
       <!-- Sidebar user panel -->
-      <div class="user-panel" align="center" style="margin-top:10px">
+      <div class="user-panel" align="center" style="margin-top:10px" >
         <div class='imaage' >
           <?php
 			
@@ -431,7 +431,7 @@ p {
 		  <a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'change_password']); ?>" class="logo">Reset Password</a>
         </div>
     </div>
-    <ul class="sidebar-menu">
+    <ul class="sidebar-menu" >
  		
 		<li <?php if($page_name=='dashboard'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>"><i class="fa fa-home"></i> <span>Home</span></a></li>
 		<hr class="breakline"></hr>

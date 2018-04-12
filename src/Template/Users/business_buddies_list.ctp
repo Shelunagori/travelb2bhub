@@ -60,11 +60,10 @@
 								<b>Mobile Number :</b> <?php echo ($row['user']['mobile_number'])?$row['user']['mobile_number']:"-- --"; ?><br>
 								</div>
 								<div class="col-md-3">
-								<b>Email :</b> <?php echo ($row['user']['email'])?$row['user']['email']:"-- --"; ?><br>
-								<b>Locality :</b> <?php echo ($row['user']['locality'])?$row['user']['locality']:"-- --"; ?>
+								<b>Email :</b> <?php echo ($row['user']['email'])?$row['user']['email']:"-- --"; ?>  
 								</div>
-								<div class="col-md-3">
-									<a follow_id="<?php echo $row['id']; ?>" class=" btn btn-danger btn-sm"  data-target="#unfollow<?php echo $row['id']; ?>" data-toggle=modal>Unfollow</a>
+								<div class="col-md-3" align="center" >
+									<a style="margin-top: 7px !important;" follow_id="<?php echo $row['id']; ?>" class=" btn btn-danger btn-sm"  data-target="#unfollow<?php echo $row['id']; ?>" data-toggle=modal>Unfollow</a>
 									<!-------Delete Modal Start--------->
 												<div id="unfollow<?php echo $row['id']; ?>" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-md" >

@@ -75,9 +75,12 @@ ul li b {
 					<legend style="text-align:left !important; color:#A99E36;"><h5> &nbsp; Destination <?php
 						echo $ds_count; ?> &nbsp;  </h5></legend>
 						<div class="col-md-12">
-						<p>Number of Rooms :</p>
+						<p>Number of Rooms:</p>
 						</div>
  						<ul>
+						<table >
+						<tr style="background-color:#ECF0F5 !important;">
+						<td>
 						<li class="col-md-4"><p>Single :&nbsp;
 						<b>
 						<?php
@@ -103,6 +106,8 @@ ul li b {
 							echo "--";
 						} ?></b>
 						</li>
+						
+						
 						<li class="col-md-4"><p>Triple :&nbsp;
 						<b>
 						<?php
@@ -116,7 +121,7 @@ ul li b {
 						} ?>
 						</b>
 						</li>
-						<li class="col-md-4"><p>Child With Bed :&nbsp;
+						<li class="col-md-6"><p>Child With Bed :&nbsp;
 						<b>
 						<?php
 						if ($row['child_with_bed'] != '')
@@ -129,8 +134,7 @@ ul li b {
 						} ?>
 						</b>
 						</li>
-						<li class="col-md-2"></li>
-						<li class="col-md-4"><p>Child Without Bed :&nbsp;
+						<li class="col-md-6"><p>Child Without Bed :&nbsp;
 						<b>
 						<?php
 						if ($row['child_without_bed'] != '')
@@ -143,6 +147,9 @@ ul li b {
 						} ?>
 						</b>
 						</li>
+						</td>
+						</tr>
+						</table>
 						<li class="col-md-12"><p>Hotel Category :&nbsp;
 						<b>
 						<?php
@@ -153,7 +160,7 @@ ul li b {
 							$hotel_category = "";
 							foreach($result as $row1)
 							{
- 								$hotel_category.= "" . $hotelCategories[$row1]; 
+ 								@$hotel_category.= "" . $hotelCategories[$row1]; 
  								$count++;
 								if($count>1){ $hotel_category.=', ';}
 							}
@@ -229,7 +236,10 @@ ul li b {
 					echo ($details['end_date']) ? date("d-m-Y", strtotime($details['end_date'])) : "-- --"; ?>
 				</b></p>
 				</li>
-				<li class="col-md-12" style="color:#6B7120;">Pickup Location<hr></hr></li>
+				<li class="col-md-12" style="color:#6B7120;margin-top:10px;">
+					Pickup Location
+					<hr style="margin-bottom:-1px !important;margin-top: 3px!important;" />
+				</li>
 				<li class="col-md-6">
 				<p>Pickup Locality :&nbsp;<b><?php
 				echo ($details['pickup_locality']) ? $details['pickup_locality'] : "-- --"; ?>
@@ -251,8 +261,11 @@ ul li b {
 					$stop_count = 1;
 					foreach($details['request_stops'] as $stops)
 					{ ?>
-					<fieldset class="col-md-12"><legend>Stop <?php	echo $stop_count; ?></legend>
-						 
+					 
+					<li class="col-md-12" style="color:#6B7120;margin-top:10px;">
+						Stop <?php	echo $stop_count; ?>
+						<hr style="margin-bottom:-1px !important;margin-top: 3px!important;" />
+					</li>
 						<li class="col-md-6">
 							<p>Stop Locality :&nbsp;<b><?php
 								echo ($stops['locality']) ? $stops['locality'] : "-- --"; ?>
@@ -268,12 +281,14 @@ ul li b {
 								echo ($stops['state_id']) ? $allStates[$stops['state_id']] : "-- --"; ?>
 							</b></p>
 						</li>
-					</fieldset>
 						<?php
 						$stop_count++;
 					}
 				} ?>
-				<li class="col-md-12" style="color:#6B7120;">Final Location<hr></hr></li>
+				<li class="col-md-12" style="color:#6B7120;margin-top:10px;">
+					Final Location
+					<hr style="margin-bottom:-1px !important;margin-top: 3px!important;" />
+				</li>
 				<li class="col-md-6">
 					<p>Final Locality :&nbsp;<b><?php
 						echo ($details['final_locality']) ? $details['final_locality'] : "-- --"; ?>
@@ -467,7 +482,11 @@ ul li b {
 					echo ($details['end_date']) ? date("d-m-Y", strtotime($details['end_date'])) : "-- --"; ?>
 				</b></p>
 				</li>
-				<li class="col-md-12" style="color:#6B7120;">Pickup Location<hr></hr></li>
+				
+				<li class="col-md-12" style="color:#6B7120;margin-top:10px;">
+					Pickup Location
+					<hr style="margin-bottom:-1px !important;margin-top: 3px!important;" />
+				</li>
 				<li class="col-md-6">
 				<p>Pickup Locality :&nbsp;<b><?php
 					echo ($details['pickup_locality']) ? $details['pickup_locality'] : "-- --"; ?>
@@ -488,7 +507,10 @@ ul li b {
 					$stop_count = 1;
 					foreach($details['request_stops'] as $stops)
 					{ ?>
-					<fieldset><legend style="color:#272907;">Stop <?php echo $stop_count; ?></legend>
+					
+						<li class="col-md-12" style="color:#6B7120;margin-top:10px;">
+							Stop <?php echo $stop_count; ?>
+							<hr style="margin-bottom:-1px !important;margin-top: 3px!important;" /></li>
 						<li class="col-md-6">
 							<p>Stop Locality :&nbsp;<b><?php
 							echo ($stops['locality']) ? $stops['locality'] : "-- --"; ?>
@@ -503,12 +525,14 @@ ul li b {
 							<p>Stop State :&nbsp;<b><?php
 							echo ($stops['state_id']) ? $allStates[$stops['state_id']] : "-- --"; ?>
 							</b></p>
-						</li> 
-						</fieldset><?php
+						</li><?php
 						$stop_count++;
 					}
 				} ?>
-				<li class="col-md-12" style="color:#6B7120;">Final Location<hr></hr></li>
+				<li class="col-md-12" style="color:#6B7120;margin-top:10px;">
+					Final Location
+					<hr style="margin-bottom:-1px !important;margin-top: 3px!important;" />
+				</li>
 				<li class="col-md-6">
 				<p>Final Locality :&nbsp;<b><?php
 				echo ($details['final_locality']) ? $details['final_locality'] : "-- --"; ?>
