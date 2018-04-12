@@ -270,16 +270,16 @@ fieldset
                  // pr($request); exit;
 				  ?>
 				  
-               <div id=cat style="padding-top:5px;">
+               <div id=cat >
 					<?php 
 					if(isset($_GET['sort']) && $_GET['sort']=="requesttype") {
 						?>
-						<div class="col-md-4 req"id="<?php if($request['category_id']==1){ echo "1";} if($request['category_id']==2){ echo "3";}if($request['category_id']==3){ echo "2";} ?>">
+						<div class="col-md-4 req" id="<?php if($request['category_id']==1){ echo "1";} if($request['category_id']==2){ echo "3";}if($request['category_id']==3){ echo "2";} ?>" style="padding-top:5px;">
 						<?php 
 					} 
 					else 
 					{ ?>
-						<div class="col-md-4 req"id="<?php echo $data['responsecount'][$request['id']]; ?>">
+						<div class="col-md-4 req" id="<?php echo $data['responsecount'][$request['id']]; ?>" style="padding-top:5px;">
 					<?php 
 					}
 					if($request['category_id']==1){ 

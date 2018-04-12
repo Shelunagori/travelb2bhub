@@ -92,10 +92,7 @@ legend{
 }
 span.select2 {
 	width :100% !important;
-}
-.menu {
-	overflow-x:scroll !important;
-}
+} 
 h1,h2,h3,h4,h5,h6{
 	font-family: 'Raleway', sans-serif !important;
 }
@@ -142,11 +139,11 @@ margin-top: 5px !important;
 }
 .slimScrollDiv
 {
-	height: 339px !important;	
+	height: 330px !important;	
 }
 .menu
 {
-	height: 339px !important;	
+	height: 330px !important;	
 }
 p {
 	margin:0px !important;
@@ -247,9 +244,7 @@ p {
 	textarea {
 		resize:none !important;
 	}
-	.navbar-nav>.notifications-menu>.dropdown-menu, .navbar-nav>.messages-menu>.dropdown-menu, .navbar-nav>.tasks-menu>.dropdown-menu{
-		width:380 !important;
-	}
+	 
 </style>
 <style>
  
@@ -341,7 +336,7 @@ p {
             </a>
             <ul class="dropdown-menu">
 			<li>
-                 <ul class="menu">
+                 <ul class="menu" style="height:500px !important;">
 				<?php use Cake\Datasource\ConnectionManager; 
 					$conn = ConnectionManager::get('default');
 					$lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);
@@ -424,8 +419,7 @@ p {
                   
                 </ul>
               </li>
-              <li class="footer"><a href="#">View all</a></li>
-            </ul>
+             </ul>
           </li>
            
           <li class="dropdown user user-menu">
