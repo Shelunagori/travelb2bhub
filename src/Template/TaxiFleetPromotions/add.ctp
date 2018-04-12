@@ -166,10 +166,7 @@ a:hover,a:focus{
 fieldset{
 	margin:10px !important;
 	border-radius: 6px;
-}
-.col-md-12 {
-	margin:5px !important;
-}
+} 
 </style> 
 <div class="container-fluid">
 	<div class="box box-primary">
@@ -184,7 +181,7 @@ fieldset{
 										<legend style="color:#369FA1;"><b><?= __('Load Package') ?></b></legend> 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt">
+										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
 											<p for="from">
 												Company Name
 												<span class="required">*</span>
@@ -194,7 +191,7 @@ fieldset{
 												 echo $this->Form->input('company_name',['class'=>'form-control','label'=>false,'autocomplete'=> "off",'placeholder'=>"Company Name",'readonly'=>'readonly','value'=>$user[0]->company_name]);?>
 											</div>
 										</div>
-										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt">
+										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
 											<p for="from">
 												Promotion Title
 												<span class="required">*</span>
@@ -205,7 +202,7 @@ fieldset{
 										</div>
 										<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
 										<input type="hidden" name="submitted_from" value="web">
-										<div class="col-md-4">
+										<div class="col-md-4 form-group">
 											<p for="from">
 												Upload Image of the Promotion
 												<span class="required">*</span>
@@ -218,12 +215,12 @@ fieldset{
 									</div>
 								</div>
 							</fieldset>
-							<br>
+							 
 						<fieldset>
 						<legend style="color:#369FA1;"><b><?= __('Area of Operation ') ?></b></legend> 
 						<div class="row">
 							<div class="col-md-12">
-								<div class="col-md-6">
+								<div class="col-md-6 form-group">
 									<p for="from">
 										Country
 										<span class="required">*</span>
@@ -234,7 +231,7 @@ fieldset{
 										echo $this->Form->input('country_id',["class"=>"form-control " ,'options' => $options,'label'=>false]);?>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-6 form-group">
 									<p for="from">
 												Choose State
 												<span class="required">*</span>
@@ -256,7 +253,7 @@ fieldset{
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-								<div class="col-md-6" >
+								<div class="col-md-6 form-group" >
 									<p for="from">
 									Select Option
 									</p>
@@ -269,7 +266,7 @@ fieldset{
 										</label>
 									</div>
 								</div>
-								<div class="col-md-6 newlist" >
+								<div class="col-md-6 newlist form-group" >
 									<p for="from">
 										Cities of Operation
 										<span class="required">*</span>
@@ -280,7 +277,7 @@ fieldset{
 										echo $this->Form->input('city_id',["class"=>"form-control " ,'options' => $options,'label'=>false]);?>
 									</div>
 								</div>
-								<div class="col-md-6 newlist1" style="display:none;>
+								<div class="col-md-6 newlist1 form-group" style="display:none;>
 									<p for="from">
 												Cities of Operation
 												<span class="required">*</span>
@@ -304,7 +301,8 @@ fieldset{
 						<fieldset>
 						<legend style="color:#369FA1;"><b><?= __('Promotion Details') ?></b></legend> 
 								<div class="row">
-									<div class="col-md-12">
+								<div class="col-md-12">
+									<div class="col-md-12 form-group">
 										<p for="from">
 											Select Cars or Buses in the Fleet
 											<span class="required">*</span>
@@ -319,10 +317,11 @@ fieldset{
 											echo $this->Form->control('vehicle_type', ['label'=>false,"id"=>"multi_vehicle", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
 										</div>
 									</div>
-								</div> 
-								<br>
+								</div>  
+								</div>  
 								<div class="row">
-									<div class="col-md-12">
+									<div class="col-md-12 ">
+									<div class="col-md-12 form-group">
 										<p for="from">
 											Fleet Details
 											
@@ -331,14 +330,14 @@ fieldset{
 											<?php echo $this->Form->input('fleet_detail',['class'=>'form-control','label'=>false,'rows'=>'2']);?>
 										</div>
 									</div>
+									</div>
 								</div>
-							</fieldset>
-							<br>
+							</fieldset> 
 								<fieldset>
 									<legend style="color:#369FA1;"><b><?= __('Promotion Period ') ?></b></legend> 
 										<div class="row">
 											<div class="col-md-12">
-												<div class="col-md-4">
+												<div class="col-md-4 form-group">
 													<p for="from">
 													Select Duration of Promotion
 													</p>
@@ -355,7 +354,7 @@ fieldset{
 														<?php // echo $this->Form->input('duration', ['options' => $priceMasters,'class'=>'form-control','label'=>false]); ?>
 													</div>
 												</div>
-												<div class="col-md-4">
+												<div class="col-md-4 form-group">
 													<p for="from">
 																Promotion Amount
 																<span class="required">*</span>
@@ -364,7 +363,7 @@ fieldset{
 													<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text']);?> 
 													</div>
 												</div>
-												<div class="col-md-4">
+												<div class="col-md-4 form-group">
 													<p for="from">
 																Visibility Date
 																<span class="required">*</span>
@@ -398,9 +397,17 @@ fieldset{
 		</div>
 	</div>
  <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
-<script>	 
+<script>
+	 
     $(document).ready(function ()
 	{
+		$('form').submit(function () {
+ 			var name = $.trim($('#price_master_id').val());
+ 			if (name  === '') {
+				alert('Text-field is empty.');
+				return false;
+			}
+		});
 		$(document).on('change','.priceMasters',function()
 		{
 			var priceVal=$('.priceMasters option:selected').attr('priceVal');

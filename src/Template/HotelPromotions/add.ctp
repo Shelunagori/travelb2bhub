@@ -138,10 +138,7 @@ a:hover,a:focus{
 fieldset{
 	margin:10px !important;
 	border-radius: 6px;
-}
-.col-md-12 {
-	margin:5px !important;
-}
+} 
 </style> 
 <section class="content">
 <div class="container-fluid">
@@ -149,21 +146,21 @@ fieldset{
 		<div class="box-body">
 			<div class="row">
 				<div class="col-md-12">
-					<form action="<?php echo $coreVariable['SiteUrl'];?>api/hotel_promotions/add.json" method="post" enctype="multipart/form-data">
-					<fieldset>
-						<legend style="color:#369FA1;"><b> &nbsp; <?= __('Hotel Details ') ?> &nbsp;  </b></legend>
-							<div class="row">
-								<div class="col-md-12">
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-										<p for="from">
-											Hotel Name
+				<form action="<?php echo $coreVariable['SiteUrl'];?>api/hotel_promotions/add.json" method="post" enctype="multipart/form-data">
+				<fieldset>
+					<legend style="color:#369FA1;"><b> &nbsp; <?= __('Hotel Details ') ?> &nbsp;  </b></legend>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt form-group">
+									<p for="from">
+										Hotel Name
 								<span class="required">*</span>
 							</p>
 							<div class="input-field">
 								 <?php echo $this->Form->input('hotel_name',['class'=>'form-control','label'=>false,'placeholder'=>"Enter Your Hotel Name",'required']);?>
 							</div>
 						</div>
-						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt form-group">
 										<p for="from">
 											Select Hotel Category
 											<span class="required">*</span>
@@ -183,7 +180,7 @@ fieldset{
 							</div> 
 							<div class="row">
 								<div class="col-md-12">
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt form-group">
 										<p for="from">
 											Hotel Location (Address, City, State)
 											<span class="required">*</span>
@@ -193,10 +190,9 @@ fieldset{
 											
 										</div>
 									</div>
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt form-group">
 										<p for="from">
 											Hotel Website
-											<span class="required">*</span>
 										</p>
 										<div class="input-field">
 										 <?php echo $this->Form->input('website',['class'=>'form-control','label'=>false,'placeholder'=>"Enter Your Website"]);?>
@@ -208,7 +204,7 @@ fieldset{
 							</div>
 							<div class="row">
 								<div class="col-md-12">
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt form-group">
 										<p for="from">
 											Cheapest Room Rate
 											<span class="required">*</span>
@@ -218,7 +214,7 @@ fieldset{
 											
 										</div>
 									</div>
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt form-group">
 										<p for="from">
 											Most Expensive Room Rate
 											<span class="required">*</span>
@@ -231,7 +227,7 @@ fieldset{
 							</div> 	
 							<div class="row">
 								<div class="col-md-12">
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt form-group">
 										<div class="input-field">
 												<p for="from">
 													Hotel Rating
@@ -251,7 +247,7 @@ fieldset{
 											   <label class="star star-1" for="star-1-21"></label>
 										</div>
 									</div>
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt form-group">
 											<p for="from">
 												Photograph of the Hotel	
 												<span class="required">*</span>
@@ -263,12 +259,12 @@ fieldset{
 										</div>
 									</div>
 								</div>
-						</fieldset><br>
+						</fieldset> 
 						<fieldset>
 							<legend style="color:#369FA1;"><b> &nbsp; <?= __(' Payment Details') ?> &nbsp;  </b></legend>
 							<div class="row">
 								<div class="col-md-12">
-										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt">
+										<div class="col-md-4 form-group">
 											<p for="from">
 												Select Promotion Duration
 												<span class="required">*</span>
@@ -283,7 +279,7 @@ fieldset{
 												 echo $this->Form->input('price_master_id',['class'=>'form-control duration select2 ','options' => $options,'label'=>false]);?>
 											</div>
 										</div>
-								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt">
+								<div class="col-md-4 form-group">
 											<p for="from">
 												Charges
 											</p>
@@ -291,7 +287,7 @@ fieldset{
 										<?php echo $this->Form->input('total_charges', ['class'=>'form-control charges','label'=>false,"placeholder"=>"Total Charges",'readonly'=>'readonly','type'=>'text']); ?>
 										</div>
 									</div>
-									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 mt">
+									<div class="col-md-4 form-group">
 											<p for="from">
 												Visible Date
 											</p>

@@ -167,10 +167,7 @@ a:hover,a:focus{
 fieldset{
 	margin:10px !important;
 	border-radius: 6px;
-}
-.col-md-12 {
-	margin:5px !important;
-}
+} 
 </style> 
 <div class="container-fluid">
 	<div class="box box-primary">
@@ -184,7 +181,7 @@ fieldset{
 										<legend style="color:#369FA1;"><b><?= __('Load Package') ?></b></legend>
 											<div class="row">
 												<div class="col-md-12">
-													<div class="col-md-4">
+													<div class="col-md-4 form-group">
 														<p for="from">
 															Package Title
 															<span class="required">*</span>
@@ -193,7 +190,7 @@ fieldset{
 															 <?php echo $this->Form->input('title',['class'=>'form-control','label'=>false,'placeholder'=>"Package Title",]);?>
 														</div>
 													</div>
-													<div class="col-md-4">
+													<div class="col-md-4 form-group">
 																<p for="from">
 																	Package Category
 																	<span class="required">*</span>
@@ -208,7 +205,7 @@ fieldset{
 																echo $this->Form->control('package_category_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Category ","style"=>"height:125px;"]);?>
 																</div>
 															</div>
-														<div class="col-md-4">
+														<div class="col-md-4 form-group">
 															<p for="from">
 																Upload Image of the Promotion
 																<span class="required">*</span>
@@ -221,12 +218,13 @@ fieldset{
 													</div>
 												</div>
 											</fieldset>
-										<br>
+										
+										
 											<fieldset>
 												<legend style="color:#369FA1;"><b><?= __('Package Details') ?></b></legend> 
 													<div class="row">
 														<div class="col-md-12">
-															<div class="col-md-4">
+															<div class="col-md-4 form-group">
 																<p for="from">
 																	Duration of Package
 																	<span class="required">*</span>
@@ -252,7 +250,7 @@ fieldset{
 																	</select>
 																</div>
 															</div>			
-															<div class="col-md-4">
+															<div class="col-md-4 form-group">
 																<p for="from">
 																	Package Valid Till
 																	<span class="required">*</span>
@@ -264,7 +262,7 @@ fieldset{
 																	</p>
 																</div>
 															</div>
-																<div class="col-md-4">
+																<div class="col-md-4 form-group">
 																<p for="from">
 																	Starting Price
 																	<span class="required">*</span>
@@ -279,7 +277,7 @@ fieldset{
 												<input type="hidden" name="submitted_from" value="web">
 													<div class="row">
 														<div class="col-md-12">
-															<div class="col-md-4">
+															<div class="col-md-4 form-group">
 																<p for="from">
 																Package Type
 																</p>
@@ -292,7 +290,7 @@ fieldset{
 																	</label>
 																</div>
 															</div>
-															<div class="col-md-4 newlist" >
+															<div class="col-md-4 newlist form-group" >
 																<p for="from">
 																	Choose Country
 																	<span class="required">*</span>
@@ -303,7 +301,7 @@ fieldset{
 																	echo $this->Form->input('country_id',["class"=>"form-control " ,'options' => $options,'label'=>false]);?>
 																</div>
 															</div>
-															<div class="col-md-4 newlist1" style="display:none;>
+															<div class="col-md-4 newlist1 form-group" style="display:none;>
 																<p for="from">
 																	Choose Country
 																	<span class="required">*</span>
@@ -317,7 +315,7 @@ fieldset{
 																	echo $this->Form->input('country_id',["class"=>"form-control select2", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select City "]);?>
 																</div>
 																</div>
-																<div class="col-md-4">
+																<div class="col-md-4 form-group">
 																<p for="from">
 																Choose City
 																<span class="required">*</span>
@@ -335,14 +333,13 @@ fieldset{
 														</div>
 													</div> 
 													<div class="row">
-														<div class="col-md-12">
-															<div class="col-md-12">
+														<div class="col-md-12 form-group">
+															<div class="col-md-12 ">
 															<p for="from">
 																Included In Package
 																	<span class="required">*</span>
 																</p>
-																</div>
-																<div class="col-md-12">
+																 
 																<div class="input-field">
 																	 <?php echo $this->Form->textarea('package_detail',['class'=>'form-control','label'=>false,'rows'=>2]);?>
 																	
@@ -351,14 +348,13 @@ fieldset{
 														</div>
 														</div>
 													<div class="row">
-														<div class="col-md-12">
-														<div class="col-md-12">
+														<div class="col-md-12 form-group">
+															<div class="col-md-12 ">
 															<p for="from">
 																	Excluded From Package
 																<span class="required">*</span>
 															</p>
-															</div>
-															<div class="col-md-12">
+															 
 																<div class="input-field">
 																	 <?php echo $this->Form->textarea('excluded_detail',['class'=>'form-control','label'=>false,'rows'=>2]);?>
 																</div>
@@ -366,12 +362,12 @@ fieldset{
 														</div>
 													</div>
 												</fieldset>
-											<br>
+											
 									<fieldset>
 										<legend style="color:#369FA1;"><b><?= __('Payment ') ?></b></legend> 
 											<div class="row">
 												<div class="col-md-12">
-													<div class="col-md-4">
+													<div class="col-md-4 form-group">
 														<p for="from">
 															Payment Duration
 														</p>
@@ -386,7 +382,7 @@ fieldset{
 															echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters','label'=>false,'empty'=>'Select ...']);?>
 														</div>
 													</div>
-													<div class="col-md-4">
+													<div class="col-md-4 form-group">
 														<p for="from">
 																	Promotion Amount
 																	<span class="required">*</span>
@@ -395,7 +391,7 @@ fieldset{
 														<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text']);?> 
 														</div>
 													</div>
-												<div class="col-md-4">
+												<div class="col-md-4 form-group">
 														<p for="from">
 																	Visibility Date
 																	<span class="required">*</span>

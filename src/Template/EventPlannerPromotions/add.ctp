@@ -143,10 +143,7 @@ a:hover,a:focus{
 fieldset{
 	margin:10px !important;
 	border-radius: 6px;
-}
-.col-md-12 {
-	margin:5px !important;
-}
+}  
 </style> 
 <div class="container-fluid">
 	<div class="box box-primary">
@@ -162,7 +159,7 @@ fieldset{
 					<legend style="color:#369FA1;"><b>Load Package</b></legend>
 						<div class="row">
 							<div class="col-md-12">
-								<div class="col-md-6">
+								<div class="col-md-6 form-group">
 									<p for="from">
 										Company Name
 										<span class="required">*</span>
@@ -173,7 +170,7 @@ fieldset{
 								</div>
 								<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
 								<input type="hidden" name="submitted_from" value="web">
-								<div class="col-md-6">
+								<div class="col-md-6 form-group ">
 									<p for="from">
 										Upload Image of the Promotion
 										<span class="required">*</span>
@@ -189,7 +186,7 @@ fieldset{
 					<legend style="color:#369FA1;"><b>Promotion Details</b></legend>
 						<div class="row">
 							<div class="col-md-12">
-								<div class="col-md-6">
+								<div class="col-md-6 form-group">
 									<p for="from">
 										Country
 										<span class="required">*</span>
@@ -200,7 +197,7 @@ fieldset{
 										echo $this->Form->input('country_id',["class"=>"form-control " ,'options' => $options,'label'=>false]);?>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-6 form-group">
 									<p> States <span class="required">*</span></p>
 									<?php 
 									$options=array();
@@ -214,7 +211,7 @@ fieldset{
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-								<div class="col-md-6" >
+								<div class="col-md-6 form-group" >
 									<p for="from">
 									Select Option
 									</p>
@@ -227,7 +224,7 @@ fieldset{
 										</label>
 									</div>
 								</div>
-								<div class="col-md-6 newlist">
+								<div class="col-md-6 form-group newlist">
 									<p for="from">
 										Cities of Operation
 										<span class="required">*</span>
@@ -238,7 +235,7 @@ fieldset{
 										echo $this->Form->input('city_id',["class"=>"form-control " ,'options' => $options,'label'=>false]);?>
 									</div>
 								</div>
-								<div class="col-md-6 newlist1" style="display:none;">
+								<div class="col-md-6 form-group newlist1" style="display:none;">
 									<p> Cities of Operation </p>
 									<?php 
 									$options=array();
@@ -263,7 +260,7 @@ fieldset{
 					<legend style="color:#369FA1;"><b> &nbsp; Payment &nbsp;  </b></legend>
 								<div class="row">
 											<div class="col-md-12">
-												<div class="col-md-4">
+												<div class="col-md-4 form-group">
 													<p for="from">
 													Select Duration of Promotion
 													</p>
@@ -280,7 +277,7 @@ fieldset{
 														<?php // echo $this->Form->input('duration', ['options' => $priceMasters,'class'=>'form-control','label'=>false]); ?>
 													</div>
 												</div>
-												<div class="col-md-4">
+												<div class="col-md-4 form-group">
 													<p for="from">
 																Promotion Amount
 																<span class="required">*</span>
@@ -289,7 +286,7 @@ fieldset{
 													<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text']);?> 
 													</div>
 												</div>
-												<div class="col-md-4">
+												<div class="col-md-4 form-group">
 													<p for="from">
 																Visibility Date
 																<span class="required">*</span>

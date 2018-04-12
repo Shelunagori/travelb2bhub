@@ -151,6 +151,10 @@ margin-top: 5px !important;
 p {
 	margin:0px !important;
 }
+.select2-container--default .select2-search--inline .select2-search__field
+{
+	width:100% !important;
+}
 </style>
 <!--- Star style ---->
 <style>
