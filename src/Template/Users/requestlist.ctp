@@ -384,7 +384,7 @@ fieldset
 							<table width="100%" border="0" class="table-responsive">
 							<tr>
 								
-								<td width="33%">
+								<td width="33%" style="padding:3px !important;">
 									<div class="check_responses" id="checkresponse_<?php echo $request['id'];?>">
 										<?php if($data['responsecount'][$pid] > 0 ) 
 										{ ?>
@@ -399,7 +399,7 @@ fieldset
 									</div>
 								</td>
 								
-								<td width="33%">
+								<td width="33%" style="padding:3px !important;">
 									<a style="width:99%;" class="viewdetail btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"data-target="#myModal1<?php echo $request['id']; ?>"data-toggle=modal> Details</a>
 									<div class="fade modal"id="myModal1<?php echo $request['id']; ?>"role=dialog>
 										<div class=modal-dialog>
@@ -414,7 +414,7 @@ fieldset
 									</div>
 								</td>
 
-								<td width="33%">
+								<td width="33%" style="padding:3px !important;">
 											<a style="width:99%;" class=" btn btn-danger btn-sm"  request_id="<?php echo $request['id']; ?>"  data-target="#deletemodal<?php echo $request['id']; ?>"data-toggle=modal>Remove</a>
 											
 													<!-------Delete Modal Start--------->

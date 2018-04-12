@@ -293,7 +293,7 @@ $(".req").sort(function (a, b) {
 								</li>
 								<?php } ?>
 								
-								 <li >
+								 <li>
 									<p>
 										Members : <span class="details"><?php echo $request['adult'] +   $request['children']; ?></span>
 									</p>
@@ -306,14 +306,14 @@ $(".req").sort(function (a, b) {
 							<hr></hr>
 						<table width="100%" style="text-align:center">
 							<tr>
-								<td width="33%">
+								<td width="33%" style="padding:3px !important;">
 									<a style="width:99%" data-toggle="modal"  class="btn btn-success btn-sm" data-target="#myModalchat<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat',$request['id'], $finalresponse[$request['id']]['user_id'],3)) ?>"> Chat </a>                        
 								</td>
-								<td width="33%">
+								<td width="33%" style="padding:3px !important;">
 									<a style="width:99%" data-toggle="modal"  class="btn btn-info btn-sm" data-target="#myModal1<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'viewdetails',$request['id'])) ?>"> Details</a>
 								</td>
 								
-								<td width="33%" align="left">
+								<td width="33%" align="left" style="padding:3px !important;">
  									<?php $reviewi = $request['responses'][0]['user_id']."-".$request['id']; ?> 
 									<?php 
 									if(array_key_exists($finalresponse[$request['id']]['user_id'], $BusinessBuddies)) {?>
@@ -345,13 +345,13 @@ $(".req").sort(function (a, b) {
 								</td>
 							</tr>
 						</table>
-						<table width="100%" style="text-align:center; margin-top:5px;">
+						<table width="100%" style="text-align:center;">
 							<tr>
-								<td width="50%">
+								<td width="50%" style="padding:3px !important;">
  									<?php $reviewi = $request['responses'][0]['user_id']."-".$request['id']; ?>
 									 <a style="width:99%" data-toggle="modal" class="btn btn-successto btn-sm" data-target="#myModal1review<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'addtestimonial',  $reviewi )) ?>"> Review </a>
 								</td>
-								<td width="50%" align="left">
+								<td width="50%" align="left" style="padding:3px !important;">
 									<?php
 										$sql="Select count(*) as block_count from blocked_users where blocked_user_id='".$finalresponse[$request['id']]['user_id']."' AND blocked_by='".$request['user']['id']."'";
 										$stmt = $conn->execute($sql);
