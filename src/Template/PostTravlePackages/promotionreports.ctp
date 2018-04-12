@@ -76,7 +76,11 @@ fieldset{
 label {
 	font-weight : 300 !important;
 }
-
+.btn-defaults {
+	background-color: #ffffff !important;
+	
+	font-size:17px !important;
+}
 </style>
 <div class="row" >
 	<div class="col-md-12">
@@ -89,8 +93,8 @@ label {
 				<div class="box-header with-border"> 
 					<span class="box-title" style="color:#057F8A;"><b><?= __('Package Reports') ?></b></span>
 					<div class="box-tools pull-right" style="margin-top:-5px;">
-						<a style="font-size:22px;margin-top: -7px;" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-						<a style="font-size:22px;margin-top: -7px;" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+						<a style="font-size:22px;margin-top: -2px;" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
+						<a style="font-size:22px;margin-top: -2px;" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 					</div>
 				</div>
 			</div>
@@ -104,7 +108,7 @@ label {
 		<fieldset style="background-color:#fff;">
 				<div class="row col-md-12" style="padding:25px;">						
 					<div class="col-md-4">
-						<?= $this->Html->image($postTravlePackage->full_image,['id'=>'myImg','style'=>'width:100%;height:150px;','data-target'=>'#imagemodal'.$postTravlePackage->id,'data-toggle'=>'modal',]) ?>
+						<?= $this->Html->image($postTravlePackage->full_image,['id'=>'myImg','style'=>'width:96%;height:140px;','data-target'=>'#imagemodal'.$postTravlePackage->id,'data-toggle'=>'modal',]) ?>
 						<div id="imagemodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-md">
 							<!-- Modal content-->
@@ -122,26 +126,32 @@ label {
 							<div class="col-md-12 ">
 							<span style="color:black;font-size:17px;"><?php echo $postTravlePackage->title?></span>
 							</div>
-							<div class="col-md-12 lbwidth">
-							Likes :
-							<a style="color:#1295AB;" href="likers_list/<?php echo $postTravlePackage->id?>"><label><?php echo $postTravlePackage->total_likes;?></label></a>
-							</div>
-							<div class="col-md-12 lbwidth ">
+							<div class="col-md-12 lbwidth" style="margin-top:5px">
 							Views :
-							<a  style="color:#1295AB;" href="viewers_list/<?php echo $postTravlePackage->id?>"><label><?php echo $postTravlePackage->total_views;?></label></a>
+								<!--<a  style="color:#1295AB;" href="viewers_list/<?php echo $postTravlePackage->id?>"><label><?php echo $postTravlePackage->total_views;?></label></a>--->
+								<a type="button" href="viewers_list/<?php echo $postTravlePackage->id; ?>" style="border-radius:10px; width:53px; background-color: #FFF !important;color: #1295AB !important; border: 1px solid; padding-top: 2px;padding-bottom: 3px" class="btn btn-md">
+									<?php echo $postTravlePackage->total_views;?>
+								</a>
 							</div>
-							<div class="col-md-12 lbwidth">
+							<div class="col-md-12 lbwidth" style="margin-top:5px">
+								Likes : &nbsp;
+								<a type="button" href="likers_list/<?php echo $postTravlePackage->id ; ?>" style="border-radius:10px; width:53px; background-color: #FFF !important;color: #1295AB !important; border: 1px solid; padding-top: 2px;padding-bottom: 3px" class="btn btn-md">
+									<?php echo $postTravlePackage->total_likes;?>
+								</a> 
+							</div>
+							
+							<div class="col-md-12 lbwidth" style="margin-top:5px">
 							Date Posted :
 							<label style="color:black;"><?php echo date('d-M-y',strtotime($postTravlePackage->created_on));?></label>
 							</div>
-							<div class="col-md-12 lbwidth">
+							<div class="col-md-12 lbwidth" style="margin-top:5px">
 							Expiring On :
 							<label style="color:#FB6542;"><?php echo date('d-M-y',strtotime($postTravlePackage->visible_date));?></label>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-4">
-						<div class="row col-md-12 text-center">
+						<div class="text-center">
 						<label><button type="button" class="btn btn-info btn-md btnlayout" data-target="#renew<?php echo $postTravlePackage->id; ?>" data-toggle=modal>Renew</button></label>
 						</div>
 						<!------------------------- Renew Modal--------------------------->
@@ -205,7 +215,7 @@ label {
 								</form>
 							</div>
 						</div>
-						<div class="row col-md-12 text-center">
+						<div class="text-center">
 						<label>
 						<button type="button" class="btn btn-danger btn-md btnlayout" data-target="#remove<?php echo $postTravlePackage->id; ?>" data-toggle=modal>Remove</button>
 						</label>
@@ -231,7 +241,7 @@ label {
 								</form>
 							</div>
 						</div>
-						<div class="row col-md-12 text-center">
+						<div class="text-center">
 						<label><a href="view/<?php echo $postTravlePackage->id; ?>" class="btn btn-warning btn-md btnlayout" >Details</a></label>
 						</div>
 					</div>
