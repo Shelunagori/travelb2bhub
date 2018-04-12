@@ -61,8 +61,7 @@ if ($err) {
 <style type="text/css">
 .lbwidth{
 	color:#716D6F;
-	font-weight:bold;
-	font-size:18px;
+	font-weight:bold; 
 	white-space: nowrap;
 	}
 fieldset{
@@ -90,7 +89,7 @@ p{
 	width:70px;
 }
 input[type=text] {
-    width: 130px;
+    width: 218px;
 	height:30px;
     box-sizing: border-box;
     border: 2px solid #ccc;
@@ -100,14 +99,11 @@ input[type=text] {
     background-color:#fff;
     background-position: 10px 10px; 
     background-repeat: no-repeat;
-    padding: 12px 20px 12px 10px;
+    padding: 12px 16px 11px 16px;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
 }
-
-input[type=text]:focus {
-    width: 100%;
-}
+ 
 </style>
 <div class="row" >
 	<div class="col-md-12">
@@ -120,19 +116,109 @@ input[type=text]:focus {
 				<div class="box-header"> 
 					<span class="box-title" style="color:#057F8A;"><b><?= __('Total Likes') ?></b></span>
 					<div class="box-tools pull-right " >
-					<input type="text" id="search" placeholder="Search here">
+					<input type="text" id="search" placeholder="Type Name or Company">
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="box-body bbb">
-		<fieldset style="background-color:#fff;">
-				<div class="row col-md-12">
-				<table class="table lbwidth" id="table">	
+		<fieldset style="background-color:#fff;" id="table">
+			<?php $i=0;		
+					if(!empty($postTravlePackages)){
+						foreach ($postTravlePackages as $postTravlePackage){ 
+						
+						$i++;
+						?>
+						
+				<div class="row col-md-12"> 
+					<div class="col-md-4" style="margin-top: 7px;">
+						<span style="color:#727e8a">Name </span> : <?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
+						<a href="<?php echo $hrefurl; ?>"> 
+						<?php echo $postTravlePackage->user->first_name." ".$postTravlePackage->user->last_name;?></a>
+					</div>
+					<div class="col-md-4" style="margin-top: 7px;">
+						<span style="color:#727e8a">Company Name</span> : <?php echo $postTravlePackage->user->company_name;?><br>
+					</div>
+					<div class="col-md-4">
+ 						<?php 
+				//pr($follower_list);exit;
+				if ($user_id!=$postTravlePackage->user_id)
+					{
+						if (in_array($postTravlePackage->user_id,$follower_list))
+						{
+						?>
+					<div class="text-center margin">	
+						<a class=" btn btn-danger btn-sm"  data-target="#unfollow<?php echo $postTravlePackage->id; ?>" data-toggle="modal" >Unfollow</a>
+					</div>
+					<?php }
+					else {
+						?>
+					<div class="text-center margin">
+						<a follow_id="<?php echo $postTravlePackage->user_id; ?>" class=" 
+				btn btn-success btn-sm"  data-target="#follow<?php echo $postTravlePackage->id; ?>" data-toggle=modal>follow</a>
+					</div>
+					<?php }}
+					else{?>
+					<div class="text-center margin" style="visibility:hidden">	
+						<a class=" btn btn-danger btn-sm"  data-target="#unfollow<?php echo $postTravlePackage->id; ?>" data-toggle="modal" >Unfollow</a>
+					</div>
+					<?php	
+					}?> 
+					 
+					<div id="unfollow<?php echo $postTravlePackage->id; ?>" class="modal fade" role="dialog">
+						<div class="modal-dialog modal-md" >
+							 
+							<form method="post" class="formSubmit">
+							<input type="hidden" name="follow_id" value="<?php echo $postTravlePackage->user_id; ?>">
+								<div class="modal-content">
+								  <div class="modal-header" style="height:100px;">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">
+										Are you sure , you want to Unfollow this user ?
+										</h4>
+									</div>
+									<div class="modal-footer" style="height:60px;">
+										<button type="submit"  class="unfollow btn btn-info" value="yes" name="unfollow_user">Yes</button>
+										<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					 
+					<div id="follow<?php echo $postTravlePackage->id; ?>" class="modal fade" role="dialog">
+						<div class="modal-dialog modal-md" >
+							<form method="post" class="formSubmit">
+							<input type="hidden" name="follow_id" value="<?php echo $postTravlePackage->user_id; ?>">
+								<div class="modal-content">
+								  <div class="modal-header" style="height:100px;">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">
+										Are you sure , you want to follow this user ?
+										</h4>
+									</div>
+									<div class="modal-footer" style="height:60px;">
+										<button type="submit"  class="unfollow btn btn-info" value="yes" name="follow_user" >Yes</button>
+										<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+									</div>
+								</div>
+								
+								</div>
+							</form>
+						</div>
+					</div> 
+					</div>		
+				<div class="col-md-12"><hr style="margin-top: 0px !important; "></hr></div> 	
+				
+				<?php }} ?>
+				
+			<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
+					<div id="loader"></div></div>	
+				<!--<table class="table lbwidth table-responsive" style="margin-bottom:0px !important" id="table">	
 				<thead>
 				<tr style="background-color:#ECDEE5;">
-				<th>Sr.NO</th>
+				<th>Sr.No.</th>
 				<th>Name</th>
 				<th>Company</th>
 				<th>Actions</th>
@@ -170,10 +256,10 @@ input[type=text]:focus {
 				<a follow_id="<?php echo $postTravlePackage->user_id; ?>" class=" 
 				btn btn-success btn-md"  data-target="#follow<?php echo $postTravlePackage->id; ?>" data-toggle=modal>follow</a>
 					<?php }}?>
-					<!-------UnFollow Modal Start--------->
+					 
 					<div id="unfollow<?php echo $postTravlePackage->id; ?>" class="modal fade" role="dialog">
 						<div class="modal-dialog modal-md" >
-							<!-- Modal content-->
+							 
 							<form method="post" class="formSubmit">
 							<input type="hidden" name="follow_id" value="<?php echo $postTravlePackage->user_id; ?>">
 								<div class="modal-content">
@@ -191,10 +277,10 @@ input[type=text]:focus {
 							</form>
 						</div>
 					</div>
-					<!-------Follow Modal Start--------->
+					 
 					<div id="follow<?php echo $postTravlePackage->id; ?>" class="modal fade" role="dialog">
 						<div class="modal-dialog modal-md" >
-							<!-- Modal content-->
+							 
 							<form method="post" class="formSubmit">
 							<input type="hidden" name="follow_id" value="<?php echo $postTravlePackage->user_id; ?>">
 								<div class="modal-content">
@@ -219,7 +305,7 @@ input[type=text]:focus {
 					<div id="loader"></div></div>
 				</tr><?php }} ?>
 				</tbody>
-				</table>
+				</table>-->
 				</div>
 		</fieldset>
 	</div>			
@@ -227,17 +313,17 @@ input[type=text]:focus {
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
  $(document).ready(function () {
- var $rows = $('#table tbody');
-$('#search').keyup(function() { 
-    var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
-    $rows.show().filter(function() {
-        var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
-        return !~text.indexOf(val);
-    }).hide();
-});
-					jQuery(".formSubmit").submit(function(){
-						jQuery("#loader-1").show();
-					});
+ var $rows = $('#table');
+	$('#search').keyup(function() { 
+		var val = $.trim($(this).val()).replace(/ +/g, ' ').toLowerCase();
+		$rows.show().filter(function() {
+			var text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+			return !~text.indexOf(val);
+		}).hide();
+	});
+	jQuery(".formSubmit").submit(function(){
+		jQuery("#loader-1").show();
+	});
 					
 					
 });

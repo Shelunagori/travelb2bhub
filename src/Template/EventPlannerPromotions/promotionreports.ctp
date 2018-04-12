@@ -56,9 +56,8 @@ if ($err) {
 ?>
 <style type="text/css">
 .lbwidth{
-	color:#716D6F;
-	font-weight:bold;
-	font-size:16px;
+	color:#716D6F; 
+	font-size:14px;
 	white-space: nowrap;
 	}
 fieldset{
@@ -67,16 +66,21 @@ fieldset{
 }
 
 .btnlayout{
-	border-radius:15px !important;
-	width:150px;
+	border-radius:30px !important;
+	width:130px;
 	}
 #myImg:hover {opacity: 0.7;}
 .bbb{
 	padding:0px!important;
 	pading-bottom:10px!important;
 }
-.unfollow{
-	width:70px;
+label {
+	font-weight : 300 !important;
+}
+.btn-defaults {
+	background-color: #ffffff !important;
+	
+	font-size:17px !important;
 }
 </style>
 <div class="row" >
@@ -88,10 +92,10 @@ fieldset{
 		<div class="row">
 			<div class="col-md-12">
 				<div class="box-header with-border"> 
-					<span class="box-title" style="color:#057F8A;"><b><?= __('Event Promotion Reports') ?></b></span>
+					<span class="box-title" style="color:#057F8A;"><b><?= __('Event Reports') ?></b></span>
 					<div class="box-tools pull-right" style="margin-top:-5px;">
-						<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-						<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+						<a style="font-size:22px;margin-top: -2px;" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
+						<a style="font-size:22px;margin-top: -2px;" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 					</div>
 				</div>
 			</div>
@@ -99,20 +103,20 @@ fieldset{
 	</div>
 	<?php //pr($eventplanners); exit;			
 					if(!empty($eventplanners)){
-						foreach ($eventplanners as $eventplanners){ 
+						foreach ($eventplanners as $eventplanner){ 
 						?>
 	<div class="box-body bbb">
 		<fieldset style="background-color:#fff;">
 				<div class="row col-md-12" style="padding:25px;">						
 					<div class="col-md-4">
-						<?= $this->Html->image($eventplanners->full_image,['id'=>'myImg','style'=>'width:100%;height:150px;','data-target'=>'#imagemodal'.$eventplanners->id,'data-toggle'=>'modal',]) ?>
-						<div id="imagemodal<?php echo $eventplanners->id;?>" class="modal fade" role="dialog">
+						<?= $this->Html->image($eventplanner->full_image,['id'=>'myImg','style'=>'width:96%;height:140px;','data-target'=>'#imagemodal'.$eventplanner->id,'data-toggle'=>'modal',]) ?>
+						<div id="imagemodal<?php echo $eventplanner->id;?>" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-md">
 							<!-- Modal content-->
 							<div class="modal-content">
 								<div class="modal-body" >
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<?= $this->Html->image($eventplanners->full_image,['style'=>'width:100%;height:300px;padding:20px;padding-top:0px!important;']) ?>
+								<?= $this->Html->image($eventplanner->full_image,['style'=>'width:100%;height:300px;padding:20px;padding-top:0px!important;']) ?>
 								</div>
 							</div>
 							</div>
@@ -121,32 +125,38 @@ fieldset{
 					<div class="col-md-4"  style="padding-left:30px;">
 						<div class="row">
 							<div class="col-md-12 ">
-							<span style="color:black;font-size:25px;"><?php echo $eventplanners->event_detail?></span>
+							<span style="color:black;font-size:17px;"><?php echo $eventplanner->event_detail; ?></span>
 							</div>
-							<div class="col-md-12 lbwidth">
-							Likes :
-							<a style="color:#1295AB;" href="likers_list/<?php echo $eventplanners->id?>"><label><?php echo $eventplanners->total_likes;?></label></a>
-							</div>
-							<div class="col-md-12 lbwidth ">
+							<div class="col-md-12 lbwidth" style="margin-top:5px">
 							Views :
-							<a  style="color:#1295AB;" href="viewers_list/<?php echo $eventplanners->id?>"><label><?php echo $eventplanners->total_views;?></label></a>
+								<!--<a  style="color:#1295AB;" href="viewers_list/<?php echo $eventplanner->id?>"><label><?php echo $eventplanner->total_views;?></label></a>--->
+								<a type="button" href="viewers_list/<?php echo $eventplanner->id; ?>" style="border-radius:10px; width:53px; background-color: #FFF !important;color: #1295AB !important; border: 1px solid; padding-top: 2px;padding-bottom: 3px" class="btn btn-md">
+									<?php echo $eventplanner->total_views;?>
+								</a>
 							</div>
-							<div class="col-md-12 lbwidth">
+							<div class="col-md-12 lbwidth" style="margin-top:5px">
+								Likes : &nbsp;
+								<a type="button" href="likers_list/<?php echo $eventplanner->id ; ?>" style="border-radius:10px; width:53px; background-color: #FFF !important;color: #1295AB !important; border: 1px solid; padding-top: 2px;padding-bottom: 3px" class="btn btn-md">
+									<?php echo $eventplanner->total_likes;?>
+								</a> 
+							</div>
+							
+							<div class="col-md-12 lbwidth" style="margin-top:5px">
 							Date Posted :
-							<label style="color:black;"><?php echo date('d-M-y',strtotime($eventplanners->created_on));?></label>
+							<label style="color:black;"><?php echo date('d-M-y',strtotime($eventplanner->created_on));?></label>
 							</div>
-							<div class="col-md-12 lbwidth">
+							<div class="col-md-12 lbwidth" style="margin-top:5px">
 							Expiring On :
-							<label style="color:#FB6542;"><?php echo date('d-M-y',strtotime($eventplanners->visible_date));?></label>
+							<label style="color:#FB6542;"><?php echo date('d-M-y',strtotime($eventplanner->visible_date));?></label>
 							</div>
 						</div>
 					</div>
 					<div class="col-md-4">
-						<div class="row col-md-12">
-						<label><button type="button" class="btn btn-info btn-lg btnlayout" data-target="#renew<?php echo $eventplanners->id; ?>" data-toggle=modal>Renew</button></label>
+						<div class="text-center">
+						<label><button type="button" class="btn btn-info btn-md btnlayout" data-target="#renew<?php echo $eventplanner->id; ?>" data-toggle=modal>Renew</button></label>
 						</div>
 						<!------------------------- Renew Modal--------------------------->
-						<div id="renew<?php echo $eventplanners->id; ?>" class="modal fade" role="dialog">
+						<div id="renew<?php echo $eventplanner->id; ?>" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-md" >
 								<!-- Modal content-->
 								<form method="post" class="formSubmit">
@@ -157,7 +167,7 @@ fieldset{
 											Do you want to renew promotion ?
 											</h3>
 										</div>
-									<div class="modal-body" style="height:80px;">
+										<div class="modal-body" style="height:80px;">
 										<br>
 											<div class="row mainrow">
 												<div class="col-md-12">
@@ -200,19 +210,19 @@ fieldset{
 										<div class="modal-footer" style="height:60px;">
 											<button type="submit"  name="pay_now" class=" btn btn-success btn-md" value="yes" >Pay Now</button>
 											<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
-											</div>
 										</div>
-									<input type="hidden" name="event_id" value="<?php echo $eventplanners->id; ?>">
-									</form>
-								</div>
+									</div>
+								<input type="hidden" name="post_travel_id" value="<?php echo $eventplanner->id; ?>">
+								</form>
 							</div>
-						<div class="row col-md-12">
+						</div>
+						<div class="text-center">
 						<label>
-						<button type="button" class="btn btn-danger btn-lg btnlayout" data-target="#remove<?php echo $eventplanners->id; ?>" data-toggle=modal>Remove</button>
+						<button type="button" class="btn btn-danger btn-md btnlayout" data-target="#remove<?php echo $eventplanner->id; ?>" data-toggle=modal>Remove</button>
 						</label>
 						</div>
 						<!------------------------- Remove Modal--------------------------->
-						<div id="remove<?php echo $eventplanners->id; ?>" class="modal fade" role="dialog">
+						<div id="remove<?php echo $eventplanner->id; ?>" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-md" >
 								<!-- Modal content-->
 								<form method="post" class="formSubmit">
@@ -220,32 +230,29 @@ fieldset{
 									  <div class="modal-header" style="height:100px;">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 											<h3 class="modal-title">
-											Are you sure ? You want to delete this promotion?
+											Are you sure ? You want to delete this Promotion
 											</h3>
 										</div>
 										<div class="modal-footer" style="height:60px;">
-											<button type="submit"  class="unfollow btn btn-success btn-md " value="yes" name="remove_promotion">Yes</button>
+											<button type="submit" name="removepackage"  class=" btn btn-success btn-md" value="yes" name="remove_promotion">Yes</button>
 											<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
 										</div>
 									</div>
-									<input type="hidden" name="event_id" value="<?php echo $eventplanners->id; ?>">
+									<input type="hidden" name="remove_package_id" value="<?php echo $eventplanner->id; ?>"/>
 								</form>
 							</div>
 						</div>
-						<div class="row col-md-12">
-						<label><a href="view/<?php echo $eventplanners->id; ?>" class="btn btn-warning btn-lg btnlayout" >Details</a></label>
+						<div class="text-center">
+						<label><a href="view/<?php echo $eventplanner->id; ?>" class="btn btn-warning btn-md btnlayout" >Details</a></label>
 						</div>
 					</div>
 				</div>
-				<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
-				<div id="loader"></div></div>
 		</fieldset>
 	</div>
 					<?php }} ?>
 </div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
-	 
     $(document).ready(function () {
 		$(document).on('change','.priceMasters',function()
 		{
@@ -275,11 +282,8 @@ fieldset{
 			}
 			else{
 				$(this).closest('div.mainrow').find('.visible_date').val("dd-mm-yyyy");
-				$(this).closest('div.mainrow').find('.payment_amount').val(0);
+				$(this).closest('div.mainrow').find('.payment_amount').val(0);-
 			}
 		})
-			jQuery(".formSubmit").submit(function(){
-						jQuery("#loader-1").show();
-					});
 		});
 </script>

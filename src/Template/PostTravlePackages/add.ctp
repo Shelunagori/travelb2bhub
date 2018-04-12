@@ -176,6 +176,7 @@ fieldset{
 	<div class="box box-primary">
 		<div class="box-body">
 			<form action="<?php echo $coreVariable['SiteUrl'];?>api/post_travle_packages/add.json" method="post" enctype="multipart/form-data">	
+			<input type="hidden"
 				<div class="row"> 
 					<div class="col-md-12"> 
 						<div class="form-box">
@@ -423,6 +424,7 @@ fieldset{
 										</div>
 									</div>
 								</div>
+								<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
 							</form>
 						</div>
 					</div>
