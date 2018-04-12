@@ -109,9 +109,6 @@ border-top:none !important;
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
     vertical-align:middle !important;
 }
-label{
-	vertical-align: text-top;
-}
 div.radio div.radio-div:not(:first-child) {
     margin-left: 5px !important;
 }
