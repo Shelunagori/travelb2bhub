@@ -109,7 +109,7 @@ class UsersController extends AppController {
 		//*--- UserChats
 		$this->loadModel('UserChats');
 		$csort['created'] = "DESC";
-		$NewNotifications = $this->UserChats->find()->where(['send_to_user_id'=> $this->Auth->user('id')])->order($csort)->all();
+		$NewNotifications = $this->UserChats->find()->contain(['Users'])->where(['UserChats.send_to_user_id'=> $this->Auth->user('id')])->order($csort)->all();
 		$chatCount = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->count();
  		$this->set('chatCount',$chatCount); 
 		$this->set('NewNotifications',$NewNotifications);
@@ -1596,7 +1596,9 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		$conditions["Requests.total_budget <="] = $MaxQuotePrice;
 		}
 		if(!empty($this->request->query("req_typesearch"))) {
-		$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
+			$typeSearchArray=$this->request->query("req_typesearch");  
+			$conditions["Requests.category_id IN"] =  $typeSearchArray; 
+			//$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
 		}
 		if(!empty($this->request->query("refidsearch"))) {
 		$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
@@ -1608,15 +1610,17 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		$conditions["Requests.pickup_city"] =  $this->request->query("pickup_city");
 		}
 		$sdate = $this->request->query("startdatesearch");
-		$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
-		if(!empty($this->request->query("startdatesearch"))) {
+		//$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+ 		if(!empty($this->request->query("startdatesearch"))) {
+			$sdate=date('Y-m-d', strtotime($sdate));
 			$da["Requests.start_date"] =  $sdate;
 			$da["Requests.check_in"] =  $sdate;
 			$conditions["OR"] =  $da;
 		}
 		$edate = $this->request->query("enddatesearch");
-		$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+		//$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
 		if(!empty($this->request->query("enddatesearch"))) {
+			$edate=date('Y-m-d', strtotime($edate));
 			$da1["Requests.end_date"] =  $edate;
 			$da1["Requests.check_out"] =  $edate;
 			$conditions["OR"] =  $da1;
@@ -1732,6 +1736,7 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		$this->loadModel('Hotels');
 		$this->loadModel('Requests');
 		$this->loadModel('Cities');
+		$this->loadModel('States');
 		$this->loadModel('BusinessBuddies');
 		$this->viewBuilder()->layout('user_layout');
 		$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
@@ -1765,21 +1770,24 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 			$conditions["Requests.total_budget <="] = $MaxQuotePrice;
 		}
 		if(!empty($this->request->query("req_typesearch"))) {
-			$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
+			$typeSearchArray=$this->request->query("req_typesearch");  
+			$conditions["Requests.category_id IN"] =  $typeSearchArray; 
 		}
 		if(!empty($this->request->query("refidsearch"))) {
 			$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
 		}
 			$sdate = $this->request->query("startdatesearch");
-			$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+			//$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
 		if(!empty($this->request->query("startdatesearch"))) {
+			$sdate=date('Y-m-d', strtotime($sdate));
 			$da["Requests.start_date"] =  $sdate;
 			$da["Requests.check_in"] =  $sdate;
 			$conditions["OR"] =  $da;
 		}
 			$edate = $this->request->query("enddatesearch");
-			$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+			//$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
 		if(!empty($this->request->query("enddatesearch"))) {
+			$edate=date('Y-m-d', strtotime($edate));
 			$da["Requests.end_date"] =  $edate;
 			$da["Requests.check_out"] =  $edate;
 			$conditions["OR"] =  $da;
@@ -1855,6 +1863,17 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		$chatCount = $allUnreadChat->count();
 		$this->set('chatCount',$chatCount); 
 		$this->set('allunreadchat',$allUnreadChat);
+		
+		$allCities = $this->Cities->find('list',['keyField' => 'id', 'valueField' => 'name'])
+		->hydrate(false)
+		->toArray();
+		$cities = $this->Cities->getAllCities();
+		$this->set('allCities', $allCities);
+		
+		$allStates = $this->States->find('list',['keyField' => 'id', 'valueField' => 'state_name'])
+		->hydrate(false)
+		->toArray();
+		$this->set('allStates', $allStates);
 	}
 public function removedRequestList() {
 $this->loadModel('Responses');
@@ -1876,22 +1895,25 @@ $conditions["Requests.total_budget >="] = $MinQuotePrice;
 $conditions["Requests.total_budget <="] = $MaxQuotePrice;
 }
 if(!empty($this->request->query("req_typesearch"))) {
-$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
+	$typeSearchArray=$this->request->query("req_typesearch");  
+	$conditions["Requests.category_id IN"] =  $typeSearchArray; 
 }
 if(!empty($this->request->query("refidsearch"))) {
 $conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
 }
 $sdate = $this->request->query("startdatesearch");
-$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+//$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
 echo $sdate;
 if(!empty($this->request->query("startdatesearch"))) {
+	$sdate=date('Y-m-d', strtotime($sdate));
 $da["Requests.start_date"] =  $sdate;
 $da["Requests.check_in"] =  $sdate;
 $conditions["OR"] =  $da;
 }
 $edate = $this->request->query("enddatesearch");
-$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+//$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
 if(!empty($this->request->query("enddatesearch"))) {
+	$edate=date('Y-m-d', strtotime($edate));
 $da1["Requests.end_date"] =  $edate;
 $da1["Requests.check_out"] =  $edate;
 $conditions["OR"] =  $da1;
@@ -2009,7 +2031,8 @@ public function respondtorequest() {
 		$conditions["Requests.pickup_city"] =  $this->request->query("pickup_city");
 	}
 	if(!empty($this->request->query("req_typesearch"))) {
-		$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
+		$typeSearchArray=$this->request->query("req_typesearch");  
+		$conditions["Requests.category_id IN"] =  $typeSearchArray; 
 	}
 	if(!empty($this->request->query("budgetsearch"))) {
 		$QPriceRange = $this->request->query("budgetsearch");
@@ -2023,20 +2046,18 @@ public function respondtorequest() {
 		$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
 	}
 	$sdate = $this->request->query("startdatesearch");
-	$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
-	if(!empty($this->request->query("startdatesearch"))) {
+ 	if(!empty($this->request->query("startdatesearch"))) {
+		$sdate=date('Y-m-d', strtotime($sdate));
 		$da["Requests.start_date"] =  $sdate;
 		$da["Requests.check_in"] =  $sdate;
 		$conditions["OR"] =  $da;
 	}
 	$edate = $this->request->query("enddatesearch");
 	if(isset($edate) AND !empty($edate)){
-		$date = str_replace('/', '-', $edate);
-		$edate = date('Y-m-d', strtotime($date));
+  		$edate = date('Y-m-d', strtotime($edate));
 	}else{
 		$edate = null;		
-	}
-	//echo  $edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+	} ;
 	if(!empty($this->request->query("enddatesearch"))) {
 		$da1["Requests.end_date"] =  $edate;
 		$da1["Requests.check_out"] = $edate;
@@ -2708,7 +2729,8 @@ public function myresponselist() {
 		$conditions["AND"] = array("Users.first_name LIKE "=>"%". $keyword[0]."%", "Users.last_name LIKE" => "%".$keyword2."%",);
 	}
 	if(!empty($this->request->query("req_typesearch"))) {
-		$conditions["Requests.category_id"] =  $this->request->query("req_typesearch");
+		$typeSearchArray=$this->request->query("req_typesearch");  
+			$conditions["Requests.category_id IN"] =  $typeSearchArray; 
 	}
 	if(!empty($this->request->query("refidsearch"))) {
 		$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
@@ -2727,16 +2749,17 @@ public function myresponselist() {
 		$conditions["Responses.is_details_shared"] =  $this->request->query("shared_details");
 	}
 	$sdate = $this->request->query("startdatesearch");
-	$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+	//$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
 	if(!empty($this->request->query("startdatesearch"))) {
+		$sdate=date('Y-m-d', strtotime($sdate));
 		$da["Requests.start_date"] =  $sdate;
 		$da["Requests.check_in"] =  $sdate;
 		$conditions["OR"] =  $da;
 	}
 	$edate = $this->request->query("enddatesearch");
 	if(isset($edate) AND !empty($edate)){
-		$date = str_replace('/', '-', $edate);
-		$edate = date('Y-m-d', strtotime($date));
+		//$date = str_replace('/', '-', $edate);
+		$edate = date('Y-m-d', strtotime($edate));
 	}
 	else{
 		$edate = null;		
@@ -4283,8 +4306,10 @@ $conditions["Requests.total_budget >="] = $MinQuotePrice;
 $conditions["Requests.total_budget <="] = $MaxQuotePrice;
 }
 	if(!empty($_POST["req_typesearch"])) {
-$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
-}
+		//$conditions["Requests.category_id"] =  $_POST["req_typesearch"];
+		$typeSearchArray=$_POST["req_typesearch"];  
+		$conditions["Requests.category_id IN"] =  $typeSearchArray; 
+	}
 if(!empty($_POST["refidsearch"])) {
 $conditions["Requests.reference_id"] =  $_POST["refidsearch"];
 }
@@ -4295,15 +4320,17 @@ if(!empty($_POST["pickup_city"])) {
 $conditions["Requests.pickup_city"] =  $_POST["pickup_city"];
 }
 $sdate = $_POST["startdatesearch"];
-$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+//$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
 if(!empty($_POST["startdatesearch"])) {
+	$sdate=date('Y-m-d', strtotime($sdate));
 $da["Requests.start_date"] =  $sdate;
 $da["Requests.check_in"] =  $sdate;
 $conditions["OR"] =  $da;
 }
 $edate = $_POST["enddatesearch"];
-$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+//$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
 if(!empty($_POST["enddatesearch"])) {
+	$edate=date('Y-m-d', strtotime($edate));
 $da1["Requests.end_date"] =  $edate;
 $da1["Requests.check_out"] =  $edate;
 $conditions["OR"] =  $da1;

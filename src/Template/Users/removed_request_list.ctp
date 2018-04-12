@@ -53,10 +53,14 @@ $conn = ConnectionManager::get('default');
 								  
 						  <div class="col-md-12">
 							   
-							   <div class="col-md-6">
-						<label for="example-text-input" class="col-form-label">Request Type: </label>		   
-								   <select name="req_typesearch" class="form-control"><option value="">Select Request Type</option><option value="1">Package</option><option value="3">Hotel</option><option value="2">Transport</option></select>
-							   </div>
+						<div class="col-md-6">
+							<label for="example-text-input" class="col-form-label">Request Type: </label>		   
+							   <select name="req_typesearch" multiple="multiple" class="form-control select2">
+								   <option value="1">Package</option>
+								   <option value="3">Hotel</option>
+								   <option value="2">Transport</option>
+							   </select>
+						   </div>
 						   
 							   
 							<div class="col-md-6">
@@ -69,13 +73,13 @@ $conn = ConnectionManager::get('default');
 							   
 							   <div class="col-md-6">     
 					<label for="example-text-input" class="col-form-label">Start Date: </label>		   
-								   <input type="text" id="datepicker1"  name="startdatesearch" value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"  class="form-control">
+								   <input type="text" id="datepicker1"  name="startdatesearch" data-date-format="dd-mm-yyyy" value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"  class="form-control">
 							   </div>
 						
 								
 							   <div class="col-md-6"> 
 					<label for="example-text-input" class="col-form-label">End Date: </label>           
-								   <input type="text" id="datepicker2" name="enddatesearch" value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"  class="form-control" >
+								   <input type="text" id="datepicker2" name="enddatesearch" data-date-format="dd-mm-yyyy" value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"  class="form-control" >
 							  </div>
 						
 							   

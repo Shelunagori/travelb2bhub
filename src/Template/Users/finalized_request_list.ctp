@@ -83,7 +83,10 @@ $conn = ConnectionManager::get('default');
             </div>
            <div class="col-md-6">            
            <label for="example-text-input" class=" col-form-label">Request Type: </label>
-			   <select name="req_typesearch" class="form-control"><option value="">Select Request Type</option><option value="1">Package</option><option value="3">Hotel</option><option value="2">Transport</option></select>
+			   <select name="req_typesearch" multiple="multiple" class="form-control select2">
+			   <option value="1">Package</option>
+			   <option value="3">Hotel</option>
+			   <option value="2">Transport</option></select>
            </div>
          
            
@@ -97,12 +100,12 @@ $conn = ConnectionManager::get('default');
            
            <div class="col-md-6">
 			<label for="example-text-input" class=" col-form-label">Start Date: </label>
-                <input type="text" id="datepicker1"  name="startdatesearch" value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"  class="form-control datepicker">
+                <input type="text" id="datepicker1" data-date-format="dd-mm-yyyy" name="startdatesearch" value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"  class="form-control datepicker">
            </div>
         
            <div class="col-md-6">  
 			<label for="example-text-input" class=" col-form-label">End Date: </label>           
-               <input type="text" id="datepicker2" name="enddatesearch" value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"  class="form-control datepicker" >
+               <input type="text" id="datepicker2" data-date-format="dd-mm-yyyy" name="enddatesearch" value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"  class="form-control datepicker" >
             </div>
     
            
@@ -188,7 +191,7 @@ $(".req").sort(function (a, b) {
 					   }
 					 ?>
 							<div id="cat" >
-									<div class="col-md-4" id="<?php if($request['category_id']==1){ echo "1";} if($request['category_id']==2){ echo "3";}if($request['category_id']==3){ echo "2";} ?>">
+									<div class="col-md-4" style="padding-top:10px;" id="<?php if($request['category_id']==1){ echo "1";} if($request['category_id']==2){ echo "3";}if($request['category_id']==3){ echo "2";} ?>">
 									<?php 
 								    if($request['category_id']==1){ 
 										$image=$this->Html->image('/img/slider/package-icon.png');
@@ -225,6 +228,11 @@ $(".req").sort(function (a, b) {
 							<legend><?php echo $image; ?></legend>
 							<span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
 								<ul>
+								<li >
+									<p>
+										From : <span class="details"><a href="viewprofile/<?php echo $finalresponse[$request['id']]['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$finalresponse[$request['id']]['user_id']]); ?></a> <font color="#1295AB"> (<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font></span>
+									</p>
+								 </li>
 								  <li >
 								 <p>
 									Request Type : <span class="details"><?php  echo $text; ?></span>
@@ -236,16 +244,46 @@ $(".req").sort(function (a, b) {
 										Total Budget : <span class="details">Rs. <?php echo $request['total_budget']; ?></span>
 									</p>
 								</li>
-								<li >
-									<p>
-										Agent Name : <span class="details"><a href="viewprofile/<?php echo $finalresponse[$request['id']]['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$finalresponse[$request['id']]['user_id']]); ?></a> <font color="#1295AB"> (<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font></span>
-									</p>
-								 </li>
+								
 								 <li >
 									<p>
 										Quotation Price : <span class="details">Rs. <?php echo $finalresponse[$request['id']]['quotation_price']; ?></span>
 									</p>
 								</li>
+								
+								<li>
+								<?php 
+								if($request['category_id']==2){ ?>
+								<p>Pickup City : &nbsp;
+									<span class="details"><?php echo ($request['pickup_city'])?$allCities[$request['pickup_city']]:"-- --"; ?><?php echo ($request['pickup_state'])?' ('.$allStates[$request['pickup_state']].')':"";  ?></span>
+								</p>
+							<?php 
+							}
+							else
+							{?>
+								<p>Destination City : &nbsp;
+									<span class="details">
+									<?php 
+									$a=$request['city_id']? $allCities[$request['city_id']]:"-- --"; 
+									$b=$request['state_id']?' ('.$allStates[$request['state_id']].')':"";
+									echo mb_strimwidth($a.$b, 0,28, "...");?>
+									<?php
+										/* if($request['category_id'] == 1){
+											if(count($request['hotels']) >1) {
+												unset($request['hotels'][0]);?><?php
+												foreach($request['hotels'] as $row) { ?>
+													<?php echo ($row['city_id'])?', '.$allCities[$row['city_id']]:""; ?>
+													<?php echo ($row['state_id'])?' ('.$allStates[$row['state_id']].')':"";  
+												}  
+											}  
+										} */?>
+									</span>
+								</p>
+							<?php
+							}
+								?>
+								</li>
+								
 							   <li >
 									<p>
 										Reference ID : <span class="details"><?php echo $request['reference_id']; ?></span>

@@ -143,7 +143,12 @@ fieldset
 									  </div>
 									  <div class=col-md-1>:</div>
 									 <div class=col-md-7>
-										<select name="req_typesearch" class="form-control"><option value="">Select Request Type</option><option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option><option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option><option value="2">Transport</option></select>
+										<select name="req_typesearch[]" multiple class="form-control select2">
+											<option value="">Select Request Type</option>
+											<option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option>
+											<option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option>
+											<option value="2">Transport</option>
+										</select>
 									</div>
                                  </div>
                                 </div>
@@ -167,7 +172,7 @@ fieldset
 									 </div>
 									<div class=col-md-1>:</div>
 									 <div class=col-md-7>
-									 <input class=form-control name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"id=datepicker1>
+									 <input class=form-control name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"id=datepicker1 data-date-format="dd-mm-yyyy">
 									 </div>
 									</div>	
 								</div>
@@ -178,7 +183,7 @@ fieldset
 										</div>
 										<div class=col-md-1>:</div>
 										<div class=col-md-7>
-										<input class=form-control name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"id=datepicker2>
+										<input class=form-control name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"id=datepicker2 data-date-format="dd-mm-yyyy">
 										</div>
 									</div>
 								</div>
@@ -265,7 +270,7 @@ fieldset
                  // pr($request); exit;
 				  ?>
 				  
-               <div id=cat>
+               <div id=cat style="padding-top:5px;">
 					<?php 
 					if(isset($_GET['sort']) && $_GET['sort']=="requesttype") {
 						?>

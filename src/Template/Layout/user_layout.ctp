@@ -151,6 +151,10 @@ margin-top: 5px !important;
 p {
 	margin:0px !important;
 }
+.select2-container--default .select2-search--inline .select2-search__field
+{
+	width:100% !important;
+}
 </style>
 <!--- Star style ---->
 <style>
@@ -242,6 +246,9 @@ p {
 	}
 	textarea {
 		resize:none !important;
+	}
+	.navbar-nav>.notifications-menu>.dropdown-menu, .navbar-nav>.messages-menu>.dropdown-menu, .navbar-nav>.tasks-menu>.dropdown-menu{
+		width:380 !important;
 	}
 </style>
 <style>
@@ -341,6 +348,8 @@ p {
 					if($chatCount > 0) {
 						 
 						foreach($NewNotifications as $allchat) {
+							$first_name=$allchat->user->first_name;
+							$last_name=$allchat->user->last_name;
 							$request_id = $allchat['request_id'];
 							$send_to_user_id = $allchat['send_to_user_id'];
 							$message = $allchat['message'];
@@ -349,18 +358,54 @@ p {
 							$type = $allchat['type']; 
 							$userid = $allchat['user_id'];
 							$url='#';
-							if($type=='Request'){ $url=$this->Url->build(array('controller'=>'users','action'=>'respondtorequest')); }
+							$org_date=date('d-m-Y h:i:A', strtotime($created));
+							$new_date=str_replace(" "," at ",$org_date);
 							
-							if($type=='Final Response'){ $url=$this->Url->build(array('controller'=>'users','action'=>'myFinalResponses')); }
+							if($type=='Request'){ 
+								$url=$this->Url->build(array('controller'=>'users','action'=>'respondtorequest')); 
+								$title="New Request Received!";
+								$clr="#9975B9";
+							}
 							
-							if($type=='Detail Share'){ $url=$this->Url->build(array('controller'=>'users','action'=>'myresponselist')); }
+							if($type=='Final Response'){ 
+								$url=$this->Url->build(array('controller'=>'users','action'=>'myFinalResponses'));
+								$title="Finalized Responses!";
+								$clr="#68A225";
+							}
 							
-							if($type=='Response'){ $url=$this->Url->build(array('controller'=>'users','action'=>'checkresponses/'.$request_id)); }
+							if($type=='Detail Share'){ 
+								$url=$this->Url->build(array('controller'=>'users','action'=>'myresponselist')); 
+								$title="Received Contact Details!";
+								$clr="#AA3939";
+							}
+							
+							if($type=='Response'){ 
+								$url=$this->Url->build(array('controller'=>'users','action'=>'checkresponses/'.$request_id)); 
+								$title="Check Responses";
+								$clr="#C9A668";
+							}
+							if($type=='Chat'){
+								$title="Chat";
+								$clr="#1295a2";
+							}
+							if($type=='Announcement'){
+								$title="Announcement";
+								$clr="#FB6542";
+							}
  							
 							?>
 								<li>
   									<a class="notify" href="<?php echo $url; ?>">
-									    <i class="fa fa-book"></i><?php echo $message;  ?>
+										<div>
+										<div style="margin-top:2px;float:right;font-size:10px;">
+										<?php echo $new_date; ?></div><br>
+											<div>
+												<font color="<?php echo $clr; ?>">
+													<?php echo $title; ?>
+												</font>
+											</div>
+										<font color="#848688">Sender's Name:</font> <?php echo $first_name.' '.$last_name; echo "<br>"; ?> <font color="#848688">Message:</font> <?php echo $message;  ?>
+										</div>
 									</a>
  								</li>
  								<?php  

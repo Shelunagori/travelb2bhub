@@ -95,7 +95,7 @@ $conn = ConnectionManager::get('default');
 			foreach($responses as $row){
 			?>
 			<div id="cat" >
-			<div class="col-md-4">
+			<div class="col-md-4" style="padding-top:10px;">
 			<?php 
                
 				if($row['request']['category_id']==1){ 
@@ -117,16 +117,6 @@ $conn = ConnectionManager::get('default');
 					<legend><?php echo $image; ?></legend>
 					<span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
                  <ul>
-                 <li >
-                    <p>
-                        Request Type  : <?php echo $text; ?>
-                    </p>
-                 </li>
-				<li >
-					<p>
-						Total Budget :  <?php echo ($row['request']['total_budget'])? "Rs. ". $row['request']['total_budget'] :"-- --" ?>
-					</p>
-				 </li>
 				 
 				 <li >
 					<p>
@@ -145,10 +135,21 @@ $conn = ConnectionManager::get('default');
 									@$final_rating=round($total_rating/$rate_count);
 								}
 						?>
-						Agent Name :  <a href="viewprofile/<?php echo $row['request']['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$row['request']['user_id']]); ?></a>
+						From :  <a href="viewprofile/<?php echo $row['request']['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$row['request']['user_id']]); ?></a>
 						<font color="#1295AB"> (<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font>
 					</p>
 				</li>
+                 <li >
+                    <p>
+                        Request Type  : <?php echo $text; ?>
+                    </p>
+                 </li>
+				<li >
+					<p>
+						Total Budget :  <?php echo ($row['request']['total_budget'])? "Rs. ". $row['request']['total_budget'] :"-- --" ?>
+					</p>
+				 </li>
+				 
 				<li >
 					 <p>Quotation Price :  <?php echo ($row['quotation_price'])? " Rs. ".$row['quotation_price']:"-- --" ?></p>
 				</li>
