@@ -187,13 +187,13 @@ fieldset{
 															<span class="required">*</span>
 														</p>
 														<div class="input-field">
-															 <?php echo $this->Form->input('title',['class'=>'form-control','label'=>false,'placeholder'=>"Package Title",]);?>
+															 <?php echo $this->Form->input('title',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>"Package Title",]);?>
+															 <label style="display:none" class="helpblock error" > This field is required.</label>
 														</div>
 													</div>
 													<div class="col-md-4 form-group">
 																<p for="from">
 																	Package Category
-																	<span class="required">*</span>
 																</p>
 																<div class="input-field">
 																<?php 
@@ -212,7 +212,8 @@ fieldset{
 															</p>
 															
 															<div class="input-field">
-																<?php  echo $this->Form->input('image',['class'=>'form-control','label'=>false,'type'=>'file']); ?>
+																<?php  echo $this->Form->input('image',['class'=>'form-control requiredfield','label'=>false,'type'=>'file']); ?>
+																<label style="display:none" class="helpblock error" > This field is required.</label>
 															</div>
 														</div>
 													</div>
@@ -230,24 +231,25 @@ fieldset{
 																	<span class="required">*</span>
 																</p>
 																<div class="input-field"> 
-																	<select name="duration_day_night" class="form-control select2">
+																	<select name="duration_day_night" class="form-control select2 requiredfield">
 																	<option value="">Select...</option>
-																	<option>1 Night 2 Days</option>
-																	<option>2 Night 3 Days</option>
-																	<option>3 Night 4 Days</option>
-																	<option>4 Night 5 Days</option>
-																	<option>5 Night 6 Days</option>
-																	<option>6 Night 7 Days</option>
-																	<option>7 Night 8 Days</option>
-																	<option>8 Night 9 Days</option>
-																	<option>9 Night 10 Days</option>
-																	<option>10 Night 11 Days</option>
-																	<option>11 Night 12 Days</option>
-																	<option>12 Night 13 Days</option>
-																	<option>13 Night 14 Days</option>
-																	<option>14 Night 15 Days</option>
+																	<option>1 N/2 D</option>
+																	<option>2 N/3 D</option>
+																	<option>3 N/4 D</option>
+																	<option>4 N/5 D</option>
+																	<option>5 N/6 D</option>
+																	<option>6 N/7 D</option>
+																	<option>7 N/8 D</option>
+																	<option>8 N/9 D</option>
+																	<option>9 N/10 D</option>
+																	<option>10 N/11 D</option>
+																	<option>11 N/12 D</option>
+																	<option>12 N/13 D</option>
+																	<option>13 N/14 D</option>
+																	<option>14 N/15 D</option>
 																	<option>More than 15 Days</option>
 																	</select>
+																	<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 															</div>			
 															<div class="col-md-4 form-group">
@@ -256,10 +258,11 @@ fieldset{
 																	<span class="required">*</span>
 																</p>
 																<div class="input-field input-group">
-																	<?php echo $this->Form->input('valid_date',['class'=>'form-control date-picker date','label'=>false,'data-date-format'=>'dd-mm-yyyy','placeholder'=>'dd-mm-yyyy']);?>
+																	<?php echo $this->Form->input('valid_date',['class'=>'form-control date-picker date requiredfield','label'=>false,'data-date-format'=>'dd-mm-yyyy','placeholder'=>'dd-mm-yyyy','value'=>date('d-m-Y')]);?>
 																	<p class="input-group-addon btn" >
 																	<span class="fa fa-calendar"></span>
 																	</p>
+																	<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 															</div>
 																<div class="col-md-4 form-group">
@@ -268,7 +271,8 @@ fieldset{
 																	<span class="required">*</span>
 																</p>
 																<div class="input-field">
-																	<?php echo $this->Form->input('starting_price',['class'=>'form-control','label'=>false,'placeholder'=>'Starting Price']);?>
+																	<?php echo $this->Form->input('starting_price',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>'Starting Price']);?>
+																	<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 															</div>							 
 														</div>
@@ -298,7 +302,8 @@ fieldset{
 																<div class="input-field">
 																 <?php $options=array();
 																	$options[] = ['value'=>'101','text'=>'India'];
-																	echo $this->Form->input('country_id',["class"=>"form-control " ,'options' => $options,'label'=>false]);?>
+																	echo $this->Form->input('country_id',["class"=>"form-control requiredfield" ,'options' => $options,'label'=>false]);?>
+																	<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 															</div>
 															<div class="col-md-4 newlist1 form-group" style="display:none;>
@@ -312,7 +317,8 @@ fieldset{
 																{
 																	$options[] = ['value'=>$country->id,'text'=>$country->country_name];
 																};
-																	echo $this->Form->input('country_id',["class"=>"form-control select2", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select City "]);?>
+																	echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select City "]);?>
+																	<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 																</div>
 																<div class="col-md-4 form-group">
@@ -327,7 +333,8 @@ fieldset{
 																{
 																	$options[] = ['value'=>$cty->cityid,'text'=>$cty->name];
 																};
-																echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
+																echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
+																<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 															</div>
 														</div>
@@ -341,7 +348,8 @@ fieldset{
 																</p>
 																 
 																<div class="input-field">
-																	 <?php echo $this->Form->textarea('package_detail',['class'=>'form-control','label'=>false,'rows'=>2]);?>
+																	 <?php echo $this->Form->textarea('package_detail',['class'=>'form-control requiredfield','label'=>false,'rows'=>2]);?>
+																	 <label style="display:none" class="helpblock error" > This field is required.</label>
 																	
 																</div>
 															</div>
@@ -356,7 +364,8 @@ fieldset{
 															</p>
 															 
 																<div class="input-field">
-																	 <?php echo $this->Form->textarea('excluded_detail',['class'=>'form-control','label'=>false,'rows'=>2]);?>
+																	 <?php echo $this->Form->textarea('excluded_detail',['class'=>'form-control requiredfield','label'=>false,'rows'=>2]);?>
+																	 <label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 															</div>
 														</div>
@@ -369,7 +378,7 @@ fieldset{
 												<div class="col-md-12">
 													<div class="col-md-4 form-group">
 														<p for="from">
-															Payment Duration
+															Payment Duration <span class="required">*</span>
 														</p>
 														<div class="input-field">
 																 
@@ -379,13 +388,13 @@ fieldset{
 															{
 																$options[] = ['value'=>$Price->id,'text'=>$Price->week,'priceVal'=>$Price->week,'price'=>$Price->price];
 															};
-															echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters','label'=>false,'empty'=>'Select ...']);?>
+															echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters requiredfield','label'=>false,'empty'=>'Select ...']);?>
+															<label style="display:none" class="helpblock error" > This field is required.</label>
 														</div>
 													</div>
 													<div class="col-md-4 form-group">
 														<p for="from">
 																	Promotion Amount
-																	<span class="required">*</span>
 														</p>
 														<div class="input-field">
 														<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text']);?> 
@@ -394,7 +403,6 @@ fieldset{
 												<div class="col-md-4 form-group">
 														<p for="from">
 																	Visibility Date
-																	<span class="required">*</span>
 														</p>
 														<div class="input-field">
 														<?php echo $this->Form->input('visible_date', ['data-date-format'=>'dd/mm/yyyy','class'=>'form-control visible_date','label'=>false,"placeholder"=>"Visible Date",'readonly'=>'readonly','type'=>'text']); ?>
@@ -430,6 +438,21 @@ fieldset{
 <script>
 	 
     $(document).ready(function () {
+		
+		$('form').submit(function () {
+			var x=0;
+			$( ".requiredfield" ).each(function() {
+  				if($(this).val()==''){
+ 					$(this).closest('div.form-group').find('.helpblock').show();
+					x = 1;
+				}
+			});
+			if(x==1){
+				$('html, body').animate({scrollTop:0}, 'slow');
+				return false;
+			}
+		});
+		
 		$(document).on('change','.priceMasters',function()
 		{
 			var priceVal=$('.priceMasters option:selected').attr('priceVal');

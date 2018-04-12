@@ -157,7 +157,8 @@ fieldset{
 								<span class="required">*</span>
 							</p>
 							<div class="input-field">
-								 <?php echo $this->Form->input('hotel_name',['class'=>'form-control','label'=>false,'placeholder'=>"Enter Your Hotel Name",'required']);?>
+								 <?php echo $this->Form->input('hotel_name',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>"Enter Your Hotel Name",]);?>
+								 <label style="display:none" class="helpblock error" > This field is required.</label>
 							</div>
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt form-group">
@@ -173,7 +174,8 @@ fieldset{
 													$options[] = ['value'=>$cat->id,'text'=>$cat->name];
 												};
 												
-												echo $this->Form->input('hotel_category_id',['class'=>'form-control select2','options' => $options,'label'=>false,"empty"=>"Select Hotel Category"]);?>
+												echo $this->Form->input('hotel_category_id',['class'=>'form-control select2 requiredfield','options' => $options,'label'=>false,"empty"=>"Select Hotel Category"]);?>
+												<label style="display:none" class="helpblock error" > This field is required.</label>
 										</div>
 									</div>
 								</div>
@@ -186,7 +188,8 @@ fieldset{
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
-										 <?php echo $this->Form->input('hotel_location',['class'=>'form-control','label'=>false,'placeholder'=>"Enter Your Hotel Location (City, State)"]);?>
+										 <?php echo $this->Form->input('hotel_location',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>"Enter Your Hotel Location (City, State)"]);?>
+										 <label style="display:none" class="helpblock error" > This field is required.</label>
 											
 										</div>
 									</div>
@@ -210,7 +213,8 @@ fieldset{
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
-										 <?php echo $this->Form->input('cheap_tariff',['class'=>'form-control','label'=>false,'type'=>'number','placeholder'=>"Cheapest Room Rate"]);?>
+										 <?php echo $this->Form->input('cheap_tariff',['class'=>'form-control requiredfield','label'=>false,'type'=>'number','placeholder'=>"Cheapest Room Rate"]);?>
+										 <label style="display:none" class="helpblock error" > This field is required.</label>
 											
 										</div>
 									</div>
@@ -220,7 +224,8 @@ fieldset{
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
-											 <?php echo $this->Form->input('expensive_tariff',['class'=>'form-control','label'=>false,'type'=>'number','placeholder'=>"Most Expensive Room Rate"]);?>
+											 <?php echo $this->Form->input('expensive_tariff',['class'=>'form-control requiredfield','label'=>false,'type'=>'number','placeholder'=>"Most Expensive Room Rate"]);?>
+											 <label style="display:none" class="helpblock error" > This field is required.</label>
 										</div>
 									</div>
 								</div>
@@ -253,8 +258,9 @@ fieldset{
 												<span class="required">*</span>
 											</p>
 											<div class="input-field">
-												 <?php echo $this->Form->input('hotel_pic',['class'=>'form-control imgInp','label'=>false,'type'=>'file','id'=>'hotelImg', 'onchange' => 'checkCertificate()']);?>
-												  <span style="color: red;font-size: 13px;"><b>File Type:</b> jpeg/jpg/png</span>&nbsp;&nbsp;&nbsp;<span style="color: red;font-size: 13px;"><b>Max Size:</b> 2 MB</span>
+												 <?php echo $this->Form->input('hotel_pic',['class'=>'form-control imgInp requiredfield','label'=>false,'type'=>'file','id'=>'hotelImg', 'onchange' => 'checkCertificate()']);?>
+												  <span style="color: red;font-size: 13px;"><b>File Type:</b> jpeg/jpg/png</span>&nbsp;&nbsp;&nbsp;<span style="color: red;font-size: 13px;">Max Size: 2 MB</span>
+												  <label style="display:none" class="helpblock error" > This field is required.</label>
 											</div>
 										</div>
 									</div>
@@ -276,7 +282,8 @@ fieldset{
 														{
 															$options[] = ['value'=>$duration->id,'text'=>$duration->week,'priceVal'=>$duration->week,'price'=>$duration->price];
 														};
-												 echo $this->Form->input('price_master_id',['class'=>'form-control duration select2 ','options' => $options,'label'=>false]);?>
+												 echo $this->Form->input('price_master_id',['class'=>'form-control  requiredfield duration select2 ','options' => $options,'label'=>false]);?>
+												 <label style="display:none" class="helpblock error" > This field is required.</label>
 											</div>
 										</div>
 								<div class="col-md-4 form-group">
@@ -322,6 +329,20 @@ fieldset{
 <script>
 	 
     $(document).ready(function () {
+		$('form').submit(function () {
+			var x=0;
+			$( ".requiredfield" ).each(function() {
+  				if($(this).val()==''){
+ 					$(this).closest('div.form-group').find('.helpblock').show();
+					x = 1;
+				}
+			});
+			if(x==1){
+				$('html, body').animate({scrollTop:0}, 'slow');
+				return false;
+			}
+		});
+		
 		$(document).on('change','.duration',function()
 		{
 			var priceVal=$('.duration option:selected').attr('priceVal');
