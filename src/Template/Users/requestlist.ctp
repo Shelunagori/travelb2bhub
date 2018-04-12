@@ -265,7 +265,7 @@ fieldset
                  // pr($request); exit;
 				  ?>
 				  
-               <div id=cat>
+               <div id=cat style="padding-top:5px;">
 					<?php 
 					if(isset($_GET['sort']) && $_GET['sort']=="requesttype") {
 						?>

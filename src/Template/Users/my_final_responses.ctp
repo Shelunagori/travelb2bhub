@@ -95,7 +95,7 @@ $conn = ConnectionManager::get('default');
 			foreach($responses as $row){
 			?>
 			<div id="cat" >
-			<div class="col-md-4">
+			<div class="col-md-4" style="padding-top:10px;">
 			<?php 
                
 				if($row['request']['category_id']==1){ 

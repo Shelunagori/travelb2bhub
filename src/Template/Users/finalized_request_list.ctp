@@ -188,7 +188,7 @@ $(".req").sort(function (a, b) {
 					   }
 					 ?>
 							<div id="cat" >
-									<div class="col-md-4" id="<?php if($request['category_id']==1){ echo "1";} if($request['category_id']==2){ echo "3";}if($request['category_id']==3){ echo "2";} ?>">
+									<div class="col-md-4" style="padding-top:10px;" id="<?php if($request['category_id']==1){ echo "1";} if($request['category_id']==2){ echo "3";}if($request['category_id']==3){ echo "2";} ?>">
 									<?php 
 								    if($request['category_id']==1){ 
 										$image=$this->Html->image('/img/slider/package-icon.png');

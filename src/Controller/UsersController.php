@@ -109,7 +109,7 @@ class UsersController extends AppController {
 		//*--- UserChats
 		$this->loadModel('UserChats');
 		$csort['created'] = "DESC";
-		$NewNotifications = $this->UserChats->find()->where(['send_to_user_id'=> $this->Auth->user('id')])->order($csort)->all();
+		$NewNotifications = $this->UserChats->find()->contain(['Users'])->where(['UserChats.send_to_user_id'=> $this->Auth->user('id')])->order($csort)->all();
 		$chatCount = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->count();
  		$this->set('chatCount',$chatCount); 
 		$this->set('NewNotifications',$NewNotifications);

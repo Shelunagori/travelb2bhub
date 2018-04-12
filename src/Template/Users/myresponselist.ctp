@@ -337,7 +337,7 @@ $(document).ready(function(){
 			if($m%3==0) { echo '<div class="clearfix"></div>'; }
 			$m++;
  			?>
-            <div class="col-md-4">
+            <div class="col-md-4" style="padding-top:10px;">
 			<?php 
 				if($response['request']['category_id']==1){ 
 					$image=$this->Html->image('/img/slider/package-icon.png');
