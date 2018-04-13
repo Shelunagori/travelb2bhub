@@ -130,7 +130,8 @@ hr { margin-top:0px!important;}
                 </div>
 				 <div class="form-group col-md-6">
                   <label>City</label>
-                  <input type="textbox" class="form-control" required autocomplete="off" id="city-search-box" name="city" placeholder="Select city/nearest city" value="<?php echo (!empty($users['city_id']))?$allCityList[$users['city_id']]:"" ;?>">
+                  <input type="textbox" taxboxname="<?php echo $users['state_id']; ?>" noofrows="1" class="form-control" required autocomplete="off" id="city-search-box" name="city" placeholder="Select city/nearest city" value="<?php echo (!empty($users['city_id']))?$allCityList[$users['city_id']]:"" ;?>">
+				  <input type="hidden" value="<?php echo $users['city_id']; ?>" id="city_id" name="city_id" >
 				  <div class="suggesstion-box" style="margin-top:-10px"></div>
                 </div>
 				<div class="col-md-12 col-md-12s">
@@ -368,7 +369,7 @@ hr { margin-top:0px!important;}
 			   
               <div class="box-footer">
 				<center>
-					<button type="submit" class="btn btn-primary">Edit Profile</button>
+					<button type="submit" class="btn btn-primary">Update Profile</button>
 				</center>	
               </div>
             </form>
@@ -385,18 +386,23 @@ hr { margin-top:0px!important;}
 
 $(document).ready(function(){	 
 		$("#city-search-box").keyup(function(){
-		var input=$("#city-search-box").val();
- 		var m_data = new FormData();
-		m_data.append('input',input);			
+		var input=$("#city-search-box").val(); 
+			var noofrows=$(this).attr('noofrows');
+			var taxboxname=$(this).attr('taxboxname');
+			var master=$(this);
+			var m_data = new FormData();
+			m_data.append('input',input);			
+			m_data.append('noofrows',noofrows);			
+			m_data.append('taxboxname',taxboxname);					
 		$.ajax({
-			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajaxCity1"]); ?>",
+			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajaxCity"]); ?>",
 			data: m_data,
 			processData: false,
 			contentType: false,
 			type: 'POST',
 			dataType:'text',
 			success: function(data)
-			{	
+			{	 
 				$(".suggesstion-box").show();
 				$(".suggesstion-box").html(data);
 				$(".city-search-box").css("background","#FFF");
@@ -426,6 +432,12 @@ $(document).ready(function(){
 				email: true
 			},
 			"mobile_number": {
+				required : true,
+				number: true,
+				minlength:10,
+				maxlength:10
+			},
+			"p_contact": {
 				required : true,
 				number: true,
 				minlength:10,
@@ -582,6 +594,7 @@ $(document).ready(function(){
 		$("#city-search-box").val(value);
 		$(".suggesstion-box").hide();
 		$(".cityCode").val(city_code);
+		$("#city_id").val(city_code);
 		var m_data = new FormData();
 		m_data.append('state_id',state_id);			
 		$.ajax({

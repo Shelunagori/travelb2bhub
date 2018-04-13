@@ -699,7 +699,7 @@ $this->set(compact('cities', 'states', 'countries', 'allCities', 'allStates','me
 			$user = $this->Users->patchEntity($userDetails, $this->request->data);
 			//pr($user); exit;
 			if ($this->Users->save($user)) {
-				$this->Flash->error(__('User has been updated successfully.'));
+				$this->Flash->success(__('User has been updated successfully.'));
 				$result['msg'] = "User has been updated successfully";
 				$this->redirect('/users/profileedit');
 			} else {
