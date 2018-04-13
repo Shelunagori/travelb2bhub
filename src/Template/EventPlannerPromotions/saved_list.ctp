@@ -135,12 +135,8 @@ hr{
 		<div class="row" >
 			<div class="col-md-12">
 				<div class="box-header with-border"> 
-					<span class="box-title" style="color:#057F8A;"><b><?= __('Event Promotions') ?></b></span>
-					<div class="box-tools pull-right" style="margin-top:-5px;">
-						<a style="font-size:20px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-						<a style="font-size:20px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
-						<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'savedList',$user_id),1);?>"  class="btn btn-box-tool" > <img src="../images/unsave.png" height="22px"/></a>
-					</div>
+					<span class="box-title" style="color:#057F8A;"><b><?= __('Saved Promotions') ?></b></span>
+					
 				</div>
 			</div>
 		</div>
@@ -181,7 +177,7 @@ hr{
 			<input type="hidden" name="event_id" value="<?php echo $eventPlannerPromotion->id; ?>">
 				<div class="row">
 					<div class="col-md-12" style="padding-top:5px;">
-					<span style="font-size:18px;"><b><?php echo $eventPlannerPromotion->user->company_name; ?></b></span>
+					<span style="font-size:18px;"><?php echo $eventPlannerPromotion->user->company_name; ?></span>
 					</div>
 					</div>
 					<span class="help-block"></span>
@@ -205,7 +201,7 @@ hr{
 						<table  width="100%" style="text-align:center;" >
 								<tr>
 								<td width="25%" >
-									<span><img src="../images/view.png" height="15px"/>
+									<span><?php echo $Image=$this->Html->image('../images/view.png',['height'=>'13px']);?>
 									<?= h($eventPlannerPromotionss->total_views);?></span>
 								</td>
 								<td width="25%">
@@ -215,10 +211,12 @@ hr{
 									$issaved=$eventPlannerPromotionss->issaved;
 									//-- LIKES DISLIKE
 									if($isLiked=='no'){
-												echo $this->Form->button('<img src="../images/unlike.png" height="15px"/>',['class'=>'btn btn-xs likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
+												$Image=$this->Html->image('../images/unlike.png',['height'=>'15px']);
+												echo $this->Form->button($Image,['class'=>'btn btn-xs likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
 											}
 											if($isLiked=='yes'){
-												echo $this->Form->button('<img src="../images/like.png" height="15px"/>',['class'=>'btn  btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
+												$Image=$this->Html->image('../images/like.png',['height'=>'15px']);
+												echo $this->Form->button($Image,['class'=>'btn  btn-xs likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
 											}?>
 									<?php echo $eventPlannerPromotionss->total_likes; ?>
 								</span>
@@ -227,16 +225,20 @@ hr{
 									<?php 
 									//-- Save Unsave
 									if($issaved=='1'){
-										echo $this->Form->button('<img src="../images/save.png" height="15px"/>',['class'=>'btn  btn-xs  ','value'=>'button','type'=>'submit','name'=>'saveeventplanner','style'=>'background-color:white;color:black;border:0px;']);
+										$Image=$this->Html->image('../images/save.png',['height'=>'15px']);
+										echo $this->Form->button($Image,['class'=>'btn  btn-xs  ','value'=>'button','type'=>'submit','name'=>'saveeventplanner','style'=>'background-color:white;color:black;border:0px;']);
 									}
 									if($issaved=='0'){
-										echo $this->Form->button('<img src="../images/save.png" height="15px"/>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'saveeventplanner']);
+										$Image=$this->Html->image('../images/unsave.png',['height'=>'15px']);
+										echo $this->Form->button($Image,['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'saveeventplanner']);
 									}
 									?>
 									<span style="visibility:hidden;">3</span>
 								</td>
 								<td width="25%">
-									<?php echo $this->Html->link('<img src="../images/flag.png" height="15px"/>','#'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn  btn-xs','data-target'=>'#reportmodal'.$eventPlannerPromotion->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>
+									<?php 
+									$Image=$this->Html->image('../images/flag.png',['height'=>'15px']);
+									echo $this->Html->link($Image,'#'.$eventPlannerPromotion->id,array('escape'=>false,'class'=>'btn  btn-xs','data-target'=>'#reportmodal'.$eventPlannerPromotion->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>
 								<span style="visibility:hidden;">3</span>
 								</td>
 							</tr>

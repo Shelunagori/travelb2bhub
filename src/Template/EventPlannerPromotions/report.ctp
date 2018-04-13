@@ -294,7 +294,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 	<div class="box-body bbb">	
 		<fieldset style="background-color:#fff;">
 			<form method="post" class="formSubmit">
-			<input type="hidden" name="event_id" value="<?php echo $hotelPromotion->id; ?>">
+			<input type="hidden" name="event_id" value="<?php echo $eventPlannerPromotion->id; ?>">
 				<div class="row">
 					<div class="col-md-12" style="padding-top:5px;">
 					<span style="font-size:18px;"><b><?php echo $eventPlannerPromotion->user->company_name; ?></b></span>
@@ -347,7 +347,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 										echo $this->Form->button('<img src="../images/save.png" height="15px"/>',['class'=>'btn  btn-xs  ','value'=>'button','type'=>'submit','name'=>'saveeventplanner','style'=>'background-color:white;color:black;border:0px;']);
 									}
 									if($issaved=='0'){
-										echo $this->Form->button('<img src="../images/save.png" height="15px"/>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'saveeventplanner']);
+										echo $this->Form->button('<img src="../images/unsave.png" height="15px"/>',['class'=>'btn btn-primary btn-xs ','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'saveeventplanner']);
 									}
 									?>
 									<span style="visibility:hidden;">3</span>

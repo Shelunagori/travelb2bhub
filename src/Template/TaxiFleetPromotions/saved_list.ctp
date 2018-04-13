@@ -110,31 +110,43 @@ if ($err) {
 }
 ?>
 <style>
-.lbwidth{
-	color:#716D6F;
-	font-weight:bold;
-	white-space: nowrap;
-	}
 fieldset{
 	margin-bottom:5px !important;
 	border-radius: 6px;
 }
-.
-p{
-	text-align:center;
-	font-size:10px;
+.modal-title{
+font-size:20px;	
 }
 
 .row{
 	line-height:15.0px;
 }
 .btnlayout{
-	border-radius:20px !important;
+	border-radius:15px !important;
 	}
 #myImg:hover {opacity: 0.7;}
 .bbb{
 	padding:0px!important;
 	pading-bottom:10px!important;
+}
+.rowspace{
+	padding-top:5px;
+	font-size:14px;
+}
+.rowspacemodal{
+	padding:10px;
+	font-size:14px;
+}
+hr{
+	margin-top: 15px !important;
+    margin-bottom: 4px !important;
+}
+.col-md-4{
+	color:#727e8a;
+	 white-space: nowrap;
+}
+label{
+	font-weight: 100;
 }
 </style> 
 	<div class="row" >
@@ -197,7 +209,7 @@ p{
 				<div class="modal-footer" style="height:60px;">
 					  <div class="row">
 							<div class="col-md-12 text-center">
-								<input type="submit" class="btn btn-primary btn-sm">
+								<input type="submit" class="btn btn-info btn-sm">
 								<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-danger btn-sm">Reset</a>
 							</div>
 					  </div>
@@ -286,7 +298,7 @@ p{
 							</div>
 						  </div>
 						<div class="modal-footer">
-							<button class="btn btn-primary btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
+							<button class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
 							<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-danger btn-sm">Reset</a>
 						</div>
 					</form>
@@ -295,7 +307,8 @@ p{
 		   </div>
 			<?php $i=1;
 			if(!empty($taxiFleetPromotions)){
-			foreach ($taxiFleetPromotions as $taxiFleetPromotion){
+			foreach ($taxiFleetPromotions as $taxiFleetPromotionss){
+			$taxiFleetPromotion=$taxiFleetPromotionss->taxi_fleet_promotion;
 				$vehicleList='';
 					$x=0;
 					foreach($taxiFleetPromotion->taxi_fleet_promotion_rows as $vehicle)
@@ -333,112 +346,14 @@ p{
 			<fieldset style="background-color:#fff;">
 				<form method="post" class="formSubmit">
 					<div class="row">
-						<div class="col-md-5" style="padding-top:5px;">
-						<span style="font-size:18px;"><b><?= h($taxiFleetPromotion->title) ?></b></span>
+						<div class="col-md-12" style="padding-top:5px;">
+						<span style="font-size:18px;"><?= h($taxiFleetPromotion->title) ?></span>
 						</div>
-						<div class="col-md-4 pull-right">
-							<div class="row" style="padding-top:5px;">
-								<div class="col-md-12 ">
-								<button class="btn btn-info btn-md btnlayout" data-target="#fleetdetail<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Fleet Details</button>
-									<!-------Report Modal Start--------->
-										<div id="fleetdetail<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
-											<div class="modal-dialog modal-md">
-												<!-- Modal content-->
-													<div class="modal-content">
-													  <div class="modal-header">
-														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h3 class="modal-title">Fleet Details</h3>
-													  </div>
-														<div class="modal-body" >
-															<span class="help-block"></span>
-															<div class="row">
-																<div class="col-md-12">
-																	<label style="padding:20px;"><?= h($taxiFleetPromotion->fleet_detail); ?></label>
-																</div>
-															</div>
-														</div>
-														<div class="modal-footer" >
-															<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancel</button>
-														</div>
-													</div>
-												</div>
-											</div>
-									<!-------Report Modal End--------->	
-									<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
-									
-									<!-------Contact Details Modal --------->
-												<div id="contactdetails<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
-													<div class="modal-dialog modal-md" >
-														<!-- Modal content-->
-															<div class="modal-content">
-															  <div class="modal-header">
-																<button type="button" class="close" data-dismiss="modal">&times;</button>
-																	<h3 class="modal-title">
-																	Seller Details
-																	</h3>
-																	</div>
-																	<div class="modal-body">
-																		<span class="help-block"></span>
-																		<div class="row">
-																		<div class="col-md-12">
-																			<div class="col-md-4">Seller Name :</div>
-																			<div class="col-md-8">
-																				<label>
-																					<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?>
-																					<?php
-																					if($taxiFleetPromotion->user_rating==0)
-																					{
-																						echo "";
-																					}
-																					else{
-																						echo "( ";
-																						for($i=0;$i<$taxiFleetPromotion->user_rating;$i++)
-																						{
-																							echo "<i class='fa fa-star' style='font-size:10px;color:#efea65;'></i>";
-																							if($i==0)
-																							{
-																								echo "";
-																							}
-																						}
-																						echo " )";
-																						}
-																					?>
-																				</label>
-																			</div>					
-																		</div>
-																	</div>
-																		<div class="row">
-																			<div class="col-md-12">
-																			<div class="col-md-4">Mobile No :</div>
-																			<div class="col-md-8">
-																			<label><?= h($taxiFleetPromotion->user->mobile_number);?></label>
-																			</div>
-																			</div>
-																		</div>
-																		<div class="row">
-																			<div class="col-md-12">
-																				<div class="col-md-4">Email :</div>
-																				<div class="col-md-8">
-																				<label><a href="mailto:<?php echo $taxiFleetPromotion->user->email;?>"><?= h($taxiFleetPromotion->user->email);?></a></label>
-																				</div>
-																			</div>
-																		</div>
-																	</div>
-																	<div class="modal-footer">
-																	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-																	</div>
-																</div>
-															</div>
-														</div>
-														<!-------Contact Details Modal End--------->	
-													</div>
-												</div>
-											</div>
-										</div>
+					</div>
 					<span class="help-block"></span>
-					<div class="row">						
+					<div class="row ">						
 					<div class="col-md-3">
-					<?= $this->Html->image($taxiFleetPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:120px;','data-target'=>'#imagemodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal',]) ?>
+					<?= $this->Html->image($taxiFleetPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:80px;','data-target'=>'#imagemodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal',]) ?>
 					<div id="imagemodal<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-md">
 						<!-- Modal content-->
@@ -449,47 +364,53 @@ p{
 								</div>
 							</div>
 						</div>
-					</div>
+					</div><hr></hr>
 					<div class="row" style="padding-top:5px;">					
 						<input type="hidden" name="taxifleet_id" value="<?php echo $taxiFleetPromotion->id; ?>">
 								<table  width="100%" style="text-align:center;" >
 								<tr>
 								<td width="25%" >
-										<span><img src="../images/view.png" height="15px"/>
-										<?= h($taxiFleetPromotion->total_views);?></span>
+										<span><?php echo $Image=$this->Html->image('../images/view.png',['height'=>'13px']);?>
+										<?= h($taxiFleetPromotionss->total_views);?></span>
 									</td>
 								<td width="25%">
 									<span>
 									<?php
 									//pr($taxiFleetPromotion);
-										$dataUserId=$taxiFleetPromotion->user_id;
-										$isLiked=$taxiFleetPromotion->isLiked;
-										$issaved=$taxiFleetPromotion->issaved;
+										$dataUserId=$taxiFleetPromotionss->user_id;
+										$isLiked=$taxiFleetPromotionss->isLiked;
+										$issaved=$taxiFleetPromotionss->issaved;
 										//-- LIKES DISLIKE
 										if($isLiked=='no'){
-											echo $this->Form->button('<img src="../images/unlike.png" height="15px"/>',['class'=>'likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
+											$Image=$this->Html->image('../images/unlike.png',['height'=>'15px']);
+											echo $this->Form->button($Image,['class'=>'likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
 											
 										}
 										if($isLiked=='yes'){
-											echo $this->Form->button('<img src="../images/like.png" height="15px"/>',['class'=>' likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
+											$Image=$this->Html->image('../images/like.png',['height'=>'15px']);
+											echo $this->Form->button($Image,['class'=>' likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
 										}?>
-								<?= h($taxiFleetPromotion->total_likes);?></span>
+								<?= h($taxiFleetPromotionss->total_likes);?></span>
 								</td>
 								<td width="25%">
 								<?php 
 									//-- Save Unsave
 									if($issaved=='1'){
-										echo $this->Form->button('<img src="../images/save.png" height="15px"/>',['class'=>' ','value'=>'button','type'=>'submit','name'=>'savetaxifleet','style'=>'background-color:white;color:black;border:0px;']);
+										$Image=$this->Html->image('../images/save.png',['height'=>'15px']);
+										echo $this->Form->button($Image,['class'=>' ','value'=>'button','type'=>'submit','name'=>'savetaxifleet','style'=>'background-color:white;color:black;border:0px;']);
 									}
 									if($issaved=='0'){
-										echo $this->Form->button('<img src="../images/unsave.png" height="15px"/>',['class'=>'','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'savetaxifleet']);
+										$Image=$this->Html->image('../images/unsave.png',['height'=>'15px']);
+										echo $this->Form->button($Image,['class'=>'','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'savetaxifleet']);
 									}
 									?>
 									
 									<span style="visibility:hidden;">3</span>
 								</td>
 								<td width="25%">
-								<?php echo $this->Html->link('<img src="../images/flag.png" height="15px"/>','#'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'','data-target'=>'#reportmodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>
+								<?php 
+								$Image=$this->Html->image('../images/flag.png',['height'=>'15px']);
+								echo $this->Html->link($Image,'#'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'','data-target'=>'#reportmodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>
 								<span style="visibility:hidden;">3</span>
 								</td>
 								</tr>
@@ -539,7 +460,7 @@ p{
 												</div>
 											</div>
 											<div class="modal-footer" style="height:60px;">
-												<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
+												<input type="submit" class="btn btn-info btn-md" name="report_submit" value="Report">
 												<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancel</button>
 											</div>
 										</div>
@@ -547,43 +468,142 @@ p{
 								</div>
 							</div>
 						</div>
-							<div class="col-md-9">
-							<div class="col-md-6">
-									<div class="row">
-										<div class="col-md-4 lbwidth">Category :</div>
-										<div class="col-md-8"><label ><?= h($vehicleList); ?></label >
+				<div class="col-md-9" >
+								<div class="row col-md-12">
+									<div class="col-md-12"><span style="color:#727e8a;">Category :</span>
+										<?= h($vehicleList); ?>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="row rowspace">
+										<div class="col-md-12"><span style="color:#727e8a;"><?= __(' Cities of Operation') ?> :</span>
+										<span><?= h($cityList); ?></span>
 										</div>
 									</div>
-								<div class="row ">
-										<div class="col-md-4 lbwidth"><?= __(' Cities of Operation') ?> :</div>
-										<div class="col-md-8"><label ><?= h($cityList); ?></label>
-										</div>
-									</div>
-									<div class="row ">
-										<div class="col-md-4 lbwidth"><?= __('States of Operation') ?>:</div>
-										<div class="col-md-8"><label ><?= h($stateList); ?> </label>
+									<div class="row rowspace">
+										<div class="col-md-12"><span style="color:#727e8a;"><?= __(' States of Operation') ?> :</span>
+										<span ><?= h($stateList); ?> </span>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-6">
-									<div class="row ">
-										<div class="col-md-4 lbwidth"><?= __('Country') ?>:</div>	
-										<div class="col-md-8"><label ><?= h($taxiFleetPromotion->country->country_name); ?> </label>
+									<div class="row rowspace">
+										<div class="col-md-12"><span style="color:#727e8a;"><?= __(' Country') ?> :</span>
+										<span >India </span>
 										</div>
 									</div>
-									<div class="row ">
-										<div class="col-md-4 lbwidth">Seller :</div>		
-										<div class="col-md-8 lbwidth11"><label>
+									<div class="row rowspace">
+										<div class="col-md-12 "><span style="color:#727e8a;"><?= __(' Seller') ?> :</span>	
+										<span>
 										<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
 										<a href="<?php echo $hrefurl; ?>"> 
-										<?php echo $taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name.' ( '.$taxiFleetPromotion->user_rating.'<i class="fa fa-star"></i> )';?>
+										<?php echo $taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name.' ( '.$taxiFleetPromotionss->user_rating.'<i class="fa fa-star"></i> )';?>
 										</a>
-										</label>
+										</span>
 										</div>					
 									</div>
+									<!-----button list-->
+							<div class="row" style="padding-top:15px;">
+								<div class="col-md-12 ">
+								<button class="btn btn-info btn-md btnlayout" data-target="#fleetdetail<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Fleet Details</button>
+									<!-------Report Modal Start--------->
+										<div id="fleetdetail<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
+											<div class="modal-dialog modal-md">
+												<!-- Modal content-->
+													<div class="modal-content">
+													  <div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<span class="modal-title">Fleet Details</span>
+													  </div>
+														<div class="modal-body" >
+															<span class="help-block"></span>
+															<div class="row">
+																<div class="col-md-12" style="padding-left:25px;padding-bottom:10px;">
+																	<span >
+																<?php echo  $this->Text->autoparagraph(h($taxiFleetPromotion->fleet_detail)); ?></span>
+																</div>
+															</div>
+														</div>
+														<div class="modal-footer" >
+															<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancel</button>
+														</div>
+													</div>
+												</div>
+											</div>
+									<!-------Report Modal End--------->	
+									<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
+									
+									<!-------Contact Details Modal --------->
+												<div id="contactdetails<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
+													<div class="modal-dialog modal-md" >
+														<!-- Modal content-->
+															<div class="modal-content">
+															  <div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																	<span class="modal-title">
+																	Seller Details
+																	</span>
+																	</div>
+																	<div class="modal-body">
+																		<span class="help-block"></span>
+																		<div class="row">
+																		<div class="col-md-12">
+																			<div class="col-md-4">Seller Name :</div>
+																			<div class="col-md-8">
+																				<span>
+																					<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?>
+																					<?php
+																					if($taxiFleetPromotionss->user_rating==0)
+																					{
+																						echo "";
+																					}
+																					else{
+																						echo "( ";
+																						for($i=0;$i<$taxiFleetPromotionss->user_rating;$i++)
+																						{
+																							echo "<i class='fa fa-star' style='font-size:10px;color:#efea65;'></i>";
+																							if($i==0)
+																							{
+																								echo "";
+																							}
+																						}
+																						echo " )";
+																						}
+																					?>
+																				</span>
+																			</div>					
+																		</div>
+																	</div>
+																		<div class="row">
+																			<div class="col-md-12">
+																			<div class="col-md-4">Mobile No :</div>
+																			<div class="col-md-8">
+																			<span><?= h($taxiFleetPromotion->user->mobile_number);?></span>
+																			</div>
+																			</div>
+																		</div>
+																		<div class="row">
+																			<div class="col-md-12">
+																				<div class="col-md-4">Email :</div>
+																				<div class="col-md-8">
+																				<span><a href="mailto:<?php echo $taxiFleetPromotion->user->email;?>"><?= h($taxiFleetPromotion->user->email);?></a></span>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																	<div class="modal-footer">
+																	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-------Contact Details Modal End--------->	
+													</div>
+											</div>
+										</div>
+										<!----button list end--->
 								</div>
 							</div>
-						</div>
 					</div>
 						<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
 						<div id="loader"></div>

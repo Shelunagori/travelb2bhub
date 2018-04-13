@@ -146,6 +146,9 @@ hr{
 	color:#727e8a;
 	 white-space: nowrap;
 }
+label{
+	font-weight: 100;
+}
 </style> 
 	<div class="row" >
 		<div class="col-md-12">
@@ -208,7 +211,7 @@ hr{
 				<div class="modal-footer" style="height:60px;">
 					  <div class="row">
 							<div class="col-md-12 text-center">
-								<input type="submit" class="btn btn-primary btn-sm">
+								<input type="submit" class="btn btn-info btn-sm">
 								<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-danger btn-sm">Reset</a>
 							</div>
 					  </div>
@@ -297,7 +300,7 @@ hr{
 							</div>
 						  </div>
 						<div class="modal-footer">
-							<button class="btn btn-primary btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
+							<button class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
 							<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-danger btn-sm">Reset</a>
 						</div>
 					</form>
@@ -369,7 +372,7 @@ hr{
 								<table  width="100%" style="text-align:center;" >
 								<tr>
 								<td width="25%" >
-										<span><img src="../images/view.png" height="15px"/>
+										<span><img src="../images/view.png" height="13px"/>
 										<?= h($taxiFleetPromotion->total_views);?></span>
 									</td>
 								<td width="25%">
@@ -453,7 +456,7 @@ hr{
 												</div>
 											</div>
 											<div class="modal-footer" style="height:60px;">
-												<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
+												<input type="submit" class="btn btn-info btn-md" name="report_submit" value="Report">
 												<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancel</button>
 											</div>
 										</div>
@@ -461,8 +464,8 @@ hr{
 								</div>
 							</div>
 						</div>
-							<div class="col-md-9" style="padding-top:5px;">
-								<div class="row col-md-12 rowspace">
+							<div class="col-md-9" >
+								<div class="row col-md-12">
 									<div class="col-md-12"><span style="color:#727e8a;">Category :</span>
 										<?= h($vehicleList); ?>
 									</div>

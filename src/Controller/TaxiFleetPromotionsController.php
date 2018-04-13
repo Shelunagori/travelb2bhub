@@ -738,7 +738,7 @@ class TaxiFleetPromotionsController extends AppController
 				} 
 				$displayMessage=$LikeResult->message;
 				$this->Flash->success(__($displayMessage));
-				return $this->redirect(['action' => 'report']);
+				return $this->redirect(['action' => 'savedList/'.$user_id]);
 			}
 			//---Remove TaxiFleet Promotion
 			if(isset($this->request->data['removetaxifleet']))
@@ -770,7 +770,7 @@ class TaxiFleetPromotionsController extends AppController
 				}
 				$displayMessage=$removeResult->message;
 				$this->Flash->success(__($displayMessage));
-				return $this->redirect(['action' => 'report']);
+				return $this->redirect(['action' => 'savedList/'.$user_id]);
 			} 
 			
 		//---Save cart TaxiFleet Promotion
@@ -808,7 +808,7 @@ class TaxiFleetPromotionsController extends AppController
 				} 
 				$displayMessage=$LikeResult->message;
 				$this->Flash->success(__($displayMessage));
-				return $this->redirect(['action' => 'report']);
+				return $this->redirect(['action' => 'savedList/'.$user_id]);
 			} 
 			//Report Modal
 			if(isset($this->request->data['report_submit']))
@@ -849,7 +849,7 @@ class TaxiFleetPromotionsController extends AppController
 				} 
 				$displayMessage=$LikeResult->message;
 				$this->Flash->success(__($displayMessage));
-				return $this->redirect(['action' => 'report']);
+				return $this->redirect(['action' => 'savedList/'.$user_id]);
 			}
 			
 		}
