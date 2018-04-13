@@ -106,7 +106,7 @@ $conn = ConnectionManager::get('default');
 					</div>
 				</div>
 				<div id="myModal122" class="modal fade form-modal" role="dialog">
-				  <div class="modal-dialog" style="width:35%;">
+				  <div class="modal-dialog" >
 					<!-- Modal content-->
 						<div class="modal-content">
 							<div class="modal-header">
