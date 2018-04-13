@@ -260,7 +260,7 @@ hr{
 					</div>
 					<span class="help-block"></span>
 					<div class="row">						
-					<div class="col-md-3">
+					<div class="col-md-3 rowspace">
 					<?= $this->Html->image($hotelPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:80px;','data-target'=>'#imagemodal'.$hotelPromotion->id,'data-toggle'=>'modal',]) ?>
 					<div id="imagemodal<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-md">
@@ -279,7 +279,7 @@ hr{
 								<table  width="100%" style="text-align:center;" >
 								<tr>
 								<td width="25%" >
-										<span><img src="../images/view.png" height="15px"/>
+										<span><img src="../images/view.png" height="13px"/>
 										<?= h($hotelPromotion->total_views);?></span>
 									</td>
 								<td width="25%">
@@ -372,7 +372,7 @@ hr{
 								</div>
 							</div>
 						</div>
-							<div class="col-md-9" style="padding-top:5px;">
+							<div class="col-md-9" >
 								<div class="col-md-5">
 										<div class="row rowspace">
 											<div class="col-md-12"><span style="color:#727e8a;">Category :</span>

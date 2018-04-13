@@ -147,6 +147,9 @@ hr{
 	color:#727e8a;
 	 white-space: nowrap;
 }
+label{
+	font-weight: 100;
+}
 </style>
 <div class="row" >
 	<div class="col-md-12">
@@ -159,9 +162,9 @@ hr{
 				<div class="box-header with-border"> 
 					<span class="box-title" style="color:#057F8A;"><b>Package Promotions</b></span>
 					<div class="box-tools pull-right" style="margin-top:-5px;">
-						<a style="font-size:20px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-						<a style="font-size:20px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
-						<a style="font-size:24px" href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'savedList',$user_id),1);?>"  class="btn btn-box-tool" ><i class="fa fa-bookmark"></i> </a>
+						<a style="font-size:16px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
+						<a style="font-size:23px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+						<a style="font-size:20px" href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'savedList',$user_id),1);?>"  class="btn btn-box-tool" ><i class="fa fa-bookmark"></i> </a>
 					</div>
 				</div>
 			</div>
@@ -179,28 +182,28 @@ hr{
 				  <div class="modal-body" style="height:130px;">
 					<div class="col-md-12 row form-group ">
 						<div class="col-md-12 radio">
-							<span>
+							<label>
 								<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="user_rating"/>
 								User Rating
-							</span>
+							</label>
 						</div>
 					</div>
 					<div class="col-md-12 row form-group ">
 						<div class="col-md-12 radio">
-							<span>
+							<label>
 							<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="total_likes"/>
 								 Likes
-							</span>
+							</label>
 						</div>
 					</div>
 					 
 					
 					<div class="col-md-12 row form-group ">
 						<div class="col-md-12 radio">
-							<span>
+							<label>
 								<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="total_views"/>
 								 Views
-							</span>
+							</label>
 						</div>
 					</div>
 					
@@ -230,7 +233,7 @@ hr{
 						<div class="row form-group margin-b10">
 							<div class=col-md-12>
 								 <div class=col-md-3>
-								  <span class="col-form-span"for=example-text-input>Country</span>
+								  <label class="col-form-label"for=example-text-input>Country</label>
 								  </div>
 								  <div class=col-md-1>:</div>
 								 <div class=col-md-7>
@@ -238,7 +241,7 @@ hr{
 									foreach($countries as $country)
 									{
 										$options[] = ['value'=>$country->id,'text'=>$country->country_name];
-									};echo $this->Form->input('country_id', ['options' => $options,'class'=>'form-control select2','span'=>false,'empty'=>'Select...']);
+									};echo $this->Form->input('country_id', ['options' => $options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...']);
 								?>
 								</div>
 							 </div>
@@ -246,7 +249,7 @@ hr{
 							<div class="row form-group margin-b10">
 								<div class=col-md-12>
 								  <div class=col-md-3>
-								 <span class="col-form-span" for=example-text-input>Package Category</span>
+								 <label class="col-form-label" for=example-text-input>Package Category</label>
 								 </div>
 								<div class=col-md-1>:</div>
 								 <div class=col-md-7>
@@ -256,14 +259,14 @@ hr{
 										{
 											$options[] = ['value'=>$sts->id,'text'=>$sts->name];
 										};
-										echo $this->Form->control('category_id', ['span'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>'Select...']);?>
+										echo $this->Form->control('category_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>'Select...']);?>
 								 </div>
 								</div>	
 							</div>
 							<div class="row form-group margin-b10">
 								<div class=col-md-12>
 								  <div class=col-md-3>
-								 <span class="col-form-span" for=example-text-input>Duration Night</span>
+								 <label class="col-form-label" for=example-text-input>Duration Night</label>
 								 </div>
 								<div class=col-md-1>:</div>
 								 <div class=col-md-7>
@@ -291,11 +294,11 @@ hr{
 							<div class="row form-group margin-b10">
 								<div class=col-md-12>
 								  <div class=col-md-3>
-								 <span class="col-form-span" for=example-text-input>Starting Price</span>
+								 <label class="col-form-label" for=example-text-input>Starting Price</label>
 								 </div>
 								<div class=col-md-1>:</div>
 								 <div class=col-md-7>
-									 <?php echo $this->Form->input('starting_price',['class'=>'form-control','span'=>false,'placeholder'=>'Starting Price']);?> 
+									 <?php echo $this->Form->input('starting_price',['class'=>'form-control','label'=>false,'placeholder'=>'Starting Price']);?> 
 								 </div>
 								</div>	
 							</div>
@@ -344,8 +347,8 @@ hr{
 			<span style="font-size:17px;"><?= h($postTravlePackage->title) ?></span>
 			</div>
 			</div>
-			<div class="row rowspace">						
-				<div class="col-md-3">
+			<div class="row ">						
+				<div class="col-md-3 rowspace">
 				<?= $this->Html->image($postTravlePackage->full_image,['id'=>'myImg','style'=>'width:100%;height:80px;','data-target'=>'#imagemodal'.$postTravlePackage->id,'data-toggle'=>'modal',]) ?>
 					<div id="imagemodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-md">
@@ -363,7 +366,7 @@ hr{
 							<table  width="100%" style="text-align:center;" >
 								<tr>
 									<td width="25%" >
-										<span><img src="../images/view.png" height="15px"/>
+										<span><img src="../images/view.png" height="13px"/>
 										<?= h($postTravlePackage->total_views);?></span>
 									</td>
 									<td width="25%">
@@ -437,9 +440,9 @@ hr{
 																<div class="row">
 																	<div class="col-md-12">
 																		<div class="col-md-3">
-																			<span>
+																			<label>
 																				Select Reason
-																			</span>
+																			</label>
 																		</div>
 																		<div class="col-md-9">
 																			<div class="input-field reason_list">
@@ -454,7 +457,7 @@ hr{
 																			</div>
 																		</div>
 																	</div>
-																</div>
+																</div><br>
 																<div class="row report_text"  style="display:none;">
 																	<div class="col-md-12">
 																		<div class="col-md-3">
@@ -486,14 +489,14 @@ hr{
 											  <div id="caption"></div>
 										</div>
 										<!--------------------image modal End--------------------->
-										<div class="col-md-9" style="padding-top:5px;">
+										<div class="col-md-9">
 											<div class="row col-md-12 rowspace">
 													<div class="col-md-12">
 													<span style="color:#727e8a;">Category :</span>
 													<span ><?= h($CategoryList); ?></span>
 													</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-5">
 												<div class="row rowspace">
 													<div class="col-md-12 "><span style="color:#727e8a;">Duration :</span> 
 													<span style="color:#FB6542"><?= h($postTravlePackage->duration_day_night) ?></span>
@@ -517,7 +520,7 @@ hr{
 												</div>
 												
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-7">
 												<div class="row rowspace">
 													<div class="col-md-12 "><span style="color:#727e8a;">Cities :</span>
 													<span ><?= h($cityList); ?></span>

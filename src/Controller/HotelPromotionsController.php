@@ -856,7 +856,6 @@ class HotelPromotionsController extends AppController
 				$this->Flash->success(__($displayMessage));
 				return $this->redirect(['action' => 'savedList/'.$user_id]);
 			}			
-			
 		}
 		$this->set(compact('user_id'));
     }

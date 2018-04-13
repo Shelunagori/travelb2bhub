@@ -273,16 +273,24 @@ fieldset{
 								</div>
 								<div class="col-md-6 newlist form-group" >
 									<p for="from">
+										Choose City
+										<span class="required">*</span>
+									</p>
+									<div class="input-field replacedata">
+									</div>
+								</div>
+								<!---<div class="col-md-6 newlist form-group" >
+									<p for="from">
 										Cities of Operation
 										<span class="required">*</span>
 									</p>
 									<div class="input-field">
-									 <?php $options=array();
+									 <?php /* $options=array();
 										$options[] = ['value'=>'0','text'=>'All Cities'];
-										echo $this->Form->input('city_id',["class"=>"form-control  requiredfield" ,'options' => $options,'label'=>false]);?>
+										echo $this->Form->input('city_id',["class"=>"form-control  requiredfield" ,'options' => $options,'label'=>false]); */?>
 										<label style="display:none" class="helpblock error" > This field is required.</label>
 									</div>
-								</div>
+								</div>--->
 								<div class="col-md-6 newlist1 form-group" style="display:none;>
 									<p for="from">
 												Cities of Operation
@@ -448,17 +456,22 @@ fieldset{
 		$(document).on('change','#city_type',function()
 		{
 			var city_type=$(this).val();
-			//alert(city_type);
-			if(city_type==0)
-			{
-				$(".newlist").show();
-				$(".newlist1").hide();				
-			}	
+			if(city_type==1){
+				$(".replacedata").html('<?php $options=array();
+				foreach($city->citystatefi as $cty)
+				{
+					$options[] = ['value'=>$cty->cityid,'text'=>$cty->name];
+				};
+				echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>');
+			}
 			else{
-				$(".newlist1").show();
-				$(".newlist").hide();
-				}	
-		})
+				$(".replacedata").html('<?php $options=array();
+				$options[] = ['value'=>'0','text'=>'All Cities','selected'];
+				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
+				?>');
+			}
+			$('.select2').select2();
+		});
 $("#multi_city").multiselect();
 $("#multi_states").multiselect();
 $("#multi_vehicle").multiselect();

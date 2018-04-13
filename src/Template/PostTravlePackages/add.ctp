@@ -294,14 +294,14 @@ fieldset{
 																	</label>
 																</div>
 															</div>
-		<div class="col-md-4 newlist form-group" >
-			<p for="from">
-				Choose Country
-				<span class="required">*</span>
-			</p>
-			<div class="input-field replacedata">
-  			</div>
-		</div>
+															<div class="col-md-4 newlist form-group" >
+																<p for="from">
+																	Choose Country
+																	<span class="required">*</span>
+																</p>
+																<div class="input-field replacedata">
+																</div>
+															</div>
  																<div class="col-md-4 form-group">
 																<p for="from">
 																Choose City

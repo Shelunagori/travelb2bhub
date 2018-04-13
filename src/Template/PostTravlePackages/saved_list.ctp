@@ -201,8 +201,8 @@ hr{
 			<span style="font-size:17px;"><?= h($postTravlePackage->title) ?></span>
 			</div>
 			</div>
-			<div class="row rowspace">						
-				<div class="col-md-3">
+			<div class="row ">						
+				<div class="col-md-3 rowspace">
 				<?= $this->Html->image($postTravlePackage->full_image,['id'=>'myImg','style'=>'width:100%;height:80px;','data-target'=>'#imagemodal'.$postTravlePackage->id,'data-toggle'=>'modal',]) ?>
 					<div id="imagemodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-md">
@@ -220,7 +220,8 @@ hr{
 							<table  width="100%" style="text-align:center;" >
 								<tr>
 									<td width="25%" >
-										<span><img src="../images/view.png" height="15px"/>
+										<span>
+										<?php echo $Image=$this->Html->image('../images/view.png',['height'=>'13px']);?>
 										<?= h($postTravlePackagess->total_views);?></span>
 									</td>
 									<td width="25%">
@@ -231,10 +232,12 @@ hr{
 											$issaved=$postTravlePackagess->issaved;
 											//-- LIKES DISLIKE
 											if($isLiked=='no'){
-												echo $this->Form->button('<img src="../images/unlike.png" height="15px"/>',['class'=>'btn btn-xs likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
+												$Image=$this->Html->image('../images/unlike.png',['height'=>'15px']);
+												echo $this->Form->button($Image,['class'=>'btn btn-xs likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
 											}
 											if($isLiked=='yes'){
-												echo $this->Form->button('<img src="../images/like.png" height="15px"/>',['class'=>'btn btn-xs likes','value'=>'button','type'=>'submit','name'=>' ','style'=>'background-color:white;color:#000;border:0px;']);
+												$Image=$this->Html->image('../images/like.png',['height'=>'15px']);
+												echo $this->Form->button($Image,['class'=>'btn btn-xs likes','value'=>'button','type'=>'submit','style'=>'background-color:white;color:#000;border:0px;','name'=>'LikeEvent']);
 											}
 										?>
 										<?= h($postTravlePackagess->total_likes);?></span>
@@ -243,16 +246,20 @@ hr{
 									<?php 
 											//-- Save Unsave
 											if($issaved=='1'){
-												echo $this->Form->button('<img src="../images/save.png" height="15px"/>',['class'=>'btn btn-xs','value'=>'button','type'=>'submit','name'=>'saveposttravle','style'=>'background-color:white;color:black;border:0px;']);
+												$Image=$this->Html->image('../images/save.png',['height'=>'15px']);
+												echo $this->Form->button($Image,['class'=>'btn btn-xs','value'=>'button','type'=>'submit','name'=>'saveposttravle','style'=>'background-color:white;color:black;border:0px;']);
 											}
 											if($issaved=='0'){
-												echo $this->Form->button('<img src="../images/unsave.png" height="15px"/>',['class'=>'btn  btn-xs','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'saveposttravle']);
+												$Image=$this->Html->image('../images/unsave.png',['height'=>'15px']);
+												echo $this->Form->button($Image,['class'=>'btn  btn-xs','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'saveposttravle']);
 											}
 											?>
 											<span style="visibility:hidden;">3</span>
 									</td>
 									<td width="25%">
-										<?php echo $this->Html->link('<img src="../images/flag.png" height="15px"/>','#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn  btn-xs','data-target'=>'#reportmodal'.$postTravlePackage->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>
+										<?php 
+										$Image=$this->Html->image('../images/flag.png',['height'=>'15px']);
+										echo $this->Html->link($Image,'#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn  btn-xs','data-target'=>'#reportmodal'.$postTravlePackage->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>
 										<span style="visibility:hidden;">3</span>
 									</td>
 										<!--------Hidden Field Delete-------------------> 			
@@ -311,7 +318,7 @@ hr{
 																			</div>
 																		</div>
 																	</div>
-																</div>
+																</div><br>
 																<div class="row report_text"  style="display:none;">
 																	<div class="col-md-12">
 																		<div class="col-md-3">
@@ -343,14 +350,14 @@ hr{
 											  <div id="caption"></div>
 										</div>
 										<!--------------------image modal End--------------------->
-										<div class="col-md-9" style="padding-top:5px;">
+										<div class="col-md-9">
 											<div class="row col-md-12 rowspace">
 													<div class="col-md-12">
 													<span style="color:#727e8a;">Category :</span>
 													<span ><?= h($CategoryList); ?></span>
 													</div>
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-5">
 												<div class="row rowspace">
 													<div class="col-md-12 "><span style="color:#727e8a;">Duration :</span> 
 													<span style="color:#FB6542"><?= h($postTravlePackage->duration_day_night) ?></span>
@@ -374,7 +381,7 @@ hr{
 												</div>
 												
 											</div>
-											<div class="col-md-6">
+											<div class="col-md-7">
 												<div class="row rowspace">
 													<div class="col-md-12 "><span style="color:#727e8a;">Cities :</span>
 													<span ><?= h($cityList); ?></span>
@@ -464,7 +471,7 @@ hr{
 																				<span>
 																					<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?>
 																					<?php
-																					if($postTravlePackage->user_rating==0)
+																					if($postTravlePackagess->user_rating==0)
 																					{
 																						echo "";
 																					}

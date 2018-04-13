@@ -700,11 +700,7 @@ class TaxiFleetPromotionsController extends AppController
     }
 	public function savedList($user_id = null)
     {
-        $higestSort=$this->request->query('higestSort'); 
-		$country_id=$this->request->query('country_id'); 
-		$city_id=$this->request->query('city_id'); 
-		$car_bus_id=$this->request->query('car_bus_id'); 
-		$state_id=$this->request->query('state_id'); 
+
 		$user_id=$this->Auth->User('id');
 		if ($this->request->is(['patch', 'post', 'put'])) 
 		{
