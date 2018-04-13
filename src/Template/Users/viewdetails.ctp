@@ -317,7 +317,13 @@ ul li b {
 			$ds_count = 1;
 			foreach($details['hotels'] as $row)
 			{ ?>
+				<div class="col-md-12">
+					<p>Number of Rooms:</p>
+				</div>
 				<ul>
+					<table >
+						<tr style="background-color:#ECF0F5 !important;">
+						<td>
 					<li class="col-md-4"><p>Single :&nbsp;<b><?php
 					if ($row['room1'] != '')
 					{
@@ -377,6 +383,9 @@ ul li b {
 					} ?></b>
 					</p>
 					</li>
+					</td>
+					</tr>
+					</table>
 					<li class="col-md-12 "><p>Hotel Category :&nbsp;<b><?php
 					if (!empty($row['hotel_category']))
 					{

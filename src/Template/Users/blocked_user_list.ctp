@@ -76,7 +76,7 @@ $conn = ConnectionManager::get('default');
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<h3 class="modal-title">
-													<h4><font color="green">Are you sure you want to Unblock this user ?</font></h4>
+													<h4 align="left"><font color="green">Are you sure you want to Unblock this user ?</font></h4>
 												</h3>
 											</div>
 												<div class="modal-footer">

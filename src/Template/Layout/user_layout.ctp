@@ -141,6 +141,10 @@ margin-top: 5px !important;
 {
 	height: 330px !important;	
 }
+.slimScrollBar{
+	width:15px !important;
+	cursor: pointer !important;
+}
 .menu
 {
 	height: 330px !important;	
@@ -297,6 +301,7 @@ p {
 		background-size: 250px 47px;
 	}
 }
+ 
 </style>
 </head>
 
@@ -322,16 +327,16 @@ p {
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+      <a href="#" style="font-size: 16px;margin-top:0px !important" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
 
       <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav" style="padding-top: 2px !important;">
           <!-- Notifications: style can be found in dropdown.less -->
-          <li class="dropdown notifications-menu">
+          <li class="dropdown notifications-menu" >
             <a href="#" class="dropdown-toggle chat_clear" data-toggle="dropdown">
-              <i class="fa fa-bell-o"></i>
+              <i style="font-size: 20px;" class="fa fa-bell-o"></i>
               <span class="label label-warning"><?php echo $chatCount; ?></span>
             </a>
             <ul class="dropdown-menu">
@@ -423,7 +428,7 @@ p {
           </li>
            
           <li class="dropdown user user-menu">
-            <a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'logout')) ?>" ><i class="fa fa-power-off "> Log Out </i>  
+            <a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'logout')) ?>" ><i style="font-size: 20px;" class="fa fa-power-off "></i>Log Out
             </a>
           </li>
           <!-- Control Sidebar Toggle Button -->

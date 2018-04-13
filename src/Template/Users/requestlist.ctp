@@ -117,7 +117,7 @@ fieldset
 				</div>
 			</div>
                <div class="fade modal form-modal" id="myModal122" role="dialog">
-                  <div class="modal-dialog " style="width:35%;">
+                  <div class="modal-dialog "  >
                      <div class=modal-content>
                         <div class=modal-header>
                            <button class="close" data-dismiss="modal" type="button">&times;</button>
@@ -144,7 +144,6 @@ fieldset
 									  <div class=col-md-1>:</div>
 									 <div class=col-md-7>
 										<select name="req_typesearch[]" multiple class="form-control select2">
-											<option value="">Select Request Type</option>
 											<option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option>
 											<option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option>
 											<option value="2">Transport</option>
@@ -435,8 +434,8 @@ fieldset
 																	</h4>
 																</div>
 																<div class="modal-footer" style="height:60px;">
-																	<a request_id="<?php echo $request['id']; ?>" type="button"  href=javascript:void(0); class="removeRequest btn btn-danger btn-sm" name="removerequest">Yes</a>
-																	<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
+																	<a request_id="<?php echo $request['id']; ?>" type="button"  href=javascript:void(0); class="removeRequest btn btn-info btn-sm" name="removerequest">Yes</a>
+																	<button type="button" class="btn  btn-sm btn-danger" data-dismiss="modal">Cancel</button>
 																</div>
 															</div>
 														</form>
@@ -460,10 +459,8 @@ fieldset
 										</div>
 									</div>-->
 								</td>
-								
 							</tr>
-							</table>
-							 
+						</table>
 					</fieldset>
                   </div>
                   <?php } ?>

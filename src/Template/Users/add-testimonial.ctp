@@ -4,7 +4,7 @@
 		  <button type="button" class="close" data-dismiss="modal">&times;</button>
 		  <h4 class="modal-title" style="text-align:left">Add Review</h4>
 		</div>
-		<div class="modal-body" style="height:224px">
+		<div class="modal-body" style="height:240px">
 <div class="container-fluid" id="profile" >
 	<div class="row tra-section-gray equal_column">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 padding0 ">
@@ -26,7 +26,7 @@
 	echo $this->Form->create("Promotions", ['type' => 'file', 'class'=> 'form-horizontal', 'url' => ['controller' => 'Users', 'action' => 'addtestimonial',$authoruserId], 'onSubmit' => 'return addtestimonial();', 'id'=>"addtestimonial"]); ?>
                        
 						<!-- Text input-->
-						<div class="form-group">
+						<div class="form-group col-md-12">
 						<label class="col-md-4 control-label" for="Rating">Rating <span class="asterisk">
 
 						</span></label>
@@ -55,21 +55,16 @@
 						</div>
 						</div>
 
-						<div class="form-group">
+						<div class="form-group col-md-12">
 						<label class="col-md-4 control-label" for="comment">Comment</label>
 						<div class="col-md-6">
 						<textarea name="comment" class="form-control" id="comment"><?php echo $comment; ?></textarea>
 						</div>
 						</div>
 						<div class="form-group">
-						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<div class="form-group margin-t30 margin-b15 text-center">
-						<ul class="btn_on_prmotion"> 
-						<li align="center">
-						<input type="submit" name="submittestimonial" id="submittestimonial" class="btn btn-primary" value="Submit ">
-						</li>
-						</ul>
-						</div>
+						<div class=" col-md-12 " align="center"> 
+						 
+						<input type="submit" name="submittestimonial" id="submittestimonial" class="btn btn-primary" value="Submit ">  
 					</div>
 				</div>
 			</div>
