@@ -11,7 +11,7 @@ class PostTravlePackagesController extends AppController
         $postTravlePackage = $this->PostTravlePackages->newEntity();
         if ($this->request->is('post')) {
            
-			$postTravlePackage = $this->PostTravlePackages->patchEntity($postTravlePackage, $this->request->data(),[ 'associated' => ['PostTravlePackageRows','PostTravlePackageCountries', 'PostTravlePackageStates','PostTravlePackageCities'] ]);
+			$postTravlePackage = $this->PostTravlePackages->patchEntity($postTravlePackage, $this->request->data(),[ 'associated' => ['PostTravlePackageRows','PostTravlePackageCountries','PostTravlePackageCities'] ]);
 
 			$message = 'PERFECT';
 			$response_code = 101;
@@ -21,13 +21,20 @@ class PostTravlePackagesController extends AppController
 			$title = $postTravlePackage->title;
 			$document = $this->request->data('document');
 			$submitted_from = @$this->request->data('submitted_from');
+			//print_r($this->request->data); exit;
 			if(@$submitted_from=='web')
 			{
 				$country_id=$this->request->data['country_id'];
 				$x=0; 
+				$postTravlePackage->post_travle_package_countries = [];
+				$postTravlePackage->post_travle_package_cities = [];  
+				$postTravlePackage->post_travle_package_rows = [];  
 				foreach($country_id as $state)
 				{
-					$postTravlePackage['PostTravlePackageCountries['.$x.']["country_id"]']=$country_id[$x];
+					$postTravlePackage_state = $this->PostTravlePackages->PostTravlePackageCountries->newEntity();
+					$postTravlePackage_state->country_id = $state;
+					$postTravlePackage->post_travle_package_countries[$x]=$postTravlePackage_state;
+	//$postTravlePackage['PostTravlePackageCountries['.$x.']["country_id"]']=$country_id[$x];
 					$x++;	
 				}
 				
@@ -35,14 +42,20 @@ class PostTravlePackagesController extends AppController
 				$y=0; 
 				foreach($city_id as $city)
 				{
-					$postTravlePackage['PostTravlePackageCities['.$y.']["city_id"]']=$city_id[$y];
+					$postTravlePackage_city = $this->PostTravlePackages->PostTravlePackageCities->newEntity();
+					$postTravlePackage_city->city_id = $city;
+					$postTravlePackage->post_travle_package_cities[$y]=$postTravlePackage_city;
+//$postTravlePackage['PostTravlePackageCities['.$y.']["city_id"]']=$city_id[$y];
 					$y++;	
 				}
 				$package_category_id=$this->request->data['package_category_id'];
 				$z=0;  
 				foreach($package_category_id as $category)
 				{
-					$postTravlePackage['PostTravlePackageRows['.$z.']["post_travle_package_category_id"]']=$package_category_id[$z];
+					$postTravlePackage_citys = $this->PostTravlePackages->PostTravlePackageRows->newEntity();
+					$postTravlePackage_citys->post_travle_package_category_id = $category;
+					$postTravlePackage->post_travle_package_rows[$z]=$postTravlePackage_citys;
+//$postTravlePackage['PostTravlePackageRows['.$z.']["post_travle_package_category_id"]']=$package_category_id[$z];
 					$z++;	
 				}
 			}
@@ -124,7 +137,7 @@ class PostTravlePackagesController extends AppController
 					
 				}				
 			} else { $postTravlePackage->document = ''; }
-
+			//print_r($postTravlePackage); exit;
 			if($message == 'PERFECT' && $response_code == 101)
 			{  
 				if ($this->PostTravlePackages->save($postTravlePackage)) {
@@ -137,7 +150,7 @@ class PostTravlePackagesController extends AppController
 			}
 		}
 		if(@$submitted_from=='web'){
-			$this->Flash->success(__('message')); 
+			$this->Flash->success(__($message)); 
 			return $this->redirect($this->coreVariable['SiteUrl'].'PostTravlePackages/report');
 		}
 		$this->set(compact('message','response_code'));
@@ -149,7 +162,14 @@ class PostTravlePackagesController extends AppController
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
 		{
-			$limit=4;
+			$submitted_from = $this->request->query('submitted_from');
+			if($submitted_from="web")
+			{
+				$limit=100;
+			}
+			else{
+				$limit=10;
+			}
 			$category_id = $this->request->query('category_id');
 			$category_short = $this->request->query('category_short');
 			//$duration_day = $this->request->query('duration_day');
@@ -167,7 +187,7 @@ class PostTravlePackagesController extends AppController
 			$higestSort = $this->request->query('higestSort');
 			$search_bar = $this->request->query('search');
 			$page = $this->request->query('page');
-			$submitted_from = $this->request->query('submitted_from');
+			
 			if(empty($page)){$page=1;}
 			// Start shorting code
 			if(empty($category_short))
@@ -340,14 +360,13 @@ class PostTravlePackagesController extends AppController
 			},'PostTravlePackageCities'=>['Cities'],'PostTravlePackageRows'=>['PostTravlePackageCategories']])
 			->innerJoinWith('PostTravlePackageRows',function($q)use($category_id_filter,$category_short,$category_search){
 				return $q->where($category_id_filter)
-				
-			->innerJoinWith('PostTravlePackageCategories',function($q)use($category_search){
+				->innerJoinWith('PostTravlePackageCategories',function($q)use($category_search){
 					return $q->where($category_search);
 				});
 			})
 			->innerJoinWith('PostTravlePackageCities',function($q) use($city_filter){ 
-						return $q->where($city_filter);
-					})
+				return $q->where($city_filter);
+			})
 			->innerJoinWith('PostTravlePackageCountries',function($q) use($country_filter,$country_id_short){ 
 						return $q->where($country_filter);
 					})				
@@ -363,7 +382,7 @@ class PostTravlePackagesController extends AppController
 			->page($page)
 			->group(['PostTravlePackages.id'])
 			->autoFields(true);
-			
+			//print_r($getTravelPackages->toArray()); exit;
 			
 			if(!empty($getTravelPackages->toArray()))
 			{

@@ -294,34 +294,15 @@ fieldset{
 																	</label>
 																</div>
 															</div>
-															<div class="col-md-4 newlist form-group" >
-																<p for="from">
-																	Choose Country
-																	<span class="required">*</span>
-																</p>
-																<div class="input-field">
-																 <?php $options=array();
-																	$options[] = ['value'=>'101','text'=>'India'];
-																	echo $this->Form->input('country_id',["class"=>"form-control requiredfield" ,'options' => $options,'label'=>false]);?>
-																	<label style="display:none" class="helpblock error" > This field is required.</label>
-																</div>
-															</div>
-															<div class="col-md-4 newlist1 form-group" style="display:none;>
-																<p for="from">
-																	Choose Country
-																	<span class="required">*</span>
-																</p>
-																<div class="input-field">
-																 <?php $options=array();
-																foreach($countries as $country)
-																{
-																	$options[] = ['value'=>$country->id,'text'=>$country->country_name];
-																};
-																	echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select City "]);?>
-																	<label style="display:none" class="helpblock error" > This field is required.</label>
-																</div>
-																</div>
-																<div class="col-md-4 form-group">
+		<div class="col-md-4 newlist form-group" >
+			<p for="from">
+				Choose Country
+				<span class="required">*</span>
+			</p>
+			<div class="input-field replacedata">
+  			</div>
+		</div>
+ 																<div class="col-md-4 form-group">
 																<p for="from">
 																Choose City
 																<span class="required">*</span>
@@ -479,15 +460,22 @@ fieldset{
 		{
 			var pack_type=$(this).val();
 			//alert(pack_type);
-			if(pack_type==0)
-			{
-				$(".newlist").show();
-				$(".newlist1").hide();				
-			}	
+			 
+			if(pack_type==1){
+				$(".replacedata").html('<?php $options=array();
+				foreach($countries as $country)
+				{
+					$options[] = ['value'=>$country->id,'text'=>$country->country_name];
+				};
+				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select City "]);?>');
+			}
 			else{
-				$(".newlist1").show();
-				$(".newlist").hide();
-				}	
+				$(".replacedata").html('<?php $options=array();
+				$options[] = ['value'=>'101','text'=>'India','selected'];
+				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
+				?>');
+			}
+			$('.select2').select2();
 		});
 $("#multi_city").multiselect();
 $("#multi_states").multiselect();

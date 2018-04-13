@@ -130,7 +130,7 @@ hr { margin-top:0px!important;}
                 </div>
 				 <div class="form-group col-md-6">
                   <label>City</label>
-                  <input type="textbox" taxboxname="<?php echo $users['state_id']; ?>" noofrows="1" class="form-control" required autocomplete="off" id="city-search-box" name="city" placeholder="Select city/nearest city" value="<?php echo (!empty($users['city_id']))?$allCityList[$users['city_id']]:"" ;?>">
+                  <input type="textbox" taxboxname="<?php echo $users['state_id']; ?>" noofrows="1" class="form-control city_select" required autocomplete="off" id="city-search-box" name="city" placeholder="Select city/nearest city" value="<?php echo (!empty($users['city_id']))?$allCityList[$users['city_id']]:"" ;?>">
 				  <input type="hidden" value="<?php echo $users['city_id']; ?>" id="city_id" name="city_id" >
 				  <div class="suggesstion-box" style="margin-top:-10px"></div>
                 </div>
@@ -385,15 +385,22 @@ hr { margin-top:0px!important;}
 <script>
 
 $(document).ready(function(){	 
+
+$(document).on('blur',".city_select",function(){
+		var master=$(this);
+		master.closest('div').find('div.suggesstion-box').delay(2000).fadeOut(1000);
+	});
+
+	
 		$("#city-search-box").keyup(function(){
 		var input=$("#city-search-box").val(); 
 			var noofrows=$(this).attr('noofrows');
 			var taxboxname=$(this).attr('taxboxname');
 			var master=$(this);
 			var m_data = new FormData();
-			m_data.append('input',input);			
-			m_data.append('noofrows',noofrows);			
-			m_data.append('taxboxname',taxboxname);					
+			m_data.append('input',input);
+			m_data.append('noofrows',noofrows);
+			m_data.append('taxboxname',taxboxname);
 		$.ajax({
 			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajaxCity"]); ?>",
 			data: m_data,
