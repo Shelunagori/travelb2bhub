@@ -1,5 +1,6 @@
 <?php
 //-- List
+
 $curl = curl_init();
 curl_setopt_array($curl, array(
   CURLOPT_URL => $coreVariable['SiteUrl']."api/HotelPromotionCarts/HotelPromotionCartlist.json?user_id=".$user_id,
@@ -172,7 +173,9 @@ hr{
 								<table  width="100%" style="text-align:center;" >
 								<tr>
 								<td width="25%" >
-										<span><img src="../images/view.png" height="15px"/>
+								<span>
+								<?php echo $Image=$this->Html->image('../images/view.png',['height'=>'15px']);
+								?>
 										<?= h($hotelPromotionss->total_views);?></span>
 									</td>
 								<td width="25%">
@@ -184,11 +187,13 @@ hr{
 										$issaved=$hotelPromotionss->issaved;
 										//-- LIKES DISLIKE
 										if($isLiked=='no'){
-											echo $this->Form->button('<img src="../images/unlike.png" height="15px"/>',['class'=>'likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
+											$Image=$this->Html->image('../images/unlike.png',['height'=>'15px']);
+											echo $this->Form->button($Image,['class'=>'likes','value'=>'button','style'=>'background-color:white;color:#F7F3F4;border:0px;','type'=>'submit','name'=>'LikeEvent']);
 											
 										}
 										if($isLiked=='yes'){
-											echo $this->Form->button('<img src="../images/like.png" height="15px"/>',['class'=>' likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
+											$Image=$this->Html->image('../images/like.png',['height'=>'15px']);
+											echo $this->Form->button($Image,['class'=>' likes','value'=>'button','type'=>'submit','name'=>'LikeEvent','style'=>'background-color:white;color:#F7F3F4;border:0px;']);
 										}?>
 								<?= h($hotelPromotionss->total_likes);?></span>
 								</td>
@@ -196,17 +201,21 @@ hr{
 								<?php 
 									//-- Save Unsave
 									if($issaved=='1'){
-										echo $this->Form->button('<img src="../images/save.png" height="15px"/>',['class'=>' ','value'=>'button','type'=>'submit','name'=>'savehotelpromotion','style'=>'background-color:white;color:black;border:0px;']);
+										$Image=$this->Html->image('../images/save.png',['height'=>'15px']);
+										echo $this->Form->button($Image,['class'=>' ','value'=>'button','type'=>'submit','name'=>'savehotelpromotion','style'=>'background-color:white;color:black;border:0px;']);
 									}
 									if($issaved=='0'){
-										echo $this->Form->button('<img src="../images/unsave.png" height="15px"/>',['class'=>'','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'savehotelpromotion']);
+										$Image=$this->Html->image('../images/unsave.png',['height'=>'15px']);
+										echo $this->Form->button($Image,['class'=>'','value'=>'button','style'=>'background-color:white;color:black;border:0px;','type'=>'submit','name'=>'savehotelpromotion']);
 									}
 									?>
 									
 									<span style="visibility:hidden;">3</span>
 								</td>
 								<td width="25%">
-								<?php echo $this->Html->link('<img src="../images/flag.png" height="15px"/>','#'.$hotelPromotion->id,array('escape'=>false,'class'=>'','data-target'=>'#reportmodal'.$hotelPromotion->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>
+								<?php 
+								$Image=$this->Html->image('../images/flag.png',['height'=>'15px']);
+								echo $this->Html->link($Image,'#'.$hotelPromotion->id,array('escape'=>false,'class'=>'','data-target'=>'#reportmodal'.$hotelPromotion->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>
 								<span style="visibility:hidden;">3</span>
 								</td>
 								</tr>

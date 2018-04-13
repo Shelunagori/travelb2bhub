@@ -131,10 +131,10 @@ hr{
 			<div class="col-md-12">
 				<div class="box-header with-border"> 
 					<span class="box-title" style="color:#057F8A;"><b><?= __('Hotel Promotions') ?></b></span>
-					<div class="box-tools pull-right" style="margin-top:-5px;">
-						<a style="font-size:24px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-						<a style="font-size:24px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
-						<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'savedList',$user_id),1);?>"  class="btn btn-box-tool" > <img src="../images/unsave.png" height="22px"/></a>
+					<div class="box-tools pull-right" style="margin-top:-7px;">
+						<a style="font-size:15px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
+						<a style="font-size:22px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+						<a style="font-size:22px" href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'savedList',$user_id),1);?>"  class="btn btn-box-tool" ><i class="fa fa-bookmark"></i> </a>
 					</div>
 				</div>
 			</div>
@@ -475,7 +475,7 @@ hr{
 																				</div>
 																			</div>
 																		</div>
-																		
+																		<span class="help-block"></span>
 																	</div>
 																	<div class="modal-footer">
 																	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
