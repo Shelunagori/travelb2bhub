@@ -77,6 +77,8 @@ legend
 			<fieldset>
 				<legend><?php echo $image1; ?></legend>
 			<div class="col-md-12">
+			<div class="col-md-10">
+			<div class="col-md-12">
 				
 				<div class="col-md-3">
 						<b>Request Type : </b> <?php echo $category_name; ?>
@@ -84,29 +86,34 @@ legend
 				<div class="col-md-3">
 						<b>Reference ID : </b> <?php echo $reference_id; ?>
 				</div>
-				<div class="col-md-2">
-						<b>Total Budget : </b> <?php echo $total_budget; ?>
-				</div>
-				<div class="col-md-3">
-						<b>Destination City : </b> <?php echo $locality; ?>
-				</div>
-			</div>
-			<div class="col-md-12">
 				<div class="col-md-3">
 						<b>Start Date : </b> <?php echo $org_check_in; ?>
 				</div>
 				<div class="col-md-3">
 						<b>End Date : </b> <?php echo $org_check_out; ?>
 				</div>
-				<div class="col-md-2">
+				 
+			</div>
+			<div class="col-md-12" >
+				
+				<div class="col-md-3">
+						<b>Total Budget : </b> <?php echo $total_budget; ?>
+				</div>
+				<div class="col-md-3">
 						<b>Members : </b> <?php echo $members; ?>
+				</div>
+				<div class="col-md-3">
+						<b>Destination City : </b> <?php echo $locality; ?>
 				</div>
 				<div class="col-md-3">
 						<b>Comment : </b> <?php echo $comment; ?>
 				</div>
-				<div class="col-md-1">
-						<a  class="viewdetail btn btn-info btn-xs" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$responseid)) ?>"data-target="#myModal1<?php echo $responseid; ?>" data-toggle=modal> Details</a>
-				</div>
+				 
+			</div>
+			</div>
+			<div class="col-md-2" align="center">
+				<a  class="viewdetail btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$responseid)) ?>"data-target="#myModal1<?php echo $responseid; ?>" data-toggle=modal> Details</a>
+			</div>
 			</div>
 			<div class="col-md-12" align="center">
 				
@@ -140,7 +147,7 @@ legend
 					</div-->
 					
 					<div class="col-md-3">
-						<b>Agent Name : <br></b>
+						<b>Agent Name :  </b>
 						<?php 
 					$total_rating=0;
 					$rate_count=0;
@@ -151,8 +158,9 @@ legend
 						$rating=$bresul['rating'];
 						$total_rating+=$rating;
 					} 
-					@$final_rating=$total_rating/$rate_count;
-					 
+					if($total_rating>0){
+						@$final_rating=$total_rating/$rate_count;
+					}
 					?>
 						<?php 
 						if($row['response']['is_details_shared']==1){
@@ -163,19 +171,17 @@ legend
 						}
 						?>
 						<a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></a>
+						<?php if($final_rating>0){ ?>
 						<font color="#1295AB">(<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font>
+						<?php } ?>
 					</div>
-					<div class="col-md-3">
-						<b>Total Budget : <br></b> <?php echo $row['request']['total_budget']; ?>
+					 
+					<div class="col-md-3"  >
+						<b>Quoted Price :  </b> <?php echo ($row['quotation_price'])?"&#8377; ".$row['quotation_price']:"-- --" ?>
 					</div>
-					<div class="col-md-2" style="width:22%;">
-						<b>Quoted Price : <br></b> <?php echo ($row['quotation_price'])?"&#8377; ".$row['quotation_price']:"-- --" ?>
-					</div>
-					<div class="col-md-3">
-		 <table width="100%" >
-		 <tr>
-			<td width="50%" style="padding:3px !important;">
-			<a style="width:99%" class="btn btn-warning btn-xs " id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>"> 
+					<div class="col-md-6" align="center">
+		 
+			<a   class="btn btn-warning btn-sm " id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>"> 
 			Chat ( <strong><?php echo $data['chat_count'][$row['id']]; ?> </strong> )</a>
 			<div class="modal fade" id="myModal11<?php echo  $row['request']['id']; ?>" role="dialog">
 				<div class="modal-dialog">
@@ -189,14 +195,13 @@ legend
 					</div>
 				</div>
 			</div>
-			</td>
-			<td width="50%" style="padding:3px !important;">
+			 
 				<!---button Share --->
 			<?php if($row['is_details_shared'] != 1) { ?>
-				<!--a style="width:99%" href="javascript:void(0);" user_id="<?php echo $row['user']['id']; ?>" class="shareDetails btn btn-info btn-xs " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
+				<!--a style="padding:5px !important;margin-top:3px;" href="javascript:void(0);" user_id="<?php echo $row['user']['id']; ?>" class="shareDetails btn btn-info btn-xs " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
 						Share Details</a-->
 						
-						<a style="width:99%" data-toggle="modal" class="btn btn-info btn-xs" data-target="#share<?php echo $row['id']; ?>" > Share Details </a>
+						<a   data-toggle="modal" class="btn btn-info btn-sm" data-target="#share<?php echo $row['id']; ?>" > Share Details </a>
 							<!-------Contact Details Modal --------->
 							<div id="share<?php echo $row['id']; ?>" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-md" >
@@ -218,22 +223,17 @@ legend
 				<?php }
 				else{
 					?>
-						<a style="width:99%" href="javascript:void(0);" class=" btn btn-info btn-xs ">
+						<a   href="javascript:void(0);" class=" btn btn-info btn-sm ">
 						Shared</a>
 					<?php 
 				} ?>
-				</td>
-				</tr>
-			</table>
-			<table width="100%">
-			<tr>
-				<td width="33%" style="padding:3px !important;">
+				 
 				<!---button Follow--->
 				<?php
 				if( !array_key_exists($row['user']['id'], $BusinessBuddies)) {?>
-						<!--a style="width:99%;" href="javascript:void(0);" class="businessBuddy btn btn-successto btn-xs "   user_id = "<?php echo $row['user']['id']; ?>"> Follow</a-->
+						<!--a style="padding:5px !important;margin-top:3px;;" href="javascript:void(0);" class="businessBuddy btn btn-successto btn-xs "   user_id = "<?php echo $row['user']['id']; ?>"> Follow</a-->
 						
-						<a style="width:99%" data-toggle="modal" class="btn btn-successto btn-xs" data-target="#follow<?php echo $row['id']; ?>" > Follow User </a>
+						<a  data-toggle="modal" class="btn btn-successto btn-sm" data-target="#follow<?php echo $row['id']; ?>" > Follow User </a>
 							<!-------Contact Details Modal --------->
 							<div id="follow<?php echo $row['id']; ?>" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-md" >
@@ -256,11 +256,9 @@ legend
 				<?php }
 				else {
 				?>
-					<a  href="javascript:void(0);" class="btn btn-successto btn-xs " user_id = "<?php echo $row['user']['id']; ?>"> Following</a>
+					<a  href="javascript:void(0);" class="btn btn-default btn-sm " style="background-color:#eadcdc !important;" user_id = "<?php echo $row['user']['id']; ?>"> Following</a>
 				<?php }	?>
-			</td>
-			
-			<td width="33%" style="padding:3px !important;">
+			 
 			
 				<!---button Block--->
 				<?php
@@ -281,7 +279,7 @@ legend
 								
 						<?php $reviewi =  $row['user']['id']."-".$row['request']['id']; ?>
 						
-							<a style="width:99%" data-toggle="modal" class="btn btn-success btn-xs" data-target="#accept<?php echo $row['id']; ?>"  > Accept Offer </a>
+							<a   data-toggle="modal" class="btn btn-success btn-sm" data-target="#accept<?php echo $row['id']; ?>"  > Accept Offer </a>
 							<!-------Contact Details Modal --------->
 							<div id="accept<?php echo $row['id']; ?>" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-md" >
@@ -301,12 +299,11 @@ legend
 										</div>
 									</div>
 							 
-						</td>
-						<td width="33%" style="padding:3px !important;">
+						 
 						<?php 
 							if($blocked==1)
 							{?>
-								<a style="width:99%;" href="javascript:void(0);" class="unblockUser btn btn-danger btn-xs " user_id = "<?php echo $row['user']['id']; ?>">
+								<a  href="javascript:void(0);" class="unblockUser btn btn-danger btn-sm " user_id = "<?php echo $row['user']['id']; ?>">
 								Blocked </a>
 							<?php }
 							else
@@ -314,7 +311,7 @@ legend
 								<!--a  href="javascript:void(0);" class="blockUser btn btn-danger btn-xs " user_id = "<?php echo $row['id']; ?>">
 								Block User </a-->
 							
-							<a style="width:99%" data-toggle="modal" class="btn btn-danger btn-xs" data-target="#block<?php echo $row['id']; ?>"  > Block User </a>
+							<a   data-toggle="modal" class="btn btn-danger btn-sm" data-target="#block<?php echo $row['id']; ?>"  > Block User </a>
 							<!-------Contact Details Modal --------->
 							<div id="block<?php echo $row['id']; ?>" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-md" >
@@ -336,9 +333,7 @@ legend
 							<?php } ?>
 						<!---button Details--->
 						
-					</td>
-					</tr>
-					</table>
+					 
 					</div>
 				</div>
 				<br>
@@ -580,8 +575,9 @@ $(document).ready(function () {
 			data: {user_id:user_id}
 		}).done(function(result){
 			if(result == 1) {
-				 
-				location.reload();
+				var url1 = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>";
+				
+				window.location.href = url1;
 			}else if(result == 2){
 			 
 			} else {
@@ -743,7 +739,9 @@ $(document).ready(function () {
 			data: {user_id:user_id}
 		}).done(function(result){
 			if(result == 1) {
-				location.reload();
+				var url1 = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>";
+				
+				window.location.href = url1;
 			} else {
 				alert("There is some problem, please try again.");
 			}

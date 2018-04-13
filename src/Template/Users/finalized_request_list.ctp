@@ -253,7 +253,11 @@ $(".req").sort(function (a, b) {
 								<ul>
 								<li >
 									<p>
-										From : <span class="details"><a href="viewprofile/<?php echo $finalresponse[$request['id']]['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$finalresponse[$request['id']]['user_id']]); ?></a> <font color="#1295AB"> (<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font></span>
+										From : <span class="details"><a href="viewprofile/<?php echo $finalresponse[$request['id']]['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$finalresponse[$request['id']]['user_id']]); ?></a> 
+										<?php if($final_rating>0){ ?>
+											<font color="#1295AB"> (<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font>
+										<?php } ?>
+										</span>
 									</p>
 								 </li>
 								  <li >

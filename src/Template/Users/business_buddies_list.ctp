@@ -43,27 +43,22 @@
 							<div class="form-group col-md-12">
 							
 								 <div class="col-md-3">
-									<b>Name :</b> <a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></a><font color="#1295AB">(<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font> <br>
-									<b>Company Name :</b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?><br>
-									
-								</div>
-								<div class="col-md-3">
-								<b>Role :</b> <?php if ($row['user']['role_id']==1){ echo "Travel Agent"; }
-									
-									else if($row['user']['role_id']==2){
-										echo "Event Planner";
-									}
-									else{
-										echo "Hotelier";
-									}?>
+									<b>Name :</b> <a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></a>
+									<?php if($final_rating>0){ ?>
+										<font color="#1295AB">(<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font> 
+									<?php } ?> 
 									<br>
-								<b>Mobile Number :</b> <?php echo ($row['user']['mobile_number'])?$row['user']['mobile_number']:"-- --"; ?><br>
+									
 								</div>
 								<div class="col-md-3">
-								<b>Email :</b> <?php echo ($row['user']['email'])?$row['user']['email']:"-- --"; ?>  
+								<b>Company Name :</b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?>
+							 
+								</div>
+								<div class="col-md-3">
+								<b>Website :</b> <?php echo ($row['user']['web_url'])?$row['user']['web_url']:"-- --"; ?> 
 								</div>
 								<div class="col-md-3" align="center" >
-									<a style="margin-top: 7px !important;" follow_id="<?php echo $row['id']; ?>" class=" btn btn-danger btn-sm"  data-target="#unfollow<?php echo $row['id']; ?>" data-toggle=modal>Unfollow</a>
+									<a style="margin-top: 2px !important;" follow_id="<?php echo $row['id']; ?>" class=" btn btn-danger btn-xs"  data-target="#unfollow<?php echo $row['id']; ?>" data-toggle=modal>Unfollow</a>
 									<!-------Delete Modal Start--------->
 												<div id="unfollow<?php echo $row['id']; ?>" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-md" >
@@ -73,7 +68,7 @@
 															  <div class="modal-header"  >
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																	<h4 class="modal-title"  align="left">
-																	Are You Sure, you want to delete this request ?
+																	Are You Sure, you want to Unfollow ?
 																	</h4>
 																</div>
 																<div class="modal-footer" >

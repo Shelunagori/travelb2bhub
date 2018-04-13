@@ -392,7 +392,9 @@ $(document).ready(function(){
 								$hrefurl =  "viewprofile/".$response['request']['user_id']."/";                       
                         }?>
                             To : <span class="details"> <a href="<?php echo $hrefurl;?>"><?php echo $response['request']['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $response['request']['user']['last_name']; ?></a> 
-							<font color="#1295AB">(<?php echo $final_rating; ?> <i class="fa fa-star"></i>)</font>
+							<?php if($final_rating>0){ ?>
+								<font color="#1295AB"> (<?php echo $final_rating; ?> <i class="fa fa-star"></i>)</font>
+							<?php } ?>
 							<?php if(in_array($response['request']['user_id'],$BusinessBuddies)) { 
 								//echo $this->Html->image('friend-ico1.png', [ "height"=>20]); 
 							} ?> 

@@ -207,7 +207,9 @@ $conn = ConnectionManager::get('default');
 								}
 						?>
 						From :  <a href="viewprofile/<?php echo $row['request']['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$row['request']['user_id']]); ?></a>
+						<?php if($final_rating>0){ ?>
 						<font color="#1295AB"> (<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font>
+						<?php } ?>
 					</p>
 				</li>
                  <li >

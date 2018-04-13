@@ -350,7 +350,9 @@ $conn = ConnectionManager::get('default');
 							?>
 					
 							Form : <span class="details"><a href="viewprofile/<?php echo $request['user_id']; ?>"><?php echo $request['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $request['user']['last_name']; ?></a>
+							 <?php if($final_rating>0){ ?>
 							 <font color="#1295AB">(<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font>
+							 <?php } ?>
 							<?php if(in_array($request['user_id'],$BusinessBuddies)) {  
 							//echo $this->Html->image('friend-ico1.png', [ "height"=>20]);
 							} ?>
