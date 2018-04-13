@@ -55,6 +55,10 @@ if ($err) {
 ?>
 <style>
 
+.col-md-4{
+	
+	color:#838784;
+}
 .contact{
 	border-radius:20px;
 	width:130px;
@@ -87,23 +91,6 @@ p{
 	}
 	label{
 	font-weight: 100;
-}
-hr{
-	margin-top: 15px !important;
-    margin-bottom: 4px !important;
-}
-label{
-	//font-weight: 100;
-}
-
-.col-md-4{
-	color:#676363;
-	font-weight:600;
-	 white-space: nowrap;
-}
-
-a{
-	color:#ac85d6;
 }
 </style>
 <section class="content">
@@ -153,8 +140,8 @@ a{
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-								<div class="col-md-3" >
-								<?= $this->Html->image($postTravlePackage->full_image,['id'=>'myImg','style'=>'width:95%;height:80px;','data-target'=>'#imagemodal'.$postTravlePackage->id,'data-toggle'=>'modal',]) ?>
+								<div class="col-md-6" >
+								<?= $this->Html->image($postTravlePackage->full_image,['id'=>'myImg','style'=>'width:95%;height:200px;','data-target'=>'#imagemodal'.$postTravlePackage->id,'data-toggle'=>'modal',]) ?>
 								<div id="imagemodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-md">
 									<!-- Modal content-->
@@ -165,17 +152,17 @@ a{
 											</div>
 										</div>
 									</div>
-								</div><hr></hr>
+								</div>
 								<div class="row" style="padding-top:5px;">
 								<table  width="100%" style="text-align:center;" >
 									<tr>
-									<td width="25%" >
+									<td width="15%" >
 										<span>
 										<?= $this->Html->image('../images/view.png',['style'=>'height:15px;']) ?>
 										 
 										<?= h($postTravlePackage->total_views);?></span>
 									</td>
-									<td width="25%">
+									<td width="15%">
 										<span ><?php
 										//
 											$dataUserId=$postTravlePackage->user_id;
@@ -191,7 +178,7 @@ a{
 										?>
 										<?= h($postTravlePackage->total_likes);?></span>
 									</td>
-									<td width="25%">
+									<td width="15%">
 									<?php 
 											//-- Save Unsave
 											if($issaved=='1'){
@@ -205,7 +192,7 @@ a{
 											?>
 											<span style="visibility:hidden;">3</span>
 									</td>
-									<td width="25%">
+									<td width="15%">
 									 
 										<?php echo $this->Html->link($this->Html->image('../images/flag.png',['style'=>'height:15px;']),'#'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn  btn-xs','data-target'=>'#reportmodal'.$postTravlePackage->id,'data-toggle'=>'modal','style'=>'background-color:white;color:black;border:0px;'));?>
 										<span style="visibility:hidden;">3</span>
@@ -249,7 +236,9 @@ a{
 																<div class="row">
 																	<div class="col-md-12">
 																		<div class="col-md-3">
-																			<span style="color:#676363;font-weight:600;">
+																			<label>
+																				Select Reason
+																			</label>
 																		</div>
 																		<div class="col-md-9">
 																			<div class="input-field reason_list">
@@ -284,81 +273,84 @@ a{
 														</div>
 													</div>
 												</div>
-													
+												<td width="40%" >
 												
+													<?php
+													echo $this->Html->link('<b>Contact Info</b>','address'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn  btn-info btn-md contact','data-target'=>'#sellerdetails'.$postTravlePackage->id,'data-toggle'=>'modal'));?>
+												
+												</td>
 											</tr>
 										</table>
+										
 										</div>
-									</div>
-									<div class="col-md-9">
-											<div class="row col-md-12 rowspace">
-													<div class="col-md-12">
-													<span style="color:#676363;font-weight:600;">Category :</span>
-													<span ><?= h($CategoryList); ?></span>
-													</div>
-											</div>
-											<div class="col-md-5">
-												<div class="row rowspace">
-													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Duration :</span> 
-													<span style="color:#FB6542"><?= h($postTravlePackage->duration_day_night) ?></span>
-													</div>
-												</div>
-												<div class="row rowspace">
-													<div class="col-md-12 ">
-													<span style="color:#676363;font-weight:600;"> Starting Price :</span>
-													<span style="color:#1295AB">&#8377; <?php echo number_format(h($postTravlePackage->starting_price)) ;?></span>
-													</div>
-												</div>
-												<div class="row rowspace">
-													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Seller :</span>
-													<span>
-														<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
-														<a href="<?php echo $hrefurl; ?>"> 
-														<?php echo "<u>".$postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.'</u> ( '.$postTravlePackage->user_rating.' <i class="fa fa-star"></i> )';?>
-														</a>
-													</span>
+										</div><br>
+										<div class="col-md-6">
+												<div class="row col-md-12">
+													<div class="col-md-4 ">Seller :</div>		
+													<div class="col-md-8 "><label>
+													<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
+													<a href="<?php echo $hrefurl; ?>"> 
+													<?php echo $postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.' ( '.$postTravlePackage->user_rating.' <i class="fa fa-star"></i> )';?>
+													</a>
+													</label>
 													</div>					
 												</div>
-											</div>
-											<div class="col-md-7">
-												<div class="row rowspace">
-													<div class="col-md-12"><span style="color:#676363;font-weight:600;">Valid Till :</span>
-													<span><?= h(date('d-M-Y',strtotime($postTravlePackage->valid_date))); ?></span>
-													</div>					
-												</div>	
-												<div class="row rowspace">
-													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Cities :</span>
-													<span ><?= h($cityList); ?></span>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Category') ?>:</div>
+													<div class="col-md-8">
+														<label><?= h($CategoryList);?></label>
 													</div>
 												</div>
-												<div class="row rowspace">
-													<div class="col-md-12"><span style="color:#676363;font-weight:600;">Country :</span>	
-													<span ><?php echo "India"//$postTravlePackage->country->country_name; ?></span>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Cities') ?>:</div>
+													<div class="col-md-8">
+														<label><?= h($cityList); ?></label>
+													</div>
+												</div>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Package Duration') ?>:</div>
+													<div class="col-md-8">
+														<label style="color:#FB6542">	<?= h($postTravlePackage->duration_day_night) ?></label>
+													</div>
+												</div>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Starting Price') ?>:</div>
+													<div class="col-md-8">
+														<label style="color:#1295A2"><?= $this->Number->format($postTravlePackage->starting_price).' &#8377;'; ?></label>
+													</div>
+												</div>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Valid Till') ?>:</div>
+													<div class="col-md-8">
+														<label><?= date('d-M-Y',strtotime($postTravlePackage->valid_date) );?></label>
 													</div>
 												</div>
 												
-								<div class="row "  style="padding-top:15px;">						
-									<div class="col-md-12 ">
-									<?php
-										echo $this->Html->link('<b>Contact Info</b>','address'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn  btn-info btn-md contact','data-target'=>'#contactdetails'.$postTravlePackage->id,'data-toggle'=>'modal'));?>
-											<!-------Contact Details Modal --------->
-											<div id="contactdetails<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
-												<div class="modal-dialog modal-md" >
-													<!-- Modal content-->
-														<div class="modal-content">
-														  <div class="modal-header">
-															<button type="button" class="close" data-dismiss="modal">&times;</button>
-																<span class="modal-title">
-																Seller Details
-																</span>
-																</div>
+												<div class="row col-md-12">
+													<div class="col-md-4"><?= __('Country') ?>:</div>
+													<div class="col-md-8">
+														<label>	<?= h($countryList); ?></label>
+													</div>
+												</div>
+												
+												<!-------Contact Details Modal --------->
+												<div id="sellerdetails<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
+													<div class="modal-dialog modal-md" >
+														<!-- Modal content-->
+															<div class="modal-content">
+															  <div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																	<h4 class="modal-title">
+																	Seller Details
+																	</h4>
+																	</div>
 																<div class="modal-body">
 																	<span class="help-block"></span>
 																	<div class="row">
 																		<div class="col-md-12">
 																			<div class="col-md-4">Seller Name :</div>
 																			<div class="col-md-8">
-																				<span>
+																				<label>
 																					<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?>
 																					<?php
 																					if($postTravlePackage->user_rating==0)
@@ -378,7 +370,7 @@ a{
 																						echo " )";
 																						}
 																					?>
-																				</span>
+																				</label>
 																			</div>					
 																		</div>
 																	</div>
@@ -386,7 +378,7 @@ a{
 																		<div class="col-md-12">
 																		<div class="col-md-4">Mobile No :</div>
 																		<div class="col-md-8">
-																		<span><?= h($postTravlePackage->user->mobile_number);?></span>
+																		<label><?= h($postTravlePackage->user->mobile_number);?></label>
 																		</div>
 																		</div>
 																	</div>
@@ -394,7 +386,7 @@ a{
 																		<div class="col-md-12">
 																			<div class="col-md-4">Email :</div>
 																			<div class="col-md-8">
-																			<span><a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a></span>
+																			<label><a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a></label>
 																			</div>
 																		</div>
 																	</div>
@@ -402,23 +394,19 @@ a{
 																		<div class="col-md-12">
 																			<div class="col-md-4">Location :</div>
 																			<div class="col-md-8">
-																			<span><?= h($postTravlePackage->user->location);?></span>
+																			<label><?= h($postTravlePackage->user->location);?></label>
 																			</div>
 																		</div>
 																	</div>
-																	<span class="help-block"></span>
 																</div>
-																<div class="modal-footer">
-																<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+																	<div class="modal-footer" style="height:60px;">
+																	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
+																</div>
 																</div>
 															</div>
 														</div>
-													</div>
-										<!-------Contact Details Modal End--------->
-												</div>
-											</div>
-										</div>
-									</div>
+															<!-------Contact Details Modal End--------->	
+														</div>
 													</div>
 												</div>
 											</form>
@@ -426,7 +414,7 @@ a{
 											<hr></hr>
 											<div class="row">
 												<div class="col-md-12 lbwidth">
-													<span style="color:#676363;font-weight:600;"><?= __('Including in Package') ?></span>
+														<label><?= __('Including in Package') ?></label>
 												</div>
 											</div>
 											<div class="row">
@@ -436,7 +424,7 @@ a{
 											</div><hr></hr>
 											<div class="row">
 												<div class="col-md-12 lbwidth">
-														<span style="color:#676363;font-weight:600;"><?= __('Excluded from Package') ?></span>
+														<label><?= __('Excluded from Package') ?></label>
 												</div>
 											</div>
 											<div class="row">

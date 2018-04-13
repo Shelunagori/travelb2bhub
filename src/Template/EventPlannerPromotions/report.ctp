@@ -117,13 +117,17 @@ hr{
 	margin-top: 15px !important;
     margin-bottom: 4px !important;
 }
-.label1{
-	color:#9a9c9c;
+.col-md-4{
+	color:#000000;
+	font-weight:600;
+	padding-top:5px;
 	 white-space: nowrap;
 }
+a{
+	color:#ac85d6;
+}
 .label11{
-	color:#000000;
-	 white-space: nowrap;
+	font-weight:100;
 }
 </style>
 <div class="row" >
@@ -206,7 +210,7 @@ hr{
 			<div class="row form-group margin-b10">
 				<div class=col-md-12>
 					 <div class=col-md-3>
-					  <span class="label1">Country</span>
+					  <label >Country</label>
 					  </div>
 					  <div class=col-md-1>:</div>
 					 <div class=col-md-7>
@@ -222,7 +226,7 @@ hr{
 				<div class="row form-group margin-b10">
 					<div class=col-md-12>
 						<div class=col-md-3>
-							 <span class="label1">State</span>
+							 <label class="label1">State</label>
 						</div>
 						<div class=col-md-1>:</div>
 						<div class=col-md-7>
@@ -240,7 +244,7 @@ hr{
 				<div class="row form-group margin-b10">
 					<div class=col-md-12>
 					  <div class=col-md-3>
-					  <span class="label1">City</span>
+					  <label class="label1">City</label>
 					 </div>
 					<div class=col-md-1>:</div>
 					 <div class=col-md-7>
@@ -297,7 +301,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 			<input type="hidden" name="event_id" value="<?php echo $eventPlannerPromotion->id; ?>">
 				<div class="row">
 					<div class="col-md-12" style="padding-top:5px;">
-					<span style="font-size:18px;"><b><?php echo $eventPlannerPromotion->user->company_name; ?></b></span>
+					<span style="font-size:18px;"><?php echo $eventPlannerPromotion->user->company_name; ?></span>
 					</div>
 					</div>
 					<span class="help-block"></span>
@@ -370,9 +374,9 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 													<div class="row">
 														<div class="col-md-12">
 															<div class="col-md-3">
-																<span>
+																<label>
 																	Select Reason
-																</span>
+																</label>
 															</div>
 															<div class="col-md-9">
 																<div class="input-field reason_list">
@@ -415,28 +419,28 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 					<div class="col-md-9">
 						<div class="col-md-6">
 							<div class="row rowspace">
-								<div class="col-md-12 "><span class="label1">Cities of Operation :</span>
-								<span class="label11"><?= h($cityList); ?></span>
+								<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Cities of Operation :</span>
+								<span ><?= h($cityList); ?></span>
 								</div>
 							</div>
 							<div class="row rowspace">
-								<div class="col-md-12 "><span class="label1">States of Operation :</span>
-								<span class="label11"><?= h($stateList); ?></span>
+								<div class="col-md-12 "><span style="color:#676363;font-weight:600;">States of Operation :</span>
+								<span class=""><?= h($stateList); ?></span>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="row rowspace">
-									<div class="col-md-12 "><span class="label1">Country :</span>
-									<span class="label11"><?= h($eventPlannerPromotion->country->country_name);?></span>
+									<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Country :</span>
+									<span class=""><?= h($eventPlannerPromotion->country->country_name);?></span>
 									</div>
 								</div>
 								<div class="row rowspace">
-									<div class="col-md-12 "><span class="label1">Event Planner :</span>
-										<span class="label11">
+									<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Event Planner :</span>
+										<span class="">
 											<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$eventPlannerPromotion->user_id),1);?>
 											<a href="<?php echo $hrefurl; ?>"> 
-											<?php echo $eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name.' ( '.$eventPlannerPromotion->user_rating.'<i class="fa fa-star"></i> )';?>
+											<?php echo "<u>".$eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name.'</u> ( '.$eventPlannerPromotion->user_rating.'<i class="fa fa-star"></i> )';?>
 											</a>
 										</span>
 									</div>
@@ -488,7 +492,6 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 														<div class="col-md-4 label1">Seller Name :</div>
 														<div class="col-md-8">
 															<span class="label11">
-															
 																<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?>
 														
 																<?php
@@ -525,7 +528,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 													<div class="col-md-12">
 														<div class="col-md-4 label1">Email :</div>
 														<div class="col-md-8">
-														<span class="label11"><a href="mailto:<?php echo $eventPlannerPromotion->user->email;?>"><?= h($eventPlannerPromotion->user->email);?></a></span>
+														<span class="label11"><u><a href="mailto:<?php echo $eventPlannerPromotion->user->email;?>"><?= h($eventPlannerPromotion->user->email);?></a></u></span>
 														</div>
 													</div>
 												</div>

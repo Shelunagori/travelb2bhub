@@ -175,7 +175,6 @@ label {
 															Payment Duration
 														</p>
 														<div class="input-field">
-																 
 														<?php				 
 															$options=array();
 															foreach($priceMasters as $Price)
@@ -255,8 +254,8 @@ label {
     $(document).ready(function () {
 		$(document).on('change','.priceMasters',function()
 		{
+			alert();
 			var ab=$(this).closest('div').find('.priceMasters option:selected').val();
-			//alert(ab);
 			if(ab!=0)
 			{
 			var priceVal=$(this).closest('div').find('.priceMasters option:selected').attr('priceVal');
@@ -283,6 +282,6 @@ label {
 				$(this).closest('div.mainrow').find('.visible_date').val("dd-mm-yyyy");
 				$(this).closest('div.mainrow').find('.payment_amount').val(0);-
 			}
-		})
+		});
 		});
 </script>

@@ -142,13 +142,22 @@ hr{
 	margin-top: 15px !important;
     margin-bottom: 4px !important;
 }
+label{
+	//font-weight: 100;
+}
+
 .col-md-4{
-	color:#727e8a;
+	color:#000000;
+	font-weight:600;
+	padding-top:5px;
 	 white-space: nowrap;
 }
-label{
-	font-weight: 100;
+
+a{
+	color:#ac85d6;
 }
+
+
 </style> 
 	<div class="row" >
 		<div class="col-md-12">
@@ -464,36 +473,36 @@ label{
 								</div>
 							</div>
 						</div>
-							<div class="col-md-9" >
+							<div class="col-md-9 " style="padding-top:8px;">
 								<div class="row col-md-12">
-									<div class="col-md-12"><span style="color:#727e8a;">Category :</span>
+									<div class="col-md-12"><span style="color:#676363;font-weight:600;">Category :</span>
 										<?= h($vehicleList); ?>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#727e8a;"><?= __(' Cities of Operation') ?> :</span>
+										<div class="col-md-12"><span style="color:#676363;font-weight:600;"><?= __(' Cities of Operation') ?> :</span>
 										<span><?= h($cityList); ?></span>
 										</div>
 									</div>
 									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#727e8a;"><?= __(' States of Operation') ?> :</span>
+										<div class="col-md-12"><span style="color:#676363;font-weight:600;"><?= __(' States of Operation') ?> :</span>
 										<span ><?= h($stateList); ?> </span>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#727e8a;"><?= __(' Country') ?> :</span>
+										<div class="col-md-12"><span style="color:#676363;font-weight:600;"><?= __(' Country') ?> :</span>
 										<span ><?= h($taxiFleetPromotion->country->country_name); ?> </span>
 										</div>
 									</div>
 									<div class="row rowspace">
-										<div class="col-md-12 "><span style="color:#727e8a;"><?= __(' Seller') ?> :</span>	
+										<div class="col-md-12 "><span style="color:#676363;font-weight:600;"><?= __(' Seller') ?> :</span>	
 										<span>
 										<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
 										<a href="<?php echo $hrefurl; ?>"> 
-										<?php echo $taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name.' ( '.$taxiFleetPromotion->user_rating.'<i class="fa fa-star"></i> )';?>
+										<?php echo "<u>".$taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name.'</u> ( '.$taxiFleetPromotion->user_rating.'<i class="fa fa-star"></i> )';?>
 										</a>
 										</span>
 										</div>					
@@ -582,7 +591,7 @@ label{
 																			<div class="col-md-12">
 																				<div class="col-md-4">Email :</div>
 																				<div class="col-md-8">
-																				<span><a href="mailto:<?php echo $taxiFleetPromotion->user->email;?>"><?= h($taxiFleetPromotion->user->email);?></a></span>
+																				<span><u><a href="mailto:<?php echo $taxiFleetPromotion->user->email;?>"><?= h($taxiFleetPromotion->user->email);?></a></u></span>
 																				</div>
 																			</div>
 																		</div>

@@ -115,9 +115,21 @@ hr{
 	margin-top: 15px !important;
     margin-bottom: 4px !important;
 }
+label{
+	//font-weight: 100;
+}
+
 .col-md-4{
-	color:#727e8a;
+	color:#000000;
+	font-weight:600;
+	padding-top:5px;
 	 white-space: nowrap;
+}
+label{
+	//font-weight: 100;
+}
+a{
+	color:#ac85d6;
 }
 </style>
 <div class="row" >
@@ -375,39 +387,39 @@ hr{
 							<div class="col-md-9" >
 								<div class="col-md-5">
 										<div class="row rowspace">
-											<div class="col-md-12"><span style="color:#727e8a;">Category :</span>
-												<?= h($hotelPromotion->hotel_category->name); ?>
+											<div class="col-md-12"><span style="color:#676363;font-weight:600;">Category :</span>
+												<span><?= h($hotelPromotion->hotel_category->name); ?></span>
 											</div>
 										</div>
 										<div class="row rowspace">
-											<div class="col-md-12"><span style="color:#727e8a;">Cheapest Room :</span>
-											<span style="color:#1295AB">&#8377;<?= number_format(h($hotelPromotion->cheap_tariff)) ?></span>
+											<div class="col-md-12"><span style="color:#676363;font-weight:600;">Cheapest Room :</span>
+											<span style="color:#1295AB">&#8377;<?= (h($hotelPromotion->cheap_tariff)) ?></span>
 											</div>
 										</div>
 									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#727e8a;">Most Expensive Room :</span>
-										<span style="color:#1295AB">&#8377;<?= number_format(h($hotelPromotion->expensive_tariff)) ?></span>
+										<div class="col-md-12"><span style="color:#676363;font-weight:600;">Most Expensive Room :</span>
+										<span style="color:#1295AB">&#8377;<?= (h($hotelPromotion->expensive_tariff)) ?></span>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-7">
 								<div class="row rowspace">
-										<div class="col-md-12 "><span style="color:#727e8a;"><?= __(' Hotelier') ?> :</span>	
+										<div class="col-md-12 "><span style="color:#676363;font-weight:600;"><?= __(' Hotelier') ?> :</span>	
 										<span>
 										<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$hotelPromotion->user_id),1);?>
 										<a href="<?php echo $hrefurl; ?>"> 
-										<?php echo $hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.' ( '.$hotelPromotion->user_rating.'<i class="fa fa-star"></i> )';?>
+										<?php echo "<u>".$hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.'</u> ( '.$hotelPromotion->user_rating.'<i class="fa fa-star"></i> )';?>
 										</a>
 										</span>
 										</div>					
 									</div>
 									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#727e8a;"><?= __(' Website') ?> :</span>
-										<span ><a style="color:#AD4175;" href="http://<?php echo $hotelPromotion->website; ?>" target="blank"><u><?= h($hotelPromotion->website) ?></u></a> </span>
+										<div class="col-md-12"><span style="color:#676363;font-weight:600;"><?= __(' Website') ?> :</span>
+										<span ><a style="color:blue;" href="http://<?php echo $hotelPromotion->website; ?>" target="blank"><u><?= h($hotelPromotion->website) ?></u></a> </span>
 										</div>
 									</div>
 									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#727e8a;"><?= __(' Location') ?> :</span>
+										<div class="col-md-12"><span style="color:#676363;font-weight:600;"><?= __(' Location') ?> :</span>
 										<span ><?= h($hotelPromotion->hotel_location) ?></span>
 										</div>
 									</div>
@@ -471,7 +483,7 @@ hr{
 																			<div class="col-md-12">
 																				<div class="col-md-4">Email :</div>
 																				<div class="col-md-8">
-																				<span><a href="mailto:<?php echo $hotelPromotion->user->email;?>"><?= h($hotelPromotion->user->email);?></a></span>
+																				<span><u><a href="mailto:<?php echo $hotelPromotion->user->email;?>"><?= h($hotelPromotion->user->email);?></a></u></span>
 																				</div>
 																			</div>
 																		</div>

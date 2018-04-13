@@ -144,12 +144,28 @@ hr{
     margin-bottom: 4px !important;
 }
 .col-md-4{
-	color:#727e8a;
+	color:#000000;
+	font-weight:600;
+	padding-top:5px;
 	 white-space: nowrap;
 }
 label{
-	font-weight: 100;
+	//font-weight: 100;
 }
+
+.col-md-4{
+	color:#000000;
+	font-weight:600;
+	padding-top:5px;
+	 white-space: nowrap;
+}
+label{
+	//font-weight: 100;
+}
+a{
+	color:#ac85d6;
+}
+
 </style>
 <div class="row" >
 	<div class="col-md-12">
@@ -492,28 +508,28 @@ label{
 										<div class="col-md-9">
 											<div class="row col-md-12 rowspace">
 													<div class="col-md-12">
-													<span style="color:#727e8a;">Category :</span>
+													<span style="color:#676363;font-weight:600;">Category :</span>
 													<span ><?= h($CategoryList); ?></span>
 													</div>
 											</div>
 											<div class="col-md-5">
 												<div class="row rowspace">
-													<div class="col-md-12 "><span style="color:#727e8a;">Duration :</span> 
+													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Duration :</span> 
 													<span style="color:#FB6542"><?= h($postTravlePackage->duration_day_night) ?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
 													<div class="col-md-12 ">
-													<span style="color:#727e8a;"> Starting Price :</span>
+													<span style="color:#676363;font-weight:600;"> Starting Price :</span>
 													<span style="color:#1295AB">&#8377; <?php echo number_format(h($postTravlePackage->starting_price)) ;?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
-													<div class="col-md-12 "><span style="color:#727e8a;">Seller :</span>
+													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Seller :</span>
 													<span>
 														<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
 														<a href="<?php echo $hrefurl; ?>"> 
-														<?php echo $postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.' ( '.$postTravlePackage->user_rating.' <i class="fa fa-star"></i> )';?>
+														<?php echo "<u>".$postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.'</u> ( '.$postTravlePackage->user_rating.' <i class="fa fa-star"></i> )';?>
 														</a>
 													</span>
 													</div>					
@@ -521,21 +537,22 @@ label{
 												
 											</div>
 											<div class="col-md-7">
+											<div class="row rowspace">
+													<div class="col-md-12"><span style="color:#676363;font-weight:600;">Valid Till :</span>
+													<span><?= h(date('d-M-Y',strtotime($postTravlePackage->valid_date))); ?></span>
+													</div>					
+												</div>	
 												<div class="row rowspace">
-													<div class="col-md-12 "><span style="color:#727e8a;">Cities :</span>
+													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Cities :</span>
 													<span ><?= h($cityList); ?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
-													<div class="col-md-12"><span style="color:#727e8a;">Country :</span>	
+													<div class="col-md-12"><span style="color:#676363;font-weight:600;">Country :</span>	
 													<span ><?php echo "India"//$postTravlePackage->country->country_name; ?></span>
 													</div>
 												</div>
-												<div class="row rowspace">
-													<div class="col-md-12"><span style="color:#727e8a;">Valid Till :</span>
-													<span><?= h(date('d-M-Y',strtotime($postTravlePackage->valid_date))); ?></span>
-													</div>					
-												</div>	
+												
 												
 					<div class="row "  style="padding-top:15px;">						
 					<div class="col-md-12 ">
@@ -643,7 +660,7 @@ label{
 																		<div class="col-md-12">
 																			<div class="col-md-4">Email :</div>
 																			<div class="col-md-8">
-																			<span><a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a></span>
+																			<span><u><a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a></u></span>
 																			</div>
 																		</div>
 																	</div>

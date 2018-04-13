@@ -428,7 +428,7 @@ p {
           </li>
            
           <li class="dropdown user user-menu">
-            <a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'logout')) ?>" ><i style="font-size: 20px;" class="fa fa-power-off "></i>Log Out
+            <a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'logout')) ?>" ><i style="font-size: 20px;" class="fa fa-power-off "></i>
             </a>
           </li>
           <!-- Control Sidebar Toggle Button -->
