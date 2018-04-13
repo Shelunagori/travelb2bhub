@@ -34,7 +34,7 @@ $conn = ConnectionManager::get('default');
 			<div class="box-header with-border"> 
 				<h3 class="box-title" style="padding:5px">Finalized Responses</h3>
 				<div class="box-tools pull-right">
-					<a style="font-size:26px" class="btn btn-box-tool" data-target="#FilerPopup" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+					<a style="font-size:22px" class="btn btn-box-tool" data-target="#FilerPopup" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 				</div>
 			</div>
 		</div>
@@ -55,6 +55,30 @@ $conn = ConnectionManager::get('default');
 					   </div>
 					</div>
 			    </div>
+				
+				<div class="row" style="margin-top:10px">
+					<div class="col-md-12">
+					   <label for="example-text-input" class="col-md-3 col-form-label">Reference ID: </label> 
+					   <div class="col-md-9">           
+						   <input class="form-control" name="refidsearch" value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>">
+					   </div>
+					</div>
+			    </div>
+				  
+				 <div class="row" style="margin-top:10px">
+					<div class="col-md-12">
+					   <label for="example-text-input" class="col-md-3 col-form-label">Request Type: </label> 
+					   <div class="col-md-9">           
+						   <select name="req_typesearch" multiple="multiple" class="form-control select2">
+								<option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option>
+								<option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option>
+								<option value="2">Transport</option>
+							</select>
+					   </div>
+					</div>
+			    </div>
+				  
+				  
 				<div class="row" style="margin-top:10px">
 					<div class="col-md-12">
 					   <label for="example-text-input" class="col-md-3 col-form-label">Total Budget: </label>
@@ -73,8 +97,55 @@ $conn = ConnectionManager::get('default');
 					   </div>
 					</div>
 			    </div>
+				
+				<div class="row" style="margin-top:10px">
+					<div class="col-md-12">
+					   <label for="example-text-input" class="col-md-3 col-form-label">Start Date: </label> 
+					   <div class="col-md-9">           
+						    <input class="form-control datepicker" data-date-format="dd-mm-yyyy" name="startdatesearch" value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" id="datepicker1">
+					   </div>
+					</div>
+			    </div>
+				
+				<div class="row" style="margin-top:10px">
+					<div class="col-md-12">
+					   <label for="example-text-input" class="col-md-3 col-form-label">End Date: </label> 
+					   <div class="col-md-9">           
+						   <input class="form-control datepicker" data-date-format="dd-mm-yyyy" name="enddatesearch" value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>" id="datepicker2">
+					   </div>
+					</div>
+			    </div>
+				
+				<div class="row" style="margin-top:10px">
+					<div class="col-md-12">
+					   <label for="example-text-input" class="col-md-3 col-form-label">Pickup City: </label> 
+					   <div class="col-md-9">           
+						   <select class="form-control select2"  name=pickup_city id=pickup_city>
+							   <option value="">Select</option>
+							   <?php foreach($allCities1 as $city){?>
+							   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['pickup_city']) AND $_GET['pickup_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
+							   <?php }?>
+							</select>
+					   </div>
+					</div>
+			    </div>
+				
+				<div class="row" style="margin-top:10px">
+					<div class="col-md-12">
+					   <label for="example-text-input" class="col-md-3 col-form-label">Destination City: </label> 
+					   <div class="col-md-9">           
+						   <select class="form-control select2" name=destination_city id=destination_city>
+							   <option value="">Select</option>
+							   <?php foreach($allCities1 as $city){?>
+							   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['destination_city']) AND $_GET['destination_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
+							   <?php }?>
+							</select>
+					   </div>
+					</div>
+			    </div>
+				
 			  </div>
-			  <div class="modal-footer" style="margin-top:10px">
+			  <div class="modal-footer" style="margin-top:10px" align="center">
 				<input type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">
 				<a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'my-final-responses')) ?>">Reset</a>
 			  </div>
@@ -448,6 +519,7 @@ function f1(res){
 </script>
 <script>
 $(document).ready(function () {
+	 $('.datepicker').datepicker();
 	$(".businessBuddy").on('click',function () {
  		var datas = $(this);
 		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'addBusinessBuddy')) ?>";

@@ -34,7 +34,7 @@ $conn = ConnectionManager::get('default');
 		<h3 class="box-title" style="padding:5px;">Finalized Requests</h3>
 			<div class="box-tools pull-right">
 				<!--<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>-->
-				<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+				<a style="font-size:22px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 			</div>
 		
 </div>
@@ -78,6 +78,11 @@ $conn = ConnectionManager::get('default');
             
         <div class="col-md-12">
 			<div class="col-md-6">
+				<label for="example-text-input" class=" col-form-label">Agent Name: </label>
+				<input type="text" name="agentnamesearch" value="<?php echo isset($_GET['agentnamesearch'])? $_GET['agentnamesearch']:''; ?>"  class="form-control">
+            </div>
+			
+			<div class="col-md-6">
 				<label for="example-text-input" class=" col-form-label">Reference ID: </label>
                 <input type="text" name="refidsearch" value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>"  class="form-control">
             </div>
@@ -108,9 +113,26 @@ $conn = ConnectionManager::get('default');
                <input type="text" id="datepicker2" data-date-format="dd-mm-yyyy" name="enddatesearch" value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"  class="form-control datepicker" >
             </div>
     
-           
+           <div class="col-md-6">  
+			<label for="example-text-input" class=" col-form-label">Pickup City: </label>           
+               <select class="form-control select2"  name="pickup_city" id="pickup_city">
+				   <option value="">Select</option>
+				   <?php foreach($allCities1 as $city){?>
+				   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['pickup_city']) AND $_GET['pickup_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
+				   <?php }?>
+				</select>
+            </div>
 			
-      
+			<div class="col-md-6">  
+			<label for="example-text-input" class=" col-form-label">Destination City: </label>           
+               <select class="form-control select2" name="destination_city" id="destination_city">
+				   <option value="">Select</option>
+				   <?php foreach($allCities1 as $city){?>
+				   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['destination_city']) AND $_GET['destination_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
+				   <?php }?>
+				</select>
+            </div>
+			
           
            <!--<div class="col-md-6">  
 			 <label for="example-text-input" class=" col-form-label">Members: </label>		   
@@ -131,6 +153,7 @@ $conn = ConnectionManager::get('default');
    <script>
    $(document).ready(function(){
 	   $('.datepicker').datepicker();
+	   
 		$('#datepicker1').datepicker({
 			dateFormat: 'dd/mm/yy',
 			changeMonth: true,
