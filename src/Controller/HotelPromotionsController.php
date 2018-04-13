@@ -778,7 +778,7 @@ class HotelPromotionsController extends AppController
 				$this->Flash->success(__($displayMessage));
 				return $this->redirect(['action' => 'savedList/'.$user_id]);
 			}
-							//-- Save Unsave
+			//-- Save Unsave
 			if(isset($this->request->data['savehotelpromotion']))
 			{
  				$hotelpromotion_id=$this->request->data('hotelpromotion_id');
@@ -809,7 +809,8 @@ class HotelPromotionsController extends AppController
 				  echo "cURL Error #:" . $err;
 				} else {
 				 $LikeResult=json_decode($LikeResponse);
-				} 
+				}
+				//pr($LikeResponse);exit;				
 				$displayMessage=$LikeResult->message;
 				$this->Flash->success(__($displayMessage));
 				return $this->redirect(['action' => 'savedList/'.$user_id]);

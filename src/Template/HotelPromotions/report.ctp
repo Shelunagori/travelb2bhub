@@ -332,12 +332,12 @@ hr{
 												<div class="row">
 													<div class="col-md-12">
 														<div class="col-md-3">
-															<label>
+															<span class="label1">
 																Select Reason
-															</label>
+															</span>
 														</div>
 														<div class="col-md-9">
-															<div class="input-field reason_list">
+															<div class="reason_list">
 																<?php 
 																	$options=array();
 																	foreach($reasonslist as $sts)
@@ -361,6 +361,7 @@ hr{
 														</div>
 													</div>
 												</div>
+												<span class="help-block"></span>
 											</div>
 											<div class="modal-footer" style="height:60px;">
 												<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
@@ -415,9 +416,10 @@ hr{
 							<div class="row" >
 								<div class="col-md-12 text-center" style="padding-top:15px;">
 									<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $hotelPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
-									
-									<!-------Contact Details Modal --------->
-												<div id="contactdetails<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
+								</div>
+
+									<!------Contact Details Modal --------->
+										<div id="contactdetails<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-md" >
 														<!-- Modal content-->
 															<div class="modal-content">
@@ -473,6 +475,7 @@ hr{
 																				</div>
 																			</div>
 																		</div>
+																		
 																	</div>
 																	<div class="modal-footer">
 																	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -481,15 +484,14 @@ hr{
 															</div>
 														</div>
 														<!-------Contact Details Modal End--------->	
-													</div>
 											</div>
 										</div>
 										<!----button list end--->
 								</div>
-							</div>
-						</form>	
-				</fieldset>	
+							</form>	
+					</fieldset>	
 				</div>
+						
 				<?php }
 				}
 				else {
