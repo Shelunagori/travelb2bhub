@@ -895,7 +895,7 @@ $(document).ready(function(){
 	$(document).on('keyup',".city_select",function(){
 		
  		var input=$(this).val();
-		if(input.length>3){
+		if(input.length>0){
 			var noofrows=$(this).attr('noofrows');
 			var taxboxname=$(this).attr('taxboxname');
 			var master=$(this);
