@@ -35,7 +35,7 @@ $conn = ConnectionManager::get('default');
 				<h3 class="box-title" style="padding:5px">Respond To Request</h3>
 				<div class="box-tools pull-right">
 					<!--<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>-->
-					<a style="font-size:26px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+					<a style="font-size:22px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
 				</div>
 			</div>
 		</div>
@@ -232,7 +232,7 @@ $conn = ConnectionManager::get('default');
 												</div>
 											  </div>                         
 
-										
+										----------->
 										 <div class="row form-group">
 											<div class="col-md-12">
 												<div class=col-md-4>
@@ -243,7 +243,7 @@ $conn = ConnectionManager::get('default');
 													<input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['followsearch'])? "checked":''; ?>  >
 												</div>                            
 											</div>
-										  </div>----------->
+										  </div>
 										</div>
 										<div class="modal-footer">
 											<div class="row form-group">										

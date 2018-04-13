@@ -1596,6 +1596,13 @@ $hotelcitystate[$row['id']]  = $city_state_name;
 			$typeSearchArray=explode(',',$_POST["req_typesearch"]);  
 			$cond["Requests.category_id IN"] =  $typeSearchArray;
 		}
+		if(isset($_POST["destination_city"]) && !empty($_POST["destination_city"])) {
+			$cond["Requests.city_id"] =  $_POST["destination_city"];
+		}
+		
+		if(isset($_POST["pickup_city"]) && !empty($_POST["pickup_city"])) {
+			$cond["Requests.pickup_city"] =  $_POST["pickup_city"];
+		}
 		if(isset($_POST["agentnamesearch"]) && !empty($_POST["agentnamesearch"])) {
 			$keyword = $_POST["agentnamesearch"];
 			$AjentArray = explode(',',$keyword);
@@ -1695,17 +1702,17 @@ $review_array=array_merge($review_array,$reviews);
 		 $comma = ',';
 		 }
 		 //$citystatefull = $cityname.$comma.' '. $statename;
-		 $citystatefull = $cityname.'('.$statename.')';
+		 $citystatefull = $cityname.' ('.$statename.')';
 			$city_state_name = "";
 							if(count($cit['request']['hotels']) >0) {
 								unset($cit['request']['hotels'][0]);
                     foreach($cit['request']['hotels'] as $row) { 
-                    $city_state_name.=','.$this->cityname($row['city_id']).'('.$this->statename($row['state_id']).')'; 
+                    $city_state_name.=','.$this->cityname($row['city_id']).' ('.$this->statename($row['state_id']).')'; 
                   	 }  } 
  
-$city[$cit['id']]=$citystatefull.''.$city_state_name;
-                     $citystate->$cit['id']  = $citystatefull.''.$city_state_name;
-                     $citystate->$cit['id']  = $citystatefull.''.$city_state_name;
+$city[$cit['id']]=$citystatefull.' '.$city_state_name;
+                     $citystate->$cit['id']  = $citystatefull.' '.$city_state_name;
+                     $citystate->$cit['id']  = $citystatefull.' '.$city_state_name;
                   	
 					 if($cit['request']['category_id']==1){
 						$sqlh = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$cit['request']['id']."'";
@@ -2576,13 +2583,23 @@ $data =   json_encode($result);
 		$current_date=date('Y-m-d'); 
 		$da=array("Requests.start_date >=" =>  $current_date,'category_id !='=> 3);
 		$da1=array("Requests.check_in >=" =>  $current_date,'category_id'=> 3); 
-		$conditions[]= array (
+		/*$conditions[]= array (
 			'OR' => array(
 				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
 				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
 			)
+		);*/
+		
+		$conditions[]= array (
+			'OR' => array(
+				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2,'Requests.total_response' =>0),
+				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response' =>0),
+				
+				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
+				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
+			)
 		);
-		//$sortq['COUNT(Responses.request_id)'] = "ASC";  ,"COUNT(Requests.Responses) > "=>0
+		//,'Requests.total_response >' =>0
 	}
 	if(isset($_POST["enddatesearch"]) && !empty($_POST["enddatesearch"])) {
 	$edate =  $_POST["enddatesearch"]; 
@@ -2619,7 +2636,7 @@ $data =   json_encode($result);
 		$sortq['COUNT(Responses.request_id)'] = "ASC";
 	}
 	if(!empty($_POST["sort"]) && $_POST["sort"]=="resposesnohl") {
-		$sortq['COUNT(Responses.request_id)'] = "DESC";
+		$sortq['Requests.total_response'] = "DESC";
 	}
 	$limit=4;
 	$page = $_POST["page"]; 
@@ -3189,6 +3206,13 @@ $this->loadModel('BlockedUsers');
 					}
 					$conditions["OR"] =  $da1;
 				}
+				if(isset($_POST["destination_city"]) && !empty($_POST["destination_city"])) {
+					$conditions["Requests.city_id"] =  $_POST["destination_city"];
+				}
+				
+				if(isset($_POST["pickup_city"]) && !empty($_POST["pickup_city"])) {
+					$conditions["Requests.pickup_city"] =  $_POST["pickup_city"];
+				}
 				$this->loadModel('BlockedUsers'); 
 				if ($_POST['role_id'] == 1) {
 				$requests = $this->Requests->find()
@@ -3426,18 +3450,28 @@ $current_date = date("Y-m-d");
 		$current_date=date('Y-m-d'); 
 		$da=array("Requests.start_date >=" =>  $current_date,'category_id !='=> 3);
 		$da1=array("Requests.check_in >=" =>  $current_date,'category_id'=> 3); 
-		$conditions[]= array (
-			'OR' => array(
-				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
-				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
-			)
-		);
-		/*$conditionsss[]= array (
+		/*$conditions[]= array (
 			'OR' => array(
 				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
 				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
 			)
 		);*/
+		$conditions[]= array (
+			'OR' => array(
+				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2,'Requests.total_response' =>0),
+				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response' =>0),
+				
+				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
+				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
+			)
+		);
+		//,'Requests.total_response >' =>0
+		$conditionsss[]= array (
+			'OR' => array(
+				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
+				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
+			)
+		);
 		
 		$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>0,"Requests.status "=>2]]);
 		$myfinalCount = $query3 ->count();
@@ -3474,11 +3508,11 @@ $current_date = date("Y-m-d");
 			}
 		}
 	} 
-$this->set('myReponseCount', $myReponseCount);
+	$this->set('myReponseCount', $myReponseCount);
 
-//$myReponseCount = $queryr->count();
-$reqcount = (($reqcount['value']-$myRequestCount1)-($delcount+ $myfinalCount));
-$countarr = array();
+	//$myReponseCount = $queryr->count();
+	$reqcount = (($reqcount['value']-$myRequestCount1)-($delcount+ $myfinalCount));
+	$countarr = array();
         $coountarr['myRequestCount'] = $myRequestCount1 ;
         $coountarr['myReponseCount'] = $myReponseCount;
         $coountarr['placereq'] = $reqcount;
@@ -3552,7 +3586,7 @@ exit;
 			->notMatching('Responses', function ($q)use($userid) {
 				return $q->where(['Responses.user_id' => $userid]);
 			})
-			->where(['Requests.city_id' => $user['city_id'],'Requests.user_id NOT IN' => $BlockedUserss, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])->count();
+			->where(['Requests.city_id' => $user['city_id'],'Requests.user_id NOT IN' => $BlockedUserss, "Requests.status !="=>2,"Requests.category_id"=>3, "Requests.is_deleted"=>0,$conditions])->count();
 		} 
 		 
 	 return  $requests;

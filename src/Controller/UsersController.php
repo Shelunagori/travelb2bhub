@@ -1867,13 +1867,34 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		$allCities = $this->Cities->find('list',['keyField' => 'id', 'valueField' => 'name'])
 		->hydrate(false)
 		->toArray();
+	 
 		$cities = $this->Cities->getAllCities();
-		$this->set('allCities', $allCities);
-		
+	$this->set('allCities', $allCities);
+	$allCities1 = array();
+	$allCities2 = array();
+	$allCityList = array();
+	if(!empty($cities)) {
+		foreach($cities as $city) {
+			$cit = $city['name'].' ('.$city['state']->state_name.')';
+			$cit1 = $city['name'];
+			$allCities1[] = array("label"=>str_replace("'", "", $cit), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
+			$allCities2[] = array("label"=>str_replace("'", "", $cit1), "value"=>$city['id'] );
+			$allCityList[$city['id']] = $city['name'];
+		}
+	}
+	//$allCities2 = $allCities1;
+	//  $allCities1 = json_encode($allCities1);
+	$this->set('allCities1', $allCities1);
+	$this->set('allCities2', $cities);	
+
+	
 		$allStates = $this->States->find('list',['keyField' => 'id', 'valueField' => 'state_name'])
 		->hydrate(false)
 		->toArray();
 		$this->set('allStates', $allStates);
+		
+		
+		
 	}
 public function removedRequestList() {
 $this->loadModel('Responses');
