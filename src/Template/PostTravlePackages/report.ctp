@@ -1,6 +1,6 @@
 <?php //echo $this->Html->css('/assets/loader-1.css'); ?>
 <?php
-//-- List
+ //-- List
 $curl = curl_init();
 curl_setopt_array($curl, array(
   CURLOPT_URL => $coreVariable['SiteUrl']."api/PostTravlePackages/getTravelPackages.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&category_id=".$category_id."&duration_day_night=".$duration_day_night."&starting_price=".$starting_price."&submitted_from=web",
