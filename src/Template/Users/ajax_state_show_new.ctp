@@ -1,6 +1,6 @@
 
 <?php if($noofrows==1) {?>
-<div class="newColmd4">
+<div class="col-md-4">
 	  Destination States
 	  <?php echo $this->Form->input('h_state_id',['label' => false,'class'=>'form-control','options'=>$states]);?>
 </div>
@@ -21,7 +21,7 @@ if($noofrows==2)
 if($noofrows==3)
 {
 	?>
-	<div class="newColmd4">
+	<div class="col-md-4">
 	  Final States
 	  <?php echo $this->Form->input('t_final_state_id',['label' => false,'class'=>'form-control select2','options'=>$states]);?>
 	</div>
@@ -33,7 +33,7 @@ if($noofrows==3)
 if($noofrows==4)
 {
 	?>
-	<div class="newColmd4">
+	<div class="col-md-4">
 	<p for="from">
 	<?php if($taxboxname=='t_pickup_state_id'){?>
 	   Pickup  State 
@@ -50,7 +50,7 @@ if($noofrows==4)
 if($noofrows==5)
 { 
 	?>
-	<div class="  newColmd4">
+	<div class="  col-md-4">
 	<?php if($taxboxname=='pickup_state_id'){?>
 	  <p>Pickup State</p>
 	<?php }
@@ -65,7 +65,7 @@ if($noofrows==5)
 if($noofrows==6)
 { 
 	?>
-	<div class="newColmd4">
+	<div class="col-md-4">
 	<p>Destination State</p>
 	<?php echo $this->Form->input($taxboxname,['label' => false,'class'=>'form-control select2','options'=>$states]);?>
 	</div>

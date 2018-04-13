@@ -141,6 +141,10 @@ margin-top: 5px !important;
 {
 	height: 330px !important;	
 }
+.slimScrollBar{
+	width:15px !important;
+	cursor: pointer !important;
+}
 .menu
 {
 	height: 330px !important;	

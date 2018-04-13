@@ -111,7 +111,7 @@ fieldset{
 						<li ><a href="#tab2" data-toggle="tab">Package</a></li>
  					</ul>
 				</div>
-				</br></br>
+				</br> 
 <div class="tab-pane active" id="tab1">
 <?php
  echo $this->Form->create(null, [
@@ -225,7 +225,7 @@ fieldset{
 								<input autocomplete="off" type="text" class="form-control" name="locality" placeholder="Enter Locality, Village or Town"/>
 							</div>
 						 
-							<div class="col-md-4">
+							<div class="col-md-4 form-group">
 									<div class="input-field">
 									<p for="from">
 										Destination City
@@ -239,7 +239,7 @@ fieldset{
 									</div>
 							</div>
 							<span class="shw">
-								<div class="col-md-4 ">
+								<div class="col-md-4 form-group">
 									<div class="input-field">
 										<p for="from">
 										Destination State
@@ -253,9 +253,9 @@ fieldset{
 							</span>
 						</div>
 					</div>	 
-						<div class="row">
+						<div class="row" style="display:none;">
 							<div class="col-md-12">
-								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt" style="display:none;">
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt" >
 									<div class="input-field">
 										<p for="from">Destination Country</p>
 										<input type="text" class="form-control" id ="h_country_name" name="h_country_name" placeholder="Country" readonly/>
@@ -279,14 +279,12 @@ fieldset{
 								</div>
 								<div class="col-md-6">
 									<div class="input-field">
-												<p for="from">
-													Check Out
-													<span class="required">*</span>
-												</p>
+										<p for="from">
+											Check Out <span class="required">*</span>
+										</p>
 									</div>
 									<div class="">
 										<input autocomplete="off" type="text" name="check_out" class="form-control date-picker" id="datepicker8" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
-										                     
 									</div>
 								</div>
 							</div>
@@ -474,7 +472,7 @@ fieldset{
 									</div>
 								</div>
 							</div>
-						</div><span class="help-block"></span>	
+						</div> 	
 						<div class="row">
 							<div class=" col-md-12 main_row">
 								<div class="col-md-6">
@@ -553,13 +551,13 @@ fieldset{
 							 
 								<div class="row">
 									<div class="col-md-12 main_row">
-										<div class="col-md-4  mt">
+										<div class="col-md-4 form-group mt">
 											<div class="input-field">
 											<p for="from">Pickup Locality</p>
 											<input autocomplete="off" type="text" class="form-control" name="pickup_locality" id="pickup_locality" placeholder="Enter Locality, Village or Town"/>
 											</div>
 										</div>
-										<div class="col-md-4 mt">
+										<div class="col-md-4 mt form-group">
 											<div class="input-field">
 												<p for="from">Pickup City</p>
 												<input type="text" class="form-control city_select ctynamerecord" id="pickup_city_name" name="pickup_city_name"  placeholder="Select City or Nearest City" taxboxname="pickup_state_id" noofrows="5" />
@@ -568,7 +566,7 @@ fieldset{
 											</div>
 										</div>	
 										<div class="stateRpl">		
-											<div class="col-md-4 mt">
+											<div class="col-md-4 form-group mt">
 												<div class="input-field">
 													<p for="from">Pickup State</p>
 													<input type='hidden' id='pickup_state_id' name="pickup_state_id"/>
@@ -576,7 +574,7 @@ fieldset{
 												</div>
 											</div>
 										
-											<div class="col-md-4 mt" style="display:none">
+											<div class="col-md-4 form-group mt" style="display:none">
 												<div class="input-field">
 												<p for="from">Pickup Country</p>
 												<input type='hidden' id='pickup_country_id' name="pickup_country_id"/>
@@ -585,8 +583,7 @@ fieldset{
 											</div>
 										</div> 
 									</div>
-								</div>
-								<span class="help-block"></span>
+								</div> 
 								<div class="package-stops">
 								</div>
 								<div class="col-md-12"> 
@@ -633,7 +630,7 @@ fieldset{
 								</div>
 								<div class="row">
 									<div class="col-md-12 rw">
-										<div class="col-md-6">
+										<div class="col-md-6 form-group">
 											<div class="input-field">
 											<p for="from">Final State</p>
 												<input type='hidden' id='p_final_state_id' name="p_final_state_id"/>
@@ -768,11 +765,10 @@ fieldset{
 												</div>
 											</div>
 											<input type='hidden' id='t_pickup_country_id' name="t_pickup_country_id"/>
-												<input type="hidden" class="form-control" id ="t_pickup_country_name" name="t_pickup_country_name" placeholder="Country" readonly/>
-										<span class="help-block"></span>
+												<input type="hidden" class="form-control" id ="t_pickup_country_name" name="t_pickup_country_name" placeholder="Country" readonly/> 
 									<div class="row">
 										<div class="col-md-12 main_row">
-											<div class="col-md-4 mt">
+											<div class="col-md-4 form-group  mt">
 													<div class="input-field">
 													<p for="from">Pickup Locality
 													 <span class="required">*</span>   
@@ -780,7 +776,7 @@ fieldset{
 													<input autocomplete="off" type="text" class="form-control" name="pickup_locality" id="pickup_locality" placeholder="Enter Locality,Village or Town"/>
 													</div>
 											</div>
-											 <div class="col-md-4 mt">
+											 <div class="col-md-4 form-group  mt">
 												<div class="input-field">
 													<p for="from">Pickup City
 													<span class="required">*</span>
@@ -791,7 +787,7 @@ fieldset{
 												</div>
 											</div>										
 											<div class="stateRpl">
-											<div class="col-md-4 mt">
+											<div class="col-md-4 form-group  mt">
 												<div class="input-field">
 												<p for="from">Pickup State</p>
 													<input type='hidden' id='t_pickup_state_id' name="t_pickup_state_id"/>
@@ -809,15 +805,13 @@ fieldset{
 												<button class="btn btn-primary btn-sm transport-stop-add " style="background-color:#1295A2;"><i class="fa fa-plus"></i> Add Stop</button>	
 											</div>			
 										</div>	
-									</div>	
-									<span class="help-block"></span>
+									</div>	 
 									<div class="row">
 										<div class="col-md-12">
 											<div class="col-md-4 mt">
 												<div class="input-field">
 													<p for="from">Final Locality
-														  
-														</p>
+													</p>
 													<input class="form-control" type="text" placeholder="Enter Locality,Village or Town" name="finalLocality">
 												</div>
 											</div>
@@ -833,7 +827,7 @@ fieldset{
 													</div>
 												</div>
 											<div class="rw2">
-												<div class="col-md-4 mt">
+												<div class="col-md-4 form-group mt">
 														<div class="input-field">
 														<p for="from">Final State</p>
 															<input type='hidden' id='t_final_state_id' name="t_final_state_id"/>
