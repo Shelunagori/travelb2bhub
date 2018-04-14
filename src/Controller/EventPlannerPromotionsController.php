@@ -165,7 +165,7 @@ class EventPlannerPromotionsController extends AppController
 				$this->Flash->success(__($displayMessage));
 				return $this->redirect(['action' => 'view/'.$event_id]);
 			}
-			//---Save cart TaxiFleet Promotion
+			//---Save cart Event Promotion
 			if(isset($this->request->data['saveeventplanner']))
 			{
 				$user_id=$this->Auth->User('id');
@@ -501,7 +501,7 @@ class EventPlannerPromotionsController extends AppController
 			//-- Remove promotion
 			if(isset($this->request->data['remove_promotion']))
 			{
- 				$event_id=$this->request->data('event_id');
+ 				$event_id=$this->request->data('remove_package_id');
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
 				 CURLOPT_URL => $this->coreVariable['SiteUrl']."api/EventPlannerPromotions/removeEvent.json?event_id=".$event_id,

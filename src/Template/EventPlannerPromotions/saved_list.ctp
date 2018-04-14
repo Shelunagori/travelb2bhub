@@ -86,7 +86,7 @@ if ($err) {
 
  ?>
  <style type="text/css">
- fieldset{
+fieldset{
 	margin-bottom:5px !important;
 	border-radius: 6px;
 }
@@ -106,7 +106,7 @@ font-size:20px;
 	pading-bottom:10px!important;
 }
 .rowspace{
-	padding-top:5px;
+	padding-top:0px;
 	font-size:14px;
 }
 .rowspacemodal{
@@ -117,13 +117,18 @@ hr{
 	margin-top: 15px !important;
     margin-bottom: 4px !important;
 }
-.label1{
-	color:#9a9c9c;
-	 white-space: nowrap;
+label{
+	color:#676363;
+	font-weight:600
 }
-.label11{
-	color:#000000;
-	 white-space: nowrap;
+
+.col-md-4{
+	color:#676363;
+	font-weight:600;
+}
+
+a{
+	color:#ac85d6;
 }
 </style>
 <div class="row" >
@@ -255,9 +260,9 @@ hr{
 													<div class="row">
 														<div class="col-md-12">
 															<div class="col-md-3">
-																<span>
+																<label>
 																	Select Reason
-																</span>
+																</label>
 															</div>
 															<div class="col-md-9">
 																<div class="input-field reason_list">
@@ -300,34 +305,43 @@ hr{
 					<div class="col-md-9">
 						<div class="col-md-6">
 							<div class="row rowspace">
-								<div class="col-md-12 "><span class="label1">Cities of Operation :</span>
-								<span class="label11"><?= h($cityList); ?></span>
+								<div class="col-md-12 "><label>Cities of Operation :</label>
+								<span ><?= h($cityList); ?></span>
 								</div>
 							</div>
 							<div class="row rowspace">
-								<div class="col-md-12 "><span class="label1">States of Operation :</span>
-								<span class="label11"><?= h($stateList); ?></span>
+								<div class="col-md-12 "><label>States of Operation </label>
+								<span class=""><?= h($stateList); ?></span>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="row rowspace">
-									<div class="col-md-12 "><span class="label1">Country :</span>
-									<span class="label11"><?= h($eventPlannerPromotion->country->country_name);?></span>
+									<div class="col-md-12 "><label>Country :</label>
+									<span class=""><?= h($eventPlannerPromotion->country->country_name);?></span>
 									</div>
 								</div>
 								<div class="row rowspace">
-									<div class="col-md-12 "><span class="label1">Event Planner :</span>
-										<span class="label11">
+									<div class="col-md-12 "><label>Event Planner :</label>
+										<span >
 											<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$eventPlannerPromotion->user_id),1);?>
-											<a href="<?php echo $hrefurl; ?>"> 
-											<?php echo $eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name.' ( '.$eventPlannerPromotionss->user_rating.'<i class="fa fa-star"></i> )';?>
-											</a>
-										</span>
+											<u><a href="<?php echo $hrefurl; ?>"> 
+												<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?></u>
+										
+												<?php
+												if($eventPlannerPromotionss->user_rating==0)
+												{
+													echo "";
+												}
+												else{
+														echo "( ".$eventPlannerPromotionss->user_rating." <i class='fa fa-star'></i> )";
+													}
+												?></a>
+											</span>
 									</div>
 								</div>
 							</div>
-						<div class="col-md-4 pull-right">
+						<div class="col-md-6 pull-right">
 						<div class="row" style="padding-top:15px;">
 							<div class="col-md-12">
 							<button class="btn btn-info btn-md btnlayout" data-target="#eventdetail<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" type="button">Event Details</button>
@@ -341,10 +355,9 @@ hr{
 													<h3 class="modal-title">Event Details</h3>
 												  </div>
 													<div class="modal-body" >
-														<span class="help-block"></span>
 														<div class="row">
 															<div class="col-md-12">
-																<span class="label11" style="padding:20px;"><?= h($eventPlannerPromotion->event_detail); ?></span>
+															<p style="padding:15px;"><?= h($eventPlannerPromotion->event_detail); ?></p>
 															</div>
 														</div>
 													</div>
@@ -371,35 +384,27 @@ hr{
 												<div class="row">
 													<div class="col-md-12">
 														<div class="col-md-4 label1">Seller Name :</div>
-														<div class="col-md-8">
-															<span class="label11">
-															
-																<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?>
+													<div class="col-md-8" style="padding-top:2px;">
+															<span >
+															<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$eventPlannerPromotion->user_id),1);?>
+															<u><a href="<?php echo $hrefurl; ?>"> 
+																<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?></u>
 														
 																<?php
-																if($eventPlannerPromotion->user_rating==0)
+																if($eventPlannerPromotionss->user_rating==0)
 																{
 																	echo "";
 																}
 																else{
-																	echo "( ";
-																	for($i=0;$i<$eventPlannerPromotion->user_rating;$i++)
-																	{
-																		echo "<i class='fa fa-star' style='font-size:10px;color:#959191;'></i>";
-																		if($i==0)
-																		{
-																			echo "";
-																		}
+																		echo "( ".$eventPlannerPromotionss->user_rating." <i class='fa fa-star'></i> )";
 																	}
-																	echo " )";
-																	}
-																?>
+																?></a>
 															</span>
 														</div>					
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-md-12">
+													<div class="col-md-12" style="padding-top:2px;">
 													<div class="col-md-4 label1">Mobile No :</div>
 													<div class="col-md-8">
 													<span class="label11"><?= h($eventPlannerPromotion->user->mobile_number);?></span>
@@ -407,7 +412,7 @@ hr{
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-md-12">
+													<div class="col-md-12" style="padding-top:2px;">
 														<div class="col-md-4 label1">Email :</div>
 														<div class="col-md-8">
 														<span class="label11"><a href="mailto:<?php echo $eventPlannerPromotion->user->email;?>"><?= h($eventPlannerPromotion->user->email);?></a></span>

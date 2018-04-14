@@ -438,16 +438,25 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 								</div>
 								<div class="row rowspace">
 									<div class="col-md-12 "><label>Event Planner :</label>
-										<span class="">
-											<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$eventPlannerPromotion->user_id),1);?>
-											<a href="<?php echo $hrefurl; ?>"> 
-											<?php echo "<u>".$eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name.'</u> ( '.$eventPlannerPromotion->user_rating.'<i class="fa fa-star"></i> )';?>
-											</a>
-										</span>
+																					<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$eventPlannerPromotion->user_id),1);?>
+											<u><a href="<?php echo $hrefurl; ?>"> 
+												<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?></u>
+										
+												<?php
+												if($eventPlannerPromotion->user_rating==0)
+												{
+													echo "";
+												}
+												else{
+														echo "( ".$eventPlannerPromotion->user_rating." <i class='fa fa-star'></i> )";
+													}
+												?></a>
+											</span>
+
 									</div>
 								</div>
 							</div>
-						<div class="col-md-4 pull-right">
+						<div class="col-md-6 pull-right">
 						<div class="row" style="padding-top:15px;">
 							<div class="col-md-12">
 							<button class="btn btn-info btn-md btnlayout" data-target="#eventdetail<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" type="button">Event Details</button>
@@ -461,10 +470,9 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 													<h3 class="modal-title">Event Details</h3>
 												  </div>
 													<div class="modal-body" >
-														<span class="help-block"></span>
 														<div class="row">
 															<div class="col-md-12">
-																<span class="label11" style="padding:20px;"><?= h($eventPlannerPromotion->event_detail); ?></span>
+																<p style="padding:15px;"><?= h($eventPlannerPromotion->event_detail); ?></p>
 															</div>
 														</div>
 													</div>
@@ -490,12 +498,12 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 												<span class="help-block"></span>
 												<div class="row">
 													<div class="col-md-12">
-														<div class="col-md-4">Seller Name :</div>
-														<div class="col-md-8">
+														<div class="col-md-4 label1">Seller Name :</div>
+													<div class="col-md-8" style="padding-top:2px;">
 															<span >
 															<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$eventPlannerPromotion->user_id),1);?>
-																<a href="<?php echo $hrefurl; ?>"> 
-																<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?></a>
+															<u><a href="<?php echo $hrefurl; ?>"> 
+																<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?></u>
 														
 																<?php
 																if($eventPlannerPromotion->user_rating==0)
@@ -503,27 +511,26 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 																	echo "";
 																}
 																else{
-																		echo $eventPlannerPromotion->user_rating." ( <i class='fa fa-star'></i> )";
-																		
+																		echo "( ".$eventPlannerPromotion->user_rating." <i class='fa fa-star'></i> )";
 																	}
-																?>
+																?></a>
 															</span>
 														</div>					
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-md-12">
-													<div class="col-md-4 ">Mobile No :</div>
+													<div class="col-md-12" style="padding-top:2px;">
+													<div class="col-md-4 label1">Mobile No :</div>
 													<div class="col-md-8">
-													<span ><?= h($eventPlannerPromotion->user->mobile_number);?></span>
+													<span class="label11"><?= h($eventPlannerPromotion->user->mobile_number);?></span>
 													</div>
 													</div>
 												</div>
 												<div class="row">
-													<div class="col-md-12">
-														<div class="col-md-4 ">Email :<</div>
+													<div class="col-md-12" style="padding-top:2px;">
+														<div class="col-md-4 label1">Email :</div>
 														<div class="col-md-8">
-														<span "><u><a href="mailto:<?php echo $eventPlannerPromotion->user->email;?>"><?= h($eventPlannerPromotion->user->email);?></a></u></span>
+														<span class="label11"><a href="mailto:<?php echo $eventPlannerPromotion->user->email;?>"><?= h($eventPlannerPromotion->user->email);?></a></span>
 														</div>
 													</div>
 												</div>
