@@ -62,7 +62,7 @@ if ($err) {
 fieldset{
 	margin-bottom:5px !important;
 	border-radius: 7px;
-	box-shadow: 0 1px 9px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	box-shadow: 0 1px 0px rgba(0,0,0,0.25), 0 6px 10px rgba(0,0,0,0.22);
 }
 
 .btnlayout{
@@ -82,22 +82,26 @@ label {
 	
 	font-size:17px !important;
 }
+.col-md-12{
+	padding-right: 7px !important;
+    padding-left: 7px !important;
+}
+.col-md-6{
+	padding-right: 7px !important;
+    padding-left: 7px !important;
+}
 </style>
 <div class="row" >
 	<div class="col-md-12">
 	</div>
 </div>
-<div class="container-fluid">
+<div class="">
 	<div class="col-md-12">
 	<div class="box box-primary" style="margin-bottom:5px;">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="box-header with-border"> 
 					<span class="box-title" style="color:#057F8A;"><b><?= __('Package Reports') ?></b></span>
-					<div class="box-tools pull-right" style="margin-top:-5px;">
-						<a style="font-size:22px;margin-top: -2px;" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-						<a style="font-size:22px;margin-top: -2px;" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
-					</div>
 				</div>
 			</div>
 		</div>
@@ -159,7 +163,7 @@ $m=0;
 							</div>
 						</div>
 					</div>
-					<div class="col-md-8 pull-right">
+					<div class="col-md-8 pull-right" style="margin-top:5px">
 						<div class="text-center col-md-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
 						<label><button type="button" class="btn btn-info btn-md btnlayout" data-target="#renew<?php echo $postTravlePackage->id; ?>" data-toggle=modal>Renew</button></label>
 						</div>
