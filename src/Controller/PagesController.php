@@ -2592,8 +2592,8 @@ $data =   json_encode($result);
 		
 		$conditions[]= array (
 			'OR' => array(
-				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2,'Requests.total_response' =>0),
-				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response' =>0),
+				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
+				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
 				
 				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
 				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
@@ -2829,6 +2829,7 @@ $data =   json_encode($result);
 	$sort['Users.first_name'] = "DESC";
 	$sort['Users.last_name'] = "DESC";
 	}
+
 
 
 	$conditions ='';
@@ -3458,8 +3459,8 @@ $current_date = date("Y-m-d");
 		);*/
 		$conditions[]= array (
 			'OR' => array(
-				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2,'Requests.total_response' =>0),
-				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response' =>0),
+				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
+				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
 				
 				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
 				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
@@ -4118,8 +4119,8 @@ $this->UserChats->updateAll(['type' => 'Chat'], ['id' => $ChatId]);
 			$SendToUser = $TableUser->get($send_to_user_id);
 			$SendToUserName = $SendToUser['first_name'].' '.$SendToUser['last_name'];
 			
-			$message = "$name has accepted your offer. Click here to go to Finalized Requests/Reponses to add a Review for $SendToUserName";
-			$msg = "$name has accepted your offer. Click here to go to Finalized Requests/Reponses to add a Review for $SendToUserName.";
+			$message = "$name has accepted your offer. Click here to go to Finalized Reponses to add a Review for $name";
+			$msg = "$name has accepted your offer. Click here to go to Finalized Reponses to add a Review for $name";
 			$userchatTable = TableRegistry::get('User_Chats');
 			$userchats = $userchatTable->newEntity();
 			$userchats->request_id = $request_id;
@@ -4622,32 +4623,58 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 		}
 
 		 
-	public function getchatNotification()
-	{	 
+	public function getchatNotificationOld()
+	{	
+
+		//echo date('Y-m-d', strtotime(' -1 day')); 
+		$new_time = date("Y-m-d H:i:s", strtotime('-24 hours'));
 		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
 			$user_id = $_POST['user_id'];
 			$unreadnotification = array();
+			$this->loadModel('User_Chats');
 			$conn = ConnectionManager::get('default');
 			//-- all data is_read='0' AND
-			$sql = "Select * FROM user_chats where send_to_user_id='".$user_id."'  order by created DESC "; 
-			$stmt = $conn->execute($sql);
+			$totalIds=array();
+			$sqls = "Select * FROM user_chats where `send_to_user_id`='".$user_id."' && `created` >= '$new_time' &&  is_read='1' order by created DESC "; 
+ 			$stmt = $conn->execute($sqls);
 			$unreadnotification = $stmt ->fetchAll('assoc');
+			foreach($unreadnotification as $data){
+ 				$totalIds[]=$data['id'];
+			}				
+			///--- UNREAD
+			$sqls1 = "Select * FROM user_chats where `send_to_user_id`='".$user_id."' &&  is_read='0' order by created DESC "; 
+ 			$stmt2 = $conn->execute($sqls1);
+			$unreadnotification2 = $stmt2 ->fetchAll('assoc');
+			foreach($unreadnotification2 as $datas){
+ 				$totalIds[]=$datas['id'];
+			}
+			
+			//$unreadnotification=array_merge($unreadnotification,$unreadnotification2);
+			
+			//$unreadnotification=$this->User_Chats->find()->where(['send_to_user_id'=>$user_id, 'created >='=>$new_time,'is_read'=>'1'])->order(['created'=>'DESC']);
+			$idsas=implode(',',$totalIds);
+			$sqlsdata = "Select * FROM user_chats where `id` IN ($idsas) order by created DESC ";
+ 			$stmtsqlsdata = $conn->execute($sqlsdata);
+			$dataofchats = $stmtsqlsdata ->fetchAll('assoc');
+			 
+			
 			$sqlcount = "Select * FROM user_chats where is_read='0' AND send_to_user_id='".$user_id."'  order by created DESC "; 
 			$stmtsqlcount = $conn->execute($sqlcount);
 			$unreadnotificationCOunt = $stmtsqlcount ->fetchAll('assoc');
-$x=0;
-			foreach($unreadnotification as $data){
+			$x=0;
+			foreach($dataofchats as $data){
  				$SenderID=$data['user_id']; 
 				$Users=$this->Users->find()->where(['id'=>$SenderID])->first();
  				$first_name=$Users['first_name'];
 				$last_name=$Users['last_name'];
 				$SenderName=$first_name.' '.$last_name;
- 				$unreadnotification[$x]['sender_name']=$SenderName;
+ 				$dataofchats[$x]['sender_name']=$SenderName;
 				$x++;
-			}  
+			}
+			 
 			$countchat = count($unreadnotificationCOunt);
  			$result['response_code'] = 200;
-			$result['response_object'] = $unreadnotification;
+			$result['response_object'] = $dataofchats;
 			$result['unread_count'] = $countchat;
 			$data =   json_encode($result);
 			echo $data;
@@ -4660,6 +4687,70 @@ $x=0;
 			exit;
 		}
 	}
+	
+	public function getchatNotification()
+	{	
+		$new_time = date("Y-m-d H:i:s", strtotime('-24 hours'));
+		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
+			$user_id = $_POST['user_id'];
+			$unreadnotification = array();
+			$this->loadModel('User_Chats');
+			$conn = ConnectionManager::get('default');
+			//-- all data is_read='0' AND
+			$totalIds=array();
+			$sqls = "Select * FROM user_chats where `send_to_user_id`='".$user_id."' && `created` >= '$new_time' &&  is_read='1' order by created DESC "; 
+ 			$stmt = $conn->execute($sqls);
+			$unreadnotification = $stmt ->fetchAll('assoc');
+			foreach($unreadnotification as $data){
+ 				$totalIds[]=$data['id'];
+			}				
+			///--- UNREAD
+			$sqls1 = "Select * FROM user_chats where `send_to_user_id`='".$user_id."' &&  is_read='0' order by created DESC "; 
+ 			$stmt2 = $conn->execute($sqls1);
+			$unreadnotification2 = $stmt2 ->fetchAll('assoc');
+			foreach($unreadnotification2 as $datas){
+ 				$totalIds[]=$datas['id'];
+			}
+			
+			//$unreadnotification=array_merge($unreadnotification,$unreadnotification2);
+			
+			//$unreadnotification=$this->User_Chats->find()->where(['send_to_user_id'=>$user_id, 'created >='=>$new_time,'is_read'=>'1'])->order(['created'=>'DESC']);
+			$idsas=implode(',',$totalIds);
+			$sqlsdata = "Select * FROM user_chats where `id` IN ($idsas) order by created DESC ";
+ 			$stmtsqlsdata = $conn->execute($sqlsdata);
+			$dataofchats = $stmtsqlsdata ->fetchAll('assoc');
+			 
+			
+			$sqlcount = "Select * FROM user_chats where is_read='0' AND send_to_user_id='".$user_id."'  order by created DESC "; 
+			$stmtsqlcount = $conn->execute($sqlcount);
+			$unreadnotificationCOunt = $stmtsqlcount ->fetchAll('assoc');
+			$x=0;
+			foreach($dataofchats as $data){
+ 				$SenderID=$data['user_id']; 
+				$Users=$this->Users->find()->where(['id'=>$SenderID])->first();
+ 				$first_name=$Users['first_name'];
+				$last_name=$Users['last_name'];
+				$SenderName=$first_name.' '.$last_name;
+ 				$dataofchats[$x]['sender_name']=$SenderName;
+				$x++;
+			}
+			 
+			$countchat = count($unreadnotificationCOunt);
+ 			$result['response_code'] = 200;
+			$result['response_object'] = $dataofchats;
+			$result['unread_count'] = $countchat;
+			$data =   json_encode($result);
+			echo $data;
+			exit;
+		}
+		else {
+			$result = array();
+			$result['response_code']= 403;
+			echo json_encode($result);
+			exit;
+		}
+	}
+	
 	public function cityNew(){
 		$this->loadModel('citiesNew');
 		$cities_new= $this->citiesNew->find();
