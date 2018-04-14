@@ -503,9 +503,9 @@ class TaxiFleetPromotionsController extends AppController
 				return $this->redirect(['action' => 'promotionreports']);
 			}
 				//-- Remove promotion
-			if(isset($this->request->data['removetexi']))
+			if(isset($this->request->data['remove_promotion']))
 			{
- 				$texifleet_id=$this->request->data('texifleet_id');
+ 				$texifleet_id=$this->request->data('remove_package_id');
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
 				 CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotions/removeTaxFlletPromotions.json?taxi_id=".$texifleet_id,

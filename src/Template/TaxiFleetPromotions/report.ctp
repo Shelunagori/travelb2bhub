@@ -143,7 +143,8 @@ hr{
     margin-bottom: 4px !important;
 }
 label{
-	//font-weight: 100;
+	color:#676363;
+	font-weight:600
 }
 
 .col-md-4{
@@ -521,11 +522,10 @@ a{
 														<span class="modal-title">Fleet Details</span>
 													  </div>
 														<div class="modal-body" >
-															<span class="help-block"></span>
 															<div class="row">
-																<div class="col-md-12" style="padding-left:25px;padding-bottom:10px;">
-																	<span >
-																<?php echo  $this->Text->autoparagraph(h($taxiFleetPromotion->fleet_detail)); ?></span>
+																<div class="col-md-12" >
+																	<p style="padding:15px;">
+																<?php echo $taxiFleetPromotion->fleet_detail; ?></p>
 																</div>
 															</div>
 														</div>
@@ -553,7 +553,9 @@ a{
 																		<span class="help-block"></span>
 																		<div class="row">
 																		<div class="col-md-12">
-																			<div class="col-md-4">Seller Name :</div>
+																			<div class="col-md-4">
+																			<label>
+																			Seller Name :</label></div>
 																			<div class="col-md-8">
 																				<span>
 																					<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?>
@@ -581,7 +583,7 @@ a{
 																	</div>
 																		<div class="row">
 																			<div class="col-md-12">
-																			<div class="col-md-4">Mobile No :</div>
+																			<div class="col-md-4"><label>Mobile No :</label></div>
 																			<div class="col-md-8">
 																			<span><?= h($taxiFleetPromotion->user->mobile_number);?></span>
 																			</div>
@@ -589,7 +591,7 @@ a{
 																		</div>
 																		<div class="row">
 																			<div class="col-md-12">
-																				<div class="col-md-4">Email :</div>
+																				<div class="col-md-4"><label>Email :</label></div>
 																				<div class="col-md-8">
 																				<span><u><a href="mailto:<?php echo $taxiFleetPromotion->user->email;?>"><?= h($taxiFleetPromotion->user->email);?></a></u></span>
 																				</div>

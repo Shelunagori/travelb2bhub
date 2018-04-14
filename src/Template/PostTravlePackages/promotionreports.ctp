@@ -240,9 +240,9 @@ label {
 									<div class="modal-content">
 									  <div class="modal-header" style="height:100px;">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h3 class="modal-title">
+											<h4 class="modal-title">
 											Are you sure ? You want to delete this Promotion
-											</h3>
+											</h4>
 										</div>
 										<div class="modal-footer" style="height:60px;">
 											<button type="submit" name="removepackage"  class=" btn btn-success btn-md" value="yes" name="remove_promotion">Yes</button>
@@ -268,7 +268,6 @@ label {
     $(document).ready(function () {
 		$(document).on('change','.priceMasters',function()
 		{
-			alert();
 			var ab=$(this).closest('div').find('.priceMasters option:selected').val();
 			if(ab!=0)
 			{
@@ -288,13 +287,13 @@ label {
 			if(dd<10){  dd='0'+dd } 
 			if(mm<10){  mm='0'+mm } 
 			var date = dd+'-'+mm+'-'+yyyy;	
-			$(this).closest('div.mainrow').find('.visible_date').val(date);
-			$(this).closest('div.mainrow').find('.payment_amount').val(price);
+			$(this).closest('div.mainrow').find('div .visible_date').val(date);
+			$(this).closest('div.mainrow').find('div .payment_amount').val(price);
 			//alert($(this).closest('div.mainrow').html());
 			}
 			else{
-				$(this).closest('div.mainrow').find('.visible_date').val("dd-mm-yyyy");
-				$(this).closest('div.mainrow').find('.payment_amount').val(0);-
+				$(this).closest('div.mainrow').find('div .visible_date').val("dd-mm-yyyy");
+				$(this).closest('div.mainrow').find('div .payment_amount').val(0);
 			}
 		});
 		});

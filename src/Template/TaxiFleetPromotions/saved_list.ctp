@@ -146,7 +146,11 @@ hr{
 	 white-space: nowrap;
 }
 label{
-	font-weight: 100;
+	color:#676363;
+	font-weight:600
+}
+a{
+	color:#ac85d6;
 }
 </style> 
 	<div class="row" >
@@ -470,34 +474,34 @@ label{
 						</div>
 				<div class="col-md-9" >
 								<div class="row col-md-12">
-									<div class="col-md-12"><span style="color:#727e8a;">Category :</span>
+									<div class="col-md-12"><label>Category :</label>
 										<?= h($vehicleList); ?>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#727e8a;"><?= __(' Cities of Operation') ?> :</span>
+										<div class="col-md-12"><label><?= __(' Cities of Operation') ?> :</label>
 										<span><?= h($cityList); ?></span>
 										</div>
 									</div>
 									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#727e8a;"><?= __(' States of Operation') ?> :</span>
+										<div class="col-md-12"><label><?= __(' States of Operation') ?> :</label>
 										<span ><?= h($stateList); ?> </span>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#727e8a;"><?= __(' Country') ?> :</span>
+										<div class="col-md-12"><label><?= __(' Country') ?> :</label>
 										<span >India </span>
 										</div>
 									</div>
 									<div class="row rowspace">
-										<div class="col-md-12 "><span style="color:#727e8a;"><?= __(' Seller') ?> :</span>	
+										<div class="col-md-12 "><label><?= __(' Seller') ?> :</label>	
 										<span>
 										<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
 										<a href="<?php echo $hrefurl; ?>"> 
-										<?php echo $taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name.' ( '.$taxiFleetPromotionss->user_rating.'<i class="fa fa-star"></i> )';?>
+										<?php echo "<u>".$taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name.'</u> ( '.$taxiFleetPromotionss->user_rating.'<i class="fa fa-star"></i> )';?>
 										</a>
 										</span>
 										</div>					
@@ -513,14 +517,13 @@ label{
 													<div class="modal-content">
 													  <div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<span class="modal-title">Fleet Details</span>
+														<span class="modal-title" >Fleet Details</span>
 													  </div>
 														<div class="modal-body" >
-															<span class="help-block"></span>
 															<div class="row">
-																<div class="col-md-12" style="padding-left:25px;padding-bottom:10px;">
-																	<span >
-																<?php echo  $this->Text->autoparagraph(h($taxiFleetPromotion->fleet_detail)); ?></span>
+																<div class="col-md-12" >
+																	<p style="padding:15px;">
+																<?php echo $taxiFleetPromotion->fleet_detail; ?></p>
 																</div>
 															</div>
 														</div>
@@ -548,7 +551,8 @@ label{
 																		<span class="help-block"></span>
 																		<div class="row">
 																		<div class="col-md-12">
-																			<div class="col-md-4">Seller Name :</div>
+																			<div class="col-md-4"><label>
+																			Seller Name :</label></div>
 																			<div class="col-md-8">
 																				<span>
 																					<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?>
@@ -576,7 +580,7 @@ label{
 																	</div>
 																		<div class="row">
 																			<div class="col-md-12">
-																			<div class="col-md-4">Mobile No :</div>
+																			<div class="col-md-4"><label>Mobile No :</label></div>
 																			<div class="col-md-8">
 																			<span><?= h($taxiFleetPromotion->user->mobile_number);?></span>
 																			</div>
@@ -584,9 +588,9 @@ label{
 																		</div>
 																		<div class="row">
 																			<div class="col-md-12">
-																				<div class="col-md-4">Email :</div>
+																				<div class="col-md-4"><label>Email :</label></div>
 																				<div class="col-md-8">
-																				<span><a href="mailto:<?php echo $taxiFleetPromotion->user->email;?>"><?= h($taxiFleetPromotion->user->email);?></a></span>
+																				<span><u><a href="mailto:<?php echo $taxiFleetPromotion->user->email;?>"><?= h($taxiFleetPromotion->user->email);?></a></u></span>
 																				</div>
 																			</div>
 																		</div>

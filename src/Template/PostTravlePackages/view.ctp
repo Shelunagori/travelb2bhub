@@ -62,38 +62,19 @@ if ($err) {
 	background-color:#1295A2;
 	color:white;
 }
-.fleet{
-	font-size:21px;	
-	background-color:white;
-	color:#909591;
-	border:0px;
-}
 
-.unfleet{
-	font-size:21px;	
-	background-color:white;
-	color:#d33c44;
-	border:0px;
-}
 p{ 
 	text-align:center;
 	font-size:10px;
 }
-.lbwidth{
-	color:#716D6F;
-	font-weight:bold;
-	white-space: nowrap;
-	font-size:16px;
-	}
-	label{
-	font-weight: 100;
+
+label{
+	color:#676363;
+	font-weight:600
 }
 hr{
 	margin-top: 15px !important;
     margin-bottom: 4px !important;
-}
-label{
-	//font-weight: 100;
 }
 
 .col-md-4{
@@ -146,7 +127,7 @@ a{
 											}
 									?>
 					<div class="row">
-					<form method="post" class="formsubmit">
+					<form method="post" class="formSubmit">
 					<input type="hidden" name="posttravle_id" value="<?php echo $postTravlePackage->id; ?>"/>
 						<div class="col-md-12">
 							<h3><?= h($postTravlePackage->title) ?></h3>
@@ -171,7 +152,7 @@ a{
 									<tr>
 									<td width="25%" >
 										<span>
-										<?= $this->Html->image('../images/view.png',['style'=>'height:15px;']) ?>
+										<?= $this->Html->image('../images/view.png',['style'=>'height:13px;']) ?>
 										 
 										<?= h($postTravlePackage->total_views);?></span>
 									</td>
@@ -425,7 +406,7 @@ a{
 											</div>
 											<hr></hr>
 											<div class="row">
-												<div class="col-md-12 lbwidth">
+												<div class="col-md-12 ">
 													<span style="color:#676363;font-weight:600;"><?= __('Including in Package') ?></span>
 												</div>
 											</div>
@@ -435,7 +416,7 @@ a{
 												</div>
 											</div><hr></hr>
 											<div class="row">
-												<div class="col-md-12 lbwidth">
+												<div class="col-md-12 ">
 														<span style="color:#676363;font-weight:600;"><?= __('Excluded from Package') ?></span>
 												</div>
 											</div>
@@ -474,7 +455,7 @@ a{
             if (el.tabIndex <= 0) el.tabIndex = 10000;
         });
     });
-	jQuery(".formSubmit").submit(function(){
+		jQuery(".formSubmit").submit(function(){
 						jQuery("#loader-1").show();
 					});
   });
