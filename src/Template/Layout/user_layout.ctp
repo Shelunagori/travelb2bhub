@@ -639,6 +639,21 @@ $(".timepicker").timepicker({
     showInputs: false
 });
 
+ $(function() {
+            function runEffect() {
+
+                var selectedEffect = 'blind';
+
+                var options = {};
+
+                $(".autohide").hide(selectedEffect, options, 500);
+            };
+
+            $(".autohide").click(function() {
+                runEffect();
+                return false;
+            });
+        });
 </script>
 
 </body>
