@@ -151,6 +151,7 @@ legend
 						<?php 
 					$total_rating=0;
 					$rate_count=0;
+					$final_rating=0;
 					$sql1="Select * from `testimonial` where `author_id`='".$row['user']['id']."' ";
 					$stmt1 = $conn->execute($sql1);
 					foreach($stmt1 as $bresul){

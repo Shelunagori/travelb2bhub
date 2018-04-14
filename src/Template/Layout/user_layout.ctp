@@ -304,7 +304,6 @@ p {
  
 </style>
 </head>
-
 <!--<body class="hold-transition skin-blue fixed sidebar-mini">-->
 
 <body class="hold-transition skin-blue fixed sidebar-mini">
@@ -335,7 +334,7 @@ p {
         <ul class="nav navbar-nav" style="padding-top: 2px !important;">
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu" >
-            <a href="#" class="dropdown-toggle chat_clear" data-toggle="dropdown">
+            <a href="#" class="dropdown-toggle " data-toggle="dropdown">
               <i style="font-size: 20px;" class="fa fa-bell-o"></i>
               <span class="label label-warning"><?php echo $chatCount; ?></span>
             </a>
@@ -357,6 +356,7 @@ p {
 							$created = $allchat['created'];
 							$type = $allchat['type']; 
 							$userid = $allchat['user_id'];
+							$notifiId = $allchat['id'];
 							$url='#';
 							$org_date=date('d-m-Y h:i:A', strtotime($created));
 							$new_date=str_replace(" "," at ",$org_date);
@@ -393,8 +393,10 @@ p {
 								$clr="#FB6542";
 							}
  							
+							$backcolor='';
+							if($is_read==1){$backcolor=' style="background-color: #e6e6e66b;opacity: .4;"';}
 							?>
-								<li>
+								<li <?php echo $backcolor; ?> class="chat_clear"  val="<?php echo $notifiId; ?>" >
   									<a class="notify" href="<?php echo $url; ?>">
 										<div>
 										<div style="margin-top:2px;float:right;font-size:10px;">
@@ -587,18 +589,18 @@ p {
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
 $(document).ready(function (){
-	/*$(".chat_clear").on('click',function () {  
+	$(".chat_clear").on('click',function () { 
+		var attrv= $(this).attr('val');
+		//alert(attrv);
 		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'clearreadChats')) ?>";
 		$.ajax({
 			url:url,
 			type: 'POST',
-			data: {clearchat:'1'}
+			data: {chatid:attrv}
 		}).done(function(result){
-			if(result == 1) { 
-				$(".chat_count").html('0');
-			}
+			 //alert(result);
 		});
-	});*/
+	});
 });
 </script>
 <?php echo $this->Html->script('/assets/bootstrap/js/bootstrap.min.js'); ?>
@@ -640,20 +642,20 @@ $(".timepicker").timepicker({
 });
 
  $(function() {
-            function runEffect() {
+	function runEffect() {
 
-                var selectedEffect = 'blind';
+		var selectedEffect = 'blind';
 
-                var options = {};
+		var options = {};
 
-                $(".autohide").hide(selectedEffect, options, 500);
-            };
+		$(".autohide").hide(selectedEffect, options, 500);
+	};
 
-            $(".autohide").click(function() {
-                runEffect();
-                return false;
-            });
-        });
+	$(".autohide").click(function() {
+		runEffect();
+		return false;
+	});
+});
 </script>
 
 </body>

@@ -53,7 +53,24 @@ class UsersController extends AppController {
 		$this->set('roleId',$role_id);
 		$this->loadModel('Requests');
 		$this->loadModel('Responses');
-		
+		$current_date=date('Y-m-d');
+		$conditions[]= array (
+			'OR' => array(
+				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
+				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
+				
+				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
+				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
+			)
+		);
+		//,'Requests.total_response >' =>0
+		$conditionsss[]= array (
+			'OR' => array(
+				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
+				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
+			)
+		);
+		$this->set("respondToRequestCountNew", $this->__getRespondToRequestCount());
 		$this->loadModel('BlockedUsers');
 		$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
 			->hydrate(false)
@@ -73,11 +90,11 @@ class UsersController extends AppController {
 		$BlockedUsers = array_unique($BlockedUsers);
 		array_push($BlockedUsers,$loginId);
 		if(sizeof($BlockedUsers)>0){
-			$conditions["Requests.user_id NOT IN"] =  $BlockedUsers; 
+			$conditionssd["Requests.user_id NOT IN"] =  $BlockedUsers; 
 		}
 		
 		$myRequestCount = 0;
- 		$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
+ 		$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2,$conditions]]);
 		$myRequestCount = $query->count(); 
 		$reqcountNew = $this->getSettings('requestcount');
  		$this->set('reqcountNew', $reqcountNew);
@@ -109,13 +126,106 @@ class UsersController extends AppController {
 		//*--- UserChats
 		$this->loadModel('UserChats');
 		$csort['created'] = "DESC";
-		$NewNotifications = $this->UserChats->find()->contain(['Users'])->where(['UserChats.send_to_user_id'=> $this->Auth->user('id')])->order($csort)->all();
-		$chatCount = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->count();
+		$new_time = date("Y-m-d H:i:s", strtotime('-24 hours'));
+		$totalIds=array();
+		$unreadnotification = $this->UserChats->find()->contain(['Users'])->where(['UserChats.send_to_user_id'=> $this->Auth->user('id'),'created >='=>$new_time,'is_read'=>1])->order($csort)->all();
+		foreach($unreadnotification as $data){
+ 				$totalIds[]=$data['id'];
+		}
+		$unreadnotification2 = $this->UserChats->find()->contain(['Users'])->where(['UserChats.send_to_user_id'=> $this->Auth->user('id'),'is_read'=>0])->order($csort)->all();
+		foreach($unreadnotification2 as $datas){
+			$totalIds[]=$datas['id'];
+		}
+		
+		$NewNotifications = $this->UserChats->find()->contain(['Users'])->where(['UserChats.id IN'=> $totalIds])->order($csort)->all();
+		//.pr($NewNotifications->toArray()); exit;
+		$chatCount = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->count(); 
  		$this->set('chatCount',$chatCount); 
 		$this->set('NewNotifications',$NewNotifications);
 		//pr($NewNotifications); exit;
 		//---
  	}
+	public function __getRespondToRequestCount() {
+		$requests ='';
+		date_default_timezone_set('Asia/Kolkata');
+		$current_time = date("Y-m-d");
+		$this->loadModel('BlockedUsers');
+		$this->loadModel('Requests');
+		$this->loadModel('Responses');
+		$this->loadModel('Hotels');
+		$this->loadModel('User_Chats');
+		$current_date=date('Y-m-d');
+		$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
+		$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
+		->hydrate(false)
+		->where(['blocked_by' => $this->Auth->user('id')])
+		->toArray();
+		if(!empty($BlockedUsers)) {
+			$BlockedUsers = array_values($BlockedUsers);
+		}
+		array_push($BlockedUsers,$this->Auth->user('id'));
+		$BlockedUsers = array_unique($BlockedUsers);
+		$conditions[]= array (
+			'OR' => array(
+				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
+				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
+			)
+		);
+		if ($this->Auth->user('role_id') == 1) { // Travel Agent
+			if(!empty($user["preference"])) {
+				$conditionalStates = array_unique(explode(",", $user["preference"]));
+			} else {
+				$conditionalStates =  $user["state_id"];
+			}
+ 			$requests = $this->Requests->find()
+			->contain(["Users", "Responses"])
+			->notMatching('Responses', function(\Cake\ORM\Query $q) {
+			return $q->where(['Responses.user_id' => $this->Auth->user('id')]);
+			})
+			->where(["OR"=>['Requests.state_id IN' => $conditionalStates, 'Requests.pickup_state IN' => $conditionalStates],$conditions, 'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0])
+			//->group('Requests.id')
+			->order(["Requests.id" => "DESC"]);
+		} 
+		else if ($this->Auth->user('role_id') == 3) { /// Hotel d
+ 			$requests = $this->Requests->find()
+			->contain(["Users", "Responses"])
+			->notMatching('Responses', function(\Cake\ORM\Query $q) {
+			return $q->where(['Responses.user_id' => $this->Auth->user('id')]);
+			})
+			->where(['Requests.city_id' => $user['city_id'], 'Requests.category_id' => 3, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
+			//->group('Requests.id')
+			->order(["Requests.id" => "DESC"]);
+		}
+		else
+		{
+			return  $requests;
+		}
+		$res_request_count = $requests->count();	 
+		$this->loadModel('BlockedUsers');
+		$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
+		->hydrate(false)
+		->where(['blocked_by' => $this->Auth->user('id')])
+		->toArray();
+		if(!empty($BlockedUsers)) {
+			$BlockedUsers = array_values($BlockedUsers);
+		}
+		array_push($BlockedUsers,$this->Auth->user('id'));
+		$BlockedUsers = array_unique($BlockedUsers);
+		if($res_request_count>0){	
+			$loggedinid = $this->Auth->user('id');
+			foreach($requests as $req){
+				$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.request_id' =>$req['id']]])->contain(['Users']);	
+				$total_responses = $queryr->count();
+				$checkblockedUsers = $this->BlockedUsers->find()->where(['blocked_by' => $req['user_id'],'blocked_user_id'=>$loggedinid])->count();        
+				if($checkblockedUsers==1 OR $total_responses>=20){
+					$res_request_count--;
+				}      
+			}
+			return $res_request_count;
+		}
+		
+		return  $res_request_count;
+	}
  	public function loginNew()
 	{
 		$this->viewBuilder()->layout('');
@@ -1611,12 +1721,23 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		$conditions["Requests.pickup_city"] =  $this->request->query("pickup_city");
 		}
 		$sdate = $this->request->query("startdatesearch");
-		//$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+		$current_date=date('Y-m-d');
  		if(!empty($this->request->query("startdatesearch"))) {
 			$sdate=date('Y-m-d', strtotime($sdate));
 			$da["Requests.start_date"] =  $sdate;
 			$da["Requests.check_in"] =  $sdate;
 			$conditions["OR"] =  $da;
+		}
+		else{
+			$conditions[]= array (
+				'OR' => array(
+					array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
+					array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
+					
+					array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
+					array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
+				)
+			);
 		}
 		$edate = $this->request->query("enddatesearch");
 		//$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
@@ -1626,6 +1747,7 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 			$da1["Requests.check_out"] =  $edate;
 			$conditions["OR"] =  $da1;
 		}
+		
 		$conditions["Requests.user_id"] = $this->Auth->user('id');
 		$conditions["Requests.status !="] = 2;
 		$conditions["Requests.is_deleted "] = 0;
@@ -2239,83 +2361,7 @@ $userRating = $query->select(["average_rating" => $query->func()->avg("rating")]
 ->order(["id" => "DESC"]);
 return $userRating;
 }
-	public function __getRespondToRequestCount() {
-		$requests ='';
-		date_default_timezone_set('Asia/Kolkata');
-		$current_time = date("Y-m-d");
-		$this->loadModel('BlockedUsers');
-		$this->loadModel('Requests');
-		$this->loadModel('Responses');
-		$this->loadModel('Hotels');
-		$this->loadModel('User_Chats');
-		$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
-		$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
-		->hydrate(false)
-		->where(['blocked_by' => $this->Auth->user('id')])
-		->toArray();
-		if(!empty($BlockedUsers)) {
-			$BlockedUsers = array_values($BlockedUsers);
-		}
-		array_push($BlockedUsers,$this->Auth->user('id'));
-		$BlockedUsers = array_unique($BlockedUsers);
-
-		if ($this->Auth->user('role_id') == 1) { // Travel Agent
-			if(!empty($user["preference"])) {
-				$conditionalStates = array_unique(array_merge(explode(",", $user["preference"]), array($user["state_id"])));
-			} else {
-				$conditionalStates =  $user["state_id"];
-			}
-			$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
-			$requests = $this->Requests->find()
-			->contain(["Users", "Responses"])
-			->notMatching('Responses', function(\Cake\ORM\Query $q) {
-			return $q->where(['Responses.user_id' => $this->Auth->user('id')]);
-			})
-			->where(["OR"=>['Requests.state_id IN' => $conditionalStates, 'Requests.pickup_state IN' => $conditionalStates],$conditions, 'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0])
-			//->group('Requests.id')
-			->order(["Requests.id" => "DESC"]);
-		} 
-		else if ($this->Auth->user('role_id') == 3) { /// Hotel d
-			$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
-			$requests = $this->Requests->find()
-			->contain(["Users", "Responses"])
-			->notMatching('Responses', function(\Cake\ORM\Query $q) {
-			return $q->where(['Responses.user_id' => $this->Auth->user('id')]);
-			})
-			->where(['Requests.city_id' => $user['city_id'], 'Requests.category_id' => 3, "Requests.status !="=>2, "Requests.is_deleted"=>0,$conditions])
-			//->group('Requests.id')
-			->order(["Requests.id" => "DESC"]);
-		}
-		else
-		{
-			return  $requests;
-		}
-		$res_request_count = $requests->count();	 
-		$this->loadModel('BlockedUsers');
-		$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
-		->hydrate(false)
-		->where(['blocked_by' => $this->Auth->user('id')])
-		->toArray();
-		if(!empty($BlockedUsers)) {
-			$BlockedUsers = array_values($BlockedUsers);
-		}
-		array_push($BlockedUsers,$this->Auth->user('id'));
-		$BlockedUsers = array_unique($BlockedUsers);
-		if($res_request_count>0){	
-			$loggedinid = $this->Auth->user('id');
-			foreach($requests as $req){
-				$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.request_id' =>$req['id']]])->contain(['Users']);	
-				$total_responses = $queryr->count();
-				$checkblockedUsers = $this->BlockedUsers->find()->where(['blocked_by' => $req['user_id'],'blocked_user_id'=>$loggedinid])->count();        
-				if($checkblockedUsers==1 OR $total_responses>=20){
-					$res_request_count--;
-				}      
-			}
-			return $res_request_count;
-		}
-		
-	return  $res_request_count;
-	}
+	
 public function __getUserRespondToRequestCount($userdetail) {
 error_reporting(0);
 $requests ='';
@@ -2609,7 +2655,7 @@ $name = $user['first_name'].' '.$user['last_name'];
 $SendToUser = $TableUser->get($send_to_user_id);
 $SendToUserName = $SendToUser['first_name'].' '.$SendToUser['last_name'];
 
-$message = "$name has accepted your offer. Click here to go to Finalized Requests/Reponses to add a Review for $SendToUserName";
+$message = "$name has accepted your offer. Click here to go to Finalized Requests/Reponses to add a Review for $name";
 $userchatTable = TableRegistry::get('User_Chats');
 $userchats = $userchatTable->newEntity();
 $userchats->request_id = $request_id;
@@ -3223,23 +3269,16 @@ $myReponseCount = $queryr->count();
 $this->set('myReponseCount', $myReponseCount);
 }
 public function clearreadChats() {
+	$chatid=$this->request->data['chatid'];;
 	$this->loadModel('UserChats');
 	date_default_timezone_set('Asia/Kolkata');
 	$loggedinid = $this->Auth->user('id');
 	$conn = ConnectionManager::get('default');
 	 
 	$sql = "UPDATE user_chats SET `is_read` = '1',`read_date_time`='".date("Y-m-d h:i:s")."'
-		 WHERE id IN (
-			 SELECT id FROM (
-				 SELECT id FROM user_chats WHERE send_to_user_id = '".$loggedinid."' AND is_read='0' ORDER BY created DESC  
-				 LIMIT 0, 10
-			 ) tmp
-		 );"; 
-	 $upsql = "UPDATE `user_chats` SET `is_read` = '1',`read_date_time`='".date("Y-m-d h:i:s")."' 
-	 WHERE send_to_user_id = '".$loggedinid."' AND is_read='0' order by created DESC LIMIT 10";
-	 $stmt = $conn->execute($sql);
-	echo $res=1;
-exit;
+		 WHERE `id` = $chatid ;";  
+ 	$stmt = $conn->execute($sql);
+	exit;
 }
 
 public function getnotifications()

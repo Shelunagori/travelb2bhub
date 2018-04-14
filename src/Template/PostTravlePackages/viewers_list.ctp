@@ -114,7 +114,7 @@ input[type=text] {
 		<div class="row" style="padding-bottom:5px;">
 			<div class="col-md-12">
 				<div class="box-header"> 
-					<span class="box-title" style="color:#057F8A;"><b><?= __('Total Likes') ?></b></span>
+					<span class="box-title" style="color:#057F8A;"><b><?= __('Total Views') ?></b></span>
 					<div class="box-tools pull-right " >
 					<input type="text" id="search" placeholder="Type Name or Company">
 					</div>

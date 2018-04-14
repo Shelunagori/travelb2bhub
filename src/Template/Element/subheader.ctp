@@ -137,7 +137,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 										<?php echo $this->Html->image('white-back-icon.png',array('style'=>'height:40px;width:50px')); ?>
 									</td>
 									<td  align="left" style="padding-top:20px; font-size:20px">
-										<?php echo $respondToRequestCount; ?>
+										<?php echo $respondToRequestCountNew; ?>
 									</td>
 								</tr>
 								<tr>
@@ -501,7 +501,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 								</td>
 							</tr>
 							<tr>
-								<td style="font-size:17px"><?php echo $respondToRequestCount; ?></td>
+								<td style="font-size:17px"><?php echo $respondToRequestCountNew; ?></td>
 							</tr>
 						</table>		
 					</div>

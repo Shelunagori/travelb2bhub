@@ -24,7 +24,7 @@ if ($err) {
 } else {
 	$response;
 	$List=json_decode($response);
-	pr($List); exit;
+	//pr($List); exit;
 	$postTravlePackages=$List->getTravelPackages;
 }
 //pr($postTravlePackages); exit;
