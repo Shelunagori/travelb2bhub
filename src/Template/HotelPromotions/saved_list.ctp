@@ -115,9 +115,19 @@ hr{
 	margin-top: 15px !important;
     margin-bottom: 4px !important;
 }
+label{
+	color:#676363;
+	font-weight:600;
+}
+
 .col-md-4{
-	color:#727e8a;
-	 white-space: nowrap;
+	color:#676363;
+	font-weight:600;
+	
+}
+
+a{
+	color:#ac85d6;
 }
 </style>
 <div class="row" >
@@ -149,7 +159,7 @@ hr{
 				<input type="hidden" name="hotelpromotion_id" value="<?php echo $hotelPromotion->id; ?>">
 					<div class="row">
 						<div class="col-md-12" style="padding-top:5px;">
-						<span style="font-size:18px;">	<?php echo $hotelPromotion->hotel_name.' ( <i class="fa fa-star" style="color:#efea65;"></i> '.$hotelPromotion->hotel_rating.' Star Hotel )';?></span>
+						<span style="font-size:16px;">	<?php echo $hotelPromotion->hotel_name.' ( <i class="fa fa-star" style="color:#959595;"></i> '.$hotelPromotion->hotel_rating.' Star Hotel )';?></span>
 						</div>
 					</div>
 					<span class="help-block"></span>
@@ -169,12 +179,12 @@ hr{
 					</div>
 					<hr></hr>
 					<div class="row" style="padding-top:5px;">					
-						<input type="hidden" name="taxifleet_id" value="<?php echo $hotelPromotion->id; ?>">
+						<input type="hidden" name="hotelpromotion_id" value="<?php echo $hotelPromotion->id; ?>">
 								<table  width="100%" style="text-align:center;" >
 								<tr>
 								<td width="25%" >
 								<span>
-								<?php echo $Image=$this->Html->image('../images/view.png',['height'=>'15px']);
+								<?php echo $Image=$this->Html->image('../images/view.png',['height'=>'13px']);
 								?>
 										<?= h($hotelPromotionss->total_views);?></span>
 									</td>
@@ -234,9 +244,9 @@ hr{
 												<div class="row">
 													<div class="col-md-12">
 														<div class="col-md-3">
-															<span class="label1">
+															<label>
 																Select Reason
-															</span>
+															</label>
 														</div>
 														<div class="col-md-9">
 															<div class="reason_list">
@@ -266,7 +276,7 @@ hr{
 												<span class="help-block"></span>
 											</div>
 											<div class="modal-footer" style="height:60px;">
-												<input type="submit" class="btn btn-primary btn-md" name="report_submit" value="Report">
+												<input type="submit" class="btn btn-info btn-md" name="report_submit" value="Report">
 												<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancel</button>
 											</div>
 										</div>
@@ -276,40 +286,48 @@ hr{
 						</div>
 							<div class="col-md-9" style="padding-top:5px;">
 								<div class="col-md-5">
-										<div class="row rowspace">
-											<div class="col-md-12"><span style="color:#727e8a;">Category :</span>
-												<?= h($hotelPromotion->hotel_category->name); ?>
+										<div class="row ">
+											<div class="col-md-12"><label>Category :</label>
+												<span><?= h($hotelPromotion->hotel_category->name); ?></span>
 											</div>
 										</div>
-										<div class="row rowspace">
-											<div class="col-md-12"><span style="color:#727e8a;">Cheapest Room :</span>
-											<span style="color:#1295AB">&#8377;<?= number_format(h($hotelPromotion->cheap_tariff)) ?></span>
+										<div class="row ">
+											<div class="col-md-12"><label>Cheapest Room :</label>
+											<span style="color:#1295AB">&#8377;<?= (h($hotelPromotion->cheap_tariff)) ?></span>
 											</div>
 										</div>
-									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#727e8a;">Most Expensive Room :</span>
-										<span style="color:#1295AB">&#8377;<?= number_format(h($hotelPromotion->expensive_tariff)) ?></span>
+									<div class="row ">
+										<div class="col-md-12"><label>Most Expensive Room :</label>
+										<span style="color:#1295AB">&#8377;<?= (h($hotelPromotion->expensive_tariff)) ?></span>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-7">
-								<div class="row rowspace">
-										<div class="col-md-12 "><span style="color:#727e8a;"><?= __(' Hotelier') ?> :</span>	
-										<span>
-										<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$hotelPromotion->user_id),1);?>
-										<a href="<?php echo $hrefurl; ?>"> 
-										<?php echo $hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name.' ( '.$hotelPromotionss->user_rating.'<i class="fa fa-star"></i> )';?>
-										</a>
-										</span>
+								<div class="row ">
+										<div class="col-md-12 "><label><?= __(' Hotelier') ?> :</label>	
+										<span><u>
+												<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$hotelPromotion->user_id),1);?>
+												<a href="<?php echo $hrefurl; ?>"> 
+												<?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name);?></u>
+												<?php
+												if($hotelPromotionss->user_rating==0)
+												{
+													echo "";
+												}
+												else{
+														echo "(".$hotelPromotionss->user_rating." <i class='fa fa-star'></i> )";
+													}
+												?></a>
+											</span>
 										</div>					
 									</div>
-									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#727e8a;"><?= __(' Website') ?> :</span>
-										<span ><a style="color:#AD4175;" href="http://<?php echo $hotelPromotion->website; ?>" target="blank"><u><?= h($hotelPromotion->website) ?></u></a> </span>
+									<div class="row ">
+										<div class="col-md-12"><label><?= __(' Website') ?> :</label>
+										<span ><a style="color:blue;" href="http://<?php echo $hotelPromotion->website; ?>" target="blank"><u><?= h($hotelPromotion->website) ?></u></a> </span>
 										</div>
 									</div>
-									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#727e8a;"><?= __(' Location') ?> :</span>
+									<div class="row ">
+										<div class="col-md-12"><label><?= __(' Location') ?> :</label>
 										<span ><?= h($hotelPromotion->hotel_location) ?></span>
 										</div>
 									</div>
@@ -337,31 +355,24 @@ hr{
 																		<div class="col-md-12">
 																			<div class="col-md-4">Seller Name :</div>
 																			<div class="col-md-8">
-																				<span>
-																					<?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name);?>
+																				<span><u>
+																					<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$hotelPromotion->user_id),1);?>
+																					<a href="<?php echo $hrefurl; ?>"> 
+																					<?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name);?></u>
 																					<?php
 																					if($hotelPromotionss->user_rating==0)
 																					{
 																						echo "";
 																					}
 																					else{
-																						echo "( ";
-																						for($i=0;$i<$hotelPromotionss->user_rating;$i++)
-																						{
-																							echo "<i class='fa fa-star' style='font-size:10px;color:#efea65;'></i>";
-																							if($i==0)
-																							{
-																								echo "";
-																							}
+																							echo "(".$hotelPromotionss->user_rating." <i class='fa fa-star'></i> )";
 																						}
-																						echo " )";
-																						}
-																					?>
+																					?></a>
 																				</span>
 																			</div>					
 																		</div>
 																	</div>
-																		<div class="row">
+																		<div class="row" style="padding-top:2px;">
 																			<div class="col-md-12">
 																			<div class="col-md-4">Mobile No :</div>
 																			<div class="col-md-8">
@@ -373,11 +384,11 @@ hr{
 																			<div class="col-md-12">
 																				<div class="col-md-4">Email :</div>
 																				<div class="col-md-8">
-																				<span><a href="mailto:<?php echo $hotelPromotion->user->email;?>"><?= h($hotelPromotion->user->email);?></a></span>
+																				<span><u><a href="mailto:<?php echo $hotelPromotion->user->email;?>"><?= h($hotelPromotion->user->email);?></a></u></span>
 																				</div>
 																			</div>
 																		</div>
-																		
+																		<span class="help-block"></span>
 																	</div>
 																	<div class="modal-footer">
 																	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -399,6 +410,9 @@ hr{
 				echo"<div class='row col-md-12 text-center'><tr><th colspan='10' ><span>No Record Found</span></th></tr></div>";
 				}?>
 			</div>
+			<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
+									<div id="loader"></div>
+									</div>
 <h2><span class="show_msg"></span></h2>
 <!-- <div class="paginator">
 <ul class="pagination">

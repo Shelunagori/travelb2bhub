@@ -131,7 +131,7 @@ font-size:20px;
 	pading-bottom:10px!important;
 }
 .rowspace{
-	padding-top:5px;
+	padding-top:0px;
 	font-size:14px;
 }
 .rowspacemodal{
@@ -157,8 +157,6 @@ label{
 a{
 	color:#ac85d6;
 }
-
-
 </style> 
 	<div class="row" >
 		<div class="col-md-12">
@@ -475,31 +473,32 @@ a{
 							</div>
 						</div>
 							<div class="col-md-9 " style="padding-top:8px;">
-								<div class="row col-md-12">
-									<div class="col-md-12"><span style="color:#676363;font-weight:600;">Category :</span>
-										<?= h($vehicleList); ?>
-									</div>
+								<div class="row col-md-12 rowspace">
+										<div class="col-md-12">
+										<label>Category :</label>
+										<span ><?= h($vehicleList); ?></span>
+										</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-7">
 									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#676363;font-weight:600;"><?= __(' Cities of Operation') ?> :</span>
+										<div class="col-md-12"><label ><?= __(' Cities of Operation') ?> :</label>
 										<span><?= h($cityList); ?></span>
 										</div>
 									</div>
 									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#676363;font-weight:600;"><?= __(' States of Operation') ?> :</span>
+										<div class="col-md-12"><label ><?= __(' States of Operation') ?> :</label>
 										<span ><?= h($stateList); ?> </span>
 										</div>
 									</div>
 								</div>
-								<div class="col-md-6">
+								<div class="col-md-5">
 									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#676363;font-weight:600;"><?= __(' Country') ?> :</span>
+										<div class="col-md-12"><label ><?= __(' Country') ?> :</label>
 										<span ><?= h($taxiFleetPromotion->country->country_name); ?> </span>
 										</div>
 									</div>
 									<div class="row rowspace">
-										<div class="col-md-12 "><span style="color:#676363;font-weight:600;"><?= __(' Seller') ?> :</span>	
+										<div class="col-md-12 "><label ><?= __(' Seller') ?> :</label>	
 										<span>
 										<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
 										<a href="<?php echo $hrefurl; ?>"> 
@@ -556,7 +555,7 @@ a{
 																			<div class="col-md-4">
 																			<label>
 																			Seller Name :</label></div>
-																			<div class="col-md-8">
+																		<div class="col-md-8" style="padding-top:2px;">
 																				<span>
 																					<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?>
 																					<?php

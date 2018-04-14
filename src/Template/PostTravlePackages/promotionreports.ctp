@@ -263,6 +263,8 @@ label {
 	</div>
 					<?php }} ?>
 </div>
+<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
+<div id="loader"></div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
     $(document).ready(function () {
@@ -296,5 +298,8 @@ label {
 				$(this).closest('div.mainrow').find('div .payment_amount').val(0);
 			}
 		});
+				jQuery(".formSubmit").submit(function(){
+						jQuery("#loader-1").show();
+					});
 		});
 </script>

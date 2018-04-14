@@ -132,7 +132,7 @@ font-size:20px;
 	pading-bottom:10px!important;
 }
 .rowspace{
-	padding-top:5px;
+	padding-top:0px;
 	font-size:14px;
 }
 .rowspacemodal{
@@ -143,25 +143,18 @@ hr{
 	margin-top: 15px !important;
     margin-bottom: 4px !important;
 }
-.col-md-4{
-	color:#000000;
-	font-weight:600;
-	padding-top:5px;
-	 white-space: nowrap;
-}
+
 label{
-	//font-weight: 100;
+	color:#676363;
+	font-weight:600;
 }
 
 .col-md-4{
-	color:#000000;
+	color:#676363;
 	font-weight:600;
-	padding-top:5px;
-	 white-space: nowrap;
+	
 }
-label{
-	//font-weight: 100;
-}
+
 a{
 	color:#ac85d6;
 }
@@ -363,8 +356,9 @@ a{
 			<span style="font-size:17px;"><?= h($postTravlePackage->title) ?></span>
 			</div>
 			</div>
+			<span class="help-block"></span>
 			<div class="row ">						
-				<div class="col-md-3 rowspace">
+				<div class="col-md-3">
 				<?= $this->Html->image($postTravlePackage->full_image,['id'=>'myImg','style'=>'width:100%;height:80px;','data-target'=>'#imagemodal'.$postTravlePackage->id,'data-toggle'=>'modal',]) ?>
 					<div id="imagemodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-md">
@@ -505,27 +499,28 @@ a{
 											  <div id="caption"></div>
 										</div>
 										<!--------------------image modal End--------------------->
+										<span class="help-block"></span>
 										<div class="col-md-9">
 											<div class="row col-md-12 rowspace">
 													<div class="col-md-12">
-													<span style="color:#676363;font-weight:600;">Category :</span>
+													<label>Category :</label>
 													<span ><?= h($CategoryList); ?></span>
 													</div>
 											</div>
 											<div class="col-md-5">
 												<div class="row rowspace">
-													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Duration :</span> 
+													<div class="col-md-12 "><label>Duration :</label>
 													<span style="color:#FB6542"><?= h($postTravlePackage->duration_day_night) ?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
 													<div class="col-md-12 ">
-													<span style="color:#676363;font-weight:600;"> Starting Price :</span>
+													<label>Starting Price :</label>
 													<span style="color:#1295AB">&#8377; <?php echo number_format(h($postTravlePackage->starting_price)) ;?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
-													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Seller :</span>
+													<div class="col-md-12 "><label>Seller :</label>
 													<span>
 														<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
 														<a href="<?php echo $hrefurl; ?>"> 
@@ -538,17 +533,17 @@ a{
 											</div>
 											<div class="col-md-7">
 											<div class="row rowspace">
-													<div class="col-md-12"><span style="color:#676363;font-weight:600;">Valid Till :</span>
+													<div class="col-md-12"><label>Valid Till :</label>
 													<span><?= h(date('d-M-Y',strtotime($postTravlePackage->valid_date))); ?></span>
 													</div>					
 												</div>	
 												<div class="row rowspace">
-													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Cities :</span>
+													<div class="col-md-12 "><label>Cities :</label>
 													<span ><?= h($cityList); ?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
-													<div class="col-md-12"><span style="color:#676363;font-weight:600;">Country :</span>	
+													<div class="col-md-12"><label>Countries :</label>
 													<span ><?php echo "India"//$postTravlePackage->country->country_name; ?></span>
 													</div>
 												</div>
@@ -623,28 +618,14 @@ a{
 																	<div class="row">
 																		<div class="col-md-12">
 																			<div class="col-md-4">Seller Name :</div>
-																			<div class="col-md-8">
-																				<span>
-																					<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?>
-																					<?php
-																					if($postTravlePackage->user_rating==0)
-																					{
-																						echo "";
-																					}
-																					else{
-																						echo "( ";
-																						for($i=0;$i<$postTravlePackage->user_rating;$i++)
-																						{
-																							echo "<i class='fa fa-star' style='font-size:10px;color:#efea65;'></i>";
-																							if($i==0)
-																							{
-																								echo "";
-																							}
-																						}
-																						echo " )";
-																						}
-																					?>
-																				</span>
+																			<div class="col-md-8" style="padding-top:2px;">
+																			<span>
+																				<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
+																				<a href="<?php echo $hrefurl; ?>"> 
+																				<?php echo "<u>".$postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.'</u> ( '.$postTravlePackage->user_rating.' <i class="fa fa-star"></i> )';?>
+																				</a>
+																			</span>
+
 																			</div>					
 																		</div>
 																	</div>
@@ -652,7 +633,7 @@ a{
 																		<div class="col-md-12">
 																		<div class="col-md-4">Mobile No :</div>
 																		<div class="col-md-8">
-																		<span><?= h($postTravlePackage->user->mobile_number);?></span>
+																		<?= h($postTravlePackage->user->mobile_number);?>
 																		</div>
 																		</div>
 																	</div>
@@ -660,7 +641,7 @@ a{
 																		<div class="col-md-12">
 																			<div class="col-md-4">Email :</div>
 																			<div class="col-md-8">
-																			<span><u><a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a></u></span>
+																			<u><a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a></u>
 																			</div>
 																		</div>
 																	</div>
@@ -668,7 +649,7 @@ a{
 																		<div class="col-md-12">
 																			<div class="col-md-4">Location :</div>
 																			<div class="col-md-8">
-																			<span><?= h($postTravlePackage->user->location);?></span>
+																			<?= h($postTravlePackage->user->location);?>
 																			</div>
 																		</div>
 																	</div>
@@ -686,9 +667,7 @@ a{
 										</div>
 									</div>
 								</div>
-									<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
-									<div id="loader"></div>
-									</div>
+									
 								</form>
 							</fieldset>
 						</div>
@@ -704,7 +683,9 @@ a{
 			<div class="col-md-12 text-center loading" style="display:none">
 				<?=  $this->Html->image('/img/loading.gif', ['style'=>'width:5%;']) ?> .
 			</div>
-			
+			<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
+									<div id="loader"></div>
+									</div>
 				</div>
 <input type="hidden" id="page" value="2">
 <input type="hidden" value="<?php $user_id; ?>" id="user_id">

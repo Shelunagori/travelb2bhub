@@ -147,14 +147,14 @@ input[type=text] {
 						{
 						?>
 					<div class="text-center margin">	
-						<a class=" btn btn-danger btn-sm"  data-target="#unfollow<?php echo $hotelpromotion->id; ?>" data-toggle="modal" >Unfollow</a>
+						<a class=" btn btn-success btn-sm"  data-target="#unfollow<?php echo $hotelpromotion->id; ?>" data-toggle="modal" >Following</a>
 					</div>
 					<?php }
 					else {
 						?>
 					<div class="text-center margin">
 						<a follow_id="<?php echo $hotelpromotion->user_id; ?>" class=" 
-				btn btn-success btn-sm"  data-target="#follow<?php echo $hotelpromotion->id; ?>" data-toggle=modal>follow</a>
+				btn btn-info btn-sm"  data-target="#follow<?php echo $hotelpromotion->id; ?>" data-toggle=modal>follow</a>
 					</div>
 					<?php }}
 					else{?>

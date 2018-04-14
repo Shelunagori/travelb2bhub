@@ -138,7 +138,7 @@ $m=0;
 					<div class="col-md-6"  style="padding-left:30px;">
 						<div class="row">
 							<div class="col-md-12 ">
-							<span style="color:black;font-size:17px;"><?php echo $hotel_promotion->event_detail?></span>
+							<span style="color:black;font-size:17px;"><?php echo $hotel_promotion->hotel_name?></span>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
 							Views :
@@ -176,9 +176,9 @@ $m=0;
 									<div class="modal-content">
 									  <div class="modal-header" >
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h3 class="modal-title">
+											<h4 class="modal-title">
 											Do you want to renew promotion ?
-											</h3>
+											</h4>
 										</div>
 										<div class="modal-body" style="height:80px;">
 										<br>
@@ -192,7 +192,7 @@ $m=0;
 																 
 														<?php				 
 															$options=array();
-															foreach($priceMasters as $Price)
+															foreach($pricemasters as $Price)
 															{
 																$options[] = ['value'=>$Price->id,'text'=>$Price->week,'priceVal'=>$Price->week,'price'=>$Price->price];
 															};
@@ -225,7 +225,7 @@ $m=0;
 											<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
 										</div>
 									</div>
-								<input type="hidden" name="post_travel_id" value="<?php echo $hotel_promotion->id; ?>">
+								<input type="hidden" name="hotel_id" value="<?php echo $hotel_promotion->id; ?>">
 								</form>
 							</div>
 						</div>
@@ -242,9 +242,9 @@ $m=0;
 									<div class="modal-content">
 									  <div class="modal-header" style="height:100px;">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h3 class="modal-title">
+											<h4 class="modal-title">
 											Are you sure ? You want to delete this Promotion
-											</h3>
+											</h4>
 										</div>
 										<div class="modal-footer" style="height:60px;">
 											<button type="submit" name="removepackage"  class=" btn btn-success btn-md" value="yes" name="remove_promotion">Yes</button>
@@ -265,6 +265,9 @@ $m=0;
 	</div>
 					<?php }} ?>
 </div>
+<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
+									<div id="loader"></div>
+									</div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
     $(document).ready(function () {
@@ -290,14 +293,17 @@ $m=0;
 			if(dd<10){  dd='0'+dd } 
 			if(mm<10){  mm='0'+mm } 
 			var date = dd+'-'+mm+'-'+yyyy;	
-			$(this).closest('div.mainrow').find('.visible_date').val(date);
-			$(this).closest('div.mainrow').find('.payment_amount').val(price);
+			$(this).closest('div.mainrow').find('div .visible_date').val(date);
+			$(this).closest('div.mainrow').find('div .payment_amount').val(price);
 			//alert($(this).closest('div.mainrow').html());
 			}
 			else{
-				$(this).closest('div.mainrow').find('.visible_date').val("dd-mm-yyyy");
-				$(this).closest('div.mainrow').find('.payment_amount').val(0);-
+				$(this).closest('div.mainrow').find('div .visible_date').val("dd-mm-yyyy");
+				$(this).closest('div.mainrow').find('div .payment_amount').val(0);
 			}
 		})
+		jQuery(".formSubmit").submit(function(){
+						jQuery("#loader-1").show();
+					});
 		});
 </script>

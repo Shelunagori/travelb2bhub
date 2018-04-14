@@ -419,24 +419,24 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 					<div class="col-md-9">
 						<div class="col-md-6">
 							<div class="row rowspace">
-								<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Cities of Operation :</span>
+								<div class="col-md-12 "><label>Cities of Operation :</label>
 								<span ><?= h($cityList); ?></span>
 								</div>
 							</div>
 							<div class="row rowspace">
-								<div class="col-md-12 "><span style="color:#676363;font-weight:600;">States of Operation :</span>
+								<div class="col-md-12 "><label>States of Operation </label>
 								<span class=""><?= h($stateList); ?></span>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="row rowspace">
-									<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Country :</span>
+									<div class="col-md-12 "><label>Country :</label>
 									<span class=""><?= h($eventPlannerPromotion->country->country_name);?></span>
 									</div>
 								</div>
 								<div class="row rowspace">
-									<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Event Planner :</span>
+									<div class="col-md-12 "><label>Event Planner :</label>
 										<span class="">
 											<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$eventPlannerPromotion->user_id),1);?>
 											<a href="<?php echo $hrefurl; ?>"> 
@@ -489,7 +489,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 												<span class="help-block"></span>
 												<div class="row">
 													<div class="col-md-12">
-														<div class="col-md-4 label1">Seller Name :</div>
+														<div class="col-md-4"><label>Seller Name :</label></div>
 														<div class="col-md-8">
 															<span class="label11">
 																<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?>
@@ -518,7 +518,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 												</div>
 												<div class="row">
 													<div class="col-md-12">
-													<div class="col-md-4 label1">Mobile No :</div>
+													<div class="col-md-4 "><label>Mobile No :</label></div>
 													<div class="col-md-8">
 													<span class="label11"><?= h($eventPlannerPromotion->user->mobile_number);?></span>
 													</div>
@@ -526,7 +526,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 												</div>
 												<div class="row">
 													<div class="col-md-12">
-														<div class="col-md-4 label1">Email :</div>
+														<div class="col-md-4 "><label>Email :</label></div>
 														<div class="col-md-8">
 														<span class="label11"><u><a href="mailto:<?php echo $eventPlannerPromotion->user->email;?>"><?= h($eventPlannerPromotion->user->email);?></a></u></span>
 														</div>

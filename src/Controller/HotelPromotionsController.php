@@ -129,7 +129,7 @@ class HotelPromotionsController extends AppController
 						'hotel_promotion_id' => $hotel_id,
 						'user_id' =>$user_id						 							
 					];
-				 
+				
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
 				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/hotel_promotions/likeHotelPromotions.json",
@@ -153,6 +153,7 @@ class HotelPromotionsController extends AppController
 				} else {
 				 $LikeResult=json_decode($LikeResponse);
 				} 
+				 //pr($LikeResponse);exit;
 				$displayMessage=$LikeResult->message;
 				$this->Flash->success(__($displayMessage));
 				return $this->redirect(['action' => 'view/'.$hotel_id]);
