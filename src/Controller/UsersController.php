@@ -945,7 +945,7 @@ public function viewuserprofile(){
 		$taxboxname=$this->request->data['taxboxname'];
 		$cities=$this->Users->Cities->find()
 		->contain(['States'])
-		->where(['Cities.name Like'=>'%'.$name.'%','Cities.is_deleted'=>0]);
+		->where(['Cities.name Like'=>''.$name.'%','Cities.is_deleted'=>0]);
 		?>
 			<ul id="country-list">
 				<?php foreach($cities as $show){ ?>
@@ -1582,6 +1582,7 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		$this->loadModel('States');
 		$this->loadModel('User_Chats');
 		$this->viewBuilder()->layout('user_layout');	
+		$loginid=$this->Auth->user('id');
 		$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
 		$this->set('users', $user);
 		if(!empty($this->request->query("keyword"))) {
@@ -1670,8 +1671,31 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 				->where($conditions)->order($sort)->all();
 		}
 		$data = array();
+		$this->loadModel('BlockedUsers');
+				$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
+			->hydrate(false)
+			->where(['blocked_by' => $loginid])
+			->toArray();
+		$myBlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_by'])
+			->hydrate(false)
+			->where(['blocked_user_id' => $loginid])
+			->toArray();
+		if(!empty($BlockedUsers)) {
+			$BlockedUsers = array_values($BlockedUsers);
+		}
+		if(!empty($myBlockedUsers)) {
+			$myBlockedUsers = array_values($myBlockedUsers);
+		}
+		$BlockedUsers=array_merge($BlockedUsers,$myBlockedUsers);
+		$BlockedUsers = array_unique($BlockedUsers);
 		foreach($requests as $req){
-		$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.request_id' =>$req['id']]])->contain(['Users']);
+
+	//print_r($BlockedUsers); exit;
+		if(sizeof($BlockedUsers)>0){
+				$conditions["Responses.user_id NOT IN"] =  $BlockedUsers; 
+		}
+			
+		$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.request_id' =>$req['id'],$conditions]])->contain(['Users']);
 		$data['responsecount'][$req['id']]  = $queryr->count();
 		}
 		$this->set('data', $data);
@@ -2444,7 +2468,28 @@ public function checkresponses($id) {
 			$sortorder['Users.last_name'] = "DESC";
 		}
 	}
-	
+	$this->loadModel('BlockedUsers');
+		$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
+			->hydrate(false)
+			->where(['blocked_by' => $loggedinid])
+			->toArray();
+		$myBlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_by'])
+			->hydrate(false)
+			->where(['blocked_user_id' => $loggedinid])
+			->toArray();
+		if(!empty($BlockedUsers)) {
+			$BlockedUsers = array_values($BlockedUsers);
+		}
+		if(!empty($myBlockedUsers)) {
+			$myBlockedUsers = array_values($myBlockedUsers);
+		}
+		$BlockedUsers=array_merge($BlockedUsers,$myBlockedUsers);
+		$BlockedUsers = array_unique($BlockedUsers);
+	//print_r($BlockedUsers); exit;
+		if(sizeof($BlockedUsers)>0){
+				$conditions["Responses.user_id NOT IN"] =  $BlockedUsers; 
+		}
+ 	
 	$responses = $this->Responses->find()
 		->contain(["Users", "Requests", "UserChats","Testimonial"])
 		->where($conditions)

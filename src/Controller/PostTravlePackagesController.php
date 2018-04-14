@@ -661,7 +661,7 @@ class PostTravlePackagesController extends AppController
 		}
 		$this->set(compact('user_id','post_travel_id'));
     }
-	public function viewersList($user_id = null)
+	public function viewersList($post_travel_id = null)
     {
 		$this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');

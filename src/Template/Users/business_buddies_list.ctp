@@ -43,6 +43,7 @@
 							<div class="form-group col-md-12">
 							
 								 <div class="col-md-3">
+<<<<<<< HEAD
 									<b>Name :</b> <a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></a><font color="#1295AB">(<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font> <br>
 								
 									
@@ -50,12 +51,28 @@
 								<div class="col-md-3">
 									<b>Company Name :</b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?>
 								
+=======
+									<b>Name :</b> <a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></a>
+									<?php if($final_rating>0){ ?>
+										<font color="#1295AB">(<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font> 
+									<?php } ?> 
+									<br>
+									
 								</div>
 								<div class="col-md-3">
-								<b>Email :</b> <?php echo ($row['user']['email'])?$row['user']['email']:"-- --"; ?>  
+								<b>Company Name :</b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?>
+							 
+>>>>>>> 118e55841b5ad03cfec520f294c94e9ee2cbb417
+								</div>
+								<div class="col-md-3">
+								<b>Website :</b> <?php echo ($row['user']['web_url'])?$row['user']['web_url']:"-- --"; ?> 
 								</div>
 								<div class="col-md-3" align="center" >
+<<<<<<< HEAD
 									<a style="margin-top: 0px !important;" follow_id="<?php echo $row['id']; ?>" class=" btn btn-danger btn-sm"  data-target="#unfollow<?php echo $row['id']; ?>" data-toggle=modal>Unfollow</a>
+=======
+									<a style="margin-top: 2px !important;" follow_id="<?php echo $row['id']; ?>" class=" btn btn-danger btn-xs"  data-target="#unfollow<?php echo $row['id']; ?>" data-toggle=modal>Unfollow</a>
+>>>>>>> 118e55841b5ad03cfec520f294c94e9ee2cbb417
 									<!-------Delete Modal Start--------->
 												<div id="unfollow<?php echo $row['id']; ?>" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-md" >
@@ -65,7 +82,7 @@
 															  <div class="modal-header"  >
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																	<h4 class="modal-title"  align="left">
-																	Are You Sure, you want to delete this request ?
+																	Are You Sure, you want to Unfollow ?
 																	</h4>
 																</div>
 																<div class="modal-footer" >
