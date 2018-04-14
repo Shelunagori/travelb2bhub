@@ -461,7 +461,7 @@ a{
 															</div>
 														</div>
 													</div>
-												</div>
+												</div><span class="help-block"></span>
 											</div>
 											<div class="modal-footer" style="height:60px;">
 												<input type="submit" class="btn btn-info btn-md" name="report_submit" value="Report">
@@ -499,12 +499,20 @@ a{
 									</div>
 									<div class="row rowspace">
 										<div class="col-md-12 "><label ><?= __(' Seller') ?> :</label>	
-										<span>
-										<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
-										<a href="<?php echo $hrefurl; ?>"> 
-										<?php echo "<u>".$taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name.'</u> ( '.$taxiFleetPromotion->user_rating.'<i class="fa fa-star"></i> )';?>
-										</a>
-										</span>
+										<span><u>
+												<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
+												<a href="<?php echo $hrefurl; ?>"> 
+												<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?></u>
+												<?php
+												if($taxiFleetPromotion->user_rating==0)
+												{
+													echo "";
+												}
+												else{
+														echo "(".$taxiFleetPromotion->user_rating." <i class='fa fa-star'></i> )";
+													}
+												?></a>
+											</span>
 										</div>					
 									</div>
 									<!-----button list-->
@@ -596,7 +604,7 @@ a{
 																				</div>
 																			</div>
 																		</div>
-																	</div>
+																	</div><span class="help-block"></span>
 																	<div class="modal-footer">
 																	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 																	</div>

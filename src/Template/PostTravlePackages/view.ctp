@@ -230,7 +230,9 @@ a{
 																<div class="row">
 																	<div class="col-md-12">
 																		<div class="col-md-3">
-																			<span style="color:#676363;font-weight:600;">
+																			<label>
+																			Select Reason
+																			</label>
 																		</div>
 																		<div class="col-md-9">
 																			<div class="input-field reason_list">
@@ -257,7 +259,7 @@ a{
 																		</div>
 																	</div>
 																</div>
-															</div>
+															</div><span class="help-block"></span>
 															<div class="modal-footer" style="height:60px;">
 																<input type="submit" class="btn btn-info btn-md" name="report_submit" value="Report">
 																<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
@@ -265,8 +267,6 @@ a{
 														</div>
 													</div>
 												</div>
-													
-												
 											</tr>
 										</table>
 										</div>
@@ -292,12 +292,20 @@ a{
 												</div>
 												<div class="row rowspace">
 													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Seller :</span>
-													<span>
-														<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
-														<a href="<?php echo $hrefurl; ?>"> 
-														<?php echo "<u>".$postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.'</u> ( '.$postTravlePackage->user_rating.' <i class="fa fa-star"></i> )';?>
-														</a>
-													</span>
+													<span><u>
+															<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
+															<a href="<?php echo $hrefurl; ?>"> 
+															<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?></u>
+															<?php
+															if($postTravlePackage->user_rating==0)
+															{
+																echo "";
+															}
+															else{
+																	echo "(".$postTravlePackage->user_rating." <i class='fa fa-star'></i> )";
+																}
+															?></a>
+														</span>
 													</div>					
 												</div>
 											</div>
@@ -338,28 +346,21 @@ a{
 																	<div class="row">
 																		<div class="col-md-12">
 																			<div class="col-md-4">Seller Name :</div>
-																			<div class="col-md-8">
-																				<span>
-																					<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?>
-																					<?php
-																					if($postTravlePackage->user_rating==0)
-																					{
-																						echo "";
+																			<div class="col-md-8" style="padding-top:2px;">
+																			<span><u>
+																				<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
+																				<a href="<?php echo $hrefurl; ?>"> 
+																				<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?></u>
+																				<?php
+																				if($postTravlePackage->user_rating==0)
+																				{
+																					echo "";
+																				}
+																				else{
+																						echo "(".$postTravlePackage->user_rating." <i class='fa fa-star'></i> )";
 																					}
-																					else{
-																						echo "( ";
-																						for($i=0;$i<$postTravlePackage->user_rating;$i++)
-																						{
-																							echo "<i class='fa fa-star' style='font-size:10px;color:#efea65;'></i>";
-																							if($i==0)
-																							{
-																								echo "";
-																							}
-																						}
-																						echo " )";
-																						}
-																					?>
-																				</span>
+																				?></a>
+																			</span>
 																			</div>					
 																		</div>
 																	</div>
@@ -367,7 +368,7 @@ a{
 																		<div class="col-md-12">
 																		<div class="col-md-4">Mobile No :</div>
 																		<div class="col-md-8">
-																		<span><?= h($postTravlePackage->user->mobile_number);?></span>
+																		<?= h($postTravlePackage->user->mobile_number);?>
 																		</div>
 																		</div>
 																	</div>
@@ -375,7 +376,7 @@ a{
 																		<div class="col-md-12">
 																			<div class="col-md-4">Email :</div>
 																			<div class="col-md-8">
-																			<span><a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a></span>
+																			<a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a>
 																			</div>
 																		</div>
 																	</div>
@@ -383,7 +384,7 @@ a{
 																		<div class="col-md-12">
 																			<div class="col-md-4">Location :</div>
 																			<div class="col-md-8">
-																			<span><?= h($postTravlePackage->user->location);?></span>
+																			<?= h($postTravlePackage->user->location);?>
 																			</div>
 																		</div>
 																	</div>

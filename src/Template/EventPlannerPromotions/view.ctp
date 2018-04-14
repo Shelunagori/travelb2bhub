@@ -183,10 +183,10 @@ a{
 									<?php 
 											//-- Save Unsave
 											if($issaved=='1'){
-												echo $this->Form->button($this->Html->image('../images/save.png',['style'=>'height:15px;']),['class'=>'btn btn-xs likes','value'=>'button','type'=>'submit','name'=>' savetaxifleet','style'=>'background-color:white;color:#000;border:0px;']);
+												echo $this->Form->button($this->Html->image('../images/save.png',['style'=>'height:15px;']),['class'=>'btn btn-xs likes','value'=>'button','type'=>'submit','name'=>'saveeventplanner','style'=>'background-color:white;color:#000;border:0px;']);
 											}
 											if($issaved=='0'){
-												echo $this->Form->button($this->Html->image('../images/unsave.png',['style'=>'height:15px;']),['class'=>'btn btn-xs likes','value'=>'button','type'=>'submit','name'=>'savetaxifleet','style'=>'background-color:white;color:#000;border:0px;']);
+												echo $this->Form->button($this->Html->image('../images/unsave.png',['style'=>'height:15px;']),['class'=>'btn btn-xs likes','value'=>'button','type'=>'submit','name'=>'saveeventplanner','style'=>'background-color:white;color:#000;border:0px;']);
 											}
 											?>
 											<span style="visibility:hidden;">3</span>
@@ -401,8 +401,7 @@ a{
 	</div> 
 </div>
 <div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
-					<div id="loader"></div>
-					</div>
+<div id="loader"></div></div>
 </section> 
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>	 
@@ -419,7 +418,7 @@ a{
 				$(".report_text").hide();
 			  }
 		})
-				jQuery(".formSubmit").submit(function(){
+				jQuery(".formsubmit").submit(function(){
 						jQuery("#loader-1").show();
 					});
   });

@@ -481,7 +481,7 @@ a{
 																			<div class="col-md-12">
 																				<div class="col-md-4">Email :</div>
 																				<div class="col-md-8">
-																				<span><u><a href="mailto:<?php echo $hotelPromotion->user->email;?>"><?= h($hotelPromotion->user->email);?></a></u></span>
+																				<span><a href="mailto:<?php echo $hotelPromotion->user->email;?>"><?= h($hotelPromotion->user->email);?></a></span>
 																				</div>
 																			</div>
 																		</div>

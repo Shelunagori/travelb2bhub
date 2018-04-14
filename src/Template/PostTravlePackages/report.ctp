@@ -516,16 +516,24 @@ a{
 												<div class="row rowspace">
 													<div class="col-md-12 ">
 													<label>Starting Price :</label>
-													<span style="color:#1295AB">&#8377; <?php echo number_format(h($postTravlePackage->starting_price)) ;?></span>
+													<span style="color:#1295AB">&#8377; <?php echo (h($postTravlePackage->starting_price)) ;?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
 													<div class="col-md-12 "><label>Seller :</label>
-													<span>
+													<span><u>
 														<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
 														<a href="<?php echo $hrefurl; ?>"> 
-														<?php echo "<u>".$postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.'</u> ( '.$postTravlePackage->user_rating.' <i class="fa fa-star"></i> )';?>
-														</a>
+														<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?></u>
+														<?php
+														if($postTravlePackage->user_rating==0)
+														{
+															echo "";
+														}
+														else{
+																echo "(".$postTravlePackage->user_rating." <i class='fa fa-star'></i> )";
+															}
+														?></a>
 													</span>
 													</div>					
 												</div>
@@ -619,13 +627,20 @@ a{
 																		<div class="col-md-12">
 																			<div class="col-md-4">Seller Name :</div>
 																			<div class="col-md-8" style="padding-top:2px;">
-																			<span>
+																			<span><u>
 																				<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
 																				<a href="<?php echo $hrefurl; ?>"> 
-																				<?php echo "<u>".$postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.'</u> ( '.$postTravlePackage->user_rating.' <i class="fa fa-star"></i> )';?>
-																				</a>
+																				<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?></u>
+																				<?php
+																				if($postTravlePackage->user_rating==0)
+																				{
+																					echo "";
+																				}
+																				else{
+																						echo "(".$postTravlePackage->user_rating." <i class='fa fa-star'></i> )";
+																					}
+																				?></a>
 																			</span>
-
 																			</div>					
 																		</div>
 																	</div>
@@ -641,7 +656,7 @@ a{
 																		<div class="col-md-12">
 																			<div class="col-md-4">Email :</div>
 																			<div class="col-md-8">
-																			<u><a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a></u>
+																			<a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a>
 																			</div>
 																		</div>
 																	</div>
