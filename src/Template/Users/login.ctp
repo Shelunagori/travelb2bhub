@@ -22,12 +22,18 @@
 		.error { color: #ff9898; text-align:center; }
 		.alert-warning{ color:#FFF !important;}
 		.alert-danger{ width:95% !important;}
+		 
+		@media only screen and (max-device-width: 480px) {
+        div.rohit {
+            zoom: 2;
+        }
+		 
 	</style>
 </head>
 <body>
 	<div class="limiter">
 		<div class="container-login100 bgdiv">
-			<div class="wrap-login100">
+			<div class="wrap-login100 main_div rohit"  >
 					<center>
 						<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:50%;']) ?>
 					</center>
