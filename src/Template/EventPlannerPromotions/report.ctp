@@ -86,7 +86,7 @@ if ($err) {
 
  ?>
  <style type="text/css">
- fieldset{
+fieldset{
 	margin-bottom:5px !important;
 	border-radius: 6px;
 }
@@ -106,7 +106,7 @@ font-size:20px;
 	pading-bottom:10px!important;
 }
 .rowspace{
-	padding-top:5px;
+	padding-top:0px;
 	font-size:14px;
 }
 .rowspacemodal{
@@ -117,17 +117,18 @@ hr{
 	margin-top: 15px !important;
     margin-bottom: 4px !important;
 }
-.col-md-4{
-	color:#000000;
-	font-weight:600;
-	padding-top:5px;
-	 white-space: nowrap;
+label{
+	color:#676363;
+	font-weight:600
 }
+
+.col-md-4{
+	color:#676363;
+	font-weight:600;
+}
+
 a{
 	color:#ac85d6;
-}
-.label11{
-	font-weight:100;
 }
 </style>
 <div class="row" >
@@ -325,7 +326,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 						<table  width="100%" style="text-align:center;" >
 								<tr>
 								<td width="25%" >
-									<span><img src="../images/view.png" height="15px"/>
+									<span><img src="../images/view.png" height="13px"/>
 									<?= h($eventPlannerPromotion->total_views);?></span>
 								</td>
 								<td width="25%">
@@ -489,10 +490,12 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 												<span class="help-block"></span>
 												<div class="row">
 													<div class="col-md-12">
-														<div class="col-md-4"><label>Seller Name :</label></div>
+														<div class="col-md-4">Seller Name :</div>
 														<div class="col-md-8">
-															<span class="label11">
-																<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?>
+															<span >
+															<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$eventPlannerPromotion->user_id),1);?>
+																<a href="<?php echo $hrefurl; ?>"> 
+																<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?></a>
 														
 																<?php
 																if($eventPlannerPromotion->user_rating==0)
@@ -500,16 +503,8 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 																	echo "";
 																}
 																else{
-																	echo "( ";
-																	for($i=0;$i<$eventPlannerPromotion->user_rating;$i++)
-																	{
-																		echo "<i class='fa fa-star' style='font-size:10px;color:#959191;'></i>";
-																		if($i==0)
-																		{
-																			echo "";
-																		}
-																	}
-																	echo " )";
+																		echo $eventPlannerPromotion->user_rating." ( <i class='fa fa-star'></i> )";
+																		
 																	}
 																?>
 															</span>
@@ -518,17 +513,17 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 												</div>
 												<div class="row">
 													<div class="col-md-12">
-													<div class="col-md-4 "><label>Mobile No :</label></div>
+													<div class="col-md-4 ">Mobile No :</div>
 													<div class="col-md-8">
-													<span class="label11"><?= h($eventPlannerPromotion->user->mobile_number);?></span>
+													<span ><?= h($eventPlannerPromotion->user->mobile_number);?></span>
 													</div>
 													</div>
 												</div>
 												<div class="row">
 													<div class="col-md-12">
-														<div class="col-md-4 "><label>Email :</label></div>
+														<div class="col-md-4 ">Email :<</div>
 														<div class="col-md-8">
-														<span class="label11"><u><a href="mailto:<?php echo $eventPlannerPromotion->user->email;?>"><?= h($eventPlannerPromotion->user->email);?></a></u></span>
+														<span "><u><a href="mailto:<?php echo $eventPlannerPromotion->user->email;?>"><?= h($eventPlannerPromotion->user->email);?></a></u></span>
 														</div>
 													</div>
 												</div>
