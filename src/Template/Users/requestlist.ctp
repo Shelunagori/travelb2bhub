@@ -193,7 +193,7 @@ fieldset
 										 </div>
 										<div class=col-md-1>:</div>
 										<div class=col-md-7>
-											<select class=form-control  name=pickup_city id=pickup_city>
+											<select class="form-control select2"  name=pickup_city id=pickup_city>
 											   <option value="">Select</option>
 											   <?php foreach($allCities1 as $city){?>
 											   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['pickup_city']) AND $_GET['pickup_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
@@ -209,7 +209,7 @@ fieldset
 										 </div>
 										<div class="col-md-1">:</div>
 										<div class="col-md-7">
-											<select class="form-control " name=destination_city id=destination_city>
+											<select class="form-control select2" name=destination_city id=destination_city>
 											   <option value="">Select</option>
 											   <?php foreach($allCities1 as $city){?>
 											   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['destination_city']) AND $_GET['destination_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
@@ -248,12 +248,9 @@ fieldset
                   </div>
                </div>
             </div>
-				<div id="autorefresh_requestlist">
-				<?php if(isset($_GET['sort']) && $_GET['sort']=="resposesnolh") { ?><script>$(document).ready(function(){$(".req").sort(function(n,e){return parseInt(n.id)>parseInt(e.id)}).each(function(){var n=$(this);n.remove(),$(n).appendTo("#cat")})})</script><?php } ?><?php if(isset($_GET['sort']) && $_GET['sort']=="resposesnohl") { ?><script>$(document).ready(function(){$(".req").sort(function(n,e){return parseInt(n.id)<parseInt(e.id)}).each(function(){var n=$(this);n.remove(),$(n).appendTo("#cat")})})</script><?php } ?><?php if(isset($_GET['sort']) && $_GET['sort']=="requesttype") { ?><script>$(document).ready(function(){$(".req").sort(function(n,e){return parseInt(n.id)>parseInt(e.id)}).each(function(){var n=$(this);n.remove(),$(n).appendTo("#cat")})})</script><?php } ?>
-			   
-	<!----------- Main SHow----------->	
-	
-			<?php
+			<div id="autorefresh_requestlist">
+ 	<!----------- Main SHow----------->	
+ 			<?php
             if(count($requests) >0) {
                 $m =0;
 				
@@ -281,6 +278,7 @@ fieldset
 						<div class="col-md-4 req" id="<?php echo $data['responsecount'][$request['id']]; ?>" style="padding-top:5px;">
 					<?php 
 					}
+					 
 					if($request['category_id']==1){ 
 						$image=$this->Html->image('/img/slider/package-icon.png');
 						$text="<span class='packageType'>Package</span>";

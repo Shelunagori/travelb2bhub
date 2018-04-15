@@ -122,7 +122,7 @@ $conn = ConnectionManager::get('default');
 												</div>
 												<div class=col-md-1>:</div>
 												 <div class=col-md-7>
-												  <input type="text" name="agentnamesearch" value="<?php echo isset($_GET['agentnamesearch'])? $_GET['agentnamesearch']:''; ?>"  class="form-control">
+ 												  <?php echo $this->Form->control('agentnamesearch', ['label'=>false,"type"=>"select",'options' =>$selectoption,"class"=>"form-control select2","data-placeholder"=>"Select... ",'empty'=>'Select...']);?>
 												</div>
 											  </div>
 										  </div>
@@ -193,7 +193,7 @@ $conn = ConnectionManager::get('default');
 														 </div>
 														<div class=col-md-1>:</div>
 														<div class=col-md-7>
-															<select class=form-control  name=pickup_city id=pickup_city>
+															<select class="form-control select2"  name=pickup_city id=pickup_city>
 															   <option value="">Select</option>
 															   <?php foreach($allCities1 as $city){?>
 															   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['pickup_city']) AND $_GET['pickup_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
@@ -209,7 +209,7 @@ $conn = ConnectionManager::get('default');
 														 </div>
 														<div class="col-md-1">:</div>
 														<div class="col-md-7">
-															<select class="form-control " name=destination_city id=destination_city>
+															<select class="form-control select2" name=destination_city id=destination_city>
 															   <option value="">Select</option>
 															   <?php foreach($allCities1 as $city){?>
 															   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['destination_city']) AND $_GET['destination_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
