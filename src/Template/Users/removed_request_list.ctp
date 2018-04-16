@@ -72,7 +72,12 @@ $m =0;
                 </li>
 				 <li >
                      <p>
-                        Total Budget : <span class="details">  Rs. <?php echo $request['total_budget']; ?></span>
+						<?php 
+							$total_budget=round($request['total_budget']);
+						?>
+                        Total Budget : <span class="details">
+						<?php echo ($total_budget)? "Rs. ". ($total_budget) :"-- --" ?>
+						</span>
                      </p>
                  </li>
 				<?php if($request['category_id'] == 3 ) { ?>

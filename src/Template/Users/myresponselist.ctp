@@ -407,13 +407,21 @@ $(document).ready(function(){
                     </p>
                  </li>
 				<li >
+					<?php 
+						$total_budget=round($response['request']['total_budget']);
+					?>
 					<p>
-						Total Budget : <span class="details"> &#8377; <?php echo ($response['request']['total_budget'])? "Rs. ". $response['request']['total_budget'] :"-- --" ?>
+						Total Budget : <span class="details"> &#8377; 
+						<?php echo ($total_budget)? "Rs. ". ($total_budget) :"-- --" ?>
 					</p>
 				 </li>
 				 
 				<li class="">
-					 <p>Quotation Price : <span class="details"> <?php echo ($response['quotation_price'])? " &#8377; ".$response['quotation_price']:"-- --" ?></p>
+					<?php 
+						$quotation_price=round($response['quotation_price']);
+					?>
+					 <p>Quotation Price : <span class="details"> 
+					 <?php echo ($quotation_price)? " &#8377; ".($quotation_price) :"-- --" ?></p>
 				</li>
 				<li >
 					<p>

@@ -268,13 +268,23 @@ $(".req").sort(function (a, b) {
 								
 								 <li >
 									<p>
-										Total Budget : <span class="details">Rs. <?php echo $request['total_budget']; ?></span>
+										<?php 
+											$total_budget=round($request['total_budget']);
+										?>
+										Total Budget : <span class="details">
+										<?php echo ($total_budget)? "Rs. ". ($total_budget) :"-- --" ?>
+										</span>
 									</p>
 								</li>
 								
 								 <li >
 									<p>
-										Quotation Price : <span class="details">Rs. <?php echo $finalresponse[$request['id']]['quotation_price']; ?></span>
+										<?php 
+											$quotation_price=round($finalresponse[$request['id']]['quotation_price']);
+										?>
+										Quotation Price : <span class="details">
+										<?php echo ($quotation_price)? "Rs. ". ($quotation_price) :"-- --" ?>
+										</span>
 									</p>
 								</li>
 								

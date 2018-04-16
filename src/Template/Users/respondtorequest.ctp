@@ -364,8 +364,13 @@ $conn = ConnectionManager::get('default');
 						</p>
 					</li>
 					<li class="">
+					<?php 
+						$total_budget=round($request['total_budget']);
+					
+					?>
 						<p>
-							Total Budget :  <span class="details">&#8377; <?php echo ($request['total_budget'])? "". number_format($request['total_budget']) :"-- --" ?>
+							Total Budget :  <span class="details">&#8377; 
+							<?php echo ($total_budget)? "". ($total_budget) :"-- --" ?>
 						</p>
 					</li>
 					<li class="">

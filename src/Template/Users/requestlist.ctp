@@ -305,7 +305,12 @@ fieldset
 								<span class="details"><?php echo $request['reference_id']; ?></span>
 							</p>
 							<p>Total Budget : &nbsp; 
-								<span class="details">&#8377; <?php echo $request['total_budget']; ?></span>
+								<?php 
+									$total_budget=round($request['total_budget']);
+								?>
+								<span class="details">&#8377; 
+								<?php echo ($total_budget)? "". ($total_budget) :"-- --" ?>
+								</span>
 							</p>
 							<?php
 							if($request['category_id']==2){ ?>

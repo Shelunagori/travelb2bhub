@@ -219,12 +219,23 @@ $conn = ConnectionManager::get('default');
                  </li>
 				<li >
 					<p>
-						Total Budget :  <?php echo ($row['request']['total_budget'])? "Rs. ". $row['request']['total_budget'] :"-- --" ?>
+						<?php 
+							$total_budget=round($row['request']['total_budget']);
+						?>
+						Total Budget :  
+						<?php //echo ($row['request']['total_budget'])? "Rs. ". $row['request']['total_budget'] :"-- --" ?>
+						<?php echo ($total_budget)? "Rs. ". ($total_budget) :"-- --" ?>
 					</p>
 				 </li>
 				 
 				<li >
-					 <p>Quotation Price :  <?php echo ($row['quotation_price'])? " Rs. ".$row['quotation_price']:"-- --" ?></p>
+					<p>
+					   <?php 
+							$quotation_price=round($row['quotation_price']);
+						?>
+						 Quotation Price :  
+						 <?php //echo ($row['quotation_price'])? " Rs. ".$row['quotation_price']:"-- --" ?>
+						 <?php echo ($quotation_price)? "Rs. ". ($quotation_price) :"-- --" ?></p>
 				</li>
                 <li class="destination">
 				   <?php if($row['request']['category_id']==2){ ?>
