@@ -211,7 +211,7 @@ fieldset{
 															</div>
 														<div class="col-md-4 form-group">
 															<p for="from">
-																Upload Image of the Promotion
+																Upload Image of Promotion
 																<span class="required">*</span>
 															</p>
 															

@@ -50,7 +50,7 @@ ul li b {
 					<li class="col-md-6"><p>Reference ID : &nbsp;<span style="color:#FB6542"><?php
 					echo $details['reference_id']; ?></span></li>
 					<li class="col-md-6"><p>Total Budget : &nbsp;<span style="color:#1295A2">  &#8377; <?php
-					echo number_format($details['total_budget'] . ""); ?></span></li>
+					echo ($details['total_budget'] . ""); ?></span></li>
 					<li class="col-md-6"><p>Adult : &nbsp; <?php
 					echo "<b>".$details['adult']."</b>"; ?></li>
 					<li class="col-md-6"><p>Children below 6 : &nbsp; <b><?php

@@ -1,4 +1,8 @@
-
+<style>
+.unfollow{
+	width:70px;
+}
+</style>
 <div class="container-fluid" id="business_buddies_list">
 <div class="row equal_column" > 
     <div class="col-md-12" > 
@@ -75,8 +79,8 @@
 																	</h4>
 																</div>
 																<div class="modal-footer" >
-																	<button type="button" follow_id="<?php echo $row['id']; ?>" class="unfollow btn btn-danger" value="yes" >Yes</button>
-																	<button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
+																	<button type="button" follow_id="<?php echo $row['id']; ?>" class="unfollow btn btn-info input-md" value="yes" >Yes</button>
+																	<button type="button" class="btn btn-danger input-md" data-dismiss="modal">Cancel</button>
 																</div>
 															</div>
 														</form>
