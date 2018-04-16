@@ -111,6 +111,10 @@ if ($err) {
 }
 ?>
 <style>
+.select2-container--default .select2-results__option[aria-disabled=true] {
+    display: none;
+}
+
 .hr{
 	margin-top:25px !important;
 }
@@ -309,10 +313,11 @@ fieldset{
 																</p>
 																<div class="input-field">
 																<?php  
+																// pr($city);
 																$options=array();
 																foreach($city->citystatefi as $cty)
 																{
-																	$options[] = ['value'=>$cty->cityid,'text'=>$cty->name];
+																	$options[] = ['value'=>$cty->cityid,'text'=>$cty->name, 'country_id'=>$cty->country_id];
 																};
 																echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
 																<label style="display:none" class="helpblock error" > This field is required.</label>
@@ -434,6 +439,28 @@ fieldset{
 			}
 		});
 		
+		$(document).on('change','.cntry',function()
+		{
+			var country_id=$('option:selected', this).val();
+			
+		var countries = [];
+        $.each($(".cntry option:selected"), function(){
+            countries.push($(this).val());
+        });
+         
+			$("#multi_city option").each(function()
+			{
+				var r=$(this).val();
+				var city_country_id=$(this).attr('country_id');
+				
+			  if(jQuery.inArray( city_country_id, countries )){
+					 $(this).prop('disabled', false);
+				}else{
+					$(this).prop('disabled', true);
+				}  
+			});
+			 
+		});	
 		$(document).on('change','.priceMasters',function()
 		{
 			var priceVal=$('.priceMasters option:selected').attr('priceVal');
@@ -467,12 +494,12 @@ fieldset{
 				{
 					$options[] = ['value'=>$country->id,'text'=>$country->country_name];
 				};
-				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select City "]);?>');
+				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select City "]);?>');
 			}
 			else{
 				$(".replacedata").html('<?php $options=array();
 				$options[] = ['value'=>'101','text'=>'India','selected'];
-				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
+				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry","multiple"=>true ,'options' => $options,'label'=>false]);
 				?>');
 			}
 			$('.select2').select2();
