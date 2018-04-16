@@ -605,11 +605,11 @@ $(document).ready(function (){
 });
 </script>
 <script type="text/javascript">
-	setInterval(function(){ abc(); }, 3000);
+	setInterval(function(){ abc(); }, 2000);
 		function abc()
 		{ 	 
-			$('#msg_div').fadeOut(500);
-			var delay = 500;
+			$('#msg_div').fadeOut(300);
+			var delay = 300;
 			setTimeout(function() {
 				$('#msg_div').remove();
 			}, delay);
@@ -653,21 +653,7 @@ $(".timepicker").timepicker({
     showInputs: false
 });
 
- $(function() {
-	function runEffect() {
-
-		var selectedEffect = 'blind';
-
-		var options = {};
-
-		$(".autohide").hide(selectedEffect, options, 500);
-	};
-
-	$(".autohide").click(function() {
-		runEffect();
-		return false;
-	});
-});
+ 
 </script>
 
 </body>

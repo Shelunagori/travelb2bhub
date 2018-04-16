@@ -534,7 +534,7 @@ a{
 													<div class="col-md-12 "><label>Seller :</label>
 													<span><u>
 														<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
-														<a href="<?php echo $hrefurl; ?>"> 
+														<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>">
 														<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?></u>
 														<?php
 														if($postTravlePackage->user_rating==0)
@@ -640,7 +640,7 @@ a{
 																			<div class="col-md-8" style="padding-top:2px;">
 																			<span><u>
 																				<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
-																				<a href="<?php echo $hrefurl; ?>"> 
+																				<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>"> 
 																				<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?></u>
 																				<?php
 																				if($postTravlePackage->user_rating==0)

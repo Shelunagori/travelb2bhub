@@ -188,7 +188,7 @@ label {
 											Do you want to renew promotion ?
 											</h3>
 										</div>
-										<div class="modal-body" >
+										<div class="modal-body">
 										<br>
 											<div class="row mainrow">
 												<div class="col-md-12">
