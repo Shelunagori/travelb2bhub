@@ -39,7 +39,6 @@ class UsersController extends AppController {
 	}
 	public function initialize()
 	{
-		
 		parent::initialize();
 		$this->Auth->allow(['logout']);
 		$first_name=$this->Auth->User('first_name');
