@@ -2849,14 +2849,7 @@ public function myresponselist() {
 		$sort['Users.last_name'] = "DESC";
 	}
 	if(!empty($this->request->query("agentnamesearch"))) {
-		$keyword1 = '';
-		$keyword2 = '';
-		$keyword = trim($this->request->query("agentnamesearch"));
-		$keyword = explode(' ',$keyword);
-		if(isset($keyword[1])) {
-			$keyword2 = $keyword[1];
-		}
-		$conditions["AND"] = array("Users.first_name LIKE "=>"%". $keyword[0]."%", "Users.last_name LIKE" => "%".$keyword2."%",);
+		 $conditions["Requests.user_id"] =  $this->request->query("agentnamesearch");
 	}
 	if(!empty($this->request->query("req_typesearch"))) {
 		$typeSearchArray=$this->request->query("req_typesearch");  
