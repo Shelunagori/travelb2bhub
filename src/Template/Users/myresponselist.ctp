@@ -119,7 +119,7 @@ $conn = ConnectionManager::get('default');
 		</div>
 		<div class=col-md-1>:</div>
 		 <div class=col-md-7>
-		  <input type="text" name="agentnamesearch" value="<?php echo isset($_GET['agentnamesearch'])? $_GET['agentnamesearch']:''; ?>"  class="form-control">
+		  <?php echo $this->Form->control('agentnamesearch', ['label'=>false,"type"=>"select",'options' =>$selectoption,"class"=>"form-control select2","data-placeholder"=>"Select... ",'empty'=>'Select...']);?>
 		</div>
 		</div>
 		</div>

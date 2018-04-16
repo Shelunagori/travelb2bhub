@@ -2194,7 +2194,6 @@ public function respondtorequest() {
 		$sort['Users.first_name'] = "DESC";
 		$sort['Users.last_name'] = "DESC";
 	}
-	//$conditions["OR"] = array("Requests.check_in >="=> $current_time, "Requests.start_date >="=> $current_time);
 	if(!empty($this->request->query("agentnamesearch"))) {
 		$conditions["Requests.user_id"] =  $this->request->query("agentnamesearch");
  	}
@@ -2226,6 +2225,15 @@ public function respondtorequest() {
 			'OR' => array(
 				array("Requests.start_date >=" =>  $sdate,'Requests.category_id'=> 2),
 				array("Requests.check_in >=" =>  $sdate,'Requests.category_id !='=> 2),
+			)
+		);
+	}
+	else {
+		$current_date=date('Y-m-d');
+		$conditions[]= array (
+			'OR' => array(
+				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
+				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
 			)
 		);
 	}
@@ -2303,6 +2311,7 @@ foreach($requests as $req){
 	$resdata['responsecount'][$req['id']]  = $queryr->count();
  	$selectoption[] = ['value'=>$req->user->id,'text'=>$req->user->first_name.' '.$req->user->last_name];
 }
+$selectoption=array_unique($selectoption); 
 $this->set('resdata', $resdata);
 $this->set('selectoption', $selectoption);
 $this->set('requests', $requests);
@@ -2911,9 +2920,8 @@ public function myresponselist() {
 		}
 		$BlockedUsers=array_merge($BlockedUsers,$myBlockedUsers);
 		$BlockedUsers = array_unique($BlockedUsers);
-	//print_r($BlockedUsers); exit;
 		if(sizeof($BlockedUsers)>0){
-				$conditions["Requests.user_id NOT IN"] =  $BlockedUsers; 
+			$conditions["Requests.user_id NOT IN"] =  $BlockedUsers; 
 		}
  	
 	$responses = $this->Responses->find()
@@ -2924,10 +2932,15 @@ public function myresponselist() {
 	$blockeddata = array();
 	$reqidarray = array();
 	$chatdata = array();
+	$selectoption = array();
 	$loggedinid = $this->Auth->user('id');
 	if(count($responses)>0){
+		 
 		foreach($responses as $req){
- 				 
+		 
+			$selectoption[] = ['value'=>$req->request->user->id,'text'=>$req->request->user->first_name.' '.$req->request->user->last_name];
+			//pr($selectoption); exit;
+	
 			$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$req['user_id']."' AND blocked_by='".$req['request']['user_id']."'";
 			$stmt = $conn->execute($sql1);
 			$bresult = $stmt ->fetch('assoc');
@@ -2951,8 +2964,9 @@ public function myresponselist() {
 		
 
 	}
-	  
+	$selectoption=array_unique($selectoption); 
 	$this->set('chatdata', $chatdata);
+	$this->set('selectoption', $selectoption);
 	$this->set('blockedUser', $blockeddata);
 	//debug($responses);
 	//	die();
