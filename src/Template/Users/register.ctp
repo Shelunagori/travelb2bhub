@@ -53,6 +53,11 @@ hr { margin-top:0px!important;}
     background-color: inherit !important;
 }
 .alert-warning{ color:#FFF !important;}	
+
+@media only screen and (max-device-width: 480px) {
+        div.rohit {
+            zoom: 2.5;
+        }
 </style>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,7 +89,7 @@ hr { margin-top:0px!important;}
 <body>
 	<div class="limiter">
 		<div class="container-login100 bgdiv">
-			<div class="wrap-login100" style="width: 920px !important;">
+			<div class="wrap-login100 rohit" style="width: 920px !important;">
 				<center>
 					<?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:10%;']) ?>
 				</center>
