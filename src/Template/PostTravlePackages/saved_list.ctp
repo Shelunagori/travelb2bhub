@@ -24,7 +24,7 @@ if ($err) {
 } else {
 	$response;
 	$List=json_decode($response);
-	pr($List); exit;
+	//pr($List); exit;
 	$postTravlePackages=$List->postTravelPackageCarts;
 }
 //pr($postTravlePackages); exit;
@@ -189,7 +189,17 @@ a{
 									$CategoryList.=$category->post_travle_package_category->name;
 									$x++;
 								}
-											
+									$countryList='';
+											$p=0;
+											foreach($postTravlePackage->post_travle_package_countries as $countries)
+											{
+												//pr($cities);exit;
+												if($p>=1){
+													$countryList.=', ';
+												}
+												$countryList.=$countries->country->country_name;
+												$p++;
+											}		
 										
 									$cityList='';
 									$z=0;

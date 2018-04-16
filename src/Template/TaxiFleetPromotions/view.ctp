@@ -284,11 +284,19 @@ a{
 									</div>
 									<div class="row rowspace">
 										<div class="col-md-12 "><span style="color:#676363;font-weight:600;"><?= __(' Seller') ?> :</span>	
-										<span>
-										<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
-										<a href="<?php echo $hrefurl; ?>"> 
-										<?php echo "<u>".$taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name.'</u> ( '.$taxiFleetPromotion->user_rating.'<i class="fa fa-star"></i> )';?>
-										</a>
+										<span><u>
+											<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
+											<a href="<?php echo $hrefurl; ?>"> 
+											<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?></u>
+											<?php
+											if($taxiFleetPromotion->user_rating==0)
+											{
+												echo "";
+											}
+											else{
+													echo "(".$taxiFleetPromotion->user_rating." <i class='fa fa-star'></i> )";
+												}
+											?></a>
 										</span>
 										</div>					
 									</div>
@@ -312,35 +320,28 @@ a{
 																	<div class="modal-body">
 																		<span class="help-block"></span>
 																		<div class="row">
-																		<div class="col-md-12">
-																			<div class="col-md-4">
-																			<label>
-																			Seller Name :</label></div>
-																			<div class="col-md-8">
-																				<span>
-																					<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?>
+																			<div class="col-md-12">
+																				<div class="col-md-4">
+																				<label>
+																				Seller Name :</label></div>
+																				<div class="col-md-8">
+																					<span><u>
+																					<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
+																					<a href="<?php echo $hrefurl; ?>"> 
+																					<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?></u>
 																					<?php
 																					if($taxiFleetPromotion->user_rating==0)
 																					{
 																						echo "";
 																					}
 																					else{
-																						echo "( ";
-																						for($i=0;$i<$taxiFleetPromotion->user_rating;$i++)
-																						{
-																							echo "<i class='fa fa-star' style='font-size:10px;color:#efea65;'></i>";
-																							if($i==0)
-																							{
-																								echo "";
-																							}
+																							echo "(".$taxiFleetPromotion->user_rating." <i class='fa fa-star'></i> )";
 																						}
-																						echo " )";
-																						}
-																					?>
+																					?></a>
 																				</span>
-																			</div>					
+																				</div>					
+																			</div>
 																		</div>
-																	</div>
 																		<div class="row">
 																			<div class="col-md-12">
 																			<div class="col-md-4"><label>Mobile No :</label></div>
@@ -379,7 +380,7 @@ a{
 								<span style="color:#676363;font-weight:600;"><?= __('Fleet Details') ?></span>
 						</div>
 					</div>
-					<div class="row">
+					<div class="row rowspace">
 						<div class="col-md-12">
 							<?= (h($taxiFleetPromotion->fleet_detail)); ?>
 						</div>

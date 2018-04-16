@@ -122,7 +122,7 @@ a{
 												if($z>=1){
 													$cityList.=' , ';
 												}
-												$cityList.=$cities->city->name;
+												$cityList.=$cities->city->name." ( ".$cities->city->state->state_name." )";
 												$z++;
 											}
 									?>
@@ -322,7 +322,7 @@ a{
 												</div>
 												<div class="row rowspace">
 													<div class="col-md-12"><span style="color:#676363;font-weight:600;">Country :</span>	
-													<span ><?php echo "India"//$postTravlePackage->country->country_name; ?></span>
+													<span ><?=h($countryList); ?></span>
 													</div>
 												</div>
 												

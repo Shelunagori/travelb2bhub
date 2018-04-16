@@ -24,7 +24,7 @@ if ($err) {
 } else {
 	$response;
 	$List=json_decode($response);
-	pr($List); exit;
+	//pr($List); exit;
 	$postTravlePackages=$List->getTravelPackages;
 }
 //pr($postTravlePackages); exit;
@@ -347,15 +347,15 @@ a{
 												$z++;
 											}
 											$countryList='';
-											$z=0;
+											$p=0;
 											foreach($postTravlePackage->post_travle_package_countries as $countries)
 											{
 												//pr($cities);exit;
-												if($z>=1){
+												if($p>=1){
 													$countryList.=', ';
 												}
 												$countryList.=$countries->country->country_name;
-												$z++;
+												$p++;
 											}
 						?>
 
