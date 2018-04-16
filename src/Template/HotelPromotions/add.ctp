@@ -151,88 +151,45 @@ fieldset{
 					<legend style="color:#369FA1;"><b> &nbsp; <?= __('Hotel Details ') ?> &nbsp;  </b></legend>
 						<div class="row">
 							<div class="col-md-12">
-								<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt form-group">
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
+									<p for="from">
+										User Name
+									<span class="required">*</span>
+									</p>
+									<div class="input-field">
+									<?php 
+									 //pr($userss);exit;
+									 echo $this->Form->input('user_name',['class'=>'form-control ','label'=>false,'placeholder'=>"Enter Your Hotel Name",'value'=>$userss['first_name'].$userss['last_name'],'readonly']);?>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
 									<p for="from">
 										Hotel Name
-								<span class="required">*</span>
-							</p>
-							<div class="input-field">
-								 <?php echo $this->Form->input('hotel_name',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>"Enter Your Hotel Name",]);?>
-								 <label style="display:none" class="helpblock error" > This field is required.</label>
+									<span class="required">*</span>
+									</p>
+									<div class="input-field">
+									<?php 
+									 //pr($userss['company_name']);exit;
+									 echo $this->Form->input('hotel_name',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>"Enter Your Hotel Name",'value'=>$userss['company_name'],'readonly']);?>
+									 <label style="display:none" class="helpblock error" > This field is required.</label>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
+									<p for="from">
+										Upload Image of Hotel	
+										<span class="required">*</span>
+									</p>
+									<div class="input-field">
+										 <?php echo $this->Form->input('hotel_pic',['class'=>'form-control imgInp requiredfield','label'=>false,'type'=>'file','id'=>'hotelImg', 'onchange' => 'checkCertificate()']);?>
+										  <span style="color: red;font-size: 13px;"><b>File Type:</b> jpeg/jpg/png</span>&nbsp;&nbsp;&nbsp;<span style="color: red;font-size: 13px;">Max Size: 2 MB</span>
+										  <label style="display:none" class="helpblock error" > This field is required.</label>
+									</div>
+								</div>
 							</div>
 						</div>
-						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt form-group">
-										<p for="from">
-											Select Hotel Category
-											<span class="required">*</span>
-										</p>
-										<div class="input-field">
-											 <?php
-												$options=array();
-												foreach($hotelcategory as $cat)
-												{
-													$options[] = ['value'=>$cat->id,'text'=>$cat->name];
-												};
-												
-												echo $this->Form->input('hotel_category_id',['class'=>'form-control select2 requiredfield','options' => $options,'label'=>false,"empty"=>"Select Hotel Category"]);?>
-												<label style="display:none" class="helpblock error" > This field is required.</label>
-										</div>
-									</div>
-								</div>
-							</div> 
-							<div class="row">
-								<div class="col-md-12">
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt form-group">
-										<p for="from">
-											Hotel Location (Address, City, State)
-											<span class="required">*</span>
-										</p>
-										<div class="input-field">
-										 <?php echo $this->Form->input('hotel_location',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>"Enter Your Hotel Location (City, State)"]);?>
-										 <label style="display:none" class="helpblock error" > This field is required.</label>
-											
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt form-group">
-										<p for="from">
-											Hotel Website
-										</p>
-										<div class="input-field">
-										 <?php echo $this->Form->input('website',['class'=>'form-control','label'=>false,'placeholder'=>"Enter Your Website"]);?>
-											
-										</div>
-									</div>
-									
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-12">
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt form-group">
-										<p for="from">
-											Cheapest Room Rate
-											<span class="required">*</span>
-										</p>
-										<div class="input-field">
-										 <?php echo $this->Form->input('cheap_tariff',['class'=>'form-control requiredfield','label'=>false,'type'=>'number','placeholder'=>"Cheapest Room Rate"]);?>
-										 <label style="display:none" class="helpblock error" > This field is required.</label>
-											
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt form-group">
-										<p for="from">
-											Most Expensive Room Rate
-											<span class="required">*</span>
-										</p>
-										<div class="input-field">
-											 <?php echo $this->Form->input('expensive_tariff',['class'=>'form-control requiredfield','label'=>false,'type'=>'number','placeholder'=>"Most Expensive Room Rate"]);?>
-											 <label style="display:none" class="helpblock error" > This field is required.</label>
-										</div>
-									</div>
-								</div>
-							</div> 	
-							<div class="row">
-								<div class="col-md-12">
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt form-group">
+						<div class="row">
+							<div class="col-md-12">	
+									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
 										<div class="input-field">
 												<p for="from">
 													Hotel Rating
@@ -251,26 +208,76 @@ fieldset{
 											   <input class="star star-1" id="star-1-21" type="radio" value="1" name="hotel_rating"/>
 											   <label class="star star-1" for="star-1-21"></label>
 										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt form-group">
+									</div>								
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
 											<p for="from">
-												Photograph of the Hotel	
+												Select Hotel Category
 												<span class="required">*</span>
 											</p>
 											<div class="input-field">
-												 <?php echo $this->Form->input('hotel_pic',['class'=>'form-control imgInp requiredfield','label'=>false,'type'=>'file','id'=>'hotelImg', 'onchange' => 'checkCertificate()']);?>
-												  <span style="color: red;font-size: 13px;"><b>File Type:</b> jpeg/jpg/png</span>&nbsp;&nbsp;&nbsp;<span style="color: red;font-size: 13px;">Max Size: 2 MB</span>
-												  <label style="display:none" class="helpblock error" > This field is required.</label>
+												 <?php
+													$options=array();
+													foreach($hotelcategory as $cat)
+													{
+														$options[] = ['value'=>$cat->id,'text'=>$cat->name];
+													};
+													
+													echo $this->Form->input('hotel_category_id',['class'=>'form-control select2 requiredfield','options' => $options,'label'=>false,"empty"=>"Select Hotel Category"]);?>
+													<label style="display:none" class="helpblock error" > This field is required.</label>
 											</div>
+										</div>
+										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
+										<p for="from">
+											Hotel Website
+										</p>
+										<div class="input-field">
+										 <?php echo $this->Form->input('website',['class'=>'form-control','label'=>false,'placeholder'=>"Enter Your Website",'value'=>$userss['web_url']]);?>
 										</div>
 									</div>
 								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
+										<p for="from">
+											Hotel Location (Address, City, State)
+											<span class="required">*</span>
+										</p>
+										<div class="input-field">
+										 <?php echo $this->Form->input('hotel_location',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>"Enter Your Hotel Location (City, State)",'value'=>$userss['adress1'].$userss['locality']]);?>
+										 <label style="display:none" class="helpblock error" > This field is required.</label>
+											
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
+										<p for="from">
+											Cheapest Room Rate
+											<span class="required">*</span>
+										</p>
+										<div class="input-field">
+										 <?php echo $this->Form->input('cheap_tariff',['class'=>'form-control requiredfield','label'=>false,'type'=>'number','placeholder'=>"Cheapest Room Rate"]);?>
+										 <label style="display:none" class="helpblock error" > This field is required.</label>
+											
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
+										<p for="from">
+											Most Expensive Room Rate
+											<span class="required">*</span>
+										</p>
+										<div class="input-field">
+											 <?php echo $this->Form->input('expensive_tariff',['class'=>'form-control requiredfield','label'=>false,'type'=>'number','placeholder'=>"Most Expensive Room Rate"]);?>
+											 <label style="display:none" class="helpblock error" > This field is required.</label>
+										</div>
+									</div>
+								</div>
+							</div> 	
 						</fieldset> 
 						<fieldset>
 							<legend style="color:#369FA1;"><b> &nbsp; <?= __(' Payment Details') ?> &nbsp;  </b></legend>
 							<div class="row">
 								<div class="col-md-12">
-										<div class="col-md-4 form-group">
+										<div class="col-md-6 form-group">
 											<p for="from">
 												Select Promotion Duration
 												<span class="required">*</span>
@@ -286,24 +293,16 @@ fieldset{
 												 <label style="display:none" class="helpblock error" > This field is required.</label>
 											</div>
 										</div>
-								<div class="col-md-4 form-group">
+										<div class="col-md-6 form-group">
 											<p for="from">
 												Charges
 											</p>
 											<div class="input-field">
-										<?php echo $this->Form->input('total_charges', ['class'=>'form-control charges','label'=>false,"placeholder"=>"Total Charges",'readonly'=>'readonly','type'=>'text']); ?>
+											<?php echo $this->Form->input('total_charges', ['class'=>'form-control charges','label'=>false,"placeholder"=>"Total Charges",'readonly'=>'readonly','type'=>'text']); ?>
+											</div>
 										</div>
-									</div>
-									<div class="col-md-4 form-group">
-											<p for="from">
-												Visible Date
-											</p>
-											<div class="input-field">
-										<?php echo $this->Form->input('visible_date', ['data-date-format'=>'dd/mm/yyyy','class'=>'form-control visible_date','label'=>false,"placeholder"=>"Visibility Date",'readonly'=>'readonly','type'=>'text']); ?>
-										</div>
-									</div>
-								</div>
-							</div> 	
+									</div> 	
+								</div> 	
 								<div class="row">
 									<div class="col-md-12">
 										<div class="input-field">
@@ -350,20 +349,6 @@ fieldset{
 			//alert(price);
 				var Result = priceVal.split(" ");
 				var weeks=Result[0];
-				//alert(weeks);
-				//var charges=weeks*price;
-				var todaydate = new Date(); // Parse date
-				for(var x=0; x < weeks; x++)
-				{
-					todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
-				}
-				var dd = todaydate .getDate();
-				var mm = todaydate .getMonth()+1; //January is 0!
-				var yyyy = todaydate .getFullYear();
-				if(dd<10){  dd='0'+dd } 
-				if(mm<10){  mm='0'+mm } 
-				var date = dd+'-'+mm+'-'+yyyy;	
-				$('.visible_date').val(date);
 				$('.charges').val(price);
 		});
 	});		

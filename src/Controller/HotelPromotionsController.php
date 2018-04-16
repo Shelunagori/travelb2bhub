@@ -370,9 +370,9 @@ class HotelPromotionsController extends AppController
     {
 		
 		$this->viewBuilder()->layout('user_layout');
-		
 		$user_id=$this->Auth->User('id');
-		$this->set(compact('user_id'));
+		$userss=$this->Auth->User();
+		$this->set(compact('user_id','userss'));
     }
 
     /**
