@@ -28,14 +28,12 @@
 		<div class="container-login100 bgdiv">
 			<div class="wrap-login100">
 					<center>
-						<?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:20%;']) ?>
+						<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:50%;']) ?>
 					</center>
-					<span class="login100-form-title p-b-34 p-t-27">
-						TRAVEL B2b HUB
-					</span>			
+						<br>	
 				<?php  echo $this->Form->create("User", ['id'=>"UserRegisterForm",'class'=>'login100-form validate-form']); ?>
 					<div class="text-center">
-						<p style="color:#fff"> Forgot Password </p>
+						<span style="color:#fff"> Forgot Password </span>
 					</div> <br />
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
 						<input class="input100" type="text" name="mobile_number" placeholder="Mobile no.">
