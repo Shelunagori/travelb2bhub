@@ -287,7 +287,7 @@ p {
 	/* Logo for Mobile */
 	.logo-lg {
 		width: 220px;
-		height: 60px;
+		height: 55px;
 		background-image: url(‘http://wordpress.coastalrepro.com/wp-content/uploads/2013/06/coastalcreative-logo-mobile.png’);
 		background-size: 250px 47px;
 	}
@@ -296,7 +296,7 @@ p {
 	/* Logo for Mobile */
 	.logo-lg {
 		width: 210px;
-		height: 60px;
+		height: 55px;
 		background-image: url(‘http://wordpress.coastalrepro.com/wp-content/uploads/2013/06/coastalcreative-logo-mobile.png’);
 		background-size: 250px 47px;
 	}
