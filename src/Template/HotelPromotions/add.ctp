@@ -347,6 +347,7 @@ label{
 				var weeks=Result[0];
 				$('.charges').val(price);
 		});
+		
 	});		
 </script>	
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>

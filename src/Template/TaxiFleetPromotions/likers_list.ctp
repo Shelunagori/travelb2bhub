@@ -138,7 +138,7 @@ input[type=text] {
 					<div class="col-md-4" style="margin-top: 7px;">
 					<span style="color:#727e8a">Company Name</span> : <?php echo $texifleetpromotion->user->company_name;?><br>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-4" style="margin-top:5px;">
  						<?php 
 				//pr($follower_list);exit;
 					if ($user_id!=$texifleetpromotion->user_id)
@@ -146,19 +146,19 @@ input[type=text] {
 						if (in_array($texifleetpromotion->user_id,$follower_list))
 						{
 						?>
-					<div class="text-center margin">	
+					<div>	
 						<a class=" btn btn-success btn-sm"  data-target="#unfollow<?php echo $texifleetpromotion->id; ?>" data-toggle="modal" >following</a>
 					</div>
 					<?php }
 					else {
 						?>
-					<div class="text-center margin">
+					<div>
 						<a follow_id="<?php echo $texifleetpromotion->user_id; ?>" class=" 
 				btn btn-info btn-sm"  data-target="#follow<?php echo $texifleetpromotion->id; ?>" data-toggle=modal>follow</a>
 					</div>
 					<?php }}
 					else{?>
-					<div class="text-center margin" style="visibility:hidden">	
+					<div style="visibility:hidden">	
 						<a class=" btn btn-danger btn-sm"  data-target="#unfollow<?php echo $texifleetpromotion->id; ?>" data-toggle="modal" >Unfollow</a>
 					</div>
 					<?php	

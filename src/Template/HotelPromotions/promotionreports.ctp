@@ -68,7 +68,7 @@ fieldset{
 
 .btnlayout{
 	border-radius:30px !important;
-	width:80px;
+	width:100%;
 	}
 #myImg:hover {opacity: 0.7;}
 .bbb{
@@ -91,6 +91,7 @@ label {
 	padding-right: 7px !important;
     padding-left: 7px !important;
 }
+
 </style>
 <div class="row" >
 	<div class="col-md-12">
@@ -119,8 +120,8 @@ $m=0;
 						?>
 				<div class="col-md-6" >		
 	<div class="box-body bbb">
-		<fieldset style="background-color:#fff;">
-				<div class="" style="padding:25px;">						
+		<fieldset style="background-color:#fff;text-align:center;">
+				<div class="row" style="padding:25px;">						
 					<div class="col-md-6">
 						<?= $this->Html->image($hotel_promotion->full_image,['id'=>'myImg','style'=>'width:96%;height:140px;','data-target'=>'#imagemodal'.$hotel_promotion->id,'data-toggle'=>'modal',]) ?>
 						<div id="imagemodal<?php echo $hotel_promotion->id;?>" class="modal fade" role="dialog">
@@ -135,7 +136,7 @@ $m=0;
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6"  style="padding-left:30px;">
+					<div class="col-md-6"  style="padding-left:30px;margin-top:10px;">
 						<div class="row">
 							<div class="col-md-12 ">
 							<span style="color:black;font-size:17px;"><?php echo $hotel_promotion->hotel_name?></span>
@@ -148,7 +149,7 @@ $m=0;
 								</a>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-								Likes : &nbsp;
+								Likes :
 								<a type="button" href="likers_list/<?php echo $hotel_promotion->id ; ?>" style="border-radius:10px; width:53px; background-color: #FFF !important;color: #1295AB !important; border: 1px solid; padding-top: 2px;padding-bottom: 3px" class="btn btn-md">
 									<?php echo $hotel_promotion->total_likes;?>
 								</a> 
@@ -164,10 +165,22 @@ $m=0;
 							</div>
 						</div>
 					</div>
-					<div class="col-md-8 pull-right" style="margin-top:5px">
-						<div class="text-center col-md-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
-						<label><button type="button" class="btn btn-info btn-md btnlayout" data-target="#renew<?php echo $hotel_promotion->id; ?>" data-toggle=modal>Renew</button></label>
-						</div>
+					<table class="table" style="width:100%;">
+						<tr>
+						<td  style="width:33%;">
+							<button type="button" class="btn btn-info btn-md btnlayout" data-target="#renew<?php echo $hotel_promotion->id; ?>" data-toggle=modal>Renew</button>
+						</td>
+						<td  style="width:33%;">
+						
+							<button type="button" class="btn btn-danger btn-md btnlayout" data-target="#remove<?php echo $hotel_promotion->id; ?>" data-toggle=modal>Remove</button>
+							
+						</td>
+						<td  style="width:33%;">
+							<a href="view/<?php echo $hotel_promotion->id; ?>" class="btn btn-warning btn-md btnlayout" >Details</a></label>
+						</td>
+					</tr>
+					</table>
+
 						<!------------------------- Renew Modal--------------------------->
 						<div id="renew<?php echo $hotel_promotion->id; ?>" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-md" >
@@ -180,8 +193,8 @@ $m=0;
 											Do you want to renew promotion ?
 											</h4>
 										</div>
-										<div class="modal-body" style="height:80px;">
-										<br>
+										<div class="modal-body">
+											<br>
 											<div class="row mainrow">
 												<div class="col-md-12">
 													<div class="col-md-4">
@@ -229,11 +242,7 @@ $m=0;
 								</form>
 							</div>
 						</div>
-						<div class="text-center col-md-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
-						<label>
-						<button type="button" class="btn btn-danger btn-md btnlayout" data-target="#remove<?php echo $hotel_promotion->id; ?>" data-toggle=modal>Remove</button>
-						</label>
-						</div>
+						
 						<!------------------------- Remove Modal--------------------------->
 						<div id="remove<?php echo $hotel_promotion->id; ?>" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-md" >
@@ -255,13 +264,9 @@ $m=0;
 								</form>
 							</div>
 						</div>
-						<div class="text-center col-md-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
-						<label><a href="view/<?php echo $hotel_promotion->id; ?>" class="btn btn-warning btn-md btnlayout" >Details</a></label>
-						</div>
 					</div>
-				</div>
-		</fieldset>
-	</div>
+			</fieldset>
+		</div>
 	</div>
 					<?php }} ?>
 </div>

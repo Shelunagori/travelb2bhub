@@ -319,7 +319,7 @@ fieldset{
 																{
 																	$options[] = ['value'=>$cty->cityid,'text'=>$cty->name, 'country_id'=>$cty->country_id];
 																};
-																echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
+																echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield max_limit","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
 																<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 															</div>
@@ -497,3 +497,4 @@ $("#multi_states").multiselect();
 $("#multi_category").multiselect();
 });
 </script>
+
