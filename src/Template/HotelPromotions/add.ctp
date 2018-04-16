@@ -138,7 +138,10 @@ a:hover,a:focus{
 fieldset{
 	margin:10px !important;
 	border-radius: 6px;
-} 
+}
+label{
+	font-size:12px;
+}
 </style> 
 <section class="content">
 <div class="container-fluid">
@@ -154,7 +157,6 @@ fieldset{
 								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
 									<p for="from">
 										User Name
-									<span class="required">*</span>
 									</p>
 									<div class="input-field">
 									<?php 
@@ -165,24 +167,20 @@ fieldset{
 								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
 									<p for="from">
 										Hotel Name
-									<span class="required">*</span>
 									</p>
 									<div class="input-field">
 									<?php 
 									 //pr($userss['company_name']);exit;
-									 echo $this->Form->input('hotel_name',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>"Enter Your Hotel Name",'value'=>$userss['company_name'],'readonly']);?>
-									 <label style="display:none" class="helpblock error" > This field is required.</label>
+									 echo $this->Form->input('hotel_name',['class'=>'form-control ','label'=>false,'placeholder'=>"Enter Your Hotel Name",'value'=>$userss['company_name'],'readonly']);?>
 									</div>
 								</div>
 								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
 									<p for="from">
 										Upload Image of Hotel	
-										<span class="required">*</span>
 									</p>
 									<div class="input-field">
-										 <?php echo $this->Form->input('hotel_pic',['class'=>'form-control imgInp requiredfield','label'=>false,'type'=>'file','id'=>'hotelImg', 'onchange' => 'checkCertificate()']);?>
-										  <span style="color: red;font-size: 13px;"><b>File Type:</b> jpeg/jpg/png</span>&nbsp;&nbsp;&nbsp;<span style="color: red;font-size: 13px;">Max Size: 2 MB</span>
-										  <label style="display:none" class="helpblock error" > This field is required.</label>
+										 <?php echo $this->Form->input('hotel_pic',['class'=>'form-control imgInp ','label'=>false,'type'=>'file','id'=>'hotelImg', 'onchange' => 'checkCertificate()']);?>
+										  <label class="helpblock error" ><b>File Type:</b> jpeg/jpg/png</label>&nbsp;&nbsp;&nbsp;<label class="helpblock error">Max Size: 2 MB</label>
 									</div>
 								</div>
 							</div>
@@ -196,7 +194,7 @@ fieldset{
 												</p>
 										</div>
 										<div style=" width: 200px;" class="stars">
-											<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
+											<input class="requiredfield" style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
 											   <input class="star star-5" id="star-5-21" type="radio" value="5" name="hotel_rating"/>
 											   <label class="star star-5" for="star-5-21"></label>
 											   <input class="star star-4" id="star-4-21" type="radio" value="4" name="hotel_rating"/>
@@ -207,6 +205,7 @@ fieldset{
 											   <label class="star star-2" for="star-2-21"></label>
 											   <input class="star star-1" id="star-1-21" type="radio" value="1" name="hotel_rating"/>
 											   <label class="star star-1" for="star-1-21"></label>
+											   <label style="display:none" class="helpblock error" > This field is required.</label>
 										</div>
 									</div>								
 								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
@@ -222,8 +221,7 @@ fieldset{
 														$options[] = ['value'=>$cat->id,'text'=>$cat->name];
 													};
 													
-													echo $this->Form->input('hotel_category_id',['class'=>'form-control select2 requiredfield','options' => $options,'label'=>false,"empty"=>"Select Hotel Category"]);?>
-													<label style="display:none" class="helpblock error" > This field is required.</label>
+													echo $this->Form->input('hotel_category_id',['class'=>'form-control select2 ','options' => $options,'label'=>false,"empty"=>"Select Hotel Category"]);?>
 											</div>
 										</div>
 										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
@@ -244,9 +242,7 @@ fieldset{
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
-										 <?php echo $this->Form->input('hotel_location',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>"Enter Your Hotel Location (City, State)",'value'=>$userss['adress1'].$userss['locality']]);?>
-										 <label style="display:none" class="helpblock error" > This field is required.</label>
-											
+										 <?php echo $this->Form->input('hotel_location',['class'=>'form-control ','label'=>false,'placeholder'=>"Enter Your Hotel Location (City, State)",'value'=>$userss['adress1'].$userss['locality']]);?>
 										</div>
 									</div>
 									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
