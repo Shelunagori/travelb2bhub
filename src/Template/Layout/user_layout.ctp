@@ -589,6 +589,7 @@ p {
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
 $(document).ready(function (){
+		
 	$(".chat_clear").on('click',function () { 
 		var attrv= $(this).attr('val');
 		//alert(attrv);
@@ -603,6 +604,17 @@ $(document).ready(function (){
 	});
 });
 </script>
+<script type="text/javascript">
+	setInterval(function(){ abc(); }, 3000);
+		function abc()
+		{ 	 
+			$('#msg_div').fadeOut(500);
+			var delay = 500;
+			setTimeout(function() {
+				$('#msg_div').remove();
+			}, delay);
+		}
+</script> 
 <?php echo $this->Html->script('/assets/bootstrap/js/bootstrap.min.js'); ?>
 
 <?php echo $this->Html->script('/assets/plugins/jquery-validation/lib/jquery.js'); ?>
