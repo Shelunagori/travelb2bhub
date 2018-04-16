@@ -24,7 +24,7 @@ if ($err) {
 } else {
 	$response;
 	$List=json_decode($response);
-	//pr($List); exit;
+	pr($List); exit;
 	$postTravlePackages=$List->getTravelPackages;
 }
 //pr($postTravlePackages); exit;
@@ -134,6 +134,7 @@ font-size:20px;
 .rowspace{
 	padding-top:0px;
 	font-size:14px;
+	
 }
 .rowspacemodal{
 	padding:10px;
@@ -334,16 +335,26 @@ a{
 									$CategoryList.=$category->post_travle_package_category->name;
 									$x++;
 								}
-											
-										
 											$cityList='';
 											$z=0;
 											foreach($postTravlePackage->post_travle_package_cities as $cities)
 											{
+												//pr($cities);exit;
 												if($z>=1){
 													$cityList.=', ';
 												}
-												$cityList.=$cities->city->name;
+												$cityList.=$cities->city->name." ( ".$cities->city->state->state_name." )";
+												$z++;
+											}
+											$countryList='';
+											$z=0;
+											foreach($postTravlePackage->post_travle_package_countries as $countries)
+											{
+												//pr($cities);exit;
+												if($z>=1){
+													$countryList.=', ';
+												}
+												$countryList.=$countries->country->country_name;
 												$z++;
 											}
 						?>
@@ -507,7 +518,7 @@ a{
 													<span ><?= h($CategoryList); ?></span>
 													</div>
 											</div>
-											<div class="col-md-5">
+											<div class="col-md-4">
 												<div class="row rowspace">
 													<div class="col-md-12 "><label>Duration :</label>
 													<span style="color:#FB6542"><?= h($postTravlePackage->duration_day_night) ?></span>
@@ -539,20 +550,20 @@ a{
 												</div>
 												
 											</div>
-											<div class="col-md-7">
+											<div class="col-md-8">
 											<div class="row rowspace">
 													<div class="col-md-12"><label>Valid Till :</label>
 													<span><?= h(date('d-M-Y',strtotime($postTravlePackage->valid_date))); ?></span>
 													</div>					
 												</div>	
-												<div class="row rowspace">
-													<div class="col-md-12 "><label>Cities :</label>
+												<div class="row" >
+													<div class="col-md-12"><label>Cities :</label>
 													<span ><?= h($cityList); ?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
 													<div class="col-md-12"><label>Countries :</label>
-													<span ><?php echo "India"//$postTravlePackage->country->country_name; ?></span>
+													<span ><?= h($countryList);?></span>
 													</div>
 												</div>
 												

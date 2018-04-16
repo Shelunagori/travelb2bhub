@@ -24,7 +24,7 @@ if ($err) {
 } else {
 	$response;
 	$List=json_decode($response);
-	//pr($List); exit;
+	pr($List); exit;
 	$postTravlePackages=$List->postTravelPackageCarts;
 }
 //pr($postTravlePackages); exit;
@@ -198,7 +198,7 @@ a{
 										if($z>=1){
 											$cityList.=', ';
 										}
-										$cityList.=$cities->city->name;
+										$cityList.=$cities->city->name." ( ".$cities->city->state->state_name." )";
 										$z++;
 									}
 						?>
