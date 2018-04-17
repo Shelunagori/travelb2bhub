@@ -290,7 +290,7 @@ font-size:20px;
 												<div class="row rowspace">
 													<div class="col-md-12 ">
 													<span style="color:#676363;font-weight:600;"> Starting Price :</span>
-													<span style="color:#1295AB">&#8377; <?php echo number_format(h($postTravlePackage->starting_price)) ;?></span>
+													<span style="color:#1295AB">&#8377; <?php echo (h($postTravlePackage->starting_price)) ;?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
