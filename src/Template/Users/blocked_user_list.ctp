@@ -64,7 +64,7 @@ $conn = ConnectionManager::get('default');
 								<div class="col-md-3">
 									<b>Company Name :</b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?>
 								</div>
-								<div class="col-md-3" align="center">
+								<div class="col-md-3"  align="left">
 									<!--a href="javascript:void(0);" class="unblockUser btn btn-success btn-sm" user_id = "<?php //echo $row['user']['id']; ?>" > Unfollow</a-->
 									
 									<a style="margin-top: 7px !important;" data-toggle="modal" class="btn btn-success btn-sm" data-target="#block<?php echo $row['user']['id']; ?>"  > Unblock User </a>

@@ -63,7 +63,7 @@
 								<div class="col-md-3">
 								<b>Website :</b> <?php echo ($row['user']['web_url'])?$row['user']['web_url']:"-- --"; ?> 
 								</div>
-								<div class="col-md-3" align="center" >
+								<div class="col-md-3" align="left" >
   
 									<a style="margin-top: 2px !important;" follow_id="<?php echo $row['id']; ?>" class=" btn btn-danger btn-xs"  data-target="#unfollow<?php echo $row['id']; ?>" data-toggle=modal>Unfollow</a> 
 									<!-------Delete Modal Start--------->
