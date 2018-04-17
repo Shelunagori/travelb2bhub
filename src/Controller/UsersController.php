@@ -1725,7 +1725,8 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 			$conditions["Requests.category_id IN"] =  $typeSearchArray; 
 		}
 		if(!empty($this->request->query("refidsearch"))) {
-			$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
+			$refArrsy=$this->request->query("refidsearch");
+			$conditions["Requests.id IN"] = $refArrsy ;
 		}
 		if(!empty($this->request->query("destination_city"))) {
 			$conditions["Requests.city_id"] =  $this->request->query("destination_city");
@@ -1745,7 +1746,7 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 			);
 		}
 		else{
-			$conditions[]= array (
+			/*$conditions[]= array (
 				'OR' => array(
 					array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
 					array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
@@ -1753,7 +1754,7 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 					array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
 					array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
 				)
-			);
+			);*/
 		}
 		$edate = $this->request->query("enddatesearch");
 		if(!empty($this->request->query("enddatesearch"))) {
@@ -1832,13 +1833,13 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		}
 		$BlockedUsers=array_merge($BlockedUsers,$myBlockedUsers);
 		$BlockedUsers = array_unique($BlockedUsers);
+		$RefId=array();
 		foreach($requests as $req){
 
-	//print_r($BlockedUsers); exit;
-		if(sizeof($BlockedUsers)>0){
-				$conditions["Responses.user_id NOT IN"] =  $BlockedUsers; 
+ 		if(sizeof($BlockedUsers)>0){
+			$conditions["Responses.user_id NOT IN"] =  $BlockedUsers; 
 		}
-			
+		$RefId[] = ['value'=>$req->id,'text'=>$req->reference_id];
 		$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.request_id' =>$req['id'],$conditions]])->contain(['Users']);
 		$data['responsecount'][$req['id']]  = $queryr->count();
 		}
@@ -1878,6 +1879,7 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		->toArray();
 		$cities = $this->Cities->getAllCities();
 		$this->set('allCities', $allCities);
+		$this->set('RefId', $RefId);
 		$allCities1 = array();
 		$allCities2 = array();
 		$allCityList = array();
@@ -2442,32 +2444,10 @@ return $q->where(['Responses.user_id' => $userdetail['id']]);
 }
 return $requests;
 }
-public function myrequestlist() {
-$this->loadModel('Requests');
-$this->loadModel('Cities');
-$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
-$this->set('users', $user);
-$requests = $this->Requests->find()
-->contain(["Users"])
-->where(['Requests.user_id' => $this->Auth->user('id')])->all();
-//  print_r($requests);
-$this->set('requests', $requests);
-}
+ 
 public function logout() {
-return $this->redirect($this->Auth->logout());
-}
-public function finalrequest() {
-$this->loadModel('Requests');
-$this->loadModel('Cities');
-$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
-$this->set('users', $user);
-$finals = $this->Requests->find()
-->contain(["Users"])
-->where(['Requests.final_id' => $this->Auth->user('id'), 'Requests.status' => 2])->all();
-//print_r($finals);
-$this->set('finals', $finals);
-//print_r($finals);
-}
+	return $this->redirect($this->Auth->logout());
+} 
 public function checkresponses($id) {
 	$this->viewBuilder()->layout('user_layout');
 	$this->loadModel('Responses');

@@ -637,8 +637,11 @@ $(document).ready(function (){
 <script>
  
 $('.select2').select2();
+var date = new Date();
+date.setDate(date.getDate());
 $('.date-picker').datepicker({
-  autoclose: true
+	minDate:0,
+	startDate: date
 });
  
 <!--$(".wysihtml5textarea").wysihtml5({useLineBreaks: true,tabSpaces: 4});-->
@@ -649,9 +652,9 @@ $(".txtEditor").Editor({
 	'insert_img':false,
 });
 
-$(".timepicker").timepicker({
+/* $(".timepicker").timepicker({
     showInputs: false
-});
+}); */
 
  
 </script>
