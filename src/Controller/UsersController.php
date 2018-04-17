@@ -1044,7 +1044,7 @@ public function viewuserprofile(){
 		$taxboxname=$this->request->data['taxboxname'];
 		$cities=$this->Users->Cities->find()
 		->contain(['States'])
-		->where(['Cities.name Like'=>''.$name.'%','Cities.is_deleted'=>0]);
+		->where(['Cities.name Like'=>''.$name.'%','Cities.is_deleted'=>0,'Cities.country_id'=>'101']);
 		?>
 			<ul id="country-list">
 				<?php foreach($cities as $show){ ?>
@@ -4642,5 +4642,24 @@ $ordKey = ord(substr($key,@$j,1));
 }
 return @$hash;
 }
-
+public function cronobforremoverequest()
+{
+	$this->loadModel('Requests');
+	$current_date=date("Y-m-d");
+	$conditions[]= array (
+		'OR' => array(
+			array("Requests.start_date <=" =>  $current_date,'Requests.category_id'=> 2),
+			array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2),
+			
+			array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response ' =>0),
+			array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
+		)
+	);
+	$requests = $this->Requests->find()->where($conditions); 
+	foreach($requests as $request){
+		$updateId=$request['id'];
+		$this->Requests->updateAll(['is_deleted' => 1], ['id' => $updateId]);
+	}
+	exit;
+}
 }
