@@ -3106,7 +3106,7 @@ public function myresponselist() {
 			->contain(["Credits"])
 			->where(['Users.id' => $this->Auth->user('id')])->first();
 		$this->set('users', $user);
-		$this->set('userProfile', $user);
+		$this->set('userProfile', $user); 
 		if(empty($this->request->query("sort"))) {
 			$sort['Requests.id'] = "DESC";
 		}
@@ -3129,20 +3129,17 @@ public function myresponselist() {
 		if(!empty($this->request->query("sort")) && $this->request->query("sort")=="agentza") {
 			$sort['Users.first_name'] = "DESC";
 			$sort['Users.last_name'] = "DESC";
+		} 
+		if(!empty($this->request->query("agentnamesearch"))) {
+			 
+			$keyword = $this->request->query("agentnamesearch");
+			$conditions["Requests.user_id IN"] =  $keyword;
 		}
-		if(!empty($this->request->query("keyword"))) {
-			$conditions["Requests.reference_id LIKE "] = "%".$this->request->query("keyword")."%";
+		if(!empty($_POST["req_typesearch"])) {
+			$typeSearchArray=$_POST["req_typesearch"];  
+			$conditions["Requests.category_id IN"] =  $typeSearchArray; 
 		}
-		if(!empty($this->request->query("agentname"))) {
-			$keyword1 = '';
-			$keyword2 = '';
-			$keyword = trim($this->request->query("agentname"));
-			$keyword = explode(' ',$keyword);
-			if(isset($keyword[1])) {
-				$keryword2 = $keyword[1];
-			}
-			$conditions["OR"] = array("Users.first_name LIKE "=>"%".$keyword1."%", "Users.last_name LIKE" => "%$keyword2%",);
-		}
+
 		if(!empty($this->request->query("acceptdeals"))) {
 			$conditions["Responses.status"] = 1;
 			$acceptDeals = 1;
@@ -3163,46 +3160,51 @@ public function myresponselist() {
 			$conditions["Requests.total_budget >="] = $MinQuotePrice;
 			$conditions["Requests.total_budget <="] = $MaxQuotePrice;
 		}
+		$sdate = $this->request->query("startdatesearch");
+		$current_date=date('Y-m-d');
+ 		if(!empty($this->request->query("startdatesearch"))) {
+			$sdate=date('Y-m-d', strtotime($sdate));
+			$conditions[]= array (
+				'OR' => array(
+					array("Requests.start_date >=" =>  $sdate,'Requests.category_id'=> 2),
+					array("Requests.check_in >=" =>  $sdate,'Requests.category_id !='=> 2),
+ 				)
+			);
+		}
+		$edate = $this->request->query("enddatesearch");
+		$current_date=date('Y-m-d');
+ 		if(!empty($this->request->query("enddatesearch"))) {
+			$edate=date('Y-m-d', strtotime($edate));
+			$conditions[]= array (
+				'OR' => array(
+					array("Requests.end_date <=" =>  $edate,'Requests.category_id'=> 2),
+					array("Requests.check_out <=" =>  $edate,'Requests.category_id !='=> 2),
+ 				)
+			);
+		}
 		if(!empty($this->request->query("refidsearch"))) {
-			$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
+			$conditions["Requests.id IN"] =  $this->request->query("refidsearch");
 		}
 		$conditions["Responses.user_id"] = $this->Auth->user('id');
 		$loggedinid=$this->Auth->user('id');
-		/*$this->loadModel('BlockedUsers');
-		$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
-			->hydrate(false)
-			->where(['blocked_by' => $loggedinid])
-			->toArray();
-		$myBlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_by'])
-			->hydrate(false)
-			->where(['blocked_user_id' => $loggedinid])
-			->toArray();
-		if(!empty($BlockedUsers)) {
-			$BlockedUsers = array_values($BlockedUsers);
-		}
-		if(!empty($myBlockedUsers)) {
-			$myBlockedUsers = array_values($myBlockedUsers);
-		}
-		$BlockedUsers=array_merge($BlockedUsers,$myBlockedUsers);
-		$BlockedUsers = array_unique($BlockedUsers);
-	//print_r($BlockedUsers); exit;
-		if(sizeof($BlockedUsers)>0){
-				$conditions["Requests.user_id NOT IN"] =  $BlockedUsers; 
-		}
-		*/
+		 
 		$conditions["Responses.status"] = 1;
 		$responses = $this->Responses->find()
 			->contain(["Requests.Users", "Requests"])
 			->where($conditions)->order($sort)->all();
 		
 		$conn = ConnectionManager::get('default');
-		$chatdata = array();
+		$key = array();
+		$value = array();
+		$RefId = array();
+		$selectoption = array();
 		if(count($responses)>0){
 			foreach($responses as $res){
-				 
 				$request_id = $res['request_id'];	
-					$user_id = $res['request']['user_id'];
-					
+				$user_id = $res['request']['user_id'];
+				$key[]=$user_id;
+				$value[]=$res->request->user->first_name.' '.$res->request->user->last_name;
+				$RefId[] = ['value'=>$res->request->id,'text'=>$res->request->reference_id];	
 					
 				$sqlc = "SELECT *,COUNT(*) as ch_count FROM user_chats 
 				WHERE request_id='".$request_id."' AND (user_id in ('".$loggedinid."','".$user_id."') 
@@ -3213,6 +3215,16 @@ public function myresponselist() {
 				$chatdata['chat_count'][$res['id']] =$resultsch['ch_count'];
 			}
 		}
+		$quiqueValue=array_values(array_unique($value)); 
+		$quiqueKey=array_values(array_unique($key));
+		$cv=0;
+		foreach($quiqueKey as $keys){
+			$textV=$quiqueValue[$cv];
+			$selectoption[] = ['value'=>$keys,'text'=>$textV];
+			$cv++;		 
+		}
+		$this->set('RefId', $RefId);
+		$this->set('selectoption', $selectoption);
 		$this->set('chatdata', $chatdata);
 		$this->set('responses', $responses);
 		
