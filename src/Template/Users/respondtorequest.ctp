@@ -152,7 +152,7 @@ $conn = ConnectionManager::get('default');
 										<div class="row form-group ">
 											<div class=col-md-12>
 												<div class=col-md-4>
-													<label class="col-form-label"for=example-text-input>Total Budget : </label>
+													<label class="col-form-label"for=example-text-input>Total Budget Range : </label>
 												</div> 
 													<div class=col-md-7>
 														<select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option>
@@ -184,7 +184,7 @@ $conn = ConnectionManager::get('default');
 											  <div class="row form-group">
 													 <div class=col-md-12>
 														 <div class=col-md-4>
-														 <label class="col-form-label"for=example-text-input>Pickup City :</label>
+														 <label class="col-form-label"for=example-text-input>Pickup City (Transportation) :</label>
 														 </div> 
 														<div class=col-md-7>
 															<select class="form-control select2"  name=pickup_city id=pickup_city>
@@ -199,7 +199,7 @@ $conn = ConnectionManager::get('default');
 												<div class="row form-group">								 
 													 <div class=col-md-12>
 														 <div class=col-md-4>
-														 <label class="col-form-label" for=example-text-input>Destination City : </label>
+														 <label class="col-form-label" for=example-text-input>Destination City (Packages & Hotels) : </label>
 														 </div> 
 														<div class="col-md-7">
 															<select class="form-control select2" name=destination_city id=destination_city>
@@ -305,8 +305,9 @@ $conn = ConnectionManager::get('default');
 			<div class="col-md-4" style="padding-top:10px;"> 
 				<fieldset>
 				<legend><?php echo @$image; ?></legend>
-				<span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
+				<span style="margin-top:-30px;float:right;"><?php echo $org_created; ?></span>
                  <ul>
+				 
 					<li class="">
 						<p>
 							<?php 
@@ -447,16 +448,20 @@ $conn = ConnectionManager::get('default');
 						<input type="hidden" name="request_id" class="request_id" id="request_id" value=""/><br>
 						<table width="90%" class="shotrs">
 							<tr>
-								<td>
-									Quote price
+								<td >
+									<label class="form-control" style="margin-top:-24px;border: 0px solid !important;">
+										Quote price
+									</label>
 								 </td>
 								 <td>
-									  <input type="text" class="form-control" id="quotation_price" name="quotation_price" placeholder="Quote your price"/><br>
+									  <input type="number" class="form-control" id="quotation_price" name="quotation_price" placeholder="Quote your price"/><br>
 								 </td>
 							</tr>
 							<tr>
-								<td>
-									 Comment
+								<td>.
+									<label class="form-control" style="margin-top:-30px;border: 0px solid !important;">
+										Comment
+									</label>
 								 </td>
 								 <td>
 									  <textarea name="comment" class="form-control" id="comment" placeholder="Enter comment here" col="10" row="10"></textarea>

@@ -4,6 +4,17 @@ use Cake\Datasource\ConnectionManager;
 $conn = ConnectionManager::get('default');
 ?>
 <style>
+@media only screen and (max-device-width: 480px) {
+	/* Logo for Mobile */
+	.btn-sm{
+		padding: 3px !important;
+	 }
+}
+fieldset
+{
+	border-radius: 7px;
+	box-shadow: 0 1px 9px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
 legend
 {
 	text-align: center;
@@ -18,10 +29,16 @@ legend
 .package{
 	 
 }
-.contain>p{
-	color:#96989A !important;
+.contain>p {
+    color: #96989A !important;
+    margin: 0 0 5px !important;
+    line-height: 17px !important;
 } 
-.details {color:#000 !important; font-weight: 400;}	
+
+.details {
+    color: #000 !important;
+    font-weight: 600;
+}
 .btn-block { width:40% !important;}
 .margin {margin-top:5px;}
 .shotrs a {margin:5px;;}
@@ -63,50 +80,53 @@ legend
 					 if($category_id==1){
 						 $category_name="Package";
 						 $image1=$this->Html->image('/img/slider/package-icon.png',['style'=>'height:20px']);
+						 $text="<span class='packageType'>Package</span>";
 					 }
 					 if($category_id==2){
 						 $category_name="Transport";
 						 $image1=$this->Html->image('/img/slider/transport-icon.png');
+						 $text="<span class='transportType'>Transport</span>";
 					 }
 					 if($category_id==3){
 						 $category_name="Hotel";
 						 $image1=$this->Html->image('/img/slider/hotelier-icon.png',['style'=>'height:30px']);
+						 $text="<span class='hotelType'>Hotel</span>";
 					 }
 				}
 				?>
 			<fieldset>
 				<legend><?php echo $image1; ?></legend>
-			<div class="col-md-12">
-			<div class="col-md-10">
-			<div class="col-md-12">
+			<div class="col-md-12" style="padding-left:0px !important;">
+			<div class="col-md-10" style="padding-left:0px !important;">
+			<div class="col-md-12" style="padding-left:0px !important;">
 				
-				<div class="col-md-3">
-						<b>Request Type : </b> <?php echo $category_name; ?>
+				<div class="col-md-3" style="padding-left:0px !important;">
+						<p>Request Type :  <?php echo $text; ?></p>
 				</div>
-				<div class="col-md-3">
-						<b>Reference ID : </b> <?php echo $reference_id; ?>
+				<div class="col-md-3" style="padding-left:0px !important;">
+						<p>Reference ID :   <b><?php echo $reference_id; ?></b></p>
 				</div>
-				<div class="col-md-3">
-						<b>Start Date : </b> <?php echo $org_check_in; ?>
+				<div class="col-md-3" style="padding-left:0px !important;">
+						<p>Start Date :  <?php echo $org_check_in; ?></p>
 				</div>
-				<div class="col-md-3">
-						<b>End Date : </b> <?php echo $org_check_out; ?>
+				<div class="col-md-3" style="padding-left:0px !important;">
+						<p>End Date :  <?php echo $org_check_out; ?></p>
 				</div>
 				 
 			</div>
-			<div class="col-md-12" >
+			<div class="col-md-12" style="padding-left:0px !important;">
 				
-				<div class="col-md-3">
-						<b>Total Budget : </b> <?php echo $total_budget; ?>
+				<div class="col-md-3" style="padding-left:0px !important;">
+						<p>Total Budget : <?php echo $total_budget; ?></p> 
 				</div>
-				<div class="col-md-3">
-						<b>Members : </b> <?php echo $members; ?>
+				<div class="col-md-3" style="padding-left:0px !important;">
+						<p>Members : <?php echo $members; ?></p> 
 				</div>
-				<div class="col-md-3">
-						<b>Destination City : </b> <?php echo $locality; ?>
+				<div class="col-md-3" style="padding-left:0px !important;">
+						<p>Destination City :  <?php echo $locality; ?></p> 
 				</div>
-				<div class="col-md-3">
-						<b>Comment : </b> <?php echo $comment; ?>
+				<div class="col-md-3" style="padding-left:0px !important;">
+						<p>Comment : <?php echo $comment; ?></p> 
 				</div>
 				 
 			</div>
@@ -182,7 +202,7 @@ legend
 					</div>
 					<div class="col-md-6" align="center">
 		 
-			<a   class="btn btn-warning btn-sm " id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>"> 
+			<a class="btn btn-warning btn-sm " id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>"> 
 			Chat ( <strong><?php echo $data['chat_count'][$row['id']]; ?> </strong> )</a>
 			<div class="modal fade" id="myModal11<?php echo  $row['request']['id']; ?>" role="dialog">
 				<div class="modal-dialog">
