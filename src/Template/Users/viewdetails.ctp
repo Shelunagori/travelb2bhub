@@ -17,6 +17,7 @@ li {
 ul li b {
 	color:#424242;
 	text-align:left;
+	font-weight:100 !important;
 }
 
 </style>

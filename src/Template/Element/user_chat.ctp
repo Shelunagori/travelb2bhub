@@ -70,7 +70,7 @@
 							<?php echo $img;?>
 							<p style="text-align: right;"><b><?php echo ucwords($row["user"]["first_name"]); ?></b></p>
 							<fieldset style="text-align:left;border-radius:20px;"><p style="text-align: right;"><?php echo ucwords($row["message"]); ?></p></fieldset>
-							<span class="time-left"><?php echo date("d M Y h:i A", strtotime($row["created"])); ?></span>
+							<span class="time-left" style="margin-top: 10px;"><?php echo date("d M Y h:i A", strtotime($row["created"])); ?></span>
 						</div>
 			<?php   } 
 					else 
@@ -106,7 +106,7 @@
 					<input id="message"  name="message" type="text" class="form-control input-sm" autocomplete="off" placeholder="Type your message here..." />
 					<input type="hidden" name="screen_id" id="screen_id" value="<?php echo $screen_id; ?>">
 					<span class="input-group-btn">
-						<button type="submit" name="submit" class="btn btn-orange btn-sm" value="Send">Send</button>
+						<button type="submit" name="submit" class="btn btn-info btn-sm" value="Send">Send</button>
 					</span>
 				</div>
 				</form>

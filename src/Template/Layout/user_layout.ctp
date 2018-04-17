@@ -643,6 +643,11 @@ $('.date-picker').datepicker({
 	minDate:0,
 	startDate: date
 });
+$('.datepicker').datepicker({
+	minDate:0,
+	startDate: date
+});
+$('.datepickers').datepicker();
  
 <!--$(".wysihtml5textarea").wysihtml5({useLineBreaks: true,tabSpaces: 4});-->
 $(".txtEditor").Editor({
