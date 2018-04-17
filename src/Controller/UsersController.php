@@ -1919,17 +1919,16 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		$this->set('BusinessBuddies', $BusinessBuddies);
 		$sort='';
 		if(empty($this->request->query("sort"))) {
-		//$sort['Requests.accept_date'] = "DESC";
 			$sort['Requests.id'] = "DESC";
 		}
-		if(!empty($this->request->query("sort")) && $this->request->query("sort")=="requesttype") {
-		$sort['Requests.category_id'] = "ASC";
+		if(!empty($this->request->query("sort")) && $this->request->query("sort")=="requesttype"){
+			$sort['Requests.category_id'] = "ASC";
 		}
 		if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgetlh") {
-		$sort['Requests.total_budget'] = "ASC";
+			$sort['Requests.total_budget'] = "ASC";
 		}
 		if(!empty($this->request->query("sort")) && $this->request->query("sort")=="totalbudgethl") {
-		$sort['Requests.total_budget'] = "DESC";
+			$sort['Requests.total_budget'] = "DESC";
 		}
 		if(!empty($this->request->query("budgetsearch"))) {
 			$QPriceRange = $this->request->query("budgetsearch");
@@ -1944,28 +1943,35 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 			$conditions["Requests.category_id IN"] =  $typeSearchArray; 
 		}
 		if(!empty($this->request->query("refidsearch"))) {
-			$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
+			$conditions["Requests.id IN"] =  $this->request->query("refidsearch");
 		}
-			$sdate = $this->request->query("startdatesearch");
-			//$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
+		if(!empty($this->request->query("destination_city"))) {
+			$conditions["Requests.city_id"] =  $this->request->query("destination_city");
+		}
+		if(!empty($this->request->query("pickup_city"))) {
+			$conditions["Requests.pickup_city"] =  $this->request->query("pickup_city");
+		}
+		$sdate = $this->request->query("startdatesearch");
 		if(!empty($this->request->query("startdatesearch"))) {
 			$sdate=date('Y-m-d', strtotime($sdate));
-			$da["Requests.start_date"] =  $sdate;
-			$da["Requests.check_in"] =  $sdate;
-			$conditions["OR"] =  $da;
+			$conditions[]= array (
+				'OR' => array(
+					array("Requests.start_date >=" =>  $sdate,'Requests.category_id'=> 2),
+					array("Requests.check_in >=" =>  $sdate,'Requests.category_id !='=> 2),
+				)
+			);
 		}
-			$edate = $this->request->query("enddatesearch");
-			//$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
+		$edate = $this->request->query("enddatesearch");
 		if(!empty($this->request->query("enddatesearch"))) {
 			$edate=date('Y-m-d', strtotime($edate));
-			$da["Requests.end_date"] =  $edate;
-			$da["Requests.check_out"] =  $edate;
-			$conditions["OR"] =  $da;
+			$conditions[]= array (
+				'OR' => array(
+					array("Requests.end_date <=" =>  $edate,'Requests.category_id'=> 2),
+					array("Requests.check_out <=" =>  $edate,'Requests.category_id !='=> 2),
+ 				)
+			);
 		}
-		if(!empty($this->request->query("keyword"))) {
-			$conditions["Requests.reference_id LIKE "] = "%".$this->request->query("keyword")."%";
-		}
-		$conditions["Requests.user_id"] = $this->Auth->user('id');
+ 		$conditions["Requests.user_id"] = $this->Auth->user('id');
 		$conditions["Requests.status"] = 2;
 		$conditions["Requests.is_deleted "] = 0;
 		
@@ -1986,17 +1992,41 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 				->where($conditions)->order($sort)->all();
 		}
 		 
-			$final_res_array = array();
-			 $conn = ConnectionManager::get('default');
+		$final_res_array = array();
+		$key = array();
+		$value = array();
+		$RefId = array();
+		$loggedinid=$this->Auth->user('id');
+		$selectoption = array();
+		$conn = ConnectionManager::get('default');
 		foreach($requests as $row){
+
 			$sql = "SELECT r.*,u.first_name,u.last_name FROM responses as r
-		inner JOIN users u on u.id=r.user_id
-		WHERE r.request_id='".$row['id']."' AND r.id='".$row['final_id']."'"; 
-		$stmt = $conn->execute($sql);
-		$resultt = $stmt ->fetch('assoc');
+			inner JOIN users u on u.id=r.user_id
+			WHERE r.request_id='".$row['id']."' AND r.id='".$row['final_id']."'"; 
+			$stmt = $conn->execute($sql);
+			$resultt = $stmt ->fetch('assoc');
 			$final_res_array[$row['id']]  = $resultt;
-		}
-			$this->set('finalresponse', $final_res_array);
+
+			$RefId[] = ['value'=>$row->id,'text'=>$row->reference_id];
+			
+			$request_id = $row->id;	
+			 
+			$user_id = $row->responses[0]->user_id;
+			$sqlc = "SELECT *,COUNT(*) as ch_count FROM user_chats 
+			WHERE request_id='".$request_id."' AND (user_id in ('".$loggedinid."','".$user_id."') 
+			AND notification='0'
+			ANd send_to_user_id in ('".$loggedinid."','".$user_id."')) ";
+			$stmtc = $conn->execute($sqlc);
+			$resultsch = $stmtc ->fetch('assoc');		
+			$chatdata['chat_count'][$row->id] =$resultsch['ch_count'];
+			
+			
+		} 
+		$this->set('RefId', $RefId);
+		$this->set('chatdata', $chatdata);
+		$this->set('selectoption', $selectoption);
+		$this->set('finalresponse', $final_res_array);
 		//pr($requests);die();
 		$this->set('requests', $requests);
 		$myRequestCount = $myReponseCount = 0;
@@ -2051,9 +2081,7 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 			$allCities2[] = array("label"=>str_replace("'", "", $cit1), "value"=>$city['id'] );
 			$allCityList[$city['id']] = $city['name'];
 		}
-	}
-	//$allCities2 = $allCities1;
-	//  $allCities1 = json_encode($allCities1);
+	} 
 	$this->set('allCities1', $allCities1);
 	$this->set('allCities2', $cities);	
 
@@ -2327,8 +2355,8 @@ foreach($requests as $req){
 	$value[]=$req->user->first_name.' '.$req->user->last_name;
  	$RefId[] = ['value'=>$req->id,'text'=>$req->reference_id];
 }
-	$quiqueValue=array_unique($value); 
-	$quiqueKey=array_unique($key);
+	$quiqueValue=array_values(array_unique($value)); 
+	$quiqueKey=array_values(array_unique($key));
 	$cv=0;
 	foreach($quiqueKey as $keys){
 		$textV=$quiqueValue[$cv];
@@ -2961,17 +2989,18 @@ public function myresponselist() {
 		}
  	}
 
-	$quiqueValue=array_unique($value); 
-	$quiqueKey=array_unique($key);
+	$quiqueValue=array_values(array_unique($value)); 
+	$quiqueKey=array_values(array_unique($key));
 	$cv=0;
 	foreach($quiqueKey as $keys){
 		$textV=$quiqueValue[$cv];
 		$selectoption[] = ['value'=>$keys,'text'=>$textV];
 		$cv++;		 
 	}
- 	$this->set('chatdata', $chatdata);
- 	$this->set('RefId', $RefId);
+	$this->set('RefId', $RefId);
 	$this->set('selectoption', $selectoption);
+ 	$this->set('chatdata', $chatdata);
+ 	
 	$this->set('blockedUser', $blockeddata);
 	//debug($responses);
 	//	die();
