@@ -456,27 +456,27 @@ a{
 								</div>
 							</div>
 						</div>
-							<div class="col-md-9 " style="padding-top:8px;">
-								<div class="row col-md-12 rowspace">
+							<div class="col-md-9">
+								<div class="row col-md-12 rowspace" style="padding-top:8px;">
 										<div class="col-md-12">
 										<label>Category :</label>
 										<span ><?= h($vehicleList); ?></span>
 										</div>
 								</div>
-								<div class="col-md-7">
-									<div class="row rowspace">
+								<div class="col-md-7 rowspace">
+									<div class="row rowspace" style="padding-top:2px;">
 										<div class="col-md-12"><label ><?= __(' Cities of Operation') ?> :</label>
 										<span><?= h($cityList); ?></span>
 										</div>
 									</div>
-									<div class="row rowspace">
+									<div class="row rowspace" style="padding-top:2px;">
 										<div class="col-md-12"><label ><?= __(' States of Operation') ?> :</label>
 										<span ><?= h($stateList); ?> </span>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-5">
-									<div class="row rowspace">
+									<div class="row rowspace" style="padding-top:2px;">
 										<div class="col-md-12"><label ><?= __(' Country') ?> :</label>
 										<span ><?= h($taxiFleetPromotion->country->country_name); ?> </span>
 										</div>
@@ -485,7 +485,7 @@ a{
 										<div class="col-md-12 "><label ><?= __(' Seller') ?> :</label>	
 										<span><u>
 												<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
-												<a href="<?php echo $hrefurl; ?>"> 
+												<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>">
 												<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?></u>
 												<?php
 												if($taxiFleetPromotion->user_rating==0)
@@ -531,7 +531,7 @@ a{
 									
 									<!-------Contact Details Modal --------->
 												<div id="contactdetails<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
-													<div class="modal-dialog modal-md" >
+													<div class="modal-dialog modal-sm" >
 														<!-- Modal content-->
 															<div class="modal-content">
 															  <div class="modal-header">
@@ -540,54 +540,40 @@ a{
 																	Seller Details
 																	</span>
 																	</div>
-																	<div class="modal-body">
+																	<div class="modal-body" style="padding-left:15px!important;">
 																		<span class="help-block"></span>
 																		<div class="row">
 																		<div class="col-md-12">
-																			<div class="col-md-4">
 																			<label>
-																			Seller Name :</label></div>
-																		<div class="col-md-8" style="padding-top:2px;">
-																				<span>
-																					<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?>
-																					<?php
-																					if($taxiFleetPromotion->user_rating==0)
-																					{
-																						echo "";
+																			Seller Name :</label>
+																				<span><u>
+																				<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
+																				<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>">
+																				<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?></u>
+																				<?php
+																				if($taxiFleetPromotion->user_rating==0)
+																				{
+																					echo "";
+																				}
+																				else{
+																						echo "(".$taxiFleetPromotion->user_rating." <i class='fa fa-star'></i> )";
 																					}
-																					else{
-																						echo "( ";
-																						for($i=0;$i<$taxiFleetPromotion->user_rating;$i++)
-																						{
-																							echo "<i class='fa fa-star' style='font-size:10px;color:#efea65;'></i>";
-																							if($i==0)
-																							{
-																								echo "";
-																							}
-																						}
-																						echo " )";
-																						}
-																					?>
-																				</span>
+																				?></a>
+																			</span>
 																			</div>					
 																		</div>
-																	</div>
 																		<div class="row">
 																			<div class="col-md-12">
-																			<div class="col-md-4"><label>Mobile No :</label></div>
-																			<div class="col-md-8">
+																			<label>Mobile No :</label>
 																			<span><?= h($taxiFleetPromotion->user->mobile_number);?></span>
-																			</div>
 																			</div>
 																		</div>
 																		<div class="row">
 																			<div class="col-md-12">
-																				<div class="col-md-4"><label>Email :</label></div>
-																				<div class="col-md-8">
+																				<label>Email :</label>
 																				<span><u><a href="mailto:<?php echo $taxiFleetPromotion->user->email;?>"><?= h($taxiFleetPromotion->user->email);?></a></u></span>
 																				</div>
 																			</div>
-																		</div>
 																	</div><span class="help-block"></span>
 																	<div class="modal-footer">
 																	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>

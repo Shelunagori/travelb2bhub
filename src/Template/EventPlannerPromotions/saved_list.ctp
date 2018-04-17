@@ -119,7 +119,9 @@ hr{
 }
 label{
 	color:#676363;
-	font-weight:600
+	font-weight:600;
+	padding-top:3px;
+	margin-bottom:0px !important;
 }
 
 .col-md-4{
@@ -325,7 +327,7 @@ a{
 									<div class="col-md-12 "><label>Event Planner :</label>
 										<span >
 											<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$eventPlannerPromotion->user_id),1);?>
-											<u><a href="<?php echo $hrefurl; ?>"> 
+											<u><a style="color:#d69d5c;" href="<?php echo $hrefurl; ?>"> 
 												<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?></u>
 										
 												<?php
@@ -371,7 +373,7 @@ a{
 								<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
 								<!-------Contact Details Modal --------->
 								<div id="contactdetails<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
-									<div class="modal-dialog modal-md" >
+									<div class="modal-dialog modal-sm" >
 									<div class="modal-content">
 									  <div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -379,15 +381,14 @@ a{
 											Seller Details
 											</h3>
 											</div>
-											<div class="modal-body">
+											<div class="modal-body" style="padding-left:15px!important;">
 												<span class="help-block"></span>
 												<div class="row">
 													<div class="col-md-12">
-														<div class="col-md-4 label1">Seller Name :</div>
-													<div class="col-md-8" style="padding-top:2px;">
-															<span >
+														<label>Seller Name :</label>
+															<span style="padding-top:2px;">
 															<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$eventPlannerPromotion->user_id),1);?>
-															<u><a href="<?php echo $hrefurl; ?>"> 
+															<u><a style="color:#d69d5c;" href="<?php echo $hrefurl; ?>"> 
 																<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?></u>
 														
 																<?php
@@ -399,24 +400,19 @@ a{
 																		echo "( ".$eventPlannerPromotionss->user_rating." <i class='fa fa-star'></i> )";
 																	}
 																?></a>
-															</span>
-														</div>					
-													</div>
+														</span>
+													</div>					
 												</div>
 												<div class="row">
-													<div class="col-md-12" style="padding-top:2px;">
-													<div class="col-md-4 label1">Mobile No :</div>
-													<div class="col-md-8">
+													<div class="col-md-12" >
+													<label>Mobile No :</label>
 													<span class="label11"><?= h($eventPlannerPromotion->user->mobile_number);?></span>
 													</div>
-													</div>
 												</div>
 												<div class="row">
 													<div class="col-md-12" style="padding-top:2px;">
-														<div class="col-md-4 label1">Email :</div>
-														<div class="col-md-8">
+														<label>Email :</label>
 														<span class="label11"><a href="mailto:<?php echo $eventPlannerPromotion->user->email;?>"><?= h($eventPlannerPromotion->user->email);?></a></span>
-														</div>
 													</div>
 												</div>
 												<span class="help-block"></span>

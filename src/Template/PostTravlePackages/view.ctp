@@ -86,6 +86,9 @@ hr{
 a{
 	color:#ac85d6;
 }
+.modal-title{
+font-size:20px;	
+}
 </style>
 <section class="content">
 <div class="row">
@@ -332,7 +335,7 @@ a{
 										echo $this->Html->link('<b>Contact Info</b>','address'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn  btn-info btn-md contact','data-target'=>'#contactdetails'.$postTravlePackage->id,'data-toggle'=>'modal'));?>
 											<!-------Contact Details Modal --------->
 											<div id="contactdetails<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
-												<div class="modal-dialog modal-md" >
+												<div class="modal-dialog modal-sm" >
 													<!-- Modal content-->
 														<div class="modal-content">
 														  <div class="modal-header">
@@ -341,13 +344,13 @@ a{
 																Seller Details
 																</span>
 																</div>
-																<div class="modal-body">
+																<div class="modal-body" style="padding-left:15px!important;">
 																	<span class="help-block"></span>
 																	<div class="row">
 																		<div class="col-md-12">
-																			<div class="col-md-4">Seller Name :</div>
-																			<div class="col-md-8" style="padding-top:2px;">
-																			<span><u>
+																			<label>Seller Name :<label>
+																			<span style="padding-top:2px;">
+																			<u>
 																				<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
 																				<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>"> 
 																				<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?></u>
@@ -363,21 +366,20 @@ a{
 																			</span>
 																			</div>					
 																		</div>
-																	</div>
 																	<div class="row">
 																		<div class="col-md-12">
-																		<div class="col-md-4">Mobile No :</div>
-																		<div class="col-md-8">
+																		<label>Mobile No :</label>
+																		<span>
 																		<?= h($postTravlePackage->user->mobile_number);?>
-																		</div>
+																		</span>
 																		</div>
 																	</div>
 																	<div class="row">
 																		<div class="col-md-12">
-																			<div class="col-md-4">Email :</div>
-																			<div class="col-md-8">
+																			<label>Email :</label>
+																			<span>
 																			<a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a>
-																			</div>
+																			</span>
 																		</div>
 																	</div>
 																	<div class="row" style="display:none;">
@@ -411,12 +413,12 @@ a{
 													<span style="color:#676363;font-weight:600;"><?= __('Including in Package') ?></span>
 												</div>
 											</div>
-											<div class="row">
+											<div class="row" style="padding-top:2px;">
 												<div class="col-md-12">
 													<?= h($postTravlePackage->package_detail); ?>
 												</div>
 											</div><hr></hr>
-											<div class="row">
+											<div class="row" style="padding-top:2px;">
 												<div class="col-md-12 ">
 														<span style="color:#676363;font-weight:600;"><?= __('Excluded from Package') ?></span>
 												</div>

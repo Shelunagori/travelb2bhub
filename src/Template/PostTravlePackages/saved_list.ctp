@@ -472,7 +472,7 @@ a{
 									<button class="btn btn-danger btn-md  btnlayout" data-target="#contactdetails<?php echo $postTravlePackage->id;?>" data-toggle="modal" type="button">Contact Info</button>
 											<!-------Contact Details Modal --------->
 											<div id="contactdetails<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
-												<div class="modal-dialog modal-md" >
+																								<div class="modal-dialog modal-sm" >
 													<!-- Modal content-->
 														<div class="modal-content">
 														  <div class="modal-header">
@@ -481,42 +481,46 @@ a{
 																Seller Details
 																</span>
 																</div>
-																<div class="modal-body">
+																<div class="modal-body" style="padding-left:15px!important;">
 																	<span class="help-block"></span>
-																	<div class="row">
-																		<div class="col-md-12">
-																			<div class="col-md-4">Seller Name :</div>
-																			<div class="col-md-8" style="padding-top:2px;">
-																				<span >
+																	<div class="row" >
+																		<div class="col-md-12"><label>Seller Name :</label>
+																		<span style="padding-top:2px;"><u>
 																				<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
-																				<a href="<?php echo $hrefurl; ?>"> 
-																				<?php echo "<u>".$postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.'</u> ( '.$postTravlePackagess->user_rating.' <i class="fa fa-star"></i> )';?>
-																				</a>
-																				</span>
-																			</div>					
+																				<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>"> 
+																				<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?></u>
+																				<?php
+																				if($postTravlePackagess->user_rating==0)
+																				{
+																					echo "";
+																				}
+																				else{
+																						echo "(".$postTravlePackagess->user_rating." <i class='fa fa-star'></i> )";
+																					}
+																				?></a></span>
 																		</div>
 																	</div>
 																	<div class="row">
 																		<div class="col-md-12">
-																		<div class="col-md-4">Mobile No :</div>
-																		<div class="col-md-8">
-																		<span><?= h($postTravlePackage->user->mobile_number);?></span>
-																		</div>
+																		<label>	Mobile No :</label>
+																		<span >
+																		<?= h($postTravlePackage->user->mobile_number);?>
+																		</span>
 																		</div>
 																	</div>
 																	<div class="row">
 																		<div class="col-md-12">
-																			<div class="col-md-4">Email :</div>
-																			<div class="col-md-8">
-																			<span><u><a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a></u></span>
-																			</div>
+																			<label>Email :</label>
+																			<span >
+																			<a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a>
+																			</span>
 																		</div>
 																	</div>
 																	<div class="row" style="display:none;">
 																		<div class="col-md-12">
-																			<div class="col-md-4">Location :</div>
-																			<div class="col-md-8">
-																			<span><?= h($postTravlePackage->user->location);?></span>
+																			Location :
+																			<div >
+																			<?= h($postTravlePackage->user->location);?>
 																			</div>
 																		</div>
 																	</div>

@@ -259,7 +259,7 @@ a{
 										<div class="col-md-12 "><label><?= __(' Hotelier') ?> :</label>	
 										<span><u>
 												<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$hotelPromotion->user_id),1);?>
-												<a href="<?php echo $hrefurl; ?>"> 
+												<a style="color:#d69d5c;" href="<?php echo $hrefurl; ?>"> 
 												<?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name);?></u>
 												<?php
 												if($hotelPromotion->user_rating==0)
@@ -292,7 +292,7 @@ a{
 
 									<!------Contact Details Modal --------->
 										<div id="contactdetails<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
-													<div class="modal-dialog modal-md" >
+													<div class="modal-dialog modal-sm" >
 														<!-- Modal content-->
 															<div class="modal-content">
 															  <div class="modal-header">
@@ -301,15 +301,15 @@ a{
 																	Seller Details
 																	</span>
 																	</div>
-																	<div class="modal-body">
+																<div class="modal-body" style="padding-left:15px!important;">
 																		<span class="help-block"></span>
 																		<div class="row ">
 																		<div class="col-md-12">
-																			<div class="col-md-4">Seller Name :</div>
-																			<div class="col-md-8" style="padding-top:2px;">
-																				<span><u>
+																			<label>Seller Name :</label>
+																			<span style="padding-top:2px;">
+																				<u>
 																					<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$hotelPromotion->user_id),1);?>
-																					<a href="<?php echo $hrefurl; ?>"> 
+																				<a style="color:#d69d5c;" href="<?php echo $hrefurl; ?>"> 
 																					<?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name);?></u>
 																					<?php
 																					if($hotelPromotion->user_rating==0)
@@ -322,23 +322,18 @@ a{
 																					?></a>
 																				</span>
 																			</div>					
-																		</div>
-																	</div>
-																		<div class="row " style="padding-top:2px;">
+																		</div>					
+																		<div class="row ">
 																			<div class="col-md-12">
-																			<div class="col-md-4">Mobile No :</div>
-																			<div class="col-md-8">
+																			<label>Mobile No :</label>
 																			<span><?= h($hotelPromotion->user->mobile_number);?></span>
 																			</div>
-																			</div>
 																		</div>
-																		<div class="row " style="padding-top:2px;">
+																		<div class="row ">
 																			<div class="col-md-12">
-																				<div class="col-md-4">Email :</div>
-																				<div class="col-md-8">
-																				<span><u><a href="mailto:<?php echo $hotelPromotion->user->email;?>"><?= h($hotelPromotion->user->email);?></a></u></span>
+																				<label>Email :</label>
+																				<span><a href="mailto:<?php echo $hotelPromotion->user->email;?>"><?= h($hotelPromotion->user->email);?></a></span>
 																				</div>
-																			</div>
 																		</div>
 																		<span class="help-block"></span>
 																	</div>
