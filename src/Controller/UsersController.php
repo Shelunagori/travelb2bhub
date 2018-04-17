@@ -2233,7 +2233,7 @@ public function respondtorequest() {
 		$sort['Users.last_name'] = "DESC";
 	}
 	if(!empty($this->request->query("agentnamesearch"))) {
-		$conditions["Requests.user_id"] =  $this->request->query("agentnamesearch");
+		$conditions["Requests.user_id IN"] =  $this->request->query("agentnamesearch");
  	}
 	if(!empty($this->request->query("destination_city"))) {
 		$conditions["Requests.city_id"] =  $this->request->query("destination_city");
