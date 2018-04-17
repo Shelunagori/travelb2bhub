@@ -1,33 +1,44 @@
 
 <?php if($noofrows==1) {?>
 <div class="col-md-4">
-	  Destination States
-	  <?php echo $this->Form->input('h_state_id',['label' => false,'class'=>'form-control','options'=>$states]);?>
-</div>
+	  Destination State
+		<?php 
+		foreach($states as $key => $value){}
+		echo $this->Form->input('s1',['type'=>'text','label' => false,'class'=>'form-control','value'=>$value,'readonly']);?>
+		<input type="hidden" name="h_state_id" value="<?php echo $key; ?>">
+ </div>
 <?php }
 if($noofrows==2)
 {
 	?>
 	<div class=" col-md-6">
-	  Final States
-	  <?php echo $this->Form->input('p_final_state_id',['label' => false,'class'=>'form-control select2','options'=>$states]);?>
+	  Final State
+ 	  		<?php 
+			foreach($states as $key => $value){}
+			echo $this->Form->input('s1',['type'=>'text','label' => false,'class'=>'form-control','value'=>$value,'readonly']);?>
+			<input type="hidden" name="p_final_state_id" value="<?php echo $key; ?>">
 	</div>
 
 	<div class=" col-md-6">
-	  Final Country
-	  <?php echo $this->Form->input('t_final_country_id',['label' => false,'class'=>'form-control select2','options'=>$countries]);?>
+	Final Country
+ 		<?php 
+		foreach($countries as $keys => $values){}
+		echo $this->Form->input('sds',['type'=>'text','label' => false,'class'=>'form-control','value'=>$values,'readonly']);?>
+		<input type="hidden" name="t_final_country_id" value="<?php echo $keys; ?>">
+
 	</div><?php
 }
 if($noofrows==3)
 {
 	?>
 	<div class="col-md-4">
-	  Final States
-	  <?php echo $this->Form->input('t_final_state_id',['label' => false,'class'=>'form-control select2','options'=>$states]);?>
+	  Final State
+	  <?php 
+			foreach($states as $key => $value){}
+			echo $this->Form->input('dasd',['type'=>'text','label' => false,'class'=>'form-control','value'=>$value,'readonly']);?>
+			<input type="hidden" name="t_final_state_id" value="<?php echo $key; ?>">
 	</div>
- 
 	  <?php echo $this->Form->hidden('t_final_country_id',['label' => false,'class'=>'form-control select2','options'=>$countries]);?>
-	  
 	 <?php
 }
 if($noofrows==4)
@@ -40,8 +51,11 @@ if($noofrows==4)
 	<?php }
 	else {?> Stop State <?php } ?>
 	</p>
-	  <?php echo $this->Form->input($taxboxname,['label' => false,'class'=>'form-control select2','options'=>$states]);?>
-	</div>
+ 	   <?php 
+		foreach($states as $key => $value){}
+		echo $this->Form->input('dasdas',['type'=>'text','label' => false,'class'=>'form-control','value'=>$value,'readonly']);?>
+		<input type="hidden" name="<?php echo $taxboxname; ?>" value="<?php echo $key; ?>">
+ 	</div>
 	<div style="display:none">
 	<?php echo $this->Form->input('t_final_country_id',['label' => false,'class'=>'form-control select2','options'=>$countries]);?>
 	</div> 
@@ -55,7 +69,11 @@ if($noofrows==5)
 	  <p>Pickup State</p>
 	<?php }
 	else {?><p>Stop State</p><?php } ?>
-	  <?php echo $this->Form->input($taxboxname,['label' => false,'class'=>'form-control select2','options'=>$states]);?>
+	 
+	  <?php 
+		foreach($states as $key => $value){}
+		echo $this->Form->input('dasdas',['type'=>'text','label' => false,'class'=>'form-control','value'=>$value,'readonly']);?>
+		<input type="hidden" name="<?php echo $taxboxname; ?>" value="<?php echo $key; ?>">
 	</div>
 	<div style="display:none">
 	<?php echo $this->Form->input('pickup_country_id',['label' => false,'class'=>'form-control select2','options'=>$countries]);?>
@@ -67,7 +85,11 @@ if($noofrows==6)
 	?>
 	<div class="col-md-4">
 	<p>Destination State</p>
-	<?php echo $this->Form->input($taxboxname,['label' => false,'class'=>'form-control select2','options'=>$states]);?>
+	 
+	<?php 
+		foreach($states as $key => $value){}
+		echo $this->Form->input('dasdas',['type'=>'text','label' => false,'class'=>'form-control','value'=>$value,'readonly']);?>
+		<input type="hidden" name="<?php echo $taxboxname; ?>" value="<?php echo $key; ?>">
 	</div>
 	<div style="display:none">
 	<?php echo $this->Form->input('country_id',['label' => false,'class'=>'form-control select2','options'=>$countries]);?>

@@ -791,7 +791,7 @@ fieldset{
 												<div class="input-field">
 												<p for="from">Pickup State</p>
 													<input type='hidden' id='t_pickup_state_id' name="t_pickup_state_id"/>
-												<input type="text" class="form-control" id ="t_pickup_state_name" name="t_pickup_state_name" placeholder="Auto Populated">
+												<input type="text" class="form-control" id ="t_pickup_state_name" name="t_pickup_state_name" placeholder="Auto Populated " readonly>
 												</div>
 											</div>
 											</div>
@@ -897,7 +897,7 @@ $(document).ready(function(){
 	
 	$(document).on('blur',".city_select",function(){
 		var master=$(this);
-		master.closest('div').find('div.suggesstion-box').delay(2000).fadeOut(1000);
+		master.closest('div').find('div.suggesstion-box').delay(1000).fadeOut(500);
 	});
 
 	$(document).on('keyup',".city_select",function(){

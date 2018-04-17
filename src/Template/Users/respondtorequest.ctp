@@ -165,13 +165,13 @@ $conn = ConnectionManager::get('default');
 													<div class=col-md-12>
 													  <div class=col-md-4>
 													 <label class="col-form-label" for=example-text-input>Start Date : </label>
-													 </div> 
-													 <div class=col-md-7>
+													</div> 
+													<div class=col-md-7>
 													 <input class="form-control datepickers" data-date-format="dd-mm-yyyy" name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" >
-													 </div>
+													</div>
 													</div>	
 												</div>
-												<div class="row form-group">								
+												<div class="row form-group">					
 													<div class=col-md-12>
 														<div class=col-md-4>
 														  <label class="col-form-label" for=example-text-input>End Date : </label>
