@@ -435,15 +435,16 @@ fieldset{
 				$("#newlist").show();
 				$(".replacedata").html('<?php $options=array();
 				$options[] = ['value'=>'0','text'=>'All Cities','selected'];
-				echo $this->Form->input('city_id',["class"=>"form-control select2 requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
+				echo $this->Form->input('city_id',["class"=>"form-control city_id requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
 				?>');
 			}
-			$('.select2').select2(); 
+			$(this).closest('form').find('.city_id').select2();
 		});
 		$(document).on('change','.state_list',function()
 		{
 			var state_id=$(this).val();
 			var m_data = new FormData();
+			var cur_obj = $(this);
 			m_data.append('state_id',state_id);			
 			$.ajax({
 				url: "<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions", "action" => "cityStateList"]); ?>",
@@ -456,12 +457,14 @@ fieldset{
 				{	//alert($("input[name='package_type']:checked").val());
 					if($("input[name='package_type']:checked").val()==1){
 						$(".replacedata").html(data);
+						
+						
 						$('#selectbox').html(data);
 					}
 					else{
 						$('#selectbox').html(data);
 					}
-					$('.select2').select2();
+					cur_obj.closest('form').find('.city_id').select2();
 				}
 			});
 		});

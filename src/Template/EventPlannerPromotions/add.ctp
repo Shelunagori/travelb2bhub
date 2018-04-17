@@ -206,7 +206,7 @@ fieldset{
 									{
 										$options[] = ['value'=>$st->id,'text'=>$st->state_name];
 									};
-									echo $this->Form->input('state_id', ['options' => $options,'class'=>'form-control select2 requiredfield','label'=>false,"data-placeholder"=>"Select States",'multiple'=>true]); ?>
+									echo $this->Form->input('state_id', ['options' => $options,'class'=>'form-control select2 requiredfield state_list','label'=>false,"data-placeholder"=>"Select States",'multiple'=>true]); ?>
 									<label style="display:none" class="helpblock error" > This field is required.</label>									
 								</div>
 							</div>
@@ -350,18 +350,19 @@ $(document).ready(function (){
 				$("#newlist").show();
 				$(".replacedata").html('<?php $options=array();
 				$options[] = ['value'=>'0','text'=>'All Cities','selected'];
-				echo $this->Form->input('city_id',["class"=>"form-control select2 requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
+				echo $this->Form->input('city_id',["class"=>"form-control city_id requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
 				?>');
 			}
-			$('.select2').select2(); 
+			$(this).closest('form').find('.city_id').select2();
 		});
 		$(document).on('change','.state_list',function()
 		{
 			var state_id=$(this).val();
 			var m_data = new FormData();
+			var cur_obj = $(this);
 			m_data.append('state_id',state_id);			
 			$.ajax({
-				url: "<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions", "action" => "cityStateList"]); ?>",
+				url: "<?php echo $this->Url->build(["controller" => "EventPlannerPromotions", "action" => "cityStateList"]); ?>",
 				data: m_data,
 				processData: false,
 				contentType: false,
@@ -371,12 +372,14 @@ $(document).ready(function (){
 				{	//alert($("input[name='package_type']:checked").val());
 					if($("input[name='package_type']:checked").val()==1){
 						$(".replacedata").html(data);
+						
+						
 						$('#selectbox').html(data);
 					}
 					else{
 						$('#selectbox').html(data);
 					}
-					$('.select2').select2();
+					cur_obj.closest('form').find('.city_id').select2();
 				}
 			});
 		});
