@@ -217,24 +217,23 @@ fieldset{
 									<p for="from">
 									Select Option
 									</p>
+									
 									<div class="input-field">
 										 <label class="radio-inline">
-										  <input id="city_type" type="radio" name="package_type" value="0" checked="checked"/>All Cities
+										  <input class="city_type" type="radio" name="package_type" value="0" checked="checked"/>All Cities
 										</label>
 										<label class="radio-inline">
-										  <input id="city_type" type="radio" name="package_type" value="1"/>Specific Cities
+										  <input class="city_type" type="radio" name="package_type" value="1"/>Specific Cities
 										</label>
 									</div>
 								</div>
-								<div class="col-md-6 form-group newlist">
-									<p for="from">
-										Cities of Operation
+								
+								<div class="col-md-6  form-group" >
+									<p for="from" id="newlist" style="display:none;">
+										Choose City
 										<span class="required">*</span>
 									</p>
-									<div class="input-field">
-									 <?php $options=array();
-										$options[] = ['value'=>'0','text'=>'All Cities'];
-										echo $this->Form->input('city_id',["class"=>"form-control " ,'options' => $options,'label'=>false]);?>
+									<div class="input-field replacedata">
 									</div>
 								</div>
 								<div class="col-md-6 form-group newlist1" style="display:none;">
@@ -309,6 +308,7 @@ fieldset{
 					</div>
 					<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
 				</form>
+				<div id="selectbox" style="display:none;"> </div>
 			</div>
 		</div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
@@ -338,20 +338,48 @@ $(document).ready(function (){
 			var price=Result1[0];
 			$('.payment_amount').val(price);
 		})
-	$(document).on('click','#city_type', function()
-	{
-		var city_type=$(this).val();
-		//alert(city_type);
-		if(city_type==0)
+		$(document).on('change','.city_type',function()
 		{
-			$(".newlist").show();
-			$(".newlist1").hide();
-		}
-		else{
-			$(".newlist1").show();
-			$(".newlist").hide();
-		}
-	})
+			var city_type=$(this).val();
+			var selectbox=$('#selectbox').html();
+			if(city_type==1){
+				$("#newlist").show();
+				$(".replacedata").html(selectbox);
+			}
+			else{
+				$("#newlist").show();
+				$(".replacedata").html('<?php $options=array();
+				$options[] = ['value'=>'0','text'=>'All Cities','selected'];
+				echo $this->Form->input('city_id',["class"=>"form-control select2 requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
+				?>');
+			}
+			$('.select2').select2(); 
+		});
+		$(document).on('change','.state_list',function()
+		{
+			var state_id=$(this).val();
+			var m_data = new FormData();
+			m_data.append('state_id',state_id);			
+			$.ajax({
+				url: "<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions", "action" => "cityStateList"]); ?>",
+				data: m_data,
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				dataType:'text',
+				success: function(data)
+				{	//alert($("input[name='package_type']:checked").val());
+					if($("input[name='package_type']:checked").val()==1){
+						$(".replacedata").html(data);
+						$('#selectbox').html(data);
+					}
+					else{
+						$('#selectbox').html(data);
+					}
+					$('.select2').select2();
+				}
+			});
+		});
 });
 </script>
  

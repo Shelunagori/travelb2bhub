@@ -972,4 +972,24 @@ class TaxiFleetPromotionsController extends AppController
 		$this->viewBuilder()->layout('user_layout');
 		$this->set(compact('user_id'));
     }
+	public function cityStateList()
+	{
+		$this->loadModel('Cities');
+		$state_id=$this->request->data['state_id'];
+		$data = explode(",", $state_id);
+		$CityList = $this->Cities->find()->where(['Cities.state_id IN' =>$data]);
+		$options=array();
+		
+		//pr($options);
+		
+		echo "
+			<select name='city_id' size='3' class='select2 form-control' multiple='multiple' tabindex='1'>";
+			foreach($CityList as $cty)
+			{
+				echo "<option value='".$cty->id."' > ".$cty->name."</option>";
+			}
+			echo "</select>";
+		exit;
+		
+	}
 }

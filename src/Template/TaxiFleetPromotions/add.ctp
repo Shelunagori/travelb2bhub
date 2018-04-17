@@ -249,7 +249,7 @@ fieldset{
 										{
 											$options[] = ['value'=>$st->id,'text'=>$st->state_name];
 										};
-										echo $this->Form->control('state_id', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield","data-placeholder"=>"Select State","style"=>"height:125px;"]);?>
+										echo $this->Form->control('state_id', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield state_list","data-placeholder"=>"Select State","style"=>"height:125px;"]);?>
 										<label style="display:none" class="helpblock error" > This field is required.</label>
 										
 									</div>
@@ -264,33 +264,22 @@ fieldset{
 									</p>
 									<div class="input-field">
 										 <label class="radio-inline">
-										  <input id="city_type" type="radio" name="package_type" value="0" checked="checked"/>All Cities
+										  <input class="city_type" type="radio" name="package_type" value="0" checked="checked"/>All Cities
 										</label>
 										<label class="radio-inline">
-										  <input id="city_type" type="radio" name="package_type" value="1"/>Specific Cities
+										  <input class="city_type" type="radio" name="package_type" value="1"/>Specific Cities
 										</label>
 									</div>
 								</div>
-								<div class="col-md-6 newlist form-group" >
-									<p for="from">
+								<div class="col-md-6  form-group" >
+									<p for="from" id="newlist" style="display:none;">
 										Choose City
 										<span class="required">*</span>
 									</p>
 									<div class="input-field replacedata">
 									</div>
 								</div>
-								<!---<div class="col-md-6 newlist form-group" >
-									<p for="from">
-										Cities of Operation
-										<span class="required">*</span>
-									</p>
-									<div class="input-field">
-									 <?php /* $options=array();
-										$options[] = ['value'=>'0','text'=>'All Cities'];
-										echo $this->Form->input('city_id',["class"=>"form-control  requiredfield" ,'options' => $options,'label'=>false]); */?>
-										<label style="display:none" class="helpblock error" > This field is required.</label>
-									</div>
-								</div>--->
+								
 								<div class="col-md-6 newlist1 form-group" style="display:none;>
 									<p for="from">
 												Cities of Operation
@@ -401,6 +390,7 @@ fieldset{
 						<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
 				</form>
 			</div>
+			<div id="selectbox" style="display:none;"> </div>
 		</div>
 	</div>
  <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
@@ -433,24 +423,47 @@ fieldset{
 			var price=Result1[0];
 			$('.payment_amount').val(price);
 		})
-		$(document).on('change','#city_type',function()
+		$(document).on('change','.city_type',function()
 		{
 			var city_type=$(this).val();
+			var selectbox=$('#selectbox').html();
 			if(city_type==1){
-				$(".replacedata").html('<?php $options=array();
-				foreach($city->citystatefi as $cty)
-				{
-					$options[] = ['value'=>$cty->cityid,'text'=>$cty->name];
-				};
-				echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield","data-placeholder"=>"Select Cities ","style"=>"height:125px;"]);?>');
+				$("#newlist").show();
+				$(".replacedata").html(selectbox);
 			}
 			else{
+				$("#newlist").show();
 				$(".replacedata").html('<?php $options=array();
 				$options[] = ['value'=>'0','text'=>'All Cities','selected'];
-				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
+				echo $this->Form->input('city_id',["class"=>"form-control select2 requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
 				?>');
 			}
-			$('.select2').select2();
+			$('.select2').select2(); 
+		});
+		$(document).on('change','.state_list',function()
+		{
+			var state_id=$(this).val();
+			var m_data = new FormData();
+			m_data.append('state_id',state_id);			
+			$.ajax({
+				url: "<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions", "action" => "cityStateList"]); ?>",
+				data: m_data,
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				dataType:'text',
+				success: function(data)
+				{	//alert($("input[name='package_type']:checked").val());
+					if($("input[name='package_type']:checked").val()==1){
+						$(".replacedata").html(data);
+						$('#selectbox').html(data);
+					}
+					else{
+						$('#selectbox').html(data);
+					}
+					$('.select2').select2();
+				}
+			});
 		});
 $("#multi_city").multiselect();
 $("#multi_states").multiselect();

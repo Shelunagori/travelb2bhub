@@ -261,11 +261,8 @@ fieldset{
 																	Package Valid Till
 																	<span class="required">*</span>
 																</p>
-																<div class="input-field input-group">
+																<div class="input-field">
 																	<?php echo $this->Form->input('valid_date',['class'=>'form-control date-picker date requiredfield','label'=>false,'data-date-format'=>'dd-mm-yyyy','placeholder'=>'dd-mm-yyyy','value'=>date('d-m-Y')]);?>
-																	<p class="input-group-addon btn" >
-																	<span class="fa fa-calendar"></span>
-																	</p>
 																	<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 															</div>
