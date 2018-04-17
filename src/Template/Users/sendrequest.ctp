@@ -165,16 +165,16 @@ fieldset{
 				<div class="col-md-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 						<div class="input-field">
-							<p for="from">No. of Rooms <span class="required">*</span></p>
+							<p for="from">No. of Roomsdfs <span class="required">*</span></p>
 							<div class="box-room">
 								<div class="col-md-7"> Single</div>
-								<div class="col-md-5"><input autocomplete="off" name="room1" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room1" type="number" min="0" style="height: 27px;" class="form-control number" id="from-place" placeholder="0"/></div>
 
 								<div class="col-md-7"> Double</div>
-								<div class="col-md-5"><input autocomplete="off" name="room2" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room2" type="number" min="0" style="height: 27px;" class="form-control number" id="from-place" placeholder="0"/></div>
 
 								<div class="col-md-7"> Triple</div>
-								<div class="col-md-5"><input autocomplete="off" name="room3" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room3" type="number" min="0" style="height: 27px;" class="form-control number" id="from-place" placeholder="0"/></div>
 
 								<div class="col-md-7"> Child with bed</div>
 								<div class="col-md-5"><input autocomplete="off" name="child_with_bed" style="height: 27px;" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
@@ -609,14 +609,14 @@ fieldset{
 								</div>
 								<div class="row">
 									<div class="col-md-12">
-										<div class="col-md-6">
+										<div class="col-md-6 form-group">
 											<div class="input-field">
 												<p for="from">Final Locality
 													</p>
 												<input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="finalLocality"/>
 											</div>
 										</div>
-										<div class="col-md-6">
+										<div class="col-md-6 form-group">
 											<div class="input-field">
 												<p for="from">Final City
 													 
@@ -637,7 +637,7 @@ fieldset{
 												<input type="text" class="form-control" id ="p_final_state_name" name="p_final_state_name" placeholder="Select State" readonly/>
 											</div>
 										</div>
-										<div class="col-md-6">
+										<div class="col-md-6 form-group">
 											<div class="input-field">
 												<p for="from">Final Country</p>
 												<input type='hidden' id='t_final_country_id' name="t_final_country_id"/>
@@ -786,8 +786,8 @@ fieldset{
 													<div class="suggesstion-box" style="margin-top:-10px"></div>
 												</div>
 											</div>										
-											<div class="stateRpl">
-											<div class="col-md-4 form-group  mt">
+											<div class="stateRpl form-group" style="padding-top:1px;">
+											<div class="col-md-4   mt">
 												<div class="input-field">
 												<p for="from">Pickup State</p>
 													<input type='hidden' id='t_pickup_state_id' name="t_pickup_state_id"/>
@@ -815,7 +815,7 @@ fieldset{
 													<input class="form-control" type="text" placeholder="Enter Locality,Village or Town" name="finalLocality">
 												</div>
 											</div>
-											<div class="col-md-4 mt">
+											<div class="col-md-4 form-group  mt">
 													<div class="input-field">
 														<p for="from">Final City
 														 <span class="required">*</span>    
@@ -826,8 +826,8 @@ fieldset{
 														
 													</div>
 												</div>
-											<div class="rw2">
-												<div class="col-md-4 form-group mt">
+											<div class="rw2 form-group" style="padding-top:1px;">
+												<div class="col-md-4  mt">
 														<div class="input-field">
 														<p for="from">Final State</p>
 															<input type='hidden' id='t_final_state_id' name="t_final_state_id"/>
@@ -887,6 +887,12 @@ fieldset{
 
 $(document).ready(function(){ 
 
+ 	$(document).on('keyup',".number",function(event){
+		  $(this).val($(this).val().replace(/[^\d].+/, ""));
+            if ((event.which < 48 || event.which > 57)) {
+                event.preventDefault();
+            }
+	});
 	$(document).on('blur',".city_select",function(){
 		var master=$(this);
 		master.closest('div').find('div.suggesstion-box').delay(2000).fadeOut(1000);
@@ -1165,7 +1171,11 @@ function selectCountry(value,city_code,state,noofrows) {
 			"h_city_id": {
 				required: true
 			},
-		
+			
+			"room1": {
+				number: true,
+				maxlength:10
+			},
 		},
 		messages: {
 			"reference_id" : {
@@ -1176,6 +1186,9 @@ function selectCountry(value,city_code,state,noofrows) {
 			},
 			"hotelAdult" : {
 				required : "Please enter number of adults."
+			},
+			"room1" : {
+				required : "Please enter number only."
 			},
 			/*"hotelChildren" : {
 				required : "Please enter number of children."
@@ -1407,9 +1420,9 @@ $(document).ready(function () {
         $(".transport-stop-add").click(function(e){
 				e.preventDefault();
 				var strHtml = '<div class="stop col-md-12 main_row" style="margin-top:5px"><hr  style="margin-top: 8px; margin-bottom: 8px;"></hr> <div class="stop-title" style="font-weight:bold"> Stop ' +transI+ ' </div><div class="row main_row">';
-				strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality, Village or Town" name="stops[' +transI+ ']"></div></div>';
-				strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control ctynamerecord city_select" type="text" noofrows="4" taxboxname="state_id_trasport_stop_city[' +transI+ ']" placeholder="Select City or Nearest City" use_for = "trasport" numCount = ' +transI+ ' id="trasport_stop_city[' +transI+ ']" name="trasport_stop_city[' +transI+ ']"><input type="hidden" class="ctyIDname" id="id_trasport_stop_city[' +transI+ ']" name="id_trasport_stop_city[' +transI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div></div>';
-				strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_trasport_stop_city[' +transI+ ']" name="state_id_trasport_stop_city[' +transI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_trasport_stop_city[' +transI+ ']" name="state_name_trasport_stop_city[' +transI+ ']" readonly></div></div></div></div>';
+				strHtml += '<div class="col-sm-4 mt form-group"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality, Village or Town" name="stops[' +transI+ ']"></div></div>';
+				strHtml += '<div class="col-sm-4 mt form-group"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control ctynamerecord city_select" type="text" noofrows="4" taxboxname="state_id_trasport_stop_city[' +transI+ ']" placeholder="Select City or Nearest City" use_for = "trasport" numCount = ' +transI+ ' id="trasport_stop_city[' +transI+ ']" name="trasport_stop_city[' +transI+ ']"><input type="hidden" class="ctyIDname" id="id_trasport_stop_city[' +transI+ ']" name="id_trasport_stop_city[' +transI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div></div>';
+				strHtml += '<div class="stateRpl form-group" ><div class="col-sm-4 mt form-group"><div class="input-field  form-group" style="margin-top:5px !important;"><p for="from">Stop State</p><input type="hidden" id="state_id_trasport_stop_city[' +transI+ ']" name="state_id_trasport_stop_city[' +transI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_trasport_stop_city[' +transI+ ']" name="state_name_trasport_stop_city[' +transI+ ']" readonly></div></div></div></div>';
 				strHtml += '<div class="row"><div class="col-md-12" align="right" style="margin-top:5px"> <button class="btn btn-danger btn-sm transport_remove_stop but"> <i class="fa fa-trash" ></i> Remove Stop</button> </div></div></div>';
 				$(".transport-stops").append(strHtml);
 				transI++;
