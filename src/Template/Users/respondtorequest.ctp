@@ -118,9 +118,8 @@ $conn = ConnectionManager::get('default');
 										 <div class="row form-group">
 											  <div class="col-md-12">
 												<div class=col-md-4>
-													<label for="example-text-input" class="  col-form-label">Agent Name</label>
-												</div>
-												<div class=col-md-1>:</div>
+													<label for="example-text-input" class="  col-form-label">Agent Name : </label>
+												</div> 
 												 <div class=col-md-7>
  												  <?php echo $this->Form->control('agentnamesearch', ['label'=>false,"type"=>"select",'options' =>$selectoption,"class"=>"form-control select2","data-placeholder"=>"Select... ",'empty'=>'Select...']);?>
 												</div>
@@ -129,22 +128,21 @@ $conn = ConnectionManager::get('default');
 										  <div class="row form-group">
 												 <div class=col-md-12>
 													 <div class=col-md-4>
-													 <label class="col-form-label"for=example-text-input>Reference ID</label>
-													 </div>
-													<div class=col-md-1>:</div>
+													 <label class="col-form-label"for=example-text-input>Reference ID : </label>
+													 </div> 
 													 <div class=col-md-7>
-													 <input class=form-control name=refidsearch value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>">
+													 
+<?php echo $this->Form->control('refidsearch[]', ['label'=>false,"type"=>"select",'options' =>$RefId,"class"=>"form-control select2","multiple"=>true,"data-placeholder"=>"Select... ",'empty'=>'Select...']);?>
 													 </div>
 												 </div>
 											</div>
 										 <div class="row form-group ">
 											<div class=col-md-12>
 												 <div class=col-md-4>
-												  <label class="col-form-label"for=example-text-input>Request Type</label>
-												  </div>
-												  <div class=col-md-1>:</div>
+												  <label class="col-form-label"for=example-text-input>Request Type : </label>
+												  </div> 
 												 <div class=col-md-7>
-													<select name="req_typesearch" multiple="multiple" class="form-control  select2">
+													<select name="req_typesearch[]" multiple="multiple" class="form-control  select2">
 													<option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option>
 													<option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option>
 													<option value="2">Transport</option></select>
@@ -154,9 +152,8 @@ $conn = ConnectionManager::get('default');
 										<div class="row form-group ">
 											<div class=col-md-12>
 												<div class=col-md-4>
-													<label class="col-form-label"for=example-text-input>Total Budget</label>
-												</div>
-												<div class=col-md-1>:</div>
+													<label class="col-form-label"for=example-text-input>Total Budget : </label>
+												</div> 
 													<div class=col-md-7>
 														<select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option>
 														<option value="100000-100000000000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? 'selected':''; ?>>100000-Above</option>
@@ -167,9 +164,8 @@ $conn = ConnectionManager::get('default');
 												<div class="row form-group">
 													<div class=col-md-12>
 													  <div class=col-md-4>
-													 <label class="col-form-label" for=example-text-input>Start Date</label>
-													 </div>
-													<div class=col-md-1>:</div>
+													 <label class="col-form-label" for=example-text-input>Start Date : </label>
+													 </div> 
 													 <div class=col-md-7>
 													 <input class="form-control datepicker" data-date-format="dd-mm-yyyy" name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" id="datepicker1">
 													 </div>
@@ -178,9 +174,8 @@ $conn = ConnectionManager::get('default');
 												<div class="row form-group">								
 													<div class=col-md-12>
 														<div class=col-md-4>
-														  <label class="col-form-label" for=example-text-input>End Date</label>
-														</div>
-														<div class=col-md-1>:</div>
+														  <label class="col-form-label" for=example-text-input>End Date : </label>
+														</div> 
 														<div class=col-md-7>
 														<input class="form-control datepicker" data-date-format="dd-mm-yyyy" name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>" id="datepicker2">
 														</div>
@@ -189,9 +184,8 @@ $conn = ConnectionManager::get('default');
 											  <div class="row form-group">
 													 <div class=col-md-12>
 														 <div class=col-md-4>
-														 <label class="col-form-label"for=example-text-input>Pickup City</label>
-														 </div>
-														<div class=col-md-1>:</div>
+														 <label class="col-form-label"for=example-text-input>Pickup City :</label>
+														 </div> 
 														<div class=col-md-7>
 															<select class="form-control select2"  name=pickup_city id=pickup_city>
 															   <option value="">Select</option>
@@ -205,9 +199,8 @@ $conn = ConnectionManager::get('default');
 												<div class="row form-group">								 
 													 <div class=col-md-12>
 														 <div class=col-md-4>
-														 <label class="col-form-label" for=example-text-input>Destination City</label>
-														 </div>
-														<div class="col-md-1">:</div>
+														 <label class="col-form-label" for=example-text-input>Destination City : </label>
+														 </div> 
 														<div class="col-md-7">
 															<select class="form-control select2" name=destination_city id=destination_city>
 															   <option value="">Select</option>
@@ -215,30 +208,15 @@ $conn = ConnectionManager::get('default');
 															   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['destination_city']) AND $_GET['destination_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
 															   <?php }?>
 															</select>
-															<?php //echo $this->Form->control('preference', ["id"=>"destination_city", "type"=>"select", 'options' =>$allCities2, "class"=>"form-control"]); ?>
-														</div>
+ 														</div>
 													</div>
 											  </div>
-											
-											 <!----  <div class="row form-group">
-												 <div class=col-md-12>
-												 <div class=col-md-4>
-												 <label class="col-form-label "for=example-text-input>Members</label>
-												 </div>
-												 <div class=col-md-1>:</div>
-												 <div class=col-md-7>
-												 <input class=form-control name=memberssearch value="<?php echo isset($_GET['memberssearch'])? $_GET['memberssearch']:''; ?>">
-												 </div>
-												</div>
-											  </div>                         
-
-										----------->
+											 
 										 <div class="row form-group">
 											<div class="col-md-12">
 												<div class=col-md-4>
-													<label for="example-text-input" class="  col-form-label">Following</label>
-												</div>
-												<div class=col-md-1>:</div>
+													<label for="example-text-input" class="  col-form-label">Following : </label>
+												</div> 
 												 <div class=col-md-7>
 													<input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['followsearch'])? "checked":''; ?>  >
 												</div>                            
@@ -253,29 +231,29 @@ $conn = ConnectionManager::get('default');
 												</div>
 											</div>
 											 <script>
-													   $('#datepicker1').datepicker({
-																dateFormat: 'dd/mm/yy',
-																changeMonth: true,
-																changeYear: true,
-																minDate: '<?php echo date("d/m/Y"); ?>',
-																onSelect: function(selected) {
-																	$( "#datepicker1" ).datepicker( "option", "minDate",selected);
-																	$('#datepicker1').val("");
-																}
-															});
-															$('#datepicker2').datepicker({
-																dateFormat: 'dd/mm/yy',
-																changeMonth: true,
-																changeYear: true,
-																minDate: '<?php echo date("d/m/Y"); ?>',
-																onSelect: function(selected) {
-																	var checkInDate = $('#datepicker1').val();
-																	if(checkInDate == "") {
-																		alert("Please select check-in date first.");
-																		$('#datepicker2').val("");
-																	}
-																}
-															});
+										   $('#datepicker1').datepicker({
+													dateFormat: 'dd/mm/yy',
+													changeMonth: true,
+													changeYear: true,
+													minDate: '<?php echo date("d/m/Y"); ?>',
+													onSelect: function(selected) {
+														$( "#datepicker1" ).datepicker( "option", "minDate",selected);
+														$('#datepicker1').val("");
+													}
+												});
+												$('#datepicker2').datepicker({
+													dateFormat: 'dd/mm/yy',
+													changeMonth: true,
+													changeYear: true,
+													minDate: '<?php echo date("d/m/Y"); ?>',
+													onSelect: function(selected) {
+														var checkInDate = $('#datepicker1').val();
+														if(checkInDate == "") {
+															alert("Please select check-in date first.");
+															$('#datepicker2').val("");
+														}
+													}
+												});
 											</script>
 										</div>
 									</form>

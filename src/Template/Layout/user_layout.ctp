@@ -35,12 +35,12 @@
 	#country-list{list-style:none;margin-left: 1px;padding:0;width:94%; margin-top: 10px;    position: absolute;
     z-index: 1000;
     background-color: #fff;}
-	#country-list li{padding-left: 10px;padding-top: 7px; background: #d8d4d41a ; border: 1px solid #bbb9b9;;top:2px}
+	#country-list li{padding-left: 10px;padding-top: 7px; background: #d8d4d41a ; border: 0px solid #bbb9b9;;top:2px}
 	#country-list li:hover{background:#d8d4d4;cursor: pointer;}
 	.column_column ul li, .column_helper ul li, .column_visual ul li, .icon_box ul li, .mfn-acc ul li, .ui-tabs-panel ul li, .post-excerpt ul li, .the_content_wrapper ul li{margin-bottom:0px !important}
 	#search-box{border: #e2e2e2 1px solid;border-radius:4px;}
 	#Content{ width:90% !important; margin-left: 5%;}
-  </style>
+</style>
 <style>
 
 .btn-primary.focus, .btn-primary:focus
