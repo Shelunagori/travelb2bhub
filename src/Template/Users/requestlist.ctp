@@ -128,24 +128,22 @@ fieldset
 							<div class="row form-group margin-b10">
 								 <div class=col-md-12>
 									 <div class=col-md-4>
-									 <label class="col-form-label"for=example-text-input>Reference ID</label>
+									 <label class="col-form-label"for=example-text-input>Reference ID : </label>
 									 </div>
-									<div class=col-md-1>:</div>
 									 <div class=col-md-7>
-									 <input class=form-control name=refidsearch value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>">
-									 </div>
-								 </div>
+							<?php echo $this->Form->control('refidsearch', ['label'=>false,"type"=>"select",'options' =>$RefId,"class"=>"form-control select2","multiple"=>true,"data-placeholder"=>"Select... ",'empty'=>'Select...']);?>
+									</div>
+								</div>
 							</div>
                             <div class="row form-group margin-b10">
 								<div class=col-md-12>
 									 <div class=col-md-4>
-									  <label class="col-form-label"for=example-text-input>Request Type</label>
-									  </div>
-									  <div class=col-md-1>:</div>
+									  <label class="col-form-label"for=example-text-input>Request Type : </label>
+									  </div> 
 									 <div class=col-md-7>
-										<select name="req_typesearch[]" multiple class="form-control select2">
-											<option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option>
-											<option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option>
+										<select name="req_typesearch[]" multiple class="form-control select2" data-placeholder='Select Request Type'>
+											<option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? '':''; ?>>Package</option>
+											<option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? '':''; ?>>Hotel</option>
 											<option value="2">Transport</option>
 										</select>
 									</div>
@@ -154,12 +152,11 @@ fieldset
 								<div class="row form-group margin-b10">
 									<div class=col-md-12>
 										<div class=col-md-4>
-											<label class="col-form-label"for=example-text-input>Total Budget</label>
-										</div>
-										<div class=col-md-1>:</div>
+											<label class="col-form-label"for=example-text-input>Total Budget Range : </label>
+										</div> 
 										<div class=col-md-7>
-											<select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option>
-											<option value="100000-100000000000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? 'selected':''; ?>>100000-Above</option>
+											<select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? '':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? '':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? '':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? '':''; ?>>50000-100000</option>
+											<option value="100000-100000000000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? '':''; ?>>100000-Above</option>
 											</select>
 										</div>
 									 </div>
@@ -167,56 +164,51 @@ fieldset
 								<div class="row form-group margin-b10">
 									<div class=col-md-12>
 									  <div class=col-md-4>
-									 <label class="col-form-label" for=example-text-input>Start Date</label>
-									 </div>
-									<div class=col-md-1>:</div>
+									 <label class="col-form-label" for=example-text-input>Start Date : </label>
+									 </div> 
 									 <div class=col-md-7>
-									 <input class=form-control name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"id=datepicker1 data-date-format="dd-mm-yyyy">
+									 <input class="form-control date-picker" name=startdatesearch   data-date-format="dd-mm-yyyy">
 									 </div>
 									</div>	
 								</div>
 								<div class="row form-group margin-b10">								
 									<div class=col-md-12>
 										<div class=col-md-4>
-										  <label class="col-form-label" for=example-text-input>End Date</label>
-										</div>
-										<div class=col-md-1>:</div>
+										  <label class="col-form-label" for=example-text-input>End Date : </label>
+										</div> 
 										<div class=col-md-7>
-										<input class=form-control name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"id=datepicker2 data-date-format="dd-mm-yyyy">
+										<input class="form-control date-picker" name=enddatesearch data-date-format="dd-mm-yyyy">
 										</div>
 									</div>
 								</div>
                               <div class="row form-group margin-b10">
 									 <div class=col-md-12>
 										 <div class=col-md-4>
-										 <label class="col-form-label"for=example-text-input>Pickup City</label>
-										 </div>
-										<div class=col-md-1>:</div>
+										 <label class="col-form-label"for=example-text-input>Pickup City (Transportation) : </label>
+										 </div> 
 										<div class=col-md-7>
 											<select class="form-control select2"  name=pickup_city id=pickup_city>
 											   <option value="">Select</option>
 											   <?php foreach($allCities1 as $city){?>
-											   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['pickup_city']) AND $_GET['pickup_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
+											   <option value="<?php echo $city['value'];?>"><?php echo $city['label'];?></option>
 											   <?php }?>
 											</select>
 										</div>
 									 </div>
                                  </div>   
-								<div class="row form-group margin-b10">								 
+								<div class="row form-group margin-b10">
 									 <div class=col-md-12>
 										 <div class=col-md-4>
-										 <label class="col-form-label" for=example-text-input>Destination City</label>
-										 </div>
-										<div class="col-md-1">:</div>
+										 <label class="col-form-label" for=example-text-input>Destination City (Packages & Hotels) : </label>
+										 </div> 
 										<div class="col-md-7">
 											<select class="form-control select2" name=destination_city id=destination_city>
 											   <option value="">Select</option>
 											   <?php foreach($allCities1 as $city){?>
-											   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['destination_city']) AND $_GET['destination_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
+											   <option value="<?php echo $city['value'];?>"><?php echo $city['label'];?></option>
 											   <?php }?>
 											</select>
-											<?php //echo $this->Form->control('preference', ["id"=>"destination_city", "type"=>"select", 'options' =>$allCities2, "class"=>"form-control"]); ?>
-										</div>
+ 										</div>
 									</div>
                               </div>
                               
@@ -234,14 +226,7 @@ fieldset
 						 
 							<button class="btn btn-primary btn-sm" name="submit" value="Submit" type="submit">Apply</button> 
 							<a href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'requestlist')) ?>"class="btn btn-primary btn-sm">Reset</a>
-						   <script>
-								$(document).ready(function(){
-								$("#datepicker1").datepicker({dateFormat:"dd/mm/yy",changeMonth:!0,changeYear:!0,minDate:"<?php echo date("d/m/Y"); ?>",onSelect:function(e){
-								$("#datepicker2").datepicker("option","minDate",e),
-								$("#datepicker2").val("")}});
-								$("#datepicker2").datepicker({dateFormat:"dd/mm/yy",changeMonth:!0,changeYear:!0,minDate:"<?php echo date("d/m/y"); ?>",onSelect:function(e){""==$("#datepicker1").val()&&(alert("Please select check-in date first."),$("#datepicker2").val(""))}});
-							});
-						   </script>
+						  
 						</div>
 						 </form>
                      </div>
@@ -297,9 +282,8 @@ fieldset
 					?>
 					<fieldset >
 						<legend align="center"><?php echo $image; ?></legend>
-						 <span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
-						<div class="contain">
-							
+				<div class="contain">
+							<p class="pull-right"> <?php echo $org_created; ?></p>
 							<p>Request Type : &nbsp;<?php echo $text; ?></p>
 							<p>Reference ID : &nbsp;
 								<span class="details"><?php echo $request['reference_id']; ?></span>
@@ -388,9 +372,8 @@ fieldset
 							</p>
 							<hr></hr> 
 							 
-							<table width="100%" border="0" class="table-responsive">
+							<table width="100%" border="0">
 							<tr>
-								
 								<td width="33%" style="padding:3px !important;">
 									<div class="check_responses" id="checkresponse_<?php echo $request['id'];?>">
 										<?php if($data['responsecount'][$pid] > 0 ) 
@@ -484,7 +467,11 @@ fieldset
 </div>
 
 <script>
-     $(document).ready(function() {
+
+    $(document).ready(function() {
+	/**$('.date-picker').datepicker({
+		
+	}); **/
         $(".removeRequest").on('click',function(e) {
 			$('#ajaxcount').val('100000');
 			var box=$(this);

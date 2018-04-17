@@ -59,6 +59,16 @@ hr { margin-top:0px!important;}
             zoom: 2.5;
         }
 </style>
+<style>
+	#country-list{list-style:none;margin-left: 1px;padding:0;width:94%; margin-top: 10px;    position: absolute;
+    z-index: 1000;
+    background-color: #fff;}
+	#country-list li{padding-left: 10px;padding-top: 7px; background: #d8d4d41a ; border: 0px solid #bbb9b9;;top:2px}
+	#country-list li:hover{background:#d8d4d4;cursor: pointer;}
+	.column_column ul li, .column_helper ul li, .column_visual ul li, .icon_box ul li, .mfn-acc ul li, .ui-tabs-panel ul li, .post-excerpt ul li, .the_content_wrapper ul li{margin-bottom:0px !important}
+	#search-box{border: #e2e2e2 1px solid;border-radius:4px;}
+	#Content{ width:90% !important; margin-left: 5%;}
+  </style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -84,6 +94,9 @@ hr { margin-top:0px!important;}
 		.wrap-login100 { background:#1f222db8 !important; width:420px !important; padding: 18px 55px 37px 55px; }
 		.p-t-27 { padding-top: 10px; }
 		.error { color: #ff9898; text-align:center; }
+		.wrap-input100 {
+		    margin-bottom: 11px !important;
+		}
 	</style>
 </head>
 <body>
@@ -91,12 +104,9 @@ hr { margin-top:0px!important;}
 		<div class="container-login100 bgdiv">
 			<div class="wrap-login100 rohit" style="width: 920px !important;">
 				<center>
-					<?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:10%;']) ?>
+					<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:16%;']) ?>
 				</center>
-				<span class="login100-form-title p-b-34 p-t-27">
-					TRAVEL B2b HUB
-				</span>			
-			<p style="color:#ff9898 !important;"><?php echo $this->Flash->render(); ?></p>
+ 			<p style="color:#ff9898 !important;"><?php echo $this->Flash->render(); ?></p>
 			<br />
 			<?php echo $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'register','autocomplete'=>"off"],'id'=>"UserRegisterForm",'onSubmit' => 'return getstatevalid();']); ?>
 				<div class="row">
@@ -147,7 +157,7 @@ hr { margin-top:0px!important;}
 						</div>
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Contact No">
-									<input class="input100 trim_space_valid"  required="" id="mobile_number" type="text" name="mobile_number" placeholder="Contact No.">
+									<input class="input100 trim_space_valid"  required="" id="mobile_number" type="number" name="mobile_number" maxlength="10" minlength="10" placeholder="Contact No.">
 							</div>										
 						</div>
 					</div>
@@ -189,29 +199,20 @@ hr { margin-top:0px!important;}
 						</div>
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "City">
-								<select name="city_id" id="city_id" class="form-control select2 input100" required="" style="height: 35px;margin-top: 11px;" >
-									<option value="" >Select</option>
-									<?php foreach($cities1 as $city) { 
-										$state_name=$city->state->state_name;
-										$country_name=$city->state->country->country_name;
-									?>
-											<option style="color:black;" state_name="<?php echo $state_name; ?>" state_id="<?php echo $city['state_id']; ?>" country_name="<?php echo $country_name; ?>" country_id="<?php echo $city['country_id']; ?>" value="<?php echo  $city['id']; ?>">
-												<?php echo  $city['name']; ?>
-												 (<?php echo $state_name; ?>)
-											</option>
-									  <?php } ?>
-								</select>
-								<div class="suggesstion-box" style="margin-top:-10px"></div>
-							</div>	
+								<input class=" input100 trim_space_valid city_select" required="" id="city-search-box" type="text"  name="city" placeholder="Select city/nearest city" taxboxname="" noofrows="1">
+							</div>
+							<div class="suggesstion-box" style="margin-top:-20px"></div>
 						</div>				
 					</div>
 				</div>
+				<input type="hidden" name="country_id" id="country_id">
+				<input type="hidden" name="city_id" id="city_id">
+				<input type="hidden" name="state_id" id="state_id">
 				<div class="row">
 					<div class="col-md-12">
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "State">
-								<input readonly class="input100 trim_space_valid" type="text"  required="" id ="state_name" name="state_name" placeholder="State" >
-								<input type='hidden' id='state_id' name="state_id"/>
+								<input readonly class="input100 trim_space_valid" type="text"  required="" id ="state_name" name="state_name" placeholder="State" > 
 							</div>						
 						</div>
 						<div class="col-md-6">
@@ -224,8 +225,8 @@ hr { margin-top:0px!important;}
 				<div class="row col-md-12">
 					<div class="col-md-12">
 							<div class="wrap-input100 validate-input" data-validate = "Country">
-										<input class="input100 trim_space_valid"  required="" type="text" readonly id ="country_name" name="country_name" placeholder="Country" >
-										<input type='hidden' id='country_id' name="country_id"/>
+								<input class="input100 trim_space_valid"  required="" type="text" readonly id ="country_name" name="country_name" placeholder="Country" >
+								 
 							</div>										
 						</div>	
 				</div>	
@@ -281,53 +282,73 @@ hr { margin-top:0px!important;}
 <?php echo $this->Html->script('/assets/login/js/main.js'); ?>
 <script>
 $(document).ready(function(){	 
-$('.select2').select2();
-$(document).on('change',"#city_id",function(){
-	var city_id=$(this, 'option: selected').val();
-	var state_id=parseFloat($('option:selected', this).attr('state_id'));
-	var state_name=$('option:selected', this).attr('state_name');
-	var country_id=parseFloat($('option:selected', this).attr('country_id'));
-	var country_name=$('option:selected', this).attr('country_name');
-	$("#state_id").val(state_id);
-	$("#state_name").val(state_name);
-	$("#country_id").val(country_id);
-	$("#country_name").val(country_name);
-});
-$(document).on('click',"#ckb1",function(){
-var va = +$('.chk_input').is( ':checked' );
-if(va==0)
-	{
-		$("#chk_cond").show();
-	}
-else
-	{
-		$("#chk_cond").hide();
-	}
- });
-  
-	/*$("#city-search-box").keyup(function(){
-		var input=$("#city-search-box").val();
- 		var m_data = new FormData();
-		m_data.append('input',input);
-		m_data.append('taxboxname',0);
-		m_data.append('noofrows',0);
+	$('.select2').select2();
+
+	$(document).on('blur',"#mobile_number",function(){ 
+		var mobile_number=$(this).val();
+		var m_data = new FormData();
 		 
+		m_data.append('mobile_number',mobile_number);
 		$.ajax({
-			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajax_city"]); ?>",
+			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "checkMobileExixt"]); ?>",
 			data: m_data,
 			processData: false,
 			contentType: false,
 			type: 'POST',
 			dataType:'text',
 			success: function(data)
-			{				
- 				$(".suggesstion-box").show();
+			{	 
+				if(data=='remove'){
+					alert("Mobile Number Already Exist");
+					$('#mobile_number').val('');
+				}
+ 			}
+		});
+	
+	
+	});
+	$(document).on('blur',"#city-search-box",function(){ 
+ 		$('.suggesstion-box').delay(1000).fadeOut(500);
+	});
+	$("#city-search-box").keyup(function(){
+ 		var input=$("#city-search-box").val(); 
+		var noofrows=$(this).attr('noofrows');
+		var taxboxname=$(this).attr('taxboxname');
+		var master=$(this);
+		//alert(input);
+		var m_data = new FormData();
+		m_data.append('input',input);
+		m_data.append('noofrows',noofrows);
+		m_data.append('taxboxname',taxboxname);
+		$.ajax({
+			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "ajaxCityRegister"]); ?>",
+			data: m_data,
+			processData: false,
+			contentType: false,
+			type: 'POST',
+			dataType:'text',
+			success: function(data)
+			{	 
+				$(".suggesstion-box").show();
 				$(".suggesstion-box").html(data);
 				$(".city-search-box").css("background","#FFF");
 			}
 		});
 	});
-	*/
+	
+ 
+	$(document).on('click',"#ckb1",function(){
+		var va = +$('.chk_input').is( ':checked' );
+		if(va==0)
+		{
+			$("#chk_cond").show();
+		}
+		else
+		{
+			$("#chk_cond").hide();
+		}
+	});
+   
 	$(document).on('change',"#role_id",function(){
  		var roleid = jQuery( "#role_id option:selected" ).val();
 		/*if(roleid==3){
@@ -357,20 +378,21 @@ else
 		});
 	});
 });
+function selectCountry(value,city_code,state,country_id,state_name,country_name) {
+		var state_id=state;
+		$(".suggesstion-box").hide();
+		$("#city-search-box").val(value);
+		$("#city_id").val(city_code);
+		
+ 		$("#state_id").val(state_id);
+		$("#state_name").val(state_name);
+		
+		$("#country_id").val(country_id);
+		$("#country_name").val(country_name);
+ 	}	
 </script>	
 <script>
-$(document).ready(function(){ 
-	
-});
-
-
-
-
-
-
-
-
-
+ 
 	/*
 		var cityData = '<?php echo $allCities; ?>';
 						//alert(cityData);
@@ -470,7 +492,7 @@ return this.optional(element) || /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u
 }, "Please enter a valid email.");
 
 $('#UserRegisterForm').validate({
-onkeyup: function (element, event) {
+		onkeyup: function (element, event) {
             if (event.which === 9 && this.elementValue(element) === "") {
                 return;
             } else {

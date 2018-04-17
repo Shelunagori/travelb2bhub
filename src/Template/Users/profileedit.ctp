@@ -386,13 +386,11 @@ hr { margin-top:0px!important;}
 
 $(document).ready(function(){	 
 
-$(document).on('blur',".city_select",function(){
+	$(document).on('blur',".city_select",function(){
 		var master=$(this);
 		master.closest('div').find('div.suggesstion-box').delay(2000).fadeOut(1000);
 	});
-
-	
-		$("#city-search-box").keyup(function(){
+	$("#city-search-box").keyup(function(){
 		var input=$("#city-search-box").val(); 
 			var noofrows=$(this).attr('noofrows');
 			var taxboxname=$(this).attr('taxboxname');
@@ -597,7 +595,7 @@ $(document).on('blur',".city_select",function(){
 	});
  });
 	function selectCountry(value,city_code,state) {
- 		var state_id=state;
+		var state_id=state;
 		$("#city-search-box").val(value);
 		$(".suggesstion-box").hide();
 		$(".cityCode").val(city_code);

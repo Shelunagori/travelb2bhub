@@ -2,6 +2,9 @@
 .checked {
     color: #1295AB;
 }
+.checked1 {
+    color: #F3565D;
+}
 .vl {
     border-left: 6px solid green;
     height: 300px;
@@ -216,93 +219,85 @@
 				}
 			} ?>
 			<p style="font-size: 16px;"><font color="#4B4B4D">Profile Completeness</font></p>
-			<div class="progress">
+			<div class="progress" style="height: 14px !important;">
 				<div class="progress-bar"  role="progressbar" aria-valuenow="<?php echo $profilePercentage; ?>"
-				aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $profilePercentage; ?>%;background-color: #1295AB !important;">
+				aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $profilePercentage; ?>%;background-color: #1295AB !important;line-height: 15px !important;">
 					<?php echo $profilePercentage; ?>%
 				</div>
 			</div>
 			<div>
 						<font color="#4B4B4D" size="4">
-						<div class="col-md-4">
+						<div class="col-md-12">
 							<?php 
 							if($users['role_id'] == 1){ ?>
-								 
-								<span style="font-size: 30px;">
-									<font color="#1295A2">
-										<?php echo $userRequestCount;?>
-									</font>
-								</span>
-								<br>
-								<strong style="font-size:13px;">
+								 <div style="float:left" >
 									Finalized Requests
-								</strong>
+								 </div>
+								 <div style="float:right"  >
+									<div style="width: 32px;height: 25px;background-color:#1295A2;border-radius:13px;color:#FEFEFE;">		
+										<?php echo $userRequestCount;?>
+									</div>
+								 </div>
 							 <?php }
 							 else if($users['role_id'] == 2){ ?>
 								
-								<span style="font-size: 30px;">
-									<font color="#1295A2">
-										<?php echo $userRequestCount;?>
-									</font>
-								</span>
-								<br>
-								<strong style="font-size:13px;">
+								 <div style="float:left" class="col-md-10">
 									Finalized Requests
-								</strong>
+								 </div>
+								 <div style="float:right" class="col-md-2">
+									<div style="width: 32px; height: 25px; background-color: #1295A2;border-radius:9px;color:#FEFEFE;">		
+									<?php echo $userRequestCount;?>
+									</div>
+								 </div>
 							 <?php } ?>
 						</div>		
-						<div class="col-md-4">
+						<div class="col-md-12" style="margin-top:3%;">
 							<?php 
 							if($users['role_id'] == 1){ ?>
-								
-								<span style="font-size: 30px;">
-									<font color="#1295A2">
-										<?php echo $userrespondToRequestCount;?>
-									</font>	
-								</span>
-								<br>
-								<strong style="font-size:13px;">
+								<div style="float:left" >
 									Responded Requests
-								</strong>
+								 </div>
+								 <div style="float:right"  >
+									<div style="width: 32px !important; height: 25px; background-color: #DFBA49;border-radius:13px;color:#FEFEFE;">		
+										<?php echo $userrespondToRequestCount;?>
+									</div>
+								 </div>
+								  
 							<?php }
 							 else if($users['role_id'] == 3){ ?>
-								
-								<span style="font-size: 30px;">
-									<font color="#1295A2">
-										<?php echo $userrespondToRequestCount;?>
-									</font>	
-								</span>
-								<br>
-								<strong style="font-size:13px;">
+								<div style="float:left" >
 									Responded Requests
-								</strong>
+								 </div>
+								 <div style="float:right"  >
+									<div style="width: 32px !important; height: 25px; background-color: #DFBA49;border-radius:13px;color:#FEFEFE;">		
+									<?php echo $userrespondToRequestCount;?>
+									</div>
+								 </div>
+								 
 							 <?php } ?>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-12" style="margin-top:3%;">
 							<?php 
 							if($users['role_id'] == 1){ ?>
-								
-								<span style="font-size: 30px;">
-									<font color="#1295A2">
-										<?php echo $userReponseCount;?>
-									</font>
-								</span>
-								<br>
-								<strong style="font-size:13px;">
+								<div style="float:left" >
 									Finalized Responses
-								</strong>
+								 </div>
+								 <div style="float:right"  >
+									<div style="width: 32px; height: 25px; background-color: #F3565D;border-radius:13px;color:#FEFEFE;">	
+										<?php echo $userReponseCount;?>
+									</div>
+								 </div>
+								  
 							<?php }
 							 else if($users['role_id'] == 3){ ?>
-								
-								<span style="font-size:30px;">
-									<font color="#1295A2">
-									<?php echo $userReponseCount;?>
-									</font>
-								</span>
-								<br>
-								<strong style="font-size:13px;">
+								<div style="float:left" >
 									Finalized Responses
-								</strong>
+								 </div>
+								 <div style="float:right"  >
+									<div style="width: 32px; height: 25px; background-color: #F3565D;border-radius:13px;color:#FEFEFE;">		
+										<?php echo $userReponseCount;?>
+									</div>
+								 </div>
 							 <?php } ?>
 						</div>
 						</font>
@@ -312,13 +307,15 @@
 		 
 		<div class="col-md-4" style="border-right:2px solid #eee;height:320px;"> 
 			
-			<div class="rating-block">
+			<div class="rating-block"><br>
+			<h4 style="color:#1295A2">Rating</h4>
+				<hr> 
 				<h5 >Average user rating &nbsp; <font color="#1295A2" ><?php echo number_format($average_rating,1);?> <small> ( <?php echo $testimonialcount;?> ) </font> </small>&nbsp; 
-					<span <?php if($average_rating==1 OR $average_rating>1){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
-					<span <?php if($average_rating==2 OR $average_rating>2){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
-					<span <?php if($average_rating==3 OR $average_rating>3){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
-					<span <?php if($average_rating==4 OR $average_rating>4){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
-					<span <?php if($average_rating==5 OR $average_rating>5){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
+					<span <?php if($average_rating==1 OR $average_rating>1){ ?>class="fa fa-star checked1"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
+					<span <?php if($average_rating==2 OR $average_rating>2){ ?>class="fa fa-star checked1"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
+					<span <?php if($average_rating==3 OR $average_rating>3){ ?>class="fa fa-star checked1"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
+					<span <?php if($average_rating==4 OR $average_rating>4){ ?>class="fa fa-star checked1"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
+					<span <?php if($average_rating==5 OR $average_rating>5){ ?>class="fa fa-star checked1"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
 				</h5>
 				<div class="row">  
 			   <div class="col-md-8 col-xs-8 col-sm-8"> <h5 class="media_h4">Rating breakdown </h5> </div>
@@ -344,9 +341,9 @@
 						<span <?php if($average_rating==$i OR $average_rating>$i){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
 						</div>
 					</div>
-					<div class="col-md-8" >
-						<div class="progress">         
-							<div <?php if($average_rating==$i OR $average_rating>$i){ ?>style="width: 100%; height: 18px; background-color: #1295AB;border-radius:9px;"<?php } ?>></div>	
+					<div class="col-md-8" style="padding-right: 0px !important;">
+						<div class="progress" style="height:13px !important;">         
+							<div <?php if($average_rating==$i OR $average_rating>$i){ ?>style="width: 100%; height: 13px; background-color: #1295AB;border-radius:9px;"<?php } ?>></div>	
 						</div>
 					</div>
 					<div class="col-md-2"  ><?php if($average_rating==$i OR 	$average_rating>$i){ echo "100"; }else{ echo "0"; }  ?>%
@@ -361,9 +358,10 @@
 		 
 		<?php  if($testimonialcount > 0) { 
 			?>
-			<div class=" " style="background-color:#FFF">
-				<h5 >Reviews</h5>
+			<h4 style="color:#1295A2">Review</h4>
 				<hr></hr>
+			<div class=" " style="background-color:#FFF">
+				
 				<div class="">
 				
 					<div class="carousel-reviews broun-block">
@@ -381,11 +379,11 @@
 									<div class="">
 										<div class="review-block">
 											<div class="">
-												<div class="block-text">
+												<div class="block-text message-data align-right">
 													<p> <?php echo $testimo['comment']; ?> </p>
 												</div>
 												 
-											</div>
+											</div><br>
 											<div class="col-md-3 col-sm-2 col-xs-2 person-img" style="padding-top:5px">
 												<?php
 
@@ -472,17 +470,17 @@
         </div>
       </div>
       <!-- /.row -->
-			<div class="box box-primary">
-			<span style="font-size:18px; padding:10px;padding-top:10px">Description</span>
-			<hr style="margin-top:2px !important"></hr>
-				<div class="box-body">
+			 
+			<span style="font-size:18px; padding:10px;padding-top:10px;color:#373435 !important;"><b>Description</b></span>
+			 
+				<div class="box-body box">
 					<div>
-						<div class="form-group col-md-12" style="min-height: 120px !important;'">
+						<div class="form-group col-md-12" style="min-height: 80px !important;'">
 							<?php echo $users['description']; ?>
 						</div>
 					</div>
 				</div>
-			</div>
+			 
 		 <?php if($users['role_id'] == 1){ ?>
 			<div class="box box-primary">
 			<span style="font-size:18px; padding:10px;padding-top:10px">Certificates</span>
