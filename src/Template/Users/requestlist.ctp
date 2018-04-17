@@ -131,7 +131,7 @@ fieldset
 									 <label class="col-form-label"for=example-text-input>Reference ID : </label>
 									 </div>
 									 <div class=col-md-7>
-							<?php echo $this->Form->control('refidsearch', ['label'=>false,"type"=>"select",'options' =>$RefId,"class"=>"form-control select2","multiple"=>true,"data-placeholder"=>"Select... ",'empty'=>'Select...']);?>
+							<?php echo $this->Form->control('refidsearch', ['label'=>false,"type"=>"select",'options' =>$RefId,"class"=>"form-control select2","multiple"=>true,"data-placeholder"=>"Select Multiple",'empty'=>'Select...']);?>
 									</div>
 								</div>
 							</div>
@@ -141,7 +141,7 @@ fieldset
 									  <label class="col-form-label"for=example-text-input>Request Type : </label>
 									  </div> 
 									 <div class=col-md-7>
-										<select name="req_typesearch[]" multiple class="form-control select2" data-placeholder='Select Request Type'>
+										<select name="req_typesearch[]" multiple class="form-control select2" data-placeholder='Select Multiple'>
 											<option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? '':''; ?>>Package</option>
 											<option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? '':''; ?>>Hotel</option>
 											<option value="2">Transport</option>

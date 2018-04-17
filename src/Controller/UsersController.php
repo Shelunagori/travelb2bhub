@@ -2826,8 +2826,10 @@ public function myresponselist() {
 		$result = explode("-", $QPriceRange);
 		$MinQuotePrice = $result[0];
 		$MaxQuotePrice = $result[1];
-		$conditions["Requests.total_budget >="] = $MinQuotePrice;
-		$conditions["Requests.total_budget <="] = $MaxQuotePrice;
+		//$conditions["Requests.total_budget >="] = $MinQuotePrice;
+		$conditions["Responses.quotation_price >="] = $MinQuotePrice;
+		//$conditions["Requests.total_budget <="] = $MaxQuotePrice;
+		$conditions["Responses.quotation_price <="] = $MaxQuotePrice;
 	}
 	$sort='';
 	if(empty($this->request->query("sort"))) {
@@ -2851,14 +2853,14 @@ public function myresponselist() {
 		$sort['Users.last_name'] = "DESC";
 	}
 	if(!empty($this->request->query("agentnamesearch"))) {
-		 $conditions["Requests.user_id"] =  $this->request->query("agentnamesearch");
-	}
+		$conditions["Requests.user_id IN "] =  $this->request->query("agentnamesearch");
+ 	}
 	if(!empty($this->request->query("req_typesearch"))) {
 		$typeSearchArray=$this->request->query("req_typesearch");  
-			$conditions["Requests.category_id IN"] =  $typeSearchArray; 
+		$conditions["Requests.category_id IN"] =  $typeSearchArray; 
 	}
 	if(!empty($this->request->query("refidsearch"))) {
-		$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
+		$conditions["Requests.id IN"] =  $this->request->query("refidsearch");
 	}
 	if(!empty($this->request->query("destination_city"))) {
 		$conditions["Requests.city_id"] =  $this->request->query("destination_city");
@@ -2868,32 +2870,30 @@ public function myresponselist() {
 	}
 	if(!empty($this->request->query("chatwith"))) {
 		$chatuserid = $this->request->query("chatwith");
-		$conditions["Requests.user_id"] = $chatuserid;
+		$conditions["Requests.user_id IN"] = $chatuserid;
 	}		
 	if(!empty($this->request->query("shared_details"))) {
 		$conditions["Responses.is_details_shared"] =  $this->request->query("shared_details");
 	}
 	$sdate = $this->request->query("startdatesearch");
-	//$sdate = (isset($sdate) && !empty($sdate))?$this->ymdFormatByDateFormat($sdate, "m-d-Y", $dateSeparator="/"):null;
 	if(!empty($this->request->query("startdatesearch"))) {
 		$sdate=date('Y-m-d', strtotime($sdate));
-		$da["Requests.start_date"] =  $sdate;
-		$da["Requests.check_in"] =  $sdate;
-		$conditions["OR"] =  $da;
+		$conditions[]= array (
+			'OR' => array(
+				array("Requests.start_date >=" =>  $sdate,'Requests.category_id'=> 2),
+				array("Requests.check_in >=" =>  $sdate,'Requests.category_id !='=> 2),
+			)
+		);
 	}
 	$edate = $this->request->query("enddatesearch");
-	if(isset($edate) AND !empty($edate)){
-		//$date = str_replace('/', '-', $edate);
-		$edate = date('Y-m-d', strtotime($edate));
-	}
-	else{
-		$edate = null;		
-	}
-//$edate = (isset($edate) && !empty($edate))?$this->ymdFormatByDateFormat($edate, "m-d-Y", $dateSeparator="/"):null;
 	if(!empty($this->request->query("enddatesearch"))) {
-		$da1["Requests.end_date"] =  $edate;
-		$da1["Requests.check_out"] =  $edate;
-		$conditions["OR"] =  $da1;
+		$edate=date('Y-m-d', strtotime($edate));
+		$conditions[]= array (
+			'OR' => array(
+				array("Requests.end_date <=" =>  $edate,'Requests.category_id'=> 2),
+				array("Requests.check_out <=" =>  $edate,'Requests.category_id !='=> 2),
+			)
+		);
 	}
 	$conditions["Responses.is_deleted "] = 0;
 	$conditions["Responses.status "] = 0;
@@ -2918,7 +2918,7 @@ public function myresponselist() {
 		if(sizeof($BlockedUsers)>0){
 			$conditions["Requests.user_id NOT IN"] =  $BlockedUsers; 
 		}
- 	
+ 	//pr($conditions); exit;
 	$responses = $this->Responses->find()
 		->contain([ "Requests.Users", "UserChats","Requests.Hotels"])
 		->where(['Responses.user_id' => $this->Auth->user('id'),$conditions])->order($sort)->all();
@@ -2929,6 +2929,7 @@ public function myresponselist() {
 	$chatdata = array();
 	$key = array();
 	$value = array();
+	$RefId = array();
 	$selectoption = array();
 	$loggedinid = $this->Auth->user('id');
 	if(count($responses)>0){
@@ -2936,7 +2937,8 @@ public function myresponselist() {
 		foreach($responses as $req){
 			$key[]=$req->request->user->id;
 			$value[]=$req->request->user->first_name.' '.$req->request->user->last_name;
-	
+			$RefId[] = ['value'=>$req->request->id,'text'=>$req->request->reference_id];
+
 			$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$req['user_id']."' AND blocked_by='".$req['request']['user_id']."'";
 			$stmt = $conn->execute($sql1);
 			$bresult = $stmt ->fetch('assoc');
@@ -2968,6 +2970,7 @@ public function myresponselist() {
 		$cv++;		 
 	}
  	$this->set('chatdata', $chatdata);
+ 	$this->set('RefId', $RefId);
 	$this->set('selectoption', $selectoption);
 	$this->set('blockedUser', $blockeddata);
 	//debug($responses);

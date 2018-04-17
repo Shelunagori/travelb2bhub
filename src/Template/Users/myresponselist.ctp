@@ -115,22 +115,20 @@ $conn = ConnectionManager::get('default');
 	 <div class="row form-group">
 		<div class="col-md-12">
 		<div class=col-md-4>
-			<label for="example-text-input" class="  col-form-label">Agent Name</label>
-		</div>
-		<div class=col-md-1>:</div>
+			<label for="example-text-input" class="  col-form-label">Agent Name : </label>
+		</div> 
 		 <div class=col-md-7>
-		  <?php echo $this->Form->control('agentnamesearch', ['label'=>false,"type"=>"select",'options' =>$selectoption,"class"=>"form-control select2","data-placeholder"=>"Select... ",'empty'=>'Select...']);?>
+		  <?php echo $this->Form->control('agentnamesearch', ['label'=>false,"type"=>"select",'options' =>$selectoption,"class"=>"form-control select2","data-placeholder"=>"Select Multiple ",'empty'=>'Select...','multiple'=>true]);?>
 		</div>
 		</div>
 		</div>
 		<div class="row form-group">
 			 <div class=col-md-12>
 				 <div class=col-md-4>
-				 <label class="col-form-label"for=example-text-input>Reference ID</label>
-				 </div>
-				<div class=col-md-1>:</div>
+				 <label class="col-form-label"for=example-text-input>Reference ID : </label>
+				 </div> 
 				 <div class=col-md-7>
-				 <input class=form-control name=refidsearch value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>">
+					<?php echo $this->Form->control('refidsearch', ['label'=>false,"type"=>"select",'options' =>$RefId,"class"=>"form-control select2","data-placeholder"=>"Select Multiple ",'empty'=>'Select...','multiple'=>true]);?>
 				 </div>
 			 </div>
 		</div>
@@ -138,13 +136,12 @@ $conn = ConnectionManager::get('default');
 						 <div class="row form-group ">
 							<div class=col-md-12>
 								 <div class=col-md-4>
-								  <label class="col-form-label"for=example-text-input>Request Type</label>
-								  </div>
-								  <div class=col-md-1>:</div>
+								  <label class="col-form-label"for=example-text-input>Request Type : </label>
+								  </div>  
 								 <div class=col-md-7>
-									<select name="req_typesearch" multiple="multiple" class="form-control select2">
-									<option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option>
-									<option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option>
+									<select name="req_typesearch[]" multiple="multiple" class="form-control select2"  data-placeholder='Select Multiple'>
+									<option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? '':''; ?>>Package</option>
+									<option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? '':''; ?>>Hotel</option>
 									<option value="2">Transport</option></select>
 								</div>
 							 </div>
@@ -152,15 +149,14 @@ $conn = ConnectionManager::get('default');
 						<div class="row form-group ">
 							<div class=col-md-12>
 								 <div class=col-md-4>
-								  <label class="col-form-label"for=example-text-input>Chat With </label>
-								  </div>
-								  <div class=col-md-1>:</div>
+								  <label class="col-form-label "for=example-text-input>Chat With :  </label>
+								  </div> 
 								 <div class=col-md-7>
-									 <select name="chatwith" class="form-control"><option value="">Select Chat With</option>
+									 <select name="chatwith[]" multiple="multiple" class="form-control select2"  data-placeholder='Select Multiple' > 
 									   <?php if(!empty($UserResponse)){ 
 											foreach($UserResponse as $user){               
 									   ?>
-									   <option <?php echo (isset($_GET['chatwith']) && $_GET['chatwith'] ==$user['id'])? 'selected':''; ?> value="<?php echo $user['id']?>"><?php echo $user['first_name'].' '.$user['last_name']?></option>
+									   <option value="<?php echo $user['id']?>"><?php echo $user['first_name'].' '.$user['last_name']?></option>
 									   <?php }}?>
 									  </select>
 								</div>
@@ -169,12 +165,11 @@ $conn = ConnectionManager::get('default');
 						<div class="row form-group ">
 							<div class=col-md-12>
 								<div class=col-md-4>
-									<label class="col-form-label"for=example-text-input>Total Budget</label>
-								</div>
-								<div class=col-md-1>:</div>
+									<label class="col-form-label"for=example-text-input>Quoted Price Range : </label>
+								</div> 
 									<div class=col-md-7>
-										<select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option>
-										<option value="100000-100000000000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? 'selected':''; ?>>100000-Above</option>
+										<select name="budgetsearch" class="form-control"  data-placeholder='Select...'><option value="">Select...</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? '':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? '':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? '':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? '':''; ?>>50000-100000</option>
+										<option value="100000-100000000000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? '':''; ?>>100000-Above</option>
 										</select>
 									</div>
 								</div>
@@ -182,36 +177,33 @@ $conn = ConnectionManager::get('default');
 								<div class="row form-group">
 									<div class=col-md-12>
 									  <div class=col-md-4>
-									 <label class="col-form-label" for=example-text-input>Start Date</label>
-									 </div>
-									<div class=col-md-1>:</div>
+									 <label class="col-form-label" for=example-text-input>Start Date : </label>
+									 </div> 
 									 <div class=col-md-7>
-									 <input class="form-control datepicker" data-date-format="dd-mm-yyyy" name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" id="datepicker1">
+									 <input class="form-control datepickers" data-date-format="dd-mm-yyyy" name=startdatesearch id="datepicker1">
 									 </div>
 									</div>	
 								</div>
 								<div class="row form-group">								
 									<div class=col-md-12>
 										<div class=col-md-4>
-										  <label class="col-form-label" for=example-text-input>End Date</label>
-										</div>
-										<div class=col-md-1>:</div>
+										  <label class="col-form-label" for=example-text-input>End Date : </label>
+										</div> 
 										<div class=col-md-7>
-										<input class="form-control datepicker" data-date-format="dd-mm-yyyy" name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>" id="datepicker2">
+										<input class="form-control datepickers" data-date-format="dd-mm-yyyy" name=enddatesearch id="datepicker2">
 										</div>
 									</div>
 								</div>
                               <div class="row form-group">
 									 <div class=col-md-12>
 										 <div class=col-md-4>
-										 <label class="col-form-label"for=example-text-input>Pickup City</label>
-										 </div>
-										<div class=col-md-1>:</div>
+										 <label class="col-form-label"for=example-text-input>Pickup City (Transportation) : </label>
+										 </div> 
 										<div class=col-md-7>
 											<select class="form-control select2"  name=pickup_city id=pickup_city>
 											   <option value="">Select</option>
 											   <?php foreach($allCities1 as $city){?>
-											   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['pickup_city']) AND $_GET['pickup_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
+											   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['pickup_city']) AND $_GET['pickup_city']==$city['value']){ echo ''; }?>><?php echo $city['label'];?></option>
 											   <?php }?>
 											</select>
 										</div>
@@ -220,40 +212,26 @@ $conn = ConnectionManager::get('default');
 								<div class="row form-group">								 
 									 <div class=col-md-12>
 										 <div class=col-md-4>
-										 <label class="col-form-label" for=example-text-input>Destination City</label>
-										 </div>
-										<div class="col-md-1">:</div>
+										 <label class="col-form-label" for=example-text-input>	Destination City (Packages & Hotels) : </label>
+										 </div> 
 										<div class="col-md-7">
 											<select class="form-control select2" name=destination_city id=destination_city>
 											   <option value="">Select</option>
 											   <?php foreach($allCities1 as $city){?>
-											   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['destination_city']) AND $_GET['destination_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
+											   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['destination_city']) AND $_GET['destination_city']==$city['value']){ echo ''; }?>><?php echo $city['label'];?></option>
 											   <?php }?>
 											</select>
-											<?php //echo $this->Form->control('preference', ["id"=>"destination_city", "type"=>"select", 'options' =>$allCities2, "class"=>"form-control"]); ?>
+											 
 										</div>
 									</div>
                               </div>
-                               <!--<div class="row form-group">
-									 <div class=col-md-12>
-									 <div class=col-md-4>
-									 <label class="col-form-label "for=example-text-input>Members</label>
-									 </div>
-									 <div class=col-md-1>:</div>
-									 <div class=col-md-7>
-									 <input class=form-control name=memberssearch value="<?php echo isset($_GET['memberssearch'])? $_GET['memberssearch']:''; ?>">
-									 </div>
-									</div>
-								  </div>                         
-
-							 -->
+                               
 						  
 						 <div class="row form-group">
 							<div class="col-md-12">
 								<div class=col-md-4>
-									<label for="example-text-input" class="  col-form-label">Following</label>
-								</div>
-								<div class=col-md-1>:</div>
+									<label for="example-text-input" class="  col-form-label">Following : </label>
+								</div> 
 								 <div class=col-md-7>
 									<input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['followsearch'])? "checked":''; ?>  >
 								</div>                            
@@ -263,9 +241,8 @@ $conn = ConnectionManager::get('default');
 						   <div class="row form-group">
 							<div class="col-md-12">
 								<div class=col-md-4>
-									<label for="example-text-input" class="  col-form-label">Shared Details</label>
-								</div>
-								<div class=col-md-1>:</div>
+									<label for="example-text-input" class="  col-form-label">Shared Details : </label>
+								</div> 
 								 <div class=col-md-7>
 									<input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['is_details_shared'])? "checked":''; ?>  >
 								</div>                            
@@ -279,31 +256,7 @@ $conn = ConnectionManager::get('default');
 								   <a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'myresponselist')) ?>">Reset</a>
 								</div>
 							</div>
-							<script>
-									   $('#datepicker1').datepicker({
-												dateFormat: 'dd/mm/yy',
-												changeMonth: true,
-												changeYear: true,
-												minDate: '<?php echo date("d/m/Y"); ?>',
-												onSelect: function(selected) {
-													$( "#datepicker2" ).datepicker( "option", "minDate",selected);
-													$('#datepicker2').val("");
-												}
-											});
-											$('#datepicker2').datepicker({
-												dateFormat: 'dd/mm/yy',
-												changeMonth: true,
-												changeYear: true,
-												minDate: '<?php echo date("d/m/Y"); ?>',
-												onSelect: function(selected) {
-													var checkInDate = $('#datepicker1').val();
-													if(checkInDate == "") {
-														alert("Please select check-in date first.");
-														$('#datepicker2').val("");
-													}
-												}
-											});
-							</script>
+							 
 						</div>
 					</div>
 				</div>
@@ -335,7 +288,7 @@ $(document).ready(function(){
 			if(isset($_GET['memberssearch'])  && $_GET['memberssearch']!="" && $_GET['memberssearch'] !=$totmem ){
 				continue;
 			}
-			if(isset($_GET['followsearch']) && $_GET['followsearch']==1 && !in_array($response['request']['user_id'],$BusinessBuddies)) {
+ 			if(isset($_GET['followsearch']) && $_GET['followsearch']==1 && !in_array($response['request']['user_id'],$BusinessBuddies)) {
 				continue;
 			}
 			if($blockedUser['blockedUser'][$response['id']]==1) { $total_responses--; }else{
@@ -362,7 +315,7 @@ $(document).ready(function(){
 				?>
 				<fieldset>
 					<legend><?php echo $image; ?></legend>
-					 <span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
+					 <span style="margin-top:-30px;float:right;"><?php echo $org_created; ?></span>
 					 <div class="contain">
                  <ul>
 				 <li class="">
@@ -412,7 +365,7 @@ $(document).ready(function(){
 					?>
 					<p>
 						Total Budget : <span class="details"> &#8377; 
-						<?php echo ($total_budget)? "Rs. ". ($total_budget) :"-- --" ?>
+						<?php echo ($total_budget)? "". ($total_budget) :"-- --" ?>
 					</p>
 				 </li>
 				 
@@ -562,13 +515,11 @@ $(document).ready(function(){
 									<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h3 class="modal-title">
-												<font color="black">Confirm Follow User ?</font>
-											</h3>
+											<h4 class="modal-title">Are you sure you want to follow this user?</h4>
 										</div>
 										<div class="modal-footer">
-										<button type="button"  href="javascript:void(0);" class="businessBuddy btn btn-warning" user_id = "<?php echo $response["request"]["user_id"]; ?>" >Follow</button>
-										<button type="button" class="btn btn-successto" data-dismiss="modal">Cancel</button>
+										<button type="button"  href="javascript:void(0);" class="businessBuddy btn btn-danger" user_id = "<?php echo $response["request"]["user_id"]; ?>" >Follow</button>
+										<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
 										</div>
 									</div>
 								</div>
@@ -591,55 +542,50 @@ $(document).ready(function(){
 										  <div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<h3 class="modal-title">
-												USER CONTACT DETAIL
+												User Contact Details
 												</h3>
 												</div>
 												<div class="modal-body">
 													<span class="help-block"></span>
 													<div class="row">
 														<div class="col-md-12">
-															<div class="col-md-4"> Name :</div>
-															<div class="col-md-8">
-																<label>
+															<div class="col-md-12"><label> Name </label>:
+																
 																	<?php echo $response['request']['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $response['request']['user']['last_name']; ?> 
-																</label>
+																
 															</div>					
 														</div>
 													</div>
 													<div class="row">
 														<div class="col-md-12">
-														<div class="col-md-4">Company Name :</div>
-															<div class="col-md-8">
-																<label>
+														<div class="col-md-12"><label>Company Name </label>:
+																
 																	<?php echo ($response['request']['user']['company_name'])?$response['request']['user']['company_name']:"-- --"; ?>
-																</label>
+																
 															</div>
 														</div>
 													</div>
 													<div class="row">
 														<div class="col-md-12">
-															<div class="col-md-4">Email :</div>
-															<div class="col-md-8">
-																<label>
+															<div class="col-md-12"><label>Email</label> :
+																
 																	<?php echo ($response['request']['user']['email'])?$response['request']['user']['email']:"-- --"; ?>
-																</label>
+																
 															</div>
 														</div>
 													</div>
 													<div class="row" style="display:none;">
 														<div class="col-md-12">
-															<div class="col-md-4">Mobile No. :</div>
-															<div class="col-md-8">
-																<label>
+															<div class="col-md-12"><label>Mobile No. </label>:
+																
 																	<?php echo ($response['request']['user']['mobile_number'])?$response['request']['user']['mobile_number']:"-- --"; ?>
-																</label>
+																
 															</div>
 														</div>
 													</div>
 													<div class="row" style="display:none;">
 														<div class="col-md-12">
-															<div class="col-md-4">Website :</div>
-															<div class="col-md-8">
+															<div class="col-md-12">Website :
 																<label>
 																	<?php echo ($response['request']['user']['web_url'])?$response['request']['user']['web_url']:"-- --"; ?>
 																</label>
@@ -648,7 +594,7 @@ $(document).ready(function(){
 													</div>
 												</div>
 												<div class="modal-footer">
-												<button type="button" class="btn btn-danger" data-dismiss="modal">Cancle</button>
+												<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
 												</div>
 											</div>
 										</div>
