@@ -342,6 +342,7 @@ $(document).ready(function (){
 		{
 			var city_type=$(this).val();
 			var selectbox=$('#selectbox').html();
+			var cur_obj = $(this);
 			if(city_type==1){
 				$("#newlist").show();
 				$(".replacedata").html(selectbox);
@@ -353,7 +354,8 @@ $(document).ready(function (){
 				echo $this->Form->input('city_id',["class"=>"form-control city_id requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
 				?>');
 			}
-			$(this).closest('form').find('.city_id').select2();
+			cur_obj.closest('div').find('.city_id').select2();
+			 
 		});
 		$(document).on('change','.state_list',function()
 		{
@@ -372,8 +374,6 @@ $(document).ready(function (){
 				{	//alert($("input[name='package_type']:checked").val());
 					if($("input[name='package_type']:checked").val()==1){
 						$(".replacedata").html(data);
-						
-						
 						$('#selectbox').html(data);
 					}
 					else{
