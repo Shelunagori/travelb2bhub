@@ -404,7 +404,7 @@ a{
 										<div class="col-md-12 "><label><?= __(' Hotelier') ?> :</label>	
 										<span><u>
 												<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$hotelPromotion->user_id),1);?>
-												<a href="<?php echo $hrefurl; ?>"> 
+												<a style="color:#d69d5c;" href="<?php echo $hrefurl; ?>"> 
 												<?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name);?></u>
 												<?php
 												if($hotelPromotion->user_rating==0)
@@ -454,7 +454,7 @@ a{
 																			<div class="col-md-8" style="padding-top:2px;">
 																				<span><u>
 																					<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$hotelPromotion->user_id),1);?>
-																					<a href="<?php echo $hrefurl; ?>"> 
+																				<a style="color:#d69d5c;" href="<?php echo $hrefurl; ?>"> 
 																					<?= h($hotelPromotion->user->first_name.' '.$hotelPromotion->user->last_name);?></u>
 																					<?php
 																					if($hotelPromotion->user_rating==0)

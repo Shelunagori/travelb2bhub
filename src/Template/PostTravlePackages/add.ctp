@@ -191,13 +191,13 @@ fieldset{
 															<span class="required">*</span>
 														</p>
 														<div class="input-field">
-															 <?php echo $this->Form->input('title',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>"Package Title",]);?>
+															 <?php echo $this->Form->input('title',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>"Enter Package Title",]);?>
 															 <label style="display:none" class="helpblock error" > This field is required.</label>
 														</div>
 													</div>
 													<div class="col-md-4 form-group">
 																<p for="from">
-																	Package Category
+																	Select Package Category
 																</p>
 																<div class="input-field">
 																<?php 
@@ -206,12 +206,12 @@ fieldset{
 																{
 																	$options[] = ['value'=>$sts->id,'text'=>$sts->name];
 																};
-																echo $this->Form->control('package_category_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Category ","style"=>"height:125px;"]);?>
+																echo $this->Form->control('package_category_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
 																</div>
 															</div>
 														<div class="col-md-4 form-group">
 															<p for="from">
-																Upload Image of the Promotion
+																Upload Image of Promotion
 																<span class="required">*</span>
 															</p>
 															
@@ -271,7 +271,7 @@ fieldset{
 															</div>
 																<div class="col-md-4 form-group">
 																<p for="from">
-																	Starting Price
+																	Package Starting Price
 																	<span class="required">*</span>
 																</p>
 																<div class="input-field">
@@ -319,7 +319,7 @@ fieldset{
 																{
 																	$options[] = ['value'=>$cty->cityid,'text'=>$cty->name, 'country_id'=>$cty->country_id];
 																};
-																echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
+																echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield max_limit","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
 																<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 															</div>
@@ -330,12 +330,10 @@ fieldset{
 															<div class="col-md-12 ">
 															<p for="from">
 																Included In Package
-																	<span class="required">*</span>
 																</p>
 																 
 																<div class="input-field">
-																	 <?php echo $this->Form->textarea('package_detail',['class'=>'form-control requiredfield','label'=>false,'rows'=>2]);?>
-																	 <label style="display:none" class="helpblock error" > This field is required.</label>
+																	 <?php echo $this->Form->textarea('package_detail',['class'=>'form-control ','label'=>false,'rows'=>2]);?>
 																	
 																</div>
 															</div>
@@ -346,12 +344,10 @@ fieldset{
 															<div class="col-md-12 ">
 															<p for="from">
 																	Excluded From Package
-																<span class="required">*</span>
 															</p>
 															 
 																<div class="input-field">
-																	 <?php echo $this->Form->textarea('excluded_detail',['class'=>'form-control requiredfield','label'=>false,'rows'=>2]);?>
-																	 <label style="display:none" class="helpblock error" > This field is required.</label>
+																	 <?php echo $this->Form->textarea('excluded_detail',['class'=>'form-control','label'=>false,'rows'=>2]);?>
 																</div>
 															</div>
 														</div>
@@ -362,7 +358,7 @@ fieldset{
 										<legend style="color:#369FA1;"><b><?= __('Payment ') ?></b></legend> 
 											<div class="row">
 												<div class="col-md-12">
-													<div class="col-md-4 form-group">
+													<div class="col-md-6 form-group">
 														<p for="from">
 															Payment Duration <span class="required">*</span>
 														</p>
@@ -378,20 +374,12 @@ fieldset{
 															<label style="display:none" class="helpblock error" > This field is required.</label>
 														</div>
 													</div>
-													<div class="col-md-4 form-group">
+													<div class="col-md-6 form-group">
 														<p for="from">
 																	Promotion Amount
 														</p>
 														<div class="input-field">
 														<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text']);?> 
-														</div>
-													</div>
-												<div class="col-md-4 form-group">
-														<p for="from">
-																	Visibility Date
-														</p>
-														<div class="input-field">
-														<?php echo $this->Form->input('visible_date', ['data-date-format'=>'dd/mm/yyyy','class'=>'form-control visible_date','label'=>false,"placeholder"=>"Visible Date",'readonly'=>'readonly','type'=>'text']); ?>
 														</div>
 													</div>
 												</div>
@@ -470,7 +458,7 @@ fieldset{
 			var weeks=Result[0];
 			var price=Result1[0];
 			
-			var todaydate = new Date(); // Parse date
+			/* var todaydate = new Date(); // Parse date
 			for(var x=0; x < weeks; x++){
 				todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
 			}
@@ -480,7 +468,7 @@ fieldset{
 			if(dd<10){  dd='0'+dd } 
 			if(mm<10){  mm='0'+mm } 
 			var date = dd+'-'+mm+'-'+yyyy;	
-			$('.visible_date').val(date);
+			$('.visible_date').val(date); */
 			$('.payment_amount').val(price);
 		})
 		$(document).on('change','#pack_type',function()
@@ -494,7 +482,7 @@ fieldset{
 				{
 					$options[] = ['value'=>$country->id,'text'=>$country->country_name];
 				};
-				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select City "]);?>');
+				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select Countries "]);?>');
 			}
 			else{
 				$(".replacedata").html('<?php $options=array();
@@ -509,3 +497,4 @@ $("#multi_states").multiselect();
 $("#multi_category").multiselect();
 });
 </script>
+

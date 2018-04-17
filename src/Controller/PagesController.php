@@ -306,7 +306,18 @@ class PagesController extends AppController
 		echo $settingdatajson;
 		exit;
     }
-	
+	public function cityList($country_id = null)
+	{
+		$this->loadModel('Cities');
+		$country_id=$this->request->query('country_id');
+		$countryArray=explode(',',$country_id);
+		$citiesapi = $this->Cities->find()->contain(['States'])->where(['Cities.is_deleted'=>0,'Cities.country_id IN'=>$countryArray]);
+		$result['response_code']=200; 
+		$result['ResponseObject'] = $citiesapi;
+		$response = json_encode($result);
+		echo $response;
+		exit; 
+	}
 	public function masterCountry()
 	{
 		//--- LOAD TABLE
@@ -329,7 +340,7 @@ class PagesController extends AppController
 		 
 		//--
 		$result2  = array();
-		$citiesapi = $this->Cities->find()->where(['is_deleted'=>0])->all();
+		$citiesapi = $this->Cities->find()->where(['is_deleted'=>0,'country_id'=>'101'])->all();
 		$totcount = count($citiesapi);
  
 		$i =1;
@@ -4625,8 +4636,6 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 		 
 	public function getchatNotificationOld()
 	{	
-
-		//echo date('Y-m-d', strtotime(' -1 day')); 
 		$new_time = date("Y-m-d H:i:s", strtotime('-24 hours'));
 		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
 			$user_id = $_POST['user_id'];
@@ -4635,7 +4644,7 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 			$conn = ConnectionManager::get('default');
 			//-- all data is_read='0' AND
 			$totalIds=array();
-			$sqls = "Select * FROM user_chats where `send_to_user_id`='".$user_id."' && `created` >= '$new_time' &&  is_read='1' order by created DESC "; 
+			$sqls = "Select * FROM user_chats where `send_to_user_id`='".$user_id."' && `read_date_time` >= '$new_time' &&  is_read='1' order by created DESC "; 
  			$stmt = $conn->execute($sqls);
 			$unreadnotification = $stmt ->fetchAll('assoc');
 			foreach($unreadnotification as $data){
@@ -4649,9 +4658,6 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
  				$totalIds[]=$datas['id'];
 			}
 			
-			//$unreadnotification=array_merge($unreadnotification,$unreadnotification2);
-			
-			//$unreadnotification=$this->User_Chats->find()->where(['send_to_user_id'=>$user_id, 'created >='=>$new_time,'is_read'=>'1'])->order(['created'=>'DESC']);
 			$idsas=implode(',',$totalIds);
 			$sqlsdata = "Select * FROM user_chats where `id` IN ($idsas) order by created DESC ";
  			$stmtsqlsdata = $conn->execute($sqlsdata);
@@ -4698,7 +4704,7 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 			$conn = ConnectionManager::get('default');
 			//-- all data is_read='0' AND
 			$totalIds=array();
-			$sqls = "Select * FROM user_chats where `send_to_user_id`='".$user_id."' && `created` >= '$new_time' &&  is_read='1' order by created DESC "; 
+			$sqls = "Select * FROM user_chats where `send_to_user_id`='".$user_id."' && `read_date_time` >= '$new_time' &&  is_read='1' order by created DESC "; 
  			$stmt = $conn->execute($sqls);
 			$unreadnotification = $stmt ->fetchAll('assoc');
 			foreach($unreadnotification as $data){
@@ -4715,26 +4721,28 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 			//$unreadnotification=array_merge($unreadnotification,$unreadnotification2);
 			
 			//$unreadnotification=$this->User_Chats->find()->where(['send_to_user_id'=>$user_id, 'created >='=>$new_time,'is_read'=>'1'])->order(['created'=>'DESC']);
-			$idsas=implode(',',$totalIds);
-			$sqlsdata = "Select * FROM user_chats where `id` IN ($idsas) order by created DESC ";
- 			$stmtsqlsdata = $conn->execute($sqlsdata);
-			$dataofchats = $stmtsqlsdata ->fetchAll('assoc');
-			 
-			
-			$sqlcount = "Select * FROM user_chats where is_read='0' AND send_to_user_id='".$user_id."'  order by created DESC "; 
-			$stmtsqlcount = $conn->execute($sqlcount);
-			$unreadnotificationCOunt = $stmtsqlcount ->fetchAll('assoc');
-			$x=0;
-			foreach($dataofchats as $data){
- 				$SenderID=$data['user_id']; 
-				$Users=$this->Users->find()->where(['id'=>$SenderID])->first();
- 				$first_name=$Users['first_name'];
-				$last_name=$Users['last_name'];
-				$SenderName=$first_name.' '.$last_name;
- 				$dataofchats[$x]['sender_name']=$SenderName;
-				$x++;
+			$dataofchats=array();
+			if(!empty($totalIds)){
+				$idsas=implode(',',$totalIds);
+				$sqlsdata = "Select * FROM user_chats where `id` IN ($idsas) order by created DESC ";
+				$stmtsqlsdata = $conn->execute($sqlsdata);
+				$dataofchats = $stmtsqlsdata ->fetchAll('assoc');
+				 
+				
+				$sqlcount = "Select * FROM user_chats where is_read='0' AND send_to_user_id='".$user_id."'  order by created DESC "; 
+				$stmtsqlcount = $conn->execute($sqlcount);
+				$unreadnotificationCOunt = $stmtsqlcount ->fetchAll('assoc');
+				$x=0;
+				foreach($dataofchats as $data){
+					$SenderID=$data['user_id']; 
+					$Users=$this->Users->find()->where(['id'=>$SenderID])->first();
+					$first_name=$Users['first_name'];
+					$last_name=$Users['last_name'];
+					$SenderName=$first_name.' '.$last_name;
+					$dataofchats[$x]['sender_name']=$SenderName;
+					$x++;
+				}
 			}
-			 
 			$countchat = count($unreadnotificationCOunt);
  			$result['response_code'] = 200;
 			$result['response_object'] = $dataofchats;

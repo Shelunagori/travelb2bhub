@@ -21,7 +21,7 @@ class UsersController extends AppController {
 	var $helpers = array('Html', 'Form', 'Response');
 	public function beforeFilter(\Cake\Event\Event $event) {
 		parent::beforeFilter($event);
-		$this->Auth->allow(['register', 'login','getcitylist', 'userVerification', 'forgotPassword', 'activatePassword', 'cakeVersion', 'deleteAllCache', 'addNewsLatter', 'otpVerifiy', 'otpResend', 'passwordotpVerifiy']);
+		$this->Auth->allow(['register', 'login','getcitylist', 'userVerification', 'forgotPassword', 'activatePassword', 'cakeVersion', 'deleteAllCache', 'addNewsLatter', 'otpVerifiy', 'otpResend', 'passwordotpVerifiy','ajaxCity','ajaxCityRegister','checkMobileExixt']);
 	}
 	
 	public function beforeRender(\Cake\Event\Event $event) {
@@ -39,7 +39,6 @@ class UsersController extends AppController {
 	}
 	public function initialize()
 	{
-		
 		parent::initialize();
 		$this->Auth->allow(['logout']);
 		$first_name=$this->Auth->User('first_name');
@@ -410,116 +409,101 @@ $this->loadModel('States');
 $this->loadModel('Cities');
 $this->loadModel('Membership');
 if ($this->request->is('post')) {
-$d = $this->request->data;
-$checkUsers = $this->Users->find()->where(['mobile_number'=> $d['mobile_number'],'email' => $d['email']])->count();
-if ($checkUsers < 1) {
-$d['email_verified'] = 0;
-$d['mobile_verified'] = 0;
-$d['reset_password_token'] = 0;
-$d['verification_token'] = 0;
-$d['mobile_otp'] = rand('1010', '9999');
-$d['status'] = 0;
-$d['create_at'] = date("Y-m-d H:i:s");
-/*$file = $d['image'];
-$path = WWW_ROOT . "userimages" . DS . $file['name'];
-move_uploaded_file($file['tmp_name'], $path);
-$d['image'] = $file['name'];*/
-if(isset($this->request->data["preference"]) && !empty($this->request->data["preference"])) {
-	$d["preference"] = implode(",", $this->request->data["preference"]);
-}
-$d['country_id'] = 101;
-$d['state_id'] = 877;
-$d['city_id'] = 33;
-$rendomCode=rand('1010', '9999');
-$d['mobile_otp'] = $rendomCode;
+	$d = $this->request->data;
+	$checkUsers = $this->Users->find()->where(['mobile_number'=> $d['mobile_number']])->count();
+	if ($checkUsers==0) {
+		$d['email_verified'] = 0;
+		$d['mobile_verified'] = 0;
+		$d['reset_password_token'] = 0;
+		$d['verification_token'] = 0;
+		$d['mobile_otp'] = rand('1010', '9999');
+		$d['status'] = 0;
+		$d['create_at'] = date("Y-m-d H:i:s");
+	 
+		if(isset($this->request->data["preference"]) && !empty($this->request->data["preference"])) {
+			$d["preference"] = implode(",", $this->request->data["preference"]);
+		}
+		$d['country_id'] = 101;
+		$d['state_id'] = 877;
+		$d['city_id'] = 33;
+		$rendomCode=rand('1010', '9999');
+		$d['mobile_otp'] = $rendomCode;
 
-$user = $this->Users->newEntity($d);
-	if ($res = $this->Users->save($user)) {
-		$subject="TravelB2Bhub registration";
-		$to=$d['email'];
-		$headers  = 'MIME-Version: 1.0' . "\r\n";
-		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-		$headers .= 'From: TravelB2Bhub <contactus@travelb2bhub.com>' . "\r\n";
-		//$headers .= "Bcc: business.leadindia@gmail.com"; // BCC mail
-		$message='<p>Dear '.$d['first_name'].',</p>';
-		$message.='<p>Thank you for registering with TravelB2Bhub.com, the  COMMISSION FREE, Business to Business, tourism trading network. </p>';
-		//$message.='<p>Update profile by <a href="https://www.travelb2bhub.com">click here</a> to login from Homepage.</p>';
-		$message.='<p>Please verify your email address by <a href="https://www.travelb2bhub.com">click here</a> to login from Homepage.</p>';
-		$message.='<p style="color:#000;">Note: You will receive a notification when there are enough registered members for you to begin trading. Please encourage your contacts to enroll.</p>';
-		$message.='<p style="color:#000;">We are committed to enhance your trading experience!</p>';
-		$message.='<p style="color:#000;">Sincerely,<br>The TravelB2Bhub Team</p>';
-		$userId = $res->id;
-		$subject= $d['first_name'].": TravelB2Bhub Account Activation";
-		$to=$d['email'];
+		$user = $this->Users->newEntity($d);
+			if ($res = $this->Users->save($user)) {
+				$subject="TravelB2Bhub registration";
+				$to=$d['email'];
+				$headers  = 'MIME-Version: 1.0' . "\r\n";
+				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+				$headers .= 'From: TravelB2Bhub <contactus@travelb2bhub.com>' . "\r\n";
+				//$headers .= "Bcc: business.leadindia@gmail.com"; // BCC mail
+				$message='<p>Dear '.$d['first_name'].',</p>';
+				$message.='<p>Thank you for registering with TravelB2Bhub.com, the  COMMISSION FREE, Business to Business, tourism trading network. </p>';
+				//$message.='<p>Update profile by <a href="https://www.travelb2bhub.com">click here</a> to login from Homepage.</p>';
+				$message.='<p>Please verify your email address by <a href="https://www.travelb2bhub.com">click here</a> to login from Homepage.</p>';
+				$message.='<p style="color:#000;">Note: You will receive a notification when there are enough registered members for you to begin trading. Please encourage your contacts to enroll.</p>';
+				$message.='<p style="color:#000;">We are committed to enhance your trading experience!</p>';
+				$message.='<p style="color:#000;">Sincerely,<br>The TravelB2Bhub Team</p>';
+				$userId = $res->id;
+				$subject= $d['first_name'].": TravelB2Bhub Account Activation";
+				$to=$d['email'];
 
 
-		$headers  = "MIME-Version: 1.0" . "\r\n";
-		$headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
-		$headers .= 'From: TravelB2Bhub <contactus@travelb2bhub.com>' . "\r\n";
-		$theKey = $this->getActivationKey($d["mobile_number"]);
+				$headers  = "MIME-Version: 1.0" . "\r\n";
+				$headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
+				$headers .= 'From: TravelB2Bhub <contactus@travelb2bhub.com>' . "\r\n";
+				$theKey = $this->getActivationKey($d["mobile_number"]);
 
-		$message='<p>Dear '.$d['first_name'].',</p>';
-		$message.='<p>Thank you for registering with TravelB2Bhub.com, the  COMMISSION FREE, Business to Business, tourism trading network. </p>';
-		$message.='<p>Please verify your email address by <span style="color:1E707E;"><a href="https://www.travelb2bhub.com/users/userVerification?ident='.$userId.'&activate='.$theKey.'">clicking here</a></span>. </p>';
-		$message.='<p>We are committed to enhance your trading experience!</p>';
-		$message.='<p>Sincerely,<br>The TravelB2Bhub Team</p>';
-		// Mail it
-		/* $email = new Email();    
-			   $email->transport('gmail')
-					->from(['webmaster@travelb2bhub.com'=>'TravelB2Bhub'])
-					->to($to)
-					->subject($subject)
-					 ->emailFormat('html')
-					->viewVars(array('msg' => $message))
-					->send($message); */
+				$message='<p>Dear '.$d['first_name'].',</p>';
+				$message.='<p>Thank you for registering with TravelB2Bhub.com, the  COMMISSION FREE, Business to Business, tourism trading network. </p>';
+				$message.='<p>Please verify your email address by <span style="color:1E707E;"><a href="https://www.travelb2bhub.com/users/userVerification?ident='.$userId.'&activate='.$theKey.'">clicking here</a></span>. </p>';
+				$message.='<p>We are committed to enhance your trading experience!</p>';
+				$message.='<p>Sincerely,<br>The TravelB2Bhub Team</p>';
+				// Mail it
+				/* $email = new Email();    
+					   $email->transport('gmail')
+							->from(['webmaster@travelb2bhub.com'=>'TravelB2Bhub'])
+							->to($to)
+							->subject($subject)
+							 ->emailFormat('html')
+							->viewVars(array('msg' => $message))
+							->send($message); */
 
 
-		//mail($to, $subject, $message, $headers);
-		
-		$mobile_no=$d['mobile_number'];
-		$sms_sender='B2BHUB';
-		$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
-		file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
-						
-		$uid = $res->id;
-		$c['credit'] = 60;
-		$c['user_Id'] = $uid;
-		$creditd = $this->Credits->newEntity($c);
-		$this->Credits->save($creditd);
-		$this->Flash->success(__('Thank you for registering with Travelb2bhub.com! Please activate your account by verify your mobile no.'));
-		
-		
-		$encrypted_data=$this->encode($userId,'B2BHUB');
-		$dummy_user_id=$encrypted_data;
-		$this->redirect('/users/otpVerifiy/'.$dummy_user_id);
-	} 
-	else {
-	$this->Flash->error(__('The user could not be saved. Please, try again.'));
+				//mail($to, $subject, $message, $headers);
+				
+				$mobile_no=$d['mobile_number'];
+				$sms_sender='B2BHUB';
+				$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
+				file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
+								
+				$uid = $res->id;
+				$c['credit'] = 60;
+				$c['user_Id'] = $uid;
+				$creditd = $this->Credits->newEntity($c);
+				$this->Credits->save($creditd);
+				$this->Flash->success(__('Thank you for registering with Travelb2bhub.com! Please activate your account by verify your mobile no.'));
+				
+				
+				$encrypted_data=$this->encode($userId,'B2BHUB');
+				$dummy_user_id=$encrypted_data;
+				$this->redirect('/users/otpVerifiy/'.$dummy_user_id);
+			} 
+			else {
+			$this->Flash->error(__('The user could not be saved. Please, try again.'));
+			}
+		} 
+		else {
+			$this->Flash->error(__('Mobile Number or Email already exists. Please enter another Mobile Number or Email to register.'));
+		}
 	}
-} else {
-$this->Flash->error(__('Mobile Number or Email already exists. Please enter another Mobile Number or Email to register.'));
-}
-}
-$cities = $this->Cities->getAllCities();
-$cities1 = $this->Cities->find()->contain(['States'=>['Countries']]);
-$this->set('cities1',$cities1);
-$states = $this->States->find()->where(['country_id' => '101'])->all();
-$allStates = array();
-foreach($states as $state){
-$allStates[$state["id"]] = $state['state_name'];
-}
-$allCities = array();
-$allCityList = array();
-if(!empty($cities)) {
-foreach($cities as $city) {
-$allCities[] = array("label"=>str_replace("'", "", $city['name'].' ('.$city['state']->state_name. ')'), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
-$allCityList[$city['id']] = $city['name'];
-
-}
-}
-$allCities = json_encode($allCities);
-$memberships = $this->Membership->find()->where(['status' => 1])->all();
-$this->set(compact('cities', 'states', 'countries', 'allCities', 'allStates','memberships'));
+	$states = $this->States->find()->where(['country_id' => '101'])->all();
+	$allStates = array();
+	foreach($states as $state){
+		$allStates[$state["id"]] = $state['state_name'];
+	}
+	$memberships = $this->Membership->find()->where(['status' => 1])->all();
+	$this->set(compact('cities', 'states', 'countries', 'allCities', 'allStates','memberships'));
 }
 /**
 * Edit method
@@ -1055,7 +1039,6 @@ public function viewuserprofile(){
 
 	public function ajaxCity()
     {
-		
 		$name=$this->request->data['input'];
 		$noofrows=$this->request->data['noofrows'];
 		$taxboxname=$this->request->data['taxboxname'];
@@ -1066,6 +1049,31 @@ public function viewuserprofile(){
 			<ul id="country-list">
 				<?php foreach($cities as $show){ ?>
 					<li onClick="selectCountry('<?php echo $show->name .' ('. $show->state->state_name .')'; ?>','<?php echo $show->id; ?>','<?php echo $show->state_id; ?>','<?php echo $noofrows; ?>');"  class="selectCountry" cty_nm="<?php echo $show->name .' ('. $show->state->state_name .')'; ?>" cty_id="<?php echo $show->id; ?>" stat_id="<?php echo $show->state_id; ?>" noofrows="<?php echo $noofrows; ?>" taxboxname="<?php echo $taxboxname; ?>">
+						<?php echo $show->name .' ('. $show->state->state_name .')';  ?>
+					</li>
+				<?php } ?>
+			</ul>
+		<?php
+		 exit;  
+    }
+	public  function checkMobileExixt()
+	{
+		$mobile_number=$this->request->data['mobile_number'];
+		$city_count=$this->Users->find()
+		->where(['mobile_number'=>$mobile_number])->count();
+		if($city_count>0)
+		{ echo"remove";}		exit;
+	}
+	public function ajaxCityRegister()
+    {
+		$name=$this->request->data['input'];
+		$cities=$this->Users->Cities->find()
+		->contain(['States'=>['Countries']])
+		->where(['Cities.name Like'=>''.$name.'%','Cities.is_deleted'=>0]);
+		?>
+			<ul id="country-list">
+				<?php foreach($cities as $show){ ?>
+					<li onClick="selectCountry('<?php echo $show->name .' ('. $show->state->state_name .')'; ?>','<?php echo $show->id; ?>','<?php echo $show->state_id; ?>','<?php echo $show->country_id; ?>','<?php echo $show->state->state_name; ?>','<?php echo $show->state->country->country_name; ?>');"  class="selectCountry">
 						<?php echo $show->name .' ('. $show->state->state_name .')';  ?>
 					</li>
 				<?php } ?>
@@ -2216,7 +2224,8 @@ public function respondtorequest() {
 		$conditions["Requests.total_budget <="] = $MaxQuotePrice;
 	}
 	if(!empty($this->request->query("refidsearch"))) {
-		$conditions["Requests.reference_id"] =  $this->request->query("refidsearch");
+		$typeSearchArraay=$this->request->query("refidsearch");
+		$conditions["Requests.id IN"] =  $typeSearchArraay;
 	}
 	$sdate = $this->request->query("startdatesearch");
  	if(!empty($this->request->query("startdatesearch"))) {
@@ -2306,13 +2315,26 @@ foreach($requests as $req){
 $this->set('data', $data);
 $resdata = array();
 $selectoption = array();
+$value = array();
+$RefId = array();
+$key = array();
 foreach($requests as $req){
 	$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.request_id' =>$req['id']]])->contain(['Users']);
 	$resdata['responsecount'][$req['id']]  = $queryr->count();
- 	$selectoption[] = ['value'=>$req->user->id,'text'=>$req->user->first_name.' '.$req->user->last_name];
+	$key[]=$req->user->id;
+	$value[]=$req->user->first_name.' '.$req->user->last_name;
+ 	$RefId[] = ['value'=>$req->id,'text'=>$req->reference_id];
 }
-$selectoption=array_unique($selectoption); 
+	$quiqueValue=array_unique($value); 
+	$quiqueKey=array_unique($key);
+	$cv=0;
+	foreach($quiqueKey as $keys){
+		$textV=$quiqueValue[$cv];
+		$selectoption[] = ['value'=>$keys,'text'=>$textV];
+		$cv++;		 
+	}
 $this->set('resdata', $resdata);
+$this->set('RefId', $RefId);
 $this->set('selectoption', $selectoption);
 $this->set('requests', $requests);
 $myRequestCount = $myReponseCount = 0;
@@ -2925,14 +2947,15 @@ public function myresponselist() {
 	$blockeddata = array();
 	$reqidarray = array();
 	$chatdata = array();
+	$key = array();
+	$value = array();
 	$selectoption = array();
 	$loggedinid = $this->Auth->user('id');
 	if(count($responses)>0){
 		 
 		foreach($responses as $req){
-		 
-			$selectoption[] = ['value'=>$req->request->user->id,'text'=>$req->request->user->first_name.' '.$req->request->user->last_name];
-			//pr($selectoption); exit;
+			$key[]=$req->request->user->id;
+			$value[]=$req->request->user->first_name.' '.$req->request->user->last_name;
 	
 			$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$req['user_id']."' AND blocked_by='".$req['request']['user_id']."'";
 			$stmt = $conn->execute($sql1);
@@ -2954,11 +2977,17 @@ public function myresponselist() {
 			$resultsch = $stmtc ->fetch('assoc');		
 			$chatdata['chat_count'][$req['id']] =$resultsch['ch_count'];
 		}
-		
+ 	}
 
+	$quiqueValue=array_unique($value); 
+	$quiqueKey=array_unique($key);
+	$cv=0;
+	foreach($quiqueKey as $keys){
+		$textV=$quiqueValue[$cv];
+		$selectoption[] = ['value'=>$keys,'text'=>$textV];
+		$cv++;		 
 	}
-	$selectoption=array_unique($selectoption); 
-	$this->set('chatdata', $chatdata);
+ 	$this->set('chatdata', $chatdata);
 	$this->set('selectoption', $selectoption);
 	$this->set('blockedUser', $blockeddata);
 	//debug($responses);

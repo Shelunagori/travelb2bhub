@@ -49,6 +49,7 @@ ul li b {
 				<ul>
 					<li class="col-md-6"><p>Reference ID : &nbsp;<span style="color:#FB6542"><?php
 					echo $details['reference_id']; ?></span></li>
+<<<<<<< HEAD
 					
 					<?php $total_budget=round($details['total_budget']);  ?>
 					<li class="col-md-6"><p>Total Budget : &nbsp;
@@ -57,6 +58,10 @@ ul li b {
 					</span>
 					</li>
 					
+=======
+					<li class="col-md-6"><p>Total Budget : &nbsp;<span style="color:#1295A2">  &#8377; <?php
+					echo ($details['total_budget'] . ""); ?></span></li>
+>>>>>>> 8e7df2a69f86d900493ced8fad5b067f5b05ed8a
 					<li class="col-md-6"><p>Adult : &nbsp; <?php
 					echo "<b>".$details['adult']."</b>"; ?></li>
 					<li class="col-md-6"><p>Children below 6 : &nbsp; <b><?php

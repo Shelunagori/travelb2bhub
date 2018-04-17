@@ -171,7 +171,7 @@ fieldset{
 								<input type="hidden" name="submitted_from" value="web">
 								<div class="col-md-6 form-group ">
 									<p for="from">
-										Upload Image of the Promotion
+										Upload Image of Promotion
 										<span class="required">*</span>
 									</p>
 									<div class="input-field">
@@ -263,7 +263,7 @@ fieldset{
 					<legend style="color:#369FA1;"><b> &nbsp; Payment &nbsp;  </b></legend>
 								<div class="row">
 											<div class="col-md-12">
-												<div class="col-md-4 form-group">
+												<div class="col-md-6 form-group">
 													<p for="from">
 													Select Duration of Promotion <span class="required">*</span>
 													</p>
@@ -281,22 +281,13 @@ fieldset{
 														<label style="display:none" class="helpblock error" > This field is required.</label>
 													</div>
 												</div>
-												<div class="col-md-4 form-group">
+												<div class="col-md-6 form-group">
 													<p for="from">
 																Promotion Amount
 																
 													</p>
 													<div class="input-field">
 													<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text']);?> 
-													</div>
-												</div>
-												<div class="col-md-4 form-group">
-													<p for="from">
-																Visibility Date
-																
-													</p>
-													<div class="input-field">
-													<?php echo $this->Form->input('visible_date', ['data-date-format'=>'dd/mm/yyyy','class'=>'form-control visible_date','label'=>false,"placeholder"=>"Visible Date",'readonly'=>'readonly','type'=>'text']); ?>
 													</div>
 												</div>
 											</div>
@@ -345,18 +336,6 @@ $(document).ready(function (){
 			var Result1 = price.split(" ");
 			var weeks=Result[0];
 			var price=Result1[0];
-			
-			var todaydate = new Date(); // Parse date
-			for(var x=0; x < weeks; x++){
-				todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
-			}
-			var dd = todaydate .getDate();
-			var mm = todaydate .getMonth()+1; //January is 0!
-			var yyyy = todaydate .getFullYear();
-			if(dd<10){  dd='0'+dd } 
-			if(mm<10){  mm='0'+mm } 
-			var date = dd+'-'+mm+'-'+yyyy;	
-			$('.visible_date').val(date);
 			$('.payment_amount').val(price);
 		})
 	$(document).on('click','#city_type', function()

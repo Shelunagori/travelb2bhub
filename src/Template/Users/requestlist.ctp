@@ -122,7 +122,7 @@ fieldset
                         <div class=modal-header>
                            <button class="close" data-dismiss="modal" type="button">&times;</button>
                            <h4 class=modal-title>Filter</h4>
-                        </div>
+                        </div>RefId
 						<form class="filter_box" method="get">
                         <div class="modal-body">
 							<div class="row form-group margin-b10">

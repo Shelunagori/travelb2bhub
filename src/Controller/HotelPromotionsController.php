@@ -33,6 +33,7 @@ class HotelPromotionsController extends AppController
 		$this->loadModel('Requests');
 		$this->loadModel('Responses');
 		$current_date=date('Y-m-d');
+		
 		$conditions[]= array (
 			'OR' => array(
 				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
@@ -49,6 +50,7 @@ class HotelPromotionsController extends AppController
 				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
 			)
 		);
+		
 		$this->set("respondToRequestCountNew", $this->__getRespondToRequestCount());
 		$this->loadModel('BlockedUsers');
 		$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
@@ -105,11 +107,26 @@ class HotelPromotionsController extends AppController
 		//*--- UserChats
 		$this->loadModel('UserChats');
 		$csort['created'] = "DESC";
-		$NewNotifications = $this->UserChats->find()->contain(['Users'])->where(['UserChats.send_to_user_id'=> $this->Auth->user('id')])->order($csort)->all();
-		$chatCount = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->count();
+		$new_time = date("Y-m-d H:i:s", strtotime('-24 hours'));
+		$totalIds=array();
+		$NewNotifications=array();
+		$unreadnotification = $this->UserChats->find()->contain(['Users'])->where(['UserChats.send_to_user_id'=> $this->Auth->user('id'),'created >='=>$new_time,'is_read'=>1])->order($csort)->all();
+		foreach($unreadnotification as $data){
+ 				$totalIds[]=$data['id'];
+		}
+		
+		$unreadnotification2 = $this->UserChats->find()->contain(['Users'])->where(['UserChats.send_to_user_id'=> $this->Auth->user('id'),'is_read'=>0])->order($csort)->all();
+		foreach($unreadnotification2 as $datas){
+			$totalIds[]=$datas['id'];
+		}
+		//pr($unreadnotification2); exit;
+		if(!empty($totalIds)){
+			$NewNotifications = $this->UserChats->find()->contain(['Users'])->where(['UserChats.id IN'=> $totalIds])->order($csort)->all();
+		}
+		$chatCount = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->count(); 
  		$this->set('chatCount',$chatCount); 
 		$this->set('NewNotifications',$NewNotifications);
-		//pr($NewNotifications); exit;
+		//pr($totalIds); exit;
 		//---
  	}
 	public function __getRespondToRequestCount() {
@@ -353,9 +370,9 @@ class HotelPromotionsController extends AppController
     {
 		
 		$this->viewBuilder()->layout('user_layout');
-		
 		$user_id=$this->Auth->User('id');
-		$this->set(compact('user_id'));
+		$userss=$this->Auth->User();
+		$this->set(compact('user_id','userss'));
     }
 
     /**

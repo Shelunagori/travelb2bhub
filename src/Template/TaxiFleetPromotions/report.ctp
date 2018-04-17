@@ -238,22 +238,6 @@ a{
 					<form class="filter_box" method="get">
 					<div class="modal-body">
 						<span class="help-block"></span>
-						<div class="row form-group margin-b10">
-							<div class=col-md-12>
-								 <div class=col-md-3>
-								  <label class="col-form-label"for=example-text-input>Country</label>
-								  </div>
-								  <div class=col-md-1>:</div>
-								 <div class=col-md-7>
-								<?php $options=array();
-									foreach($countries as $country)
-									{
-										$options[] = ['value'=>$country->id,'text'=>$country->country_name];
-									};echo $this->Form->input('country_id', ['options' => $options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...']);
-								?>
-								</div>
-							 </div>
-							</div>
 							<div class="row form-group margin-b10">
 								<div class=col-md-12>
 									<div class=col-md-3>

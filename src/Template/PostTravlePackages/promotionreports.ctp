@@ -67,7 +67,7 @@ fieldset{
 
 .btnlayout{
 	border-radius:30px !important;
-	width:80px;
+	width:100%;
 	}
 #myImg:hover {opacity: 0.7;}
 .bbb{
@@ -118,7 +118,7 @@ label {
 						?>
 				<div class="col-md-6" >		
 	<div class="box-body bbb">
-		<fieldset style="background-color:#fff;">
+		<fieldset style="background-color:#fff;text-align:center;">
 				<div class="" style="padding:25px;">						
 					<div class="col-md-6">
 						<?= $this->Html->image($postTravlePackage->full_image,['id'=>'myImg','style'=>'width:96%;height:140px;','data-target'=>'#imagemodal'.$postTravlePackage->id,'data-toggle'=>'modal',]) ?>
@@ -134,7 +134,7 @@ label {
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6"  style="padding-left:30px;">
+					<div class="col-md-6"  style="padding-left:30px;margin-top:10px;">
 						<div class="row">
 							<div class="col-md-12 ">
 							<span style="color:black;font-size:17px;"><?php echo $postTravlePackage->title?></span>
@@ -163,10 +163,19 @@ label {
 							</div>
 						</div>
 					</div>
-					<div class="col-md-8 pull-right" style="margin-top:5px">
-						<div class="text-center col-md-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
-						<label><button type="button" class="btn btn-info btn-md btnlayout" data-target="#renew<?php echo $postTravlePackage->id; ?>" data-toggle=modal>Renew</button></label>
-						</div>
+					<table class="table" style="width:100%;">
+						<tr>
+						<td  style="width:33%;">
+							<button type="button" class="btn btn-info btn-md btnlayout" data-target="#renew<?php echo $postTravlePackage->id; ?>" data-toggle=modal>Renew</button>
+						</td>
+						<td  style="width:33%;">
+						<button type="button" class="btn btn-danger btn-md btnlayout" data-target="#remove<?php echo $postTravlePackage->id; ?>" data-toggle=modal>Remove</button>
+						</td>
+						<td  style="width:33%;">
+						<a href="view/<?php echo $postTravlePackage->id; ?>" class="btn btn-warning btn-md btnlayout" >Details</a>
+						</td>
+						</tr>
+					</table>
 						<!------------------------- Renew Modal--------------------------->
 						<div id="renew<?php echo $postTravlePackage->id; ?>" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-md" >
@@ -179,7 +188,7 @@ label {
 											Do you want to renew promotion ?
 											</h3>
 										</div>
-										<div class="modal-body" style="height:80px;">
+										<div class="modal-body">
 										<br>
 											<div class="row mainrow">
 												<div class="col-md-12">
@@ -227,11 +236,6 @@ label {
 								</form>
 							</div>
 						</div>
-						<div class="text-center col-md-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
-						<label>
-						<button type="button" class="btn btn-danger btn-md btnlayout" data-target="#remove<?php echo $postTravlePackage->id; ?>" data-toggle=modal>Remove</button>
-						</label>
-						</div>
 						<!------------------------- Remove Modal--------------------------->
 						<div id="remove<?php echo $postTravlePackage->id; ?>" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-md" >
@@ -253,13 +257,9 @@ label {
 								</form>
 							</div>
 						</div>
-						<div class="text-center col-md-4 col-xs-4 col-sm-4 col-md-4 col-lg-4">
-						<label><a href="view/<?php echo $postTravlePackage->id; ?>" class="btn btn-warning btn-md btnlayout" >Details</a></label>
-						</div>
 					</div>
-				</div>
-		</fieldset>
-	</div>
+			</fieldset>
+		</div>
 	</div>
 					<?php }} ?>
 </div>
