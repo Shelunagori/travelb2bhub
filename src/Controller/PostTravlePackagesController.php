@@ -129,6 +129,24 @@ class PostTravlePackagesController extends AppController
 		//pr($totalIds); exit;
 		//---
  	}
+	
+	public function ajaxCity($country_id = null)
+	{
+		$this->loadModel('Cities');
+		 $country_id=$this->request->data('country_id');
+	  $countryArray=explode(',',$country_id);
+ 	$citiesapi = $this->Cities->find()->contain(['States'])->where(['Cities.is_deleted'=>0,'Cities.country_id IN'=>$countryArray]);
+ 	foreach($citiesapi as $citiesa){
+		
+		$city_id=$citiesa->id;
+		$city_name=$citiesa->name;
+		$state_name=$citiesa->state->state_name;
+		
+		echo '<option value="'.$city_id.'">'.$city_name.' ('.$state_name.')</option>';
+	}
+		exit; 
+	}
+	
 	public function __getRespondToRequestCount() {
 		$requests ='';
 		date_default_timezone_set('Asia/Kolkata');

@@ -308,7 +308,7 @@ fieldset{
 																Choose City
 																<span class="required">*</span>
 																</p>
-																<div class="input-field">
+																<div class="input-field" id="mcity">
 																<?php  
 																// pr($city);
 																$options=array();
@@ -404,12 +404,33 @@ fieldset{
 						</div>
 					</div>
 				</div>
-
+<?php //echo $http://13.127.63.130/travelb2bhub/pages/cityList.json?country_id=101; ?>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
 	 
     $(document).ready(function () {
-		
+		 
+		 
+		 var pack_type=$('#pack_type').val();
+			//alert(pack_type);
+			 
+			if(pack_type==1){
+				$(".replacedata").html('<?php $options=array();
+				foreach($countries as $country)
+				{
+					$options[] = ['value'=>$country->id,'text'=>$country->country_name];
+				};
+				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select Countries "]);?>');
+			}
+			else{
+				$(".replacedata").html('<?php $options=array();
+				$options[] = ['value'=>'101','text'=>'India','selected'];
+				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry","multiple"=>true ,'options' => $options,'label'=>false]);
+				?>');
+			}
+			$('.select2').select2();
+			
+			
 		$('form').submit(function () {
 			var x=0;
 			$( ".requiredfield" ).each(function() {
@@ -430,22 +451,32 @@ fieldset{
 			
 		var countries = [];
         $.each($(".cntry option:selected"), function(){
-            countries.push($(this).val());
+             countries.push($(this).val());
         });
          
-			$("#multi_city option").each(function()
-			{
-				var r=$(this).val();
-				var city_country_id=$(this).attr('country_id');
-				
-			  if(jQuery.inArray( city_country_id, countries )){
-					 $(this).prop('disabled', false);
-				}else{
-					$(this).prop('disabled', true);
-				}  
+		 
+		 
+		 var m_data = new FormData();
+			m_data.append('country_id',countries);			
+			$.ajax({
+				url: "<?php echo $this->Url->build(["controller" => "PostTravlePackages", "action" => "ajax_city"]); ?>",
+				data: m_data,
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				dataType:'text',
+				success: function(data)
+				{
+					$('#mcity').html('<select name="city_id" multiple="multiple" class="form-control select2 requiredfield max_limit" data-placeholder="Select City" id="multi_city" style="height:125px;">'+data+'</select>');
+					$("#multi_city").select2();
+				}
 			});
+		  
 			 
 		});	
+		
+		
+	 
 		$(document).on('change','.priceMasters',function()
 		{
 			var priceVal=$('.priceMasters option:selected').attr('priceVal');
@@ -474,6 +505,7 @@ fieldset{
 			//alert(pack_type);
 			 
 			if(pack_type==1){
+				$('#mcity').html('<select name="city_id" multiple="multiple" class="form-control select2 requiredfield max_limit" data-placeholder="Select City" id="multi_city" style="height:125px;"><option value="">Select Please </option></select>');
 				$(".replacedata").html('<?php $options=array();
 				foreach($countries as $country)
 				{
@@ -482,8 +514,10 @@ fieldset{
 				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select Countries "]);?>');
 			}
 			else{
+				$('#mcity').html('<select name="city_id" multiple="multiple" class="form-control select2 requiredfield max_limit" data-placeholder="Select City" id="multi_city" style="height:125px;"><option value="">Select Please </option></select>');
+					$("#multi_city").select2();
 				$(".replacedata").html('<?php $options=array();
-				$options[] = ['value'=>'101','text'=>'India','selected'];
+				$options[] = ['value'=>'101','text'=>'India'];
 				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry","multiple"=>true ,'options' => $options,'label'=>false]);
 				?>');
 			}
