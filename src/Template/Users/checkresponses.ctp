@@ -4,6 +4,24 @@ use Cake\Datasource\ConnectionManager;
 $conn = ConnectionManager::get('default');
 ?>
 <style>
+ 
+@media all and (max-width: 1000px) {
+	/* Logo for Mobile */
+	.tst{
+		margin-top: 5px !important;
+	 }
+}
+@media all and (min-width: 1000px) {
+	/* Logo for Mobile */
+	.tst{
+		margin-top: -5px !important;
+	 }
+}
+fieldset
+{
+	border-radius: 7px;
+	box-shadow: 0 1px 9px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
 legend
 {
 	text-align: center;
@@ -18,10 +36,16 @@ legend
 .package{
 	 
 }
-.contain>p{
-	color:#96989A !important;
+ p {
+    color: #96989A !important;
+    margin: 0 0 5px !important;
+    line-height: 17px !important;
 } 
-.details {color:#000 !important; font-weight: 400;}	
+
+.details {
+    color: #000 !important;
+    font-weight: 400;
+}
 .btn-block { width:40% !important;}
 .margin {margin-top:5px;}
 .shotrs a {margin:5px;;}
@@ -63,50 +87,53 @@ legend
 					 if($category_id==1){
 						 $category_name="Package";
 						 $image1=$this->Html->image('/img/slider/package-icon.png',['style'=>'height:20px']);
+						 $text="<span class='packageType'>Package</span>";
 					 }
 					 if($category_id==2){
 						 $category_name="Transport";
 						 $image1=$this->Html->image('/img/slider/transport-icon.png');
+						 $text="<span class='transportType'>Transport</span>";
 					 }
 					 if($category_id==3){
 						 $category_name="Hotel";
-						 $image1=$this->Html->image('/img/slider/hotelier-icon.png',['style'=>'height:30px']);
+						 $image1=$this->Html->image('/img/slider/hotelier-icon.png');
+						 $text="<span class='hotelType'>Hotel</span>";
 					 }
 				}
 				?>
 			<fieldset>
 				<legend><?php echo $image1; ?></legend>
-			<div class="col-md-12">
-			<div class="col-md-10">
-			<div class="col-md-12">
+			<div class="col-md-12" style="padding-left:0px !important;">
+			<div class="col-md-10" style="padding-left:0px !important;">
+			<div class="col-md-12 " style="padding-left:0px !important;">
 				
-				<div class="col-md-3">
-						<b>Request Type : </b> <?php echo $category_name; ?>
+				<div class="col-md-3" style="padding-left:0px !important;">
+						<p>Request Type :  <?php echo $text; ?></p>
 				</div>
-				<div class="col-md-3">
-						<b>Reference ID : </b> <?php echo $reference_id; ?>
+				<div class="col-md-3" style="padding-left:0px !important;">
+						<p>Reference ID :   <span class="details"><?php echo $reference_id; ?></span></p>
 				</div>
-				<div class="col-md-3">
-						<b>Start Date : </b> <?php echo $org_check_in; ?>
+				<div class="col-md-3" style="padding-left:0px !important;">
+						<p>Start Date :  <span class="details"><?php echo $org_check_in; ?></span></p>
 				</div>
-				<div class="col-md-3">
-						<b>End Date : </b> <?php echo $org_check_out; ?>
+				<div class="col-md-3" style="padding-left:0px !important;">
+						<p>End Date :  <span class="details"><?php echo $org_check_out; ?></span></p>
 				</div>
 				 
 			</div>
-			<div class="col-md-12" >
+			<div class="col-md-12" style="padding-left:0px !important;">
 				
-				<div class="col-md-3">
-						<b>Total Budget : </b> <?php echo $total_budget; ?>
+				<div class="col-md-3" style="padding-left:0px !important;">
+						<p>Total Budget : <span class="details"><?php echo $total_budget; ?></span></p>
 				</div>
-				<div class="col-md-3">
-						<b>Members : </b> <?php echo $members; ?>
+				<div class="col-md-3" style="padding-left:0px !important;">
+						<p>Members : <span class="details"><?php echo $members; ?></span></p>
 				</div>
-				<div class="col-md-3">
-						<b>Destination City : </b> <?php echo $locality; ?>
+				<div class="col-md-3" style="padding-left:0px !important;">
+						<p>Destination City :  <span class="details"><?php echo $locality; ?></span></p>
 				</div>
-				<div class="col-md-3">
-						<b>Comment : </b> <?php echo $comment; ?>
+				<div class="col-md-3" style="padding-left:0px !important;">
+						<p>Comment : <span class="details"><?php echo $comment; ?></span></p>
 				</div>
 				 
 			</div>
@@ -146,7 +173,7 @@ legend
 						<?php //echo $image; ?> <br><?php //echo $text; ?>
 					</div-->
 					
-					<div class="col-md-3">
+					<div class="col-md-4">
 						<b>Agent Name :  </b>
 						<?php 
 					$total_rating=0;
@@ -177,12 +204,12 @@ legend
 						<?php } ?>
 					</div>
 					 
-					<div class="col-md-3"  >
+					<div class="col-md-2"  >
 						<b>Quoted Price :  </b> <?php echo ($row['quotation_price'])?"&#8377; ".$row['quotation_price']:"-- --" ?>
 					</div>
-					<div class="col-md-6" align="center">
+					<div class="col-md-6" align="left">
 		 
-			<a   class="btn btn-warning btn-sm " id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>"> 
+			<a class="btn btn-warning btn-sm tst" id="chatcounts_<?php echo $row['id'];?>" data-toggle="modal" data-target="#myModal11<?php echo  $row['request']['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row["user_id"],1)) ?>"> 
 			Chat ( <strong><?php echo $data['chat_count'][$row['id']]; ?> </strong> )</a>
 			<div class="modal fade" id="myModal11<?php echo  $row['request']['id']; ?>" role="dialog">
 				<div class="modal-dialog">
@@ -202,7 +229,7 @@ legend
 				<!--a style="padding:5px !important;margin-top:3px;" href="javascript:void(0);" user_id="<?php echo $row['user']['id']; ?>" class="shareDetails btn btn-info btn-xs " request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">
 						Share Details</a-->
 						
-						<a   data-toggle="modal" class="btn btn-info btn-sm" data-target="#share<?php echo $row['id']; ?>" > Share Details </a>
+						<a   data-toggle="modal" class="btn btn-info btn-sm tst" data-target="#share<?php echo $row['id']; ?>" > Share Details </a>
 							<!-------Contact Details Modal --------->
 							<div id="share<?php echo $row['id']; ?>" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-md" >
@@ -224,7 +251,7 @@ legend
 				<?php }
 				else{
 					?>
-						<a   href="javascript:void(0);" class=" btn btn-info btn-sm ">
+						<a   href="javascript:void(0);" class=" btn btn-info btn-sm tst">
 						Shared</a>
 					<?php 
 				} ?>
@@ -234,7 +261,7 @@ legend
 				if( !array_key_exists($row['user']['id'], $BusinessBuddies)) {?>
 						<!--a style="padding:5px !important;margin-top:3px;;" href="javascript:void(0);" class="businessBuddy btn btn-successto btn-xs "   user_id = "<?php echo $row['user']['id']; ?>"> Follow</a-->
 						
-						<a  data-toggle="modal" class="btn btn-successto btn-sm" data-target="#follow<?php echo $row['id']; ?>" > Follow User </a>
+						<a  data-toggle="modal" class="btn btn-successto btn-sm tst" data-target="#follow<?php echo $row['id']; ?>" > Follow User </a>
 							<!-------Contact Details Modal --------->
 							<div id="follow<?php echo $row['id']; ?>" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-md" >
@@ -257,7 +284,7 @@ legend
 				<?php }
 				else {
 				?>
-					<a  href="javascript:void(0);" class="btn btn-default btn-sm " style="background-color:#eadcdc !important;" user_id = "<?php echo $row['user']['id']; ?>"> Following</a>
+					<a  href="javascript:void(0);" class="btn btn-default btn-sm tst" style="background-color:#eadcdc !important;" user_id = "<?php echo $row['user']['id']; ?>"> Following</a>
 				<?php }	?>
 			 
 			
@@ -280,7 +307,7 @@ legend
 								
 						<?php $reviewi =  $row['user']['id']."-".$row['request']['id']; ?>
 						
-							<a   data-toggle="modal" class="btn btn-success btn-sm" data-target="#accept<?php echo $row['id']; ?>"  > Accept Offer </a>
+							<a   data-toggle="modal" class="btn btn-success btn-sm tst" data-target="#accept<?php echo $row['id']; ?>"  > Accept Offer </a>
 							<!-------Contact Details Modal --------->
 							<div id="accept<?php echo $row['id']; ?>" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-md" >
@@ -304,7 +331,7 @@ legend
 						<?php 
 							if($blocked==1)
 							{?>
-								<a  href="javascript:void(0);" class="unblockUser btn btn-danger btn-sm " user_id = "<?php echo $row['user']['id']; ?>">
+								<a  href="javascript:void(0);" class="unblockUser btn btn-danger btn-sm tst" user_id = "<?php echo $row['user']['id']; ?>">
 								Blocked </a>
 							<?php }
 							else
@@ -312,7 +339,7 @@ legend
 								<!--a  href="javascript:void(0);" class="blockUser btn btn-danger btn-xs " user_id = "<?php echo $row['id']; ?>">
 								Block User </a-->
 							
-							<a   data-toggle="modal" class="btn btn-danger btn-sm" data-target="#block<?php echo $row['id']; ?>"  > Block User </a>
+							<a   data-toggle="modal" class="btn btn-danger btn-sm tst" data-target="#block<?php echo $row['id']; ?>"  > Block User </a>
 							<!-------Contact Details Modal --------->
 							<div id="block<?php echo $row['id']; ?>" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-md" >

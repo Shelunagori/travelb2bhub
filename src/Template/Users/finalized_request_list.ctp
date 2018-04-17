@@ -66,127 +66,147 @@ $conn = ConnectionManager::get('default');
   </div>
 </div>
  <div id="myModal122" class="modal fade form-modal" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog" >
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Filter</h4>
       </div>
-      <div class="modal-body">
-        <form method="get" class="filter_box">
-            
-        <div class="col-md-12">
-			<div class="col-md-6">
-				<label for="example-text-input" class=" col-form-label">Agent Name: </label>
-				<input type="text" name="agentnamesearch" value="<?php echo isset($_GET['agentnamesearch'])? $_GET['agentnamesearch']:''; ?>"  class="form-control">
-            </div>
-			
-			<div class="col-md-6">
-				<label for="example-text-input" class=" col-form-label">Reference ID: </label>
-                <input type="text" name="refidsearch" value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>"  class="form-control">
-            </div>
-           <div class="col-md-6">            
-           <label for="example-text-input" class=" col-form-label">Request Type: </label>
-			   <select name="req_typesearch" multiple="multiple" class="form-control select2">
-			   <option value="1">Package</option>
-			   <option value="3">Hotel</option>
-			   <option value="2">Transport</option></select>
-           </div>
-         
-           
-           <div class="col-md-6">
-			<label for="example-text-input" class=" col-form-label">Total Budget: </label>
-               <select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option>
-               <option value="100000-100000000000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? 'selected':''; ?>>100000-Above</option>
-               </select>
-           </div>
-      
-           
-           <div class="col-md-6">
-			<label for="example-text-input" class=" col-form-label">Start Date: </label>
-                <input type="text" id="datepicker1" data-date-format="dd-mm-yyyy" name="startdatesearch" value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>"  class="form-control datepicker">
-           </div>
-        
-           <div class="col-md-6">  
-			<label for="example-text-input" class=" col-form-label">End Date: </label>           
-               <input type="text" id="datepicker2" data-date-format="dd-mm-yyyy" name="enddatesearch" value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>"  class="form-control datepicker" >
-            </div>
-    
-           <div class="col-md-6">  
-			<label for="example-text-input" class=" col-form-label">Pickup City: </label>           
-               <select class="form-control select2"  name="pickup_city" id="pickup_city">
-				   <option value="">Select</option>
-				   <?php foreach($allCities1 as $city){?>
-				   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['pickup_city']) AND $_GET['pickup_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
-				   <?php }?>
-				</select>
-            </div>
-			
-			<div class="col-md-6">  
-			<label for="example-text-input" class=" col-form-label">Destination City: </label>           
-               <select class="form-control select2" name="destination_city" id="destination_city">
-				   <option value="">Select</option>
-				   <?php foreach($allCities1 as $city){?>
-				   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['destination_city']) AND $_GET['destination_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
-				   <?php }?>
-				</select>
-            </div>
-			
-          
-           <!--<div class="col-md-6">  
-			 <label for="example-text-input" class=" col-form-label">Members: </label>		   
-                <input type="text" name="memberssearch" value="<?php echo isset($_GET['memberssearch'])? $_GET['memberssearch']:''; ?>"  class="form-control">
-           </div>-->
-       </div>
-          
-    <div class="modal-footer">
-		<div class="row form-group">			  
-			<div class="col-md-12 text-center" style="margin-top:10px">
-	
-			<input type="submit" name="submit" value="Apply"  class="btn btn-primary btn-submit">
-			<a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'finalized-request-list')) ?>">Reset</a>
-		</div>
-	</div>
-   </div>
-   </form>
-   <script>
-   $(document).ready(function(){
-	   $('.datepicker').datepicker();
-	   
-		$('#datepicker1').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				$( "#datepicker2" ).datepicker( "option", "minDate",selected);
-				$('#datepicker2').val("");
-			}
-		});
-});
-		$('#datepicker2').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/y"); ?>',
-			onSelect: function(selected) {
-				var checkInDate = $('#datepicker1').val();
-				if(checkInDate == "") {
-					alert("Please select check-in date first.");
-					$('#datepicker2').val("");
-				}
-			}
-		});
-		</script>
-      </div>
-      <div class="modal-footer">
-      
-      </div>
-    </div>
+	 <form method="get" class="filter_box" style="margin-top:5px">
+     <div class="modal-body">
+	 <div class="row form-group">
+		<div class="col-md-12">
+		<div class=col-md-4>
+			<label for="example-text-input" class="  col-form-label">Agent Name : </label>
+		</div> 
+		 <div class=col-md-7>
 
-  </div>
-</div>
+
+		  <?php 
+		$options=array();
+		if(!empty($finalresponse)){
+			foreach($finalresponse as $st)
+			{ 
+				$key[]=$st['user_id'];
+				$value[]=$st['first_name'].' '.$st['last_name'];
+			};
+			$quiqueValue=array_values(array_unique($value)); 
+			$quiqueKey=array_values(array_unique($key));
+			
+			$cv=0; 
+			foreach($quiqueKey as $keys){
+				$textV=$quiqueValue[$cv];
+				$selectoption[] = ['value'=>$keys,'text'=>$textV];
+				$cv++;		 
+			}
+		}
+		echo $this->Form->control('agentnamesearch', ['label'=>false,"type"=>"select",'options' =>$selectoption,"class"=>"form-control select2","data-placeholder"=>"Select Multiple ",'empty'=>'Select...','multiple'=>true]);?>
+		</div>
+		</div>
+		</div>
+		<div class="row form-group">
+			 <div class=col-md-12>
+				 <div class=col-md-4>
+				 <label class="col-form-label"for=example-text-input>Reference ID : </label>
+				 </div> 
+				 <div class=col-md-7>
+					<?php echo $this->Form->control('refidsearch', ['label'=>false,"type"=>"select",'options' =>$RefId,"class"=>"form-control select2","data-placeholder"=>"Select Multiple ",'empty'=>'Select...','multiple'=>true]);?>
+				 </div>
+			 </div>
+		</div>
+
+						 <div class="row form-group ">
+							<div class=col-md-12>
+								 <div class=col-md-4>
+								  <label class="col-form-label"for=example-text-input>Request Type : </label>
+								  </div>  
+								 <div class=col-md-7>
+									<select name="req_typesearch[]" multiple="multiple" class="form-control select2"  data-placeholder='Select Multiple'>
+									<option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? '':''; ?>>Package</option>
+									<option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? '':''; ?>>Hotel</option>
+									<option value="2">Transport</option></select>
+								</div>
+							 </div>
+						</div>
+					 
+						<div class="row form-group ">
+							<div class=col-md-12>
+								<div class=col-md-4>
+									<label class="col-form-label"for=example-text-input>Total  Budget Range : </label>
+								</div> 
+									<div class=col-md-7>
+										<select name="budgetsearch" class="form-control"  data-placeholder='Select...'><option value="">Select...</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? '':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? '':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? '':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? '':''; ?>>50000-100000</option>
+										<option value="100000-100000000000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? '':''; ?>>100000-Above</option>
+										</select>
+									</div>
+								</div>
+							  </div>
+								<div class="row form-group">
+									<div class=col-md-12>
+									  <div class=col-md-4>
+									 <label class="col-form-label" for=example-text-input>Start Date : </label>
+									 </div> 
+									 <div class=col-md-7>
+									 <input class="form-control datepickers" data-date-format="dd-mm-yyyy" name=startdatesearch id="datepicker1">
+									 </div>
+									</div>	
+								</div>
+								<div class="row form-group">								
+									<div class=col-md-12>
+										<div class=col-md-4>
+										  <label class="col-form-label" for=example-text-input>End Date : </label>
+										</div> 
+										<div class=col-md-7>
+										<input class="form-control datepickers" data-date-format="dd-mm-yyyy" name=enddatesearch id="datepicker2">
+										</div>
+									</div>
+								</div>
+                              <div class="row form-group">
+									 <div class=col-md-12>
+										 <div class=col-md-4>
+										 <label class="col-form-label"for=example-text-input>Pickup City (Transportation) : </label>
+										 </div> 
+										<div class=col-md-7>
+											<select class="form-control select2"  name=pickup_city id=pickup_city>
+											   <option value="">Select</option>
+											   <?php foreach($allCities1 as $city){?>
+											   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['pickup_city']) AND $_GET['pickup_city']==$city['value']){ echo ''; }?>><?php echo $city['label'];?></option>
+											   <?php }?>
+											</select>
+										</div>
+									 </div>
+                                 </div>   
+							<div class="row form-group">								 
+								 <div class=col-md-12>
+									 <div class=col-md-4>
+									 <label class="col-form-label" for=example-text-input>	Destination City (Packages & Hotels) : </label>
+									 </div> 
+									<div class="col-md-7">
+										<select class="form-control select2" name=destination_city id=destination_city>
+										   <option value="">Select</option>
+										   <?php foreach($allCities1 as $city){?>
+										   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['destination_city']) AND $_GET['destination_city']==$city['value']){ echo ''; }?>><?php echo $city['label'];?></option>
+										   <?php }?>
+										</select>
+										 
+									</div>
+								</div>
+						  </div>
+ 						<div class="modal-footer">
+							<div class="row form-group">			  
+								<div class="col-md-12 text-center">
+							 
+								   <input type="submit" name="submit" value="Apply"  class="btn btn-primary btn-submit">
+								   <a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'finalizedRequestList')) ?>">Reset</a>
+								</div>
+							</div>
+							 
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
 <?php if(isset($_GET['sort']) && $_GET['sort']=="requesttype") { ?>
 <script>
@@ -249,7 +269,7 @@ $(".req").sort(function (a, b) {
 					?>
 							<fieldset>
 							<legend><?php echo $image; ?></legend>
-							<span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
+							<span style="margin-top:-30px;float:right;"><?php echo $org_created; ?></span>
 								<ul>
 								<li >
 									<p>
@@ -379,10 +399,11 @@ $(".req").sort(function (a, b) {
 								 </li>
 							</ul>
 							<hr></hr>
+					 
 						<table width="100%" style="text-align:center">
 							<tr>
 								<td width="33%" style="padding:3px !important;">
-									<a style="width:99%" data-toggle="modal"  class="btn btn-success btn-sm" data-target="#myModalchat<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat',$request['id'], $finalresponse[$request['id']]['user_id'],3)) ?>"> Chat </a>                        
+									<a style="width:99%" data-toggle="modal"  class="btn btn-success btn-sm" data-target="#myModalchat<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat',$request['id'], $finalresponse[$request['id']]['user_id'],3)) ?>"> Chat ( <strong><?php echo $chatdata['chat_count'][$request['id']]; ?> </strong> )</a>                        
 								</td>
 								<td width="33%" style="padding:3px !important;">
 									<a style="width:99%" data-toggle="modal"  class="btn btn-info btn-sm" data-target="#myModal1<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'viewdetails',$request['id'])) ?>"> Details</a>
@@ -404,13 +425,11 @@ $(".req").sort(function (a, b) {
 												<div class="modal-content">
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h3 class="modal-title">
-															<font color="black">Confirm Follow User ?</font>
-														</h3>
+														<h4 class="modal-title">Are you sure you want to follow this user?</h4>
 													</div>
 													<div class="modal-footer">
 													<button type="button"  href="javascript:void(0);" class="businessBuddy btn btn-warning" user_id = "<?php echo $finalresponse[$request['id']]['user_id']; ?>" >Follow</button>
-													<button type="button" class="btn btn-successto" data-dismiss="modal">Cancel</button>
+													<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
 													</div>
 												</div>
 											</div>
@@ -440,8 +459,9 @@ $(".req").sort(function (a, b) {
 									 
 									if($blocked==1)
 									{ ?>
-										<a  style="width:99%"  class="btn btn-danger btn-sm " ">
-										Blocked </a>
+										 
+										<span style="width:99%; background-color:#dadadabf;display: inline-block;text-align: center;"  class=" btn-defult btn-sm ">
+										User Blocked </span>
 									<?php }
 									else
 									{ ?>

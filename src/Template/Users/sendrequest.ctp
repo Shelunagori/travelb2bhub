@@ -887,12 +887,14 @@ fieldset{
 
 $(document).ready(function(){ 
 
- 	$(document).on('keyup',".number",function(event){
+ /* 	$(document).on('keyup',".number",function(event){
 		  $(this).val($(this).val().replace(/[^\d].+/, ""));
             if ((event.which < 48 || event.which > 57)) {
                 event.preventDefault();
             }
-	});
+	}); */
+	
+	
 	$(document).on('blur',".city_select",function(){
 		var master=$(this);
 		master.closest('div').find('div.suggesstion-box').delay(2000).fadeOut(1000);

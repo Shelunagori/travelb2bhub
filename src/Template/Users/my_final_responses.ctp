@@ -13,12 +13,16 @@ $conn = ConnectionManager::get('default');
 		border-radius: 7px;
 		box-shadow: 0 1px 9px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	}
-	.details {color:#000 !important; font-weight: 400;}	
-		li > p{
-		color:#96989A !important;
-		margin: 0 0 4px !important;
-		line-height:17px !important; 
-	}
+	 p {
+    color: #96989A !important;
+    margin: 0 0 5px !important;
+    line-height: 17px !important;
+} 
+
+.details {
+    color: #000 !important;
+    font-weight: 400;
+}
 </style>
 <div id="my_final_responses" class="container-fluid">
 	<div class="row equal_column">
@@ -186,7 +190,7 @@ $conn = ConnectionManager::get('default');
 				?>
 				<fieldset>
 					<legend><?php echo $image; ?></legend>
-					<span style="margin-top:0px;float:right;"><?php echo $org_created; ?></span>
+					<span style="margin-top:-30px;float:right;"><?php echo $org_created; ?></span>
                  <ul>
 				 
 				 <li >
@@ -224,7 +228,7 @@ $conn = ConnectionManager::get('default');
 						?>
 						Total Budget :  
 						<?php //echo ($row['request']['total_budget'])? "Rs. ". $row['request']['total_budget'] :"-- --" ?>
-						<?php echo ($total_budget)? "Rs. ". ($total_budget) :"-- --" ?>
+						<span class="details"><?php echo ($total_budget)? "Rs. ". ($total_budget) :"-- --" ?></span>
 					</p>
 				 </li>
 				 
@@ -235,16 +239,16 @@ $conn = ConnectionManager::get('default');
 						?>
 						 Quotation Price :  
 						 <?php //echo ($row['quotation_price'])? " Rs. ".$row['quotation_price']:"-- --" ?>
-						 <?php echo ($quotation_price)? "Rs. ". ($quotation_price) :"-- --" ?></p>
+						<span class="details"> <?php echo ($quotation_price)? "Rs. ". ($quotation_price) :"-- --" ?></span></p>
 				</li>
                 <li class="destination">
 				   <?php if($row['request']['category_id']==2){ ?>
                   <p>
-                   Pickup City : <span> <?php echo ($row['request']['pickup_city'])?$allCities[$row['request']['pickup_city']]:"-- --"; ?><?php echo ($row['request']['pickup_state'])?' ('.$allStates[$row['request']['pickup_state']].')':"";  ?></span>
+                   Pickup City : <span class="details"> <?php echo ($row['request']['pickup_city'])?$allCities[$row['request']['pickup_city']]:"-- --"; ?><?php echo ($row['request']['pickup_state'])?' ('.$allStates[$row['request']['pickup_state']].')':"";  ?></span>
 
                   <?php } else { ?>
                         <p>
-                        Destination City :  <span>
+                        Destination City :  <span class="details">
 						<?php 
 							$a=$row['request']['city_id']?$allCities[$row['request']['city_id']]:"-- --"; 
 							$b=$row['request']['state_id']?' ('.$allStates[$row['request']['state_id']].')':"";
@@ -262,12 +266,12 @@ $conn = ConnectionManager::get('default');
 				<?php if($row['request']['category_id'] == 3 ) { ?>
 					<li >
                         <p>
-                            Start Date :  <?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?>
+                            Start Date :  <span class="details"><?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?></span>
                         </p>
                      </li>
 					<li >
                         <p>
-                            End Date :  <?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?>
+                            End Date :  <span class="details"><?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?></span>
                         </p>
                     </li>
 					<?php } elseif($row['request']['category_id'] == 1 ) {
@@ -277,15 +281,15 @@ $conn = ConnectionManager::get('default');
 					?>
 					<li >
                         <p>
-                            Start Date :  <?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?>
+                            Start Date :  <span class="details"><?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?></span>
                         </p>
                      </li>
 					<li >
                         <p>
                         <?php if(!empty($result['TopDate'])) { ?>
-                        End Date :  <?php echo date('d/m/Y',strtotime($result['TopDate'])); ?>
+                        End Date :  <span class="details"><?php echo date('d/m/Y',strtotime($result['TopDate'])); ?></span>
                         <?php }else{?>
-                        End Date : <?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?>
+                        End Date : <span class="details"><?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?></span>
                         <?php }?>
                             
                         </p>
@@ -293,22 +297,22 @@ $conn = ConnectionManager::get('default');
 				<?php } elseif($row['request']['category_id'] == 2 ) { ?>
 					<li >
                         <p>
-                            Start Date :  <?php echo ($row['request']['start_date'])?date("d/m/Y", strtotime($row['request']['start_date'])):"-- --"; ?>
+                            Start Date :  <span class="details"><?php echo ($row['request']['start_date'])?date("d/m/Y", strtotime($row['request']['start_date'])):"-- --"; ?></span>
                         </p>
                     </li>
 					<li >
                         <p>
-                            End Date :  <?php echo ($row['request']['end_date'])?date("d/m/Y", strtotime($row['request']['end_date'])):"-- --"; ?>
+                            End Date :  <span class="details"><?php echo ($row['request']['end_date'])?date("d/m/Y", strtotime($row['request']['end_date'])):"-- --"; ?></span>
                         </p>
                     </li>
 				<?php } ?>
 				     <li >
                         <p>
-                            Members :  <?php echo $row['request']['adult'] +  $row['request']['children']; ?>
+                            Members :  <span class="details"><?php echo $row['request']['adult'] +  $row['request']['children']; ?></span>
                      </p>
 					</li>
 					<li>
-                       <p> Comment : <span ><?php echo mb_strimwidth($row['comment'], 0, 25, "...");?></span></p>
+                       <p> Comment : <span class="details"><?php echo mb_strimwidth($row['comment'], 0, 25, "...");?></span></p>
                     </li>
                    </ul>
 				   <hr></hr>
