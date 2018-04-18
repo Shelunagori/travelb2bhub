@@ -120,7 +120,7 @@ $m=0;
 				<div class="col-md-6" >		
 	<div class="box-body bbb">
 		<fieldset style="background-color:#fff;text-align:center;">
-				<div class="row" style="padding:25px;">						
+				<div class="row" style="padding:25px;">							
 					<div class="col-md-6">
 						<?= $this->Html->image($texifleetpromotion->full_image,['id'=>'myImg','style'=>'width:96%;height:140px;','data-target'=>'#imagemodal'.$texifleetpromotion->id,'data-toggle'=>'modal',]) ?>
 						<div id="imagemodal<?php echo $texifleetpromotion->id;?>" class="modal fade" role="dialog">
@@ -164,7 +164,7 @@ $m=0;
 							</div>
 						</div>
 					</div>
-					<table class="table" style="width:100%;">
+					<table class="table" style="width:100%;margin-bottom:0px !important;">
 						<tr>
 						<td  style="width:33%;">
 							<button type="button" class="btn btn-info btn-md btnlayout" data-target="#renew<?php echo $texifleetpromotion->id; ?>" data-toggle=modal>Renew</button>
@@ -177,7 +177,9 @@ $m=0;
 						</td>
 						</tr>
 					</table>
-						<!------------------------- Renew Modal--------------------------->
+				</div>
+		</fieldset>
+		<!------------------------- Renew Modal--------------------------->
 						<div id="renew<?php echo $texifleetpromotion->id; ?>" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-md" >
 								<!-- Modal content-->
@@ -185,9 +187,9 @@ $m=0;
 									<div class="modal-content">
 									  <div class="modal-header" >
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h3 class="modal-title">
+											<h4 class="modal-title">
 											Do you want to renew promotion ?
-											</h3>
+											</h4>
 										</div>
 										<div class="modal-body">
 										<br>
@@ -259,8 +261,6 @@ $m=0;
 								</form>
 							</div>
 						</div>
-				</div>
-		</fieldset>
 	</div>
 	</div>
 					<?php }} ?>

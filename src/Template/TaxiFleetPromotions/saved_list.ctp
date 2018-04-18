@@ -163,13 +163,12 @@ a{
 		<div class="row" >
 			<div class="col-md-12">
 				<div class="box-header with-border"> 
-					<span class="box-title" style="color:#057F8A;"><b>Taxi/Fleet Promotions</b></span>
+					<span class="box-title" style="color:#057F8A;"><b>Saved Promotions</b></span>
 				</div>
 			</div>
 		</div>
 	</div>  
-
-			<?php $i=1;
+		<?php $i=1;
 			if(!empty($taxiFleetPromotions)){
 			foreach ($taxiFleetPromotions as $taxiFleetPromotionss){
 			$taxiFleetPromotion=$taxiFleetPromotionss->taxi_fleet_promotion;

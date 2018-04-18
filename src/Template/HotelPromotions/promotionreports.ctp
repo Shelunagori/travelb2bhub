@@ -165,7 +165,7 @@ $m=0;
 							</div>
 						</div>
 					</div>
-					<table class="table" style="width:100%;">
+					<table class="table" style="width:100%;margin-bottom:0px!important;">
 						<tr>
 						<td  style="width:33%;">
 							<button type="button" class="btn btn-info btn-md btnlayout" data-target="#renew<?php echo $hotel_promotion->id; ?>" data-toggle=modal>Renew</button>
@@ -180,8 +180,9 @@ $m=0;
 						</td>
 					</tr>
 					</table>
-
-						<!------------------------- Renew Modal--------------------------->
+					</div>
+			</fieldset>
+			<!------------------------- Renew Modal--------------------------->
 						<div id="renew<?php echo $hotel_promotion->id; ?>" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-md" >
 								<!-- Modal content-->
@@ -264,8 +265,6 @@ $m=0;
 								</form>
 							</div>
 						</div>
-					</div>
-			</fieldset>
 		</div>
 	</div>
 					<?php }} ?>
