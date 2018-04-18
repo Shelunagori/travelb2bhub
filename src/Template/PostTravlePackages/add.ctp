@@ -177,7 +177,6 @@ fieldset{
 	<div class="box box-primary">
 		<div class="box-body">
 			<form action="<?php echo $coreVariable['SiteUrl'];?>api/post_travle_packages/add.json" method="post" enctype="multipart/form-data">	
-			<input type="hidden"
 				<div class="row"> 
 					<div class="col-md-12"> 
 						<div class="form-box">
@@ -408,11 +407,8 @@ fieldset{
 <script>
 	 
     $(document).ready(function () {
-		 
-		 
 		 var pack_type=$('#pack_type').val();
 			//alert(pack_type);
-			 
 			if(pack_type==1){
 				$(".replacedata").html('<?php $options=array();
 				foreach($countries as $country)

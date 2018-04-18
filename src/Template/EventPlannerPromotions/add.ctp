@@ -153,7 +153,6 @@ fieldset{
 					<?php echo  $this->Flash->render() ?>
 				</div>
 				<form action="<?php echo $coreVariable['SiteUrl'];?>api/event_planner_promotions/add.json" method="post" enctype="multipart/form-data">	
- 				</div>
 				<div class="box-body">
 					<fieldset>
 					<legend style="color:#369FA1;"><b>Load Event Planner Promotion</b></legend>
@@ -253,7 +252,11 @@ fieldset{
 							<div class="col-md-12">
 								<div class="col-md-12 form-group">
 									<p>Enter Description of Your Company </p>
+<<<<<<< HEAD
 									<?php echo $this->Form->textarea('event_detail', ['class'=>'form-control requiredfield','label'=>false,'rows'=>3,'style'=>'resize:none','requiredfield']); ?> 	 
+=======
+									<?php echo $this->Form->textarea('event_detail', ['class'=>'form-control requiredfield','label'=>false,'rows'=>3,'style'=>'resize:none']); ?> 	 
+>>>>>>> origin/master
 									<label style="display:none" class="helpblock error" > This field is required.</label>
 								</div>
 							</div>

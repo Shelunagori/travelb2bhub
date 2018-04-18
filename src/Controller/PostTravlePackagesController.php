@@ -394,7 +394,6 @@ class PostTravlePackagesController extends AppController
 		$user_id=$this->Auth->User('id');
 		$this->set(compact('user_id'));
     }
-
     public function edit($id = null)
     {
         $postTravlePackage = $this->PostTravlePackages->get($id, [
@@ -416,7 +415,6 @@ class PostTravlePackagesController extends AppController
         $this->set(compact('postTravlePackage', 'currencies', 'countries', 'priceMasters', 'users'));
         $this->set('_serialize', ['postTravlePackage']);
     }
-
     /**
      * Delete method
      *

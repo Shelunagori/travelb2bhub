@@ -91,6 +91,9 @@ label {
 	padding-right: 7px !important;
     padding-left: 7px !important;
 }
+.mainrow{
+	padding:12px;
+}
 </style>
 <div class="row" >
 	<div class="col-md-12">
@@ -193,10 +196,9 @@ $m=0;
 											</h4>
 										</div>
 										<div class="modal-body">
-										<br>
 											<div class="row mainrow">
 												<div class="col-md-12">
-													<div class="col-md-4">
+													<div class="col-md-6">
 														<p for="from">
 															Payment Duration
 														</p>
@@ -211,16 +213,7 @@ $m=0;
 															echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters','label'=>false,'empty'=>'Select ...']);?>
 														</div>
 													</div>
-													<div class="col-md-4">
-														<p for="from">
-																	Visibility Date
-																	<span class="required">*</span>
-														</p>
-														<div class="input-field">
-														<?php echo $this->Form->input('visible_date', ['data-date-format'=>'dd/mm/yyyy','class'=>'form-control visible_date','label'=>false,"placeholder"=>"Visible Date",'readonly'=>'readonly','type'=>'text']); ?>
-														</div>
-													</div>
-													<div class="col-md-4">
+													<div class="col-md-6">
 														<p for="from">
 																	Promotion Amount
 																	<span class="required">*</span>
@@ -285,22 +278,10 @@ $m=0;
 			var Result1 = price.split(" ");
 			var weeks=Result[0];
 			var price=Result1[0];
-			var todaydate = new Date(); // Parse date
-			for(var x=0; x < weeks; x++){
-				todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
-			}
-			var dd = todaydate .getDate();
-			var mm = todaydate .getMonth()+1; //January is 0!
-			var yyyy = todaydate .getFullYear();
-			if(dd<10){  dd='0'+dd } 
-			if(mm<10){  mm='0'+mm } 
-			var date = dd+'-'+mm+'-'+yyyy;	
-			$(this).closest('div.mainrow').find('div .visible_date').val(date);
+			
 			$(this).closest('div.mainrow').find('div .payment_amount').val(price);
-			//alert($(this).closest('div.mainrow').html());
 			}
 			else{
-				$(this).closest('div.mainrow').find('div .visible_date').val("dd-mm-yyyy");
 				$(this).closest('div.mainrow').find('div .payment_amount').val(0);
 			}
 		})
