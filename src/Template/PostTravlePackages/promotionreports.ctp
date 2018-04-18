@@ -163,7 +163,7 @@ label {
 							</div>
 						</div>
 					</div>
-					<table class="table" style="width:100%;	">
+					<table class="table" style="width:100%;margin-bottom:0px !important;">
 						<tr>
 						<td  style="width:33%;">
 							<button type="button" class="btn btn-info btn-md btnlayout" data-target="#renew<?php echo $postTravlePackage->id; ?>" data-toggle=modal>Renew</button>
