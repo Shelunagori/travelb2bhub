@@ -164,24 +164,26 @@ fieldset{
 				<div class="row">
 				<div class="col-md-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-						<div class="input-field">
-							<p for="from">No. of Roomsdfs <span class="required">*</span></p>
+						<div class="input-field maindivs">
+							<p for="from">No. of Rooms <span class="required">*</span></p>
 							<div class="box-room">
 								<div class="col-md-7"> Single</div>
-								<div class="col-md-5"><input autocomplete="off" name="room1" type="number" min="0" style="height: 27px;" class="form-control number" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room1" type="number" min="0" style="height: 27px;" class="form-control number hotelroom" id="from-place" placeholder="0"/></div>
 
 								<div class="col-md-7"> Double</div>
-								<div class="col-md-5"><input autocomplete="off" name="room2" type="number" min="0" style="height: 27px;" class="form-control number" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room2" type="number" min="0" style="height: 27px;" class="form-control number hotelroom" id="from-place" placeholder="0"/></div>
 
 								<div class="col-md-7"> Triple</div>
-								<div class="col-md-5"><input autocomplete="off" name="room3" type="number" min="0" style="height: 27px;" class="form-control number" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room3" type="number" min="0" style="height: 27px;" class="form-control number hotelroom" id="from-place" placeholder="0"/></div>
 
 								<div class="col-md-7"> Child with bed</div>
-								<div class="col-md-5"><input autocomplete="off" name="child_with_bed" style="height: 27px;" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="child_with_bed" style="height: 27px;" type="number" min="0" class="form-control hotelroom" id="from-place" placeholder="0"/></div>
 
 								<div class="col-md-7"> Child without bed</div>
-								<div class="col-md-5"><input autocomplete="off" name="child_without_bed" style="height: 27px;" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="child_without_bed" style="height: 27px;" type="number" min="0" class="form-control hotelroom" id="from-place" placeholder="0"/></div>
+								
 							</div>
+							<label style="display:none;color:#ea3733;font-weight:100 !important;" id="showerror" > This field is required.</label>
 						</div>
 					</div>
 			
@@ -378,20 +380,21 @@ fieldset{
 							<p for="from">No. of Rooms <span class="required">*</span></p>
 							<div class="box-room">
 								<div class="col-md-7"> Single</div>
-								<div class="col-md-5"><input autocomplete="off" name="room1" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room1" type="number" min="0" style="height: 27px;" class="form-control packageroom" id="from-place" placeholder="0"/></div>
 
 								<div class="col-md-7"> Double</div>
-								<div class="col-md-5"><input autocomplete="off" name="room2" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room2" type="number" min="0" style="height: 27px;" class="form-control packageroom" id="from-place" placeholder="0"/></div>
 
 								<div class="col-md-7"> Triple</div>
-								<div class="col-md-5"><input autocomplete="off" name="room3" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room3" type="number" min="0" style="height: 27px;" class="form-control packageroom" id="from-place" placeholder="0"/></div>
 
 								<div class="col-md-7"> Child with bed</div>
-								<div class="col-md-5"><input autocomplete="off" name="child_with_bed" style="height: 27px;" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="child_with_bed" style="height: 27px;" type="number" min="0" class="form-control packageroom" id="from-place" placeholder="0"/></div>
 
 								<div class="col-md-7"> Child without bed</div>
-								<div class="col-md-5"><input autocomplete="off" name="child_without_bed" style="height: 27px;" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="child_without_bed" style="height: 27px;" type="number" min="0" class="form-control packageroom" id="from-place" placeholder="0"/></div>
 							</div>
+							<label style="display:none;color:#ea3733;font-weight:100 !important;" id="showerror12" > This field is required.</label>
 						</div>
 					</div>
 
@@ -695,7 +698,7 @@ fieldset{
 													<div class="input-field">
 														<p for="from" >
 															Reference ID  
-															<span class="required">*</span>(This is for your reference )
+															<span class="required">*</span> (This is for your reference )
 														</p>
 														<input  name="reference_id" type="text" class="form-control ref1" id="reference_id" placeholder="Reference ID" autocomplete="off" />
 														 
@@ -1092,6 +1095,37 @@ function selectCountry(value,city_code,state,noofrows) {
 	 
 	
 } 
+$('#HotelRequestForm').submit(function(){
+	var x=0;
+	$('.hotelroom').each(function(){
+		if($(this).val() >0){
+			x=1;
+		}
+	});
+	$('#showerror').hide();
+	 
+	if(x==0){
+		$('#showerror').show();
+		$('html, body').animate({scrollTop:0}, 'slow');
+		return false;
+	}
+	
+})
+$('#PackgeRequestForm').submit(function(){
+	var x=0;
+	$('.packageroom').each(function(){
+		if($(this).val() >0){
+			x=1;
+		}
+	});
+	$('#showerror12').hide();
+	if(x==0){
+		$('#showerror12').show();
+		$('html, body').animate({scrollTop:0}, 'slow');
+		return false;
+	}
+})
+
 //--- Seco 
 	$('#PackgeRequestForm').validate({
 		rules: {

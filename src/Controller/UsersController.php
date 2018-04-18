@@ -1331,7 +1331,7 @@ $d['end_date'] = (isset($d['end_date']) && !empty($d['start_date']))?$this->ymdF
 					$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
 					$userchats->created = date("Y-m-d H:i:s");
 					$userchats->type = 'Request';
-					$userchats->notification = 1;;
+					$userchats->notification = 1;
 					if ($userchatTable->save($userchats)) {
 						$id = $userchats->id;
 					}
