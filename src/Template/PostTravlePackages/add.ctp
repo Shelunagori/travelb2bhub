@@ -417,6 +417,9 @@ fieldset{
 				$(".replacedata").html('<?php $options=array();
 				foreach($countries as $country)
 				{
+					if($country->id==101){
+						continue;
+					}
 					$options[] = ['value'=>$country->id,'text'=>$country->country_name];
 				};
 				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select Countries "]);?>');
@@ -502,6 +505,9 @@ fieldset{
 				$(".replacedata").html('<?php $options=array();
 				foreach($countries as $country)
 				{
+					if($country->id==101){
+						continue;
+					}
 					$options[] = ['value'=>$country->id,'text'=>$country->country_name];
 				};
 				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select Countries "]);?>');

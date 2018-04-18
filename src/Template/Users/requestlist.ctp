@@ -283,7 +283,7 @@ fieldset
 					<fieldset >
 						<legend align="center"><?php echo $image; ?></legend>
 				<div class="contain">
-							<p class="pull-right"> <?php echo $org_created; ?></p>
+							<p class="pull-right" style="margin-top:-30px !important;"> <?php echo $org_created; ?></p>
 							<p>Request Type : &nbsp;<?php echo $text; ?></p>
 							<p>Reference ID : &nbsp;
 								<span class="details"><?php echo $request['reference_id']; ?></span>
@@ -416,7 +416,7 @@ fieldset
 															  <div class="modal-header" style="height:100px;">
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																	<h4 class="modal-title">
-																	Are You Sure, you want to delete this request ?
+																	Are you sure you want to remove this request?
 																	</h4>
 																</div>
 																<div class="modal-footer" style="height:60px;">

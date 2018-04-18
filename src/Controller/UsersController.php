@@ -2474,7 +2474,9 @@ return $requests;
 }
  
 public function logout() {
-	return $this->redirect($this->Auth->logout());
+	$this->redirect($this->Auth->logout());
+	$this->Flash->error(__('Logout Successfully.'));
+	return ;
 } 
 public function checkresponses($id) {
 	$this->viewBuilder()->layout('user_layout');
