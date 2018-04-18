@@ -514,7 +514,7 @@ fieldset{
 				 
 								 
 								<fieldset>
-									<legend style="color:#369FA1;"><b> &nbsp;  TRANSPORT REQUIREMENTS  &nbsp; </b></legend>
+									<legend style="color:#369FA1;"><b> &nbsp;  TRANSPORT REQUIREMENTS D&nbsp; </b></legend>
 									<div class="row">
 										<div class="col-md-12 ">
 											<div class="col-md-4 ">
@@ -525,6 +525,7 @@ fieldset{
 												</div>
 												<div class="input-field">
 												<?php echo $this->Form->control('transport_requirement', ["type"=>"select",'options' =>$postTravlePackageCategories, "class"=>"form-control select2","data-placeholder"=>"Select Options", "empty"=>'Select Options']);?>
+												<label id="transport_requirement-error" class="error" for="transport_requirement"> </label>
  												</div>
 											</div>
 											<div class="col-md-4">
@@ -621,7 +622,7 @@ fieldset{
 												<p for="from">Final City
 													 
 												</p>
-												<input type="text" class="form-control city_select" id="p_final_city_name" noofrows="2" name="p_final_city_name" placeholder="Select City or Nearest City"/>
+												<input type="text" class="form-control city_select" id="p_final_city_name" noofrows="2" name="p_final_city_name" required placeholder="Select City or Nearest City"/>
 												<input type='hidden' id='p_final_city_id' name="p_final_city_id" />
 												<div class="suggesstion-box" style="margin-top:-10px"></div>
 											</div>
@@ -732,12 +733,15 @@ fieldset{
 											<div class="col-md-4 ">
 												<div class="input-field">
 													<p for="from">
-														Select Transport
+														Select Transport 
 														<span class="required">*</span>
 													</p>
 												</div>
-												<div class="input-field">
-												<?php echo $this->Form->control('transport_requirement', ["type"=>"select",'options' =>$postTravlePackageCategories, "class"=>"form-control select2","data-placeholder"=>"Select Options","empty"=>'Select Options']);?></div>
+												<div class="">
+													<?php echo $this->Form->control('transport_requirement', ["type"=>"select",'options' =>$postTravlePackageCategories, "class"=>"form-control select2","data-placeholder"=>"Select Options","empty"=>'Select Options','required']);?>
+													 
+												</div>
+												<label id="transport_requirement-error" class="error" for="transport_requirement"> </label>
 											</div>
 											<div class="col-md-4">
 												<div class="input-field">
@@ -1114,12 +1118,35 @@ function selectCountry(value,city_code,state,noofrows) {
 			"city_id": {
 				required: true
 			},
-			
+			"transport_requirement": {
+				required: true
+			},
+			"start_date" : {
+				required : true
+			},
+			"end_date": {
+				required : true,
+			},
+			"pickup_city_name": {
+				required: true
+			},
 			"pincode": {
 				required: true
 			}
 		},
 		messages: {
+			"start_date" : {
+				required : "Please select start date."
+			},
+			"end_date": {
+				required : "Please select end date."
+			},
+			"pickup_city_name": {
+				required: "Please select city."
+			},
+			"transport_requirement" : {
+				required : "Please Select Transport Requirement."
+			},
 			"reference_id" : {
 				required : "Please enter reference id."
 			},
@@ -1235,6 +1262,9 @@ function selectCountry(value,city_code,state,noofrows) {
 			"t_pickup_city_id": {
 				required: true
 			},
+			"transport_requirement": {
+				required: true
+			},
 			"t_final_city_id": {
 				required: true
 			},
@@ -1243,6 +1273,9 @@ function selectCountry(value,city_code,state,noofrows) {
 			}
 		},
 		messages: {
+			"transport_requirement" : {
+				required : "Please Select Transport Requirement."
+			},
 			"reference_id" : {
 				required : "Please enter reference id."
 			},
@@ -1265,7 +1298,7 @@ function selectCountry(value,city_code,state,noofrows) {
 				required: "Please select city."
 			},
 			"t_final_city_id": {
-				required: "Please select city."
+				required: "This field is required."
 			},
 			"pickup_locality": {
 				required: "Please enter locality."
@@ -1398,7 +1431,7 @@ $(document).ready(function () {
             e.preventDefault();
             var strHtml = '<div class="stop col-md-12 main_row" style="margin-top:5px"><hr  style="margin-top: 8px; margin-bottom: 8px;"></hr> <div class="stop-title" style="font-weight:bold"> Stop ' +packageI+ ' </div><div class="row main_row">';
         	strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality,Village or Town" name="stops[' +packageI+ ']"></div></div>';
-        	strHtml += '<div class="col-sm-4 mt"><p for="from">Stop City</p><input class="trans_city form-control city_select ctynamerecord" noofrows="5" taxboxname="state_id_package_stop_city[' +packageI+ ']" type="text" placeholder="Select City or Nearest City" use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" class="ctyIDname" name="id_package_stop_city[' +packageI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div> ';
+        	strHtml += '<div class="col-sm-4 mt"><p for="from">Stop City</p><input class="trans_city form-control city_select ctynamerecord" noofrows="5" taxboxname="state_id_package_stop_city[' +packageI+ ']" type="text" placeholder="Select City or Nearest City" required use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" class="ctyIDname" name="id_package_stop_city[' +packageI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div> ';
         	strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly></div></div></div></div>';
         strHtml += '<div class="row"><div class="col-md-12" align="right" style="margin-top:5px"> <button class="btn btn-danger btn-sm package_remove_stop but"> <i class="fa fa-trash" ></i> Remove Stop</button> </div></div></div>';
         $(".package-stops").append(strHtml);
@@ -1423,7 +1456,7 @@ $(document).ready(function () {
 				e.preventDefault();
 				var strHtml = '<div class="stop col-md-12 main_row" style="margin-top:5px"><hr  style="margin-top: 8px; margin-bottom: 8px;"></hr> <div class="stop-title" style="font-weight:bold"> Stop ' +transI+ ' </div><div class="row main_row">';
 				strHtml += '<div class="col-sm-4 mt form-group"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality, Village or Town" name="stops[' +transI+ ']"></div></div>';
-				strHtml += '<div class="col-sm-4 mt form-group"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control ctynamerecord city_select" type="text" noofrows="4" taxboxname="state_id_trasport_stop_city[' +transI+ ']" placeholder="Select City or Nearest City" use_for = "trasport" numCount = ' +transI+ ' id="trasport_stop_city[' +transI+ ']" name="trasport_stop_city[' +transI+ ']"><input type="hidden" class="ctyIDname" id="id_trasport_stop_city[' +transI+ ']" name="id_trasport_stop_city[' +transI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div></div>';
+				strHtml += '<div class="col-sm-4 mt form-group"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control ctynamerecord city_select" required type="text" noofrows="4" taxboxname="state_id_trasport_stop_city[' +transI+ ']" placeholder="Select City or Nearest City" use_for = "trasport" numCount = ' +transI+ ' id="trasport_stop_city[' +transI+ ']" name="trasport_stop_city[' +transI+ ']"> <input type="hidden" class="ctyIDname" id="id_trasport_stop_city[' +transI+ ']" name="id_trasport_stop_city[' +transI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div></div>';
 				strHtml += '<div class="stateRpl form-group" ><div class="col-sm-4 mt form-group"><div class="input-field  form-group" style="margin-top:5px !important;"><p for="from">Stop State</p><input type="hidden" id="state_id_trasport_stop_city[' +transI+ ']" name="state_id_trasport_stop_city[' +transI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_trasport_stop_city[' +transI+ ']" name="state_name_trasport_stop_city[' +transI+ ']" readonly></div></div></div></div>';
 				strHtml += '<div class="row"><div class="col-md-12" align="right" style="margin-top:5px"> <button class="btn btn-danger btn-sm transport_remove_stop but"> <i class="fa fa-trash" ></i> Remove Stop</button> </div></div></div>';
 				$(".transport-stops").append(strHtml);
