@@ -1,9 +1,32 @@
 <?php //echo $this->Html->css('/assets/loader-1.css'); ?>
 <?php
+
+ if(!empty($duration_day_night)){
+	$duration_day_night=explode(',', $duration_day_night);
+
+	foreach($duration_day_night as $daataa){
+		if($daataa==1){$duration_day_nights[]='1 N/2 D';}
+		if($daataa==2){$duration_day_nights[]='2 N/3 D';}
+		if($daataa==3){$duration_day_nights[]='3 N/4 D';}
+		if($daataa==4){$duration_day_nights[]='4 N/5 D';}
+		if($daataa==5){$duration_day_nights[]='5 N/6 D';}
+		if($daataa==6){$duration_day_nights[]='6 N/7 D';}
+		if($daataa==7){$duration_day_nights[]='7 N/8 D';}
+		if($daataa==8){$duration_day_nights[]='8 N/9 D';}
+		if($daataa==9){$duration_day_nights[]='9 N/10 D';}
+		if($daataa==10){$duration_day_nights[]='10 N/11 D';}
+		if($daataa==11){$duration_day_nights[]='11 N/12 D';}
+		if($daataa==12){$duration_day_nights[]='12 N/13 D';}
+		if($daataa==13){$duration_day_nights[]='13 N/14 D';}
+		if($daataa==14){$duration_day_nights[]='14 N/15 D';}
+		if($daataa==15){$duration_day_nights[]='More than 15 Days';}
+	}
+	if(!empty($duration_day_nights)) {$duration_day_night=implode(',',$duration_day_nights);}
+}
  //-- List
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => $coreVariable['SiteUrl']."api/PostTravlePackages/getTravelPackages.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&category_id=".$category_id."&duration_day_night=".$duration_day_night."&starting_price=".$starting_price."&submitted_from=web",
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/PostTravlePackages/getTravelPackages.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&category_id=".$category_id."&duration_day_night=".$duration_day_night."&starting_price=".$starting_price."&city_id=".$city_id."&search=".$search."&submitted_from=web",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -15,16 +38,18 @@ curl_setopt_array($curl, array(
     "postman-token: 4f8087cd-6560-4ca6-5539-9499d3c5b967"
   ),
 ));
+
 $response = curl_exec($curl);
 $err = curl_error($curl);
 curl_close($curl);
+
 $priceMasters=array();
 if ($err) {
   echo "cURL Error #:" . $err;
 } else {
 	$response;
 	$List=json_decode($response);
-	//pr($List); exit;
+	
 	$postTravlePackages=$List->getTravelPackages;
 }
 //pr($postTravlePackages); exit;
@@ -242,26 +267,62 @@ a{
 					<span class="help-block"></span>
 						<div class="row form-group margin-b10">
 							<div class=col-md-12>
-								 <div class=col-md-3>
-								  <label class="col-form-label"for=example-text-input>Country</label>
-								  </div>
-								  <div class=col-md-1>:</div>
+								 <div class=col-md-4>
+								  <label class="col-form-label"for=example-text-input>Country : </label>
+								  </div> 
 								 <div class=col-md-7>
 								<?php $options=array();
 									foreach($countries as $country)
 									{
 										$options[] = ['value'=>$country->id,'text'=>$country->country_name];
-									};echo $this->Form->input('country_id', ['options' => $options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...']);
+									};echo $this->Form->input('country_id', ['options' => $options,'class'=>'form-control select2 cntry','label'=>false,'empty'=>'Select...',"multiple"=> true,'data-placeholder'=>"Select Multiple"]);
 								?>
 								</div>
 							 </div>
 							</div>
 							<div class="row form-group margin-b10">
+							<div class=col-md-12>
+								 <div class=col-md-4>
+								  <label class="col-form-label"for=example-text-input>City : </label>
+								  </div> 
+								 <div class="col-md-7" id="mcity">
+									<?php
+									echo $this->Form->input('city_id', ['options' => array(),'class'=>'form-control select2 cntry','label'=>false,'empty'=>'Select...',"multiple"=> true,'data-placeholder'=>"Select Multiple"]); ?>
+								</div>
+							 </div>
+							</div>
+							<div class="row form-group margin-b10">
 								<div class=col-md-12>
-								  <div class=col-md-3>
-								 <label class="col-form-label" for=example-text-input>Package Category</label>
+								  <div class=col-md-4>
+								 <label class="col-form-label" for=example-text-input>Select Package Duration : </label>
+								 </div> 
+								 <div class=col-md-7>
+									<select name="" multiple="multiple" class="form-control select2 seleteddata" data-placeholder="Select Multiple">
+  										<option value="1">1 N/2 D</option>
+										<option value="2">2 N/3 D</option>
+										<option value="3">3 N/4 D</option>
+										<option value="4">4 N/5 D</option>
+										<option value="5">5 N/6 D</option>
+										<option value="6">6 N/7 D</option>
+										<option value="7">7 N/8 D</option>
+										<option value="8">8 N/9 D</option>
+										<option value="9">9 N/10 D</option>
+										<option value="10">10 N/11 D</option>
+										<option value="11">11 N/12 D</option>
+										<option value="12">12 N/13 D</option>
+										<option value="13">13 N/14 D</option>
+										<option value="14">14 N/15 D</option>
+										<option value="15">More than 15 Days</option>
+									</select>
+									<input type="hidden" name="duration_day_night" id="duration">
 								 </div>
-								<div class=col-md-1>:</div>
+								</div>	
+							</div>
+							<div class="row form-group margin-b10">
+								<div class=col-md-12>
+								  <div class=col-md-4>
+								 <label class="col-form-label" for=example-text-input>Select Package Category : </label>
+								 </div> 
 								 <div class=col-md-7>
 									<?php 
 										$options=array();
@@ -269,46 +330,30 @@ a{
 										{
 											$options[] = ['value'=>$sts->id,'text'=>$sts->name];
 										};
-										echo $this->Form->control('category_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>'Select...']);?>
+										echo $this->Form->control('category_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>'Select...',"multiple"=> true,'data-placeholder'=>"Select Multiple"]);?>
 								 </div>
 								</div>	
 							</div>
 							<div class="row form-group margin-b10">
 								<div class=col-md-12>
-								  <div class=col-md-3>
-								 <label class="col-form-label" for=example-text-input>Duration Night</label>
-								 </div>
-								<div class=col-md-1>:</div>
+								  <div class=col-md-4>
+								 <label class="col-form-label" for=example-text-input>Starting Price : </label>
+								 </div> 
 								 <div class=col-md-7>
-									<select name="duration_day_night" class="form-control select2">
-										<option value="">Select...</option>
-										<option>1 Night 2 Days</option>
-										<option>2 Night 3 Days</option>
-										<option>3 Night 4 Days</option>
-										<option>4 Night 5 Days</option>
-										<option>5 Night 6 Days</option>
-										<option>6 Night 7 Days</option>
-										<option>7 Night 8 Days</option>
-										<option>8 Night 9 Days</option>
-										<option>9 Night 10 Days</option>
-										<option>10 Night 11 Days</option>
-										<option>11 Night 12 Days</option>
-										<option>12 Night 13 Days</option>
-										<option>13 Night 14 Days</option>
-										<option>14 Night 15 Days</option>
-										<option>More than 15 Days</option>
+									<select name="starting_price" class="form-control">
+										<option value="">Select Total Budget</option>
+										<option value="0-5000" >0-5000</option>
+										<option value="5000-10000">5000-10000</option>
+										<option value="10000-20000">10000-20000</option>
+										<option value="20000-30000">20000-30000</option>
+										<option value="30000-40000">30000-40000</option>
+										<option value="40000-50000">40000-50000</option>
+										<option value="50000-100000">50000-100000</option>
+										<option value="100000-150000">100000-150000</option>
+										<option value="150000-200000">150000-200000</option>
+										<option value="100000-100000000000">200000-Above
+										</option>
 									</select>
-								 </div>
-								</div>	
-							</div>
-							<div class="row form-group margin-b10">
-								<div class=col-md-12>
-								  <div class=col-md-3>
-								 <label class="col-form-label" for=example-text-input>Starting Price</label>
-								 </div>
-								<div class=col-md-1>:</div>
-								 <div class=col-md-7>
-									 <?php echo $this->Form->input('starting_price',['class'=>'form-control','label'=>false,'placeholder'=>'Starting Price']);?> 
 								 </div>
 								</div>	
 							</div>
@@ -321,6 +366,21 @@ a{
 				</div>
 			  </div>
 			</div>
+
+<form method="get">
+<div class="" style="margin-bottom:5px;">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="">
+			<table width="100%"><tr><td width="95%"> 
+				<input class="form-control" placeholder="Type Location, State, City etc." name="search"/></td><td>
+				<button class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Search</button> </td></tr></table>
+			</div>
+		</div>
+	</div>
+</div>
+</form>
+
 		<?php $i=1;
 					//pr($postTravlePackages); exit;			
 					if(!empty($postTravlePackages)){
@@ -683,7 +743,7 @@ a{
 															</div>
 														</div>
 													</div>
-										<!-------Contact Details Modal End--------->
+										<!--Contact Details Modal End -->
 												</div>
 											</div>
 										</div>
@@ -720,6 +780,49 @@ a{
 <script type="text/javascript">	
 	
 	$(document).ready(function(){
+
+		$(document).on('change','.seleteddata',function()
+		{
+		 	var fruits = [];
+			$('.seleteddata option:selected').each(function(){
+				var vals=$(this).val();
+				fruits.push(vals);
+			});
+			$('#duration').val(fruits);
+		});
+
+		$(document).on('change','.cntry',function()
+		{
+			var country_id=$('option:selected', this).val();
+			
+		var countries = [];
+        $.each($(".cntry option:selected"), function(){
+             countries.push($(this).val());
+        });
+         
+		 
+		 
+		 var m_data = new FormData();
+			m_data.append('country_id',countries);			
+			$.ajax({
+				url: "<?php echo $this->Url->build(["controller" => "PostTravlePackages", "action" => "ajax_city"]); ?>",
+				data: m_data,
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				dataType:'text',
+				success: function(data)
+				{
+					$('#mcity').html('<select name="city_id[]" multiple="multiple" class="form-control select2 requiredfield max_limit" data-placeholder="Select Multiple" id="multi_city" style="height:125px;">'+data+'</select>');
+					$("#multi_city").select2();
+				}
+			});
+		  
+			 
+		});	
+		
+
+
 		/*$(window).scroll(function() {
 			var schorll = $(this).scrollTop();
 			var scrollTop = $(window).scrollTop();
