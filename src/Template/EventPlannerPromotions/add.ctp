@@ -369,7 +369,7 @@ $(document).ready(function (){
 				type: 'POST',
 				dataType:'text',
 				success: function(data)
-				{	//alert($("input[name='package_type']:checked").val());
+				{	
 					if($("input[name='package_type']:checked").val()==1){
 						$(".replacedata").html(data);
 						$('#selectbox').html(data);

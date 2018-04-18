@@ -330,8 +330,8 @@ fieldset{
 																</p>
 																 
 																<div class="input-field">
-																	 <?php echo $this->Form->textarea('package_detail',['class'=>'form-control ','label'=>false,'rows'=>2]);?>
-																	
+																	 <?php echo $this->Form->textarea('package_detail',['class'=>'form-control requiredfield','label'=>false,'rows'=>2]);?>
+																	<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 															</div>
 														</div>
