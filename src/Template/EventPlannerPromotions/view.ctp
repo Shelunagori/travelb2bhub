@@ -318,7 +318,7 @@ a{
 
 									</div>
 								</div>
-											<div class="row rowspace">
+											<div class="row " style="padding-top: 8px;">
 												<div class="col-md-12 text-center">
 													<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
 													</div>

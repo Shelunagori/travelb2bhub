@@ -94,6 +94,9 @@ label {
 .mainrow{
 	padding:12px;
 }
+.unfollow{
+	width:70px;
+}
 </style>
 <div class="row" >
 	<div class="col-md-12">
@@ -247,7 +250,7 @@ $m=0;
 											</h4>
 										</div>
 										<div class="modal-footer" style="height:60px;">
-											<button type="submit"  class=" btn btn-success btn-md" value="yes" name="remove_promotion">Yes</button>
+											<button type="submit"  class="unfollow btn btn-success btn-md" value="yes" name="remove_promotion">Yes</button>
 											<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
 										</div>
 									</div>
