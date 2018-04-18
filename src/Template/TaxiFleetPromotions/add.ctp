@@ -178,7 +178,7 @@ fieldset{
 							<div class="panel-group" style="background-color:white;">
 								<div class="panel">
 									<fieldset>
-										<legend style="color:#369FA1;"><b><?= __('Load Package') ?></b></legend> 
+										<legend style="color:#369FA1;"><b><?= __('Load Taxi/Fleet Promotion') ?></b></legend> 
 								<div class="row">
 									<div class="col-md-12">
 										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
@@ -194,7 +194,7 @@ fieldset{
 										</div>
 										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
 											<p for="from">
-												Promotion Title
+												Enter Promotion Title
 												<span class="required">*</span>
 											</p>
 											<div class="input-field">
@@ -209,7 +209,6 @@ fieldset{
 												Upload Image of Promotion
 												<span class="required">*</span>
 											</p>
-											
 											<div class="input-field">
 												<?php  echo $this->Form->input('image',['class'=>'form-control requiredfield','label'=>false,'type'=>'file']); ?>
 												<label style="display:none" class="helpblock error" > This field is required.</label>
@@ -237,7 +236,7 @@ fieldset{
 								</div>
 								<div class="col-md-6 form-group">
 									<p for="from">
-												Choose State
+												Select States of Operation
 												<span class="required">*</span>
 									</p>
 									
@@ -249,7 +248,7 @@ fieldset{
 										{
 											$options[] = ['value'=>$st->id,'text'=>$st->state_name];
 										};
-										echo $this->Form->control('state_id', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield state_list","data-placeholder"=>"Select State","style"=>"height:125px;"]);?>
+										echo $this->Form->control('state_id', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield state_list","data-placeholder"=>"Select Options","style"=>"height:125px;"]);?>
 										<label style="display:none" class="helpblock error" > This field is required.</label>
 										
 									</div>
@@ -273,15 +272,15 @@ fieldset{
 								</div>
 								<div class="col-md-6  form-group" >
 									<p for="from" id="newlist" style="display:none;">
-										Choose City
+										Select Cities of Operation
 										<span class="required">*</span>
 									</p>
 									<div class="input-field replacedata">
 									</div>
 								</div>
 								
-								<div class="col-md-6 newlist1 form-group" style="display:none;>
-									<p for="from">
+								<div class="col-md-6 newlist1 form-group" style="display:none;">
+									<p for="for">
 												Cities of Operation
 												<span class="required">*</span>
 									</p>
@@ -332,7 +331,8 @@ fieldset{
 											
 										</p>
 										<div class="input-field">
-											<?php echo $this->Form->input('fleet_detail',['class'=>'form-control','label'=>false,'rows'=>'2']);?>
+											<?php echo $this->Form->input('fleet_detail',['class'=>'form-control requiredfield','label'=>false,'rows'=>'2']);?>
+											<label style="display:none" class="helpblock error" > This field is required.</label>
 										</div>
 									</div>
 									</div>
@@ -415,13 +415,19 @@ fieldset{
 		
 		$(document).on('change','.priceMasters',function()
 		{
+			var p_type=$(this).val();
 			var priceVal=$('.priceMasters option:selected').attr('priceVal');
 			var price=$('.priceMasters option:selected').attr('price');
+			if(p_type!=''){
 			var Result = priceVal.split(" ");
 			var Result1 = price.split(" ");
 			var weeks=Result[0];
 			var price=Result1[0];
 			$('.payment_amount').val(price);
+			}
+			else{
+					$('.payment_amount').val(0);
+			}
 		})
 		$(document).on('change','.city_type',function()
 		{

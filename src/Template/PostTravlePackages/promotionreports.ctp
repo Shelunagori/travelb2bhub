@@ -134,7 +134,7 @@ label {
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6"  style="padding-left:30px;margin-top:10px;">
+					<div class="col-md-6"  style="padding-left:25px;margin-top:10px;">
 						<div class="row">
 							<div class="col-md-12 ">
 							<span style="color:black;font-size:17px;"><?php echo $postTravlePackage->title?></span>
@@ -163,7 +163,7 @@ label {
 							</div>
 						</div>
 					</div>
-					<table class="table" style="width:100%;">
+					<table class="table" style="width:100%;	">
 						<tr>
 						<td  style="width:33%;">
 							<button type="button" class="btn btn-info btn-md btnlayout" data-target="#renew<?php echo $postTravlePackage->id; ?>" data-toggle=modal>Renew</button>
@@ -176,7 +176,9 @@ label {
 						</td>
 						</tr>
 					</table>
-						<!------------------------- Renew Modal--------------------------->
+					</div>
+			</fieldset>
+			<!------------------------- Renew Modal--------------------------->
 						<div id="renew<?php echo $postTravlePackage->id; ?>" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-md" >
 								<!-- Modal content-->
@@ -257,8 +259,6 @@ label {
 								</form>
 							</div>
 						</div>
-					</div>
-			</fieldset>
 		</div>
 	</div>
 					<?php }} ?>

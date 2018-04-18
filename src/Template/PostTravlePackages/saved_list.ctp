@@ -167,7 +167,7 @@ a{
 		<div class="row">
 			<div class="col-md-12">
 				<div class="box-header with-border"> 
-					<span class="box-title" style="color:#057F8A;"><b>Package Promotions</b></span>
+					<span class="box-title" style="color:#057F8A;"><b>Saved Promotions</b></span>
 					<div class="box-tools pull-right" style="margin-top:-5px;">
 					</div>
 				</div>
@@ -391,11 +391,19 @@ a{
 												</div>
 												<div class="row rowspace">
 													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Seller :</span>
-													<span>
+													<span><u>
 														<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
-														<a href="<?php echo $hrefurl; ?>"> 
-														<?php echo "<u>".$postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name.'</u> ( '.$postTravlePackagess->user_rating.' <i class="fa fa-star"></i> )';?>
-														</a>
+														<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>">
+														<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?></u>
+														<?php
+														if($postTravlePackagess->user_rating==0)
+														{
+															echo "";
+														}
+														else{
+																echo "(".$postTravlePackagess->user_rating." <i class='fa fa-star'></i> )";
+															}
+														?></a>
 													</span>
 													</div>					
 												</div>

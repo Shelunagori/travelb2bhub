@@ -140,7 +140,7 @@ fieldset{
 	border-radius: 6px;
 }
 label{
-	font-size:12px;
+	font-size:13px;
 }
 </style> 
 <section class="content">
@@ -151,7 +151,7 @@ label{
 				<div class="col-md-12">
 				<form action="<?php echo $coreVariable['SiteUrl'];?>api/hotel_promotions/add.json" method="post" enctype="multipart/form-data">
 				<fieldset>
-					<legend style="color:#369FA1;"><b> &nbsp; <?= __('Hotel Details ') ?> &nbsp;  </b></legend>
+					<legend style="color:#369FA1;"><b> &nbsp; <?= __('Load Hotel Promotion') ?> &nbsp;  </b></legend>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
@@ -179,8 +179,8 @@ label{
 										Upload Image of Hotel	
 									</p>
 									<div class="input-field">
-										 <?php echo $this->Form->input('hotel_pic',['class'=>'form-control imgInp ','label'=>false,'type'=>'file','id'=>'hotelImg', 'onchange' => 'checkCertificate()']);?>
-										  <label class="helpblock error" ><b>File Type:</b> jpeg/jpg/png</label>&nbsp;&nbsp;&nbsp;<label class="helpblock error">Max Size: 2 MB</label>
+										 <?php echo $this->Form->input('hotel_pic',['class'=>'form-control imgInp requiredfield ','label'=>false,'type'=>'file','id'=>'hotelImg', 'onchange' => 'checkCertificate()']);?>
+										  <label style="display:none" class="helpblock error" > This field is required.</label>
 									</div>
 								</div>
 							</div>
@@ -226,16 +226,29 @@ label{
 										</div>
 										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
 										<p for="from">
-											Hotel Website
+											Cheapest Room Rate
+											<span class="required">*</span>
 										</p>
 										<div class="input-field">
-										 <?php echo $this->Form->input('website',['class'=>'form-control','label'=>false,'placeholder'=>"Enter Your Website",'value'=>$userss['web_url']]);?>
+										 <?php echo $this->Form->input('cheap_tariff',['class'=>'form-control requiredfield','label'=>false,'type'=>'number','placeholder'=>"Cheapest Room Rate"]);?>
+										 <label style="display:none" class="helpblock error" > This field is required.</label>
+											
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="row">
 								<div class="col-md-12">
+								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
+										<p for="from">
+											Most Expensive Room Rate
+											<span class="required">*</span>
+										</p>
+										<div class="input-field">
+											 <?php echo $this->Form->input('expensive_tariff',['class'=>'form-control requiredfield','label'=>false,'type'=>'number','placeholder'=>"Most Expensive Room Rate"]);?>
+											 <label style="display:none" class="helpblock error" > This field is required.</label>
+										</div>
+									</div>
 									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
 										<p for="from">
 											Hotel Location (Address, City, State)
@@ -247,30 +260,17 @@ label{
 									</div>
 									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
 										<p for="from">
-											Cheapest Room Rate
-											<span class="required">*</span>
+											Hotel Website
 										</p>
 										<div class="input-field">
-										 <?php echo $this->Form->input('cheap_tariff',['class'=>'form-control requiredfield','label'=>false,'type'=>'number','placeholder'=>"Cheapest Room Rate"]);?>
-										 <label style="display:none" class="helpblock error" > This field is required.</label>
-											
-										</div>
-									</div>
-									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
-										<p for="from">
-											Most Expensive Room Rate
-											<span class="required">*</span>
-										</p>
-										<div class="input-field">
-											 <?php echo $this->Form->input('expensive_tariff',['class'=>'form-control requiredfield','label'=>false,'type'=>'number','placeholder'=>"Most Expensive Room Rate"]);?>
-											 <label style="display:none" class="helpblock error" > This field is required.</label>
+										 <?php echo $this->Form->input('website',['class'=>'form-control','label'=>false,'placeholder'=>"Enter Your Website",'value'=>$userss['web_url']]);?>
 										</div>
 									</div>
 								</div>
 							</div> 	
 						</fieldset> 
 						<fieldset>
-							<legend style="color:#369FA1;"><b> &nbsp; <?= __(' Payment Details') ?> &nbsp;  </b></legend>
+							<legend style="color:#369FA1;"><b> &nbsp; <?= __(' Payment Period') ?> &nbsp;  </b></legend>
 							<div class="row">
 								<div class="col-md-12">
 										<div class="col-md-6 form-group">
@@ -285,7 +285,7 @@ label{
 														{
 															$options[] = ['value'=>$duration->id,'text'=>$duration->week,'priceVal'=>$duration->week,'price'=>$duration->price];
 														};
-												 echo $this->Form->input('price_master_id',['class'=>'form-control  requiredfield duration select2 ','options' => $options,'label'=>false]);?>
+												 echo $this->Form->input('price_master_id',['class'=>'form-control  requiredfield duration select2 ','options' => $options,'label'=>false,'empty'=>'Select Options']);?>
 												 <label style="display:none" class="helpblock error" > This field is required.</label>
 											</div>
 										</div>
@@ -340,19 +340,23 @@ label{
 		
 		$(document).on('change','.duration',function()
 		{
+			var p_type=$(this).val();
 			var priceVal=$('.duration option:selected').attr('priceVal');
 			var price=$('.duration option:selected').attr('price');
-			//alert(price);
+			if(p_type!=''){
 				var Result = priceVal.split(" ");
 				var weeks=Result[0];
 				$('.charges').val(price);
+			}
+			else{
+				$('.charges').val(0);
+			}
 		});
 		
 	});		
 </script>	
-<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 	<script type="text/javascript">		
-		 	function checkCertificate()
+		 	/* function checkCertificate()
 			{
 				 var file = document.getElementById("hotelImg");
 				var file_name = file.value;
@@ -371,5 +375,5 @@ label{
 				} else {
 					document.getElementById("sbmtpromotion").disabled = false;
 				}
-			}
+			} */
 	</script>

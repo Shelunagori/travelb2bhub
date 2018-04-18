@@ -182,12 +182,12 @@ fieldset{
 					<div class="col-md-12"> 
 						<div class="form-box">
 									<fieldset>
-										<legend style="color:#369FA1;"><b><?= __('Load Package') ?></b></legend>
+										<legend style="color:#369FA1;"><b><?= __('Load Package Promotion') ?></b></legend>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="col-md-4 form-group">
 														<p for="from">
-															Package Title
+															Enter Package Title
 															<span class="required">*</span>
 														</p>
 														<div class="input-field">
@@ -297,7 +297,7 @@ fieldset{
 															</div>
 															<div class="col-md-4 newlist form-group" >
 																<p for="from">
-																	Choose Country
+																	Select Countries
 																	<span class="required">*</span>
 																</p>
 																<div class="input-field replacedata">
@@ -305,7 +305,7 @@ fieldset{
 															</div>
  																<div class="col-md-4 form-group">
 																<p for="from">
-																Choose City
+																Select Cities
 																<span class="required">*</span>
 																</p>
 																<div class="input-field" id="mcity">
@@ -352,7 +352,7 @@ fieldset{
 												</fieldset>
 											
 									<fieldset>
-										<legend style="color:#369FA1;"><b><?= __('Payment ') ?></b></legend> 
+										<legend style="color:#369FA1;"><b><?= __('Payment Period') ?></b></legend> 
 											<div class="row">
 												<div class="col-md-12">
 													<div class="col-md-6 form-group">
@@ -367,7 +367,7 @@ fieldset{
 															{
 																$options[] = ['value'=>$Price->id,'text'=>$Price->week,'priceVal'=>$Price->week,'price'=>$Price->price];
 															};
-															echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters requiredfield','label'=>false,'empty'=>'Select ...']);?>
+															echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters requiredfield select2','label'=>false,'empty'=>'Select Options']);?>
 															<label style="display:none" class="helpblock error" > This field is required.</label>
 														</div>
 													</div>
@@ -404,7 +404,6 @@ fieldset{
 						</div>
 					</div>
 				</div>
-<?php //echo $http://13.127.63.130/travelb2bhub/pages/cityList.json?country_id=101; ?>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
 	 
@@ -479,25 +478,19 @@ fieldset{
 	 
 		$(document).on('change','.priceMasters',function()
 		{
+			var p_type=$(this).val();
 			var priceVal=$('.priceMasters option:selected').attr('priceVal');
 			var price=$('.priceMasters option:selected').attr('price');
+			if(p_type!=''){
 			var Result = priceVal.split(" ");
 			var Result1 = price.split(" ");
 			var weeks=Result[0];
 			var price=Result1[0];
-			
-			/* var todaydate = new Date(); // Parse date
-			for(var x=0; x < weeks; x++){
-				todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
-			}
-			var dd = todaydate .getDate();
-			var mm = todaydate .getMonth()+1; //January is 0!
-			var yyyy = todaydate .getFullYear();
-			if(dd<10){  dd='0'+dd } 
-			if(mm<10){  mm='0'+mm } 
-			var date = dd+'-'+mm+'-'+yyyy;	
-			$('.visible_date').val(date); */
 			$('.payment_amount').val(price);
+			}
+			else{
+				$('.payment_amount').val(0);
+			}
 		})
 		$(document).on('change','#pack_type',function()
 		{

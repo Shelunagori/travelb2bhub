@@ -156,7 +156,7 @@ fieldset{
  				</div>
 				<div class="box-body">
 					<fieldset>
-					<legend style="color:#369FA1;"><b>Load Package</b></legend>
+					<legend style="color:#369FA1;"><b>Load Event Planner Promotion</b></legend>
 						<div class="row">
 							<div class="col-md-12">
 								<div class="col-md-6 form-group">
@@ -199,14 +199,14 @@ fieldset{
 									</div>
 								</div>
 								<div class="col-md-6 form-group">
-									<p> States <span class="required">*</span></p>
+									<p> Select States of Operation <span class="required">*</span></p>
 									<?php 
 									$options=array();
 									foreach($states as $st)
 									{
 										$options[] = ['value'=>$st->id,'text'=>$st->state_name];
 									};
-									echo $this->Form->input('state_id', ['options' => $options,'class'=>'form-control select2 requiredfield state_list','label'=>false,"data-placeholder"=>"Select States",'multiple'=>true]); ?>
+									echo $this->Form->input('state_id', ['options' => $options,'class'=>'form-control select2 requiredfield state_list','label'=>false,"data-placeholder"=>"Select Options",'multiple'=>true]); ?>
 									<label style="display:none" class="helpblock error" > This field is required.</label>									
 								</div>
 							</div>
@@ -252,14 +252,14 @@ fieldset{
 						<div class="row">
 							<div class="col-md-12">
 								<div class="col-md-12">
-									<p>Event Details </p>
-									<?php echo $this->Form->textarea('event_detail', ['class'=>'form-control','label'=>false,"placeholder"=>"Enter Description of Your Company",'rows'=>3,'style'=>'resize:none']); ?> 	 
+									<p>Enter Description of Your Company </p>
+									<?php echo $this->Form->textarea('event_detail', ['class'=>'form-control','label'=>false,'rows'=>3,'style'=>'resize:none']); ?> 	 
 								</div>
 							</div>
 						</div>
 					</fieldset>
 					<fieldset>
-					<legend style="color:#369FA1;"><b> &nbsp; Payment &nbsp;  </b></legend>
+					<legend style="color:#369FA1;"><b> &nbsp; Payment Period &nbsp;  </b></legend>
 								<div class="row">
 											<div class="col-md-12">
 												<div class="col-md-6 form-group">
@@ -330,13 +330,19 @@ $(document).ready(function (){
 		
 		$(document).on('change','.priceMasters',function()
 		{
+			var p_type=$(this).val();
 			var priceVal=$('.priceMasters option:selected').attr('priceVal');
 			var price=$('.priceMasters option:selected').attr('price');
+			if(p_type!=''){
 			var Result = priceVal.split(" ");
 			var Result1 = price.split(" ");
 			var weeks=Result[0];
 			var price=Result1[0];
 			$('.payment_amount').val(price);
+			}
+			else{
+				$('.payment_amount').val(0);
+			}
 		})
 		$(document).on('change','.city_type',function()
 		{
