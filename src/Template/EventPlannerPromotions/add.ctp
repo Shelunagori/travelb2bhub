@@ -244,15 +244,19 @@ fieldset{
 										$options[] = ['value'=>$cty->cityid,'text'=>$cty->name];
 									};
 									echo $this->Form->input('city_id', ['options' =>$options,'class'=>'form-control select2 requiredfield','label'=>false,"data-placeholder"=>"Select Cities",'multiple'=>true]); ?>
-							<label style="display:none" class="helpblock error" > This field is required.</label>									
+									<label style="display:none" class="helpblock error" > This field is required.</label>									
 								</div>
  							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-								<div class="col-md-12">
+								<div class="col-md-12 form-group">
 									<p>Enter Description of Your Company </p>
+<<<<<<< HEAD
+									<?php echo $this->Form->textarea('event_detail', ['class'=>'form-control requiredfield','label'=>false,'rows'=>3,'style'=>'resize:none','requiredfield']); ?> 	 
+=======
 									<?php echo $this->Form->textarea('event_detail', ['class'=>'form-control requiredfield','label'=>false,'rows'=>3,'style'=>'resize:none']); ?> 	 
+>>>>>>> origin/master
 									<label style="display:none" class="helpblock error" > This field is required.</label>
 								</div>
 							</div>
@@ -315,13 +319,21 @@ fieldset{
 <script>
 $(document).ready(function (){
 		$('form').submit(function () {
-			var x=0;
+			var x=1;
 			$( ".requiredfield" ).each(function() {
-  				if($(this).val()==''){
+				if($(this).val()!=''){ 
+ 					$(this).closest('div.form-group').find('.helpblock').hide();
+				}
+  				if($(this).val()==''){ 
  					$(this).closest('div.form-group').find('.helpblock').show();
 					x = 1;
 				}
- 			});
+				if($(this).val()==null){
+ 					$(this).closest('div.form-group').find('.helpblock').show();
+					x = 1;
+				}
+				
+			});
 			if(x==1){
 				$('html, body').animate({scrollTop:0}, 'slow');
 				return false;

@@ -189,17 +189,17 @@ fieldset{
 											<div class="input-field">
 												 <?php
 												 echo $this->Form->input('company_name',['class'=>'form-control requiredfield','label'=>false,'autocomplete'=> "off",'placeholder'=>"Company Name",'readonly'=>'readonly','value'=>$user[0]->company_name]);?>
-												<label style="display:none" class="helpblock error" > This field is required.</label>
+												<label style="display:none;" class="helpblock error" > This field is required.</label>
 											</div>
 										</div>
-										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
+										<div class="col-md-4 form-group">
 											<p for="from">
 												Enter Promotion Title
 												<span class="required">*</span>
 											</p>
 											<div class="input-field">
 												 <?php echo $this->Form->input('title',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>"Enter Promotion Title"]);?>
-												 <label style="display:none" class="helpblock error" > This field is required.</label>
+												 <label style="display:none;margin-top:-20px;" class="helpblock error" > This field is required.</label>
 											</div>
 										</div>
 										<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
@@ -400,12 +400,20 @@ fieldset{
     $(document).ready(function ()
 	{
 		$('form').submit(function () {
-			var x=0;
+			var x=1;
 			$( ".requiredfield" ).each(function() {
-  				if($(this).val()==''){
+				if($(this).val()!=''){ 
+ 					$(this).closest('div.form-group').find('.helpblock').hide();
+				}
+  				if($(this).val()==''){ 
  					$(this).closest('div.form-group').find('.helpblock').show();
 					x = 1;
 				}
+				if($(this).val()==null){
+ 					$(this).closest('div.form-group').find('.helpblock').show();
+					x = 1;
+				}
+				
 			});
 			if(x==1){
 				$('html, body').animate({scrollTop:0}, 'slow');
@@ -441,7 +449,7 @@ fieldset{
 				$("#newlist").show();
 				$(".replacedata").html('<?php $options=array();
 				$options[] = ['value'=>'0','text'=>'All Cities','selected'];
-				echo $this->Form->input('city_id',["class"=>"form-control city_id requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
+				echo $this->Form->input('city_id',["class"=>"form-control city_id requiredfield","multiple"=>true ,'options' => $options,'label'=>false,'required']);
 				?>');
 			}
 			$(this).closest('form').find('.city_id').select2();

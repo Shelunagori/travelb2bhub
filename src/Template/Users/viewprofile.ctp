@@ -483,12 +483,13 @@
 			 
 		 <?php if($users['role_id'] == 1){ ?>
 			<div class="box box-primary">
-			<span style="font-size:18px; padding:10px;padding-top:10px">Certificates</span>
+			<span style="font-size:18px;padding-top:10px">Certificates</span>
 			<hr style="margin-top:2px !important"></hr>
 				<div class="box-body">
 					<div>
-						<div class="col-md-12">
-							<div class="img_show col-md-3" align="center">
+						
+						<div class="col-md-12 responsive" width="100%" height="100px" style="overflow-x: scroll;">
+							<div class="img_show col-md-2" align="center">
 								<?php if(!empty($users['iata_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iata_pic'])>0) { 
 									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iata_pic'], ["alt"=>"IATA Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
@@ -498,7 +499,7 @@
 									IATA Pic
 								</p>
 							</div>
-							<div class="img_show col-md-3" align="center">
+							<div class="img_show col-md-2" align="center">
 								<?php if(!empty($users['tafi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['tafi_pic'])>0) {
 									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['tafi_pic'], ["alt"=>"T A F I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
@@ -509,7 +510,7 @@
 								</p>
 							</div>
 							
-							<div class="img_show col-md-3" align="center">
+							<div class="img_show col-md-2" align="center">
 								<?php if(!empty($users['taai_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['taai_pic'])>0) { 
 									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['taai_pic'], ["alt"=>"T A A I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
@@ -520,7 +521,7 @@
 								</p>
 							</div>
 							
-							<div class="img_show col-md-3" align="center">
+							<div class="img_show col-md-2" align="center">
 								<?php if(!empty($users['iato_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iato_pic'])>0) { 
 									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iato_pic'], ["alt"=>"I A T O Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
@@ -531,7 +532,7 @@
 								</p>
 							</div>
 							
-							<div class="img_show col-md-3" align="center">
+							<div class="img_show col-md-2" align="center">
 								<?php if(!empty($users['adyoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adyoi_pic'])>0) { 
 									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adyoi_pic'], ["alt"=>"A D Y O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
@@ -542,7 +543,7 @@
 								</p>
 							</div>
 							
-							<div class="img_show col-md-3" align="center">
+							<div class="img_show col-md-2" align="center">
 								<?php if(!empty($users['iso9001_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iso9001_pic'])>0) { 
 									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iso9001_pic'], ["alt"=>"I S O 9001 Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
@@ -553,7 +554,7 @@
 								</p>
 							</div>
 							
-							<div class="img_show col-md-3" align="center">
+							<div class="img_show col-md-2" align="center">
 								<?php if(!empty($users['uftaa_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['uftaa_pic'])>0) { 
 								   echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['uftaa_pic'], ["alt"=>"U F T A A Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
@@ -564,7 +565,7 @@
 									</p>
 							</div>
 							
-							<div class="img_show col-md-3" align="center">
+							<div class="img_show col-md-2" align="center">
 								<?php if(!empty($users['adtoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adtoi_pic'])>0) { 
 									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adtoi_pic'], ["alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
