@@ -252,7 +252,8 @@ fieldset{
 							<div class="col-md-12">
 								<div class="col-md-12">
 									<p>Enter Description of Your Company </p>
-									<?php echo $this->Form->textarea('event_detail', ['class'=>'form-control','label'=>false,'rows'=>3,'style'=>'resize:none']); ?> 	 
+									<?php echo $this->Form->textarea('event_detail', ['class'=>'form-control requiredfield','label'=>false,'rows'=>3,'style'=>'resize:none']); ?> 	 
+									<label style="display:none" class="helpblock error" > This field is required.</label>
 								</div>
 							</div>
 						</div>

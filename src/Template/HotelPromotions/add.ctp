@@ -352,28 +352,21 @@ label{
 				$('.charges').val(0);
 			}
 		});
-		
+			$(document).on('blur','.high_rate',function()
+				{
+					calculate();
+				})
+				function calculate()
+				{
+					var low_rate=$('.low_rate').val();
+					//alert(low_rate);
+					var high_rate=$('.high_rate').val();
+					//alert(high_rate);
+					if(high_rate<low_rate)
+					{
+						alert("Most Expensive Room Rate should be greater then Cheapest Room Rate");
+						$('.high_rate').val('');
+					}	
+				}
 	});		
 </script>	
-	<script type="text/javascript">		
-		 	/* function checkCertificate()
-			{
-				 var file = document.getElementById("hotelImg");
-				var file_name = file.value;
-				var extension = file_name.split('.').pop().toLowerCase();
-				var size = file.files[0].size;
-				var allowedFormats = ["jpeg", "jpg", "png"];
-
-				if (!(allowedFormats.indexOf(extension) > -1)) {
-					alert("Enter a jpg/jpeg/pdf/png file");
-
-					document.getElementById("sbmtpromotion").disabled = true;
-					return false;
-				} else if (((size / 1024) / 1024) > 2) {
-					alert("Your file should be less than 2MB");
-					return false;
-				} else {
-					document.getElementById("sbmtpromotion").disabled = false;
-				}
-			} */
-	</script>
