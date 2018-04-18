@@ -357,7 +357,7 @@ a{
 					<span class="help-block"></span>
 					<div class="row">						
 					<div class="col-md-3">
-					<?= $this->Html->image($taxiFleetPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:80px;','data-target'=>'#imagemodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal',]) ?>
+					<?= $this->Html->image($taxiFleetPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:80px;','data-target'=>'#imagemodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal','promotionid'=>$taxiFleetPromotion->id,'userId'=>$user_id,'class'=>'viewCount']) ?>
 					<div id="imagemodal<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-md">
 						<!-- Modal content-->
@@ -586,11 +586,11 @@ a{
 															</div>
 														</div>
 								<div class="col-md-12 text-center">
-									<button class="btn btn-info btn-md btnlayout" data-target="#fleetdetail<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Fleet Details</button>
+									<button class="btn btn-info btn-md btnlayout viewCount" data-target="#fleetdetail<?php echo $taxiFleetPromotion->id;?>" promotionid="<?php echo $taxiFleetPromotion->id;?>" userId="<?php echo $user_id;?>" data-toggle="modal" type="button">Fleet Details</button>
 										<!-------Report Modal Start--------->
 											
 										<!-------Report Modal End--------->	
-									<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
+									<button class="btn btn-danger btn-md btnlayout viewCount" data-target="#contactdetails<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $taxiFleetPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Contact Info</button>
 										
 									<!-------Contact Details Modal --------->
 												
@@ -641,8 +641,27 @@ a{
 				$(".report_text").hide();
 			  }
 		});
-		jQuery(".formSubmit").submit(function(){
-						jQuery("#loader-1").show();
-					});
+		jQuery("form").submit(function(){
+			jQuery("#loader-1").show();
+		});
+	$(document).on('click','.viewCount',function()
+	{
+		var promotionid=$(this).attr('promotionid');
+		var userId=$(this).attr('userId');
+		
+		var siteUrl='<?php echo $coreVariable['SiteUrl']; ?>';
+		var siteUrls="api/TaxiFleetPromotions/getTaxiFleetPromotionsDetails.json?id="+promotionid+"&user_id="+userId;
+		var mainUrl=siteUrl+siteUrls; 
+		//alert(mainUrl);
+		$.ajax({
+			url: mainUrl,
+			processData: false,
+			contentType: false,
+			type: 'GET',
+			success: function(data)
+			{
+			}
+		});
+	});
   });
 </script>

@@ -668,14 +668,38 @@ var date = new Date();
 date.setDate(date.getDate());
 $('.date-picker').datepicker({
 	minDate:0,
-	startDate: date
+	startDate: date,
+	autoclose:false
 });
 $('.datepicker').datepicker({
 	minDate:0,
-	startDate: date
+	startDate: date,
+	autoclose:false
 });
-$('.datepickers').datepicker();
- 
+$('.datepickers').datepicker({autoclose:false});
+//--
+$('.datepickers').click(function(){
+	$(this).datepicker({autoclose:false});
+});
+
+$('.datepicker').click(function(){
+	$(this).datepicker({
+		minDate:0,
+		startDate: date,
+		autoclose:false
+	});
+});
+
+$('.date-picker').click(function(){
+	$(this).datepicker({
+		minDate:0,
+		startDate: date,
+		autoclose:false
+	});
+});
+/*$(document).on('click','.datepickers',datepicker({autoclose:false}));
+$(document).on('click','.datepicker',datepicker({autoclose:false,minDate:0,startDate: date,}));
+$(document).on('click','.date-picker',datepicker({autoclose:false,minDate:0,startDate: date,}));*/
 <!--$(".wysihtml5textarea").wysihtml5({useLineBreaks: true,tabSpaces: 4});-->
 $(".txtEditor").Editor({
 	'source':true,
