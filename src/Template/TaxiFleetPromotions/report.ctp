@@ -4,7 +4,7 @@
 //-- LIST 
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => $coreVariable['SiteUrl']."api/TaxiFleetPromotions/getTaxiFleetPromotions.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&city_id=".$city_id."&state_id=".$state_id."&car_bus_id=".$car_bus_id."&submitted_from=web",
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/TaxiFleetPromotions/getTaxiFleetPromotions.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&city_id=".$city_id."&state_id=".$state_id."&car_bus_id=".$car_bus_id."&search=".$search."&submitted_from=web",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -240,10 +240,9 @@ a{
 						<span class="help-block"></span>
 							<div class="row form-group margin-b10">
 								<div class=col-md-12>
-									<div class=col-md-3>
-										<label class="col-form-label"for=example-text-input>State</label>
+									<div class=col-md-4>
+										<label class="col-form-label"for=example-text-input>State : </label>
 									</div>
-									<div class=col-md-1>:</div>
 									<div class=col-md-7>
 									<?php 
 										$options=array();
@@ -251,17 +250,16 @@ a{
 										{
 											$options[] = ['value'=>$st->id,'text'=>$st->state_name];
 										};
-										echo $this->Form->input('state_id', ['options' => $options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...']); 
+										echo $this->Form->input('state_id', ['options' => $options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']); 
 									?> 
 									</div>
 								 </div>
 							 </div>
 							<div class="row form-group margin-b10">
 								<div class=col-md-12>
-								  <div class=col-md-3>
-								 <label class="col-form-label" for=example-text-input>City</label>
+								  <div class=col-md-4>
+								 <label class="col-form-label" for=example-text-input>City : </label>
 								 </div>
-								<div class=col-md-1>:</div>
 								 <div class=col-md-7>
 									 <?php 
 									$options=array();
@@ -269,16 +267,15 @@ a{
 									{
 										$options[] = ['value'=>$cty->cityid,'text'=>$cty->name];
 									};
-									echo $this->Form->input('city_id', ['options' =>$options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...']); ?>
+									echo $this->Form->input('city_id', ['options' =>$options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']); ?>
 								 </div>
 								</div>	
 							</div>
 							<div class="row form-group margin-b10">
 								<div class=col-md-12>
-								  <div class=col-md-3>
-								 <label class="col-form-label" for=example-text-input>Vehicle Type</label>
+								  <div class=col-md-4>
+								 <label class="col-form-label" for=example-text-input>Select Taxt/Fleet Category : </label>
 								 </div>
-								<div class=col-md-1>:</div>
 								 <div class=col-md-7>
 									 <?php 
 									$options=array();
@@ -286,7 +283,7 @@ a{
 									{
 										$options[] = ['value'=>$Buses->id,'text'=>$Buses->name];
 									};
-									echo $this->Form->control('car_bus_id', ['label'=>false,"id"=>"multi_vehicle", "type"=>"select",'options' =>$options, "class"=>"form-control select2","style"=>"height:125px;",'empty'=>'Select...']);?>
+									echo $this->Form->control('car_bus_id', ['label'=>false,"id"=>"multi_vehicle", "type"=>"select",'options' =>$options, "class"=>"form-control select2","style"=>"height:125px;",'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']);?>
 								 </div>
 								</div>	
 							</div>
@@ -299,6 +296,20 @@ a{
 				 </div>
 			  </div>
 		   </div>
+
+<form method="get">
+	<div class="" style="margin-bottom:5px;">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="">
+				<table width="100%"><tr><td width="95%"> 
+					<input class="form-control" placeholder="Type Location, State, City etc." name="search"/></td><td>
+					<button class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Search</button> </td></tr></table>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
 			<?php $i=1;
 			if(!empty($taxiFleetPromotions)){
 			foreach ($taxiFleetPromotions as $taxiFleetPromotion){
@@ -501,10 +512,7 @@ a{
 									</div>
 									<!-----button list-->
 							<div class="row" style="padding-top:15px;">
-								<div class="col-md-12 ">
-								<button class="btn btn-info btn-md btnlayout" data-target="#fleetdetail<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Fleet Details</button>
-									<!-------Report Modal Start--------->
-										<div id="fleetdetail<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
+							<div id="fleetdetail<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
 											<div class="modal-dialog modal-md">
 												<!-- Modal content-->
 													<div class="modal-content">
@@ -526,11 +534,7 @@ a{
 													</div>
 												</div>
 											</div>
-									<!-------Report Modal End--------->	
-									<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
-									
-									<!-------Contact Details Modal --------->
-												<div id="contactdetails<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
+									<div id="contactdetails<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-sm" >
 														<!-- Modal content-->
 															<div class="modal-content">
@@ -581,10 +585,19 @@ a{
 																</div>
 															</div>
 														</div>
+								<div class="col-md-12 text-center">
+									<button class="btn btn-info btn-md btnlayout" data-target="#fleetdetail<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Fleet Details</button>
+										<!-------Report Modal Start--------->
+											
+										<!-------Report Modal End--------->	
+									<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
+										
+									<!-------Contact Details Modal --------->
+												
 														<!-------Contact Details Modal End--------->	
-													</div>
 											</div>
-										</div>
+									</div>
+								</div>
 										<!----button list end--->
 								</div>
 							</div>

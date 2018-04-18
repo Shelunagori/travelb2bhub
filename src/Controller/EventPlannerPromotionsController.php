@@ -413,12 +413,14 @@ class EventPlannerPromotionsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-	public function report($higestSort = null,$country_id = null,$state_id = null,$city_id = null,$removeEvent=null,$event_id=null,$saveeventplanner= null)
+	public function report($higestSort = null,$search = null,$country_id = null,$state_id = null,$city_id = null,$removeEvent=null,$event_id=null,$saveeventplanner= null)
     {
-		$higestSort=$this->request->query('higestSort'); 
-		$country_id=$this->request->query('country_id'); 
-		$city_id=$this->request->query('city_id'); 
+		$higestSort=$this->request->query('higestSort');  
+		$search=$this->request->query('search'); 
+		$city_ids=$this->request->query('city_id'); 
+		if(!empty($city_ids)) {$city_id=implode(',',$city_ids);}
 		$state_id=$this->request->query('state_id');
+		if(!empty($state_id)) {$state_id=implode(',',$state_id);}
 		//-- REMOVE PARAMETER
 		$user_id=$this->Auth->User('id');
 		if ($this->request->is(['patch', 'post', 'put'])) 
@@ -572,7 +574,7 @@ class EventPlannerPromotionsController extends AppController
 		}
 		
 		$this->viewBuilder()->layout('user_layout');
-		$this->set(compact('user_id','higestSort','country_id','city_id','state_id'));
+		$this->set(compact('user_id','higestSort','search','country_id','city_id','state_id'));
     }
 	 public function promotionreports()
     {

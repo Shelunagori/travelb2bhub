@@ -1,9 +1,9 @@
-<?php //echo $this->Html->css('/assets/loader-1.css'); ?>
+<?php  //echo $this->Html->css('/assets/loader-1.css'); ?>
 <?php
 //-- List
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => $coreVariable['SiteUrl']."api/EventPlannerPromotions/getEventPlanners.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&city_id=".$city_id."&state_id=".$state_id."&submitted_from=web",
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/EventPlannerPromotions/getEventPlanners.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&city_id=".$city_id."&state_id=".$state_id."&search=".$search."&submitted_from=web",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -213,10 +213,9 @@ a{
 			
 				<div class="row form-group margin-b10">
 					<div class=col-md-12>
-						<div class=col-md-3>
-							 <label class="label1">State</label>
+						<div class=col-md-4>
+							 <label class="label1">State : </label>
 						</div>
-						<div class=col-md-1>:</div>
 						<div class=col-md-7>
 						<?php 
 							$options=array();
@@ -224,17 +223,16 @@ a{
 							{
 								$options[] = ['value'=>$st->id,'text'=>$st->state_name];
 							};
-							echo $this->Form->input('state_id', ['options' => $options,'class'=>'form-control select2','label'=>false,"data-placeholder"=>"Select States",'empty'=>'Select...']); 
+							echo $this->Form->input('state_id', ['options' => $options,'class'=>'form-control select2','label'=>false,"data-placeholder"=>"Select States",'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']); 
 						?> 
 						</div>
 					 </div>
 				 </div>
 				<div class="row form-group margin-b10">
 					<div class=col-md-12>
-					  <div class=col-md-3>
-					  <label class="label1">City</label>
+					  <div class=col-md-4>
+					  <label class="label1">City : </label>
 					 </div>
-					<div class=col-md-1>:</div>
 					 <div class=col-md-7>
 						 <?php 
 						$options=array();
@@ -242,7 +240,7 @@ a{
 						{
 							$options[] = ['value'=>$cty->cityid,'text'=>$cty->name];
 						};
-						echo $this->Form->input('city_id', ['options' =>$options,'class'=>'form-control select2','label'=>false,"data-placeholder"=>"Select Cities",'empty'=>'Select...']); ?>
+						echo $this->Form->input('city_id', ['options' =>$options,'class'=>'form-control select2','label'=>false,"data-placeholder"=>"Select Cities",'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']); ?>
 					 </div>
 					</div>	
 				</div>
@@ -254,7 +252,20 @@ a{
 		</form>
 	 </div>
   </div>
-</div>		
+</div>
+<form method="get">
+	<div class="" style="margin-bottom:5px;">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="">
+				<table width="100%"><tr><td width="95%"> 
+					<input class="form-control" placeholder="Type Location, State, City etc." name="search"/></td><td>
+					<button class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Search</button> </td></tr></table>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>		
 <?php $i=1;
 if(!empty($eventPlannerPromotions)){
 foreach ($eventPlannerPromotions as $eventPlannerPromotion){
@@ -443,36 +454,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 									</div>
 								</div>
 							</div>
-						<div class="col-md-6 pull-right">
-						<div class="row" style="padding-top:15px;">
-							<div class="col-md-12">
-							<button class="btn btn-info btn-md btnlayout" data-target="#eventdetail<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" type="button">Event Details</button>
-								<!-------Report Modal Start--------->
-								<div id="eventdetail<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
-										<div class="modal-dialog modal-md">
-											<!-- Modal content-->
-												<div class="modal-content">
-												  <div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal">&times;</button>
-													<h3 class="modal-title">Event Details</h3>
-												  </div>
-													<div class="modal-body" >
-														<div class="row">
-															<div class="col-md-12">
-																<p style="padding:15px;"><?= h($eventPlannerPromotion->event_detail); ?></p>
-															</div>
-														</div>
-													</div>
-													<div class="modal-footer" >
-														<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancel</button>
-													</div>
-												</div>
-											</div>
-										</div>
-								<!-------Report Modal End--------->	
-								<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
-								<!-------Contact Details Modal --------->
-								<div id="contactdetails<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
+							<div id="contactdetails<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
 									<div class="modal-dialog modal-sm" >
 									<div class="modal-content">
 									  <div class="modal-header">
@@ -523,6 +505,38 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 										</div>
 									</div>
 								</div>
+								<div id="eventdetail<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
+										<div class="modal-dialog modal-md">
+											<!-- Modal content-->
+												<div class="modal-content">
+												  <div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal">&times;</button>
+													<h3 class="modal-title">Event Details</h3>
+												  </div>
+													<div class="modal-body" >
+														<div class="row">
+															<div class="col-md-12">
+																<p style="padding:15px;"><?= h($eventPlannerPromotion->event_detail); ?></p>
+															</div>
+														</div>
+													</div>
+													<div class="modal-footer" >
+														<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancel</button>
+													</div>
+												</div>
+											</div>
+										</div>
+						<div class="col-md-12 text-center">
+						
+						<div class="row" style="padding-top:15px;">
+							<div class="col-md-12">
+							<button class="btn btn-info btn-md btnlayout" data-target="#eventdetail<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" type="button">Event Details</button>
+								<!-------Report Modal Start--------->
+								
+								<!-------Report Modal End--------->	
+								<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
+								<!-------Contact Details Modal --------->
+								
 							</div>
 						</div>
 					</div>

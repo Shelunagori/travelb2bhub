@@ -3,7 +3,7 @@
 //-- List
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => $coreVariable['SiteUrl']."api/hotel_promotions/getHotelList.json?isLikedUserId=".$user_id.'&higestSort='.$higestSort.'&category_id='.$category_id.'&rating_filter='.$rating_filter."&submitted_from=web",
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/hotel_promotions/getHotelList.json?isLikedUserId=".$user_id.'&higestSort='.$higestSort.'&category_id='.$category_id.'&search='.$search.'&rating_filter='.$rating_filter.'&starting_price='.$starting_price."&submitted_from=web",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -212,26 +212,24 @@ a{
 								<span class="help-block"></span>
 								<div class="row form-group margin-b10">
 									<div class=col-md-12>
-										 <div class=col-md-3>
-										  <label class="col-form-label"for=example-text-input>Category</label>
-										  </div>
-										  <div class=col-md-1>:</div>
+										 <div class=col-md-4>
+										  <label class="col-form-label"for=example-text-input>Select Hotel Category : </label>
+										  </div> 
 										 <div class=col-md-7>
 										<?php $options=array();
 											foreach($hotelcategory as $country)
 											{
 												$options[] = ['value'=>$country->id,'text'=>$country->name];
-											};echo $this->Form->input('category_id', ['options' => $options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...']);
+											};echo $this->Form->input('category_id', ['options' => $options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']);
 										?>
 										</div>
 									 </div>
 									</div>
 									<div class="row form-group margin-b10">
 										<div class=col-md-12>
-										  <div class=col-md-3>
-										 <label class="col-form-label" for=example-text-input>Rating</label>
-										 </div>
-										<div class=col-md-1>:</div>
+										  <div class=col-md-4>
+										 <label class="col-form-label" for=example-text-input>Select Hotel Rating :</label>
+										 </div> 
 										 <div class=col-md-7>
 											<select name="rating_filter" class="form-control select2">
 												<option value="">Select...</option>
@@ -240,6 +238,29 @@ a{
 												<option>3</option>
 												<option>4</option>
 												<option>5</option>							
+											</select>
+										 </div>
+										</div>	
+									</div>
+									<div class="row form-group margin-b10">
+										<div class=col-md-12>
+										  <div class=col-md-4>
+										 <label class="col-form-label" for=example-text-input>Room Price Range : </label>
+										 </div> 
+										 <div class=col-md-7>
+											<select name="starting_price" class="form-control">
+												<option value="">Select</option>
+												<option value="0-5000" >0-5000</option>
+												<option value="5000-10000">5000-10000</option>
+												<option value="10000-20000">10000-20000</option>
+												<option value="20000-30000">20000-30000</option>
+												<option value="30000-40000">30000-40000</option>
+												<option value="40000-50000">40000-50000</option>
+												<option value="50000-100000">50000-100000</option>
+												<option value="100000-150000">100000-150000</option>
+												<option value="150000-200000">150000-200000</option>
+												<option value="100000-100000000000">200000-Above
+												</option>
 											</select>
 										 </div>
 										</div>	
@@ -254,6 +275,19 @@ a{
 						</div>
 					  </div>
 					</div>
+<form method="get">
+<div class="" style="margin-bottom:5px;">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="">
+			<table width="100%"><tr><td width="95%"> 
+				<input class="form-control" placeholder="Type Location, State, City etc." name="search"/></td><td>
+				<button class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Search</button> </td></tr></table>
+			</div>
+		</div>
+	</div>
+</div>
+</form>
 		<?php $i=1;
 				if(!empty($hotelPromotions)){
 				foreach ($hotelPromotions as $hotelPromotion){
