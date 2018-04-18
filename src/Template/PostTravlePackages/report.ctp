@@ -430,14 +430,14 @@ a{
 			<span class="help-block"></span>
 			<div class="row ">						
 				<div class="col-md-3">
-				<?= $this->Html->image($postTravlePackage->full_image,['id'=>'myImg','style'=>'width:100%;height:80px;','data-target'=>'#imagemodal'.$postTravlePackage->id,'data-toggle'=>'modal',]) ?>
+				<?= $this->Html->image($postTravlePackage->full_image,['id'=>'myImg','style'=>'width:100%;height:80px;','data-target'=>'#imagemodal'.$postTravlePackage->id,'data-toggle'=>'modal','promotionid'=>$postTravlePackage->id,'userId'=>$user_id,'class'=>'viewCount']) ?>
 					<div id="imagemodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-md">
 						<!-- Modal content-->
 							<div class="modal-content">
 								<div class="modal-body" >
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
-								<?= $this->Html->image($postTravlePackage->full_image,['style'=>'width:100%;height:300px;padding:20px;padding-top:0px!important;']) ?>
+								<?= $this->Html->image($postTravlePackage->full_image,['style'=>'width:100%;height:300px;padding:20px;padding-top:0px!important;','promotionid'=>$postTravlePackage->id,'userId'=>$user_id,'class'=>'viewCount']) ?>
 								</div>
 							</div>
 						</div>
@@ -737,10 +737,10 @@ a{
 									</div>
 								</div>
 								<div class="col-md-12 text-center">
-									<button class="btn btn-info btn-md btnlayout" data-target="#Inclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal" type="button">Inclusion</button>
+									<button class="btn btn-info btn-md btnlayout viewCount" data-target="#Inclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal"  promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" type="button">Inclusion</button>
 										<!-------Report Modal Start--------->
-									<button class="btn btn-warning btn-md btnlayout" data-target="#Exclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal" type="button">Exclusion</button>
-									<button class="btn btn-danger btn-md  btnlayout" data-target="#contactdetails<?php echo $postTravlePackage->id;?>" data-toggle="modal" type="button">Contact Info</button>
+									<button class="btn btn-warning btn-md btnlayout viewCount" data-target="#Exclusion<?php echo $postTravlePackage->id;?>"   promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" data-toggle="modal" type="button">Exclusion</button>
+									<button class="btn btn-danger btn-md  btnlayout viewCount" data-target="#contactdetails<?php echo $postTravlePackage->id;?>" promotionid="<?php echo $postTravlePackage->id;?>" data-toggle="modal" userId="<?php echo $user_id;?>" type="button">Contact Info</button>
 											<!-------Contact Details Modal --------->
 											
 										<!--Contact Details Modal End -->
@@ -794,15 +794,11 @@ a{
 		$(document).on('change','.cntry',function()
 		{
 			var country_id=$('option:selected', this).val();
-			
-		var countries = [];
-        $.each($(".cntry option:selected"), function(){
-             countries.push($(this).val());
-        });
-         
-		 
-		 
-		 var m_data = new FormData();
+			var countries = [];
+			$.each($(".cntry option:selected"), function(){
+				 countries.push($(this).val());
+			});
+			var m_data = new FormData();
 			m_data.append('country_id',countries);			
 			$.ajax({
 				url: "<?php echo $this->Url->build(["controller" => "PostTravlePackages", "action" => "ajax_city"]); ?>",
@@ -819,8 +815,27 @@ a{
 			});
 		  
 			 
-		});	
+		});
 		
+	$(document).on('click','.viewCount',function()
+	{
+		var promotionid=$(this).attr('promotionid');
+		var userId=$(this).attr('userId');
+		
+		var siteUrl='<?php echo $coreVariable['SiteUrl']; ?>';
+		var siteUrls="api/PostTravlePackages/getTravelPackageDetails.json?id="+promotionid+"&user_id="+userId;
+		var mainUrl=siteUrl+siteUrls; 
+		//alert(mainUrl);
+		$.ajax({
+			url: mainUrl,
+			processData: false,
+			contentType: false,
+			type: 'GET',
+			success: function(data)
+			{
+			}
+		});
+	});
 
 
 		/*$(window).scroll(function() {
@@ -881,8 +896,8 @@ a{
             if (el.tabIndex <= 0) el.tabIndex = 10000;
         });
     });
-			jQuery(".formSubmit").submit(function(){
-						jQuery("#loader-1").show();
-					});
+	jQuery("form").submit(function(){
+		jQuery("#loader-1").show();
+	});
   });
 </script>

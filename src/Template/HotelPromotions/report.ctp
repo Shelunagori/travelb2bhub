@@ -304,7 +304,7 @@ a{
 					<span class="help-block"></span>
 					<div class="row">						
 					<div class="col-md-3 rowspace">
-					<?= $this->Html->image($hotelPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:80px;','data-target'=>'#imagemodal'.$hotelPromotion->id,'data-toggle'=>'modal',]) ?>
+					<?= $this->Html->image($hotelPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:80px;','data-target'=>'#imagemodal'.$hotelPromotion->id,'data-toggle'=>'modal','promotionid'=>$hotelPromotion->id,'userId'=>$user_id,'class'=>'viewCount']) ?>
 					<div id="imagemodal<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-md">
 						<!-- Modal content-->
@@ -466,7 +466,7 @@ a{
 									<!-----button list-->
 							<div class="row" >
 								<div class="col-md-12 text-center" style="padding-top:15px;">
-									<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $hotelPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
+									<button class="btn btn-danger btn-md btnlayout viewCount" data-target="#contactdetails<?php echo $hotelPromotion->id;?>" data-toggle="modal"  promotionid="<?php echo $hotelPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Contact Info</button>
 								</div>
 
 									<!------Contact Details Modal --------->
@@ -570,8 +570,27 @@ if(a == '5')
 	$(".report_text").hide();
 			  }
 		});
-		jQuery(".formSubmit").submit(function(){
-						jQuery("#loader-1").show();
-					});
+		jQuery("form").submit(function(){
+			jQuery("#loader-1").show();
+		});
   });
+  $(document).on('click','.viewCount',function()
+	{
+		var promotionid=$(this).attr('promotionid');
+		var userId=$(this).attr('userId');
+		
+		var siteUrl='<?php echo $coreVariable['SiteUrl']; ?>';
+		var siteUrls="api/hotel_promotions/getHotelDetails.json?id="+promotionid+"&user_id="+userId;
+		var mainUrl=siteUrl+siteUrls; 
+		//alert(mainUrl);
+		$.ajax({
+			url: mainUrl,
+			processData: false,
+			contentType: false,
+			type: 'GET',
+			success: function(data)
+			{
+			}
+		});
+	});
 </script>

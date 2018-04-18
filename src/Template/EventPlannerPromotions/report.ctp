@@ -306,7 +306,8 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 					<span class="help-block"></span>
 				<div class="row">
 					<div class="col-md-3">
-					<?= $this->Html->image($eventPlannerPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:80px;','data-target'=>'#imagemodal'.$eventPlannerPromotion->id,'data-toggle'=>'modal',]) ?>
+					<?= $this->Html->image($eventPlannerPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:80px;','data-target'=>'#imagemodal'.$eventPlannerPromotion->id,'data-toggle'=>'modal','promotionid'=>$eventPlannerPromotion->id,'userId'=>$user_id,'class'=>'viewCount']) ?>
+					 
 					<div id="imagemodal<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-md">
 						<!-- Modal content-->
@@ -530,11 +531,11 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 						
 						<div class="row" style="padding-top:15px;">
 							<div class="col-md-12">
-							<button class="btn btn-info btn-md btnlayout" data-target="#eventdetail<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" type="button">Event Details</button>
+								<button class="btn btn-info btn-md btnlayout viewCount" data-target="#eventdetail<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $eventPlannerPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Event Details</button>
 								<!-------Report Modal Start--------->
 								
 								<!-------Report Modal End--------->	
-								<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
+								<button class="btn btn-danger btn-md btnlayout viewCount" data-target="#contactdetails<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $eventPlannerPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Contact Info</button>
 								<!-------Contact Details Modal --------->
 								
 							</div>
@@ -567,20 +568,39 @@ else
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>	 
 $(document).ready(function(){
-$('.reason_box').on('change', function() {
-  //var b=$(this);
-  var a=$(this).closest("div").find(" option:selected").val();
-	if(a == '5')
-	  {
-		$(".report_text").show();
-	  }
-	  else
-	  {
-		$(".report_text").hide();
-	  }
-});
-	jQuery(".formSubmit").submit(function(){
-						jQuery("#loader-1").show();
-					});
+	$('.reason_box').on('change', function() {
+	  //var b=$(this);
+	  var a=$(this).closest("div").find(" option:selected").val();
+		if(a == '5')
+		  {
+			$(".report_text").show();
+		  }
+		  else
+		  {
+			$(".report_text").hide();
+		  }
+	});
+	jQuery("form").submit(function(){
+		jQuery("#loader-1").show();
+	});
+	$(document).on('click','.viewCount',function()
+	{
+		var promotionid=$(this).attr('promotionid');
+		var userId=$(this).attr('userId');
+		
+		var siteUrl='<?php echo $coreVariable['SiteUrl']; ?>';
+		var siteUrls="api/EventPlannerPromotions/getEventPlannersDetails.json?id="+promotionid+"&user_id="+userId;
+		var mainUrl=siteUrl+siteUrls; 
+		$.ajax({
+			url: mainUrl,
+			processData: false,
+			contentType: false,
+			type: 'GET',
+			success: function(data)
+			{
+			}
+		});
+	});	
+
 });
 </script>
