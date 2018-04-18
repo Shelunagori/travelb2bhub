@@ -1746,7 +1746,7 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 			);
 		}
 		else{
-			$conditions[]= array (
+			/* $conditions[]= array (
 				'OR' => array(
 					array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
 					array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
@@ -1754,7 +1754,7 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 					array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
 					array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
 				)
-			);
+			); */
 		}
 		$edate = $this->request->query("enddatesearch");
 		if(!empty($this->request->query("enddatesearch"))) {

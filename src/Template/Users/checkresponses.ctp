@@ -76,6 +76,7 @@ legend
 					 $total_budget=$ro['request']['total_budget'];
 					 $locality=$ro['request']['locality'];
 					 $comment=$ro['request']['comment'];
+					 $created=$ro['request']['created'];
 					 $check_in=$ro['request']['check_in'];
 					 $check_out=$ro['request']['check_out'];
 					 $org_check_in=date('d-M-Y', strtotime($check_in));
@@ -100,13 +101,15 @@ legend
 						 $text="<span class='hotelType'>Hotel</span>";
 					 }
 				}
+				$org_created=date('d-M-Y', strtotime($created));
 				?>
 			<fieldset>
 				<legend><?php echo $image1; ?></legend>
+				<p class="pull-right" style="margin-top:-30px !important;"> <?php echo $org_created; ?></p>
 			<div class="col-md-12" style="padding-left:0px !important;">
 			<div class="col-md-10" style="padding-left:0px !important;">
 			<div class="col-md-12 " style="padding-left:0px !important;">
-				
+			 
 				<div class="col-md-3" style="padding-left:0px !important;">
 						<p>Request Type :  <?php echo $text; ?></p>
 				</div>
@@ -174,7 +177,7 @@ legend
 					</div-->
 					
 					<div class="col-md-4">
-						<b>Agent Name :  </b>
+						<b>From :  </b>
 						<?php 
 					$total_rating=0;
 					$rate_count=0;
@@ -205,7 +208,7 @@ legend
 					</div>
 					 
 					<div class="col-md-2"  >
-						<b>Quoted Price :  </b> <?php echo ($row['quotation_price'])?"&#8377; ".$row['quotation_price']:"-- --" ?>
+						<b>Quoted Price :  </b> <font color="#1295AB"><?php echo ($row['quotation_price'])?"&#8377; ".$row['quotation_price']:"-- --" ?></font>
 					</div>
 					<div class="col-md-6" align="left">
 		 
@@ -238,7 +241,7 @@ legend
 												<div class="modal-header">
 													<button type="button" class="close" data-dismiss="modal">&times;</button>
 													<h3 class="modal-title">
-														<font color="black">Share Details</font>
+														<font color="black">you sure you want to share yor details with this user?</font>
 													</h3>
 												</div>
 												<div class="modal-footer">
@@ -251,7 +254,7 @@ legend
 				<?php }
 				else{
 					?>
-						<a   href="javascript:void(0);" class=" btn btn-info btn-sm tst">
+						<a  style="cursor:no-drop" href="javascript:void(0);" class=" btn btn-info btn-sm tst">
 						Shared</a>
 					<?php 
 				} ?>
@@ -270,7 +273,7 @@ legend
 												<div class="modal-header">
 													<button type="button" class="close" data-dismiss="modal">&times;</button>
 													<h3 class="modal-title">
-														<font color="black">Follow User</font>
+														<font color="black">you sure you want to follow this user?</font>
 													</h3>
 												</div>
 												<div class="modal-footer">
