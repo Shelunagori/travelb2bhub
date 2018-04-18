@@ -153,7 +153,6 @@ fieldset{
 					<?php echo  $this->Flash->render() ?>
 				</div>
 				<form action="<?php echo $coreVariable['SiteUrl'];?>api/event_planner_promotions/add.json" method="post" enctype="multipart/form-data">	
- 				</div>
 				<div class="box-body">
 					<fieldset>
 					<legend style="color:#369FA1;"><b>Load Event Planner Promotion</b></legend>
