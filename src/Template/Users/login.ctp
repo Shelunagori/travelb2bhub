@@ -37,9 +37,8 @@
 					<center>
 						<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:50%;']) ?>
 					</center>
-							
-				<p style="color:#ff9898 !important;"><?php echo $this->Flash->render(); ?></p>
-				<br />
+				<p style="color:#ff9898 !important;"><?php echo "<br>".$this->Flash->render()."<br/>"; ?></p>
+				
                 <?php  echo $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'login'],'id'=>"UserLoginForm", 'class'=>'login100-form validate-form']); ?>
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
 						<input class="input100" type="text" name="email" placeholder="Email">
