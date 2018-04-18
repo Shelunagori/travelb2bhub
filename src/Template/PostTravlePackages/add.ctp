@@ -407,11 +407,8 @@ fieldset{
 <script>
 	 
     $(document).ready(function () {
-		 
-		 
 		 var pack_type=$('#pack_type').val();
 			//alert(pack_type);
-			 
 			if(pack_type==1){
 				$(".replacedata").html('<?php $options=array();
 				foreach($countries as $country)

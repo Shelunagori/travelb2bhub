@@ -230,7 +230,7 @@ label{
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
-										 <?php echo $this->Form->input('cheap_tariff',['class'=>'form-control requiredfield','label'=>false,'type'=>'number','placeholder'=>"Cheapest Room Rate"]);?>
+										 <?php echo $this->Form->input('cheap_tariff',['class'=>'form-control requiredfield low_rate','label'=>false,'type'=>'number','placeholder'=>"Cheapest Room Rate"]);?>
 										 <label style="display:none" class="helpblock error" > This field is required.</label>
 											
 										</div>
@@ -245,7 +245,7 @@ label{
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
-											 <?php echo $this->Form->input('expensive_tariff',['class'=>'form-control requiredfield','label'=>false,'type'=>'number','placeholder'=>"Most Expensive Room Rate"]);?>
+											 <?php echo $this->Form->input('expensive_tariff',['class'=>'form-control requiredfield high_rate','label'=>false,'type'=>'number','placeholder'=>"Most Expensive Room Rate"]);?>
 											 <label style="display:none" class="helpblock error" > This field is required.</label>
 										</div>
 									</div>
