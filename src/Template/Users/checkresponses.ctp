@@ -89,16 +89,19 @@ legend
 						 $category_name="Package";
 						 $image1=$this->Html->image('/img/slider/package-icon.png',['style'=>'height:20px']);
 						 $text="<span class='packageType'>Package</span>";
+						 $dest_show="Destination City";
 					 }
 					 if($category_id==2){
 						 $category_name="Transport";
 						 $image1=$this->Html->image('/img/slider/transport-icon.png');
 						 $text="<span class='transportType'>Transport</span>";
+						 $dest_show="Pickup City";
 					 }
 					 if($category_id==3){
 						 $category_name="Hotel";
 						 $image1=$this->Html->image('/img/slider/hotelier-icon.png');
 						 $text="<span class='hotelType'>Hotel</span>";
+						 $dest_show="Destination City";
 					 }
 				}
 				$org_created=date('d-M-Y', strtotime($created));
@@ -133,7 +136,7 @@ legend
 						<p>Members : <span class="details"><?php echo $members; ?></span></p>
 				</div>
 				<div class="col-md-3" style="padding-left:0px !important;">
-						<p>Destination City :  <span class="details"><?php echo $locality; ?></span></p>
+						<p><?php echo $dest_show; ?> :  <span class="details"><?php echo $locality; ?></span></p>
 				</div>
 				<div class="col-md-3" style="padding-left:0px !important;">
 						<p>Comment : <span class="details"><?php echo $comment; ?></span></p>
@@ -157,6 +160,7 @@ legend
 				if($row['request']['category_id']==1){ 
 					$image=$this->Html->image('/img/slider/package-icon.png',['style'=>'height:20px']);
 					$text="<span class='requestType'>Package</span>";
+					
 				} 
 				if($row['request']['category_id']==2){
 					$image= $this->Html->image('/img/slider/transport-icon.png');

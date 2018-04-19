@@ -179,7 +179,8 @@ p {
 	  transition: all .25s;
 
 	}
-
+	a:hover,a:active,a:focus{outline:none !important;}
+	button:hover,button:active,button:focus{outline:none !important;}
 
 	input.star-5:checked ~ label.star:before {
 
