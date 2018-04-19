@@ -313,6 +313,7 @@ label{
 								</div>							
 						</fieldset>
 						<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
+						<input type="hiddens" name="visible_date" class="visible_date" value="">
 					</form>
 				</div>
 			</div>
@@ -337,21 +338,34 @@ label{
 				return false;
 			}
 		});
-		
+ 		
 		$(document).on('change','.duration',function()
 		{
-			var p_type=$(this).val();
 			var priceVal=$('.duration option:selected').attr('priceVal');
 			var price=$('.duration option:selected').attr('price');
-			if(p_type!=''){
-				var Result = priceVal.split(" ");
-				var weeks=Result[0];
-				$('.charges').val(price);
+			var Result = priceVal.split(" ");
+			var Result1 = price.split(" ");
+			var weeks=Result[0];
+			var price=Result1[0];
+			
+			var todaydate = new Date(); // Parse date
+			for(var x=0; x < weeks; x++){
+				todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
 			}
-			else{
-				$('.charges').val(0);
-			}
+			var dd = todaydate .getDate();
+			var mm = todaydate .getMonth()+1; //January is 0!
+			var yyyy = todaydate .getFullYear();
+			if(dd<10){  dd='0'+dd } 
+			if(mm<10){  mm='0'+mm } 
+			var date = dd+'-'+mm+'-'+yyyy;	
+			$('.visible_date').val(date);
+			$('.payment_amount').val(price);
 		});
+		
+		
+		
+		
+		
 			$(document).on('blur','.high_rate,.low_rate',function()
 				{
 					var high_rate=parseInt($('.high_rate').val());
