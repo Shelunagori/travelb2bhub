@@ -96,7 +96,7 @@ fieldset{
 	padding-bottom: 8px;
 }
 label {
-    display: contents !important;
+    display: flex !important;
 }
 </style> 
 <div class="container-fluid">
