@@ -145,12 +145,12 @@ legend
 				<a  class="viewdetail btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$responseid)) ?>"data-target="#myModal1<?php echo $responseid; ?>" data-toggle=modal> Details</a>
 			</div>
 			</div>
-			<div class="col-md-12" align="center">
+			<div class="col-md-12" align="center" >
 				
 			</div>
-			<br>
+			
 			</fieldset>
-			<hr>
+			 <br>
 		<?php
 		if(count($responses) >0) {
 			foreach($responses as $row){
