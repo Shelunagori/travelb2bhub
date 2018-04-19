@@ -267,7 +267,7 @@ a{
 						<div class="row form-group margin-b10">
 							<div class=col-md-12>
 								 <div class=col-md-4>
-								  <label class="col-form-label"for=example-text-input>Country : </label>
+								  <label class="col-form-label"for=example-text-input>Country: </label>
 								  </div> 
 								 <div class=col-md-7>
 								<?php $options=array();
@@ -282,7 +282,7 @@ a{
 							<div class="row form-group margin-b10">
 							<div class=col-md-12>
 								 <div class=col-md-4>
-								  <label class="col-form-label"for=example-text-input>City : </label>
+								  <label class="col-form-label"for=example-text-input>City: </label>
 								  </div> 
 								 <div class="col-md-7" id="mcity">
 									<?php
@@ -293,7 +293,7 @@ a{
 							<div class="row form-group margin-b10">
 								<div class=col-md-12>
 								  <div class=col-md-4>
-								 <label class="col-form-label" for=example-text-input>Select Package Duration : </label>
+								 <label class="col-form-label" for=example-text-input>Select Package Duration: </label>
 								 </div> 
 								 <div class=col-md-7>
 									<select name="" multiple="multiple" class="form-control select2 seleteddata" data-placeholder="Select Multiple">
@@ -320,7 +320,7 @@ a{
 							<div class="row form-group margin-b10">
 								<div class=col-md-12>
 								  <div class=col-md-4>
-								 <label class="col-form-label" for=example-text-input>Select Package Category : </label>
+								 <label class="col-form-label" for=example-text-input>Select Package Category: </label>
 								 </div> 
 								 <div class=col-md-7>
 									<?php 
@@ -336,7 +336,7 @@ a{
 							<div class="row form-group margin-b10">
 								<div class=col-md-12>
 								  <div class=col-md-4>
-								 <label class="col-form-label" for=example-text-input>Starting Price : </label>
+								 <label class="col-form-label" for=example-text-input>Starting Price: </label>
 								 </div> 
 								 <div class=col-md-7>
 									<select name="starting_price" class="form-control">
@@ -405,7 +405,7 @@ a{
 												if($z>=1){
 													$cityList.=', ';
 												}
-												$cityList.=$cities->city->name." ( ".$cities->city->state->state_name." )";
+												$cityList.=$cities->city->name." (".$cities->city->state->state_name.")";
 												$z++;
 											}
 											$countryList='';
@@ -576,24 +576,24 @@ a{
 										<div class="col-md-9">
 											<div class="row col-md-12 rowspace">
 													<div class="col-md-12">
-													<label>Category :</label>
+													<label>Category: </label>
 													<span ><?= h($CategoryList); ?></span>
 													</div>
 											</div>
 											<div class="col-md-4 rowspace">
 												<div class="row " style="padding-top:2px;">
-													<div class="col-md-12 "><label>Duration :</label>
+													<div class="col-md-12 "><label>Package Duration: </label>
 													<span style="color:#FB6542"><?= h($postTravlePackage->duration_day_night) ?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
 													<div class="col-md-12 ">
-													<label>Starting Price :</label>
+													<label>Starting Price: </label>
 													<span style="color:#1295AB">&#8377; <?php echo (h($postTravlePackage->starting_price)) ;?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
-													<div class="col-md-12 "><label>Seller :</label>
+													<div class="col-md-12 "><label>Seller: </label>
 													<span><u>
 														<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
 														<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>">
@@ -614,17 +614,17 @@ a{
 											</div>
 											<div class="col-md-8">
 											<div class="row rowspace" style="padding-top:2px;">
-													<div class="col-md-12"><label>Valid Till :</label>
+													<div class="col-md-12"><label>Valid Till: </label>
 													<span><?= h(date('d-M-Y',strtotime($postTravlePackage->valid_date))); ?></span>
 													</div>					
 												</div>	
 												<div class="row" >
-													<div class="col-md-12"><label>Cities :</label>
+													<div class="col-md-12"><label>Cities: <label>
 													<span ><?= h($cityList); ?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
-													<div class="col-md-12"><label>Countries :</label>
+													<div class="col-md-12"><label>Countries: </label>
 													<span ><?= h($countryList);?></span>
 													</div>
 												</div>
@@ -690,7 +690,7 @@ a{
 											<div class="modal-body" style="padding-left:15px!important;">
 												<span class="help-block"></span>
 												<div class="row" >
-													<div class="col-md-12"><label>Seller Name :</label>
+													<div class="col-md-12"><label>Seller Name: </label>
 													<span style="padding-top:2px;"><u>
 															<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
 															<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>"> 
@@ -708,7 +708,7 @@ a{
 												</div>
 												<div class="row">
 													<div class="col-md-12">
-													<label>	Mobile No :</label>
+													<label>	Mobile No: </label>
 													<span >
 													<?= h($postTravlePackage->user->mobile_number);?>
 													</span>
@@ -716,7 +716,7 @@ a{
 												</div>
 												<div class="row">
 													<div class="col-md-12">
-														<label>Email :</label>
+														<label>Email: </label>
 														<span >
 														<a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a>
 														</span>
@@ -724,7 +724,7 @@ a{
 												</div>
 												<div class="row" style="display:none;">
 													<div class="col-md-12">
-														Location :
+														Location: 
 														<div >
 														<?= h($postTravlePackage->user->location);?>
 														</div>

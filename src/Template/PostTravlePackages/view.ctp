@@ -277,24 +277,24 @@ font-size:20px;
 									<div class="col-md-9">
 											<div class="row col-md-12 rowspace">
 													<div class="col-md-12">
-													<span style="color:#676363;font-weight:600;">Category :</span>
+													<span style="color:#676363;font-weight:600;">Category: </span>
 													<span ><?= h($CategoryList); ?></span>
 													</div>
 											</div>
 											<div class="col-md-5">
 												<div class="row rowspace">
-													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Duration :</span> 
+													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Duration: </span> 
 													<span style="color:#FB6542"><?= h($postTravlePackage->duration_day_night) ?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
 													<div class="col-md-12 ">
-													<span style="color:#676363;font-weight:600;"> Starting Price :</span>
+													<span style="color:#676363;font-weight:600;">Starting Price: </span>
 													<span style="color:#1295AB">&#8377; <?php echo (h($postTravlePackage->starting_price)) ;?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
-													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Seller :</span>
+													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Seller: </span>
 													<span><u>
 															<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
 															<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>"> 
@@ -314,17 +314,17 @@ font-size:20px;
 											</div>
 											<div class="col-md-7">
 												<div class="row rowspace">
-													<div class="col-md-12"><span style="color:#676363;font-weight:600;">Valid Till :</span>
+													<div class="col-md-12"><span style="color:#676363;font-weight:600;">Valid Till: </span>
 													<span><?= h(date('d-M-Y',strtotime($postTravlePackage->valid_date))); ?></span>
 													</div>					
 												</div>	
 												<div class="row rowspace">
-													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Cities :</span>
+													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Cities: </span>
 													<span ><?= h($cityList); ?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
-													<div class="col-md-12"><span style="color:#676363;font-weight:600;">Country :</span>	
+													<div class="col-md-12"><span style="color:#676363;font-weight:600;">Country: </span>	
 													<span ><?=h($countryList); ?></span>
 													</div>
 												</div>
@@ -348,7 +348,7 @@ font-size:20px;
 																	<span class="help-block"></span>
 																	<div class="row">
 																		<div class="col-md-12">
-																			<label>Seller Name :<label>
+																			<label>Seller Name: <label>
 																			<span style="padding-top:2px;">
 																			<u>
 																				<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
@@ -368,7 +368,7 @@ font-size:20px;
 																		</div>
 																	<div class="row">
 																		<div class="col-md-12">
-																		<label>Mobile No :</label>
+																		<label>Mobile No: </label>
 																		<span>
 																		<?= h($postTravlePackage->user->mobile_number);?>
 																		</span>
@@ -376,7 +376,7 @@ font-size:20px;
 																	</div>
 																	<div class="row">
 																		<div class="col-md-12">
-																			<label>Email :</label>
+																			<label>Email: </label>
 																			<span>
 																			<a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a>
 																			</span>
@@ -384,7 +384,7 @@ font-size:20px;
 																	</div>
 																	<div class="row" style="display:none;">
 																		<div class="col-md-12">
-																			<div class="col-md-4">Location :</div>
+																			<div class="col-md-4">Location: </div>
 																			<div class="col-md-8">
 																			<?= h($postTravlePackage->user->location);?>
 																			</div>
