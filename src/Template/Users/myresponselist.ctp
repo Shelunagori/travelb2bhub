@@ -115,7 +115,7 @@ $conn = ConnectionManager::get('default');
 	 <div class="row form-group">
 		<div class="col-md-12">
 		<div class=col-md-4>
-			<label for="example-text-input" class="  col-form-label">Agent Name : </label>
+			<label for="example-text-input" class="  col-form-label">Agent Name:  </label>
 		</div> 
 		 <div class=col-md-7>
 		  <?php echo $this->Form->control('agentnamesearch', ['label'=>false,"type"=>"select",'options' =>$selectoption,"class"=>"form-control select2","data-placeholder"=>"Select Multiple ",'empty'=>'Select...','multiple'=>true]);?>
@@ -125,7 +125,7 @@ $conn = ConnectionManager::get('default');
 		<div class="row form-group">
 			 <div class=col-md-12>
 				 <div class=col-md-4>
-				 <label class="col-form-label"for=example-text-input>Reference ID : </label>
+				 <label class="col-form-label"for=example-text-input>Reference ID:  </label>
 				 </div> 
 				 <div class=col-md-7>
 					<?php echo $this->Form->control('refidsearch', ['label'=>false,"type"=>"select",'options' =>$RefId,"class"=>"form-control select2","data-placeholder"=>"Select Multiple ",'empty'=>'Select...','multiple'=>true]);?>
@@ -136,7 +136,7 @@ $conn = ConnectionManager::get('default');
 						 <div class="row form-group ">
 							<div class=col-md-12>
 								 <div class=col-md-4>
-								  <label class="col-form-label"for=example-text-input>Request Type : </label>
+								  <label class="col-form-label"for=example-text-input>Request Type:  </label>
 								  </div>  
 								 <div class=col-md-7>
 									<select name="req_typesearch[]" multiple="multiple" class="form-control select2"  data-placeholder='Select Multiple'>
@@ -149,7 +149,7 @@ $conn = ConnectionManager::get('default');
 						<div class="row form-group ">
 							<div class=col-md-12>
 								 <div class=col-md-4>
-								  <label class="col-form-label "for=example-text-input>Chat With :  </label>
+								  <label class="col-form-label "for=example-text-input>Chat With:   </label>
 								  </div> 
 								 <div class=col-md-7>
 									 <select name="chatwith[]" multiple="multiple" class="form-control select2"  data-placeholder='Select Multiple' > 
@@ -165,7 +165,7 @@ $conn = ConnectionManager::get('default');
 						<div class="row form-group ">
 							<div class=col-md-12>
 								<div class=col-md-4>
-									<label class="col-form-label"for=example-text-input>Quoted Price Range : </label>
+									<label class="col-form-label"for=example-text-input>Quoted Price Range:  </label>
 								</div> 
 									<div class=col-md-7>
 										<select name="budgetsearch" class="form-control"  data-placeholder='Select...'><option value="">Select...</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? '':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? '':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? '':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? '':''; ?>>50000-100000</option>
@@ -177,7 +177,7 @@ $conn = ConnectionManager::get('default');
 								<div class="row form-group">
 									<div class=col-md-12>
 									  <div class=col-md-4>
-									 <label class="col-form-label" for=example-text-input>Start Date : </label>
+									 <label class="col-form-label" for=example-text-input>Start Date:  </label>
 									 </div> 
 									 <div class=col-md-7>
 									 <input class="form-control datepickers" data-date-format="dd-mm-yyyy" name=startdatesearch id="datepicker1">
@@ -187,7 +187,7 @@ $conn = ConnectionManager::get('default');
 								<div class="row form-group">								
 									<div class=col-md-12>
 										<div class=col-md-4>
-										  <label class="col-form-label" for=example-text-input>End Date : </label>
+										  <label class="col-form-label" for=example-text-input>End Date:  </label>
 										</div> 
 										<div class=col-md-7>
 										<input class="form-control datepickers" data-date-format="dd-mm-yyyy" name=enddatesearch id="datepicker2">
@@ -197,7 +197,7 @@ $conn = ConnectionManager::get('default');
                               <div class="row form-group">
 									 <div class=col-md-12>
 										 <div class=col-md-4>
-										 <label class="col-form-label"for=example-text-input>Pickup City (Transportation) : </label>
+										 <label class="col-form-label"for=example-text-input>Pickup City (Transportation):  </label>
 										 </div> 
 										<div class=col-md-7>
 											<select class="form-control select2"  name=pickup_city id=pickup_city>
@@ -212,7 +212,7 @@ $conn = ConnectionManager::get('default');
 								<div class="row form-group">								 
 									 <div class=col-md-12>
 										 <div class=col-md-4>
-										 <label class="col-form-label" for=example-text-input>	Destination City (Packages & Hotels) : </label>
+										 <label class="col-form-label" for=example-text-input>	Destination City (Packages & Hotels):  </label>
 										 </div> 
 										<div class="col-md-7">
 											<select class="form-control select2" name=destination_city id=destination_city>
@@ -230,7 +230,7 @@ $conn = ConnectionManager::get('default');
 						 <div class="row form-group">
 							<div class="col-md-12">
 								<div class=col-md-4>
-									<label for="example-text-input" class="  col-form-label">Following : </label>
+									<label for="example-text-input" class="  col-form-label">Following:  </label>
 								</div> 
 								 <div class=col-md-7>
 									<input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['followsearch'])? "checked":''; ?>  >
@@ -241,7 +241,7 @@ $conn = ConnectionManager::get('default');
 						   <div class="row form-group">
 							<div class="col-md-12">
 								<div class=col-md-4>
-									<label for="example-text-input" class="  col-form-label">Shared Details : </label>
+									<label for="example-text-input" class="  col-form-label">Shared Details:  </label>
 								</div> 
 								 <div class=col-md-7>
 									<input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['is_details_shared'])? "checked":''; ?>  >
@@ -344,7 +344,7 @@ $(document).ready(function(){
                         }else{
 								$hrefurl =  "viewprofile/".$response['request']['user_id']."/";                       
                         }?>
-                            To : <span class="details"> <a href="<?php echo $hrefurl;?>"><?php echo $response['request']['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $response['request']['user']['last_name']; ?></a> 
+                            To:  <span class="details"> <a href="<?php echo $hrefurl;?>"><?php echo $response['request']['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $response['request']['user']['last_name']; ?></a> 
 							<?php if($final_rating>0){ ?>
 								<font color="#1295AB"> (<?php echo $final_rating; ?> <i class="fa fa-star"></i>)</font>
 							<?php } ?>
@@ -356,7 +356,7 @@ $(document).ready(function(){
 				</li>
                  <li>
                     <p>
-                        Request Type  : <span class="details"> <?php echo $text; ?>
+                        Request Type:  <span class="details"> <?php echo $text; ?>
                     </p>
                  </li>
 				<li >
@@ -364,8 +364,8 @@ $(document).ready(function(){
 						$total_budget=round($response['request']['total_budget']);
 					?>
 					<p>
-						Total Budget : <span class="details"> &#8377; 
-						<?php echo ($total_budget)? "". ($total_budget) :"-- --" ?>
+						Total Budget:  <span class="details"> &#8377; 
+						<?php echo ($total_budget)? "". ($total_budget): "-- --" ?>
 					</p>
 				 </li>
 				 
@@ -373,22 +373,22 @@ $(document).ready(function(){
 					<?php 
 						$quotation_price=round($response['quotation_price']);
 					?>
-					 <p>Quotation Price : <span class="details"> 
-					 <?php echo ($quotation_price)? " &#8377; ".($quotation_price) :"-- --" ?></p>
+					 <p>Quotation Price:  <span class="details"> 
+					 <?php echo ($quotation_price)? " &#8377; ".($quotation_price): "-- --" ?></p>
 				</li>
 				<li >
 					<p>
-						Reference ID : <span class="details"><?php echo $response['request']['reference_id']; ?></span>
+						Reference ID:  <span class="details"><?php echo $response['request']['reference_id']; ?></span>
 					</p>
 				</li>
                 <li class=" destination">
 				   <?php if($response['request']['category_id']==2){ ?>
                   <p>
-                   Pickup City : <span class="details"><span> <?php echo ($response['request']['pickup_city'])?$allCities[$response['request']['pickup_city']]:"-- --"; ?><?php echo ($response['request']['pickup_state'])?' ('.$allStates[$response['request']['pickup_state']].')':"";  ?></span>
+                   Pickup City:  <span class="details"><span> <?php echo ($response['request']['pickup_city'])?$allCities[$response['request']['pickup_city']]:"-- --"; ?><?php echo ($response['request']['pickup_state'])?' ('.$allStates[$response['request']['pickup_state']].')':"";  ?></span>
 
                   <?php } else { ?>
                         <p>
-                        Destination City : <span class="details"> <span>
+                        Destination City:  <span class="details"> <span>
 						<?php 
 							$a=$response['request']['city_id']?$allCities[$response['request']['city_id']]:"-- --"; 
 							$b=$response['request']['state_id']?' ('.$allStates[$response['request']['state_id']].')':"";
@@ -400,12 +400,12 @@ $(document).ready(function(){
 				<?php if($response['request']['category_id'] == 3 ) { ?>
 					<li class="">
                         <p>
-                            Start Date : <span class="details"> <?php echo ($response['request']['check_in'])?date("d/m/Y", strtotime($response['request']['check_in'])):"-- --"; ?>
+                            Start Date:  <span class="details"> <?php echo ($response['request']['check_in'])?date("d/m/Y", strtotime($response['request']['check_in'])):"-- --"; ?>
                         </p>
                      </li>
 					<li class="">
                         <p>
-                            End Date : <span class="details"> <?php echo ($response['request']['check_out'])?date("d/m/Y", strtotime($response['request']['check_out'])):"-- --"; ?>
+                            End Date:  <span class="details"> <?php echo ($response['request']['check_out'])?date("d/m/Y", strtotime($response['request']['check_out'])):"-- --"; ?>
                         </p>
                     </li>
 				<?php } elseif($response['request']['category_id'] == 1 ) {
@@ -415,15 +415,15 @@ $(document).ready(function(){
 					?>
 					<li class="">
                         <p>
-                            Start Date : <span class="details"> <?php echo ($response['request']['check_in'])?date("d/m/Y", strtotime($response['request']['check_in'])):"-- --"; ?>
+                            Start Date:  <span class="details"> <?php echo ($response['request']['check_in'])?date("d/m/Y", strtotime($response['request']['check_in'])):"-- --"; ?>
                         </p>
                      </li>
 					<li class="">
                         <p>
                         <?php if(!empty($result['TopDate'])) { ?>
-                        End Date : <span class="details"> <?php echo date('d/m/Y',strtotime($result['TopDate'])); ?>
+                        End Date:  <span class="details"> <?php echo date('d/m/Y',strtotime($result['TopDate'])); ?>
                         <?php }else{?>
-                        End Date :<span class="details"> <?php echo ($response['request']['check_out'])?date("d/m/Y", strtotime($response['request']['check_out'])):"-- --"; ?>
+                        End Date: <span class="details"> <?php echo ($response['request']['check_out'])?date("d/m/Y", strtotime($response['request']['check_out'])):"-- --"; ?>
                         <?php }?>
                             
                         </p>
@@ -431,18 +431,18 @@ $(document).ready(function(){
 				<?php } elseif($response['request']['category_id'] == 2 ) { ?>
 					<li class="">
                         <p>
-                            Start Date : <span class="details"> <?php echo ($response['request']['start_date'])?date("d/m/Y", strtotime($response['request']['start_date'])):"-- --"; ?>
+                            Start Date:  <span class="details"> <?php echo ($response['request']['start_date'])?date("d/m/Y", strtotime($response['request']['start_date'])):"-- --"; ?>
                         </p>
                     </li>
 					<li class="">
                         <p>
-                            End Date : <span class="details"> <?php echo ($response['request']['end_date'])?date("d/m/Y", strtotime($response['request']['end_date'])):"-- --"; ?>
+                            End Date:  <span class="details"> <?php echo ($response['request']['end_date'])?date("d/m/Y", strtotime($response['request']['end_date'])):"-- --"; ?>
                         </p>
                     </li>
 				<?php } ?>
 				                <li class="">
                         <p>
-                            Members : <span class="details"> <?php echo $response['request']['adult'] +  $response['request']['children']; ?>
+                            Members:  <span class="details"> <?php echo $response['request']['adult'] +  $response['request']['children']; ?>
                      </p>
                  </li>
 				 
@@ -450,7 +450,7 @@ $(document).ready(function(){
 	
 					
                    <li class="">
-                       <p> Comment :<span class="details"><?php echo mb_strimwidth($response['comment'], 0, 25, "...");?></span></p>
+                       <p> Comment: <span class="details"><?php echo mb_strimwidth($response['comment'], 0, 25, "...");?></span></p>
                      </li>
                    </ul>
 				   <hr style="margin-top: 0px!important;"></hr>
@@ -543,9 +543,9 @@ $(document).ready(function(){
 										<div class="modal-content">
 										  <div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h3 class="modal-title">
+												<h4 class="modal-title">
 												User Contact Details
-												</h3>
+												</h4>
 												</div>
 												<div class="modal-body">
 													<span class="help-block"></span>
@@ -569,7 +569,7 @@ $(document).ready(function(){
 													</div>
 													<div class="row">
 														<div class="col-md-12">
-															<div class="col-md-12"><label>Email</label> :
+															<div class="col-md-12"><label>Email</label>: 
 																
 																	<?php echo ($response['request']['user']['email'])?$response['request']['user']['email']:"-- --"; ?>
 																
@@ -587,7 +587,7 @@ $(document).ready(function(){
 													</div>
 													<div class="row" style="display:none;">
 														<div class="col-md-12">
-															<div class="col-md-12">Website :
+															<div class="col-md-12">Website: 
 																<label>
 																	<?php echo ($response['request']['user']['web_url'])?$response['request']['user']['web_url']:"-- --"; ?>
 																</label>
@@ -634,7 +634,7 @@ $(document).ready(function(){
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<h3 class="modal-title">
-													<h4><font color="red">Are you sure you want to block this user ?</font></h4>
+													<h4><font color="black">Are you sure you want to block this user?</font></h4>
 												</h3>
 											</div>
 												<div class="modal-footer">

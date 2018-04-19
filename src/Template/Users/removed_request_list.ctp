@@ -50,24 +50,25 @@ $m =0;
  ?>		<div id="cat" >
 			<div class="col-md-4" style="padding-top:15px;">
 				<?php 
-				   if($request['category_id']==1){ 
+				   
+					if($request['category_id']==1){ 
 						$image=$this->Html->image('/img/slider/package-icon.png');
-						$text="<span class='requestType'>Package</span>";
+						$text="<span class='packageType'>Package</span>";
 					} 
 					if($request['category_id']==2){
 						$image= $this->Html->image('/img/slider/transport-icon.png');
-						$text="<span class='requestType'>Transport</span>";
+						$text="<span class='transportType'>Transport</span>";
 					}
 					if($request['category_id']==3){
 						$image= $this->Html->image('/img/slider/hotelier-icon.png');
-						$text="<span class='requestType'>Hotel</span>";
-					} 
+						$text="<span class='hotelType'>Hotel</span>";
+					}
 				?>
                 <fieldset><legend><?php echo $image; ?></legend>
 				 <ul>
                     <li >
                     <p>
-                        Request Type : <span class="details"> <?php  echo $text ; ?></span>
+                        Request Type:  <span class="details"> <?php  echo $text ; ?></span>
                     </p>
                 </li>
 				 <li >
@@ -75,20 +76,20 @@ $m =0;
 						<?php 
 							$total_budget=round($request['total_budget']);
 						?>
-                        Total Budget : <span class="details">
-						<?php echo ($total_budget)? "Rs. ". ($total_budget) :"-- --" ?>
+                        Total Budget:  <span class="details">
+						<?php echo ($total_budget)? "Rs. ". ($total_budget): "-- --" ?>
 						</span>
                      </p>
                  </li>
 				<?php if($request['category_id'] == 3 ) { ?>
 					<li >
                         <p>
-                            Start Date :<span class="details"> <?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
+                            Start Date: <span class="details"> <?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
                         </p>
                      </li>
 					<li >
                         <p>
-                            End Date :<span class="details"> <?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?></span>
+                            End Date: <span class="details"> <?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?></span>
                         </p>
                      </li>
 				<?php } elseif($request['category_id'] == 1 ) {
@@ -98,21 +99,21 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 ?>
 					<li >
                         <p>
-                            Start Date :<span class="details"> <?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
+                            Start Date: <span class="details"> <?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
                         </p>
                      </li>
 					<li >
-                        <p><?php if(!empty($result['TopDate'])) { ?>End Date : <span class="details"> <?php echo date('d/m/Y',strtotime($result['TopDate'])); ?></span><?php }else{?>End Date : <span class="details"><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?><?php }?></span>
+                        <p><?php if(!empty($result['TopDate'])) { ?>End Date:  <span class="details"> <?php echo date('d/m/Y',strtotime($result['TopDate'])); ?></span><?php }else{?>End Date:  <span class="details"><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?><?php }?></span>
                    </li>
 				<?php } elseif($request['category_id'] == 2 ) {?>
 					<li >
                         <p>
-                            Start Date :<span class="details"> <?php echo ($request['start_date'])?date('d/m/Y',strtotime($request['start_date'])):"-- --"; ?></span>
+                            Start Date: <span class="details"> <?php echo ($request['start_date'])?date('d/m/Y',strtotime($request['start_date'])):"-- --"; ?></span>
                         </p>
                      </li>
 					<li >
                         <p>
-                            End Date :<span class="details"> <?php echo ($request['end_date'])?date('d/m/Y',strtotime($request['end_date'])):"-- --"; ?></span>
+                            End Date: <span class="details"> <?php echo ($request['end_date'])?date('d/m/Y',strtotime($request['end_date'])):"-- --"; ?></span>
                         </p>
                    </li>
 			<?php } ?>
@@ -120,22 +121,22 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 				
 				<li >
                     <p>
-                        Reference ID : <span class="details"> <?php echo $request['reference_id']; ?></span>
+                        Reference ID:  <span class="details"> <?php echo $request['reference_id']; ?></span>
                     </p>
                  </li>
                <li >
                      <p>
-                        Members : <span class="details"> <?php echo $request['adult'] +   $request['children']; ?> </span> 
+                        Members:  <span class="details"> <?php echo $request['adult'] +   $request['children']; ?> </span> 
                      </p>
                  </li>
                
                      <li >
                   <?php if($request['category_id']==2){ ?>
                   <p>
-                      Pickup City :<span class="details"> <span><?php echo ($request['pickup_city'])?$allCities[$request['pickup_city']]:"-- --"; ?><?php echo ($request['pickup_state'])?' ('.$allStates[$request['pickup_state']].')':"";  ?></span></span>
+                      Pickup City: <span class="details"> <span><?php echo ($request['pickup_city'])?$allCities[$request['pickup_city']]:"-- --"; ?><?php echo ($request['pickup_state'])?' ('.$allStates[$request['pickup_state']].')':"";  ?></span></span>
                   <?php } else { ?>
                             <p>
-                                Destination City : <span class="details"> <span>
+                                Destination City:  <span class="details"> <span>
 								<?php 
 									$a=$request['city_id']?$allCities[$request['city_id']]:"-- --"; 
 									$b=$request['state_id']?' ('.$allStates[$request['state_id']].')':"";
@@ -157,7 +158,7 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 
              
                      <li >
-                         <p>Comment :<span class="details">
+                         <p>Comment: <span class="details">
 					 
 						 <?php echo mb_strimwidth($request['comment'], 0, 25, "...");?></span></p>
                      </li>

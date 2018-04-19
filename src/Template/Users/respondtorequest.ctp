@@ -118,7 +118,7 @@ $conn = ConnectionManager::get('default');
 										 <div class="row form-group">
 											  <div class="col-md-12">
 												<div class=col-md-4>
-													<label for="example-text-input" class="  col-form-label">Agent Name : </label>
+													<label for="example-text-input" class="  col-form-label">Agent Name:  </label>
 												</div> 
 												 <div class=col-md-7>
  												  <?php echo $this->Form->control('agentnamesearch', ['label'=>false,"type"=>"select",'options' =>$selectoption,"class"=>"form-control select2","data-placeholder"=>"Select Multiple ",'empty'=>'Select...','multiple'=>true]);?>
@@ -128,7 +128,7 @@ $conn = ConnectionManager::get('default');
 										  <div class="row form-group">
 												 <div class=col-md-12>
 													 <div class=col-md-4>
-													 <label class="col-form-label"for=example-text-input>Reference ID : </label>
+													 <label class="col-form-label"for=example-text-input>Reference ID:  </label>
 													 </div> 
 													 <div class=col-md-7>
 													 
@@ -139,7 +139,7 @@ $conn = ConnectionManager::get('default');
 										 <div class="row form-group ">
 											<div class=col-md-12>
 												 <div class=col-md-4>
-												  <label class="col-form-label"for=example-text-input>Request Type : </label>
+												  <label class="col-form-label"for=example-text-input>Request Type:  </label>
 												  </div> 
 												 <div class=col-md-7>
 													<select name="req_typesearch[]" multiple="multiple" class="form-control  select2" data-placeholder="Select Multiple">
@@ -152,7 +152,7 @@ $conn = ConnectionManager::get('default');
 										<div class="row form-group ">
 											<div class=col-md-12>
 												<div class=col-md-4>
-													<label class="col-form-label"for=example-text-input>Total Budget Range : </label>
+													<label class="col-form-label"for=example-text-input>Total Budget Range:  </label>
 												</div> 
 													<div class=col-md-7>
 														<select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? '':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? '':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? '':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? '':''; ?>>50000-100000</option>
@@ -164,7 +164,7 @@ $conn = ConnectionManager::get('default');
 												<div class="row form-group">
 													<div class=col-md-12>
 													  <div class=col-md-4>
-													 <label class="col-form-label" for=example-text-input>Start Date : </label>
+													 <label class="col-form-label" for=example-text-input>Start Date:  </label>
 													</div> 
 													<div class=col-md-7>
 													 <input class="form-control datepickers" data-date-format="dd-mm-yyyy" name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" >
@@ -174,7 +174,7 @@ $conn = ConnectionManager::get('default');
 												<div class="row form-group">					
 													<div class=col-md-12>
 														<div class=col-md-4>
-														  <label class="col-form-label" for=example-text-input>End Date : </label>
+														  <label class="col-form-label" for=example-text-input>End Date:  </label>
 														</div> 
 														<div class=col-md-7>
 														<input class="form-control datepickers" data-date-format="dd-mm-yyyy" name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>">
@@ -184,7 +184,7 @@ $conn = ConnectionManager::get('default');
 											  <div class="row form-group">
 													 <div class=col-md-12>
 														 <div class=col-md-4>
-														 <label class="col-form-label"for=example-text-input>Pickup City (Transportation) :</label>
+														 <label class="col-form-label"for=example-text-input>Pickup City (Transportation): </label>
 														 </div> 
 														<div class=col-md-7>
 															<select class="form-control select2"  name=pickup_city id=pickup_city>
@@ -199,7 +199,7 @@ $conn = ConnectionManager::get('default');
 												<div class="row form-group">								 
 													 <div class=col-md-12>
 														 <div class=col-md-4>
-														 <label class="col-form-label" for=example-text-input>Destination City (Packages & Hotels) : </label>
+														 <label class="col-form-label" for=example-text-input>Destination City (Packages & Hotels):  </label>
 														 </div> 
 														<div class="col-md-7">
 															<select class="form-control select2" name=destination_city id=destination_city>
@@ -215,7 +215,7 @@ $conn = ConnectionManager::get('default');
 										 <div class="row form-group">
 											<div class="col-md-12">
 												<div class=col-md-4>
-													<label for="example-text-input" class="  col-form-label">Following : </label>
+													<label for="example-text-input" class="  col-form-label">Following:  </label>
 												</div> 
 												 <div class=col-md-7>
 													<input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['followsearch'])? "checked":''; ?>  >
@@ -303,7 +303,7 @@ $conn = ConnectionManager::get('default');
 
 							?>
 					
-							Form : <span class="details"><a href="viewprofile/<?php echo $request['user_id']; ?>"><?php echo $request['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $request['user']['last_name']; ?></a>
+							Form:  <span class="details"><a href="viewprofile/<?php echo $request['user_id']; ?>"><?php echo $request['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $request['user']['last_name']; ?></a>
 							 <?php if($final_rating>0){ ?>
 							 <font color="#1295AB">(<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font>
 							 <?php } ?>
@@ -314,7 +314,7 @@ $conn = ConnectionManager::get('default');
 					</li>
 					<li class="">
 						<p>
-							Request Type  :  <?php echo $text; ?>
+							Request Type:   <?php echo $text; ?>
 						</p>
 					</li>
 					<li class="">
@@ -323,23 +323,23 @@ $conn = ConnectionManager::get('default');
 					
 					?>
 						<p>
-							Total Budget :  <span class="details">&#8377; 
-							<?php echo ($total_budget)? "". ($total_budget) :"-- --" ?>
+							Total Budget:   <span class="details">&#8377; 
+							<?php echo ($total_budget)? "". ($total_budget): "-- --" ?>
 						</p>
 					</li>
 					<li class="">
 						<p>
-							Reference ID :  <span class="details"><?php echo ($request['reference_id'])? "". $request['reference_id'] :"-- --" ?>
+							Reference ID:   <span class="details"><?php echo ($request['reference_id'])? "". $request['reference_id']: "-- --" ?>
 						</p>
 					</li>
 					
 					<li class="">
 					<?php if($request['category_id']==2){ ?>
 						<p>
-							Pickup City : <span class="details"><?php echo ($request['pickup_city'])?$allCities[$request['pickup_city']]:"-- --"; ?><?php echo ($request['pickup_state'])?' ('.$allStates[$request['pickup_state']].')':"";  ?>
+							Pickup City:  <span class="details"><?php echo ($request['pickup_city'])?$allCities[$request['pickup_city']]:"-- --"; ?><?php echo ($request['pickup_state'])?' ('.$allStates[$request['pickup_state']].')':"";  ?>
 						<?php } else { ?>
 						<p>
-							Destination City : <span class="details">
+							Destination City:  <span class="details">
 							<?php 
 							$a=$request['city_id']?$allCities[$request['city_id']]:"-- --"; 
 							$b=$request['state_id']?' ('.$allStates[$request['state_id']].')':"";
@@ -350,12 +350,12 @@ $conn = ConnectionManager::get('default');
 					   <?php if($request['category_id'] == 3 ) { ?>
 						<li class="">
                             <p>
-                                Start Date : <span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?>
+                                Start Date:  <span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?>
                             </p>
                         </li>
 						<li class="">
                             <p>
-                                End Date : <span class="details"> <?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?>
+                                End Date:  <span class="details"> <?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?>
                             </p>
                        </li>
 					<?php } elseif($request['category_id'] == 1 ) { 
@@ -365,37 +365,37 @@ $conn = ConnectionManager::get('default');
 					?>
 						<li class="">
                             <p>
-                                Start Date :<span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?>
+                                Start Date: <span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?>
                             </p>
                          </li>
 						<li class="">
                         <p>
 							<?php if(!empty($result['TopDate'])) { ?>
-                        End Date :  <span class="details"><?php echo date('d/m/Y',strtotime($result['TopDate'])); ?>
+                        End Date:   <span class="details"><?php echo date('d/m/Y',strtotime($result['TopDate'])); ?>
                         <?php }else{?>
-                            End Date : <span class="details"> <?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?>
+                            End Date:  <span class="details"> <?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?>
                             <?php } ?>
                         </p>
                         </li>
 					<?php } elseif($request['category_id'] == 2 ) {?>
 					<li class="">
                             <p>
-                                Start Date : <span class="details"><?php echo ($request['start_date'])?date('d/m/Y',strtotime($request['start_date'])):"-- --"; ?>
+                                Start Date:  <span class="details"><?php echo ($request['start_date'])?date('d/m/Y',strtotime($request['start_date'])):"-- --"; ?>
                             </p>
                         </li>
 						<li class="">
                             <p>
-                                End Date : <span class="details"><?php echo ($request['end_date'])?date('d/m/Y',strtotime($request['end_date'])):"-- --"; ?>
+                                End Date:  <span class="details"><?php echo ($request['end_date'])?date('d/m/Y',strtotime($request['end_date'])):"-- --"; ?>
                             </p>
                         </li>
 					<?php } ?>
 					<li class="">
                             <p>
-                                Members : <span class="details"><?php echo $request['adult'] + $request['children']; ?>
+                                Members:  <span class="details"><?php echo $request['adult'] + $request['children']; ?>
                            </p>
                    </li>
                 <li class=" ">
-                     <p>Comment : <span class="details"><span> 
+                     <p>Comment:  <span class="details"><span> 
 					 <?php echo mb_strimwidth($request['comment'], 0, 25, "...");?></span></p>
                  </li>
                       </ul>
@@ -492,9 +492,9 @@ $conn = ConnectionManager::get('default');
 										<div class="modal-content">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h3 class="modal-title">
-													<font color="black">Are you sure you want to unfollow the user?</font>
-												</h3>
+												<h4 class="modal-title">
+													<font color="black">Are you sure you want to follow the user?</font>
+												</h4>
 											</div>
 												 
 												<div class="modal-footer">
@@ -538,9 +538,9 @@ $conn = ConnectionManager::get('default');
 										<div class="modal-content">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
-												<h3 class="modal-title">
-													<h4><font color="red">Are you sure you want to block this user ?</font></h4>
-												</h3>
+												<h4 class="modal-title">
+													<h4><font color="black">Are you sure you want to block this user?</font></h4>
+												</h4>
 											</div>
 												<div class="modal-footer">
 													<button type="button"  href="javascript:void(0);" class="blockUser btn btn-danger" user_id = "<?php echo $request['user']['id']; ?>">Block</button>
