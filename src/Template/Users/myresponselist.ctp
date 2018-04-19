@@ -504,7 +504,9 @@ $(document).ready(function(){
 						<td style="padding:3px !important;" <?php if($response['is_details_shared'] == 1) { echo 'width="33%"'; }else{ echo 'width="50%"'; } ?> >
 							<?php
 							if(array_key_exists($response["request"]["user_id"], $BusinessBuddies)) {?>
-								<a href="#" style="width:99%" class="btn btn-warning btn-sm"> Following</a>
+								
+								<span style=" width:99%;background-color:#dadadabf;display: inline-block;text-align: center;"  class=" btn-defult btn-sm ">
+										Following </span>
 							<?php } 
 							else{ ?>
 								  

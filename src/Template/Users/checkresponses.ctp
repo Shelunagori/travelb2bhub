@@ -287,7 +287,8 @@ legend
 				<?php }
 				else {
 				?>
-					<a  href="javascript:void(0);" class="btn btn-default btn-sm tst" style="background-color:#eadcdc !important;" user_id = "<?php echo $row['user']['id']; ?>"> Following</a>
+					<span style="background-color:#dadadabf;display: inline-block;text-align: center;border-radius: 6px;    vertical-align: middle;"  class=" btn-defult btn-sm ">
+										Following </span> 
 				<?php }	?>
 			 
 			

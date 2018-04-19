@@ -413,7 +413,9 @@ $(".req").sort(function (a, b) {
  									<?php $reviewi = $request['responses'][0]['user_id']."-".$request['id']; ?> 
 									<?php 
 									if(array_key_exists($finalresponse[$request['id']]['user_id'], $BusinessBuddies)) {?>
-										<a href="#" style="width:99%" class="btn btn-warning btn-sm"> Following</a>
+										<span style=" width:99%;background-color:#dadadabf;display: inline-block;text-align: center;"  class=" btn-defult btn-sm ">
+											Following
+										</span>
 									<?php } 
 									else{ ?>
 										<!--a style="width:99%" href="javascript:void(0);" class="businessBuddy btn btn-warning btn-sm" user_id = "<?php //echo $finalresponse[$request['id']]['user_id']; ?>"> Follow User</a-->

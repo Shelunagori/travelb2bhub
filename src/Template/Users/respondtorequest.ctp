@@ -478,7 +478,9 @@ $conn = ConnectionManager::get('default');
 					<td width="50%" style="padding:3px !important;">
 						<?php
 						if(array_key_exists($request["user_id"], $BusinessBuddies)) {?>
-							<a href="#" style="width:99%" class="btn btn-warning btn-sm"> Following</a>
+							 
+							<span style=" width:99%;background-color:#dadadabf;display: inline-block;text-align: center;"  class=" btn-defult btn-sm ">
+										Following </span>
 						<?php } 
 						else{ ?>
 							 
@@ -491,7 +493,7 @@ $conn = ConnectionManager::get('default');
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<h3 class="modal-title">
-													<font color="black">Confirm Follow User ?</font>
+													<font color="black">Are you sure you want to unfollow the user?</font>
 												</h3>
 											</div>
 												 
