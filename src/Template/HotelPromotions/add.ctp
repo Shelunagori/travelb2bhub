@@ -362,10 +362,9 @@ label{
 				});
 				function calculate()
 				{
-					var low_rate=($('.low_rate').val());
+					var low_rate=parseInt($('.low_rate').val());
 					//alert(low_rate);
-					var high
-					_rate=($('.high_rate').val());
+					var high_rate=parseInt($('.high_rate').val());
 					//alert(high_rate);
 					if(low_rate.length>high_rate.length)
 					{
