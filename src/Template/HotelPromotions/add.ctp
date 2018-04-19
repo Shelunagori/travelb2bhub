@@ -378,11 +378,8 @@ label{
 				{
 					var low_rate=parseInt($('.low_rate').val());
 					//alert(low_rate);
-<<<<<<< HEAD
 					var high_rate=($('.high_rate').val());
-=======
-					var high_rate=parseInt($('.high_rate').val());
->>>>>>> origin/master
+
 					//alert(high_rate);
 					if(low_rate.length>high_rate.length)
 					{
