@@ -277,7 +277,7 @@ $conn = ConnectionManager::get('default');
 			$org_created=date('d-M-Y', strtotime($created));
 			?>
 
-			<div class="col-md-4" style="padding-top:10px;"> 
+			<div class="col-md-4" style="padding-top:15px;"> 
 				<fieldset>
 				<legend><?php echo @$image; ?></legend>
 				<span style="margin-top:-30px;float:right;"><?php echo $org_created; ?></span>

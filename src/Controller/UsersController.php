@@ -1996,6 +1996,7 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		$key = array();
 		$value = array();
 		$RefId = array();
+		$chatdata = array();
 		$loggedinid=$this->Auth->user('id');
 		$selectoption = array();
 		$conn = ConnectionManager::get('default');

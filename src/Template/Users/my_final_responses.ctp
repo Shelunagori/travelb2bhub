@@ -170,7 +170,7 @@ $conn = ConnectionManager::get('default');
 			foreach($responses as $row){
 			?>
 			<div id="cat" >
-			<div class="col-md-4" style="padding-top:10px;">
+			<div class="col-md-4" style="padding-top:15px;">
 			<?php 
                
 				if($row['request']['category_id']==1){ 

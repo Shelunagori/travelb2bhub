@@ -295,7 +295,7 @@ $(document).ready(function(){
 			if($m%3==0) { echo '<div class="clearfix"></div>'; }
 			$m++;
  			?>
-            <div class="col-md-4" style="padding-top:10px;">
+            <div class="col-md-4" style="padding-top:15px;">
 			<?php 
 				if($response['request']['category_id']==1){ 
 					$image=$this->Html->image('/img/slider/package-icon.png');
@@ -453,7 +453,7 @@ $(document).ready(function(){
                        <p> Comment :<span class="details"><?php echo mb_strimwidth($response['comment'], 0, 25, "...");?></span></p>
                      </li>
                    </ul>
-				   <hr></hr>
+				   <hr style="margin-top: 0px!important;"></hr>
 				   <div class="">
 					<table width="100%" border="0" >
 						<?php $id = $response['request']['id']; ?>
