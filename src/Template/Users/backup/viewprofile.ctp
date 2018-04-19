@@ -35,11 +35,13 @@
 <section class="content">
       <div class="row">
         <!-- left column -->
-        <div class="col-md-4">
+        <div class="col-md-12">
           <!-- general form elements -->
           <div class="box box-primary">
 			<div class="box-tools pull-right">
-		 
+			<?php if($users['id']==$loginid){?>
+				<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> Edit </a>
+			<?php } ?>
 			</div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -48,7 +50,7 @@
 			     
 					<div>
 						<div class="form-group">
-						<div class="form-group  text-center">
+						<div class="form-group col-md-4 text-center" style="border-right:2px solid #eee;height:320px;">
 							<?php
 							if($users['profile_pic']==""){
 								echo $this->Html->image('no-profile-image.jpg', ["alt"=>"Profile Pic", "height"=>110, 'style'=>'border-radius: 50%;',"width"=>110]); 
@@ -300,27 +302,12 @@
 						</div>
 						</font>
 				   </div>
-						</div>  
- 	</div>
-            </form>
+						</div> 
+ 
+		 
+		<div class="col-md-4" style="border-right:2px solid #eee;height:320px;"> 
 			
-          </div>      
-		  
-		 </div>
-      </div>  
-      </div>  
-<!-------------------second------------------------------------------------->
- <div class="col-md-4">
-          <!-- general form elements -->
-          <div class="box box-primary">
-			<div class="box-tools pull-right">
-			 
-			</div>
-            <!-- /.box-header -->
-            <!-- form start -->
-            <form role="form">
-              <div class="box-body">
-			      <div class="rating-block">
+			<div class="rating-block"><br>
 			<h4 style="color:#1295A2">Rating</h4>
 				<hr> 
 				<h5 >Average user rating &nbsp; <font color="#1295A2" ><?php echo number_format($average_rating,1);?> <small> ( <?php echo $testimonialcount;?> ) </font> </small>&nbsp; 
@@ -348,52 +335,28 @@
 				  $var = "star$i";
 				  $count = $$var;
 				   $percent = $count * 100 / $tot_stars;?>
-				   <div class="row" class="col-md-12" style="padding-top:15px;">
-				   <table width="100%" border="0">
-					<tr>
-					<td width="18%" align="right">	
-					<div class="col-md-12"  style="text-align:right;">
+				   <div class="row">
+					<div class="col-md-2" style="text-align:right;">
 						<div><?php echo $i;?> 
 						<span <?php if($average_rating==$i OR $average_rating>$i){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
 						</div>
 					</div>
-					</td>
-					<td width="70%">	
-					<div class="col-md-8" style="padding-right: 0px !important;width:100% !important;">
-						<div class="progress" style="height:13px !important;margin-bottom:2px !important;">         
+					<div class="col-md-8" style="padding-right: 0px !important;">
+						<div class="progress" style="height:13px !important;">         
 							<div <?php if($average_rating==$i OR $average_rating>$i){ ?>style="width: 100%; height: 13px; background-color: #1295AB;border-radius:9px;"<?php } ?>></div>	
 						</div>
 					</div>
-					</td>
-					<td width="7%" align="left">	
-					<div class="col-md-2" ><?php if($average_rating==$i OR 	$average_rating>$i){ echo "100"; }else{ echo "0"; }  ?>%
+					<div class="col-md-2"  ><?php if($average_rating==$i OR 	$average_rating>$i){ echo "100"; }else{ echo "0"; }  ?>%
 					</div>
-					</td>
-					</tr>
-					</table>
 					</div>
 				  <?php }?> 
 				   </div> 
 				
 			</div>
-		 </div>
-      </div>  
-      </div>		  
-      		  
-<!-------------------second------------------------------------------------->		  
-<!-------------------third------------------------------------------------->	
-
-
-<div class="col-md-4">
-          <!-- general form elements -->
-          <div class="box box-primary">
-			<div class="box-tools pull-right">
-			<?php if($users['id']==$loginid){?>
-				<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> Edit </a>
-			<?php } ?>
-			</div> 
-              <div class="box-body">
-			     <?php  if($testimonialcount > 0) { 
+ 		</div> 
+		<div class="col-md-4">
+		 
+		<?php  if($testimonialcount > 0) { 
 			?>
 			<h4 style="color:#1295A2">Review</h4>
 				<hr></hr>
@@ -497,13 +460,15 @@
 				</div>
 			</div>
 			<?php
-		}?>    
-		  
-		 </div>
-      </div>  
-      </div>	  
-<!-------------------third------------------------------------------------->		  
-     </div>  
+		}?>
+				 
+		</div>
+ 	</div>
+            </form>
+			
+          </div>      
+        </div>
+      </div>
       <!-- /.row -->
 			 
 			<span style="font-size:18px; padding:10px;padding-top:10px;color:#373435 !important;"><b>Description</b></span>
@@ -517,10 +482,12 @@
 				</div>
 			 
 		 <?php if($users['role_id'] == 1){ ?>
-			 
-			<span style="font-size:18px; padding:10px;padding-top:10px;color:#373435 !important;"><b>Certificates</b></span>
-				<div class="box-body box">
+			<div class="box box-primary">
+			<span style="font-size:18px;padding-top:10px">Certificates</span>
+			<hr style="margin-top:2px !important"></hr>
+				<div class="box-body">
 					<div>
+						
 						<div class="col-md-12 responsive" width="100%" height="100px" style="overflow-x: scroll;">
 							<div class="img_show col-md-2" align="center">
 								<?php if(!empty($users['iata_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iata_pic'])>0) { 
@@ -612,12 +579,13 @@
 						</div>
 					</div>
 				</div>
+			</div>
 		 <?php } ?>
 			
-				<span style="font-size:18px; padding:10px;padding-top:10px;color:#373435 !important;">
-					<b>Office Photographs</b>
-				</span>
-				<div class="box-body box">
+			<div class="box box-primary">
+				<span style="font-size:18px; padding:10px;padding-top:10px">Office Photographs</span>
+				<hr style="margin-top:2px !important"></hr>
+				<div class="box-body">
 					<div>
 						<div class="form-group col-md-12">
 							<div class="col-md-4">
@@ -640,6 +608,10 @@
 						</div>
 					</div>
 				</div>
+			</div>
+		 
+		
+		
     </section>
 	
  
