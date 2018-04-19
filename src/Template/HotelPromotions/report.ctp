@@ -213,7 +213,7 @@ a{
 								<div class="row form-group margin-b10">
 									<div class=col-md-12>
 										 <div class=col-md-4>
-										  <label class="col-form-label"for=example-text-input>Select Hotel Category : </label>
+										  <label class="col-form-label"for=example-text-input>Select Hotel Category:  </label>
 										  </div> 
 										 <div class=col-md-7>
 										<?php $options=array();
@@ -228,7 +228,7 @@ a{
 									<div class="row form-group margin-b10">
 										<div class=col-md-12>
 										  <div class=col-md-4>
-										 <label class="col-form-label" for=example-text-input>Select Hotel Rating :</label>
+										 <label class="col-form-label" for=example-text-input>Select Hotel Rating: </label>
 										 </div> 
 										 <div class=col-md-7>
 											<select name="rating_filter" class="form-control select2">
@@ -245,7 +245,7 @@ a{
 									<div class="row form-group margin-b10">
 										<div class=col-md-12>
 										  <div class=col-md-4>
-										 <label class="col-form-label" for=example-text-input>Room Price Range : </label>
+										 <label class="col-form-label" for=example-text-input>Room Price Range:  </label>
 										 </div> 
 										 <div class=col-md-7>
 											<select name="starting_price" class="form-control">
@@ -301,7 +301,7 @@ a{
 				<input type="hidden" name="hotelpromotion_id" value="<?php echo $hotelPromotion->id; ?>">
 					<div class="row">
 						<div class="col-md-12" style="padding-top:5px;">
-						<span style="font-size:16px;">	<?php echo $hotelPromotion->hotel_name.' ( <i class="fa fa-star" style="color:#efea65;"></i> '.$hotelPromotion->hotel_rating.' Star Hotel )';?></span>
+						<span style="font-size:16px;">	<?php echo $hotelPromotion->hotel_name.' ( <i class="fa fa-star" style="color:#959595;"></i> '.$hotelPromotion->hotel_rating.' Star Hotel )';?></span>
 						</div>
 					</div>
 					<span class="help-block"></span>
@@ -421,24 +421,24 @@ a{
 							<div class="col-md-9">
 								<div class="col-md-5">
 										<div class="row rowspace">
-											<div class="col-md-12"><label>Category :</label>
+											<div class="col-md-12"><label>Category: </label>
 												<span><?= h($hotelPromotion->hotel_category->name); ?></span>
 											</div>
 										</div>
 										<div class="row rowspace">
-											<div class="col-md-12"><label>Cheapest Room :</label>
+											<div class="col-md-12"><label>Cheapest Room: </label>
 											<span style="color:#1295AB">&#8377;<?= (h($hotelPromotion->cheap_tariff)) ?></span>
 											</div>
 										</div>
 									<div class="row rowspace">
-										<div class="col-md-12"><label>Most Expensive Room :</label>
+										<div class="col-md-12"><label>Most Expensive Room: </label>
 										<span style="color:#1295AB">&#8377;<?= (h($hotelPromotion->expensive_tariff)) ?></span>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-7">
 								<div class="row rowspace">
-										<div class="col-md-12 "><label><?= __(' Hotelier') ?> :</label>	
+										<div class="col-md-12 "><label><?= __(' Hotelier') ?>: </label>	
 										<span><u>
 												<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$hotelPromotion->user_id),1);?>
 												<a style="color:#d69d5c;" href="<?php echo $hrefurl; ?>"> 
@@ -449,19 +449,19 @@ a{
 													echo "";
 												}
 												else{
-														echo "(".$hotelPromotion->user_rating." <i class='fa fa-star'></i> )";
+														echo "(".$hotelPromotion->user_rating." <i class='fa fa-star'></i>)";
 													}
 												?></a>
 											</span>
 										</div>					
 									</div>
 									<div class="row rowspace">
-										<div class="col-md-12"><label><?= __(' Website') ?> :</label>
+										<div class="col-md-12"><label><?= __(' Website') ?>: </label>
 										<span ><a style="color:blue;" href="http://<?php echo $hotelPromotion->website; ?>" target="blank"><u><?= h($hotelPromotion->website) ?></u></a> </span>
 										</div>
 									</div>
 									<div class="row rowspace">
-										<div class="col-md-12"><label><?= __(' Location') ?> :</label>
+										<div class="col-md-12"><label><?= __(' Location') ?>: </label>
 										<span ><?= h($hotelPromotion->hotel_location) ?></span>
 										</div>
 									</div>
@@ -487,7 +487,7 @@ a{
 																		<span class="help-block"></span>
 																		<div class="row ">
 																		<div class="col-md-12">
-																			<label>Seller Name :</label>
+																			<label>Seller Name: </label>
 																			<span style="padding-top:2px;">
 																				<u>
 																					<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$hotelPromotion->user_id),1);?>
@@ -499,7 +499,7 @@ a{
 																						echo "";
 																					}
 																					else{
-																							echo "(".$hotelPromotion->user_rating." <i class='fa fa-star'></i> )";
+																							echo "(".$hotelPromotion->user_rating." <i class='fa fa-star'></i>)";
 																						}
 																					?></a>
 																				</span>
@@ -507,13 +507,13 @@ a{
 																		</div>					
 																		<div class="row ">
 																			<div class="col-md-12">
-																			<label>Mobile No :</label>
+																			<label>Mobile No: </label>
 																			<span><?= h($hotelPromotion->user->mobile_number);?></span>
 																			</div>
 																		</div>
 																		<div class="row ">
 																			<div class="col-md-12">
-																				<label>Email :</label>
+																				<label>Email: </label>
 																				<span><a href="mailto:<?php echo $hotelPromotion->user->email;?>"><?= h($hotelPromotion->user->email);?></a></span>
 																				</div>
 																		</div>

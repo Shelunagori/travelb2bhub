@@ -137,10 +137,12 @@ a{
 								
 							?>
 				<form method="post" class="formsubmit">
-							<div class="row">
+							<div class="row" style="padding-top:5px;">
 								<div class="col-md-12">
-									<h3><?= h($eventPlannerPromotion->user->company_name) ?></h3>
+									<span style="font-size:18px;"><?= h($eventPlannerPromotion->user->company_name) ?></span>
+									</div>
 								</div>
+								<span class="help-block"></span>
 							<div class="row">
 							<div class="col-md-12">
 								<div class="col-md-3">
@@ -155,7 +157,7 @@ a{
 											</div>
 										</div>
 									</div>
-								</div>
+								</div><hr></hr>
 								<input type="hidden" name="event_id" value="<?php echo $eventPlannerPromotion->id; ?>">
 									<div class="row" style="padding-top:5px;">
 									<table  width="100%" style="text-align:center;" >
@@ -280,27 +282,27 @@ a{
 										</table>
 									</div>
 								</div>
-							<div class="col-md-9">
+							<div class="col-md-9 " style="padding-top:5px;">
 								<div class="col-md-6">
 									<div class="row rowspace">
-										<div class="col-md-12 "><label>Cities of Operation :</label>
+										<div class="col-md-12 "><label>Cities of Operation: </label>
 										<span ><?= h($cityList); ?></span>
 										</div>
 									</div>
 									<div class="row rowspace">
-										<div class="col-md-12 "><label>States of Operation </label>
+										<div class="col-md-12 "><label>States of Operation: </label>
 										<span class=""><?= h($stateList); ?></span>
 										</div>
 									</div>
 								</div>			
 									<div class="col-md-6">
 										<div class="row rowspace">
-											<div class="col-md-12 "><label>Country :</label>
+											<div class="col-md-12 "><label>Country: </label>
 											<span class=""><?= h($eventPlannerPromotion->country->country_name);?></span>
 											</div>
 										</div>
 										<div class="row rowspace">
-											<div class="col-md-12 "><label>Event Planner :</label>
+											<div class="col-md-12 "><label>Event Planner: </label>
 											<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$eventPlannerPromotion->user_id),1);?>
 													<span><u><a style="color:#d69d5c;" href="<?php echo $hrefurl; ?>"> 
 														<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?></u>
@@ -340,7 +342,7 @@ a{
 												<span class="help-block"></span>
 												<div class="row">
 													<div class="col-md-12">
-														<label>Seller Name :</label>
+														<label>Seller Name: </label>
 															<span style="padding-top:2px;">
 															<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$eventPlannerPromotion->user_id),1);?>
 															<u><a style="color:#d69d5c;" href="<?php echo $hrefurl; ?>"> 
@@ -360,13 +362,13 @@ a{
 												</div>
 												<div class="row">
 													<div class="col-md-12" >
-													<label>Mobile No :</label>
+													<label>Mobile No: </label>
 													<span class="label11"><?= h($eventPlannerPromotion->user->mobile_number);?></span>
 													</div>
 												</div>
 												<div class="row">
 													<div class="col-md-12" style="padding-top:2px;">
-														<label>Email :</label>
+														<label>Email: </label>
 														<span class="label11"><a href="mailto:<?php echo $eventPlannerPromotion->user->email;?>"><?= h($eventPlannerPromotion->user->email);?></a></span>
 													</div>
 												</div>
@@ -378,7 +380,6 @@ a{
 										</div>
 									</div>
 								</div>
-							</div>
 						</form>
 						<hr></hr>					
 						<div class="row">
@@ -390,6 +391,7 @@ a{
 							<div class="col-md-12">
 								<?= (h($eventPlannerPromotion->event_detail)); ?>
 							</div>
+						</div>
 						</div>
 					<?php }?>
 			</div> 

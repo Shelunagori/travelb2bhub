@@ -151,7 +151,7 @@ $m=0;
 								</a>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-								Likes : &nbsp;
+								Likes :
 								<a type="button" href="likers_list/<?php echo $texifleetpromotion->id ; ?>" style="border-radius:10px; width:53px; background-color: #FFF !important;color: #1295AB !important; border: 1px solid; padding-top: 2px;padding-bottom: 3px" class="btn btn-md">
 									<?php echo $texifleetpromotion->total_likes;?>
 								</a> 
@@ -242,7 +242,7 @@ $m=0;
 									  <div class="modal-header" style="height:100px;">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 											<h4 class="modal-title">
-											Are you sure ? You want to delete this Promotion
+											Are you sure you want to delete this Promotion?
 											</h4>
 										</div>
 										<div class="modal-footer" style="height:60px;">

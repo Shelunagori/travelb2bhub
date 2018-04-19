@@ -188,13 +188,11 @@ fieldset{
 								<div class="col-md-6 form-group">
 									<p for="from">
 										Country
-										<span class="required">*</span>
 									</p>
 									<div class="input-field">
 									 <?php $options=array();
 										$options[] = ['value'=>'101','text'=>'India'];
-										echo $this->Form->input('country_id',["class"=>"form-control requiredfield" ,'options' => $options,'label'=>false]);?>
-										<label style="display:none" class="helpblock error" > This field is required.</label>
+										echo $this->Form->input('country_id',["class"=>"form-control " ,'options' => $options,'label'=>false]);?>
 									</div>
 								</div>
 								<div class="col-md-6 form-group">
@@ -252,11 +250,7 @@ fieldset{
 							<div class="col-md-12">
 								<div class="col-md-12 form-group">
 									<p>Enter Description of Your Company </p>
-<<<<<<< HEAD
-									<?php echo $this->Form->textarea('event_detail', ['class'=>'form-control requiredfield','label'=>false,'rows'=>3,'style'=>'resize:none','requiredfield']); ?> 	 
-=======
 									<?php echo $this->Form->textarea('event_detail', ['class'=>'form-control requiredfield','label'=>false,'rows'=>3,'style'=>'resize:none']); ?> 	 
->>>>>>> origin/master
 									<label style="display:none" class="helpblock error" > This field is required.</label>
 								</div>
 							</div>

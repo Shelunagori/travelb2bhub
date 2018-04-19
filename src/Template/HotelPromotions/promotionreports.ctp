@@ -245,11 +245,11 @@ $m=0;
 									  <div class="modal-header" style="height:100px;">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 											<h4 class="modal-title">
-											Are you sure ? You want to delete this Promotion
+											Are you sure you want to delete this Promotion?
 											</h4>
 										</div>
 										<div class="modal-footer" style="height:60px;">
-											<button type="submit" name="removepackage"  class=" btn btn-success btn-md" value="yes" name="remove_promotion">Yes</button>
+											<button type="submit" name="removepackage"  class="unfollow btn btn-success btn-md" value="yes" name="remove_promotion">Yes</button>
 											<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
 										</div>
 									</div>

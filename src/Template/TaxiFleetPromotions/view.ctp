@@ -139,10 +139,12 @@ a{
 										}
 										?>
 				<form method="post" class="formSubmit">
-							<div class="row">
-								<div class="col-md-12">
-									<h3><?= h($taxiFleetPromotion->title) ?></h3>
+							<div class="row" style="padding-top:5px;">
+								<div class="col-md-12" >
+									<span style="font-size:18px;"><?= h($taxiFleetPromotion->title) ?></span>
 								</div>
+							</div>
+							<span class="help-block"></span>	
 							<div class="row">
 							<div class="col-md-12">
 							<div class="col-md-3">
@@ -364,7 +366,6 @@ a{
 								</div>
 							</div>
 						</div>
-						</div>
 						<hr></hr>	<span class="help-block"></span>					
 						<div class="row">
 						<div class="col-md-12">
@@ -375,6 +376,7 @@ a{
 						<div class="col-md-12">
 							<?= (h($taxiFleetPromotion->fleet_detail)); ?>
 						</div>
+					</div>
 					</div>
 					</form>
 					<?php endforeach; ?>

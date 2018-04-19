@@ -76,7 +76,7 @@ fieldset{
 	pading-bottom:10px!important;
 }
 label {
-	font-weight : 300 !important;
+	font-weight:  300 !important;
 }
 .btn-defaults {
 	background-color: #ffffff !important;
@@ -147,25 +147,25 @@ $m=0;
 							<span style="color:black;font-size:17px;"><?php echo $eventplanner->event_detail?></span>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-							Views :
+							Views: 
 								<!--<a  style="color:#1295AB;" href="viewers_list/<?php echo $eventplanner->id?>"><label><?php echo $eventplanner->total_views;?></label></a>--->
 								<a type="button" href="viewers_list/<?php echo $eventplanner->id; ?>" style="border-radius:10px; width:53px; background-color: #FFF !important;color: #1295AB !important; border: 1px solid; padding-top: 2px;padding-bottom: 3px" class="btn btn-md">
 									<?php echo $eventplanner->total_views;?>
 								</a>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-								Likes : &nbsp;
+								Likes:  &nbsp;
 								<a type="button" href="likers_list/<?php echo $eventplanner->id ; ?>" style="border-radius:10px; width:53px; background-color: #FFF !important;color: #1295AB !important; border: 1px solid; padding-top: 2px;padding-bottom: 3px" class="btn btn-md">
 									<?php echo $eventplanner->total_likes;?>
 								</a> 
 							</div>
 							
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-							Date Posted :
+							Date Posted: 
 							<label style="color:black;"><?php echo date('d-M-y',strtotime($eventplanner->created_on));?></label>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-							Expiring On :
+							Expiring On: 
 							<label style="color:#FB6542;"><?php echo date('d-M-y',strtotime($eventplanner->visible_date));?></label>
 							</div>
 						</div>
@@ -246,7 +246,7 @@ $m=0;
 									  <div class="modal-header" style="height:100px;">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 											<h4 class="modal-title">
-											Are you sure ? You want to delete this Promotion
+											Are you sure you want to delete this Promotion?
 											</h4>
 										</div>
 										<div class="modal-footer" style="height:60px;">
