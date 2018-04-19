@@ -301,7 +301,34 @@ p {
 		background-size: 250px 47px;
 	}
 }
- 
+@media all and (max-width: 770px) {
+	.innav{
+		display:block !important;
+		width:auto !important;
+		float: left !important;
+		margin-top: -3px !important;
+	}
+	.content-wrapper{
+		padding-top: 50px !important;
+	}
+	.outnav{
+		display:none !important;
+	}
+}
+@media all and (min-width: 770px) {
+	.innav{
+		display:none !important;
+	}
+	.outnav{
+		display:block !important;
+	}
+}
+@media all and (max-width: 770px) {
+	.dropdown-menu{
+ 		width:auto !important;
+ 	}
+}
+
 </style>
 </head>
 <!--<body class="hold-transition skin-blue fixed sidebar-mini">-->
@@ -318,7 +345,7 @@ p {
 <div id="wrapper">
 	<header class="main-header  no-print">
     <!-- Logo background: #1295a2; -->
-    <a style="line-height: 60px;" href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo" >
+    <a style="line-height: 56px;" href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo outnav" >
       <span class="logo-mini" style="font-size:0px !important;"><?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:77%;']) ?></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg" style="font-size:0px !important;"><?=  $this->Html->image('/img/main_logo.png', ['style'=>'width:92%;','class'=>'image-responsive']) ?></span>
@@ -329,7 +356,11 @@ p {
       <a href="#" style="font-size: 16px;margin-top:0px !important" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
-
+	<a style="line-height: 60px;" href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo innav" >
+      <span class="logo-mini" style="font-size:0px !important;"><?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:77%;']) ?></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg" style="font-size:0px !important;"><?=  $this->Html->image('/img/main_logo.png', ['style'=>'width:92%;','class'=>'image-responsive']) ?></span>
+    </a>
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav" style="padding-top: 2px !important;">
           <!-- Notifications: style can be found in dropdown.less -->
@@ -666,48 +697,35 @@ date.setDate(date.getDate());
 $('.date-picker').datepicker({
 	minDate:0,
 	startDate: date,
-	autoclose:false
+	autoclose:true
 });
 $('.datepicker').datepicker({
 	minDate:0,
 	startDate: date,
-	autoclose:false
+	autoclose:true
 });
-$('.datepickers').datepicker({autoclose:false});
+$('.datepickers').datepicker({autoclose:true});
 //--
 $('.datepickers').click(function(){
-	$(this).datepicker({autoclose:false});
+	$(this).datepicker({autoclose:true});
 });
 
 $('.datepicker').click(function(){
 	$(this).datepicker({
 		minDate:0,
 		startDate: date,
-		autoclose:false
+		autoclose:true
 	});
 });
 
-$('.date-picker').click(function(){
-	$(this).datepicker({
-		minDate:0,
-		startDate: date,
-		autoclose:false
-	});
-});
-/*$(document).on('click','.datepickers',datepicker({autoclose:false}));
-$(document).on('click','.datepicker',datepicker({autoclose:false,minDate:0,startDate: date,}));
-$(document).on('click','.date-picker',datepicker({autoclose:false,minDate:0,startDate: date,}));*/
-<!--$(".wysihtml5textarea").wysihtml5({useLineBreaks: true,tabSpaces: 4});-->
+
 $(".txtEditor").Editor({
 	'source':true,
 	'togglescreen':false,
 	'rm_format':false,
 	'insert_img':false,
 });
-
-/* $(".timepicker").timepicker({
-    showInputs: false
-}); */
+ 
 
  
 </script>
