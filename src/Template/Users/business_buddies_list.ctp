@@ -48,7 +48,7 @@
 							
 								 <div class="col-md-3">
   
-									<b>Name :</b> <a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></a>
+									<b>Name: </b> <a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></a>
 									<?php if($final_rating>0){ ?>
 										<font color="#1295AB">(<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font> 
 									<?php } ?> 
@@ -56,12 +56,12 @@
 									
 								</div>
 								<div class="col-md-3">
-								<b>Company Name :</b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?>
+								<b>Company Name: </b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?>
 							 
  
 								</div>
 								<div class="col-md-3">
-								<b>Website :</b> <?php echo ($row['user']['web_url'])?$row['user']['web_url']:"-- --"; ?> 
+								<b>Website: </b> <?php echo ($row['user']['web_url'])?$row['user']['web_url']:"-- --"; ?> 
 								</div>
 								<div class="col-md-3" align="left" >
   
@@ -75,7 +75,7 @@
 															  <div class="modal-header"  >
 																	<button type="button" class="close" data-dismiss="modal">&times;</button>
 																	<h4 class="modal-title"  align="left">
-																	Are You Sure, you want to Unfollow ?
+																	Are you sure you want to unfollow this user?
 																	</h4>
 																</div>
 																<div class="modal-footer" >
@@ -87,6 +87,7 @@
 													</div>
 												</div>
 											<!-------Delete Modal End--------->
+											
 								</div>
 							</div>
 						</div><hr></hr>

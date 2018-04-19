@@ -51,23 +51,23 @@ $conn = ConnectionManager::get('default');
 									<?php 
 										$hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$row['user']['id']));
 									?>
-									<b>Name :</b>
+									<b>Name: </b>
 									<a href="<?php echo $hrefurl; ?>"> <?php echo $row['user']['first_name']; ?>&nbsp;<?php echo $row['user']['last_name']; ?></a>
 									<font color="#1295AB">(<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font>
 								</div>
 								<div class="col-md-3">
-									<b>Email :</b> <?php echo ($row['user']['email'])?$row['user']['email']:"-- --"; ?>
+									<b>Email: </b> <?php echo ($row['user']['email'])?$row['user']['email']:"-- --"; ?>
 								</div>
 								<!--div class="col-md-3">
-									<b>Mobile No. :</b> <?php echo ($row['user']['mobile_number'])?$row['user']['mobile_number']:"-- --"; ?>
+									<b>Mobile No.: </b> <?php echo ($row['user']['mobile_number'])?$row['user']['mobile_number']:"-- --"; ?>
 								</div-->
 								<div class="col-md-3">
-									<b>Company Name :</b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?>
+									<b>Company Name: </b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?>
 								</div>
 								<div class="col-md-3"  align="left">
 									<!--a href="javascript:void(0);" class="unblockUser btn btn-success btn-sm" user_id = "<?php //echo $row['user']['id']; ?>" > Unfollow</a-->
-									
-									<a style="margin-top: 7px !important;" data-toggle="modal" class="btn btn-success btn-sm" data-target="#block<?php echo $row['user']['id']; ?>"  > Unblock User </a>
+							 
+							<a style="margin-top: 2px !important;" data-toggle="modal" class="btn btn-success btn-xs" data-target="#block<?php echo $row['user']['id']; ?>"  > Unblock User </a>
 							<!-------Contact Details Modal --------->
 							<div id="block<?php echo $row['user']['id']; ?>" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-md" >
@@ -76,7 +76,7 @@ $conn = ConnectionManager::get('default');
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<h3 class="modal-title">
-													<h4 align="left"><font color="green">Are you sure you want to Unblock this user ?</font></h4>
+													<h4 align="left"><font color="black">Are you sure you want to Unblock this user?</font></h4>
 												</h3>
 											</div>
 												<div class="modal-footer">
@@ -86,8 +86,11 @@ $conn = ConnectionManager::get('default');
 											</div>
 										</div>
 									</div>
-								</div>
-							</div>
+ 								</div>
+							
+ 							</div>
+							<div class="col-md-12"><hr></hr></div>
+							
 								<?php } ?>
 							
 						</div>
@@ -100,22 +103,22 @@ $conn = ConnectionManager::get('default');
 				 <ul>
                     <li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <p>
-                            <b>Name :</b> <?php echo $row['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $row['user']['last_name']; ?>
+                            <b>Name: </b> <?php echo $row['user']['first_name']; ?>&nbsp;&nbsp;<?php echo $row['user']['last_name']; ?>
                         </p>
                      </li>
 					<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <p>
-                            <b>Email :</b> <?php echo ($row['user']['email'])?$row['user']['email']:"-- --"; ?>
+                            <b>Email: </b> <?php echo ($row['user']['email'])?$row['user']['email']:"-- --"; ?>
                         </p>
                      </li>
 					<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <p>
-                            <b>Mobile No. :</b> <?php echo ($row['user']['mobile_number'])?$row['user']['mobile_number']:"-- --"; ?>
+                            <b>Mobile No.: </b> <?php echo ($row['user']['mobile_number'])?$row['user']['mobile_number']:"-- --"; ?>
                         </p>
                      </li>
 					<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <p>
-                            <b>Company Name :</b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?>
+                            <b>Company Name: </b> <?php echo ($row['user']['company_name'])?$row['user']['company_name']:"-- --"; ?>
                         </p>
                      </li>
                  </ul>

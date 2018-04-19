@@ -48,19 +48,19 @@ ul li b {
 			<br>
 				<div class="head_of_popup"><span style="color:#1295A2;font-weight: 100;font-size:18px">General Requirements</span></div>
 				<ul>
-					<li class="col-md-6"><p>Reference ID : &nbsp;<span style="color:#FB6542"><?php
+					<li class="col-md-6"><p>Reference ID:  &nbsp;<span style="color:#FB6542"><?php
 					echo $details['reference_id']; ?></span></li>
  
 					<?php $total_budget=round($details['total_budget']);  ?>
-					<li class="col-md-6"><p>Total Budget : &nbsp;
+					<li class="col-md-6"><p>Total Budget:  &nbsp;
 					<span style="color:#1295A2">  &#8377;
-						<?php echo ($total_budget)? "". ($total_budget) :"-- --" ?>
+						<?php echo ($total_budget)? "". ($total_budget): "-- --" ?>
 					</span>
 					</li>
   
- 					<li class="col-md-6"><p>Adult : &nbsp; <?php
+ 					<li class="col-md-6"><p>Adult:  &nbsp; <?php
 					echo "<b>".$details['adult']."</b>"; ?></li>
-					<li class="col-md-6"><p>Children below 6 : &nbsp; <b><?php
+					<li class="col-md-6"><p>Children below 6:  &nbsp; <b><?php
 					echo $details['children']; ?></b></li>
 				</ul>
 			 </div>
@@ -88,7 +88,7 @@ ul li b {
 						<table >
 						<tr style="background-color:#ECF0F5 !important;">
 						<td>
-						<li class="col-md-4"><p>Single :&nbsp;
+						<li class="col-md-4"><p>Single: &nbsp;
 						<b>
 						<?php
 						if ($row['room1'] != '')
@@ -101,7 +101,7 @@ ul li b {
 						} ?>
 						</b>
 						</li>
-						<li class="col-md-4"><p>Double :&nbsp;
+						<li class="col-md-4"><p>Double: &nbsp;
 						<b>
 						<?php
 						if ($row['room2'] != '')
@@ -115,7 +115,7 @@ ul li b {
 						</li>
 						
 						
-						<li class="col-md-4"><p>Triple :&nbsp;
+						<li class="col-md-4"><p>Triple: &nbsp;
 						<b>
 						<?php
 						if ($row['room3'] != '')
@@ -128,7 +128,7 @@ ul li b {
 						} ?>
 						</b>
 						</li>
-						<li class="col-md-6"><p>Child With Bed :&nbsp;
+						<li class="col-md-6"><p>Child With Bed: &nbsp;
 						<b>
 						<?php
 						if ($row['child_with_bed'] != '')
@@ -141,7 +141,7 @@ ul li b {
 						} ?>
 						</b>
 						</li>
-						<li class="col-md-6"><p>Child Without Bed :&nbsp;
+						<li class="col-md-6"><p>Child Without Bed: &nbsp;
 						<b>
 						<?php
 						if ($row['child_without_bed'] != '')
@@ -157,7 +157,7 @@ ul li b {
 						</td>
 						</tr>
 						</table>
-						<li class="col-md-12"><p>Hotel Category :&nbsp;
+						<li class="col-md-12"><p>Hotel Category: &nbsp;
 						<b>
 						<?php
 						if (!empty($row['hotel_category']))
@@ -182,7 +182,7 @@ ul li b {
 						} ?>
 						</b>
 						</li>
-						<li class="col-md-6"><p>Hotel Rating :&nbsp;
+						<li class="col-md-6"><p>Hotel Rating: &nbsp;
 						<?php
 						if ($row['hotel_rating'] > 0)
 						{
@@ -196,27 +196,27 @@ ul li b {
 						}
 						?>
 						</li>
-						<li class="col-md-6"><p>Meal :&nbsp;
+						<li class="col-md-6"><p>Meal: &nbsp;
 						<b>
 						<?php
-						echo ($row['meal_plan']) ? $mealPlanArray[$row['meal_plan']] : "-- --"; ?>
+						echo ($row['meal_plan']) ? $mealPlanArray[$row['meal_plan']]:  "-- --"; ?>
 						</b></li>
-						<li class="col-md-6"><p>Check In :&nbsp; <b><?php
-						echo ($row['check_in']) ? date("d-m-Y", strtotime($row['check_in'])) : "-- --"; ?>
-						</b></li>
-						<li class="col-md-6">
-							<p>Check Out :&nbsp;<b><?php
-						echo ($row['check_out']) ? date("d-m-Y", strtotime($row['check_out'])) : "-- --"; ?>
-						</b></li>
-						<li class="col-md-6"><p>Locality :&nbsp;<b><?php
-						echo ($row['locality']) ? $row['locality'] : "-- --"; ?>
+						<li class="col-md-6"><p>Check In: &nbsp; <b><?php
+						echo ($row['check_in']) ? date("d-m-Y", strtotime($row['check_in'])):  "-- --"; ?>
 						</b></li>
 						<li class="col-md-6">
-							<p>Destination City :&nbsp;<b><?php
-						echo ($row['city_id']) ? $allCities[$row['city_id']] : "-- --"; ?>
+							<p>Check Out: &nbsp;<b><?php
+						echo ($row['check_out']) ? date("d-m-Y", strtotime($row['check_out'])):  "-- --"; ?>
 						</b></li>
-						<li class="col-md-6"><p>Destination State :&nbsp;<b><?php
-						echo ($row['state_id']) ? $allStates[$row['state_id']] : "-- --"; ?>
+						<li class="col-md-6"><p>Locality: &nbsp;<b><?php
+						echo ($row['locality']) ? $row['locality']:  "-- --"; ?>
+						</b></li>
+						<li class="col-md-6">
+							<p>Destination City: &nbsp;<b><?php
+						echo ($row['city_id']) ? $allCities[$row['city_id']]:  "-- --"; ?>
+						</b></li>
+						<li class="col-md-6"><p>Destination State: &nbsp;<b><?php
+						echo ($row['state_id']) ? $allStates[$row['state_id']]:  "-- --"; ?>
 						</b></ul>
 					</fieldset>	 
 						<?php
@@ -230,19 +230,19 @@ ul li b {
 				    <div class="head_of_popup"><span style="color:#1295A2;font-weight: 100;font-size:18px">Transport Requirements</span></div>
 			<ul>
 				<li class="col-md-12 ">
-				<p>Transport :&nbsp;
+				<p>Transport: &nbsp;
 					<b><?php
-					echo ($details['transport_requirement']) ? $transpoartRequirmentArray[$details['transport_requirement']] : "-- --"; ?>
+					echo ($details['transport_requirement']) ? $transpoartRequirmentArray[$details['transport_requirement']]:  "-- --"; ?>
 				</b></p>
 				</li>
 				<li class="col-md-6">
-				<p>Start Date :&nbsp;<b><?php
-					echo ($details['start_date']) ? date("d-m-Y", strtotime($details['start_date'])) : "-- --"; ?>
+				<p>Start Date: &nbsp;<b><?php
+					echo ($details['start_date']) ? date("d-m-Y", strtotime($details['start_date'])):  "-- --"; ?>
 				</b></p>
 				</li>
 				<li class="col-md-6">
-				<p>End Date :&nbsp;<b><?php
-					echo ($details['end_date']) ? date("d-m-Y", strtotime($details['end_date'])) : "-- --"; ?>
+				<p>End Date: &nbsp;<b><?php
+					echo ($details['end_date']) ? date("d-m-Y", strtotime($details['end_date'])):  "-- --"; ?>
 				</b></p>
 				</li>
 				<li class="col-md-12" style="color:#6B7120;margin-top:10px;">
@@ -250,18 +250,18 @@ ul li b {
 					<hr style="margin-bottom:-1px !important;margin-top: 3px!important;" />
 				</li>
 				<li class="col-md-6">
-				<p>Pickup Locality :&nbsp;<b><?php
-				echo ($details['pickup_locality']) ? $details['pickup_locality'] : "-- --"; ?>
+				<p>Pickup Locality: &nbsp;<b><?php
+				echo ($details['pickup_locality']) ? $details['pickup_locality']:  "-- --"; ?>
 				</b></p>
 				</li>
 				<li class="col-md-6">
-				<p>Pickup City :&nbsp;<b><?php
-				echo ($details['pickup_city']) ? $allCities[$details['pickup_city']] : "-- --"; ?>
+				<p>Pickup City: &nbsp;<b><?php
+				echo ($details['pickup_city']) ? $allCities[$details['pickup_city']]:  "-- --"; ?>
 				</b></p>
 				</li>
 				<li class="col-md-6">
-				<p>Pickup State :&nbsp;<b><?php
-				echo ($details['pickup_state']) ? $allStates[$details['pickup_state']] : "-- --"; ?>
+				<p>Pickup State: &nbsp;<b><?php
+				echo ($details['pickup_state']) ? $allStates[$details['pickup_state']]:  "-- --"; ?>
 				</b></p>
 				</li>
 				<?php
@@ -276,18 +276,18 @@ ul li b {
 						<hr style="margin-bottom:-1px !important;margin-top: 3px!important;" />
 					</li>
 						<li class="col-md-6">
-							<p>Stop Locality :&nbsp;<b><?php
-								echo ($stops['locality']) ? $stops['locality'] : "-- --"; ?>
+							<p>Stop Locality: &nbsp;<b><?php
+								echo ($stops['locality']) ? $stops['locality']:  "-- --"; ?>
 							</b></p>
 						</li>
 						<li class="col-md-6">
-							<p>Stop City :&nbsp;<b><?php
-								echo ($stops['city_id']) ? $allCities[$stops['city_id']] : "-- --"; ?>
+							<p>Stop City: &nbsp;<b><?php
+								echo ($stops['city_id']) ? $allCities[$stops['city_id']]:  "-- --"; ?>
 							</b></p>
 						</li>
 						<li class="col-md-6">
-							<p>Stop State :&nbsp;<b><?php
-								echo ($stops['state_id']) ? $allStates[$stops['state_id']] : "-- --"; ?>
+							<p>Stop State: &nbsp;<b><?php
+								echo ($stops['state_id']) ? $allStates[$stops['state_id']]:  "-- --"; ?>
 							</b></p>
 						</li>
 						<?php
@@ -299,18 +299,18 @@ ul li b {
 					<hr style="margin-bottom:-1px !important;margin-top: 3px!important;" />
 				</li>
 				<li class="col-md-6">
-					<p>Final Locality :&nbsp;<b><?php
-						echo ($details['final_locality']) ? $details['final_locality'] : "-- --"; ?>
+					<p>Final Locality: &nbsp;<b><?php
+						echo ($details['final_locality']) ? $details['final_locality']:  "-- --"; ?>
 					</b></p>
 				</li>
 				<li class="col-md-6">
-					<p>Final City :&nbsp;<b><?php
-						echo ($details['final_city']) ? $allCities[$details['final_city']] : "-- --"; ?>
+					<p>Final City: &nbsp;<b><?php
+						echo ($details['final_city']) ? $allCities[$details['final_city']]:  "-- --"; ?>
 					</b></p>
 				</li>
 				<li class="col-md-6">
-					<p>Final State :&nbsp;<b><?php
-						echo ($details['final_state']) ? $allStates[$details['final_state']] : "-- --"; ?>
+					<p>Final State: &nbsp;<b><?php
+						echo ($details['final_state']) ? $allStates[$details['final_state']]:  "-- --"; ?>
 					</b></p>
 				</li>
 			</ul>
@@ -333,7 +333,7 @@ ul li b {
 					<table >
 						<tr style="background-color:#ECF0F5 !important;">
 						<td>
-					<li class="col-md-4"><p>Single :&nbsp;<b><?php
+					<li class="col-md-4"><p>Single: &nbsp;<b><?php
 					if ($row['room1'] != '')
 					{
 						echo $row['room1'];
@@ -345,7 +345,7 @@ ul li b {
 					</b>
 					</p>
 					</li>
-					<li class="col-md-4"><p>Double :&nbsp;<b><?php
+					<li class="col-md-4"><p>Double: &nbsp;<b><?php
 					if ($row['room2'] != '')
 					{
 						echo $row['room2'];
@@ -357,7 +357,7 @@ ul li b {
 					</b>
 					</p>
 					</li>
-					<li class="col-md-4"><p>Triple :&nbsp;<b><?php
+					<li class="col-md-4"><p>Triple: &nbsp;<b><?php
 					if ($row['room3'] != '')
 					{
 						echo $row['room3'];
@@ -369,7 +369,7 @@ ul li b {
 					</b>
 					</p>
 					</li>
-					<li class=" col-md-6 "><p>Child With Bed :&nbsp;<b><?php
+					<li class=" col-md-6 "><p>Child With Bed: &nbsp;<b><?php
 					if ($row['child_with_bed'] != '')
 					{
 						echo $row['child_with_bed'];
@@ -381,7 +381,7 @@ ul li b {
 					</b>
 					</p>
 					</li>
-					<li class="  col-md-6"><p>Child Without Bed :&nbsp;<b><?php
+					<li class="  col-md-6"><p>Child Without Bed: &nbsp;<b><?php
 					if ($row['child_without_bed'] != '')
 					{
 						echo $row['child_without_bed'];
@@ -395,7 +395,7 @@ ul li b {
 					</td>
 					</tr>
 					</table>
-					<li class="col-md-12 "><p>Hotel Category :&nbsp;<b><?php
+					<li class="col-md-12 "><p>Hotel Category: &nbsp;<b><?php
 					if (!empty($row['hotel_category']))
 					{
 						$result = explode(",", $row['hotel_category']);
@@ -415,7 +415,7 @@ ul li b {
 					</b>
 					</p>
 					</li>
-					<li class="col-md-6 "><p>Hotel Rating :&nbsp;<?php
+					<li class="col-md-6 "><p>Hotel Rating: &nbsp;<?php
 					if ($row['hotel_rating'] > 0)
 					{
 						for ($i = $row['hotel_rating']; $i > 0; $i--)
@@ -431,27 +431,27 @@ ul li b {
 					</p>
 					</li>
 					<li class="col-md-6  col-offset-right-1">
-					<p>Meal :&nbsp;<b><?php
-					echo ($row['meal_plan']) ? $mealPlanArray[$row['meal_plan']] : "-- --"; ?>
+					<p>Meal: &nbsp;<b><?php
+					echo ($row['meal_plan']) ? $mealPlanArray[$row['meal_plan']]:  "-- --"; ?>
 					</b></p>
 					</li>
 					<li class="col-md-6 ">
-					<p>Check In :&nbsp;<b><?php
-					echo ($row['check_in']) ? date("d-m-Y", strtotime($row['check_in'])) : "-- --"; ?>
+					<p>Check In: &nbsp;<b><?php
+					echo ($row['check_in']) ? date("d-m-Y", strtotime($row['check_in'])):  "-- --"; ?>
 					</b></p>
 					</li>
 					<li class=" col-md-6 ">
-					<p>Check Out :&nbsp;<b><?php
-					echo ($row['check_out']) ? date("d-m-Y", strtotime($row['check_out'])) : "-- --"; ?>
+					<p>Check Out: &nbsp;<b><?php
+					echo ($row['check_out']) ? date("d-m-Y", strtotime($row['check_out'])):  "-- --"; ?>
 					</b></p>
 					</li>
 					<li class="col-md-6 ">
-					<p>Locality :&nbsp;<b><?php
-					echo ($row['locality']) ? $row['locality'] : "-- --"; ?>
+					<p>Locality: &nbsp;<b><?php
+					echo ($row['locality']) ? $row['locality']:  "-- --"; ?>
 					</b></p>
 					</li>
 					<li class="col-md-6 ">
-					<p>Destination City :&nbsp;<b><?php
+					<p>Destination City: &nbsp;<b><?php
 					if (empty($row['city_id']))
 					{
 						echo $allCities[$details['city_id']];
@@ -462,7 +462,7 @@ ul li b {
 					} ?>
 					</b></p>
 					</li>
-					<li class="col-md-6 "><p>Destination State :&nbsp;<b><?php
+					<li class="col-md-6 "><p>Destination State: &nbsp;<b><?php
 					if (empty($row['state_id']))
 					{
 						echo $allStates[$details['state_id']];
@@ -486,18 +486,18 @@ ul li b {
 		<div class="head_of_popup"><span style="color:#1295A2;font-weight: 100;font-size:18px">Transport Requirements</span></div>
 			<ul>
 				<li class="col-md-6">
-				<p>Transport :&nbsp;<b><?php
-					echo ($details['transport_requirement']) ? $transpoartRequirmentArray[$details['transport_requirement']] : "-- --"; ?>
+				<p>Transport: &nbsp;<b><?php
+					echo ($details['transport_requirement']) ? $transpoartRequirmentArray[$details['transport_requirement']]:  "-- --"; ?>
 				</b></p>
 				</li>
 				<li class="col-md-6">
-				<p>Start Date :&nbsp;<b><?php
-					echo ($details['start_date']) ? date("d-m-Y", strtotime($details['start_date'])) : "-- --"; ?>
+				<p>Start Date: &nbsp;<b><?php
+					echo ($details['start_date']) ? date("d-m-Y", strtotime($details['start_date'])):  "-- --"; ?>
 				</b></p>
 				</li>
 				<li class="col-md-6">
-				<p>End Date :&nbsp;<b><?php
-					echo ($details['end_date']) ? date("d-m-Y", strtotime($details['end_date'])) : "-- --"; ?>
+				<p>End Date: &nbsp;<b><?php
+					echo ($details['end_date']) ? date("d-m-Y", strtotime($details['end_date'])):  "-- --"; ?>
 				</b></p>
 				</li>
 				
@@ -506,18 +506,18 @@ ul li b {
 					<hr style="margin-bottom:-1px !important;margin-top: 3px!important;" />
 				</li>
 				<li class="col-md-6">
-				<p>Pickup Locality :&nbsp;<b><?php
-					echo ($details['pickup_locality']) ? $details['pickup_locality'] : "-- --"; ?>
+				<p>Pickup Locality: &nbsp;<b><?php
+					echo ($details['pickup_locality']) ? $details['pickup_locality']:  "-- --"; ?>
 				</b></p>
 				</li>
 				<li class="col-md-6">
-				<p>Pickup City :&nbsp;<b><?php
-					echo ($details['pickup_city']) ? $allCities[$details['pickup_city']] : "-- --"; ?>
+				<p>Pickup City: &nbsp;<b><?php
+					echo ($details['pickup_city']) ? $allCities[$details['pickup_city']]:  "-- --"; ?>
 				</b></p>
 				</li>
 				<li class="col-md-12">
-				<p>Pickup State :&nbsp;<b><?php
-					echo ($details['pickup_state']) ? $allStates[$details['pickup_state']] : "-- --"; ?>
+				<p>Pickup State: &nbsp;<b><?php
+					echo ($details['pickup_state']) ? $allStates[$details['pickup_state']]:  "-- --"; ?>
 				</b></p>
 				</li><?php
 				if (!empty($details['request_stops']))
@@ -530,18 +530,18 @@ ul li b {
 							Stop <?php echo $stop_count; ?>
 							<hr style="margin-bottom:-1px !important;margin-top: 3px!important;" /></li>
 						<li class="col-md-6">
-							<p>Stop Locality :&nbsp;<b><?php
-							echo ($stops['locality']) ? $stops['locality'] : "-- --"; ?>
+							<p>Stop Locality: &nbsp;<b><?php
+							echo ($stops['locality']) ? $stops['locality']:  "-- --"; ?>
 							</b></p>
 						</li>
 						<li class="col-md-6">
-							<p>Stop City :&nbsp;<b><?php
-							echo ($stops['city_id']) ? $allCities[$stops['city_id']] : "-- --"; ?>
+							<p>Stop City: &nbsp;<b><?php
+							echo ($stops['city_id']) ? $allCities[$stops['city_id']]:  "-- --"; ?>
 							</b></p>
 						</li>
 						<li class="col-md-6">
-							<p>Stop State :&nbsp;<b><?php
-							echo ($stops['state_id']) ? $allStates[$stops['state_id']] : "-- --"; ?>
+							<p>Stop State: &nbsp;<b><?php
+							echo ($stops['state_id']) ? $allStates[$stops['state_id']]:  "-- --"; ?>
 							</b></p>
 						</li><?php
 						$stop_count++;
@@ -552,18 +552,18 @@ ul li b {
 					<hr style="margin-bottom:-1px !important;margin-top: 3px!important;" />
 				</li>
 				<li class="col-md-6">
-				<p>Final Locality :&nbsp;<b><?php
-				echo ($details['final_locality']) ? $details['final_locality'] : "-- --"; ?>
+				<p>Final Locality: &nbsp;<b><?php
+				echo ($details['final_locality']) ? $details['final_locality']:  "-- --"; ?>
 				</b></p>
 				</li>
 				<li class="col-md-6">
-				<p>Final City :&nbsp;<b><?php
-				echo ($details['final_city']) ? $allCities[$details['final_city']] : "-- --"; ?>
+				<p>Final City: &nbsp;<b><?php
+				echo ($details['final_city']) ? $allCities[$details['final_city']]:  "-- --"; ?>
 				</b></p>
 				</li>
 				<li class="col-md-6">
-				<p>Final State :&nbsp;<b><?php
-				echo ($details['final_state']) ? $allStates[$details['final_state']] : "-- --"; ?>
+				<p>Final State: &nbsp;<b><?php
+				echo ($details['final_state']) ? $allStates[$details['final_state']]:  "-- --"; ?>
 				</b></p>
 				</li>
 			</ul>

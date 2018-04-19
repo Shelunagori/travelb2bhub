@@ -78,7 +78,7 @@ $conn = ConnectionManager::get('default');
 	 <div class="row form-group">
 		<div class="col-md-12">
 		<div class=col-md-4>
-			<label for="example-text-input" class="  col-form-label">Agent Name : </label>
+			<label for="example-text-input" class="  col-form-label">Agent Name:  </label>
 		</div> 
 		 <div class=col-md-7>
 
@@ -108,7 +108,7 @@ $conn = ConnectionManager::get('default');
 		<div class="row form-group">
 			 <div class=col-md-12>
 				 <div class=col-md-4>
-				 <label class="col-form-label"for=example-text-input>Reference ID : </label>
+				 <label class="col-form-label"for=example-text-input>Reference ID:  </label>
 				 </div> 
 				 <div class=col-md-7>
 					<?php echo $this->Form->control('refidsearch', ['label'=>false,"type"=>"select",'options' =>$RefId,"class"=>"form-control select2","data-placeholder"=>"Select Multiple ",'empty'=>'Select...','multiple'=>true]);?>
@@ -119,7 +119,7 @@ $conn = ConnectionManager::get('default');
 						 <div class="row form-group ">
 							<div class=col-md-12>
 								 <div class=col-md-4>
-								  <label class="col-form-label"for=example-text-input>Request Type : </label>
+								  <label class="col-form-label"for=example-text-input>Request Type:  </label>
 								  </div>  
 								 <div class=col-md-7>
 									<select name="req_typesearch[]" multiple="multiple" class="form-control select2"  data-placeholder='Select Multiple'>
@@ -133,7 +133,7 @@ $conn = ConnectionManager::get('default');
 						<div class="row form-group ">
 							<div class=col-md-12>
 								<div class=col-md-4>
-									<label class="col-form-label"for=example-text-input>Total  Budget Range : </label>
+									<label class="col-form-label"for=example-text-input>Total  Budget Range:  </label>
 								</div> 
 									<div class=col-md-7>
 										<select name="budgetsearch" class="form-control"  data-placeholder='Select...'><option value="">Select...</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? '':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? '':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? '':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? '':''; ?>>50000-100000</option>
@@ -145,7 +145,7 @@ $conn = ConnectionManager::get('default');
 								<div class="row form-group">
 									<div class=col-md-12>
 									  <div class=col-md-4>
-									 <label class="col-form-label" for=example-text-input>Start Date : </label>
+									 <label class="col-form-label" for=example-text-input>Start Date:  </label>
 									 </div> 
 									 <div class=col-md-7>
 									 <input class="form-control datepickers" data-date-format="dd-mm-yyyy" name=startdatesearch id="datepicker1">
@@ -155,7 +155,7 @@ $conn = ConnectionManager::get('default');
 								<div class="row form-group">								
 									<div class=col-md-12>
 										<div class=col-md-4>
-										  <label class="col-form-label" for=example-text-input>End Date : </label>
+										  <label class="col-form-label" for=example-text-input>End Date:  </label>
 										</div> 
 										<div class=col-md-7>
 										<input class="form-control datepickers" data-date-format="dd-mm-yyyy" name=enddatesearch id="datepicker2">
@@ -165,7 +165,7 @@ $conn = ConnectionManager::get('default');
                               <div class="row form-group">
 									 <div class=col-md-12>
 										 <div class=col-md-4>
-										 <label class="col-form-label"for=example-text-input>Pickup City (Transportation) : </label>
+										 <label class="col-form-label"for=example-text-input>Pickup City (Transportation):  </label>
 										 </div> 
 										<div class=col-md-7>
 											<select class="form-control select2"  name=pickup_city id=pickup_city>
@@ -180,7 +180,7 @@ $conn = ConnectionManager::get('default');
 							<div class="row form-group">								 
 								 <div class=col-md-12>
 									 <div class=col-md-4>
-									 <label class="col-form-label" for=example-text-input>	Destination City (Packages & Hotels) : </label>
+									 <label class="col-form-label" for=example-text-input>	Destination City (Packages & Hotels):  </label>
 									 </div> 
 									<div class="col-md-7">
 										<select class="form-control select2" name=destination_city id=destination_city>
@@ -273,7 +273,7 @@ $(".req").sort(function (a, b) {
 								<ul>
 								<li >
 									<p>
-										From : <span class="details"><a href="viewprofile/<?php echo $finalresponse[$request['id']]['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$finalresponse[$request['id']]['user_id']]); ?></a> 
+										From:  <span class="details"><a href="viewprofile/<?php echo $finalresponse[$request['id']]['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$finalresponse[$request['id']]['user_id']]); ?></a> 
 										<?php if($final_rating>0){ ?>
 											<font color="#1295AB"> (<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font>
 										<?php } ?>
@@ -282,7 +282,7 @@ $(".req").sort(function (a, b) {
 								 </li>
 								  <li >
 								 <p>
-									Request Type : <span class="details"><?php  echo $text; ?></span>
+									Request Type:  <span class="details"><?php  echo $text; ?></span>
 								</p>
 								</li>
 								
@@ -291,8 +291,8 @@ $(".req").sort(function (a, b) {
 										<?php 
 											$total_budget=round($request['total_budget']);
 										?>
-										Total Budget : <span class="details">
-										<?php echo ($total_budget)? "Rs. ". ($total_budget) :"-- --" ?>
+										Total Budget:  <span class="details">
+										<?php echo ($total_budget)? "Rs. ". ($total_budget): "-- --" ?>
 										</span>
 									</p>
 								</li>
@@ -302,8 +302,8 @@ $(".req").sort(function (a, b) {
 										<?php 
 											$quotation_price=round($finalresponse[$request['id']]['quotation_price']);
 										?>
-										Quotation Price : <span class="details">
-										<?php echo ($quotation_price)? "Rs. ". ($quotation_price) :"-- --" ?>
+										Quotation Price:  <span class="details">
+										<?php echo ($quotation_price)? "Rs. ". ($quotation_price): "-- --" ?>
 										</span>
 									</p>
 								</li>
@@ -311,14 +311,14 @@ $(".req").sort(function (a, b) {
 								<li>
 								<?php 
 								if($request['category_id']==2){ ?>
-								<p>Pickup City : &nbsp;
+								<p>Pickup City:  &nbsp;
 									<span class="details"><?php echo ($request['pickup_city'])?$allCities[$request['pickup_city']]:"-- --"; ?><?php echo ($request['pickup_state'])?' ('.$allStates[$request['pickup_state']].')':"";  ?></span>
 								</p>
 							<?php 
 							}
 							else
 							{?>
-								<p>Destination City : &nbsp;
+								<p>Destination City:  &nbsp;
 									<span class="details">
 									<?php 
 									$a=$request['city_id']? $allCities[$request['city_id']]:"-- --"; 
@@ -343,18 +343,18 @@ $(".req").sort(function (a, b) {
 								
 							   <li >
 									<p>
-										Reference ID : <span class="details"><?php echo $request['reference_id']; ?></span>
+										Reference ID:  <span class="details"><?php echo $request['reference_id']; ?></span>
 									</p>
 								</li>
 								<?php if($request['category_id'] == 3 ) { ?>
 								<li >
 									<p>
-										Start Date : <span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
+										Start Date:  <span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
 									</p>
 								</li>
 								<li >
 									<p>
-										End Date : <span class="details"><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?></p></span>
+										End Date:  <span class="details"><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?></p></span>
 								</li>
 								<?php } elseif($request['category_id'] == 1 ) {
 										$sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='".$request['id']."'";
@@ -363,38 +363,38 @@ $(".req").sort(function (a, b) {
 									?>
 								<li >
 									<p>
-										Start Date : <span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
+										Start Date:  <span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
 									</p>
 								</li>
 								<li >
 									<p>
 									<?php if(!empty($result['TopDate'])) { ?>
-									End Date :  <span class="details"><?php echo date('d/m/Y',strtotime($result['TopDate'])); ?></span>
+									End Date:   <span class="details"><?php echo date('d/m/Y',strtotime($result['TopDate'])); ?></span>
 									<?php }else{?>
-										End Date :  <span class="details"><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?></span>
+										End Date:   <span class="details"><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?></span>
 										<?php }?>
 									</p>
 								</li>
 								<?php } elseif($request['category_id'] == 2 ) {?>
 								<li >
 									<p>
-										Start Date : <span class="details"><?php echo ($request['start_date'])?date('d/m/Y',strtotime($request['start_date'])):"-- --"; ?>
+										Start Date:  <span class="details"><?php echo ($request['start_date'])?date('d/m/Y',strtotime($request['start_date'])):"-- --"; ?>
 									</p>
 								</li>
 								 <li >
 									<p>
-										End Date : <span class="details"><?php echo ($request['end_date'])?date('d/m/Y',strtotime($request['end_date'])):"-- --"; ?><span class="budy right" style="display:none;"><a href="#" ><?php echo $this->Html->image('friend-ico.png'); ?></a></span></span>
+										End Date:  <span class="details"><?php echo ($request['end_date'])?date('d/m/Y',strtotime($request['end_date'])):"-- --"; ?><span class="budy right" style="display:none;"><a href="#" ><?php echo $this->Html->image('friend-ico.png'); ?></a></span></span>
 									</p>
 								</li>
 								<?php } ?>
 								
 								 <li>
 									<p>
-										Members : <span class="details"><?php echo $request['adult'] +   $request['children']; ?></span>
+										Members:  <span class="details"><?php echo $request['adult'] +   $request['children']; ?></span>
 									</p>
 								</li>
 								<li>
-									<p>Response Comment : <span class="details">
+									<p>Response Comment:  <span class="details">
 									<?php echo mb_strimwidth($finalresponse[$request['id']]['comment'], 0, 25, "...");?></span></p>
 								 </li>
 							</ul>
@@ -430,7 +430,7 @@ $(".req").sort(function (a, b) {
 														<h4 class="modal-title">Are you sure you want to follow this user?</h4>
 													</div>
 													<div class="modal-footer">
-													<button type="button"  href="javascript:void(0);" class="businessBuddy btn btn-warning" user_id = "<?php echo $finalresponse[$request['id']]['user_id']; ?>" >Follow</button>
+													<button type="button"  href="javascript:void(0);" class="businessBuddy btn btn-danger" user_id = "<?php echo $finalresponse[$request['id']]['user_id']; ?>" >Follow</button>
 													<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
 													</div>
 												</div>
@@ -476,7 +476,7 @@ $(".req").sort(function (a, b) {
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
 														<h4 class="modal-title">
-															<font color="red">Are you sure you want to block this user?</font>
+															<font color="black">Are you sure you want to block this user?</font>
 														</h4>
 													</div>
 														<div class="modal-footer">
@@ -600,13 +600,13 @@ $(".req").sort(function (a, b) {
 	});
 $('#UserChatForm').validate({
 	rules: {
-		"message" : {
-			required : true
+		"message":  {
+			required:  true
 		}
 	},
 	messages: {
-		"message" : {
-			required : "Please enter message."
+		"message":  {
+			required:  "Please enter message."
 		}
 	},
 	ignore: ":hidden:not(select)"

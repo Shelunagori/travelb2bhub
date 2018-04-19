@@ -128,7 +128,7 @@ fieldset
 							<div class="row form-group margin-b10">
 								 <div class=col-md-12>
 									 <div class=col-md-4>
-									 <label class="col-form-label"for=example-text-input>Reference ID : </label>
+									 <label class="col-form-label"for=example-text-input>Reference ID:  </label>
 									 </div>
 									 <div class=col-md-7>
 							<?php echo $this->Form->control('refidsearch', ['label'=>false,"type"=>"select",'options' =>$RefId,"class"=>"form-control select2","multiple"=>true,"data-placeholder"=>"Select Multiple",'empty'=>'Select...']);?>
@@ -138,7 +138,7 @@ fieldset
                             <div class="row form-group margin-b10">
 								<div class=col-md-12>
 									 <div class=col-md-4>
-									  <label class="col-form-label"for=example-text-input>Request Type : </label>
+									  <label class="col-form-label"for=example-text-input>Request Type:  </label>
 									  </div> 
 									 <div class=col-md-7>
 										<select name="req_typesearch[]" multiple class="form-control select2" data-placeholder='Select Multiple'>
@@ -152,7 +152,7 @@ fieldset
 								<div class="row form-group margin-b10">
 									<div class=col-md-12>
 										<div class=col-md-4>
-											<label class="col-form-label"for=example-text-input>Total Budget Range : </label>
+											<label class="col-form-label"for=example-text-input>Total Budget Range:  </label>
 										</div> 
 										<div class=col-md-7>
 											<select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? '':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? '':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? '':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? '':''; ?>>50000-100000</option>
@@ -164,7 +164,7 @@ fieldset
 								<div class="row form-group margin-b10">
 									<div class=col-md-12>
 									  <div class=col-md-4>
-									 <label class="col-form-label" for=example-text-input>Start Date : </label>
+									 <label class="col-form-label" for=example-text-input>Start Date:  </label>
 									 </div> 
 									 <div class=col-md-7>
 									 <input class="form-control date-picker" name=startdatesearch   data-date-format="dd-mm-yyyy">
@@ -174,7 +174,7 @@ fieldset
 								<div class="row form-group margin-b10">								
 									<div class=col-md-12>
 										<div class=col-md-4>
-										  <label class="col-form-label" for=example-text-input>End Date : </label>
+										  <label class="col-form-label" for=example-text-input>End Date:  </label>
 										</div> 
 										<div class=col-md-7>
 										<input class="form-control date-picker" name=enddatesearch data-date-format="dd-mm-yyyy">
@@ -184,7 +184,7 @@ fieldset
                               <div class="row form-group margin-b10">
 									 <div class=col-md-12>
 										 <div class=col-md-4>
-										 <label class="col-form-label"for=example-text-input>Pickup City (Transportation) : </label>
+										 <label class="col-form-label"for=example-text-input>Pickup City (Transportation):  </label>
 										 </div> 
 										<div class=col-md-7>
 											<select class="form-control select2"  name=pickup_city id=pickup_city>
@@ -199,7 +199,7 @@ fieldset
 								<div class="row form-group margin-b10">
 									 <div class=col-md-12>
 										 <div class=col-md-4>
-										 <label class="col-form-label" for=example-text-input>Destination City (Packages & Hotels) : </label>
+										 <label class="col-form-label" for=example-text-input>Destination City (Packages & Hotels):  </label>
 										 </div> 
 										<div class="col-md-7">
 											<select class="form-control select2" name=destination_city id=destination_city>
@@ -284,28 +284,28 @@ fieldset
 						<legend align="center"><?php echo $image; ?></legend>
 				<div class="contain">
 							<p class="pull-right" style="margin-top:-30px !important;"> <?php echo $org_created; ?></p>
-							<p>Request Type : &nbsp;<?php echo $text; ?></p>
-							<p>Reference ID : &nbsp;
+							<p>Request Type:  &nbsp;<?php echo $text; ?></p>
+							<p>Reference ID:  &nbsp;
 								<span class="details"><?php echo $request['reference_id']; ?></span>
 							</p>
-							<p>Total Budget : &nbsp; 
+							<p>Total Budget:  &nbsp; 
 								<?php 
 									$total_budget=round($request['total_budget']);
 								?>
 								<span class="details">&#8377; 
-								<?php echo ($total_budget)? "". ($total_budget) :"-- --" ?>
+								<?php echo ($total_budget)? "". ($total_budget): "-- --" ?>
 								</span>
 							</p>
 							<?php
 							if($request['category_id']==2){ ?>
-								<p>Pickup City : &nbsp;
+								<p>Pickup City:  &nbsp;
 									<span class="details"><?php echo ($request['pickup_city'])?$allCities[$request['pickup_city']]:"-- --"; ?><?php echo ($request['pickup_state'])?' ('.$allStates[$request['pickup_state']].')':"";  ?></span>
 								</p>
 							<?php 
 							}
 							else
 							{?>
-								<p>Destination City : &nbsp;
+								<p>Destination City:  &nbsp;
 									<span class="details">
 									<?php 
 									$a=$request['city_id']?$allCities[$request['city_id']]:"-- --"; 
@@ -326,10 +326,10 @@ fieldset
 							<?php
 							}
 							if($request['category_id'] == 3 ) { ?>
-								<p>Start Date : &nbsp;
+								<p>Start Date:  &nbsp;
 									<span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
 								</p>
-								<p>End Date : &nbsp;
+								<p>End Date:  &nbsp;
 									<span class="details"><?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?></span>
 								</p>
 							<?php 
@@ -339,10 +339,10 @@ fieldset
                                 $stmt = $conn->execute($sql);
                                 $result = $stmt->fetch('assoc');
 							?>
-								<p>Start Date : &nbsp;
+								<p>Start Date:  &nbsp;
 									<span class="details"><?php echo ($request['check_in'])?date('d/m/Y',strtotime($request['check_in'])):"-- --"; ?></span>
 								</p>
-								<p>End Date : &nbsp;
+								<p>End Date:  &nbsp;
 									<span class="details"><?php if(!empty($result['TopDate'])) { ?><?php echo date('d/m/Y',strtotime($result['TopDate'])); ?><?php }else{?>End Date: <?php echo ($request['check_out'])?date('d/m/Y',strtotime($request['check_out'])):"-- --"; ?><?php }?></span>
 								</p>
 								
@@ -350,23 +350,23 @@ fieldset
 							}
 							if($request['category_id'] == 2 ) { 
 							?>
-								<p>Start Date : &nbsp;
+								<p>Start Date:  &nbsp;
 									<span class="details"><?php echo ($request['start_date'])?date('d/m/Y',strtotime($request['start_date'])):"-- --"; ?></span>
 								</p>
-								<p>End Date : &nbsp;
+								<p>End Date:  &nbsp;
 									<span class="details"><?php echo ($request['end_date'])?date('d/m/Y',strtotime($request['end_date'])):"-- --"; ?></span>
 								</p>
 							<?php
 							}
 							?>
 							
-							<p>Members : &nbsp;
+							<p>Members:  &nbsp;
 								<span class="details"><?php echo $request['adult'] +   $request['children']; ?></span>
 							</p>
 							<?php 
 							$pid=$request['id'];
 							?>
-							<p>Comment : &nbsp;
+							<p>Comment:  &nbsp;
 								<span class="details">
 								<?php echo mb_strimwidth($request['comment'], 0, 25, "...");?></span>
 							</p>

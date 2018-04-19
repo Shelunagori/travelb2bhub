@@ -210,7 +210,7 @@ $conn = ConnectionManager::get('default');
 									@$final_rating=round($total_rating/$rate_count);
 								}
 						?>
-						From :  <a href="viewprofile/<?php echo $row['request']['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$row['request']['user_id']]); ?></a>
+						From:   <a href="viewprofile/<?php echo $row['request']['user_id']; ?>/1"><?php echo str_replace(';',' ',$allUsers[$row['request']['user_id']]); ?></a>
 						<?php if($final_rating>0){ ?>
 						<font color="#1295AB"> (<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font>
 						<?php } ?>
@@ -218,7 +218,7 @@ $conn = ConnectionManager::get('default');
 				</li>
                  <li >
                     <p>
-                        Request Type  : <?php echo $text; ?>
+                        Request Type:  <?php echo $text; ?>
                     </p>
                  </li>
 				<li >
@@ -226,9 +226,9 @@ $conn = ConnectionManager::get('default');
 						<?php 
 							$total_budget=round($row['request']['total_budget']);
 						?>
-						Total Budget :  
-						<?php //echo ($row['request']['total_budget'])? "Rs. ". $row['request']['total_budget'] :"-- --" ?>
-						<span class="details"><?php echo ($total_budget)? "Rs. ". ($total_budget) :"-- --" ?></span>
+						Total Budget:   
+						<?php //echo ($row['request']['total_budget'])? "Rs. ". $row['request']['total_budget']: "-- --" ?>
+						<span class="details"><?php echo ($total_budget)? "Rs. ". ($total_budget): "-- --" ?></span>
 					</p>
 				 </li>
 				 
@@ -237,18 +237,18 @@ $conn = ConnectionManager::get('default');
 					   <?php 
 							$quotation_price=round($row['quotation_price']);
 						?>
-						 Quotation Price :  
+						 Quotation Price:   
 						 <?php //echo ($row['quotation_price'])? " Rs. ".$row['quotation_price']:"-- --" ?>
-						<span class="details"> <?php echo ($quotation_price)? "Rs. ". ($quotation_price) :"-- --" ?></span></p>
+						<span class="details"> <?php echo ($quotation_price)? "Rs. ". ($quotation_price): "-- --" ?></span></p>
 				</li>
                 <li class="destination">
 				   <?php if($row['request']['category_id']==2){ ?>
                   <p>
-                   Pickup City : <span class="details"> <?php echo ($row['request']['pickup_city'])?$allCities[$row['request']['pickup_city']]:"-- --"; ?><?php echo ($row['request']['pickup_state'])?' ('.$allStates[$row['request']['pickup_state']].')':"";  ?></span>
+                   Pickup City:  <span class="details"> <?php echo ($row['request']['pickup_city'])?$allCities[$row['request']['pickup_city']]:"-- --"; ?><?php echo ($row['request']['pickup_state'])?' ('.$allStates[$row['request']['pickup_state']].')':"";  ?></span>
 
                   <?php } else { ?>
                         <p>
-                        Destination City :  <span class="details">
+                        Destination City:   <span class="details">
 						<?php 
 							$a=$row['request']['city_id']?$allCities[$row['request']['city_id']]:"-- --"; 
 							$b=$row['request']['state_id']?' ('.$allStates[$row['request']['state_id']].')':"";
@@ -258,7 +258,7 @@ $conn = ConnectionManager::get('default');
                         <?php } ?>
                  </li>
                  <li>
-					<p>Reference ID : &nbsp;
+					<p>Reference ID:  &nbsp;
 						<span class="details"><?php echo $row['request']['reference_id']; ?></span>
 					</p>
                  </li>
@@ -266,12 +266,12 @@ $conn = ConnectionManager::get('default');
 				<?php if($row['request']['category_id'] == 3 ) { ?>
 					<li >
                         <p>
-                            Start Date :  <span class="details"><?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?></span>
+                            Start Date:   <span class="details"><?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?></span>
                         </p>
                      </li>
 					<li >
                         <p>
-                            End Date :  <span class="details"><?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?></span>
+                            End Date:   <span class="details"><?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?></span>
                         </p>
                     </li>
 					<?php } elseif($row['request']['category_id'] == 1 ) {
@@ -281,15 +281,15 @@ $conn = ConnectionManager::get('default');
 					?>
 					<li >
                         <p>
-                            Start Date :  <span class="details"><?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?></span>
+                            Start Date:   <span class="details"><?php echo ($row['request']['check_in'])?date("d/m/Y", strtotime($row['request']['check_in'])):"-- --"; ?></span>
                         </p>
                      </li>
 					<li >
                         <p>
                         <?php if(!empty($result['TopDate'])) { ?>
-                        End Date :  <span class="details"><?php echo date('d/m/Y',strtotime($result['TopDate'])); ?></span>
+                        End Date:   <span class="details"><?php echo date('d/m/Y',strtotime($result['TopDate'])); ?></span>
                         <?php }else{?>
-                        End Date : <span class="details"><?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?></span>
+                        End Date:  <span class="details"><?php echo ($row['request']['check_out'])?date("d/m/Y", strtotime($row['request']['check_out'])):"-- --"; ?></span>
                         <?php }?>
                             
                         </p>
@@ -297,22 +297,22 @@ $conn = ConnectionManager::get('default');
 				<?php } elseif($row['request']['category_id'] == 2 ) { ?>
 					<li >
                         <p>
-                            Start Date :  <span class="details"><?php echo ($row['request']['start_date'])?date("d/m/Y", strtotime($row['request']['start_date'])):"-- --"; ?></span>
+                            Start Date:   <span class="details"><?php echo ($row['request']['start_date'])?date("d/m/Y", strtotime($row['request']['start_date'])):"-- --"; ?></span>
                         </p>
                     </li>
 					<li >
                         <p>
-                            End Date :  <span class="details"><?php echo ($row['request']['end_date'])?date("d/m/Y", strtotime($row['request']['end_date'])):"-- --"; ?></span>
+                            End Date:   <span class="details"><?php echo ($row['request']['end_date'])?date("d/m/Y", strtotime($row['request']['end_date'])):"-- --"; ?></span>
                         </p>
                     </li>
 				<?php } ?>
 				     <li >
                         <p>
-                            Members :  <span class="details"><?php echo $row['request']['adult'] +  $row['request']['children']; ?></span>
+                            Members:   <span class="details"><?php echo $row['request']['adult'] +  $row['request']['children']; ?></span>
                      </p>
 					</li>
 					<li>
-                       <p> Comment : <span class="details"><?php echo mb_strimwidth($row['comment'], 0, 25, "...");?></span></p>
+                       <p> Comment:  <span class="details"><?php echo mb_strimwidth($row['comment'], 0, 25, "...");?></span></p>
                     </li>
                    </ul>
 				   <hr></hr>
@@ -376,13 +376,13 @@ $conn = ConnectionManager::get('default');
 												<div class="modal-content">
 													<div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
-														<h3 class="modal-title">
-															<font color="black">Confirm Follow User ?</font>
-														</h3>
+														<h4 class="modal-title">
+															<font color="black">Are you sure you want to follow this user?</font>
+														</h4>
 													</div>
 														<div class="modal-footer">
-														<button type="button"  href="javascript:void(0);" class="businessBuddy btn btn-warning btn-sm" user_id = "<?php echo $row['request']['user_id']; ?>" >Follow</button>
-														<button type="button" class="btn btn-successto" data-dismiss="modal">Cancel</button>
+														<button type="button"  href="javascript:void(0);" class="businessBuddy btn btn-danger btn-sm" user_id = "<?php echo $row['request']['user_id']; ?>" >Follow</button>
+														<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
 														</div>
 													</div>
 												</div>
@@ -420,7 +420,7 @@ $conn = ConnectionManager::get('default');
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<h3 class="modal-title">
-													<h4><font color="red">Are you sure you want to block this user ?</font></h4>
+													<h4><font color="black">Are you sure you want to block this user ?</font></h4>
 												</h3>
 											</div>
 												<div class="modal-footer">
@@ -505,26 +505,26 @@ $conn = ConnectionManager::get('default');
   });
 $('#UserChatForm').validate({
 	rules: {
-		"message" : {
-			required : true
+		"message":  {
+			required:  true
 		}
 	},
 	messages: {
-		"message" : {
-			required : "Please enter message."
+		"message":  {
+			required:  "Please enter message."
 		}
 	},
 	ignore: ":hidden:not(select)"
 });
 $('#addtestimonial').validate({
 	rules: {
-		"rating" : {
-			required : true
+		"rating":  {
+			required:  true
 		}
 	},
 	messages: {
-		"rating" : {
-			required : "Please select rating."
+		"rating":  {
+			required:  "Please select rating."
 		}
 	}
 });
