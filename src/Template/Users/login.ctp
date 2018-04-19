@@ -24,9 +24,13 @@
 		.alert-danger{ width:95% !important;}
 		 
 		@media only screen and (max-device-width: 480px) {
-        div.prakash {
-            zoom: 2;
-        }
+			div.prakash {
+				zoom: 2;
+			}
+			.input100 {
+				font-size: 20px !important;
+			}
+		}
 	</style>
 </head>
 <body>

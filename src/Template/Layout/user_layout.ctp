@@ -428,11 +428,7 @@ p {
               </li>
              </ul>
           </li>
-           
-          <li class="dropdown user user-menu">
-            <a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'logout')) ?>" ><i style="font-size: 20px;" class="fa fa-power-off "></i>
-            </a>
-          </li>
+            
           <!-- Control Sidebar Toggle Button -->
            
         </ul>
@@ -565,8 +561,9 @@ p {
 			<li><a target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/terms-and-conditions/"><i class="fa fa-edit"></i> <span>Terms & Conditions</span></a></li>
 			<li><a target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/privacy-policy/"><i class="fa fa-lock"></i> <span>Privacy Policy</span></a></li>
 			<li><a target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/<?php echo $WEBURL; ?>"><i class="fa fa-question-circle"></i> <span>FAQs</span></a></li>
-			
-	 
+			<li <?php if($page_name=='logout' && $controller=='Users'){ echo 'class="active"';}?>>
+				<a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'logout']); ?>"><i class="fa fa-power-off"></i> <span>Logout</span></a>
+			</li>
       </ul>
     </section>
     <!-- /.sidebar -->
