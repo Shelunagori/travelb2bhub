@@ -279,25 +279,7 @@ fieldset{
 									</div>
 								</div>
 								
-								<div class="col-md-6 newlist1 form-group" style="display:none;">
-									<p for="for">
-												Cities of Operation
-												<span class="required">*</span>
-									</p>
-									<div class="input-field">
-									<?php 
-										$options=array();
-										foreach($city->citystatefi as $cty)
-										{
-											$options[] = ['value'=>$cty->cityid,'text'=>$cty->name];
-											
-										};
-										$options[] = ['value'=>'0','text'=>'All Cities'];
-										echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
-										<label style="display:none" class="helpblock error" > This field is required.</label>
-										
-									</div>
-								</div>
+								
 							</div>
 						</div>
 						</fieldset>
@@ -388,7 +370,7 @@ fieldset{
 							</div>
 						</div>
 						<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
-						<input type="hiddens" name="visible_date" class="visible_date" value="">
+						<input type="hidden" name="visible_date" class="visible_date" value="">
 				</form>
 			</div>
 			<div id="selectbox" style="display:none;"> </div>
@@ -401,7 +383,7 @@ fieldset{
     $(document).ready(function ()
 	{
 		$('form').submit(function () {
-			var x=1;
+			var x=0;
 			$( ".requiredfield" ).each(function() {
 				if($(this).val()!=''){ 
  					$(this).closest('div.form-group').find('.helpblock').hide();
@@ -413,8 +395,9 @@ fieldset{
 				if($(this).val()==null){
  					$(this).closest('div.form-group').find('.helpblock').show();
 					x = 1;
+					
 				}
-				
+				alert($(this).val());
 			});
 			if(x==1){
 				$('html, body').animate({scrollTop:0}, 'slow');
@@ -444,6 +427,12 @@ fieldset{
 			$('.visible_date').val(date);
 			$('.payment_amount').val(price);
 		});
+		$("#newlist").show();
+		$(".replacedata").html('<?php $options=array();
+				$options[] = ['value'=>'0','text'=>'All Cities','selected'];
+				echo $this->Form->input('city_id',["class"=>"form-control city_id requiredfield","multiple"=>true ,'options' => $options,'label'=>false,'required']);
+				?>');
+		$('.city_id').select2();
 		$(document).on('change','.city_type',function()
 		{
 			var city_type=$(this).val();

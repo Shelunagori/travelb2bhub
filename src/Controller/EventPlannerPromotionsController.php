@@ -975,7 +975,7 @@ public function savedList($user_id = null)
 		$CityList = $this->Cities->find()->where(['Cities.state_id IN' =>$data]);
 		$options=array();
 		echo "
-			<select name='city_id' size='3' class='form-control city_id' multiple='multiple' tabindex='1'>";
+			<select name='city_id[]' size='3' class='form-control city_id' multiple='multiple' tabindex='1'>";
 			foreach($CityList as $cty)
 			{
 				echo "<option value='".$cty->id."' > ".$cty->name."</option>";

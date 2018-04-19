@@ -233,17 +233,6 @@ fieldset{
 									<div class="input-field replacedata">
 									</div>
 								</div>
-								<div class="col-md-6 form-group newlist1" style="display:none;">
-									<p> Cities of Operation <span class="required">*</span></p>
-									<?php 
-									$options=array();
-									foreach($city->citystatefi as $cty)
-									{
-										$options[] = ['value'=>$cty->cityid,'text'=>$cty->name];
-									};
-									echo $this->Form->input('city_id', ['options' =>$options,'class'=>'form-control select2 requiredfield','label'=>false,"data-placeholder"=>"Select Cities",'multiple'=>true]); ?>
-									<label style="display:none" class="helpblock error" > This field is required.</label>									
-								</div>
  							</div>
 						</div>
 						<div class="row">
@@ -304,7 +293,7 @@ fieldset{
 							</div>
 						</div>
 					</div>
-					<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
+					<input type="hiddens" name="user_id" value="<?php echo $user_id;?>">
 					<input type="hiddens" name="visible_date" class="visible_date" value="">
 				</form>
 				<div id="selectbox" style="display:none;"> </div>
@@ -314,8 +303,8 @@ fieldset{
 <script>
 $(document).ready(function (){
 		$('form').submit(function () {
-			var x=1;
-			$( ". " ).each(function() {
+			var x=0;
+			$( ".requiredfield" ).each(function() {
 				if($(this).val()!=''){ 
  					$(this).closest('div.form-group').find('.helpblock').hide();
 				}
@@ -360,8 +349,12 @@ $(document).ready(function (){
 		
 		
 		
-		
-		
+		$("#newlist").show();
+		$(".replacedata").html('<?php $options=array();
+			$options[] = ['value'=>'0','text'=>'All Cities','selected'];
+			echo $this->Form->input('city_id',["class"=>"form-control city_id requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
+			?>');
+		$('.city_id').select2();
 		$(document).on('change','.city_type',function()
 		{
 			var city_type=$(this).val();

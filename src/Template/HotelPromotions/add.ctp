@@ -294,7 +294,7 @@ label{
 												Charges
 											</p>
 											<div class="input-field">
-											<?php echo $this->Form->input('total_charges', ['class'=>'form-control charges','label'=>false,"placeholder"=>"Total Charges",'readonly'=>'readonly','type'=>'text']); ?>
+											<?php echo $this->Form->input('total_charges', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Total Charges",'readonly'=>'readonly','type'=>'text']); ?>
 											</div>
 										</div>
 									</div> 	
@@ -313,7 +313,7 @@ label{
 								</div>							
 						</fieldset>
 						<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
-						<input type="hiddens" name="visible_date" class="visible_date" value="">
+						<input type="hidden" name="visible_date" class="visible_date" value="">
 					</form>
 				</div>
 			</div>
@@ -378,8 +378,7 @@ label{
 				{
 					var low_rate=($('.low_rate').val());
 					//alert(low_rate);
-					var high
-					_rate=($('.high_rate').val());
+					var high_rate=($('.high_rate').val());
 					//alert(high_rate);
 					if(low_rate.length>high_rate.length)
 					{
