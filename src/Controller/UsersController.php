@@ -60,7 +60,7 @@ class UsersController extends AppController {
 				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
 				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
 				
-				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
+				array("Requests.start_date <=" =>  $current_date,'Requests.category_id'=> 2,'Requests.total_response >' =>0),
 				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
 			)
 		);
@@ -96,8 +96,8 @@ class UsersController extends AppController {
 		}
 		
 		$myRequestCount = 0;
- 		$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2,$conditions]]);
-		$myRequestCount = $query->count(); 
+ 		$myRequestCount = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2,$conditions]])->count();
+		
 		$reqcountNew = $this->getSettings('requestcount');
  		$this->set('reqcountNew', $reqcountNew);
  		$this->set('myRequestCountNew', $myRequestCount);
@@ -1266,11 +1266,7 @@ $d['end_date']=date('Y-m-d',strtotime($d['end_date']));
 else{
 $d['end_date']	='0000-00-00';
 }
-/* 
-$d['check_in'] = (isset($d['check_in']) && !empty($d['check_in']))?$this->ymdFormatByDateFormat($d['check_in'], "d-m-Y", $dateSeparator="/"):null;
-$d['check_out'] = (isset($d['check_out']) && !empty($d['check_out']))?$this->ymdFormatByDateFormat($d['check_out'], "d-m-Y", $dateSeparator="/"):null;
-$d['start_date'] = (isset($d['start_date']) && !empty($d['start_date']))?$this->ymdFormatByDateFormat($d['start_date'], "d-m-Y", $dateSeparator="/"):null;
-$d['end_date'] = (isset($d['end_date']) && !empty($d['start_date']))?$this->ymdFormatByDateFormat($d['end_date'], "d-m-Y", $dateSeparator="/"):null; */
+ 
 
 	if($this->request->data['category_id'] == 2 ){
 		$p['transport_requirement'] = $d['transport_requirement'];
@@ -1334,6 +1330,9 @@ $d['end_date'] = (isset($d['end_date']) && !empty($d['start_date']))?$this->ymdF
 					$userchats->notification = 1;
 					if ($userchatTable->save($userchats)) {
 						$id = $userchats->id;
+						$push_message="You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+						$this->sendpushnotification($usr["id"],$push_message,$push_message);
+						
 					}
 				}
 			}		
@@ -1475,6 +1474,8 @@ $Userlist = $stmt ->fetchAll('assoc');
  					$userchats->notification = 1;
 					if ($userchatTable->save($userchats)) {
 						$id = $userchats->id;
+						$push_message="You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+						$this->sendpushnotification($usr["id"],$push_message,$push_message);
 					}
 				}
 			}
@@ -1523,27 +1524,30 @@ elseif($this->request->data['category_id'] == 3 ){
 	$conn = ConnectionManager::get('default');
 	$sql = "SELECT * FROM users WHERE id !='".$this->Auth->user('id')."' AND role_id in ('1') AND FIND_IN_SET ('".$p['state_id']."', preference) > 0 ";
 	$stmt = $conn->execute($sql);
-	$Userlist = $stmt ->fetchAll('assoc');            
+	$Userlist = $stmt ->fetchAll('assoc'); 
+	
 			foreach($Userlist as $usr)
 			{
 				$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$usr['id']."' AND blocked_by='".$this->Auth->user('id')."'";
 					$stmt = $conn->execute($sql1);
 					$bresult = $stmt ->fetch('assoc');
-						if($bresult['block_count']==0){
-				$userchats = $userchatTable->newEntity();
-				$userchats->request_id = $ui;
-				$userchats->user_id = $this->Auth->user('id');
-				$userchats->send_to_user_id = $usr["id"];
-				$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
-				$userchats->type = 'Request';
-				$userchats->created = date("Y-m-d H:i:s");
-				$userchats->notification = 1;
-				if ($userchatTable->save($userchats)) {
-				$id = $userchats->id;
-				}
-							
+					if($bresult['block_count']==0){
+						$userchats = $userchatTable->newEntity();
+						$userchats->request_id = $ui;
+						$userchats->user_id = $this->Auth->user('id');
+						$userchats->send_to_user_id = $usr["id"];
+						$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+						$userchats->type = 'Request';
+						$userchats->created = date("Y-m-d H:i:s");
+						$userchats->notification = 1;
+						if ($userchatTable->save($userchats)) {
+						$id = $userchats->id;
+							$push_message="You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+							$this->sendpushnotification($usr["id"],$push_message,$push_message);
+						}
+									
 					}
-			}
+				}
 /*For Travel Agent*/
 	
 	/*For Hotelier*/
@@ -1556,17 +1560,19 @@ $Userlisth = $stmth->fetchAll('assoc');
 					$stmt = $conn->execute($sql1);
 					$bresult = $stmt->fetch('assoc');
 						if($bresult['block_count']==0){	
-							$userchats = $userchatTable->newEntity();
-				$userchats->request_id = $ui;
-				$userchats->user_id = $this->Auth->user('id');
-				$userchats->send_to_user_id = $usrh["id"];
-				$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
-				$userchats->created = date("Y-m-d H:i:s");
-				$userchats->notification = 1;
-				$userchats->type = 'Request';
-				if ($userchatTable->save($userchats)) {
-				$id = $userchats->id;
-				}	
+						$userchats = $userchatTable->newEntity();
+						$userchats->request_id = $ui;
+						$userchats->user_id = $this->Auth->user('id');
+						$userchats->send_to_user_id = $usrh["id"];
+						$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+						$userchats->created = date("Y-m-d H:i:s");
+						$userchats->notification = 1;
+						$userchats->type = 'Request';
+						if ($userchatTable->save($userchats)) {
+							$id = $userchats->id;
+							$push_message="You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+							$this->sendpushnotification($usr["id"],$push_message,$push_message);
+						}	
 					}
 			}
 	/*For Hotelier*/	
@@ -1578,22 +1584,24 @@ return $this->redirect('/users/sendrequest');
 }
 }
 /*Users List */				
-$Userlist = $this->Users->find()
-->where(['id !=' => $this->Auth->user('id'),'role_id IN'=>1,3])->all()->toArray();	
-$userchatTable = TableRegistry::get('User_Chats');
-$userchats = $userchatTable->newEntity();
-foreach($Userlist as $usr){
-$userchats->request_id = $d['req_id'];
-$userchats->user_id = $this->Auth->user('id');
-$userchats->send_to_user_id = $usr["id"];
-$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
-$userchats->type = 'Request';
-$userchats->created = date("Y-m-d H:i:s");
-$userchats->notification = 1;;
-if ($userchatTable->save($userchats)) {
-$id = $userchats->id;
-}
-}
+	$Userlist = $this->Users->find()
+	->where(['id !=' => $this->Auth->user('id'),'role_id IN'=>1,3])->all()->toArray();	
+	$userchatTable = TableRegistry::get('User_Chats');
+	$userchats = $userchatTable->newEntity();
+	foreach($Userlist as $usr){
+		$userchats->request_id = $d['req_id'];
+		$userchats->user_id = $this->Auth->user('id');
+		$userchats->send_to_user_id = $usr["id"];
+		$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+		$userchats->type = 'Request';
+		$userchats->created = date("Y-m-d H:i:s");
+		$userchats->notification = 1;;
+		if ($userchatTable->save($userchats)) {
+			$id = $userchats->id;
+			$push_message="You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+			$this->sendpushnotification($usr["id"],$push_message,$push_message);
+		}
+	}
 }
 } else {
 $this->Flash->error(__('Sorry, You cannot add more than '.$reqcount["value"] .' request.'));
@@ -1629,6 +1637,8 @@ $chatCount = $allUnreadChat->count();
 $this->set('chatCount',$chatCount); 
 $this->set('allunreadchat',$allUnreadChat);
 }
+
+
 public function hotelrequest() {
 $this->loadModel('Hotels');
 $user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
@@ -1746,15 +1756,15 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 			);
 		}
 		else{
-			 /*  $conditions[]= array (
+			   $conditions[]= array (
 				'OR' => array(
 					array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
 					array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
 					
-					array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
+					array("Requests.start_date <=" =>  $current_date,'Requests.category_id'=> 2,'Requests.total_response >' =>0),
 					array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
 				)
-			);   */
+			);   
 		}
 		$edate = $this->request->query("enddatesearch");
 		if(!empty($this->request->query("enddatesearch"))) {
@@ -2716,10 +2726,11 @@ $userchats->message = $message;
 $userchats->type = 'Final Response';
 $userchats->created = date("Y-m-d H:i:s");
 $userchats->notification = 1;;
-if ($userchatTable->save($userchats)) {
-$id = $userchats->id;
-$res = 1;
-}
+	if ($userchatTable->save($userchats)) {
+		$id = $userchats->id;
+ 		$this->sendpushnotification($send_to_user_id,$message,$message);
+		$res = 1;
+	}
 }
 }
 echo $res;
@@ -3781,6 +3792,7 @@ public function addresponse() {
 			$userchats->notification = 1;;
 			if ($userchatTable->save($userchats)) {
 				$id = $userchats->id;
+				$this->sendpushnotification($request["user_id"],$message,$message);
 			}
 			$this->Flash->success(__('Your response has bee submitted successfully.'));
 		} 
@@ -4029,6 +4041,8 @@ $d["created"] = date("Y-m-d H:i:s");
 $sql = "Insert into user_chats SET user_id='".$this->Auth->user('id')."',send_to_user_id='".$d['chat_user_id']."',
 	created='".date("Y-m-d H:i:s")."',request_id='".$d['request_id']."',screen_id='".$d['screen_id']."',message='".$_POST['message']."',type='Chat'";
 $stmt = $conn->execute($sql);
+$message=$_POST['message'];
+$this->sendpushnotification($d['chat_user_id'],$message,$message);
 /*if(isset($d['screen_id']))
 	{
 	$d["screen_id"] = $d['screen_id'];
@@ -4090,6 +4104,7 @@ $userchats->created = date("Y-m-d H:i:s");
 $userchats->notification = 1;
 if ($userchatTable->save($userchats)) {
 $id = $userchats->id;
+$this->sendpushnotification($send_to_user_id,$message,$message);
 $res = 1;
 }
 $res = 1;
@@ -4555,114 +4570,172 @@ $data[$req['id']]  = $queryr->count();
 //$this->set(compact('requests', "allCities", "allStates","requests", "data","user"));
 }
 	
-public function getcheckresponselists()
-{
-$this->loadModel('Responses');
-$this->loadModel('Requests');
-$this->loadModel('Cities');
-$this->loadModel('States');
-$this->loadModel('User_Chats');
-$this->loadModel('Testimonial');
-$loggedinid= $this->Auth->user('id');
-$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
-$this->set('users', $user);
-$id = $_POST['request_id'];
-$keyword = "";
-$acceptDeals = "";
-	$conditions["Responses.request_id"] = $id;
-	if(!empty($_POST["agentname"])) {
-$keyword1 = '';
-$keyword2 = '';
-$keyword = trim($_POST["agentname"]);
-$keyword = explode(' ',$keyword);
-if(isset($keyword[0]) && !isset($keyword[1])) {
-$keyword1 = $keyword[0];
-$conditions["Users.first_name"] =$keyword1;
-}
-if(isset($keyword[1])) {
-$keyword1 = trim($keyword[0]);
-$keyword2 = trim($keyword[1]);
-$da["Users.first_name"] =  $keyword1;
-$da["Users.last_name"] =  $keyword2;
-$conditions["AND"] =  $da;
-}
+	public function getcheckresponselists()
+	{
+		$this->loadModel('Responses');
+		$this->loadModel('Requests');
+		$this->loadModel('Cities');
+		$this->loadModel('States');
+		$this->loadModel('User_Chats');
+		$this->loadModel('Testimonial');
+		$loggedinid= $this->Auth->user('id');
+		$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
+		$this->set('users', $user);
+		$id = $_POST['request_id'];
+		$keyword = "";
+		$acceptDeals = "";
+		$conditions["Responses.request_id"] = $id;
+		if(!empty($_POST["agentname"])) {
+			$keyword1 = '';
+			$keyword2 = '';
+			$keyword = trim($_POST["agentname"]);
+			$keyword = explode(' ',$keyword);
+			if(isset($keyword[0]) && !isset($keyword[1])) {
+				$keyword1 = $keyword[0];
+				$conditions["Users.first_name"] =$keyword1;
+			}
+			if(isset($keyword[1])) {
+				$keyword1 = trim($keyword[0]);
+				$keyword2 = trim($keyword[1]);
+				$da["Users.first_name"] =  $keyword1;
+				$da["Users.last_name"] =  $keyword2;
+				$conditions["AND"] =  $da;
+			}
+		}
+		if(!empty($_POST["acceptdeals"])) {
+			$conditions["Responses.status"] = 1;
+			$acceptDeals = 1;
+		}
+		$sortorder ='';
+		$chat_sort = 0;
+		$responses = $this->Responses->find()
+		->contain(["Users", "Requests", "UserChats","Testimonial"])
+		->where($conditions)
+		->order($sortorder)
+		->all();	
+		$userchatTable = TableRegistry::get('User_Chats');
+		$conn = ConnectionManager::get('default');
+		$data = array();
+		foreach($responses as $row){ 
+			$request_id = $row['request']['id'];
+			$user_id = $row['user']['id'];
+			$sql = "SELECT *,COUNT(*) as ch_count FROM user_chats 
+			WHERE request_id='".$request_id."' AND (user_id in ('".$loggedinid."','".$user_id."') 
+			AND notification='0'
+			ANd send_to_user_id in ('".$loggedinid."','".$user_id."')) ";
+			$stmt = $conn->execute($sql);
+			$results = $stmt ->fetch('assoc');			
+			//$row["request"]["chat_count"]=$results['ch_count'];
+			$data[$row['id']] =$results['ch_count'];
+			echo json_encode($data);
+			die();
+		}	
+		
 	}
-if(!empty($_POST["acceptdeals"])) {
-$conditions["Responses.status"] = 1;
-$acceptDeals = 1;
-}
-$sortorder ='';
-$chat_sort = 0;
-$responses = $this->Responses->find()
-->contain(["Users", "Requests", "UserChats","Testimonial"])
-->where($conditions)
-->order($sortorder)
-->all();	
-$userchatTable = TableRegistry::get('User_Chats');
-$conn = ConnectionManager::get('default');
-$data = array();
-foreach($responses as $row){ 
-$request_id = $row['request']['id'];
-$user_id = $row['user']['id'];
-$sql = "SELECT *,COUNT(*) as ch_count FROM user_chats 
-WHERE request_id='".$request_id."' AND (user_id in ('".$loggedinid."','".$user_id."') 
-AND notification='0'
-ANd send_to_user_id in ('".$loggedinid."','".$user_id."')) ";
-$stmt = $conn->execute($sql);
-$results = $stmt ->fetch('assoc');			
-//$row["request"]["chat_count"]=$results['ch_count'];
-$data[$row['id']] =$results['ch_count'];
-	echo json_encode($data);
-	die();
-}	
-	
-}
 
-public function encode($string,$key) {
-$key = sha1($key);
-$strLen = strlen($string);
-$keyLen = strlen($key);
-for ($i = 0; $i < $strLen; $i++) {
-$ordStr = ord(substr($string,$i,1));
-if (@$j == $keyLen) { $j = 0; }
-$ordKey = ord(substr($key,@$j,1));
-@$j++;
-@$hash .= strrev(base_convert(dechex($ordStr + $ordKey),16,36));
-}
-return @$hash;
-}
+	public function encode($string,$key) {
+		$key = sha1($key);
+		$strLen = strlen($string);
+		$keyLen = strlen($key);
+		for ($i = 0; $i < $strLen; $i++) {
+		$ordStr = ord(substr($string,$i,1));
+		if (@$j == $keyLen) { $j = 0; }
+		$ordKey = ord(substr($key,@$j,1));
+		@$j++;
+		@$hash .= strrev(base_convert(dechex($ordStr + $ordKey),16,36));
+		}
+		return @$hash;
+	}
 
-public function decode($string,$key) {
-$key = sha1($key);
-$strLen = strlen($string);
-$keyLen = strlen($key);
-for ($i = 0; $i < $strLen; $i+=2) {
-$ordStr = hexdec(base_convert(strrev(substr($string,$i,2)),36,16));
-if (@$j == $keyLen) { @$j = 0; }
-$ordKey = ord(substr($key,@$j,1));
-@$j++;
-@$hash .= chr($ordStr - $ordKey);
-}
-return @$hash;
-}
-public function cronobforremoverequest()
-{
-	$this->loadModel('Requests');
-	$current_date=date("Y-m-d");
-	$conditions[]= array (
-		'OR' => array(
-			array("Requests.start_date <=" =>  $current_date,'Requests.category_id'=> 2),
-			array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2),
+	public function decode($string,$key) {
+		$key = sha1($key);
+		$strLen = strlen($string);
+		$keyLen = strlen($key);
+		for ($i = 0; $i < $strLen; $i+=2) {
+		$ordStr = hexdec(base_convert(strrev(substr($string,$i,2)),36,16));
+		if (@$j == $keyLen) { @$j = 0; }
+		$ordKey = ord(substr($key,@$j,1));
+		@$j++;
+		@$hash .= chr($ordStr - $ordKey);
+		}
+		return @$hash;
+	}
+	public function cronobforremoverequest()
+	{
+		$this->loadModel('Requests');
+		$current_date=date("Y-m-d");
+		$conditions[]= array (
+			'OR' => array(
+				array("Requests.start_date <=" =>  $current_date,'Requests.category_id'=> 2),
+				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2),
+				
+				array("Requests.start_date <=" =>  $current_date,'Requests.category_id'=> 2,'Requests.total_response >' =>0),
+				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
+			)
+		);
+		$conditions['is_deleted']=0;
+		$requests = $this->Requests->find()->where($conditions); 
+		//pr($requests->toArray()); exit;
+		foreach($requests as $request){
+			$updateId=$request['id'];
+			$this->Requests->updateAll(['is_deleted' => 1], ['id' => $updateId]);
+		}
+		exit;
+	}
+		public function sendpushnotification($userid,$message,$message_data)
+		{
+			$conn = ConnectionManager::get('default');
+			$sql = "Select device_id FROM users where id='".$userid."'";
+			$stmt = $conn->execute($sql);
+			$user = $stmt ->fetch('assoc');
+			$deviceid = $user['device_id'];
 			
-			array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response ' =>0),
-			array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
-		)
-	);
-	$requests = $this->Requests->find()->where($conditions); 
-	foreach($requests as $request){
-		$updateId=$request['id'];
-		$this->Requests->updateAll(['is_deleted' => 1], ['id' => $updateId]);
-	}
-	exit;
-}
+			if(!empty($deviceid)){
+
+			$sql1 = "Select count(*) as countchat FROM user_chats as c 
+			INNER JOIN users as u on u.id=c.user_id
+			where c.is_read='0' AND c.send_to_user_id='".$userid."'
+			order by c.created DESC ";
+			$stmt1 = $conn->execute($sql1);
+			$countchat = $stmt1 ->fetch('assoc');
+			
+			$API_ACCESS_KEY='AIzaSyA5mzBqngPlq220FYB8Cr2O4y79RH4i9s4';
+
+			$registrationIds =  $deviceid;
+			$msg = array
+			(
+			'body' 	=> $message,
+			'title'	=> 'Travelb2bhub Notification',
+			'icon'	=> 'myicon',/*Default Icon*/
+			'sound' => 'mySound',/*Default sound*/
+			'unread_count' => $countchat,
+			'message' => $message_data
+			);
+			$data = array
+			(
+			"unread_count" => $countchat
+			);
+			$fields = array('to'=> $registrationIds,
+			'notification'=> $msg,
+			'data' => $msg
+			);
+			$headers = array(
+			'Authorization: key='.$API_ACCESS_KEY,
+			'Content-Type: application/json'
+			);
+
+			
+			$ch = curl_init();
+			curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
+			curl_setopt( $ch,CURLOPT_POST, true );
+			curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
+			curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
+			curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
+			curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
+			$result = curl_exec($ch );
+			curl_close( $ch );
+ 			return $result;
+ 			}
+			
+		}	
 }
