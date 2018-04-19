@@ -296,20 +296,22 @@ a{
 				 </div>
 			  </div>
 		   </div>
-
-<form method="get">
-	<div class="" style="margin-bottom:5px;">
-		<div class="row">
-			<div class="col-md-12">
-				<div class="">
-				<table width="100%"><tr><td width="95%"> 
-					<input class="form-control" placeholder="Type Location, State, City etc." name="search"/></td><td>
-					<button class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Search</button> </td></tr></table>
+			<form method="get">
+				<div class="" style="margin-bottom:5px;">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="">
+								<table width="100%"><tr><td width="80%"> 
+								<input class="form-control" placeholder="Type Location, State, City etc." name="search"/></td>
+								<td width="8%" style="padding-left:5px;"><button style="width:100%" class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Search</button></td>
+								<td width="8%" style="padding-left:5px;"><a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-danger btn-sm" style="width:100%">Reset</a>
+								</td></tr>
+							</table>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-</form>
+			</form>
 			<?php $i=1;
 			if(!empty($taxiFleetPromotions)){
 			foreach ($taxiFleetPromotions as $taxiFleetPromotion){
@@ -363,7 +365,7 @@ a{
 						<!-- Modal content-->
 							<div class="modal-content">
 								<div class="modal-body" >
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<button type="button" class="close" data-dismiss="modal" style="padding-right:8px !important;">&times;</button>
 								<?= $this->Html->image($taxiFleetPromotion->full_image,['style'=>'width:100%;height:300px;padding:20px;padding-top:0px!important;']) ?>
 								</div>
 							</div>
@@ -585,31 +587,23 @@ a{
 																</div>
 															</div>
 														</div>
-								<div class="col-md-12 text-center">
-									<button class="btn btn-info btn-md btnlayout viewCount" data-target="#fleetdetail<?php echo $taxiFleetPromotion->id;?>" promotionid="<?php echo $taxiFleetPromotion->id;?>" userId="<?php echo $user_id;?>" data-toggle="modal" type="button">Fleet Details</button>
-										<!-------Report Modal Start--------->
-											
-										<!-------Report Modal End--------->	
-									<button class="btn btn-danger btn-md btnlayout viewCount" data-target="#contactdetails<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $taxiFleetPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Contact Info</button>
-										
-									<!-------Contact Details Modal --------->
-												
-														<!-------Contact Details Modal End--------->	
+														<div class="col-md-12 text-center">
+															<button class="btn btn-info btn-md btnlayout viewCount" data-target="#fleetdetail<?php echo $taxiFleetPromotion->id;?>" promotionid="<?php echo $taxiFleetPromotion->id;?>" userId="<?php echo $user_id;?>" data-toggle="modal" type="button">Fleet Details</button>&nbsp;&nbsp;
+															<button class="btn btn-danger btn-md btnlayout viewCount" data-target="#contactdetails<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $taxiFleetPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Contact Info</button>
+														</div>
+														</div>
+													</div>
+												</div>
 											</div>
-									</div>
+										</form>	
+									</fieldset>	
 								</div>
-										<!----button list end--->
-								</div>
-							</div>
-						</form>	
-				</fieldset>	
-				</div>
-						<?php      }
-								}
-								else{	
+								<?php      }
+									}
+									else{	
 										echo"<div class='row col-md-12 text-center'><tr><th colspan='10' ><span>No Record Found</span></th></tr></div>";
 									}
-								?>
+									?>
 						<!--<div class="paginator">
 										<ul class="pagination">
 											<?= $this->Paginator->first('<< ' . __('first')) ?>

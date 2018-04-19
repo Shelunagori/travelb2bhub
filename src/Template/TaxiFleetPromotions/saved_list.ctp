@@ -222,7 +222,7 @@ a{
 						<!-- Modal content-->
 							<div class="modal-content">
 								<div class="modal-body" >
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<button type="button" class="close" data-dismiss="modal" style="padding-right:8px !important;">&times;</button>
 								<?= $this->Html->image($taxiFleetPromotion->full_image,['style'=>'width:100%;height:300px;padding:20px;padding-top:0px!important;']) ?>
 								</div>
 							</div>
@@ -377,7 +377,7 @@ a{
 									<!-----button list-->
 							<div class="row" style="padding-top:15px;">
 								<div class="col-md-12 ">
-								<button class="btn btn-info btn-md btnlayout" data-target="#fleetdetail<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Fleet Details</button>
+								<button class="btn btn-info btn-md btnlayout" data-target="#fleetdetail<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Fleet Details</button>&nbsp;&nbsp;
 									<!-------Report Modal Start--------->
 										<div id="fleetdetail<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
 											<div class="modal-dialog modal-md">
@@ -403,7 +403,6 @@ a{
 											</div>
 									<!-------Report Modal End--------->	
 									<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
-									
 									<!-------Contact Details Modal --------->
 												<div id="contactdetails<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-sm" >

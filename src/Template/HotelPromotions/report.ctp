@@ -280,9 +280,12 @@ a{
 	<div class="row">
 		<div class="col-md-12">
 			<div class="">
-			<table width="100%"><tr><td width="95%"> 
-				<input class="form-control" placeholder="Type Location, State, City etc." name="search"/></td><td>
-				<button class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Search</button> </td></tr></table>
+				<table width="100%"><tr><td width="80%"> 
+					<input class="form-control" placeholder="Type Location, State, City etc." name="search"/></td>
+					<td width="8%" style="padding-left:5px;"><button style="width:100%" class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Search</button></td>
+					<td width="8%" style="padding-left:5px;"><a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>"class="btn btn-danger btn-sm" style="width:100%">Reset</a>
+					</td></tr>
+				</table>
 			</div>
 		</div>
 	</div>
@@ -310,7 +313,7 @@ a{
 						<!-- Modal content-->
 							<div class="modal-content">
 								<div class="modal-body" >
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<button type="button" class="close" data-dismiss="modal" style="padding-right:8px !important;">&times;</button>
 								<?= $this->Html->image($hotelPromotion->full_image,['style'=>'width:100%;height:300px;padding:20px;padding-top:0px!important;']) ?>
 								</div>
 							</div>

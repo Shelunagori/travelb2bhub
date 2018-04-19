@@ -258,9 +258,12 @@ a{
 		<div class="row">
 			<div class="col-md-12">
 				<div class="">
-				<table width="100%"><tr><td width="95%"> 
-					<input class="form-control" placeholder="Type Location, State, City etc." name="search"/></td><td>
-					<button class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Search</button> </td></tr></table>
+					<table width="100%"><tr><td width="80%"> 
+						<input class="form-control" placeholder="Type Location, State, City etc." name="search"/></td>
+						<td width="8%" style="padding-left:5px;"><button style="width:100%" class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Search</button></td>
+						<td width="8%" style="padding-left:5px;"><a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-sm" style="width:100%">Reset</a>
+						</td></tr>
+					</table>
 				</div>
 			</div>
 		</div>
@@ -313,7 +316,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 						<!-- Modal content-->
 							<div class="modal-content">
 								<div class="modal-body" >
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<button type="button" class="close" data-dismiss="modal" style="padding-right:8px !important;">&times;</button>
 								<?= $this->Html->image($eventPlannerPromotion->full_image,['style'=>'width:100%;height:300px;padding:20px;padding-top:0px!important;']) ?>
 								</div>
 							</div>
@@ -447,7 +450,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 													echo "";
 												}
 												else{
-														echo "( ".$eventPlannerPromotion->user_rating." <i class='fa fa-star'></i> )";
+														echo "(".$eventPlannerPromotion->user_rating." <i class='fa fa-star'></i>)";
 													}
 												?></a>
 											</span>
@@ -480,7 +483,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 																	echo "";
 																}
 																else{
-																		echo "( ".$eventPlannerPromotion->user_rating." <i class='fa fa-star'></i> )";
+																		echo "(".$eventPlannerPromotion->user_rating." <i class='fa fa-star'></i>)";
 																	}
 																?></a>
 														</span>
@@ -528,13 +531,9 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 											</div>
 										</div>
 						<div class="col-md-12 text-center">
-						
 						<div class="row" style="padding-top:15px;">
 							<div class="col-md-12">
-								<button class="btn btn-info btn-md btnlayout viewCount" data-target="#eventdetail<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $eventPlannerPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Event Details</button>
-								<!-------Report Modal Start--------->
-								
-								<!-------Report Modal End--------->	
+								<button class="btn btn-info btn-md btnlayout viewCount" data-target="#eventdetail<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $eventPlannerPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Event Details</button>&nbsp;&nbsp;
 								<button class="btn btn-danger btn-md btnlayout viewCount" data-target="#contactdetails<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $eventPlannerPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Contact Info</button>
 								<!-------Contact Details Modal --------->
 								

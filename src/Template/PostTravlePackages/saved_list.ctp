@@ -229,7 +229,7 @@ a{
 						<!-- Modal content-->
 							<div class="modal-content">
 								<div class="modal-body" >
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<button type="button" class="close" data-dismiss="modal" style="padding-right:8px !important;">&times;</button>
 								<?= $this->Html->image($postTravlePackage->full_image,['style'=>'width:100%;height:300px;padding:20px;padding-top:0px!important;']) ?>
 								</div>
 							</div>
@@ -427,7 +427,7 @@ a{
 												
 					<div class="row "  style="padding-top:15px;">						
 					<div class="col-md-12 ">
-						<button class="btn btn-info btn-md btnlayout" data-target="#Inclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal" type="button">Inclusion</button>
+						<button class="btn btn-info btn-md btnlayout" data-target="#Inclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal" type="button">Inclusions</button>&nbsp;&nbsp;
 							<!-------Report Modal Start--------->
 							<div id="Inclusion<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-md">
@@ -452,7 +452,7 @@ a{
 										</div>
 									</div>
 								</div>
-								<button class="btn btn-warning btn-md btnlayout" data-target="#Exclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal" type="button">Exclusion</button>
+								<button class="btn btn-warning btn-md btnlayout" data-target="#Exclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal" type="button">Exclusions</button>&nbsp;&nbsp;
 								<!-------Report Modal Start--------->
 								<div id="Exclusion<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 									<div class="modal-dialog modal-md">

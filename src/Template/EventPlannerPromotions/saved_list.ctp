@@ -196,7 +196,7 @@ a{
 						<!-- Modal content-->
 							<div class="modal-content">
 								<div class="modal-body" >
-								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<button type="button" class="close" data-dismiss="modal" style="padding-right:8px !important;">&times;</button>
 								<?= $this->Html->image($eventPlannerPromotion->full_image,['style'=>'width:100%;height:300px;padding:20px;padding-top:0px!important;']) ?>
 								</div>
 							</div>
@@ -336,17 +336,17 @@ a{
 													echo "";
 												}
 												else{
-														echo "( ".$eventPlannerPromotionss->user_rating." <i class='fa fa-star'></i> )";
+														echo "(".$eventPlannerPromotionss->user_rating." <i class='fa fa-star'></i>)";
 													}
 												?></a>
 											</span>
 									</div>
 								</div>
 							</div>
-						<div class="col-md-6 pull-right">
+						<div class="col-md-12 text-center">
 						<div class="row" style="padding-top:15px;">
 							<div class="col-md-12">
-							<button class="btn btn-info btn-md btnlayout" data-target="#eventdetail<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" type="button">Event Details</button>
+							<button class="btn btn-info btn-md btnlayout" data-target="#eventdetail<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" type="button">Event Details</button>&nbsp;&nbsp;
 								<!-------Report Modal Start--------->
 								<div id="eventdetail<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
 										<div class="modal-dialog modal-md">
@@ -397,7 +397,7 @@ a{
 																	echo "";
 																}
 																else{
-																		echo "( ".$eventPlannerPromotionss->user_rating." <i class='fa fa-star'></i> )";
+																		echo "(".$eventPlannerPromotionss->user_rating." <i class='fa fa-star'></i>)";
 																	}
 																?></a>
 														</span>
