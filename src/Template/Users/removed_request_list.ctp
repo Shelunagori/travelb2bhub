@@ -50,19 +50,19 @@ $m =0;
  ?>		<div id="cat" >
 			<div class="col-md-4" style="padding-top:15px;">
 				<?php 
-					   if($request['category_id']==1){ 
-							$image=$this->Html->image('/img/slider/package-icon.png');
-							$text="<span class='requestType'>Package</span>";
-						} 
-						if($request['category_id']==2){
-							$image= $this->Html->image('/img/slider/transport-icon.png');
-							$text="<span class='requestType'>Transport</span>";
-						}
-						if($request['category_id']==3){
-							$image= $this->Html->image('/img/slider/hotelier-icon.png');
-							$text="<span class='requestType'>Hotel</span>";
-						} 
-					?>
+				   if($request['category_id']==1){ 
+						$image=$this->Html->image('/img/slider/package-icon.png');
+						$text="<span class='requestType'>Package</span>";
+					} 
+					if($request['category_id']==2){
+						$image= $this->Html->image('/img/slider/transport-icon.png');
+						$text="<span class='requestType'>Transport</span>";
+					}
+					if($request['category_id']==3){
+						$image= $this->Html->image('/img/slider/hotelier-icon.png');
+						$text="<span class='requestType'>Hotel</span>";
+					} 
+				?>
                 <fieldset><legend><?php echo $image; ?></legend>
 				 <ul>
                     <li >
