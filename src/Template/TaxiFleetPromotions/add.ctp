@@ -181,7 +181,7 @@ fieldset{
 										<legend style="color:#369FA1;"><b><?= __('Load Taxi/Fleet Promotion') ?></b></legend> 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
+										<div class="col-lg-4 col-md-4 col-sm-4  mt form-group">
 											<p for="from">
 												Your Company Name
 												<span class="required">*</span>

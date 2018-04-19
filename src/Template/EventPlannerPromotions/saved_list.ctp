@@ -312,7 +312,7 @@ a{
 								</div>
 							</div>
 							<div class="row rowspace">
-								<div class="col-md-12 "><label>States of Operation </label>
+								<div class="col-md-12 "><label>States of Operation: </label>
 								<span class=""><?= h($stateList); ?></span>
 								</div>
 							</div>
