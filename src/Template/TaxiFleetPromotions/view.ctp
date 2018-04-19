@@ -100,7 +100,6 @@ label{
 a{
 	color:#ac85d6;
 }
-
 </style>
 <section class="content">
 <div class="row">
@@ -260,30 +259,30 @@ a{
 						</div>
 					<div class="col-md-9">
 								<div class="row col-md-12" style="padding-top:8px;">
-									<div class="col-md-12"><span style="color:#676363;font-weight:600;">Category :</span>
+									<div class="col-md-12"><span style="color:#676363;font-weight:600;">Category: </span>
 										<?= h($vehicleList); ?>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#676363;font-weight:600;"><?= __(' Cities of Operation') ?> :</span>
+										<div class="col-md-12"><span style="color:#676363;font-weight:600;"><?= __(' Cities of Operation') ?>: </span>
 										<span><?= h($cityList); ?></span>
 										</div>
 									</div>
 									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#676363;font-weight:600;"><?= __(' States of Operation') ?> :</span>
+										<div class="col-md-12"><span style="color:#676363;font-weight:600;"><?= __(' States of Operation') ?>: </span>
 										<span ><?= h($stateList); ?> </span>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#676363;font-weight:600;"><?= __(' Country') ?> :</span>
+										<div class="col-md-12"><span style="color:#676363;font-weight:600;"><?= __(' Country') ?>: </span>
 										<span ><?= h($taxiFleetPromotion->country->country_name); ?> </span>
 										</div>
 									</div>
 									<div class="row rowspace">
-										<div class="col-md-12 "><span style="color:#676363;font-weight:600;"><?= __(' Seller') ?> :</span>	
+										<div class="col-md-12 "><span style="color:#676363;font-weight:600;"><?= __(' Seller') ?>: </span>	
 										<span><u>
 											<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
 											<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>"> 
@@ -302,11 +301,12 @@ a{
 									</div>
 									<!-----button list-->
 							<div class="row" style="padding-top:15px;">
-								<div class="col-md-12 ">
+								<div class="col-md-12 text-center">
 									<?php
 										echo $this->Html->link('<b>Contact Info</b>','address'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn  btn-info btn-md contact','data-target'=>'#contactdetails'.$taxiFleetPromotion->id,'data-toggle'=>'modal'));?>
-									
-									<!-------Contact Details Modal --------->
+												</div>
+											</div>
+											<!-------Contact Details Modal --------->
 												<div id="contactdetails<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-sm" >
 														<!-- Modal content-->
@@ -322,7 +322,7 @@ a{
 																				<div class="row">
 																		<div class="col-md-12">
 																			<label>
-																			Seller Name :</label>
+																			Seller Name: </label>
 																				<span><u>
 																				<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
 																				<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>">
@@ -341,13 +341,13 @@ a{
 																		</div>
 																		<div class="row">
 																			<div class="col-md-12">
-																			<label>Mobile No :</label>
+																			<label>Mobile No: </label>
 																			<span><?= h($taxiFleetPromotion->user->mobile_number);?></span>
 																			</div>
 																		</div>
 																		<div class="row">
 																			<div class="col-md-12">
-																				<label>Email :</label>
+																				<label>Email: </label>
 																				<span><u><a href="mailto:<?php echo $taxiFleetPromotion->user->email;?>"><?= h($taxiFleetPromotion->user->email);?></a></u></span>
 																				</div>
 																			</div>
@@ -359,8 +359,6 @@ a{
 															</div>
 														</div>
 														<!-------Contact Details Modal End--------->	
-													</div>
-											</div>
 										</div>
 										<!----button list end--->
 								</div>

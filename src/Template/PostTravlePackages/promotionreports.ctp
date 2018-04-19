@@ -75,7 +75,7 @@ fieldset{
 	pading-bottom:10px!important;
 }
 label {
-	font-weight : 300 !important;
+	font-weight:  300 !important;
 }
 .btn-defaults {
 	background-color: #ffffff !important;
@@ -92,6 +92,9 @@ label {
 }
 .mainrow{
 	padding:12px;
+}
+.unfollow{
+	width:70px;
 }
 </style>
 <div class="row" >
@@ -143,25 +146,25 @@ label {
 							<span style="color:black;font-size:17px;"><?php echo $postTravlePackage->title?></span>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-							Views :
+							Views: 
 								<!--<a  style="color:#1295AB;" href="viewers_list/<?php echo $postTravlePackage->id?>"><label><?php echo $postTravlePackage->total_views;?></label></a>--->
 								<a type="button" href="viewers_list/<?php echo $postTravlePackage->id; ?>" style="border-radius:10px; width:53px; background-color: #FFF !important;color: #1295AB !important; border: 1px solid; padding-top: 2px;padding-bottom: 3px" class="btn btn-md">
 									<?php echo $postTravlePackage->total_views;?>
 								</a>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-								Likes : &nbsp;
+								Likes:  
 								<a type="button" href="likers_list/<?php echo $postTravlePackage->id ; ?>" style="border-radius:10px; width:53px; background-color: #FFF !important;color: #1295AB !important; border: 1px solid; padding-top: 2px;padding-bottom: 3px" class="btn btn-md">
 									<?php echo $postTravlePackage->total_likes;?>
 								</a> 
 							</div>
 							
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-							Date Posted :
+							Date Posted: 
 							<label style="color:black;"><?php echo date('d-M-y',strtotime($postTravlePackage->created_on));?></label>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-							Expiring On :
+							Expiring On: 
 							<label style="color:#FB6542;"><?php echo date('d-M-y',strtotime($postTravlePackage->visible_date));?></label>
 							</div>
 						</div>
@@ -239,11 +242,11 @@ label {
 									  <div class="modal-header" style="height:100px;">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 											<h4 class="modal-title">
-											Are you sure ? You want to delete this Promotion
+											Are you sure you want to delete this Promotion?
 											</h4>
 										</div>
 										<div class="modal-footer" style="height:60px;">
-											<button type="submit" name="removepackage"  class=" btn btn-success btn-md" value="yes" name="remove_promotion">Yes</button>
+											<button type="submit" name="removepackage"  class=" unfollow btn btn-success btn-md" value="yes" name="remove_promotion">Yes</button>
 											<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
 										</div>
 									</div>

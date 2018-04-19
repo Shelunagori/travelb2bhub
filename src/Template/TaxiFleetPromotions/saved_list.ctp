@@ -334,30 +334,30 @@ a{
 					<div class="col-md-9" >
 								<div class="row col-md-12 rowspace">
 										<div class="col-md-12" style="padding-top:8px;">
-										<label>Category :</label>
+										<label>Category: </label>
 										<span ><?= h($vehicleList); ?></span>
 										</div>
 								</div>
 								<div class="col-md-7">
 									<div class="row rowspace" style="padding-top:2px;">
-										<div class="col-md-12"><label ><?= __(' Cities of Operation') ?> :</label>
+										<div class="col-md-12"><label ><?= __(' Cities of Operation') ?>: </label>
 										<span><?= h($cityList); ?></span>
 										</div>
 									</div>
 									<div class="row rowspace" style="padding-top:2px;">
-										<div class="col-md-12"><label ><?= __(' States of Operation') ?> :</label>
+										<div class="col-md-12"><label ><?= __(' States of Operation') ?>: </label>
 										<span ><?= h($stateList); ?> </span>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-5">
 									<div class="row rowspace" style="padding-top:2px;">
-										<div class="col-md-12"><label ><?= __(' Country') ?> :</label>
+										<div class="col-md-12"><label ><?= __(' Country') ?>: </label>
 										<span >India </span>
 										</div>
 									</div>
 									<div class="row rowspace">
-										<div class="col-md-12 "><label ><?= __(' Seller') ?> :</label>	
+										<div class="col-md-12 "><label ><?= __(' Seller') ?>: </label>	
 										<span><u>
 												<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
 												<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>">
@@ -376,9 +376,65 @@ a{
 									</div>
 									<!-----button list-->
 							<div class="row" style="padding-top:15px;">
-								<div class="col-md-12 ">
+								<div class="col-md-12 text-center">
 								<button class="btn btn-info btn-md btnlayout" data-target="#fleetdetail<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Fleet Details</button>&nbsp;&nbsp;
-									<!-------Report Modal Start--------->
+								<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
+								</div>
+							</div>
+							<!-------Contact Details Modal --------->
+												<div id="contactdetails<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
+													<div class="modal-dialog modal-sm" >
+														<!-- Modal content-->
+															<div class="modal-content">
+															  <div class="modal-header">
+																<button type="button" class="close" data-dismiss="modal">&times;</button>
+																	<span class="modal-title">
+																	Seller Details
+																	</span>
+																	</div>
+																	<div class="modal-body" style="padding-left:15px!important;">
+																		<span class="help-block"></span>
+																		<div class="row">
+																		<div class="col-md-12">
+																			<label>
+																			Seller Name: </label>
+																				<span><u>
+																				<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
+																				<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>">
+																				<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?></u>
+																				<?php
+																				if($taxiFleetPromotionss->user_rating==0)
+																				{
+																					echo "";
+																				}
+																				else{
+																						echo "(".$taxiFleetPromotionss->user_rating." <i class='fa fa-star'></i> )";
+																					}
+																				?></a>
+																			</span>
+																			</div>					
+																		</div>
+																		<div class="row">
+																			<div class="col-md-12">
+																			<label>Mobile No: </label>
+																			<span><?= h($taxiFleetPromotion->user->mobile_number);?></span>
+																			</div>
+																		</div>
+																		<div class="row">
+																			<div class="col-md-12">
+																				<label>Email: </label>
+																				<span><u><a href="mailto:<?php echo $taxiFleetPromotion->user->email;?>"><?= h($taxiFleetPromotion->user->email);?></a></u></span>
+																				</div>
+																			</div>
+																		</div>
+																	<div class="modal-footer">
+																	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<!-------Contact Details Modal End--------->	
+											<!-------Report Modal Start--------->
 										<div id="fleetdetail<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
 											<div class="modal-dialog modal-md">
 												<!-- Modal content-->
@@ -402,62 +458,6 @@ a{
 												</div>
 											</div>
 									<!-------Report Modal End--------->	
-									<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
-									<!-------Contact Details Modal --------->
-												<div id="contactdetails<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
-													<div class="modal-dialog modal-sm" >
-														<!-- Modal content-->
-															<div class="modal-content">
-															  <div class="modal-header">
-																<button type="button" class="close" data-dismiss="modal">&times;</button>
-																	<span class="modal-title">
-																	Seller Details
-																	</span>
-																	</div>
-																	<div class="modal-body" style="padding-left:15px!important;">
-																		<span class="help-block"></span>
-																		<div class="row">
-																		<div class="col-md-12">
-																			<label>
-																			Seller Name :</label>
-																				<span><u>
-																				<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
-																				<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>">
-																				<?= h($taxiFleetPromotion->user->first_name.' '.$taxiFleetPromotion->user->last_name);?></u>
-																				<?php
-																				if($taxiFleetPromotionss->user_rating==0)
-																				{
-																					echo "";
-																				}
-																				else{
-																						echo "(".$taxiFleetPromotionss->user_rating." <i class='fa fa-star'></i> )";
-																					}
-																				?></a>
-																			</span>
-																			</div>					
-																		</div>
-																		<div class="row">
-																			<div class="col-md-12">
-																			<label>Mobile No :</label>
-																			<span><?= h($taxiFleetPromotion->user->mobile_number);?></span>
-																			</div>
-																		</div>
-																		<div class="row">
-																			<div class="col-md-12">
-																				<label>Email :</label>
-																				<span><u><a href="mailto:<?php echo $taxiFleetPromotion->user->email;?>"><?= h($taxiFleetPromotion->user->email);?></a></u></span>
-																				</div>
-																			</div>
-																		</div>
-																	<div class="modal-footer">
-																	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-																	</div>
-																</div>
-															</div>
-														</div>
-														<!-------Contact Details Modal End--------->	
-													</div>
-											</div>
 										</div>
 										<!----button list end--->
 								</div>

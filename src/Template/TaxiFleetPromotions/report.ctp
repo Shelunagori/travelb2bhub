@@ -241,7 +241,7 @@ a{
 							<div class="row form-group margin-b10">
 								<div class=col-md-12>
 									<div class=col-md-4>
-										<label class="col-form-label"for=example-text-input>State : </label>
+										<label class="col-form-label"for=example-text-input>State:  </label>
 									</div>
 									<div class=col-md-7>
 									<?php 
@@ -258,7 +258,7 @@ a{
 							<div class="row form-group margin-b10">
 								<div class=col-md-12>
 								  <div class=col-md-4>
-								 <label class="col-form-label" for=example-text-input>City : </label>
+								 <label class="col-form-label" for=example-text-input>City:  </label>
 								 </div>
 								 <div class=col-md-7>
 									 <?php 
@@ -274,7 +274,7 @@ a{
 							<div class="row form-group margin-b10">
 								<div class=col-md-12>
 								  <div class=col-md-4>
-								 <label class="col-form-label" for=example-text-input>Select Taxt/Fleet Category : </label>
+								 <label class="col-form-label" for=example-text-input>Select Taxt/Fleet Category:  </label>
 								 </div>
 								 <div class=col-md-7>
 									 <?php 
@@ -472,30 +472,30 @@ a{
 							<div class="col-md-9">
 								<div class="row col-md-12 rowspace" style="padding-top:8px;">
 										<div class="col-md-12">
-										<label>Category :</label>
+										<label>Category: </label>
 										<span ><?= h($vehicleList); ?></span>
 										</div>
 								</div>
 								<div class="col-md-7 rowspace">
 									<div class="row rowspace" style="padding-top:2px;">
-										<div class="col-md-12"><label ><?= __(' Cities of Operation') ?> :</label>
+										<div class="col-md-12"><label ><?= __(' Cities of Operation') ?>: </label>
 										<span><?= h($cityList); ?></span>
 										</div>
 									</div>
 									<div class="row rowspace" style="padding-top:2px;">
-										<div class="col-md-12"><label ><?= __(' States of Operation') ?> :</label>
+										<div class="col-md-12"><label ><?= __(' States of Operation') ?>: </label>
 										<span ><?= h($stateList); ?> </span>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-5">
 									<div class="row rowspace" style="padding-top:2px;">
-										<div class="col-md-12"><label ><?= __(' Country') ?> :</label>
+										<div class="col-md-12"><label ><?= __(' Country') ?>: </label>
 										<span ><?= h($taxiFleetPromotion->country->country_name); ?> </span>
 										</div>
 									</div>
 									<div class="row rowspace">
-										<div class="col-md-12 "><label ><?= __(' Seller') ?> :</label>	
+										<div class="col-md-12 "><label ><?= __(' Seller') ?>: </label>	
 										<span><u>
 												<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
 												<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>">
@@ -551,7 +551,7 @@ a{
 																		<div class="row">
 																		<div class="col-md-12">
 																			<label>
-																			Seller Name :</label>
+																			Seller Name: </label>
 																				<span><u>
 																				<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
 																				<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>">
@@ -570,13 +570,13 @@ a{
 																		</div>
 																		<div class="row">
 																			<div class="col-md-12">
-																			<label>Mobile No :</label>
+																			<label>Mobile No: </label>
 																			<span><?= h($taxiFleetPromotion->user->mobile_number);?></span>
 																			</div>
 																		</div>
 																		<div class="row">
 																			<div class="col-md-12">
-																				<label>Email :</label>
+																				<label>Email: </label>
 																				<span><u><a href="mailto:<?php echo $taxiFleetPromotion->user->email;?>"><?= h($taxiFleetPromotion->user->email);?></a></u></span>
 																				</div>
 																			</div>
