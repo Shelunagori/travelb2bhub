@@ -145,12 +145,12 @@ legend
 				<a  class="viewdetail btn btn-info btn-sm" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$responseid)) ?>"data-target="#myModal1<?php echo $responseid; ?>" data-toggle=modal> Details</a>
 			</div>
 			</div>
-			<div class="col-md-12" align="center">
+			<div class="col-md-12" align="center" >
 				
 			</div>
-			<br>
+			
 			</fieldset>
-			<hr>
+			 <br>
 		<?php
 		if(count($responses) >0) {
 			foreach($responses as $row){
@@ -208,7 +208,7 @@ legend
 					</div>
 					 
 					<div class="col-md-2"  >
-						<b>Quoted Price :  </b> <font color="#1295AB"><?php echo ($row['quotation_price'])?"&#8377; ".$row['quotation_price']:"-- --" ?></font>
+						<b>Quoted Price :  </b> <font color="black"><?php echo ($row['quotation_price'])?"&#8377; ".$row['quotation_price']:"-- --" ?></font>
 					</div>
 					<div class="col-md-6" align="left">
 		 
@@ -240,9 +240,9 @@ legend
 										<div class="modal-content">
 												<div class="modal-header">
 													<button type="button" class="close" data-dismiss="modal">&times;</button>
-													<h3 class="modal-title">
-														<font color="black">you sure you want to share yor details with this user?</font>
-													</h3>
+													<h4 class="modal-title">
+														<font color="black">Are you sure you want to share yor details with this user?</font>
+													</h4>
 												</div>
 												<div class="modal-footer">
 													<button type="button"  href="javascript:void(0);" class="shareDetails btn btn-info" request_id = "<?php echo $row['request']['id']; ?>" user_id="<?php echo $row['user']['id']; ?>" response_id = "<?php echo $row['id']; ?>" >Shared</button>
@@ -272,9 +272,9 @@ legend
 										<div class="modal-content">
 												<div class="modal-header">
 													<button type="button" class="close" data-dismiss="modal">&times;</button>
-													<h3 class="modal-title">
-														<font color="black">you sure you want to follow this user?</font>
-													</h3>
+													<h4 class="modal-title">
+														<font color="black">Are you sure you want to follow this user?</font>
+													</h4>
 												</div>
 												<div class="modal-footer">
 													<button type="button"  href="javascript:void(0);" class="businessBuddy btn btn-successto" user_id = "<?php echo $row['user']['id']; ?>" >Follow</button>
@@ -287,7 +287,8 @@ legend
 				<?php }
 				else {
 				?>
-					<a  href="javascript:void(0);" class="btn btn-default btn-sm tst" style="background-color:#eadcdc !important;" user_id = "<?php echo $row['user']['id']; ?>"> Following</a>
+					<span style="background-color:#dadadabf;display: inline-block;text-align: center;border-radius: 6px;    vertical-align: middle;"  class=" btn-defult btn-sm ">
+										Following </span> 
 				<?php }	?>
 			 
 			
@@ -319,7 +320,7 @@ legend
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<h3 class="modal-title">
-													<h4><font color="blue">Are you sure you want to Accept Offer ?</font></h4>
+													<h4><font color="black">Are you sure you want to Accept Offer ?</font></h4>
 												</h3>
 											</div>
 												<div class="modal-footer">
@@ -351,7 +352,7 @@ legend
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<h3 class="modal-title">
-													<h4><font color="red">Are you sure you want to block this user ?</font></h4>
+													<h4><font color="black">Are you sure you want to block this user ?</font></h4>
 												</h3>
 											</div>
 												<div class="modal-footer">

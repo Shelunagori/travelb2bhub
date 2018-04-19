@@ -95,6 +95,9 @@ fieldset{
 	float:left;
 	padding-bottom: 8px;
 }
+label {
+    display: contents !important;
+}
 </style> 
 <div class="container-fluid">
 	<div class="box box-primary">
@@ -164,24 +167,26 @@ fieldset{
 				<div class="row">
 				<div class="col-md-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
-						<div class="input-field">
-							<p for="from">No. of Roomsdfs <span class="required">*</span></p>
+						<div class="input-field maindivs">
+							<p for="from">No. of Rooms <span class="required">*</span></p>
 							<div class="box-room">
 								<div class="col-md-7"> Single</div>
-								<div class="col-md-5"><input autocomplete="off" name="room1" type="number" min="0" style="height: 27px;" class="form-control number" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room1" type="number" min="0" style="height: 27px;" class="form-control number hotelroom" id="from-place" placeholder="0"/></div>
 
 								<div class="col-md-7"> Double</div>
-								<div class="col-md-5"><input autocomplete="off" name="room2" type="number" min="0" style="height: 27px;" class="form-control number" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room2" type="number" min="0" style="height: 27px;" class="form-control number hotelroom" id="from-place" placeholder="0"/></div>
 
 								<div class="col-md-7"> Triple</div>
-								<div class="col-md-5"><input autocomplete="off" name="room3" type="number" min="0" style="height: 27px;" class="form-control number" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room3" type="number" min="0" style="height: 27px;" class="form-control number hotelroom" id="from-place" placeholder="0"/></div>
 
 								<div class="col-md-7"> Child with bed</div>
-								<div class="col-md-5"><input autocomplete="off" name="child_with_bed" style="height: 27px;" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="child_with_bed" style="height: 27px;" type="number" min="0" class="form-control hotelroom" id="from-place" placeholder="0"/></div>
 
 								<div class="col-md-7"> Child without bed</div>
-								<div class="col-md-5"><input autocomplete="off" name="child_without_bed" style="height: 27px;" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="child_without_bed" style="height: 27px;" type="number" min="0" class="form-control hotelroom" id="from-place" placeholder="0"/></div>
+								
 							</div>
+							<p style="display:none;color:#ea3733;font-weight:100 !important;" id="showerror" > This field is required.</p>
 						</div>
 					</div>
 			
@@ -234,7 +239,7 @@ fieldset{
 									</div>
 									<div>
 										<input autocomplete="off" type="text" class="form-control city_select" id="h_city_name" name="h_city_name" noofrows="1" placeholder="Select City or Nearest City"/>
-										<input type='hidden' id='h_city_id' class="ctyidd" name="h_city_id" />
+ 										<input type='hidden' id='h_city_id' class="ctyidd" name="h_city_id" />
 										<div class="suggesstion-box" style="margin-top:-10px;"></div>
 									</div>
 							</div>
@@ -378,20 +383,21 @@ fieldset{
 							<p for="from">No. of Rooms <span class="required">*</span></p>
 							<div class="box-room">
 								<div class="col-md-7"> Single</div>
-								<div class="col-md-5"><input autocomplete="off" name="room1" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room1" type="number" min="0" style="height: 27px;" class="form-control packageroom" id="from-place" placeholder="0"/></div>
 
 								<div class="col-md-7"> Double</div>
-								<div class="col-md-5"><input autocomplete="off" name="room2" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room2" type="number" min="0" style="height: 27px;" class="form-control packageroom" id="from-place" placeholder="0"/></div>
 
 								<div class="col-md-7"> Triple</div>
-								<div class="col-md-5"><input autocomplete="off" name="room3" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room3" type="number" min="0" style="height: 27px;" class="form-control packageroom" id="from-place" placeholder="0"/></div>
 
 								<div class="col-md-7"> Child with bed</div>
-								<div class="col-md-5"><input autocomplete="off" name="child_with_bed" style="height: 27px;" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="child_with_bed" style="height: 27px;" type="number" min="0" class="form-control packageroom" id="from-place" placeholder="0"/></div>
 
 								<div class="col-md-7"> Child without bed</div>
-								<div class="col-md-5"><input autocomplete="off" name="child_without_bed" style="height: 27px;" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="child_without_bed" style="height: 27px;" type="number" min="0" class="form-control packageroom" id="from-place" placeholder="0"/></div>
 							</div>
+							<p style="display:none;color:#ea3733;font-weight:100 !important;" id="showerror12" > This field is required.</p>
 						</div>
 					</div>
 
@@ -523,7 +529,7 @@ fieldset{
 														Select Transport
 													</p>
 												</div>
-												<div class="input-field">
+												<div class="">
 												<?php echo $this->Form->control('transport_requirement', ["type"=>"select",'options' =>$postTravlePackageCategories, "class"=>"form-control select2","data-placeholder"=>"Select Options", "empty"=>'Select Options']);?>
 												<label id="transport_requirement-error" class="error" for="transport_requirement"> </label>
  												</div>
@@ -695,7 +701,7 @@ fieldset{
 													<div class="input-field">
 														<p for="from" >
 															Reference ID  
-															<span class="required">*</span>(This is for your reference )
+															<span class="required">*</span> (This is for your reference )
 														</p>
 														<input  name="reference_id" type="text" class="form-control ref1" id="reference_id" placeholder="Reference ID" autocomplete="off" />
 														 
@@ -739,9 +745,9 @@ fieldset{
 												</div>
 												<div class="">
 													<?php echo $this->Form->control('transport_requirement', ["type"=>"select",'options' =>$postTravlePackageCategories, "class"=>"form-control select2","data-placeholder"=>"Select Options","empty"=>'Select Options','required']);?>
-													 
+													<label id="transport_requirement-error" class="error" for="transport_requirement"> </label>
 												</div>
-												<label id="transport_requirement-error" class="error" for="transport_requirement"> </label>
+												
 											</div>
 											<div class="col-md-4">
 												<div class="input-field">
@@ -891,15 +897,7 @@ fieldset{
 
 $(document).ready(function(){ 
 
- /* 	$(document).on('keyup',".number",function(event){
-		  $(this).val($(this).val().replace(/[^\d].+/, ""));
-            if ((event.which < 48 || event.which > 57)) {
-                event.preventDefault();
-            }
-	}); */
-	
-	
-	$(document).on('blur',".city_select",function(){
+ 	$(document).on('blur',".city_select",function(){
 		var master=$(this);
 		master.closest('div').find('div.suggesstion-box').delay(1000).fadeOut(500);
 	});
@@ -1092,6 +1090,41 @@ function selectCountry(value,city_code,state,noofrows) {
 	 
 	
 } 
+$('#HotelRequestForm').submit(function(){
+	var x=0;
+	$('.hotelroom').each(function(){
+		if($(this).val() >0){
+			x=1;
+		}
+	});
+	$('#showerror').hide();
+	$('#HotelRequestFormCITY').hide();
+	if($(this).closest('div').find('.ctyidd').val()==''){
+		$('#HotelRequestFormCITY').show();
+	}	
+	if(x==0){
+		$('#showerror').show();
+		$('html, body').animate({scrollTop:0}, 'slow');
+		return false;
+	}
+	
+	
+})
+$('#PackgeRequestForm').submit(function(){
+	var x=0;
+	$('.packageroom').each(function(){
+		if($(this).val() >0){
+			x=1;
+		}
+	});
+	$('#showerror12').hide();
+	if(x==0){
+		$('#showerror12').show();
+		$('html, body').animate({scrollTop:0}, 'slow');
+		return false;
+	}
+})
+
 //--- Seco 
 	$('#PackgeRequestForm').validate({
 		rules: {
@@ -1142,7 +1175,7 @@ function selectCountry(value,city_code,state,noofrows) {
 				required : "Please select end date."
 			},
 			"pickup_city_name": {
-				required: "Please select city."
+				required: "Please select valid city."
 			},
 			"transport_requirement" : {
 				required : "Please Select Transport Requirement."
@@ -1166,7 +1199,7 @@ function selectCountry(value,city_code,state,noofrows) {
 				required : "Please select check-out date."
 			},
 			"city_id": {
-				required: "Please select city."
+				required: "Please select valid city."
 			},
 		
 			"pincode": {
@@ -1229,7 +1262,7 @@ function selectCountry(value,city_code,state,noofrows) {
 				required : "Please select check-out date."
 			},
 			"h_city_id": {
-				required: "Please select city."
+				required: "Please select valid city."
 			},
 			"locality": {
 				required: "Please enter locality."
@@ -1295,7 +1328,7 @@ function selectCountry(value,city_code,state,noofrows) {
 				required : "Please select end date."
 			},
 			"t_pickup_city_id": {
-				required: "Please select city."
+				required: "Please select valid city."
 			},
 			"t_final_city_id": {
 				required: "This field is required."

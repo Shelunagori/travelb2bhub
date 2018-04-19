@@ -48,7 +48,7 @@ $m =0;
                   }
                   $m++;	
  ?>		<div id="cat" >
-			<div class="col-md-4">
+			<div class="col-md-4" style="padding-top:15px;">
 				<?php 
 					   if($request['category_id']==1){ 
 							$image=$this->Html->image('/img/slider/package-icon.png');

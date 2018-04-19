@@ -295,7 +295,7 @@ $(document).ready(function(){
 			if($m%3==0) { echo '<div class="clearfix"></div>'; }
 			$m++;
  			?>
-            <div class="col-md-4" style="padding-top:10px;">
+            <div class="col-md-4" style="padding-top:15px;">
 			<?php 
 				if($response['request']['category_id']==1){ 
 					$image=$this->Html->image('/img/slider/package-icon.png');
@@ -453,7 +453,7 @@ $(document).ready(function(){
                        <p> Comment :<span class="details"><?php echo mb_strimwidth($response['comment'], 0, 25, "...");?></span></p>
                      </li>
                    </ul>
-				   <hr></hr>
+				   <hr style="margin-top: 0px!important;"></hr>
 				   <div class="">
 					<table width="100%" border="0" >
 						<?php $id = $response['request']['id']; ?>
@@ -504,7 +504,9 @@ $(document).ready(function(){
 						<td style="padding:3px !important;" <?php if($response['is_details_shared'] == 1) { echo 'width="33%"'; }else{ echo 'width="50%"'; } ?> >
 							<?php
 							if(array_key_exists($response["request"]["user_id"], $BusinessBuddies)) {?>
-								<a href="#" style="width:99%" class="btn btn-warning btn-sm"> Following</a>
+								
+								<span style=" width:99%;background-color:#dadadabf;display: inline-block;text-align: center;"  class=" btn-defult btn-sm ">
+										Following </span>
 							<?php } 
 							else{ ?>
 								  

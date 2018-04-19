@@ -271,7 +271,7 @@ fieldset{
 																	<span class="required">*</span>
 																</p>
 																<div class="input-field">
-																	<?php echo $this->Form->input('starting_price',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>'Starting Price']);?>
+																	<?php echo $this->Form->input('starting_price',['class'=>'form-control requiredfield number','label'=>false,'placeholder'=>'Starting Price','type'=>'number']);?>
 																	<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 															</div>							 
@@ -376,6 +376,7 @@ fieldset{
 														</p>
 														<div class="input-field">
 														<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text']);?> 
+														<input type="hidden" class="visible_date" name="visible_date">
 														</div>
 													</div>
 												</div>
@@ -405,7 +406,32 @@ fieldset{
 				</div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
-	 
+	$(document).on('keyup',".number",function(e){
+	
+		if ($.inArray(e.which, [46, 9, 27, 13]) !== -1 ||
+             // Allow: Ctrl/cmd+A
+            (e.which == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+C
+            (e.which == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+X
+            (e.which == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // which: home, end, left, right
+            (e.which >= 35 && e.which <= 39)) { 
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+			if(e.which == 190)
+			{
+				$(this).val('');
+			  e.preventDefault();
+			}
+        else if ((e.shiftKey || (e.which < 48 || e.which > 57)) && (e.which < 96 || e.which > 105) && (e.which != 8)) {
+			$(this).val('');
+            e.preventDefault();
+        }
+
+	}); 
     $(document).ready(function () {
 		 var pack_type=$('#pack_type').val();
 			//alert(pack_type);
@@ -465,7 +491,7 @@ fieldset{
 				dataType:'text',
 				success: function(data)
 				{
-					$('#mcity').html('<select name="city_id" multiple="multiple" class="form-control select2 requiredfield max_limit" data-placeholder="Select City" id="multi_city" style="height:125px;">'+data+'</select>');
+					$('#mcity').html('<select name="city_id[]" multiple="multiple" class="form-control select2 requiredfield max_limit" data-placeholder="Select City" id="multi_city" style="height:125px;">'+data+'</select>');
 					$("#multi_city").select2();
 				}
 			});
@@ -477,20 +503,26 @@ fieldset{
 	 
 		$(document).on('change','.priceMasters',function()
 		{
-			var p_type=$(this).val();
 			var priceVal=$('.priceMasters option:selected').attr('priceVal');
 			var price=$('.priceMasters option:selected').attr('price');
-			if(p_type!=''){
 			var Result = priceVal.split(" ");
 			var Result1 = price.split(" ");
 			var weeks=Result[0];
 			var price=Result1[0];
+			
+			var todaydate = new Date(); // Parse date
+			for(var x=0; x < weeks; x++){
+				todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
+			}
+			var dd = todaydate .getDate();
+			var mm = todaydate .getMonth()+1; //January is 0!
+			var yyyy = todaydate .getFullYear();
+			if(dd<10){  dd='0'+dd } 
+			if(mm<10){  mm='0'+mm } 
+			var date = dd+'-'+mm+'-'+yyyy;	
+			$('.visible_date').val(date);
 			$('.payment_amount').val(price);
-			}
-			else{
-				$('.payment_amount').val(0);
-			}
-		})
+		});
 		$(document).on('change','#pack_type',function()
 		{
 			var pack_type=$(this).val();

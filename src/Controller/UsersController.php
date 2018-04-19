@@ -1331,7 +1331,7 @@ $d['end_date'] = (isset($d['end_date']) && !empty($d['start_date']))?$this->ymdF
 					$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
 					$userchats->created = date("Y-m-d H:i:s");
 					$userchats->type = 'Request';
-					$userchats->notification = 1;;
+					$userchats->notification = 1;
 					if ($userchatTable->save($userchats)) {
 						$id = $userchats->id;
 					}
@@ -1746,7 +1746,7 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 			);
 		}
 		else{
-			  $conditions[]= array (
+			 /*  $conditions[]= array (
 				'OR' => array(
 					array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
 					array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
@@ -1754,7 +1754,7 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 					array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
 					array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
 				)
-			);  
+			);   */
 		}
 		$edate = $this->request->query("enddatesearch");
 		if(!empty($this->request->query("enddatesearch"))) {
@@ -1996,6 +1996,7 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		$key = array();
 		$value = array();
 		$RefId = array();
+		$chatdata = array();
 		$loggedinid=$this->Auth->user('id');
 		$selectoption = array();
 		$conn = ConnectionManager::get('default');
