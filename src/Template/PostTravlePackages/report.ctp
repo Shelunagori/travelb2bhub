@@ -177,8 +177,6 @@ label{
 
 .col-md-4{
 	color:#676363;
-	font-weight:600;
-	
 }
 
 a{

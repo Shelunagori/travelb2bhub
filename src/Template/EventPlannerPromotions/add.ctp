@@ -314,7 +314,7 @@ fieldset{
 $(document).ready(function (){
 		$('form').submit(function () {
 			var x=1;
-			$( ".requiredfield" ).each(function() {
+			$( ". " ).each(function() {
 				if($(this).val()!=''){ 
  					$(this).closest('div.form-group').find('.helpblock').hide();
 				}
