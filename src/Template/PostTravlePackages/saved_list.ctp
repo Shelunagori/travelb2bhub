@@ -361,7 +361,7 @@ a{
 												</div>
 											</tr>
 										</table>
-									</div>
+									</div><hr></hr>
 								</div>		
 										<!--------------------image modal--------------------->
 										<div id="myModal" class="modal1" style="display: none;">

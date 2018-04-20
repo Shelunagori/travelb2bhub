@@ -302,7 +302,7 @@ a{
 									</div>
 							<!-------Report Modal End--------->	
 						</table>
-					</div>
+					</div><hr></hr>
 					</div>
 					<div class="col-md-9 " style="padding-top:5px;">
 						<div class="col-md-6">

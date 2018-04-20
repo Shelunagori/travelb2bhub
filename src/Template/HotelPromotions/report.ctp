@@ -416,9 +416,9 @@ a{
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>	<span class="help-block"></span>
-							<div class="col-md-9">
+							</div><hr></hr>
+						</div>
+							<div class="col-md-9" style="padding-top:15px;">
 								<div class="col-md-5">
 										<div class="row rowspace">
 											<div class="col-md-12"><label>Category: </label>

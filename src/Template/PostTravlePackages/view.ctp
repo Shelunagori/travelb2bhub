@@ -101,7 +101,7 @@ font-size:20px;
 									foreach($postTravlePackage->post_travle_package_rows as $category)
 										{
 											if($x>=1){
-												$CategoryList.=' , ';
+												$CategoryList.=', ';
 											}
 											$CategoryList.=$category->post_travle_package_category->name;
 											$x++;
@@ -111,7 +111,7 @@ font-size:20px;
 											foreach($postTravlePackage->post_travle_package_countries as $country)
 											{
 												if($y>=1){
-													$countryList.=' , ';
+													$countryList.=', ';
 												}
 												$countryList.=$country->country->country_name;
 												$y++;
@@ -122,7 +122,7 @@ font-size:20px;
 											foreach($postTravlePackage->post_travle_package_cities as $cities)
 											{
 												if($z>=1){
-													$cityList.=' , ';
+													$cityList.=', ';
 												}
 												$cityList.=$cities->city->name." ( ".$cities->city->state->state_name." )";
 												$z++;
@@ -144,7 +144,7 @@ font-size:20px;
 										<div class="modal-content">
 											<div class="modal-body" >
 								<button type="button" class="close" data-dismiss="modal" style="padding-right:8px !important;">&times;</button>
-											<?= $this->Html->image($postTravlePackage->full_image,['style'=>'width:100%;height:300px;padding:20px;padding-top:0px!important;']) ?>
+											<?= $this->Html->image($postTravlePackage->full_image,['style'=>'width:100%;height:350px;padding:20px;padding-top:0px!important;']) ?>
 											</div>
 										</div>
 									</div>
@@ -273,7 +273,7 @@ font-size:20px;
 										</table>
 										</div>
 									</div>
-									<div class="col-md-9">
+									<div class="col-md-9" style="padding-top:15px;">
 											<div class="row col-md-12 rowspace">
 													<div class="col-md-12">
 													<span style="color:#676363;font-weight:600;">Category: </span>
@@ -329,9 +329,12 @@ font-size:20px;
 												</div>
 												
 								<div class="row "  style="padding-top:15px;">						
-									<div class="col-md-12 ">
+									<div class="col-md-12 text-center">
 									<?php
 										echo $this->Html->link('<b>Contact Info</b>','address'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn  btn-info btn-md contact','data-target'=>'#contactdetails'.$postTravlePackage->id,'data-toggle'=>'modal'));?>
+											
+												</div>
+											</div>
 											<!-------Contact Details Modal --------->
 											<div id="contactdetails<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 												<div class="modal-dialog modal-sm" >
@@ -398,8 +401,6 @@ font-size:20px;
 														</div>
 													</div>
 										<!-------Contact Details Modal End--------->
-												</div>
-											</div>
 										</div>
 									</div>
 													</div>

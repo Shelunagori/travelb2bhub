@@ -282,7 +282,7 @@ a{
 										</div>
 									</div>
 								</div>
-							</div>
+							</div><hr></hr>
 						</div>
 							<div class="col-md-9" >
 								<div class="col-md-5">

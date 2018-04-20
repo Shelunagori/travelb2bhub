@@ -140,12 +140,12 @@ label {
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6"  style="padding-left:25px;margin-top:10px;">
+					<div class="col-md-6"  style="padding-left:25px;margin-top:5px;">
 						<div class="row">
 							<div class="col-md-12 ">
 							<span style="color:black;font-size:17px;"><?php echo $postTravlePackage->title?></span>
 							</div>
-							<div class="col-md-12 lbwidth" style="margin-top:5px">
+							<div class="col-md-12 lbwidth" style="margin-top:10px">
 							Views: 
 								<!--<a  style="color:#1295AB;" href="viewers_list/<?php echo $postTravlePackage->id?>"><label><?php echo $postTravlePackage->total_views;?></label></a>--->
 								<a type="button" href="viewers_list/<?php echo $postTravlePackage->id; ?>" style="border-radius:10px; width:53px; background-color: #FFF !important;color: #1295AB !important; border: 1px solid; padding-top: 2px;padding-bottom: 3px" class="btn btn-md">
@@ -163,7 +163,7 @@ label {
 							Date Posted: 
 							<label style="color:black;"><?php echo date('d-M-y',strtotime($postTravlePackage->created_on));?></label>
 							</div>
-							<div class="col-md-12 lbwidth" style="margin-top:5px">
+							<div class="col-md-12 lbwidth" style="margin-top:0px !important;">
 							Expiring On: 
 							<label style="color:#FB6542;"><?php echo date('d-M-y',strtotime($postTravlePackage->visible_date));?></label>
 							</div>

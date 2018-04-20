@@ -467,7 +467,7 @@ a{
 										</div>
 									</div>
 								</div>
-							</div>
+							</div><hr></hr>
 						</div>
 							<div class="col-md-9">
 								<div class="row col-md-12 rowspace" style="padding-top:8px;">
@@ -506,7 +506,7 @@ a{
 													echo "";
 												}
 												else{
-														echo "(".$taxiFleetPromotion->user_rating." <i class='fa fa-star'></i> )";
+														echo "(".$taxiFleetPromotion->user_rating." <i class='fa fa-star'></i>)";
 													}
 												?></a>
 											</span>
@@ -562,7 +562,7 @@ a{
 																					echo "";
 																				}
 																				else{
-																						echo "(".$taxiFleetPromotion->user_rating." <i class='fa fa-star'></i> )";
+																						echo "(".$taxiFleetPromotion->user_rating." <i class='fa fa-star'></i>)";
 																					}
 																				?></a>
 																			</span>

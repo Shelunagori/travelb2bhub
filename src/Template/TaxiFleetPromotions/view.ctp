@@ -112,7 +112,7 @@ a{
 									foreach($taxiFleetPromotion->taxi_fleet_promotion_rows as $vehicle)
 										{
 											if($x>=1){
-												$vehicleList.=' , ';
+												$vehicleList.=', ';
 											}
 											$vehicleList.=$vehicle->taxi_fleet_car_bus->name;
 											$x++;
@@ -122,7 +122,7 @@ a{
 									foreach($taxiFleetPromotion->taxi_fleet_promotion_cities as $cities)
 										{
 											if($y>=1){
-												$cityList.=' , ';
+												$cityList.=', ';
 											}
 											@$cityList.=$cities->city->name;
 											$y++;
@@ -132,7 +132,7 @@ a{
 									foreach($taxiFleetPromotion->taxi_fleet_promotion_states as $states)
 										{
 											if($z>=1){
-												$stateList.=' , ';
+												$stateList.=', ';
 											}
 											$stateList.=$states->state->state_name;
 											$z++;

@@ -561,7 +561,7 @@ a{
 												</div>
 											</tr>
 										</table>
-									</div>
+									</div>	<hr></hr>
 								</div>		
 										<!--------------------image modal--------------------->
 										<div id="myModal" class="modal1" style="display:none;">
@@ -617,7 +617,7 @@ a{
 													</div>					
 												</div>	
 												<div class="row" >
-													<div class="col-md-12"><label>Cities: <label>
+													<div class="col-md-12"><label>Cities: </label>
 													<span ><?= h($cityList); ?></span>
 													</div>
 												</div>
@@ -627,8 +627,6 @@ a{
 													</div>
 												</div>
 												
-												
-					<div class="row "  style="padding-top:15px;">
 					<div id="Inclusion<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-md">
 							<!-- Modal content-->
@@ -736,6 +734,7 @@ a{
 										</div>
 									</div>
 								</div>
+								<div class="row "  style="padding-top:15px;">
 								<div class="col-md-12 text-center">
 									<button class="btn btn-info btn-md btnlayout viewCount" data-target="#Inclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal"  promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" type="button">Inclusions</button>&nbsp;&nbsp;
 										<!-------Report Modal Start--------->
@@ -749,7 +748,6 @@ a{
 										</div>
 									</div>
 								</div>
-									
 								</form>
 							</fieldset>
 						</div>

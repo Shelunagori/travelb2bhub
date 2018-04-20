@@ -144,25 +144,25 @@ $m=0;
 							<span style="color:black;font-size:17px;"><?php echo $texifleetpromotion->title?></span>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-							Views :
+							Views: 
 								<!--<a  style="color:#1295AB;" href="viewers_list/<?php echo $texifleetpromotion->id?>"><label><?php echo $texifleetpromotion->total_views;?></label></a>--->
 								<a type="button" href="viewers_list/<?php echo $texifleetpromotion->id; ?>" style="border-radius:10px; width:53px; background-color: #FFF !important;color: #1295AB !important; border: 1px solid; padding-top: 2px;padding-bottom: 3px" class="btn btn-md">
 									<?php echo $texifleetpromotion->total_views;?>
 								</a>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-								Likes :
+								Likes: 
 								<a type="button" href="likers_list/<?php echo $texifleetpromotion->id ; ?>" style="border-radius:10px; width:53px; background-color: #FFF !important;color: #1295AB !important; border: 1px solid; padding-top: 2px;padding-bottom: 3px" class="btn btn-md">
 									<?php echo $texifleetpromotion->total_likes;?>
 								</a> 
 							</div>
 							
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-							Date Posted :
+							Date Posted: 
 							<label style="color:black;"><?php echo date('d-M-y',strtotime($texifleetpromotion->created_on));?></label>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-							Expiring On :
+							Expiring On: 
 							<label style="color:#FB6542;"><?php echo date('d-M-y',strtotime($texifleetpromotion->visible_date));?></label>
 							</div>
 						</div>

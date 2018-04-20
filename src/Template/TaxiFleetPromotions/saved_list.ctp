@@ -329,7 +329,7 @@ a{
 										</div>
 									</div>
 								</div>
-							</div>
+							</div><hr></hr>
 						</div>
 					<div class="col-md-9" >
 								<div class="row col-md-12 rowspace">
@@ -368,7 +368,7 @@ a{
 													echo "";
 												}
 												else{
-														echo "(".$taxiFleetPromotionss->user_rating." <i class='fa fa-star'></i> )";
+														echo "(".$taxiFleetPromotionss->user_rating." <i class='fa fa-star'></i>)";
 													}
 												?></a>
 											</span>
@@ -408,7 +408,7 @@ a{
 																					echo "";
 																				}
 																				else{
-																						echo "(".$taxiFleetPromotionss->user_rating." <i class='fa fa-star'></i> )";
+																						echo "(".$taxiFleetPromotionss->user_rating." <i class='fa fa-star'></i>)";
 																					}
 																				?></a>
 																			</span>
