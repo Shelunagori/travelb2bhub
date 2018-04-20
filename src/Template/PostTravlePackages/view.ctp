@@ -79,8 +79,7 @@ hr{
 
 .col-md-4{
 	color:#676363;
-	font-weight:600;
-	 white-space: nowrap;
+	white-space: nowrap;
 }
 
 a{
@@ -348,9 +347,9 @@ font-size:20px;
 																	<span class="help-block"></span>
 																	<div class="row">
 																		<div class="col-md-12">
-																			<label>Seller Name: <label>
+																			<label>Seller Name: </label>
 																			<span style="padding-top:2px;">
-																			<u>
+																				<u>
 																				<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
 																				<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>"> 
 																				<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?></u>
