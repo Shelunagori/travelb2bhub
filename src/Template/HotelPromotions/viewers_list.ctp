@@ -89,12 +89,12 @@ p{
 	width:70px;
 }
 input[type=text] {
-    width: 218px;
+    width: 200px;
 	height:30px;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 14px;
     background-color: white;
     background-color:#fff;
     background-position: 10px 10px; 
@@ -115,7 +115,7 @@ input[type=text] {
 </div>
 <div class="container-fluid">
 	<div class="box box-primary" style="margin-bottom:5px;">
-		<div class="row" style="padding-bottom:5px;">
+		<div class="row" style="padding-bottom:2px;">
 			<div class="col-md-12">
 				<div class="box-header"> 
 					<span class="box-title" style="color:#057F8A;"><b><?= __('Total Views') ?></b></span>
@@ -142,7 +142,7 @@ input[type=text] {
 					<div class="col-md-4" style="margin-top: 7px;">
 					<span style="color:#727e8a">Company Name</span> : <?php echo $hotelpromotion->user->company_name;?><br>
 					</div>
-					<div class="col-md-4" style="margin-top:5px;">
+					<div class="col-md-4" style="margin-top:5px;margin-bottom:5px;">
  						<?php 
 				//pr($follower_list);exit;
 				if ($user_id!=$hotelpromotion->user_id)

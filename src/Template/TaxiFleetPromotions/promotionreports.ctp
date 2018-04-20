@@ -138,7 +138,7 @@ $m=0;
 							</div>
 						</div>
 					</div>
-				<div class="col-md-6"  style="padding-left:30px;margin-top:10px;">
+				<div class="col-md-6"  style="padding-left:30px;margin-top:5px;">
 						<div class="row">
 							<div class="col-md-12 ">
 							<span style="color:black;font-size:17px;"><?php echo $texifleetpromotion->title?></span>
@@ -151,7 +151,7 @@ $m=0;
 								</a>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-								Likes: 
+								Likes:&nbsp; 
 								<a type="button" href="likers_list/<?php echo $texifleetpromotion->id ; ?>" style="border-radius:10px; width:53px; background-color: #FFF !important;color: #1295AB !important; border: 1px solid; padding-top: 2px;padding-bottom: 3px" class="btn btn-md">
 									<?php echo $texifleetpromotion->total_likes;?>
 								</a> 

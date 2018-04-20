@@ -151,7 +151,7 @@ $m=0;
 								</a>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-								Likes: 
+								Likes:&nbsp;
 								<a type="button" href="likers_list/<?php echo $hotel_promotion->id ; ?>" style="border-radius:10px; width:53px; background-color: #FFF !important;color: #1295AB !important; border: 1px solid; padding-top: 2px;padding-bottom: 3px" class="btn btn-md">
 									<?php echo $hotel_promotion->total_likes;?>
 								</a> 
