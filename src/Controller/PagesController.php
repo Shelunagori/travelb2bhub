@@ -70,6 +70,12 @@ class PagesController extends AppController
 		exit;
     }    
     public function home(){
+		if ($this->Auth->user('id')) {
+			return $this->redirect('/users/dashboard');
+		}
+		else{
+			return $this->redirect('/users/login');
+		}
 		$this->loadModel('Requests');
 		$this->loadModel('Slider');
 		$travelAgentCount = $this->Users->find()->where(['role_id' => 1])->count();
@@ -2594,13 +2600,6 @@ $data =   json_encode($result);
 		$current_date=date('Y-m-d'); 
 		$da=array("Requests.start_date >=" =>  $current_date,'category_id !='=> 3);
 		$da1=array("Requests.check_in >=" =>  $current_date,'category_id'=> 3); 
-		/*$conditions[]= array (
-			'OR' => array(
-				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
-				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
-			)
-		);*/
-		
 		$conditions[]= array (
 			'OR' => array(
 				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
@@ -2610,7 +2609,6 @@ $data =   json_encode($result);
 				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
 			)
 		);
-		//,'Requests.total_response >' =>0
 	}
 	if(isset($_POST["enddatesearch"]) && !empty($_POST["enddatesearch"])) {
 	$edate =  $_POST["enddatesearch"]; 
@@ -2644,10 +2642,10 @@ $data =   json_encode($result);
 	}
 	$sortq='';
 	if(!empty($_POST["sort"]) && $_POST["sort"]=="resposesnolh") {
-		$sortq['COUNT(Responses.request_id)'] = "ASC";
+		$sort['COUNT(Responses.request_id)'] = "ASC";
 	}
 	if(!empty($_POST["sort"]) && $_POST["sort"]=="resposesnohl") {
-		$sortq['Requests.total_response'] = "DESC";
+		$sort['Requests.total_response'] = "DESC";
 	}
 	$limit=4;
 	$page = $_POST["page"]; 

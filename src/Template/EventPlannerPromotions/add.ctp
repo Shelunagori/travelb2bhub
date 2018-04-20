@@ -293,8 +293,8 @@ fieldset{
 							</div>
 						</div>
 					</div>
-					<input type="hiddens" name="user_id" value="<?php echo $user_id;?>">
-					<input type="hiddens" name="visible_date" class="visible_date" value="">
+					<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
+					<input type="hidden" name="visible_date" class="visible_date" value="">
 				</form>
 				<div id="selectbox" style="display:none;"> </div>
 			</div>
