@@ -401,7 +401,7 @@ a{
 															echo "";
 														}
 														else{
-																echo "(".$postTravlePackagess->user_rating." <i class='fa fa-star'></i> )";
+																echo "(".$postTravlePackagess->user_rating." <i class='fa fa-star'></i>)";
 															}
 														?></a>
 													</span>
@@ -503,7 +503,7 @@ a{
 																					echo "";
 																				}
 																				else{
-																						echo "(".$postTravlePackagess->user_rating." <i class='fa fa-star'></i> )";
+																						echo "(".$postTravlePackagess->user_rating." <i class='fa fa-star'></i>)";
 																					}
 																				?></a></span>
 																		</div>
