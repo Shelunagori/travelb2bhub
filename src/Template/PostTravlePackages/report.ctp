@@ -697,7 +697,7 @@ a{
 																echo "";
 															}
 															else{
-																	echo "(".$postTravlePackage->user_rating." <i class='fa fa-star'></i> )";
+																	echo "(".$postTravlePackage->user_rating." <i class='fa fa-star'></i>)";
 																}
 															?></a></span>
 													</div>
