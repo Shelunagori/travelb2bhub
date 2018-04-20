@@ -161,7 +161,7 @@ hr { margin-top:0px!important;}
 						</div>
 						<div class="col-md-6" style="color:white;">
 							<div class="wrap-input100 validate-input" data-validate = "Contact No">
-									<input class="input100 trim_space_valid"  required="" id="mobile_number" type="number" name="mobile_number" maxlength="10" minlength="10" placeholder="Contact No.">
+									<input class="input100 trim_space_valid maxxx"  required="" id="mobile_number" type="number" name="mobile_number" maxlength="10" minlength="10" placeholder="Contact No.">
 							</div>										
 						</div>
 					</div>
@@ -215,7 +215,7 @@ hr { margin-top:0px!important;}
 						</div>
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Pincode">
-								<input class="input100 trim_space_valid"  required="" placeholder="Pin Code" type="text" name="pincode" id="pincode">
+								<input class="input100 trim_space_valid maxxx"  required="" placeholder="Pin Code" type="number" name="pincode" id="pincode" maxlength="6" minlength="6">
 							</div>
 						</div>	
 					</div>	
@@ -246,7 +246,7 @@ hr { margin-top:0px!important;}
 						<div class="contact100-form-checkbox col-md-12">
 							<input class="input-checkbox100 chk_input"  id="ckb1" type="checkbox" required  name="remember-me">
 							<label class="label-checkbox100" for="ckb1">
-								I accept the <a><u>Privacy Policy</u></a> and <a><u>Terms & Conditions</a></u>
+								I accept the <a style="color:white;" target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/privacy-policy/"><u>Privacy Policy</u></a> and <a style="color:white;" target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/terms-and-conditions/"><u>Terms & Conditions</a></u>
 							</label>
 							<span id="chk_cond" style="color:#f16060;">Please accept Terms & Condition and Privacy Policy</span>
 						</div>
@@ -723,5 +723,32 @@ $(document).ready(function($){
        separateDialCode: true
       //utilsScript: "build/js/utils.js"
     });
-  </script>					
+  </script>	
+<script>
+$(document).ready(function (){  
+$(document).on('keyup',"input[type='number']",function(e){
+		if ($.inArray(e.which, [46, 9, 27, 13]) !== -1 ||
+             // Allow: Ctrl/cmd+A
+            (e.which == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+C
+            (e.which == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // Allow: Ctrl/cmd+X
+            (e.which == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+             // which: home, end, left, right
+            (e.which >= 35 && e.which <= 39)) { 
+                 // let it happen, don't do anything
+                 return;
+        }
+        // Ensure that it is a number and stop the keypress
+			if(e.which == 190)
+			{
+				$(this).val('');
+			  e.preventDefault();
+			}
+        else if ((e.shiftKey || (e.which < 48 || e.which > 57)) && (e.which < 96 || e.which > 105) && (e.which != 8)) {
+			$(this).val('');
+            e.preventDefault();
+        }
+		});   
+	});   
 </html>
