@@ -2875,7 +2875,7 @@ public function myresponselist() {
 	}
 	$sort='';
 	if(empty($this->request->query("sort"))) {
-		$sort['Requests.id'] = "DESC";
+		$sort['Responses.id'] = "DESC";
 	}
 	if(!empty($this->request->query("sort")) && $this->request->query("sort")=="requesttype") {
 		$sort['Requests.category_id'] = "ASC";
@@ -2960,12 +2960,13 @@ public function myresponselist() {
 		if(sizeof($BlockedUsers)>0){
 			$conditions["Requests.user_id NOT IN"] =  $BlockedUsers; 
 		}
- 	//pr($conditions); exit;
+ 	//pr($responses); exit;
 	$responses = $this->Responses->find()
 		->contain([ "Requests.Users", "UserChats","Requests.Hotels"])
 		->where(['Responses.user_id' => $this->Auth->user('id'),$conditions])->order($sort)->all();
 	$this->set('responses', $responses);
 	$conn = ConnectionManager::get('default');
+	//pr($responses); exit;
 	$blockeddata = array();
 	$reqidarray = array();
 	$chatdata = array();

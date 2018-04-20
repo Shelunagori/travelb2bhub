@@ -364,11 +364,11 @@ $conn = ConnectionManager::get('default');
 								<td width="33%" style="padding:3px !important;">
 									<?php
 									if(array_key_exists($row['request']['user_id'], $BusinessBuddies)) {?>
-										<a href="#" style="width:99%" class="btn btn-warning btn-sm"> Following</a>
+										<span style="width:99%;background-color:#dadadabf;display: inline-block;text-align: center;border-radius: 6px;vertical-align: middle;"  class="btn-defult btn-sm tst"> Following </span> 
 									<?php } 
 									else{ ?>
 										  
-										<a style="width:99%" data-toggle="modal" class="btn btn-warning btn-sm" data-target="#follow<?php echo $id; ?>" > Follow User </a>
+									<a style="width:99%" data-toggle="modal" class="btn btn-warning btn-sm" data-target="#follow<?php echo $id; ?>" > Follow User </a>
 									<!-------Contact Details Modal --------->
 									<div id="follow<?php echo $id; ?>" class="modal fade" role="dialog">
 										<div class="modal-dialog modal-md" >
@@ -406,8 +406,7 @@ $conn = ConnectionManager::get('default');
 								}
 							if($blocked==1)
 							{?>
-								<a  style="width:99%" class=" btn btn-danger btn-sm ">
-								Blocked </a>
+								<span style="width:99%;background-color:#dadadabf;display: inline-block;text-align: center;border-radius: 6px;vertical-align: middle;"  class="btn-defult btn-sm tst"> User Blocked </span> 
 							<?php }
 							else
 							{ ?>
