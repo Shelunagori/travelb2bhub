@@ -897,6 +897,103 @@ label {
 
 $(document).ready(function(){ 
 
+		$('#datepicker1').datepicker({
+			dateFormat: 'dd/mm/yy',
+			changeMonth: true,
+			changeYear: true,
+			minDate: '<?php echo date("d/m/Y"); ?>',
+			onSelect: function(selected) {
+				$( "#datepicker2" ).datepicker( "option", "minDate",selected);
+				$('#datepicker2').val("");
+			}
+		});
+		$('#datepicker2').datepicker({
+			dateFormat: 'dd/mm/yy',
+			changeMonth: true,
+			changeYear: true,
+			minDate: '<?php echo date("d/m/Y"); ?>',
+			onSelect: function(selected) {
+				var checkInDate = $('#datepicker1').val();
+				if(checkInDate == "") {
+					alert("Please select check-in date first.");
+					$('#datepicker2').val("");
+				}
+			}
+		});
+
+		
+		$('#datepicker3').datepicker({
+			dateFormat: 'dd/mm/yy',
+			changeMonth: true,
+			changeYear: true,
+			minDate: '<?php echo date("d/m/Y"); ?>',
+			onSelect: function(selected) {
+				$( "#datepicker4" ).datepicker( "option", "minDate",selected);
+				$('#datepicker4').val("");
+			}
+		});
+		$('#datepicker4').datepicker({
+			dateFormat: 'dd/mm/yy',
+			changeMonth: true,
+			changeYear: true,
+			minDate: '<?php echo date("d/m/Y"); ?>',
+			onSelect: function(selected) {
+				var checkInDate = $('#datepicker3').val();
+				if(checkInDate == "") {
+					alert("Please select start date first.");
+					$('#datepicker4').val("");
+				}
+			}
+		});
+		$('#datepicker5').datepicker({
+			dateFormat: 'dd/mm/yy',
+			changeMonth: true,
+			changeYear: true,
+			minDate: '<?php echo date("d/m/Y"); ?>',
+			onSelect: function(selected) {
+				$( "#datepicker6" ).datepicker( "option", "minDate",selected);
+				$('#datepicker6').val("");
+			}
+		});
+		$('#datepicker6').datepicker({
+			dateFormat: 'dd/mm/yy',
+			changeMonth: true,
+			changeYear: true,
+			minDate: '<?php echo date("d/m/Y"); ?>',
+			onSelect: function(selected) {
+				var checkInDate = $('#datepicker5').val();
+				if(checkInDate == "") {
+					alert("Please select start date first.");
+					$('#datepicker6').val("");
+				}
+			}
+		});
+
+		$('#datepicker7').datepicker({
+			dateFormat: 'dd/mm/yy',
+			changeMonth: true,
+			changeYear: true,
+			minDate: '<?php echo date("d/m/Y"); ?>',
+			onSelect: function(selected) {
+				$( "#datepicker8" ).datepicker( "option", "minDate",selected);
+				$('#datepicker8').val("");
+			}
+		});
+		$('#datepicker8').datepicker({
+			dateFormat: 'dd/mm/yy',
+			changeMonth: true,
+			changeYear: true,
+			minDate: '<?php echo date("d/m/Y"); ?>',
+			onSelect: function(selected) {
+				var checkInDate = $('#datepicker7').val();
+				if(checkInDate == "") {
+					alert("Please select check-in date first.");
+					$('#datepicker8').val("");
+				}
+			}
+		});
+ 
+
  	$(document).on('blur',".city_select",function(){
 		var master=$(this);
 		master.closest('div').find('div.suggesstion-box').delay(1000).fadeOut(500);
