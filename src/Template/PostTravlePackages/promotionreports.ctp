@@ -222,6 +222,7 @@ label {
 														</div>
 													</div>
 												</div>
+												<input type="hidden" name="visible_date" class="visible_date" value="">
 											</div>
 										</div>
 										<div class="modal-footer" style="height:60px;">
@@ -266,6 +267,7 @@ label {
 		$(document).on('change','.priceMasters',function()
 		{
 			var ab=$(this).closest('div').find('.priceMasters option:selected').val();
+			 
 			if(ab!=0)
 			{
 			var priceVal=$(this).closest('div').find('.priceMasters option:selected').attr('priceVal');
@@ -274,14 +276,27 @@ label {
 			var Result1 = price.split(" ");
 			var weeks=Result[0];
 			var price=Result1[0];
-			$(this).closest('div.mainrow').find('div .payment_amount').val(price);
+			var todaydate = new Date(); // Parse date
+			for(var x=0; x < weeks; x++){
+				todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
+			}
+			var dd = todaydate .getDate();
+			var mm = todaydate .getMonth()+1; //January is 0!
+			var yyyy = todaydate .getFullYear();
+			if(dd<10){  dd='0'+dd } 
+			if(mm<10){  mm='0'+mm } 
+			var date = dd+'-'+mm+'-'+yyyy;	
+			$(this).closest('div.mainrow').find('.visible_date').val(date);
+			$(this).closest('div.mainrow').find('.payment_amount').val(price);
+			//alert($(this).closest('div.mainrow').html());
 			}
 			else{
-				$(this).closest('div.mainrow').find('div .payment_amount').val(0);
+				$(this).closest('div.mainrow').find('.visible_date').val("dd-mm-yyyy");
+				$(this).closest('div.mainrow').find('.payment_amount').val(0);
 			}
 		});
-				jQuery(".formSubmit").submit(function(){
-						jQuery("#loader-1").show();
-					});
+		jQuery(".formSubmit").submit(function(){
+			jQuery("#loader-1").show();
 		});
+	});
 </script>
