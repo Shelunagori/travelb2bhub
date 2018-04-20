@@ -267,7 +267,7 @@ a{
 													echo "";
 												}
 												else{
-														echo "(".$hotelPromotion->user_rating." <i class='fa fa-star'></i> )";
+														echo "(".$hotelPromotion->user_rating." <i class='fa fa-star'></i>)";
 													}
 												?></a>
 											</span>
@@ -317,7 +317,7 @@ a{
 																						echo "";
 																					}
 																					else{
-																							echo "(".$hotelPromotion->user_rating." <i class='fa fa-star'></i> )";
+																							echo "(".$hotelPromotion->user_rating." <i class='fa fa-star'></i>)";
 																						}
 																					?></a>
 																				</span>

@@ -177,7 +177,7 @@ input[type=text] {
 								  <div class="modal-header" style="height:100px;">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
 										<h4 class="modal-title">
-										Are you sure , you want to Unfollow this user ?
+										Are you sure you want to Unfollow this user ?
 										</h4>
 									</div>
 									<div class="modal-footer" style="height:60px;">
@@ -197,7 +197,7 @@ input[type=text] {
 								  <div class="modal-header" style="height:100px;">
 										<button type="button" class="close" data-dismiss="modal">&times;</button>
 										<h4 class="modal-title">
-										Are you sure , you want to follow this user ?
+										Are you sure you want to follow this user ?
 										</h4>
 									</div>
 									<div class="modal-footer" style="height:60px;">

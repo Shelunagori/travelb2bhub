@@ -503,8 +503,10 @@ fieldset{
 	 
 		$(document).on('change','.priceMasters',function()
 		{
+			var blank=$(this).val();
 			var priceVal=$('.priceMasters option:selected').attr('priceVal');
 			var price=$('.priceMasters option:selected').attr('price');
+			if(blank!=''){
 			var Result = priceVal.split(" ");
 			var Result1 = price.split(" ");
 			var weeks=Result[0];
@@ -522,6 +524,11 @@ fieldset{
 			var date = dd+'-'+mm+'-'+yyyy;	
 			$('.visible_date').val(date);
 			$('.payment_amount').val(price);
+			}
+			else{
+				//$('.visible_date').val('dd-mm-yyyy');
+				$('.payment_amount').val(0);
+			}
 		});
 		$(document).on('change','#pack_type',function()
 		{

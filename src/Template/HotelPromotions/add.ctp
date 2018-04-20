@@ -341,13 +341,14 @@ label{
  		
 		$(document).on('change','.duration',function()
 		{
+			var blank=$(this).val();
 			var priceVal=$('.duration option:selected').attr('priceVal');
 			var price=$('.duration option:selected').attr('price');
+			if(blank!=''){
 			var Result = priceVal.split(" ");
 			var Result1 = price.split(" ");
 			var weeks=Result[0];
 			var price=Result1[0];
-			
 			var todaydate = new Date(); // Parse date
 			for(var x=0; x < weeks; x++){
 				todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
@@ -360,6 +361,10 @@ label{
 			var date = dd+'-'+mm+'-'+yyyy;	
 			$('.visible_date').val(date);
 			$('.payment_amount').val(price);
+			}
+			else{
+				$('.payment_amount').val(0);
+			}
 		});
 		
 		

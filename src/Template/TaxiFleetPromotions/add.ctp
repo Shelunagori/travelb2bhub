@@ -337,7 +337,7 @@ fieldset{
 														 
 															$options[] = ['value'=>$Price->id,'text'=>$Price->week,'priceVal'=>$Price->week,'price'=>$Price->price];
 														};
-														echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters requiredfield','label'=>false,'empty'=>'Select ...']);?>
+														echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters requiredfield select2','label'=>false,'empty'=>'Select ...']);?>
 														<?php // echo $this->Form->input('duration', ['options' => $priceMasters,'class'=>'form-control','label'=>false]); ?>
 														<label style="display:none" class="helpblock error" > This field is required.</label>
 													</div>
@@ -407,13 +407,14 @@ fieldset{
 		
 		$(document).on('change','.priceMasters',function()
 		{
+			var blank=$(this).val();
 			var priceVal=$('.priceMasters option:selected').attr('priceVal');
 			var price=$('.priceMasters option:selected').attr('price');
+			if(blank!=''){
 			var Result = priceVal.split(" ");
 			var Result1 = price.split(" ");
 			var weeks=Result[0];
 			var price=Result1[0];
-			
 			var todaydate = new Date(); // Parse date
 			for(var x=0; x < weeks; x++){
 				todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
@@ -426,6 +427,10 @@ fieldset{
 			var date = dd+'-'+mm+'-'+yyyy;	
 			$('.visible_date').val(date);
 			$('.payment_amount').val(price);
+			}
+			else{
+				$('.payment_amount').val(0);
+			}
 		});
 		$("#newlist").show();
 		$(".replacedata").html('<?php $options=array();
