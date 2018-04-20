@@ -1,4 +1,18 @@
 <style>
+@media all and (max-width: 771px) {
+	/* Logo for Mobile */
+	.imagesize{
+		width:40% !important;
+		margin-top:10px !important;
+	 }
+}
+@media all and (min-width: 771px) {
+	/* Logo for Mobile */
+	.imagesize{
+		width:16% !important;
+		margin-top:10px !important;
+	 }
+}
 hr { margin-top:0px!important;}
 .price {
 	height: 40px;
@@ -108,7 +122,7 @@ hr { margin-top:0px!important;}
 		<div class="container-login100 bgdiv">
 			<div class="wrap-login100 rohit" style="width: 920px !important;">
 				<center>
-					<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:30%;margin-top:10px;"']) ?>
+					<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:30%;margin-top:10px;"','class'=>'imagesize']) ?>
 				</center>
  			<p style="color:#ff9898 !important;"><?php echo $this->Flash->render(); ?></p>
 			<br />
@@ -161,7 +175,7 @@ hr { margin-top:0px!important;}
 						</div>
 						<div class="col-md-6" style="color:white;">
 							<div class="wrap-input100 validate-input" data-validate = "Contact No">
-									<input class="input100 trim_space_valid maxxx"  required="" id="mobile_number" type="number" name="mobile_number" maxlength="10" minlength="10" placeholder="Contact No.">
+									<input class="input100 trim_space_valid maxx"  required="" id="mobile_number" type="tel" name="mobile_number" maxlength="10" minlength="10" placeholder="Contact No.">
 							</div>										
 						</div>
 					</div>
@@ -215,7 +229,7 @@ hr { margin-top:0px!important;}
 						</div>
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Pincode">
-								<input class="input100 trim_space_valid maxxx"  required="" placeholder="Pin Code" type="number" name="pincode" id="pincode" maxlength="6" minlength="6">
+								<input class="input100 trim_space_valid maxx"  required="" placeholder="Pin Code" type="tel" name="pincode" id="pincode" maxlength="6" minlength="6">
 							</div>
 						</div>	
 					</div>	
@@ -726,7 +740,7 @@ $(document).ready(function($){
   </script>	
 <script>
 $(document).ready(function (){  
-$(document).on('keyup',"input[type='number']",function(e){
+	$(document).on('keyup',".maxx",function(e){
 		if ($.inArray(e.which, [46, 9, 27, 13]) !== -1 ||
              // Allow: Ctrl/cmd+A
             (e.which == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
@@ -743,12 +757,13 @@ $(document).on('keyup',"input[type='number']",function(e){
 			if(e.which == 190)
 			{
 				$(this).val('');
-			  e.preventDefault();
+				e.preventDefault();
 			}
         else if ((e.shiftKey || (e.which < 48 || e.which > 57)) && (e.which < 96 || e.which > 105) && (e.which != 8)) {
 			$(this).val('');
             e.preventDefault();
         }
 		});   
-	});   
+	});
+</script>	
 </html>
