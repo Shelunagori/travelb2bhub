@@ -279,7 +279,7 @@ label {
 										</p>
 									</div>
 									<div class="">
-									<input autocomplete="off" type="text" name="check_in" class="form-control date-picker"s data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
+									<input autocomplete="off" type="text" name="check_in" id="datepicker1" class="form-control " data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -289,7 +289,7 @@ label {
 										</p>
 									</div>
 									<div class="">
-										<input autocomplete="off" type="text" name="check_out" class="form-control date-picker" id="datepicker8" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
+										<input autocomplete="off" type="text" name="check_out" class="form-control" id="datepicker2" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
 									</div>
 								</div>
 							</div>
@@ -892,35 +892,39 @@ label {
 </div>
 
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
-<?php echo $this->Html->script(['jquery.validate']);?>		 
-<script>
-
-$(document).ready(function(){ 
-
-		$('#datepicker1').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				$( "#datepicker2" ).datepicker( "option", "minDate",selected);
+<?php echo $this->Html->script(['jquery.validate']);?>
+  <script>
+  $(document).ready(function(){ 
+		var date = new Date();
+		date.setDate(date.getDate());
+ 		
+		$("#datepicker1").datepicker({
+			autoclose:true,
+			minDate:0,
+			startDate: date,
+		}).on("changeDate", function (e) {
+			var selected = $(this).val();
+			var selected = selected.replace("-", "/");
+ 			var dates = new Date(selected);
+			//date.setDate(date.getDate() + 1);
+			alert(dates);
+			$("#datepicker2").val(selected);
+		});
+		 
+		$("#datepicker2").datepicker({
+			autoclose:true,
+			minDate:0,
+			startDate: date,
+		}).on("changeDate", function (e) {
+			var checkInDate = $('#datepicker1').val();
+			if(checkInDate == "") {
+				alert("Please select check-in date first.");
 				$('#datepicker2').val("");
 			}
 		});
-		$('#datepicker2').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				var checkInDate = $('#datepicker1').val();
-				if(checkInDate == "") {
-					alert("Please select check-in date first.");
-					$('#datepicker2').val("");
-				}
-			}
-		});
-
+ 
+		
+ 		 
 		
 		$('#datepicker3').datepicker({
 			dateFormat: 'dd/mm/yy',

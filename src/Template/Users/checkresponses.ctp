@@ -114,32 +114,32 @@ legend
 			<div class="col-md-12 " style="padding-left:0px !important;">
 			 
 				<div class="col-md-3" style="padding-left:0px !important;">
-						<p>Request Type :  <?php echo $text; ?></p>
+						<p>Request Type:   <?php echo $text; ?></p>
 				</div>
 				<div class="col-md-3" style="padding-left:0px !important;">
-						<p>Reference ID :   <span class="details"><?php echo $reference_id; ?></span></p>
+						<p>Reference ID:    <span class="details"><?php echo $reference_id; ?></span></p>
 				</div>
 				<div class="col-md-3" style="padding-left:0px !important;">
-						<p>Start Date :  <span class="details"><?php echo $org_check_in; ?></span></p>
+						<p>Start Date:   <span class="details"><?php echo $org_check_in; ?></span></p>
 				</div>
 				<div class="col-md-3" style="padding-left:0px !important;">
-						<p>End Date :  <span class="details"><?php echo $org_check_out; ?></span></p>
+						<p>End Date:   <span class="details"><?php echo $org_check_out; ?></span></p>
 				</div>
 				 
 			</div>
 			<div class="col-md-12" style="padding-left:0px !important;">
 				
 				<div class="col-md-3" style="padding-left:0px !important;">
-						<p>Total Budget : <span class="details"><?php echo $total_budget; ?></span></p>
+						<p>Total Budget:  <span class="details"><?php echo $total_budget; ?></span></p>
 				</div>
 				<div class="col-md-3" style="padding-left:0px !important;">
-						<p>Members : <span class="details"><?php echo $members; ?></span></p>
+						<p>Members:  <span class="details"><?php echo $members; ?></span></p>
 				</div>
 				<div class="col-md-3" style="padding-left:0px !important;">
-						<p><?php echo $dest_show; ?> :  <span class="details"><?php echo $locality; ?></span></p>
+						<p><?php echo $dest_show; ?>:   <span class="details"><?php echo $locality; ?></span></p>
 				</div>
 				<div class="col-md-3" style="padding-left:0px !important;">
-						<p>Comment : <span class="details"><?php echo $comment; ?></span></p>
+						<p>Comment:  <span class="details"><?php echo $comment; ?></span></p>
 				</div>
 				 
 			</div>
@@ -181,7 +181,7 @@ legend
 					</div-->
 					
 					<div class="col-md-4">
-						<b>From :  </b>
+ 					<p>From: <span class="details">						
 						<?php 
 					$total_rating=0;
 					$rate_count=0;
@@ -209,10 +209,11 @@ legend
 						<?php if($final_rating>0){ ?>
 						<font color="#1295AB">(<?php echo round($final_rating); ?> <i class="fa fa-star"></i>)</font>
 						<?php } ?>
+						</span></p>
 					</div>
 					 
 					<div class="col-md-2"  >
-						<b>Quoted Price :  </b> <font color="black"><?php echo ($row['quotation_price'])?"&#8377; ".$row['quotation_price']:"-- --" ?></font>
+						<p>Quoted Price: <span class="details"><?php echo ($row['quotation_price'])?"&#8377; ".$row['quotation_price']:"-- --" ?></span></p> 
 					</div>
 					<div class="col-md-6" align="left">
 		 
@@ -245,7 +246,7 @@ legend
 												<div class="modal-header">
 													<button type="button" class="close" data-dismiss="modal">&times;</button>
 													<h4 class="modal-title">
-														<font color="black">Are you sure you want to share yor details with this user?</font>
+														<font color="black">Are you sure you want to share your details with this user?</font>
 													</h4>
 												</div>
 												<div class="modal-footer">
@@ -433,84 +434,83 @@ legend
 	</div>
 </div>
 	
-<div class="fade modal" id="myModal122" role="dialog">
-	<div class="modal-dialog">
-		<div class="modal-content">
-		   <div class="modal-header">
-			  <button class="close data-dismiss=modal" type="button">×</button>
-			  <h4 class="modal-title">Filter</h4>
-		   </div>
-		   <div class="modal-body" style="height:300px">
-			<form method="get" class="filter_box">
-				<div class="col-md-6">
-				   <div class="col-md-12">
-					<label for="example-text-input" class=" col-form-label">Name: </label> 
-					   <input type="text" name="agentname" value="<?php echo isset($_GET['agentname'])? $_GET['agentname']:''; ?>"  class="form-control">
-				   </div>
-				</div>
-				 
-				<div class="col-md-6">
-				  
-				   <div class="col-md-12"> 
-					 <label for="example-text-input" class=" col-form-label">Reference ID: </label>
-					   <input type="text" name="refidsearch" value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>"  class="form-control">
-				  </div>
-				</div>
-					   
-					   
-				<div class="col-md-6">
-				   
-				   <div class="col-md-12">
-					<label for="example-text-input" class=" col-form-label">Budget: </label> 
-					   <select name="budgetsearch" class="form-control"><option value="">Select Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
-				   </div>
-				</div>
-					   
-					   
-				<div class="col-md-6">
-				   
-				   <div class="col-md-12">
-					<label for="example-text-input" class=" col-form-label">Quoted Price: </label>
-					   <select name="quotesearch" class="form-control"><option value="">Select Quoted Price</option><option value="0-10000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="30000-50000")? 'selected':''; ?>>30000- 50000</option><option value="50000-100000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
+<div class="fade modal form-modal" id="myModal122" role="dialog">
+	  <div class="modal-dialog "  >
+		 <div class=modal-content>
+			<div class=modal-header>
+			   <button class="close" data-dismiss="modal" type="button">&times;</button>
+			   <h4 class=modal-title>Filter</h4>
+			</div>
+			<form class="filter_box" method="get">
+				<div class="modal-body">
+					<div class="col-md-12">
+					   <div class="col-md-12">
+						<label for="example-text-input" class=" col-form-label">Name: </label> 
+						   <input type="text" name="agentname" value="<?php echo isset($_GET['agentname'])? $_GET['agentname']:''; ?>"  class="form-control">
+					   </div>
 					</div>
-				</div>
-				<div class="col-md-6">
-				  
-				   <div class="col-md-12">
-					 <label for="example-text-input" class=" col-form-label">Chat With: </label>
-					   <select name="chatwith" class="form-control"><option value="">Select Chat With</option>
-					   <?php if(!empty($UserResponse)){ 
-							foreach($UserResponse as $user){               
-					   ?>
-					   <option <?php echo (isset($_GET['chatwith']) && $_GET['chatwith'] ==$user['user']['id'])? 'selected':''; ?> value="<?php echo $user['user']['id']?>"><?php echo $user['user']['first_name'].' '.$user['user']['last_name']?></option>
-					   <?php }}?>
-					   </select>
+					 
+					<div class="col-md-12">
+					  
+					   <div class="col-md-12"> 
+						 <label for="example-text-input" class=" col-form-label">Reference ID: </label>
+						   <input type="text" name="refidsearch" value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>"  class="form-control">
+					  </div>
 					</div>
-				</div>
-				<div class="col-md-6">
-				   
-				   <div class="col-md-12">
-						<label for="example-text-input" class=" col-form-label">Following: </label> 
-					   <input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['followsearch'])? "checked":''; ?>  >
-				   </div>
-			   </div>
-				<div class="col-md-6">
-				   
-				   <div class="col-md-12">
-					<label for="example-text-input" class=" col-form-label">Shared Details: </label>
-					   <input type="checkbox" name="shared_details" value="1" <?php echo isset($_GET['shared_details'])? "checked":''; ?>  >
-				   </div>
-			   </div>
+						   
+						   
+					<div class="col-md-12">
 					   
-				<div class="col-md-12 text-center">
-				<hr></hr>
+					   <div class="col-md-12">
+						<label for="example-text-input" class=" col-form-label">Budget: </label> 
+						   <select name="budgetsearch" class="form-control"><option value="">Select Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
+					   </div>
+					</div>
+						   
+						   
+					<div class="col-md-12">
+					   
+					   <div class="col-md-12">
+						<label for="example-text-input" class=" col-form-label">Quoted Price: </label>
+						   <select name="quotesearch" class="form-control"><option value="">Select Quoted Price</option><option value="0-10000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="30000-50000")? 'selected':''; ?>>30000- 50000</option><option value="50000-100000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
+						</div>
+					</div>
+					<div class="col-md-12">
+					  
+					   <div class="col-md-12">
+						 <label for="example-text-input" class=" col-form-label">Chat With: </label>
+						   <select name="chatwith" class="form-control"><option value="">Select Chat With</option>
+						   <?php if(!empty($UserResponse)){ 
+								foreach($UserResponse as $user){               
+						   ?>
+						   <option <?php echo (isset($_GET['chatwith']) && $_GET['chatwith'] ==$user['user']['id'])? 'selected':''; ?> value="<?php echo $user['user']['id']?>"><?php echo $user['user']['first_name'].' '.$user['user']['last_name']?></option>
+						   <?php }}?>
+						   </select>
+						</div>
+					</div>
+					<div class="col-md-12">
+					   
+					   <div class="col-md-12">
+							<label for="example-text-input" class=" col-form-label">Following: </label> 
+						   <input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['followsearch'])? "checked":''; ?>  >
+					   </div>
+				   </div>
+					<div class="col-md-12">
+					   
+					   <div class="col-md-12">
+						<label for="example-text-input" class=" col-form-label">Shared Details: </label>
+						   <input type="checkbox" name="shared_details" value="1" <?php echo isset($_GET['shared_details'])? "checked":''; ?>  >
+					   </div>
+				   </div>                           
+				</div>
+				<div class="modal-footer">
 					<button type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">Filter</button>
 					<a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'checkresponses',$responseid)) ?>">Reset</a>
 				</div>
-		   </form>
-		   </div>
-		</div>
-	</div>
+			 </form>
+		 </div>
+	  </div>
+   </div>
 </div>
 		 
 <div class="modal fade" id="myModal2" role="dialog">
@@ -684,26 +684,26 @@ $(document).ready(function () {
 <script>
 $('#UserChatForm').validate({
 	rules: {
-		"message" : {
-			required : true
+		"message":  {
+			required:  true
 		}
 	},
 	messages: {
-		"message" : {
-			required : "Please enter message."
+		"message":  {
+			required:  "Please enter message."
 		}
 	},
 	ignore: ":hidden:not(select)"
 });
 $('#addtestimonial').validate({
 	rules: {
-		"rating" : {
-			required : true
+		"rating":  {
+			required:  true
 		}
 	},
 	messages: {
-		"rating" : {
-			required : "Please select rating."
+		"rating":  {
+			required:  "Please select rating."
 		}
 	}
 });
@@ -785,13 +785,13 @@ $(document).ready(function () {
 });
 $('#UserRatingForm').validate({
 	rules: {
-		"rating" : {
-			required : true
+		"rating":  {
+			required:  true
 		}
 	},
 	messages: {
-		"rating" : {
-			required : "Please select rating."
+		"rating":  {
+			required:  "Please select rating."
 		}
 	},
 	ignore: ":hidden:not(select)"
