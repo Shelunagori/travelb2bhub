@@ -295,7 +295,7 @@ a{
 												echo "";
 											}
 											else{
-													echo "(".$taxiFleetPromotion->user_rating." <i class='fa fa-star'></i> )";
+													echo "(".$taxiFleetPromotion->user_rating." <i class='fa fa-star'></i>)";
 												}
 											?></a>
 										</span>
@@ -335,7 +335,7 @@ a{
 																					echo "";
 																				}
 																				else{
-																						echo "(".$taxiFleetPromotion->user_rating." <i class='fa fa-star'></i> )";
+																						echo "(".$taxiFleetPromotion->user_rating." <i class='fa fa-star'></i>)";
 																					}
 																				?></a>
 																			</span>

@@ -305,7 +305,7 @@ font-size:20px;
 																echo "";
 															}
 															else{
-																	echo "(".$postTravlePackage->user_rating." <i class='fa fa-star'></i> )";
+																	echo "(".$postTravlePackage->user_rating." <i class='fa fa-star'></i>)";
 																}
 															?></a>
 														</span>
@@ -360,7 +360,7 @@ font-size:20px;
 																					echo "";
 																				}
 																				else{
-																						echo "(".$postTravlePackage->user_rating." <i class='fa fa-star'></i> )";
+																						echo "(".$postTravlePackage->user_rating." <i class='fa fa-star'></i>)";
 																					}
 																				?></a>
 																			</span>
