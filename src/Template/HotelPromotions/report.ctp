@@ -84,6 +84,7 @@ if ($err) {
 
 ?>
 <style type="text/css">
+ 
 fieldset{
 	margin-bottom:5px !important;
 	border-radius: 6px;

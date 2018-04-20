@@ -136,7 +136,18 @@ if ($err) {
 }
 ?>
 <style type="text/css">
-
+@media all and (max-width: 410px) {
+	/* Logo for Mobile */
+	.btnlayout{
+		margin-top: 5px !important;
+	 }
+}
+@media all and (min-width: 400px) {
+	/* Logo for Mobile */
+	.btnlayout{
+		//margin-top: -5px !important;
+	 }
+}
 fieldset{
 	margin-bottom:5px !important;
 	border-radius: 6px;
@@ -150,7 +161,7 @@ font-size:20px;
 }
 .btnlayout{
 	border-radius:15px !important;
-	}
+}
 #myImg:hover {opacity: 0.7;}
 .bbb{
 	padding:0px!important;
