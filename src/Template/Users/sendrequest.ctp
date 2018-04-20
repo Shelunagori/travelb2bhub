@@ -375,7 +375,9 @@ label {
 		 
 		 
 			<fieldset>
+				
 				<legend style="color:#369FA1;"><b> &nbsp; STAY REQUIREMENTS &nbsp; </b></legend>
+				<div class="newdiv">
 				<div class="row">
 				<div class="col-md-12">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
@@ -489,7 +491,7 @@ label {
 										</p>
 									</div>
 									<div class="">
-									<input autocomplete="off" type="text" name="check_in" class="form-control date-picker" id="datepicker7" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
+									<input autocomplete="off" type="text" name="check_in" class="form-control" id="datepickerofpkg" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
 									</div>
 									</div> 
 								<div class="col-md-6">
@@ -500,27 +502,28 @@ label {
 										</p>
 									</div>
 									<div class="">
-										<input autocomplete="off" type="text" name="check_out" class="form-control date-picker" id="datepicker8" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
+										<input autocomplete="off" type="text" name="check_out" class="form-control checkdatefornext" id="datepickerofpkg1" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
 										                    
 									</div>
 								</div> 
 							</div>
 						</div>
-							
-						<div class="input_fields_wrap1"></div>
-						<div class="row">
-							<div class="col-md-12" style="margin-top:5px">  
-								<div class="col-md-12">  
-									<button class="btn btn-primary btn-sm add_field_button2 " style="background-color:#1295A2;"><i class="fa fa-plus"></i> Add Destination</button>
-								</div>
- 							</div>
-						</div> 
+					
+				
+					<div class="input_fields_wrap1"></div>
+					<div class="row">
+						<div class="col-md-12" style="margin-top:5px">  
+							<div class="col-md-12">  
+								<button class="btn btn-primary btn-sm add_field_button2 " style="background-color:#1295A2;"><i class="fa fa-plus"></i> Add Destination</button>
+							</div>
+						</div>
 					</div>
-				</fieldset>
-				 
+				</div>
+			</fieldset>
+			</div>	 
 								 
 								<fieldset>
-									<legend style="color:#369FA1;"><b> &nbsp;  TRANSPORT REQUIREMENTS D&nbsp; </b></legend>
+									<legend style="color:#369FA1;"><b> &nbsp;  TRANSPORT REQUIREMENTS &nbsp; </b></legend>
 									<div class="row">
 										<div class="col-md-12 ">
 											<div class="col-md-4 ">
@@ -540,7 +543,7 @@ label {
 													Start Date
 												</p>
 											</div> 
-											<input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker3" placeholder="DD-MM-YYYY"/>
+											<input autocomplete="off" name="start_date" type="text" class="form-control " data-date-format="dd-mm-yyyy" id="packageTransport" placeholder="DD-MM-YYYY"/>
 												                   
 											 
 										</div>
@@ -550,7 +553,7 @@ label {
 													End Date
 												</p>
 											</div>
-											<input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker4" placeholder="DD-MM-YYYY"/>
+											<input autocomplete="off" name="end_date" type="text" class="form-control" data-date-format="dd-mm-yyyy" id="packageTransport1" placeholder="DD-MM-YYYY"/>
 										</div>	
 											
 										</div>
@@ -757,7 +760,7 @@ label {
 													</p>
 												</div>
 												<div class="">
-													 <input autocomplete="off" name="start_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker5" placeholder="DD-MM-YYYY"/>
+													 <input autocomplete="off" name="start_date" type="text" class="form-control" data-date-format="dd-mm-yyyy" id="datepickerofTransport" placeholder="DD-MM-YYYY"/>
 												</div>
 											</div>
 											<div class="col-md-4">
@@ -768,7 +771,7 @@ label {
 												</p>
 												</div>
 												<div class="">
-													 <input autocomplete="off" name="end_date" type="text" class="form-control date-picker" data-date-format="dd-mm-yyyy" id="datepicker6" placeholder="DD-MM-YYYY"/>
+													 <input autocomplete="off" name="end_date" type="text" class="form-control" data-date-format="dd-mm-yyyy" id="datepickerofTransport1" placeholder="DD-MM-YYYY"/>
 												</div>
 											</div>	
 													
@@ -893,110 +896,165 @@ label {
 
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <?php echo $this->Html->script(['jquery.validate']);?>
-  <script>
-  $(document).ready(function(){ 
-		var date = new Date();
-		date.setDate(date.getDate());
- 		
-		$("#datepicker1").datepicker({
-			autoclose:true,
-			minDate:0,
-			startDate: date,
-		}).on("changeDate", function (e) {
-			var selected = $(this).val();
-			var selected = selected.replace("-", "/");
- 			var dates = new Date(selected);
-			//date.setDate(date.getDate() + 1);
-			alert(dates);
-			$("#datepicker2").val(selected);
-		});
-		 
-		$("#datepicker2").datepicker({
-			autoclose:true,
-			minDate:0,
-			startDate: date,
-		}).on("changeDate", function (e) {
-			var checkInDate = $('#datepicker1').val();
-			if(checkInDate == "") {
-				alert("Please select check-in date first.");
+<script>
+$(document).ready(function(){ 
+	var date = new Date();
+	date.setDate(date.getDate());
+	//-- Hotel date Pickers Starte 
+	$("#datepicker1").datepicker({
+		autoclose:true,
+		minDate:0,
+		startDate: date,
+	}).on("changeDate", function (e) {
+		var selected = $(this).val();
+		//$("#datepicker2").val(selected);
+	});
+	 
+	$("#datepicker2").datepicker({
+		autoclose:true,
+		minDate:0,
+		startDate: date,
+	}).on("changeDate", function (e) {
+		var checkOutDate=$(this).val();
+		var checkInDate = $('#datepicker1').val();
+		if(checkInDate == "") {
+			alert("Please select check-in date first.");
+			$('#datepicker2').val("");
+		}
+		else{
+			var arrDate = checkOutDate.split("-");
+			var Ndt=arrDate[2]+'-'+arrDate[1]+'-'+arrDate[0];
+			checkOutDateDate = new Date(Ndt);
+			 
+			var arrDates = checkInDate.split("-");
+			var Ndt=arrDates[2]+'-'+arrDates[1]+'-'+arrDates[0];
+			checkInDateDate = new Date(Ndt);
+			
+			if(checkOutDateDate<=checkInDateDate)
+			{
+				alert("Check-in date should be less then Check-out Date.");
 				$('#datepicker2').val("");
 			}
-		});
- 
-		
- 		 
-		
-		$('#datepicker3').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				$( "#datepicker4" ).datepicker( "option", "minDate",selected);
-				$('#datepicker4').val("");
+		}
+	});
+ 	//-- Hotel date Pickers End 	 
+ 	//-- Transport date Pickers Starte 
+	 
+	 $("#datepickerofTransport").datepicker({
+		autoclose:true,
+		minDate:0,
+		startDate: date,
+	}).on("changeDate", function (e) {
+		var selected = $(this).val();
+ 	});
+	 
+	$("#datepickerofTransport1").datepicker({
+		autoclose:true,
+		minDate:0,
+		startDate: date,
+	}).on("changeDate", function (e) {
+		var checkOutDate=$(this).val();
+		var checkInDate = $('#datepickerofTransport').val();
+		if(checkInDate == "") {
+			alert("Please select start date first.");
+			$('#datepickerofTransport1').val("");
+		}
+		else{
+			var arrDate = checkOutDate.split("-");
+			var Ndt=arrDate[2]+'-'+arrDate[1]+'-'+arrDate[0];
+			checkOutDateDate = new Date(Ndt);
+			 
+			var arrDates = checkInDate.split("-");
+			var Ndt=arrDates[2]+'-'+arrDates[1]+'-'+arrDates[0];
+			checkInDateDate = new Date(Ndt);
+			
+			if(checkOutDateDate<checkInDateDate)
+			{
+				alert("Start date should be less then end Date Date.");
+				$('#datepickerofTransport1').val("");
 			}
-		});
-		$('#datepicker4').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				var checkInDate = $('#datepicker3').val();
-				if(checkInDate == "") {
-					alert("Please select start date first.");
-					$('#datepicker4').val("");
-				}
+		}
+	});  
+ 	//-- TRans date Pickers End 
+//-- Package date Pickers Starte 
+	 
+	 $("#datepickerofpkg").datepicker({
+		autoclose:true,
+		minDate:0,
+		startDate: date,
+	}).on("changeDate", function (e) {
+		var selected = $(this).val();
+ 	});
+	 
+	$("#datepickerofpkg1").datepicker({
+		autoclose:true,
+		minDate:0,
+		startDate: date,
+	}).on("changeDate", function (e) {
+		var checkOutDate=$(this).val();
+		var checkInDate = $('#datepickerofpkg').val();
+		if(checkInDate == "") {
+			alert("Please select check-in date first.");
+			$('#datepickerofpkg1').val("");
+		}
+		else{
+		//	
+		var arrDate = checkOutDate.split("-");
+		var Ndt=arrDate[2]+'-'+arrDate[1]+'-'+arrDate[0];
+ 		checkOutDateDate = new Date(Ndt);
+		 
+  		var arrDates = checkInDate.split("-");
+		var Ndt=arrDates[2]+'-'+arrDates[1]+'-'+arrDates[0];
+ 		checkInDateDate = new Date(Ndt);
+		//		
+ 			if(checkOutDateDate<=checkInDateDate)
+			{
+				alert("Check-in date should be less then Check-out Date.");
+				$('#datepickerofpkg1').val("");
 			}
-		});
-		$('#datepicker5').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				$( "#datepicker6" ).datepicker( "option", "minDate",selected);
-				$('#datepicker6').val("");
+		}
+	});  
+ 	//-- Package date Pickers End 
+	//-- Package date Pickers Starte 
+	 
+	 $("#packageTransport").datepicker({
+		autoclose:true,
+		minDate:0,
+		startDate: date,
+	}).on("changeDate", function (e) {
+		var selected = $(this).val();
+ 	});
+	 
+	$("#packageTransport1").datepicker({
+		autoclose:true,
+		minDate:0,
+		startDate: date,
+	}).on("changeDate", function (e) {
+		var checkOutDate=$(this).val();
+		var checkInDate = $('#packageTransport').val();
+		if(checkInDate == "") {
+			alert("Please select start date date first.");
+			$('#packageTransport1').val("");
+		}
+		else{
+		//	
+		var arrDate = checkOutDate.split("-");
+		var Ndt=arrDate[2]+'-'+arrDate[1]+'-'+arrDate[0];
+ 		checkOutDateDate = new Date(Ndt);
+		 
+  		var arrDates = checkInDate.split("-");
+		var Ndt=arrDates[2]+'-'+arrDates[1]+'-'+arrDates[0];
+ 		checkInDateDate = new Date(Ndt);
+		//		
+ 			if(checkOutDateDate<=checkInDateDate)
+			{
+				alert("Start date should be less then end Date.");
+				$('#packageTransport1').val("");
 			}
-		});
-		$('#datepicker6').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				var checkInDate = $('#datepicker5').val();
-				if(checkInDate == "") {
-					alert("Please select start date first.");
-					$('#datepicker6').val("");
-				}
-			}
-		});
+		}
+	});
+///------------------------------------
 
-		$('#datepicker7').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				$( "#datepicker8" ).datepicker( "option", "minDate",selected);
-				$('#datepicker8').val("");
-			}
-		});
-		$('#datepicker8').datepicker({
-			dateFormat: 'dd/mm/yy',
-			changeMonth: true,
-			changeYear: true,
-			minDate: '<?php echo date("d/m/Y"); ?>',
-			onSelect: function(selected) {
-				var checkInDate = $('#datepicker7').val();
-				if(checkInDate == "") {
-					alert("Please select check-in date first.");
-					$('#datepicker8').val("");
-				}
-			}
-		});
- 
 
  	$(document).on('blur',".city_select",function(){
 		var master=$(this);
@@ -1619,21 +1677,20 @@ $(document).ready(function () {
 
 	});
     $(document).ready(function () {
-
         var wrapper = $(".input_fields_wrap1");
 		$(wrapper).on("click", ".remove_field", function (e) {
             e.preventDefault();
 			$(this).closest('div.stop').slideUp(function(){
 				$(this).remove();
 			});
-         });
+        });
         var max_fields = 10;
         var add_button = $(".add_field_button2");
-
         var x = 1;
         $(add_button).click(function (e) {
+			var masterClick=$(this);
             e.preventDefault();
-			var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'addNewDestinationRow')) ?>";
+ 			var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'addNewDestinationRow')) ?>";
 			var number = Math.floor((Math.random() * 100000) + 1);
 			$.ajax({
 				url:url,
@@ -1641,82 +1698,48 @@ $(document).ready(function () {
 				data: {"number":number},
 				async:false
 			}).done(function(result){
-				$(wrapper).append(result);
-
-				$(wrapper).find("input[name='hh_room1["+number+"]']").val($("#room1").val());
-				$(wrapper).find("input[name='hh_room2["+number+"]']").val($("#room2").val());
-				$(wrapper).find("input[name='hh_room3["+number+"]']").val($("#room3").val());
-				$(wrapper).find("input[name='hh_child_with_bed["+number+"]']").val($("#child_with_bed").val());
-				$(wrapper).find("input[name='hh_child_without_bed["+number+"]']").val($("#child_without_bed").val());
-$(".hh_hotel_category").multiselect();
-				$(wrapper).find("input:text[name='hh_city_name["+number+"]']").autocomplete({
-					source: JSON.parse(cityData),
-					select: function (e, ui) {
-						e.preventDefault();
-
-						$(this).val(ui.item.label);
-						$(wrapper).find("input:hidden[name='hh_city_id["+number+"]']").val(ui.item.value);
-
-						$(wrapper).find("input:hidden[name='hh_state_id["+number+"]']").val(ui.item.state_id);
-						$(wrapper).find("input:text[name='hh_state_name["+number+"]']").val(ui.item.state_name);
-
-						$(wrapper).find("input:hidden[name='hh_country_id["+number+"]']").val(ui.item.country_id);
-						$(wrapper).find("input:text[name='hh_country_name["+number+"]']").val(ui.item.country_name);
-					}
-				});
-				//$(wrapper).find("input:text[name='hh_check_in["+number+"]']").datepicker();
-				//$(wrapper).find("input:text[name='hh_check_out["+number+"]']").datepicker();
-
-				var checkInDatePicker = $(wrapper).find("input:text[name='hh_check_in["+number+"]']");
+				var len = $('input.checkdatefornext').length;
+				var new_len=len-1;
+ 				$(wrapper).append(result);
+  				var checkInDatePicker = $(wrapper).find("input:text[name='hh_check_in["+number+"]']");
 				var checkOutDatePicker = $(wrapper).find("input:text[name='hh_check_out["+number+"]']");
-				//checkInDatePicker.datepicker();
-				//checkOutDatePicker.datepicker();
-
-				var lastdate = '';
-							
-				
-				var enddate ='';
-				var enddate2 = $('#datepicker8').val();
-				var enddate1 = $(".enddate").val();
-				if (enddate1 == '' || enddate1==null)
-				{
-				var enddate =enddate2;
-				}else{
-				$("#collapse2 .enddate").each(function() {
-					if ($(this).val()=='' || $(this).val()==null) {
-					x=1	
-					}else{
-						lastdate = $(this).val();
-					}
-				});	
-				var enddate =enddate1;
-				}
-				if (lastdate=='' || lastdate==null) {
-				var k=1;
-				}else{
-				enddate	= lastdate;
-				}
+				var last_date=masterClick.closest('fieldset').find('input.checkdatefornext:eq('+new_len+')').val();
+				var newdate=last_date.split('-');
+				var day=newdate[0];
+				var month=newdate[1];
+				var year=newdate[2];
+				var spltdate=year+'-'+month+'-'+day;
+				var d = new Date(spltdate);
 				checkInDatePicker.datepicker({
-					dateFormat: 'dd/mm/yy',
-					changeMonth: true,
-					changeYear: true,
-					//minDate: '<?php echo date("d/m/Y"); ?>',
-					minDate: enddate,
-					onSelect: function(selected) {
-						checkOutDatePicker.datepicker( "option", "minDate",selected);
+					autoclose:true,
+					minDate:0,
+					startDate: d,
+				}).on("changeDate", function (e) {
+					
+ 				});
+				checkOutDatePicker.datepicker({
+					autoclose:true,
+					minDate:0,
+					startDate: d,
+				}).on("changeDate", function (e) {
+					var checkOutDate=checkOutDatePicker.val();
+					var checkInDate = checkInDatePicker.val();
+					if(checkInDate == "") {
+						alert("Please select check-in date first.");
 						checkOutDatePicker.val("");
 					}
-				});
-				checkOutDatePicker.datepicker({
-					dateFormat: 'dd/mm/yy',
-					changeMonth: true,
-					changeYear: true,
-					//minDate: '<?php echo date("d/m/Y"); ?>',
-					minDate: enddate,
-					onSelect: function(selected) {
-						var checkInDate = checkInDatePicker.val();
-						if(checkInDate == "") {
-							alert("Please select check-in date first.");
+					else{
+						var arrDate = checkOutDate.split("-");
+						var Ndt=arrDate[2]+'-'+arrDate[1]+'-'+arrDate[0];
+						checkOutDateDate = new Date(Ndt);
+						 
+						var arrDates = checkInDate.split("-");
+						var Ndt=arrDates[2]+'-'+arrDates[1]+'-'+arrDates[0];
+						checkInDateDate = new Date(Ndt);
+						
+						if(checkOutDateDate<=checkInDateDate)
+						{
+							alert("Check-in date should be less then Check-out Date.");
 							checkOutDatePicker.val("");
 						}
 					}

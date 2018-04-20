@@ -1,4 +1,4 @@
-<div>
+ 
 	<div class="destination newdiv">
 	<div class="stop col-md-12">
 	<hr  style="margin-top: 8px; margin-bottom: 8px;"></hr>
@@ -114,7 +114,7 @@
 						</p>
 					</div>
 					<div class="col-md-12 input-group">
-						<input require type="text" required="true" name="hh_check_in[<?php echo $randomNumber; ?>]" id="hh_check_in[<?php echo $randomNumber; ?>]" class="form-control date-picker"  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>                     
+						<input require type="text" required="true" name="hh_check_in[<?php echo $randomNumber; ?>]" id="hh_check_in[<?php echo $randomNumber; ?>]" class="form-control datepicker"  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>                     
 					</div>
 				</div> 
 				<div class="col-md-6">
@@ -124,7 +124,7 @@
 					</p>
 					</div>
 					<div class="col-md-12 input-group">
-						<input type="text" required="true" name="hh_check_out[<?php echo $randomNumber; ?>]" id ="hh_check_out[<?php echo $randomNumber; ?>]" class="form-control enddate date-picker"  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>                     
+						<input type="text" required="true" name="hh_check_out[<?php echo $randomNumber; ?>]" id ="hh_check_out[<?php echo $randomNumber; ?>]" class="form-control enddate datepicker checkdatefornext"  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>                     
 					</div>
 				</div>
 			</div>
@@ -138,9 +138,10 @@
 			
 		</div>
 	</div>
+	</div>
+	</div>
 	<script>
-	$('.select2').select2();
-	$('.date-picker').datepicker();
+	$('.select2').select2(); 
 	//var cityData = '<?php //echo $allCities; ?>';
 	//$(document).ready(function () {
 		/*createAutocompleteCity('<?php echo $randomNumber; ?>')

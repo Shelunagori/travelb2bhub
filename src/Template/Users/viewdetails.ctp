@@ -164,17 +164,13 @@ ul li b {
 						{
 							$result = explode(",", $row['hotel_category']);
 							$count = 1;
-							$hotel_category = "";
+							$hotel_category = array();
 							foreach($result as $row1)
 							{
- 								@$hotel_category.= "" . $hotelCategories[$row1]; 
+ 								@$hotel_category[]=$hotelCategories[$row1]; 
  								$count++;
-								if($count>2){ $hotel_category.=', ';}
 							}
-
-							echo substr($hotel_category, 0, -3);
-							
-
+							echo $hotel_category=implode(', ',$hotel_category);
 						}
 						else
 						{
@@ -396,17 +392,17 @@ ul li b {
 					</tr>
 					</table>
 					<li class="col-md-12 "><p>Hotel Category: &nbsp;<b><?php
+					$hotel_category = array();
 					if (!empty($row['hotel_category']))
 					{
 						$result = explode(",", $row['hotel_category']);
 						$count = 1;
-						$hotel_category = "";
 						foreach($result as $row1)
 						{
-							$hotel_category.= "" . $hotelCategories[$row1] . ", ";
+							$hotel_category[]=$hotelCategories[$row1];
 							$count++;
 						}
-						echo substr($hotel_category, 0, -3);
+						echo $hotel_category=implode(', ',$hotel_category);
 					}
 					else
 					{
@@ -595,7 +591,7 @@ ul li b {
 	<?php
 	} ?>
 	<div class="modal-footer">
-		<button class="btn btn-default"data-dismiss=modal type=button>Close</button>
+		<button class="btn btn-danger btn-sm"data-dismiss=modal type=button>Close</button>
 	</div>
 </div>
 </div>
@@ -633,7 +629,7 @@ ul li b {
 				</div>
 			</div>
 			<div class=modal-footer>
-				<button class="btn btn-default"data-dismiss=modal type=button>Close</button>
+				<button class="btn btn-sm btn-danger" data-dismiss=modal type=button>Close</button>
 			</div>
 		</div>
 	</div>
