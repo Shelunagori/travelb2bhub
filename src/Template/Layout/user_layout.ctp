@@ -370,6 +370,7 @@ p {
               <i style="font-size: 20px;" class="fa fa-bell-o"></i>
               <span class="label label-warning"><?php echo $chatCount; ?></span>
             </a>
+	 
             <ul class="dropdown-menu">
 			<li>
                  <ul class="menu" style="height:500px !important;">
@@ -392,7 +393,7 @@ p {
 							$url='#';
 							$org_date=date('d-m-Y h:i:A', strtotime($created));
 							$new_date=str_replace(" "," at ",$org_date);
-							
+	
 							if($type=='Request'){ 
 								$url=$this->Url->build(array('controller'=>'users','action'=>'respondtorequest')); 
 								$title="New Request Received!";
@@ -419,17 +420,44 @@ p {
 							if($type=='Chat'){
 								$title="Chat";
 								$clr="#1295a2";
+								$req="Select * from `requests` where `id`='".$request_id."' ";
+								$reqdata = $conn->execute($req);
+								foreach($reqdata as $reqdataa){
+									$statusofreq=$reqdataa['status'];
+									$user_idofreq=$reqdataa['user_id'];
+								}
+								if(($statusofreq==0) && ($user_idofreq==$loginId)){ $url=$this->Url->build(array('controller'=>'users','action'=>'checkresponses/'.$request_id));}
+								if(($statusofreq==2) && ($user_idofreq==$loginId)){ $url=$this->Url->build(array('controller'=>'users','action'=>'finalizedRequestList'));}
+								if(($statusofreq==0) && ($user_idofreq!=$loginId)){$url=$url=$this->Url->build(array('controller'=>'users','action'=>'myresponselist'));;}
+								if(($statusofreq==2) && ($user_idofreq!=$loginId)){$url=$url=$this->Url->build(array('controller'=>'users','action'=>'myFinalResponses'));}
 							}
 							if($type=='Announcement'){
 								$title="Announcement";
 								$clr="#FB6542";
+								?>
+								<!--<div id="Announcementpupup<?php echo $notifiId; ?>" class="modal fade" role="dialog">
+									  <div class="modal-dialog">
+ 										<div class="modal-content">
+										  <div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title"><?php echo $title;?></h4>
+										  </div>
+										  <div class="modal-body">
+											<p><?php echo $message;  ?></p>
+										  </div>
+										  <div class="modal-footer">
+											<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+										  </div>
+										</div>
+									</div>
+								</div>-->
+								<?php
 							}
- 							
 							$backcolor='';
 							if($is_read==1){$backcolor=' style="background-color: #e6e6e66b;opacity: .4;"';}
 							?>
 								<li <?php echo $backcolor; ?> class="chat_clear"  val="<?php echo $notifiId; ?>" >
-  									<a class="notify" href="<?php echo $url; ?>">
+  									<a class="notify" href="<?php echo $url; ?>" <?php if($type=="Announcement"){ ?> data-toggle="modal" data-target="#Announcementpupup<?php echo$notifiId; ?>" <?php }?>>
 										<div>
 										<div style="margin-top:2px;float:right;font-size:10px;">
 										<?php echo $new_date; ?></div><br>
