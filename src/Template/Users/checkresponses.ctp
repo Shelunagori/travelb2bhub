@@ -258,8 +258,7 @@ legend
 				<?php }
 				else{
 					?>
-						<a  style="cursor:no-drop" href="javascript:void(0);" class=" btn btn-info btn-sm tst">
-						Shared</a>
+						<span style="background-color:#dadadabf;display: inline-block;text-align: center;border-radius: 6px;    vertical-align: middle;"  class=" btn-defult btn-sm tst">Detail Shared </span> 
 					<?php 
 				} ?>
 				 
@@ -291,8 +290,7 @@ legend
 				<?php }
 				else {
 				?>
-					<span style="background-color:#dadadabf;display: inline-block;text-align: center;border-radius: 6px;    vertical-align: middle;"  class=" btn-defult btn-sm ">
-										Following </span> 
+					<span style="background-color:#dadadabf;display: inline-block;text-align: center;border-radius: 6px;    vertical-align: middle;"  class=" btn-defult btn-sm tst"> Following </span> 
 				<?php }	?>
 			 
 			
