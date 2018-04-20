@@ -296,8 +296,7 @@ $(".req").sort(function (a, b) {
 										</span>
 									</p>
 								</li>
-								
-								 <li >
+								<li>
 									<p>
 										<?php 
 											$quotation_price=round($finalresponse[$request['id']]['quotation_price']);

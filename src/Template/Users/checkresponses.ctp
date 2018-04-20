@@ -270,22 +270,22 @@ legend
 						<a  data-toggle="modal" class="btn btn-successto btn-sm tst" data-target="#follow<?php echo $row['id']; ?>" > Follow User </a>
 							<!-------Contact Details Modal --------->
 							<div id="follow<?php echo $row['id']; ?>" class="modal fade" role="dialog">
-								<div class="modal-dialog modal-md" >
-									<!-- Modal content-->
-										<div class="modal-content">
-												<div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal">&times;</button>
-													<h4 class="modal-title">
-														<font color="black">Are you sure you want to follow this user?</font>
-													</h4>
-												</div>
-												<div class="modal-footer">
-													<button type="button"  href="javascript:void(0);" class="businessBuddy btn btn-successto" user_id = "<?php echo $row['user']['id']; ?>" >Follow</button>
-													<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
-												</div>
-											</div>
+							<div class="modal-dialog modal-md" >
+								<!-- Modal content-->
+								<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">
+												<font color="black">Are you sure you want to follow this user?</font>
+											</h4>
+										</div>
+										<div class="modal-footer">
+											<button type="button"  href="javascript:void(0);" class="businessBuddy btn btn-successto" user_id = "<?php echo $row['user']['id']; ?>" >Follow</button>
+											<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
 										</div>
 									</div>
+								</div>
+							</div>
 									
 				<?php }
 				else {
