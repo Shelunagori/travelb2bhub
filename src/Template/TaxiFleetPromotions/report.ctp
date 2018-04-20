@@ -112,6 +112,18 @@ if ($err) {
 ?>
 <style>
 
+@media all and (max-width: 410px) {
+	/* Logo for Mobile */
+	.btnlayout{
+		margin-top: 5px !important;
+	 }
+}
+@media all and (min-width: 400px) {
+	/* Logo for Mobile */
+	.btnlayout{
+		//margin-top: -5px !important;
+	 }
+}
 fieldset{
 	margin-bottom:5px !important;
 	border-radius: 6px;
@@ -125,7 +137,7 @@ font-size:20px;
 }
 .btnlayout{
 	border-radius:15px !important;
-	}
+}
 #myImg:hover {opacity: 0.7;}
 .bbb{
 	padding:0px!important;
@@ -134,6 +146,7 @@ font-size:20px;
 .rowspace{
 	padding-top:0px;
 	font-size:14px;
+	
 }
 .rowspacemodal{
 	padding:10px;
@@ -143,16 +156,14 @@ hr{
 	margin-top: 15px !important;
     margin-bottom: 4px !important;
 }
+
 label{
 	color:#676363;
-	font-weight:600
+	font-weight:600;
 }
 
 .col-md-4{
-	color:#000000;
-	font-weight:600;
-	padding-top:5px;
-	 white-space: nowrap;
+	color:#676363;
 }
 
 a{

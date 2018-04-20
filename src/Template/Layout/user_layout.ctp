@@ -156,6 +156,9 @@ p {
 {
 	width:100% !important;
 }
+label{
+margin-bottom: 0px!important;
+}
 </style>
 <!--- Star style ---->
 <style>

@@ -58,6 +58,9 @@ hr { margin-top:0px!important;}
         div.rohit {
             zoom: 2.5;
         }
+		.a{
+			color:white !important;
+		}
 </style>
 <style>
 	#country-list{list-style:none;margin-left: 1px;padding:0;width:94%; margin-top: 10px;    position: absolute;
@@ -97,6 +100,7 @@ hr { margin-top:0px!important;}
 		.wrap-input100 {
 		    margin-bottom: 11px !important;
 		}
+		
 	</style>
 </head>
 <body>
@@ -104,7 +108,7 @@ hr { margin-top:0px!important;}
 		<div class="container-login100 bgdiv">
 			<div class="wrap-login100 rohit" style="width: 920px !important;">
 				<center>
-					<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:16%;']) ?>
+					<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:30%;margin-top:10px;"']) ?>
 				</center>
  			<p style="color:#ff9898 !important;"><?php echo $this->Flash->render(); ?></p>
 			<br />
@@ -155,7 +159,7 @@ hr { margin-top:0px!important;}
 									<input class="input100 trim_space_valid"  required="" type="email" name="email" placeholder="Email">
 								</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-6" style="color:white;">
 							<div class="wrap-input100 validate-input" data-validate = "Contact No">
 									<input class="input100 trim_space_valid"  required="" id="mobile_number" type="number" name="mobile_number" maxlength="10" minlength="10" placeholder="Contact No.">
 							</div>										
@@ -183,13 +187,7 @@ hr { margin-top:0px!important;}
 									</div>
 					</div>
 				</div>
-				<div class="row col-md-12">
-					<div class="col-md-12">
-							<div class="wrap-input100 validate-input" data-validate = "Address1">
-										<input class="input100 trim_space_valid"  required="" type="text" name="address1" placeholder="Address1" id="address1">
-								</div>	
-					</div>
-				</div>
+				
 				<div class="row">
 					<div class="col-md-12">
 						<div class="col-md-6">
@@ -248,9 +246,9 @@ hr { margin-top:0px!important;}
 						<div class="contact100-form-checkbox col-md-12">
 							<input class="input-checkbox100 chk_input"  id="ckb1" type="checkbox" required  name="remember-me">
 							<label class="label-checkbox100" for="ckb1">
-								I accept your Privacy Policy and  Terms and Conditions
+								I accept the <a><u>Privacy Policy</u></a> and <a><u>Terms & Conditions</a></u>
 							</label>
-							<span id="chk_cond" style="color:red;">Please Checked Terms and Condition</span>
+							<span id="chk_cond" style="color:#f16060;">Please accept Terms & Condition and Privacy Policy</span>
 						</div>
 					</div>
 				</div>
