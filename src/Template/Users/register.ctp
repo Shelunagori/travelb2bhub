@@ -262,13 +262,13 @@ hr { margin-top:0px!important;}
 							<label class="label-checkbox100" for="ckb1">
 								I accept the <a style="color:white;" target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/privacy-policy/"><u>Privacy Policy</u></a> and <a style="color:white;" target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/terms-and-conditions/"><u>Terms & Conditions</a></u>
 							</label>
-							<span id="chk_cond" style="color:#f16060;">Please accept Terms & Condition and Privacy Policy</span>
+							<span id="chk_cond" style="color:#f16060; display:none;">Please accept Terms & Conditions and Privacy Policy</span>
 						</div>
 					</div>
 				</div>
 				<div class="col-md-12">
 					<div class="col-xs-12" align="center">
-						<input type="submit" class="btn btn-primary" id="ckb1"  value="Register">
+						<input type="submit" class="btn btn-primary sb" id="ckb1"  value="Register">
 					</div>
 				</div>
 				<div class="col-md-12 text-center" style="margin-top: 20px;">
