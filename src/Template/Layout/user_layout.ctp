@@ -349,8 +349,12 @@ margin-bottom: 0px!important;
 }
 .main-footer {
 	padding:1px !important;
+} 
+@media all and (max-width: 767px) {
+	.main-sidebar, .left-side {
+		padding-top: 46px !important;
+	}
 }
- 
 </style>
 </head>
 <!--<body class="hold-transition skin-blue fixed sidebar-mini">-->
@@ -503,10 +507,10 @@ margin-bottom: 0px!important;
 					else { 
 					?>
 					<li>
-                    <a class="notify" href="#">
-                      <i class="fa fa-warning text-yellow"></i> No Notification
-                    </a>
-                  </li>
+						<a class="notify" href="#">
+						  <i class="fa fa-warning text-yellow"></i> No Notification
+						</a>
+					</li>
 				<?php } ?>
               
                   
@@ -514,11 +518,7 @@ margin-bottom: 0px!important;
               </li>
              </ul>
           </li>
-		<li>
-			<a style="padding-right:0px !important" href="www.google.com" target="_blank" class="dropdown-toggle " data-toggle="dropdown">
-              <?=  $this->Html->image('/img/playstore.png', ['style'=>'width:26%;','class'=>'image-responsive']) ?>
-            </a>
-		</li>
+		 
             
           <!-- Control Sidebar Toggle Button -->
            

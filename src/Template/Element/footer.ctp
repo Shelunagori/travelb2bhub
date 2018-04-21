@@ -2,62 +2,31 @@
 h1,h2,h3,h4,h5,h6{
 	font-family: 'Raleway', sans-serif !important;
 }
-li { list-style: none;}
-.review-block .block-text {
-    background-color: #eee;
-    padding: 10px 15px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-}
-.carousel-inner {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-}
-.carousel {
-    position: relative;
-}
-.review-block .block-text p {
-    margin: 0;
-    min-height: 120px; 
-    height: 120px;
-    z-index: 30;
-}
-hr { margin-top:0px!important;}
-.bg-red{
-	background-color:#F3565D!important
-}
 .bg-blue{
 	background-color:#1295A2!important;
+} 
+.fixedDivCss {
+  overflow: hidden;
+  background-color: #FFF;
+  position: fixed;
+  bottom: -20px;
+  width: 100%;
+  left: 0px;
 }
-.bg-green{
-	background-color:#56BC87!important;
-}
-.bg-yellow{
-	background-color:#DFBA49!important;
-}
-.bg-white
-{
-	padding: 30px !important;
-}
-.arroysign
-{
-	margin: 17px;
-	right: 23px !important;
-    width: 3% !important;
-    top: 40%;
-    bottom: 52%;
-}
-.rating i {
-	color:#1295A2 !important;
-}
-
-
-</style>
+.inner{
+	padding:5px !important;
+	bottom:0;
+} 
+ </style>
 <?php 
-$lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);
+$page_name=$this->request->params['action']; 
+$controller=$this->request->params['controller']; 
+if($controller=='Users'){
+if($page_name!='viewprofile'){
+if($page_name!='sendrequest'){ 
+
  ?>
-		<div class="homepageshow">
+		<div class="homepageshow fixedDivCss">
 		<table width="100%">
 			<tr>
  			<?php if($users['role_id'] == 1 || $users['role_id'] == 2) { 
@@ -69,19 +38,16 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 					<div class="inner">
 						<table width="100%" border="0"  style="text-align:center">
 							<tr>
-								<td height="30px"> 	 
+								<td height="25px"> 	 
 									<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:20px;width:20px')); ?>
 								</td>
 							</tr>
 							<tr>
-								<td height="25px" style="font-size:8px !important">
+								<td height="20" style="font-size:8px !important">
 									Place Request
 								</td>
 							</tr>
-							<tr>
-								<td height="25px" style="font-size:14px"><?php echo ($reqcountNew['value']-$myRequestCountNew); ?></td>
-							</tr>
-						</table>		
+ 						</table>		
 						 
 					</div>
 				  </div>
@@ -97,18 +63,16 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 					<div class="inner">
 						<table width="100%" border="0" style="text-align:center">
 							<tr>
-								<td height="30px" > 
-									<?php echo $this->Html->image('white-my-request-icon.png',array('style'=>'height:20px;width:20px')); ?>
+								<td height="25px" > 
+									<?php echo $this->Html->image('white-my-request-icon.png',array('style'=>'height:15px;width:15px')); ?> 
+									<span style="position: absolute;top: 3px; text-align: center; border-radius: 100%; background-color: #fff;color: #000; border: 1px solid #afafaf;"class="label"><?php echo $myRequestCountNew; ?></span>
 								</td>
 							</tr>
 							<tr>
-								<td height="25px"  style="font-size:8px !important">
+								<td height="20px"  style="font-size:8px !important">
 									My Requests
 								</td>
-							</tr>
-							<tr>
-								<td height="25px"  style="font-size:14px"><?php echo $myRequestCountNew; ?></td>
-							</tr>
+							</tr> 
 						</table>		
 					</div>
 				  </div>
@@ -152,18 +116,16 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 					<div class="inner">
 						<table width="100%" border="0" style="text-align:center">
 							<tr>
-								<td height="26px" > 	 
-									<?php echo $this->Html->image('white-back-icon.png',array('style'=>'height:20px;width:20px')); ?>
+								<td height="25px" > 	 
+									<?php echo $this->Html->image('white-back-icon.png',array('style'=>'height:15px;width:15px')); ?>
+									<span style="position: absolute;top: 3px; text-align: center; border-radius: 100%; background-color: #fff;color: #000; border: 1px solid #afafaf;"class="label"><?php echo $respondToRequestCountNew; ?></span> 
 								</td>
 							</tr>
 							<tr>
-								<td height="25px"  style="font-size:8px !important">
+								<td height="20px"  style="font-size:8px !important">
 									Respond to Requests
 								</td>
-							</tr>
-							<tr>
-								<td height="20px"  style="font-size:14px"><?php echo $respondToRequestCountNew; ?></td>
-							</tr>
+							</tr> 
 						</table>		
 					</div>
 				  </div>
@@ -204,18 +166,16 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 					<div class="inner">
 						<table width="100%" border="0" style="text-align:center">
 							<tr>
-								<td height="30px" > 
-									<?php echo $this->Html->image('white-my-resposes-head.png',array('style'=>'height:20px;width:20px')); ?>
+								<td height="25px" > 
+									<?php echo $this->Html->image('white-my-resposes-head.png',array('style'=>'height:15px;width:15px')); ?>
+									<span style="position: absolute;top: 3px; text-align: center; border-radius: 100%; background-color: #fff;color: #000; border: 1px solid #afafaf;"class="label"><?php echo $myReponseCountNew; ?></span> 
 								</td>
 							</tr>
 							<tr>
-								<td height="25px"  style="font-size:8px !important">
+								<td height="20px"  style="font-size:8px !important">
 									My Responses
 								</td>
-							</tr>
-							<tr>
-								<td height="25px"  style="font-size:14px"><?php echo $myReponseCountNew; ?></td>
-							</tr>
+							</tr> 
 						</table>		
 					</div>
 				  </div>
@@ -227,4 +187,4 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 			</table>
  		  
 		</div> 
-<?php //} ?>
+<?php } } } ?>
