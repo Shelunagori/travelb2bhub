@@ -37,21 +37,23 @@ $conn = ConnectionManager::get('default');
 </style>
 
 <section class="content">
- <div class="col-md-12">
+ 
+      <div class="row">
+	 <div class="col-md-12">
 				<div class="box-tools pull-right">
 				<?php if($users['id']==$loginid){?>
 					<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> Edit </a>
 				<?php } ?>
 				</div> 
 			</div>
-      <div class="row">
-	 
+			</div>
+			<div class="row">
         <!-- left column -->
         <div class="col-md-4">
           <!-- general form elements -->
           <div class="box box-primary">
 			<div class="box-tools pull-right">
-		 
+					
 			</div>
             <!-- /.box-header -->
             <!-- form start -->
@@ -649,7 +651,7 @@ $conn = ConnectionManager::get('default');
 				<div class="box-body box">
 					 
 						<div class="form-group col-md-12 " >
-						<table  width="100%">
+						<table  width="100%"><br>
 						<tr>
 							<td align="center" width="25%">
 							<div >
@@ -695,7 +697,7 @@ $conn = ConnectionManager::get('default');
 							</td>
 							</tr>
 							<tr>
-								<td width="25%" align="center">IATA</td>
+								<td width="25%" height="50px" align="center">IATA</td>
 								<td width="25%"  align="center">TAFI</td>
 								<td width="25%"  align="center">TAAI</td>
 								<td width="25%"  align="center">IATO</td>
@@ -743,7 +745,7 @@ $conn = ConnectionManager::get('default');
 							</td>
 							</tr>
 							<tr>
-								<td width="25%" align="center">ADYOI</td>
+								<td width="25%" height="50px"  align="center">ADYOI</td>
 								<td width="25%"  align="center">ISO9001</td>
 								<td width="25%"  align="center">UFTAA</td>
 								<td width="25%"  align="center">ADTOI</td>
@@ -759,9 +761,9 @@ $conn = ConnectionManager::get('default');
 				<div class="box-body box">
 					<div>
 						<div class="form-group col-md-12">
-						<table cellpadding="10">
+						<table width="100%"><br>
 							<tr>
-								<td width="48%">
+								<td width="48%" align="center">
 									<div>
 										 
 										<?php if(!empty($users['company_img_1_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_img_1_pic'])>0) {
@@ -773,7 +775,7 @@ $conn = ConnectionManager::get('default');
 									</div>
 								</td >
 								<td width="1%">&nbsp;</td>
-								<td width="48%">
+								<td width="48%"  align="center">
 									<div>
 										<?php if(!empty($users['company_img_2_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_img_2_pic'])>0) {
 										echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_2_pic'], [ "alt"=>"Company Image 2 Pic", "height"=>"150px;"]);?>
@@ -797,7 +799,7 @@ $conn = ConnectionManager::get('default');
 				<div class="box-body box">
 					<div>
 						<div class="form-group col-md-12">
-						<table>
+						<table width="100%"><br>
 						<tr>
 						<td width="33%">
 							<div  align="center">
@@ -836,7 +838,7 @@ $conn = ConnectionManager::get('default');
 							</td>
 							</tr>
 							<tr>
-								<td align="center">Pan Card</td>
+								<td height="50px" align="center">Pan Card</td>
 								<td align="center">Business Card</td>
 								<td align="center">Company Shop Act Registration</td>
 							</tr>
