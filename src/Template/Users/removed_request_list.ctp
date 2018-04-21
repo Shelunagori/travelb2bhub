@@ -23,9 +23,7 @@ $conn = ConnectionManager::get('default');
 <div class="row equal_column" > 
 	<div class="col-md-12" > 
 		<div class="col-md-12" style="background-color:#"> 
-			 
-			<?php echo $this->element('subheader');?>
-			<?php echo  $this->Flash->render() ?>
+ 			<?php echo  $this->Flash->render() ?>
 		</div>
 	</div>	
 </div>	

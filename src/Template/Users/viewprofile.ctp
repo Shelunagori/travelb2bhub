@@ -232,7 +232,7 @@ $conn = ConnectionManager::get('default');
 						<div class="col-md-12">
 							<?php 
 							if($users['role_id'] == 1){ ?>
-								 <div style="float:left" >
+								 <div style="float:left" class="col-md-10" align="left">
 									Finalized Requests
 								 </div>
 								 <div style="float:right"  >
@@ -243,7 +243,7 @@ $conn = ConnectionManager::get('default');
 							 <?php }
 							 else if($users['role_id'] == 2){ ?>
 								
-								 <div style="float:left" class="col-md-10">
+								 <div style="float:left" class="col-md-10" align="left">
 									Finalized Requests
 								 </div>
 								 <div style="float:right" class="col-md-2">
@@ -256,7 +256,7 @@ $conn = ConnectionManager::get('default');
 						<div class="col-md-12" style="margin-top:3%;">
 							<?php 
 							if($users['role_id'] == 1){ ?>
-								<div style="float:left" >
+								<div style="float:left" class="col-md-10" align="left">
 									Responded Requests
 								 </div>
 								 <div style="float:right"  >
@@ -267,7 +267,7 @@ $conn = ConnectionManager::get('default');
 								  
 							<?php }
 							 else if($users['role_id'] == 3){ ?>
-								<div style="float:left" >
+								<div style="float:left" class="col-md-10" align="left">
 									Responded Requests
 								 </div>
 								 <div style="float:right"  >
@@ -281,7 +281,7 @@ $conn = ConnectionManager::get('default');
 						<div class="col-md-12" style="margin-top:3%;">
 							<?php 
 							if($users['role_id'] == 1){ ?>
-								<div style="float:left" >
+								<div style="float:left" class="col-md-10" align="left">
 									Finalized Responses
 								 </div>
 								 <div style="float:right"  >
@@ -292,7 +292,7 @@ $conn = ConnectionManager::get('default');
 								  
 							<?php }
 							 else if($users['role_id'] == 3){ ?>
-								<div style="float:left" >
+								<div style="float:left" class="col-md-10" align="left">
 									Finalized Responses
 								 </div>
 								 <div style="float:right"  >
@@ -585,269 +585,163 @@ $conn = ConnectionManager::get('default');
 				<div class="box-body box">
 					<div>
 						<div class="form-group col-md-12" >
-						<table>
+						<table >
 							<tr>
-								<td width="50%">Address:</td>
+								<td width="150px">Address:</td>
 								<td width="50%"><?php echo $users['address']; ?></td>
 							</tr>
 							<tr>
 								<td>City:</td>
-								<td><?php echo $users['city_id']; ?></td>
-							</tr>
-							<tr>
-								<td>:</td>
-								<td><?php echo $users['p_contact']; ?></td>
-							</tr>
-							<tr>
-								<td>Email:</td>
-								<td><?php echo $users['email']; ?></td>
-							</tr>
-							<tr>
-								<td>Website:</td>
-								<td><?php echo $users['web_url']; ?></td>
-							</tr>
-							<tr>
-								<td>States of Operation:</td>
-								<td><?php $preference=$users['preference']; 
-								
-								$preferences=explode(',', $preference);
-							 
-								foreach($preferences as $data){
-									
-									$state_id=$data;
-									  
-									$set="select `state_name` from `states` where `id`='$state_id'";
-									$stmt1 = $conn->execute($set);
-									foreach($stmt1 as $fet){
-									$state_name=$fet['state_name'];	
+								<td><?php
+									$ct_id=$users['city_id'];
+									$seto="select `name` from `cities` where `id`='$ct_id'";
+									$stmto = $conn->execute($seto);
+									foreach($stmto as $feto){
+									echo $ct_name=$feto['name'];	
 									}
-									
-									$final_state_name.=$state_name;
-									$final_state_name.=',';
-								}
-								echo $final_state_name;
 								?></td>
 							</tr>
+							<tr>
+								<td>State:</td>
+								<td><?php 
+									$stst_id=$users['state_id'];
+									$set1="select `state_name` from `states` where `id`='$stst_id'";
+									$stmt11 = $conn->execute($set1);
+									foreach($stmt11 as $fet1){
+									echo $stst_name=$fet1['state_name'];	
+									}
+								?></td>
+							</tr>
+							<tr>
+								<td>Country:</td>
+								<td><?php 
+									$cntry_id=$users['country_id'];
+									$seto1="select `country_name` from `countries` where `id`='$cntry_id'";
+									$stmto1 = $conn->execute($seto1);
+									foreach($stmto1 as $feto1){
+									echo $cntry_name=$feto1['country_name'];	
+									}
+								?></td>
+							</tr>
+							<tr>
+								<td>Pincode:</td>
+								<td><?php echo $users['pincode']; ?></td>
+							</tr>
+							
 						</table>	
 						</div>
 					</div>
 				</div>
-			 </div>
 			 
 			 
-			 
-		 <?php if($users['role_id'] == 1){ ?>
-			 
-			<!--span style="font-size:18px; padding:10px;padding-top:10px;color:#373435 !important;"><b>Certificates</b></span>
-				<div class="box-body box">
-					<div>
-						<div id="carousel-reviews" class="carousel slide carousel1" data-ride="carousel">
-							<div class="carousel-inner">
-						<div class="col-md-12 responsive" width="100%" height="100px" style="overflow-x: scroll;">
-							<div class="img_show col-md-2 item" align="center">
-								<?php if(!empty($users['iata_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iata_pic'])>0) { 
-									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iata_pic'], ["alt"=>"IATA Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
-								<?php }else{ 
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"IATA Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
-									} ?>
-								<p>
-									IATA Pic
-								</p>
-							</div>
-							<div class="img_show col-md-2 item" align="center">
-								<?php if(!empty($users['tafi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['tafi_pic'])>0) {
-									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['tafi_pic'], ["alt"=>"T A F I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
-								<?php }else{ 
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"T A F I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
-									} ?>
-								<p>
-									T A F I Pic
-								</p>
-							</div>
-							
-							<div class="img_show col-md-2 item" align="center">
-								<?php if(!empty($users['taai_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['taai_pic'])>0) { 
-									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['taai_pic'], ["alt"=>"T A A I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
-								<?php }else{ 
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"T A A I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
-									} ?>
-								<p>
-									T A A I Pic
-								</p>
-							</div>
-							
-							<div class="img_show col-md-2 item" align="center">
-								<?php if(!empty($users['iato_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iato_pic'])>0) { 
-									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iato_pic'], ["alt"=>"I A T O Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
-								<?php }else{ 
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"I A T O Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
-									} ?>
-								<p>
-									IATO Pic
-								</p>
-							</div>
-							
-							<div class="img_show col-md-2 item" align="center">
-								<?php if(!empty($users['adyoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adyoi_pic'])>0) { 
-									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adyoi_pic'], ["alt"=>"A D Y O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
-								<?php }else{ 
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
-									} ?>
-								<p>
-									A D Y O I Pic
-								</p>
-							</div>
-							
-							<div class="img_show col-md-2 item" align="center">
-								<?php if(!empty($users['iso9001_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iso9001_pic'])>0) { 
-									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iso9001_pic'], ["alt"=>"I S O 9001 Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
-								<?php }else{ 
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"I S O 9001 Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
-									} ?>
-								<p>
-									I S O 9001 Pic
-								</p>
-							</div>
-							
-							<div class="img_show col-md-2 item" align="center">
-								<?php if(!empty($users['uftaa_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['uftaa_pic'])>0) { 
-								   echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['uftaa_pic'], ["alt"=>"U F T A A Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
-								<?php }else{ 
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"U F T A A Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
-									} ?>
-									<p>
-										U F T A A Pic
-									</p>
-							</div>
-							
-							<div class="img_show col-md-2 item" align="center">
-								<?php if(!empty($users['adtoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adtoi_pic'])>0) { 
-									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adtoi_pic'], ["alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
-								<?php }else{ 
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
-									} ?>
-									<p>
-										A D T O I Pic
-									</p>
-							</div>
-							
-						</div>
-						</div>
-						
-						
-						<div class="">
-									<a class="left carousel-control arroysign" href="#carousel-reviews" role="button" data-slide="prev">   
-										<i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
-									</a>
-									<a class="right carousel-control arroysign" href="#carousel-reviews" role="button" data-slide="next">
-										<i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
-									</a>
-								</div>
-								
-						</div>
-						
-					</div>
-				</div-->
-				
-				
-				 
-		 <?php } ?>
 		 
 		  <?php if($users['role_id'] == 1){ ?>
 			 
 			<span style="font-size:18px; padding:10px;padding-top:10px;color:#373435 !important;"><b>Certificates</b></span>
 				<div class="box-body box">
-					<div>
-						<div class="col-md-12 responsive" width="100%" height="100px" style="overflow-x: scroll;">
-							<div class="img_show col-md-2" align="center">
+					 
+						<div class="form-group col-md-12 " >
+						<table  width="100%">
+						<tr>
+							<td align="center" width="25%">
+							<div >
 								<?php if(!empty($users['iata_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iata_pic'])>0) { 
 									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iata_pic'], ["alt"=>"IATA Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
 									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"IATA Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 									} ?>
-								<p>
-									IATA Pic
-								</p>
+								 
 							</div>
-							<div class="img_show col-md-2" align="center">
+							</td>
+							<td align="center"  width="25%">
+							<div >
 								<?php if(!empty($users['tafi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['tafi_pic'])>0) {
 									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['tafi_pic'], ["alt"=>"T A F I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
 									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"T A F I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 									} ?>
-								<p>
-									T A F I Pic
-								</p>
+								 
 							</div>
-							
-							<div class="img_show col-md-2" align="center">
+							</td>
+							<td align="center"  width="25%">
+							<div >
 								<?php if(!empty($users['taai_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['taai_pic'])>0) { 
 									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['taai_pic'], ["alt"=>"T A A I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
 									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"T A A I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 									} ?>
-								<p>
-									T A A I Pic
-								</p>
+								 
 							</div>
+							</td>
+							 
 							
-							<div class="img_show col-md-2" align="center">
+							<td align="center"  width="25%">
+							<div >
 								<?php if(!empty($users['iato_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iato_pic'])>0) { 
 									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iato_pic'], ["alt"=>"I A T O Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
 									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"I A T O Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 									} ?>
-								<p>
-									IATO Pic
-								</p>
+								 
 							</div>
-							
-							<div class="img_show col-md-2" align="center">
+							</td>
+							</tr>
+							<tr>
+								<td width="25%" align="center">IATA</td>
+								<td width="25%"  align="center">TAFI</td>
+								<td width="25%"  align="center">TAAI</td>
+								<td width="25%"  align="center">IATO</td>
+							</tr>
+							<tr>
+							<td align="center"  width="25%">
+							<div >
 								<?php if(!empty($users['adyoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adyoi_pic'])>0) { 
 									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adyoi_pic'], ["alt"=>"A D Y O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
 									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 									} ?>
-								<p>
-									A D Y O I Pic
-								</p>
+								 
 							</div>
-							
-							<div class="img_show col-md-2" align="center">
+							</td>
+							<td align="center"  width="25%">
+							<div >
 								<?php if(!empty($users['iso9001_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iso9001_pic'])>0) { 
 									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iso9001_pic'], ["alt"=>"I S O 9001 Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
 									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"I S O 9001 Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 									} ?>
-								<p>
-									I S O 9001 Pic
-								</p>
+							 
 							</div>
-							
-							<div class="img_show col-md-2" align="center">
+							</td>
+							<td align="center"  width="25%">
+							<div >
 								<?php if(!empty($users['uftaa_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['uftaa_pic'])>0) { 
 								   echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['uftaa_pic'], ["alt"=>"U F T A A Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
 									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"U F T A A Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 									} ?>
-									<p>
-										U F T A A Pic
-									</p>
+									 
 							</div>
-							
-							<div class="img_show col-md-2" align="center">
+							</td>
+							<td align="center"  width="25%">
+							<div >
 								<?php if(!empty($users['adtoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adtoi_pic'])>0) { 
 									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adtoi_pic'], ["alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
 									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 									} ?>
-									<p>
-										A D T O I Pic
-									</p>
+								 
 							</div>
-							
+							</td>
+							</tr>
+							<tr>
+								<td width="25%" align="center">ADYOI</td>
+								<td width="25%"  align="center">ISO9001</td>
+								<td width="25%"  align="center">UFTAA</td>
+								<td width="25%"  align="center">ADTOI</td>
+							</tr>
+							</table>
 						</div>
-					</div>
 				</div>
 		 <?php } ?>
 			
@@ -857,23 +751,89 @@ $conn = ConnectionManager::get('default');
 				<div class="box-body box">
 					<div>
 						<div class="form-group col-md-12">
-							<div class="col-md-4">
-								<p>Photograph Of <?php if($users['role_id'] == 3) { echo "Hotel "; } else { ?> Office <?php } ?> 1</p>
-								<?php if(!empty($users['company_img_1_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_img_1_pic'])>0) {
-								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_1_pic'], [ "alt"=>"Company Image 1 Pic", "height"=>"150px;border-radius: 50%;"]);?>
+						<table cellpadding="10">
+							<tr>
+								<td width="48%">
+									<div>
+										 
+										<?php if(!empty($users['company_img_1_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_img_1_pic'])>0) {
+										echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_1_pic'], [ "alt"=>"Company Image 1 Pic", "height"=>"150px;"]);?>
+										<?php }
+										else{
+											echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130]); 
+										}?>
+									</div>
+								</td >
+								<td width="1%">&nbsp;</td>
+								<td width="48%">
+									<div>
+										<?php if(!empty($users['company_img_2_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_img_2_pic'])>0) {
+										echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_2_pic'], [ "alt"=>"Company Image 2 Pic", "height"=>"150px;"]);?>
+										<?php }
+										else{
+											echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130]); 
+										}?>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+				
+				
+				
+				<span style="font-size:18px; padding:10px;padding-top:10px;color:#373435 !important;">
+					<b>ID/Registration Pics</b>
+				</span>
+				<div class="box-body box">
+					<div>
+						<div class="form-group col-md-12">
+						<table>
+						<tr>
+						<td width="33%">
+							<div  align="center">
+								 
+								<?php if(!empty($users['pancard_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['pancard_pic'])>0) {
+								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['pancard_pic'], [ "alt"=>"Pan Card", "height"=>"150px;border-radius: 50%;"]);?>
 								<?php }
 								else{
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"Pan Card", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 								}?>
+								 
 							</div>
-							<div class="col-md-4"><p>Photograph Of <?php if($users['role_id'] == 3) { echo "Hotel "; } else { ?> Office <?php } ?> 2</p>  
-								<?php if(!empty($users['company_img_2_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_img_2_pic'])>0) {
-								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_2_pic'], [ "alt"=>"Company Image 2 Pic", "height"=>"150px;border-radius: 50%;"]);?>
+							</td>
+							<td width="33%">
+							<div   align="center">
+								<?php if(!empty($users['id_card_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['id_card_pic'])>0) {
+								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['id_card_pic'], [ "alt"=>"Business card", "height"=>"150px;border-radius: 50%;"]);?>
 								<?php }
 								else{
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"Business card", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 								}?>
+								 
 							</div>
+							</td>
+							<td width="33%">
+							<div   align="center">
+								<?php if(!empty($users['company_shop_registration_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_shop_registration_pic'])>0) {
+								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_shop_registration_pic'], [ "alt"=>"Company Shop Act Registration", "height"=>"150px;border-radius: 50%;"]);?>
+								<?php }
+								else{
+									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"Company Shop Act Registration", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+								}?>
+									
+							</div>
+							 
+							</td>
+							</tr>
+							<tr>
+								<td align="center">Pan Card</td>
+								<td align="center">Business Card</td>
+								<td align="center">Company Shop Act Registration</td>
+							</tr>
+							</table>
+							
 						</div>
 					</div>
 				</div>

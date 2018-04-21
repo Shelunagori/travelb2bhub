@@ -321,6 +321,11 @@ margin-bottom: 0px!important;
 		display:none !important;
 	}
 }
+@media all and (max-width: 770px) {
+	.portalmobile{
+		display:none !important;
+ 	}
+}
 @media all and (min-width: 770px) {
 	.innav{
 		display:none !important;
@@ -333,7 +338,17 @@ margin-bottom: 0px!important;
 	.dropdown-menu{
  		width:auto !important;
  	}
-} 
+}
+@media all and (min-width: 770px) {
+	.main-footer{
+		display:none !important;
+ 	}
+}
+.main-footer {
+	padding:1px !important;
+	margin-bottom: -20px !important;
+}
+ 
 </style>
 </head>
 <!--<body class="hold-transition skin-blue fixed sidebar-mini">-->
@@ -358,17 +373,22 @@ margin-bottom: 0px!important;
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
-      <a href="#" style="font-size: 16px;margin-top:0px !important" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+    <a href="#" style="font-size: 16px;margin-top:0px !important" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
-      </a>
+    </a>
 	<a style="line-height: 60px;" href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo innav" >
       <span class="logo-mini" style="font-size:0px !important;"><?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:77%;']) ?></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg" style="font-size:0px !important;"><?=  $this->Html->image('/img/main_logo.png', ['style'=>'width:92%;','class'=>'image-responsive']) ?></span>
+      <span class="logo-lg" style="font-size:0px !important;"><?=  $this->Html->image('/img/mobile_logo.png', ['style'=>'width:92%;','class'=>'image-responsive']) ?></span>
     </a>
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav" style="padding-top: 2px !important;">
           <!-- Notifications: style can be found in dropdown.less -->
+		  <li>
+			<a style="padding-right:0px !important" href="www.google.com" target="_blank" class="dropdown-toggle " data-toggle="dropdown">
+              <?=  $this->Html->image('/img/playstore.png', ['style'=>'width:26%;','class'=>'image-responsive']) ?>
+            </a>
+		  </li>
           <li class="dropdown notifications-menu" >
             <a href="#" class="dropdown-toggle " data-toggle="dropdown">
               <i style="font-size: 20px;" class="fa fa-bell-o"></i>
@@ -644,9 +664,9 @@ margin-bottom: 0px!important;
 		 </section>
 	</div>
 </div>
-<footer class="main-footer hide_print">
-    2016 &copy; <a href="http://www.phppoets.com" target="_blank"> PHP POETS IT SOLUTION PRIVATE LTD.</a> All Rights Reserved.
-</footer>
+<div class="main-footer hide_print">
+<?php echo $this->element('subheader');?>
+</div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
 $(document).ready(function (){

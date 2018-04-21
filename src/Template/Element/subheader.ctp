@@ -51,13 +51,15 @@ hr { margin-top:0px!important;}
 .rating i {
 	color:#1295A2 !important;
 }
+
+
 </style>
 <?php 
 $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);
 	if($lastword=="dashboard"  ) {
 		?>
-		<div class="row">
-		<div class="col-md-12">
+		<div class="row portalmobile">
+		<div class="col-md-12 portalmobile">
 			<div class="row">
 			<?php
 			if($users['role_id'] == 1 || $users['role_id'] == 2)
@@ -427,27 +429,29 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 	else 
 	{ 
 		?>
-		<!--<div class="col-md-12">
-			<div class="row">
-			<?php if($users['role_id'] == 1 || $users['role_id'] == 2) { 
+		<div>
+		<table width="100%">
+			<tr>
+ 			<?php if($users['role_id'] == 1 || $users['role_id'] == 2) { 
 			?>
-			<div class="col-lg-3 col-xs-6">
+			<td width="20%">
+			<div style="width:100% !important;border-right:1px solid #1c6f7d">
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'sendrequest')) ?>">
- 				  <div class="small-box bg-red">
+ 				  <div class="small-box bg-blue">
 					<div class="inner">
-						<table width="100%" border="0" height="120px" style="text-align:center">
+						<table width="100%" border="0"  style="text-align:center">
 							<tr>
-								<td>&nbsp;	 
-									<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:33px;width:40px')); ?>
+								<td height="30px"> 	 
+									<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:20px;width:20px')); ?>
 								</td>
 							</tr>
 							<tr>
-								<td style="font-size:16px">
+								<td height="25px" style="font-size:12px">
 									Place Request
 								</td>
 							</tr>
 							<tr>
-								<td style="font-size:17px"><?php echo ($reqcountNew['value']-$myRequestCountNew); ?></td>
+								<td height="25px" style="font-size:14px"><?php echo ($reqcountNew['value']-$myRequestCountNew); ?></td>
 							</tr>
 						</table>		
 						 
@@ -455,196 +459,144 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 				  </div>
 				</a>
 			</div>
+			</td>
+			<td width="20%">
 			<!-- ./col -->
-			<!--<div class="col-lg-3 col-xs-6">
+			 <div style="width:100% !important;border-right:1px solid #1c6f7d">
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>">
 				   
-				  <div class="small-box bg-yellow">
+				  <div class="small-box bg-blue">
 					<div class="inner">
-						<table width="100%" border="0"  height="120px" style="text-align:center">
+						<table width="100%" border="0" style="text-align:center">
 							<tr>
-								<td>&nbsp; 
-									<?php echo $this->Html->image('white-my-request-icon.png',array('style'=>'height:33px;width:40px')); ?>
+								<td height="30px" > 
+									<?php echo $this->Html->image('white-my-request-icon.png',array('style'=>'height:20px;width:20px')); ?>
 								</td>
 							</tr>
 							<tr>
-								<td style="font-size:16px">
+								<td height="25px"  style="font-size:12px">
 									My Requests
 								</td>
 							</tr>
 							<tr>
-								<td style="font-size:17px"><?php echo $myRequestCount; ?></td>
+								<td height="25px"  style="font-size:14px"><?php echo $myRequestCountNew; ?></td>
 							</tr>
 						</table>		
 					</div>
 				  </div>
 				</a>
 			</div>
+			</td>
 			<?php } 
 			if($users['role_id'] == 1 || $users['role_id'] == 3) { 
 			?>
 			<!-- COls -->
-			<!--<div class="col-lg-3 col-xs-6">
+			<?php if($users['role_id'] == 1){?>
+			<td width="20%">
+			<div style="width:100% !important;border-right:1px solid #1c6f7d">
+			<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'dashboard')) ?>">
+ 				  
+				  <div class="small-box bg-blue">
+					<div class="inner">
+						<table width="100%" border="0" style="text-align:center">
+							<tr>
+								<td height="40px">
+									<i style="font-size:25px" class="fa fa-home"></i>								
+ 								</td>
+							</tr>
+							<tr height="40px">
+								<td style="font-size:12px">
+									Home
+								</td>
+							</tr> 
+						</table>		
+					</div>
+				  </div>
+				</a>
+			</div>
+			</td>	
+			<?php } ?> 
+			<td width="20%">
+			<div style="width:100% !important;border-right:1px solid #1c6f7d">
 			<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>">
  				  
-				  <div class="small-box bg-green">
+				  <div class="small-box bg-blue">
 					<div class="inner">
-						<table width="100%" border="0"  height="120px" style="text-align:center">
+						<table width="100%" border="0" style="text-align:center">
 							<tr>
-								<td>&nbsp;	 
-									<?php echo $this->Html->image('white-back-icon.png',array('style'=>'height:33px;width:40px')); ?>
+								<td height="30px" > 	 
+									<?php echo $this->Html->image('white-back-icon.png',array('style'=>'height:20px;width:20px')); ?>
 								</td>
 							</tr>
 							<tr>
-								<td style="font-size:16px">
-									Respond to Requests
+								<td height="25px"  style="font-size:12px">
+									R to R
 								</td>
 							</tr>
 							<tr>
-								<td style="font-size:17px"><?php echo $respondToRequestCountNew; ?></td>
+								<td height="25px"  style="font-size:14px"><?php echo $respondToRequestCountNew; ?></td>
 							</tr>
 						</table>		
 					</div>
 				  </div>
 				</a>
 			</div>
+			</td>
+			<?php if($users['role_id'] == 3){?>
+			<td width="20%">
+			<div style="width:100% !important;border-right:1px solid #1c6f7d">
+			<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'dashboard')) ?>">
+ 				  
+				  <div class="small-box bg-blue">
+					<div class="inner">
+						<table width="100%" border="0" style="text-align:center">
+							<tr>
+								<td height="40px" > 
+									<i style="font-size:25px" class="fa fa-home"></i>								
+ 								</td>
+							</tr>
+							<tr>
+								<td height="40px"  style="font-size:12px">
+									Home
+								</td>
+							</tr> 
+						</table>		
+					</div>
+				  </div>
+				</a>
+			</div>
+			</td>	
+			<?php } ?>
+			<td width="20%">
 			<!---COls--->
-			<!--<div class="col-lg-3 col-xs-6">
+			 <div style="width:100% !important">
 			<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'myresponselist')) ?>">
 				  
 				  <div class="small-box bg-blue">
 					<div class="inner">
-						<table width="100%" border="0" height="120px" style="text-align:center">
+						<table width="100%" border="0" style="text-align:center">
 							<tr>
-								<td>&nbsp;
-									<?php echo $this->Html->image('white-my-resposes-head.png',array('style'=>'height:33px;width:40px')); ?>
+								<td height="30px" > 
+									<?php echo $this->Html->image('white-my-resposes-head.png',array('style'=>'height:20px;width:20px')); ?>
 								</td>
 							</tr>
 							<tr>
-								<td style="font-size:16px">
+								<td height="25px"  style="font-size:12px">
 									My Responses
 								</td>
 							</tr>
 							<tr>
-								<td style="font-size:17px"><?php echo $myReponseCount; ?></td>
+								<td height="25px"  style="font-size:14px"><?php echo $myReponseCountNew; ?></td>
 							</tr>
 						</table>		
 					</div>
 				  </div>
 				</a>
 			</div>
-			<?php }
-			
-		if($users['role_id'] == 2 ) { 
-			?>
-				<!-- COls -->
-				<!--<div class="col-lg-3 col-xs-6">
-					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'finalized-request-list')) ?>">
-					  <div class="small-box bg-green">
-						<div class="inner">
-							<table width="100%" border="0" height="120px" style="text-align:center">
-								<tr>
-									<td align="center">&nbsp;	 
-										<i style='font-size:38px' class="fa fa-check-square"></i>
-									</td>
-								</tr>
-								<tr>
-									<td style=" font-size:16px">
-										Finalized Requests
-									</td>
-								</tr>
-								<tr>
-									<td style="font-size:17px"><?php echo $finalizeRequest; ?></td>
-								</tr>
-							</table>		
-							 
-						</div>
-					  </div>
-					</a>
-				</div>
-				<!---COls--->
-				<!--<div class="col-lg-3 col-xs-6">
-					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'removed-request-list')) ?>">
-					  <div class="small-box bg-blue">
-						<div class="inner">
-							<table width="100%" border="0" height="120px" style="text-align:center">
-								<tr>
-									<td align="center">&nbsp;	 
-										<i style='font-size:38px' class="fa fa-trash"></i>
-									</td>
-								</tr>
-								<tr>
-									<td  style="font-size:16px">
-										Removed Requests
-									</td>
-								</tr>
-								<tr>
-									<td style="font-size:17px"><?php echo $RemovedReqest; ?></td>
-								</tr>
-							</table>		
-							 
-						</div>
-					  </div>
-					  
-					</a>
-				</div>
-		<?php }
-			if($users['role_id'] == 3)
-			{
-				?>
-				<div class="col-lg-3 col-xs-6">
-					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'my-final-responses')) ?>">
-						 
-					  <div class="small-box bg-red">
-						<div class="inner">
-							<table width="100%" border="0" height="120px" style="text-align:center">
-								<tr>
-									<td align="center">&nbsp;	 
-										<i style='font-size:38px' class="fa fa-check-square"></i>
-									</td>
-								</tr>
-								<tr>
-									<td  style="font-size:16px">
-										Finalized Responses
-									</td>
-								</tr>
-								<tr>
-									<td style="font-size:17px"><?php echo ($FInalResponseCount); ?></td>
-								</tr>
-							</table>		
-							 
-						</div>
-					  </div>
-					</a>
-				</div>
-				<!-- ./col -->
-				<!--<div class="col-lg-3 col-xs-6">
-					<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'blocked-user-list')) ?>">
-						 
-					  <div class="small-box bg-yellow">
-						<div class="inner">
-							<table width="100%" border="0" height="120px" style="text-align:center">
-								<tr>
-									<td align="center">&nbsp;	 
-										<i style='font-size:38px' class="fa fa-users"></i>
-									</td>
-								</tr>
-								<tr>
-									<td style="font-size:16px">
-										Blocked Users
-									</td>
-								</tr>
-								<tr>
-									<td style="font-size:17px"><?php echo $blockedUserscount; ?></td>
-								</tr>
-							</table>		
-						</div>
-					  </div>
-					</a>
-				</div>
-			<?php 
-			}
-			?>
- 		  </div>
-		</div>--->
+			</td> 
+			<?php }	?>
+			</tr>
+			</table>
+ 		  
+		</div> 
 <?php } ?>

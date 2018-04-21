@@ -25,8 +25,7 @@ $conn = ConnectionManager::get('default');
 <div class="container-fluid" id="finalized_request_list">
 <div class="row equal_column" > 
     <div class="col-md-12" > 
-		<?php echo $this->element('subheader');?>
-		<?php echo  $this->Flash->render() ?>
+ 		<?php echo  $this->Flash->render() ?>
 	</div>
 </div>
 <div class="box box-primary">

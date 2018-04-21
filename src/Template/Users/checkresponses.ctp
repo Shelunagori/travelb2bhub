@@ -54,8 +54,7 @@ legend
 <div class="container-fluid" id="checkresponses">
     <div class="row equal_column"> 
 		<div class="col-md-12" style="background-color:"> 
-			 
-			<?php echo $this->element('subheader');?>
+			  
 		</div>
 	</div>
 	<div class="box box-primary">
