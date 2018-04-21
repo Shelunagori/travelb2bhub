@@ -240,9 +240,10 @@ $conn = ConnectionManager::get('default');
 						<font color="#4B4B4D" size="4">
 						<div class="col-md-12">
 							<?php 
+							$Final_hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'finalized-request-list'));
 							if($users['role_id'] == 1){ ?>
 								 <div style="float:left" class="col-md-10" align="left">
-									Finalized Requests
+									<a href="<?php echo $hrefurl; ?>"> Finalized Requests</a>
 								 </div>
 								 <div style="float:right"  >
 									<div style="width: 32px;height: 25px;background-color:#1295A2;border-radius:13px;color:#FEFEFE;">		
@@ -253,7 +254,7 @@ $conn = ConnectionManager::get('default');
 							 else if($users['role_id'] == 2){ ?>
 								
 								 <div style="float:left" class="col-md-10" align="left">
-									Finalized Requests
+									<a href="<?php echo $hrefurl; ?>"> Finalized Requests</a>
 								 </div>
 								 <div style="float:right" class="col-md-2">
 									<div style="width: 32px; height: 25px; background-color: #1295A2;border-radius:9px;color:#FEFEFE;">		
@@ -264,9 +265,10 @@ $conn = ConnectionManager::get('default');
 						</div>		
 						<div class="col-md-12" style="margin-top:3%;">
 							<?php 
+							$Res_req_hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'respondtorequest'));
 							if($users['role_id'] == 1){ ?>
 								<div style="float:left" class="col-md-10" align="left">
-									Responded Requests
+									<a href="<?php echo $Res_req_hrefurl; ?>"> Responded Requests</a>
 								 </div>
 								 <div style="float:right"  >
 									<div style="width: 32px !important; height: 25px; background-color: #DFBA49;border-radius:13px;color:#FEFEFE;">		
@@ -277,7 +279,7 @@ $conn = ConnectionManager::get('default');
 							<?php }
 							 else if($users['role_id'] == 3){ ?>
 								<div style="float:left" class="col-md-10" align="left">
-									Responded Requests
+									<a href="<?php echo $Res_req_hrefurl; ?>"> Responded Requests</a>
 								 </div>
 								 <div style="float:right"  >
 									<div style="width: 32px !important; height: 25px; background-color: #DFBA49;border-radius:13px;color:#FEFEFE;">		
@@ -289,9 +291,10 @@ $conn = ConnectionManager::get('default');
 						</div>
 						<div class="col-md-12" style="margin-top:3%;">
 							<?php 
+							$final_res_hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'my-final-responses'));
 							if($users['role_id'] == 1){ ?>
 								<div style="float:left" class="col-md-10" align="left">
-									Finalized Responses
+									<a href="<?php echo $final_res_hrefurl; ?>"> Finalized Responses</a>
 								 </div>
 								 <div style="float:right"  >
 									<div style="width: 32px; height: 25px; background-color: #F3565D;border-radius:13px;color:#FEFEFE;">	
@@ -302,7 +305,7 @@ $conn = ConnectionManager::get('default');
 							<?php }
 							 else if($users['role_id'] == 3){ ?>
 								<div style="float:left" class="col-md-10" align="left">
-									Finalized Responses
+									<a href="<?php echo $final_res_hrefurl; ?>"> Finalized Responses</a>
 								 </div>
 								 <div style="float:right"  >
 									<div style="width: 32px; height: 25px; background-color: #F3565D;border-radius:13px;color:#FEFEFE;">		

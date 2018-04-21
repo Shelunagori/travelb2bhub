@@ -180,9 +180,9 @@ hr { margin-top:0px!important;}
 						</div>
 						<div class="col-md-6" style="color:white;">
 							<div class="wrap-input100 validate-input" data-validate = "Contact No">
-									
+									 
 									<input class="input100 trim_space_valid maxx"  required="" type="tel"  maxlength="10" minlength="10" id="number_format" name="mobile_number" />
-									<span class="focus-input100" data-placeholder="Contact No."></span>
+									<span class="focus-input100" data-placeholder="Contact No(India)"></span>
 									<!--input class="input100 trim_space_valid maxx"  required="" id="mobile_number" type="tel" name="mobile_number" maxlength="10" minlength="10" placeholder="Contact No"  />
 									<span class="focus-input100"></span-->
 							</div>										
@@ -237,14 +237,13 @@ hr { margin-top:0px!important;}
 				<div class="row">
 					<div class="col-md-12">
 						<div class="col-md-6">
-							<div class="wrap-input100 validate-input" data-validate = "State">
-								<span for="Preference_States" style="color:#fff;">State</span>
+							<div class="wrap-input100 validate-input st" data-validate = "State">
 								<input readonly class="input100 trim_space_valid" type="text"  required="" id ="state_name" name="state_name" /> 
+								 <span class="focus-input100" data-placeholder="State"></span>
 							</div>						
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-6"><div id="pc"> </div>
 							<div class="wrap-input100 validate-input" data-validate = "Pincode">
-								<span style="font-size:16px !important;visibility:hidden;">State</span>
 								<input class="input100 trim_space_valid maxx"  required=""  type="tel" name="pincode" id="pincode" maxlength="6" minlength="6"/>
 								<span class="focus-input100" data-placeholder="Pincode"></span>
 							</div>
@@ -253,9 +252,9 @@ hr { margin-top:0px!important;}
 				</div>	
 				<div class="row col-md-12">
 					<div class="col-md-12">
-							<div class="wrap-input100 validate-input" data-validate = "Country">
-							<span for="Preference_States" style="color:#fff;">Country</span>
+							<div class="wrap-input100 validate-input ctr" data-validate = "Country">
 								<input class="input100 trim_space_valid"  required="" type="text" readonly id ="country_name" name="country_name" />
+								<span class="focus-input100" data-placeholder="Country"></span>
 							</div>										
 						</div>	
 				</div>	
@@ -414,10 +413,13 @@ function selectCountry(value,city_code,state,country_id,state_name,country_name)
 		$("#city_id").val(city_code);
 		
  		$("#state_id").val(state_id);
-		$("#state_name").val(state_name);
+		$(".st").html('<label for="Preference_States" style="color:#fff;">States</label><input readonly style="padding:0px !important;" class="input100 trim_space_valid" type="text" value='+state_name+' required="" id ="state_name" name="state_name" /> ');
+		//$("#state_name").val(state_name);
+		$('#pc').html('<br>');
 		
+		$(".ctr").html('<label for="Preference_Country" style="color:#fff;">Country</label><input class="input100 trim_space_valid"  required="" value='+country_name+' style="padding:0px !important;" type="text" readonly id ="country_name" name="country_name" />');
 		$("#country_id").val(country_id);
-		$("#country_name").val(country_name);
+		//$("#country_name").val(country_name);
  	}	
 </script>	
 <script>
