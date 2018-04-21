@@ -932,7 +932,7 @@ $(document).ready(function(){
 			
 			if(checkOutDateDate<=checkInDateDate)
 			{
-				alert("Check-in date should be less then Check-out Date.");
+				alert("Check-in date should be less than Check-out Date.");
 				$('#datepicker2').val("");
 			}
 		}
@@ -970,7 +970,7 @@ $(document).ready(function(){
 			
 			if(checkOutDateDate<checkInDateDate)
 			{
-				alert("Start date should be less then end Date Date.");
+				alert("Start date should be less than end Date Date.");
 				$('#datepickerofTransport1').val("");
 			}
 		}
@@ -1009,7 +1009,7 @@ $(document).ready(function(){
 		//		
  			if(checkOutDateDate<=checkInDateDate)
 			{
-				alert("Check-in date should be less then Check-out Date.");
+				alert("Check-in date should be less than Check-out Date.");
 				$('#datepickerofpkg1').val("");
 			}
 		}
@@ -1048,7 +1048,7 @@ $(document).ready(function(){
 		//		
  			if(checkOutDateDate<=checkInDateDate)
 			{
-				alert("Start date should be less then end Date.");
+				alert("Start date should be less than end Date.");
 				$('#packageTransport1').val("");
 			}
 		}
@@ -1739,7 +1739,7 @@ $(document).ready(function () {
 						
 						if(checkOutDateDate<=checkInDateDate)
 						{
-							alert("Check-in date should be less then Check-out Date.");
+							alert("Check-in date should be less than Check-out Date.");
 							checkOutDatePicker.val("");
 						}
 					}
