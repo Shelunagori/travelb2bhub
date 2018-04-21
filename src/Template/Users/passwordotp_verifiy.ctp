@@ -35,10 +35,11 @@
 					</span>
 				<?php  echo $this->Form->create("User", ['id'=>"UserRegisterForm",'class'=>'login100-form validate-form']); ?>
 					<div class="text-center">
-						<p style="color:#fff"> Otp Verification </p>
+						<p style="color:#fff"> OTP Verification </p>
 					</div> <br />
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
 						<input class="input100" type="text" name="mobile_otp" autofocus="on">
+						<span class="focus-input100" data-placeholder="Enter OTP"></span>
 					</div>
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" style="width: 100%;">
@@ -73,7 +74,19 @@
 		</div>
 	</div>
 	<div id="dropDownSelect1"></div>
+<script type="text/javascript">
 
+	setInterval(function(){ abc(); }, 2000);
+		function abc()
+		{ 	
+			$('#msg_div').fadeOut(300);
+			var delay = 300;
+			setTimeout(function() {
+				$('#msg_div').remove();
+			}, delay);
+		} 
+		
+</script> 
 <?php echo $this->Html->script('/assets/login/jquery/jquery-3.2.1.min.js'); ?>
 <?php echo $this->Html->script('/assets/login/animsition/js/animsition.min.js'); ?>
 <?php echo $this->Html->script('/assets/login/bootstrap/js/popper.js'); ?>

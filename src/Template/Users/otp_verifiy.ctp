@@ -35,10 +35,11 @@
 					</span>
 				<?php  echo $this->Form->create("User", ['id'=>"UserRegisterForm",'class'=>'login100-form validate-form']); ?>
 					<div class="text-center">
-						<p style="color:#fff"> Otp Verification </p>
+						<p style="color:#fff"> OTP Verification </p>
 					</div> <br />
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
 						<input class="input100" type="text" name="mobile_otp" autofocus="on">
+						<span class="focus-input100" data-placeholder="Enter OTP"></span>
 					</div>
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" style="width: 100%;">

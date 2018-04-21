@@ -44,11 +44,13 @@
 				
                 <?php  echo $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'login'],'id'=>"UserLoginForm", 'class'=>'login100-form validate-form']); ?>
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="text" name="email" placeholder="Email">
+						<input class="input100" type="text" name="email" >
+						<span class="focus-input100" data-placeholder="Email"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" name="password" placeholder="Password">
+						<input class="input100" type="password" name="password" >
+						<span class="focus-input100" data-placeholder="Password"></span>
 					</div>
 
 					<div class="contact100-form-checkbox">
@@ -82,7 +84,19 @@
 		</div>
 	</div>
 	<div id="dropDownSelect1"></div>
+<script type="text/javascript">
 
+	setInterval(function(){ abc(); }, 2000);
+		function abc()
+		{ 	
+			$('#msg_div').fadeOut(300);
+			var delay = 300;
+			setTimeout(function() {
+				$('#msg_div').remove();
+			}, delay);
+		} 
+		
+</script> 
 <?php echo $this->Html->script('/assets/login/jquery/jquery-3.2.1.min.js'); ?>
 <?php echo $this->Html->script('/assets/login/animsition/js/animsition.min.js'); ?>
 <?php echo $this->Html->script('/assets/login/bootstrap/js/popper.js'); ?>

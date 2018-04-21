@@ -75,6 +75,7 @@ hr { margin-top:0px!important;}
 		.a{
 			color:white !important;
 		}
+		
 </style>
 <style>
 	#country-list{list-style:none;margin-left: 1px;padding:0;width:94%; margin-top: 10px;    position: absolute;
@@ -107,12 +108,12 @@ hr { margin-top:0px!important;}
 	<style>
 		.bgdiv { background-image: url('../webroot/assets/login/login_background.jpg'); }
 		.p-b-34 { padding-bottom: 10px !important; }
-		.login100-form-title { font-size:25px; }
+		.login100-form-title { font-size:14px; }
 		.wrap-login100 { background:#1f222db8 !important; width:420px !important; padding: 18px 55px 37px 55px; }
 		.p-t-27 { padding-top: 10px; }
 		.error { color: #ff9898; text-align:center; }
 		.wrap-input100 {
-		    margin-bottom: 11px !important;
+		  //margin: 10px !important;
 		}
 		
 	</style>
@@ -145,23 +146,26 @@ hr { margin-top:0px!important;}
 								</select>
 							</div>					
 						</div>
-						<div class="col-md-6">
+						<div class="col-md-6" style="font-size:14px !important;">
 							<div class="wrap-input100 validate-input "  data-validate = "Company Name">
-						 <input class=" input100 trim_space_valid " required=""  id="company_name" type="text" name="company_name" placeholder="Company Name">
+							<input class=" input100 trim_space_valid " required=""  id="company_name" type="text" name="company_name" >
+							<span class="focus-input100" data-placeholder="Company Name"></span>
 							</div>				
 						</div>										
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<div class="col-md-6">
+						<div class="col-md-6" >
 								<div class="wrap-input100 validate-input" data-validate = "First name">
-									<input class="input100 trim_space_valid"  required="" type="text" name="first_name" placeholder="First Name"/>
-							</div>
+									<input class="input100 trim_space_valid"  required="" type="text" name="first_name" />
+									<span class="focus-input100" data-placeholder="First Name"></span>
+								</div>
 						</div>
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Last name">
-									<input class="input100 trim_space_valid"  required="" type="text" name="last_name" placeholder="Last Name">
+									<input class="input100 trim_space_valid"  required="" type="text" name="last_name" />
+									<span class="focus-input100" data-placeholder="Last Name"></span>
 								</div>						
 						</div>
 					</div>
@@ -170,12 +174,14 @@ hr { margin-top:0px!important;}
 					<div class="col-md-12">
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Email">
-									<input class="input100 trim_space_valid"  required="" type="email" name="email" placeholder="Email">
-								</div>
+								<input class="input100 trim_space_valid"  required="" type="email" name="email" />
+								<span class="focus-input100" data-placeholder="Email"></span>
+							</div>
 						</div>
 						<div class="col-md-6" style="color:white;">
 							<div class="wrap-input100 validate-input" data-validate = "Contact No">
-									<input class="input100 trim_space_valid maxx"  required="" id="mobile_number" type="tel" name="mobile_number" maxlength="10" minlength="10" placeholder="Contact No.">
+									<span for="Preference_States" style="color:#fff;">Contact No</span>
+									<input class="input100 trim_space_valid maxx"  required="" id="mobile_number" type="tel" name="mobile_number" maxlength="10" minlength="10" />
 							</div>										
 						</div>
 					</div>
@@ -184,12 +190,14 @@ hr { margin-top:0px!important;}
 					<div class="col-md-12">
 							<div class="col-md-6">
 								<div class="wrap-input100 validate-input" data-validate = "Password">
-										<input class="input100 trim_space_valid" required=""  type="password" name="password" placeholder="Password" id="password">
+										<input class="input100 trim_space_valid" required="" type="password" name="password"  id="password"/>
+										<span class="focus-input100" data-placeholder="Password"></span>
 									</div>	
 								</div>						
 							<div class="col-md-6">
 								<div class="wrap-input100 validate-input" data-validate = "Confirm Password">
-											<input class="input100 trim_space_valid" required=""  type="password" name="cpassword" placeholder=" Confirm Password" id="cpassword">
+											<input class="input100 trim_space_valid" required=""  type="password" name="cpassword" id="cpassword"/>
+											<span class="focus-input100" data-placeholder="Confirm Password"></span>
 										</div>
 									</div>	
 					</div>
@@ -197,7 +205,8 @@ hr { margin-top:0px!important;}
 				<div class="row col-md-12">
 					<div class="col-md-12">
 							<div class="wrap-input100 validate-input" data-validate = "Address">
-										<input class="input100 trim_space_valid"  required="" type="text" name="address" placeholder="Address" id="address">
+										<input class="input100 trim_space_valid"  required="" type="text" name="address"  id="address"/>
+										<span class="focus-input100" data-placeholder="Address"></span>
 									</div>
 					</div>
 				</div>
@@ -206,12 +215,14 @@ hr { margin-top:0px!important;}
 					<div class="col-md-12">
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Locality">
-										<input class="input100 trim_space_valid"  required="" type="text" name="locality" placeholder="Locality or Village or Town" id="locality">
+										<input class="input100 trim_space_valid"  required="" type="text" name="locality"  id="locality"/>
+										<span class="focus-input100" data-placeholder="Locality or Village or Town"></span>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "City">
-								<input class=" input100 trim_space_valid city_select" required="" id="city-search-box" type="text"  name="city" placeholder="Select city/nearest city" taxboxname="" noofrows="1">
+								<input class=" input100 trim_space_valid city_select" required="" id="city-search-box" type="text"  name="city"  taxboxname="" noofrows="1"/>
+								<span class="focus-input100" data-placeholder="Select City/Nearest City"></span>
 							</div>
 							<div class="suggesstion-box" style="margin-top:-20px"></div>
 						</div>				
@@ -224,12 +235,15 @@ hr { margin-top:0px!important;}
 					<div class="col-md-12">
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "State">
-								<input readonly class="input100 trim_space_valid" type="text"  required="" id ="state_name" name="state_name" placeholder="State" > 
+								<span for="Preference_States" style="color:#fff;">State</span>
+								<input readonly class="input100 trim_space_valid" type="text"  required="" id ="state_name" name="state_name" /> 
 							</div>						
 						</div>
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Pincode">
-								<input class="input100 trim_space_valid maxx"  required="" placeholder="Pin Code" type="tel" name="pincode" id="pincode" maxlength="6" minlength="6">
+								<span style="font-size:16px !important;visibility:hidden;">State</span>
+								<input class="input100 trim_space_valid maxx"  required=""  type="tel" name="pincode" id="pincode" maxlength="6" minlength="6"/>
+								<span class="focus-input100" data-placeholder="Pincode"></span>
 							</div>
 						</div>	
 					</div>	
@@ -237,8 +251,8 @@ hr { margin-top:0px!important;}
 				<div class="row col-md-12">
 					<div class="col-md-12">
 							<div class="wrap-input100 validate-input" data-validate = "Country">
-								<input class="input100 trim_space_valid"  required="" type="text" readonly id ="country_name" name="country_name" placeholder="Country" >
-								 
+							<span for="Preference_States" style="color:#fff;">Country</span>
+								<input class="input100 trim_space_valid"  required="" type="text" readonly id ="country_name" name="country_name" />
 							</div>										
 						</div>	
 				</div>	
@@ -766,4 +780,17 @@ $(document).ready(function (){
 		});   
 	});
 </script>	
+<script type="text/javascript">
+
+	setInterval(function(){ abc(); }, 2000);
+		function abc()
+		{ 	
+			$('#msg_div').fadeOut(300);
+			var delay = 300;
+			setTimeout(function() {
+				$('#msg_div').remove();
+			}, delay);
+		} 
+		
+</script> 
 </html>
