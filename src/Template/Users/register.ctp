@@ -182,7 +182,7 @@ hr { margin-top:0px!important;}
 							<div class="wrap-input100 validate-input" data-validate = "Contact No">
 									 
 									<input class="input100 trim_space_valid maxx"  required="" type="tel"  maxlength="10" minlength="10" id="number_format" name="mobile_number" />
-									<span class="focus-input100" data-placeholder="Contact No(India)"></span>
+									<span class="focus-input100" data-placeholder="Contact No. (India)"></span>
 									<!--input class="input100 trim_space_valid maxx"  required="" id="mobile_number" type="tel" name="mobile_number" maxlength="10" minlength="10" placeholder="Contact No"  />
 									<span class="focus-input100"></span-->
 							</div>										
@@ -236,12 +236,6 @@ hr { margin-top:0px!important;}
 				<input type="hidden" name="state_id" id="state_id">
 				<div class="row">
 					<div class="col-md-12">
-						<div class="col-md-6">
-							<div class="wrap-input100 validate-input st" data-validate = "State">
-								<input readonly class="input100 trim_space_valid" type="text"  required="" id ="state_name" name="state_name" /> 
-								 <span class="focus-input100" data-placeholder="State"></span>
-							</div>						
-						</div>
 						<div class="col-md-6"><div id="pc"> </div>
 							<div class="wrap-input100 validate-input" data-validate = "Pincode">
 								<input class="input100 trim_space_valid maxx"  required=""  type="tel" name="pincode" id="pincode" maxlength="6" minlength="6"/>
@@ -251,7 +245,13 @@ hr { margin-top:0px!important;}
 					</div>	
 				</div>	
 				<div class="row col-md-12">
-					<div class="col-md-12">
+					<div class="col-md-6">
+								<div class="wrap-input100 validate-input st" data-validate = "State">
+								<input readonly class="input100 trim_space_valid" type="text"  required="" id ="state_name" name="state_name" /> 
+								 <span class="focus-input100" data-placeholder="State"></span>
+							</div>						
+						</div>
+					<div class="col-md-6">
 							<div class="wrap-input100 validate-input ctr" data-validate = "Country">
 								<input class="input100 trim_space_valid"  required="" type="text" readonly id ="country_name" name="country_name" />
 								<span class="focus-input100" data-placeholder="Country"></span>
@@ -263,7 +263,7 @@ hr { margin-top:0px!important;}
 						<div class="mt" tooltip="Select upto 5 states">
 							<div class="wrap-input100 validate-input">
 								<label for="Preference_States" style="color:#fff;">States where you operate</label>
-								<span style="font-size:11px;color:#fff;">(Select upto 5 states )</span>
+								
 								<div class="input-field">
 									<?php echo $this->Form->control('preference', ["id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select", "data-placeholder"=>"Select upto 5 states where you operate", "style"=>"height:125px;"]); ?>
 								</div>
@@ -275,7 +275,7 @@ hr { margin-top:0px!important;}
 					<div class="col-md-12">
 						<div class="contact100-form-checkbox col-md-12">
 							<input class="input-checkbox100 chk_input"  id="ckb1" type="checkbox" required  name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
+							<label class="label-checkbox100" for="ckb1" style="padding-left:40px;">
 								I accept the <a style="color:white;" target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/privacy-policy/"><u>Privacy Policy</u></a> and <a style="color:white;" target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/terms-and-conditions/"><u>Terms & Conditions</a></u>
 							</label>
 							<span id="chk_cond" style="color:#f16060; display:none;">Please accept Terms & Conditions and Privacy Policy</span>
@@ -288,8 +288,8 @@ hr { margin-top:0px!important;}
 					</div>
 				</div>
 				<div class="col-md-12 text-center" style="margin-top: 20px;">
-					<p style="color:#fff">Do you have an account ?
-						<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'login')) ?>" style="color:#5ba7a4;" >
+					<p style="color:#fff;">Do you have an account ?
+						<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'login')) ?>" style="color:#5ba7a4;font-size:19px;" >
 							Sign in
 						</a>
 					</p>
@@ -413,11 +413,11 @@ function selectCountry(value,city_code,state,country_id,state_name,country_name)
 		$("#city_id").val(city_code);
 		
  		$("#state_id").val(state_id);
-		$(".st").html('<label for="Preference_States" style="color:#fff;">States</label><input readonly style="padding:0px !important;" class="input100 trim_space_valid" type="text" value='+state_name+' required="" id ="state_name" name="state_name" /> ');
+		$(".st").html('<label for="Preference_States" style="color:#fff;font-family:Raleway, sans-serif ;">States</label><input readonly style="padding:0px !important;" class="input100 trim_space_valid" type="text" value='+state_name+' required="" id ="state_name" name="state_name" /> ');
 		//$("#state_name").val(state_name);
 		$('#pc').html('<br>');
 		
-		$(".ctr").html('<label for="Preference_Country" style="color:#fff;">Country</label><input class="input100 trim_space_valid"  required="" value='+country_name+' style="padding:0px !important;" type="text" readonly id ="country_name" name="country_name" />');
+		$(".ctr").html('<label for="Preference_Country" style="color:#fff;font-family:Raleway, sans-serif ;">Country</label><input class="input100 trim_space_valid"  required="" value='+country_name+' style="padding:0px !important;" type="text" readonly id ="country_name" name="country_name" />');
 		$("#country_id").val(country_id);
 		//$("#country_name").val(country_name);
  	}	
