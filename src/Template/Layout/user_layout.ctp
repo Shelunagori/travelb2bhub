@@ -317,6 +317,9 @@ margin-bottom: 0px!important;
 	.content-wrapper{
 		padding-top: 50px !important;
 	}
+	.slimScrollDiv{
+	padding-top: 0px !important;
+	}
 	.outnav{
 		display:none !important;
 	}
@@ -346,7 +349,6 @@ margin-bottom: 0px!important;
 }
 .main-footer {
 	padding:1px !important;
-	margin-bottom: -20px !important;
 }
  
 </style>
@@ -389,7 +391,7 @@ margin-bottom: 0px!important;
               <?=  $this->Html->image('/img/playstore.png', ['style'=>'width:26%;','class'=>'image-responsive']) ?>
             </a>
 		  </li>-->
-          <li class="dropdown notifications-menu" >
+          <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle " data-toggle="dropdown">
               <i style="font-size: 20px;" class="fa fa-bell-o"></i>
               <span class="label label-warning"><?php echo $chatCount; ?></span>
@@ -645,7 +647,7 @@ margin-bottom: 0px!important;
 			<li><a target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/terms-and-conditions/"><i class="fa fa-edit"></i> <span>Terms & Conditions</span></a></li>
 			<li><a target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/privacy-policy/"><i class="fa fa-lock"></i> <span>Privacy Policy</span></a></li>
 			<li><a target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/<?php echo $WEBURL; ?>"><i class="fa fa-question-circle"></i> <span>FAQs</span></a></li>
-			<li <?php if($page_name=='logout' && $controller=='Users'){ echo 'class="active"';}?>>
+			<li style="margin-bottom:40px!important" <?php if($page_name=='logout' && $controller=='Users'){ echo 'class="active"';}?>>
 				<a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'logout']); ?>"><i class="fa fa-power-off"></i> <span>Logout</span></a>
 			</li>
       </ul>
