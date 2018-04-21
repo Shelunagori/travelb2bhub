@@ -1,3 +1,7 @@
+<?php 
+use Cake\Datasource\ConnectionManager; 
+$conn = ConnectionManager::get('default');
+?>
 <style>
 .checked {
     color: #1295AB;
@@ -515,6 +519,122 @@
 						</div>
 					</div>
 				</div>
+				
+				
+				<span style="font-size:18px; padding:10px;padding-top:10px;color:#373435 !important;"><b>Personal Details</b></span>
+			 
+				<div class="box-body box">
+					<div>
+						<div class="form-group col-md-12" >
+						<table>
+							<tr>
+								<td width="50%">Company Name:</td>
+								<td width="50%"><?php echo $users['company_name']; ?></td>
+							</tr>
+							<tr>
+								<td>Primary Contact No.:</td>
+								<td><?php echo $users['mobile_number']; ?></td>
+							</tr>
+							<tr>
+								<td>Secondary Contact No.:</td>
+								<td><?php echo $users['p_contact']; ?></td>
+							</tr>
+							<tr>
+								<td>Email:</td>
+								<td><?php echo $users['email']; ?></td>
+							</tr>
+							<tr>
+								<td>Website:</td>
+								<td><?php echo $users['web_url']; ?></td>
+							</tr>
+							<tr>
+								<td>States of Operation:</td>
+								<td><?php $preference=$users['preference']; 
+								
+								$preferences=explode(',', $preference);
+							 
+								foreach($preferences as $data){
+									
+									$state_id=$data;
+									  
+									$set="select `state_name` from `states` where `id`='$state_id'";
+									$stmt1 = $conn->execute($set);
+									foreach($stmt1 as $fet){
+									$state_name=$fet['state_name'];	
+									}
+									
+									$final_state_name.=$state_name;
+									$final_state_name.=',';
+								}
+								echo $final_state_name;
+								?></td>
+							</tr>
+						</table>	
+						</div>
+					</div>
+				</div>
+			 </div>
+			 
+			 
+			 
+			 
+			 
+			 
+			 <span style="font-size:18px; padding:10px;padding-top:10px;color:#373435 !important;"><b>Address</b></span>
+			 
+				<div class="box-body box">
+					<div>
+						<div class="form-group col-md-12" >
+						<table>
+							<tr>
+								<td width="50%">Address:</td>
+								<td width="50%"><?php echo $users['address']; ?></td>
+							</tr>
+							<tr>
+								<td>City:</td>
+								<td><?php echo $users['city_id']; ?></td>
+							</tr>
+							<tr>
+								<td>:</td>
+								<td><?php echo $users['p_contact']; ?></td>
+							</tr>
+							<tr>
+								<td>Email:</td>
+								<td><?php echo $users['email']; ?></td>
+							</tr>
+							<tr>
+								<td>Website:</td>
+								<td><?php echo $users['web_url']; ?></td>
+							</tr>
+							<tr>
+								<td>States of Operation:</td>
+								<td><?php $preference=$users['preference']; 
+								
+								$preferences=explode(',', $preference);
+							 
+								foreach($preferences as $data){
+									
+									$state_id=$data;
+									  
+									$set="select `state_name` from `states` where `id`='$state_id'";
+									$stmt1 = $conn->execute($set);
+									foreach($stmt1 as $fet){
+									$state_name=$fet['state_name'];	
+									}
+									
+									$final_state_name.=$state_name;
+									$final_state_name.=',';
+								}
+								echo $final_state_name;
+								?></td>
+							</tr>
+						</table>	
+						</div>
+					</div>
+				</div>
+			 </div>
+			 
+			 
 			 
 		 <?php if($users['role_id'] == 1){ ?>
 			 

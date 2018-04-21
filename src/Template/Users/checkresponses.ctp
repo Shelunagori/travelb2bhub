@@ -445,12 +445,36 @@ legend
 				<div class="modal-body">
 					<div class="col-md-12">
 					   <div class="col-md-12">
-						<label for="example-text-input" class=" col-form-label">Name: </label> 
-						   <input type="text" name="agentname" value="<?php echo isset($_GET['agentname'])? $_GET['agentname']:''; ?>"  class="form-control">
+						<label for="example-text-input" class=" col-form-label">Agent Name: </label> 
+						    
+						   <select name="agentname[]" multiple class="form-control select2" data-placeholder='Select Agent Name'>
+						   
+						   <?php if(!empty($UserResponse)){ 
+								foreach($UserResponse as $user){
+						   ?>
+							<option <?php echo (isset($_GET['agentname']) && $_GET['agentname'] ==$user['user']['id'])? 'selected':''; ?> value="<?php echo $user['user']['id']?>">
+								<?php echo $user['user']['first_name'].' '.$user['user']['last_name']?>
+							</option>
+						   <?php }}?>
+						   </select>
 					   </div>
 					</div>
+					
+					
+					 <div class="col-md-12">
+					   <div class="col-md-12">
+						 <label for="example-text-input" class=" col-form-label">Select Chat With: </label>
+						   <select name="chatwith[]" class="form-control select2" multiple data-placeholder='Select Chat With'>
+						   <?php if(!empty($UserResponse)){ 
+								foreach($UserResponse as $user){               
+						   ?>
+						   <option <?php echo (isset($_GET['chatwith']) && $_GET['chatwith'] ==$user['user']['id'])? 'selected':''; ?> value="<?php echo $user['user']['id']?>"><?php echo $user['user']['first_name'].' '.$user['user']['last_name']?></option>
+						   <?php }}?>
+						   </select>
+						</div>
+					</div>
 					 
-					<div class="col-md-12">
+					<!--div class="col-md-12">
 					  
 					   <div class="col-md-12"> 
 						 <label for="example-text-input" class=" col-form-label">Reference ID: </label>
@@ -465,29 +489,18 @@ legend
 						<label for="example-text-input" class=" col-form-label">Budget: </label> 
 						   <select name="budgetsearch" class="form-control"><option value="">Select Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
 					   </div>
-					</div>
+					</div-->
 						   
 						   
 					<div class="col-md-12">
 					   
 					   <div class="col-md-12">
-						<label for="example-text-input" class=" col-form-label">Quoted Price: </label>
+						<label for="example-text-input" class=" col-form-label">Quoted Price Range: </label>
 						   <select name="quotesearch" class="form-control"><option value="">Select Quoted Price</option><option value="0-10000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="30000-50000")? 'selected':''; ?>>30000- 50000</option><option value="50000-100000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
 						</div>
 					</div>
-					<div class="col-md-12">
-					  
-					   <div class="col-md-12">
-						 <label for="example-text-input" class=" col-form-label">Chat With: </label>
-						   <select name="chatwith" class="form-control"><option value="">Select Chat With</option>
-						   <?php if(!empty($UserResponse)){ 
-								foreach($UserResponse as $user){               
-						   ?>
-						   <option <?php echo (isset($_GET['chatwith']) && $_GET['chatwith'] ==$user['user']['id'])? 'selected':''; ?> value="<?php echo $user['user']['id']?>"><?php echo $user['user']['first_name'].' '.$user['user']['last_name']?></option>
-						   <?php }}?>
-						   </select>
-						</div>
-					</div>
+					
+					 
 					<div class="col-md-12">
 					   
 					   <div class="col-md-12">

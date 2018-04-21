@@ -692,6 +692,8 @@ $(document).ready(function (){
 });
 </script>
 <script type="text/javascript">
+
+/*	Auto hide toster notification Start 
 	setInterval(function(){ abc(); }, 2000);
 		function abc()
 		{ 	 
@@ -700,7 +702,9 @@ $(document).ready(function (){
 			setTimeout(function() {
 				$('#msg_div').remove();
 			}, delay);
-		}
+		} 
+*	Auto hide toster notification Start */
+		
 </script> 
 <?php echo $this->Html->script('/assets/bootstrap/js/bootstrap.min.js'); ?>
 

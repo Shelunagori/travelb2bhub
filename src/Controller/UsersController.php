@@ -2505,21 +2505,7 @@ public function checkresponses($id) {
 	$acceptDeals = "";
 	$conditions["Responses.request_id"] = $id;
 	if(!empty($this->request->query("agentname"))) {
-		$keyword1 = '';
-		$keyword2 = '';
-		$keyword = trim($this->request->query("agentname"));
-		$keyword = explode(' ',$keyword);
-		if(isset($keyword[0]) && !isset($keyword[1])) {
-			$keyword1 = $keyword[0];
-			$conditions["Users.first_name"] =$keyword1;
-		}
-		if(isset($keyword[1])) {
-			$keyword1 = trim($keyword[0]);
-			$keyword2 = trim($keyword[1]);
-			$da["Users.first_name"] =  $keyword1;
-			$da["Users.last_name"] =  $keyword2;
-			$conditions["AND"] =  $da;
-		}
+		$conditions["Responses.user_id IN"] = $this->request->query("agentname");
 	}
 	if(!empty($this->request->query("acceptdeals"))) {
 		$conditions["Responses.status"] = 1;
@@ -2535,7 +2521,7 @@ public function checkresponses($id) {
 	}
 	if(!empty($this->request->query("chatwith"))) {
 		$chatuserid = $this->request->query("chatwith");
-		$conditions["Responses.user_id"] = $chatuserid;
+		$conditions["Responses.user_id IN"] = $chatuserid;
 	}
 	if(!empty($this->request->query("budgetsearch"))) {
 		$QPriceRange = $this->request->query("budgetsearch");
