@@ -37,7 +37,15 @@ $conn = ConnectionManager::get('default');
 </style>
 
 <section class="content">
+ <div class="col-md-12">
+				<div class="box-tools pull-right">
+				<?php if($users['id']==$loginid){?>
+					<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> Edit </a>
+				<?php } ?>
+				</div> 
+			</div>
       <div class="row">
+	 
         <!-- left column -->
         <div class="col-md-4">
           <!-- general form elements -->
@@ -48,6 +56,7 @@ $conn = ConnectionManager::get('default');
             <!-- /.box-header -->
             <!-- form start -->
             <form role="form">
+			
               <div class="box-body">
 			     
 					<div>
@@ -391,11 +400,7 @@ $conn = ConnectionManager::get('default');
 <div class="col-md-4">
           <!-- general form elements -->
           <div class="box box-primary">
-			<div class="box-tools pull-right">
-			<?php if($users['id']==$loginid){?>
-				<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> Edit </a>
-			<?php } ?>
-			</div> 
+			
               <div class="box-body">
 			     <?php  if($testimonialcount > 0) { 
 			?>
