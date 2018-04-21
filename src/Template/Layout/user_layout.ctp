@@ -1,8 +1,10 @@
+<?php //pr($this->request->webroot); exit;?>
+
 <!DOCTYPE html>
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <head>
 <meta charset="utf-8">
-<title>TB2B</title    line-height: 60px;
+<title>TB2B</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta content="" name="description">
@@ -331,8 +333,7 @@ margin-bottom: 0px!important;
 	.dropdown-menu{
  		width:auto !important;
  	}
-}
-
+} 
 </style>
 </head>
 <!--<body class="hold-transition skin-blue fixed sidebar-mini">-->
@@ -716,17 +717,16 @@ $(document).ready(function (){
 <?php echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/daterangepicker.js'); ?>
 <?php echo $this->Html->script('/assets/plugins/timepicker/bootstrap-timepicker.min.js'); ?>
  
-<?php echo $this->Html->script('/assets/plugins/select2/select2.full.min.js'); ?>
+<?php echo $this->Html->script('/assets/plugins/select2/select2.full.min.js'); ?> 
 <?php echo $this->Html->script('/assets/plugins/bootstrap-editable/js/bootstrap-editable.min.js'); ?>
 <?php echo $this->Html->script('/assets/plugins/iCheck/icheck.min.js'); ?>
-
 
 <?php echo $this->Html->script('/assets/plugins/fastclick/fastclick.js'); ?>
 <?php echo $this->Html->script('/assets/dist/js/app.js'); ?>
 <?php echo $this->Html->script('/assets/dist/js/demo.js'); ?> 
 <?php echo $this->Html->script('/assets/plugins/WYSIWYG/editor.js'); ?>
+
 <script>
- 
 $('.select2').select2();
 var date = new Date();
 date.setDate(date.getDate());
@@ -754,17 +754,12 @@ $('.datepicker').click(function(){
 	});
 });
 
-
 $(".txtEditor").Editor({
 	'source':true,
 	'togglescreen':false,
 	'rm_format':false,
 	'insert_img':false,
-});
- 
-
- 
-</script>
-
+}); 
+</script> 
 </body>
 </html>

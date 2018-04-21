@@ -320,6 +320,9 @@ label{
 		</div>
 	</div>
 </div>
+<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
+	<div id="loader"></div>
+</div>
 </section>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
@@ -337,6 +340,7 @@ label{
 				$('html, body').animate({scrollTop:0}, 'slow');
 				return false;
 			}
+			$("#loader-1").show();
 		});
  		
 		$(document).on('change','.duration',function()
