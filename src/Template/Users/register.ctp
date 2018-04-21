@@ -180,8 +180,11 @@ hr { margin-top:0px!important;}
 						</div>
 						<div class="col-md-6" style="color:white;">
 							<div class="wrap-input100 validate-input" data-validate = "Contact No">
-									<span for="Preference_States" style="color:#fff;">Contact No</span>
-									<input class="input100 trim_space_valid maxx"  required="" id="mobile_number" type="tel" name="mobile_number" maxlength="10" minlength="10" />
+									
+									<input class="input100 trim_space_valid maxx"  required="" type="tel"  maxlength="10" minlength="10" id="number_format" name="mobile_number" />
+									<span class="focus-input100" data-placeholder="Contact No."></span>
+									<!--input class="input100 trim_space_valid maxx"  required="" id="mobile_number" type="tel" name="mobile_number" maxlength="10" minlength="10" placeholder="Contact No"  />
+									<span class="focus-input100"></span-->
 							</div>										
 						</div>
 					</div>
