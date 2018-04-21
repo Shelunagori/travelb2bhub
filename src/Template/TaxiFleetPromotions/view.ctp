@@ -307,7 +307,7 @@ a{
 									<?php
 										echo $this->Html->link('<b>Contact Info</b>','address'.$taxiFleetPromotion->id,array('escape'=>false,'class'=>'btn  btn-info btn-md contact','data-target'=>'#contactdetails'.$taxiFleetPromotion->id,'data-toggle'=>'modal'));?>
 												</div>
-											</div>
+											</div><span class="help-block"></span>
 											<!-------Contact Details Modal --------->
 												<div id="contactdetails<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-sm" >

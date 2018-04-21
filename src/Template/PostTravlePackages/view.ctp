@@ -330,11 +330,10 @@ font-size:20px;
 												
 								<div class="row "  style="padding-top:15px;">						
 									<div class="col-md-12 text-center">
-									<?php
+										<?php
 										echo $this->Html->link('<b>Contact Info</b>','address'.$postTravlePackage->id,array('escape'=>false,'class'=>'btn  btn-info btn-md contact','data-target'=>'#contactdetails'.$postTravlePackage->id,'data-toggle'=>'modal'));?>
-											
-												</div>
-											</div>
+									</div>
+								</div><span class="help-block"></span>
 											<!-------Contact Details Modal --------->
 											<div id="contactdetails<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 												<div class="modal-dialog modal-sm" >

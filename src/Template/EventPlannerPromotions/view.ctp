@@ -319,11 +319,11 @@ a{
 													</span>
 											</div>
 										</div>
-													<div class="row " style="padding-top: 8px;">
+													<div class="row " style="padding-top: 15px;">
 														<div class="col-md-12 text-center">
 														<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
 														</div>
-													</div>
+													</div><span class="help-block"></span>
 												</div>
 											</div>
 										</div>	

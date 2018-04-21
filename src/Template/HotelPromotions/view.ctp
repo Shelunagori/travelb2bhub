@@ -289,7 +289,8 @@ a{
 								<div class="col-md-12 text-center" style="padding-top:15px;">
 									<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $hotelPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
 								</div>
-
+							</div>
+						<span class="help-block"></span>
 									<!------Contact Details Modal --------->
 										<div id="contactdetails<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
 													<div class="modal-dialog modal-sm" >
@@ -344,7 +345,6 @@ a{
 															</div>
 														</div>
 														<!-------Contact Details Modal End--------->	
-											</div>
 										</div>
 										<!----button list end--->
 								</div>
