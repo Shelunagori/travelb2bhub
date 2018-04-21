@@ -373,9 +373,9 @@ margin-bottom: 0px!important;
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
       <!-- Sidebar toggle button-->
-      <a href="#" style="font-size: 16px;margin-top:0px !important" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+    <a href="#" style="font-size: 16px;margin-top:0px !important" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
-      </a>
+    </a>
 	<a style="line-height: 60px;" href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo innav" >
       <span class="logo-mini" style="font-size:0px !important;"><?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:77%;']) ?></span>
       <!-- logo for regular state and mobile devices -->
@@ -385,7 +385,7 @@ margin-bottom: 0px!important;
         <ul class="nav navbar-nav" style="padding-top: 2px !important;">
           <!-- Notifications: style can be found in dropdown.less -->
 		  <li>
-			<a style="padding:0px !important" href="#" class="dropdown-toggle " data-toggle="dropdown">
+			<a style="padding-right:0px !important" href="www.google.com" target="_blank" class="dropdown-toggle " data-toggle="dropdown">
               <?=  $this->Html->image('/img/playstore.png', ['style'=>'width:26%;','class'=>'image-responsive']) ?>
             </a>
 		  </li>
