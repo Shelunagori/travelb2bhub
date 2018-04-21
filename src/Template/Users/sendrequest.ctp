@@ -98,7 +98,8 @@ fieldset{
 label {
     display: flex !important;
 }
-</style> 
+</style>
+</div>
 <div class="container-fluid">
 	<div class="box box-primary">
 		<div class="box-body" style="padding:15px !important;">

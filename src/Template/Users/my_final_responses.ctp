@@ -27,8 +27,6 @@ $conn = ConnectionManager::get('default');
 <div id="my_final_responses" class="container-fluid">
 	<div class="row equal_column">
 	<div class="col-md-12" style="background-color:#"> 
-		 
-		<?php echo $this->element('subheader');?>
 		<?php echo  $this->Flash->render() ?>
 	</div>
 	</div>
