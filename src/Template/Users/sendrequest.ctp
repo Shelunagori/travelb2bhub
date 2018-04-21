@@ -114,7 +114,10 @@ label {
 						<li ><a href="#tab2" data-toggle="tab">Package</a></li>
  					</ul>
 				</div>
-				</br> 
+				</br>
+<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
+<div id="loader"></div>
+</div>				
 <div class="tab-pane active" id="tab1">
 <?php
  echo $this->Form->create(null, [
@@ -932,7 +935,7 @@ $(document).ready(function(){
 			
 			if(checkOutDateDate<=checkInDateDate)
 			{
-				alert("Check-in date should be less than Check-out Date.");
+				alert("Checkout date is greater than Checking Date.");
 				$('#datepicker2').val("");
 			}
 		}
@@ -970,7 +973,7 @@ $(document).ready(function(){
 			
 			if(checkOutDateDate<checkInDateDate)
 			{
-				alert("Start date should be less than end Date Date.");
+				alert("End date is greater than Start Date.");
 				$('#datepickerofTransport1').val("");
 			}
 		}
@@ -1009,7 +1012,7 @@ $(document).ready(function(){
 		//		
  			if(checkOutDateDate<=checkInDateDate)
 			{
-				alert("Check-in date should be less than Check-out Date.");
+ 				alert("Checkout date is greater than Checking Date.");
 				$('#datepickerofpkg1').val("");
 			}
 		}
@@ -1048,7 +1051,7 @@ $(document).ready(function(){
 		//		
  			if(checkOutDateDate<=checkInDateDate)
 			{
-				alert("Start date should be less than end Date.");
+				alert("End date is greater than Start Date.");
 				$('#packageTransport1').val("");
 			}
 		}
@@ -1266,9 +1269,8 @@ $('#HotelRequestForm').submit(function(){
 		$('html, body').animate({scrollTop:0}, 'slow');
 		return false;
 	}
-	
-	
-})
+}); 
+
 $('#PackgeRequestForm').submit(function(){
 	var x=0;
 	$('.packageroom').each(function(){
@@ -1282,6 +1284,7 @@ $('#PackgeRequestForm').submit(function(){
 		$('html, body').animate({scrollTop:0}, 'slow');
 		return false;
 	}
+	
 })
 
 //--- Seco 
@@ -1365,7 +1368,10 @@ $('#PackgeRequestForm').submit(function(){
 				required: "Please enter pincode."
 			}
 		},
-		ignore: ""
+		submitHandler: function (form) {
+ 			$("#loader-1").show();
+			form[0].submit(); 
+		}
 	});
 	$('#HotelRequestForm').validate({
 		rules: {
@@ -1427,7 +1433,10 @@ $('#PackgeRequestForm').submit(function(){
 				required: "Please enter locality."
 			}
 		},
-		ignore: ""
+		submitHandler: function (form) {
+ 			$("#loader-1").show();
+			form[0].submit(); 
+		}
 	});
 	$('#TransportRequestForm').validate({
 		rules: {
@@ -1496,7 +1505,10 @@ $('#PackgeRequestForm').submit(function(){
 				required: "Please enter locality."
 			}
 		},
-		ignore: ""
+		submitHandler: function (form) {
+ 			$("#loader-1").show();
+			form[0].submit(); 
+		}
 	});
 	 
 	/*$('#PackgeRequestForm').submit(function(){
@@ -1752,5 +1764,6 @@ $(document).ready(function () {
             $(this).parent('div').remove();
             x--;
         })
-    });
+ 			
+     });
 </script>
