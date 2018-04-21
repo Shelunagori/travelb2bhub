@@ -381,7 +381,7 @@ margin-bottom: 0px!important;
 	<a style="line-height: 60px;" href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'dashboard']); ?>" class="logo innav" >
       <span class="logo-mini" style="font-size:0px !important;"><?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:77%;']) ?></span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg" style="font-size:0px !important;"><?=  $this->Html->image('/img/mobile_logo.png', ['style'=>'width:92%;','class'=>'image-responsive']) ?></span>
+      <span class="logo-lg" style="font-size:0px !important;"><?=  $this->Html->image('/img/main_logo.png', ['style'=>'width:92%;','class'=>'image-responsive']) ?></span>
     </a>
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav" style="padding-top: 2px !important;">
@@ -514,6 +514,11 @@ margin-bottom: 0px!important;
               </li>
              </ul>
           </li>
+		<li>
+			<a style="padding-right:0px !important" href="www.google.com" target="_blank" class="dropdown-toggle " data-toggle="dropdown">
+              <?=  $this->Html->image('/img/playstore.png', ['style'=>'width:26%;','class'=>'image-responsive']) ?>
+            </a>
+		</li>
             
           <!-- Control Sidebar Toggle Button -->
            
