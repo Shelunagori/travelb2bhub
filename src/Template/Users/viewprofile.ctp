@@ -38,15 +38,7 @@ $conn = ConnectionManager::get('default');
 
 <section class="content">
  
-      <div class="row">
-	 <div class="col-md-12">
-				<div class="box-tools pull-right">
-				<?php if($users['id']==$loginid){?>
-					<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> Edit </a>
-				<?php } ?>
-				</div> 
-			</div>
-			</div>
+       
 			<div class="row">
         <!-- left column -->
         <div class="col-md-4">
@@ -245,7 +237,7 @@ $conn = ConnectionManager::get('default');
 							$Final_hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'finalized-request-list'));
 							if($users['role_id'] == 1){ ?>
 								 <div style="float:left" class="col-md-10" align="left">
-									<a href="<?php echo $hrefurl; ?>"> Finalized Requests</a>
+									<a href="<?php echo $hrefurl; ?>"> <u style="font-size:16px !important;">Finalized Requests</u></a>
 								 </div>
 								 <div style="float:right"  >
 									<div style="width: 32px;height: 25px;background-color:#1295A2;border-radius:13px;color:#FEFEFE;">		
@@ -256,7 +248,7 @@ $conn = ConnectionManager::get('default');
 							 else if($users['role_id'] == 2){ ?>
 								
 								 <div style="float:left" class="col-md-10" align="left">
-									<a href="<?php echo $hrefurl; ?>"> Finalized Requests</a>
+									<a href="<?php echo $hrefurl; ?>"> <u style="font-size:16px !important;">Finalized Requests</u></a>
 								 </div>
 								 <div style="float:right" class="col-md-2">
 									<div style="width: 32px; height: 25px; background-color: #1295A2;border-radius:9px;color:#FEFEFE;">		
@@ -270,7 +262,7 @@ $conn = ConnectionManager::get('default');
 							$Res_req_hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'respondtorequest'));
 							if($users['role_id'] == 1){ ?>
 								<div style="float:left" class="col-md-10" align="left">
-									<a href="<?php echo $Res_req_hrefurl; ?>"> Responded Requests</a>
+									<a href="<?php echo $Res_req_hrefurl; ?>"> <u style="font-size:16px !important;">Responded Requests</u></a>
 								 </div>
 								 <div style="float:right"  >
 									<div style="width: 32px !important; height: 25px; background-color: #DFBA49;border-radius:13px;color:#FEFEFE;">		
@@ -281,7 +273,7 @@ $conn = ConnectionManager::get('default');
 							<?php }
 							 else if($users['role_id'] == 3){ ?>
 								<div style="float:left" class="col-md-10" align="left">
-									<a href="<?php echo $Res_req_hrefurl; ?>"> Responded Requests</a>
+									<a href="<?php echo $Res_req_hrefurl; ?>"> <u style="font-size:16px !important;">Responded Requests</u></a>
 								 </div>
 								 <div style="float:right"  >
 									<div style="width: 32px !important; height: 25px; background-color: #DFBA49;border-radius:13px;color:#FEFEFE;">		
@@ -296,7 +288,7 @@ $conn = ConnectionManager::get('default');
 							$final_res_hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'my-final-responses'));
 							if($users['role_id'] == 1){ ?>
 								<div style="float:left" class="col-md-10" align="left">
-									<a href="<?php echo $final_res_hrefurl; ?>"> Finalized Responses</a>
+									<a href="<?php echo $final_res_hrefurl; ?>"> <u style="font-size:16px !important;">Finalized Responses</u></a>
 								 </div>
 								 <div style="float:right"  >
 									<div style="width: 32px; height: 25px; background-color: #F3565D;border-radius:13px;color:#FEFEFE;">	
@@ -307,7 +299,7 @@ $conn = ConnectionManager::get('default');
 							<?php }
 							 else if($users['role_id'] == 3){ ?>
 								<div style="float:left" class="col-md-10" align="left">
-									<a href="<?php echo $final_res_hrefurl; ?>"> Finalized Responses</a>
+									<a href="<?php echo $final_res_hrefurl; ?>"> <u style="font-size:16px !important;">Finalized Responses</u></a>
 								 </div>
 								 <div style="float:right"  >
 									<div style="width: 32px; height: 25px; background-color: #F3565D;border-radius:13px;color:#FEFEFE;">		
@@ -495,6 +487,7 @@ $conn = ConnectionManager::get('default');
 		else{
 			?>
 			<div class="col-md-12" style="background-color:#FFF">
+			
 				<p style="font-size:20px;padding-top:5px">Reviews</p>
 				<hr></hr>
 				<div class="">
@@ -523,6 +516,11 @@ $conn = ConnectionManager::get('default');
 			<span style="font-size:18px; padding:10px;padding-top:10px;color:#373435 !important;"><b>Description</b></span>
 			 
 				<div class="box-body box">
+				<div class="box-tools pull-right">
+					<?php if($users['id']==$loginid){?>
+						<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> Edit </a>
+					<?php } ?>
+				</div> 
 					<div>
 						<div class="form-group col-md-12" style="min-height: 80px !important;'">
 							<?php echo $users['description']; ?>
@@ -534,6 +532,11 @@ $conn = ConnectionManager::get('default');
 				<span style="font-size:18px; padding:10px;padding-top:10px;color:#373435 !important;"><b>Personal Details</b></span>
 			 
 				<div class="box-body box">
+					<div class="box-tools pull-right">
+						<?php if($users['id']==$loginid){?>
+							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> Edit </a>
+						<?php } ?>
+					</div> 
 					<div>
 						<div class="form-group col-md-12" >
 						<table>
@@ -593,6 +596,11 @@ $conn = ConnectionManager::get('default');
 			 <span style="font-size:18px; padding:10px;padding-top:10px;color:#373435 !important;"><b>Address</b></span>
 			 
 				<div class="box-body box">
+				<div class="box-tools pull-right">
+					<?php if($users['id']==$loginid){?>
+						<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> Edit </a>
+					<?php } ?>
+				</div> 
 					<div>
 						<div class="form-group col-md-12" >
 						<table >
@@ -649,7 +657,11 @@ $conn = ConnectionManager::get('default');
 			 
 			<span style="font-size:18px; padding:10px;padding-top:10px;color:#373435 !important;"><b>Certificates</b></span>
 				<div class="box-body box">
-					 
+					 <div class="box-tools pull-right">
+						<?php if($users['id']==$loginid){?>
+							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> Edit </a>
+						<?php } ?>
+					</div> 
 						<div class="form-group col-md-12 " >
 						<table  width="100%"><br>
 						<tr>
@@ -759,6 +771,11 @@ $conn = ConnectionManager::get('default');
 					<b>Office Photographs</b>
 				</span>
 				<div class="box-body box">
+				<div class="box-tools pull-right">
+					<?php if($users['id']==$loginid){?>
+						<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> Edit </a>
+					<?php } ?>
+				</div> 
 					<div>
 						<div class="form-group col-md-12">
 						<table width="100%"><br>
@@ -797,6 +814,11 @@ $conn = ConnectionManager::get('default');
 					<b>ID/Registration Pics</b>
 				</span>
 				<div class="box-body box">
+				<div class="box-tools pull-right">
+					<?php if($users['id']==$loginid){?>
+						<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> Edit </a>
+					<?php } ?>
+				</div> 
 					<div>
 						<div class="form-group col-md-12">
 						<table width="100%"><br>
