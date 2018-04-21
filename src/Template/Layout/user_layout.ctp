@@ -384,11 +384,11 @@ margin-bottom: 0px!important;
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav" style="padding-top: 2px !important;">
           <!-- Notifications: style can be found in dropdown.less -->
-		  <li>
+		 <!-- <li>
 			<a style="padding-right:0px !important" href="www.google.com" target="_blank" class="dropdown-toggle " data-toggle="dropdown">
               <?=  $this->Html->image('/img/playstore.png', ['style'=>'width:26%;','class'=>'image-responsive']) ?>
             </a>
-		  </li>
+		  </li>-->
           <li class="dropdown notifications-menu" >
             <a href="#" class="dropdown-toggle " data-toggle="dropdown">
               <i style="font-size: 20px;" class="fa fa-bell-o"></i>
@@ -665,7 +665,7 @@ margin-bottom: 0px!important;
 	</div>
 </div>
 <div class="main-footer hide_print">
-<?php echo $this->element('subheader');?>
+<?php echo $this->element('footer');?>
 </div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>

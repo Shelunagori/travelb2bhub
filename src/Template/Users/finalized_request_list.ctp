@@ -547,8 +547,7 @@ $(".req").sort(function (a, b) {
 						<?php } ?>
 					</div>
 				</div>
-			</div>
-<?php echo $this->element('footer');?>
+			</div> 
 <?php echo $this->Html->script(['ap.pagination.js']);?>
 <script>
 	$(".blockUser").click(function (e) {

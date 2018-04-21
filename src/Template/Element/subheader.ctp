@@ -56,7 +56,7 @@ hr { margin-top:0px!important;}
 </style>
 <?php 
 $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);
-	if($lastword=="dashboard"  ) {
+	//if($lastword=="dashboard"  ) {
 		?>
 		<div class="row portalmobile">
 		<div class="col-md-12 portalmobile">
@@ -125,7 +125,6 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 			} 
 			if($users['role_id'] == 1 || $users['role_id'] == 3) { 
 			?>
-		
 				<!-- COls -->
 				<div class="col-md-3">
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>">
@@ -425,11 +424,11 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 	</div>
 			
 	<?php
-	} 
+	/*} 
 	else 
-	{ 
-		?>
-		<div>
+	{*/ 
+	/*	?>
+		<div class="homepageshow">
 		<table width="100%">
 			<tr>
  			<?php if($users['role_id'] == 1 || $users['role_id'] == 2) { 
@@ -599,4 +598,4 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 			</table>
  		  
 		</div> 
-<?php } ?>
+<?php //} */ ?>
