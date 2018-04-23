@@ -107,7 +107,7 @@ font-size:20px;
 }
 
 .row{
-	line-height:15.0px;
+	line-height:15.0px;rowspace
 }
 .btnlayout{
 	border-radius:15px !important;
