@@ -653,11 +653,9 @@ $conn = ConnectionManager::get('default');
 		else{
 			?>
 			<div class="col-md-12" style="background-color:#FFF">
-			
-				<p style="font-size:20px;padding-top:5px">Reviews</p>
+				<h4 style="color:#1295A2">Review</h4>
 				<hr></hr>
 				<div class="">
-				
 					<div class="carousel-reviews broun-block" style="height: 230px;">
 						<div id="carousel-reviews" class="carousel slide carousel1" data-ride="carousel">
 							<div class="carousel-inner">
@@ -862,16 +860,16 @@ $conn = ConnectionManager::get('default');
 					</div> 
 					<div class="rating-block">
 					<h4 style="color:#1295A2">Certificates</h4>
-					<hr>
+					<hr style="margin-bottom:5px !important;">
 						<div class="form-group col-md-12 " >
 						<table  width="100%"><br>
 						<tr>
 							<td align="center" width="25%">
 							<div >
 								<?php if(!empty($users['iata_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iata_pic'])>0) { 
-									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iata_pic'], ["alt"=>"IATA Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+									echo $this->Html->image('icon/iata.png', ["alt"=>"IATA Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"IATA Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+									echo $this->Html->image('icon/iata-1.png', ["class"=>"img-responsive", "alt"=>"IATA Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 									} ?>
 								 
 							</div>
@@ -879,9 +877,9 @@ $conn = ConnectionManager::get('default');
 							<td align="center"  width="25%">
 							<div >
 								<?php if(!empty($users['tafi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['tafi_pic'])>0) {
-									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['tafi_pic'], ["alt"=>"T A F I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+									echo $this->Html->image('icon/tafi.png', ["alt"=>"T A F I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"T A F I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+									echo $this->Html->image('icon/tafi-1.png', ["class"=>"img-responsive", "alt"=>"T A F I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 									} ?>
 								 
 							</div>
@@ -889,9 +887,9 @@ $conn = ConnectionManager::get('default');
 							<td align="center"  width="25%">
 							<div >
 								<?php if(!empty($users['taai_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['taai_pic'])>0) { 
-									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['taai_pic'], ["alt"=>"T A A I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+									echo $this->Html->image('icon/taai.png', ["alt"=>"T A A I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"T A A I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+									echo $this->Html->image('icon/taai-1.png', ["class"=>"img-responsive", "alt"=>"T A A I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 									} ?>
 								 
 							</div>
@@ -901,27 +899,24 @@ $conn = ConnectionManager::get('default');
 							<td align="center"  width="25%">
 							<div >
 								<?php if(!empty($users['iato_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iato_pic'])>0) { 
-									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iato_pic'], ["alt"=>"I A T O Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+									echo $this->Html->image('icon/iato.png', ["alt"=>"I A T O Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"I A T O Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+									echo $this->Html->image('icon/iato-1.png', ["class"=>"img-responsive", "alt"=>"I A T O Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 									} ?>
 								 
 							</div>
 							</td>
 							</tr>
-							<tr>
-								<td width="25%" height="50px" align="center">IATA</td>
-								<td width="25%"  align="center">TAFI</td>
-								<td width="25%"  align="center">TAAI</td>
-								<td width="25%"  align="center">IATO</td>
-							</tr>
+							 <tr>
+							 <td><br></td>
+							 </tr>
 							<tr>
 							<td align="center"  width="25%">
 							<div >
 								<?php if(!empty($users['adyoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adyoi_pic'])>0) { 
-									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adyoi_pic'], ["alt"=>"A D Y O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+									echo $this->Html->image('icon/adyoi.png', ["alt"=>"A D Y O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+									echo $this->Html->image('icon/adyoi-1.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 									} ?>
 								 
 							</div>
@@ -929,9 +924,9 @@ $conn = ConnectionManager::get('default');
 							<td align="center"  width="25%">
 							<div >
 								<?php if(!empty($users['iso9001_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iso9001_pic'])>0) { 
-									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iso9001_pic'], ["alt"=>"I S O 9001 Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+									echo $this->Html->image('icon/iso.png', ["alt"=>"I S O 9001 Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"I S O 9001 Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+									echo $this->Html->image('icon/iso-1.png', ["class"=>"img-responsive", "alt"=>"I S O 9001 Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 									} ?>
 							 
 							</div>
@@ -939,9 +934,9 @@ $conn = ConnectionManager::get('default');
 							<td align="center"  width="25%">
 							<div >
 								<?php if(!empty($users['uftaa_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['uftaa_pic'])>0) { 
-								   echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['uftaa_pic'], ["alt"=>"U F T A A Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+								   echo $this->Html->image('icon/uftaa.png', ["alt"=>"U F T A A Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"U F T A A Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+									echo $this->Html->image('icon/uftaa-1.png', ["class"=>"img-responsive", "alt"=>"U F T A A Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 									} ?>
 									 
 							</div>
@@ -949,20 +944,15 @@ $conn = ConnectionManager::get('default');
 							<td align="center"  width="25%">
 							<div >
 								<?php if(!empty($users['adtoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adtoi_pic'])>0) { 
-									echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adtoi_pic'], ["alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+									echo $this->Html->image('icon/adtoi.png', ["alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+									echo $this->Html->image('icon/adtoi-1.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 									} ?>
 								 
 							</div>
 							</td>
 							</tr>
-							<tr>
-								<td width="25%" height="50px"  align="center">ADYOI</td>
-								<td width="25%"  align="center">ISO9001</td>
-								<td width="25%"  align="center">UFTAA</td>
-								<td width="25%"  align="center">ADTOI</td>
-							</tr>
+							 
 							</table>
 						</div>
 				</div>
