@@ -237,7 +237,7 @@ $conn = ConnectionManager::get('default');
 							$Final_hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'finalized-request-list'));
 							if($users['role_id'] == 1){ ?>
 								 <div style="float:left" class="col-md-10" align="left">
-									<a href="<?php echo $hrefurl; ?>"> <u style="font-size:16px !important;">Finalized Requests</u></a>
+									<a href="<?php echo $hrefurl; ?>"> <u style="font-size:14px !important;">Finalized Requests</u></a>
 								 </div>
 								 <div style="float:right"  >
 									<div style="width: 32px;height: 25px;background-color:#1295A2;border-radius:13px;color:#FEFEFE;">		
@@ -248,7 +248,7 @@ $conn = ConnectionManager::get('default');
 							 else if($users['role_id'] == 2){ ?>
 								
 								 <div style="float:left" class="col-md-10" align="left">
-									<a href="<?php echo $hrefurl; ?>"> <u style="font-size:16px !important;">Finalized Requests</u></a>
+									<a href="<?php echo $hrefurl; ?>"> <u style="font-size:14px !important;">Finalized Requests</u></a>
 								 </div>
 								 <div style="float:right" class="col-md-2">
 									<div style="width: 32px; height: 25px; background-color: #1295A2;border-radius:9px;color:#FEFEFE;">		
@@ -262,7 +262,7 @@ $conn = ConnectionManager::get('default');
 							$Res_req_hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'respondtorequest'));
 							if($users['role_id'] == 1){ ?>
 								<div style="float:left" class="col-md-10" align="left">
-									<a href="<?php echo $Res_req_hrefurl; ?>"> <u style="font-size:16px !important;">Responded Requests</u></a>
+									<a href="<?php echo $Res_req_hrefurl; ?>"> <u style="font-size:14px !important;">Responded Requests</u></a>
 								 </div>
 								 <div style="float:right"  >
 									<div style="width: 32px !important; height: 25px; background-color: #DFBA49;border-radius:13px;color:#FEFEFE;">		
@@ -357,7 +357,7 @@ $conn = ConnectionManager::get('default');
 					for ($i=5;$i >=1; --$i) {
 				  $var = "star$i";
 				  $count = $$var;
-				   $percent = $count * 100 / $tot_stars;?>
+				  $percent = $count * 100 / $tot_stars;?>
 				   <div class="row" class="col-md-12" style="padding-top:15px;">
 				   <table width="90%" border="0" style="margin-left:15px;">
 					<tr>
@@ -492,7 +492,7 @@ $conn = ConnectionManager::get('default');
 				<hr></hr>
 				<div class="">
 				
-					<div class="carousel-reviews broun-block" style="height: 214px;">
+					<div class="carousel-reviews broun-block" style="height: 230px;">
 						<div id="carousel-reviews" class="carousel slide carousel1" data-ride="carousel">
 							<div class="carousel-inner">
 								<div class="block-text">
@@ -518,7 +518,7 @@ $conn = ConnectionManager::get('default');
 				<div class="box-body box">
 				<div class="box-tools pull-right">
 					<?php if($users['id']==$loginid){?>
-						<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> Edit </a>
+						<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"><i class="fa fa-edit"></i> </a>
 					<?php } ?>
 				</div> 
 					<div>
@@ -534,7 +534,7 @@ $conn = ConnectionManager::get('default');
 				<div class="box-body box">
 					<div class="box-tools pull-right">
 						<?php if($users['id']==$loginid){?>
-							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> Edit </a>
+							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> <i class="fa fa-edit"></i> </a>
 						<?php } ?>
 					</div> 
 					<div>
@@ -598,7 +598,7 @@ $conn = ConnectionManager::get('default');
 				<div class="box-body box">
 				<div class="box-tools pull-right">
 					<?php if($users['id']==$loginid){?>
-						<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> Edit </a>
+						<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> <i class="fa fa-edit"></i> </a>
 					<?php } ?>
 				</div> 
 					<div>
@@ -659,7 +659,7 @@ $conn = ConnectionManager::get('default');
 				<div class="box-body box">
 					 <div class="box-tools pull-right">
 						<?php if($users['id']==$loginid){?>
-							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> Edit </a>
+							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> <i class="fa fa-edit"></i> </a>
 						<?php } ?>
 					</div> 
 						<div class="form-group col-md-12 " >
@@ -773,7 +773,7 @@ $conn = ConnectionManager::get('default');
 				<div class="box-body box">
 				<div class="box-tools pull-right">
 					<?php if($users['id']==$loginid){?>
-						<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> Edit </a>
+						<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> <i class="fa fa-edit"></i> </a>
 					<?php } ?>
 				</div> 
 					<div>
@@ -816,7 +816,7 @@ $conn = ConnectionManager::get('default');
 				<div class="box-body box">
 				<div class="box-tools pull-right">
 					<?php if($users['id']==$loginid){?>
-						<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> Edit </a>
+						<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> <i class="fa fa-edit"></i> </a>
 					<?php } ?>
 				</div> 
 					<div>
