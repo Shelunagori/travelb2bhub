@@ -32,8 +32,8 @@
 </head>
 <body>
 	<div class="limiter">
-		<div class="container-login100 bgdiv prakash">
-			<div class="wrap-login100">
+		<div class="container-login100 bgdiv ">
+			<div class="wrap-login100 prakash">
 					<center>
 						<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:50%;']) ?>
 					</center>

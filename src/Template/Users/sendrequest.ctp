@@ -936,7 +936,7 @@ $(document).ready(function(){
 			
 			if(checkOutDateDate<=checkInDateDate)
 			{
-				alert("Checkout date is greater than Checking Date.");
+				alert("Please ensure Checkout date is greater than Checkin Date.");
 				$('#datepicker2').val("");
 			}
 		}
@@ -966,15 +966,15 @@ $(document).ready(function(){
 		else{
 			var arrDate = checkOutDate.split("-");
 			var Ndt=arrDate[2]+'-'+arrDate[1]+'-'+arrDate[0];
-			checkOutDateDate = new Date(Ndt);
+			EndDate = new Date(Ndt);
 			 
 			var arrDates = checkInDate.split("-");
 			var Ndt=arrDates[2]+'-'+arrDates[1]+'-'+arrDates[0];
-			checkInDateDate = new Date(Ndt);
+			StartDate = new Date(Ndt);
 			
-			if(checkOutDateDate<checkInDateDate)
+			if(StartDate>EndDate)
 			{
-				alert("End date is greater than Start Date.");
+				alert("Please ensure End date is not less than Start Date.");
 				$('#datepickerofTransport1').val("");
 			}
 		}
@@ -1013,7 +1013,7 @@ $(document).ready(function(){
 		//		
  			if(checkOutDateDate<=checkInDateDate)
 			{
- 				alert("Checkout date is greater than Checking Date.");
+ 				alert("Please ensure Checkout date is greater than Checkin Date.");
 				$('#datepickerofpkg1').val("");
 			}
 		}
@@ -1050,9 +1050,9 @@ $(document).ready(function(){
 		var Ndt=arrDates[2]+'-'+arrDates[1]+'-'+arrDates[0];
  		checkInDateDate = new Date(Ndt);
 		//		
- 			if(checkOutDateDate<=checkInDateDate)
+ 			if(checkOutDateDate<checkInDateDate)
 			{
-				alert("End date is greater than Start Date.");
+				alert("Please ensure End date is not less than Start Date.");
 				$('#packageTransport1').val("");
 			}
 		}
@@ -1752,7 +1752,7 @@ $(document).ready(function () {
 						
 						if(checkOutDateDate<=checkInDateDate)
 						{
-							alert("Check-in date should be less than Check-out Date.");
+							alert("Please ensure Checkout date is greater than Checkin Date.");
 							checkOutDatePicker.val("");
 						}
 					}
