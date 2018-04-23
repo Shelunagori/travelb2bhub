@@ -99,7 +99,7 @@ li > p{
 <span class="help-block"></span>
 		 
 <div class="row equal_column">
-<a href="https://www.google.com/" target="_blank" id="myBtn" title="Download Andorid App"><?=  $this->Html->image('/img/playstore.png', ['style'=>'width:100%;','class'=>'image-responsive']) ?></a>
+<!---<a href="https://www.google.com/" target="_blank" id="myBtn" title="Download Andorid App"><?=  $this->Html->image('/img/playstore.png', ['style'=>'width:100%;','class'=>'image-responsive']) ?></a>---->
 	<?php if($role_id==1) {?>
 	<div class="col-md-4"> 
 	<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Travel.jpg);height:200px;width:100%;background-repeat:round;padding: 25px;">
