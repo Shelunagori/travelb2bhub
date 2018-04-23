@@ -264,7 +264,7 @@ input[type=checkbox] {
 				<input type="hidden" name="state_id" id="state_id">
 				<div class="row">
 					<div class="col-md-12">
-						<div class="col-md-6"><div id="pc"> </div>
+						<div class="col-md-6"><div id="pcfdfg"> </div>
 							<div class="wrap-input100 validate-input" data-validate = "Pincode">
 								<input class="input100 trim_space_valid maxx"  required=""  type="tel" name="pincode" id="pincode" maxlength="6" minlength="6"/>
 								<span class="focus-input100" data-placeholder="Pincode"></span>
