@@ -303,7 +303,7 @@ input[type=checkbox] {
 					<div class="col-xs-12" align="center">
 						<input type="submit" class="btn btn-primary sb" id="ckb1"  value="Register">
 					</div>
-				</div>
+				</div><br><br>
 				<div class="col-md-12 text-center" style="margin-top: 20px;">
 					<p style="color:#fff;">Do you have an account ?
 						<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'login')) ?>" style="color:#5ba7a4;font-size:19px;" >
@@ -381,7 +381,7 @@ $(document).ready(function(){
 		});
 	});
 	
- 
+	 $("#chk_cond").hide();
 	$(document).on('click',"#ckb1",function(){
 		var va = +$('.chk_input').is( ':checked' );
 		if(va==0)

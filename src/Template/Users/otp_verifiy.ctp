@@ -20,12 +20,20 @@
 		.wrap-login100 { background:#1f222db8 !important; width:420px !important; padding: 18px 55px 37px 55px; }
 		.p-t-27 { padding-top: 10px; }
 		.error { color: #ff9898; margin-left: 25px; }
+		@media only screen and (max-device-width: 480px) {
+			div.prakash {
+				zoom: 2;
+			}
+			.input100 {
+				font-size: 20px !important;
+			}
+		}
 		
 	</style>
 </head>
 <body>
 	<div class="limiter">
-		<div class="container-login100 bgdiv">
+		<div class="container-login100 bgdiv prakash">
 			<div class="wrap-login100">
 					<center>
 						<?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:20%;']) ?>

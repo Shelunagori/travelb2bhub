@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Travel B2B HUB</title>
+	<title>TravelB2BHUB</title>
 	 <?php echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
 	<?php echo $this->Html->css('/assets/login/fonts/iconic/css/material-design-iconic-font.min.css'); ?>
@@ -19,13 +19,20 @@
 		.login100-form-title { font-size:25px; }
 		.wrap-login100 { background:#1f222db8 !important; width:420px !important; padding: 18px 55px 37px 55px; }
 		.p-t-27 { padding-top: 10px; }
-		.error { color: #ff9898; margin-left: 25px; }
-		
+	.error { color: #ff9898; margin-left: 25px; }
+	@media only screen and (max-device-width: 480px) {
+		div.prakash {
+			zoom: 2;
+		}
+		.input100 {
+			font-size: 20px !important;
+		}
+	}
 	</style>
 </head>
 <body>
 	<div class="limiter">
-		<div class="container-login100 bgdiv">
+		<div class="container-login100 bgdiv prakash">
 			<div class="wrap-login100">
 					<center>
 						<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:50%;']) ?>
