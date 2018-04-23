@@ -592,7 +592,7 @@ a{
 											<div class="col-md-4 rowspace">
 												<div class="row " style="padding-top:2px;">
 													<div class="col-md-12 "><label>Package Duration: </label>
-													<span style="color:#FB6542"><?= h($postTravlePackage->duration_day_night) ?></span>
+													<span style="color:#FB6542;"><?= h($postTravlePackage->duration_day_night) ?></span>
 													</div>
 												</div>
 												<div class="row rowspace">

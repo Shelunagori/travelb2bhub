@@ -44,7 +44,9 @@
 	#Content{ width:90% !important; margin-left: 5%;}
 </style>
 <style>
-
+input[type=checkbox],input[type=radio] {
+    margin: 0px 0 0;
+}
 .btn-primary.focus, .btn-primary:focus
 {
 	color:ins

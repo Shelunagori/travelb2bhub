@@ -81,8 +81,10 @@ hr { margin-top:0px!important;}
 	}
 	.a{
 		color:white !important;
-	}
-	
+	}	
+}
+input[type=checkbox] {
+    margin: 0px 0 0;
 }		
 </style>
 <style>
@@ -284,7 +286,7 @@ hr { margin-top:0px!important;}
 					<div class="col-md-12">
 						<div class="contact100-form-checkbox col-md-12">
 							<input class="chk_input"  id="ckb1" type="checkbox" required  name="remember-me">
-							<span class="" for="ckb1" style="padding-left:20px;color:white;display: inline;">
+							<span class="" for="ckb1" style="padding-left:20px;color:white;padding-bottom:5px;">
 								I accept the <a style="color:white;" target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/privacy-policy/"><u>Privacy Policy</u></a> and <a style="color:white;" target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/terms-and-conditions/"><u>Terms & Conditions</a></u>
 							</span><br>
 							<span id="chk_cond" style="color:#f16060; display:none;display: inline;">Please accept Terms & Conditions and Privacy Policy</span>
