@@ -48,6 +48,10 @@ hr { margin-top:0px!important;}
 	width:100%;
 	opacity: .7;
 }
+.focus-input100::after{
+	font-size:19px !important; 
+	font-family: popins-regular;
+}
 .nm { 
 	font-size: 19px;
     color: #373435;
@@ -85,6 +89,9 @@ hr { margin-top:0px!important;}
 	.a{
 		color:white !important;
 	}	
+	.tnc{
+		margin-top: -18px !important;
+	}
 }
 input[type=checkbox] {
     margin: 0px 0 0;
@@ -291,11 +298,22 @@ input[type=checkbox] {
 				<div class="row col-md-12">
 					<div class="col-md-12">
 						<div class="contact100-form-checkbox col-md-12">
-							<input class="chk_input"  id="ckb1" type="checkbox" required  name="remember-me">
-							<span class="" for="ckb1" style="padding-left:20px;color:white;padding-bottom:5px;">
-								I accept the <a style="color:white;" target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/privacy-policy/"><u>Privacy Policy</u></a> and <a style="color:white;" target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/terms-and-conditions/"><u>Terms & Conditions</a></u>
-							</span><br>
-							<span id="chk_cond" style="color:#f16060; display:none;display: inline;">Please accept Terms & Conditions and Privacy Policy</span>
+						<table>
+							<tr>
+								<td>
+									<input class="chk_input tnc"  id="ckb1" type="checkbox" required  name="remember-me">
+								</td>	
+								<td  >	
+									<span class="" for="ckb1" style="color:white;margin-left:10px !important;">
+										I accept the <a style="color:white;" target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/privacy-policy/"><u>Privacy Policy</u></a> and <a style="color:white;" target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/terms-and-conditions/"><u>Terms & Conditions</a></u>
+									</span><br>
+									
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2"><span id="chk_cond" style="color:#f16060; display:none;display: inline;">Please accept Terms & Conditions and Privacy Policy</span></td>
+							</tr>
+						</table>	
 						</div>
 					</div>
 				</div>
