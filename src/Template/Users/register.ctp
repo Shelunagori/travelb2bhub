@@ -413,11 +413,11 @@ function selectCountry(value,city_code,state,country_id,state_name,country_name)
 		$("#city_id").val(city_code);
 		
  		$("#state_id").val(state_id);
-		$(".st").html('<label for="Preference_States" style="color:#fff;font-family:Raleway, sans-serif ;">States</label><input readonly style="padding:0px !important;" class="input100 trim_space_valid" type="text" value='+state_name+' required="" id ="state_name" name="state_name" /> ');
+		$(".st").html('<span for="Preference_States" style="color:#fff;font-family:Raleway, sans-serif ;">States</span><input readonly style="padding:0px !important;" class="input100 trim_space_valid" type="text" value='+state_name+' required="" id ="state_name" name="state_name" /> ');
 		//$("#state_name").val(state_name);
 		$('#pc').html('<br>');
 		
-		$(".ctr").html('<label for="Preference_Country" style="color:#fff;font-family:Raleway, sans-serif ;">Country</label><input class="input100 trim_space_valid"  required="" value='+country_name+' style="padding:0px !important;" type="text" readonly id ="country_name" name="country_name" />');
+		$(".ctr").html('<span for="Preference_Country" style="color:#fff;font-family:Raleway, sans-serif ;">Country</span><input class="input100 trim_space_valid"  required="" value='+country_name+' style="padding:0px !important;" type="text" readonly id ="country_name" name="country_name" />');
 		$("#country_id").val(country_id);
 		//$("#country_name").val(country_name);
  	}	
