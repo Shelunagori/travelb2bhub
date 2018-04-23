@@ -346,6 +346,19 @@ $conn = ConnectionManager::get('default');
 			  </div>
 			  <div class="row"> 
 				<?php     
+				$average_rating1;
+				$average_rating2;
+				$average_rating3;
+				$average_rating4;
+				$average_rating5;
+				
+				$total_avarage_rating_count;
+				
+				$percentage_rating5=round(($average_rating5/$total_avarage_rating_count)*100);
+				$percentage_rating4=round(($average_rating4/$total_avarage_rating_count)*100);
+				$percentage_rating3=round(($average_rating3/$total_avarage_rating_count)*100);
+				$percentage_rating2=round(($average_rating2/$total_avarage_rating_count)*100);
+				$percentage_rating1=round(($average_rating1/$total_avarage_rating_count)*100);
 				// Example data
 				$star1 = $star1count;
 				$star2 = $star2count;
@@ -354,35 +367,120 @@ $conn = ConnectionManager::get('default');
 				$star5 = $star5count;
 
 				$tot_stars = $star1 + $star2 + $star3 + $star4 + $star5;
-					for ($i=5;$i >=1; --$i) {
-				  $var = "star$i";
-				  $count = $$var;
-				  $percent = $count * 100 / $tot_stars;?>
+					 
+				  
+				  
+				  ?>
 				   <div class="row" class="col-md-12" style="padding-top:15px;">
 				   <table width="90%" border="0" style="margin-left:15px;">
 					<tr>
-					<td width="18%" align="right">	
-					<div class="col-md-12"  style="text-align:right;">
-						<div><?php echo $i;?> 
-						<span <?php if($average_rating==$i OR $average_rating>$i){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
-						</div>
-					</div>
-					</td>
-					<td width="70%">	
-					<div class="col-md-8" style="padding-right: 0px !important;width:100% !important;">
-						<div class="progress" style="height:13px !important;margin-bottom:2px !important;">         
-							<div <?php if($average_rating==$i OR $average_rating>$i){ ?>style="width: 100%; height: 13px; background-color: #1295AB;border-radius:9px;"<?php } ?>></div>	
-						</div>
-					</div>
-					</td>
-					<td width="7%" align="left">	
-					<div class="col-md-2" ><?php if($average_rating==$i OR 	$average_rating>$i){ echo "100"; }else{ echo "0"; }  ?>%
-					</div>
-					</td>
+						<td width="18%" align="right">	
+							<div class="col-md-12"  style="text-align:right;">
+								<div>5 
+								<span <?php if($percentage_rating5>0){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
+								</div>
+							</div>
+						</td>
+						<td width="70%">
+							<div class="col-md-8" style="padding-right: 0px !important;width:100% !important;">
+								<div class="progress" style="height:13px !important;margin-bottom:2px !important;">         
+									<div <?php if($percentage_rating5>0){ ?>style="width: <?php echo $percentage_rating5; ?>%; height: 13px; background-color: #1295AB;border-radius:9px;"<?php } ?>></div>	
+								</div>
+							</div>
+						</td>
+						<td width="7%" align="left">	
+							<div class="col-md-2" >
+								<?php if($percentage_rating5>0){ echo $percentage_rating5; }else{ echo "0"; }  ?>%
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td width="18%" align="right">	
+							<div class="col-md-12"  style="text-align:right;">
+								<div>4
+								<span <?php if($percentage_rating4>0){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
+								</div>
+							</div>
+						</td>
+						<td width="70%">
+							<div class="col-md-8" style="padding-right: 0px !important;width:100% !important;">
+								<div class="progress" style="height:13px !important;margin-bottom:2px !important;">         
+									<div <?php if($percentage_rating4>0){ ?>style="width: <?php echo $percentage_rating4; ?>%; height: 13px; background-color: #1295AB;border-radius:9px;"<?php } ?>></div>	
+								</div>
+							</div>
+						</td>
+						<td width="7%" align="left">	
+							<div class="col-md-2" >
+								<?php if($percentage_rating4>0){ echo $percentage_rating4; }else{ echo "0"; }  ?>%
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td width="18%" align="right">	
+							<div class="col-md-12"  style="text-align:right;">
+								<div>3
+								<span <?php if($percentage_rating3>0){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
+								</div>
+							</div>
+						</td>
+						<td width="70%">
+							<div class="col-md-8" style="padding-right: 0px !important;width:100% !important;">
+								<div class="progress" style="height:13px !important;margin-bottom:2px !important;">         
+									<div <?php if($percentage_rating3>0){ ?>style="width: <?php echo $percentage_rating3; ?>%; height: 13px; background-color: #1295AB;border-radius:9px;"<?php } ?>></div>	
+								</div>
+							</div>
+						</td>
+						<td width="7%" align="left">	
+							<div class="col-md-2" >
+								<?php if($percentage_rating3>0){ echo $percentage_rating3; }else{ echo "0"; }  ?>%
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td width="18%" align="right">	
+							<div class="col-md-12"  style="text-align:right;">
+								<div>2
+								<span <?php if($percentage_rating2>0){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
+								</div>
+							</div>
+						</td>
+						<td width="70%">
+							<div class="col-md-8" style="padding-right: 0px !important;width:100% !important;">
+								<div class="progress" style="height:13px !important;margin-bottom:2px !important;">         
+									<div <?php if($percentage_rating2>0){ ?>style="width: <?php echo $percentage_rating2; ?>%; height: 13px; background-color: #1295AB;border-radius:9px;"<?php } ?>></div>	
+								</div>
+							</div>
+						</td>
+						<td width="7%" align="left">	
+							<div class="col-md-2" >
+								<?php if($percentage_rating2>0){ echo $percentage_rating2; }else{ echo "0"; }  ?>%
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td width="18%" align="right">	
+							<div class="col-md-12"  style="text-align:right;">
+								<div>1
+								<span <?php if($percentage_rating1>0){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
+								</div>
+							</div>
+						</td>
+						<td width="70%">
+							<div class="col-md-8" style="padding-right: 0px !important;width:100% !important;">
+								<div class="progress" style="height:13px !important;margin-bottom:2px !important;">         
+									<div <?php if($percentage_rating1>0){ ?>style="width: <?php echo $percentage_rating1; ?>%; height: 13px; background-color: #1295AB;border-radius:9px;"<?php } ?>></div>	
+								</div>
+							</div>
+						</td>
+						<td width="7%" align="left">	
+							<div class="col-md-2" >
+								<?php if($percentage_rating1>0){ echo $percentage_rating1; }else{ echo "0"; }  ?>%
+							</div>
+						</td>
 					</tr>
 					</table>
 					</div>
-				  <?php }?> 
+				   
 				   </div> 
 				
 			</div>
