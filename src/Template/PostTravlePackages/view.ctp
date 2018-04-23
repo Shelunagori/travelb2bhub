@@ -69,8 +69,8 @@ p{
 }
 
 label{
-	color:#676363;
-	font-weight:600
+	color:#96989A !important;
+	font-weight:100
 }
 hr{
 	margin-top: 15px !important;
@@ -78,7 +78,7 @@ hr{
 }
 
 .col-md-4{
-	color:#676363;
+	color:#96989A;
 	white-space: nowrap;
 }
 
@@ -276,24 +276,24 @@ font-size:20px;
 									<div class="col-md-9" style="padding-top:15px;">
 											<div class="row col-md-12 rowspace">
 													<div class="col-md-12">
-													<span style="color:#676363;font-weight:600;">Category: </span>
+													<label >Category: </label>
 													<span ><?= h($CategoryList); ?></span>
 													</div>
 											</div>
 											<div class="col-md-5">
 												<div class="row rowspace">
-													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Duration: </span> 
+													<div class="col-md-12 "><label>Duration: </label> 
 													<span style="color:#FB6542"><?= h($postTravlePackage->duration_day_night) ?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
 													<div class="col-md-12 ">
-													<span style="color:#676363;font-weight:600;">Starting Price: </span>
+													<label>Starting Price: </label>
 													<span style="color:#1295AB">&#8377; <?php echo (h($postTravlePackage->starting_price)) ;?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
-													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Seller: </span>
+													<div class="col-md-12 "><label>Seller: </label>
 													<span><u>
 															<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
 															<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>"> 
@@ -313,17 +313,17 @@ font-size:20px;
 											</div>
 											<div class="col-md-7">
 												<div class="row rowspace">
-													<div class="col-md-12"><span style="color:#676363;font-weight:600;">Valid Till: </span>
+													<div class="col-md-12"><label>Valid Till: </label>
 													<span><?= h(date('d-M-Y',strtotime($postTravlePackage->valid_date))); ?></span>
 													</div>					
 												</div>	
 												<div class="row rowspace">
-													<div class="col-md-12 "><span style="color:#676363;font-weight:600;">Cities: </span>
+													<div class="col-md-12 "><label>Cities: </label>
 													<span ><?= h($cityList); ?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
-													<div class="col-md-12"><span style="color:#676363;font-weight:600;">Country: </span>	
+													<div class="col-md-12"><label>Country: </label>	
 													<span ><?=h($countryList); ?></span>
 													</div>
 												</div>
@@ -409,7 +409,7 @@ font-size:20px;
 											<hr></hr>
 											<div class="row">
 												<div class="col-md-12 ">
-													<span style="color:#676363;font-weight:600;"><?= __('Including in Package') ?></span>
+													<label><?= __('Including in Package') ?></label>
 												</div>
 											</div>
 											<div class="row" style="padding-top:2px;">
@@ -419,7 +419,7 @@ font-size:20px;
 											</div><hr></hr>
 											<div class="row" style="padding-top:2px;">
 												<div class="col-md-12 ">
-														<span style="color:#676363;font-weight:600;"><?= __('Excluded from Package') ?></span>
+														<label><?= __('Excluded from Package') ?></label>
 												</div>
 											</div>
 											<div class="row">

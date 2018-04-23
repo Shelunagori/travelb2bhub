@@ -111,7 +111,6 @@ if ($err) {
 }
 ?>
 <style>
-
 @media all and (max-width: 410px) {
 	/* Logo for Mobile */
 	.btnlayout{
@@ -144,7 +143,7 @@ font-size:20px;
 	pading-bottom:10px!important;
 }
 .rowspace{
-	padding-top:0px;
+	padding-top:5px;
 	font-size:14px;
 	
 }
@@ -158,8 +157,8 @@ hr{
 }
 
 label{
-	color:#676363;
-	font-weight:600;
+	color:#96989A !important;
+	font-weight:100;
 }
 
 .col-md-4{
@@ -488,20 +487,20 @@ a{
 										<span ><?= h($vehicleList); ?></span>
 										</div>
 								</div>
-								<div class="col-md-7 rowspace">
-									<div class="row rowspace" style="padding-top:2px;">
+								<div class="col-md-7">
+									<div class="row rowspace" >
 										<div class="col-md-12"><label ><?= __(' Cities of Operation') ?>: </label>
 										<span><?= h($cityList); ?></span>
 										</div>
 									</div>
-									<div class="row rowspace" style="padding-top:2px;">
+									<div class="row rowspace" >
 										<div class="col-md-12"><label ><?= __(' States of Operation') ?>: </label>
 										<span ><?= h($stateList); ?> </span>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-5">
-									<div class="row rowspace" style="padding-top:2px;">
+									<div class="row rowspace" >
 										<div class="col-md-12"><label ><?= __(' Country') ?>: </label>
 										<span ><?= h($taxiFleetPromotion->country->country_name); ?> </span>
 										</div>

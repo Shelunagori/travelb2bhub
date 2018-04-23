@@ -132,7 +132,7 @@ font-size: 20px;
 	pading-bottom: 10px!important;
 }
 .rowspace{
-	padding-top: 5px;
+	padding-top:5px;
 	font-size: 14px;
 }
 .rowspacemodal{
@@ -144,13 +144,13 @@ hr{
     margin-bottom:  4px !important;
 }
 label{
-	color:#676363;
-	font-weight: 600
+	color:#96989A !important;;
+	font-weight: 100;
 }
 
 .col-md-4{
-	color:#676363;
-	font-weight: 600;
+	color:#96989A !important;
+	font-weight: 100;
 	
 }
 
@@ -373,24 +373,24 @@ a{
 										<div class="col-md-9">
 											<div class="row col-md-12 rowspace">
 													<div class="col-md-12">
-													<span style="color:#676363;font-weight: 600;">Category: </span>
+													<span style="color:#96989A !important;;font-weight: 100;">Category: </span>
 													<span ><?= h($CategoryList); ?></span>
 													</div>
 											</div>
 											<div class="col-md-5">
 												<div class="row rowspace">
-													<div class="col-md-12 "><span style="color:#676363;font-weight: 600;">Duration: </span> 
+													<div class="col-md-12 "><span style="color:#96989A !important;font-weight: 100;">Duration: </span> 
 													<span style="color:#FB6542"><?= h($postTravlePackage->duration_day_night) ?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
 													<div class="col-md-12 ">
-													<span style="color:#676363;font-weight: 600;"> Starting Price: </span>
+													<span style="color:#96989A !important;;font-weight: 100;"> Starting Price: </span>
 													<span style="color:#1295AB">&#8377; <?php echo (h($postTravlePackage->starting_price)) ;?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
-													<div class="col-md-12 "><span style="color:#676363;font-weight: 600;">Seller: </span>
+													<div class="col-md-12 "><span style="color:#96989A !important;;font-weight: 100;">Seller: </span>
 													<span><u>
 														<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
 														<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>">
@@ -410,17 +410,17 @@ a{
 											</div>
 											<div class="col-md-7">
 											<div class="row rowspace">
-													<div class="col-md-12"><span style="color:#676363;font-weight: 600;">Valid Till: </span>
+													<div class="col-md-12"><span style="color:#96989A !important;;font-weight: 100;">Valid Till: </span>
 													<span><?= h(date('d-M-Y',strtotime($postTravlePackage->valid_date))); ?></span>
 													</div>					
 												</div>	
 												<div class="row rowspace">
-													<div class="col-md-12 "><span style="color:#676363;font-weight: 600;">Cities: </span>
+													<div class="col-md-12 "><span style="color:#96989A !important;;font-weight: 100;">Cities: </span>
 													<span ><?= h($cityList); ?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
-													<div class="col-md-12"><span style="color:#676363;font-weight: 600;">Country: </span>	
+													<div class="col-md-12"><span style="color:#96989A !important;;font-weight: 100;">Country: </span>	
 													<span ><?php echo "India"//$postTravlePackage->country->country_name; ?></span>
 													</div>
 												</div>

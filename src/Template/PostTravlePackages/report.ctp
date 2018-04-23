@@ -168,7 +168,7 @@ font-size:20px;
 	pading-bottom:10px!important;
 }
 .rowspace{
-	padding-top:0px;
+	padding-top:5px;
 	font-size:14px;
 	
 }
@@ -182,8 +182,8 @@ hr{
 }
 
 label{
-	color:#676363;
-	font-weight:600;
+	color:#96989A !important;
+	font-weight:100;
 }
 
 .col-md-4{

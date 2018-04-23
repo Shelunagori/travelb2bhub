@@ -75,7 +75,8 @@ fieldset{
 	pading-bottom:10px!important;
 }
 label {
-	font-weight:  300 !important;
+	font-weight:  100 !important;
+	color:#96989A !important;
 }
 .btn-defaults {
 	background-color: #ffffff !important;
@@ -146,26 +147,26 @@ label {
 							<span style="color:black;font-size:17px;"><?php echo $postTravlePackage->title?></span>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:10px">
-							Views: 
+							<label>Views:</label> 
 								<!--<a  style="color:#1295AB;" href="viewers_list/<?php echo $postTravlePackage->id?>"><label><?php echo $postTravlePackage->total_views;?></label></a>--->
 								<a type="button" href="viewers_list/<?php echo $postTravlePackage->id; ?>" style="border-radius:10px; width:53px; background-color: #FFF !important;color: #1295AB !important; border: 1px solid; padding-top: 2px;padding-bottom: 3px" class="btn btn-md">
 									<?php echo $postTravlePackage->total_views;?>
 								</a>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-								Likes:&nbsp; 
+								<label>Likes:&nbsp;</label> 
 								<a type="button" href="likers_list/<?php echo $postTravlePackage->id ; ?>" style="border-radius:10px; width:53px; background-color: #FFF !important;color: #1295AB !important; border: 1px solid; padding-top: 2px;padding-bottom: 3px" class="btn btn-md">
 									<?php echo $postTravlePackage->total_likes;?>
 								</a> 
 							</div>
 							
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-							Date Posted: 
-							<label style="color:black;"><?php echo date('d-M-y',strtotime($postTravlePackage->created_on));?></label>
+							<label>Date Posted:</label> 
+							<span style="color:black;"><?php echo date('d-M-y',strtotime($postTravlePackage->created_on));?></label>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:0px !important;">
-							Expiring On: 
-							<label style="color:#FB6542;"><?php echo date('d-M-y',strtotime($postTravlePackage->visible_date));?></label>
+							<label>Expiring On:</label> 
+							<span style="color:#FB6542;"><?php echo date('d-M-y',strtotime($postTravlePackage->visible_date));?></label>
 							</div>
 						</div>
 					</div>
