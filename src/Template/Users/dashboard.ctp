@@ -105,8 +105,8 @@ li > p{
 	<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Travel.jpg);height:200px;width:100%;background-repeat:round;padding: 25px;">
 		  <!-- small box -->
 		  <div class="small-box" >
-			<div class="inner">
-				<table border="0" height="130px">
+			<div class="inner" align="center">
+				<table border="0" height="130px" style="text-align: center;">
 					<tr>
 						<td colspan="2" style="font-size:16px"><b>Listed Packages</b></td>	
 					</tr>
@@ -133,8 +133,8 @@ li > p{
 		<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Hotel.jpg);height:200px;width:100%;background-repeat:round;padding: 25px;">
 		  <!-- small box -->
 		  <div class="small-box" >
-			<div class="inner">
-				<table border="0" height="130px">
+			<div class="inner" align="center">
+				<table border="0" height="130px" style="text-align: center;">
 					<tr>
 						<td colspan="2" style="font-size:16px"><b>Hotel Promotions</b></td>	
 					</tr>
@@ -161,8 +161,8 @@ li > p{
 	<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Taxi.jpg);height:200px;width:100%;background-repeat:round;padding: 25px;">
 		  <!-- small box -->
 		  <div class="small-box" >
-			<div class="inner">
-				<table border="0" height="130px">
+			<div class="inner" align="center">
+				<table border="0" height="130px" style="text-align: center;">
 					<tr>
 						<td colspan="2" style="font-size:16px"><b>Listed Taxi/Fleet Services</b></td>	
 					</tr>
@@ -186,8 +186,8 @@ li > p{
 		<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Event.jpg);height:200px;width:100%;background-repeat:round;padding: 25px;">
 		  <!-- small box -->
 		  <div class="small-box" >
-			<div class="inner">
-				<table border="0" height="130px">
+			<div class="inner" align="center">
+				<table border="0" height="130px" style="text-align: center;">
 					<tr>
 						<td colspan="2" style="font-size:16px"><b>Event Promotions</b></td>	
 					</tr>
