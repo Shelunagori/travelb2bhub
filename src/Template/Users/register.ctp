@@ -2,14 +2,21 @@
 @media all and (max-width: 771px) {
 	/* Logo for Mobile */
 	.imagesize{
-		width:40% !important;
+		width:80% !important;
 		margin-top:10px !important;
 	 }
 }
 @media all and (min-width: 771px) {
 	/* Logo for Mobile */
 	.imagesize{
-		width:16% !important;
+		width:70% !important;
+		margin-top:10px !important;
+	 }
+}
+@media all and (min-width: 1001px) {
+	/* Logo for Mobile */
+	.imagesize{
+		width:15% !important;
 		margin-top:10px !important;
 	 }
 }
@@ -69,13 +76,14 @@ hr { margin-top:0px!important;}
 .alert-warning{ color:#FFF !important;}	
 
 @media only screen and (max-device-width: 480px) {
-        div.rohit {
-            zoom: 2.5;
-        }
-		.a{
-			color:white !important;
-		}
-		
+	div.rohit {
+		zoom: 2.5;
+	}
+	.a{
+		color:white !important;
+	}
+	
+}		
 </style>
 <style>
 	#country-list{list-style:none;margin-left: 1px;padding:0;width:94%; margin-top: 10px;    position: absolute;
@@ -134,10 +142,11 @@ hr { margin-top:0px!important;}
 							<div class="wrap-input100 validate-input" data-validate = "Select Type">
 								<select name="role_id" id="role_id" class="form-control input100" required="" style="height: 35px;margin-top: 11px;" >
 									<option value="" disabled selected>Select</option>
-									<?php foreach($memberships as $membership) { 
+									<?php 
+									$promotion_id=$_GET['promotion_id'];
+									foreach($memberships as $membership) { 
 									   $selected ='';
-									   if(isset($_GET['role']) && $_GET['role']!="" && ($membership['id']==$_GET['role'])){
-								   
+									   if(isset($_GET['promotion_id']) && $_GET['promotion_id']!="" && ($membership['id']==$_GET['promotion_id'])){
 										$selected ='selected';
 									   }
 									   ?>
@@ -259,13 +268,13 @@ hr { margin-top:0px!important;}
 						</div>	
 				</div>	
 				<div class="row col-md-12">
-					<div class="col-md-12" id="preferenceStateDiv">
+					<div class="col-md-12 preferenceStateDiv" id="preferenceStateDiv">
 						<div class="mt" tooltip="Select upto 5 states">
 							<div class="wrap-input100 validate-input">
-								<label for="Preference_States" style="color:#fff;">States where you operate</label>
+								<span for="Preference_States" style="color:#fff;">States where you operate</span>
 								
 								<div class="input-field">
-									<?php echo $this->Form->control('preference', ["id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select", "data-placeholder"=>"Select upto 5 states where you operate", "style"=>"height:125px;"]); ?>
+									<?php echo $this->Form->control('preference', ["id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select ", "data-placeholder"=>"Select upto 5 states where you operate", "style"=>"height:100px;"]); ?>
 								</div>
 							</div>
 						</div>
@@ -275,9 +284,9 @@ hr { margin-top:0px!important;}
 					<div class="col-md-12">
 						<div class="contact100-form-checkbox col-md-12">
 							<input class="input-checkbox100 chk_input"  id="ckb1" type="checkbox" required  name="remember-me">
-							<label class="label-checkbox100" for="ckb1" style="padding-left:40px;">
+							<span class="label-checkbox100" for="ckb1" style="padding-left:40px;">
 								I accept the <a style="color:white;" target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/privacy-policy/"><u>Privacy Policy</u></a> and <a style="color:white;" target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/terms-and-conditions/"><u>Terms & Conditions</a></u>
-							</label>
+							</span>
 							<span id="chk_cond" style="color:#f16060; display:none;">Please accept Terms & Conditions and Privacy Policy</span>
 						</div>
 					</div>
@@ -377,6 +386,8 @@ $(document).ready(function(){
 		}
 	});
    
+   
+   
 	$(document).on('change',"#role_id",function(){
  		var roleid = jQuery( "#role_id option:selected" ).val();
 		/*if(roleid==3){
@@ -384,6 +395,7 @@ $(document).ready(function(){
 		} else{
 			$('.hotelname').html('Company Name<span class="asterisk"><img class="img-responsive" src="../img/Asterisk.png"></span>')		
 		}*/
+		
 		if(roleid != "" && roleid == 1) {
 			$('#preferenceStateDiv').show();
 			var needPreferenceState = true;
@@ -782,7 +794,15 @@ $(document).ready(function (){
 			$(this).val('');
             e.preventDefault();
         }
-		});   
+		});
+
+var prootionId=<?php echo $_GET['promotion_id'];?>;
+   
+   if(prootionId == 1 ){
+	  // alert(prootionId);
+		$('.preferenceStateDiv').show();
+		//var needPreferenceState = true;  
+   }		
 	});
 </script>	
 <script type="text/javascript">
