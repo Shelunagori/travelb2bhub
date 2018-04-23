@@ -194,7 +194,7 @@ legend
 				$org_created=date('d-M-Y', strtotime($created));
 				
 				?>
-				<div class="col-md-12">
+				<div class="col-md-12" style="padding-top:20px;">
 					<!--div class="col-md-2" style="width:9.666667%;">
 						<?php //echo $image; ?> <br><?php //echo $text; ?>
 					</div-->
