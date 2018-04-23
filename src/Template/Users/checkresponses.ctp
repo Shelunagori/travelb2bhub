@@ -492,7 +492,7 @@ legend
 			</div>
 			<form class="filter_box" method="get">
 				<div class="modal-body">
-					<div class="col-md-12">
+					<div class="col-md-12" style="margin-top:5px">
 					   <div class="col-md-12">
 						<label for="example-text-input" class=" col-form-label">Agent Name: </label> 
 						    
@@ -510,7 +510,7 @@ legend
 					</div>
 					
 					
-					 <div class="col-md-12">
+					 <div class="col-md-12" style="margin-top:5px">
 					   <div class="col-md-12">
 						 <label for="example-text-input" class=" col-form-label">Select Chat With: </label>
 						   <select name="chatwith[]" class="form-control select2" multiple data-placeholder='Select Chat With'>
@@ -541,7 +541,7 @@ legend
 					</div-->
 						   
 						   
-					<div class="col-md-12">
+					<div class="col-md-12" style="margin-top:5px">
 					   
 					   <div class="col-md-12">
 						<label for="example-text-input" class=" col-form-label">Quoted Price Range: </label>
@@ -550,14 +550,14 @@ legend
 					</div>
 					
 					 
-					<div class="col-md-12">
+					<div class="col-md-12" style="margin-top:5px">
 					   
 					   <div class="col-md-12">
 							<label for="example-text-input" class=" col-form-label">Following: </label> 
 						   <input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['followsearch'])? "checked":''; ?>  >
 					   </div>
 				   </div>
-					<div class="col-md-12">
+					<div class="col-md-12" style="margin-top:5px">
 					   
 					   <div class="col-md-12">
 						<label for="example-text-input" class=" col-form-label">Shared Details: </label>
