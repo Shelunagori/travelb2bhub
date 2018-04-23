@@ -293,7 +293,7 @@ margin-bottom: 0px!important;
 @media all and (max-width: 520px) {
 	/* Logo for Mobile */
 	.logo-lg {
-		width: 220px;
+		width: 180px;
 		height: 55px;
 		background-image: url(‘http://wordpress.coastalrepro.com/wp-content/uploads/2013/06/coastalcreative-logo-mobile.png’);
 		background-size: 250px 47px;
