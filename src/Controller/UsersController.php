@@ -2786,6 +2786,8 @@ $this->redirect('/users/finalrequest/');
 $this->redirect('/users/finalrequest/');
 }
 }
+
+
 public function viewprofile($id,$is_share=null) {
 $this->loadModel('Cities');
 $this->loadModel('Testimonial');
@@ -2873,6 +2875,59 @@ $userRating = $query->select(["average_rating" => $query->func()->avg("rating")]
 ->first();
 $average_rating = $userRating['average_rating'];
 $this->set('average_rating', $average_rating);
+
+$average_rating1 = 0;
+$query1 = $this->Testimonial->find();
+$userRating1 = $query->select(["average_rating" => $query1->func()->avg("rating")])
+->where(['user_id' => $id])
+->order(["id" => "DESC"])
+->first();
+$average_rating1 = $userRating1['average_rating'];
+$this->set('average_rating1', $average_rating1);
+
+
+$average_rating1 = 0;
+$query1 = $this->Testimonial->find()
+					->where(['user_id' => $id, 'rating'=>1])
+					->count();
+$average_rating1 = $query1;
+$this->set('average_rating1', $average_rating1);
+
+$average_rating2 = 0;
+$query2 = $this->Testimonial->find()
+					->where(['user_id' => $id, 'rating'=>2])
+					->count();
+$average_rating2 = $query2;
+$this->set('average_rating2', $average_rating2);
+
+$average_rating3 = 0;
+$query3 = $this->Testimonial->find()
+					->where(['user_id' => $id, 'rating'=>3])
+					->count();
+$average_rating3 = $query3;
+$this->set('average_rating3', $average_rating3);
+
+$average_rating4 = 0;
+$query4 = $this->Testimonial->find()
+					->where(['user_id' => $id, 'rating'=>4])
+					->count();
+$average_rating4 = $query4;
+$this->set('average_rating4', $average_rating4);
+
+$average_rating5 = 0;
+$query5 = $this->Testimonial->find()
+					->where(['user_id' => $id, 'rating'=>5])
+					->count();
+$average_rating5 = $query5;
+$this->set('average_rating5', $average_rating5);
+
+$query6 = $this->Testimonial->find()
+					->where(['user_id' => $id])
+					->count();
+$total_avarage_rating_count = $query6;
+$this->set('total_avarage_rating_count', $total_avarage_rating_count);
+
+
 $testimonialcount= 0;
 $utestimonials = $this->Testimonial->find()->where(['user_id'=> $id])->all();
 $testimonialcount = $utestimonials->count();		
@@ -2888,6 +2943,8 @@ $alltestimonials[] = array( "name"=>$name,"rating1"=>$testimonial['rating'], "de
 $this->set('testimonial',$alltestimonials);
 }
 }
+
+
 public function myresponselist() {
 	$this->loadModel('BusinessBuddies');
 	$this->loadModel('Responses');

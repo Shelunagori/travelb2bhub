@@ -371,10 +371,10 @@ $conn = ConnectionManager::get('default');
 				  
 				  
 				  ?>
-				   <div class="row" class="col-md-12" style="padding-top:15px;">
+				   <div class="row" class="col-md-12" >
 				   <table width="90%" border="0" style="margin-left:15px;">
-					<tr>
-						<td width="18%" align="right">	
+					<tr height="35px">
+						<td width="18%" align="right" style="height:20px !important;">	
 							<div class="col-md-12"  style="text-align:right;">
 								<div>5 
 								<span <?php if($percentage_rating5>0){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
@@ -387,15 +387,19 @@ $conn = ConnectionManager::get('default');
 									<div <?php if($percentage_rating5>0){ ?>style="width: <?php echo $percentage_rating5; ?>%; height: 13px; background-color: #1295AB;border-radius:9px;"<?php } ?>></div>	
 								</div>
 							</div>
+							
 						</td>
 						<td width="7%" align="left">	
 							<div class="col-md-2" >
 								<?php if($percentage_rating5>0){ echo $percentage_rating5; }else{ echo "0"; }  ?>%
+								<br>
+								 
 							</div>
 						</td>
+						
 					</tr>
-					<tr>
-						<td width="18%" align="right">	
+					<tr height="35px">
+						<td width="18%" align="right" style="height:20px !important;">	
 							<div class="col-md-12"  style="text-align:right;">
 								<div>4
 								<span <?php if($percentage_rating4>0){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
@@ -415,7 +419,7 @@ $conn = ConnectionManager::get('default');
 							</div>
 						</td>
 					</tr>
-					<tr>
+					<tr height="35px">
 						<td width="18%" align="right">	
 							<div class="col-md-12"  style="text-align:right;">
 								<div>3
@@ -436,7 +440,7 @@ $conn = ConnectionManager::get('default');
 							</div>
 						</td>
 					</tr>
-					<tr>
+					<tr height="35px">
 						<td width="18%" align="right">	
 							<div class="col-md-12"  style="text-align:right;">
 								<div>2
@@ -457,8 +461,8 @@ $conn = ConnectionManager::get('default');
 							</div>
 						</td>
 					</tr>
-					<tr>
-						<td width="18%" align="right">	
+					<tr height="35px">
+						<td width="18%" align="right" style="">	
 							<div class="col-md-12"  style="text-align:right;">
 								<div>1
 								<span <?php if($percentage_rating1>0){ ?>class="fa fa-star checked"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
