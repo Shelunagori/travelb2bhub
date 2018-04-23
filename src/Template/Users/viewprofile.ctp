@@ -255,7 +255,7 @@ $conn = ConnectionManager::get('default');
 									 </div>
 								</td>
 								<td width="20%">
-									 <div style="float:right"  >
+									 <div style="float:right;"  >
 										<div style="width: 32px;height: 25px;background-color:#1295A2;border-radius:13px;color:#FEFEFE;">		
 											<?php echo $userRequestCount;?>
 										</div>
@@ -273,7 +273,7 @@ $conn = ConnectionManager::get('default');
 									 </div>
 								</td>
 								<td width="20%">
-									 <div style="float:right;padding-top:1px" class="col-md-2">
+									 <div style="float:right;" class="col-md-2">
 										<div style="width: 32px; height: 25px; background-color: #1295A2;border-radius:9px;color:#FEFEFE;">		
 										<?php echo $userRequestCount;?>
 										</div>
@@ -339,7 +339,7 @@ $conn = ConnectionManager::get('default');
 									 </div>
 								 </td>
 								 <td>
-									 <div style="float:right"  >
+									 <div style="float:right;padding-top:1px"  >
 										<div style="width: 32px; height: 25px; background-color: #F3565D;border-radius:13px;color:#FEFEFE;">	
 											<?php echo $userReponseCount;?>
 										</div>
@@ -357,7 +357,7 @@ $conn = ConnectionManager::get('default');
 									 </div>
 								</td>
 								<td>
-									 <div style="float:right"  >
+									 <div style="float:right;padding-top:1px"  >
 										<div style="width: 32px; height: 25px; background-color: #F3565D;border-radius:13px;color:#FEFEFE;">		
 											<?php echo $userReponseCount;?>
 										</div>
