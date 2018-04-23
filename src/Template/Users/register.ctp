@@ -50,6 +50,7 @@ hr { margin-top:0px!important;}
 }
 .input100{
 	padding:0px !important;
+	margin-bottom: -6px;
 }
 .focus-input100::after{
 	font-size:19px !important; 
@@ -158,7 +159,7 @@ input[type=checkbox] {
 					<div class="col-md-12">
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Select Type">
-								<select name="role_id" id="role_id" class="form-control input100" required="" style="height: 35px;margin-top: 11px;" >
+								<select name="role_id" id="role_id" class="form-control input100" required="" style="height: 35px;margin-top: 4px;margin-bottom:0px !important;" >
 									<option value="" disabled selected>User Category</option>
 									<?php 
 									$promotion_id=$_GET['promotion_id'];
