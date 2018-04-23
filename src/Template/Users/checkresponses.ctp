@@ -68,21 +68,32 @@ legend
 		</div>
 		<div class="box-body">
 			<?php 
-				//pr($responses->toArray());
-				foreach($responses as $ro){
 				
+				foreach($responses as $ro){
+ 			
+					 $category_id=$ro['request']['category_id'];
 					 $reference_id=$ro['request']['reference_id'];
 					 $total_budget=$ro['request']['total_budget'];
 					 $locality=$ro['request']['locality'];
 					 $comment=$ro['request']['comment'];
 					 $created=$ro['request']['created'];
+					 $start_date=$ro['request']['start_date'];
+					 $end_date=$ro['request']['end_date'];
 					 $check_in=$ro['request']['check_in'];
 					 $check_out=$ro['request']['check_out'];
-					 $org_check_in=date('d/m/Y', strtotime($check_in));
-					 $org_check_out=date('d/m/Y', strtotime($check_out));
+					if($category_id == 3 ) {
+						$org_check_in=date('d/m/Y', strtotime($check_in));
+						$org_check_out=date('d/m/Y', strtotime($check_out));
+					}
+					else
+					{
+						$org_check_in=date('d/m/Y', strtotime($start_date));
+						$org_check_out=date('d/m/Y', strtotime($end_date));
+					}
+
 					 $adult=$ro['request']['adult'];
 					 $children=$ro['request']['children'];
-					 $category_id=$ro['request']['category_id'];
+					 
 					 $members=$adult+$children;
 					 if($category_id==1){
 						 $category_name="Package";
