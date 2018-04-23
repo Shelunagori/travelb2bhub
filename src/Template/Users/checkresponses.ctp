@@ -78,8 +78,8 @@ legend
 					 $created=$ro['request']['created'];
 					 $check_in=$ro['request']['check_in'];
 					 $check_out=$ro['request']['check_out'];
-					 $org_check_in=date('d-M-Y', strtotime($check_in));
-					 $org_check_out=date('d-M-Y', strtotime($check_out));
+					 $org_check_in=date('d/M/Y', strtotime($check_in));
+					 $org_check_out=date('d/M/Y', strtotime($check_out));
 					 $adult=$ro['request']['adult'];
 					 $children=$ro['request']['children'];
 					 $category_id=$ro['request']['category_id'];
