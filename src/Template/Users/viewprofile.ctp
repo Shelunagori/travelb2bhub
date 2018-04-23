@@ -710,7 +710,7 @@ $conn = ConnectionManager::get('default');
 				 
 				
 				
-			 
+			 <?php if($users['id']==$loginid){?>
 				<div class="box box-primary">
 				<div class="box-body">
 					<div class="box-tools pull-right">
@@ -724,31 +724,23 @@ $conn = ConnectionManager::get('default');
 					<h4 style="color:#1295A2">Personal Details</h4>
 					<hr>
 					<div>
-						<div class="form-group col-md-12" >
-						<table>
-							<tr>
-								<td width="60%">Company Name:</td>
-								<td width="40%"><?php echo $users['company_name']; ?></td>
-							</tr>
-							<tr>
-								<td>Primary Contact No.:</td>
-								<td><?php echo $users['mobile_number']; ?></td>
-							</tr>
-							<tr>
-								<td>Secondary Contact No.:</td>
-								<td><?php echo $users['p_contact']; ?></td>
-							</tr>
-							<tr>
-								<td>Email:</td>
-								<td><?php echo $users['email']; ?></td>
-							</tr>
-							<tr>
-								<td>Website:</td>
-								<td><?php echo $users['web_url']; ?></td>
-							</tr>
-							<tr>
-								<td>States of Operation:</td>
-								<td><?php $preference=$users['preference']; 
+							<div class="form-group col-md-12" >
+								 Company Name: <?php echo $users['company_name']; ?> 
+							</div>
+							<div class="form-group col-md-12" >
+								 Primary Contact No.: <?php echo $users['mobile_number']; ?> 
+							</div>
+							<div class="form-group col-md-12" >
+								 Secondary Contact No.: <?php echo $users['p_contact']; ?> 
+							</div>
+							<div class="form-group col-md-12" >
+								 Email: <?php echo $users['email']; ?> 
+							</div>
+							<div class="form-group col-md-12" >
+								 Website: <?php echo $users['web_url']; ?> 
+							</div>
+							<div class="form-group col-md-12" >
+								 States of Operation: <?php $preference=$users['preference']; 
 								
 								$preferences=explode(',', $preference);
 							 
@@ -766,16 +758,16 @@ $conn = ConnectionManager::get('default');
 									$final_state_name.=',';
 								}
 								echo $final_state_name;
-								?></td>
-							</tr>
-						</table>	
+								?>
+							</div>
+								 
 						</div>
 					</div>
 				</div>
 			 </div>
 			</div>
 			 
-			 
+			 <?php } ?> 
 			 
 			 
 			 
@@ -1009,7 +1001,7 @@ $conn = ConnectionManager::get('default');
 				
 				
 				
-			 
+		<?php if($users['id']==$loginid){?>	 
 			<div class="box box-primary">
 				<div class="box-body">
 					<div class="box-tools pull-right">
@@ -1074,7 +1066,8 @@ $conn = ConnectionManager::get('default');
 				</div>
 			</div>
 		</div>
-    </section>
+	<?php } ?>	
+</section>
 	
  
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
