@@ -619,7 +619,7 @@ margin-bottom: 0px!important;
 		<li <?php if($page_name=='promotionreports' && $controller=='EventPlannerPromotions'){ echo 'class="active"';}?>>
 			<a href="<?php echo $this->Url->build(["controller" => "EventPlannerPromotions",'action'=>'promotionreports']); ?>"><i class="fa fa-book"></i> <span>Promotion Reports</span></a>
 		</li>
-		<?php } 
+		<?php }
 		if($roleId==3) { ?>
 			<li <?php if($page_name=='add' && $controller=='HotelPromotions'){ echo 'class="active"';}?>><a href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>'add']); ?>"><i class="fa fa-bullhorn"></i> <span> Promote Your Hotel</span></a></li>
 			
