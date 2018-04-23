@@ -1546,7 +1546,7 @@ $('#PackgeRequestForm').submit(function(){
 <script>
 $(document).ready(function () {
     	$('#tabtransport').click(function (e) {
-    		$('.newdiv').remove();
+    		$('.newdivsss').remove();
 			$('.remove_field').remove();
     	});
         // This button will increment the value
