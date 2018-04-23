@@ -135,7 +135,27 @@ legend
 						<p>Members:  <span class="details"><?php echo $members; ?></span></p>
 				</div>
 				<div class="col-md-3" style="padding-left:0px !important;">
-						<p><?php echo $dest_show; ?>:   <span class="details"><?php echo $locality; ?></span></p>
+					<?php if($category_id==2){ ?>
+						<p>Pickup City:  &nbsp;
+							<span class="details">
+								<?php echo ($ro['request']['pickup_city'])?$allCities[$ro['request']['pickup_city']]:"-- --"; ?>
+								<?php echo ($ro['request']['pickup_state'])?' ('.$allStates[$ro['request']['pickup_state']].')':"";  ?>
+							</span>
+						</p>
+					<?php }else{ ?>
+						
+						<p>Destination City:  &nbsp;
+							<span class="details">
+							<?php 
+							$a=$ro['request']['city_id']?$allCities[$ro['request']['city_id']]:"-- --"; 
+							$b=$ro['request']['state_id']?' ('.$allStates[$ro['request']['state_id']].')':"";
+							echo mb_strimwidth($a.$b, 0,28, "...");?>
+						 
+							</span>
+						</p>
+						
+					<?php } ?>
+						
 				</div>
 				<div class="col-md-3" style="padding-left:0px !important;">
 						<p>Comment:  <span class="details"><?php echo $comment; ?></span></p>
