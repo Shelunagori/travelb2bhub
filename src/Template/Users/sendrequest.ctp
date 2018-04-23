@@ -442,12 +442,12 @@ label {
 				
  					<div class="row">
 						<div class="col-md-12 main_row">
-							<div class="col-md-4">
+							<div class="col-md-4 form-group">
 								<p>Locality</p>
 									<input type="text" autocomplete="off" class="form-control" name="locality" id="locality" placeholder="Enter Locality, Village or Town"/>
 							</div>
 						 
-							<div class="col-md-4">
+							<div class="col-md-4 form-group">
 								<div class="input-field">
 								<p for="from">
 									Destination City <span class="required">*</span>
@@ -460,7 +460,7 @@ label {
 								</div>
 							</div>
 							<div class="stateRpl">
-								<div class="col-md-4">
+								<div class="col-md-4 form-group">
 									<div class="input-field">
 										<p for="from">
 											Destination State
@@ -477,7 +477,7 @@ label {
 						<div class="row">
 							<div class="col-md-12">
 								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 mt" style="display:none;">
-									<div class="input-field">
+									<div class="input-field form-group">
 										<p for="from">Destination Country</p>
 										<input type="text" class="form-control" id ="country_name" name="country_name" placeholder="Auto Populated" readonly/>
 										<input type='hidden' id='country_id' name="country_id"/>
@@ -1635,9 +1635,9 @@ $(document).ready(function () {
         
             e.preventDefault();
             var strHtml = '<div class="stop col-md-12 main_row" style="margin-top:5px"><hr  style="margin-top: 8px; margin-bottom: 8px;"></hr> <div class="stop-title" style="font-weight:bold"> Stop ' +packageI+ ' </div><div class="row main_row">';
-        	strHtml += '<div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality,Village or Town" name="stops[' +packageI+ ']"></div></div>';
-        	strHtml += '<div class="col-sm-4 mt"><p for="from">Stop City</p><input class="trans_city form-control city_select ctynamerecord" noofrows="5" taxboxname="state_id_package_stop_city[' +packageI+ ']" type="text" placeholder="Select City or Nearest City" required use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" class="ctyIDname" name="id_package_stop_city[' +packageI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div> ';
-        	strHtml += '<div class="stateRpl"><div class="col-sm-4 mt"><div class="input-field"><p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly></div></div></div></div>';
+        	strHtml += '<div class="col-sm-4 mt form-group"> <p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality,Village or Town" name="stops[' +packageI+ ']"> </div>';
+        	strHtml += '<div class="col-sm-4 mt form-group"><p for="from">Stop City</p><input class="trans_city form-control city_select ctynamerecord" noofrows="5" taxboxname="state_id_package_stop_city[' +packageI+ ']" type="text" placeholder="Select City or Nearest City" required use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" class="ctyIDname" name="id_package_stop_city[' +packageI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div> ';
+        	strHtml += '<div class="stateRpl"><div class="col-sm-4 mt form-group" > <p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly> </div></div></div>';
         strHtml += '<div class="row"><div class="col-md-12" align="right" style="margin-top:5px"> <button class="btn btn-danger btn-sm package_remove_stop but"> <i class="fa fa-trash" ></i> Remove Stop</button> </div></div></div>';
         $(".package-stops").append(strHtml);
         	packageI++;
