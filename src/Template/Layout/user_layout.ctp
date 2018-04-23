@@ -239,9 +239,8 @@ margin-bottom: 0px!important;
 		border-color:#C9A66B !important;
 		
 	}
-	.btn-successto:hover 
-	{ 
-		color: white;
+	.btn.focus, .btn:focus, .btn:hover
+ 		color: white !important;
 	}
 	.btn-successtoNew
 	{

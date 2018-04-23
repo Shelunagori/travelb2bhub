@@ -90,7 +90,7 @@
 							<?php echo $images;?>
 							<p style="text-align: right;"><b><?php echo ucwords($row["user"]["first_name"]); ?></b></p>
 							<fieldset style="text-align:left;border-radius:20px;"><p style="text-align: right;"><?php echo ucwords($row["message"]); ?></p></fieldset>
-							<span class="time-right"><?php echo date("d M Y h:i A", strtotime($row["created"])); ?></span>
+							<span class="time-right" style="margin-top: 10px;"><?php echo date("d M Y h:i A", strtotime($row["created"])); ?></span>
 						</div>
 						 		 
 					<?php } ?>

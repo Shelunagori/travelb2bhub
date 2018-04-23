@@ -131,7 +131,7 @@ class UsersController extends AppController {
 		$new_time = date("Y-m-d H:i:s", strtotime('-24 hours'));
 		$totalIds=array();
 		$NewNotifications=array();
-		$unreadnotification = $this->UserChats->find()->contain(['Users'])->where(['UserChats.send_to_user_id'=> $this->Auth->user('id'),'created >='=>$new_time,'is_read'=>1])->order($csort)->all();
+		$unreadnotification = $this->UserChats->find()->contain(['Users'])->where(['UserChats.send_to_user_id'=> $this->Auth->user('id'),'read_date_time >='=>$new_time,'is_read'=>1])->order($csort)->all();
 		foreach($unreadnotification as $data){
  				$totalIds[]=$data['id'];
 		}
@@ -1191,6 +1191,7 @@ public function sendrequest() {
 	$this->loadModel('User_Chats');
 	$this->loadModel('taxi_fleet_car_buses');
 	$this->loadModel('MealPlans');
+	$constReqCount=10;
 	$this->viewBuilder()->layout('user_layout');
 	$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first(); 
 	$postTravlePackageCategories = $this->taxi_fleet_car_buses->find('list', ['limit' => 200]);
@@ -1223,7 +1224,7 @@ public function sendrequest() {
 	$this->set('delcount', $delcount);
 	$plcreqcount = (($reqcount['value']-$myRequestCount1)-($delcount+ $myfinalCount));
 	//echo $myRequestCount1; die();
-	if($myRequestCount1 >=10){
+	if($myRequestCount1 >=$constReqCount){
 		$msg = "You have exceeded the count of permissible open requests. You must Finalize a Request or Remove a Request in order to proceed with placing another request.";
 		$this->Flash->error(__($msg));
 		return $this->redirect('/users/requestlist');
@@ -1299,14 +1300,14 @@ $d['end_date']	='0000-00-00';
 		if ($re = $this->Requests->save($contact)) {
 		$ui = $re->id;
 		if(isset($d['stops'])) {
-		foreach($d['stops'] as $key=>$row) {
-		$stopData['request_id'] = $ui;
-		$stopData['locality'] =  $row;
-		$stopData['city_id'] =  $d['id_trasport_stop_city'][$key];
-		$stopData['state_id'] =  $d['state_id_trasport_stop_city'][$key];
-		$result = $this->RequestStops->newEntity($stopData);
-		$this->RequestStops->save($result);
-		}
+			foreach($d['stops'] as $key=>$row) {
+				$stopData['request_id'] = $ui;
+				$stopData['locality'] =  $row;
+				$stopData['city_id'] =  $d['id_trasport_stop_city'][$key];
+				$stopData['state_id'] =  $d['state_id_trasport_stop_city'][$key];
+				$result = $this->RequestStops->newEntity($stopData);
+				$this->RequestStops->save($result);
+			}
 		}
 		/*Users List */
 		$userchatTable = TableRegistry::get('User_Chats');
@@ -1336,9 +1337,20 @@ $d['end_date']	='0000-00-00';
 					}
 				}
 			}		
-			
-                        
-			$this->Flash->success(__('Congratulations! Your Request has been submitted!'));
+	if($myRequestCount1==($constReqCount-2) ){			 
+		$msg = "Alert! You are about to reach the 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing another request.";
+		$this->Flash->Error(__($msg));
+	}
+	else if($myRequestCount1==($constReqCount-1) ){		 
+		$msg = "Alert! You have reached the count of 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing a request.";
+		$this->Flash->Error(__($msg));
+	}
+	else
+	{
+		$msg = "Congratulations! Your request has been submitted successfully.";
+		$this->Flash->success(__($msg));
+	}		
+ 
 				return $this->redirect('/users/requestlist');
 			} 
 			else {
@@ -1479,8 +1491,20 @@ $Userlist = $stmt ->fetchAll('assoc');
 					}
 				}
 			}
-	
-$this->Flash->success(__('Congratulations! Your Request has been submitted!'));
+if($myRequestCount1==($constReqCount-2) ){			 
+	$msg = "Alert! You are about to reach the 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing another request.";
+	$this->Flash->Error(__($msg));
+}
+else if($myRequestCount1==($constReqCount-1) ){		 
+	$msg = "Alert! You have reached the count of 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing a request.";
+	$this->Flash->Error(__($msg));
+}
+else
+{
+	$msg = "Congratulations! Your request has been submitted successfully.";
+	$this->Flash->success(__($msg));
+}	
+
 return $this->redirect('/users/requestlist');
 } else {
 $this->Flash->error(__('Sorry.'));
@@ -1576,7 +1600,19 @@ $Userlisth = $stmth->fetchAll('assoc');
 					}
 			}
 	/*For Hotelier*/	
-$this->Flash->success(__('Congratulations! Your Request has been submitted!'));
+	if($myRequestCount1==($constReqCount-2) ){			 
+		$msg = "Alert! You are about to reach the 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing another request.";
+		$this->Flash->Error(__($msg));
+	}
+	else if($myRequestCount1==($constReqCount-1) ){			 
+		$msg = "Alert! You have reached the count of 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing a request.";
+		$this->Flash->Error(__($msg));
+	}
+	else
+	{
+		$msg = "Congratulations! Your request has been submitted successfully.";
+		$this->Flash->success(__($msg));
+	}
 return $this->redirect('/users/requestlist');
 } else {
 $this->Flash->error(__('Sorry.'));

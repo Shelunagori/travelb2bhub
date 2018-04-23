@@ -38,7 +38,7 @@ class TaxiFleetPromotionsController extends AppController
 				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
 				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
 				
-				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
+				array("Requests.start_date <=" =>  $current_date,'Requests.category_id'=> 2,'Requests.total_response >' =>0),
 				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
 			)
 		);
@@ -74,8 +74,8 @@ class TaxiFleetPromotionsController extends AppController
 		}
 		
 		$myRequestCount = 0;
- 		$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2,$conditions]]);
-		$myRequestCount = $query->count(); 
+ 		$myRequestCount = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2,$conditions]])->count();
+		
 		$reqcountNew = $this->getSettings('requestcount');
  		$this->set('reqcountNew', $reqcountNew);
  		$this->set('myRequestCountNew', $myRequestCount);
@@ -109,7 +109,7 @@ class TaxiFleetPromotionsController extends AppController
 		$new_time = date("Y-m-d H:i:s", strtotime('-24 hours'));
 		$totalIds=array();
 		$NewNotifications=array();
-		$unreadnotification = $this->UserChats->find()->contain(['Users'])->where(['UserChats.send_to_user_id'=> $this->Auth->user('id'),'created >='=>$new_time,'is_read'=>1])->order($csort)->all();
+		$unreadnotification = $this->UserChats->find()->contain(['Users'])->where(['UserChats.send_to_user_id'=> $this->Auth->user('id'),'read_date_time >='=>$new_time,'is_read'=>1])->order($csort)->all();
 		foreach($unreadnotification as $data){
  				$totalIds[]=$data['id'];
 		}
