@@ -316,42 +316,44 @@ $conn = ConnectionManager::get('default');
 				   <hr></hr>
 				   <div>
 				   <?php $id=$row['id']; ?>
+<div class="modal fade" id="myModalChat<?php echo $id; ?>" role="dialog">
+	<div class="modal-dialog">
+	
+	  <!-- Modal content-->
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <button type="button" class="close" data-dismiss="modal">&times;</button>
+		  <h4 class="modal-title">Chat</h4>
+		</div>
+		<div class="modal-body">
+			
+		</div>
+	  </div>
+	</div>
+</div>
+<div class="modal fade" id="myModal1<?php echo $id;?>" role="dialog">
+	<div class="modal-dialog">
+		  <!-- Modal content-->
+		  <div class="modal-content">
+			<div class="modal-header">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+			  <h4 class="modal-title">Details</h4>
+			</div>
+			<div class="modal-body">
+			</div>
+		  </div>
+		</div>
+	</div>
 					<table width="100%" style="text-align:center" class>
 							<tr>
 								<td width="50%" style="padding:3px !important;">
 									<a style="width:99%" data-toggle="modal" class="btn btn-success btn-sm" data-target="#myModalChat<?php echo $id; ?>" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'userChat', $row['request']['id'], $row['request']['user_id'],2)) ?>">
 									Chat ( <strong><?php echo $chatdata['chat_count'][$row['id']]; ?> </strong> )</a>
-									<div class="modal fade" id="myModalChat<?php echo $id; ?>" role="dialog">
-										<div class="modal-dialog">
-										
-										  <!-- Modal content-->
-										  <div class="modal-content">
-											<div class="modal-header">
-											  <button type="button" class="close" data-dismiss="modal">&times;</button>
-											  <h4 class="modal-title">Chat</h4>
-											</div>
-											<div class="modal-body">
-												
-											</div>
-										  </div>
-										</div>
-									</div>
+									
 								</td>
 								<td width="50%" style="padding:3px !important;">
 									<a style="width:99%" data-toggle="modal" class="btn btn-info btn-sm" data-target="#myModal1<?php echo $id;?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$row['request']['id'])) ?>"> Details</a>
-									<div class="modal fade" id="myModal1<?php echo $id;?>" role="dialog">
-									<div class="modal-dialog">
-										  <!-- Modal content-->
-										  <div class="modal-content">
-											<div class="modal-header">
-											  <button type="button" class="close" data-dismiss="modal">&times;</button>
-											  <h4 class="modal-title">Details</h4>
-											</div>
-											<div class="modal-body">
-											</div>
-										  </div>
-										</div>
-									</div>
+									
 							 </td>
 							 </tr>
 						</table>
