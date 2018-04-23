@@ -79,6 +79,9 @@ hr { margin-top:0px!important;}
 	div.rohit {
 		zoom: 2.5;
 	}
+	span.select2-dropdown {
+		zoom: 3.5;
+	}
 	.a{
 		color:white !important;
 	}	
@@ -269,6 +272,9 @@ input[type=checkbox] {
 							</div>										
 						</div>	
 				</div>	
+				
+				 
+								
 				<div class="row col-md-12">
 					<div class="col-md-12 preferenceStateDiv" id="preferenceStateDiv">
 						<div class="mt" tooltip="Select upto 5 states">
