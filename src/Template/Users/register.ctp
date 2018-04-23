@@ -48,9 +48,15 @@ hr { margin-top:0px!important;}
 	width:100%;
 	opacity: .7;
 }
+.input100{
+	padding:0px !important;
+}
 .focus-input100::after{
 	font-size:19px !important; 
 	font-family: popins-regular;
+}
+body{
+	font-family: popins-regular !important;
 }
 .nm { 
 	font-size: 19px;
@@ -264,7 +270,7 @@ input[type=checkbox] {
 							</div>
 						</div>	
 					</div>	
-				</div>	
+				</div>
 				<div class="row col-md-12">
 					<div class="col-md-6">
 								<div class="wrap-input100 validate-input st" data-validate = "State">
@@ -286,10 +292,10 @@ input[type=checkbox] {
 					<div class="col-md-12 preferenceStateDiv" id="preferenceStateDiv">
 						<div class="mt" tooltip="Select upto 5 states">
 							<div class="wrap-input100 validate-input">
-								<span for="Preference_States" style="color:#fff;">States where you operate</span>
+								<span for="Preference_States"  style="color:#fff;font-size:16px !important;">States where you operate</span>
 								
 								<div class="input-field">
-									<?php echo $this->Form->control('preference', ["id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control chosen-select ", "data-placeholder"=>"Select upto 5 states where you operate", "style"=>"height:100px;"]); ?>
+									<?php echo $this->Form->control('preference', ["id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control focus-input100 chosen-select ", "data-placeholder"=>"Select upto 5 states where you operate", "style"=>"height:100px;"]); ?>
 								</div>
 							</div>
 						</div>
