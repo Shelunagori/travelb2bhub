@@ -7,7 +7,11 @@ $conn = ConnectionManager::get('default');
     color: #1295AB;
 }
 .checked1 {
-    color: #F3565D;
+    color: #1295AB;
+}
+.checked2 {
+    color: #F5F5F5;
+	    font-weight: 400;
 }
 .vl {
     border-left: 6px solid green;
@@ -224,90 +228,145 @@ $conn = ConnectionManager::get('default');
 				}
 			} ?>
 			<p style="font-size: 16px;"><font color="#4B4B4D">Profile Completeness</font></p>
-			<div class="progress" style="height: 14px !important;">
+			<center>
+			<div class="progress" style="height: 14px !important;width:80%;float:auto;" >
 				<div class="progress-bar"  role="progressbar" aria-valuenow="<?php echo $profilePercentage; ?>"
 				aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $profilePercentage; ?>%;background-color: #1295AB !important;line-height: 15px !important;">
 					<?php echo $profilePercentage; ?>%
 				</div>
 			</div>
+			</center>
 			<div>
-						<font color="#4B4B4D" size="4">
+						<font color="#4B4B4D" size="3">
+						<table width="100%">
+							<tr>
+							
 						<div class="col-md-12">
 							<?php 
 							$Final_hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'finalized-request-list'));
 							if($users['role_id'] == 1){ ?>
-								 <div style="float:left" class="col-md-10" align="left">
-									<a href="<?php echo $hrefurl; ?>"> <u style="font-size:14px !important;">Finalized Requests</u></a>
-								 </div>
-								 <div style="float:right"  >
-									<div style="width: 32px;height: 25px;background-color:#1295A2;border-radius:13px;color:#FEFEFE;">		
-										<?php echo $userRequestCount;?>
-									</div>
-								 </div>
+								<td width="80%">
+									 <div style="float:left" class="col-md-10" align="left">
+										<a href="<?php echo $hrefurl; ?>"> 
+											<font style="font-size:14px !important;">
+												Finalized Requests
+											</font>
+										</a>
+									 </div>
+								</td>
+								<td width="20%">
+									 <div style="float:right"  >
+										<div style="width: 32px;height: 25px;background-color:#1295A2;border-radius:13px;color:#FEFEFE;">		
+											<?php echo $userRequestCount;?>
+										</div>
+									 </div>
+								 </td>
 							 <?php }
 							 else if($users['role_id'] == 2){ ?>
-								
-								 <div style="float:left" class="col-md-10" align="left">
-									<a href="<?php echo $hrefurl; ?>"> <u style="font-size:14px !important;">Finalized Requests</u></a>
-								 </div>
-								 <div style="float:right;padding-top:1px" class="col-md-2">
-									<div style="width: 32px; height: 25px; background-color: #1295A2;border-radius:9px;color:#FEFEFE;">		
-									<?php echo $userRequestCount;?>
-									</div>
-								 </div>
+								<td width="80%">
+									 <div style="float:left" class="col-md-10" align="left">
+										<a href="<?php echo $hrefurl; ?>"> 
+											<font style="font-size:14px !important;">
+												Finalized Requests
+											</font>
+										</a>
+									 </div>
+								</td>
+								<td width="20%">
+									 <div style="float:right;padding-top:1px" class="col-md-2">
+										<div style="width: 32px; height: 25px; background-color: #1295A2;border-radius:9px;color:#FEFEFE;">		
+										<?php echo $userRequestCount;?>
+										</div>
+									 </div>
+								</td>
 							 <?php } ?>
 						</div>		
-						<div class="col-md-12" style="margin-top:3%;">
+						</tr>
+						<tr>
+						<div class="col-md-12"  >
 							<?php 
 							$Res_req_hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'respondtorequest'));
 							if($users['role_id'] == 1){ ?>
-								<div style="float:left" class="col-md-10" align="left">
-									<a href="<?php echo $Res_req_hrefurl; ?>"> <u style="font-size:14px !important;">Responded Requests</u></a>
-								 </div>
-								 <div style="float:right;padding-top:1px"  >
-									<div style="width: 32px !important; height: 25px; background-color: #DFBA49;border-radius:13px;color:#FEFEFE;">		
-										<?php echo $userrespondToRequestCount;?>
-									</div>
-								 </div>
-								  
+								<td>
+									<div style="float:left" class="col-md-10" align="left">
+										<a href="<?php echo $Res_req_hrefurl; ?>"> 
+											<font style="font-size:14px !important;">
+												Responded Requests
+											</font>
+										</a>
+									 </div>
+								 </td>
+								 <td>
+									 <div style="float:right;padding-top:1px"  >
+										<div style="width: 32px !important; height: 25px; background-color: #DFBA49;border-radius:13px;color:#FEFEFE;">		
+											<?php echo $userrespondToRequestCount;?>
+										</div>
+									 </div>
+								</td>
 							<?php }
 							 else if($users['role_id'] == 3){ ?>
-								<div style="float:left" class="col-md-10" align="left">
-									<a href="<?php echo $Res_req_hrefurl; ?>"> <u style="font-size:14px !important;">Responded Requests</u></a>
-								 </div>
-								 <div style="float:right; padding-top:1px">
-									<div style="width: 32px !important; height: 25px; background-color: #DFBA49;border-radius:13px;color:#FEFEFE;">		
-									<?php echo $userrespondToRequestCount;?>
-									</div>
-								 </div>
-								 
+								<td>
+									<div style="float:left" class="col-md-10" align="left">
+										<a href="<?php echo $Res_req_hrefurl; ?>"> 
+											<font style="font-size:14px !important;">
+												Responded Requests
+											</font>
+										</a>
+									 </div>
+								 </td>
+								 <td>
+									 <div style="float:right; padding-top:1px">
+										<div style="width: 32px !important; height: 25px; background-color: #DFBA49;border-radius:13px;color:#FEFEFE;">		
+										<?php echo $userrespondToRequestCount;?>
+										</div>
+									 </div>
+								</td> 
 							 <?php } ?>
 						</div>
-						<div class="col-md-12" style="margin-top:3%;">
+						</tr>
+						<tr>
+						<div class="col-md-12"  >
 							<?php 
 							$final_res_hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'my-final-responses'));
 							if($users['role_id'] == 1){ ?>
-								<div style="float:left" class="col-md-10" align="left">
-									<a href="<?php echo $final_res_hrefurl; ?>"> <u style="font-size:14px !important;">Finalized Responses</u></a>
-								 </div>
-								 <div style="float:right"  >
-									<div style="width: 32px; height: 25px; background-color: #F3565D;border-radius:13px;color:#FEFEFE;">	
-										<?php echo $userReponseCount;?>
-									</div>
-								 </div>
-								  
+								<td>
+									 <div style="float:left" class="col-md-10" align="left">
+										<a href="<?php echo $final_res_hrefurl; ?>"> 
+											<font style="font-size:14px !important;">
+												Finalized Responses
+											</font>
+										</a>
+									 </div>
+								 </td>
+								 <td>
+									 <div style="float:right"  >
+										<div style="width: 32px; height: 25px; background-color: #F3565D;border-radius:13px;color:#FEFEFE;">	
+											<?php echo $userReponseCount;?>
+										</div>
+									 </div>
+								</td>
 							<?php }
 							 else if($users['role_id'] == 3){ ?>
-								<div style="float:left" class="col-md-10" align="left">
-									<a href="<?php echo $final_res_hrefurl; ?>"> <u style="font-size:14px !important;">Finalized Responses</u></a>
-								 </div>
-								 <div style="float:right"  >
-									<div style="width: 32px; height: 25px; background-color: #F3565D;border-radius:13px;color:#FEFEFE;">		
-										<?php echo $userReponseCount;?>
-									</div>
-								 </div>
+								<td>
+									 <div style="float:left" class="col-md-10" align="left">
+										<a href="<?php echo $final_res_hrefurl; ?>"> 
+											<font style="font-size:14px !important;">
+												Finalized Responses
+											</font>
+										</a>
+									 </div>
+								</td>
+								<td>
+									 <div style="float:right"  >
+										<div style="width: 32px; height: 25px; background-color: #F3565D;border-radius:13px;color:#FEFEFE;">		
+											<?php echo $userReponseCount;?>
+										</div>
+									 </div>
+								</td>
 							 <?php } ?>
 						</div>
+						</tr>
+						</table>
 						</font>
 				   </div>
 						</div>  
@@ -330,15 +389,20 @@ $conn = ConnectionManager::get('default');
             <!-- form start -->
             <form role="form">
               <div class="box-body">
+			  <div class="box-tools pull-right">
+					<?php if($users['id']==$loginid){?>
+						<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"><i class="fa fa-edit"></i> </a>
+					<?php } ?>
+				</div> 
 			      <div class="rating-block">
 			<h4 style="color:#1295A2">Rating</h4>
 				<hr> 
 				<h5 >Average user rating &nbsp; <font color="#1295A2" ><?php echo number_format($average_rating,1);?> <small> ( <?php echo $testimonialcount;?> ) </font> </small>&nbsp; 
-					<span <?php if($average_rating==1 OR $average_rating>1){ ?>class="fa fa-star checked1"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
-					<span <?php if($average_rating==2 OR $average_rating>2){ ?>class="fa fa-star checked1"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
-					<span <?php if($average_rating==3 OR $average_rating>3){ ?>class="fa fa-star checked1"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
-					<span <?php if($average_rating==4 OR $average_rating>4){ ?>class="fa fa-star checked1"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
-					<span <?php if($average_rating==5 OR $average_rating>5){ ?>class="fa fa-star checked1"<?php }else{  ?>class="fa fa-star"<?php } ?> ></span>
+					<span <?php if($average_rating==1 OR $average_rating>1){ ?>class="fa fa-star checked1"<?php }else{  ?>class="fa fa-star checked2"<?php } ?> ></span>
+					<span <?php if($average_rating==2 OR $average_rating>2){ ?>class="fa fa-star checked1"<?php }else{  ?>class="fa fa-star checked2"<?php } ?> ></span>
+					<span <?php if($average_rating==3 OR $average_rating>3){ ?>class="fa fa-star checked1"<?php }else{  ?>class="fa fa-star checked2"<?php } ?> ></span>
+					<span <?php if($average_rating==4 OR $average_rating>4){ ?>class="fa fa-star checked1"<?php }else{  ?>class="fa fa-star checked2"<?php } ?> ></span>
+					<span <?php if($average_rating==5 OR $average_rating>5){ ?>class="fa fa-star checked1"<?php }else{  ?>class="fa fa-star checked2"<?php } ?> ></span>
 				</h5>
 				<div class="row">  
 			   <div class="col-md-8 col-xs-8 col-sm-8"> <h5 class="media_h4">Rating breakdown </h5> </div>
@@ -613,38 +677,60 @@ $conn = ConnectionManager::get('default');
       </div>	  
 <!-------------------third------------------------------------------------->		  
      </div>  
-      <!-- /.row -->
+      <!-- /.row 
+	  
+	   <div class="box box-primary">
+			
+              <div class="box-body">
+	  -->
 			 
-			<span style="font-size:18px; padding:10px;padding-top:10px;color:#373435 !important;"><b>Description</b></span>
 			 
-				<div class="box-body box">
-				<div class="box-tools pull-right">
-					<?php if($users['id']==$loginid){?>
-						<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"><i class="fa fa-edit"></i> </a>
-					<?php } ?>
-				</div> 
-					<div>
-						<div class="form-group col-md-12" style="min-height: 80px !important;'">
-							<?php echo $users['description']; ?>
+			      
+			
+			 
+				  
+			<div class="box box-primary">
+				<div class="box-body">
+					<div class="box-tools pull-right">
+						<?php if($users['id']==$loginid){?>
+							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin">
+								<i class="fa fa-edit"></i>
+							</a>
+						<?php } ?>
+					</div> 
+					<div class="rating-block">
+					<h4 style="color:#1295A2">Description</h4>
+					<hr> 
+						<div>
+							<div class="form-group col-md-12" style="min-height: 80px !important;'">
+								<?php echo $users['description']; ?>
+							</div>
 						</div>
 					</div>
 				</div>
+			</div>
+				 
 				
 				
-				<span style="font-size:18px; padding:10px;padding-top:10px;color:#373435 !important;"><b>Personal Details</b></span>
 			 
-				<div class="box-body box">
+				<div class="box box-primary">
+				<div class="box-body">
 					<div class="box-tools pull-right">
 						<?php if($users['id']==$loginid){?>
-							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> <i class="fa fa-edit"></i> </a>
+							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin">
+								<i class="fa fa-edit"></i>
+							</a>
 						<?php } ?>
 					</div> 
+					<div class="rating-block">
+					<h4 style="color:#1295A2">Personal Details</h4>
+					<hr>
 					<div>
 						<div class="form-group col-md-12" >
 						<table>
 							<tr>
-								<td width="50%">Company Name:</td>
-								<td width="50%"><?php echo $users['company_name']; ?></td>
+								<td width="60%">Company Name:</td>
+								<td width="40%"><?php echo $users['company_name']; ?></td>
 							</tr>
 							<tr>
 								<td>Primary Contact No.:</td>
@@ -689,20 +775,26 @@ $conn = ConnectionManager::get('default');
 					</div>
 				</div>
 			 </div>
+			</div>
 			 
 			 
 			 
 			 
 			 
 			 
-			 <span style="font-size:18px; padding:10px;padding-top:10px;color:#373435 !important;"><b>Address</b></span>
 			 
-				<div class="box-body box">
-				<div class="box-tools pull-right">
-					<?php if($users['id']==$loginid){?>
-						<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> <i class="fa fa-edit"></i> </a>
-					<?php } ?>
-				</div> 
+			<div class="box box-primary">
+				<div class="box-body">
+					<div class="box-tools pull-right">
+						<?php if($users['id']==$loginid){?>
+							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin">
+								<i class="fa fa-edit"></i>
+							</a>
+						<?php } ?>
+					</div> 
+					<div class="rating-block">
+					<h4 style="color:#1295A2">Address</h4>
+					<hr>
 					<div>
 						<div class="form-group col-md-12" >
 						<table >
@@ -752,18 +844,25 @@ $conn = ConnectionManager::get('default');
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
 			 
 			 
 		 
 		  <?php if($users['role_id'] == 1){ ?>
 			 
-			<span style="font-size:18px; padding:10px;padding-top:10px;color:#373435 !important;"><b>Certificates</b></span>
-				<div class="box-body box">
-					 <div class="box-tools pull-right">
+				<div class="box box-primary">
+				<div class="box-body">
+					<div class="box-tools pull-right">
 						<?php if($users['id']==$loginid){?>
-							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> <i class="fa fa-edit"></i> </a>
+							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin">
+								<i class="fa fa-edit"></i>
+							</a>
 						<?php } ?>
 					</div> 
+					<div class="rating-block">
+					<h4 style="color:#1295A2">Certificates</h4>
+					<hr>
 						<div class="form-group col-md-12 " >
 						<table  width="100%"><br>
 						<tr>
@@ -867,17 +966,23 @@ $conn = ConnectionManager::get('default');
 							</table>
 						</div>
 				</div>
+			</div>
+		</div>
 		 <?php } ?>
 			
-				<span style="font-size:18px; padding:10px;padding-top:10px;color:#373435 !important;">
-					<b>Office Photographs</b>
-				</span>
-				<div class="box-body box">
-				<div class="box-tools pull-right">
-					<?php if($users['id']==$loginid){?>
-						<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> <i class="fa fa-edit"></i> </a>
-					<?php } ?>
-				</div> 
+				 
+			<div class="box box-primary">
+				<div class="box-body">
+					<div class="box-tools pull-right">
+						<?php if($users['id']==$loginid){?>
+							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin">
+								<i class="fa fa-edit"></i>
+							</a>
+						<?php } ?>
+					</div> 
+					<div class="rating-block">
+					<h4 style="color:#1295A2">Office Photographs</h4>
+				<hr>
 					<div>
 						<div class="form-group col-md-12">
 						<table width="100%"><br>
@@ -909,18 +1014,24 @@ $conn = ConnectionManager::get('default');
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
 				
 				
 				
-				<span style="font-size:18px; padding:10px;padding-top:10px;color:#373435 !important;">
-					<b>ID/Registration Pics</b>
-				</span>
-				<div class="box-body box">
-				<div class="box-tools pull-right">
-					<?php if($users['id']==$loginid){?>
-						<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin"> <i class="fa fa-edit"></i> </a>
-					<?php } ?>
-				</div> 
+			 
+			<div class="box box-primary">
+				<div class="box-body">
+					<div class="box-tools pull-right">
+						<?php if($users['id']==$loginid){?>
+							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin">
+								<i class="fa fa-edit"></i>
+							</a>
+						<?php } ?>
+					</div> 
+					<div class="rating-block">
+					<h4 style="color:#1295A2">ID/Registration Pics</h4>
+					<hr>
 					<div>
 						<div class="form-group col-md-12">
 						<table width="100%"><br>
@@ -971,6 +1082,8 @@ $conn = ConnectionManager::get('default');
 						</div>
 					</div>
 				</div>
+			</div>
+		</div>
     </section>
 	
  
