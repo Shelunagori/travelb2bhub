@@ -86,7 +86,7 @@ legend
 					 $members=$adult+$children;
 					 if($category_id==1){
 						 $category_name="Package";
-						 $image1=$this->Html->image('/img/slider/package-icon.png',['style'=>'height:20px']);
+						 $image1=$this->Html->image('/img/slider/package-icon.png');
 						 $text="<span class='packageType'>Package</span>";
 						 $dest_show="Destination City";
 					 }
