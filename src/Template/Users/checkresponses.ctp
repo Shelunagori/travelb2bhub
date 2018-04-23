@@ -15,7 +15,7 @@ $conn = ConnectionManager::get('default');
 	/* Logo for Mobile */
 	.tst{
 		margin-top: -5px !important;
-	 }
+	}
 }
 fieldset
 {
@@ -339,19 +339,49 @@ legend
 								<div class="modal-dialog modal-md" >
 									<!-- Modal content-->
 										<div class="modal-content">
+										<form action="<?php echo $this->Url->build(array('controller'=>'users','action'=>'acceptOffer')) ?>" method="post">
 											<div class="modal-header">
 												<button type="button" class="close" data-dismiss="modal">&times;</button>
 												<h3 class="modal-title">
-													<h4><font color="black">Are you sure you want to Accept Offer ?</font></h4>
+													<h4><font color="black">Leave a Review, and Accept Offer ?</font></h4>
 												</h3>
 											</div>
-												<div class="modal-footer">
-													<button type="button"  href="javascript:void(0);" class="acceptOffer btn btn-info "request_id = "<?php echo $row['request']['id']; ?>" response_id = "<?php echo $row['id']; ?>">Accept</button>
-													<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+											<div class="modal-body">
+												<div class="form-group" style="height:50px">
+													<label class="col-md-4 control-label" for="Rating">Rating (Optional)<span class="asterisk"></span></label>
+													<div class="col-md-5">
+														<input class="star star-5" id="star-5<?php echo $row['id']; ?>" type="radio" name="rating"  value="5"/>
+														<label class="star star-5" for="star-5<?php echo $row['id']; ?>"></label>
+														<input class="star star-4" id="star-4<?php echo $row['id']; ?>" type="radio" name="rating"  value="4"/>
+														<label class="star star-4" for="star-4<?php echo $row['id']; ?>"></label>
+														<input class="star star-3" id="star-3<?php echo $row['id']; ?>" type="radio" name="rating" value="3"/>
+														<label class="star star-3" for="star-3<?php echo $row['id']; ?>"></label>
+														<input class="star star-2" id="star-2<?php echo $row['id']; ?>" type="radio" name="rating"  value="2"/>
+														<label class="star star-2" for="star-2<?php echo $row['id']; ?>"></label>
+														<input class="star star-1" id="star-1<?php echo $row['id']; ?>" type="radio" name="rating"  value="1" />
+														<label class="star star-1" for="star-1<?php echo $row['id']; ?>"></label>
+														<input style="display:none;" type="radio" name="rating" value="0"/>
+													</div>
+												</div>
+
+												<div class="form-group" style="height:50px">
+													<label class="col-md-4 control-label" for="comment">Comment (Optional)</label>
+													<div class="col-md-6">
+														<textarea name="comment" class="form-control" id="comment"><?php echo $comment; ?></textarea>
+													</div>
 												</div>
 											</div>
+<input type="hidden" value="<?php echo $row['request']['id']; ?>" name="request_id" />
+<input type="hidden" value="<?php echo $row['id']; ?>" name="response_id" />
+<input type="hidden" value="<?php echo $row['request']['id']; ?>" name="request_id" />
+											<div class="modal-footer">
+												<button type="submit" class="acceptOffer btn btn-info">Accept</button>
+												<button type="button" class="btn btn-warning" data-dismiss="modal">Cancel</button>
+											</div>
+										</form>
 										</div>
 									</div>
+								</div>
 							 
 						 
 						<?php 
@@ -671,7 +701,7 @@ $(document).ready(function () {
 			});
 	});
 	
-	$(".acceptOffer").click(function (e) {
+	/*$(".acceptOffer").click(function (e) {
 		e.preventDefault();
 		var __this = $(this);
 		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'acceptOffer')) ?>";
@@ -691,7 +721,7 @@ $(document).ready(function () {
 					alert("There is some problem, please try again.");
 				}
 			});
-	});
+	});*/
 	$(".shareDetails").click(function (e) {
 		e.preventDefault();
 		var __this = $(this);

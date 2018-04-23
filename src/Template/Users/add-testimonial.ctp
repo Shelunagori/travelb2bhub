@@ -58,7 +58,7 @@
 						<div class="form-group col-md-12">
 						<label class="col-md-4 control-label" for="comment">Comment</label>
 						<div class="col-md-6">
-						<textarea name="comment" class="form-control" id="comment"><?php echo $comment; ?></textarea>
+						<textarea name="comment" class="form-control" id="comment"></textarea>
 						</div>
 						</div>
 						<div class="form-group">

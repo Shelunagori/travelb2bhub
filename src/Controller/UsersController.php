@@ -2672,56 +2672,72 @@ public function checkresponses($id) {
 }
 public function acceptOffer() {
 	date_default_timezone_set('Asia/Kolkata');
-$this->loadModel('Requests');
-$this->loadModel('Responses');
-$this->loadModel('User_Chats');
-$res = 0;
-if(isset($_POST["request_id"]) && !empty($_POST["request_id"]) && !empty($this->Auth->user('id'))) {
-$TableRequest = TableRegistry::get('Requests');
-$request = $TableRequest->get($_POST["request_id"]);
-$user_from_id = $request['user_id'];
-$request_id = $_POST["request_id"];
-$request->status = 2;
-$request->final_id = $_POST["response_id"];
-$request->accept_date =  date("Y-m-d H:i:s");
-$request->response_id = $_POST["response_id"];
-if ($TableRequest->save($request)){
-$TableResponse = TableRegistry::get('Responses');
-$response = $TableResponse->get($_POST["response_id"]);
-$send_to_user_id = $response['user_id'];
-$response->status = 1;
-$TableResponse->save($response);
-$res = 1;
-}
-if($res==1)
-{
-$TableUser = TableRegistry::get('Users');
-$user = $TableUser->get($user_from_id);
-$name = $user['first_name'].' '.$user['last_name'];
-///--- Sender 
-$SendToUser = $TableUser->get($send_to_user_id);
-$SendToUserName = $SendToUser['first_name'].' '.$SendToUser['last_name'];
+	$this->loadModel('Requests');
+	$this->loadModel('Responses');
+	$this->loadModel('testimonial');
+	$this->loadModel('User_Chats');
+	$res = 0;
+ 
+	if(isset($_POST["request_id"]) && !empty($_POST["request_id"]) && !empty($this->Auth->user('id'))) {
+		$TableRequest = TableRegistry::get('Requests');
+		$request = $TableRequest->get($_POST["request_id"]);
+		$user_from_id = $request['user_id'];
+		$request_id = $_POST["request_id"];
+		$request->status = 2;
+		$request->final_id = $_POST["response_id"];
+		$request->accept_date =  date("Y-m-d H:i:s");
+		$request->response_id = $_POST["response_id"];
+		if ($TableRequest->save($request)){
+			$TableResponse = TableRegistry::get('Responses');
+			$response = $TableResponse->get($_POST["response_id"]);
+			$send_to_user_id = $response['user_id'];
+			$response->status = 1;
+			$TableResponse->save($response);
+			$res = 1;
+		}
+		if($res==1)
+		{
+			$TableUser = TableRegistry::get('Users');
+			$user = $TableUser->get($user_from_id);
+			$name = $user['first_name'].' '.$user['last_name'];
+			///--- Sender 
+			$SendToUser = $TableUser->get($send_to_user_id);
+			$SendToUserName = $SendToUser['first_name'].' '.$SendToUser['last_name'];
 
-$message = "$name has accepted your offer. Click here to go to Finalized Requests/Reponses to add a Review for $name";
-$userchatTable = TableRegistry::get('User_Chats');
-$userchats = $userchatTable->newEntity();
-$userchats->request_id = $request_id;
-$userchats->user_id = $user_from_id;
-$userchats->send_to_user_id = $send_to_user_id;
-$userchats->message = $message;
-$userchats->type = 'Final Response';
-$userchats->created = date("Y-m-d H:i:s");
-$userchats->notification = 1;;
-	if ($userchatTable->save($userchats)) {
-		$id = $userchats->id;
- 		$this->sendpushnotification($send_to_user_id,$message,$message);
-		$res = 1;
+			$message = "$name has accepted your offer. Click here to go to Finalized Requests/Reponses to add a Review for $name";
+			$userchatTable = TableRegistry::get('User_Chats');
+			$userchats = $userchatTable->newEntity();
+			$userchats->request_id = $request_id;
+			$userchats->user_id = $user_from_id;
+			$userchats->send_to_user_id = $send_to_user_id;
+			$userchats->message = $message;
+			$userchats->type = 'Final Response';
+			$userchats->created = date("Y-m-d H:i:s");
+			$userchats->notification = 1;;
+				if ($userchatTable->save($userchats)) {
+					$id = $userchats->id;
+					$this->sendpushnotification($send_to_user_id,$message,$message);
+					$res = 1;
+				}
+		}
+		//---- REVIEW
+ 		$testimonialTable = TableRegistry::get('testimonial');
+		$testimonial = $testimonialTable->newEntity();
+		$testimonial->author_id = $request['user_id'];
+		$testimonial->request_id = $request_id;
+		$testimonial->user_id = $response['user_id'];
+		$testimonial->rating = $this->request->data['rating'];
+		$testimonial->comment = $this->request->data['comment'];
+		$testimonial->status =  '0';
+		$testimonial->created_at = date("Y-m-d H:i:s");
+		if ($testimonialTable->save($testimonial)) {
+			$id = $testimonial->id;
+		}
 	}
+	return $this->redirect('/users/FinalizedRequestList');
 }
-}
-echo $res;
-exit;
-}
+
+
 public function myresponse($id) {
 $this->loadModel('Requests');
 $users = TableRegistry::get('Requests');
