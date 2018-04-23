@@ -76,7 +76,7 @@ font-size:20px;
 	pading-bottom:10px!important;
 }
 .rowspace{
-	padding-top:0px;
+	padding-top:5px;
 	font-size:14px;
 }
 .rowspacemodal{
@@ -88,8 +88,8 @@ hr{
     margin-bottom: 4px !important;
 }
 label{
-	color:#676363;
-	font-weight:600
+	color:#96989A !important;
+	font-weight:100;
 }
 
 .col-md-4{
@@ -196,9 +196,9 @@ a{
 												<div class="row">
 													<div class="col-md-12">
 														<div class="col-md-3">
-															<label>
+															<span>
 																Select Reason
-															</label>
+															</span>
 														</div>
 														<div class="col-md-9">
 															<div class="reason_list">
@@ -303,8 +303,7 @@ a{
 																	</span>
 																	</div>
 																<div class="modal-body" style="padding-left:15px!important;">
-																		<span class="help-block"></span>
-																		<div class="row ">
+																		<div class="row rowspace">
 																		<div class="col-md-12">
 																			<label>Seller Name: </label>
 																			<span style="padding-top:2px;">
@@ -324,13 +323,13 @@ a{
 																				</span>
 																			</div>					
 																		</div>					
-																		<div class="row ">
+																		<div class="row rowspace">
 																			<div class="col-md-12">
 																			<label>Mobile No: </label>
 																			<span><?= h($hotelPromotion->user->mobile_number);?></span>
 																			</div>
 																		</div>
-																		<div class="row ">
+																		<div class="row rowspace">
 																			<div class="col-md-12">
 																				<label>Email: </label>
 																				<span><a href="mailto:<?php echo $hotelPromotion->user->email;?>"><?= h($hotelPromotion->user->email);?></a></span>

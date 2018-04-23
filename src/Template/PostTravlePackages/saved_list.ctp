@@ -157,6 +157,9 @@ label{
 a{
 	color:#ac85d6;
 }
+.btn{
+	margin-bottom:4px !important;
+}
 </style>
 <div class="row" >
 	<div class="col-md-12">
@@ -321,9 +324,9 @@ a{
 																<div class="row">
 																	<div class="col-md-12">
 																		<div class="col-md-3">
-																			<label>
+																			<span>
 																				Select Reason
-																			</label>
+																			</span>
 																		</div>
 																		<div class="col-md-9">
 																			<div class="input-field reason_list">
@@ -426,33 +429,12 @@ a{
 												</div>
 												
 					<div class="row "  style="padding-top: 15px;">						
-					<div class="col-md-12 ">
-						<button class="btn btn-info btn-md btnlayout" data-target="#Inclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal" type="button">Inclusions</button>&nbsp;&nbsp;
-							<!-------Report Modal Start--------->
-							<div id="Inclusion<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
-								<div class="modal-dialog modal-md">
-									<!-- Modal content-->
-										<div class="modal-content">
-										  <div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<span class="modal-title">Including in Package</span>
-										  </div>
-											<div class="modal-body" >
-												<div class="row ">
-													<div class="col-md-12" style="padding: 15px;">
-													<div class="col-md-12">
-														<span ><?= h($postTravlePackage->package_detail); ?></span>
-													</div>
-													</div>
-												</div>
-											</div>
-											<div class="modal-footer" >
-												<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancel</button>
-											</div>
-										</div>
+						<div class="col-md-12 text-center" >
+							<button class="btn btn-info btn-md btnlayout" data-target="#Inclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal" type="button">Inclusions</button>&nbsp;&nbsp;
+							<button class="btn btn-warning btn-md btnlayout" data-target="#Exclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal" type="button">Exclusions</button>&nbsp;&nbsp;
+							<button  class="btn btn-danger btn-md  btnlayout" data-target="#contactdetails<?php echo $postTravlePackage->id;?>" data-toggle="modal" type="button">Contact Info</button>
 									</div>
 								</div>
-								<button class="btn btn-warning btn-md btnlayout" data-target="#Exclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal" type="button">Exclusions</button>&nbsp;&nbsp;
 								<!-------Report Modal Start--------->
 								<div id="Exclusion<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 									<div class="modal-dialog modal-md">
@@ -477,10 +459,9 @@ a{
 											</div>
 										</div>
 									</div>
-									<button class="btn btn-danger btn-md  btnlayout" data-target="#contactdetails<?php echo $postTravlePackage->id;?>" data-toggle="modal" type="button">Contact Info</button>
 											<!-------Contact Details Modal --------->
 											<div id="contactdetails<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
-																								<div class="modal-dialog modal-sm" >
+											<div class="modal-dialog modal-sm" >
 													<!-- Modal content-->
 														<div class="modal-content">
 														  <div class="modal-header">
@@ -540,9 +521,30 @@ a{
 															</div>
 														</div>
 													</div>
-										<!-------Contact Details Modal End--------->
+											<!-------Report Modal Start--------->
+							<div id="Inclusion<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
+								<div class="modal-dialog modal-md">
+									<!-- Modal content-->
+										<div class="modal-content">
+										  <div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<span class="modal-title">Including in Package</span>
+										  </div>
+											<div class="modal-body" >
+												<div class="row ">
+													<div class="col-md-12" style="padding: 15px;">
+													<div class="col-md-12">
+														<span ><?= h($postTravlePackage->package_detail); ?></span>
+													</div>
+													</div>
 												</div>
 											</div>
+											<div class="modal-footer" >
+												<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancel</button>
+											</div>
+										</div>
+									</div>
+								</div>
 										</div>
 									</div>
 								</div>

@@ -441,9 +441,9 @@ a{
 												<div class="row">
 													<div class="col-md-12">
 														<div class="col-md-3">
-															<label>
+															<span>
 																Select Reason
-															</label>
+															</span>
 														</div>
 														<div class="col-md-9">
 															<div class="input-field reason_list">
@@ -558,8 +558,7 @@ a{
 																	</span>
 																	</div>
 																	<div class="modal-body" style="padding-left:15px!important;">
-																		<span class="help-block"></span>
-																		<div class="row">
+																		<div class="row rowspace">
 																		<div class="col-md-12">
 																			<label>
 																			Seller Name: </label>
@@ -579,13 +578,13 @@ a{
 																			</span>
 																			</div>					
 																		</div>
-																		<div class="row">
+																		<div class="row rowspace">
 																			<div class="col-md-12">
 																			<label>Mobile No: </label>
 																			<span><?= h($taxiFleetPromotion->user->mobile_number);?></span>
 																			</div>
 																		</div>
-																		<div class="row">
+																		<div class="row rowspace">
 																			<div class="col-md-12">
 																				<label>Email: </label>
 																				<span><u><a href="mailto:<?php echo $taxiFleetPromotion->user->email;?>"><?= h($taxiFleetPromotion->user->email);?></a></u></span>

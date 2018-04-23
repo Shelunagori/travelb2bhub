@@ -86,10 +86,9 @@ hr{
     margin-bottom: 4px !important;
 }
 label{
-	color:#676363;
-	font-weight:600
+	color:#96989A !important;;
+	font-weight: 100;
 }
-
 .contact{
 	border-radius:20px;
 	width:130px;
@@ -219,9 +218,9 @@ a{
 												<div class="row">
 													<div class="col-md-12">
 														<div class="col-md-3">
-															<label>
+															<span>
 																Select Reason
-															</label>
+															</span>
 														</div>
 														<div class="col-md-9">
 															<div class="input-field reason_list">
@@ -261,30 +260,30 @@ a{
 						</div>
 					<div class="col-md-9">
 								<div class="row col-md-12" style="padding-top:8px;">
-									<div class="col-md-12"><span style="color:#676363;font-weight:600;">Category: </span>
+									<div class="col-md-12"><span style="color:#96989A;font-weight:100;">Category: </span>
 										<?= h($vehicleList); ?>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#676363;font-weight:600;"><?= __(' Cities of Operation') ?>: </span>
+										<div class="col-md-12"><span style="color:#96989A;font-weight:100;"><?= __(' Cities of Operation') ?>: </span>
 										<span><?= h($cityList); ?></span>
 										</div>
 									</div>
 									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#676363;font-weight:600;"><?= __(' States of Operation') ?>: </span>
+										<div class="col-md-12"><span style="color:#96989A;font-weight:100;"><?= __(' States of Operation') ?>: </span>
 										<span ><?= h($stateList); ?> </span>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="row rowspace">
-										<div class="col-md-12"><span style="color:#676363;font-weight:600;"><?= __(' Country') ?>: </span>
+										<div class="col-md-12"><span style="color:#96989A;font-weight:100;"><?= __(' Country') ?>: </span>
 										<span ><?= h($taxiFleetPromotion->country->country_name); ?> </span>
 										</div>
 									</div>
 									<div class="row rowspace">
-										<div class="col-md-12 "><span style="color:#676363;font-weight:600;"><?= __(' Seller') ?>: </span>	
+										<div class="col-md-12 "><span style="color:#96989A;font-weight:100;"><?= __(' Seller') ?>: </span>	
 										<span><u>
 											<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$taxiFleetPromotion->user_id),1);?>
 											<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>"> 
@@ -320,8 +319,7 @@ a{
 																	</span>
 																	</div>
 																	<div class="modal-body" style="padding-left:15px!important;">
-																		<span class="help-block"></span>
-																				<div class="row">
+																		<div class="row rowspace">
 																		<div class="col-md-12">
 																			<label>
 																			Seller Name: </label>
@@ -341,13 +339,13 @@ a{
 																			</span>
 																			</div>					
 																		</div>
-																		<div class="row">
+																		<div class="row rowspace">
 																			<div class="col-md-12">
 																			<label>Mobile No: </label>
 																			<span><?= h($taxiFleetPromotion->user->mobile_number);?></span>
 																			</div>
 																		</div>
-																		<div class="row">
+																		<div class="row rowspace">
 																			<div class="col-md-12">
 																				<label>Email: </label>
 																				<span><u><a href="mailto:<?php echo $taxiFleetPromotion->user->email;?>"><?= h($taxiFleetPromotion->user->email);?></a></u></span>
@@ -369,7 +367,7 @@ a{
 						<hr></hr>	<span class="help-block"></span>					
 						<div class="row">
 						<div class="col-md-12">
-								<span style="color:#676363;font-weight:600;"><?= __('Fleet Details') ?></span>
+								<span style="color:#96989A;font-weight:100;"><?= __('Fleet Details') ?></span>
 						</div>
 					</div>
 					<div class="row" style="padding-top:2px;">

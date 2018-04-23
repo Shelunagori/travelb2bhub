@@ -232,9 +232,9 @@ font-size:20px;
 																<div class="row">
 																	<div class="col-md-12">
 																		<div class="col-md-3">
-																			<label>
+																			<span>
 																			Select Reason
-																			</label>
+																			</span>
 																		</div>
 																		<div class="col-md-9">
 																			<div class="input-field reason_list">
@@ -346,8 +346,7 @@ font-size:20px;
 																</span>
 																</div>
 																<div class="modal-body" style="padding-left:15px!important;">
-																	<span class="help-block"></span>
-																	<div class="row">
+																	<div class="row rowspace">
 																		<div class="col-md-12">
 																			<label>Seller Name: </label>
 																			<span style="padding-top:2px;">
@@ -367,7 +366,7 @@ font-size:20px;
 																			</span>
 																			</div>					
 																		</div>
-																	<div class="row">
+																	<div class="row rowspace">
 																		<div class="col-md-12">
 																		<label>Mobile No: </label>
 																		<span>
@@ -375,7 +374,7 @@ font-size:20px;
 																		</span>
 																		</div>
 																	</div>
-																	<div class="row">
+																	<div class="row rowspace">
 																		<div class="col-md-12">
 																			<label>Email: </label>
 																			<span>

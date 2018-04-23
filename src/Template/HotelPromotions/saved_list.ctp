@@ -84,6 +84,18 @@ if ($err) {
 
 ?>
 <style type="text/css">
+@media all and (max-width: 410px) {
+	/* Logo for Mobile */
+	.btnlayout{
+		margin-top: 5px !important;
+	 }
+}
+@media all and (min-width: 400px) {
+	/* Logo for Mobile */
+	.btnlayout{
+		//margin-top: -5px !important;
+	 }
+}
 fieldset{
 	margin-bottom:5px !important;
 	border-radius: 6px;
@@ -97,7 +109,7 @@ font-size:20px;
 }
 .btnlayout{
 	border-radius:15px !important;
-	}
+}
 #myImg:hover {opacity: 0.7;}
 .bbb{
 	padding:0px!important;
@@ -106,6 +118,7 @@ font-size:20px;
 .rowspace{
 	padding-top:5px;
 	font-size:14px;
+	
 }
 .rowspacemodal{
 	padding:10px;
@@ -115,15 +128,14 @@ hr{
 	margin-top: 15px !important;
     margin-bottom: 4px !important;
 }
+
 label{
-	color:#676363;
-	font-weight:600;
+	color:#96989A !important;
+	font-weight:100;
 }
 
 .col-md-4{
 	color:#676363;
-	font-weight:600;
-	
 }
 
 a{
@@ -244,9 +256,9 @@ a{
 												<div class="row">
 													<div class="col-md-12">
 														<div class="col-md-3">
-															<label>
+															<span>
 																Select Reason
-															</label>
+															</span>
 														</div>
 														<div class="col-md-9">
 															<div class="reason_list">
@@ -283,27 +295,27 @@ a{
 									</div>
 								</div>
 							</div><hr></hr>
-						</div>
+						</div><span class="help-block"></span>
 							<div class="col-md-9" >
 								<div class="col-md-5">
-										<div class="row" style="padding-top:8px;">
+										<div class="row rowspace">
 											<div class="col-md-12"><label>Category: </label>
 												<span><?= h($hotelPromotion->hotel_category->name); ?></span>
 											</div>
 										</div>
-										<div class="row ">
+										<div class="row rowspace">
 											<div class="col-md-12"><label>Cheapest Room: </label>
 											<span style="color:#1295AB">&#8377;<?= (h($hotelPromotion->cheap_tariff)) ?></span>
 											</div>
 										</div>
-									<div class="row ">
+									<div class="row rowspace">
 										<div class="col-md-12"><label>Most Expensive Room: </label>
 										<span style="color:#1295AB">&#8377;<?= (h($hotelPromotion->expensive_tariff)) ?></span>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-7">
-								<div class="row ">
+								<div class="row rowspace">
 										<div class="col-md-12 "><label><?= __(' Hotelier') ?>: </label>	
 										<span><u>
 												<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$hotelPromotion->user_id),1);?>
@@ -321,12 +333,12 @@ a{
 											</span>
 										</div>					
 									</div>
-									<div class="row ">
+									<div class="row rowspace">
 										<div class="col-md-12"><label><?= __(' Website') ?>: </label>
 										<span ><a style="color:blue;" href="http://<?php echo $hotelPromotion->website; ?>" target="blank"><u><?= h($hotelPromotion->website) ?></u></a> </span>
 										</div>
 									</div>
-									<div class="row ">
+									<div class="row rowspace">
 										<div class="col-md-12"><label><?= __(' Location') ?>: </label>
 										<span ><?= h($hotelPromotion->hotel_location) ?></span>
 										</div>
@@ -350,8 +362,7 @@ a{
 																	</span>
 																	</div>
 																<div class="modal-body" style="padding-left:15px!important;">
-																		<span class="help-block"></span>
-																		<div class="row ">
+																		<div class="row rowspace">
 																		<div class="col-md-12">
 																			<label>Seller Name: </label>
 																			<span style="padding-top:2px;">
@@ -371,13 +382,13 @@ a{
 																				</span>
 																			</div>					
 																		</div>					
-																		<div class="row ">
+																		<div class="row rowspace">
 																			<div class="col-md-12">
 																			<label>Mobile No: </label>
 																			<span><?= h($hotelPromotion->user->mobile_number);?></span>
 																			</div>
 																		</div>
-																		<div class="row ">
+																		<div class="row rowspace">
 																			<div class="col-md-12">
 																				<label>Email: </label>
 																				<span><a href="mailto:<?php echo $hotelPromotion->user->email;?>"><?= h($hotelPromotion->user->email);?></a></span>

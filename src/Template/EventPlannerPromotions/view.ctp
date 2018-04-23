@@ -76,7 +76,7 @@ font-size:20px;
 	pading-bottom:10px!important;
 }
 .rowspace{
-	padding-top:0px;
+	padding-top:5px;
 	font-size:14px;
 }
 .rowspacemodal{
@@ -88,12 +88,9 @@ hr{
     margin-bottom: 4px !important;
 }
 label{
-	color:#676363;
-	font-weight:600;
-	padding-top:3px;
-	margin-bottom:0px !important;
+	color:#96989A !important;
+	font-weight:100;
 }
-
 .col-md-4{
 	color:#676363;
 	font-weight:600;
@@ -240,9 +237,9 @@ a{
 																<div class="row">
 																	<div class="col-md-12">
 																		<div class="col-md-3">
-																			<label>
+																			<span>
 																				Select Reason
-																			</label>
+																			</span>
 																		</div>
 																		<div class="col-md-9">
 																			<div class="input-field reason_list">
@@ -339,8 +336,7 @@ a{
 											</h3>
 											</div>
 											<div class="modal-body" style="padding-left:15px!important;">
-												<span class="help-block"></span>
-												<div class="row">
+												<div class="row rowspace">
 													<div class="col-md-12">
 														<label>Seller Name: </label>
 															<span style="padding-top:2px;">
@@ -360,14 +356,14 @@ a{
 														</span>
 													</div>					
 												</div>
-												<div class="row">
+												<div class="row rowspace">
 													<div class="col-md-12" >
 													<label>Mobile No: </label>
 													<span class="label11"><?= h($eventPlannerPromotion->user->mobile_number);?></span>
 													</div>
 												</div>
-												<div class="row">
-													<div class="col-md-12" style="padding-top:2px;">
+												<div class="row rowspace">
+													<div class="col-md-12" >
 														<label>Email: </label>
 														<span class="label11"><a href="mailto:<?php echo $eventPlannerPromotion->user->email;?>"><?= h($eventPlannerPromotion->user->email);?></a></span>
 													</div>

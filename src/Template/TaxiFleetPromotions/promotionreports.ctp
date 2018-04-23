@@ -75,8 +75,9 @@ fieldset{
 	padding:0px!important;
 	pading-bottom:10px!important;
 }
-label {
-	font-weight : 300 !important;
+label{
+	color:#96989A !important;
+	font-weight:100;
 }
 .btn-defaults {
 	background-color: #ffffff !important;
@@ -144,26 +145,26 @@ $m=0;
 							<span style="color:black;font-size:17px;"><?php echo $texifleetpromotion->title?></span>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-							Views: 
+							<label>Views:</label> 
 								<!--<a  style="color:#1295AB;" href="viewers_list/<?php echo $texifleetpromotion->id?>"><label><?php echo $texifleetpromotion->total_views;?></label></a>--->
 								<a type="button" href="viewers_list/<?php echo $texifleetpromotion->id; ?>" style="border-radius:10px; width:53px; background-color: #FFF !important;color: #1295AB !important; border: 1px solid; padding-top: 2px;padding-bottom: 3px" class="btn btn-md">
 									<?php echo $texifleetpromotion->total_views;?>
 								</a>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-								Likes:&nbsp; 
+								<label>Likes:&nbsp;</label> 
 								<a type="button" href="likers_list/<?php echo $texifleetpromotion->id ; ?>" style="border-radius:10px; width:53px; background-color: #FFF !important;color: #1295AB !important; border: 1px solid; padding-top: 2px;padding-bottom: 3px" class="btn btn-md">
 									<?php echo $texifleetpromotion->total_likes;?>
 								</a> 
 							</div>
 							
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-							Date Posted: 
-							<label style="color:black;"><?php echo date('d-M-y',strtotime($texifleetpromotion->created_on));?></label>
+							<label>Date Posted:</label> 
+							<span><?php echo date('d-M-y',strtotime($texifleetpromotion->created_on));?></span>
 							</div>
 							<div class="col-md-12 lbwidth" style="margin-top:5px">
-							Expiring On: 
-							<label style="color:#FB6542;"><?php echo date('d-M-y',strtotime($texifleetpromotion->visible_date));?></label>
+							<label>Expiring On:</label> 
+						<span><?php echo date('d-M-y',strtotime($texifleetpromotion->visible_date));?></span>
 							</div>
 						</div>
 					</div>

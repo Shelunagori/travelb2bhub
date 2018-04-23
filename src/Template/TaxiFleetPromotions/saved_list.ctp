@@ -130,7 +130,7 @@ font-size:20px;
 	pading-bottom:10px!important;
 }
 .rowspace{
-	padding-top:0px;
+	padding-top:5px;
 	font-size:14px;
 }
 .rowspacemodal{
@@ -146,8 +146,8 @@ hr{
 	 white-space: nowrap;
 }
 label{
-	color:#676363;
-	font-weight:600
+	color:#96989A !important;
+	font-weight:100;
 }
 a{
 	color:#ac85d6;
@@ -292,9 +292,9 @@ a{
 												<div class="row">
 													<div class="col-md-12">
 														<div class="col-md-3">
-															<label>
+															<span>
 																Select Reason
-															</label>
+															</span>
 														</div>
 														<div class="col-md-9">
 															<div class="input-field reason_list">
@@ -333,25 +333,25 @@ a{
 						</div>
 					<div class="col-md-9" >
 								<div class="row col-md-12 rowspace">
-										<div class="col-md-12" style="padding-top:8px;">
+										<div class="col-md-12" >
 										<label>Category: </label>
 										<span ><?= h($vehicleList); ?></span>
 										</div>
 								</div>
 								<div class="col-md-7">
-									<div class="row rowspace" style="padding-top:2px;">
+									<div class="row rowspace" >
 										<div class="col-md-12"><label ><?= __(' Cities of Operation') ?>: </label>
 										<span><?= h($cityList); ?></span>
 										</div>
 									</div>
-									<div class="row rowspace" style="padding-top:2px;">
+									<div class="row rowspace" >
 										<div class="col-md-12"><label ><?= __(' States of Operation') ?>: </label>
 										<span ><?= h($stateList); ?> </span>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-5">
-									<div class="row rowspace" style="padding-top:2px;">
+									<div class="row rowspace" >
 										<div class="col-md-12"><label ><?= __(' Country') ?>: </label>
 										<span >India </span>
 										</div>
@@ -375,7 +375,7 @@ a{
 										</div>					
 									</div>
 									<!-----button list-->
-							<div class="row" style="padding-top:15px;">
+							<div class="row rowspace" style="padding-top:15px;">
 								<div class="col-md-12 text-center">
 								<button class="btn btn-info btn-md btnlayout" data-target="#fleetdetail<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Fleet Details</button>&nbsp;&nbsp;
 								<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
@@ -393,8 +393,7 @@ a{
 																	</span>
 																	</div>
 																	<div class="modal-body" style="padding-left:15px!important;">
-																		<span class="help-block"></span>
-																		<div class="row">
+																		<div class="row rowspace">
 																		<div class="col-md-12">
 																			<label>
 																			Seller Name: </label>
@@ -414,13 +413,13 @@ a{
 																			</span>
 																			</div>					
 																		</div>
-																		<div class="row">
+																		<div class="row rowspace">
 																			<div class="col-md-12">
 																			<label>Mobile No: </label>
 																			<span><?= h($taxiFleetPromotion->user->mobile_number);?></span>
 																			</div>
 																		</div>
-																		<div class="row">
+																		<div class="row rowspace">
 																			<div class="col-md-12">
 																				<label>Email: </label>
 																				<span><u><a href="mailto:<?php echo $taxiFleetPromotion->user->email;?>"><?= h($taxiFleetPromotion->user->email);?></a></u></span>

@@ -532,9 +532,9 @@ a{
 																<div class="row">
 																	<div class="col-md-12">
 																		<div class="col-md-3">
-																			<label>
+																			<span>
 																				Select Reason
-																			</label>
+																			</span>
 																		</div>
 																		<div class="col-md-9">
 																			<div class="input-field reason_list">
@@ -589,8 +589,8 @@ a{
 													<span ><?= h($CategoryList); ?></span>
 													</div>
 											</div>
-											<div class="col-md-4 rowspace">
-												<div class="row " style="padding-top:2px;">
+											<div class="col-md-4">
+												<div class="row rowspace">
 													<div class="col-md-12 "><label>Package Duration: </label>
 													<span style="color:#FB6542;"><?= h($postTravlePackage->duration_day_night) ?></span>
 													</div>
@@ -622,12 +622,12 @@ a{
 												
 											</div>
 											<div class="col-md-8">
-											<div class="row rowspace" style="padding-top:2px;">
+											<div class="row rowspace" >
 													<div class="col-md-12"><label>Valid Till: </label>
 													<span><?= h(date('d-M-Y',strtotime($postTravlePackage->valid_date))); ?></span>
 													</div>					
 												</div>	
-												<div class="row" >
+												<div class="row rowspace" >
 													<div class="col-md-12"><label>Cities: </label>
 													<span ><?= h($cityList); ?></span>
 													</div>
@@ -745,15 +745,13 @@ a{
 										</div>
 									</div>
 								</div>
-								<div class="row "  style="padding-top:15px;">
-								<div class="col-md-12 text-center">
+								<div class="row" style="padding-top:15px;">
+								<div class="col-md-12 text-center" >
 									<button class="btn btn-info btn-md btnlayout viewCount" data-target="#Inclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal"  promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" type="button">Inclusions</button>&nbsp;&nbsp;
 										<!-------Report Modal Start--------->
 									<button class="btn btn-warning btn-md btnlayout viewCount" data-target="#Exclusion<?php echo $postTravlePackage->id;?>"   promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" data-toggle="modal" type="button">Exclusions</button>&nbsp;&nbsp;
 									<button class="btn btn-danger btn-md  btnlayout viewCount" data-target="#contactdetails<?php echo $postTravlePackage->id;?>" promotionid="<?php echo $postTravlePackage->id;?>" data-toggle="modal" userId="<?php echo $user_id;?>" type="button">Contact Info</button>
-											<!-------Contact Details Modal --------->
-											
-										<!--Contact Details Modal End -->
+										
 												</div>
 											</div>
 										</div>

@@ -86,6 +86,18 @@ if ($err) {
 
  ?>
  <style type="text/css">
+@media all and (max-width: 410px) {
+	/* Logo for Mobile */
+	.btnlayout{
+		margin-top: 5px !important;
+	 }
+}
+@media all and (min-width: 400px) {
+	/* Logo for Mobile */
+	.btnlayout{
+		//margin-top: -5px !important;
+	 }
+}
 fieldset{
 	margin-bottom:5px !important;
 	border-radius: 6px;
@@ -99,15 +111,16 @@ font-size:20px;
 }
 .btnlayout{
 	border-radius:15px !important;
-	}
+}
 #myImg:hover {opacity: 0.7;}
 .bbb{
 	padding:0px!important;
 	pading-bottom:10px!important;
 }
 .rowspace{
-	padding-top:0px;
+	padding-top:5px;
 	font-size:14px;
+	
 }
 .rowspacemodal{
 	padding:10px;
@@ -117,16 +130,14 @@ hr{
 	margin-top: 15px !important;
     margin-bottom: 4px !important;
 }
+
 label{
-	color:#676363;
-	font-weight:600;
-	padding-top:3px;
-	margin-bottom:0px !important;
+	color:#96989A !important;
+	font-weight:100;
 }
 
 .col-md-4{
 	color:#676363;
-	font-weight:600;
 }
 
 a{
@@ -262,9 +273,9 @@ a{
 													<div class="row">
 														<div class="col-md-12">
 															<div class="col-md-3">
-																<label>
+																<span>
 																	Select Reason
-																</label>
+																</span>
 															</div>
 															<div class="col-md-9">
 																<div class="input-field reason_list">
@@ -343,11 +354,66 @@ a{
 									</div>
 								</div>
 							</div>
-						<div class="col-md-12 text-center">
-						<div class="row" style="padding-top:15px;">
-							<div class="col-md-12">
-							<button class="btn btn-info btn-md btnlayout" data-target="#eventdetail<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" type="button">Event Details</button>&nbsp;&nbsp;
-								<!-------Report Modal Start--------->
+								<div class="col-md-12 text-center">
+									<div class="row" style="padding-top:15px;">
+										<div class="col-md-12">
+										<button class="btn btn-info btn-md btnlayout" data-target="#eventdetail<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" type="button">Event Details</button>&nbsp;&nbsp;
+										<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
+										</div>
+									</div>
+								</div>
+								<!-------Contact Details Modal --------->
+								<div id="contactdetails<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
+									<div class="modal-dialog modal-sm" >
+									<div class="modal-content">
+									  <div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h3 class="modal-title">
+											Seller Details
+											</h3>
+											</div>
+											<div class="modal-body" style="padding-left:15px!important;">
+												<div class="row rowspace">
+													<div class="col-md-12">
+														<label>Seller Name: </label>
+															<span style="padding-top:2px;">
+															<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$eventPlannerPromotion->user_id),1);?>
+															<u><a style="color:#d69d5c;" href="<?php echo $hrefurl; ?>"> 
+																<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?></u>
+														
+																<?php
+																if($eventPlannerPromotionss->user_rating==0)
+																{
+																	echo "";
+																}
+																else{
+																		echo "(".$eventPlannerPromotionss->user_rating." <i class='fa fa-star'></i>)";
+																	}
+																?></a>
+														</span>
+													</div>					
+												</div>
+												<div class="row rowspace">
+													<div class="col-md-12" >
+													<label>Mobile No: </label>
+													<span class="label11"><?= h($eventPlannerPromotion->user->mobile_number);?></span>
+													</div>
+												</div>
+												<div class="row rowspace">
+													<div class="col-md-12" style="padding-top:2px;">
+														<label>Email: </label>
+														<span class="label11"><a href="mailto:<?php echo $eventPlannerPromotion->user->email;?>"><?= h($eventPlannerPromotion->user->email);?></a></span>
+													</div>
+												</div>
+												<span class="help-block"></span>
+											</div>
+											<div class="modal-footer">
+											<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+											</div>
+										</div>
+									</div>
+								</div>
+						<!-------Report Modal Start--------->
 								<div id="eventdetail<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
 										<div class="modal-dialog modal-md">
 											<!-- Modal content-->
@@ -370,62 +436,6 @@ a{
 											</div>
 										</div>
 								<!-------Report Modal End--------->	
-								<button class="btn btn-danger btn-md btnlayout" data-target="#contactdetails<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>
-								<!-------Contact Details Modal --------->
-								<div id="contactdetails<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
-									<div class="modal-dialog modal-sm" >
-									<div class="modal-content">
-									  <div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<h3 class="modal-title">
-											Seller Details
-											</h3>
-											</div>
-											<div class="modal-body" style="padding-left:15px!important;">
-												<span class="help-block"></span>
-												<div class="row">
-													<div class="col-md-12">
-														<label>Seller Name: </label>
-															<span style="padding-top:2px;">
-															<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$eventPlannerPromotion->user_id),1);?>
-															<u><a style="color:#d69d5c;" href="<?php echo $hrefurl; ?>"> 
-																<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?></u>
-														
-																<?php
-																if($eventPlannerPromotionss->user_rating==0)
-																{
-																	echo "";
-																}
-																else{
-																		echo "(".$eventPlannerPromotionss->user_rating." <i class='fa fa-star'></i>)";
-																	}
-																?></a>
-														</span>
-													</div>					
-												</div>
-												<div class="row">
-													<div class="col-md-12" >
-													<label>Mobile No: </label>
-													<span class="label11"><?= h($eventPlannerPromotion->user->mobile_number);?></span>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-12" style="padding-top:2px;">
-														<label>Email: </label>
-														<span class="label11"><a href="mailto:<?php echo $eventPlannerPromotion->user->email;?>"><?= h($eventPlannerPromotion->user->email);?></a></span>
-													</div>
-												</div>
-												<span class="help-block"></span>
-											</div>
-											<div class="modal-footer">
-											<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</form>
