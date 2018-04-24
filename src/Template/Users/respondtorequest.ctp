@@ -166,7 +166,7 @@ $conn = ConnectionManager::get('default');
 													 <label class="col-form-label" for=example-text-input>Start Date:  </label>
 													</div> 
 													<div class=col-md-7>
-													 <input class="form-control datepickers" data-date-format="dd-mm-yyyy" name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" >
+													 <input  type="text"  class="form-control datepickers" data-date-format="dd-mm-yyyy" name=startdatesearch value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" >
 													</div>
 													</div>	
 												</div>
@@ -176,7 +176,7 @@ $conn = ConnectionManager::get('default');
 														  <label class="col-form-label" for=example-text-input>End Date:  </label>
 														</div> 
 														<div class=col-md-7>
-														<input class="form-control datepickers" data-date-format="dd-mm-yyyy" name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>">
+														<input  type="text" class="form-control datepickers" data-date-format="dd-mm-yyyy" name=enddatesearch value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch']:''; ?>">
 														</div>
 													</div>
 												</div>

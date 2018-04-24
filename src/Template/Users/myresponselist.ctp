@@ -180,7 +180,7 @@ $conn = ConnectionManager::get('default');
 									 <label class="col-form-label" for=example-text-input>Start Date:  </label>
 									 </div> 
 									 <div class=col-md-7>
-									 <input class="form-control datepickers" data-date-format="dd-mm-yyyy" name=startdatesearch id="datepicker1">
+									 <input  type="text"  class="form-control datepickers" data-date-format="dd-mm-yyyy" name=startdatesearch id="datepicker1">
 									 </div>
 									</div>	
 								</div>
@@ -190,7 +190,7 @@ $conn = ConnectionManager::get('default');
 										  <label class="col-form-label" for=example-text-input>End Date:  </label>
 										</div> 
 										<div class=col-md-7>
-										<input class="form-control datepickers" data-date-format="dd-mm-yyyy" name=enddatesearch id="datepicker2">
+										<input  type="text"  class="form-control datepickers" data-date-format="dd-mm-yyyy" name=enddatesearch id="datepicker2">
 										</div>
 									</div>
 								</div>

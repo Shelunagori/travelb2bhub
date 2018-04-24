@@ -809,6 +809,7 @@ $('#packageTransport1').click(function(){
 	$(this).datepicker().datepicker( "show" );
 });
 ///------ END
+$('input[type="text"]'). attr("autocomplete", "off");
 
 $(".txtEditor").Editor({
 	'source':true,
@@ -816,6 +817,7 @@ $(".txtEditor").Editor({
 	'rm_format':false,
 	'insert_img':false,
 }); 
+
 </script> 
 </body>
 </html>
