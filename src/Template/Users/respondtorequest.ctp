@@ -428,7 +428,7 @@ $conn = ConnectionManager::get('default');
 									</label>
 								 </td>
 								 <td>
-									  <input type="number" class="form-control" id="quotation_price" name="quotation_price" placeholder="Quote your price"/><br>
+									  <input type="text" class="form-control" id="quotation_price" name="quotation_price" placeholder="Quote your price" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/><br>
 								 </td>
 							</tr>
 							<tr>
@@ -555,8 +555,7 @@ $conn = ConnectionManager::get('default');
 		</fieldset>
 		</form>
 		</div>
-	</div>
-</div>
+	</div> 
 							<?php  } } ?>
 							<div class="pages"></div>
 						<?php }else {?>

@@ -161,16 +161,16 @@ label {
 									<p for="from">
 										Total Budget  <span class="required">*</span>
 									</p>
-									<input autocomplete="off" name="total_budget" type="number" min="1" class="form-control" id="total_budget" placeholder="Total Budget"/>
+									<input autocomplete="off" name="total_budget" type="text" min="1" class="form-control" id="total_budget" placeholder="Total Budget" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
 								</div>
 							</div>
 							<div class="col-md-4">
 								<p for="from">Adults <span class="required">*</span></p>
-								<?php echo $this->Form->control('hotelAdult', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
+								<?php echo $this->Form->control('hotelAdult', ["type"=>"text","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'oninput'=>"this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"]); ?>
 							</div>
 							<div class="col-md-4">
 								<p for="from">Children below 6 </p>
-								<?php echo $this->Form->control('hotelChildren', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
+								<?php echo $this->Form->control('hotelChildren', ["type"=>"text","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'oninput'=>"this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"]); ?>
 							</div>							 
 						</div>
 					</div>
@@ -184,19 +184,19 @@ label {
 							<p for="from">No. of Rooms <span class="required">*</span></p>
 							<div class="box-room">
 								<div class="col-md-7"> Single</div>
-								<div class="col-md-5"><input autocomplete="off" name="room1" type="number" min="0" style="height: 27px;" class="form-control number hotelroom" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room1" type="text" min="0" style="height: 27px;" class="form-control number hotelroom" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
 
 								<div class="col-md-7"> Double</div>
-								<div class="col-md-5"><input autocomplete="off" name="room2" type="number" min="0" style="height: 27px;" class="form-control number hotelroom" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room2" type="text" min="0" style="height: 27px;" class="form-control number hotelroom" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
 
 								<div class="col-md-7"> Triple</div>
-								<div class="col-md-5"><input autocomplete="off" name="room3" type="number" min="0" style="height: 27px;" class="form-control number hotelroom" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room3" type="text" min="0" style="height: 27px;" class="form-control number hotelroom" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
 
 								<div class="col-md-7"> Child with bed</div>
-								<div class="col-md-5"><input autocomplete="off" name="child_with_bed" style="height: 27px;" type="number" min="0" class="form-control hotelroom" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="child_with_bed" style="height: 27px;" type="text" min="0" class="form-control hotelroom" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
 
 								<div class="col-md-7"> Child without bed</div>
-								<div class="col-md-5"><input autocomplete="off" name="child_without_bed" style="height: 27px;" type="number" min="0" class="form-control hotelroom" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="child_without_bed" style="height: 27px;" type="text" min="0" class="form-control hotelroom" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
 								
 							</div>
 							<p style="display:none;color:#ea3733;font-weight:100 !important;" id="showerror" > This field is required.</p>
@@ -370,16 +370,16 @@ label {
 										Total Budget 
 										<span class="required">*</span>										
 									</p>
-									<input autocomplete="off" name="total_budget" type="number" min="1" class="form-control" id="total_budget" placeholder="Total Budget"/>
+									<input autocomplete="off" name="total_budget" type="text" min="1" class="form-control" id="total_budget" placeholder="Total Budget" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" />
 								</div>
 							</div>
 							<div class="col-md-4">
 								<p for="from">Adults <span class="required">*</span></p>
-								<?php echo $this->Form->control('adult', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
+								<?php echo $this->Form->control('adult', ["type"=>"text","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'oninput'=>"this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"]); ?>
  							</div>
 							<div class="col-md-4">
 								<p for="from">Children below 6  </p>
-								<?php echo $this->Form->control('children', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
+								<?php echo $this->Form->control('children', ["type"=>"text","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'oninput'=>"this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"]); ?>
  							</div>
 						</div>
 					</div>
@@ -397,19 +397,19 @@ label {
 							<p for="from">No. of Rooms <span class="required">*</span></p>
 							<div class="box-room">
 								<div class="col-md-7"> Single</div>
-								<div class="col-md-5"><input autocomplete="off" name="room1" type="number" min="0" style="height: 27px;" class="form-control packageroom" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room1" type="text" min="0" style="height: 27px;" class="form-control packageroom" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
 
 								<div class="col-md-7"> Double</div>
-								<div class="col-md-5"><input autocomplete="off" name="room2" type="number" min="0" style="height: 27px;" class="form-control packageroom" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room2" type="text" min="0" style="height: 27px;" class="form-control packageroom" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
 
 								<div class="col-md-7"> Triple</div>
-								<div class="col-md-5"><input autocomplete="off" name="room3" type="number" min="0" style="height: 27px;" class="form-control packageroom" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room3" type="text" min="0" style="height: 27px;" class="form-control packageroom" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
 
 								<div class="col-md-7"> Child with bed</div>
-								<div class="col-md-5"><input autocomplete="off" name="child_with_bed" style="height: 27px;" type="number" min="0" class="form-control packageroom" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="child_with_bed" style="height: 27px;" type="text" min="0" class="form-control packageroom" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
 
 								<div class="col-md-7"> Child without bed</div>
-								<div class="col-md-5"><input autocomplete="off" name="child_without_bed" style="height: 27px;" type="number" min="0" class="form-control packageroom" id="from-place" placeholder="0"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="child_without_bed" style="height: 27px;" type="text" min="0" class="form-control packageroom" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
 							</div>
 							<p style="display:none;color:#ea3733;font-weight:100 !important;" id="showerror12" > This field is required.</p>
 						</div>
@@ -732,16 +732,16 @@ label {
 															Total Budget 
 															<span class="required">*</span>
 														</p>
-														<input name="total_budget" type="number" min="1" class="form-control " id="total_budget" placeholder="Total Budget" autocomplete="off" />
+														<input name="total_budget" type="text" min="1" class="form-control " id="total_budget" placeholder="Total Budget" autocomplete="off" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/>
 													</div>
 												</div>
 												<div class="col-md-4">
 													<p for="from">Adults <span class="required">*</span></p>
-													<?php echo $this->Form->control('transportAdult', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
+													<?php echo $this->Form->control('transportAdult', ["type"=>"text","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'oninput'=>"this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"]); ?>
 												</div>
 												<div class="col-md-4">
 													<p for="from">Children below 6  </p>
-													<?php echo $this->Form->control('transportChildren', ["type"=>"number","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0"]); ?>
+													<?php echo $this->Form->control('transportChildren', ["type"=>"text","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'oninput'=>"this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"]); ?>
 												</div>
 											</div>
 										</div>

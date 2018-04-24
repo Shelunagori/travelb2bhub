@@ -111,11 +111,11 @@ hr { margin-top:0px!important;}
                 </div>
                 <div class="form-group col-md-4">
                   <label for="exampleInputPassword1">Mobile No.</label>
-                  <input type="text" class="form-control" name="mobile_number" value="<?php echo str_replace(' ','',$users['mobile_number']); ?>" id="mobile_number" placeholder="Enter Here">
+                  <input type="text" class="form-control" name="mobile_number" value="<?php echo str_replace(' ','',$users['mobile_number']); ?>" id="mobile_number" placeholder="Enter Here" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                 </div>
 				<div class="form-group col-md-4">
                   <label for="exampleInputPassword1">Secondary Contact No.</label>
-                  <input type="text" class="form-control" name="p_contact" value="<?php echo $users['p_contact'] ?>" id="p_contact" placeholder="Secondary Contact Number">
+                  <input type="text" class="form-control" name="p_contact" value="<?php echo $users['p_contact'] ?>" id="p_contact" placeholder="Secondary Contact Number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                 </div>
 				
 				<div class="form-group col-md-6">
@@ -140,7 +140,7 @@ hr { margin-top:0px!important;}
 				<div class="col-md-12 col-md-12s">
 				<div class="form-group col-md-4">
 					  <label for="exampleInputPassword1">PinCode</label>
-					  <input type="text" class="form-control" id ="pincode" value = "<?php echo (!empty($users['pincode']))?$users['pincode']:""; ?>"name="pincode" placeholder="Enter Pincode">
+					  <input type="text" class="form-control" id ="pincode" value = "<?php echo (!empty($users['pincode']))?$users['pincode']:""; ?>"name="pincode" placeholder="Enter Pincode" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
 				</div>
 				<div class="shw">
 					<div class="form-group col-md-4">
