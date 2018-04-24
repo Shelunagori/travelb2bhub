@@ -84,11 +84,18 @@ li > p{
   padding: 15px;
   border-radius: 8px;
 }
-.content-header {
-	padding: 0px 0px 0 0px !important;
+@media all and (max-width: 520px) {
+	.content-header {
+		padding: 0px 0px 0 0px !important;
+	}
+	.content{
+	padding: 0px !important;
+	}
 }
-.content{
-padding: 0px !important;
+@media all and (min-width: 520px) {
+	.tets{
+		margin-top: 25px;
+	}
 }
 </style>
 
@@ -102,7 +109,7 @@ padding: 0px !important;
 		?>
 	</div>
 </div> 
- <div class="row equal_column" style="margin-bottom:20px">
+ <div class="row equal_column tets" style="margin-bottom:20px">
 <!---<a href="https://www.google.com/" target="_blank" id="myBtn" title="Download Andorid App"><?=  $this->Html->image('/img/playstore.png', ['style'=>'width:100%;','class'=>'image-responsive']) ?></a>---->
 	<?php if($role_id==1) {?>
 	<div class="col-md-4"> 
