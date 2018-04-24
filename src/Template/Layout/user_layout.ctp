@@ -684,32 +684,14 @@ margin-bottom: 0px!important;
 <script>
 $(document).ready(function (){
 		
-	$(document).on('keyup',"input[type='number']",function(e){
-	 
-		if ($.inArray(e.which, [46, 9, 27, 13]) !== -1 ||
-             // Allow: Ctrl/cmd+A
-            (e.which == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
-             // Allow: Ctrl/cmd+C
-            (e.which == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
-             // Allow: Ctrl/cmd+X
-            (e.which == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
-             // which: home, end, left, right
-            (e.which >= 35 && e.which <= 39)) { 
-                 // let it happen, don't do anything
-                 return;
-        }
-        // Ensure that it is a number and stop the keypress
-			if(e.which == 190)
-			{
-				$(this).val('');
-			  e.preventDefault();
-			}
-        else if ((e.shiftKey || (e.which < 48 || e.which > 57)) && (e.which < 96 || e.which > 105) && (e.which != 8)) {
-			$(this).val('');
-            e.preventDefault();
-        }
-
-	}); 
+	/*$(document).on('keyup',"input[type='number']",function(e){
+		var value=$(this).val();
+		if(value != '')
+		{
+			var number_only= value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
+			$(this).val(number_only);
+		}
+	});*/ 
 	
 	$(".chat_clear").on('click',function () { 
 		var attrv= $(this).attr('val');
