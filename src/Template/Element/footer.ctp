@@ -7,7 +7,7 @@ h1,h2,h3,h4,h5,h6{
 } 
 .fixedDivCss {
   overflow: hidden;
-  background-color: #FFF;
+  background-color: #1295a2;
   position: fixed;
   bottom: -20px;
   width: 100%;
@@ -31,8 +31,8 @@ if($page_name!='sendrequest'){
 			<tr>
  			<?php if($users['role_id'] == 1 || $users['role_id'] == 2) { 
 			?>
-			<td width="25%">
-			<div style="width:100% !important;border-right:1px solid #1c6f7d">
+			<td width="25%" style="border-right:1px solid #1c6f7d">
+			<div style="width:100% !important;">
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'sendrequest')) ?>">
  				  <div class="small-box bg-blue">
 					<div class="inner">
@@ -54,9 +54,9 @@ if($page_name!='sendrequest'){
 				</a>
 			</div>
 			</td>
-			<td width="25%">
+			<td width="25%" style="border-right:1px solid #1c6f7d">
 			<!-- ./col -->
-			 <div style="width:100% !important;border-right:1px solid #1c6f7d">
+			 <div style="width:100% !important;">
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>">
 				   
 				  <div class="small-box bg-blue">
@@ -108,8 +108,8 @@ if($page_name!='sendrequest'){
 			</div>
 			</td>-->	
 			<?php } ?> 
-			<td width="25%">
-			<div style="width:100% !important;border-right:1px solid #1c6f7d">
+			<td width="25%"  style="border-right:1px solid #1c6f7d">
+			<div style="width:100% !important;">
 			<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>">
  				  
 				  <div class="small-box bg-blue">

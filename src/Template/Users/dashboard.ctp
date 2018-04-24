@@ -68,7 +68,7 @@ li > p{
 	color:#FFF !important;		
 }
 .textpormoition {
-	font-size:10px!important;
+	font-size:15px!important;
 }	
 #myBtn { 
   position: fixed;
@@ -84,6 +84,12 @@ li > p{
   padding: 15px;
   border-radius: 8px;
 }
+.content-header {
+	padding: 0px 0px 0 0px !important;
+}
+.content{
+padding: 0px !important;
+}
 </style>
 
 <section class="content-header">
@@ -95,23 +101,21 @@ li > p{
 			$role_id=$users->role_id 
 		?>
 	</div>
-</div>
-<span class="help-block"></span>
-		 
-<div class="row equal_column">
+</div> 
+ <div class="row equal_column" style="margin-bottom:20px">
 <!---<a href="https://www.google.com/" target="_blank" id="myBtn" title="Download Andorid App"><?=  $this->Html->image('/img/playstore.png', ['style'=>'width:100%;','class'=>'image-responsive']) ?></a>---->
 	<?php if($role_id==1) {?>
 	<div class="col-md-4"> 
-	<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Travel.jpg);height:200px;width:100%;background-repeat:round;padding: 25px;">
+	<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Travel.jpg);height:33%;width:100%;background-repeat:round; padding:20px">
 		  <!-- small box -->
 		  <div class="small-box" >
 			<div class="inner" align="center">
 				<table border="0" height="130px" style="text-align: center;">
 					<tr>
-						<td colspan="2" style="font-size:16px"><b>Listed Packages</b></td>	
+						<td colspan="2" style="font-size:17px"><b>Listed Packages</b></td>	
 					</tr>
 					<tr>
-						<td colspan="2" class="textpormoition">Click on the buttons below to View Promote Travel Packages </td>	
+						<td colspan="2" class="textpormoition">Click on the buttons below to View or Promote Travel Packages </td>	
 					</tr>
 					 
 					<tr>
@@ -130,13 +134,13 @@ li > p{
 	</div>
 	<?php } ?>
 	<div class="col-md-4 neww" > 
-		<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Hotel.jpg);height:200px;width:100%;background-repeat:round;padding: 25px;">
+		<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Hotel.jpg);height:33%;width:100%;background-repeat:round; padding:20px;">
 		  <!-- small box -->
 		  <div class="small-box" >
 			<div class="inner" align="center">
 				<table border="0" height="130px" style="text-align: center;">
 					<tr>
-						<td colspan="2" style="font-size:16px"><b>Hotel Promotions</b></td>	
+						<td colspan="2" style="font-size:17px"><b>Hotel Promotions</b></td>	
 					</tr>
 					<tr>
 						<td colspan="2" class="textpormoition">Click on the <?php if($role_id==3){ ?>buttons<?php } else{echo"button";} ?> below to View <?php if($role_id==3){ ?>or Post<?php } ?> Hotel Promotions </td>	
@@ -158,13 +162,13 @@ li > p{
 	</div>
 	
 	<div class="col-md-4">
-	<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Taxi.jpg);height:200px;width:100%;background-repeat:round;padding: 25px;">
+	<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Taxi.jpg);height:33%;width:100%;background-repeat:round; padding:20px">
 		  <!-- small box -->
 		  <div class="small-box" >
 			<div class="inner" align="center">
 				<table border="0" height="130px" style="text-align: center;">
 					<tr>
-						<td colspan="2" style="font-size:16px"><b>Listed Taxi/Fleet Services</b></td>	
+						<td colspan="2" style="font-size:17px"><b>Listed Taxi/Fleet Services</b></td>	
 					</tr>
 					<tr>
 						<td colspan="2" class="textpormoition">Click on the <?php if($role_id==1){ ?>buttons<?php } else{echo"button";} ?> below to View <?php if($role_id==1){ ?> or Promote <?php } ?> Taxi/Fleet Services </td>	
@@ -183,13 +187,13 @@ li > p{
 	</div>
 	<?php if($role_id==2 || $role_id==3) { ?>
 	<div class="col-md-4"> 
-		<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Event.jpg);height:200px;width:100%;background-repeat:round;padding: 25px;">
+		<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Event.jpg);height:33%;width:100%;background-repeat:round; padding:20px">
 		  <!-- small box -->
 		  <div class="small-box" >
 			<div class="inner" align="center">
 				<table border="0" height="130px" style="text-align: center;">
 					<tr>
-						<td colspan="2" style="font-size:16px"><b>Event Promotions</b></td>	
+						<td colspan="2" style="font-size:17px"><b>Event Promotions</b></td>	
 					</tr>
 					<tr>
 						<td colspan="2" class="textpormoition">Click on the <?php if($role_id==2){ ?>buttons<?php } else{echo"button";} ?> below to View <?php if($role_id==2){ ?> or Promote <?php }?> Event Planning Services </td>	
@@ -302,7 +306,7 @@ li > p{
 				</div>
 				</div>
               <?php } ?>
-               
+              
              
           </div>
 
