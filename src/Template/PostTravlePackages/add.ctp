@@ -270,7 +270,7 @@ fieldset{
 																	Package Starting Price
 																	<span class="required">*</span>
 																</p>
-																<div class="">
+																<div class="input-field">
 																	<?php echo $this->Form->input('starting_price',['class'=>'form-control requiredfield number','label'=>false,'placeholder'=>'Starting Price','type'=>'number']);?>
 																	<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
@@ -409,7 +409,7 @@ fieldset{
 </div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
-	$(document).on('keyup',".number",function(e){
+/* 	$(document).on('keyup',".number",function(e){
 	
 		if ($.inArray(e.which, [46, 9, 27, 13]) !== -1 ||
              // Allow: Ctrl/cmd+A
@@ -434,7 +434,7 @@ fieldset{
             e.preventDefault();
         }
 
-	}); 
+	}); */ 
     $(document).ready(function () {
 		 var pack_type=$('#pack_type').val();
 			//alert(pack_type);
