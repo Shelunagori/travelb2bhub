@@ -151,7 +151,7 @@ input[type=checkbox] {
 			<div class="wrap-login100 rohit" style="width: 920px !important;">
 				<center>
 					<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:30%;margin-top:10px;"','class'=>'imagesize']) ?>
-					<h2  style="border:0 !important;font-size: 26px !important;color: #fff;">REGISTRATION</h2>
+					<h3  style="color:#fff;margin:20px 0 0px 0">REGISTRATION</h3>
 				</center>
  			<p style="color:#ff9898 !important;"><?php echo $this->Flash->render(); ?></p>
 			<br />
