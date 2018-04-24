@@ -194,8 +194,7 @@ label {
 						</div>
 					</div>
 			
-
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
+ 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 						<div class="input-field">
 							Hotel Rating	
 							<div style=" width: 200px;" >

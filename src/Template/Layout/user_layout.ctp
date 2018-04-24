@@ -774,16 +774,41 @@ $('.datepicker').datepicker({
 $('.datepickers').datepicker({autoclose:true});
 //--
 $('.datepickers').click(function(){
-	$(this).datepicker({autoclose:true});
+	$(this).datepicker().datepicker( "show" );
+});
+$('.datepicker').click(function(){
+	$(this).datepicker().datepicker( "show" );
+});
+$('.date-picker').click(function(){
+	$(this).datepicker().datepicker( "show" );
 });
 
-$('.datepicker').click(function(){
-	$(this).datepicker({
-		minDate:0,
-		startDate: date,
-		autoclose:true
-	});
+//--- Place REQ datepickers
+$('#datepicker1').click(function(){
+	$(this).datepicker().datepicker( "show" );
 });
+$('#datepicker2').click(function(){
+	$(this).datepicker().datepicker( "show" );
+});
+$('#datepickerofTransport').click(function(){
+	$(this).datepicker().datepicker( "show" );
+});
+$('#datepickerofTransport1').click(function(){
+	$(this).datepicker().datepicker( "show" );
+});
+$('#datepickerofpkg').click(function(){
+	$(this).datepicker().datepicker( "show" );
+});
+$('#datepickerofpkg1').click(function(){
+	$(this).datepicker().datepicker( "show" );
+});
+$('#packageTransport').click(function(){
+	$(this).datepicker().datepicker( "show" );
+});
+$('#packageTransport1').click(function(){
+	$(this).datepicker().datepicker( "show" );
+});
+///------ END
 
 $(".txtEditor").Editor({
 	'source':true,
