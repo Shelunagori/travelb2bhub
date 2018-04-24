@@ -151,10 +151,12 @@ input[type=checkbox] {
 			<div class="wrap-login100 rohit" style="width: 920px !important;">
 				<center>
 					<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:30%;margin-top:10px;"','class'=>'imagesize']) ?>
+					<h2  style="border:0 !important;font-size: 26px !important;color: #fff;">REGISTRATION</h2>
 				</center>
  			<p style="color:#ff9898 !important;"><?php echo $this->Flash->render(); ?></p>
 			<br />
 			<?php echo $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'register','autocomplete'=>"off"],'id'=>"UserRegisterForm",'onSubmit' => 'return getstatevalid();']); ?>
+				
 				<div class="row">
 					<div class="col-md-12">
 						<div class="col-md-6">
