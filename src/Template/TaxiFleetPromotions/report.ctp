@@ -377,7 +377,7 @@ a{
 							<div class="modal-content">
 								<div class="modal-body" >
 								<button type="button" class="close" data-dismiss="modal" style="padding-right:8px !important;">&times;</button>
-								<?= $this->Html->image($taxiFleetPromotion->full_image,['style'=>'width:100%;height:300px;padding:20px;padding-top:0px!important;']) ?>
+								<?= $this->Html->image($taxiFleetPromotion->full_image,['style'=>'width:100%;padding:20px;padding-top:0px!important;']) ?>
 								</div>
 							</div>
 						</div>
