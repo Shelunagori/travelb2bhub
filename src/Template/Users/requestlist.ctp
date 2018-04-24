@@ -165,7 +165,7 @@ fieldset
 									 <label class="col-form-label" for=example-text-input>Start Date:  </label>
 									 </div> 
 									 <div class=col-md-7>
-									 <input class="form-control date-picker" name=startdatesearch   data-date-format="dd-mm-yyyy">
+									 <input type="text" class="form-control date-picker" name=startdatesearch   data-date-format="dd-mm-yyyy">
 									 </div>
 									</div>	
 								</div>
@@ -175,7 +175,7 @@ fieldset
 										  <label class="col-form-label" for=example-text-input>End Date:  </label>
 										</div> 
 										<div class=col-md-7>
-										<input class="form-control date-picker" name=enddatesearch data-date-format="dd-mm-yyyy">
+										<input type="text" class="form-control date-picker" name=enddatesearch data-date-format="dd-mm-yyyy">
 										</div>
 									</div>
 								</div>
