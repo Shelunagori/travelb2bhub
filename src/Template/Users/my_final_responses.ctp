@@ -492,9 +492,6 @@ $conn = ConnectionManager::get('default');
           </div>
       </div>
     </div>
- 
-	
-<?php echo $this->element('footer');?> 
 <script>
 	$("#responsesWrap").apPagination({
     targets: ".box-event",
