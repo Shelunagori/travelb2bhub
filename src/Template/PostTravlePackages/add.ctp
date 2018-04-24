@@ -409,7 +409,7 @@ fieldset{
 </div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
-/* 	$(document).on('keyup',".number",function(e){
+ 	$(document).on('keyup',".number",function(e){
 	
 		if ($.inArray(e.which, [46, 9, 27, 13]) !== -1 ||
              // Allow: Ctrl/cmd+A
@@ -433,8 +433,7 @@ fieldset{
 			$(this).val('');
             e.preventDefault();
         }
-
-	}); */ 
+	}); 
     $(document).ready(function () {
 		 var pack_type=$('#pack_type').val();
 			//alert(pack_type);

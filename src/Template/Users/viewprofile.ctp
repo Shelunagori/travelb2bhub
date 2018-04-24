@@ -37,7 +37,10 @@ $conn = ConnectionManager::get('default');
     height: 89px;
     z-index: 30;
 }
-
+label{
+	color:#96989A !important;
+	font-weight:100;
+}
 </style>
 
 <section class="content">
@@ -723,7 +726,7 @@ $conn = ConnectionManager::get('default');
 					<hr>
 					<div>
 							<div class="form-group col-md-12" >
-								 Company Name: <?php echo $users['company_name']; ?> 
+								<label>Company Name:</label> <?php echo $users['company_name']; ?> 
 							</div>
 							<div class="form-group col-md-12" >
 								 Primary Contact No.: <?php echo $users['mobile_number']; ?> 

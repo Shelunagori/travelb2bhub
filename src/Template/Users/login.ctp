@@ -68,7 +68,7 @@
 					</div>
 
 					<div class="text-center p-t-90" style="padding-top: 20px;">
-						<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'forgotPassword')) ?>">
+						<a class="txt1" style="font-size:15px !important;color:#a9d4fa;" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'forgotPassword')) ?>">
 							Forgot your password?
 						</a>
 					</div>
