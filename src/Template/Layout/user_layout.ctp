@@ -25,7 +25,10 @@
 	<?php echo $this->Html->css('/assets/demo-styles.css'); ?>
 	<?php echo $this->Html->css('/assets/loader-1.css'); ?>
 	<?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Raleway'); ?>
- 	<?php echo $this->Html->css('//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'); ?> 
+ 	<?php echo $this->Html->css('//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'); ?>
+	 
+<link rel="stylesheet" href="">
+ 
 	<?php
 	echo $this->Html->meta(
     'favicon.ico',
