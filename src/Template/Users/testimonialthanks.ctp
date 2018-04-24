@@ -2,7 +2,7 @@
 	<div class="row equal_column" > 
 		<div class="col-md-12" style="background-color:#fff"> 
 			<br>
-			<?php echo $this->element('subheader');?>
+			 
 			<?php echo  $this->Flash->render() ?>
 		</div>
 		<div class="col-md-12" style="background-color:#fff"> 
