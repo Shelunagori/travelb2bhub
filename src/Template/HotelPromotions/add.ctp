@@ -230,7 +230,7 @@ label{
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
-										 <?php echo $this->Form->input('cheap_tariff',['class'=>'form-control requiredfield low_rate','label'=>false,'type'=>'number','placeholder'=>"Cheapest Room Rate"]);?>
+										 <?php echo $this->Form->input('cheap_tariff',['class'=>'form-control requiredfield low_rate','label'=>false,'type'=>'text','placeholder'=>"Cheapest Room Rate",'oninput'=>"this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"]);?>
 										 <label style="display:none" class="helpblock error" > This field is required.</label>
 											
 										</div>
@@ -245,7 +245,7 @@ label{
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
-											 <?php echo $this->Form->input('expensive_tariff',['class'=>'form-control requiredfield high_rate','label'=>false,'type'=>'number','placeholder'=>"Most Expensive Room Rate"]);?>
+											 <?php echo $this->Form->input('expensive_tariff',['class'=>'form-control requiredfield high_rate','label'=>false,'type'=>'text','placeholder'=>"Most Expensive Room Rate",'oninput'=>"this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"]);?>
 											 <label style="display:none" class="helpblock error" > This field is required.</label>
 										</div>
 									</div>
@@ -382,10 +382,9 @@ label{
 				function calculate()
 				{
 					var low_rate=parseInt($('.low_rate').val());
-					//alert(low_rate);
-					var high_rate=($('.high_rate').val());
-
-					//alert(high_rate);
+					alert(low_rate);
+					var high_rate=parseInt($('.high_rate').val());
+					alert(high_rate);
 					if(low_rate.length>high_rate.length)
 					{
 						alert("Most Expensive Room Rate should be greater then Cheapest Room Rate");
