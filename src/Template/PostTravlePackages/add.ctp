@@ -270,7 +270,7 @@ fieldset{
 																	Package Starting Price
 																	<span class="required">*</span>
 																</p>
-																<div class="input-field">
+																<div class="">
 																	<?php echo $this->Form->input('starting_price',['class'=>'form-control requiredfield number','label'=>false,'placeholder'=>'Starting Price','type'=>'number']);?>
 																	<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
