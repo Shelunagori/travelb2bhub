@@ -276,6 +276,7 @@ $conn = ConnectionManager::get('default');
 			$org_created=date('d-M-Y', strtotime($created));
 			?>
 			<div class="col-md-4" style="padding-top:15px;">
+			<form method="post" class="filter_box">
 				<fieldset>
 				<legend><?php echo @$image; ?></legend>
 				<span style="margin-top:-30px;float:right;"><?php echo $org_created; ?></span>
@@ -447,7 +448,6 @@ $conn = ConnectionManager::get('default');
 							<input type="submit" name="submit" class="btn btn-info btn-sm" width="20px" style="width:70px !important;" value="Submit">
 						 </div>
 					  </div>
-					  </form>
 					</div>
 				  </div>
 				</div>	
@@ -553,6 +553,7 @@ $conn = ConnectionManager::get('default');
 				</tr>
 			</table>	
 		</fieldset>
+		</form>
 		</div>
 	</div>
 </div>
@@ -570,7 +571,9 @@ $conn = ConnectionManager::get('default');
 				</div>
 			</div>
 		</div>
-
+<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
+<div id="loader"></div>
+</div>
  
 <script>
 $(document).ready(function () {
@@ -594,8 +597,10 @@ $(document).ready(function () {
 			});
 		 
 	});
-	$(".businessBuddy").on('click',function () {
-		
+				jQuery(".filter_box").submit(function(){
+					jQuery("#loader-1").show();
+				});
+		$(".businessBuddy").on('click',function () {
  		var datas = $(this);
 		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'addBusinessBuddy')) ?>";
 		var user_id = $(this).attr("user_id");
