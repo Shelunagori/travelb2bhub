@@ -141,7 +141,12 @@
 	</div>
 	</div>
 	<script>
-	$('.select2').select2(); 
+$('.select2').select2(); 
+$('.datepicker').datepicker(); 
+
+$('.datepicker').click(function(){
+	$(this).datepicker().datepicker( "show" );
+});
 	//var cityData = '<?php //echo $allCities; ?>';
 	//$(document).ready(function () {
 		/*createAutocompleteCity('<?php echo $randomNumber; ?>')
