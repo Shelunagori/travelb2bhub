@@ -418,7 +418,8 @@ $(document).ready(function(){
 	});
    
    
-   
+   $('.hoteltype').html('<div class="wrap-input100 validate-input "  data-validate = "Company Name"><input class=" input100 trim_space_valid " required=""  id="company_name" type="text" name="company_name" ><span class="focus-input100" data-placeholder="Company Name"></span></div>');
+
 	$(document).on('change',"#role_id",function(){
  		var roleid = jQuery( "#role_id option:selected" ).val();
 		/*if(roleid==3){
@@ -426,7 +427,13 @@ $(document).ready(function(){
 		} else{
 			$('.hotelname').html('Company Name<span class="asterisk"><img class="img-responsive" src="../img/Asterisk.png"></span>')		
 		}*/
-		
+		if(roleid != "" && roleid == 3) {
+			$('.hoteltype').html('<div class="wrap-input100 validate-input "  data-validate = "Hotel Name"><input class=" input100 trim_space_valid " required=""  id="hotel_name" type="text" name="hotel_name" ><span class="focus-input100" data-placeholder="Hotel Name"></span></div>');
+		}
+		else
+		{
+			$('.hoteltype').html('<div class="wrap-input100 validate-input "  data-validate = "Company Name"><input class=" input100 trim_space_valid " required=""  id="company_name" type="text" name="company_name" ><span class="focus-input100" data-placeholder="Company Name"></span></div>');
+		}
 		if(roleid != "" && roleid == 1) {
 			$('#preferenceStateDiv').show();
 			var needPreferenceState = true;
