@@ -144,15 +144,16 @@ hr { margin-top:0px!important;}
 				</div>
 				<div class="shw">
 					<div class="form-group col-md-4">
-						
+						<?php 
+						//pr($states_show->toarray());exit;
+						$states_show=$states_show->toarray();?>
 						  <label>States</label>
-							<input type="text" class="form-control" id ="state_name" value="<?php echo 
-							(!empty($users['state_id']))?$allStates[$users['state_name']]:""; ?>" name="state_name" placeholder="Select State" readonly />
+							<input type="text" class="form-control" id ="state_name" value="<?php echo $states_show[$users['state_id']];?>" name="state_name" placeholder="Select State" readonly />
 							<input type='hidden' id='state_id' name="state_id" value="<?php echo (!empty($users['state_id']))?$users['state_id']:""; ?>" />
-					</div>
+					</div><?php $country_show=$country_show->toarray();  ?>
 					<div class="form-group col-md-4">
 						  <label>Country</label>
-						  <input type="text" class="form-control" id ="country_name" Value ="India" name="country_name" placeholder="Select Country" readonly/>
+						  <input type="text" class="form-control" id ="country_name" Value ="<?php echo $country_show[$users['country_id']];?>" name="country_name" placeholder="Select Country" readonly />
                           <input type='hidden' id='country_id' name="country_id" value="<?php echo (!empty($users['country_id']))?$users['country_id']:""; ?>" />
 					</div>
 				</div> 

@@ -1003,8 +1003,9 @@ public function viewuserprofile(){
 			$this->set('myReponseCount', $myReponseCount);
 			$cities = $this->Cities->getAllCities();
 			$states = $this->States->find()->where(['country_id' => '101'])->all();
-			$states_show=$this->Users->States->find('list');
+			$states_show=$this->Users->States->find('list')->where(['country_id' => '101']);
 			$country_show=$this->Users->Countries->find('list');
+			//pr($country_show->toArray());exit;
 			$allStates = array();
 			foreach($states as $state){
 				$allStates[$state["id"]] = $state['state_name'];
