@@ -104,6 +104,7 @@ label {
 	<div class="box box-primary">
 		<div class="box-body" style="padding:15px !important;">
 		<div class="row"> 
+		 
 		<div class=" "> 
 		<div id="tra-sendrequest" class=" " style="background:#FFF">
 			<div class=" ">
@@ -114,9 +115,12 @@ label {
 						<li><a id="tabtransport" href="#tab3" data-toggle="tab">Transport</a></li>
 						<li ><a href="#tab2" data-toggle="tab">Package</a></li>
  					</ul>
+					<ul>
+						<li style="color:red;margin-top:15px;"><?php echo ($reqcountNew['value']-$myRequestCountNew); ?> Requests Remaining</li>
+					</ul>
 				</div>
 				</br>
-				<?php echo ($reqcountNew['value']-$myRequestCountNew); ?>
+				
 <div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
 <div id="loader"></div>
 </div>				
@@ -1695,20 +1699,25 @@ $(document).ready(function () {
             e.preventDefault();
 			$(this).closest('div.stop').slideUp(function(){
 				$(this).remove();
+				
+					var l = 1;
+			$( ".Destination-title" ).each(function() {
+					var htmlString = 'Destination '+l;
+					$( this ).text( htmlString );
+					l++;
+				});
 			});
         });
         var max_fields = 10;
         var add_button = $(".add_field_button2");
         var x = 1;
-		
-	 var gk=0;
+		 
         $(add_button).click(function (e) {
 			var masterClick=$(this);
-			gk++;
             e.preventDefault();
  			var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'addNewDestinationRow')) ?>";
 			var number = Math.floor((Math.random() * 100000) + 1);
-			 alert(gk);
+			 
 			$.ajax({
 				url:url,
 				type: 'POST',
@@ -1763,12 +1772,25 @@ $(document).ready(function () {
 				});
 				
 			});
+			var l = 1;
+			$( ".Destination-title" ).each(function() {
+					var htmlString = 'Destination '+l;
+					$( this ).text( htmlString );
+					l++;
+				});
 			return false;
         });
         $(wrapper).on("click", ".remove_field1", function (e) {
             e.preventDefault();
             $(this).parent('div').remove();
             x--;
+		 
+        })
+		 $(wrapper).on("click", ".remove_field", function (e) {
+            e.preventDefault();
+            $(this).parent('div').remove();
+            x--;
+		
         })
  			
      });

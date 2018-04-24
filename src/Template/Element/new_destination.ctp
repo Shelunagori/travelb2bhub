@@ -2,7 +2,7 @@
 	<div class="destination newdiv">
 	<div class="stop col-md-12">
 	<hr  style="margin-top: 8px; margin-bottom: 8px;"></hr>
-	<div class="Destination-title"> <b> Destination </b></div> 
+	<b> <div class="Destination-title"> Destination </div> </b>
 	<div class="row main_row"> 
 	  <div class="row">
 			<div class="col-md-12">
