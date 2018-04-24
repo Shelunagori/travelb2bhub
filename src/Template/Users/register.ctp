@@ -151,7 +151,7 @@ input[type=checkbox] {
 			<div class="wrap-login100 rohit" style="width: 920px !important;">
 				<center>
 					<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:30%;margin-top:10px;"','class'=>'imagesize']) ?>
-					<h3  style="color:#fff;margin:20px 0 0px 0">REGISTRATION</h3>
+					<h4  style="color:#fff;margin:20px 0 0px 0;font-family:Raleway, sans-serif ;">REGISTRATION</h4>
 				</center>
  			<p style="color:#ff9898 !important;"><?php echo $this->Flash->render(); ?></p>
 			<br />
@@ -310,8 +310,8 @@ input[type=checkbox] {
 									<input class="chk_input tnc"  id="ckb1" type="checkbox" required  name="remember-me">
 								</td>	
 								<td  >	
-									<span class="" for="ckb1" style="color:white;margin-left:10px !important;">
-										I accept the <a style="color:white;" target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/privacy-policy/"><u>Privacy Policy</u></a> and <a style="color:white;" target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/terms-and-conditions/"><u>Terms & Conditions</a></u>
+									<span class="" for="ckb1" style="color:white;margin-left:20px !important;">
+										I accept the <a style="color:white;" target="_blank"  href="http://travelb2bhub.com/privacy-policy/"><u>Privacy Policy</u></a> and <a style="color:white;" target="_blank"  href="http://travelb2bhub.com/terms-and-conditions/"><u>Terms & Conditions</a></u>
 									</span><br>
 									
 								</td>

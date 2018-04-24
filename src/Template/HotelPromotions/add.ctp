@@ -373,18 +373,17 @@ label{
 			
 			$(document).on('blur','.high_rate,.low_rate',function()
 				{
-					var high_rate=parseInt($('.high_rate').val());
+					var high_rate=$('.high_rate').val();
 					if(high_rate.length>0)
 					{
+					alert();
 					calculate();
 					}
 				});
 				function calculate()
 				{
-					var low_rate=parseInt($('.low_rate').val());
-					alert(low_rate);
-					var high_rate=parseInt($('.high_rate').val());
-					alert(high_rate);
+					var low_rate=$('.low_rate').val();
+					var high_rate=$('.high_rate').val();
 					if(low_rate.length>high_rate.length)
 					{
 						alert("Most Expensive Room Rate should be greater then Cheapest Room Rate");
