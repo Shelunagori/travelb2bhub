@@ -971,10 +971,10 @@ $conn = ConnectionManager::get('default');
 									<div>
 										 
 										<?php if(!empty($users['company_img_1_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_img_1_pic'])>0) {
-										echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_1_pic'], [ "alt"=>"Company Image 1 Pic", "height"=>"150px;"]);?>
+										echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_1_pic'], [ "alt"=>"Company Image 1 Pic", "height"=>"150px;", 'style'=>'border-radius: 50%;']);?>
 										<?php }
 										else{
-											echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130]); 
+											echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 										}?>
 									</div>
 								</td >
@@ -982,10 +982,10 @@ $conn = ConnectionManager::get('default');
 								<td width="48%"  align="center">
 									<div>
 										<?php if(!empty($users['company_img_2_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_img_2_pic'])>0) {
-										echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_2_pic'], [ "alt"=>"Company Image 2 Pic", "height"=>"150px;"]);?>
+										echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_2_pic'], [ "alt"=>"Company Image 2 Pic", "height"=>"150px;", 'style'=>'border-radius: 50%;']);?>
 										<?php }
 										else{
-											echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130]); 
+											echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
 										}?>
 									</div>
 								</td>
@@ -1020,7 +1020,7 @@ $conn = ConnectionManager::get('default');
 							<div  align="center">
 								 
 								<?php if(!empty($users['pancard_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['pancard_pic'])>0) {
-								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['pancard_pic'], [ "alt"=>"Pan Card", "height"=>"150px;border-radius: 50%;"]);?>
+								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['pancard_pic'], [ "alt"=>"Pan Card", "style"=>"height:150px;border-radius: 50% !important;"]);?>
 								<?php }
 								else{
 									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"Pan Card", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
@@ -1031,7 +1031,7 @@ $conn = ConnectionManager::get('default');
 							<td width="33%">
 							<div   align="center">
 								<?php if(!empty($users['id_card_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['id_card_pic'])>0) {
-								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['id_card_pic'], [ "alt"=>"Business card", "height"=>"150px;border-radius: 50%;"]);?>
+								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['id_card_pic'], [ "alt"=>"Business card", "style"=>"height:150px;border-radius: 50% !important;"]);?>
 								<?php }
 								else{
 									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"Business card", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
@@ -1042,7 +1042,7 @@ $conn = ConnectionManager::get('default');
 							<td width="33%">
 							<div   align="center">
 								<?php if(!empty($users['company_shop_registration_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_shop_registration_pic'])>0) {
-								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_shop_registration_pic'], [ "alt"=>"Company Shop Act Registration", "height"=>"150px;border-radius: 50%;"]);?>
+								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_shop_registration_pic'], [ "alt"=>"Company Shop Act Registration", "style"=>"height:150px;border-radius: 50% !important;"]);?>
 								<?php }
 								else{
 									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"Company Shop Act Registration", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
