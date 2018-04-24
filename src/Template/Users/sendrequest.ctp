@@ -116,6 +116,7 @@ label {
  					</ul>
 				</div>
 				</br>
+				<?php echo ($reqcountNew['value']-$myRequestCountNew); ?>
 <div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
 <div id="loader"></div>
 </div>				
@@ -1699,11 +1700,15 @@ $(document).ready(function () {
         var max_fields = 10;
         var add_button = $(".add_field_button2");
         var x = 1;
+		
+	 var gk=0;
         $(add_button).click(function (e) {
 			var masterClick=$(this);
+			gk++;
             e.preventDefault();
  			var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'addNewDestinationRow')) ?>";
 			var number = Math.floor((Math.random() * 100000) + 1);
+			 alert(gk);
 			$.ajax({
 				url:url,
 				type: 'POST',
@@ -1756,6 +1761,7 @@ $(document).ready(function () {
 						}
 					}
 				});
+				
 			});
 			return false;
         });
