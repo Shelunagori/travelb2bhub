@@ -98,6 +98,10 @@ fieldset{
 label {
     display: flex !important;
 }
+/* p{
+	color:#96989A !important;
+	font-weight:100;	
+} */
 </style>
 </div>
 <div class="container-fluid">
@@ -201,7 +205,7 @@ label {
 			
  					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 						<div class="input-field">
-							Hotel Rating	
+						<p for="from">Hotel Rating</p>	
 							<div style=" width: 200px;" >
 								<input style="display:none;" type="radio" checked value="0" name="hotel_rating"/>
 								<input class="star star-5" id="star-5-21" type="radio" value="5" name="hotel_rating"/>
@@ -219,13 +223,13 @@ label {
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 						<div class="input-field hotel_category">
-							Hotel Category 
+							<p for="from">Hotel Category </p>
 							<?php echo $this->Form->control('hotel_category', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 						<div class="input-field">
-							Meal Plan
+							<p for="from">Meal Plan</p>
  							<?php echo $this->Form->control('meal_plan', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$MealPlans, "class"=>"form-control select2","data-placeholder"=>"Select Options ",'empty'=>'Select Options']);?>
  						</div>
 					</div>
@@ -431,13 +435,13 @@ label {
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 						<div class="input-field hotel_category">
-							Hotel Category 
+							<p for="from">Hotel Category </p>
 							<?php echo $this->Form->control('hotel_category', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$hotelCategories, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 						<div class="input-field">
-							Meal Plan
+							<p for="from">Meal Plan</p>
 							<?php echo $this->Form->control('meal_plan', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$MealPlans, "class"=>"form-control select2","data-placeholder"=>"Select Options ",'empty'=>'Select Options']);?>
 						</div>
 					</div>
