@@ -176,11 +176,8 @@ input[type=checkbox] {
 								</select>
 							</div>					
 						</div>
-						<div class="col-md-6" style="font-size:14px !important;">
-							<div class="wrap-input100 validate-input "  data-validate = "Company Name">
-							<input class=" input100 trim_space_valid " required=""  id="company_name" type="text" name="company_name" >
-							<span class="focus-input100" data-placeholder="Company Name"></span>
-							</div>				
+						<div class="col-md-6 hoteltype" style="font-size:14px !important;">
+											
 						</div>										
 					</div>
 				</div>
@@ -355,7 +352,6 @@ input[type=checkbox] {
 <script>
 $(document).ready(function(){	 
 	$('.select2').select2();
-
 	$(document).on('blur',"#mobile_number",function(){ 
 		var mobile_number=$(this).val();
 		var m_data = new FormData();
@@ -455,18 +451,20 @@ $(document).ready(function(){
 });
 function selectCountry(value,city_code,state,country_id,state_name,country_name) {
 		var state_id=state;
+
 		$(".suggesstion-box").hide();
 		$("#city-search-box").val(value);
 		$("#city_id").val(city_code);
 		
  		$("#state_id").val(state_id);
+
 		$(".st").html('<span for="Preference_States" style="color:#fff;font-family:Raleway, sans-serif ;">States</span><input readonly style="padding:0px !important;" class="input100 trim_space_valid" type="text" value='+state_name+' required="" id ="state_name" name="state_name" /> ');
-		//$("#state_name").val(state_name);
+		$("#state_name").val(state_name);
 		$('#pc').html('<br>');
-		
+		//alert(state_name);
 		$(".ctr").html('<span for="Preference_Country" style="color:#fff;font-family:Raleway, sans-serif ;">Country</span><input class="input100 trim_space_valid"  required="" value='+country_name+' style="padding:0px !important;" type="text" readonly id ="country_name" name="country_name" />');
 		$("#country_id").val(country_id);
-		//$("#country_name").val(country_name);
+		$("#country_name").val(country_name);
  	}	
 </script>	
 <script>
@@ -830,27 +828,26 @@ $(document).ready(function (){
             e.preventDefault();
         }
 		});
-
-var prootionId=<?php echo $_GET['promotion_id'];?>;
-   
-   if(prootionId == 1 ){
-	  // alert(prootionId);
-		$('.preferenceStateDiv').show();
-		//var needPreferenceState = true;  
-   }		
-	});
+ 
+});
 </script>	
 <script type="text/javascript">
+var prootionId=<?php echo $_GET['promotion_id'];?>;
 
-	setInterval(function(){ abc(); }, 2000);
-		function abc()
-		{ 	
-			$('#msg_div').fadeOut(300);
-			var delay = 300;
-			setTimeout(function() {
-				$('#msg_div').remove();
-			}, delay);
-		} 
-		
+if(prootionId == 1 ){
+	$('.preferenceStateDiv').show();
+}
+</script>	
+<script type="text/javascript">
+ 	setInterval(function(){ abc(); }, 2000);
+	function abc()
+	{ 	
+		$('#msg_div').fadeOut(300);
+		var delay = 300;
+		setTimeout(function() {
+			$('#msg_div').remove();
+		}, delay);
+	} 
+	
 </script> 
 </html>

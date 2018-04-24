@@ -443,8 +443,7 @@ $(document).ready(function(){
 				maxlength:10
 			},
 			"p_contact": {
-				required : true,
-				number: true,
+ 				number: true,
 				minlength:10,
 				maxlength:10
 			},

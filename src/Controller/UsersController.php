@@ -410,6 +410,7 @@ $this->loadModel('Cities');
 $this->loadModel('Membership');
 if ($this->request->is('post')) {
 	$d = $this->request->data;
+
 	$checkUsers = $this->Users->find()->where(['mobile_number'=> $d['mobile_number']])->count();
 	if ($checkUsers==0) {
 		$d['email_verified'] = 0;
@@ -423,14 +424,12 @@ if ($this->request->is('post')) {
 		if(isset($this->request->data["preference"]) && !empty($this->request->data["preference"])) {
 			$d["preference"] = implode(",", $this->request->data["preference"]);
 		}
-		$d['country_id'] = 101;
-		$d['state_id'] = 877;
-		$d['city_id'] = 33;
+		 
 		$rendomCode=rand('1010', '9999');
 		$d['mobile_otp'] = $rendomCode;
 
 		$user = $this->Users->newEntity($d);
-			if ($res = $this->Users->save($user)) {
+ 			if ($res = $this->Users->save($user)) {
 				$subject="TravelB2Bhub registration";
 				$to=$d['email'];
 				$headers  = 'MIME-Version: 1.0' . "\r\n";
@@ -1069,7 +1068,7 @@ public function viewuserprofile(){
 		$name=$this->request->data['input'];
 		$cities=$this->Users->Cities->find()
 		->contain(['States'=>['Countries']])
-		->where(['Cities.name Like'=>''.$name.'%','Cities.is_deleted'=>0]);
+		->where(['Cities.name Like'=>''.$name.'%','Cities.is_deleted'=>0,'Cities.country_id'=>101]);
 		?>
 			<ul id="country-list">
 				<?php foreach($cities as $show){ ?>
@@ -1745,6 +1744,8 @@ $this->set("hotelCategories", $this->_getHotelCategoriesArray());
 $this->set(compact('details', "allCities", "allStates", "allCountries", "transpoartRequirmentArray", "mealPlanArray"));
 }
 	public function requestlist() {
+ 
+ 
 		$this->loadModel('Responses');
 		$this->loadModel('Hotels');
 		$this->loadModel('Requests');
