@@ -729,19 +729,19 @@ label{
 								<label>Company Name:</label> <?php echo $users['company_name']; ?> 
 							</div>
 							<div class="form-group col-md-12" >
-								 Primary Contact No.: <?php echo $users['mobile_number']; ?> 
+								 <label>Primary Contact No:</label> <?php echo $users['mobile_number']; ?> 
 							</div>
 							<div class="form-group col-md-12" >
-								 Secondary Contact No.: <?php echo $users['p_contact']; ?> 
+								<label> Secondary Contact No:</label> <?php echo $users['p_contact']; ?> 
 							</div>
 							<div class="form-group col-md-12" >
-								 Email: <?php echo $users['email']; ?> 
+								 <label>Email:</label> <?php echo $users['email']; ?> 
 							</div>
 							<div class="form-group col-md-12" >
-								 Website: <?php echo $users['web_url']; ?> 
+								 <label>Website:</label> <?php echo $users['web_url']; ?> 
 							</div>
 							<div class="form-group col-md-12" >
-								 States of Operation: <?php $preference=$users['preference']; 
+								 <label>States of Operation:</label> <?php $preference=$users['preference']; 
 								
 								$preferences=explode(',', $preference);
 							 
@@ -790,11 +790,11 @@ label{
 						<div class="form-group col-md-12" >
 						<table >
 							<tr>
-								<td width="150px">Address:</td>
+								<td width="150px"><label>Address:</label></td>
 								<td width="50%"><?php echo $users['address']; ?></td>
 							</tr>
 							<tr>
-								<td>City:</td>
+								<td><label>City:</label></td>
 								<td><?php
 									$ct_id=$users['city_id'];
 									$seto="select `name` from `cities` where `id`='$ct_id'";
@@ -805,7 +805,7 @@ label{
 								?></td>
 							</tr>
 							<tr>
-								<td>State:</td>
+								<td><label>State:</label></td>
 								<td><?php 
 									$stst_id=$users['state_id'];
 									$set1="select `state_name` from `states` where `id`='$stst_id'";
@@ -816,7 +816,7 @@ label{
 								?></td>
 							</tr>
 							<tr>
-								<td>Country:</td>
+								<td><label>Country:</label></td>
 								<td><?php 
 									$cntry_id=$users['country_id'];
 									$seto1="select `country_name` from `countries` where `id`='$cntry_id'";
@@ -827,7 +827,7 @@ label{
 								?></td>
 							</tr>
 							<tr>
-								<td>Pincode:</td>
+								<td><label>Pincode:</label></td>
 								<td><?php echo $users['pincode']; ?></td>
 							</tr>
 							

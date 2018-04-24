@@ -16,7 +16,7 @@ use Cake\Network\Email\Email;
 *
 * @property \App\Model\Table\UsersTable $Users 
 */
-	
+
 class UsersController extends AppController {
 	var $helpers = array('Html', 'Form', 'Response');
 	public function beforeFilter(\Cake\Event\Event $event) {

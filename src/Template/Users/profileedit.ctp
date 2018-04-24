@@ -54,7 +54,10 @@ hr { margin-top:0px!important;}
 	padding-right:0px !important;
 	padding-left:0px !important;	
 }
- 
+ label{
+	color:#96989A !important;
+	font-weight:100;
+}
 </style>
 
 <section class="content">
@@ -143,7 +146,8 @@ hr { margin-top:0px!important;}
 					<div class="form-group col-md-4">
 						
 						  <label>States</label>
-							<input type="text" class="form-control" id ="state_name" value = "<?php echo (!empty($users['state_id']))?$allStates[$users['state_id']]:""; ?>"name="state_name" placeholder="Select State" readonly/>
+							<input type="text" class="form-control" id ="state_name" value="<?php echo 
+							(!empty($users['state_id']))?$allStates[$users['state_name']]:""; ?>" name="state_name" placeholder="Select State" readonly />
 							<input type='hidden' id='state_id' name="state_id" value="<?php echo (!empty($users['state_id']))?$users['state_id']:""; ?>" />
 					</div>
 					<div class="form-group col-md-4">
