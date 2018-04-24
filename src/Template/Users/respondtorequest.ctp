@@ -40,6 +40,7 @@ $conn = ConnectionManager::get('default');
 	</div>
 	<div class="box-body">
 		<div class="row">
+		<div class="col-md-12">
           <div id="myModal123" class="modal fade form-modal" role="dialog">
 			  <div class="modal-dialog" style=" width: 22%;">
 				<!-- Modal content-->
@@ -274,13 +275,12 @@ $conn = ConnectionManager::get('default');
 			$created=$request['created'];
 			$org_created=date('d-M-Y', strtotime($created));
 			?>
-
-			<div class="col-md-4" style="padding-top:15px;"> 
+			<div class="col-md-4" style="padding-top:15px;">
 				<fieldset>
 				<legend><?php echo @$image; ?></legend>
 				<span style="margin-top:-30px;float:right;"><?php echo $org_created; ?></span>
+				<div class="contain">
                  <ul>
-				 
 					<li class="">
 						<p>
 							<?php 
@@ -396,8 +396,8 @@ $conn = ConnectionManager::get('default');
                      <p>Comment:  <span class="details"><span> 
 					 <?php echo mb_strimwidth($request['comment'], 0, 25, "...");?></span></p>
                  </li>
-                      </ul>
-					  
+                </ul>
+			</div>
 				<hr></hr>	  
 		 <table width="100%" border="0">
 			<tr>
@@ -554,6 +554,8 @@ $conn = ConnectionManager::get('default');
 			</table>	
 		</fieldset>
 		</div>
+	</div>
+</div>
 							<?php  } } ?>
 							<div class="pages"></div>
 						<?php }else {?>
