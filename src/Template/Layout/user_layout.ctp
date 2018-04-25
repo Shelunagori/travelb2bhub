@@ -654,10 +654,10 @@ margin-bottom: 0px!important;
 		if($roleId==3){$WEBURL='hotelier';}
 		?>
 			<hr class="breakline"></hr>
-			<li><a target="_blank" href="http://ecotourismrajasthan.com/travelb2bhub/contact/"><i class="fa fa-phone"></i> <span>Contact Us</span></a></li>
-			<li><a target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/terms-and-conditions/"><i class="fa fa-edit"></i> <span>Terms & Conditions</span></a></li>
-			<li><a target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/privacy-policy/"><i class="fa fa-lock"></i> <span>Privacy Policy</span></a></li>
-			<li><a target="_blank"  href="http://ecotourismrajasthan.com/travelb2bhub/<?php echo $WEBURL; ?>"><i class="fa fa-question-circle"></i> <span>FAQs</span></a></li>
+			<li><a target="_blank" href="http://www.travelb2bhub.com/contact/"><i class="fa fa-phone"></i> <span>Contact Us</span></a></li>
+			<li><a target="_blank"  href="http://www.travelb2bhub.com/terms-and-conditions/"><i class="fa fa-edit"></i> <span>Terms & Conditions</span></a></li>
+			<li><a target="_blank"  href="http://www.travelb2bhub.com/privacy-policy/"><i class="fa fa-lock"></i> <span>Privacy Policy</span></a></li>
+			<li><a target="_blank"  href="http://www.travelb2bhub.com/<?php echo $WEBURL; ?>"><i class="fa fa-question-circle"></i> <span>FAQs</span></a></li>
 			<li style="margin-bottom:40px!important" <?php if($page_name=='logout' && $controller=='Users'){ echo 'class="active"';}?>>
 				<a href="<?php echo $this->Url->build(["controller" => "Users",'action'=>'logout']); ?>"><i class="fa fa-power-off"></i> <span>Logout</span></a>
 			</li>

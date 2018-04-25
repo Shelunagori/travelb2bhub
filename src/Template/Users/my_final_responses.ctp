@@ -1,8 +1,9 @@
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
-
 <?php
+
 use Cake\Datasource\ConnectionManager; 
 $conn = ConnectionManager::get('default');
+
 ?>
 <style>
 	legend {
@@ -53,7 +54,7 @@ $conn = ConnectionManager::get('default');
 					<div class="col-md-12">
 					   <label for="example-text-input" class="col-md-3 col-form-label">Agent Name: </label> 
 					   <div class="col-md-9">           
-						   <?php echo $this->Form->control('agentnamesearch', ['label'=>false,"type"=>"select",'options' =>$selectoption,"class"=>"form-control select2","data-placeholder"=>"Select Multiple ",'empty'=>'Select...','multiple'=>true]);?>
+						   <?php echo $this->Form->control('agentnamesearch', ['label'=>false,"type"=>"select",'options' =>$selectoption,"class"=>"form-control select2","data-placeholder"=>"Select Multiple ",'empty'=>'Select...','multiple'=>true]); ?>
 					   </div>
 					</div>
 			    </div>
@@ -62,7 +63,7 @@ $conn = ConnectionManager::get('default');
 					<div class="col-md-12">
 					   <label for="example-text-input" class="col-md-3 col-form-label">Reference ID: </label> 
 					   <div class="col-md-9">           
-						   <?php echo $this->Form->control('refidsearch[]', ['label'=>false,"type"=>"select",'options' =>$RefId,"class"=>"form-control select2","multiple"=>true,"data-placeholder"=>"Select Multiple",'empty'=>'Select...','multiple'=>true]);?>
+						   <?php echo $this->Form->control('refidsearch[]', ['label'=>false,"type"=>"select",'options' =>$RefId,"class"=>"form-control select2","multiple"=>true,"data-placeholder"=>"Select Multiple",'empty'=>'Select...','multiple'=>true]); ?>
 					   </div>
 					</div>
 			    </div>
@@ -71,9 +72,9 @@ $conn = ConnectionManager::get('default');
 					<div class="col-md-12">
 					   <label for="example-text-input" class="col-md-3 col-form-label">Request Type: </label> 
 					   <div class="col-md-9">           
-						   <select name="req_typesearch" multiple="multiple" class="form-control select2" data-placeholder="Select Multiple">
-								<option value="1" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="1")? 'selected':''; ?>>Package</option>
-								<option value="3" <?php echo (isset($_GET['req_typesearch']) && $_GET['req_typesearch'] =="2")? 'selected':''; ?>>Hotel</option>
+						    <select name="req_typesearch" multiple="multiple" class="form-control select2" data-placeholder="Select Multiple">
+								<option value="1">Package</option>
+								<option value="3">Hotel</option>
 								<option value="2">Transport</option>
 							</select>
 					   </div>
@@ -85,7 +86,13 @@ $conn = ConnectionManager::get('default');
 					<div class="col-md-12">
 					   <label for="example-text-input" class="col-md-3 col-form-label">Total Budget Range: </label>
 					   <div class="col-md-9">             
-						   <select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
+						    <select name="budgetsearch" class="form-control">
+								<option value="">Select Total Budget</option>
+								<option value="0-10000">0-10000</option>
+								<option value="10000-30000" >10000-30000</option>
+								<option value="30000-50000" >30000-50000</option>
+								<option value="50000-100000">50000-100000</option>
+							</select>
 					   </div>
 					</div>
 				</div>
@@ -93,9 +100,14 @@ $conn = ConnectionManager::get('default');
 					<div class="col-md-12">
 					   <label for="example-text-input" class="col-md-3 col-form-label">Quoted Price Range: </label> 
 					   <div class="col-md-9">            
-						   <select name="quotesearch" class="form-control"><option value="">Select Quoted Price</option><option value="0-10000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option>
-						   <option value="100000-100000000000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="100000-100000000000")? 'selected':''; ?>>100000-Above</option>
-							</select>
+						<select name="quotesearch" class="form-control">
+							<option value="">Select Quoted Price</option>
+							<option value="0-10000">0-10000</option>
+							<option value="10000-30000">10000-30000</option>
+							<option value="30000-50000">30000-50000</option>
+							<option value="50000-100000">50000-100000</option>
+							<option value="100000-100000000000" >100000-Above</option>
+						</select>
 					   </div>
 					</div>
 			    </div>
@@ -104,7 +116,7 @@ $conn = ConnectionManager::get('default');
 					<div class="col-md-12">
 					   <label for="example-text-input" class="col-md-3 col-form-label">Start Date: </label>
 					   <div class="col-md-9">           
-						    <input  type="text"  class="form-control datepickers" data-date-format="dd-mm-yyyy" name="startdatesearch" value="<?php echo isset($_GET['startdatesearch'])? $_GET['startdatesearch']:''; ?>" id="datepicker1">
+						    <input  type="text"  class="form-control datepickers" data-date-format="dd-mm-yyyy" name="startdatesearch" id="datepicker1">
 					   </div>
 					</div>
 			    </div>
@@ -114,8 +126,7 @@ $conn = ConnectionManager::get('default');
 					   <label for="example-text-input" class="col-md-3 col-form-label">End Date: </label> 
 					   <div class="col-md-9">           
 						   <input  type="text" class="form-control datepickers" data-date-format="dd-mm-yyyy" name
-="enddatesearch" value="<?php echo isset($_GET['enddatesearch'])? $_GET['enddatesearch'
-]:''; ?>" id="datepicker2">
+="enddatesearch" id="datepicker2">
 					   </div>
 					</div>
 			    </div>
@@ -126,28 +137,29 @@ $conn = ConnectionManager::get('default');
 					   <div class="col-md-9">           
 						   <select class="form-control select2"  name=pickup_city id=pickup_city>
 							   <option value="">Select</option>
-							   <?php foreach($allCities as $city){?>
-							   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['pickup_city']) AND $_GET['pickup_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
+							   <?php foreach($allCities1 as $city){?>
+							   <option value="<?php echo $city['value'];?>"><?php echo $city['label'];?></option>
 							   <?php }?>
 							</select>
 					   </div>
 					</div>
 			    </div>
 				
-				<div class="row" style="margin-top:10px">
+
+			 <div class="row" style="margin-top:10px">
 					<div class="col-md-12">
 					   <label for="example-text-input" class="col-md-3 col-form-label">Destination City (Packages & Hotels): </label> 
 					   <div class="col-md-9">           
 						   <select class="form-control select2" name=destination_city id=destination_city>
 							   <option value="">Select</option>
-							   <?php foreach($allCities as $city){?>
+							   <?php foreach($allCities1 as $city){?>
 							   <option value="<?php echo $city['value'];?>"<?php if(isset($_GET['destination_city']) AND $_GET['destination_city']==$city['value']){ echo 'selected'; }?>><?php echo $city['label'];?></option>
 							   <?php }?>
 							</select>
 					   </div>
 					</div>
 			    </div>
-				
+			 
 			  </div>
 			  <div class="modal-footer" style="margin-top:10px" align="center">
 				<input type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">
@@ -161,18 +173,16 @@ $conn = ConnectionManager::get('default');
 	</div>
 	<div class="box-body">
 		<div class="row">
-		<div class="">
-			
+		<div class=""> 		
 <!------------ Main -------------->	
 	<?php 
-		if(count($responses) >0) {
-			//pr($responses->toArray());
+		if(count($responses) >0) {  
 			foreach($responses as $row){
 			?>
 			<div id="cat" >
 			<div class="col-md-4" style="padding-top:15px;">
 			<?php 
-               
+                
 				if($row['request']['category_id']==1){ 
 					$image=$this->Html->image('/img/slider/package-icon.png');
 					$text="<span class='packageType'>Package</span>";

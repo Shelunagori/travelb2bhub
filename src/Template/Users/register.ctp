@@ -311,7 +311,7 @@ input[type=checkbox] {
 								</td>	
 								<td  >	
 									<span class="" for="ckb1" style="color:white;margin-left:20px !important;">
-										I accept the <a style="color:white;" target="_blank"  href="http://travelb2bhub.com/privacy-policy/"><u>Privacy Policy</u></a> and <a style="color:white;" target="_blank"  href="http://travelb2bhub.com/terms-and-conditions/"><u>Terms & Conditions</a></u>
+										I accept the <a style="color:white;" target="_blank"  href="http://www.travelb2bhub.com/privacy-policy/"><u>Privacy Policy</u></a> and <a style="color:white;" target="_blank"  href="http://www.travelb2bhub.com/terms-and-conditions/"><u>Terms & Conditions</a></u>
 									</span><br>
 									
 								</td>

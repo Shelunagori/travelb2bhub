@@ -12,19 +12,19 @@
 						<label for="from">No. of Rooms</label>
 						<div class="box-room">
 							<div class="col-md-7"> Single</div>
-							<div class="col-md-5"><input autocomplete="off" name="hh_room1[<?php echo $randomNumber;?>]" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+							<div class="col-md-5"><input autocomplete="off" name="hh_room1[<?php echo $randomNumber;?>]" type="text" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
 
 							<div class="col-md-7"> Double</div>
-							<div class="col-md-5"><input autocomplete="off" name="hh_room2[<?php echo $randomNumber;?>]" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+							<div class="col-md-5"><input autocomplete="off" name="hh_room2[<?php echo $randomNumber;?>]" type="text" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
 
 							<div class="col-md-7"> Triple</div>
-							<div class="col-md-5"><input autocomplete="off" name="hh_room3[<?php echo $randomNumber;?>]" type="number" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0"/></div>
+							<div class="col-md-5"><input autocomplete="off" name="hh_room3[<?php echo $randomNumber;?>]" type="text" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
 
 							<div class="col-md-7"> Child with bed</div>
-							<div class="col-md-5"><input autocomplete="off" name="hh_child_with_bed[<?php echo $randomNumber;?>]" style="height: 27px;" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
+							<div class="col-md-5"><input autocomplete="off" name="hh_child_with_bed[<?php echo $randomNumber;?>]" style="height: 27px;" type="text" min="0" class="form-control" id="from-place" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" placeholder="0"/></div>
 
 							<div class="col-md-7"> Child without bed</div>
-							<div class="col-md-5"><input autocomplete="off" name="hh_child_without_bed[<?php echo $randomNumber;?>]" style="height: 27px;" type="number" min="0" class="form-control" id="from-place" placeholder="0"/></div>
+							<div class="col-md-5"><input autocomplete="off" name="hh_child_without_bed[<?php echo $randomNumber;?>]" style="height: 27px;" type="text" min="0" class="form-control" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
 						</div>
 					</div>
 				</div>
