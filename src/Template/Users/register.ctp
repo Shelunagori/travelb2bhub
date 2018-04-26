@@ -41,33 +41,11 @@ hr { margin-top:0px!important;}
     text-align: center;
     color: white;
 }
-.overlap {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-	width:100%;
-	opacity: .7;
-}
-.input100{
-	padding:0px !important;
-	margin-bottom: -6px;
-}
-.focus-input100::after{
-	font-size:19px !important; 
-	font-family: popins-regular;
-}
+
 body{
 	font-family: popins-regular !important;
 }
-.nm { 
-	font-size: 19px;
-    color: #373435;
-    font-weight: 900;
-}
-.other { 
-	font-size: 17px;
-    color: #727376; 
-}
+
 .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img { 
 	height: 200 !important;
     width: 200 !important; 
@@ -102,7 +80,8 @@ body{
 }
 input[type=checkbox] {
     margin: 0px 0 0;
-}		
+}	
+
 </style>
 <style>
 	#country-list{list-style:none;margin-left: 1px;padding:0;width:94%; margin-top: 10px;    position: absolute;
@@ -176,7 +155,7 @@ input[type=checkbox] {
 								</select>
 							</div>					
 						</div>
-						<div class="col-md-6 hoteltype" style="font-size:14px !important;">
+						<div class="col-md-6 hoteltype" >
 											
 						</div>										
 					</div>
@@ -418,7 +397,7 @@ $(document).ready(function(){
 	});
    
    
-   $('.hoteltype').html('<div class="wrap-input100 validate-input "  data-validate = "Company Name"><input class=" input100 trim_space_valid " required=""  id="company_name" type="text" name="company_name" ><span class="focus-input100" data-placeholder="Company Name"></span></div>');
+   $('.hoteltype').html('<div class="wrap-input100 validate-input "  data-validate = "Company Name"><input class=" input100 trim_space_valid " required=""  id="company_name" type="text" name="company_name" ><span class="focus-input100" data-placeholder="Company Name" style="top: -10px;"></span></div>');
 
 	$(document).on('change',"#role_id",function(){
  		var roleid = jQuery( "#role_id option:selected" ).val();
@@ -428,11 +407,11 @@ $(document).ready(function(){
 			$('.hotelname').html('Company Name<span class="asterisk"><img class="img-responsive" src="../img/Asterisk.png"></span>')		
 		}*/
 		if(roleid != "" && roleid == 3) {
-			$('.hoteltype').html('<div class="wrap-input100 validate-input "  data-validate = "Hotel Name"><input class=" input100 trim_space_valid " required=""  id="hotel_name" type="text" name="hotel_name" ><span class="focus-input100" data-placeholder="Hotel Name"></span></div>');
+			$('.hoteltype').html('<div class="wrap-input100 validate-input "  data-validate = "Hotel Name"><input class=" input100 trim_space_valid " required=""  id="hotel_name" type="text" name="hotel_name" /><span class="focus-input100" data-placeholder="Hotel Name" style="top: -10px;"></span></div>');
 		}
 		else
 		{
-			$('.hoteltype').html('<div class="wrap-input100 validate-input "  data-validate = "Company Name"><input class=" input100 trim_space_valid " required=""  id="company_name" type="text" name="company_name" ><span class="focus-input100" data-placeholder="Company Name"></span></div>');
+			$('.hoteltype').html('<div class="wrap-input100 validate-input "  data-validate = "Company Name"><input class=" input100 trim_space_valid " required=""  id="company_name" type="text" name="company_name" /><span class="focus-input100" data-placeholder="Company Name" style="top: -10px;"></span></div>');
 		}
 		if(roleid != "" && roleid == 1) {
 			$('#preferenceStateDiv').show();
