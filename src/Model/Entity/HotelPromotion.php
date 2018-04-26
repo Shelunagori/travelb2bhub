@@ -49,5 +49,16 @@ class HotelPromotion extends Entity
     protected $_accessible = [
         '*' => true,
         'id' => false
-    ];
+    ]; 
+	protected $_virtual = [
+       'full_image'
+    ];	
+	
+	protected function _getFullImage()
+	{
+		if(!empty($this->_properties['hotel_pic']))
+		{
+			return 'http://udaipurcare.com/travelb2b/webroot/'. $this->_properties['hotel_pic'];
+		}
+	}
 }

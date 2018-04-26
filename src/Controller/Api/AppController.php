@@ -28,7 +28,7 @@ class AppController extends Controller
 	public function initialize()
     {
 		$coreVariable = [
-			'SiteUrl' => 'http://13.127.63.130/travelb2bhub/',
+			'SiteUrl' => 'http://udaipurcare.com/travelb2b/',
 		];
 		$this->coreVariable = $coreVariable;
 		$this->set(compact('coreVariable'));
