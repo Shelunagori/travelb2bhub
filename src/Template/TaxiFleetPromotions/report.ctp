@@ -182,13 +182,74 @@ a{
 					<span class="box-title" style="color:#057F8A;"><b>Taxi/Fleet Promotions</b></span>
 					<div class="box-tools pull-right" style="margin-top:-5px;">
 						<a style="font-size:16px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-						<a style="font-size:23px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+						<a style="font-size:23px" class="btn btn-box-tool " data-target="#demo" data-toggle="collapse"> <i class="fa fa-filter" aria-expanded="false"></i></a>
 						<a style="font-size:20px" href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'savedList',$user_id),1);?>" class="btn btn-box-tool" ><i class="fa fa-bookmark"></i></a>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>  
+		<div class="row collapse"  id="demo" aria-expanded="false">
+			<div class="col-md-12">
+				<div class="box-header with-border">
+				<form class="filter_box" method="get">
+					<fieldset><legend>Filter</legend>
+						<div class="row form-group margin-b10">
+							<div class="col-md-12">
+								<div class="col-md-6 margin-b10">
+									<label class="col-form-label" for=example-text-input>City:  </label>
+									<div class="input-field">
+									 <?php 
+									$options=array();
+									foreach($city->citystatefi as $cty)
+									{
+										$options[] = ['value'=>$cty->cityid,'text'=>$cty->name];
+									};
+									echo $this->Form->input('city_id', ['options' =>$options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']); ?>
+									</div>
+								</div>	
+							  <div class="col-md-6 margin-b10">
+								 <label class="col-form-label" for=example-text-input>State:  </label>
+									<div class="input-field">
+									<?php 
+									$options=array();
+									foreach($states as $st)
+									{
+										$options[] = ['value'=>$st->id,'text'=>$st->state_name];
+									};
+									echo $this->Form->input('state_id', ['options' => $options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']); 
+									?> 
+									</div>
+								</div>	
+							</div>
+						</div>
+						<div class="row form-group margin-b10">
+							<div class="col-md-12">
+								<div class="col-md-12">
+									<label class="col-form-label"for=example-text-input>Select Taxt/Fleet Category:  </label>
+									<div class="input-field">
+										<?php 
+										$options=array();
+										foreach($TaxiFleetCarBuses as $Buses)
+										{
+											$options[] = ['value'=>$Buses->id,'text'=>$Buses->name];
+										};
+										echo $this->Form->control('car_bus_id', ['label'=>false,"id"=>"multi_vehicle", "type"=>"select",'options' =>$options, "class"=>"form-control select2","style"=>"height:125px;",'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']);?>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="row form-group margin-b10">
+							<div class="col-md-12 text-center">
+								<button class="btn btn-success btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
+								<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-warning btn-sm">Reset</a>
+							</div>	
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>  
 			 <div id="myModal123" class="modal fade" role="dialog" >
 			  <div class="modal-dialog modal-sm" >
 				<!-- Modal content-->
