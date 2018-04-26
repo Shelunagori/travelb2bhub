@@ -156,7 +156,9 @@ input[type=checkbox] {
 							</div>					
 						</div>
 						<div class="col-md-6 hoteltype" >
-											
+							<div class="wrap-input100 validate-input "  data-validate = "Company Name">
+							<input class=" input100 trim_space_valid taxtboxname" required=""  id="company_name" type="text" name="company_name" >
+							<span class="focus-input100 lablename" data-placeholder="Company Name" ></span></div>				
 						</div>										
 					</div>
 				</div>
@@ -395,24 +397,25 @@ $(document).ready(function(){
 			$("#chk_cond").hide();
 		}
 	});
-   
-   
-   $('.hoteltype').html('<div class="wrap-input100 validate-input "  data-validate = "Company Name"><input class=" input100 trim_space_valid " required=""  id="company_name" type="text" name="company_name" ><span class="focus-input100" data-placeholder="Company Name" ></span></div>');
-
+  
 	$(document).on('change',"#role_id",function(){
  		var roleid = jQuery( "#role_id option:selected" ).val();
-		/*if(roleid==3){
-			$('.hotelname').html('Hotel Name<span class="asterisk"><img class="img-responsive" src="../img/Asterisk.png"></span>')		
-		} else{
-			$('.hotelname').html('Company Name<span class="asterisk"><img class="img-responsive" src="../img/Asterisk.png"></span>')		
-		}*/
-		if(roleid != "" && roleid == 3) {
-			$('.hoteltype').html('<div class="wrap-input100 validate-input "  data-validate = "Hotel Name"><input class=" input100 trim_space_valid " required=""  id="hotel_name" type="text" name="hotel_name" /><span class="focus-input100" data-placeholder="Hotel Name" ></span></div>');
-		}
+ 		if(roleid != "" && roleid == 3) {
+ 
+			$('.lablename').removeAttr('data-placeholder');
+			$('.lablename').attr('data-placeholder','Hotel Name');
+			
+			$('.taxtboxname').removeAttr('name');
+			$('.taxtboxname').attr('name','hotel_name');
+ 		}
 		else
 		{
-			$('.hoteltype').html('<div class="wrap-input100 validate-input "  data-validate = "Company Name"><input class=" input100 trim_space_valid " required=""  id="company_name" type="text" name="company_name" /><span class="focus-input100" data-placeholder="Company Name"></span></div>');
-		}
+			$('.lablename').removeAttr('data-placeholder');
+			$('.lablename').attr('data-placeholder','Company Name');
+			
+			$('.taxtboxname').removeAttr('name');
+			$('.taxtboxname').attr('name','company_name');
+ 		}
 		if(roleid != "" && roleid == 1) {
 			$('#preferenceStateDiv').show();
 			var needPreferenceState = true;
@@ -822,6 +825,20 @@ var prootionId=<?php echo $_GET['promotion_id'];?>;
 
 if(prootionId == 1 ){
 	$('.preferenceStateDiv').show();
+}
+if(prootionId == 3 ){
+	$('.lablename').removeAttr('data-placeholder');
+	$('.lablename').attr('data-placeholder','Hotel Name');
+	
+	$('.taxtboxname').removeAttr('name');
+	$('.taxtboxname').attr('name','hotel_name');
+}
+else{
+	$('.lablename').removeAttr('data-placeholder');
+	$('.lablename').attr('data-placeholder','Company Name');
+	
+	$('.taxtboxname').removeAttr('name');
+	$('.taxtboxname').attr('name','company_name');
 }
 </script>	
 <script type="text/javascript">
