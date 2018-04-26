@@ -392,24 +392,25 @@ label {
 				<div class="newdiv">
 				<div class="row">
 				<div class="col-md-12">
+				<b><div class="Destination-title col-md-12"> Destination </div>	</b>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 						<div class="input-field">
 							<p for="from">No. of Rooms <span class="required">*</span></p>
 							<div class="box-room">
 								<div class="col-md-7"> Single</div>
-								<div class="col-md-5"><input autocomplete="off" name="room1" type="text" min="0" style="height: 27px;" class="form-control packageroom" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room1" type="text" min="0" style="height: 27px;" class="form-control packageroom" id="room1room" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
 
 								<div class="col-md-7"> Double</div>
-								<div class="col-md-5"><input autocomplete="off" name="room2" type="text" min="0" style="height: 27px;" class="form-control packageroom" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room2" type="text" min="0" style="height: 27px;" class="form-control packageroom" id="room2room" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
 
 								<div class="col-md-7"> Triple</div>
-								<div class="col-md-5"><input autocomplete="off" name="room3" type="text" min="0" style="height: 27px;" class="form-control packageroom" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="room3" type="text" min="0" style="height: 27px;" class="form-control packageroom" id="room3room" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
 
 								<div class="col-md-7"> Child with bed</div>
-								<div class="col-md-5"><input autocomplete="off" name="child_with_bed" style="height: 27px;" type="text" min="0" class="form-control packageroom" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="child_with_bed" style="height: 27px;" type="text" min="0" class="form-control packageroom" id="room4room" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
 
 								<div class="col-md-7"> Child without bed</div>
-								<div class="col-md-5"><input autocomplete="off" name="child_without_bed" style="height: 27px;" type="text" min="0" class="form-control packageroom" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
+								<div class="col-md-5"><input autocomplete="off" name="child_without_bed" style="height: 27px;" type="text" min="0" class="form-control packageroom" id="room5room" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
 							</div>
 							<p style="display:none;color:#ea3733;font-weight:100 !important;" id="showerror12" > This field is required.</p>
 						</div>
@@ -1731,6 +1732,15 @@ $(document).ready(function () {
 				var len = $('input.checkdatefornext').length;
 				var new_len=len-1;
  				$(wrapper).append(result);
+				//--
+				
+				$(wrapper).find("input[name='hh_room1["+number+"]']").val($("#room1room").val());
+				$(wrapper).find("input[name='hh_room2["+number+"]']").val($("#room2room").val());
+				$(wrapper).find("input[name='hh_room3["+number+"]']").val($("#room3room").val());
+				$(wrapper).find("input[name='hh_child_with_bed["+number+"]']").val($("#room4room").val());
+				$(wrapper).find("input[name='hh_child_without_bed["+number+"]']").val($("#room5room").val());
+				
+				//--
   				var checkInDatePicker = $(wrapper).find("input:text[name='hh_check_in["+number+"]']");
 				var checkOutDatePicker = $(wrapper).find("input:text[name='hh_check_out["+number+"]']");
 				var last_date=masterClick.closest('fieldset').find('input.checkdatefornext:eq('+new_len+')').val();
