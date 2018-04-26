@@ -2,14 +2,14 @@
 	<div class="destination newdiv">
 	<div class="stop col-md-12">
 	<hr  style="margin-top: 8px; margin-bottom: 8px;"></hr>
-	<b> <div class="Destination-title"> Destination </div> </b>
+	<b><div class="Destination-title"> Destination </div></b>
 	<div class="row main_row"> 
 	  <div class="row">
 			<div class="col-md-12">
 			
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 					<div class="input-field">
-						<label for="from">No. of Rooms</label>
+						<span for="from">No. of Rooms</span>
 						<div class="box-room">
 							<div class="col-md-7"> Single</div>
 							<div class="col-md-5"><input autocomplete="off" name="hh_room1[<?php echo $randomNumber;?>]" type="text" min="0" style="height: 27px;" class="form-control" id="from-place" placeholder="0" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/></div>
@@ -56,7 +56,7 @@
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 mt">
 					<div class="input-field">
 						Meal Plan
-						<?php echo $this->Form->control('hh_meal_plan['.$randomNumber.']', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$MealPlans, "class"=>"form-control select2","data-placeholder"=>"Select Options "]); ?>
+						<?php echo $this->Form->control('hh_meal_plan['.$randomNumber.']', ["id"=>"h_hotel_category", "type"=>"select",'options' =>$MealPlans, "class"=>"form-control select2","data-placeholder"=>"Select Options ",'empty'=>'Select Options']); ?>
 					</div>
 				</div>
 			
@@ -113,7 +113,7 @@
 							Check In
 						</p>
 					</div>
-					<div class="col-md-12 input-group">
+					<div class="">
 						<input require type="text" required="true" name="hh_check_in[<?php echo $randomNumber; ?>]" id="hh_check_in[<?php echo $randomNumber; ?>]" class="form-control datepicker"  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>                     
 					</div>
 				</div> 
@@ -123,7 +123,7 @@
 						Check Out
 					</p>
 					</div>
-					<div class="col-md-12 input-group">
+					<div class="">
 						<input type="text" required="true" name="hh_check_out[<?php echo $randomNumber; ?>]" id ="hh_check_out[<?php echo $randomNumber; ?>]" class="form-control enddate datepicker checkdatefornext"  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>                     
 					</div>
 				</div>
