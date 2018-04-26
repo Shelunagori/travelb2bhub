@@ -4767,7 +4767,7 @@ $data[$req['id']]  = $queryr->count();
 			$stmt1 = $conn->execute($sql1);
 			$countchat = $stmt1 ->fetch('assoc');
 			
-			$API_ACCESS_KEY='AIzaSyA5mzBqngPlq220FYB8Cr2O4y79RH4i9s4';
+			$API_ACCESS_KEY='AIzaSyBMQtE5umATnqJkV4edMYQ_fR8263Zm21E';
 
 			$registrationIds =  $deviceid;
 			$msg = array
