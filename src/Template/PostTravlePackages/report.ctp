@@ -49,7 +49,6 @@ if ($err) {
 } else {
 	$response;
 	$List=json_decode($response);
-	
 	$postTravlePackages=$List->getTravelPackages;
 }
 //pr($postTravlePackages); exit;
@@ -84,6 +83,7 @@ if ($err) {
 }
 //--- Category
 $curl = curl_init();
+ 
 curl_setopt_array($curl, array(
   CURLOPT_URL => $coreVariable['SiteUrl']."api/post_travle_package_categories/index.json",
   CURLOPT_RETURNTRANSFER => true,
