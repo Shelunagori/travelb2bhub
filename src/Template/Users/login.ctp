@@ -39,17 +39,16 @@
 			<div class="wrap-login100 main_div prakash"  >
 					<center>
 						<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:50%;']) ?>
-					</center>
-				<p style="color:#ff9898 !important;"><?php echo "<br>".$this->Flash->render()."<br/>"; ?></p>
+					</center> 
 				
                 <?php  echo $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'login'],'id'=>"UserLoginForm", 'class'=>'login100-form validate-form']); ?>
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="text" name="email" >
+						<input class="input100" type="text" autocomplete="new-password" name="email" >
 						<span class="focus-input100" data-placeholder="Email"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" name="password" >
+						<input class="input100" type="password" autocomplete="new-password" name="password" >
 						<span class="focus-input100" data-placeholder="Password"></span>
 					</div>
 

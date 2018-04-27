@@ -1,164 +1,361 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-    <link rel="shortcut icon" href="/packages/serverfireteam/panel/favicon.ico">
-    <link rel="icon" href="/packages/serverfireteam/panel/favicon.ico" >
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="PHP" >
-	<title>TB2B</title>
-		<?php echo $this->Html->css('/packages/zofe/rapyd/assets/demo/style.css'); ?> 
-		<?php echo $this->Html->css('/packages/zofe/rapyd/assets/datepicker/datepicker3.css'); ?>
-		<?php echo $this->Html->css('/packages/zofe/rapyd/assets/autocomplete/autocomplete.css'); ?>
-		<?php echo $this->Html->css('/packages/zofe/rapyd/assets/autocomplete/bootstrap-tagsinput.css'); ?>
-		<?php echo $this->Html->css('/packages/zofe/rapyd/assets/colorpicker/css/bootstrap-colorpicker.min.css'); ?>
-		<?php echo $this->Html->css('/packages/serverfireteam/panel/css/styles.css'); ?>
-		<?php echo $this->Html->css('/packages/serverfireteam/panel/font-icon/icomoon/style.css'); ?>
-		<?php echo $this->Html->script('https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'); ?> 
-		<?php echo $this->Html->script('https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js'); ?> 
-		<?php echo $this->Html->script('http://fonts.googleapis.com/css?family=Abel');?> 
-		  
-		<?php echo $this->Html->script('/packages/serverfireteam/panel/js/jquery-1.11.0.js'); ?></script>
-		<?php echo $this->Html->css('/packages/zofe/rapyd/assets/select2/select2.css'); ?>
-		<?php echo $this->Html->script('/packages/zofe/rapyd/assets/select2/select2.js'); ?></script>
-		
-		<style>
-			.Responses .pull-right a{
-				display: none;
-			}
-			.Requests .pull-right a{
-				display: none;
-			}
-		</style>
-	</head>
-	<body class="dashboard Admin">
-	<div class="loading">
-        <h1> LOADING </h1>
-        <div class="spinner">
-          <div class="rect1"></div>
-          <div class="rect2"></div>
-          <div class="rect3"></div>
-          <div class="rect4"></div>
-          <div class="rect5"></div>
-        </div>
-    </div>
-
-    <div id="wrapper">
-        <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-static-top " role="navigation" style="margin-bottom: 0">
-
-            <!-- /.navbar-header -->
-             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed btn-resp-sidebar" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-
-              </div>
-
-
-            <!-- /.navbar-top-links -->
-
-            <div class="navbar-default sidebar " role="navigation">
-                <div class="sidebar-nav navbar-collapse collapse " id="bs-example-navbar-collapse-1">
-                      <div class="grav center">
-						<?php echo $this->Html->Image('/packages/serverfireteam/panel/img/logo.png'); ?>
-					  </div>
-                      <div class="user-info">
-					  
-					  </div>
-                     
-                      <ul class="nav" id="side-menu">
-                          <li class="{{ (Request::url() === url('panel')) ? 'active' : '' }}">
-                              <a  href="{{ url('panel') }}" ><i class="fa fa-dashboard fa-fw"></i> {{ \Lang::get('panel::fields.dashboard') }}</a>
-                          </li>
-
-                          @foreach($linkItems as $linkItem)
-                              
-                              <li class="s-link {{ $isActive ? 'active' : '' }}">
-                                  <a  href="{{ url($linkItem['showListUrl']) }}" class="{{ $isActive ? 'active' : '' }}">
-                                      <i class="fa fa-edit fa-fw"></i>
-                                      {{{$linkItem['title']}}}
-                                  </a>
-                                  <span class="badge {{App::getLocale() == 'fa' ? 'pull-left' : 'pull-right'}}">{!!$linkItem['count']!!}</span>
-                                  <div class="items-bar">
-                                      <a href="{{ url($linkItem['addUrl']) }}" class="ic-plus" title="Add" ></a>
-                                      <a title="List" class="ic-lines" href="{{ url($linkItem['showListUrl']) }}" ></a>
-                                  </div>
-                              </li>
-                          @endforeach
-<li class="s-link"><a href="{{ url('/') }}/reports.php"><i class="fa fa-edit fa-fw"></i>Reports</a></li>
-						  <li class="s-link"><a href="{{ url('/') }}/statistics.php"><i class="fa fa-edit fa-fw"></i>Statistics</a></li>
-                      </ul>
-
-                        </li>
-                    </ul>
-                </div>
-
-
-            </div>
-            <!-- /.navbar-static-side -->
-        </nav>
-      
-        <div id="page-wrapper">
-
-
-            <!-- Menu Bar -->
-            <div class="row">
-                <div class="col-xs-12 text-a top-icon-bar">
-                    <div class="btn-group" role="group" aria-label="...">
-                        <div class="btn-group" role="group">
-                            <a  type="button" class="btn btn-default dropdown-toggle main-link" data-toggle="dropdown" aria-expanded="false">
-                                Settings
-                                <span class="caret"></span>
-                            </a>
-                          <ul class="dropdown-menu" role="menu">
-                            <li><a href=""><span class="icon  ic-users "></span> Edit Profile</a></li>
-                            <li><a href=""><span class="icon ic-cog"></span>Change Password</a></li>
-                          </ul>
-                        </div>
-                        <a href="{{url('panel/logout')}}" type="button" class="btn btn-default main-link">Logout<span class="icon  ic-switch"></span></a>
-                      </div>
-                </div>
-            </div>
-
-            <?php echo $this->fetch('content'); ?>
-
-        </div>
-        </div>
-        <!-- /#page-wrapper -->
-
-    </div>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta charset="utf-8">
+<title>TB2B</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta content="width=device-width, initial-scale=1" name="viewport">
+<meta content="" name="description">
+<meta content="" name="author"> 
+	<?php echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
 	
-	
-	
-	
-	
+	<?php echo $this->Html->css('/assets/plugins/bootstrap-datepicker/css/datepicker3.css'); ?> 
+	<?php echo $this->Html->css('/assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css'); ?> 
+	<?php echo $this->Html->css('/assets/plugins/timepicker/bootstrap-timepicker.min.css'); ?> 
+	<?php echo $this->Html->css('/assets/plugins/jquery-validation/demo/css/screen.css'); ?> 
+	<?php echo $this->Html->css('/assets/plugins/iCheck/all.css'); ?> 
+	<?php echo $this->Html->css('/assets/font-awesome/css/font-awesome.min.css'); ?> 
+	<?php echo $this->Html->css('/assets/ionicons/css/ionicons.min.css'); ?> 
+	<?php echo $this->Html->css('/assets/plugins/select2/select2.min.css'); ?>
+	<?php echo $this->Html->css('/assets/plugins/bootstrap-editable/css/bootstrap-editable.css'); ?>
+	<?php echo $this->Html->css('/assets/dist/css/AdminLTE.min.css'); ?>
+	<?php echo $this->Html->css('/assets/dist/css/skins/_all-skins.min.css'); ?>
+<?php //echo $this->Html->css('/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css'); ?>
+<?php echo $this->Html->css('/assets/plugins/WYSIWYG/editor.css'); ?>
+	<?php
+	echo $this->Html->meta(
+    'favicon.ico',
+    '/images/shortcut_icon/favicon.ico',
+    ['type' => 'icon']
+);
+?>
+
+<style>
+h1,h2,h3,h4,h5,h6{
+	font-family: 'Raleway', sans-serif !important;
+}
+#grad1 {
+    height: 50px;
+    background:  #DA0845; /* For browsers that do not support gradients */    
+    background: -webkit-linear-gradient(left,  #DA0845 , #DB7E14); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right,  #DA0845, #DB7E14); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right,  #DA0845, #DB7E14); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right,  #DA0845 , #DB7E14); /* Standard syntax (must be last) */
+}
+
+.box.box-primary {
+    border-top-color: #66cad5 !important;
+}
+
+sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a {
+    color: #fff;
+    background: #66cad5e3;
+    border-left-color: #DA3E2E;
+}
+.required {
+	color:#ea3733;
+}
+
+body{
+	font-family: 'Montserrat';
+	color: #606062;
+
+}
  
-	
-	
-	
-	
-	
-	
-	
-	
+fieldset {
+	padding: 10px ;
+	border: 1px solid #bfb7b7f7;
+	margin: 12px;
+}
+legend{
+	margin-left: 20px;	
+	 color:#144277; 
+	//color:#144277c9; 
+	font-size: 17px;
+	margin-bottom: 0px;
+	border:none;
+}
+span.select2 {
+	width :100% !important;
+}
+ 
+</style>
+<style>
 
-			
-			
-		<?php echo $this->Html->script('/packages/serverfireteam/panel/js/bootstrap.min.js'); ?>
-		<?php echo $this->Html->script('/packages/serverfireteam/panel/js/sb-admin-2.js'); ?>  
-		<?php echo $this->Html->script('/packages/zofe/rapyd/assets/datepicker/bootstrap-datepicker.js'); ?>
-		<?php echo $this->Html->script('/packages/zofe/rapyd/assets/datepicker/locales/bootstrap-datepicker.it.js'); ?>
-		<?php echo $this->Html->script('/packages/zofe/rapyd/assets/autocomplete/typeahead.bundle.min.js'); ?>
-		<?php echo $this->Html->script('/packages/zofe/rapyd/assets/template/handlebars.js'); ?> 
-		<?php echo $this->Html->script('/packages/zofe/rapyd/assets/autocomplete/bootstrap-tagsinput.min.js');?>
-		<?php echo $this->Html->script('/packages/zofe/rapyd/assets/colorpicker/js/bootstrap-colorpicker.min.js');?>
-		<?php echo $this->Html->script('/packages/zofe/rapyd/assets/select2/custom.js'); ?> 
-	</body>
+body{
+font-family: 'Montserrat';
+font-size:14px;
+}
+.self-table > tbody > tr > td, .self-table > tr > td
+{
+border-top:none !important;
+}
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    vertical-align:middle !important;
+}
+label{
+	vertical-align: text-top;
+}
+div.radio div.radio-div:not(:first-child) {
+    margin-left: 5px !important;
+}
+.checkbox, .radio {
+margin-bottom: 5px !important;
+margin-top: 5px !important;
+}
 
+ @media print {
+	    .hide_print{
+		   display:none;
+	   }
+   }
+
+</style>
+ 
+</head>
+
+<body class="hold-transition skin-blue fixed sidebar-mini">
+<?php $this->Form->templates([
+		'inputContainer' => '{{content}}'
+	]); 
+?>
+<div id="wrapper">
+<header class="main-header no-print" >
+   <a href="<?php echo $this->Url->build(["controller" => "Admins",'action'=>'add']); ?>" class="logo">
+      <span class="logo-mini"><?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:77%;']) ?></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><?=  $this->Html->image('/img/main_logo.png', ['style'=>'width:85%;']) ?></span>
+    </a>
+    <nav class="navbar navbar-static-top"  >
+    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+	 <!---<a href="#" class="hidden-lg hidden-md hidden-sm sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>-->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+            <li class="dropdown user user-menu">
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				  <span> <i class="fa fa-setting"></i> Setting</span>
+				</a>
+				<ul class="dropdown-menu">
+					<!--<li>
+					  <?php echo $this->Html->link('Edit Profile',['controller' => 'Users', 'action' => 'editprofile', '_full' => true,'class'=>'btn btn-default btn-flat']); ?>
+					</li>
+					<li>
+					  <?php echo $this->Html->link('Change Password',['controller' => 'Users', 'action' => 'changepassword', '_full' => true,'class'=>'btn btn-default btn-flat']); ?>
+					</li>-->
+					<li>
+					  <?php echo $this->Html->link('Logout',['controller' => 'Admins', 'action' => 'logout', '_full' => true,'class'=>'btn btn-default btn-flat']); ?>
+					</li>
+					
+				</ul>
+			</li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <aside class="main-sidebar no-print">
+  <section class="sidebar" >		
+	<ul class="sidebar-menu">
+			<?php  
+			 $class_selected='';
+			$user_right1="";
+			$user_right1 = $this->requestAction(['controller'=>'Admins', 'action'=>'UserRights'],['pass'=>array()]);
+			
+			$user_right=explode(',', $user_right1);
+			
+			$fetch_menu = $this->requestAction(['controller'=>'Admins', 'action'=>'menu'],['pass'=>array()]);
+		    $main_menu_arr[]='';
+			$page_name=$this->request->params['action'];
+             foreach($fetch_menu as $data)
+			 {
+				if(in_array($data->id, $user_right))
+				{
+					if(empty($data->main_menu) && empty($data->sub_menu))
+					{
+						if($page_name==$data['page_name_url'])
+						{
+							$class_selected='selected';
+						}
+							
+						?>
+						<li class="<?php if($page_name==$data['page_name_url']){ echo 'active'; } ?>">
+						<?php echo $this->Html->link('<i class="'.$data['icon_class_name'].'"></i>&nbsp;&nbsp;<span class="title">'.$data['name'].'</span><span class="'.$class_selected.'"></span>',array('controller' => $data['controller'], 'action' => $data['page_name_url'], '_full' => true),['escape'=>false]); ?>
+						
+						</li>
+				<?php $class_selected=''; }else{
+					if(!in_array($data['main_menu'], $main_menu_arr)){
+						$main_menu_arr[]=$data['main_menu'];
+						$fetch_menu_submenu = $this->requestAction(['controller'=>'Admins', 'action'=>'MenuSubmenu'],['pass'=>array($data['main_menu'])]);		
+							foreach($fetch_menu_submenu as $data_value1)
+							{ 	
+								if($data_value1['page_name_url'] == $page_name)
+								{
+									$class_active='active';
+									$arrow_open='open';
+									$class_selected='selected';
+								}
+							}
+						?>
+						<li class="treeview<?php  echo @$class_active; ?> ">
+								<?php echo $this->Html->link('<i class="'.$data['main_menu_icon'].'"></i>&nbsp;&nbsp;<span class="title">'.$data['main_menu'].'</span><span class="'.$class_selected.'"></span><span class="pull-right-container">
+								  <i class="fa fa-angle-left pull-right"></i>
+								</span>',array('action' => '#'),['escape'=>false]); ?>
+								
+								<ul class="treeview-menu">
+								<?php
+								$class_active='';
+								$arrow_open='';
+								$class_selected='';
+						
+						foreach($fetch_menu_submenu as $data_value)
+						{
+							if(!empty($data_value['sub_menu']))
+							{ 
+								$fetch_submenu = $this->requestAction(['controller'=>'Admins', 'action'=>'submenu'],['pass'=>array($data_value['sub_menu'])]);	
+								
+								if(!in_array($data_value['sub_menu'], $main_menu_arr))
+								{
+									$main_menu_arr[]=$data_value['sub_menu'];
+										$main_menu_arr_my[]=$data_value['sub_menu'];
+										foreach($fetch_submenu as $data_value1)
+										{
+											if($data_value1['page_name_url'] == $page_name)
+											{
+												$class_active='active';
+												$arrow_open='open';
+												$class_selected='selected';
+											}
+											 
+										}
+										$x=0;
+								foreach($fetch_submenu as $data_submenu)
+								{$x++;
+										if(in_array($data_submenu['id'], $user_right) && $x==1)
+										{  
+										?>
+										<li class="treeview <?php  echo @$class_active; ?>">
+										<?php echo $this->Html->link('<i class="'.$data_value['sub_menu_icon'].'"></i><span class="title">'.$data_value['sub_menu'].'</span><span class="'.$class_selected.'"></span><span class="pull-right-container">
+										  <i class="fa fa-angle-left pull-right"></i>
+										</span>',array('action' => '#'),['escape'=>false]); ?>
+										<ul  class="treeview-menu">
+										<?php
+										foreach($fetch_submenu as $data_submenu)
+										{
+											if((in_array($data_submenu['id'], $user_right))&& (!in_array($data_submenu['name'], $main_menu_arr)))
+											{
+												$main_menu_arr[]=$data_submenu['name'];
+											 ?>
+											<li class="<?php if($page_name==$data_submenu['page_name_url']){ echo ' active'; } ?>">
+											<?php echo $this->Html->link('<i class="'.$data_submenu['icon_class_name'].'"></i><span class="title">'.$data_submenu['name'].'</span>',array('controller' => $data_submenu['controller'], 'action' => $data_submenu['page_name_url'], '_full' => true),['escape'=>false]); ?>
+												
+											</li>
+											<?php
+											}
+										}
+										$class_active='';
+										$arrow_open='';
+										$class_selected='';
+										?>
+										</ul>
+									</li>
+							<?php
+						 }}} }else
+							{
+										if((in_array($data_value['id'], $user_right)) && (!in_array($data_value['name'], $main_menu_arr)))
+										{
+											$main_menu_arr[]=$data_value['name'];
+										 ?>
+												<li class="<?php if($page_name==$data_value['page_name_url']){ echo ' active'; } ?>">
+												<?php echo $this->Html->link('<i class="'.$data_value['icon_class_name'].'"></i><span class="title">'.$data_value['name'].'</span>',array('controller' => $data_value['controller'], 'action' => $data_value['page_name_url'], '_full' => true),['escape'=>false]); ?>
+												</li>
+												<?php
+						}}} ?>
+				</ul>	
+							</li>
+							<?php
+						$class_active='';
+						$arrow_open='';
+						$class_selected='';
+		}}}}	  ?>
+		<!----
+<li><a href="<?php echo $this->Url->build(["controller" => "Admins/index"]); ?>">Dashboard</a></li>		
+<li><a href="<?php echo $this->Url->build(["controller" => "Cities", "action" => "add"]); ?>">City-Master</a></li>		
+<li><a href="<?php echo $this->Url->build(["controller" => "States", "action" => "add"]); ?>">State-Master</a></li>		
+<li><a href="<?php echo $this->Url->build(["controller" => "Countries", "action" => "add"]); ?>">Country-Master</a></li>		
+<li><a href="<?php echo $this->Url->build(["controller" => "Promotion/index"]); ?>">Promotion</a></li>		
+<li><a href="<?php echo $this->Url->build(["controller" => "Testimonial/index"]); ?>">Testimonial</a></li>		
+<li><a href="<?php echo $this->Url->build(["controller" => "Requests/index"]); ?>">Request</a></li>		
+<li><a href="<?php echo $this->Url->build(["controller" => "Responses/index"]); ?>">Response</a></li>		
+<li><a href="<?php echo $this->Url->build(["controller" => "Roles", "action" => "add"]); ?>">Roles</a></li>	
+---->
+	
+		</ul>
+		</section>
+	
+		</aside>
+
+  
+	<div class="content-wrapper">
+		 <section class="content">
+			<div class="row">
+				<?php echo $this->Flash->render(); ?>
+				<?php echo $this->fetch('content'); ?>
+			</div>
+		 </section>
+	</div>
+</div>
+<footer class="main-footer hide_print">
+    2016 &copy; <a href="http://www.phppoets.com" target="_blank"> PHP POETS IT SOLUTION PRIVATE LTD.</a> All Rights Reserved.
+</footer>
+
+
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<?php echo $this->Html->script('/assets/bootstrap/js/bootstrap.min.js'); ?>
+
+<?php echo $this->Html->script('/assets/plugins/jquery-validation/lib/jquery.js'); ?>
+<?php echo $this->Html->script('/assets/plugins/jquery-validation/dist/jquery.validate.js'); ?>
+
+<?php echo $this->Html->script('/assets/plugins/slimScroll/jquery.slimscroll.min.js'); ?>
+<?php echo $this->Html->script('/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'); ?>
+<?php echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/daterangepicker.js'); ?>
+<?php echo $this->Html->script('/assets/plugins/timepicker/bootstrap-timepicker.min.js'); ?>
+ 
+<?php echo $this->Html->script('/assets/plugins/select2/select2.full.min.js'); ?>
+<?php echo $this->Html->script('/assets/plugins/bootstrap-editable/js/bootstrap-editable.min.js'); ?>
+<?php echo $this->Html->script('/assets/plugins/iCheck/icheck.min.js'); ?>
+
+
+<?php echo $this->Html->script('/assets/plugins/fastclick/fastclick.js'); ?>
+<?php echo $this->Html->script('/assets/dist/js/app.min.js'); ?>
+<?php echo $this->Html->script('/assets/dist/js/demo.js'); ?>
+<?php //echo $this->Html->script('/assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js'); ?>
+<?php echo $this->Html->script('/assets/plugins/WYSIWYG/editor.js'); ?>
+<script>
+ 
+$('.select2').select2();
+$('.date-picker').datepicker({
+      autoclose: true
+    });
+ 
+<!--$(".wysihtml5textarea").wysihtml5({useLineBreaks: true,tabSpaces: 4});-->
+$(".txtEditor").Editor({
+'source':true,
+'togglescreen':false,
+'rm_format':false,
+'insert_img':false,
+});
+
+$(".timepicker").timepicker({
+          showInputs: false
+});
+
+</script>
+
+</body>
 </html>

@@ -12,13 +12,17 @@ $conn = ConnectionManager::get('default');
 	fieldset
 	{
 		border-radius: 7px;
-		box-shadow: 0 1px 9px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+		box-shadow: 0 3px 9px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	}
 	.details {color:#000 !important; font-weight: 400;}	
 	li > p{
 		color:#96989A !important;
 		margin: 0 0 4px !important;
 		line-height:17px !important; 	
+	}
+	.col-form-label{
+		margin-top: 4px;
+		font-weight:100 !important;
 	}	
 		
 </style>
@@ -33,13 +37,129 @@ $conn = ConnectionManager::get('default');
 		<h3 class="box-title" style="padding:5px;">Finalized Requests</h3>
 			<div class="box-tools pull-right">
 				<!--<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>-->
-				<a style="font-size:22px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+				<a style="font-size:22px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="collapse"> <i class="fa fa-filter"></i></a>
 			</div>
 		
 </div>
 <div class="box-body">
 <div class="row">
 <div class="" >
+		<div class="collapse"  id="myModal122" aria-expanded="false"> 
+			<form class="filter_box" style="padding-right: 15px;padding-left: 15px;" method="get">
+				<fieldset><legend style="text-align:left !important;">Filter</legend>
+					<div class=""> 
+						<div class="col-md-6">
+							<div>
+								<label for="example-text-input" class="  col-form-label">Agent Name:  </label>
+							</div> 
+							<div>
+								<?php 
+								$options=array();
+								if(!empty($finalresponse)){
+									foreach($finalresponse as $st)
+									{ 
+										$key[]=$st['user_id'];
+										$value[]=$st['first_name'].' '.$st['last_name'];
+									};
+									$quiqueValue=array_values(array_unique($value)); 
+									$quiqueKey=array_values(array_unique($key));
+									
+									$cv=0; 
+									foreach($quiqueKey as $keys){
+										$textV=$quiqueValue[$cv];
+										$selectoption[] = ['value'=>$keys,'text'=>$textV];
+										$cv++;		 
+									}
+								}
+								echo $this->Form->control('agentnamesearch', ['label'=>false,"type"=>"select",'options' =>$selectoption,"class"=>"form-control select2","data-placeholder"=>"Select Multiple ",'empty'=>'Select...','multiple'=>true]);?>
+
+							</div>
+						</div>
+						<div class=col-md-6>
+							 <div >
+							 <label class="col-form-label"for=example-text-input>Reference ID:  </label>
+							 </div>
+							 <div >
+								<?php echo $this->Form->control('refidsearch', ['label'=>false,"type"=>"select",'options' =>$RefId,"class"=>"form-control select2","multiple"=>true,"data-placeholder"=>"Select Multiple",'empty'=>'Select...']);?>
+							</div>
+						</div>
+						
+						<div class=col-md-6>
+							 <div >
+							  <label class="col-form-label"for=example-text-input>Request Type:  </label>
+							  </div> 
+							 <div >
+								<select name="req_typesearch[]" multiple class="form-control select2" data-placeholder='Select Multiple'>
+									<option value="1" >Package</option>
+									<option value="3" >Hotel</option>
+									<option value="2">Transport</option>
+								</select>
+							</div>
+						</div> 
+						<div class=col-md-6>
+							<div >
+								<label class="col-form-label"for=example-text-input>Total Budget Range:  </label>
+							</div> 
+							<div >
+								<select name="budgetsearch" class="form-control"><option value="">Select Total Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? '':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? '':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? '':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? '':''; ?>>50000-100000</option>
+								<option value="100000-100000000000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? '':''; ?>>100000-Above</option>
+								</select>
+							</div>
+						</div>
+						<div class=col-md-6>
+							<div >
+								<label class="col-form-label" for=example-text-input>Start Date:  </label>
+							</div> 
+							<div >
+								<input type="text" class="form-control date-picker" placeholder="Select Date" name=startdatesearch   data-date-format="dd-mm-yyyy">
+							</div>
+						</div>	 							
+						<div class=col-md-6>
+							<div >
+							  <label class="col-form-label" for=example-text-input>End Date:  </label>
+							</div> 
+							<div >
+							<input type="text" class="form-control date-picker" placeholder="Select Date" name=enddatesearch data-date-format="dd-mm-yyyy">
+							</div>
+						</div>
+					 
+						<div class=col-md-6>
+							<div >
+								<label class="col-form-label"for=example-text-input>Pickup City (Transportation):  </label>
+							</div> 
+							<div >
+								<select class="form-control select2"  name=pickup_city id=pickup_city>
+								   <option value="">Select</option>
+								   <?php foreach($allCities1 as $city){?>
+								   <option value="<?php echo $city['value'];?>"><?php echo $city['label'];?></option>
+								   <?php }?>
+								</select>
+							</div>
+						</div> 
+						<div class=col-md-6>
+							<div >
+								<label class="col-form-label" for=example-text-input>Destination City (Packages & Hotels):  </label>
+							</div> 
+							<div class="">
+								<select class="form-control select2" name=destination_city id=destination_city>
+								   <option value="">Select</option>
+								   <?php foreach($allCities1 as $city){?>
+								   <option value="<?php echo $city['value'];?>"><?php echo $city['label'];?></option>
+								   <?php }?>
+								</select>
+							</div>
+						</div>                         
+					</div>
+ 					<div class="col-md-12 text-center">
+						<hr></hr>
+						<a class="btn btn-danger btn-sm" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'finalizedRequestList')) ?>">Reset</a>
+						<button class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Apply</button> 
+					</div>
+				</fieldset>
+			</form>
+		</div>
+
+
 <div id="myModal123" class="modal fade form-modal" role="dialog">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -64,6 +184,12 @@ $conn = ConnectionManager::get('default');
 		</div>
   </div>
 </div>
+
+
+
+
+
+
  <div id="myModal122" class="modal fade form-modal" role="dialog">
   <div class="modal-dialog" >
     <!-- Modal content-->
@@ -135,8 +261,13 @@ $conn = ConnectionManager::get('default');
 									<label class="col-form-label"for=example-text-input>Total  Budget Range:  </label>
 								</div> 
 									<div class=col-md-7>
-										<select name="budgetsearch" class="form-control"  data-placeholder='Select...'><option value="">Select...</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? '':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? '':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? '':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? '':''; ?>>50000-100000</option>
-										<option value="100000-100000000000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="100000-100000000000")? '':''; ?>>100000-Above</option>
+										<select name="budgetsearch" class="form-control">
+											<option value="">Select Total Budget</option>
+											<option value="0-10000">0-10000</option>
+											<option value="10001-30000">10001-30000</option>
+											<option value="30001-50000" >30001-50000</option>
+											<option value="50001-100000" >50001-100000</option>
+											<option value="100001-1000000000">100001-Above</option>
 										</select>
 									</div>
 								</div>

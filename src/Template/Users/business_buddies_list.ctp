@@ -98,7 +98,7 @@
       <div class="pages"></div>
 		<?php } else {?>
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 ">
-				<div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 box-event">
+				<div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 box-event test-center">
 				You are not following anyone.
 				</div>
 			</div>

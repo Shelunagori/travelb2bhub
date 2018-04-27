@@ -139,8 +139,7 @@ $conn = ConnectionManager::get('default');
       </div>
    </div>
 </div>
-</div>
-<?php echo $this->element('footer');?>
+</div> 
 <?php echo $this->Html->script(['ap.pagination.js']);?>
 <script>
 $(document).ready(function () {

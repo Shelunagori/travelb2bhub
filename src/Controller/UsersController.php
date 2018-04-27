@@ -2355,6 +2355,7 @@ public function respondtorequest() {
 	array_push($BlockedUsers,$this->Auth->user('id'));
 	$userid=$this->Auth->user('id');
 	$BlockedUsers = array_unique($BlockedUsers);
+	//pr($conditions); exit;
 	if ($this->Auth->user('role_id') == 1) { // Travel Agent
 		if(!empty($user["preference"])) {
 			$conditionalStates = array_unique(explode(",", $user["preference"]));
@@ -3218,10 +3219,10 @@ public function myresponselist() {
 		$this->loadModel('User_Chats');
 		$this->loadModel('BusinessBuddies');
 		$this->viewBuilder()->layout('user_layout');
-		/*$user = $this->Users->find()
+		$user = $this->Users->find()
 			->contain(["Credits"])
 			->where(['Users.id' => $this->Auth->user('id')])->first();
-		//$this->set('users', $user);
+		$this->set('users', $user);
 		//$this->set('userProfile', $user); */
 		if(empty($this->request->query("sort"))) {
 			$sort['Requests.id'] = "DESC";

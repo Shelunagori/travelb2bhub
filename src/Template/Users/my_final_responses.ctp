@@ -12,18 +12,21 @@ $conn = ConnectionManager::get('default');
 	fieldset
 	{
 		border-radius: 7px;
-		box-shadow: 0 1px 9px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+		box-shadow: 0 3px 9px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	}
 	p {
 		color: #96989A !important;
 		margin: 0 0 5px !important;
 		line-height: 17px !important;
 	} 
-
-.details {
-    color: #000 !important;
-    font-weight: 400;
-}
+	.col-form-label{
+		margin-top: 4px;
+		font-weight:100 !important;
+	}
+	.details {
+		color: #000 !important;
+		font-weight: 400;
+	}
 </style>
 <div id="my_final_responses" class="container-fluid">
 	<div class="row equal_column">
@@ -37,7 +40,7 @@ $conn = ConnectionManager::get('default');
 			<div class="box-header with-border"> 
 				<h3 class="box-title" style="padding:5px">Finalized Responses</h3>
 				<div class="box-tools pull-right">
-					<a style="font-size:22px" class="btn btn-box-tool" data-target="#FilerPopup" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+					<a style="font-size:22px" class="btn btn-box-tool" data-target="#filterpopups" data-toggle="collapse"> <i class="fa fa-filter"></i></a>
 				</div>
 			</div>
 		</div>
@@ -173,7 +176,126 @@ $conn = ConnectionManager::get('default');
 	</div>
 	<div class="box-body">
 		<div class="row">
-		<div class=""> 		
+		<div class=""> 
+		<div class="collapse"  id="filterpopups" aria-expanded="false"> 
+			<form class="filter_box" style="padding-right: 15px;padding-left: 15px;" method="get">
+				<fieldset><legend style="text-align:left !important;">Filter</legend>
+					<div class=""> 
+						<div class="col-md-6">
+							<div>
+								<label for="example-text-input" class="  col-form-label">Agent Name:  </label>
+							</div> 
+							<div>
+								<?php echo $this->Form->control('agentnamesearch', ['label'=>false,"type"=>"select",'options' =>$selectoption,"class"=>"form-control select2","data-placeholder"=>"Select Multiple ",'empty'=>'Select...','multiple'=>true]);?>
+							</div>
+						</div>
+						<div class=col-md-6>
+							 <div >
+							 <label class="col-form-label"for=example-text-input>Reference ID:  </label>
+							 </div>
+							 <div >
+								<?php echo $this->Form->control('refidsearch', ['label'=>false,"type"=>"select",'options' =>$RefId,"class"=>"form-control select2","multiple"=>true,"data-placeholder"=>"Select Multiple",'empty'=>'Select...']);?>
+							</div>
+						</div>
+						
+						 
+						<div class=col-md-6>
+							<div >
+								<label class="col-form-label"for=example-text-input>Total Budget Range:  </label>
+							</div> 
+							<div >
+								<select name="budgetsearch" class="form-control">
+									<option value="">Select Total Budget</option>
+									<option value="0-10000">0-10000</option>
+									<option value="10001-30000">10001-30000</option>
+									<option value="30001-50000" >30001-50000</option>
+									<option value="50001-100000" >50001-100000</option>
+									<option>100001-Above</option>
+								</select>
+							</div>
+						</div>
+						<div class=col-md-6>
+							<div >
+								<label class="col-form-label"for=example-text-input>Quoted Price Range:  </label>
+							</div> 
+							<div >
+								<select name="quotesearch" class="form-control">
+									<option value="">Select Quoted Price</option>
+									<option value="0-10000">0-10000</option>
+									<option value="10001-30000">10001-30000</option>
+									<option value="30001-50000" >30001-50000</option>
+									<option value="50001-100000" >50001-100000</option>
+									<option value="100001-1000000000">100001-Above</option>
+								</select>
+							</div>
+						</div>
+						<div class=col-md-6>
+							<div >
+								<label class="col-form-label" for=example-text-input>Start Date:  </label>
+							</div> 
+							<div >
+								<input type="text" class="form-control date-picker" placeholder="Select Date" name=startdatesearch   data-date-format="dd-mm-yyyy">
+							</div>
+						</div>	 							
+						<div class=col-md-6>
+							<div >
+							  <label class="col-form-label" for=example-text-input>End Date:  </label>
+							</div> 
+							<div >
+							<input type="text" class="form-control date-picker" placeholder="Select Date" name=enddatesearch data-date-format="dd-mm-yyyy">
+							</div>
+						</div>
+					 
+						<div class=col-md-6>
+							<div >
+								<label class="col-form-label"for=example-text-input>Pickup City (Transportation):  </label>
+							</div> 
+							<div >
+								<select class="form-control select2"  name=pickup_city id=pickup_city>
+								   <option value="">Select</option>
+								   <?php foreach($allCities1 as $city){?>
+								   <option value="<?php echo $city['value'];?>"><?php echo $city['label'];?></option>
+								   <?php }?>
+								</select>
+							</div>
+						</div> 
+						<div class=col-md-6>
+							<div >
+								<label class="col-form-label" for=example-text-input>Destination City (Packages & Hotels):  </label>
+							</div> 
+							<div class="">
+								<select class="form-control select2" name=destination_city id=destination_city>
+								   <option value="">Select</option>
+								   <?php foreach($allCities1 as $city){?>
+								   <option value="<?php echo $city['value'];?>"><?php echo $city['label'];?></option>
+								   <?php }?>
+								</select>
+							</div>
+						</div>
+						<div class=col-md-6>
+							 <div >
+							  <label class="col-form-label"for=example-text-input>Request Type:  </label>
+							  </div> 
+							 <div >
+								<select name="req_typesearch[]" multiple class="form-control select2" data-placeholder='Select Multiple'>
+									<option value="1" >Package</option>
+									<option value="3" >Hotel</option>
+									<option value="2">Transport</option>
+								</select>
+							</div>
+						</div>                         
+					</div>
+					
+					<div class="col-md-12 text-center">
+						<hr></hr>
+						<a class="btn btn-danger btn-sm" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'respondtorequest')) ?>">Reset</a>
+						<button class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Apply</button> 
+					</div>
+				</fieldset>
+			</form>
+		</div>
+
+				
 <!------------ Main -------------->	
 	<?php 
 		if(count($responses) >0) {  
@@ -418,7 +540,7 @@ $conn = ConnectionManager::get('default');
 								}
 							if($blocked==1)
 							{?>
-								<span style="width:99%;background-color:#dadadabf;display: inline-block;text-align: center;border-radius: 6px;vertical-align: middle;"  class="btn-defult btn-sm tst"> User Blocked </span> 
+								<span style="width:99%;background-color:#dadadabf;display: inline-block;text-align: center;border-radius: 6px;vertical-align: middle;"  class="btn-defult btn-sm tst"> Blocked </span> 
 							<?php }
 							else
 							{ ?>

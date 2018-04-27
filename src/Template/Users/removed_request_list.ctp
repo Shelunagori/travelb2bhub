@@ -190,7 +190,7 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 	   <?php } else {?>
 	   <div class="row">
 			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 box-event">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 box-event text-center">
                     There are no Removed Requests. 
                 </div>
 			</div>
@@ -214,8 +214,7 @@ $sql = "SELECT id,req_id,MAX(check_out) as TopDate FROM `hotels` where req_id='"
 		</div>
 	</div>
 </div>
-  
-<?php echo $this->element('footer');?>
+   
   <script>
  $(document).ready(function(){ 
    $('#datepicker1').datepicker({

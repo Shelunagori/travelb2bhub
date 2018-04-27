@@ -683,20 +683,10 @@ margin-bottom: 0px!important;
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
 $(document).ready(function (){
-		
-	/*$(document).on('keyup',"input[type='number']",function(e){
-		var value=$(this).val();
-		if(value != '')
-		{
-			var number_only= value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');
-			$(this).val(number_only);
-		}
-	});*/ 
-	
+ 	
 	$(".chat_clear").on('click',function () { 
 		var attrv= $(this).attr('val');
-		//alert(attrv);
-		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'clearreadChats')) ?>";
+ 		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'clearreadChats')) ?>";
 		$.ajax({
 			url:url,
 			type: 'POST',

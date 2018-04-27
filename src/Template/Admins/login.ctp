@@ -22,33 +22,40 @@
 		.error { color: #ff9898; text-align:center; }
 		.alert-warning{ color:#FFF !important;}
 		.alert-danger{ width:95% !important;}
+		 
+		@media only screen and (max-device-width: 480px) {
+			div.prakash {
+				zoom: 2;
+			}
+			.input100 {
+				font-size: 20px !important;
+			}
+		}
 	</style>
 </head>
 <body>
 	<div class="limiter">
 		<div class="container-login100 bgdiv">
-			<div class="wrap-login100">
+			<div class="wrap-login100 main_div prakash"  >
 					<center>
-						<?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:20%;']) ?>
+						<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:50%;']) ?>
 					</center>
-					<span class="login100-form-title p-b-34 p-t-27">
-						TRAVEL B2b HUB
-					</span>			
-				 <?php echo $this->Flash->render(); ?> 
-				 
+				
                 <?php  echo $this->Form->create(null, ['url' => ['controller' => 'Admins', 'action' => 'login'],'id'=>"UserLoginForm", 'class'=>'login100-form validate-form']); ?>
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="text" name="email" placeholder="Email">
+						<input class="input100" type="text" autocomplete="new-password" name="email" >
+						<span class="focus-input100" data-placeholder="Email"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" name="password" placeholder="Password">
+						<input class="input100" type="password" autocomplete="new-password" name="password" >
+						<span class="focus-input100"  data-placeholder="Password"></span>
 					</div>
 
 					<div class="contact100-form-checkbox">
 						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
 						<label class="label-checkbox100" for="ckb1">
-							Keep me singed in
+							Keep me signed in
 						</label>
 					</div>
 
@@ -56,20 +63,31 @@
 						<button class="login100-form-btn" style="width: 100%;">
 							Login
 						</button>
- 					</div>
+					</div>
 
 					<div class="text-center p-t-90" style="padding-top: 20px; visibility:hidden">
-						<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'forgotPassword')) ?>">
+						<a class="txt1" style="font-size:15px !important;color:#a9d4fa;" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'forgotPassword')) ?>">
 							Forgot your password?
 						</a>
-					</div>
-					 					
+					</div> 				
 				<?php echo $this->Form->end();?>
 			</div>
 		</div>
 	</div>
 	<div id="dropDownSelect1"></div>
+<script type="text/javascript">
 
+	setInterval(function(){ abc(); }, 2000);
+		function abc()
+		{ 	
+			$('#msg_div').fadeOut(300);
+			var delay = 300;
+			setTimeout(function() {
+				$('#msg_div').remove();
+			}, delay);
+		} 
+		
+</script> 
 <?php echo $this->Html->script('/assets/login/jquery/jquery-3.2.1.min.js'); ?>
 <?php echo $this->Html->script('/assets/login/animsition/js/animsition.min.js'); ?>
 <?php echo $this->Html->script('/assets/login/bootstrap/js/popper.js'); ?>
