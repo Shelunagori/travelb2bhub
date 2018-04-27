@@ -134,6 +134,9 @@ label{
 	color:#96989A !important;
 	font-weight:100;
 }
+.col-form-label{
+	color:#000 !important;
+}
 
 .col-md-4{
 	color:#676363;
@@ -156,9 +159,76 @@ a{
 					<span class="box-title" style="color:#057F8A;"><b><?= __('Hotel Promotions') ?></b></span>
 					<div class="box-tools pull-right" style="margin-top:-7px;">
 						<a style="font-size:15px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-						<a style="font-size:22px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+						<a style="font-size:22px" class="btn btn-box-tool" data-target="#demo" data-toggle="collapse" aria-expanded="false"> <i class="fa fa-filter"></i></a>
 						<a style="font-size:22px" href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'savedList',$user_id),1);?>"  class="btn btn-box-tool" ><i class="fa fa-bookmark"></i> </a>
 					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row collapse"  id="demo" aria-expanded="false">
+			<div class="col-md-12">
+				<div class="box-header with-border">
+					<form class="filter_box" method="get">
+						<fieldset><legend>Filter</legend>
+							<div class="row ">
+								<div class="col-md-12" >
+									<div class="col-md-12" style="padding-top:8px;">
+										<label class="col-form-label"for=example-text-input>Select Hotel Category:  </label>
+										<div class="input-field" style="padding-top:8px;">
+											<?php $options=array();
+												foreach($hotelcategory as $country)
+												{
+													$options[] = ['value'=>$country->id,'text'=>$country->name];
+												};echo $this->Form->input('category_id', ['options' => $options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']);
+											?>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row ">
+								<div class="col-md-12">
+									<div class="col-md-6" style="padding-top:8px;">
+									 <label class="col-form-label" for=example-text-input>Select Hotel Rating: </label>
+										 <div class="input-field" style="padding-top:8px;">
+											<select name="rating_filter" class="form-control select2">
+												<option value="">Select...</option>
+												<option>1 </option>
+												<option>2</option>
+												<option>3</option>
+												<option>4</option>
+												<option>5</option>							
+											</select>
+										 </div>
+									</div>	
+									<div class="col-md-6" style="padding-top:8px;">
+										<label class="col-form-label" for=example-text-input>Room Price Range:  </label>
+										<div class="input-field" style="padding-top:8px;">
+											<select name="starting_price" class="form-control">
+												<option value="">Select</option>
+												<option value="0-5000" >0-5000</option>
+												<option value="5000-10000">5000-10000</option>
+												<option value="10000-20000">10000-20000</option>
+												<option value="20000-30000">20000-30000</option>
+												<option value="30000-40000">30000-40000</option>
+												<option value="40000-50000">40000-50000</option>
+												<option value="50000-100000">50000-100000</option>
+												<option value="100000-150000">100000-150000</option>
+												<option value="150000-200000">150000-200000</option>
+												<option value="100000-100000000000">200000-Above
+												</option>
+											</select>
+										 </div>
+									</div>	
+								</div>
+							</div>
+							<div class="row" style="padding-top:8px;">
+								<div class="col-md-12 text-center">
+									<button class="btn btn-success btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
+									<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>"class="btn btn-warning btn-sm">Reset</a>
+								</div>	
+							</div>
+						</fieldset>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -224,61 +294,7 @@ a{
 							<form class="filter_box" method="get">
 							<div class="modal-body">
 								<span class="help-block"></span>
-								<div class="row form-group margin-b10">
-									<div class=col-md-12>
-										 <div class=col-md-4>
-										  <label class="col-form-label"for=example-text-input>Select Hotel Category:  </label>
-										  </div> 
-										 <div class=col-md-7>
-										<?php $options=array();
-											foreach($hotelcategory as $country)
-											{
-												$options[] = ['value'=>$country->id,'text'=>$country->name];
-											};echo $this->Form->input('category_id', ['options' => $options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']);
-										?>
-										</div>
-									 </div>
-									</div>
-									<div class="row form-group margin-b10">
-										<div class=col-md-12>
-										  <div class=col-md-4>
-										 <label class="col-form-label" for=example-text-input>Select Hotel Rating: </label>
-										 </div> 
-										 <div class=col-md-7>
-											<select name="rating_filter" class="form-control select2">
-												<option value="">Select...</option>
-												<option>1 </option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>							
-											</select>
-										 </div>
-										</div>	
-									</div>
-									<div class="row form-group margin-b10">
-										<div class=col-md-12>
-										  <div class=col-md-4>
-										 <label class="col-form-label" for=example-text-input>Room Price Range:  </label>
-										 </div> 
-										 <div class=col-md-7>
-											<select name="starting_price" class="form-control">
-												<option value="">Select</option>
-												<option value="0-5000" >0-5000</option>
-												<option value="5000-10000">5000-10000</option>
-												<option value="10000-20000">10000-20000</option>
-												<option value="20000-30000">20000-30000</option>
-												<option value="30000-40000">30000-40000</option>
-												<option value="40000-50000">40000-50000</option>
-												<option value="50000-100000">50000-100000</option>
-												<option value="100000-150000">100000-150000</option>
-												<option value="150000-200000">150000-200000</option>
-												<option value="100000-100000000000">200000-Above
-												</option>
-											</select>
-										 </div>
-										</div>	
-									</div>
+
 								
 								  </div>
 								<div class="modal-footer">

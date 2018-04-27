@@ -143,6 +143,9 @@ label{
 a{
 	color:#ac85d6;
 }
+.col-form-label{
+	color:#000 !important;
+}
 </style>
 <div class="row" >
 	<div class="col-md-12">
@@ -150,19 +153,65 @@ a{
 </div>
 <div class="container-fluid">
 	<div class="box box-primary" style="margin-bottom:5px;">
-		<div class="row" >
+		<div class="row">
 			<div class="col-md-12">
 				<div class="box-header with-border"> 
 					<span class="box-title" style="color:#057F8A;"><b><?= __('Event Promotions') ?></b></span>
 					<div class="box-tools pull-right" style="margin-top:-5px;">
 						<a style="font-size:20px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
-						<a style="font-size:20px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+						<a style="font-size:20px" class="btn btn-box-tool" data-target="#demo" data-toggle="collapse" aria-expanded="false"> <i class="fa fa-filter"></i></a>
 						<a style="font-size:20px" href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'savedList',$user_id),1);?>"  class="btn btn-box-tool" ><i class="fa fa-bookmark"></i> </a>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="row collapse"  id="demo" aria-expanded="false">
+			<div class="col-md-12">
+				<div class="box-header with-border">
+				<form class="filter_box" method="get">
+					<fieldset><legend>Filter</legend>
+						<div class="row">
+							<div class="col-md-12">
+							 <div class="col-md-6" style="padding-top:8px;">
+								 <label class="col-form-label" for=example-text-input>State:  </label>
+									<div class="input-field" style="padding-top:8px;">
+									<?php 
+										$options=array();
+										foreach($states as $st)
+										{
+											$options[] = ['value'=>$st->id,'text'=>$st->state_name];
+										};
+										echo $this->Form->input('state_id', ['options' => $options,'class'=>'form-control select2','label'=>false,"data-placeholder"=>"Select States",'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']); 
+									?> 
+									</div>
+								</div>	
+								<div class="col-md-6" style="padding-top:8px;">
+									<label class="col-form-label" for=example-text-input>City:  </label>
+									<div class="input-field" style="padding-top:8px;">
+									<?php 
+										$options=array();
+										foreach($city->citystatefi as $cty)
+										{
+											$options[] = ['value'=>$cty->cityid,'text'=>$cty->name];
+										};
+										echo $this->Form->input('city_id', ['options' =>$options,'class'=>'form-control select2','label'=>false,"data-placeholder"=>"Select Cities",'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']); ?>
+									</div>
+								</div>	
+							 
+							</div>
+						</div>
+						<div class="row" style="padding-top:8px;">
+							<div class="col-md-12 text-center">
+								<button class="btn btn-success btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
+								<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-warning btn-sm">Reset</a>
+							</div>	
+						</div>
+					</fieldset>
+				</form>
+			</div>
+		</div>
 	</div>
+</div>
 <!-------SHORTING FILTERING--------->
 <div id="myModal123" class="modal fade" role="dialog">
   <div class="modal-dialog modal-sm">
@@ -211,59 +260,7 @@ a{
 		</div>
 	</div>
 </div>
-<div class="fade modal form-modal" id="myModal122" role="dialog">
-  <div class="modal-dialog modal-md"  >
-	 <div class=modal-content>
-		<div class=modal-header>
-		   <button class="close" data-dismiss="modal" type="button">&times;</button>
-		   <h4 class=modal-title>Filter</h4>
-		</div>
-		<form class="filter_box" method="get">
-		<div class="modal-body">
-			<span class="help-block"></span>
-			
-				<div class="row form-group margin-b10">
-					<div class=col-md-12>
-						<div class=col-md-4>
-							 <label class="label1">State:  </label>
-						</div>
-						<div class=col-md-7>
-						<?php 
-							$options=array();
-							foreach($states as $st)
-							{
-								$options[] = ['value'=>$st->id,'text'=>$st->state_name];
-							};
-							echo $this->Form->input('state_id', ['options' => $options,'class'=>'form-control select2','label'=>false,"data-placeholder"=>"Select States",'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']); 
-						?> 
-						</div>
-					 </div>
-				 </div>
-				<div class="row form-group margin-b10">
-					<div class=col-md-12>
-					  <div class=col-md-4>
-					  <label class="label1">City:  </label>
-					 </div>
-					 <div class=col-md-7>
-						 <?php 
-						$options=array();
-						foreach($city->citystatefi as $cty)
-						{
-							$options[] = ['value'=>$cty->cityid,'text'=>$cty->name];
-						};
-						echo $this->Form->input('city_id', ['options' =>$options,'class'=>'form-control select2','label'=>false,"data-placeholder"=>"Select Cities",'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']); ?>
-					 </div>
-					</div>	
-				</div>
-			  </div>
-			<div class="modal-footer">
-				<button class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
-				<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'report')) ?>"class="btn btn-danger btn-sm">Reset</a>
-			</div>
-		</form>
-	 </div>
-  </div>
-</div>
+
 <form method="get">
 	<div class="" style="margin-bottom:5px;">
 		<div class="row">

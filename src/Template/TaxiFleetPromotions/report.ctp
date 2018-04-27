@@ -168,6 +168,9 @@ label{
 a{
 	color:#ac85d6;
 }
+.col-form-label{
+	color:#000 !important;
+}
 </style> 
 	<div class="row" >
 		<div class="col-md-12">
@@ -193,11 +196,11 @@ a{
 				<div class="box-header with-border">
 				<form class="filter_box" method="get">
 					<fieldset><legend>Filter</legend>
-						<div class="row form-group margin-b10">
+						<div class="row " >
 							<div class="col-md-12">
-								<div class="col-md-6 margin-b10">
+								<div class="col-md-6" style="padding-top:8px;">
 									<label class="col-form-label" for=example-text-input>City:  </label>
-									<div class="input-field">
+									<div class="input-field" style="padding-top:8px;">
 									 <?php 
 									$options=array();
 									foreach($city->citystatefi as $cty)
@@ -207,9 +210,9 @@ a{
 									echo $this->Form->input('city_id', ['options' =>$options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']); ?>
 									</div>
 								</div>	
-							  <div class="col-md-6 margin-b10">
+							  <div class="col-md-6" style="padding-top:8px;">
 								 <label class="col-form-label" for=example-text-input>State:  </label>
-									<div class="input-field">
+									<div class="input-field" style="padding-top:8px;">
 									<?php 
 									$options=array();
 									foreach($states as $st)
@@ -222,11 +225,11 @@ a{
 								</div>	
 							</div>
 						</div>
-						<div class="row form-group margin-b10">
-							<div class="col-md-12">
-								<div class="col-md-12">
+						<div class="row ">
+							<div class="col-md-12" >
+								<div class="col-md-12" style="padding-top:8px;">
 									<label class="col-form-label"for=example-text-input>Select Taxt/Fleet Category:  </label>
-									<div class="input-field">
+									<div class="input-field" style="padding-top:8px;">
 										<?php 
 										$options=array();
 										foreach($TaxiFleetCarBuses as $Buses)
@@ -238,7 +241,7 @@ a{
 								</div>
 							</div>
 						</div>
-						<div class="row form-group margin-b10">
+						<div class="row " style="padding-top:8px;">
 							<div class="col-md-12 text-center">
 								<button class="btn btn-success btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
 								<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-warning btn-sm">Reset</a>
@@ -300,90 +303,6 @@ a{
 				</div>
 				</div>
 			</div>
-		   <div class="fade modal form-modal" id="myModal122" role="dialog">
-			  <div class="modal-dialog " >
-				 <div class=modal-content>
-					<div class=modal-header>
-					   <button class="close" data-dismiss="modal" type="button">&times;</button>
-					   <h4 class=modal-title>Filter</h4>
-					</div>
-					<form class="filter_box" method="get">
-					<div class="modal-body">
-						<span class="help-block"></span>
-							<div class="row form-group margin-b10">
-								<div class=col-md-12>
-									<div class=col-md-4>
-										<label class="col-form-label"for=example-text-input>State:  </label>
-									</div>
-									<div class=col-md-7>
-									<?php 
-										$options=array();
-										foreach($states as $st)
-										{
-											$options[] = ['value'=>$st->id,'text'=>$st->state_name];
-										};
-										echo $this->Form->input('state_id', ['options' => $options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']); 
-									?> 
-									</div>
-								 </div>
-							 </div>
-							<div class="row form-group margin-b10">
-								<div class=col-md-12>
-								  <div class=col-md-4>
-								 <label class="col-form-label" for=example-text-input>City:  </label>
-								 </div>
-								 <div class=col-md-7>
-									 <?php 
-									$options=array();
-									foreach($city->citystatefi as $cty)
-									{
-										$options[] = ['value'=>$cty->cityid,'text'=>$cty->name];
-									};
-									echo $this->Form->input('city_id', ['options' =>$options,'class'=>'form-control select2','label'=>false,'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']); ?>
-								 </div>
-								</div>	
-							</div>
-							<div class="row form-group margin-b10">
-								<div class=col-md-12>
-								  <div class=col-md-4>
-								 <label class="col-form-label" for=example-text-input>Select Taxt/Fleet Category:  </label>
-								 </div>
-								 <div class=col-md-7>
-									 <?php 
-									$options=array();
-									foreach($TaxiFleetCarBuses as $Buses)
-									{
-										$options[] = ['value'=>$Buses->id,'text'=>$Buses->name];
-									};
-									echo $this->Form->control('car_bus_id', ['label'=>false,"id"=>"multi_vehicle", "type"=>"select",'options' =>$options, "class"=>"form-control select2","style"=>"height:125px;",'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']);?>
-								 </div>
-								</div>	
-							</div>
-						  </div>
-						<div class="modal-footer">
-							<button class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
-							<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-danger btn-sm">Reset</a>
-						</div>
-					</form>
-				 </div>
-			  </div>
-		   </div>
-			<form method="get">
-				<div class="" style="margin-bottom:5px;">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="">
-								<table width="100%"><tr><td width="80%"> 
-								<input class="form-control" placeholder="Type Location, State, City etc." name="search"/></td>
-								<td width="8%" style="padding-left:5px;"><button style="width:100%" class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Search</button></td>
-								<td width="8%" style="padding-left:5px;"><a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-danger btn-sm" style="width:100%">Reset</a>
-								</td></tr>
-							</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</form>
 			<?php $i=1;
 			if(!empty($taxiFleetPromotions)){
 			foreach ($taxiFleetPromotions as $taxiFleetPromotion){

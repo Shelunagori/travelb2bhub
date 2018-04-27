@@ -195,6 +195,9 @@ label{
 a{
 	color:#ac85d6;
 }
+.col-form-label{
+	color:#000 !important;
+}
 </style>
 <div class="row" >
 	<div class="col-md-12">
@@ -219,11 +222,11 @@ a{
 				<div class="box-header with-border">
 		<form class="filter_box" method="get">
 			<fieldset><legend>Filter</legend>
-						<div class="row form-group margin-b10">
+						<div class="row ">
 							<div class="col-md-12">
-								 <div class="col-md-6" style="padding-top:5px;">
+								 <div class="col-md-6" style="padding-top:8px;">
 									<label class="col-form-label"for=example-text-input>Country: </label>
-									 <div class="input-field" style="padding-top:5px;">
+									 <div class="input-field" style="padding-top:8px;">
 										<?php $options=array();
 										foreach($countries as $country)
 										{
@@ -232,20 +235,20 @@ a{
 										?>
 									</div>
 								</div>
-								 <div class="col-md-6" style="padding-top:5px;">
+								 <div class="col-md-6" style="padding-top:8px;">
 									<label class="col-form-label"for=example-text-input>City: </label>
-									 <div class="input-field" id="mcity" style="padding-top:5px;">
+									 <div class="input-field" id="mcity" style="padding-top:8px;">
 										<?php
 										echo $this->Form->input('city_id', ['options' => array(),'class'=>'form-control select2 cntry','label'=>false,'empty'=>'Select...',"multiple"=> true,'data-placeholder'=>"Select Multiple"]); ?>
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="row form-group margin-b10">
+						<div class="row ">
 							<div class="col-md-12">
-								<div class="col-md-6" style="padding-top:5px;">
+								<div class="col-md-6" style="padding-top:8px;">
 								 <label class="col-form-label" for=example-text-input>Select Package Duration: </label>
-								 <div class="input-field" style="padding-top:5px;">
+								 <div class="input-field" style="padding-top:8px;">
 									<select name="" multiple="multiple" class="form-control select2 seleteddata" data-placeholder="Select Multiple">
   										<option value="1">1 N/2 D</option>
 										<option value="2">2 N/3 D</option>
@@ -266,9 +269,9 @@ a{
 									<input type="hidden" name="duration_day_night" id="duration">
 									</div>
 								</div>	
-								<div class="col-md-6" style="padding-top:5px;">
+								<div class="col-md-6" style="padding-top:8px;">
 									<label class="col-form-label" for=example-text-input>Starting Price: </label>
-									<div class="input-field" style="padding-top:5px;">
+									<div class="input-field" style="padding-top:8px;">
 										<select name="starting_price" class="form-control">
 											<option value="">Select Total Budget</option>
 											<option value="0-5000" >0-5000</option>
@@ -287,11 +290,11 @@ a{
 								</div>	
 							</div>
 						</div>
-							<div class="row form-group margin-b10">
+							<div class="row ">
 								<div class="col-md-12">
-									<div class="col-md-12" style="padding-top:5px;">
+									<div class="col-md-6" style="padding-top:8px;">
 									 <label class="col-form-label" for=example-text-input>Select Package Category: </label>
-									 <div class="input-field" style="padding-top:5px;">
+									 <div class="input-field" style="padding-top:8px;">
 										<?php 
 											$options=array();
 											foreach($cat as $sts)
@@ -301,9 +304,18 @@ a{
 											echo $this->Form->control('category_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>'Select...',"multiple"=> true,'data-placeholder'=>"Select Multiple"]);?>
 										 </div>
 									</div>	
+									<div class="col-md-6 form-group" style="padding-top:8px;">
+									<label for="from">
+										Package Valid Till
+									</label>
+									<div class="input-field" style="padding-top:8px;">
+										<?php echo $this->Form->input('valid_date',['class'=>'form-control date-picker date requiredfield','label'=>false,'data-date-format'=>'dd-mm-yyyy','placeholder'=>'Select Date']);?>
+										<label style="display:none" class="helpblock error" > This field is required.</label>
+									</div>
+								</div>
 								</div>	
 							</div>	
-							<div class="row form-group margin-b10">
+							<div class="row ">
 								<div class="col-md-12 text-center">
 									<button class="btn btn-success btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
 									<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-warning  btn-sm">Reset</a>
