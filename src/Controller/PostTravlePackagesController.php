@@ -434,7 +434,7 @@ class PostTravlePackagesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
-	public function report($city_id = null,$search = null,$higestSort = null,$country_id = null,$category_id = null,$duration_day_night = null,$starting_price = null,$posttravle_id= null,$removeposttravle= null,$saveposttravle= null)
+	public function report($city_id = null,$search = null,$higestSort = null,$country_id = null,$category_id = null,$duration_day_night = null,$starting_price = null,$posttravle_id= null,$removeposttravle= null,$saveposttravle= null,$valid_date= null)
     {
 		$higestSort=$this->request->query('higestSort'); 
 		$city_ids=$this->request->query('city_id'); 
@@ -446,6 +446,7 @@ class PostTravlePackagesController extends AppController
 		$duration_day_night=$this->request->query('duration_day_night');
  		$starting_price=$this->request->query('starting_price');
  		$search=$this->request->query('search');
+ 		$valid_date=$this->request->query('valid_date');
 		 //-- REMOVE PARAMETER
 		$user_id=$this->Auth->User('id');
 		if ($this->request->is(['patch', 'post', 'put'])) 
@@ -601,7 +602,7 @@ class PostTravlePackagesController extends AppController
 		
 		$this->viewBuilder()->layout('user_layout');
         $user_id=$this->Auth->User('id');
-		$this->set(compact('user_id','search','higestSort','city_id','country_id','category_id','duration_day_night','starting_price'));
+		$this->set(compact('user_id','search','higestSort','city_id','country_id','category_id','duration_day_night','starting_price','valid_date'));
     }
 	
 	public function moredata()
