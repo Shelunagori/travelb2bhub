@@ -40,7 +40,9 @@
 					<center>
 						<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:50%;']) ?>
 					</center>
-				<p style="color:#ff9898 !important;"> <br></p>
+				<div class="container-login100-form-btn" style="margin-top:15px">
+					<?php echo  $this->Flash->render() ?>
+				</div>
                 <?php  echo $this->Form->create(null, ['url' => ['controller' => 'Admins', 'action' => 'login'],'id'=>"UserLoginForm", 'class'=>'login100-form validate-form']); ?>
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
 						<input class="input100" type="text" autocomplete="new-password" name="email" >
@@ -58,7 +60,7 @@
 							Keep me signed in
 						</label>
 					</div>
-
+					 
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" style="width: 100%;">
 							Login
