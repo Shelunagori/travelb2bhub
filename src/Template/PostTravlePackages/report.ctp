@@ -226,7 +226,7 @@ a{
 							<div class="col-md-12">
 								 <div class="col-md-6" style="padding-top:8px;">
 									<label class="col-form-label"for=example-text-input>Country: </label>
-									 <div class="input-field" style="padding-top:8px;">
+									 <div class="input-field" style="padding-top:4px;">
 										<?php $options=array();
 										foreach($countries as $country)
 										{
@@ -237,7 +237,7 @@ a{
 								</div>
 								 <div class="col-md-6" style="padding-top:8px;">
 									<label class="col-form-label"for=example-text-input>City: </label>
-									 <div class="input-field" id="mcity" style="padding-top:8px;">
+									 <div class="input-field" id="mcity" style="padding-top:4px;">
 										<?php
 										echo $this->Form->input('city_id', ['options' => array(),'class'=>'form-control select2 cntry','label'=>false,'empty'=>'Select...',"multiple"=> true,'data-placeholder'=>"Select Multiple"]); ?>
 									</div>
@@ -248,7 +248,7 @@ a{
 							<div class="col-md-12">
 								<div class="col-md-6" style="padding-top:8px;">
 								 <label class="col-form-label" for=example-text-input>Select Package Duration: </label>
-								 <div class="input-field" style="padding-top:8px;">
+								 <div class="input-field" style="padding-top:4px;">
 									<select name="" multiple="multiple" class="form-control select2 seleteddata" data-placeholder="Select Multiple">
   										<option value="1">1 N/2 D</option>
 										<option value="2">2 N/3 D</option>
@@ -271,7 +271,7 @@ a{
 								</div>	
 								<div class="col-md-6" style="padding-top:8px;">
 									<label class="col-form-label" for=example-text-input>Starting Price: </label>
-									<div class="input-field" style="padding-top:8px;">
+									<div class="input-field" style="padding-top:4px;">
 										<select name="starting_price" class="form-control">
 											<option value="">Select Total Budget</option>
 											<option value="0-5000" >0-5000</option>
@@ -294,7 +294,7 @@ a{
 								<div class="col-md-12">
 									<div class="col-md-6" style="padding-top:8px;">
 									 <label class="col-form-label" for=example-text-input>Select Package Category: </label>
-									 <div class="input-field" style="padding-top:8px;">
+									 <div class="input-field" style="padding-top:4px;">
 										<?php 
 											$options=array();
 											foreach($cat as $sts)
@@ -305,20 +305,21 @@ a{
 										 </div>
 									</div>	
 									<div class="col-md-6 form-group" style="padding-top:8px;">
-									<label for="from">
+									<label class="col-form-label" for="from">
 										Package Valid Till
 									</label>
-									<div class="input-field" style="padding-top:8px;">
+									<div class="input-field" style="padding-top:4px;">
 										<?php echo $this->Form->input('valid_date',['class'=>'form-control date-picker date requiredfield','label'=>false,'data-date-format'=>'dd-mm-yyyy','placeholder'=>'Select Date']);?>
 										<label style="display:none" class="helpblock error" > This field is required.</label>
 									</div>
 								</div>
 								</div>	
-							</div>	
+							</div>
+							<hr style="margin-top: 0px !important;margin-bottom: 0px !important;"></hr>	
 							<div class="row ">
-								<div class="col-md-12 text-center">
-									<button class="btn btn-success btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
+								<div class="col-md-12 text-center" style="padding-top:12px;">
 									<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'report')) ?>"class="btn btn-warning  btn-sm">Reset</a>
+									<button class="btn btn-success btn-sm" name="submit" value="Submit" type="submit">Apply</button> 
 									</div>
 								</div>
 							</div>

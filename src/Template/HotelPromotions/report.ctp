@@ -221,11 +221,12 @@ a{
 									</div>	
 								</div>
 							</div>
-							<div class="row" style="padding-top:8px;">
-								<div class="col-md-12 text-center">
-									<button class="btn btn-success btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
-									<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>"class="btn btn-warning btn-sm">Reset</a>
-								</div>	
+							<hr ></hr>	
+							<div class="row ">
+								<div class="col-md-12 text-center" style="padding-top:12px;">
+									<a href="<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'report')) ?>"class="btn btn-warning  btn-sm">Reset</a>
+									<button class="btn btn-success btn-sm" name="submit" value="Submit" type="submit">Apply</button> 
+								</div>
 							</div>
 						</fieldset>
 					</form>

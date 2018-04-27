@@ -200,7 +200,7 @@ a{
 							<div class="col-md-12">
 								<div class="col-md-6" style="padding-top:8px;">
 									<label class="col-form-label" for=example-text-input>City:  </label>
-									<div class="input-field" style="padding-top:8px;">
+									<div class="input-field" style="padding-top:4px;">
 									 <?php 
 									$options=array();
 									foreach($city->citystatefi as $cty)
@@ -212,7 +212,7 @@ a{
 								</div>	
 							  <div class="col-md-6" style="padding-top:8px;">
 								 <label class="col-form-label" for=example-text-input>State:  </label>
-									<div class="input-field" style="padding-top:8px;">
+									<div class="input-field" style="padding-top:4px;">
 									<?php 
 									$options=array();
 									foreach($states as $st)
@@ -229,7 +229,7 @@ a{
 							<div class="col-md-12" >
 								<div class="col-md-12" style="padding-top:8px;">
 									<label class="col-form-label"for=example-text-input>Select Taxt/Fleet Category:  </label>
-									<div class="input-field" style="padding-top:8px;">
+									<div class="input-field" style="padding-top:4px;">
 										<?php 
 										$options=array();
 										foreach($TaxiFleetCarBuses as $Buses)
@@ -241,12 +241,13 @@ a{
 								</div>
 							</div>
 						</div>
-						<div class="row " style="padding-top:8px;">
-							<div class="col-md-12 text-center">
-								<button class="btn btn-success btn-sm" name="submit" value="Submit" type="submit">Filter</button> 
-								<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-warning btn-sm">Reset</a>
-							</div>	
-						</div>
+						<hr ></hr>	
+							<div class="row ">
+								<div class="col-md-12 text-center" style="padding-top:12px;">
+									<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-warning  btn-sm">Reset</a>
+									<button class="btn btn-success btn-sm" name="submit" value="Submit" type="submit">Apply</button> 
+								</div>
+							</div>
 					</fieldset>
 				</form>
 			</div>
