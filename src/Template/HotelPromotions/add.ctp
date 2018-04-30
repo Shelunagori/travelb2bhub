@@ -420,7 +420,7 @@ if (Extension == "gif" || Extension == "png" || Extension == "bmp"
 
             } 
 //The file upload is NOT an image
-else {
+		else {
                 alert("Photo only allows file types of GIF, PNG, JPG, JPEG and BMP. ");
 				$("#hotelImg").val('');
             }

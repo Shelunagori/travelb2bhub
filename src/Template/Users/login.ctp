@@ -70,7 +70,7 @@
 					</div>
 
 					<div class="text-center p-t-90" style="padding-top: 20px;"> 
- 						<p style="color:#fff">Forgot your password?
+ 						<p style="color:#fff">Forgot password?
 							<a class="txt1" style="color:#a9d4fa;" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'forgotPassword')) ?>">
 							 Click Here
 						</a>
