@@ -36,7 +36,7 @@
 <body>
 	<div class="limiter">
 		<div class="container-login100 bgdiv">
-			<div class="wrap-login100 main_div prakash"  >
+			<div class="wrap-login100 main_div prakash">
 					<center>
 						<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:50%;']) ?>
 					</center> 
@@ -69,14 +69,16 @@
 						<input type="hidden" name="redirect_page" value="<?php echo $redirect_page;?>"/>
 					</div>
 
-					<div class="text-center p-t-90" style="padding-top: 20px;">
-						<a class="txt1" style="font-size:15px !important;color:#a9d4fa;" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'forgotPassword')) ?>">
-							Forgot your password?
+					<div class="text-center p-t-90" style="padding-top: 20px;"> 
+ 						<p style="color:#fff">Forgot your password?
+							<a class="txt1" style="color:#a9d4fa;" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'forgotPassword')) ?>">
+							 Click Here
 						</a>
+						</p>
 					</div>
 					<div class="text-center p-t-90" style="padding-top: 20px;">
-						<p style="color:#fff">Don't  have an account ?
-							<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'register')) ?>" style="color:#5ba7a4;">
+						<p style="color:#fff">Don't  have an account?
+							<a class="txt1"  style="color:#a9d4fa;" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'register')) ?>" style="color:#5ba7a4;">
 								Sign up
 							</a>
 						</p>
