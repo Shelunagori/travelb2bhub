@@ -539,7 +539,7 @@ fieldset{
 			//alert(pack_type);
 			 
 			if(pack_type==1){
-				$('#mcity').html('<select name="city_id" multiple="multiple" class="form-control select2 requiredfield max_limit" data-placeholder="Select City" id="multi_city" style="height:125px;"><option value="">Select Please </option></select>');
+				$('#mcity').html('<select name="city_id[]" multiple="multiple" class="form-control select2 requiredfield max_limit" data-placeholder="Select City" id="multi_city" style="height:125px;"><option value="">Select Please </option></select>');
 				$(".replacedata").html('<?php $options=array();
 				foreach($countries as $country)
 				{
@@ -551,7 +551,7 @@ fieldset{
 				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select Countries "]);?>');
 			}
 			else{
-				$('#mcity').html('<select name="city_id" multiple="multiple" class="form-control select2 requiredfield max_limit" data-placeholder="Select City" id="multi_city" style="height:125px;"><option value="">Select Please </option></select>');
+				$('#mcity').html('<select name="city_id[]" multiple="multiple" class="form-control select2 requiredfield max_limit" data-placeholder="Select City" id="multi_city" style="height:125px;"><option value="">Select Please </option></select>');
 					$("#multi_city").select2();
 				$(".replacedata").html('<?php $options=array();
 				$options[] = ['value'=>'101','text'=>'India'];

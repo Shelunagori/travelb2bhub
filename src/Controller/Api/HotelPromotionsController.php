@@ -25,7 +25,7 @@ class HotelPromotionsController extends AppController
 			$submitted_from = @$this->request->data('submitted_from');
 			if(@$submitted_from=='web')
 			{
-				$state_id=$this->request->data['state_id'];
+				/*$state_id=$this->request->data['state_id'];
 				$x=0;
 				foreach($state_id as $state)
 				{
@@ -38,8 +38,9 @@ class HotelPromotionsController extends AppController
 				{
 					$hotelPromotions['event_planner_promotion_cities['.$y.']["city_id"]']=$city_id[$y];
 					$y++;	
-				}
-			}
+				}*/
+				$hotelPromotions->payment_status = 'Pending';
+			} 
 			if(!empty($this->request->data('visible_date')))
 			{
 				$hotelPromotions->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
@@ -55,41 +56,67 @@ class HotelPromotionsController extends AppController
 					if(in_array($ext, $arr_ext)) { 
 						if (!file_exists('path/to/directory')) {
 								mkdir('path/to/directory', 0777, true);
-							}
+						}
+						$percentageTOReduse=100;
+						if(($image['size']>1000000) &&($image['size']<=3000000)){
+							$percentageTOReduse=50;
+						}
+						if(($image['size']>3000000) &&($image['size']<=6000000)){
+							$percentageTOReduse=20;
+						}
+						if($image['size']>6000000){
+							$percentageTOReduse=10;
+						}
+						//pr($percentageTOReduse); exit;
+						/* Resize Image */
+						$destination_url = WWW_ROOT . '/img/hotels/'.$title.'.'.$ext;
+						if($ext=='png'){
+							$image = imagecreatefrompng($image['tmp_name']);
+						}else{
+							$image = imagecreatefromjpeg($image['tmp_name']); 
+						}
+						imagejpeg($image, $destination_url, $percentageTOReduse);
+						$hotelPromotions->hotel_pic='img/hotels/'.$title.'.'.$ext;
+						/*
 						if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/img/hotels/'.$title.'.'.$ext)) {
 							$hotelPromotions->hotel_pic='img/hotels/'.$title.'.'.$ext;
 						} else {
 							$message = 'Image not uploaded';
+							$this->Flash->error(__($message)); 
 							$response_code = 102;
-						}
+						}*/
 					} 
 					else 
 					{ 
 						$message = 'Invalid image extension';
+						$this->Flash->error(__($message)); 
 						$response_code = 103;  
 					}					
 				}
 				else 
 				{ 	
 					$message = 'Invalid image extension';
+					$this->Flash->error(__($message)); 
 					$response_code = 103;  
 				}				
 			} else { $hotelPromotions->hotel_pic ='';  }	
 
-			// pr($hotelPromotions); exit;
+			// print_r($hotelPromotions); exit;
 			if($message == 'PERFECT' && $response_code == 101)
 			{
+				//pr($hotelPromotions); exit;
 				if ($this->HotelPromotions->save($hotelPromotions)) {
 					$message = 'The hotel promotions has been saved';
+					$this->Flash->success(__($message)); 
 					$response_code = 200;
 				}else{
 					$message = 'The hotel promotions has not been saved';
+					$this->Flash->error(__($message)); 
 					$response_code = 204;				
 				}
 			}			
         } 
 		if(@$submitted_from=='web'){
-			$this->Flash->success(__('message')); 
 			return $this->redirect($this->coreVariable['SiteUrl'].'HotelPromotions/report');
 		}
 		$this->set(compact('message','response_code'));
@@ -196,10 +223,17 @@ $getHotelPromotion=$getEventPlanners ;
         $this->set('_serialize', ['getHotelPromotion','message','response_code']);				
 	}	
 	
-	public function getHotelList($isLikedUserId = null,$category_id = null,$short=null,$rating_filter=null,$higestSort=null,$page=null,$search=null,$starting_price=null)
+	public function getHotelList($isLikedUserId = null,$category_id = null,$short=null,$rating_filter=null,$higestSort=null,$page=null,$search=null,$starting_price=null,$submitted_from=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
-		$limit=10;
+		$submitted_from = $this->request->query('submitted_from');
+		if($submitted_from="web")
+		{
+			$limit=100;
+		}
+		else{
+			$limit=10;
+		}
 		if(!empty($isLikedUserId))
 		{
 			$category_id = $this->request->query('category_id');

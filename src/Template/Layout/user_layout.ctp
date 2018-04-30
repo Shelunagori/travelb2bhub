@@ -11,10 +11,7 @@
 <meta content="width=device-width, initial-scale=1" name="viewport">
 <meta content="" name="description">
 <meta content="" name="author">
-	<?php  echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
-	<?php echo $this->Html->css('/assets/plugins/bootstrap-datepicker/css/datepicker3.css'); ?> 
-	<?php echo $this->Html->css('/assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css'); ?> 
-	<?php echo $this->Html->css('/assets/plugins/timepicker/bootstrap-timepicker.min.css'); ?> 
+	<?php  echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?> 
 	<?php echo $this->Html->css('/assets/plugins/jquery-validation/demo/css/screen.css'); ?> 
 	<?php echo $this->Html->css('/assets/plugins/iCheck/all.css'); ?> 
 	<?php echo $this->Html->css('/assets/font-awesome/css/font-awesome.min.css'); ?> 
@@ -28,7 +25,8 @@
 	<?php echo $this->Html->css('/assets/loader-1.css'); ?>
 	<?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Raleway'); ?>
  	<?php echo $this->Html->css('//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'); ?>
-	 
+ 	<?php echo $this->Html->css('/assets/datepicker.css'); ?>
+ 
 <link rel="stylesheet" href="">
  
 	<?php
@@ -713,24 +711,17 @@ $(document).ready(function (){
 		
 </script> 
 <?php echo $this->Html->script('/assets/bootstrap/js/bootstrap.min.js'); ?>
-
 <?php echo $this->Html->script('/assets/plugins/jquery-validation/lib/jquery.js'); ?>
 <?php echo $this->Html->script('/assets/plugins/jquery-validation/dist/jquery.validate.js'); ?>
-
-<?php echo $this->Html->script('/assets/plugins/slimScroll/jquery.slimscroll.min.js'); ?>
-<?php echo $this->Html->script('/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js'); ?>
-<?php echo $this->Html->script('/assets/plugins/bootstrap-daterangepicker/daterangepicker.js'); ?>
-<?php echo $this->Html->script('/assets/plugins/timepicker/bootstrap-timepicker.min.js'); ?>
- 
+<?php echo $this->Html->script('/assets/plugins/slimScroll/jquery.slimscroll.min.js'); ?>  
 <?php echo $this->Html->script('/assets/plugins/select2/select2.full.min.js'); ?> 
 <?php echo $this->Html->script('/assets/plugins/bootstrap-editable/js/bootstrap-editable.min.js'); ?>
 <?php echo $this->Html->script('/assets/plugins/iCheck/icheck.min.js'); ?>
-
 <?php echo $this->Html->script('/assets/plugins/fastclick/fastclick.js'); ?>
 <?php echo $this->Html->script('/assets/dist/js/app.js'); ?>
 <?php echo $this->Html->script('/assets/dist/js/demo.js'); ?> 
 <?php echo $this->Html->script('/assets/plugins/WYSIWYG/editor.js'); ?>
-
+<?php echo $this->Html->script('/assets/datepicker.js'); ?>
 <script>
 $('.select2').select2();
 var date = new Date();

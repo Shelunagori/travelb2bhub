@@ -55,15 +55,15 @@
 					<p style="color:#fff !important;"><?php echo $this->Flash->render(); ?></p>
 				
 					<div class="text-center p-t-90" style="padding-top: 20px;">
-						<p style="color:#fff">Already have an account ?
-							<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'login')) ?>" style="color:#5ba7a4;">
+						<p style="color:#fff">Already have an account?
+							<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'login')) ?>" style="color:#a9d4fa;">
 								Login
 							</a>
 						</p>
 					</div>						
 					<div class="text-center p-t-90" style="padding-top: 20px;">
-						<p style="color:#fff">Don't  have an account ?
-							<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'register')) ?>" style="color:#5ba7a4;">
+						<p style="color:#fff">Don't  have an account?
+							<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'register')) ?>" style="color:#a9d4fa;">
 								Sign up
 							</a>
 						</p>

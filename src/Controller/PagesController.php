@@ -863,7 +863,7 @@ class PagesController extends AppController
 					exit;
 				} 
 				else 
-				{
+				{ 
 					$email=$this->request->data['email'];
 					$user=$this->Users->find()->where(['email'=>$email]);
 					$result['response_object'] = $user;
@@ -2605,7 +2605,7 @@ $data =   json_encode($result);
 				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
 				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
 				
-				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
+				array("Requests.start_date <=" =>  $current_date,'Requests.category_id'=> 2,'Requests.total_response >' =>0),
 				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
 			)
 		);
@@ -3471,7 +3471,7 @@ $current_date = date("Y-m-d");
 				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
 				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
 				
-				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
+				array("Requests.start_date <=" =>  $current_date,'Requests.category_id'=> 2,'Requests.total_response >' =>0),
 				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
 			)
 		);
@@ -4939,9 +4939,10 @@ $response=array('success'=>$success,'error'=>$error,'response'=>$response);
 				$delcount++;
 			}
 		}
+		$constReqCount=10;
 		$reqcount = $this->getSettings('requestcount');
 		$plcreqcount = (($reqcount['value']-$myRequestCount1)-($delcount+ $myfinalCount));
-		if($myRequestCount1 >=10){
+		if($myRequestCount1 >=$constReqCount){
 			$result = array();
 			$result['response_code'] = 500;
 			$result['response_object'] = "Alert! You have exceeded the count of 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing a request.";
@@ -5091,12 +5092,15 @@ $this->User_Chats->updateAll(['type' => 'Request'], ['id' => $id]);
 						}
 					}
 					$result['response_code'] = 200;
-if($myRequestCount1==8){			 
-$result['response_object'] = "Alert! You are about to reach the 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing another request.";
+if($myRequestCount1==($constReqCount-2) ){		 
+	$result['response_object'] = "Alert! You are about to reach the 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing another request.";
+}
+else if($myRequestCount1==($constReqCount-1) ){			 
+	$result['response_object'] = "Alert! You have reached the count of 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing a request.";
 }
 else
 {
-$result['response_object'] = "Congratulations! Your request has been submitted successfully.";
+	$result['response_object'] = "Congratulations! Your request has been submitted successfully.";
 }
 					$data = json_encode($result);
 					echo $data;
@@ -5148,9 +5152,10 @@ $result['response_object'] = "Congratulations! Your request has been submitted s
 				$delcount++;
 			}
 		}
+		$constReqCount=10;
 		$reqcount = $this->getSettings('requestcount');
 		$plcreqcount = (($reqcount['value']-$myRequestCount1)-($delcount+ $myfinalCount));
-		if($myRequestCount1 >=10){
+		if($myRequestCount1 >=$constReqCount){
 			$result = array();
 			$result['response_code'] = 500;
 			$result['response_object'] = "Alert! You have exceeded the count of 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing a request.";
@@ -5247,12 +5252,15 @@ $this->User_Chats->updateAll(['type' => 'Request'], ['id' => $id]);
 					}
 						
 					$result['response_code'] = 200;
-if($myRequestCount1 ==8){			 
-$result['response_object'] = "Alert! You are about to reach the 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing another request.";
+if($myRequestCount1==($constReqCount-2) ){			 
+	$result['response_object'] = "Alert! You are about to reach the 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing another request.";
+}
+else if($myRequestCount1==($constReqCount-1) ){		 
+	$result['response_object'] = "Alert! You have reached the count of 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing a request.";
 }
 else
 {
-$result['response_object'] = "Congratulations! Your request has been submitted successfully.";
+	$result['response_object'] = "Congratulations! Your request has been submitted successfully.";
 }
 					$data = json_encode($result);
 					echo $data;
@@ -5283,7 +5291,7 @@ $result['response_object'] = "Congratulations! Your request has been submitted s
 		$this->loadModel('RequestStops');
 		$this->loadModel('Hotels');
 		$this->loadModel('User_Chats');
-		 
+		$constReqCount=10;
 		$user = $this->Users->find()->where(['id' => $_POST['user_id']])->first();
 		$myRequestCount = $myReponseCount = 0;
 		$myfinalCount  = 0;
@@ -5306,7 +5314,7 @@ $result['response_object'] = "Congratulations! Your request has been submitted s
 		}
 		$reqcount = $this->getSettings('requestcount');
 		$plcreqcount = (($reqcount['value']-$myRequestCount1)-($delcount+ $myfinalCount));
-		if($myRequestCount1 >=10){
+		if($myRequestCount1 >=$constReqCount){
 			$result = array();
 			$result['response_code'] = 500;
 			$result['response_object'] = "Alert! You have exceeded the count of 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing a request.";
@@ -5419,12 +5427,15 @@ $this->User_Chats->updateAll(['type' => 'Request'], ['id' => $id]);
 					}
 				}
 
-if($myRequestCount1 ==8){			 
-			$result['response_object'] = "Alert! You are about to reach the 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing another request.";
+if($myRequestCount1==($constReqCount-2) ){			 
+	$result['response_object'] = "Alert! You are about to reach the 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing another request.";
+}
+else if($myRequestCount1==($constReqCount-1) ){			 
+	$result['response_object'] = "Alert! You have reached the count of 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing a request.";
 }
 else
 {
-$result['response_object'] = "Congratulations! Your request has been submitted successfully.";
+	$result['response_object'] = "Congratulations! Your request has been submitted successfully.";
 }
  					$result['response_code'] = 200;					
 					$data = json_encode($result);

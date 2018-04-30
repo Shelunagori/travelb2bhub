@@ -134,6 +134,7 @@ class UsersController extends AppController {
 			$totalIds=array();
 			$NewNotifications=array();
 			$unreadnotification = $this->UserChats->find()->contain(['Users'])->where(['UserChats.send_to_user_id'=> $this->Auth->user('id'),'read_date_time >='=>$new_time,'is_read'=>1])->order($csort)->all();
+			
 			foreach($unreadnotification as $data){
 					$totalIds[]=$data['id'];
 			}
@@ -146,6 +147,7 @@ class UsersController extends AppController {
 			if(!empty($totalIds)){
 				$NewNotifications = $this->UserChats->find()->contain(['Users'])->where(['UserChats.id IN'=> $totalIds])->order($csort)->all();
 			}
+			//pr($totalIds); exit;
 			$chatCount = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->count(); 
 			$this->set('chatCount',$chatCount); 
 			$this->set('NewNotifications',$NewNotifications);
@@ -433,46 +435,6 @@ if ($this->request->is('post')) {
 
 		$user = $this->Users->newEntity($d);
  			if ($res = $this->Users->save($user)) {
-				$subject="TravelB2Bhub registration";
-				$to=$d['email'];
-				$headers  = 'MIME-Version: 1.0' . "\r\n";
-				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-				$headers .= 'From: TravelB2Bhub <contactus@travelb2bhub.com>' . "\r\n";
-				//$headers .= "Bcc: business.leadindia@gmail.com"; // BCC mail
-				$message='<p>Dear '.$d['first_name'].',</p>';
-				$message.='<p>Thank you for registering with TravelB2Bhub.com, the  COMMISSION FREE, Business to Business, tourism trading network. </p>';
-				//$message.='<p>Update profile by <a href="https://www.travelb2bhub.com">click here</a> to login from Homepage.</p>';
-				$message.='<p>Please verify your email address by <a href="https://www.travelb2bhub.com">click here</a> to login from Homepage.</p>';
-				$message.='<p style="color:#000;">Note: You will receive a notification when there are enough registered members for you to begin trading. Please encourage your contacts to enroll.</p>';
-				$message.='<p style="color:#000;">We are committed to enhance your trading experience!</p>';
-				$message.='<p style="color:#000;">Sincerely,<br>The TravelB2Bhub Team</p>';
-				$userId = $res->id;
-				$subject= $d['first_name'].": TravelB2Bhub Account Activation";
-				$to=$d['email'];
-
-
-				$headers  = "MIME-Version: 1.0" . "\r\n";
-				$headers .= "Content-type: text/html; charset=iso-8859-1" . "\r\n";
-				$headers .= 'From: TravelB2Bhub <contactus@travelb2bhub.com>' . "\r\n";
-				$theKey = $this->getActivationKey($d["mobile_number"]);
-
-				$message='<p>Dear '.$d['first_name'].',</p>';
-				$message.='<p>Thank you for registering with TravelB2Bhub.com, the  COMMISSION FREE, Business to Business, tourism trading network. </p>';
-				$message.='<p>Please verify your email address by <span style="color:1E707E;"><a href="https://www.travelb2bhub.com/users/userVerification?ident='.$userId.'&activate='.$theKey.'">clicking here</a></span>. </p>';
-				$message.='<p>We are committed to enhance your trading experience!</p>';
-				$message.='<p>Sincerely,<br>The TravelB2Bhub Team</p>';
-				// Mail it
-				/* $email = new Email();    
-					   $email->transport('gmail')
-							->from(['webmaster@travelb2bhub.com'=>'TravelB2Bhub'])
-							->to($to)
-							->subject($subject)
-							 ->emailFormat('html')
-							->viewVars(array('msg' => $message))
-							->send($message); */
-
-
-				//mail($to, $subject, $message, $headers);
 				
 				$mobile_no=$d['mobile_number'];
 				$sms_sender='B2BHUB';
@@ -487,7 +449,7 @@ if ($this->request->is('post')) {
 				$this->Flash->success(__('Thank you for registering with Travelb2bhub.com! Please activate your account by verify your mobile no.'));
 				
 				
-				$encrypted_data=$this->encode($userId,'B2BHUB');
+				$encrypted_data=$this->encode($uid,'B2BHUB');
 				$dummy_user_id=$encrypted_data;
 				$this->redirect('/users/otpVerifiy/'.$dummy_user_id);
 			} 
@@ -3590,7 +3552,7 @@ return md5(md5($mobileNo));
 public function sendMail() {
 $subject="TravelB2Bhub Email Verification";
 //$to=$d['email'];
-$to="varshneymohit1@gmail.com";
+$to="dasumenaria@gmail.com";
 $headers  = 'MIME-Version: 1.0' . "\r\n";
 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 $headers .= 'From: TravelB2Bhub <contactus@travelb2bhub.com>' . "\r\n";
@@ -3688,28 +3650,49 @@ public function otpVerifiy($dummy_user_id) {
 	$decrypted_data=$this->decode($dummy_user_id,'B2BHUB');
 	$user_id=$decrypted_data;
 	
-$this->viewBuilder()->layout('');
-Configure::write('debug',2);
- 
-if ($this->request->is('post')) {
-$this->loadModel('Users');
-$mobile_otp = $this->request->data['mobile_otp'];
-$user_count = $this->Users
-->find()
-->where(['id' =>$user_id,'mobile_otp'=>$mobile_otp])
-->count();
-if($user_count>0){
-	$TableResponse = TableRegistry::get("Users");
-	$query = $TableResponse->query();
+	$this->viewBuilder()->layout('');
+	Configure::write('debug',2);
+	 
+	if ($this->request->is('post')) {
+	$this->loadModel('Users');
+	$mobile_otp = $this->request->data['mobile_otp'];
+	$user_count = $this->Users
+	->find()
+	->where(['id' =>$user_id,'mobile_otp'=>$mobile_otp])
+	->count();
+	if($user_count>0){
+		$TableResponse = TableRegistry::get("Users");
+		$query = $TableResponse->query();
 		$result = $query->update()
 			->set(['status' => '1'])
 			->where(['id' => $user_id])
 			->execute();
 		
-		// $UserS=$this->Users->find()->where(['id'=>$user_id])->first();
-		//$this->Auth=$UserS;
-		// $this->request->session()->write('Auth', $UserS);
-	 $this->redirect('/users/login');
+			$UserS=$this->Users->find()->where(['id'=>$user_id])->first();
+			$subject="TravelB2Bhub registration";
+			$headers  = 'MIME-Version: 1.0' . "\r\n";
+			$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+			$headers .= 'From: TravelB2Bhub <contactus@travelb2bhub.com>' . "\r\n";
+			//$headers .= "Bcc: business.leadindia@gmail.com"; // BCC mail
+			$message='<p>Dear '.$UserS['first_name'].',</p>';
+			$message.='<p>Thank you for registering with TravelB2Bhub.com, the  COMMISSION FREE, Business to Business, tourism trading network. </p>';
+			$message.='<p style="color:#000;">Note: You will receive a notification when there are enough registered members for you to begin trading. Please encourage your contacts to enroll.</p>';
+			$message.='<p style="color:#000;">We are committed to enhance your trading experience!</p>';
+			$message.='<p style="color:#000;">Sincerely,<br>The TravelB2Bhub Team</p>';
+			$userId = $user_id;
+			//$subject= $UserS['first_name'].": TravelB2Bhub Account Activation";
+			$to=$UserS['email'];
+ 			// Mail it
+			 $email = new Email();    
+				   $email->transport('gmail')
+						->from(['webmaster@travelb2bhub.com'=>'TravelB2Bhub'])
+						->to($to)
+						->subject($subject)
+						->emailFormat('html')
+						->viewVars(array('msg' => $message))
+						->send($message); 
+			@mail($to, $subject, $message, $headers);
+		$this->redirect('/users/login');
  	 
 	}else{
 		$this->Flash->error(__('Otp is not correct try again'));

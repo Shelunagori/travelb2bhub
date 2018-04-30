@@ -5,7 +5,6 @@ use Cake\Filesystem\Folder;
 use Cake\Filesystem\File;
 class PostTravlePackagesController extends AppController
 {
-
     public function add()
     {
         $postTravlePackage = $this->PostTravlePackages->newEntity();
@@ -15,12 +14,11 @@ class PostTravlePackagesController extends AppController
 
 			$message = 'PERFECT';
 			$response_code = 101;
-			
-			$id=$postTravlePackage->user_id;
+ 			$id=$postTravlePackage->user_id;
 			$image = $this->request->data('image');	
 			$title = $postTravlePackage->title;
 			$document = $this->request->data('document');
-			$submitted_from = @$this->request->data('submitted_from');
+			$submitted_from = @$this->request->data('submitted_from'); 
 			//print_r($this->request->data); exit;
 			if(@$submitted_from=='web')
 			{
@@ -78,20 +76,40 @@ class PostTravlePackagesController extends AppController
 				{
 					if(in_array($ext, $arr_ext)) { 
 						if (!file_exists('path/to/directory')) {
-								mkdir('path/to/directory', 0777, true);
-								
-							}
+							mkdir('path/to/directory', 0777, true);
+						}
+						$percentageTOReduse=100;
+						if(($image['size']>1000000) &&($image['size']<=3000000)){
+							$percentageTOReduse=50;
+						}
+						if(($image['size']>3000000) &&($image['size']<=6000000)){
+							$percentageTOReduse=20;
+						}
+						if($image['size']>6000000){
+							$percentageTOReduse=10;
+						}
+						/* Resize Image */
+						$destination_url = WWW_ROOT . '/images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
+						if($ext=='png'){
+							$image = imagecreatefrompng($image['tmp_name']);
+						}else{
+							$image = imagecreatefromjpeg($image['tmp_name']); 
+						}
+						imagejpeg($image, $destination_url, $percentageTOReduse);
+						$postTravlePackage->image='images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
+						/*//imagedestroy($image);
 						if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)) {
 							$postTravlePackage->image='images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
 						} else {
 							$message = 'Image not uploaded';
+							$this->Flash->error(__($message));
 							$response_code = 102;
-							
-						}
+						}*/
 					} 
 					else 
 					{ 
 						$message = 'Invalid image extension';
+						$this->Flash->error(__($message));
 						$response_code = 103;  
 						
 					}					
@@ -99,12 +117,12 @@ class PostTravlePackagesController extends AppController
 				else 
 				{ 	
 					$message = 'Invalid image extension';
+					$this->Flash->error(__($message));
 					$response_code = 103;  
 				
 				}				
 			} else { $postTravlePackage->image ='';  }
-
-			if(!empty($document))
+ 			if(!empty($document))
 			{  
 				$dir = new Folder(WWW_ROOT . 'images/PostTravelPackages/'.$id.'/'.$title.'/document', true, 0755);
 				$ext = substr(strtolower(strrchr($document['name'], '.')), 1); 
@@ -119,6 +137,7 @@ class PostTravlePackagesController extends AppController
 							$postTravlePackage->document='images/PostTravelPackages/'.$id.'/'.$title.'/document/'.$id.'.'.$ext;
 						} else {
 							$message = 'Document not uploaded';
+							$this->Flash->error(__($message));
 							$response_code = 104;
 							
 						}
@@ -126,6 +145,7 @@ class PostTravlePackagesController extends AppController
 					else 
 					{ 	
 						$message = 'Invalid document extension';
+						$this->Flash->error(__($message));
 						$response_code = 105;  
 						
 					}					
@@ -133,6 +153,7 @@ class PostTravlePackagesController extends AppController
 				else 
 				{ 	
 					$message = 'Invalid document extension';
+					$this->Flash->error(__($message));
 					$response_code = 105; 
 					
 				}				
@@ -142,15 +163,17 @@ class PostTravlePackagesController extends AppController
 			{  
 				if ($this->PostTravlePackages->save($postTravlePackage)) {
 					$message = 'The post travel package has been saved';
+					$this->Flash->success(__($message)); 
 					$response_code = 200;
 				}else{
 					$message = 'The post travel package has not been saved';
+					$this->Flash->error(__($message)); 
 					$response_code = 204;				
 				}	
 			}
 		}
 		if(@$submitted_from=='web'){
-			$this->Flash->success(__($message)); 
+			//$this->Flash->success(__($message)); 
 			return $this->redirect($this->coreVariable['SiteUrl'].'PostTravlePackages/report');
 		}
 		$this->set(compact('message','response_code'));
@@ -357,7 +380,7 @@ class PostTravlePackagesController extends AppController
 			$getTravelPackages = $this->PostTravlePackages->find()
 			->contain(['Users'=>function($q){
 				return $q->select(['first_name','last_name','mobile_number','company_name','email']);
-			},'PostTravlePackageCities'=>['Cities'],'PostTravlePackageRows'=>['PostTravlePackageCategories']])
+			},'PostTravlePackageCities'=>['Cities'=>['States']],'PostTravlePackageRows'=>['PostTravlePackageCategories'],'PostTravlePackageCountries'=>['Countries']])
 			->innerJoinWith('PostTravlePackageRows',function($q)use($category_id_filter,$category_short,$category_search){
 				return $q->where($category_id_filter)
 				->innerJoinWith('PostTravlePackageCategories',function($q)use($category_search){
@@ -479,7 +502,7 @@ class PostTravlePackagesController extends AppController
 		$getTravelPackageDetails = $this->PostTravlePackages->find();
 		$getTravelPackageDetails->select(['total_likes'=>$getTravelPackageDetails->func()->count('PostTravlePackageLikes.id')])
 			->leftJoinWith('PostTravlePackageLikes')
-			->contain(['Users','PriceMasters','PostTravlePackageRows'=>['PostTravlePackageCategories'],'PostTravlePackageCities'=>['Cities'],'PostTravlePackageCountries'=>['Countries']])
+			->contain(['Users','PriceMasters','PostTravlePackageRows'=>['PostTravlePackageCategories'],'PostTravlePackageCities'=>['Cities'=>['States']],'PostTravlePackageCountries'=>['Countries']])
 			->where(['PostTravlePackages.id'=>$id])
 			->group(['PostTravlePackages.id'])
 		->autoFields(true);

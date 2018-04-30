@@ -58,23 +58,46 @@ class EventPlannerPromotionsController extends AppController
 					if(in_array($ext, $arr_ext)) { 
 						if (!file_exists('path/to/directory')) {
 								mkdir('path/to/directory', 0777, true);
-							}
-						if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/eventPlannerPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)) {
+						}
+						$percentageTOReduse=100;
+						if(($image['size']>1000000) &&($image['size']<=3000000)){
+							$percentageTOReduse=50;
+						}
+						if(($image['size']>3000000) &&($image['size']<=6000000)){
+							$percentageTOReduse=20;
+						}
+						if($image['size']>6000000){
+							$percentageTOReduse=10;
+						} 
+						/* Resize Image */
+						$destination_url = WWW_ROOT . '/images/eventPlannerPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
+						if($ext=='png'){
+							$image = imagecreatefrompng($image['tmp_name']);
+						}else{
+							$image = imagecreatefromjpeg($image['tmp_name']); 
+						}
+						imagejpeg($image, $destination_url, $percentageTOReduse);
+						$eventPlannerPromotion->image='images/eventPlannerPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
+						
+						/*if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/eventPlannerPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)) {
 							$eventPlannerPromotion->image='images/eventPlannerPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
 						} else {
 							$message = 'Image not uploaded';
+							$this->Flash->error(__($message));
 							$response_code = 102;
-						}
+						}*/
 					} 
 					else 
 					{ 
 						$message = 'Invalid image extension';
+						$this->Flash->error(__($message));
 						$response_code = 103;  
 					}					
 				}
 				else 
 				{ 	
 					$message = 'Invalid image extension';
+					$this->Flash->error(__($message));
 					$response_code = 103;  
 				}				
 			} else { $eventPlannerPromotion->image ='';  }	
@@ -94,6 +117,7 @@ class EventPlannerPromotionsController extends AppController
 							$eventPlannerPromotion->document='images/eventPlannerPromotion/'.$id.'/'.$title.'/document/'.$id.'.'.$ext;
 						} else {
 							$message = 'Document not uploaded';
+							$this->Flash->error(__($message));
 							$response_code = 104;
 							
 						}
@@ -101,12 +125,14 @@ class EventPlannerPromotionsController extends AppController
 					else 
 					{ 	
 						$message = 'Invalid document extension';
+						$this->Flash->error(__($message));
 						$response_code = 105;  
 					}					
 				}
 				else 
 				{ 	
 					$message = 'Invalid document extension';
+					$this->Flash->error(__($message));
 					$response_code = 105;  
 				}				
 			} else { $eventPlannerPromotion->document = ''; }			
@@ -115,15 +141,16 @@ class EventPlannerPromotionsController extends AppController
 			{
 				if ($this->EventPlannerPromotions->save($eventPlannerPromotion)) {
 					$message = 'The event promotions has been saved';
+					$this->Flash->success(__($message)); 
 					$response_code = 200;
 				}else{
 					$message = 'The event promotions has not been saved';
+					$this->Flash->error(__($message));
 					$response_code = 204;				
 				}
 			}			
         } 
 		if(@$submitted_from=='web'){
-			$this->Flash->success(__('message')); 
 			return $this->redirect($this->coreVariable['SiteUrl'].'EventPlannerPromotions/report');
 		}
 		$this->set(compact('message','response_code'));
@@ -231,12 +258,19 @@ class EventPlannerPromotionsController extends AppController
         $this->set('_serialize', ['getEventPlanners','message','response_code']);				
 	}	
 	
-	public function getEventPlanners($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$higestSort=null,$search=null,$page=null)
+	public function getEventPlanners($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$higestSort=null,$search=null,$page=null,$submitted_from=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
 		{
-			$limit=10;
+			$submitted_from = $this->request->query('submitted_from');
+			if($submitted_from="web")
+			{
+				$limit=100;
+			}
+			else{
+				$limit=10;
+			}
 			$country_id = $this->request->query('country_id');
 			$country_id_short = $this->request->query('country_id_short');
 			$state_id = $this->request->query('state_id');

@@ -376,8 +376,7 @@ label{
 					var high_rate=$('.high_rate').val();
 					if(high_rate.length>0)
 					{
-					alert();
-					calculate();
+						calculate();
 					}
 				});
 				function calculate()

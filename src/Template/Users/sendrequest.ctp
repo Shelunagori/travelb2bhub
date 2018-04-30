@@ -291,7 +291,7 @@ label {
 										</p>
 									</div>
 									<div class="">
-									<input autocomplete="off" type="text" name="check_in" id="datepicker1" class="form-control " data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
+									<input autocomplete="off" type="text" name="check_in" id="HotelDatePicker" class="form-control " data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -914,22 +914,38 @@ $(document).ready(function(){
 	var date = new Date();
 	date.setDate(date.getDate());
 	//-- Hotel date Pickers Starte 
-	$("#datepicker1").datepicker({
-		autoclose:true,
+	
+	
+	$("#HotelDatePicker").datepicker({
+		autoclose:false,
 		minDate:0,
 		startDate: date,
-	}).on("changeDate", function (e) {
-		var selected = $(this).val();
-		//$("#datepicker2").val(selected);
+	}).on("change", function (e) {
+ 		var selected = $(this).val();
+		var checkoutDtaa = $('#datepicker2').val();
+		
+ 		var arrDate = selected.split("-");
+		var Ndt=arrDate[2]+'-'+arrDate[1]+'-'+arrDate[0];
+		checkOutDateDate = new Date(Ndt); 
+		 
+		var arrDates = checkoutDtaa.split("-");
+		var Ndt=arrDates[2]+'-'+arrDates[1]+'-'+arrDates[0];
+		checkInDateDate = new Date(Ndt);
+		
+		if(checkOutDateDate>=checkInDateDate)
+		{
+			alert("Please ensure Checkout date is greater than Checkin Date.");
+			$('#datepicker2').val("");
+		}
 	});
-	 
+	
 	$("#datepicker2").datepicker({
 		autoclose:true,
 		minDate:0,
 		startDate: date,
-	}).on("changeDate", function (e) {
+	}).on("change", function (e) {
 		var checkOutDate=$(this).val();
-		var checkInDate = $('#datepicker1').val();
+		var checkInDate = $('#HotelDatePicker').val();
 		if(checkInDate == "") {
 			alert("Please select check-in date first.");
 			$('#datepicker2').val("");
@@ -952,20 +968,36 @@ $(document).ready(function(){
 	});
  	//-- Hotel date Pickers End 	 
  	//-- Transport date Pickers Starte 
-	 
+	var date = new Date();
+	date.setDate(date.getDate());
 	 $("#datepickerofTransport").datepicker({
 		autoclose:true,
 		minDate:0,
 		startDate: date,
-	}).on("changeDate", function (e) {
+	}).on("change", function (e) {
 		var selected = $(this).val();
+		var checkoutDtaa = $('#datepickerofTransport1').val();
+		
+ 		var arrDate = selected.split("-");
+		var Ndt=arrDate[2]+'-'+arrDate[1]+'-'+arrDate[0];
+		checkOutDateDate = new Date(Ndt); 
+		 
+		var arrDates = checkoutDtaa.split("-");
+		var Ndt=arrDates[2]+'-'+arrDates[1]+'-'+arrDates[0];
+		checkInDateDate = new Date(Ndt);
+		
+		if(checkOutDateDate>checkInDateDate)
+		{
+			alert("Please ensure End date is not less than Start Date.");
+			$('#datepickerofTransport1').val("");
+		}
  	});
 	 
 	$("#datepickerofTransport1").datepicker({
 		autoclose:true,
 		minDate:0,
 		startDate: date,
-	}).on("changeDate", function (e) {
+	}).on("change", function (e) {
 		var checkOutDate=$(this).val();
 		var checkInDate = $('#datepickerofTransport').val();
 		if(checkInDate == "") {
@@ -989,21 +1021,37 @@ $(document).ready(function(){
 		}
 	});  
  	//-- TRans date Pickers End 
-//-- Package date Pickers Starte 
-	 
-	 $("#datepickerofpkg").datepicker({
+	//-- Package date Pickers Starte 
+	var date = new Date();
+	date.setDate(date.getDate());
+	$("#datepickerofpkg").datepicker({
 		autoclose:true,
 		minDate:0,
 		startDate: date,
-	}).on("changeDate", function (e) {
+	}).on("change", function (e) {
 		var selected = $(this).val();
+		var checkoutDtaa = $('#datepickerofpkg1').val();
+		
+ 		var arrDate = selected.split("-");
+		var Ndt=arrDate[2]+'-'+arrDate[1]+'-'+arrDate[0];
+		checkOutDateDate = new Date(Ndt); 
+		 
+		var arrDates = checkoutDtaa.split("-");
+		var Ndt=arrDates[2]+'-'+arrDates[1]+'-'+arrDates[0];
+		checkInDateDate = new Date(Ndt);
+		
+		if(checkOutDateDate>=checkInDateDate)
+		{
+			alert("Please ensure Checkout date is greater than Checkin Date.");
+			$('#datepickerofpkg1').val("");
+		}
  	});
 	 
 	$("#datepickerofpkg1").datepicker({
 		autoclose:true,
 		minDate:0,
 		startDate: date,
-	}).on("changeDate", function (e) {
+	}).on("change", function (e) {
 		var checkOutDate=$(this).val();
 		var checkInDate = $('#datepickerofpkg').val();
 		if(checkInDate == "") {
@@ -1029,20 +1077,36 @@ $(document).ready(function(){
 	});  
  	//-- Package date Pickers End 
 	//-- Package date Pickers Starte 
-	 
-	 $("#packageTransport").datepicker({
+	var date = new Date();
+	date.setDate(date.getDate());
+	$("#packageTransport").datepicker({
 		autoclose:true,
 		minDate:0,
 		startDate: date,
-	}).on("changeDate", function (e) {
+	}).on("change", function (e) {
 		var selected = $(this).val();
+		var checkoutDtaa = $('#packageTransport1').val();
+		
+ 		var arrDate = selected.split("-");
+		var Ndt=arrDate[2]+'-'+arrDate[1]+'-'+arrDate[0];
+		checkOutDateDate = new Date(Ndt); 
+		 
+		var arrDates = checkoutDtaa.split("-");
+		var Ndt=arrDates[2]+'-'+arrDates[1]+'-'+arrDates[0];
+		checkInDateDate = new Date(Ndt);
+		
+		if(checkOutDateDate>checkInDateDate)
+		{
+			alert("Please ensure End date is not less than Start Date.");
+			$('#packageTransport1').val("");
+		}
  	});
 	 
 	$("#packageTransport1").datepicker({
 		autoclose:true,
 		minDate:0,
 		startDate: date,
-	}).on("changeDate", function (e) {
+	}).on("change", function (e) {
 		var checkOutDate=$(this).val();
 		var checkInDate = $('#packageTransport').val();
 		if(checkInDate == "") {
@@ -1754,14 +1818,29 @@ $(document).ready(function () {
 					autoclose:true,
 					minDate:0,
 					startDate: d,
-				}).on("changeDate", function (e) {
+				}).on("change", function (e) {
+					var selected = $(this).val();
+					var checkoutDtaa = checkOutDatePicker.val();
 					
+					var arrDate = selected.split("-");
+					var Ndt=arrDate[2]+'-'+arrDate[1]+'-'+arrDate[0];
+					checkOutDateDate = new Date(Ndt); 
+					 
+					var arrDates = checkoutDtaa.split("-");
+					var Ndt=arrDates[2]+'-'+arrDates[1]+'-'+arrDates[0];
+					checkInDateDate = new Date(Ndt);
+					
+					if(checkOutDateDate>=checkInDateDate)
+					{
+						alert("Please ensure Checkout date is greater than Checkin Date.");
+						checkOutDatePicker.val("");
+					}
  				});
 				checkOutDatePicker.datepicker({
 					autoclose:true,
 					minDate:0,
 					startDate: d,
-				}).on("changeDate", function (e) {
+				}).on("change", function (e) {
 					var checkOutDate=checkOutDatePicker.val();
 					var checkInDate = checkInDatePicker.val();
 					if(checkInDate == "") {
