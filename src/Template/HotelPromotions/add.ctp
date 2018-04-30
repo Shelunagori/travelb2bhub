@@ -404,7 +404,7 @@ label{
             var Extension = FileUploadPath.substring(
                     FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
 //The file uploaded is an image
-if (Extension == "gif" || Extension == "png" || Extension == "bmp"
+if (Extension == "png"
                     || Extension == "jpeg" || Extension == "jpg") {
 
 // To Display
@@ -421,7 +421,7 @@ if (Extension == "gif" || Extension == "png" || Extension == "bmp"
             } 
 //The file upload is NOT an image
 else {
-                alert("Photo only allows file types of GIF, PNG, JPG, JPEG and BMP. ");
+                alert("Photo only allows file types of PNG, JPG and JPEG.");
 				$("#hotelImg").val('');
             }
         }

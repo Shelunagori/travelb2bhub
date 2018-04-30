@@ -174,7 +174,7 @@ fieldset{
 										<span class="required">*</span>
 									</p>
 									<div class="input-field">
-										<?php  echo $this->Form->input('image',['class'=>'form-control requiredfield','label'=>false,'type'=>'file']); ?>
+										<?php  echo $this->Form->input('image',['class'=>'form-control requiredfield','label'=>false,'type'=>'file','onchange'=>'checkCertificate()','id'=>'hotelImg']); ?>
 										<label style="display:none" class="helpblock error" > This field is required.</label>
 									</div>
 								</div>
@@ -408,4 +408,38 @@ $(document).ready(function (){
 		});
 });
 </script>
- 
+ <script type="text/javascript">
+    function checkCertificate() {
+        var fuData = document.getElementById('hotelImg');
+        var FileUploadPath = fuData.value;
+
+//To check if user upload any file
+        if (FileUploadPath == '') {
+            alert("Please upload an image");
+
+        } else {
+            var Extension = FileUploadPath.substring(
+                    FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+//The file uploaded is an image
+if (Extension == "png" || Extension == "jpeg" || Extension == "jpg") {
+
+// To Display
+                if (fuData.files && fuData.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#blah').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(fuData.files[0]);
+                }
+
+            } 
+//The file upload is NOT an image
+else {
+                alert("Photo only allows file types of PNG, JPG and JPEG.");
+				$("#hotelImg").val('');
+            }
+        }
+    }
+</script>
