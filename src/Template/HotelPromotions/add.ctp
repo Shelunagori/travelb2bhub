@@ -420,8 +420,13 @@ if (Extension == "png"
 
             } 
 //The file upload is NOT an image
+<<<<<<< HEAD
 else {
                 alert("Photo only allows file types of PNG, JPG and JPEG.");
+=======
+		else {
+                alert("Photo only allows file types of GIF, PNG, JPG, JPEG and BMP. ");
+>>>>>>> origin/master
 				$("#hotelImg").val('');
             }
         }

@@ -215,7 +215,7 @@ fieldset{
 															</p>
 															
 															<div class="input-field">
-																<?php  echo $this->Form->input('image',['class'=>'form-control requiredfield','label'=>false,'type'=>'file']); ?>
+																<?php  echo $this->Form->input('image',['class'=>'form-control requiredfield','label'=>false,'type'=>'file','onchange'=>'checkCertificate()','id'=>'hotelImg']); ?>
 																<label style="display:none" class="helpblock error" > This field is required.</label>
 															</div>
 														</div>
@@ -271,7 +271,7 @@ fieldset{
 																	<span class="required">*</span>
 																</p>
 																<div class="input-field">
-																	<?php echo $this->Form->input('starting_price',['class'=>'form-control requiredfield number','label'=>false,'placeholder'=>'Starting Price','type'=>'number']);?>
+																	<?php echo $this->Form->input('starting_price',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>'Starting Price','type'=>'test','oninput'=>"this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"]);?>
 																	<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 															</div>							 
@@ -565,4 +565,32 @@ $("#multi_states").multiselect();
 $("#multi_category").multiselect();
 });
 </script>
+<script type="text/javascript">
+    function checkCertificate() {
+        var fuData = document.getElementById('hotelImg');
+        var FileUploadPath = fuData.value;
+        if (FileUploadPath == '') {
+            alert("Please upload an image");
+        } else {
+            var Extension = FileUploadPath.substring(
+                    FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+			if ( Extension == "png" ||  Extension == "jpeg" || Extension == "jpg") {
 
+                if (fuData.files && fuData.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#blah').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(fuData.files[0]);
+                }
+
+            } 
+		else {
+                alert("Photo only allows file types of PNG, JPG and JPEG.");
+				$("#hotelImg").val('');
+            }
+        }
+    }
+</script>
