@@ -44,9 +44,7 @@ label{
 </style>
 
 <section class="content">
- 
-       
-			<div class="row">
+		<div class="row">
         <!-- left column -->
         <div class="col-md-4">
           <!-- general form elements -->
@@ -57,10 +55,8 @@ label{
             <!-- /.box-header -->
             <!-- form start -->
             <form role="form">
-			
-              <div class="box-body">
-			     
-					<div>
+               <div class="box-body">
+ 					<div>
 						<div class="form-group">
 						<div class="form-group  text-center">
 							<?php
@@ -245,12 +241,15 @@ label{
 							<tr>
 							
 						<div class="col-md-12">
-							<?php 
-							$Final_hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'finalized-request-list'));
+							<?php
+							$Final_hrefurl='#';
+							if($users['id']==$loginid){
+								$Final_hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'finalized-request-list'));
+							}
 							if($users['role_id'] == 1){ ?>
 								<td width="80%">
 									 <div style="float:left" class="col-md-10" align="left">
-										<a href="<?php echo $hrefurl; ?>"> 
+										<a href="<?php echo $Final_hrefurl; ?>"> 
 											<font style="font-size:14px !important;">
 												Finalized Requests
 											</font>
@@ -268,7 +267,7 @@ label{
 							 else if($users['role_id'] == 2){ ?>
 								<td width="80%">
 									 <div style="float:left" class="col-md-10" align="left">
-										<a href="<?php echo $hrefurl; ?>"> 
+										<a href="<?php echo $Final_hrefurl; ?>"> 
 											<font style="font-size:14px !important;">
 												Finalized Requests
 											</font>
@@ -288,7 +287,10 @@ label{
 						<tr>
 						<div class="col-md-12"  >
 							<?php 
-							$Res_req_hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'respondtorequest'));
+							$Res_req_hrefurl='#';
+							if($users['id']==$loginid){
+								$Res_req_hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'respondtorequest'));
+							}
 							if($users['role_id'] == 1){ ?>
 								<td>
 									<div style="float:left" class="col-md-10" align="left">
@@ -330,7 +332,10 @@ label{
 						<tr>
 						<div class="col-md-12"  >
 							<?php 
-							$final_res_hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'my-final-responses'));
+							$final_res_hrefurl='#';
+							if($users['id']==$loginid){
+								$final_res_hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'my-final-responses'));
+							}
 							if($users['role_id'] == 1){ ?>
 								<td>
 									 <div style="float:left" class="col-md-10" align="left">
