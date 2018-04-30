@@ -4,9 +4,9 @@
 		<div class="box box-primary">
 			<div class="box-header with-border">
 				<?php if(!empty($id)){ ?>
-					<i class="fa fa-pencil-square-o"></i> <b> Edit Role </b>
+					 <b> Edit Role </b>
 				<?php }else{ ?>
-					<i class="fa fa-plus"></i> <b> Add Role </b>
+					 <b> Add Role </b>
 				<?php } ?>
 			</div>
 			<div class="box-body">
@@ -52,13 +52,16 @@
 	<div class="col-md-6">
 		<div class="box box-primary">
 			<div class="box-header with-border">
-				<i class="fa fa-list"></i> <b> View List </b>
+				<b> View List </b>
+				<div class="box-tools pull-right">
+					<a style="font-size:19px;  margin-top: -6px;" class="btn btn-box-tool" data-target="#myModal122" data-toggle="collapse"> <i class="fa fa-filter"></i></a>
+				</div>
 			</div> 
-			 
 			<div class="box-body">
 			<form method="get">
-				<fieldset style="text-align:center;"><legend><button type="button" class="btn btn-xs btn-info collapsed" data-toggle="collapse" data-target="#demo" aria-expanded="false">Click here to search</button></legend>
-					<div class="col-md-12 collapse"  id="demo" aria-expanded="false">
+				<div class="collapse"  id="myModal122" aria-expanded="false"> 
+				<fieldset style="text-align:left;"><legend>Filter</legend>
+					<div class="col-md-12 ">
 						<div class="row"> 
 							<div class="col-md-12">
 								<label class="control-label">Role</label>
@@ -73,6 +76,7 @@
 						</div>
 					</div>
 				</fieldset>
+				</div>
 			</form>
 				<table class="table table-bordered" cellpadding="0" cellspacing="0" id="main_tble">
 					<thead>
@@ -113,6 +117,9 @@
 </section>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
+jQuery(".loadingshow").submit(function(){
+	jQuery("#loader-1").show();
+});
 $(document).ready(function() {
 	// validate signup form on keyup and submit
 	 $("#CityForm").validate({ 
@@ -123,6 +130,7 @@ $(document).ready(function() {
 		},
 		submitHandler: function () {
 			$("#submit_member").attr('disabled','disabled');
+
 			form.submit();
 		}
 	}); 

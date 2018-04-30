@@ -10,7 +10,22 @@ use App\Controller\AppController;
  */
 class CitiesController extends AppController
 {
-
+	public function initialize()
+	{
+		parent::initialize();
+		$this->Auth->allow(['logout']);
+		 
+		$loginId=$this->Auth->User('id');  
+		if(!empty($loginId)){
+			$first_name=$this->Auth->User('first_name');
+			$last_name=$this->Auth->User('last_name');
+			$profile_pic=$this->Auth->User('profile_pic');  
+			$authUserName=$first_name.' '.$last_name;
+			$this->set('MemberName',$authUserName);
+			$this->set('profile_pic', $profile_pic);
+			$this->set('loginId',$loginId); 
+		}
+	} 
     /**
      * Index method
      *
@@ -83,7 +98,7 @@ class CitiesController extends AppController
 			$stateid = $this->request->query['stateid'];
 			 
 			if(!empty($city)){
-				$conditions['Cities.name LIKE']='%'.$city.'%';
+				$conditions['Cities.name LIKE']=$city.'%';
 			}
 			if(!empty($stateid)){
 				$conditions['Cities.state_id']=$stateid;	

@@ -241,7 +241,7 @@ a{
 									<label class="col-form-label"for=example-text-input>City: </label>
 									 <div class="input-field" id="mcity" style="padding-top:4px;">
 										<?php
-										echo $this->Form->input('city_id', ['options' => array(),'class'=>'form-control select2 cntry','label'=>false,'empty'=>'Select...',"multiple"=> true,'data-placeholder'=>"Select Multiple"]); ?>
+										echo $this->Form->input('city_id', ['options' => array(),'class'=>'form-control select2 cntry','label'=>false,'empty'=>'Select...',"multiple"=> true,'data-placeholder'=>"Select (Country Selection Required)"]); ?>
 									</div>
 								</div>
 							</div>
@@ -412,7 +412,7 @@ a{
 								  </div> 
 								 <div class="col-md-7" id="mcity">
 									<?php
-									echo $this->Form->input('city_id', ['options' => array(),'class'=>'form-control select2 cntry','label'=>false,'empty'=>'Select...',"multiple"=> true,'data-placeholder'=>"Select Multiple"]); ?>
+									echo $this->Form->input('city_id', ['options' => array(),'class'=>'form-control select2 cntry','label'=>false,'empty'=>'Select...',"multiple"=> true,'data-placeholder'=>"Select (Country Selection Required)"]); ?>
 								</div>
 							 </div>
 							</div>
@@ -525,9 +525,10 @@ a{
 								}
 											$cityList='';
 											$z=0;
+											
 											foreach($postTravlePackage->post_travle_package_cities as $cities)
 											{
-												//pr($cities);exit;
+											 
 												if($z>=1){
 													$cityList.=', ';
 												}

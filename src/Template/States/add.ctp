@@ -4,13 +4,13 @@
 		<div class="box box-primary">
 			<div class="box-header with-border">
 				<?php if(!empty($id)){ ?>
-					<i class="fa fa-pencil-square-o"></i> <b> Edit State </b>
+					 <b> Edit State </b>
 				<?php }else{ ?>
-					<i class="fa fa-plus"></i> <b> Add State </b>
+					 <b> Add State </b>
 				<?php } ?>
 			</div>
 			<div class="box-body"> 
-				<div class="form-group">
+				<div class="">
 				<?= $this->Form->create($state,['id'=>'StateForm']) ?>
 					<div class="row">
 						<div class="col-md-4">
@@ -55,13 +55,17 @@
 	<div class="col-md-6">
 		<div class="box box-primary">
 			<div class="box-header with-border">
-				<i class="fa fa-list"></i> <b> View List </b>
+				<b> View List </b>
+				<div class="box-tools pull-right">
+					<a style="font-size:19px;  margin-top: -6px;" class="btn btn-box-tool" data-target="#myModal122" data-toggle="collapse"> <i class="fa fa-filter"></i></a>
+				</div>
 			</div> 
 			 
 			<div class="box-body"> 
 			<form method="get">
-				<fieldset style="text-align:center;"><legend><button type="button" class="btn btn-xs btn-info collapsed" data-toggle="collapse" data-target="#demo" aria-expanded="false">Click here to search</button></legend>
-					<div class="col-md-12 collapse"  id="demo" aria-expanded="false">
+			<div class="collapse"  id="myModal122" aria-expanded="false"> 
+				<fieldset style="text-align:left;"><legend>Filter</legend>
+					<div class="col-md-12">
 						<div class="row"> 
 							<div class="col-md-12">
 								<label class="control-label">State</label>
@@ -73,12 +77,15 @@
 								<?php echo $this->Form->input('CountryName',['options' =>$country,'label' => false,'class'=>'form-control select2','empty'=> 'Select...','value' => '']);?>	 
 							</div>
 							<div class="col-md-12" align="center">
+								<hr style="margin-top: 12px;margin-bottom: 10px;"></hr>
+								<a href="<?php echo $this->Url->build(array('controller'=>'States','action'=>'add')) ?>"class="btn btn-danger btn-sm">Reset</a>
 								<label class="control-label col-md-12">&nbsp;</label>
 								<?php echo $this->Form->button('Search',['class'=>'btn btn-sm btn-success','id'=>'submit_member','name'=>'search_report']); ?> 
 							</div> 
 						</div>
 					</div>
 				</fieldset>
+			</div>
 			</form>
 				<table class="table table-bordered" cellpadding="0" cellspacing="0" id="main_tble">
 					<thead>
@@ -97,7 +104,27 @@
 							<td><?= h($state->country->country_name) ?></td>
 							<td class="actions">
 									<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/States/add/'.$state->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
-									<?php echo $this->Form->PostLink('<i class="fa fa-trash"></i>','/States/delete/'.$state->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $state->id)));?>
+									
+									<a class=" btn btn-danger btn-xs" data-target="#deletemodal<?php echo $state->id; ?>" data-toggle=modal><i class="fa fa-trash"></i></a>
+									<div id="deletemodal<?php echo $state->id; ?>" class="modal fade" role="dialog">
+										<div class="modal-dialog modal-md" >
+											<form method="post" action="<?php echo $this->Url->build(array('controller'=>'States','action'=>'delete',$state->id)) ?>">
+												<div class="modal-content">
+												  <div class="modal-header">
+														<button type="button" class="close" data-dismiss="modal">&times;</button>
+														<h4 class="modal-title">
+														Are you sure you want to remove this State?
+														</h4>
+													</div>
+													<div class="modal-footer">
+ 														<button type="submit" class="btn  btn-sm btn-info">Yes</button>
+														<button type="button" class="btn  btn-sm btn-danger" data-dismiss="modal">Cancel</button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+									<?php $this->Form->PostLink('<i class="fa fa-trash"></i>','/States/delete/'.$state->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $state->id)));?>
 							</td>
 						</tr>
 					<?php $i++; endforeach; ?>
@@ -118,7 +145,11 @@
 </section>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
+jQuery(".loadingshow").submit(function(){
+	jQuery("#loader-1").show();
+});
 $(document).ready(function() {
+	
 	// validate signup form on keyup and submit
 	 $("#StateForm").validate({ 
 		rules: {
@@ -131,6 +162,7 @@ $(document).ready(function() {
 		},
 		submitHandler: function () {
 			$("#submit_member").attr('disabled','disabled');
+			$("#loader-1").show();
 			form.submit();
 		}
 	}); 

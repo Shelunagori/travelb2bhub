@@ -3,35 +3,40 @@
 	<div class="col-md-12">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<i class="fa fa-list"></i> <b>User List</b>
-				</div> 
-				<div class="box-body"> 
-				<form method="get">
-					<fieldset><legend><button type="button" class="btn btn-xs btn-info collapsed" data-toggle="collapse" data-target="#demo" aria-expanded="false">Click here to search</button></legend>
-						<div class="col-md-12 collapse"  id="demo" aria-expanded="false">
-							<div class="row"> 
-								<div class="col-md-4">
-									<label class="control-label">Hotel Name</label>
-									<?php echo $this->Form->input('hotelNM',[
-									'label' => false,'class'=>'form-control ','placeholder'=>'Enter Hotel Name']);?>
-								</div>
-								<div class="col-md-3">
-									<label class="control-label">Select </label>
-									<div class="form-group">
-										<div class="radio">
-											<label><input type="radio" name="statusWise" value="1">Activate</label>
-											<label><input type="radio" name="statusWise" value="2">Deactivate</label>
-										</div>
-									</div>	 
-								</div>
-								<div class="col-md-4" align="center">
-									<label class="control-label col-md-12">&nbsp;</label>
-									<?php echo $this->Form->button('Search',['class'=>'btn btn-sm btn-success','id'=>'submit_member','name'=>'search_report']); ?> 
-								</div> 
+					 <b>User List</b>
+					<div class="box-tools pull-right">
+					<a style="font-size:19px;  margin-top: -6px;" class="btn btn-box-tool" data-target="#myModal122" data-toggle="collapse"> <i class="fa fa-filter"></i></a>
+				</div>
+			</div> 
+			<div class="box-body">
+			<form method="get" class="loadingshow">
+				<div class="collapse"  id="myModal122" aria-expanded="false"> 
+				<fieldset style="text-align:left;"><legend>Filter</legend>
+					<div class="col-md-12 ">
+						<div class="row"> 
+							<div class="col-md-4">
+								<label class="control-label">Hotel Name</label>
+								<?php echo $this->Form->input('hotelNM',[
+								'label' => false,'class'=>'form-control ','placeholder'=>'Enter Hotel Name']);?>
 							</div>
+							<div class="col-md-3">
+								<label class="control-label">Select </label>
+								<div class="form-group">
+									<div class="radio">
+										<label><input type="radio" name="statusWise" value="1">Activate</label>
+										<label><input type="radio" name="statusWise" value="2">Deactivate</label>
+									</div>
+								</div>	 
+							</div>
+							<div class="col-md-4" align="center">
+								<label class="control-label col-md-12">&nbsp;</label>
+								<?php echo $this->Form->button('Search',['class'=>'btn btn-sm btn-success','id'=>'submit_member','name'=>'search_report']); ?> 
+							</div> 
 						</div>
-					</fieldset>
-				</form>
+					</div>
+				</fieldset>
+				</div>
+			</form>
 					<table class="table table-bordered" cellpadding="0" cellspacing="0" id="main_tble">
 						<thead>
 							<tr>
@@ -64,7 +69,7 @@
 									 
 
 <!-- The Modal Start-->
-<i type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal_<?= $user->id ?>">view</i>
+<i type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal_<?= $user->id ?>"><i class="fa fa-book"></i></i>
 <!-- Modal -->
 <div id="myModal_<?= $user->id ?>" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -128,23 +133,21 @@
 					State : <?= $user->state->state_name ?>
 				</div>
 				<div class="col-md-6">
-					Country : 
+					Country :  <?= $user->country->country_name ?>
 				</div>
 			</div>
 			<br> 
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
       </div>
     </div>
-
   </div>
 </div>
 									
-									<!-- The Modal End-->
-						  
- 	 <?php echo $this->Html->Link('Edit','/Users/report_edit/'.$user->id, array('class'=>'btn btn-warning btn-xs'));?>
-									<?php echo $this->Form->PostLink('<i class="fa fa-trash"></i>','/Users/delete/'.$user->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $user->id)));?>
+						 
+						<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/Users/add/'.$user->id,array('escape'=>false,'class'=>'btn btn-info btn-xs'));?>
+						<?php echo $this->Form->PostLink('<i class="fa fa-trash"></i>','/Users/delete/'.$user->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $user->id)));?>
 								</td>
 								 
 							</tr>
@@ -164,3 +167,9 @@
 		</div>
 	</div>
 </section>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<script>
+jQuery(".loadingshow").submit(function(){
+	jQuery("#loader-1").show();
+});
+</script>

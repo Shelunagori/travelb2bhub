@@ -1,5 +1,4 @@
 <?php 
- 
 //pr($this->request->webroot); exit;?>
 
 <!DOCTYPE html>
@@ -166,8 +165,15 @@ p {
 	width:100% !important;
 }
 label{
-margin-bottom: 0px!important;
+	margin-bottom: 0px!important;
+	font-weight:100 !important;
 }
+fieldset
+{
+	border-radius: 7px;
+	box-shadow: 0 3px 9px rgba(0,0,0,0.25), 0 2px 5px rgba(0,0,0,0.22);
+	margin-bottom:10px;
+} 
 </style>
 <!--- Star style ---->
 <style>
@@ -410,9 +416,9 @@ margin-bottom: 0px!important;
         <div class='imaage' >
           <?php
 			if(!empty($profile_pic)){
-				if(file_exists('img/user_docs/'.$loginId.'/'.$profile_pic)>0)
+				if(file_exists('img/admin_profile/'.$profile_pic)>0)
 				{
-					echo $this->Html->image('user_docs/'.$loginId.'/'.$profile_pic, ["class"=>"img-responsive","alt"=>"Profile Pic",'style'=>"width: 45%;"]);
+					echo $this->Html->image('admin_profile/'.$profile_pic, ["class"=>"img-responsive","alt"=>"Profile Pic",'style'=>"width: 45%;"]);
 				}
 				else{
 					echo $this->Html->image('no-profile-image.jpg', ["class"=>"img-responsive","alt"=>"Profile Pic"]);
@@ -429,7 +435,7 @@ margin-bottom: 0px!important;
 		  </br>
 		   Admin
 		  <br>
-		  <a href="<?php echo $this->Url->build(["controller" => "Admins",'action'=>'viewprofile/'.$loginId]); ?>" class="logo">My Profile</a> | &nbsp;
+		  <a href="<?php echo $this->Url->build(["controller" => "Admins",'action'=>'profileedit']); ?>" class="logo">Edit Profile</a> | &nbsp;
 		  <a href="<?php echo $this->Url->build(["controller" => "Admins",'action'=>'change_password']); ?>" class="logo">Reset Password</a>
         </div>
     </div>		
@@ -567,6 +573,9 @@ margin-bottom: 0px!important;
 			</div>
 		 </section>
 	</div>
+</div>
+<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
+	<div id="loader"></div>
 </div>
 <footer class="main-footer hide_print">
     2016 &copy; <a href="http://www.phppoets.com" target="_blank"> PHP POETS IT SOLUTION PRIVATE LTD.</a> All Rights Reserved.

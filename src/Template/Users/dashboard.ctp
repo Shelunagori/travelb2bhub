@@ -104,7 +104,7 @@ li > p{
 <div class="row equal_column" > 
     <div class="col-md-12" > 
 		<?php echo $this->element('subheader');?>
-		<?php echo  $this->Flash->render();
+		<?php 
 			$role_id=$users->role_id 
 		?>
 	</div>
@@ -200,7 +200,7 @@ li > p{
 			<div class="inner" align="center">
 				<table border="0" height="130px" style="text-align: center;">
 					<tr>
-						<td colspan="2" style="font-size:17px"><b>Event Promotions</b></td>	
+						<td colspan="2" style="font-size:17px"><b>Event Planner Promotions</b></td>	
 					</tr>
 					<tr>
 						<td colspan="2" class="textpormoition">Click on the <?php if($role_id==2){ ?>buttons<?php } else{echo"button";} ?> below to View <?php if($role_id==2){ ?> or Promote <?php }?> Event Planning Services </td>	

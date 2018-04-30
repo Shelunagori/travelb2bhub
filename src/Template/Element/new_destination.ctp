@@ -114,7 +114,7 @@
 						</p>
 					</div>
 					<div class="">
-						<input require type="text" required="true" name="hh_check_in[<?php echo $randomNumber; ?>]" id="hh_check_in[<?php echo $randomNumber; ?>]" class="form-control datepicker"  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>                     
+						<input require type="text" required="true" name="hh_check_in[<?php echo $randomNumber; ?>]" id="hh_check_in[<?php echo $randomNumber; ?>]" class="form-control"  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>                     
 					</div>
 				</div> 
 				<div class="col-md-6">
@@ -124,7 +124,7 @@
 					</p>
 					</div>
 					<div class="">
-						<input type="text" required="true" name="hh_check_out[<?php echo $randomNumber; ?>]" id ="hh_check_out[<?php echo $randomNumber; ?>]" class="form-control enddate datepicker checkdatefornext"  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>                     
+						<input type="text" required="true" name="hh_check_out[<?php echo $randomNumber; ?>]" id ="hh_check_out[<?php echo $randomNumber; ?>]" class="form-control enddate checkdatefornext"  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>                     
 					</div>
 				</div>
 			</div>
@@ -142,11 +142,7 @@
 	</div>
 	<script>
 $('.select2').select2(); 
-$('.datepicker').datepicker(); 
 
-$('.datepicker').click(function(){
-	$(this).datepicker().datepicker( "show" );
-});
 	//var cityData = '<?php //echo $allCities; ?>';
 	//$(document).ready(function () {
 		/*createAutocompleteCity('<?php echo $randomNumber; ?>')

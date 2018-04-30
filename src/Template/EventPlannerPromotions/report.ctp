@@ -156,7 +156,7 @@ a{
 		<div class="row">
 			<div class="col-md-12">
 				<div class="box-header with-border"> 
-					<span class="box-title" style="color:#057F8A;"><b><?= __('Event Promotions') ?></b></span>
+					<span class="box-title" style="color:#057F8A;"><b><?= __('Event Planner') ?></b></span>
 					<div class="box-tools pull-right" style="margin-top:-5px;">
 						<a style="font-size:20px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>
 						<a style="font-size:20px" class="btn btn-box-tool" data-target="#demo" data-toggle="collapse" aria-expanded="false"> <i class="fa fa-filter"></i></a>
@@ -523,7 +523,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 												<div class="modal-content">
 												  <div class="modal-header">
 													<button type="button" class="close" data-dismiss="modal">&times;</button>
-													<h3 class="modal-title">Event Details</h3>
+													<h3 class="modal-title">Event Planner Details</h3>
 												  </div>
 													<div class="modal-body" >
 														<div class="row">
@@ -541,7 +541,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 						<div class="col-md-12 text-center">
 						<div class="row" style="padding-top:15px;">
 							<div class="col-md-12">
-								<button class="btn btn-info btn-md btnlayout viewCount" data-target="#eventdetail<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $eventPlannerPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Event Details</button>&nbsp;&nbsp;
+								<button class="btn btn-info btn-md btnlayout viewCount" data-target="#eventdetail<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $eventPlannerPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Planner Details</button>&nbsp;&nbsp;
 								<button class="btn btn-danger btn-md btnlayout viewCount" data-target="#contactdetails<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $eventPlannerPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Contact Info</button>
 								<!-------Contact Details Modal --------->
 								

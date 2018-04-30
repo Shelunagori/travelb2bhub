@@ -190,13 +190,13 @@ a{
 									<div class="col-md-6" style="padding-top:8px;">
 									 <label class="col-form-label" for=example-text-input>Select Hotel Rating: </label>
 										 <div class="input-field" style="padding-top:8px;">
-											<select name="rating_filter" class="form-control select2">
+											<select name="rating_filter" class="form-control">
 												<option value="">Select...</option>
-												<option>1 </option>
-												<option>2</option>
-												<option>3</option>
-												<option>4</option>
-												<option>5</option>							
+												<option value="1">&#9733;</option>
+												<option value="2">&#9733;&#9733;</option>
+												<option value="3">&#9733;&#9733;&#9733;</option>
+												<option value="4">&#9733;&#9733;&#9733;&#9733;</option>
+												<option value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>							
 											</select>
 										 </div>
 									</div>	

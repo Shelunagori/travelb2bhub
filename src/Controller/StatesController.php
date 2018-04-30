@@ -10,7 +10,22 @@ use App\Controller\AppController;
  */
 class StatesController extends AppController
 {
-
+	public function initialize()
+	{
+		parent::initialize();
+		$this->Auth->allow(['logout']);
+		 
+		$loginId=$this->Auth->User('id');  
+		if(!empty($loginId)){
+			$first_name=$this->Auth->User('first_name');
+			$last_name=$this->Auth->User('last_name');
+			$profile_pic=$this->Auth->User('profile_pic');  
+			$authUserName=$first_name.' '.$last_name;
+			$this->set('MemberName',$authUserName);
+			$this->set('profile_pic', $profile_pic);
+			$this->set('loginId',$loginId); 
+		}
+	} 
     /**
      * Index method
      *
@@ -78,7 +93,7 @@ class StatesController extends AppController
 			$CountryName = $this->request->query['CountryName'];
 			 
 			if(!empty($StateId)){
-				$conditions['States.state_name LIKE']='%'.$StateId.'%';
+				$conditions['States.state_name LIKE']=$StateId.'%';
 			}
 			if(!empty($CountryName)){
 				$conditions['States.country_id']=$CountryName;	

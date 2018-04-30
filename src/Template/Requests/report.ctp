@@ -4,14 +4,17 @@
 	<div class="col-md-12">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<i class="fa fa-list"></i><b>Requests</b>
+					<b>Requests</b>
+					<div class="box-tools pull-right">
+						<a style="font-size:19px;  margin-top: -6px;" class="btn btn-box-tool" data-target="#myModal122" data-toggle="collapse"> <i class="fa fa-filter"></i></a>
+					</div>
 				</div> 
 			 <div class="box-body"> 
 			 			<div class="box-body">
-			<form method="get">
-				<fieldset><legend><button type="button" class="btn btn-xs btn-info collapsed" data-toggle="collapse" data-target="#demo" aria-expanded="false">Click here to search</button></legend>
-					<div class="col-md-12 collapse"  id="demo" aria-expanded="false">
-						<div class="row"> 
+			<form method="get" class="loadingshow">
+				<div class="collapse"  id="myModal122" aria-expanded="false"> 
+				<fieldset style="text-align:left;"><legend>Filter</legend>
+					<div class="col-md-12 ">
 							<div class="col-md-3">
 								<label class="control-label">Reference Id</label>
 								<?php echo $this->Form->input('RefID',[
@@ -39,6 +42,8 @@
 								<?php echo $this->Form->input('category',['options' =>$CategoriesList,'label' => false,'class'=>'form-control select2','empty'=> 'Select...']);?>	 
 							</div>
 							<div class="col-md-12" align="center">
+								<hr style="margin-top: 12px;margin-bottom: 10px;"></hr>
+								<a href="<?php echo $this->Url->build(array('controller'=>'Requests','action'=>'report')) ?>"class="btn btn-danger btn-sm">Reset</a>
 								<label class="control-label col-md-12">&nbsp;</label>
 								<?php echo $this->Form->button('Search',['class'=>'btn btn-sm btn-success','id'=>'submit_member','name'=>'search_report']); ?> 
 							</div> 
@@ -108,3 +113,9 @@
 		</div>
 	</div>
 </section>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<script>
+jQuery(".loadingshow").submit(function(){
+	jQuery("#loader-1").show();
+});
+</script>

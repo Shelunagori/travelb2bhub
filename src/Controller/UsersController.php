@@ -292,7 +292,7 @@ class UsersController extends AppController {
 	public function report() {
 		$this->viewBuilder()->layout('admin_layout');
 		$this->paginate = [
-		'contain' => ['Cities','States']
+		'contain' => ['Cities','States','Countries']
 		];
 		$users = $this->paginate($this->Users);
 		//pr($users->toArray()); exit;
@@ -840,30 +840,30 @@ $redirect_page = '/users/dashboard';
 }
 $user = $this->Auth->identify();
 if ($user) {
-$this->Auth->setUser($user);
-date_default_timezone_set('Asia/Kolkata');
-$loggedinid = $this->Auth->user('id');
-$logintime = date("Y-m-d H:i:s");
-$current_date = date("Y-m-d");
-$conn = ConnectionManager::get('default');
-	
-$sql = "UPDATE users SET last_login='".$logintime."' WHERE id='".$loggedinid."'";
-$stmt = $conn->execute($sql);	
-// set rating
-$this->loadModel("Testimonial");
-$testimonials = $this->Testimonial->find()->where(['user_id'=> $this->Auth->user('id')])->all();
-$testimonialcount = $testimonials->count();
-$this->request->session()->write('Auth.User.testimonialcount', (int)$testimonialcount);
-$query = $this->Testimonial->find();
-$userRating = $query->select(["average_rating" => $query->func()->avg("rating")])
-->where(['user_id' => $this->Auth->user('id')])
-->order(["id" => "DESC"])
-->first();
-$this->request->session()->write('Auth.User.avrage_rating', $userRating->average_rating);
-return $this->redirect($redirect_page);
+	$this->Auth->setUser($user);
+	date_default_timezone_set('Asia/Kolkata');
+	$loggedinid = $this->Auth->user('id');
+	$logintime = date("Y-m-d H:i:s");
+	$current_date = date("Y-m-d");
+	$conn = ConnectionManager::get('default');
+		
+	$sql = "UPDATE users SET last_login='".$logintime."' WHERE id='".$loggedinid."'";
+	$stmt = $conn->execute($sql);	
+	// set rating
+	$this->loadModel("Testimonial");
+	$testimonials = $this->Testimonial->find()->where(['user_id'=> $this->Auth->user('id')])->all();
+	$testimonialcount = $testimonials->count();
+	$this->request->session()->write('Auth.User.testimonialcount', (int)$testimonialcount);
+	$query = $this->Testimonial->find();
+	$userRating = $query->select(["average_rating" => $query->func()->avg("rating")])
+	->where(['user_id' => $this->Auth->user('id')])
+	->order(["id" => "DESC"])
+	->first();
+	$this->request->session()->write('Auth.User.avrage_rating', $userRating->average_rating);
+	return $this->redirect($redirect_page);
 } else {
-$this->Flash->error(__('Invalid username or password, or your account is not active, please try again.'));
-return $this->redirect('/users/login');
+	$this->Flash->error(__('Invalid username or password, or your account is not active, please try again.'));
+	return $this->redirect('/users/login');
 }
 }
 $redirect_page = "";
@@ -2368,13 +2368,13 @@ public function respondtorequest() {
 			return $q->where(['Responses.user_id' => $userid]);
 		})
 		->where(["OR"=>['Requests.state_id IN' => $conditionalStates, 'Requests.pickup_state IN' => $conditionalStates],$conditions, 'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2, "Requests.is_deleted"=>0])
-		->order($sort);
+		->order($sort)->toArray();
 	} 
 	else if ($this->Auth->user('role_id') == 2) { /// Event Planner
 		$requests = $this->Requests->find()
 			->contain(["Users","Hotels"])
 			->where(['Requests.pickup_state' => $user["state_id"], 'Requests.category_id' => 2, "Requests.status !="=>2, "Requests.is_deleted"=>0])
-			->order($sort);
+			->order($sort)->toArray();
 	}
 	else if ($this->Auth->user('role_id') == 3) {
 		$requests = $this->Requests->find()
@@ -2383,10 +2383,10 @@ public function respondtorequest() {
 			return $q->where(['Responses.user_id' => $userid]);
 		})
 		->where(['Requests.city_id' => $user['city_id'],'Requests.user_id NOT IN' => $BlockedUsers, "Requests.status !="=>2,"Requests.category_id"=>3, "Requests.is_deleted"=>0,$conditions])
-		->order($sort);
+		->order($sort)->toArray();
  
 	}
-	 
+ 
 $loggedinid = $this->Auth->user('id');
 $data = array();
 foreach($requests as $req){
@@ -2528,7 +2528,7 @@ return $requests;
  
 public function logout() {
 	$this->redirect($this->Auth->logout());
-	$this->Flash->error(__('Logout Successfully.'));
+	$this->Flash->error(__('Logged out Successfully.'));
 	return ;
 } 
 public function checkresponses($id) {

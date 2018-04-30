@@ -94,11 +94,11 @@ hr { margin-top:0px!important;}
                     <option value="3" <?php if($role_id== 3){ echo "Selected"; }?> >Hotelier</option>
                   </select>
                 </div> 
-				 <div class="form-group col-md-6">
+				<div class="form-group col-md-6">
                   <label>First Name</label>
                   <input type="text" class="form-control" name="first_name" value="<?php echo $users['first_name'] ?>" id="first_name" placeholder="First Name">
                 </div>
-				 <div class="form-group col-md-6">
+				<div class="form-group col-md-6">
                   <label>Last Name</label>
                   <input type="text" class="form-control" name="last_name" value="<?php echo $users['last_name'] ?>" id="last_name" placeholder="last Name">
                 </div>
@@ -106,7 +106,7 @@ hr { margin-top:0px!important;}
                   <label>Company Name</label>
                   <input type="text" class="form-control" name="company_name" value="<?php echo $users['company_name'] ?>" id="company_name" placeholder="Company Name">
                 </div>
-				 <div class="form-group col-md-6">
+				<div class="form-group col-md-6">
                   <label>Website</label>
                   <input type="text" class="form-control" id ="web_url" value = "<?php echo (!empty($users['web_url']))?$users['web_url']:""; ?>" name="web_url" placeholder="Website URL">
                 </div>

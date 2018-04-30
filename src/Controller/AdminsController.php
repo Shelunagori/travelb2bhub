@@ -25,22 +25,68 @@ class AdminsController extends AppController
 			$this->set('profile_pic', $profile_pic);
 			$this->set('loginId',$loginId); 
 		}
-	}
-	public function index()
-    {
-		$this->viewBuilder()->layout('admin_layout');
-    }
+	} 
 	public function dashboard()
     {
 		$this->viewBuilder()->layout('admin_layout');
+		$loginId=$this->Auth->User('id');  
     }
-	public function viewprofile()
+ 	public function changePassword()
     {
 		$this->viewBuilder()->layout('admin_layout');
+		$loginId=$this->Auth->User('id');
+		if ($this->request->is('post')) {
+			$Admins = $this->Admins->find()->where(['id' => $loginId])->first();
+			
+			$verify = (new \Cake\Auth\DefaultPasswordHasher)->check($this->request->data['old_password'], $Admins->password);
+			if($verify) {
+				$result = $this->Admins->patchEntity($Admins, ['password' => $this->request->data['password']]);
+ 				if ($this->Admins->save($result)) {
+					$this->Flash->success(__('Your password has been changed successfully.'));
+					return $this->redirect(['action' => 'changePassword']);
+ 				}
+			} else {
+ 				$this->Flash->error(__('Current Password does not matched.'));
+				return $this->redirect(['action' => 'changePassword']);
+			}
+		}		
     }
-	public function change_password()
+ 	public function profileedit()
     {
 		$this->viewBuilder()->layout('admin_layout');
+		$loginId=$this->Auth->User('id');
+		$admins = $this->Admins->find()->where(['id' => $loginId])->first();
+		$this->set('admins',$admins); 
+		if ($this->request->is('post')) {
+			
+			if(!empty($this->request->data['profile_pic']['tmp_name']))
+			{
+				$path_info = pathinfo($this->request->data['profile_pic']['name']);
+				chmod ($this->request->data['profile_pic']['tmp_name'], 0644);
+				$photo=time()."admin.".$path_info['extension'];
+				$fullpath= WWW_ROOT."img".DS."admin_profile";
+				$res1 = is_dir($fullpath);
+				if($res1 != 1) {
+					$res2= mkdir($fullpath, 0777, true);
+				}
+				move_uploaded_file($this->request->data['profile_pic']['tmp_name'],$fullpath.DS.$photo);
+				$this->request->data['profile_pic'] = $photo; 
+ 				$this->request->session()->write('Auth.User.profile_pic', $photo);
+ 			}
+			$this->request->session()->write('Auth.User.first_name', $this->request->data['first_name']);
+			$this->request->session()->write('Auth.User.last_name', $this->request->data['last_name']);
+			
+			$result = $this->Admins->patchEntity($admins, $this->request->data);
+ 			if ($this->Admins->save($result)) {
+				$this->Flash->success(__('Profile has been changed successfully.'));
+				return $this->redirect(['action' => 'profileedit']);
+			}
+			else{
+				$this->Flash->error(__('Something went wrong please try again.'));
+				return $this->redirect(['action' => 'profileedit']);
+			}
+			 
+		}		
     }
     public function login()
     {
@@ -61,28 +107,15 @@ class AdminsController extends AppController
 		return $this->redirect($this->Auth->logout());
 	}
 
-    /**
-     * View method
-     *
-     * @param string|null $id Admin id.
-     * @return \Cake\Network\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
     public function view($id = null)
     {
         $admin = $this->Admins->get($id, [
             'contain' => ['AdminRole']
         ]);
-
         $this->set('admin', $admin);
         $this->set('_serialize', ['admin']);
     }
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
-     */
     public function add()
     {
 		$this->viewBuilder()->layout('admin_layout');
@@ -147,9 +180,7 @@ class AdminsController extends AppController
 	public function menu()
 	{
 		$user_id=$this->Auth->User('id');
-		
 		$fetch_menu = $this->Admins->Modules->find()->order(['preferance'=>'ASC'])->toArray();
-		
 		$this->response->body($fetch_menu);
 		return $this->response;
 	}
