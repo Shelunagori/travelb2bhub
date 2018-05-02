@@ -111,6 +111,7 @@ if ($err) {
 }
 ?>
 <style>
+
 .select2-container--default .select2-results__option[aria-disabled=true] {
     display: none;
 }
@@ -172,8 +173,9 @@ fieldset{
 	margin:10px !important;
 	border-radius: 6px;
 } 
-</style> 
+</style>
 <div class="container-fluid">
+
 	<div class="box box-primary">
 		<div class="box-body">
 			<form action="<?php echo $coreVariable['SiteUrl'];?>api/post_travle_packages/add.json" method="post" enctype="multipart/form-data">	

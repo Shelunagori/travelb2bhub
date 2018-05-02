@@ -58,6 +58,12 @@ hr { margin-top:0px!important;}
 	color:#96989A !important;
 	font-weight:100;
 }
+.error {
+	color:#ea3733 !important;	
+}
+.img_show{
+ margin-top:10px;	
+}
 </style>
 
 <section class="content">
@@ -116,7 +122,7 @@ hr { margin-top:0px!important;}
                 </div>
                 <div class="form-group col-md-4">
                   <label for="exampleInputPassword1">Mobile No.</label>
-                  <input type="text" class="form-control" name="mobile_number" value="<?php echo str_replace(' ','',$users['mobile_number']); ?>" id="mobile_number" placeholder="Enter Here" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                  <input type="text" class="form-control" name="" readonly value="<?php echo str_replace(' ','',$users['mobile_number']); ?>" id="mobile_number" placeholder="Enter Here" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                 </div>
 				<div class="form-group col-md-4">
                   <label for="exampleInputPassword1">Secondary Contact No.</label>
@@ -183,9 +189,9 @@ hr { margin-top:0px!important;}
 					<div class="col-md-12">
 						<div class="img_show col-md-3" align="center">
 							<?php if(!empty($users['iata_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iata_pic'])) { 
-								echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iata_pic'], ["alt"=>"IATA Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+								echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iata_pic'], ["alt"=>"IATA Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']);?>
 							<?php }else{ 
-								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"IATA Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+								echo $this->Html->image('icon/iata-1.png', ["class"=>"img-responsive", "alt"=>"IATA Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']); 
 								} ?>
 							<p>
 								<?php echo $this->Form->input('IATA Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'iata_pic']); ?>
@@ -194,9 +200,9 @@ hr { margin-top:0px!important;}
 						</div>
 						<div class="img_show col-md-3" UPLOAD PHOTO align="center">
 							<?php if(!empty($users['tafi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['tafi_pic'])) {
-                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['tafi_pic'], ["alt"=>"T A F I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['tafi_pic'], ["alt"=>"T A F I Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']);?>
                             <?php }else{ 
-								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"T A F I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+								echo $this->Html->image('icon/tafi-1.png', ["class"=>"img-responsive", "alt"=>"T A F I Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']); 
 								} ?>
 							<p>
 								<?php echo $this->Form->input('T A F I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'tafi_pic']); ?>
@@ -206,9 +212,9 @@ hr { margin-top:0px!important;}
 						
 						<div class="img_show col-md-3" align="center">
 							<?php if(!empty($users['taai_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['taai_pic'])) { 
-                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['taai_pic'], ["alt"=>"T A A I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['taai_pic'], ["alt"=>"T A A I Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']);?>
 							<?php }else{ 
-								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"T A A I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+								echo $this->Html->image('icon/taai-1.png', ["class"=>"img-responsive", "alt"=>"T A A I Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']); 
 								} ?>
 							<p>
 								<?php echo $this->Form->input('T A A I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'taai_pic']); ?>
@@ -218,9 +224,9 @@ hr { margin-top:0px!important;}
 						
 						<div class="img_show col-md-3" align="center">
 							<?php if(!empty($users['iato_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iato_pic'])) { 
-                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iato_pic'], ["alt"=>"I A T O Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iato_pic'], ["alt"=>"I A T O Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']);?>
 							<?php }else{ 
-								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"I A T O Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+								echo $this->Html->image('icon/iato-1.png', ["class"=>"img-responsive", "alt"=>"I A T O Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']); 
 								} ?>
 							<p>
 								<?php echo $this->Form->input('IATO Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'iato_pic']); ?>
@@ -230,9 +236,9 @@ hr { margin-top:0px!important;}
 						
 						<div class="img_show col-md-3" align="center">
 							<?php if(!empty($users['adyoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adyoi_pic'])) { 
-                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adyoi_pic'], ["alt"=>"A D Y O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adyoi_pic'], ["alt"=>"A D Y O I Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']);?>
 							<?php }else{ 
-								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+								echo $this->Html->image('icon/adtoi-1.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']); 
 								} ?>
 							<p>
 								<?php echo $this->Form->input('A D Y O I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'adyoi_pic']); ?>
@@ -242,9 +248,9 @@ hr { margin-top:0px!important;}
 						
 						<div class="img_show col-md-3" align="center">
 							<?php if(!empty($users['iso9001_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iso9001_pic'])) { 
-                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iso9001_pic'], ["alt"=>"I S O 9001 Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['iso9001_pic'], ["alt"=>"I S O 9001 Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']);?>
 							<?php }else{ 
-								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"I S O 9001 Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+								echo $this->Html->image('icon/iso-1.png', ["class"=>"img-responsive", "alt"=>"I S O 9001 Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']); 
 								} ?>
 							<p>
 								<?php echo $this->Form->input('I S O 9001 Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'iso9001_pic']); ?>
@@ -254,9 +260,9 @@ hr { margin-top:0px!important;}
 						
 						<div class="img_show col-md-3" align="center">
 							<?php if(!empty($users['uftaa_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['uftaa_pic'])) { 
-                               echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['uftaa_pic'], ["alt"=>"U F T A A Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+                               echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['uftaa_pic'], ["alt"=>"U F T A A Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']);?>
 							<?php }else{ 
-								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"U F T A A Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+								echo $this->Html->image('icon/uftaa-1.png', ["class"=>"img-responsive", "alt"=>"U F T A A Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']); 
 								} ?>
 							<p>
 								<?php echo $this->Form->input('U F T A A Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'uftaa_pic']); ?>
@@ -266,9 +272,9 @@ hr { margin-top:0px!important;}
 						
 						<div class="img_show col-md-3" align="center">
 							<?php if(!empty($users['adtoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adtoi_pic'])) { 
-                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adtoi_pic'], ["alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+                                echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$users['adtoi_pic'], ["alt"=>"A D T O I Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']);?>
 							<?php }else{ 
-								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+								echo $this->Html->image('icon/adtoi-1.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']); 
 								} ?>
 							<p>
 								<?php echo $this->Form->input('A D T O I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'adtoi_pic']); ?>
@@ -305,7 +311,7 @@ hr { margin-top:0px!important;}
 							<p>
 							<?php 
 							  if($this->request->session()->read('Auth.User.role_id') == 1 or $this->request->session()->read('Auth.User.role_id') == 2) {
-								echo $this->Form->input('Photograph of your office (Pic 1)', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_img_1','style'=>'height:130 !important;' ]);
+								echo $this->Form->input('Photograph of your office (Pic 1)', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_img_1','style'=>'height:100 !important;' ]);
 							  }else{
 								  echo $this->Form->input('Photograph of your Hotel-1', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_img_1' ]);
 							  } ?>

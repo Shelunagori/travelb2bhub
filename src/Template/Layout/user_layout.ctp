@@ -359,6 +359,19 @@ margin-bottom: 0px!important;
 		padding-top: 46px !important;
 	}
 }
+#ButtonforaddMore { 
+	position: fixed;
+	bottom: 10%;
+	right: 0px;
+	z-index: 99; 
+	border: none;
+	outline: none;
+	background-color: #1295a2;
+	color: white;
+	cursor: pointer;
+	border-radius: 100%;
+	padding: 10px 12px 10px 12px;
+}
 </style>
 </head>
 <!--<body class="hold-transition skin-blue fixed sidebar-mini">-->

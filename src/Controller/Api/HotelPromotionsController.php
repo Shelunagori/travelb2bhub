@@ -77,6 +77,14 @@ class HotelPromotionsController extends AppController
 						}
 						imagejpeg($image, $destination_url, $percentageTOReduse);
 						$hotelPromotions->hotel_pic='img/hotels/'.$title.'.'.$ext;
+						if(file_exists(WWW_ROOT . '/img/hotels/'.$title.'.'.$ext)>0) {
+						}
+						else
+						{
+							$message = 'Image not uploaded';
+							$this->Flash->error(__($message));
+							$response_code = 102;
+						}
 						/*
 						if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/img/hotels/'.$title.'.'.$ext)) {
 							$hotelPromotions->hotel_pic='img/hotels/'.$title.'.'.$ext;

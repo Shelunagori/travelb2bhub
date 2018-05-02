@@ -78,15 +78,19 @@ class PostTravlePackagesController extends AppController
 						if (!file_exists('path/to/directory')) {
 							mkdir('path/to/directory', 0777, true);
 						}
+						 
 						$percentageTOReduse=100;
 						if(($image['size']>1000000) &&($image['size']<=3000000)){
 							$percentageTOReduse=50;
 						}
-						if(($image['size']>3000000) &&($image['size']<=6000000)){
+						elseif(($image['size']>3000000) &&($image['size']<=6000000)){
 							$percentageTOReduse=20;
 						}
-						if($image['size']>6000000){
+						elseif($image['size']>6000000){
 							$percentageTOReduse=10;
+						}
+						else{
+							$percentageTOReduse=5;
 						}
 						/* Resize Image */
 						$destination_url = WWW_ROOT . '/images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
@@ -95,8 +99,17 @@ class PostTravlePackagesController extends AppController
 						}else{
 							$image = imagecreatefromjpeg($image['tmp_name']); 
 						}
-						imagejpeg($image, $destination_url, $percentageTOReduse);
-						$postTravlePackage->image='images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
+						$immm=imagejpeg($image, $destination_url, $percentageTOReduse);
+ 						$postTravlePackage->image='images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
+						if(file_exists(WWW_ROOT . '/images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)>0) {
+						}
+						else
+						{
+							$message = 'Image not uploaded';
+							$this->Flash->error(__($message));
+							$response_code = 102;
+						}
+					
 						/*//imagedestroy($image);
 						if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)) {
 							$postTravlePackage->image='images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;

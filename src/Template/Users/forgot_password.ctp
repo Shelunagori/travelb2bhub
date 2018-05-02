@@ -36,6 +36,9 @@
 			<div class="wrap-login100 prakash">
 					<center>
 						<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:50%;']) ?>
+						<div class="container-login100-form-btn" style="margin-top:15px">
+							<?php echo  $this->Flash->render() ?>
+						</div>
 					</center>
 						<br>	
 				<?php  echo $this->Form->create("User", ['id'=>"UserRegisterForm",'class'=>'login100-form validate-form']); ?>
@@ -43,7 +46,7 @@
 						<span style="color:#fff"> Forgot Password </span>
 					</div> <br />
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="text" name="mobile_number" >
+						<input class="input100" type="text" maxlength="10" minlength="10"name="mobile_number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
 						<span class="focus-input100" data-placeholder="Mobile No"></span>
 					</div>
 					<div class="container-login100-form-btn">
@@ -52,7 +55,7 @@
 						</button>
 					</div>
 					<br />
-					<p style="color:#fff !important;"><?php echo $this->Flash->render(); ?></p>
+					 
 				
 					<div class="text-center p-t-90" style="padding-top: 20px;">
 						<p style="color:#fff">Already have an account?

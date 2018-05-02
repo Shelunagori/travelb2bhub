@@ -152,6 +152,9 @@ a{
 	</div>
 </div>
 <div class="container-fluid">
+<?php if($roleId==2){?>
+<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'add')) ?>" target="_blank" id="ButtonforaddMore" title="Click Here to add Event Planner Promotion"><i class="fa fa-plus"></i></a>
+<?php } ?>
 	<div class="box box-primary" style="margin-bottom:5px;">
 		<div class="row">
 			<div class="col-md-12">

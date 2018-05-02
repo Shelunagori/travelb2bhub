@@ -94,7 +94,14 @@ class TaxiFleetPromotionsController extends AppController
 						}
 						imagejpeg($image, $destination_url, $percentageTOReduse);
 						$taxiFleetPromotion->image='images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
-						
+						if(file_exists(WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)>0) {
+						}
+						else
+						{
+							$message = 'Image not uploaded';
+							$this->Flash->error(__($message));
+							$response_code = 102;
+						}
 						/*if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)) {
 							$taxiFleetPromotion->image='images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
 						} else {

@@ -3577,39 +3577,40 @@ exit;
 */
 public function forgotPassword() {
 	$this->viewBuilder()->layout('');
-Configure::write('debug',2);
-if ($this->request->is('post')) {
-$this->loadModel('Users');
-$d = $this->request->data;
-$user = $this->Users
-->find()
-->where(['mobile_number' =>$d['mobile_number']])
-->first();
-if (!empty($user)) {
-	$user_id=$user["id"];
-	$mobile_no=$d['mobile_number'];
-	
-	$rendomCode=rand('1010', '9999');
-	$TableResponse = TableRegistry::get("Users");
-	$query = $TableResponse->query();
-		$result = $query->update()
-			->set(['mobile_otp' => $rendomCode])
-			->where(['id' => $user_id])
-			->execute();
+	Configure::write('debug',2);
+	if ($this->request->is('post')) {
+		$this->loadModel('Users');
+		$d = $this->request->data;
+		$user = $this->Users
+		->find()
+		->where(['mobile_number' =>$d['mobile_number']])
+		->first();
+		if (!empty($user)) {
+			$user_id=$user["id"];
+			$mobile_no=$d['mobile_number'];
 			
-	$sms_sender='B2BHUB';
-	$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
-	file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
-	 
-	 $encrypted_data=$this->encode($user_id,'B2BHUB');
-	 $dummy_user_id=$encrypted_data;
+			$rendomCode=rand('1010', '9999');
+			$TableResponse = TableRegistry::get("Users");
+			$query = $TableResponse->query();
+				$result = $query->update()
+					->set(['mobile_otp' => $rendomCode])
+					->where(['id' => $user_id])
+					->execute();
+					
+			$sms_sender='B2BHUB';
+			$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
+			file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
+			 
+			 $encrypted_data=$this->encode($user_id,'B2BHUB');
+			 $dummy_user_id=$encrypted_data;
+					
+			$this->redirect('/users/passwordotp-verifiy/'.$dummy_user_id);
 			
-	$this->redirect('/users/passwordotp-verifiy/'.$dummy_user_id);
-	
-} else {
-$this->Flash->error(__('Incorrect Mobile no.'));
-}
-}
+		} else 
+		{
+		$this->Flash->error(__('Incorrect Mobile no.'));
+		}
+	}
 }
 /**
 *  It is used to reset password when users click the link in their email

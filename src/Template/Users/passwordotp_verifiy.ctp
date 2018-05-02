@@ -35,17 +35,17 @@
 		<div class="container-login100 bgdiv ">
 			<div class="wrap-login100 prakash">
 					<center>
-						<?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:20%;']) ?>
-					</center>
-					<span class="login100-form-title p-b-34 p-t-27">
-						TRAVEL B2b HUB
-					</span>
+						<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:50%;']) ?>
+						<div class="container-login100-form-btn" style="margin-top:15px">
+							<?php echo  $this->Flash->render() ?>
+						</div>
+					</center> 
 				<?php  echo $this->Form->create("User", ['id'=>"UserRegisterForm",'class'=>'login100-form validate-form']); ?>
 					<div class="text-center">
 						<p style="color:#fff"> OTP Verification </p>
 					</div> <br />
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="text" name="mobile_otp" autofocus="on">
+						<input class="input100" type="text" name="mobile_otp" autofocus="on" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');" maxlength="4">
 						<span class="focus-input100" data-placeholder="Enter OTP"></span>
 					</div>
 					<div class="container-login100-form-btn">
@@ -54,7 +54,7 @@
 						</button>
 					</div>
 					<br />
-					<p style="color:#fff !important;"><?php echo $this->Flash->render(); ?></p>
+					 
 					<div class="text-center p-t-90" style="padding-top: 20px;">
 						<p style="color:#fff">Otp resend?
 							<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'otp_resend/'.$dummy_user_id)) ?>" style="color:#a9d4fa;">
