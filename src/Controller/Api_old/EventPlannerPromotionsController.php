@@ -58,23 +58,54 @@ class EventPlannerPromotionsController extends AppController
 					if(in_array($ext, $arr_ext)) { 
 						if (!file_exists('path/to/directory')) {
 								mkdir('path/to/directory', 0777, true);
-							}
-						if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/eventPlannerPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)) {
+						}
+						$percentageTOReduse=100;
+						if(($image['size']>1000000) &&($image['size']<=3000000)){
+							$percentageTOReduse=50;
+						}
+						if(($image['size']>3000000) &&($image['size']<=6000000)){
+							$percentageTOReduse=20;
+						}
+						if($image['size']>6000000){
+							$percentageTOReduse=10;
+						} 
+						/* Resize Image */
+						$destination_url = WWW_ROOT . '/images/eventPlannerPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
+						if($ext=='png'){
+							$image = imagecreatefrompng($image['tmp_name']);
+						}else{
+							$image = imagecreatefromjpeg($image['tmp_name']); 
+						}
+						imagejpeg($image, $destination_url, $percentageTOReduse);
+						$eventPlannerPromotion->image='images/eventPlannerPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
+						if(file_exists(WWW_ROOT . '/images/eventPlannerPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)>0) {
+						}
+						else
+						{
+							$message = 'Image not uploaded';
+							$this->Flash->error(__($message));
+							$response_code = 102;
+						}
+						
+						/*if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/eventPlannerPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)) {
 							$eventPlannerPromotion->image='images/eventPlannerPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
 						} else {
 							$message = 'Image not uploaded';
+							$this->Flash->error(__($message));
 							$response_code = 102;
-						}
+						}*/
 					} 
 					else 
 					{ 
 						$message = 'Invalid image extension';
+						$this->Flash->error(__($message));
 						$response_code = 103;  
 					}					
 				}
 				else 
 				{ 	
 					$message = 'Invalid image extension';
+					$this->Flash->error(__($message));
 					$response_code = 103;  
 				}				
 			} else { $eventPlannerPromotion->image ='';  }	
@@ -94,6 +125,7 @@ class EventPlannerPromotionsController extends AppController
 							$eventPlannerPromotion->document='images/eventPlannerPromotion/'.$id.'/'.$title.'/document/'.$id.'.'.$ext;
 						} else {
 							$message = 'Document not uploaded';
+							$this->Flash->error(__($message));
 							$response_code = 104;
 							
 						}
@@ -101,12 +133,14 @@ class EventPlannerPromotionsController extends AppController
 					else 
 					{ 	
 						$message = 'Invalid document extension';
+						$this->Flash->error(__($message));
 						$response_code = 105;  
 					}					
 				}
 				else 
 				{ 	
 					$message = 'Invalid document extension';
+					$this->Flash->error(__($message));
 					$response_code = 105;  
 				}				
 			} else { $eventPlannerPromotion->document = ''; }			
@@ -115,17 +149,17 @@ class EventPlannerPromotionsController extends AppController
 			{
 				if ($this->EventPlannerPromotions->save($eventPlannerPromotion)) {
 					$message = 'The event promotions has been saved';
+					$this->Flash->success(__($message)); 
 					$response_code = 200;
 				}else{
 					$message = 'The event promotions has not been saved';
+					$this->Flash->error(__($message));
 					$response_code = 204;				
 				}
 			}			
-        }
-		if(@$submitted_from=='web')
-		{
-			$this->Flash->success(__('message'));
-			return $this->redirect(['controller'=>'EventPlannerPromotions','action' => 'report']);
+        } 
+		if(@$submitted_from=='web'){
+			return $this->redirect($this->coreVariable['SiteUrl'].'EventPlannerPromotions/report');
 		}
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);		
@@ -232,18 +266,29 @@ class EventPlannerPromotionsController extends AppController
         $this->set('_serialize', ['getEventPlanners','message','response_code']);				
 	}	
 	
-	public function getEventPlanners($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null)
+	public function getEventPlanners($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$higestSort=null,$search=null,$page=null,$submitted_from=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
 		{
+			$submitted_from = $this->request->query('submitted_from');
+			if($submitted_from="web")
+			{
+				$limit=100;
+			}
+			else{
+				$limit=10;
+			}
 			$country_id = $this->request->query('country_id');
 			$country_id_short = $this->request->query('country_id_short');
 			$state_id = $this->request->query('state_id');
 			$state_id_short = $this->request->query('state_id_short');
 			$city_id_short = $this->request->query('city_id_short');
 			$city_id = $this->request->query('city_id');
-			
+			$higestSort = $this->request->query('higestSort');
+			$search_bar = $this->request->query('search');
+			$page = $this->request->query('page');
+			if(empty($page)){$page=1;}
 			if(!empty($country_id))
 			{
 				$country_id = ['EventPlannerPromotions.country_id'=>$country_id];
@@ -255,7 +300,8 @@ class EventPlannerPromotionsController extends AppController
 			
 			if(!empty($state_id))
 			{
-				$state_filter = ['state_id'=>$state_id];
+				$state_id = explode(',',$state_id);
+				$state_filter = ['EventPlannerPromotionStates.state_id IN'=>$state_id];
 			}else
 			{
 				$state_filter = null;
@@ -264,45 +310,84 @@ class EventPlannerPromotionsController extends AppController
 			
 			if(!empty($city_id))
 			{
-				$city_filter = ['city_id'=>$city_id];
+				$city_id = explode(',',$city_id);
+				$city_filter = ['EventPlannerPromotionCities.city_id IN'=>$city_id];
 			}else
 			{
 				$city_filter = null;
 			}
 			
-			
+			$where_short = ['EventPlannerPromotions.id' =>'DESC'];
 			if(!empty($country_id_short))
 			{
 				$where_short = ['EventPlannerPromotions.country_id' =>$country_id_short];
-			}else
-			{
-				$where_short = null;
-			}	
+			} 	
 			
 			
 			if(!empty($state_id_short))
 			{
 				$where_short = ['EventPlannerPromotionStates.id' =>$state_id_short];
-			}else
-			{
-				$where_short = null;
 			}
+			
 			if(!empty($city_id_short))
 			{
 				$where_short = ['EventPlannerPromotionCities.id' =>$city_id_short];
-			}else
-			{
-				$where_short = null;
-			}	
+			} 	
 
-			//pr($where_short);exit;	
+			$search_bar_title = null;
+			$data_arr = [];
+			$data_arr_state=[];
+			
+			if(!empty($search_bar))
+			{	
+				$search_bar_city = $this->EventPlannerPromotions->EventPlannerPromotionCities->Cities
+				->find()->select(['id'])->where(['name Like' =>'%'.$search_bar.'%']);
+				if(!empty($search_bar_city)) 
+				{ 
+					$search_bar_city_data = $this->EventPlannerPromotions->EventPlannerPromotionCities->find()
+					->select(['event_planner_promotion_id'])->where(['EventPlannerPromotionCities.city_id IN' =>$search_bar_city])->toArray();
+					
+					if(!empty($search_bar_city_data))
+					{
+						foreach($search_bar_city_data as $data)
+						{
+							$data_arr_state[] = $data->event_planner_promotion_id;
+						}
+					}
+					
+				}
+				
+				$search_bar_state = $this->EventPlannerPromotions->EventPlannerPromotionStates->States
+				->find()->select(['id'])->where(['state_name Like' =>'%'.$search_bar.'%']);
+				if(!empty($search_bar_state)) 
+				{ 
+					$search_bar_state_data = $this->EventPlannerPromotions->EventPlannerPromotionStates->find()
+					->select(['event_planner_promotion_id'])->where(['EventPlannerPromotionStates.state_id IN' =>$search_bar_state])->toArray();
+					
+					if(!empty($search_bar_state_data))
+					{
+						foreach($search_bar_state_data as $data)
+						{
+							$data_arr[] = $data->event_planner_promotion_id;
+						}
+					}
+					
+				}	
+				$search_bar_title = array_merge($data_arr,$data_arr_state);
+				if(!empty($search_bar_title)){
+				$search_bar_title = ['EventPlannerPromotions.id IN' =>$search_bar_title];
+				}else
+				{
+					$search_bar_title = ['EventPlannerPromotions.id IN' =>''];
+				}				
+			}	
 			
 			$getEventPlanners = $this->EventPlannerPromotions->find();
 			 
 				$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('EventPlannerPromotionLikes.id')])
-				->contain(['EventPlannerPromotionCities'=>['Cities'],'Users'=>function($q){
-				return $q->select(['first_name','last_name','mobile_number','company_name']);
-			}])
+				->contain(['Users'=>function($q){
+				return $q->select(['first_name','last_name','mobile_number','company_name','email']);
+			},'PriceMasters','Countries','EventPlannerPromotionStates'=>['States'],'EventPlannerPromotionCities'=>['Cities']])
 				->leftJoinWith('EventPlannerPromotionLikes')
 				->innerJoinWith('EventPlannerPromotionStates',function($q) use($state_filter){ 
 						return $q->where($state_filter);
@@ -311,12 +396,15 @@ class EventPlannerPromotionsController extends AppController
 						return $q->where($city_filter);
 					})	
 			->where(['visible_date >=' =>date('Y-m-d')])
-			->where(['is_deleted' =>0])
+			->where(['EventPlannerPromotions.is_deleted' =>0])
 			->where($country_id)
 			->order($where_short)
+			->where($search_bar_title)
 			->group(['EventPlannerPromotions.id'])
+			->limit($limit)
+			->page($page)
 			->autoFields(true);
-			
+			//pr($where_short);exit;	
 			if(!empty($getEventPlanners->toArray()))
 			{
 				foreach($getEventPlanners as $getEventPlanner)
@@ -341,8 +429,8 @@ class EventPlannerPromotionsController extends AppController
 						->find()->where(['event_planner_promotion_id' => $getEventPlanner->id])->count();
 						
 					$all_raiting=0;	
-					$testimonial=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId]);
-					$testimonial_count=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId])->count();
+					$testimonial=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getEventPlanner->user_id]);
+					$testimonial_count=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getEventPlanner->user_id])->count();
 						 
 						 foreach($testimonial as $test_data){
 							 $rating=$test_data->rating;
@@ -353,13 +441,36 @@ class EventPlannerPromotionsController extends AppController
 							 if($final_raiting>0){
 								$getEventPlanner->user_rating=number_format($final_raiting, 1);
 							 }else{
-								$getEventPlanner->user_rating=0;
+								$getEventPlanner->user_rating="0";
 							 }	
 						 }else{
-							$getEventPlanner->user_rating=0;
+							$getEventPlanner->user_rating="0";
 						 }	 
 				}
-				 
+				if(!empty($higestSort))
+				{
+					if($higestSort == 'total_likes')
+					{
+						$getEventPlanners = $getEventPlanners->toArray();
+						usort($getEventPlanners, function ($a, $b) {
+							return $b['total_likes'] - $a['total_likes'];
+						});
+					}
+					else if($higestSort == 'total_views')
+					{
+						$getEventPlanners = $getEventPlanners->toArray();
+						usort($getEventPlanners, function ($a, $b) {
+							return $b['total_views'] - $a['total_views'];
+						});					
+					}
+					else if($higestSort == 'user_rating')
+					{
+						$getEventPlanners = $getEventPlanners->toArray();
+						usort($getEventPlanners, function ($a, $b) {
+							return $b['user_rating'] - $a['user_rating'];
+						});					
+					}					
+				}				 
 				$message = 'List Found Successfully';
 				$response_code = 200;
 			}
@@ -408,21 +519,20 @@ class EventPlannerPromotionsController extends AppController
 			$exists = $this->EventPlannerPromotions->EventPlannerPromotionViews->exists(['event_planner_promotion_id'=>$viewEventPlannerPromotions->event_planner_promotion_id,'user_id'=>$viewEventPlannerPromotions->user_id]);
 			
 			$carts = $this->EventPlannerPromotions->EventPlannerPromotionCarts->exists(['EventPlannerPromotionCarts.event_planner_promotion_id'=>$id,'EventPlannerPromotionCarts.user_id'=>$user_id,'EventPlannerPromotionCarts.is_deleted'=>0]);
-			
+			foreach($getEventPlannersDetails as $sfad){
 			if($carts==0){
-				foreach($getEventPlannersDetails as $sfad){
+				
 					$sfad->issaved=false;
-				}
+				 
 				
 			}else{
-				foreach($getEventPlannersDetails as $sfad){
-					$sfad->issaved=true;
-				}
+				 	$sfad->issaved=true;
+				 
 			}
 			
 			$all_raiting=0;	
-					$testimonial=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id]);
-					$testimonial_count=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id])->count();
+					$testimonial=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id]);
+					$testimonial_count=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id])->count();
 						 
 						 foreach($testimonial as $test_data){
 							 
@@ -435,7 +545,7 @@ class EventPlannerPromotionsController extends AppController
 								 if($final_raiting>0){
 									$rat->user_rating=number_format($final_raiting, 1);
 								 }else{
-									$rat->user_rating=0;
+									$rat->user_rating="0";
 								 }
 							 }	
 						 }else{
@@ -443,7 +553,7 @@ class EventPlannerPromotionsController extends AppController
 								$rat->user_rating=0;
 							 }	
 							 
-						 }
+					}	 }
 						 
 			if($exists == 0)
 			{
@@ -528,5 +638,95 @@ class EventPlannerPromotionsController extends AppController
 
 	}		
 
+	
+	public function EventPlannerViews($event_planner_promotion_id=null,$page=null,$user_id=null,$search=null)
+	{
+		$event_planner_promotion_id = $this->request->query('event_planner_promotion_id');
+		$user_id = $this->request->query('user_id');
+		$search_bar = $this->request->query('search');
+		$page = $this->request->query('page');
+		$filter_search=array();
+		if(!empty($search_bar)){
+			$filter_search["OR"] = array("Users.first_name Like"=> '%'.$search_bar.'%',"Users.last_name Like"=> '%'.$search_bar.'%',"Users.company_name Like"=> '%'.$search_bar.'%');
+ 		}
+		$limit=10;
+		if(empty($page)){$page=1;}
+		$COunt = $this->EventPlannerPromotions->EventPlannerPromotionViews->find()->where(['event_planner_promotion_id'=>$event_planner_promotion_id])->count();
+		if($COunt>0)
+		{
+			$getTravelPackages = $this->EventPlannerPromotions->EventPlannerPromotionViews->find()
+				->contain(['Users'=>function($q)use($filter_search){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id'])->where($filter_search);
+				}])
+				->where(['event_planner_promotion_id'=>$event_planner_promotion_id])
+				->limit($limit)
+				->page($page);
+			foreach($getTravelPackages as $packages){
+				$Follow = $this->EventPlannerPromotions->EventPlannerPromotionViews->Users->BusinessBuddies->exists(['user_id'=>$user_id,'bb_user_id'=>$packages->user_id]);  
+				if($Follow==0){
+					$packages->isfollow=false;
+				}else{
+					$packages->isfollow=true;
+				}
+ 			}
+			$response_object = $getTravelPackages;
+			$response_code = 200;
+			$message = '';
+		}
+		else{
+			$response_object = array();
+			$response_code = 204;
+			$message = 'No data found';
+		}
+			
+		$this->set(compact('message','response_code','response_object'));
+        $this->set('_serialize', ['message','response_code','response_object']);		
+		
+	}
+	
+	public function EventPlannerLikes($event_planner_promotion_id=null,$page=null,$user_id=null,$search=null)
+	{
+		$event_planner_promotion_id = $this->request->query('event_planner_promotion_id');
+		$user_id = $this->request->query('user_id');
+		$search_bar = $this->request->query('search');
+		$page = $this->request->query('page');
+		$filter_search=array();
+		if(!empty($search_bar)){
+			$filter_search["OR"] = array("Users.first_name Like"=> '%'.$search_bar.'%',"Users.last_name Like"=> '%'.$search_bar.'%',"Users.company_name Like"=> '%'.$search_bar.'%');
+ 		}
+		$limit=10;
+		if(empty($page)){$page=1;}
+		$COunt = $this->EventPlannerPromotions->EventPlannerPromotionLikes->find()->where(['event_planner_promotion_id'=>$event_planner_promotion_id])->count();
+		if($COunt>0)
+		{
+			$getTravelPackages = $this->EventPlannerPromotions->EventPlannerPromotionLikes->find()
+				->contain(['Users'=>function($q)use($filter_search){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id'])->where($filter_search);
+				}])
+				->where(['event_planner_promotion_id'=>$event_planner_promotion_id])
+				->limit($limit)
+				->page($page);
+			foreach($getTravelPackages as $packages){
+				$Follow = $this->EventPlannerPromotions->EventPlannerPromotionLikes->Users->BusinessBuddies->exists(['user_id'=>$user_id,'bb_user_id'=>$packages->user_id]);  
+				if($Follow==0){
+					$packages->isfollow=false;
+				}else{
+					$packages->isfollow=true;
+				}
+ 			}
+			$response_object = $getTravelPackages;
+			$response_code = 200;
+			$message = '';
+		}
+		else{
+			$response_object = array();
+			$response_code = 204;
+			$message = 'No data found';
+		}
+			
+		$this->set(compact('message','response_code','response_object'));
+        $this->set('_serialize', ['message','response_code','response_object']);		
+		
+	}
 	
 }

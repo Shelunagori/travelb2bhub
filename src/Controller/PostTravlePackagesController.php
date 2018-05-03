@@ -1036,7 +1036,25 @@ class PostTravlePackagesController extends AppController
 		$this->set(compact('user_id'));
     }
     
-	
+	public function PackageReport($city_id = null,$search = null,$higestSort = null,$country_id = null,$category_id = null,$duration_day_night = null,$starting_price = null,$posttravle_id= null,$removeposttravle= null,$saveposttravle= null,$valid_date= null)
+    {
+		$higestSort=$this->request->query('higestSort'); 
+		$city_ids=$this->request->query('city_id'); 
+		if(!empty($city_ids)) {$city_id=implode(',',$city_ids);}
+		$country_id=$this->request->query('country_id'); 
+		if(!empty($country_id)) {$country_id=implode(',',$country_id);}
+		$category_id=$this->request->query('category_id');
+		if(!empty($category_id)) {$category_id=implode(',',$category_id);} 
+		$duration_day_night=$this->request->query('duration_day_night');
+ 		$starting_price=$this->request->query('starting_price');
+ 		$search=$this->request->query('search');
+ 		$valid_date=$this->request->query('valid_date');
+		 //-- REMOVE PARAMETER
+		$user_id=$this->Auth->User('id');
+ 		$this->viewBuilder()->layout('admin_layout');
+        $user_id=$this->Auth->User('id');
+		$this->set(compact('user_id','search','higestSort','city_id','country_id','category_id','duration_day_night','starting_price','valid_date'));
+    }
 	
 	
 }

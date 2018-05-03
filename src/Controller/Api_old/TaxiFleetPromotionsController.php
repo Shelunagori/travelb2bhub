@@ -40,14 +40,16 @@ class TaxiFleetPromotionsController extends AppController
  
 				} 
 				$city_id=$this->request->data['city_id'];
+				 
 				$y=0; 
 				foreach($city_id as $city)
 				{
 					$taxiFleetPromotion_cities = $this->TaxiFleetPromotions->TaxiFleetPromotionCities->newEntity();
 					$taxiFleetPromotion_cities->city_id = $city;
 					$taxiFleetPromotion->taxi_fleet_promotion_cities[$y]=$taxiFleetPromotion_cities;
-                    $y++;	
+					$y++;	
 				}
+				 
 				$vehicle_type=$this->request->data['vehicle_type'];
 				$z=0; 
 				foreach($vehicle_type as $vehicle)
@@ -70,20 +72,48 @@ class TaxiFleetPromotionsController extends AppController
 				if(!empty($ext))
 				{
 					if(in_array($ext, $arr_ext)) { 
+						$percentageTOReduse=100;
 						if (!file_exists('path/to/directory')) {
 							mkdir('path/to/directory', 0777, true);
 						}
-						if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)) {
+						if(($image['size']>1000000) &&($image['size']<=3000000)){
+							$percentageTOReduse=50;
+						}
+						if(($image['size']>3000000) &&($image['size']<=6000000)){
+							$percentageTOReduse=20;
+						}
+						if($image['size']>6000000){
+							$percentageTOReduse=10;
+						} 
+						/* Resize Image */
+						$destination_url = WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
+						if($ext=='png'){
+							$image = imagecreatefrompng($image['tmp_name']);
+						}else{
+							$image = imagecreatefromjpeg($image['tmp_name']); 
+						}
+						imagejpeg($image, $destination_url, $percentageTOReduse);
+						$taxiFleetPromotion->image='images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
+						if(file_exists(WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)>0) {
+						}
+						else
+						{
+							$message = 'Image not uploaded';
+							$this->Flash->error(__($message));
+							$response_code = 102;
+						}
+						/*if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)) {
 							$taxiFleetPromotion->image='images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
 						} else {
 							$message = 'Image not uploaded';
+							$this->Flash->error(__($message)); 
 							$response_code = 102;
-							
-						}
+						}*/
 					} 
 					else 
 					{ 
 						$message = 'Invalid image extension';
+						$this->Flash->error(__($message)); 
 						$response_code = 103;  
 						
 					}					
@@ -91,6 +121,7 @@ class TaxiFleetPromotionsController extends AppController
 				else 
 				{ 	
 					$message = 'Invalid image extension';
+					$this->Flash->error(__($message)); 
 					$response_code = 103;  
 				}				
 			} else { $taxiFleetPromotion->image ='';  }	
@@ -110,6 +141,7 @@ class TaxiFleetPromotionsController extends AppController
 							$taxiFleetPromotion->document='images/taxiFleetPromotion/'.$id.'/'.$title.'/document/'.$id.'.'.$ext;
 						} else {
 							$message = 'Document not uploaded';
+							$this->Flash->error(__($message)); 
 							$response_code = 104;
 							
 						}
@@ -117,6 +149,7 @@ class TaxiFleetPromotionsController extends AppController
 					else 
 					{ 	
 						$message = 'Invalid document extension';
+						$this->Flash->error(__($message)); 
 						$response_code = 105;  
 						
 					}					
@@ -124,6 +157,7 @@ class TaxiFleetPromotionsController extends AppController
 				else 
 				{ 	
 					$message = 'Invalid document extension';
+					$this->Flash->error(__($message)); 
 					$response_code = 105;  
 					
 				}				
@@ -133,19 +167,19 @@ class TaxiFleetPromotionsController extends AppController
 			{
 				if ($this->TaxiFleetPromotions->save($taxiFleetPromotion)) {
 					$message = 'The Taxi/Fleet promotions has been saved';
+					$this->Flash->success(__($message)); 
 					$response_code = 200;
 				}else{
 					$message = 'The Taxi/Fleet promotions has not been saved';
+					$this->Flash->error(__($message)); 
 					$response_code = 204; 
 				}
 			}			
         }
  
 		if(@$submitted_from=='web'){
-			$this->Flash->success(__('message'));
-			return $this->redirect(['controller'=>'TaxiFleetPromotions','action' => 'add']);
-		}
-
+			return $this->redirect($this->coreVariable['SiteUrl'].'TaxiFleetPromotions/report');
+		}		
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);
     }
@@ -181,8 +215,16 @@ class TaxiFleetPromotionsController extends AppController
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);		
 	}
-	public function getTaxiFleetPromotions($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$car_bus_id=null,$car_bus_short=null)
+	public function getTaxiFleetPromotions($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$car_bus_id=null,$car_bus_short=null,$higestSort=null,$search=null,$page=null,$submitted_from=null)
 	{
+		$submitted_from = $this->request->query('submitted_from');
+		if($submitted_from="web")
+		{
+			$limit=100;
+		}
+		else{
+			$limit=10;
+		}
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		$country_id_short = $this->request->query('country_id_short');		
 		$country_id = $this->request->query('country_id');		
@@ -190,10 +232,12 @@ class TaxiFleetPromotionsController extends AppController
 		$state_id_short = $this->request->query('state_id_short');
 		$city_id_short = $this->request->query('city_id_short');
 		$city_id = $this->request->query('city_id');
-
+		$higestSort = $this->request->query('higestSort');
 		$car_bus_short = $this->request->query('car_bus_short');
-		$car_bus_id = $this->request->query('car_bus_id');		
-		
+		$car_bus_id = $this->request->query('car_bus_id');	
+		$search_bar = $this->request->query('search');		
+		$page = $this->request->query('page');		
+		if(empty($page)){$page=1;}
 		if(!empty($isLikedUserId))
 		{
 			if(!empty($country_id))
@@ -232,42 +276,95 @@ class TaxiFleetPromotionsController extends AppController
 				$car_bus_filter = null;
 			}	
 
-			
+			$where_short = ['TaxiFleetPromotions.id' =>'DESC'];
 			if(!empty($country_id_short))
 			{
 				$where_short = ['TaxiFleetPromotions.country_id' =>$country_id_short];
-			}else
-			{
-				$where_short = null;
-			}			
+			} 			
 			
 			if(!empty($state_id_short))
 			{
 				$where_short = ['TaxiFleetPromotionsStates.id' =>$state_id_short];
-			}else
-			{
-				$where_short = null;
-			}
+			} 
 			if(!empty($city_id_short))
 			{
 				$where_short = ['TaxiFleetPromotionCities.id' =>$city_id_short];
-			}else
-			{
-				$where_short = null;
-			}
+			} 
 			if(!empty($car_bus_short))
 			{
 				$where_short = ['TaxiFleetPromotionRows.id' =>$car_bus_short];
-			}else
-			{
-				$where_short = null;
-			}				
+			} 				
 
+
+			$search_bar_title = null;
+			$data_arr = [];
+			$data_arr_state=[];
+			$data_arr_title = [];
+			if(!empty($search_bar))
+			{	
+				$search_bar_title = $this->TaxiFleetPromotions->find()
+						->select(['id'])
+						->where(['title Like' =>'%'.$search_bar.'%'])
+						->toArray();
+		
+				if(!empty($search_bar_title)) 
+				{
+					foreach($search_bar_title as $data_bar)
+					{
+						$data_arr_title[] = $data_bar->id;
+					}					
+				}
+
+				
+				$search_bar_city = $this->TaxiFleetPromotions->TaxiFleetPromotionCities->Cities
+				->find()->select(['id'])->where(['name Like' =>'%'.$search_bar.'%']);
+				if(!empty($search_bar_city)) 
+				{ 
+					$search_bar_city_data = $this->TaxiFleetPromotions->TaxiFleetPromotionCities->find()
+					->select(['taxi_fleet_promotion_id'])->where(['TaxiFleetPromotionCities.city_id IN' =>$search_bar_city])->toArray();
+					
+					if(!empty($search_bar_city_data))
+					{
+						foreach($search_bar_city_data as $data)
+						{
+							$data_arr_state[] = $data->taxi_fleet_promotion_id;
+						}
+					}
+					
+				}
+				
+				$search_bar_state = $this->TaxiFleetPromotions->TaxiFleetPromotionStates->States
+				->find()->select(['id'])->where(['state_name Like' =>'%'.$search_bar.'%']);
+				if(!empty($search_bar_state)) 
+				{ 
+					$search_bar_state_data = $this->TaxiFleetPromotions->TaxiFleetPromotionStates->find()
+					->select(['taxi_fleet_promotion_id'])->where(['TaxiFleetPromotionStates.state_id IN' =>$search_bar_state])->toArray();
+					
+					if(!empty($search_bar_state_data))
+					{
+						foreach($search_bar_state_data as $data)
+						{
+							$data_arr[] = $data->taxi_fleet_promotion_id;
+						}
+					}
+					
+				}	
+				$search_bar_title = array_merge($data_arr_title,$data_arr,$data_arr_state);
+				if(!empty($search_bar_title)){
+				$search_bar_title = ['TaxiFleetPromotions.id IN' =>$search_bar_title];
+				}else
+				{
+					$search_bar_title = ['TaxiFleetPromotions.id IN' =>''];
+				}				
+			}
+
+
+			//pr($search_bar_title);exit;
 			
 			$getTaxiFleetPromotions = $this->TaxiFleetPromotions->find();
 			$getTaxiFleetPromotions->select(['total_likes'=>$getTaxiFleetPromotions->func()->count('TaxiFleetPromotionLikes.id')])
 				->contain(['Users'=>function($q){
-					return $q->select(['first_name','last_name','mobile_number','company_name']);
+					return $q->select(['first_name','last_name','mobile_number','company_name','email']);
 				}])
 				->leftJoinWith('TaxiFleetPromotionLikes')
 				
@@ -281,12 +378,16 @@ class TaxiFleetPromotionsController extends AppController
 						return $q->where($car_bus_filter);
 					})					
 				
-				->contain(['Users','PriceMasters','Countries','TaxiFleetPromotionCities'=>['Cities'],'TaxiFleetPromotionRows'=>['TaxiFleetCarBuses']])
+				->contain(['Users','PriceMasters','Countries','TaxiFleetPromotionCities'=>['Cities'],'TaxiFleetPromotionRows'=>['TaxiFleetCarBuses'],'TaxiFleetPromotionStates'=>['States']])
 					
 				->where(['TaxiFleetPromotions.visible_date >=' =>date('Y-m-d')])
 				->where($country_id)
+				->where($search_bar_title)
+				->where(['TaxiFleetPromotions.is_deleted' =>0])
 				->order($where_short)
 				->group(['TaxiFleetPromotions.id'])
+				->limit($limit)
+				->page($page)
 				->autoFields(true);
 			//pr($getTravelPackages->toArray()); exit;
 			if(!empty($getTaxiFleetPromotions->toArray()))
@@ -297,7 +398,7 @@ class TaxiFleetPromotionsController extends AppController
 							
 					$exists = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->exists(['taxi_fleet_promotion_id'=>$getTaxiFleetPromotion->id,'user_id'=>$isLikedUserId]);
 					
-					if($exists == 0)
+					if($exists == 1)
 					{  $getTaxiFleetPromotion->isLiked = 'yes'; } 
 					else { $getTaxiFleetPromotion->isLiked = 'no'; }	
 
@@ -312,8 +413,8 @@ class TaxiFleetPromotionsController extends AppController
 						->find()->where(['taxi_fleet_promotion_id' => $getTaxiFleetPromotion->id])->count();
 					
 					$all_raiting=0;	
-					$testimonial=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId]);
-					$testimonial_count=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId])->count();
+					$testimonial=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getTaxiFleetPromotion->user_id]);
+					$testimonial_count=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getTaxiFleetPromotion->user_id])->count();
 						 
 						 foreach($testimonial as $test_data){
 							 $rating=$test_data->rating;
@@ -324,13 +425,39 @@ class TaxiFleetPromotionsController extends AppController
 							 if($final_raiting>0){
 								$getTaxiFleetPromotion->user_rating=number_format($final_raiting, 1);
 							 }else{
-								$getTaxiFleetPromotion->user_rating=0;
+								$getTaxiFleetPromotion->user_rating="0";
 							 }	
 						 }else{
-							$getTaxiFleetPromotion->user_rating=0;
+							$getTaxiFleetPromotion->user_rating="0";
 						 }	 
 					 
 				}
+
+				if(!empty($higestSort))
+				{
+					if($higestSort == 'total_likes')
+					{
+						$getTaxiFleetPromotions = $getTaxiFleetPromotions->toArray();
+						usort($getTaxiFleetPromotions, function ($a, $b) {
+							return $b['total_likes'] - $a['total_likes'];
+						});
+					}
+					else if($higestSort == 'total_views')
+					{
+						$getTaxiFleetPromotions = $getTaxiFleetPromotions->toArray();
+						usort($getTaxiFleetPromotions, function ($a, $b) {
+							return $b['total_views'] - $a['total_views'];
+						});					
+					}
+					else if($higestSort == 'user_rating')
+					{
+						$getTaxiFleetPromotions = $getTaxiFleetPromotions->toArray();
+						usort($getTaxiFleetPromotions, function ($a, $b) {
+							return $b['user_rating'] - $a['user_rating'];
+						});					
+					}					
+				}
+				
 				$message = 'List Found Successfully';
 				$response_code = 200;
 			}
@@ -345,7 +472,7 @@ class TaxiFleetPromotionsController extends AppController
 		{
 			$message = 'isLikedUserId is empty';
 			$getTaxiFleetPromotions = [];
-			$response_code = 204;			
+			$response_code = 204;		
 		}
 		
 		$this->set(compact('getTaxiFleetPromotions','message','response_code'));
@@ -372,21 +499,19 @@ class TaxiFleetPromotionsController extends AppController
 			$exists = $this->TaxiFleetPromotions->TaxiFleetPromotionViews->exists(['taxi_fleet_promotion_id'=>$viewTaxiFleetPromotions->taxi_fleet_promotion_id,'user_id'=>$viewTaxiFleetPromotions->user_id]);
 			
 			$carts = $this->TaxiFleetPromotions->TaxiFleetPromotionCarts->exists(['TaxiFleetPromotionCarts.taxi_fleet_promotion_id'=>$id,'TaxiFleetPromotionCarts.user_id'=>$user_id,'TaxiFleetPromotionCarts.is_deleted'=>0]);
-			
+			foreach($getTaxiFleetPromotionsDetails as $sfad){
 			if($carts==0){
-				foreach($getTaxiFleetPromotionsDetails as $sfad){
-					$sfad->issaved=false;
-				}
 				
-			}else{
-				foreach($getTaxiFleetPromotionsDetails as $sfad){
+					$sfad->issaved=false;
+				 
+			}else{ 
 					$sfad->issaved=true;
-				}
+				 
 			}
 			
 			$all_raiting=0;	
-					$testimonial=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id]);
-					$testimonial_count=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id])->count();
+					$testimonial=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id]);
+					$testimonial_count=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id])->count();
 						 
 						 foreach($testimonial as $test_data){
 							 
@@ -399,7 +524,7 @@ class TaxiFleetPromotionsController extends AppController
 								 if($final_raiting>0){
 									$rat->user_rating=number_format($final_raiting, 1);
 								 }else{
-									$rat->user_rating=0;
+									$rat->user_rating="0";
 								 }
 							 }	
 						 }else{
@@ -408,7 +533,7 @@ class TaxiFleetPromotionsController extends AppController
 							 }	
 							 
 						 }
-						 
+			}			 
 			if($exists == 0)
 			{
 				if ($this->TaxiFleetPromotions->TaxiFleetPromotionViews->save($viewTaxiFleetPromotions)) {
@@ -431,7 +556,7 @@ class TaxiFleetPromotionsController extends AppController
 
 					$exists = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->exists(['taxi_fleet_promotion_id'=>$vew->id,'user_id'=>$user_id]);
 					
-					if($exists == 0)
+					if($exists != 0)
 					{  $vew->isLiked = 'yes'; } 
 					else { $vew->isLiked = 'no'; }							
 							
@@ -562,6 +687,96 @@ class TaxiFleetPromotionsController extends AppController
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);		
 
+	}
+	
+	public function TexiPromotionViews($texifleet_promotion_id=null,$page=null,$user_id=null,$search=null)
+	{
+		$texifleet_promotion_id = $this->request->query('texifleet_promotion_id');
+		$user_id = $this->request->query('user_id');
+		$search_bar = $this->request->query('search');
+		$page = $this->request->query('page');
+		$filter_search=array();
+		if(!empty($search_bar)){
+			$filter_search["OR"] = array("Users.first_name Like"=> '%'.$search_bar.'%',"Users.last_name Like"=> '%'.$search_bar.'%',"Users.company_name Like"=> '%'.$search_bar.'%');
+ 		}
+		$limit=10;
+		if(empty($page)){$page=1;}
+		$COunt = $this->TaxiFleetPromotions->TaxiFleetPromotionViews->find()->where(['taxi_fleet_promotion_id'=>$texifleet_promotion_id])->count();
+		if($COunt>0)
+		{
+			$getTravelPackages = $this->TaxiFleetPromotions->TaxiFleetPromotionViews->find()
+				->contain(['Users'=>function($q)use($filter_search){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id'])->where($filter_search);
+				}])
+				->where(['taxi_fleet_promotion_id'=>$texifleet_promotion_id])
+				->limit($limit)
+				->page($page);
+			foreach($getTravelPackages as $packages){
+				$Follow = $this->TaxiFleetPromotions->TaxiFleetPromotionViews->Users->BusinessBuddies->exists(['user_id'=>$user_id,'bb_user_id'=>$packages->user_id]);  
+				if($Follow==0){
+					$packages->isfollow=false;
+				}else{
+					$packages->isfollow=true;
+				}
+ 			}
+			$response_object = $getTravelPackages;
+			$response_code = 200;
+			$message = '';
+		}
+		else{
+			$response_object = array();
+			$response_code = 204;
+			$message = 'No data found';
+		}
+			
+		$this->set(compact('message','response_code','response_object'));
+        $this->set('_serialize', ['message','response_code','response_object']);		
+		
+	}
+	
+	public function TexiPromotionLikes($texifleet_promotion_id=null,$page=null,$user_id=null,$search=null)
+	{
+		$texifleet_promotion_id = $this->request->query('texifleet_promotion_id');
+		$user_id = $this->request->query('user_id');
+		$search_bar = $this->request->query('search');
+		$page = $this->request->query('page');
+		$filter_search=array();
+		if(!empty($search_bar)){
+			$filter_search["OR"] = array("Users.first_name Like"=> '%'.$search_bar.'%',"Users.last_name Like"=> '%'.$search_bar.'%',"Users.company_name Like"=> '%'.$search_bar.'%');
+ 		}
+		$limit=10;
+		if(empty($page)){$page=1;}
+		$COunt = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->find()->where(['taxi_fleet_promotion_id'=>$texifleet_promotion_id])->count();
+		if($COunt>0)
+		{
+			$getTravelPackages = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->find()
+				->contain(['Users'=>function($q)use($filter_search){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id'])->where($filter_search);
+				}])
+				->where(['taxi_fleet_promotion_id'=>$texifleet_promotion_id])
+				->limit($limit)
+				->page($page);
+			foreach($getTravelPackages as $packages){
+				$Follow = $this->TaxiFleetPromotions->TaxiFleetPromotionLikes->Users->BusinessBuddies->exists(['user_id'=>$user_id,'bb_user_id'=>$packages->user_id]);  
+				if($Follow==0){
+					$packages->isfollow=false;
+				}else{
+					$packages->isfollow=true;
+				}
+ 			}
+			$response_object = $getTravelPackages;
+			$response_code = 200;
+			$message = '';
+		}
+		else{
+			$response_object = array();
+			$response_code = 204;
+			$message = 'No data found';
+		}
+			
+		$this->set(compact('message','response_code','response_object'));
+        $this->set('_serialize', ['message','response_code','response_object']);		
+		
 	}
 	
 }

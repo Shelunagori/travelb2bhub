@@ -73,6 +73,9 @@ class HotelPromotionsTable extends Table
         $this->hasMany('HotelPromotionCarts', [
             'foreignKey' => 'hotel_promotion_id'
         ]);
+        $this->hasMany('HotelPromotionReports', [
+            'foreignKey' => 'hotel_promotion_id'
+        ]);
     }
 
     /**

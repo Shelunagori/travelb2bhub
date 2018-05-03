@@ -2754,163 +2754,317 @@ $this->redirect('/users/finalrequest/');
 $this->redirect('/users/finalrequest/');
 }
 }
+	public function adminviewprofile($id,$is_share=null) {
+		$this->loadModel('Cities');
+		$this->loadModel('Testimonial');
+		$this->loadModel('Users');
+		$this->loadModel('Requests');
+		$this->loadModel('Responses');
+		$this->loadModel('Membership');
+		$this->viewBuilder()->layout('admin_layout');
+		$loginid=$this->Auth->user('id');
+		$this->set('loginid', $loginid);
+		$userRequestCount = $userReponseCount = 0;
+		$userrespondToRequestCount = 0;
+		/*$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $id, 
+		"Requests.status !="=>2, "Requests.is_deleted"=>0]]);
+		$userRequestCount = $query->count();*/
+		$rconditions["Responses.user_id"] = $id;
+		$rconditions["Responses.status"] = 1;
+		$this->set('is_share',$is_share);
+		$responses = $this->Responses->find()
+		->contain(["Users", "Requests"])
+		->where($rconditions)->all();
+		$userReponseCount = $responses->count();
+		/*$queryr = $this->Responses->find('all', ['conditions' => ['Responses.user_id' => $id]]);
+		$userReponseCount = $queryr->count();*/
+		$this->set('userReponseCount', $userReponseCount);
+		$user = $this->Users->find()->where(['id' => $id])->first();
+		$conditions["Requests.user_id"] = $id;
+		$conditions["Requests.status"] = 2;
+		$conditions["Requests.is_deleted "] = 0;
+		if ($user['role_id'] == 1) {
+		$requests = $this->Requests->find()
+		->contain(["Users","Responses"])
+		->where($conditions)->order(["Requests.id" => "DESC"])->all();
+		}
+		if ($user['role_id'] == 2) {
+		$requests = $this->Requests->find()
+		->contain(["Users","Responses"])
+		->where($conditions)->order(["Requests.id" => "DESC"])->all();
+		}
+		if ($user['role_id'] == 3) {
+		$conditions["Requests.category_id "] = 3;
+		$requests = $this->Requests->find()
+		->contain(["Users","Responses"])
+		->where($conditions)->order(["Requests.id" => "DESC"])->all();
+		}
+		$userRequestCount = $requests->count();
+		$this->set('userRequestCount', $userRequestCount);
+		$TableMembership = TableRegistry::get('Membership');
+		$membership = $TableMembership->get($user["role_id"]);
+		$membership_name = $membership["membership_name"];
+		$this->set('membership_name', $membership_name);
+
+		$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $id]]);
+		$myReponseCount = $queryr->count();
+		$this->set('userrespondToRequestCount', $myReponseCount);
+
+		$userrespondToRequestCount = $this->__getUserRespondToRequestCount($user);
+		//$this->set("userrespondToRequestCount", $userrespondToRequestCount);
+		//$this->set('respondToRequestCount', $respondToRequestCount);
+		$alltestimonials ='';
+		$this->set('users', $user);
+
+		$star1 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>1])->all();
+		$star1count = $star1->count();
+		$this->set('star1count', $star1count);
+		$star2 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>2])->all();
+		$star2count = $star2->count();
+		$this->set('star2count', $star2count);
+		$star3 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>3])->all();
+		$star3count = $star3->count();
+		$this->set('star3count', $star3count);
+
+		$star4 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>4])->all();
+		$star4count = $star4->count();
+		$this->set('star4count', $star4count);
+		$star5 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>5])->all();
+		$star5count = $star5->count();
+		$this->set('star5count', $star5count);
+
+		$average_rating = 0;
+		$query = $this->Testimonial->find();
+		$userRating = $query->select(["average_rating" => $query->func()->avg("rating")])
+		->where(['user_id' => $id])
+		->order(["id" => "DESC"])
+		->first();
+		$average_rating = $userRating['average_rating'];
+		$this->set('average_rating', $average_rating);
+
+		$average_rating1 = 0;
+		$query1 = $this->Testimonial->find();
+		$userRating1 = $query->select(["average_rating" => $query1->func()->avg("rating")])
+		->where(['user_id' => $id])
+		->order(["id" => "DESC"])
+		->first();
+		$average_rating1 = $userRating1['average_rating'];
+		$this->set('average_rating1', $average_rating1);
 
 
-public function viewprofile($id,$is_share=null) {
-$this->loadModel('Cities');
-$this->loadModel('Testimonial');
-$this->loadModel('Users');
-$this->loadModel('Requests');
-$this->loadModel('Responses');
-$this->loadModel('Membership');
-$this->viewBuilder()->layout('user_layout');
-$loginid=$this->Auth->user('id');
-$this->set('loginid', $loginid);
-$userRequestCount = $userReponseCount = 0;
-$userrespondToRequestCount = 0;
-/*$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $id, 
-"Requests.status !="=>2, "Requests.is_deleted"=>0]]);
-$userRequestCount = $query->count();*/
-$rconditions["Responses.user_id"] = $id;
-$rconditions["Responses.status"] = 1;
-$this->set('is_share',$is_share);
-$responses = $this->Responses->find()
-->contain(["Users", "Requests"])
-->where($rconditions)->all();
-$userReponseCount = $responses->count();
-/*$queryr = $this->Responses->find('all', ['conditions' => ['Responses.user_id' => $id]]);
-$userReponseCount = $queryr->count();*/
-$this->set('userReponseCount', $userReponseCount);
-$user = $this->Users->find()->where(['id' => $id])->first();
-$conditions["Requests.user_id"] = $id;
-$conditions["Requests.status"] = 2;
-$conditions["Requests.is_deleted "] = 0;
-if ($user['role_id'] == 1) {
-$requests = $this->Requests->find()
-->contain(["Users","Responses"])
-->where($conditions)->order(["Requests.id" => "DESC"])->all();
-}
-if ($user['role_id'] == 2) {
-$requests = $this->Requests->find()
-->contain(["Users","Responses"])
-->where($conditions)->order(["Requests.id" => "DESC"])->all();
-}
-if ($user['role_id'] == 3) {
-$conditions["Requests.category_id "] = 3;
-$requests = $this->Requests->find()
-->contain(["Users","Responses"])
-->where($conditions)->order(["Requests.id" => "DESC"])->all();
-}
-$userRequestCount = $requests->count();
-$this->set('userRequestCount', $userRequestCount);
-$TableMembership = TableRegistry::get('Membership');
-$membership = $TableMembership->get($user["role_id"]);
-$membership_name = $membership["membership_name"];
-$this->set('membership_name', $membership_name);
+		$average_rating1 = 0;
+		$query1 = $this->Testimonial->find()
+							->where(['user_id' => $id, 'rating'=>1])
+							->count();
+		$average_rating1 = $query1;
+		$this->set('average_rating1', $average_rating1);
 
-$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $id]]);
-$myReponseCount = $queryr->count();
-$this->set('userrespondToRequestCount', $myReponseCount);
+		$average_rating2 = 0;
+		$query2 = $this->Testimonial->find()
+							->where(['user_id' => $id, 'rating'=>2])
+							->count();
+		$average_rating2 = $query2;
+		$this->set('average_rating2', $average_rating2);
 
-$userrespondToRequestCount = $this->__getUserRespondToRequestCount($user);
-//$this->set("userrespondToRequestCount", $userrespondToRequestCount);
-//$this->set('respondToRequestCount', $respondToRequestCount);
-$alltestimonials ='';
-$this->set('users', $user);
+		$average_rating3 = 0;
+		$query3 = $this->Testimonial->find()
+							->where(['user_id' => $id, 'rating'=>3])
+							->count();
+		$average_rating3 = $query3;
+		$this->set('average_rating3', $average_rating3);
 
-$star1 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>1])->all();
-$star1count = $star1->count();
-$this->set('star1count', $star1count);
-$star2 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>2])->all();
-$star2count = $star2->count();
-$this->set('star2count', $star2count);
-$star3 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>3])->all();
-$star3count = $star3->count();
-$this->set('star3count', $star3count);
+		$average_rating4 = 0;
+		$query4 = $this->Testimonial->find()
+							->where(['user_id' => $id, 'rating'=>4])
+							->count();
+		$average_rating4 = $query4;
+		$this->set('average_rating4', $average_rating4);
 
-$star4 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>4])->all();
-$star4count = $star4->count();
-$this->set('star4count', $star4count);
-$star5 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>5])->all();
-$star5count = $star5->count();
-$this->set('star5count', $star5count);
+		$average_rating5 = 0;
+		$query5 = $this->Testimonial->find()
+							->where(['user_id' => $id, 'rating'=>5])
+							->count();
+		$average_rating5 = $query5;
+		$this->set('average_rating5', $average_rating5);
 
-$average_rating = 0;
-$query = $this->Testimonial->find();
-$userRating = $query->select(["average_rating" => $query->func()->avg("rating")])
-->where(['user_id' => $id])
-->order(["id" => "DESC"])
-->first();
-$average_rating = $userRating['average_rating'];
-$this->set('average_rating', $average_rating);
-
-$average_rating1 = 0;
-$query1 = $this->Testimonial->find();
-$userRating1 = $query->select(["average_rating" => $query1->func()->avg("rating")])
-->where(['user_id' => $id])
-->order(["id" => "DESC"])
-->first();
-$average_rating1 = $userRating1['average_rating'];
-$this->set('average_rating1', $average_rating1);
+		$query6 = $this->Testimonial->find()
+							->where(['user_id' => $id])
+							->count();
+		$total_avarage_rating_count = $query6;
+		$this->set('total_avarage_rating_count', $total_avarage_rating_count);
 
 
-$average_rating1 = 0;
-$query1 = $this->Testimonial->find()
-					->where(['user_id' => $id, 'rating'=>1])
-					->count();
-$average_rating1 = $query1;
-$this->set('average_rating1', $average_rating1);
+		$testimonialcount= 0;
+		$utestimonials = $this->Testimonial->find()->where(['user_id'=> $id])->all();
+		$testimonialcount = $utestimonials->count();		
+		$this->set('testimonialcount',$testimonialcount);
+		$testimonials = $this->Testimonial->find()->where(['user_id'=> $id])->all();
+		$testimoniallist = array();
+		if(!empty($testimonials)) {
+		foreach($testimonials as $testimonial) {
+			$users = $this->Users->find()->where(['id'=> $testimonial['author_id']])->first();
+			$name = $users['first_name']." ".$users['last_name'];
+			$alltestimonials[] = array( "name"=>$name,"rating1"=>$testimonial['rating'], "description"=>$users['description'], "profile_pic"=>$users['profile_pic'], "comment"=>$testimonial['comment'],"user_id"=>$testimonial['user_id'],"author_id"=>$testimonial['author_id']);
+			} 
+			$this->set('testimonial',$alltestimonials);
+		}
+	}
 
-$average_rating2 = 0;
-$query2 = $this->Testimonial->find()
-					->where(['user_id' => $id, 'rating'=>2])
-					->count();
-$average_rating2 = $query2;
-$this->set('average_rating2', $average_rating2);
+	public function viewprofile($id,$is_share=null) {
+	$this->loadModel('Cities');
+	$this->loadModel('Testimonial');
+	$this->loadModel('Users');
+	$this->loadModel('Requests');
+	$this->loadModel('Responses');
+	$this->loadModel('Membership');
+	$this->viewBuilder()->layout('user_layout');
+	$loginid=$this->Auth->user('id');
+	$this->set('loginid', $loginid);
+	$userRequestCount = $userReponseCount = 0;
+	$userrespondToRequestCount = 0;
+	/*$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $id, 
+	"Requests.status !="=>2, "Requests.is_deleted"=>0]]);
+	$userRequestCount = $query->count();*/
+	$rconditions["Responses.user_id"] = $id;
+	$rconditions["Responses.status"] = 1;
+	$this->set('is_share',$is_share);
+	$responses = $this->Responses->find()
+	->contain(["Users", "Requests"])
+	->where($rconditions)->all();
+	$userReponseCount = $responses->count();
+	/*$queryr = $this->Responses->find('all', ['conditions' => ['Responses.user_id' => $id]]);
+	$userReponseCount = $queryr->count();*/
+	$this->set('userReponseCount', $userReponseCount);
+	$user = $this->Users->find()->where(['id' => $id])->first();
+	$conditions["Requests.user_id"] = $id;
+	$conditions["Requests.status"] = 2;
+	$conditions["Requests.is_deleted "] = 0;
+	if ($user['role_id'] == 1) {
+	$requests = $this->Requests->find()
+	->contain(["Users","Responses"])
+	->where($conditions)->order(["Requests.id" => "DESC"])->all();
+	}
+	if ($user['role_id'] == 2) {
+	$requests = $this->Requests->find()
+	->contain(["Users","Responses"])
+	->where($conditions)->order(["Requests.id" => "DESC"])->all();
+	}
+	if ($user['role_id'] == 3) {
+	$conditions["Requests.category_id "] = 3;
+	$requests = $this->Requests->find()
+	->contain(["Users","Responses"])
+	->where($conditions)->order(["Requests.id" => "DESC"])->all();
+	}
+	$userRequestCount = $requests->count();
+	$this->set('userRequestCount', $userRequestCount);
+	$TableMembership = TableRegistry::get('Membership');
+	$membership = $TableMembership->get($user["role_id"]);
+	$membership_name = $membership["membership_name"];
+	$this->set('membership_name', $membership_name);
 
-$average_rating3 = 0;
-$query3 = $this->Testimonial->find()
-					->where(['user_id' => $id, 'rating'=>3])
-					->count();
-$average_rating3 = $query3;
-$this->set('average_rating3', $average_rating3);
+	$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $id]]);
+	$myReponseCount = $queryr->count();
+	$this->set('userrespondToRequestCount', $myReponseCount);
 
-$average_rating4 = 0;
-$query4 = $this->Testimonial->find()
-					->where(['user_id' => $id, 'rating'=>4])
-					->count();
-$average_rating4 = $query4;
-$this->set('average_rating4', $average_rating4);
+	$userrespondToRequestCount = $this->__getUserRespondToRequestCount($user);
+	//$this->set("userrespondToRequestCount", $userrespondToRequestCount);
+	//$this->set('respondToRequestCount', $respondToRequestCount);
+	$alltestimonials ='';
+	$this->set('users', $user);
 
-$average_rating5 = 0;
-$query5 = $this->Testimonial->find()
-					->where(['user_id' => $id, 'rating'=>5])
-					->count();
-$average_rating5 = $query5;
-$this->set('average_rating5', $average_rating5);
+	$star1 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>1])->all();
+	$star1count = $star1->count();
+	$this->set('star1count', $star1count);
+	$star2 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>2])->all();
+	$star2count = $star2->count();
+	$this->set('star2count', $star2count);
+	$star3 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>3])->all();
+	$star3count = $star3->count();
+	$this->set('star3count', $star3count);
 
-$query6 = $this->Testimonial->find()
-					->where(['user_id' => $id])
-					->count();
-$total_avarage_rating_count = $query6;
-$this->set('total_avarage_rating_count', $total_avarage_rating_count);
+	$star4 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>4])->all();
+	$star4count = $star4->count();
+	$this->set('star4count', $star4count);
+	$star5 = $this->Testimonial->find()->where(['user_id'=> $id,'rating'=>5])->all();
+	$star5count = $star5->count();
+	$this->set('star5count', $star5count);
+
+	$average_rating = 0;
+	$query = $this->Testimonial->find();
+	$userRating = $query->select(["average_rating" => $query->func()->avg("rating")])
+	->where(['user_id' => $id])
+	->order(["id" => "DESC"])
+	->first();
+	$average_rating = $userRating['average_rating'];
+	$this->set('average_rating', $average_rating);
+
+	$average_rating1 = 0;
+	$query1 = $this->Testimonial->find();
+	$userRating1 = $query->select(["average_rating" => $query1->func()->avg("rating")])
+	->where(['user_id' => $id])
+	->order(["id" => "DESC"])
+	->first();
+	$average_rating1 = $userRating1['average_rating'];
+	$this->set('average_rating1', $average_rating1);
 
 
-$testimonialcount= 0;
-$utestimonials = $this->Testimonial->find()->where(['user_id'=> $id])->all();
-$testimonialcount = $utestimonials->count();		
-$this->set('testimonialcount',$testimonialcount);
-$testimonials = $this->Testimonial->find()->where(['user_id'=> $id])->all();
-$testimoniallist = array();
-if(!empty($testimonials)) {
-foreach($testimonials as $testimonial) {
-$users = $this->Users->find()->where(['id'=> $testimonial['author_id']])->first();
-$name = $users['first_name']." ".$users['last_name'];
-$alltestimonials[] = array( "name"=>$name,"rating1"=>$testimonial['rating'], "description"=>$users['description'], "profile_pic"=>$users['profile_pic'], "comment"=>$testimonial['comment'],"user_id"=>$testimonial['user_id'],"author_id"=>$testimonial['author_id']);
-} 
-$this->set('testimonial',$alltestimonials);
-}
-}
+	$average_rating1 = 0;
+	$query1 = $this->Testimonial->find()
+						->where(['user_id' => $id, 'rating'=>1])
+						->count();
+	$average_rating1 = $query1;
+	$this->set('average_rating1', $average_rating1);
+
+	$average_rating2 = 0;
+	$query2 = $this->Testimonial->find()
+						->where(['user_id' => $id, 'rating'=>2])
+						->count();
+	$average_rating2 = $query2;
+	$this->set('average_rating2', $average_rating2);
+
+	$average_rating3 = 0;
+	$query3 = $this->Testimonial->find()
+						->where(['user_id' => $id, 'rating'=>3])
+						->count();
+	$average_rating3 = $query3;
+	$this->set('average_rating3', $average_rating3);
+
+	$average_rating4 = 0;
+	$query4 = $this->Testimonial->find()
+						->where(['user_id' => $id, 'rating'=>4])
+						->count();
+	$average_rating4 = $query4;
+	$this->set('average_rating4', $average_rating4);
+
+	$average_rating5 = 0;
+	$query5 = $this->Testimonial->find()
+						->where(['user_id' => $id, 'rating'=>5])
+						->count();
+	$average_rating5 = $query5;
+	$this->set('average_rating5', $average_rating5);
+
+	$query6 = $this->Testimonial->find()
+						->where(['user_id' => $id])
+						->count();
+	$total_avarage_rating_count = $query6;
+	$this->set('total_avarage_rating_count', $total_avarage_rating_count);
+
+
+	$testimonialcount= 0;
+	$utestimonials = $this->Testimonial->find()->where(['user_id'=> $id])->all();
+	$testimonialcount = $utestimonials->count();		
+	$this->set('testimonialcount',$testimonialcount);
+	$testimonials = $this->Testimonial->find()->where(['user_id'=> $id])->all();
+	$testimoniallist = array();
+	if(!empty($testimonials)) {
+	foreach($testimonials as $testimonial) {
+	$users = $this->Users->find()->where(['id'=> $testimonial['author_id']])->first();
+	$name = $users['first_name']." ".$users['last_name'];
+	$alltestimonials[] = array( "name"=>$name,"rating1"=>$testimonial['rating'], "description"=>$users['description'], "profile_pic"=>$users['profile_pic'], "comment"=>$testimonial['comment'],"user_id"=>$testimonial['user_id'],"author_id"=>$testimonial['author_id']);
+	} 
+	$this->set('testimonial',$alltestimonials);
+	}
+	}
 
 
 public function myresponselist() {

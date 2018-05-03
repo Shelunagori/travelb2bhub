@@ -996,20 +996,4 @@ class TaxiFleetPromotionsController extends AppController
 		exit;
 		
 	}
-	
-	public function PackageReport($higestSort = null,$search = null,$country_id = null,$state_id = null,$city_id = null,$car_bus_id = null,$taxifleet_id= null,$removetaxifleet=null)
-    {
-        $higestSort=$this->request->query('higestSort'); 
-		$city_ids=$this->request->query('city_id'); 
-		if(!empty($city_ids)) {$city_id=implode(',',$city_ids);}
-
-		$car_bus_id=$this->request->query('car_bus_id');
-		if(!empty($car_bus_id)) {$car_bus_id=implode(',',$car_bus_id);}
-		$state_id=$this->request->query('state_id');
-		if(!empty($state_id)) {$state_id=implode(',',$state_id);}
-		$search=$this->request->query('search');
-		$user_id=$this->Auth->User('id');
-		$this->viewBuilder()->layout('admin_layout');
-		$this->set(compact('user_id','higestSort','country_id','city_id','state_id','car_bus_id','search'));
-    }
 }

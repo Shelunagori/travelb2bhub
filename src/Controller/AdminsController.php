@@ -29,7 +29,24 @@ class AdminsController extends AppController
 	public function dashboard()
     {
 		$this->viewBuilder()->layout('admin_layout');
-		$loginId=$this->Auth->User('id');  
+		$loginId=$this->Auth->User('id');
+		//-- counts
+		$valid_date=date('Y-m-d');
+		$PackagePromotionCount = $this->Admins->PostTravlePackages->find()
+			->where(['valid_date >=' => $valid_date,'is_deleted'=>0])->count();
+		$this->set('PackagePromotionCount', $PackagePromotionCount);	
+		
+		$TaxiPromotionCount = $this->Admins->TaxiFleetPromotions->find()
+			->where(['TaxiFleetPromotions.visible_date >=' => $valid_date,'is_deleted'=>0])->count();
+		$this->set('TaxiPromotionCount', $TaxiPromotionCount);
+		
+		$EventPromotionCount = $this->Admins->EventPlannerPromotions->find()
+			->where(['EventPlannerPromotions.visible_date >=' => $valid_date,'is_deleted'=>0])->count();
+		$this->set('EventPromotionCount', $EventPromotionCount);
+		
+		$HotelPromotionCount = $this->Admins->HotelPromotions->find()
+			->where(['HotelPromotions.visible_date >=' => $valid_date,'is_deleted'=>0])->count();
+		$this->set('HotelPromotionCount', $HotelPromotionCount);
     }
  	public function changePassword()
     {
@@ -77,6 +94,7 @@ class AdminsController extends AppController
 			$this->request->session()->write('Auth.User.last_name', $this->request->data['last_name']);
 			
 			$result = $this->Admins->patchEntity($admins, $this->request->data);
+			//print_r($result); exit;
  			if ($this->Admins->save($result)) {
 				$this->Flash->success(__('Profile has been changed successfully.'));
 				return $this->redirect(['action' => 'profileedit']);

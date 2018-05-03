@@ -79,7 +79,10 @@ class PostTravlePackagesTable extends Table
         $this->hasMany('PostTravlePackagePriceBeforeRenews', [
             'foreignKey' => 'post_travle_package_id'
         ]);
-		 $this->hasMany('PostTravlePackageCarts', [
+		$this->hasMany('PostTravlePackageCarts', [
+            'foreignKey' => 'post_travle_package_id'
+        ]);
+		$this->hasMany('PostTravlePackageReports', [
             'foreignKey' => 'post_travle_package_id'
         ]);
 		

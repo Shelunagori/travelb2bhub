@@ -43,6 +43,11 @@ class AdminsTable extends Table
 		$this->hasMany('Modules');
 		$this->belongsTo('Users');
 		$this->belongsTo('UserChats');
+		
+		$this->belongsTo('PostTravlePackages');
+		$this->belongsTo('TaxiFleetPromotions');
+		$this->belongsTo('EventPlannerPromotions');
+		$this->belongsTo('HotelPromotions');
     }
 
     /**

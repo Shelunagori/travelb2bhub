@@ -696,11 +696,7 @@ label{
 			<div class="box box-primary">
 				<div class="box-body">
 					<div class="box-tools pull-right">
-						<?php if($users['id']==$loginid){?>
-							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin">
-								<i class="fa fa-edit"></i>
-							</a>
-						<?php } ?>
+						
 					</div> 
 					<div class="rating-block">
 					<h4 style="color:#1295A2">Description</h4>
@@ -720,11 +716,7 @@ label{
 				<div class="box box-primary">
 				<div class="box-body">
 					<div class="box-tools pull-right">
-						<?php if($users['id']==$loginid){?>
-							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin">
-								<i class="fa fa-edit"></i>
-							</a>
-						<?php } ?>
+						
 					</div> 
 					<div class="rating-block">
 					<h4 style="color:#1295A2">Personal Details</h4>
@@ -782,11 +774,7 @@ label{
 			<div class="box box-primary">
 				<div class="box-body">
 					<div class="box-tools pull-right">
-						<?php if($users['id']==$loginid){?>
-							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin">
-								<i class="fa fa-edit"></i>
-							</a>
-						<?php } ?>
+						
 					</div> 
 					<div class="rating-block">
 					<h4 style="color:#1295A2">Address</h4>
@@ -850,11 +838,7 @@ label{
 				<div class="box box-primary">
 				<div class="box-body">
 					<div class="box-tools pull-right">
-						<?php if($users['id']==$loginid){?>
-							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin">
-								<i class="fa fa-edit"></i>
-							</a>
-						<?php } ?>
+						
 					</div> 
 					<div class="rating-block">
 					<h4 style="color:#1295A2">Certificates</h4>
@@ -962,11 +946,7 @@ label{
 			<div class="box box-primary">
 				<div class="box-body">
 					<div class="box-tools pull-right">
-						<?php if($users['id']==$loginid){?>
-							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin">
-								<i class="fa fa-edit"></i>
-							</a>
-						<?php } ?>
+						
 					</div> 
 					<div class="rating-block">
 					<h4 style="color:#1295A2">Office Photographs</h4>
@@ -1011,11 +991,7 @@ label{
 			<div class="box box-primary">
 				<div class="box-body">
 					<div class="box-tools pull-right">
-						<?php if($users['id']==$loginid){?>
-							<a href="../profileedit/<?php echo $users['id'];?>" class="btn btn-sm btn-danger margin">
-								<i class="fa fa-edit"></i>
-							</a>
-						<?php } ?>
+						
 					</div> 
 					<div class="rating-block">
 					<h4 style="color:#1295A2">ID/Registration Pics</h4>

@@ -337,6 +337,13 @@ $getHotelPromotion=$getEventPlanners ;
 					$getEventPlanner->total_views = $this->HotelPromotions->HotelPromotionViews
 						->find()->where(['hotel_promotion_id' => $getEventPlanner->id])->count();
 						
+					$getEventPlanner->total_saved = $this->HotelPromotions->HotelPromotionCarts
+						->find()->where(['hotel_promotion_id' => $getEventPlanner->id])->count();
+						
+					$getEventPlanner->total_flagged = $this->HotelPromotions->HotelPromotionReports
+						->find()->where(['hotel_promotion_id' => $getEventPlanner->id])->count();
+
+						
 					$all_raiting=0;	
 					$testimonial=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getEventPlanner->user_id]);
 					$testimonial_count=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getEventPlanner->user_id])->count();

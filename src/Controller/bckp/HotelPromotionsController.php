@@ -4,17 +4,18 @@ namespace App\Controller;
 use App\Controller\AppController;
 
 /**
- * TaxiFleetPromotions Controller
+ * HotelPromotions Controller
  *
- * @property \App\Model\Table\TaxiFleetPromotionsTable $TaxiFleetPromotions
+ * @property \App\Model\Table\HotelPromotionsTable $HotelPromotions
  */
-class TaxiFleetPromotionsController extends AppController
+class HotelPromotionsController extends AppController
 {
 
     /**
      * Index method
      *
-     * @return \Cake\Network\Response|null*/
+     * @return \Cake\Network\Response|null
+     */
 	public function initialize()
 	{
 		parent::initialize();
@@ -135,8 +136,8 @@ class TaxiFleetPromotionsController extends AppController
 		$this->loadModel('BlockedUsers');
 		$this->loadModel('Requests');
 		$this->loadModel('Responses');
-		$this->loadModel('Hotels');
 		$this->loadModel('Users');
+		$this->loadModel('Hotels');
 		$this->loadModel('User_Chats');
 		$current_date=date('Y-m-d');
 		$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
@@ -214,39 +215,39 @@ class TaxiFleetPromotionsController extends AppController
     {
 		$this->viewBuilder()->layout('user_layout');
         $this->paginate = [
-            'contain' => ['Countries', 'PriceMasters', 'Users','TaxiFleetPromotionRows','TaxiFleetPromotionCities','TaxiFleetPromotionStates']
+            'contain' => ['Users', 'HotelCategories', 'PriceMasters']
         ];
-        $taxiFleetPromotions = $this->paginate($this->TaxiFleetPromotions);
-		//pr($taxiFleetPromotions->toArray());exit;
-        $this->set(compact('taxiFleetPromotions'));
-        $this->set('_serialize', ['taxiFleetPromotions']);
+        $hotelPromotions = $this->paginate($this->HotelPromotions);
+
+        $this->set(compact('hotelPromotions'));
+        $this->set('_serialize', ['hotelPromotions']);
     }
 
     /**
      * View method
      *
-     * @param string|null $id Taxi Fleet Promotion id.
+     * @param string|null $id Hotel Promotion id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null)
     {
-		$this->viewBuilder()->layout('user_layout');	
+		$this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');
-			if ($this->request->is(['patch', 'post', 'put'])) 
+		if ($this->request->is(['patch', 'post', 'put'])) 
 		{
 			//-- Like EVENT
 			if(isset($this->request->data['LikeEvent']))
 			{
- 				$taxifleet_id=$this->request->data('taxifleet_id');
+ 				$hotel_id=$this->request->data('hotel_id');
 				$post =[
-						'taxi_fleet_promotion_id' => $taxifleet_id,
+						'hotel_promotion_id' => $hotel_id,
 						'user_id' =>$user_id						 							
 					];
-				//pr($post);exit;
+				
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
-				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotions/likeTaxiFleetPromotions.json",
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/hotel_promotions/likeHotelPromotions.json",
 				  CURLOPT_RETURNTRANSFER => true,
 				  CURLOPT_ENCODING => "",
 				  CURLOPT_MAXREDIRS => 10,
@@ -267,25 +268,24 @@ class TaxiFleetPromotionsController extends AppController
 				} else {
 				 $LikeResult=json_decode($LikeResponse);
 				} 
+				 //pr($LikeResponse);exit;
 				$displayMessage=$LikeResult->message;
 				$this->Flash->success(__($displayMessage));
-				return $this->redirect(['action' => 'view/'.$taxifleet_id]);
+				return $this->redirect(['action' => 'view/'.$hotel_id]);
 			}
 		
-			
-		//---Save cart TaxiFleet Promotion
-			if(isset($this->request->data['savetaxifleet']))
+							//-- Save Unsave
+			if(isset($this->request->data['savehotelpromotion']))
 			{
-				$user_id=$this->Auth->User('id');
-				$taxifleet_id=$this->request->data('taxifleet_id');
+ 				$hotel_id=$this->request->data('hotel_id');
 				$post =[
-						'taxi_fleet_promotion_id' => $taxifleet_id,
+						'hotel_promotion_id' => $hotel_id,
 						'user_id' =>$user_id						 							
 					];
 				//pr($post);exit;
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
-				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotionCarts/TaxiFleetPromotionsCartAdd.json",
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/HotelPromotionCarts/HotelPromotionCartAdd.json",
 				  CURLOPT_RETURNTRANSFER => true,
 				  CURLOPT_ENCODING => "",
 				  CURLOPT_MAXREDIRS => 10,
@@ -308,17 +308,17 @@ class TaxiFleetPromotionsController extends AppController
 				} 
 				$displayMessage=$LikeResult->message;
 				$this->Flash->success(__($displayMessage));
-				return $this->redirect(['action' => 'view/'.$taxifleet_id]);
-			} 
-			//Report Modal
+				return $this->redirect(['action' => 'view/'.$hotel_id]);
+			}
+								//Report Modal//
 			if(isset($this->request->data['report_submit']))
 			{
 				$user_id=$this->Auth->User('id');
-				$taxifleet_id=$this->request->data('taxifleet_id');
+				$hotel_id=$this->request->data('hotel_id');
 				$report_reason_id=$this->request->data('report_reason_id');
 				$comment=$this->request->data('comment');
 				$post =[
-						'taxi_fleet_promotion_id' => $taxifleet_id,
+						'hotel_promotion_id' => $hotel_id,
 						'report_reason_id' => $report_reason_id,
 						'user_id' =>$user_id,						 							
 						'comment' =>$comment						 							
@@ -326,7 +326,7 @@ class TaxiFleetPromotionsController extends AppController
 				//pr($post);exit;
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
-				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotionReports/TaxiFleetPromotionReportAdd.json",
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/HotelPromotionReports/HotelPromotionReportAdd.json",
 				  CURLOPT_RETURNTRANSFER => true,
 				  CURLOPT_ENCODING => "",
 				  CURLOPT_MAXREDIRS => 10,
@@ -349,99 +349,107 @@ class TaxiFleetPromotionsController extends AppController
 				} 
 				$displayMessage=$LikeResult->message;
 				$this->Flash->success(__($displayMessage));
-				return $this->redirect(['action' => 'view/'.$taxifleet_id]);
-			}
+				return $this->redirect(['action' => 'view/'.$hotel_id]);
+			}			
 			
 		}
+		
 		$this->set(compact('user_id','id'));
+        /* $hotelPromotion = $this->HotelPromotions->get($id, [
+            'contain' => ['Users', 'HotelCategories', 'PriceMasters', 'HotelPromotionCities', 'HotelPromotionLikes', 'HotelPromotionPriceBeforeRenews', 'HotelPromotionReports', 'HotelPromotionViews']
+        ]); */
+		
     }
 
     /**
      * Add method
      *
-     * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise.
+     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
     public function add()
     {
-		$this->viewBuilder()->layout('user_layout');	
+		
+		$this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');
-		$this->set(compact('user_id'));
+		$userss=$this->Auth->User();
+		$this->set(compact('user_id','userss'));
     }
 
     /**
      * Edit method
      *
-     * @param string|null $id Taxi Fleet Promotion id.
-     * @return \Cake\Network\Response|null Redirects on successful edit, renders view otherwise.
+     * @param string|null $id Hotel Promotion id.
+     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Network\Exception\NotFoundException When record not found.
      */
     public function edit($id = null)
     {
-        $taxiFleetPromotion = $this->TaxiFleetPromotions->get($id, [
+		$this->viewBuilder()->layout('user_layout');
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id'));
+        $hotelPromotion = $this->HotelPromotions->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $taxiFleetPromotion = $this->TaxiFleetPromotions->patchEntity($taxiFleetPromotion, $this->request->data);
-            if ($this->TaxiFleetPromotions->save($taxiFleetPromotion)) {
-                $this->Flash->success(__('The taxi fleet promotion has been saved.'));
+            $hotelPromotion = $this->HotelPromotions->patchEntity($hotelPromotion, $this->request->data);
+            if ($this->HotelPromotions->save($hotelPromotion)) {
+                $this->Flash->success(__('The hotel promotion has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
+            } else {
+                $this->Flash->error(__('The hotel promotion could not be saved. Please, try again.'));
             }
-            $this->Flash->error(__('The taxi fleet promotion could not be saved. Please, try again.'));
         }
-        $countries = $this->TaxiFleetPromotions->Countries->find('list', ['limit' => 200]);
-        $priceMasters = $this->TaxiFleetPromotions->PriceMasters->find('list', ['limit' => 200]);
-        $users = $this->TaxiFleetPromotions->Users->find('list', ['limit' => 200]);
-		$this->set(compact('taxiFleetPromotion', 'countries', 'priceMasters', 'users'));
-        $this->set('_serialize', ['taxiFleetPromotion']);
+        $users = $this->HotelPromotions->Users->find('list', ['limit' => 200]);
+        $hotelCategories = $this->HotelPromotions->HotelCategories->find('list', ['limit' => 200]);
+        $priceMasters = $this->HotelPromotions->PriceMasters->find('list', ['limit' => 200]);
+        $this->set(compact('hotelPromotion', 'users', 'hotelCategories', 'priceMasters'));
+        $this->set('_serialize', ['hotelPromotion']);
     }
 
     /**
      * Delete method
      *
-     * @param string|null $id Taxi Fleet Promotion id.
+     * @param string|null $id Hotel Promotion id.
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function delete($id = null)
     {
         $this->request->allowMethod(['post', 'delete']);
-        $taxiFleetPromotion = $this->TaxiFleetPromotions->get($id);
-        if ($this->TaxiFleetPromotions->delete($taxiFleetPromotion)) {
-            $this->Flash->success(__('The taxi fleet promotion has been deleted.'));
+        $hotelPromotion = $this->HotelPromotions->get($id);
+        if ($this->HotelPromotions->delete($hotelPromotion)) {
+            $this->Flash->success(__('The hotel promotion has been deleted.'));
         } else {
-            $this->Flash->error(__('The taxi fleet promotion could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The hotel promotion could not be deleted. Please, try again.'));
         }
 
         return $this->redirect(['action' => 'index']);
     }
-
-	public function report($higestSort = null,$search = null,$country_id = null,$state_id = null,$city_id = null,$car_bus_id = null,$taxifleet_id= null,$removetaxifleet=null)
+	
+	public function report($starting_price = null,$higestSort = null,$search = null,$category_id = null,$rating_filter = null,$hotelpromotion_id= null,$savehotelpromotion= null)
     {
-        $higestSort=$this->request->query('higestSort'); 
-		$city_ids=$this->request->query('city_id'); 
-		if(!empty($city_ids)) {$city_id=implode(',',$city_ids);}
-
-		$car_bus_id=$this->request->query('car_bus_id');
-		if(!empty($car_bus_id)) {$car_bus_id=implode(',',$car_bus_id);}
-		$state_id=$this->request->query('state_id');
-		if(!empty($state_id)) {$state_id=implode(',',$state_id);}
+		$higestSort=$this->request->query('higestSort');
+		$category_id=$this->request->query('category_id');
+		if(!empty($category_id)) {$category_id=implode(',',$category_id);}
+		$rating_filter=$this->request->query('rating_filter');
 		$search=$this->request->query('search');
+		$starting_price=$this->request->query('starting_price');
 		$user_id=$this->Auth->User('id');
 		if ($this->request->is(['patch', 'post', 'put'])) 
 		{
 			//-- Like EVENT
 			if(isset($this->request->data['LikeEvent']))
 			{
- 				$taxifleet_id=$this->request->data('taxifleet_id');
+ 				$hotelpromotion_id=$this->request->data('hotelpromotion_id');
 				$post =[
-						'taxi_fleet_promotion_id' => $taxifleet_id,
+						'hotel_promotion_id' => $hotelpromotion_id,
 						'user_id' =>$user_id						 							
 					];
 				//pr($post);exit;
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
-				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotions/likeTaxiFleetPromotions.json",
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/hotel_promotions/likeHotelPromotions.json",
 				  CURLOPT_RETURNTRANSFER => true,
 				  CURLOPT_ENCODING => "",
 				  CURLOPT_MAXREDIRS => 10,
@@ -466,14 +474,13 @@ class TaxiFleetPromotionsController extends AppController
 				$this->Flash->success(__($displayMessage));
 				return $this->redirect(['action' => 'report']);
 			}
-			//---Remove TaxiFleet Promotion
-			if(isset($this->request->data['removetaxifleet']))
+			//---Remove Hotel  Promotion
+			if(isset($this->request->data['removehotelpromtion']))
 			{
-				$taxifleet_id=$this->request->data('taxifleet_id');
-				//pr($taxifleet_id);exit;
+				$hotelpromotion_id=$this->request->data('hotelpromotion_id');
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
-				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotions/removeTaxFlletPromotions.json?taxi_id=".$taxifleet_id,
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/hotel_promotions/removePromotion.json?promotion_id=".$hotelpromotion_id,
 				  CURLOPT_RETURNTRANSFER => true,
 				  CURLOPT_ENCODING => "",
 				  CURLOPT_MAXREDIRS => 10,
@@ -497,62 +504,19 @@ class TaxiFleetPromotionsController extends AppController
 				$displayMessage=$removeResult->message;
 				$this->Flash->success(__($displayMessage));
 				return $this->redirect(['action' => 'report']);
-			} 
-			
-		//---Save cart TaxiFleet Promotion
-			if(isset($this->request->data['savetaxifleet']))
+			}
+							//-- Save Unsave
+			if(isset($this->request->data['savehotelpromotion']))
 			{
-				$user_id=$this->Auth->User('id');
-				$taxifleet_id=$this->request->data('taxifleet_id');
+ 				$hotelpromotion_id=$this->request->data('hotelpromotion_id');
 				$post =[
-						'taxi_fleet_promotion_id' => $taxifleet_id,
+						'hotel_promotion_id' => $hotelpromotion_id,
 						'user_id' =>$user_id						 							
 					];
 				//pr($post);exit;
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
-				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotionCarts/TaxiFleetPromotionsCartAdd.json",
-				  CURLOPT_RETURNTRANSFER => true,
-				  CURLOPT_ENCODING => "",
-				  CURLOPT_MAXREDIRS => 10,
-				  CURLOPT_TIMEOUT => 30,
-				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-				  CURLOPT_CUSTOMREQUEST => "POST",
-				  CURLOPT_POSTFIELDS =>$post,
-				  CURLOPT_HTTPHEADER => array(
-					"cache-control: no-cache",
-					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
-				  ),
-				));
-				$LikeResponse = curl_exec($curl);
-				$err = curl_error($curl);
-				curl_close($curl);
-				if ($err) {
-				  echo "cURL Error #:" . $err;
-				} else {
-				 $LikeResult=json_decode($LikeResponse);
-				} 
-				$displayMessage=$LikeResult->message;
-				$this->Flash->success(__($displayMessage));
-				return $this->redirect(['action' => 'report']);
-			} 
-			//Report Modal
-			if(isset($this->request->data['report_submit']))
-			{
-				$user_id=$this->Auth->User('id');
-				$taxifleet_id=$this->request->data('taxifleet_id');
-				$report_reason_id=$this->request->data('report_reason_id');
-				$comment=$this->request->data('comment');
-				$post =[
-						'taxi_fleet_promotion_id' => $taxifleet_id,
-						'report_reason_id' => $report_reason_id,
-						'user_id' =>$user_id,						 							
-						'comment' =>$comment						 							
-					];
-				//pr($post);exit;
-				$curl = curl_init();
-				curl_setopt_array($curl, array(
-				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotionReports/TaxiFleetPromotionReportAdd.json",
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/HotelPromotionCarts/HotelPromotionCartAdd.json",
 				  CURLOPT_RETURNTRANSFER => true,
 				  CURLOPT_ENCODING => "",
 				  CURLOPT_MAXREDIRS => 10,
@@ -577,12 +541,54 @@ class TaxiFleetPromotionsController extends AppController
 				$this->Flash->success(__($displayMessage));
 				return $this->redirect(['action' => 'report']);
 			}
+								//Report Modal//
+			if(isset($this->request->data['report_submit']))
+			{
+				$user_id=$this->Auth->User('id');
+				$hotelpromotion_id=$this->request->data('hotelpromotion_id');
+				$report_reason_id=$this->request->data('report_reason_id');
+				$comment=$this->request->data('comment');
+				$post =[
+						'hotel_promotion_id' => $hotelpromotion_id,
+						'report_reason_id' => $report_reason_id,
+						'user_id' =>$user_id,						 							
+						'comment' =>$comment						 							
+					];
+				//pr($post);exit;
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/HotelPromotionReports/HotelPromotionReportAdd.json",
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "POST",
+				  CURLOPT_POSTFIELDS =>$post,
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				$displayMessage=$LikeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'report']);
+			}			
 			
 		}
 		$this->viewBuilder()->layout('user_layout');
-		$this->set(compact('user_id','higestSort','country_id','city_id','state_id','car_bus_id','search'));
-    }
-	 public function promotionreports()
+		$user_id=$this->Auth->User('id');
+        $this->set(compact('user_id','search','starting_price','higestSort','category_id','rating_filter'));
+	}
+	  public function promotionreports()
     {
 		$this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');
@@ -591,13 +597,13 @@ class TaxiFleetPromotionsController extends AppController
 				//-- Renew promotion
 			if(isset($this->request->data['pay_now']))
 			{
- 				$texifleet_id=$this->request->data('texifleet_id');
+ 				$hotel_id=$this->request->data('hotel_id');
  				$price_master_id=$this->request->data('price_master_id');
  				$visible_date=$this->request->data('visible_date');
  				$payment_amount=$this->request->data('payment_amount');
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
-				 CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotions/renewTaxiFleet.json?taxifleet_id=".$texifleet_id."&price_master_id=".$price_master_id."&price=".$payment_amount."&visible_date=".$visible_date,
+				 CURLOPT_URL => $this->coreVariable['SiteUrl']."api/hotel_promotions/renewHotelpromotion.json?promotion_id=".$hotel_id."&price_master_id=".$price_master_id."&price=".$payment_amount."&visible_date=".$visible_date,
 				  CURLOPT_RETURNTRANSFER => true,
 				  CURLOPT_ENCODING => "",
 				  CURLOPT_MAXREDIRS => 10,
@@ -622,13 +628,13 @@ class TaxiFleetPromotionsController extends AppController
 				$this->Flash->success(__($displayMessage));
 				return $this->redirect(['action' => 'promotionreports']);
 			}
-				//-- Remove promotion
+			//-- Remove promotion
 			if(isset($this->request->data['remove_promotion']))
 			{
- 				$texifleet_id=$this->request->data('remove_package_id');
+ 				$hotel_id=$this->request->data('hotel_id');
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
-				 CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotions/removeTaxFlletPromotions.json?taxi_id=".$texifleet_id,
+				 CURLOPT_URL => $this->coreVariable['SiteUrl']."api/hotel_promotions/removePromotion.json?promotion_id=".$hotel_id,
 				  CURLOPT_RETURNTRANSFER => true,
 				  CURLOPT_ENCODING => "",
 				  CURLOPT_MAXREDIRS => 10,
@@ -656,7 +662,7 @@ class TaxiFleetPromotionsController extends AppController
 		}
 		$this->set(compact('user_id'));
     }
-	public function likersList($taxifleet_id = null)
+	public function likersList($hotelpromotion_id = null)
     {
 		$this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');
@@ -696,7 +702,7 @@ class TaxiFleetPromotionsController extends AppController
 				} 
 				$displayMessage="You have been successfully followed this user  ";
 				$this->Flash->success(__($displayMessage));
-				return $this->redirect(['action' => 'likersList/'.$taxifleet_id]);
+				return $this->redirect(['action' => 'likersList/'.$hotelpromotion_id]);
 			}
 			//-- UnFollow User
 			if(isset($this->request->data['unfollow_user']))
@@ -732,12 +738,12 @@ class TaxiFleetPromotionsController extends AppController
 				} 
 				$displayMessage="You have been successfully unfollowed this user  ";
 				$this->Flash->success(__($displayMessage));
-				return $this->redirect(['action' => 'likersList/'.$taxifleet_id]);
+				return $this->redirect(['action' => 'likersList/'.$hotelpromotion_id]);
 			}
 		}
-		$this->set(compact('user_id','taxifleet_id'));
+		$this->set(compact('user_id','hotelpromotion_id'));
     }
-	public function viewersList($taxifleet_id = null)
+	public function viewersList($hotelpromotion_id = null)
     {
 		$this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');
@@ -777,7 +783,7 @@ class TaxiFleetPromotionsController extends AppController
 				} 
 				$displayMessage="You have been successfully followed this user  ";
 				$this->Flash->success(__($displayMessage));
-				return $this->redirect(['action' => 'viewersList/'.$taxifleet_id]);
+				return $this->redirect(['action' => 'viewersList/'.$hotelpromotion_id]);
 			}
 			//-- UnFollow User
 			if(isset($this->request->data['unfollow_user']))
@@ -813,29 +819,29 @@ class TaxiFleetPromotionsController extends AppController
 				} 
 				$displayMessage="You have been successfully unfollowed this user  ";
 				$this->Flash->success(__($displayMessage));
-				return $this->redirect(['action' => 'viewersList/'.$taxifleet_id]);
+				return $this->redirect(['action' => 'viewersList/'.$hotelpromotion_id]);
 			}
 		}
-		$this->set(compact('user_id','taxifleet_id'));
+		$this->set(compact('user_id','hotelpromotion_id'));
     }
-	public function savedList($user_id = null)
+	  public function savedList($user_id = null)
     {
-
+		$this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');
-		if ($this->request->is(['patch', 'post', 'put'])) 
+			if ($this->request->is(['patch', 'post', 'put'])) 
 		{
 			//-- Like EVENT
 			if(isset($this->request->data['LikeEvent']))
 			{
- 				$taxifleet_id=$this->request->data('taxifleet_id');
+ 				$hotelpromotion_id=$this->request->data('hotelpromotion_id');
 				$post =[
-						'taxi_fleet_promotion_id' => $taxifleet_id,
+						'hotel_promotion_id' => $hotelpromotion_id,
 						'user_id' =>$user_id						 							
 					];
 				//pr($post);exit;
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
-				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotions/likeTaxiFleetPromotions.json",
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/hotel_promotions/likeHotelPromotions.json",
 				  CURLOPT_RETURNTRANSFER => true,
 				  CURLOPT_ENCODING => "",
 				  CURLOPT_MAXREDIRS => 10,
@@ -860,14 +866,13 @@ class TaxiFleetPromotionsController extends AppController
 				$this->Flash->success(__($displayMessage));
 				return $this->redirect(['action' => 'savedList/'.$user_id]);
 			}
-			//---Remove TaxiFleet Promotion
-			if(isset($this->request->data['removetaxifleet']))
+			//---Remove Hotel  Promotion
+			if(isset($this->request->data['removehotelpromtion']))
 			{
-				$taxifleet_id=$this->request->data('taxifleet_id');
-				//pr($taxifleet_id);exit;
+				$hotelpromotion_id=$this->request->data('hotelpromotion_id');
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
-				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotions/removeTaxFlletPromotions.json?taxi_id=".$taxifleet_id,
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/hotel_promotions/removePromotion.json?promotion_id=".$hotelpromotion_id,
 				  CURLOPT_RETURNTRANSFER => true,
 				  CURLOPT_ENCODING => "",
 				  CURLOPT_MAXREDIRS => 10,
@@ -891,21 +896,19 @@ class TaxiFleetPromotionsController extends AppController
 				$displayMessage=$removeResult->message;
 				$this->Flash->success(__($displayMessage));
 				return $this->redirect(['action' => 'savedList/'.$user_id]);
-			} 
-			
-		//---Save cart TaxiFleet Promotion
-			if(isset($this->request->data['savetaxifleet']))
+			}
+			//-- Save Unsave
+			if(isset($this->request->data['savehotelpromotion']))
 			{
-				$user_id=$this->Auth->User('id');
-				$taxifleet_id=$this->request->data('taxifleet_id');
+ 				$hotelpromotion_id=$this->request->data('hotelpromotion_id');
 				$post =[
-						'taxi_fleet_promotion_id' => $taxifleet_id,
+						'hotel_promotion_id' => $hotelpromotion_id,
 						'user_id' =>$user_id						 							
 					];
 				//pr($post);exit;
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
-				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotionCarts/TaxiFleetPromotionsCartAdd.json",
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/HotelPromotionCarts/HotelPromotionCartAdd.json",
 				  CURLOPT_RETURNTRANSFER => true,
 				  CURLOPT_ENCODING => "",
 				  CURLOPT_MAXREDIRS => 10,
@@ -925,20 +928,21 @@ class TaxiFleetPromotionsController extends AppController
 				  echo "cURL Error #:" . $err;
 				} else {
 				 $LikeResult=json_decode($LikeResponse);
-				} 
+				}
+				//pr($LikeResponse);exit;				
 				$displayMessage=$LikeResult->message;
 				$this->Flash->success(__($displayMessage));
 				return $this->redirect(['action' => 'savedList/'.$user_id]);
-			} 
-			//Report Modal
+			}
+								//Report Modal//
 			if(isset($this->request->data['report_submit']))
 			{
 				$user_id=$this->Auth->User('id');
-				$taxifleet_id=$this->request->data('taxifleet_id');
+				$hotelpromotion_id=$this->request->data('hotelpromotion_id');
 				$report_reason_id=$this->request->data('report_reason_id');
 				$comment=$this->request->data('comment');
 				$post =[
-						'taxi_fleet_promotion_id' => $taxifleet_id,
+						'hotel_promotion_id' => $hotelpromotion_id,
 						'report_reason_id' => $report_reason_id,
 						'user_id' =>$user_id,						 							
 						'comment' =>$comment						 							
@@ -946,7 +950,7 @@ class TaxiFleetPromotionsController extends AppController
 				//pr($post);exit;
 				$curl = curl_init();
 				curl_setopt_array($curl, array(
-				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotionReports/TaxiFleetPromotionReportAdd.json",
+				  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/HotelPromotionReports/HotelPromotionReportAdd.json",
 				  CURLOPT_RETURNTRANSFER => true,
 				  CURLOPT_ENCODING => "",
 				  CURLOPT_MAXREDIRS => 10,
@@ -970,46 +974,8 @@ class TaxiFleetPromotionsController extends AppController
 				$displayMessage=$LikeResult->message;
 				$this->Flash->success(__($displayMessage));
 				return $this->redirect(['action' => 'savedList/'.$user_id]);
-			}
-			
+			}			
 		}
-		$this->viewBuilder()->layout('user_layout');
 		$this->set(compact('user_id'));
-    }
-	public function cityStateList()
-	{
-		$this->loadModel('Cities');
-		$state_id=$this->request->data['state_id'];
-		$data = explode(",", $state_id);
-		$CityList = $this->Cities->find()->where(['Cities.state_id IN' =>$data]);
-		$options=array();
-		
-		//pr($options);
-		
-		echo "
-			<select name='city_id[]' size='3' class=' form-control city_id' multiple='multiple' tabindex='1'>";
-			foreach($CityList as $cty)
-			{
-				echo "<option value='".$cty->id."' > ".$cty->name."</option>";
-			}
-			echo "</select>";
-		exit;
-		
-	}
-	
-	public function PackageReport($higestSort = null,$search = null,$country_id = null,$state_id = null,$city_id = null,$car_bus_id = null,$taxifleet_id= null,$removetaxifleet=null)
-    {
-        $higestSort=$this->request->query('higestSort'); 
-		$city_ids=$this->request->query('city_id'); 
-		if(!empty($city_ids)) {$city_id=implode(',',$city_ids);}
-
-		$car_bus_id=$this->request->query('car_bus_id');
-		if(!empty($car_bus_id)) {$car_bus_id=implode(',',$car_bus_id);}
-		$state_id=$this->request->query('state_id');
-		if(!empty($state_id)) {$state_id=implode(',',$state_id);}
-		$search=$this->request->query('search');
-		$user_id=$this->Auth->User('id');
-		$this->viewBuilder()->layout('admin_layout');
-		$this->set(compact('user_id','higestSort','country_id','city_id','state_id','car_bus_id','search'));
     }
 }

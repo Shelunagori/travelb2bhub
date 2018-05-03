@@ -15,7 +15,7 @@ class HotelPromotionsController extends AppController
     {
         $hotelPromotions = $this->HotelPromotions->newEntity();
         if ($this->request->is('post')) {
-            $hotelPromotions = $this->HotelPromotions->patchEntity($hotelPromotions,$this->request->data(),['associated' => ['hotelPromotionCities']]);
+            $hotelPromotions = $this->HotelPromotions->patchEntity($hotelPromotions,$this->request->data());
 
 			$message = 'PERFECT';
 			$response_code = 101;
@@ -25,7 +25,7 @@ class HotelPromotionsController extends AppController
 			$submitted_from = @$this->request->data('submitted_from');
 			if(@$submitted_from=='web')
 			{
-				$state_id=$this->request->data['state_id'];
+				/*$state_id=$this->request->data['state_id'];
 				$x=0;
 				foreach($state_id as $state)
 				{
@@ -38,8 +38,9 @@ class HotelPromotionsController extends AppController
 				{
 					$hotelPromotions['event_planner_promotion_cities['.$y.']["city_id"]']=$city_id[$y];
 					$y++;	
-				}
-			}
+				}*/
+				$hotelPromotions->payment_status = 'Pending';
+			} 
 			if(!empty($this->request->data('visible_date')))
 			{
 				$hotelPromotions->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
@@ -55,43 +56,76 @@ class HotelPromotionsController extends AppController
 					if(in_array($ext, $arr_ext)) { 
 						if (!file_exists('path/to/directory')) {
 								mkdir('path/to/directory', 0777, true);
-							}
+						}
+						$percentageTOReduse=100;
+						if(($image['size']>1000000) &&($image['size']<=3000000)){
+							$percentageTOReduse=50;
+						}
+						if(($image['size']>3000000) &&($image['size']<=6000000)){
+							$percentageTOReduse=20;
+						}
+						if($image['size']>6000000){
+							$percentageTOReduse=10;
+						}
+						//pr($percentageTOReduse); exit;
+						/* Resize Image */
+						$destination_url = WWW_ROOT . '/img/hotels/'.$title.'.'.$ext;
+						if($ext=='png'){
+							$image = imagecreatefrompng($image['tmp_name']);
+						}else{
+							$image = imagecreatefromjpeg($image['tmp_name']); 
+						}
+						imagejpeg($image, $destination_url, $percentageTOReduse);
+						$hotelPromotions->hotel_pic='img/hotels/'.$title.'.'.$ext;
+						if(file_exists(WWW_ROOT . '/img/hotels/'.$title.'.'.$ext)>0) {
+						}
+						else
+						{
+							$message = 'Image not uploaded';
+							$this->Flash->error(__($message));
+							$response_code = 102;
+						}
+						/*
 						if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/img/hotels/'.$title.'.'.$ext)) {
 							$hotelPromotions->hotel_pic='img/hotels/'.$title.'.'.$ext;
 						} else {
 							$message = 'Image not uploaded';
+							$this->Flash->error(__($message)); 
 							$response_code = 102;
-						}
+						}*/
 					} 
 					else 
 					{ 
 						$message = 'Invalid image extension';
+						$this->Flash->error(__($message)); 
 						$response_code = 103;  
 					}					
 				}
 				else 
 				{ 	
 					$message = 'Invalid image extension';
+					$this->Flash->error(__($message)); 
 					$response_code = 103;  
 				}				
 			} else { $hotelPromotions->hotel_pic ='';  }	
 
-			// pr($hotelPromotions); exit;
+			// print_r($hotelPromotions); exit;
 			if($message == 'PERFECT' && $response_code == 101)
 			{
+				//pr($hotelPromotions); exit;
 				if ($this->HotelPromotions->save($hotelPromotions)) {
 					$message = 'The hotel promotions has been saved';
+					$this->Flash->success(__($message)); 
 					$response_code = 200;
 				}else{
 					$message = 'The hotel promotions has not been saved';
+					$this->Flash->error(__($message)); 
 					$response_code = 204;				
 				}
 			}			
-        }
-		if(@$submitted_from=='web')
-		{
-			$this->Flash->success(__('message'));
-			return $this->redirect(['controller'=>'HotelPromotions','action' => 'add']);
+        } 
+		if(@$submitted_from=='web'){
+			return $this->redirect($this->coreVariable['SiteUrl'].'HotelPromotions/report');
 		}
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);		
@@ -154,8 +188,8 @@ class HotelPromotionsController extends AppController
 		if(!empty($user_id))
 		{
 			$getEventPlanners = $this->HotelPromotions->find()
-			->where(['is_deleted' =>0])
-			->where(['user_id'=>$user_id])
+			->where(['HotelPromotions.is_deleted' =>0])
+			->where(['HotelPromotions.user_id'=>$user_id])
 			->group(['HotelPromotions.id'])
 			->autoFields(true);
 	
@@ -197,26 +231,94 @@ $getHotelPromotion=$getEventPlanners ;
         $this->set('_serialize', ['getHotelPromotion','message','response_code']);				
 	}	
 	
-	public function getHotelList($isLikedUserId = null)
+	public function getHotelList($isLikedUserId = null,$category_id = null,$short=null,$rating_filter=null,$higestSort=null,$page=null,$search=null,$starting_price=null,$submitted_from=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
+		$submitted_from = $this->request->query('submitted_from');
+		if($submitted_from="web")
+		{
+			$limit=100;
+		}
+		else{
+			$limit=10;
+		}
 		if(!empty($isLikedUserId))
 		{
-			$getEventPlanners = $this->HotelPromotions->find();
+			$category_id = $this->request->query('category_id');
+			$short = $this->request->query('short'); 
+			$rating_filter = $this->request->query('rating_filter');
+			$higestSort = $this->request->query('higestSort');
+			$starting_price = $this->request->query('starting_price');
+			$page = $this->request->query('page');
+			$search_bar = $this->request->query('search');
+			if(empty($page)){$page=1;}
+			$category_id_filter = null;
+			//-- Filter 
+			if(!empty($search_bar))
+			{
+				$Searchbox = ['HotelPromotions.hotel_location LIKE'=> '%'.$search_bar.'%'];
+			}
+			if(!empty($category_id))
+			{
+				$category_id = explode(',',$category_id);
+				$category_id_filter = ['HotelPromotions.hotel_category_id IN'=>$category_id];
+			}
+			else
+			{
+				$category_id_filter = null;
+			}
+			$rating_filter_filter = null;
+			if(!empty($rating_filter))
+			{
+				$Ratings = explode(',',$rating_filter);
+				$rating_filter_filter = ['HotelPromotions.hotel_rating IN'=>$Ratings];
+			}
+			//-- SHORTs
+			$where_short=['HotelPromotions.id' =>'DESC'];
+			if(!empty($short))
+			{ 
+				if($short=='cheap_tariff')
+				{
+					$where_short = ['HotelPromotions.cheap_tariff' =>'DESC'];
+				}
 			
-				$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('HotelPromotionLikes.id')])
+				if($short=='hotel_rating')
+				{
+					$where_short = ['HotelPromotions.hotel_rating' =>'DESC'];
+				}
+			}
+			$conditions=array();
+			if(!empty($starting_price)) {
+ 				$result = explode("-", $starting_price); 
+				$MinQuotePrice = $result[0];
+				$MaxQuotePrice = $result[1];
+				if($MaxQuotePrice=='100000'){ $MaxQuotePrice='1000000000';}
+				$conditions["HotelPromotions.cheap_tariff >="] = $MinQuotePrice;
+				$conditions["HotelPromotions.cheap_tariff <="] = $MaxQuotePrice;
+			}
+			
+			$getHotelPromotion = $this->HotelPromotions->find();
+			
+				$getHotelPromotion->select(['total_likes'=>$getHotelPromotion->func()->count('HotelPromotionLikes.id')])
 				->contain(['HotelCategories','Users'=>function($q){
-				return $q->select(['first_name','last_name','mobile_number','company_name']);
+				return $q->select(['first_name','last_name','mobile_number','company_name','email']);
 			}])
-				->leftJoinWith('HotelPromotionLikes')
+			->leftJoinWith('HotelPromotionLikes')
+			->where($category_id_filter)
+			->where($Searchbox)
+			->where($rating_filter_filter)
+			->where($conditions)
 			->where(['HotelPromotions.visible_date >=' =>date('Y-m-d')])
 			->where(['HotelPromotions.is_deleted' =>0])
+			->order($where_short)
 			->group(['HotelPromotions.id'])
+			->limit($limit)
+			->page($page)
 			->autoFields(true);
-			//pr($getEventPlanners->toArray()); exit;
-			if(!empty($getEventPlanners->toArray()))
+			 
+			if(!empty($getHotelPromotion->toArray()))
 			{
-				foreach($getEventPlanners as $getEventPlanner)
+				foreach($getHotelPromotion as $getEventPlanner)
 				{
 					$getEventPlanner->total_likes = $this->HotelPromotions->HotelPromotionLikes
 							->find()->where(['hotel_promotion_id' => $getEventPlanner->id])->count();	
@@ -236,26 +338,51 @@ $getHotelPromotion=$getEventPlanners ;
 						->find()->where(['hotel_promotion_id' => $getEventPlanner->id])->count();
 						
 					$all_raiting=0;	
-					$testimonial=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId]);
-					$testimonial_count=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$isLikedUserId])->count();
+					$testimonial=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getEventPlanner->user_id]);
+					$testimonial_count=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getEventPlanner->user_id])->count();
 						 
-						 foreach($testimonial as $test_data){
+						foreach($testimonial as $test_data){
 							 $rating=$test_data->rating;
 							 $all_raiting+=$rating;
-						 }
-						 if($testimonial_count>0){
+						}
+						if($testimonial_count>0){
 							 $final_raiting=($all_raiting/$testimonial_count);
 							 if($final_raiting>0){
 								$getEventPlanner->user_rating=number_format($final_raiting, 1);
 							 }else{
-								$getEventPlanner->user_rating=0;
+								$getEventPlanner->user_rating="0";
 							 }	
-						 }else{
-							$getEventPlanner->user_rating=0;
-						 }	 
+						}else{
+							$getEventPlanner->user_rating="0";
+						}
 				}
-				$getHotelPromotion=$getEventPlanners ;
-				$message = 'List Found Successfully';
+				if(!empty($higestSort))
+				{
+					
+					if($higestSort == 'total_likes')
+					{
+						$getHotelPromotion = $getHotelPromotion->toArray();
+						usort($getHotelPromotion, function ($a, $b) {
+							return $b['total_likes'] - $a['total_likes'];
+						});
+					}
+					else if($higestSort == 'total_views')
+					{
+						$getHotelPromotion = $getHotelPromotion->toArray();
+						usort($getHotelPromotion, function ($a, $b) {
+							return $b['total_views'] - $a['total_views'];
+						});					
+					}
+					else if($higestSort == 'user_rating')
+					{
+						$getHotelPromotion = $getHotelPromotion->toArray();
+						usort($getHotelPromotion, function ($a, $b) {
+							return $b['user_rating'] - $a['user_rating'];
+						});					
+					}					
+				}
+ 			
+ 				$message = 'List Found Successfully';
 				$response_code = 200;
 			}
 			else
@@ -284,7 +411,7 @@ $getHotelPromotion=$getEventPlanners ;
 		$getEventPlannersDetails = $this->HotelPromotions->find();
 		$getEventPlannersDetails->select(['total_likes'=>$getEventPlannersDetails->func()->count('HotelPromotionLikes.id')])
 			->leftJoinWith('HotelPromotionLikes')
-			->contain(['HotelCategories','Users','PriceMasters','HotelPromotionCities'=>['Cities']])
+			->contain(['HotelCategories','Users','PriceMasters'])
 			->where(['HotelPromotions.id'=>$id])
 			->where(['HotelPromotions.is_deleted' =>0])
 			->group(['HotelPromotions.id'])
@@ -300,24 +427,25 @@ $getHotelPromotion=$getEventPlanners ;
 			$viewHotelPromotions->user_id = $user_id;         
 			
 			
-			$exists = $this->HotelPromotions->HotelPromotionViews->exists(['hotel_promotion_id'=>$viewHotelPromotions->hotel_promotion_id,'user_id'=>$viewHotelPromotions->user_id]);
-			
+			$exists = $this->HotelPromotions->HotelPromotionViews->exists(['HotelPromotionViews.hotel_promotion_id'=>$id,'HotelPromotionViews.user_id'=>$user_id]);
+			$count_view=$this->HotelPromotions->HotelPromotionViews->find()->where(['HotelPromotionViews.hotel_promotion_id'=>$id,'HotelPromotionViews.user_id'=>$user_id])->count();
 			$carts = $this->HotelPromotions->HotelPromotionCarts->exists(['HotelPromotionCarts.hotel_promotion_id'=>$id,'HotelPromotionCarts.user_id'=>$user_id,'HotelPromotionCarts.is_deleted'=>0]);
-			
-			if($carts==0){
-				foreach($getEventPlannersDetails as $sfad){
-					$sfad->issaved=false;
+			foreach($getEventPlannersDetails as $sfad){
+				if($carts==0){
+						$sfad->issaved=false;
+				}else{
+						$sfad->issaved=true;
 				}
-				
-			}else{
-				foreach($getEventPlannersDetails as $sfad){
-					$sfad->issaved=true;
-				}
-			}
+			 
+				$exists = $this->HotelPromotions->HotelPromotionLikes->exists(['hotel_promotion_id'=>$sfad->id,'user_id'=>$user_id ]);
+				if($exists == 1)
+				{ $sfad->isLiked = 'yes'; }
+				else{ $sfad->isLiked = 'no'; }
+			 
 			
 			$all_raiting=0;	
-					$testimonial=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id]);
-					$testimonial_count=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$user_id])->count();
+					$testimonial=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id]);
+					$testimonial_count=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id])->count();
 						 
 						 foreach($testimonial as $test_data){
 							 
@@ -330,7 +458,7 @@ $getHotelPromotion=$getEventPlanners ;
 								 if($final_raiting>0){
 									$rat->user_rating=number_format($final_raiting, 1);
 								 }else{
-									$rat->user_rating=0;
+									$rat->user_rating="0";
 								 }
 							 }	
 						 }else{
@@ -339,8 +467,8 @@ $getHotelPromotion=$getEventPlanners ;
 							 }	
 							 
 						 }
-						 
-			if($exists == 0)
+				}		 
+			if($count_view==0)
 			{
 				if ($this->HotelPromotions->HotelPromotionViews->save($viewHotelPromotions)) {
 					$message = 'Data found and view increased by 1';
@@ -450,12 +578,99 @@ $getHotelPromotion=$getEventPlanners ;
 			$response_code = 204;
 			$message='Success';
 		}
-		 
-		 
 	 
 		$this->set(compact('response_code','message'));
         $this->set('_serialize', ['response_code','message']);		
 		 
+	}
+	public function HotelPromotionsViews($hotel_promotion_id=null,$page=null,$user_id=null,$search=null)
+	{
+		$hotel_promotion_id = $this->request->query('hotel_promotion_id');
+		$user_id = $this->request->query('user_id');
+		$search_bar = $this->request->query('search');
+		$page = $this->request->query('page');
+		$filter_search=array();
+		if(!empty($search_bar)){
+			$filter_search["OR"] = array("Users.first_name Like"=> '%'.$search_bar.'%',"Users.last_name Like"=> '%'.$search_bar.'%',"Users.company_name Like"=> '%'.$search_bar.'%');
+ 		}
+		$limit=10;
+		if(empty($page)){$page=1;}
+		$COunt = $this->HotelPromotions->HotelPromotionViews->find()->where(['hotel_promotion_id'=>$hotel_promotion_id])->count();
+		if($COunt>0)
+		{
+			$getTravelPackages = $this->HotelPromotions->HotelPromotionViews->find()
+				->contain(['Users'=>function($q)use($filter_search){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id'])->where($filter_search);
+				}])
+				->where(['hotel_promotion_id'=>$hotel_promotion_id])
+				->limit($limit)
+				->page($page);
+			foreach($getTravelPackages as $packages){
+				$Follow = $this->HotelPromotions->HotelPromotionViews->Users->BusinessBuddies->exists(['user_id'=>$user_id,'bb_user_id'=>$packages->user_id]);  
+				if($Follow==0){
+					$packages->isfollow=false;
+				}else{
+					$packages->isfollow=true;
+				}
+ 			}
+			$response_object = $getTravelPackages;
+			$response_code = 200;
+			$message = '';
+		}
+		else{
+			$response_object = array();
+			$response_code = 204;
+			$message = 'No data found';
+		}
+			
+		$this->set(compact('message','response_code','response_object'));
+        $this->set('_serialize', ['message','response_code','response_object']);		
+		
+	}
+	
+	public function HotelPromotionsLikes($hotel_promotion_id=null,$page=null,$user_id=null,$search=null)
+	{
+		$hotel_promotion_id = $this->request->query('hotel_promotion_id');
+		$user_id = $this->request->query('user_id');
+		$search_bar = $this->request->query('search');
+		$page = $this->request->query('page');
+		$filter_search=array();
+		if(!empty($search_bar)){
+			$filter_search["OR"] = array("Users.first_name Like"=> '%'.$search_bar.'%',"Users.last_name Like"=> '%'.$search_bar.'%',"Users.company_name Like"=> '%'.$search_bar.'%');
+ 		}
+		$limit=10;
+		if(empty($page)){$page=1;}
+		$COunt = $this->HotelPromotions->HotelPromotionLikes->find()->where(['hotel_promotion_id'=>$hotel_promotion_id])->count();
+		if($COunt>0)
+		{
+			$getTravelPackages = $this->HotelPromotions->HotelPromotionLikes->find()
+				->contain(['Users'=>function($q)use($filter_search){
+					return $q->select(['first_name','last_name','mobile_number','company_name','role_id'])->where($filter_search);
+				}])
+				->where(['hotel_promotion_id'=>$hotel_promotion_id])
+				->limit($limit)
+				->page($page);
+			foreach($getTravelPackages as $packages){
+				$Follow = $this->HotelPromotions->HotelPromotionLikes->Users->BusinessBuddies->exists(['user_id'=>$user_id,'bb_user_id'=>$packages->user_id]);  
+				if($Follow==0){
+					$packages->isfollow=false;
+				}else{
+					$packages->isfollow=true;
+				}
+ 			}
+			$response_object = $getTravelPackages;
+			$response_code = 200;
+			$message = '';
+		}
+		else{
+			$response_object = array();
+			$response_code = 204;
+			$message = 'No data found';
+		}
+			
+		$this->set(compact('message','response_code','response_object'));
+        $this->set('_serialize', ['message','response_code','response_object']);		
+		
 	}
 	
 }

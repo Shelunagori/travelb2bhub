@@ -428,6 +428,12 @@ class EventPlannerPromotionsController extends AppController
 					$getEventPlanner->total_views = $this->EventPlannerPromotions->EventPlannerPromotionViews
 						->find()->where(['event_planner_promotion_id' => $getEventPlanner->id])->count();
 						
+					$getEventPlanner->total_saved = $this->EventPlannerPromotions->EventPlannerPromotionCarts
+						->find()->where(['event_planner_promotion_id' => $getEventPlanner->id])->count();
+						
+					$getEventPlanner->total_flagged = $this->EventPlannerPromotions->EventPlannerPromotionReports
+						->find()->where(['event_planner_promotion_id' => $getEventPlanner->id])->count();
+						
 					$all_raiting=0;	
 					$testimonial=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getEventPlanner->user_id]);
 					$testimonial_count=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getEventPlanner->user_id])->count();

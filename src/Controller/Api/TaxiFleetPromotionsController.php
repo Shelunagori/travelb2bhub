@@ -412,6 +412,12 @@ class TaxiFleetPromotionsController extends AppController
 					$getTaxiFleetPromotion->total_views = $this->TaxiFleetPromotions->TaxiFleetPromotionViews
 						->find()->where(['taxi_fleet_promotion_id' => $getTaxiFleetPromotion->id])->count();
 					
+					$getTaxiFleetPromotion->total_saved = $this->TaxiFleetPromotions->TaxiFleetPromotionCarts
+						->find()->where(['taxi_fleet_promotion_id' => $getTaxiFleetPromotion->id])->count();
+					
+					$getTaxiFleetPromotion->total_flagged = $this->TaxiFleetPromotions->TaxiFleetPromotionReports
+						->find()->where(['taxi_fleet_promotion_id' => $getTaxiFleetPromotion->id])->count();
+					
 					$all_raiting=0;	
 					$testimonial=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getTaxiFleetPromotion->user_id]);
 					$testimonial_count=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getTaxiFleetPromotion->user_id])->count();

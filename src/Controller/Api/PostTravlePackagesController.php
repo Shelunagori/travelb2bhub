@@ -193,7 +193,7 @@ class PostTravlePackagesController extends AppController
         $this->set('_serialize', ['message','response_code']);
     }
 
-	public function getTravelPackages($isLikedUserId=null,$category_id = null, $category_short = null,$duration_day=null,$duration_night=null,$duration_short=null,$valid_date=null,$valid_date_short=null,$starting_price=null,$starting_price_short=null,$country_id=null,$country_id_short=null,$city_id=null,$city_id_short=null,$category_name=null,$higestSort=null,$search = null,$page = null,$submitted_from=null)
+	public function getTravelPackages($isLikedUserId=null,$category_id = null, $category_short = null,$duration_day=null,$duration_night=null,$duration_short=null,$valid_date=null,$valid_date_short=null,$starting_price=null,$starting_price_short=null,$country_id=null,$country_id_short=null,$city_id=null,$city_id_short=null,$category_name=null,$higestSort=null,$search = null,$page = null,$submitted_from=null,$starting_price_Filter=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
@@ -439,6 +439,12 @@ class PostTravlePackagesController extends AppController
 					}	
 					
 					$getTravelPackage->total_views = $this->PostTravlePackages->PostTravlePackageViews
+						->find()->where(['post_travle_package_id' => $getTravelPackage->id])->count();
+						
+					$getTravelPackage->total_saved = $this->PostTravlePackages->PostTravlePackageCarts
+						->find()->where(['post_travle_package_id' => $getTravelPackage->id])->count();
+						
+					$getTravelPackage->total_flagged = $this->PostTravlePackages->PostTravlePackageReports
 						->find()->where(['post_travle_package_id' => $getTravelPackage->id])->count();
 						
 					$all_raiting=0;	

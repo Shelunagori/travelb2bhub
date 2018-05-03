@@ -69,7 +69,7 @@
 									 
 
 <!-- The Modal Start-->
-<i type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#myModal_<?= $user->id ?>"><i class="fa fa-book"></i></i>
+<a href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'adminviewprofile/'.$user->id)) ?>" class="btn btn-success btn-xs"  ><i class="fa fa-book"></i></i>
 <!-- Modal -->
 <div id="myModal_<?= $user->id ?>" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -146,8 +146,8 @@
 </div>
 									
 						 
-						<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/Users/add/'.$user->id,array('escape'=>false,'class'=>'btn btn-info btn-xs'));?>
-						<?php echo $this->Form->PostLink('<i class="fa fa-trash"></i>','/Users/delete/'.$user->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $user->id)));?>
+						<?php // echo $this->Html->link('<i class="fa fa-edit"></i>','/Users/add/'.$user->id,array('escape'=>false,'class'=>'btn btn-info btn-xs'));?>
+						<?php //echo $this->Form->PostLink('<i class="fa fa-trash"></i>','/Users/delete/'.$user->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $user->id)));?>
 								</td>
 								 
 							</tr>

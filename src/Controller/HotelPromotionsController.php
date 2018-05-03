@@ -978,4 +978,18 @@ class HotelPromotionsController extends AppController
 		}
 		$this->set(compact('user_id'));
     }
+	
+	public function PackageReport($starting_price = null,$higestSort = null,$search = null,$category_id = null,$rating_filter = null,$hotelpromotion_id= null,$savehotelpromotion= null)
+    {
+		$higestSort=$this->request->query('higestSort');
+		$category_id=$this->request->query('category_id');
+		if(!empty($category_id)) {$category_id=implode(',',$category_id);}
+		$rating_filter=$this->request->query('rating_filter');
+		$search=$this->request->query('search');
+		$starting_price=$this->request->query('starting_price');
+		$user_id=$this->Auth->User('id');
+		$this->viewBuilder()->layout('admin_layout');
+		$user_id=$this->Auth->User('id');
+        $this->set(compact('user_id','search','starting_price','higestSort','category_id','rating_filter'));
+	}
 }
