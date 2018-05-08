@@ -1,4 +1,4 @@
-<div class="row">
+<!---<div class="row">
 	<div class="col-md-12">
         <div class="col-md-3">
             <div class="small-box bg-aqua">
@@ -49,4 +49,4 @@
           </div>
         </div>
     </div>
-</div>
+</div>---->

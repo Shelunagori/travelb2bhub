@@ -20,8 +20,10 @@ class EventPlannerPromotionsController extends AppController
 			$image = $this->request->data('image');	
 			$document = $this->request->data('document');
 			$submitted_from = @$this->request->data('submitted_from');
+			$eventPlannerPromotion->submitted_from=0;
 			if(@$submitted_from=='web')
 			{
+				$eventPlannerPromotion->submitted_from=1;
 				$eventPlannerPromotion->event_planner_promotion_states = [];
 				$eventPlannerPromotion->event_planner_promotion_cities = []; 
 				$state_id=$this->request->data['state_id'];
@@ -60,15 +62,18 @@ class EventPlannerPromotionsController extends AppController
 								mkdir('path/to/directory', 0777, true);
 						}
 						$percentageTOReduse=100;
-						if(($image['size']>1000000) &&($image['size']<=3000000)){
-							$percentageTOReduse=50;
+						if(@$submitted_from=='web')
+						{
+							if(($image['size']>3000000) &&($image['size']<=4000000)){
+								$percentageTOReduse=50;
+							}
+							elseif(($image['size']>4000000) &&($image['size']<=6000000)){ 
+								$percentageTOReduse=20;
+							}
+							elseif($image['size']>6000000){
+								$percentageTOReduse=10;
+							}
 						}
-						if(($image['size']>3000000) &&($image['size']<=6000000)){
-							$percentageTOReduse=20;
-						}
-						if($image['size']>6000000){
-							$percentageTOReduse=10;
-						} 
 						/* Resize Image */
 						$destination_url = WWW_ROOT . '/images/eventPlannerPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
 						if($ext=='png'){

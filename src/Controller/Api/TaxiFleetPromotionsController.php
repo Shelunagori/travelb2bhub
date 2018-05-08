@@ -22,8 +22,10 @@ class TaxiFleetPromotionsController extends AppController
 			$image = $this->request->data('image');	
 			$document = $this->request->data('document');
 			$submitted_from = @$this->request->data('submitted_from');
+			$taxiFleetPromotion->submitted_from=0;
 			if(@$submitted_from=='web')
 			{
+				$taxiFleetPromotion->submitted_from=1;
 				$state_id=$this->request->data['state_id'];
 				$x=0; 
 				$taxiFleetPromotion->taxi_fleet_promotion_states = [];
@@ -72,19 +74,23 @@ class TaxiFleetPromotionsController extends AppController
 				if(!empty($ext))
 				{
 					if(in_array($ext, $arr_ext)) { 
-						$percentageTOReduse=100;
+						 
 						if (!file_exists('path/to/directory')) {
 							mkdir('path/to/directory', 0777, true);
 						}
-						if(($image['size']>1000000) &&($image['size']<=3000000)){
-							$percentageTOReduse=50;
+						$percentageTOReduse=100;
+						if(@$submitted_from=='web')
+						{
+							if(($image['size']>3000000) &&($image['size']<=4000000)){
+								$percentageTOReduse=50;
+							}
+							elseif(($image['size']>4000000) &&($image['size']<=6000000)){ 
+								$percentageTOReduse=20;
+							}
+							elseif($image['size']>6000000){
+								$percentageTOReduse=10;
+							}
 						}
-						if(($image['size']>3000000) &&($image['size']<=6000000)){
-							$percentageTOReduse=20;
-						}
-						if($image['size']>6000000){
-							$percentageTOReduse=10;
-						} 
 						/* Resize Image */
 						$destination_url = WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
 						if($ext=='png'){

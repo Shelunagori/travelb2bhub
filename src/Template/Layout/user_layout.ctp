@@ -366,11 +366,12 @@ margin-bottom: 0px!important;
 	z-index: 99; 
 	border: none;
 	outline: none;
-	background-color: #1295a2;
+	background-color: #EA4335;
 	color: white;
 	cursor: pointer;
 	border-radius: 100%;
-	padding: 10px 12px 10px 12px;
+	padding: 15px 17px 13px 17px;
+	margin-right: 20px;
 }
 </style>
 </head>

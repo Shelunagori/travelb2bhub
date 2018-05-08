@@ -331,30 +331,39 @@ input[type=checkbox] {
 <?php echo $this->Html->script('/assets/login/daterangepicker/daterangepicker.js'); ?>
 <?php echo $this->Html->script('/assets/login/countdowntime/countdowntime.js'); ?>
 <?php echo $this->Html->script('/assets/login/js/main.js'); ?>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
 $(document).ready(function(){	 
 	$('.select2').select2();
-	$(document).on('blur',"#mobile_number",function(){ 
+	 
+	$(document).on('blur',"#number_format",function(){ 
+			 
 		var mobile_number=$(this).val();
 		var m_data = new FormData();
 		 
-		m_data.append('mobile_number',mobile_number);
-		$.ajax({
-			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "checkMobileExixt"]); ?>",
-			data: m_data,
-			processData: false,
-			contentType: false,
-			type: 'POST',
-			dataType:'text',
-			success: function(data)
-			{	 
-				if(data=='remove'){
-					alert("Mobile Number Already Exist");
-					$('#mobile_number').val('');
+		if(mobile_number.length==10){  
+			m_data.append('mobile_number',mobile_number);
+			$.ajax({
+				url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "checkMobileExixt"]); ?>",
+				data: m_data,
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				dataType:'text',
+				success: function(data)
+				{	 
+					if(data=='remove'){
+						alert("Mobile Number Already Exist");
+						$('#mobile_number').val('');
+					}
 				}
- 			}
-		});
-	
+			});
+		}
+		else
+		{
+			alert("Please enter valid Mobile No.");
+			$(this).val('');
+		}		
 	
 	});
 	$(document).on('blur',"#city-search-box",function(){ 
@@ -456,6 +465,7 @@ function selectCountry(value,city_code,state,country_id,state_name,country_name)
 		$("#country_id").val(country_id);
 		$("#country_name").val(country_name);
  	}	
+
 </script>	
 <script>
  

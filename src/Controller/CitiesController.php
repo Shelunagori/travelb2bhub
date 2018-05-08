@@ -85,9 +85,9 @@ class CitiesController extends AppController
                 $this->Flash->error(__('The city could not be saved. Please, try again.'));
             }
         }
-        $states = $this->Cities->States->find('list', ['limit' => 200]);
+        $states = $this->Cities->States->find()->where(['is_deleted'=>0]);
 		//-- View List
-		
+		//pr($states->toArray()); exit;
 		$this->paginate = [
             'contain' => ['States']
         ];

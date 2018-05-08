@@ -20,8 +20,10 @@ class PostTravlePackagesController extends AppController
 			$document = $this->request->data('document');
 			$submitted_from = @$this->request->data('submitted_from'); 
 			//print_r($this->request->data); exit;
+			$postTravlePackage->submitted_from=0;
 			if(@$submitted_from=='web')
 			{
+				$postTravlePackage->submitted_from=1;
 				$country_id=$this->request->data['country_id'];
 				$x=0; 
 				$postTravlePackage->post_travle_package_countries = [];
@@ -80,17 +82,17 @@ class PostTravlePackagesController extends AppController
 						}
 						 
 						$percentageTOReduse=100;
-						if(($image['size']>1000000) &&($image['size']<=3000000)){
-							$percentageTOReduse=50;
-						}
-						elseif(($image['size']>3000000) &&($image['size']<=6000000)){
-							$percentageTOReduse=20;
-						}
-						elseif($image['size']>6000000){
-							$percentageTOReduse=10;
-						}
-						else{
-							$percentageTOReduse=5;
+						if(@$submitted_from=='web')
+						{
+							if(($image['size']>3000000) &&($image['size']<=4000000)){
+								$percentageTOReduse=50;
+							}
+							elseif(($image['size']>4000000) &&($image['size']<=6000000)){ 
+								$percentageTOReduse=20;
+							}
+							elseif($image['size']>6000000){
+								$percentageTOReduse=10;
+							}
 						}
 						/* Resize Image */
 						$destination_url = WWW_ROOT . '/images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;

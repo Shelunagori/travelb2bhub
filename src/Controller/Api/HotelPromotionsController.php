@@ -23,8 +23,10 @@ class HotelPromotionsController extends AppController
 			$title = $id.'hotel_'.rand();
 			$image = $this->request->data('hotel_pic');	 
 			$submitted_from = @$this->request->data('submitted_from');
+			$hotelPromotions->submitted_from=0;
 			if(@$submitted_from=='web')
 			{
+				$hotelPromotions->submitted_from=1;
 				/*$state_id=$this->request->data['state_id'];
 				$x=0;
 				foreach($state_id as $state)
@@ -58,14 +60,17 @@ class HotelPromotionsController extends AppController
 								mkdir('path/to/directory', 0777, true);
 						}
 						$percentageTOReduse=100;
-						if(($image['size']>1000000) &&($image['size']<=3000000)){
-							$percentageTOReduse=50;
-						}
-						if(($image['size']>3000000) &&($image['size']<=6000000)){
-							$percentageTOReduse=20;
-						}
-						if($image['size']>6000000){
-							$percentageTOReduse=10;
+						if(@$submitted_from=='web')
+						{
+							if(($image['size']>3000000) &&($image['size']<=4000000)){
+								$percentageTOReduse=50;
+							}
+							elseif(($image['size']>4000000) &&($image['size']<=6000000)){ 
+								$percentageTOReduse=20;
+							}
+							elseif($image['size']>6000000){
+								$percentageTOReduse=10;
+							}
 						}
 						//pr($percentageTOReduse); exit;
 						/* Resize Image */
@@ -231,7 +236,7 @@ $getHotelPromotion=$getEventPlanners ;
         $this->set('_serialize', ['getHotelPromotion','message','response_code']);				
 	}	
 	
-	public function getHotelList($isLikedUserId = null,$category_id = null,$short=null,$rating_filter=null,$higestSort=null,$page=null,$search=null,$starting_price=null,$submitted_from=null)
+	public function getHotelList($isLikedUserId = null,$category_id = null,$short=null,$rating_filter=null,$higestSort=null,$page=null,$search=null,$starting_price=null,$submitted_from=null,$search_bar=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		$submitted_from = $this->request->query('submitted_from');
@@ -254,6 +259,7 @@ $getHotelPromotion=$getEventPlanners ;
 			if(empty($page)){$page=1;}
 			$category_id_filter = null;
 			//-- Filter 
+			$Searchbox=array();
 			if(!empty($search_bar))
 			{
 				$Searchbox = ['HotelPromotions.hotel_location LIKE'=> '%'.$search_bar.'%'];

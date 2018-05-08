@@ -28,10 +28,16 @@
 						</div>
 						<div class="col-md-8">
 							<?php 
-							echo $this->Form->input('state_id',['options' =>$states,'label' => false,'class'=>'form-control select2','empty'=> 'Select...']);?>	
+							foreach($states as $state){
+								$selectoption[] = ['value'=>$state->id,'text'=>$state->state_name,'country_id'=>$state->country_id];
+							}
+							echo $this->Form->input('state_id',['options' =>$selectoption,'label' => false,'class'=>'form-control select2 selectState','empty'=> 'Select...']);?>	
 							<label id="state-id-error" class="error" for="state-id"> </label>
 						</div>
 					</div>
+					<input type="hidden" name="country_id" id="country_id">
+					<input type="hidden" name="price" value="2000">
+					<input type="hidden" name="category" value="3">
 					<span class="help-block"></span>
 					<div class="box-footer">
 						<div class="row">
@@ -71,7 +77,11 @@
 							</div>
 							<div class="col-md-12">
 								<label class="control-label">Select State</label>
-								<?php echo $this->Form->input('stateid',['options' =>$states,'label' => false,'class'=>'form-control select2','empty'=> 'Select...']);?>	 
+								<?php $selectoption=array();
+							foreach($states as $state){
+								$selectoption[] = ['value'=>$state->id,'text'=>$state->state_name,'country_id'=>$state->country_id];
+							}
+							echo $this->Form->input('stateid',['options' =>$selectoption,'label' => false,'class'=>'form-control select2','empty'=> 'Select...']);?>	 
 							</div>
 							<div class="col-md-12" align="center">
 							<hr style="margin-top: 12px;margin-bottom: 10px;"></hr>
@@ -145,6 +155,11 @@ jQuery(".loadingshow").submit(function(){
 });
 $(document).ready(function() {
 	// validate signup form on keyup and submit
+	$(document).on('change','.selectState',function(){
+		//var selected=$(this,'option:selected').attr('country_id');
+		var selected = $('option:selected', this).attr('country_id');
+		$('#country_id').val(selected);
+	});
 	 $("#CityForm").validate({ 
 		rules: {
 			name: {
