@@ -284,30 +284,23 @@ a{
 <?php $i=1;
 if(!empty($eventPlannerPromotions)){
 foreach ($eventPlannerPromotions as $eventPlannerPromotion){
-							$cityList='';
-							$x=0;
-								foreach($eventPlannerPromotion->event_planner_promotion_cities as $cities)
-								{
-									if($x>=1)
-									{
-									$cityList.=', ';
-									}
-									@$cityList.=$cities->city->name;
-									if($cities->city_id==0){@$cityList.='All Cities';}
-									$x++;
-								}
-								
-								$stateList='';
-								$y=0;
-								foreach($eventPlannerPromotion->event_planner_promotion_states as $states)
-								{
-									if($y>=1)
-									{
-									$stateList.=', ';
-									}
-									$stateList.=$states->state->state_name;
-									$y++;
-								}
+		$cityList=array();
+		foreach($eventPlannerPromotion->event_planner_promotion_cities as $cities)
+		{ 
+			
+			if($cities->city_id==0){@$cityList[]='All Cities';}
+			else{
+				@$cityList[]=$cities->city->name;
+			}
+		}
+		
+		$stateList=array();
+		foreach($eventPlannerPromotion->event_planner_promotion_states as $states)
+		{
+			$stateList[]=$states->state->state_name;
+		}
+		$stateLists=implode(', ',array_unique($stateList));
+		$cityLists=implode(', ',array_unique($cityList));
 	?>
 	<div class="box-body bbb">	
 		<fieldset style="background-color:#fff;">
@@ -435,12 +428,12 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 						<div class="col-md-6">
 							<div class="row rowspace">
 								<div class="col-md-12 "><label>Cities of Operation: </label>
-								<span ><?= h($cityList); ?></span>
+								<span ><?= h($cityLists); ?></span>
 								</div>
 							</div>
 							<div class="row rowspace">
 								<div class="col-md-12 "><label>States of Operation: </label>
-								<span class=""><?= h($stateList); ?></span>
+								<span class=""><?= h($stateLists); ?></span>
 								</div>
 							</div>
 						</div>

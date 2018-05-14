@@ -23,10 +23,8 @@ class HotelPromotionsController extends AppController
 			$title = $id.'hotel_'.rand();
 			$image = $this->request->data('hotel_pic');	 
 			$submitted_from = @$this->request->data('submitted_from');
-			$hotelPromotions->submitted_from=0;
 			if(@$submitted_from=='web')
 			{
-				$hotelPromotions->submitted_from=1;
 				/*$state_id=$this->request->data['state_id'];
 				$x=0;
 				foreach($state_id as $state)
@@ -236,7 +234,7 @@ $getHotelPromotion=$getEventPlanners ;
         $this->set('_serialize', ['getHotelPromotion','message','response_code']);				
 	}	
 	
-	public function getHotelList($isLikedUserId = null,$category_id = null,$short=null,$rating_filter=null,$higestSort=null,$page=null,$search=null,$starting_price=null,$submitted_from=null,$search_bar=null)
+	public function getHotelList($isLikedUserId = null,$category_id = null,$short=null,$rating_filter=null,$higestSort=null,$page=null,$search=null,$starting_price=null,$submitted_from=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		$submitted_from = $this->request->query('submitted_from');
@@ -259,7 +257,6 @@ $getHotelPromotion=$getEventPlanners ;
 			if(empty($page)){$page=1;}
 			$category_id_filter = null;
 			//-- Filter 
-			$Searchbox=array();
 			if(!empty($search_bar))
 			{
 				$Searchbox = ['HotelPromotions.hotel_location LIKE'=> '%'.$search_bar.'%'];

@@ -20,10 +20,8 @@ class PostTravlePackagesController extends AppController
 			$document = $this->request->data('document');
 			$submitted_from = @$this->request->data('submitted_from'); 
 			//print_r($this->request->data); exit;
-			$postTravlePackage->submitted_from=0;
 			if(@$submitted_from=='web')
 			{
-				$postTravlePackage->submitted_from=1;
 				$country_id=$this->request->data['country_id'];
 				$x=0; 
 				$postTravlePackage->post_travle_package_countries = [];
@@ -586,8 +584,8 @@ class PostTravlePackagesController extends AppController
 			}
 			else
 			{
-					$message = 'Data found but viewed already';
-					$response_code = 205;					
+				$message = 'Data found but viewed already';
+				$response_code = 205;					
 			}			
 			
 		
@@ -595,7 +593,13 @@ class PostTravlePackagesController extends AppController
 			foreach($getTravelPackageDetails as $getTravelPackageDetail)
 			{
 				$getTravelPackageDetail->total_views = $this->PostTravlePackages->PostTravlePackageViews
-			->find()->where(['post_travle_package_id' => $id])->count();	
+					->find()->where(['post_travle_package_id' => $id])->count();
+
+				$getTravelPackageDetail->total_saved = $this->PostTravlePackages->PostTravlePackageCarts
+					->find()->where(['post_travle_package_id' => $id])->count();
+					
+				$getTravelPackageDetail->total_flagged = $this->PostTravlePackages->PostTravlePackageReports
+					->find()->where(['post_travle_package_id' => $id])->count();
 
 				$exists = $this->PostTravlePackages->PostTravlePackageLikes->exists(['post_travle_package_id'=>$getTravelPackageDetail->id,'user_id'=>$user_id]);
 				if($exists == 1)

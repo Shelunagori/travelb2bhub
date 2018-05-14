@@ -1,4 +1,3 @@
-<?php //echo $this->Html->css('/assets/loader-1.css'); ?>
 <?php
 
  if(!empty($duration_day_night)){
@@ -111,6 +110,7 @@ if ($err) {
  
 }
 ?>
+<?php //490pr($postTravlePackages);?>
 <style type="text/css">
 @media all and (max-width: 410px) {
 	/* Logo for Mobile */
@@ -376,39 +376,25 @@ a{
 					//pr($postTravlePackages); exit;			
 					if(!empty($postTravlePackages)){
 						foreach ($postTravlePackages as $postTravlePackage): 
-							$CategoryList='';
-							$x=0;
+							$CategoryList=array();
 							foreach($postTravlePackage->post_travle_package_rows as $category)
-								{
-									if($x>=1){
-										$CategoryList.=', ';
-									}
-									$CategoryList.=$category->post_travle_package_category->name;
-									$x++;
-								}
-											$cityList='';
-											$z=0;
-											
-											foreach($postTravlePackage->post_travle_package_cities as $cities)
-											{
-											 
-												if($z>=1){
-													$cityList.=', ';
-												}
-												$cityList.=$cities->city->name." (".$cities->city->state->state_name.")";
-												$z++;
-											}
-											$countryList='';
-											$p=0;
-											foreach($postTravlePackage->post_travle_package_countries as $countries)
-											{
-												//pr($cities);exit;
-												if($p>=1){
-													$countryList.=', ';
-												}
-												$countryList.=$countries->country->country_name;
-												$p++;
-											}
+							{
+								$CategoryList[]=$category->post_travle_package_category->name;
+							}
+							$cityList=array();
+							foreach($postTravlePackage->post_travle_package_cities as $cities)
+							{
+								$cityList[]=$cities->city->name." (".$cities->city->state->state_name.")";
+							}
+							$countryList=array();
+							$p=0;
+							foreach($postTravlePackage->post_travle_package_countries as $countries)
+							{
+								$countryList[]=$countries->country->country_name;
+							} 
+							$CategoryLists=implode(', ',array_unique($CategoryList));
+							$countryLists=implode(', ',array_unique($countryList));
+							$cityLists=implode(', ',array_unique($cityList));
 						?>
 
 <div class="box-body bbb">
@@ -464,7 +450,7 @@ a{
 											<div class="row col-md-12 rowspace">
 													<div class="col-md-12">
 													<label>Category: </label>
-													<span ><?= h($CategoryList); ?></span>
+													<span ><?= h($CategoryLists); ?></span>
 													</div>
 											</div>
 											<div class="col-md-4">
@@ -479,6 +465,7 @@ a{
 													<span style="color:#1295AB">&#8377; <?php echo (h($postTravlePackage->starting_price)) ;?></span>
 													</div>
 												</div>
+												
 												<div class="row rowspace">
 													<div class="col-md-12 "><label>Seller: </label>
 													<span><u>
@@ -497,7 +484,18 @@ a{
 													</span>
 													</div>					
 												</div>
-												
+												<div class="row rowspace">
+													<div class="col-md-12 ">
+													<label>Date Posted: </label>
+													<span style="color:#black"> <?php echo date('d-M-Y',strtotime($postTravlePackage->created_on)) ; ?></span>
+													</div>
+												</div>
+												<div class="row rowspace">
+													<div class="col-md-12">
+													<label>Expiring On: </label>
+													<span style="color:#FB6542">  <?php echo date('d-M-Y',strtotime($postTravlePackage->visible_date)) ; ?></span>
+													</div>
+												</div> 
 											</div>
 											<div class="col-md-8">
 											<div class="row rowspace" >
@@ -507,12 +505,19 @@ a{
 												</div>	
 												<div class="row rowspace" >
 													<div class="col-md-12"><label>Cities: </label>
-													<span ><?= h($cityList); ?></span>
+													<span ><?= h($cityLists); ?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
 													<div class="col-md-12"><label>Countries: </label>
-													<span ><?= h($countryList);?></span>
+													<span ><?= h($countryLists);?></span>
+													</div>
+												</div>
+												
+												<div class="row rowspace" style="visibility:hidden;">
+													<div class="col-md-12">
+													<label>Expiring On: </label>
+													<span style="color:#FB6542">  <?php echo date('d-M-Y',strtotime($postTravlePackage->visible_date)) ; ?></span>
 													</div>
 												</div>
 												
@@ -623,16 +628,45 @@ a{
 										</div>
 									</div>
 								</div>
-								<div class="row" style="padding-top:15px;">
-								<div class="col-md-12 text-center" >
-									<button class="btn btn-info btn-md btnlayout viewCount" data-target="#Inclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal"  promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" type="button">Inclusions</button>&nbsp;&nbsp;
-										<!-------Report Modal Start--------->
-									<button class="btn btn-warning btn-md btnlayout viewCount" data-target="#Exclusion<?php echo $postTravlePackage->id;?>"   promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" data-toggle="modal" type="button">Exclusions</button>&nbsp;&nbsp;
-									<button class="btn btn-danger btn-md  btnlayout viewCount" data-target="#contactdetails<?php echo $postTravlePackage->id;?>" promotionid="<?php echo $postTravlePackage->id;?>" data-toggle="modal" userId="<?php echo $user_id;?>" type="button">Contact Info</button>
-										
-												</div>
-											</div>
+								
 										</div>
+								<div class="" style="padding-top:15px;">
+									<div class="col-md-12 text-center" >
+										<button style="margin-top:5px" class="btn btn-info btn-md btnlayout viewCount" data-target="#Inclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal"  promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" type="button">Inclusions</button>&nbsp;&nbsp;
+										
+										<button style="margin-top:5px" class="btn btn-warning btn-md btnlayout viewCount" data-target="#Exclusion<?php echo $postTravlePackage->id;?>"   promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" data-toggle="modal" type="button">Exclusions</button>&nbsp;&nbsp;
+										
+										<button style="margin-top:5px" class="btn btn-success btn-md  btnlayout viewCount" data-target="#contactdetails<?php echo $postTravlePackage->id;?>" promotionid="<?php echo $postTravlePackage->id;?>" data-toggle="modal" userId="<?php echo $user_id;?>" type="button">Contact Info</button>
+										
+										<a style="margin-top:5px" href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>'adminview/'.$postTravlePackage->id]); ?>" class="btn btn-warning btn-md btnlayout" > Details</a>&nbsp;&nbsp;
+									
+										<!--<a style="margin-top:5px" href="<?php echo $this->Url->build(["controller" => "PostTravlePackages",'action'=>'adminedit/'.$postTravlePackage->id]); ?>" class="btn btn-successto btn-md btnlayout" >Edit Event</a>&nbsp;&nbsp;-->
+										
+										<button style="margin-top:5px;" type="button" class="btn btn-danger btn-md btnlayout" data-target="#remove<?php echo $postTravlePackage->id; ?>" data-toggle=modal>Remove Package</button>
+											
+									</div>
+					<div id="remove<?php echo $postTravlePackage->id; ?>" class="modal fade" role="dialog">
+						<div class="modal-dialog modal-md" >
+							<!-- Modal content-->
+							<form method="post" class="formSubmit">
+								<div class="modal-content">
+								  <div class="modal-header" style="height:100px;">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">
+										Are you sure you want to delete this Promotion?
+										</h4>
+									</div>
+									<div class="modal-footer" >
+										<button type="submit"  class="unfollow btn btn-success btn-md" value="yes" name="removepackage">Yes</button>
+										<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
+									</div>
+								</div>
+								<input type="hidden" name="remove_package_id" value="<?php echo $postTravlePackage->id; ?>"/>
+							</form>
+						</div>
+					</div>
+									
+								</div>
 									</div>
 								</div>
 								</form>
@@ -651,9 +685,9 @@ a{
 				<?=  $this->Html->image('/img/loading.gif', ['style'=>'width:5%;']) ?> .
 			</div>
 			<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
-									<div id="loader"></div>
-									</div>
+				<div id="loader"></div>
 				</div>
+			</div>
 <input type="hidden" id="page" value="2">
 <input type="hidden" value="<?php $user_id; ?>" id="user_id">
 <input type="hidden" value="<?php $higestSort; ?>" id="higestSort">

@@ -22,10 +22,8 @@ class TaxiFleetPromotionsController extends AppController
 			$image = $this->request->data('image');	
 			$document = $this->request->data('document');
 			$submitted_from = @$this->request->data('submitted_from');
-			$taxiFleetPromotion->submitted_from=0;
 			if(@$submitted_from=='web')
 			{
-				$taxiFleetPromotion->submitted_from=1;
 				$state_id=$this->request->data['state_id'];
 				$x=0; 
 				$taxiFleetPromotion->taxi_fleet_promotion_states = [];

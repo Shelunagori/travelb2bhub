@@ -303,7 +303,7 @@ $m=0;
 		});
 		
 		jQuery(".formSubmit").submit(function(){
-						jQuery("#loader-1").show();
-					});
+			jQuery("#loader-1").show();
 		});
+	});
 </script>

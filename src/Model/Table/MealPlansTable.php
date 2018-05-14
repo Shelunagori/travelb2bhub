@@ -7,19 +7,17 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * HotelCategories Model
+ * MealPlans Model
  *
- * @property \Cake\ORM\Association\HasMany $HotelPromotions
- *
- * @method \App\Model\Entity\HotelCategory get($primaryKey, $options = [])
- * @method \App\Model\Entity\HotelCategory newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\HotelCategory[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\HotelCategory|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\HotelCategory patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\HotelCategory[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\HotelCategory findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\MealPlan get($primaryKey, $options = [])
+ * @method \App\Model\Entity\MealPlan newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\MealPlan[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\MealPlan|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\MealPlan patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\MealPlan[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\MealPlan findOrCreate($search, callable $callback = null, $options = [])
  */
-class HotelCategoriesTable extends Table
+class MealPlansTable extends Table
 {
 
     /**
@@ -32,13 +30,9 @@ class HotelCategoriesTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('hotel_categories');
+        $this->table('meal_plans');
         $this->displayField('name');
         $this->primaryKey('id');
-
-        $this->hasMany('HotelPromotions', [
-            'foreignKey' => 'hotel_category_id'
-        ]);
     }
 
     /**
@@ -58,6 +52,11 @@ class HotelCategoriesTable extends Table
             ->notEmpty('name');
 
         /* $validator
+            ->dateTime('created_on')
+            ->requirePresence('created_on', 'create')
+            ->notEmpty('created_on');
+
+        $validator
             ->integer('is_deleted')
             ->requirePresence('is_deleted', 'create')
             ->notEmpty('is_deleted'); */

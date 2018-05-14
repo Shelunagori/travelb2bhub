@@ -516,39 +516,25 @@ a{
 					//pr($postTravlePackages); exit;			
 					if(!empty($postTravlePackages)){
 						foreach ($postTravlePackages as $postTravlePackage): 
-							$CategoryList='';
-							$x=0;
+							$CategoryList=array();
 							foreach($postTravlePackage->post_travle_package_rows as $category)
-								{
-									if($x>=1){
-										$CategoryList.=', ';
-									}
-									$CategoryList.=$category->post_travle_package_category->name;
-									$x++;
-								}
-											$cityList='';
-											$z=0;
-											
-											foreach($postTravlePackage->post_travle_package_cities as $cities)
-											{
-											 
-												if($z>=1){
-													$cityList.=', ';
-												}
-												$cityList.=$cities->city->name." (".$cities->city->state->state_name.")";
-												$z++;
-											}
-											$countryList='';
-											$p=0;
-											foreach($postTravlePackage->post_travle_package_countries as $countries)
-											{
-												//pr($cities);exit;
-												if($p>=1){
-													$countryList.=', ';
-												}
-												$countryList.=$countries->country->country_name;
-												$p++;
-											}
+							{
+								$CategoryList[]=$category->post_travle_package_category->name;
+							}
+							$cityList=array();
+							foreach($postTravlePackage->post_travle_package_cities as $cities)
+							{
+								$cityList[]=$cities->city->name." (".$cities->city->state->state_name.")";
+							}
+							$countryList=array();
+							$p=0;
+							foreach($postTravlePackage->post_travle_package_countries as $countries)
+							{
+								$countryList[]=$countries->country->country_name;
+							} 
+							$CategoryLists=implode(', ',array_unique($CategoryList));
+							$countryLists=implode(', ',array_unique($countryList));
+							$cityLists=implode(', ',array_unique($cityList));
 						?>
 
 <div class="box-body bbb">
@@ -707,7 +693,7 @@ a{
 											<div class="row col-md-12 rowspace">
 													<div class="col-md-12">
 													<label>Category: </label>
-													<span ><?= h($CategoryList); ?></span>
+													<span ><?= h($CategoryLists); ?></span>
 													</div>
 											</div>
 											<div class="col-md-4">
@@ -750,12 +736,12 @@ a{
 												</div>	
 												<div class="row rowspace" >
 													<div class="col-md-12"><label>Cities: </label>
-													<span ><?= h($cityList); ?></span>
+													<span ><?= h($cityLists); ?></span>
 													</div>
 												</div>
 												<div class="row rowspace">
 													<div class="col-md-12"><label>Countries: </label>
-													<span ><?= h($countryList);?></span>
+													<span ><?= h($countryLists);?></span>
 													</div>
 												</div>
 												

@@ -243,13 +243,12 @@ fieldset
 		color:#FFF;
 		border-color:#6FB98F !important;
 	}
-	.btn-successto
+	.btn-successto,.btn-successto:hover
 	{
 		background-color:#C9A66B !important;
 		color:#FFF;
 		border-color:#C9A66B !important;
-		
-	}
+ 	}
 	.btn.focus, .btn:focus, .btn:hover
  		color: white !important;
 	}

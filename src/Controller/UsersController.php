@@ -4880,12 +4880,14 @@ $data[$req['id']]  = $queryr->count();
 				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
 			)
 		);
+		$conditions[]= array ('Requests.status'=> 0);
+		
 		$conditions['is_deleted']=0;
 		$requests = $this->Requests->find()->where($conditions); 
-		//pr($requests->toArray()); exit;
+		print_r($requests->toArray()); exit;
 		foreach($requests as $request){
 			$updateId=$request['id'];
-			$this->Requests->updateAll(['is_deleted' => 1], ['id' => $updateId]);
+			//$this->Requests->updateAll(['is_deleted' => 1], ['id' => $updateId]);
 		}
 		exit;
 	}

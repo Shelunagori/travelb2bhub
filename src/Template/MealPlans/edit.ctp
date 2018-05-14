@@ -8,19 +8,20 @@
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
                 __('Delete'),
-                ['action' => 'delete', $hotelCategory->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $hotelCategory->id)]
+                ['action' => 'delete', $mealPlan->id],
+                ['confirm' => __('Are you sure you want to delete # {0}?', $mealPlan->id)]
             )
         ?></li>
-        <li><?= $this->Html->link(__('List Hotel Categories'), ['action' => 'index']) ?></li>
+        <li><?= $this->Html->link(__('List Meal Plans'), ['action' => 'index']) ?></li>
     </ul>
 </nav>
-<div class="hotelCategories form large-9 medium-8 columns content">
-    <?= $this->Form->create($hotelCategory) ?>
+<div class="mealPlans form large-9 medium-8 columns content">
+    <?= $this->Form->create($mealPlan) ?>
     <fieldset>
-        <legend><?= __('Edit Hotel Category') ?></legend>
+        <legend><?= __('Edit Meal Plan') ?></legend>
         <?php
             echo $this->Form->input('name');
+            echo $this->Form->input('created_on');
             echo $this->Form->input('is_deleted');
         ?>
     </fieldset>

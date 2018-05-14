@@ -259,30 +259,23 @@ a{
 <?php $i=1;
 if(!empty($eventPlannerPromotions)){
 foreach ($eventPlannerPromotions as $eventPlannerPromotion){
-							$cityList='';
-							$x=0;
-								foreach($eventPlannerPromotion->event_planner_promotion_cities as $cities)
-								{
-									if($x>=1)
-									{
-									$cityList.=', ';
-									}
-									@$cityList.=$cities->city->name;
-									if($cities->city_id==0){@$cityList.='All Cities';}
-									$x++;
-								}
-								
-								$stateList='';
-								$y=0;
-								foreach($eventPlannerPromotion->event_planner_promotion_states as $states)
-								{
-									if($y>=1)
-									{
-									$stateList.=', ';
-									}
-									$stateList.=$states->state->state_name;
-									$y++;
-								}
+		$cityList=array();
+		foreach($eventPlannerPromotion->event_planner_promotion_cities as $cities)
+		{ 
+			if($cities->city_id==0){@$cityList[]='All Cities';}
+			else{
+				@$cityList[]=$cities->city->name;
+			}
+		}
+		
+		$stateList=array();
+		foreach($eventPlannerPromotion->event_planner_promotion_states as $states)
+		{
+			$stateList[]=$states->state->state_name;
+		}
+		$stateLists=implode(', ',array_unique($stateList));
+		$cityLists=implode(', ',array_unique($cityList));
+		//pr($eventPlannerPromotion);
 	?>
 	<div class="box-body bbb">	
 		<fieldset style="background-color:#fff;">
@@ -312,7 +305,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 					<hr></hr>
 					<div class="row" style="padding-top:5px;">					
 						<input type="hidden" name="event_id" value="<?php echo $eventPlannerPromotion->id; ?>">
-						<table  width="100%" style="text-align:center;" >
+							<table  width="100%" style="text-align:center;" >
 								<tr>
 								<td width="25%" >
 									<span><img src="../images/view.png" height="13px"/>
@@ -320,7 +313,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 								</td>
 								<td width="25%" >
 									<span><img src="../images/unlike.png" height="13px"/>
-									<?= h($eventPlannerPromotion->total_views);?></span>
+									<?= h($eventPlannerPromotion->total_likes);?></span>
 								</td>
 								<td width="25%" >
 									<span><img src="../images/unsave.png" height="14px"/>
@@ -339,42 +332,52 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 						<div class="col-md-6">
 							<div class="row rowspace">
 								<div class="col-md-12 "><label>Cities of Operation: </label>
-								<span ><?= h($cityList); ?></span>
+								<span ><?= h($cityLists); ?></span>
 								</div>
 							</div>
 							<div class="row rowspace">
 								<div class="col-md-12 "><label>States of Operation: </label>
-								<span class=""><?= h($stateList); ?></span>
+								<span class=""><?= h($stateLists); ?></span>
+								</div>
+							</div>
+							<div class="row rowspace">
+								<div class="col-md-12 "><label>Country: </label>
+								<span class=""><?= h($eventPlannerPromotion->country->country_name);?></span>
 								</div>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="row rowspace">
-									<div class="col-md-12 "><label>Country: </label>
-									<span class=""><?= h($eventPlannerPromotion->country->country_name);?></span>
-									</div>
-								</div>
-								<div class="row rowspace">
-									<div class="col-md-12 "><label>Event Planner: </label>
-										<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'adminviewprofile',$eventPlannerPromotion->user_id),1);?>
-											<u><a style="color:#d69d5c;" href="<?php echo $hrefurl; ?>"> 
-												<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?></u>
-										
-												<?php
-												if($eventPlannerPromotion->user_rating==0)
-												{
-													echo "";
-												}
-												else{
-														echo "(".$eventPlannerPromotion->user_rating." <i class='fa fa-star'></i>)";
-													}
-												?></a>
-											</span>
-
-									</div>
+								<div class="col-md-12 "><label>Created Date: </label>
+								<span class=""><?= h(date('d-m-Y',strtotime($eventPlannerPromotion->created_on)));?></span>
 								</div>
 							</div>
-							<div id="contactdetails<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
+							<div class="row rowspace">
+								<div class="col-md-12 "><label>Expiring On: </label>
+								<span class=""><?= h(date('d-m-Y',strtotime($eventPlannerPromotion->visible_date)));?></span>
+								</div>
+							</div>
+							<div class="row rowspace">
+								<div class="col-md-12 "><label>Event Planner: </label>
+									<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'adminviewprofile',$eventPlannerPromotion->user_id),1);?>
+										<u><a style="color:#d69d5c;" href="<?php echo $hrefurl; ?>"> 
+											<?= h($eventPlannerPromotion->user->first_name.' '.$eventPlannerPromotion->user->last_name);?></u>
+									
+											<?php
+											if($eventPlannerPromotion->user_rating==0)
+											{
+												echo "";
+											}
+											else{
+													echo "(".$eventPlannerPromotion->user_rating." <i class='fa fa-star'></i>)";
+												}
+											?></a>
+										</span>
+
+								</div>
+							</div>
+						</div>
+						<div id="contactdetails<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
 									<div class="modal-dialog modal-sm" >
 									<div class="modal-content">
 									  <div class="modal-header">
@@ -425,39 +428,66 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 									</div>
 								</div>
 								<div id="eventdetail<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
-										<div class="modal-dialog modal-md">
-											<!-- Modal content-->
-												<div class="modal-content">
-												  <div class="modal-header">
-													<button type="button" class="close" data-dismiss="modal">&times;</button>
-													<h3 class="modal-title">Event Planner Details</h3>
-												  </div>
-													<div class="modal-body" >
-														<div class="row">
-															<div class="col-md-12">
-																<p style="padding:15px;"><?= h($eventPlannerPromotion->event_detail); ?></p>
-															</div>
+									<div class="modal-dialog modal-md">
+										<!-- Modal content-->
+											<div class="modal-content">
+											  <div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h3 class="modal-title">Event Planner Details</h3>
+											  </div>
+												<div class="modal-body" >
+													<div class="row">
+														<div class="col-md-12">
+															<p style="padding:15px;"><?= h($eventPlannerPromotion->event_detail); ?></p>
 														</div>
 													</div>
-													<div class="modal-footer" >
-														<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancel</button>
-													</div>
+												</div>
+												<div class="modal-footer" >
+													<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancel</button>
 												</div>
 											</div>
 										</div>
+									</div>
 						<div class="col-md-12 text-center">
 						<div class="row" style="padding-top:15px;">
 							<div class="col-md-12">
-								<button class="btn btn-info btn-md btnlayout viewCount" data-target="#eventdetail<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $eventPlannerPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Planner Details</button>&nbsp;&nbsp;
-								<button class="btn btn-danger btn-md btnlayout viewCount" data-target="#contactdetails<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $eventPlannerPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Contact Info</button>
-								<!-------Contact Details Modal --------->
+								<button style="margin-top:5px" class="btn btn-info btn-md btnlayout" data-target="#eventdetail<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $eventPlannerPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Planner Details</button>&nbsp;&nbsp;
 								
+								<button style="margin-top:5px" class="btn btn-success btn-md btnlayout" data-target="#contactdetails<?php echo $eventPlannerPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $eventPlannerPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Contact Info</button>&nbsp;&nbsp;
+								
+								<a style="margin-top:5px" href="adminview/<?php echo $eventPlannerPromotion->id; ?>" class="btn btn-warning btn-md btnlayout" > Details</a>&nbsp;&nbsp;
+								
+								<!--<a style="margin-top:5px" href="<?php echo $this->Url->build(["controller" => "EventPlannerPromotions",'action'=>'adminedit/'.$eventPlannerPromotion->id]); ?>" class="btn btn-successto btn-md btnlayout" >Edit Event</a>&nbsp;&nbsp;-->
+								
+								<button style="margin-top:5px" type="button" class="btn btn-danger btn-md btnlayout" data-target="#remove<?php echo $eventPlannerPromotion->id; ?>" data-toggle=modal>Remove Event</button>
+								<!-------Contact Details Modal --------->
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</form>
+				<div id="remove<?php echo $eventPlannerPromotion->id; ?>" class="modal fade" role="dialog">
+						<div class="modal-dialog modal-md" >
+							<!-- Modal content-->
+							<form method="post" class="formSubmit">
+								<div class="modal-content">
+								  <div class="modal-header" style="height:100px;">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">
+										Are you sure you want to delete this Promotion?
+										</h4>
+									</div>
+									<div class="modal-footer" >
+										<button type="submit"  class="unfollow btn btn-success btn-md" value="yes" name="remove_promotion">Yes</button>
+										<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
+									</div>
+								</div>
+								<input type="hidden" name="remove_package_id" value="<?php echo $eventPlannerPromotion->id; ?>"/>
+							</form>
+						</div>
+					</div>
+
 	</fieldset>
 </div>
 <?php }}					

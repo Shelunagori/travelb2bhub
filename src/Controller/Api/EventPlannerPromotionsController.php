@@ -585,7 +585,12 @@ class EventPlannerPromotionsController extends AppController
 			foreach($getEventPlannersDetails as $vew){
 					$vew->total_views = $this->EventPlannerPromotions->EventPlannerPromotionViews
 							->find()->where(['event_planner_promotion_id' => $id])->count();
-
+					$vew->total_saved = $this->EventPlannerPromotions->EventPlannerPromotionCarts
+						->find()->where(['event_planner_promotion_id' => $id])->count();
+						
+					$vew->total_flagged = $this->EventPlannerPromotions->EventPlannerPromotionReports
+						->find()->where(['event_planner_promotion_id' => $id])->count();
+						
 					$exists = $this->EventPlannerPromotions->EventPlannerPromotionLikes->exists(['event_planner_promotion_id'=>$vew->id,'user_id'=>$user_id]);
 					if($exists == 1)
 					{ $vew->isLiked = 'yes'; }

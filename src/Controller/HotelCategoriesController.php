@@ -10,7 +10,22 @@ use App\Controller\AppController;
  */
 class HotelCategoriesController extends AppController
 {
-
+	public function initialize()
+	{
+		parent::initialize();
+		$this->Auth->allow(['logout']);
+		 
+		$loginId=$this->Auth->User('id');  
+		if(!empty($loginId)){
+			$first_name=$this->Auth->User('first_name');
+			$last_name=$this->Auth->User('last_name');
+			$profile_pic=$this->Auth->User('profile_pic');  
+			$authUserName=$first_name.' '.$last_name;
+			$this->set('MemberName',$authUserName);
+			$this->set('profile_pic', $profile_pic);
+			$this->set('loginId',$loginId); 
+		}
+	} 
     /**
      * Index method
      *
@@ -44,68 +59,49 @@ class HotelCategoriesController extends AppController
     /**
      * Add method
      *
-     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
+     * @return \Cake\Network\Response|null Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($id = null)
     {
-        $hotelCategory = $this->HotelCategories->newEntity();
-        if ($this->request->is('post')) {
+		$this->viewBuilder()->layout('admin_layout');	
+ 		if(!$id)
+		{				
+			$hotelCategory = $this->HotelCategories->newEntity();
+		}
+		else
+		{
+			$hotelCategory = $this->HotelCategories->get($id, [
+				'contain' => []
+			]);
+		}
+        if ($this->request->is(['patch','post','put'])) {
             $hotelCategory = $this->HotelCategories->patchEntity($hotelCategory, $this->request->data);
+			 
             if ($this->HotelCategories->save($hotelCategory)) {
                 $this->Flash->success(__('The hotel category has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The hotel category could not be saved. Please, try again.'));
+                return $this->redirect(['action' => 'add']);
             }
+            $this->Flash->error(__('The hotel category could not be saved. Please, try again.'));
         }
-        $this->set(compact('hotelCategory'));
-        $this->set('_serialize', ['hotelCategory']);
+		$hotelCategories = $this->paginate($this->HotelCategories->find()->where(['is_deleted'=>0]));
+
+        $this->set(compact('hotelCategory','hotelCategories'));
+        $this->set('_serialize', ['hotelCategory','hotelCategories']);
     }
-
-    /**
-     * Edit method
-     *
-     * @param string|null $id Hotel Category id.
-     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Network\Exception\NotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $hotelCategory = $this->HotelCategories->get($id, [
-            'contain' => []
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $hotelCategory = $this->HotelCategories->patchEntity($hotelCategory, $this->request->data);
-            if ($this->HotelCategories->save($hotelCategory)) {
-                $this->Flash->success(__('The hotel category has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The hotel category could not be saved. Please, try again.'));
-            }
-        }
-        $this->set(compact('hotelCategory'));
-        $this->set('_serialize', ['hotelCategory']);
-    }
-
-    /**
-     * Delete method
-     *
-     * @param string|null $id Hotel Category id.
-     * @return \Cake\Network\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
+ 
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['patch','post', 'put']);
         $hotelCategory = $this->HotelCategories->get($id);
-        if ($this->HotelCategories->delete($hotelCategory)) {
+        $this->request->data['is_deleted']=1;
+		$hotelCategory = $this->HotelCategories->patchEntity($hotelCategory, $this->request->data());
+        if ($this->HotelCategories->save($hotelCategory)) {
             $this->Flash->success(__('The hotel category has been deleted.'));
         } else {
             $this->Flash->error(__('The hotel category could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'add']);
     }
 }

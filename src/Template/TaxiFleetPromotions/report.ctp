@@ -310,38 +310,29 @@ a{
 			<?php $i=1;
 			if(!empty($taxiFleetPromotions)){
 			foreach ($taxiFleetPromotions as $taxiFleetPromotion){
-				$vehicleList='';
-					$x=0;
-					foreach($taxiFleetPromotion->taxi_fleet_promotion_rows as $vehicle)
-						{
-							if($x>=1){
-								$vehicleList.=', ';
-							}
-							$vehicleList.=$vehicle->taxi_fleet_car_bus->name;
-							$x++;
-						}
-						$cityList='';
-						$y=0;
-						foreach($taxiFleetPromotion->taxi_fleet_promotion_cities as $cities)
-							{
-								if($y>=1){
-									$cityList.=', ';
-								}
-								@$cityList.=$cities->city->name;
-								if($cities->city_id==0){@$cityList.='All Cities';}
-								$y++;
-							}
-						$stateList='';
-						$z=0;
-						foreach($taxiFleetPromotion->taxi_fleet_promotion_states as $statess)
-							{
-								if($z>=1){
-									$stateList.=', ';
-								}
-								$stateList.=$statess->state->state_name;
-								$z++;
-							}
-						$i++; ?>
+				$vehicleList=array(); 
+				foreach($taxiFleetPromotion->taxi_fleet_promotion_rows as $vehicle)
+				{
+					$vehicleList[]=$vehicle->taxi_fleet_car_bus->name;
+				}
+				$cityList=array();
+				foreach($taxiFleetPromotion->taxi_fleet_promotion_cities as $cities)
+				{
+					 
+					if($cities->city_id==0){@$cityList[]='All Cities';}
+					else{
+						@$cityList[]=$cities->city->name;
+					}
+				}
+				$stateList=array();
+				foreach($taxiFleetPromotion->taxi_fleet_promotion_states as $statess)
+				{ 
+					$stateList[]=$statess->state->state_name;
+				}
+				$vehicleLists=implode(', ',array_unique($vehicleList));
+				$stateLists=implode(', ',array_unique($stateList));
+				$cityLists=implode(', ',array_unique($cityList));
+				$i++; ?>
 	
 	<div class="box-body bbb">	
 			<fieldset style="background-color:#fff;">
@@ -468,18 +459,18 @@ a{
 								<div class="row col-md-12 rowspace" style="padding-top:8px;">
 										<div class="col-md-12">
 										<label>Category: </label>
-										<span ><?= h($vehicleList); ?></span>
+										<span ><?= h($vehicleLists); ?></span>
 										</div>
 								</div>
 								<div class="col-md-7">
 									<div class="row rowspace" >
 										<div class="col-md-12"><label ><?= __(' Cities of Operation') ?>: </label>
-										<span><?= h($cityList); ?></span>
+										<span><?= h($cityLists); ?></span>
 										</div>
 									</div>
 									<div class="row rowspace" >
 										<div class="col-md-12"><label ><?= __(' States of Operation') ?>: </label>
-										<span ><?= h($stateList); ?> </span>
+										<span ><?= h($stateLists); ?> </span>
 										</div>
 									</div>
 								</div>

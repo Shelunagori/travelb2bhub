@@ -327,6 +327,11 @@ margin-bottom: 0px!important;
 	.outnav{
 		display:none !important;
 	}
+} 
+@media all and (max-width: 994px) {
+	.hideinphone{
+		display:none !important;
+ 	}
 }
 @media all and (max-width: 770px) {
 	.portalmobile{

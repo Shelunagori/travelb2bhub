@@ -4,32 +4,23 @@
 		<div class="box box-primary">
 			<div class="box-header with-border">
 			<?php if(!empty($id)){ ?>
-							 <b> Edit Category </b>
+							 <b> Edit Meal Plan </b>
 						<?php }else{ ?>
-							 <b> Add Category </b>
+							 <b> Add Meal Plan </b>
 						<?php } ?>
 				
 			</div>
 			<div class="box-body"> 
 				<div class="">
-				<?= $this->Form->create($hotelCategory,['id'=>'CountryForm']) ?>
-					<!--<div class="row">
-						<div class="col-md-4">
-							<label class="control-label">Country Code  </label>
-						</div>
-						<div class="col-md-8">
-							<?php echo $this->Form->control('country_cod',[
-							'label' => false,'class'=>'form-control input-medium ','placeholder'=>'Enter Country Code']);?>
-						</div>
-					</div>
-					<span class="help-block"></span>-->
+				<?= $this->Form->create($mealPlan,['id'=>'CountryForm']) ?>
+					 
 					<div class="row">
 						<div class="col-md-4">
-							<label class="control-label">Category Name</label>
+							<label class="control-label">Meal Plan Name</label>
 						</div>
 						<div class="col-md-8">
 							<?php 
-							echo $this->Form->input('name',['label' => false,'class'=>'form-control input-medium ','Placeholder'=> 'Enter Category Name']);?>	
+							echo $this->Form->input('name',['label' => false,'class'=>'form-control input-medium ','Placeholder'=> 'Enter Meal Plan Name']);?>	
 						</div>
 					</div>
 					<span class="help-block"> </span>
@@ -52,7 +43,7 @@
 	<div class="col-md-6">
 		<div class="box box-primary">
 			<div class="box-header with-border">
-				<b> View Category List </b>
+				<b> View Meal Plan List </b>
 				<div class="box-tools pull-right">
 					<!--<a style="font-size:19px;  margin-top: -6px;" class="btn btn-box-tool" data-target="#myModal122" data-toggle="collapse"> <i class="fa fa-filter"></i></a>-->
 				</div>
@@ -65,12 +56,12 @@
 					<div class="row"> 
 						<div class="col-md-12">
 							<label class="control-label">Country name</label>
-							<?php echo $this->Form->input('CountryName',[
+							<?php echo $this->Form->input('name',[
 							'label' => false,'class'=>'form-control ','placeholder'=>'Enter Country Name']);?>
 						</div>
 						<div class="col-md-12" align="center">
 							<hr style="margin-top: 12px;margin-bottom: 10px;"></hr>
-							<a href="<?php echo $this->Url->build(array('controller'=>'Countries','action'=>'add')) ?>"class="btn btn-danger btn-sm">Reset</a>
+							<a href="<?php echo $this->Url->build(array('controller'=>'MealPlans','action'=>'add')) ?>"class="btn btn-danger btn-sm">Reset</a>
 							<label class="control-label col-md-12">&nbsp;</label>
 							<?php echo $this->Form->button('Apply',['class'=>'btn btn-sm btn-success','id'=>'submit_member','name'=>'search_report']); ?> 
 						</div> 
@@ -88,21 +79,21 @@
 					</tr>
 				</thead>
 				<tbody>
-					<?php foreach ($hotelCategories as $hotelCategory): ?>
+					<?php foreach ($MealPlans as $country): ?>
 					<tr>
-						<td><?= $this->Number->format($hotelCategory->id) ?></td> 
-						<td><?= h($hotelCategory->name) ?></td>
+						<td><?= $this->Number->format($country->id) ?></td> 
+						<td><?= h($country->name) ?></td>
 						<td class="actions">
-							<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/HotelCategories/add/'.$hotelCategory->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
-							<a class=" btn btn-danger btn-xs" data-target="#deletemodal<?php echo $hotelCategory->id; ?>" data-toggle=modal><i class="fa fa-trash"></i></a>
-									<div id="deletemodal<?php echo $hotelCategory->id; ?>" class="modal fade" role="dialog">
+							<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/MealPlans/add/'.$country->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
+							<a class=" btn btn-danger btn-xs" data-target="#deletemodal<?php echo $country->id; ?>" data-toggle=modal><i class="fa fa-trash"></i></a>
+									<div id="deletemodal<?php echo $country->id; ?>" class="modal fade" role="dialog">
 										<div class="modal-dialog modal-md" >
-											<form method="post" action="<?php echo $this->Url->build(array('controller'=>'HotelCategories','action'=>'delete',$hotelCategory->id)) ?>">
+											<form method="post" action="<?php echo $this->Url->build(array('controller'=>'MealPlans','action'=>'delete',$country->id)) ?>">
 												<div class="modal-content">
 												  <div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
 														<h4 class="modal-title">
-														Are you sure you want to remove this hotel Category?
+														Are you sure you want to remove this Country?
 														</h4>
 													</div>
 													<div class="modal-footer">
@@ -113,7 +104,7 @@
 											</form>
 										</div>
 									</div>
-						   <?php  $this->Form->PostLink('<i class="fa fa-trash"></i>','/HotelCategories/delete/'.$hotelCategory->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $hotelCategory->id)));?>
+						   <?php  $this->Form->PostLink('<i class="fa fa-trash"></i>','/MealPlans/delete/'.$country->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $country->id)));?>
 						</td>
 					</tr>
 					<?php endforeach; ?>
@@ -143,7 +134,7 @@ $(document).ready(function() {
 	// validate signup form on keyup and submit
 	 $("#CountryForm").validate({ 
 		rules: {
-			name: {
+			country_name: {
 				required: true
 			} 
 		},
