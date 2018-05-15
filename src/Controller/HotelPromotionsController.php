@@ -588,7 +588,7 @@ class HotelPromotionsController extends AppController
 		$user_id=$this->Auth->User('id');
         $this->set(compact('user_id','search','starting_price','higestSort','category_id','rating_filter'));
 	}
-	  public function promotionreports()
+	public function promotionreports()
     {
 		$this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');
@@ -824,7 +824,7 @@ class HotelPromotionsController extends AppController
 		}
 		$this->set(compact('user_id','hotelpromotion_id'));
     }
-	  public function savedList($user_id = null)
+	public function savedList($user_id = null)
     {
 		$this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');
@@ -990,6 +990,149 @@ class HotelPromotionsController extends AppController
 		$user_id=$this->Auth->User('id');
 		$this->viewBuilder()->layout('admin_layout');
 		$user_id=$this->Auth->User('id');
+		if ($this->request->is(['patch', 'post', 'put'])) 
+		{
+				//-- Renew promotion
+			if(isset($this->request->data['pay_now']))
+			{
+ 				$hotel_id=$this->request->data('hotel_id');
+ 				$price_master_id=$this->request->data('price_master_id');
+ 				$visible_date=$this->request->data('visible_date');
+ 				$payment_amount=$this->request->data('payment_amount');
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				 CURLOPT_URL => $this->coreVariable['SiteUrl']."api/hotel_promotions/renewHotelpromotion.json?promotion_id=".$hotel_id."&price_master_id=".$price_master_id."&price=".$payment_amount."&visible_date=".$visible_date,
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "GET",
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				//pr($LikeResult);exit;
+				$displayMessage=$LikeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'PackageReport']);
+			}
+			//-- Remove promotion
+			if(isset($this->request->data['removepackage']))
+			{
+ 				$hotel_id=$this->request->data('hotel_id');
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				 CURLOPT_URL => $this->coreVariable['SiteUrl']."api/hotel_promotions/removePromotion.json?promotion_id=".$hotel_id,
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "GET",
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				//pr($LikeResult);exit;
+				$displayMessage=$LikeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'PackageReport']);
+			}
+		}
         $this->set(compact('user_id','search','starting_price','higestSort','category_id','rating_filter'));
 	}
+	
+	public function adminview($id = null)
+    {
+        $this->viewBuilder()->layout('admin_layout');
+		$user_id=$this->Auth->User('id');
+		if ($this->request->is(['patch', 'post', 'put'])) 
+		{
+				//-- Renew promotion
+			if(isset($this->request->data['pay_now']))
+			{
+ 				$hotel_id=$this->request->data('hotel_id');
+ 				$price_master_id=$this->request->data('price_master_id');
+ 				$visible_date=$this->request->data('visible_date');
+ 				$payment_amount=$this->request->data('payment_amount');
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				 CURLOPT_URL => $this->coreVariable['SiteUrl']."api/hotel_promotions/renewHotelpromotion.json?promotion_id=".$hotel_id."&price_master_id=".$price_master_id."&price=".$payment_amount."&visible_date=".$visible_date,
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "GET",
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				//pr($LikeResult);exit;
+				$displayMessage=$LikeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'adminview/'.$hotel_id]);
+			}
+			//-- Remove promotion
+			if(isset($this->request->data['removepackage']))
+			{
+ 				$hotel_id=$this->request->data('hotel_id');
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				 CURLOPT_URL => $this->coreVariable['SiteUrl']."api/hotel_promotions/removePromotion.json?promotion_id=".$hotel_id,
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "GET",
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				//pr($LikeResult);exit;
+				$displayMessage=$LikeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'PackageReport']);
+			}
+		}
+		$this->set(compact('user_id','id'));
+    }
 }

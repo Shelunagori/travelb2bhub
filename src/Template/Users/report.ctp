@@ -1,3 +1,4 @@
+ 
 <section class="content">
 <div class="row">
 	<div class="col-md-12">
@@ -44,20 +45,37 @@
 								<th><?= ('Name') ?></th>
 								<th><?= $this->Paginator->sort('email') ?></th>
 								<th><?= ('Mobile') ?></th>
-								<th><?= ('Role') ?></th> 
+								<th><?= ('Category') ?></th> 
 								<th><?= ('City') ?></th> 
 								<th><?= ('State') ?></th> 
+								<th><?= ('State of Operation') ?></th> 
 								<th class="actions"><?= __('Actions') ?></th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php $x=0; foreach ($users as $user): $x++;
 							$role_id=$user->role_id;
+							$blocked=$user->blocked;
 							if($role_id==1){ $roleShow="Travel Agent";}
 							if($role_id==2){ $roleShow="Event Planner";}
 							if($role_id==3){ $roleShow="Hotelier";}
+							$rowcolor='';
+							if($blocked==1){ $rowcolor="#f5d8d8";}
+							$selectedPreferenceStates = "";
+							$state_name=array();
+							if(!empty($user['preference'])) 
+							{
+								$selectedPreferenceStates = explode(",", $user['preference']);
+								
+								foreach($selectedPreferenceStates as $operated)
+								{
+									$state_name[]=$allStates[$operated];
+								}
+							}
+							$stateofoperation='';
+							if(!empty($state_name)){$stateofoperation=implode(', ',$state_name);}
 							?>
-							<tr>
+							<tr style="background-color:<?php echo $rowcolor; ?>">
 								<td><?= $x; ?></td> 
 								<td><?= h($user->first_name.' '.$user->last_name) ?></td>
 								<td><?= h($user->email) ?></td>
@@ -65,89 +83,54 @@
 								<td><?php echo $roleShow; ?></td> 
 								<td><?= h($user->city->name) ?></td> 
 								<td><?= h($user->state->state_name) ?></td> 
+								<td><?= h($stateofoperation) ?></td> 
 								<td class="actions">
 									 
 
-<!-- The Modal Start-->
-<a href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'adminviewprofile/'.$user->id)) ?>" class="btn btn-success btn-xs"  ><i class="fa fa-book"></i></i>
-<!-- Modal -->
-<div id="myModal_<?= $user->id ?>" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <?php
-		$role_id=$user->role_id;
-		if($role_id==1){ $roleShow="Travel Agent";}
-		if($role_id==2){ $roleShow="Event Planner";}
-		if($role_id==3){ $roleShow="Hotelier";}
-		?>
-			<div class="col-md-12">
-				<div class="col-md-6">
-					Category : <?= $roleShow ?>
-				</div>
-				<div class="col-md-6">
-					Company : <?= $user->company_name ?>
-				</div>
-				
-			</div>
-			<br>
-			<br>
-			<div class="col-md-12">
-				<div class="col-md-6">
-					First Name : <?= $user->first_name ?>
-				</div>
-				<div class="col-md-6">
-					Last Name : <?= $user->last_name ?>
-				</div>
-				
-			</div>
-			<br>
-			<br>
-			<div class="col-md-12">
-				<div class="col-md-6">
-					Mobile Number : <?= $user->mobile_number ?>
-				</div>
-				<div class="col-md-6">
-					Email Id : <?= $user->email ?>
-				</div>
-			</div>
-			<br>
-			<br>
-			<div class="col-md-12">
-				<div class="col-md-6">
-					Address : <?= $user->address ?>
-				</div>
-				<div class="col-md-6">
-					City : <?= $user->city->name ?>
-				</div>
-			</div>
-			<br>
-			<br>
-			<div class="col-md-12">
-				<div class="col-md-6">
-					State : <?= $user->state->state_name ?>
-				</div>
-				<div class="col-md-6">
-					Country :  <?= $user->country->country_name ?>
-				</div>
-			</div>
-			<br> 
-      </div>
-      <div class="modal-footer">
-			<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-									
+						<a style="margin-top:2px" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'adminviewprofile/'.$user->id)) ?>" title="View Details" class="btn btn-success btn-xs"  ><i class="fa fa-book"></i></i> </a>&nbsp;
 						 
-						<?php // echo $this->Html->link('<i class="fa fa-edit"></i>','/Users/add/'.$user->id,array('escape'=>false,'class'=>'btn btn-info btn-xs'));?>
-						<?php //echo $this->Form->PostLink('<i class="fa fa-trash"></i>','/Users/delete/'.$user->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $user->id)));?>
+						<?php  echo $this->Html->link('<i class="fa fa-edit"></i>','/Users/add/'.$user->id,array('escape'=>false,'class'=>'btn btn-info btn-xs','title'=>'Edit User','style'=>'margin-top:2px'));?> 
+						
+						<a style="margin-top:2px" class=" btn btn-danger btn-xs" title="Delete User" data-target="#deletemodal<?php echo $user->id; ?>" data-toggle=modal><i class="fa fa-trash"></i></a>
+						<div id="deletemodal<?php echo $user->id; ?>" class="modal fade" role="dialog">
+							<div class="modal-dialog modal-md" >
+								<form method="post" action="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'delete',$user->id)) ?>">
+									<div class="modal-content">
+									  <div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">
+											Are you sure you want to remove this User?
+											</h4>
+										</div>
+										<div class="modal-footer">
+											<button type="submit" class="btn  btn-sm btn-info">Yes</button>
+											<button type="button" class="btn  btn-sm btn-danger" data-dismiss="modal">Cancel</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						
+						<a style="margin-top:2px" class=" btn btn-successto btn-xs" title="Block User" data-target="#Block<?php echo $user->id; ?>" data-toggle=modal><i class="fa fa-gavel"></i></a>
+						<div id="Block<?php echo $user->id; ?>" class="modal fade" role="dialog">
+							<div class="modal-dialog modal-md" >
+								<form method="post" action="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'adminBlockUser',$user->id)) ?>">
+									<div class="modal-content">
+									  <div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">
+											Are you sure you want to Block this User?
+											</h4>
+										</div>
+										<div class="modal-footer">
+											<button type="submit" class="btn  btn-sm btn-info">Yes</button>
+											<button type="button" class="btn  btn-sm btn-danger" data-dismiss="modal">Cancel</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+						<?php  $this->Form->PostLink('<i class="fa fa-trash"></i>','/Users/delete/'.$user->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','title'=>'Delete','confirm' => __('Are you sure you want to delete # {0}?', $user->id)));?>
 								</td>
 								 
 							</tr>

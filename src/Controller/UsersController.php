@@ -296,9 +296,14 @@ class UsersController extends AppController {
 		$this->paginate = [
 		'contain' => ['Cities','States','Countries']
 		];
-		$users = $this->paginate($this->Users);
+		$users = $this->paginate($this->Users->find()->where(['Users.is_deleted'=>0]));
 		//pr($users->toArray()); exit;
-		$this->set(compact('users'));
+		$states = $this->Users->States->find()->where(['country_id' => '101'])->all();
+		$allStates = array();
+		foreach($states as $state){
+			$allStates[$state["id"]] = $state['state_name'];
+		}
+		$this->set(compact('users','allStates'));
 		$this->set('_serialize', ['users']);
 		
 	}
@@ -784,6 +789,16 @@ if ($this->request->is('post')) {
 * @throws \Cake\Network\Exception\NotFoundException When record not found.
 */
 public function delete($id = null) {
+	$this->request->allowMethod(['patch','post', 'put']);
+	$city = $this->Users->get($id);
+	$this->request->data['is_deleted']=1;
+	$city = $this->Users->patchEntity($city, $this->request->data());
+	if ($this->Users->save($city)) {
+		$this->Flash->success(__('The User has been deleted.'));
+	} else {
+		$this->Flash->error(__('The User could not be deleted. Please, try again.'));
+	}
+	return $this->redirect(['action' => 'report']);
 }
 /**
 * Login method
@@ -971,6 +986,7 @@ public function viewuserprofile(){
 			$states_show=$this->Users->States->find('list')->where(['country_id' => '101']);
 			$country_show=$this->Users->Countries->find('list');
 			//pr($country_show->toArray());exit;
+
 			$allStates = array();
 			foreach($states as $state){
 				$allStates[$state["id"]] = $state['state_name'];
@@ -4891,60 +4907,75 @@ $data[$req['id']]  = $queryr->count();
 		}
 		exit;
 	}
-		public function sendpushnotification($userid,$message,$message_data)
-		{
-			$conn = ConnectionManager::get('default');
-			$sql = "Select device_id FROM users where id='".$userid."'";
-			$stmt = $conn->execute($sql);
-			$user = $stmt ->fetch('assoc');
-			$deviceid = $user['device_id'];
-			
-			if(!empty($deviceid)){
+	public function sendpushnotification($userid,$message,$message_data)
+	{
+		$conn = ConnectionManager::get('default');
+		$sql = "Select device_id FROM users where id='".$userid."'";
+		$stmt = $conn->execute($sql);
+		$user = $stmt ->fetch('assoc');
+		$deviceid = $user['device_id'];
+		
+		if(!empty($deviceid)){
 
-			$sql1 = "Select count(*) as countchat FROM user_chats as c 
-			INNER JOIN users as u on u.id=c.user_id
-			where c.is_read='0' AND c.send_to_user_id='".$userid."'
-			order by c.created DESC ";
-			$stmt1 = $conn->execute($sql1);
-			$countchat = $stmt1 ->fetch('assoc');
-			
-			$API_ACCESS_KEY='AIzaSyBMQtE5umATnqJkV4edMYQ_fR8263Zm21E';
+		$sql1 = "Select count(*) as countchat FROM user_chats as c 
+		INNER JOIN users as u on u.id=c.user_id
+		where c.is_read='0' AND c.send_to_user_id='".$userid."'
+		order by c.created DESC ";
+		$stmt1 = $conn->execute($sql1);
+		$countchat = $stmt1 ->fetch('assoc');
+		
+		$API_ACCESS_KEY='AIzaSyBMQtE5umATnqJkV4edMYQ_fR8263Zm21E';
 
-			$registrationIds =  $deviceid;
-			$msg = array
-			(
-			'body' 	=> $message,
-			'title'	=> 'Travelb2bhub Notification',
-			'icon'	=> 'myicon',/*Default Icon*/
-			'sound' => 'mySound',/*Default sound*/
-			'unread_count' => $countchat,
-			'message' => $message_data
-			);
-			$data = array
-			(
-			"unread_count" => $countchat
-			);
-			$fields = array('to'=> $registrationIds,
-			'notification'=> $msg,
-			'data' => $msg
-			);
-			$headers = array(
-			'Authorization: key='.$API_ACCESS_KEY,
-			'Content-Type: application/json'
-			);
+		$registrationIds =  $deviceid;
+		$msg = array
+		(
+		'body' 	=> $message,
+		'title'	=> 'Travelb2bhub Notification',
+		'icon'	=> 'myicon',/*Default Icon*/
+		'sound' => 'mySound',/*Default sound*/
+		'unread_count' => $countchat,
+		'message' => $message_data
+		);
+		$data = array
+		(
+		"unread_count" => $countchat
+		);
+		$fields = array('to'=> $registrationIds,
+		'notification'=> $msg,
+		'data' => $msg
+		);
+		$headers = array(
+		'Authorization: key='.$API_ACCESS_KEY,
+		'Content-Type: application/json'
+		);
 
-			
-			$ch = curl_init();
-			curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
-			curl_setopt( $ch,CURLOPT_POST, true );
-			curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
-			curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
-			curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
-			curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
-			$result = curl_exec($ch );
-			curl_close( $ch );
- 			return $result;
- 			}
-			
-		}	
+		
+		$ch = curl_init();
+		curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
+		curl_setopt( $ch,CURLOPT_POST, true );
+		curl_setopt( $ch,CURLOPT_HTTPHEADER, $headers );
+		curl_setopt( $ch,CURLOPT_RETURNTRANSFER, true );
+		curl_setopt( $ch,CURLOPT_SSL_VERIFYPEER, false );
+		curl_setopt( $ch,CURLOPT_POSTFIELDS, json_encode( $fields ) );
+		$result = curl_exec($ch );
+		curl_close( $ch );
+		return $result;
+		}
+		
+	}
+	public function adminBlockUser($id = null)
+	{
+		$this->request->allowMethod(['patch','post', 'put']);
+		$city = $this->Users->get($id);
+		$this->request->data['blocked']=1;
+		
+		$city = $this->Users->patchEntity($city, $this->request->data());
+		 
+		if ($this->Users->save($city)) {
+			$this->Flash->success(__('The User has been Blocked.'));
+		} else {
+			$this->Flash->error(__('The User could not be Blocked. Please, try again.'));
+		}
+		return $this->redirect(['action' => 'report']);
+	}
 }

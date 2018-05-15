@@ -204,7 +204,6 @@ $m=0;
 															Payment Duration
 														</p>
 														<div class="input-field">
-																 
 														<?php				 
 															$options=array();
 															foreach($pricemasters as $Price)
@@ -254,7 +253,7 @@ $m=0;
 											<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
 										</div>
 									</div>
-									<input type="hidden" name="remove_package_id" value="<?php echo $hotel_promotion->id; ?>"/>
+									<input type="hidden" name="hotel_id" value="<?php echo $hotel_promotion->id; ?>"/>
 								</form>
 							</div>
 						</div>

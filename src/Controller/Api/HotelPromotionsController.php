@@ -497,6 +497,12 @@ $getHotelPromotion=$getEventPlanners ;
 			foreach($getEventPlannersDetails as $vew){
 					$vew->total_views = $this->HotelPromotions->HotelPromotionViews
 							->find()->where(['hotel_promotion_id' => $id])->count();
+							
+					$vew->total_flagged = $this->HotelPromotions->HotelPromotionReports
+							->find()->where(['hotel_promotion_id' => $id])->count();
+							
+					$vew->total_saved = $this->HotelPromotions->HotelPromotionCarts
+							->find()->where(['hotel_promotion_id' => $id])->count();
 				}
 		}
 		else

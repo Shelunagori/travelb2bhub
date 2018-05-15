@@ -7,7 +7,7 @@ use App\Controller\AppController;
  * TaxiFleetPromotions Controller
  *
  * @property \App\Model\Table\TaxiFleetPromotionsTable $TaxiFleetPromotions
- */
+ */	
 class TaxiFleetPromotionsController extends AppController
 {
 
@@ -1010,6 +1010,148 @@ class TaxiFleetPromotionsController extends AppController
 		$search=$this->request->query('search');
 		$user_id=$this->Auth->User('id');
 		$this->viewBuilder()->layout('admin_layout');
+		if ($this->request->is(['patch', 'post', 'put'])) 
+		{
+				//-- Renew promotion
+			if(isset($this->request->data['pay_now']))
+			{
+ 				$texifleet_id=$this->request->data('texifleet_id');
+ 				$price_master_id=$this->request->data('price_master_id');
+ 				$visible_date=$this->request->data('visible_date');
+ 				$payment_amount=$this->request->data('payment_amount');
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				 CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotions/renewTaxiFleet.json?taxifleet_id=".$texifleet_id."&price_master_id=".$price_master_id."&price=".$payment_amount."&visible_date=".$visible_date,
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "GET",
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				//pr($LikeResult);exit;
+				$displayMessage=$LikeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'PackageReport']);
+			}
+				//-- Remove promotion
+			if(isset($this->request->data['remove_promotion']))
+			{
+ 				$texifleet_id=$this->request->data('remove_package_id');
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				 CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotions/removeTaxFlletPromotions.json?taxi_id=".$texifleet_id,
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "GET",
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				//pr($LikeResult);exit;
+				$displayMessage=$LikeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'PackageReport']);
+			}
+		}
 		$this->set(compact('user_id','higestSort','country_id','city_id','state_id','car_bus_id','search'));
+    }
+	public function adminview($id = null)
+    {
+        $this->viewBuilder()->layout('admin_layout');
+		$user_id=$this->Auth->User('id');
+		if ($this->request->is(['patch', 'post', 'put'])) 
+		{
+				//-- Renew promotion
+			if(isset($this->request->data['pay_now']))
+			{
+ 				$texifleet_id=$this->request->data('texifleet_id');
+ 				$price_master_id=$this->request->data('price_master_id');
+ 				$visible_date=$this->request->data('visible_date');
+ 				$payment_amount=$this->request->data('payment_amount');
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				 CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotions/renewTaxiFleet.json?taxifleet_id=".$texifleet_id."&price_master_id=".$price_master_id."&price=".$payment_amount."&visible_date=".$visible_date,
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "GET",
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				//pr($LikeResult);exit;
+				$displayMessage=$LikeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'adminview/'.$texifleet_id]);
+			}
+				//-- Remove promotion
+			if(isset($this->request->data['remove_promotion']))
+			{
+ 				$texifleet_id=$this->request->data('remove_package_id');
+				$curl = curl_init();
+				curl_setopt_array($curl, array(
+				 CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotions/removeTaxFlletPromotions.json?taxi_id=".$texifleet_id,
+				  CURLOPT_RETURNTRANSFER => true,
+				  CURLOPT_ENCODING => "",
+				  CURLOPT_MAXREDIRS => 10,
+				  CURLOPT_TIMEOUT => 30,
+				  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+				  CURLOPT_CUSTOMREQUEST => "GET",
+				  CURLOPT_HTTPHEADER => array(
+					"cache-control: no-cache",
+					"postman-token: 7e320187-3288-d2ad-e6f3-890260c02fc7"
+				  ),
+				));
+				$LikeResponse = curl_exec($curl);
+				$err = curl_error($curl);
+				curl_close($curl);
+				if ($err) {
+				  echo "cURL Error #:" . $err;
+				} else {
+				 $LikeResult=json_decode($LikeResponse);
+				} 
+				//pr($LikeResult);exit;
+				$displayMessage=$LikeResult->message;
+				$this->Flash->success(__($displayMessage));
+				return $this->redirect(['action' => 'PackageReport']);
+			}
+		}
+		$this->set(compact('user_id','id'));
     }
 }
