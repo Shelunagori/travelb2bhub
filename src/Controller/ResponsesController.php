@@ -81,16 +81,26 @@ class ResponsesController extends AppController
         $this->paginate = [
             'contain' => ['Users', 'Requests', 'Testimonial']
         ];
-		
+		$ReqID='';$status='';$removed='';$Quotation='';$category_id='';$is_details_shared='';
 		if(isset($this->request->query['search_report'])){
 			
- 			$RefID = $this->request->query['ReqID'];
+ 			$ReqID  = $this->request->query['ReqID'];
 			$status = $this->request->query['status'];
 			$removed = $this->request->query['removed'];
 			$Quotation = $this->request->query['Quotation'];
-			 
-			if(!empty($RefID)){
-				$conditions['Responses.request_id']=$RefID;
+			$category_id = $this->request->query['category_id'];
+			$is_details_shared = $this->request->query['is_details_shared'];
+			$this->set('ReqID',$ReqID);
+			$this->set('status',$status);
+			$this->set('removed',$removed);
+			$this->set('Quotation',$Quotation);
+			$this->set('category_id',$category_id);
+			$this->set('is_details_shared',$is_details_shared);
+			if(!empty($ReqID)){
+				$conditions['Requests.reference_id LIKE']='%'.$ReqID.'%';
+			}
+			if(!empty($category_id)){
+				$conditions['Requests.category_id']=$category_id;
 			}
 			if($status==1){
 				$conditions['Responses.status']=0;	
@@ -107,12 +117,85 @@ class ResponsesController extends AppController
 			if(!empty($Quotation)){
 				$conditions['Responses.quotation_price']=$Quotation;
 			}
-			 
+			if(!empty($is_details_shared)){
+				if($is_details_shared==2){$is_details_shared=0;}
+				$conditions['Responses.is_details_shared']=$is_details_shared;
+			}
+			
 			$responses = $this->paginate($this->Responses->find()->where($conditions));
+			 
   		}
 		else {
 			$responses = $this->paginate($this->Responses);
 		}
+		$this->set('ReqID',$ReqID);
+			$this->set('status',$status);
+			$this->set('removed',$removed);
+			$this->set('Quotation',$Quotation);
+			$this->set('category_id',$category_id);
+			$this->set('is_details_shared',$is_details_shared);
+	//pr($responses); exit;
+        $this->set(compact('responses'));
+        $this->set('_serialize', ['responses']);
+    }
+	
+	public function excelDownload()
+    {
+		$this->viewBuilder()->layout('');	
+        $this->paginate = [
+            'contain' => ['Users', 'Requests', 'Testimonial']
+        ];
+		$ReqID='';$status='';$removed='';$Quotation='';$category_id='';$is_details_shared='';
+		if(isset($this->request->query['search_report'])){
+			
+ 			$ReqID  = $this->request->query['ReqID'];
+			$status = $this->request->query['status'];
+			$removed = $this->request->query['removed'];
+			$Quotation = $this->request->query['Quotation'];
+			$category_id = $this->request->query['category_id'];
+			$is_details_shared = $this->request->query['is_details_shared'];
+			$this->set('ReqID',$ReqID);
+			$this->set('status',$status);
+			$this->set('removed',$removed);
+			$this->set('Quotation',$Quotation);
+			$this->set('category_id',$category_id);
+			$this->set('is_details_shared',$is_details_shared);
+			if(!empty($ReqID)){
+				$conditions['Requests.reference_id LIKE']='%'.$ReqID.'%';
+			}
+			if(!empty($category_id)){
+				$conditions['Requests.category_id']=$category_id;
+			}
+			if($status==1){
+				$conditions['Responses.status']=0;	
+			}
+			if($status==2){
+				$conditions['Responses.status']=1;	
+			}
+			if($removed==2){
+				$conditions['Responses.is_deleted']=0;	
+			}
+			if($removed==1){
+				$conditions['Responses.is_deleted']=1;	
+			}
+			if(!empty($Quotation)){
+				$conditions['Responses.quotation_price']=$Quotation;
+			}
+			if(!empty($is_details_shared)){
+				if($is_details_shared==2){$is_details_shared=0;}
+				$conditions['Responses.is_details_shared']=$is_details_shared;
+			}
+			$responses = $this->Responses->find()->contain(['Users', 'Requests', 'Testimonial'])->where($conditions);
+  		}
+		else {
+			$responses = $this->Responses->find()->contain(['Users', 'Requests', 'Testimonial']);;
+		}
+		$this->set('ReqID',$ReqID);
+		$this->set('status',$status);
+		$this->set('removed',$removed);
+		$this->set('Quotation',$Quotation);
+		$this->set('category_id',$category_id);
+		$this->set('is_details_shared',$is_details_shared);
 		 
 	//pr($responses); exit;
         $this->set(compact('responses'));
@@ -208,6 +291,6 @@ class ResponsesController extends AppController
             $this->Flash->error(__('The response could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'report']);
     }
 }

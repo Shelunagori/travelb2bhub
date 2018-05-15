@@ -455,13 +455,14 @@ fieldset
 				{
 					if(empty($data->main_menu) && empty($data->sub_menu))
 					{
-						if($page_name==$data['page_name_url'])
+						 
+						if($data['page_name_url'] == $page_name && $data['controller'] == $controller)
 						{
 							$class_selected='selected';
 						}
 							
 						?>
-						<li class="<?php if($page_name==$data['page_name_url']){ echo 'active'; } ?>">
+						<li class="<?php if($page_name==$data['page_name_url']  && $data['controller'] == $controller){ echo 'active'; } ?>">
 						<?php echo $this->Html->link('<i class="'.$data['icon_class_name'].'"></i>&nbsp;&nbsp;<span class="title">'.$data['name'].'</span><span class="'.$class_selected.'"></span>',array('controller' => $data['controller'], 'action' => $data['page_name_url'], '_full' => true),['escape'=>false]); ?>
 						
 						</li>
@@ -471,7 +472,7 @@ fieldset
 						$fetch_menu_submenu = $this->requestAction(['controller'=>'Admins', 'action'=>'MenuSubmenu'],['pass'=>array($data['main_menu'])]);		
 							foreach($fetch_menu_submenu as $data_value1)
 							{ 	
-								if($data_value1['page_name_url'] == $page_name)
+								if($data_value1['page_name_url'] == $page_name && $data_value1['controller'] == $controller)
 								{
 									$class_active='active';
 									$arrow_open='open';
@@ -528,7 +529,7 @@ fieldset
 											{
 												$main_menu_arr[]=$data_submenu['name'];
 											 ?>
-											<li class="<?php if($page_name==$data_submenu['page_name_url']){ echo ' active'; } ?>">
+											<li class="<?php if($page_name==$data_submenu['page_name_url']  && $data_submenu['controller'] == $controller){ echo ' active'; } ?>">
 											<?php echo $this->Html->link('<i class="'.$data_submenu['icon_class_name'].'"></i><span class="title">'.$data_submenu['name'].'</span>',array('controller' => $data_submenu['controller'], 'action' => $data_submenu['page_name_url'], '_full' => true),['escape'=>false]); ?>
 												
 											</li>

@@ -15,18 +15,28 @@
 				<fieldset style="text-align:left;"><legend>Filter</legend>
 					<div class="col-md-12 ">
 						<div class="row"> 
-							<div class="col-md-3">
-								<label class="control-label">Request Id</label>
+							<div class="col-md-2">
+								<label class="control-label">Reference Id</label>
 								<?php echo $this->Form->input('ReqID',[
-								'label' => false,'class'=>'form-control ','placeholder'=>'Enter Request Id']);?>
+								'label' => false,'class'=>'form-control ','placeholder'=>'Reference Id']);?>
 							</div>
-							<div class="col-md-3">
+							
+							<div class="col-md-2">
+								<label class="control-label">Request Type</label>
+								<select name="category_id" class="form-control select2" placeholder="Select...">
+									<option value="">Select...</option>
+									<option value="1">Package</option>
+									<option value="3">Hotel</option>
+									<option value="2">Transport</option>
+								</select>
+							</div>
+							<div class="col-md-2">
 								<label class="control-label">Quotation Price</label>
 								<?php echo $this->Form->input('Quotation',[
-								'label' => false,'class'=>'form-control ','placeholder'=>'Enter Quotation Price']);?>
+								'label' => false,'class'=>'form-control ','placeholder'=>'Quotation Price']);?>
 							</div>
 							 
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<label class="control-label">Select Status</label>
 								<select name="status" class="form-control select2" placeholder="Select...">
 									<option value="">Select...</option>
@@ -34,12 +44,20 @@
 									<option value="2">Finalized</option>
 								</select>
 							</div>
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<label class="control-label">Remove Status</label>
 								<select name="removed" class="form-control select2" placeholder="Select...">
 									<option value="">Select...</option>
 									<option value="2">Open</option>
 									<option value="1">Removed</option>
+								</select>
+							</div>
+							<div class="col-md-2">
+								<label class="control-label">Detail Shared</label>
+								<select name="is_details_shared" class="form-control select2" placeholder="Select...">
+									<option value="">Select...</option>
+									<option value="1">Shared</option>
+									<option value="0">Not Shared</option>
 								</select>
 							</div>
 							 
@@ -54,23 +72,26 @@
 				</fieldset>
 				</div>
 			</form>
-
+			<div class="col-md-12" align="right">
+				<a style="margin:2px" href="<?php echo $this->Url->build(array('controller'=>'Responses','action'=>'excelDownload?ReqID='.$ReqID.'&category_id='.$category_id.'&Quotation='.$Quotation.'&status='.$status.'&removed='.$removed.'&is_details_shared='.$is_details_shared)) ?>" title="Download Excel" class="btn btn-info btn-xs"  ><i class="fa fa-download"></i> Excel</i> </a>
+			</div>
 				<table class="table table-bordered" cellpadding="0" cellspacing="0">
 					<thead>
 						<tr>
 							<th scope="col"><?= ('S.No') ?></th>
-							<th scope="col"><?= $this->Paginator->sort('request_id') ?></th>
+							<th scope="col"><?= h('Rreference ID') ?></th>
+							<th scope="col"><?= h('Request Type') ?></th>
 							<th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
 							<th scope="col"><?= $this->Paginator->sort('quotation_price') ?></th>
-							<th scope="col"><?= $this->Paginator->sort('is_details_shared') ?></th>
+							<th scope="col"><?= ('Detail Shared') ?></th>
 							<th scope="col"><?= $this->Paginator->sort('created') ?></th>
 							<th scope="col"><?= $this->Paginator->sort('status') ?></th>
 							<th scope="col"><?= $this->Paginator->sort('is_deleted') ?></th>
-							<!---<th scope="col" class="actions"><?= __('Actions') ?></th>-->
+							<th scope="col" class="actions"><?= __('Actions') ?></th>
 						</tr>
 					</thead>
 					<tbody>
-						<?php foreach ($responses as $response): 
+						<?php  foreach ($responses as $response): 
 							$status= $response->status;
 							if($status==0){$showStatus='Open';}
 							if($status==1){$showStatus='Finalized';}
@@ -80,21 +101,65 @@
 							$is_details_shared= $response->is_details_shared;
 							if($is_details_shared==0){$showis_details_shared='Not Shared';}
 							if($is_details_shared==1){$showis_details_shared='Shared';}
+							$category_id=$response->request->category_id;
+							if($category_id==1){ 
+								$text="Package";
+							} 
+							if($category_id==2){
+								$text="Transport";
+							}
+							if($category_id==3){
+								$text="Hotel";
+							}
 						?>
 						<tr>
-							<td><?= $this->Number->format($response->id) ?></td>
-							<td><?= $response->request->id ?></td>
+							<td><?= h($response->id) ?></td>
+							<td><?= $response->request->reference_id ?></td>
+							<td><?= h($text) ?></td>
 							<td><?php echo $response->user->first_name.$response->user->last_name; ?></td>
-							<td><?= $this->Number->format($response->quotation_price) ?></td>
+							<td><?= h($response->quotation_price) ?></td>
 							<td><?php echo $showis_details_shared; ?></td>
-							<td><?= h($response->created) ?></td>
+							<td><?= h(date('d-m-Y',strtotime($response->created))) ?></td>
 							<td><?php echo $showStatus; ?></td>
 							<td><?php echo $showis_deleted; ?></td>
-							<!---<td class="actions">
-								<?= $this->Html->link(__('View'), ['action' => 'view', $response->id]) ?>
-								<?= $this->Html->link(__('Edit'), ['action' => 'edit', $response->id]) ?>
-								<?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $response->id], ['confirm' => __('Are you sure you want to delete # {0}?', $response->id)]) ?>
-							</td>--->
+							 <td class="actions">
+							 <a data-toggle="modal" class="btn btn-info btn-xs" title="View Details" data-target="#myModal1<?php echo $response->id; ?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$response->request->id)) ?>"><i class="fa fa-book"></i></a>
+							 <div class="modal fade" id="myModal1<?php echo $response->id; ?>" role="dialog">
+								<div class="modal-dialog">
+								  <!-- Modal content-->
+								  <div class="modal-content">
+									<div class="modal-header">
+									  <button type="button" class="close" data-dismiss="modal">&times;</button>
+									  <h4 class="modal-title">Details</h4>
+									</div>
+									<div class="modal-body">
+									</div>
+								  </div>
+								</div>
+							</div>
+							<a style="margin-top:2px" class=" btn btn-danger btn-xs" title="Delete Response" data-target="#deletemodal<?php echo $response->id; ?>" data-toggle=modal><i class="fa fa-trash"></i></a>
+							<div id="deletemodal<?php echo $response->id; ?>" class="modal fade" role="dialog">
+								<div class="modal-dialog modal-md" >
+									<form method="post" action="<?php echo $this->Url->build(array('controller'=>'Responses','action'=>'delete',$response->id)) ?>">
+										<div class="modal-content">
+										  <div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												<h4 class="modal-title">
+												Are you sure you want to remove this response?
+												</h4>
+											</div>
+											<div class="modal-footer">
+												<button type="submit" class="btn  btn-sm btn-info">Yes</button>
+												<button type="button" class="btn  btn-sm btn-danger" data-dismiss="modal">Cancel</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+								<?php $this->Html->link(__('View'), ['action' => 'view', $response->id]) ?>
+								<?php $this->Html->link(__('Edit'), ['action' => 'edit', $response->id]) ?>
+								<?php $this->Form->postLink(__('Delete'), ['action' => 'delete', $response->id], ['confirm' => __('Are you sure you want to delete # {0}?', $response->id)]) ?>
+							</td> 
 						</tr>
 						<?php endforeach; ?>
 					</tbody>

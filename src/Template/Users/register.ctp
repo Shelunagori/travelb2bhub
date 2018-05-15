@@ -416,7 +416,7 @@ $(document).ready(function(){
 			$('.lablename').attr('data-placeholder','Hotel Name');
 			
 			$('.taxtboxname').removeAttr('name');
-			$('.taxtboxname').attr('name','hotel_name');
+			$('.taxtboxname').attr('name','company_name');
  		}
 		else
 		{
@@ -842,7 +842,7 @@ if(prootionId == 3 ){
 	$('.lablename').attr('data-placeholder','Hotel Name');
 	
 	$('.taxtboxname').removeAttr('name');
-	$('.taxtboxname').attr('name','hotel_name');
+	$('.taxtboxname').attr('name','company_name');
 }
 else{
 	$('.lablename').removeAttr('data-placeholder');

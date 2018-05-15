@@ -3,7 +3,7 @@
 	<div class="col-md-12">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<b>Testimonials List</b>
+					<b>Review/Rating List</b>
 					<div class="box-tools pull-right">
 						<a style="font-size:19px;  margin-top: -6px;" class="btn btn-box-tool" data-target="#myModal122" data-toggle="collapse"> <i class="fa fa-filter"></i></a>
 					</div>
@@ -42,9 +42,10 @@
 							<thead>
 								<tr style="background-color:#DFD9C4;">
 									<th scope="col"><?= __('Sr.No') ?></th>
-									<th scope="col"><?= __('User') ?></th>
-									<th scope="col"><?= __('Author') ?></th>
-									<th scope="col"><?= __('Rating') ?></th> 
+									<th scope="col"><?= __('Username') ?></th>
+									<th scope="col"><?= __('Reviewer') ?></th>
+									<th scope="col"><?= __('Review/Rating') ?></th> 
+									<th scope="col"><?= __('Comment') ?></th> 
 								</tr>
 						</thead>
 						<tbody>
@@ -53,7 +54,14 @@
 								<td><?php echo $i; ?></td>
 								<td><?= $testimonials->user->first_name.' '.$testimonials->user->last_name ?></td>
 								<td><?= $testimonials->author->first_name ?></td> 
-								<td><?php echo $testimonials->rating; ?></td> 
+								<td style="text-align:center"><?php $rate=$testimonials->rating;
+									for($xxs=1;$xxs<=$rate;$xxs++)
+									{
+											echo " &#9733; ";
+									}
+									?>
+								</td> 
+								<td><?php echo $testimonials->comment; ?></td> 
 							</tr>
 							<?php $i++; endforeach; ?>
 						</tbody>

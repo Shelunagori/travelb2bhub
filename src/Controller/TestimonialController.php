@@ -54,7 +54,7 @@ class TestimonialController extends AppController
     }
 
 	
-	public function report()
+	public function report($Rateing=null)
     {
 		$this->viewBuilder()->layout('admin_layout');		
         $this->paginate = [
@@ -62,9 +62,8 @@ class TestimonialController extends AppController
         ];
 		if(isset($this->request->query['search_report'])){
 			$Rateing = $this->request->query['Rateing'];
- 			 
 			if(!empty($Rateing)){
-				$conditions['Testimonial.rating LIKE']='%'.$Rateing.'%';
+				$conditions['Testimonial.rating LIKE']=$Rateing;
 			}
  			$testimonial = $this->paginate($this->Testimonial->find()->where($conditions));
   		}

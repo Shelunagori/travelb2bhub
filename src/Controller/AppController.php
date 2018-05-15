@@ -92,7 +92,7 @@ class AppController extends Controller {
 							'username' => 'email',
 							'password' => 'password'
 						],
-						'scope' => ['status' => '1','blocked' => '0','is_deleted' => '0'],
+						'scope' => ['status' => '1','is_deleted' => '0'],
 						'userModel' => 'Users'
 					]
 				],

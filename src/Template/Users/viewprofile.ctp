@@ -730,9 +730,17 @@ label{
 					<h4 style="color:#1295A2">Personal Details</h4>
 					<hr>
 					<div>
+							<?php if($users['role_id'] == 3) { ?>
+							<div class="form-group col-md-12" >
+								<label>Hotel Name:</label> <?php echo $users['company_name']; ?> 
+							</div>
+							<?php } else{
+								?>
 							<div class="form-group col-md-12" >
 								<label>Company Name:</label> <?php echo $users['company_name']; ?> 
 							</div>
+							<?php
+							}?>
 							<div class="form-group col-md-12" >
 								 <label>Primary Contact No:</label> <?php echo $users['mobile_number']; ?> 
 							</div>
@@ -745,6 +753,7 @@ label{
 							<div class="form-group col-md-12" >
 								 <label>Website:</label> <?php echo $users['web_url']; ?> 
 							</div>
+							<?php if($users['role_id'] == 1) { ?>
 							<div class="form-group col-md-12" >
 								 <label>States of Operation:</label> <?php $preference=$users['preference']; 
 								
@@ -766,7 +775,7 @@ label{
 								echo $final_state_name;
 								?>
 							</div>
-								 
+							<?php } ?> 	 
 						</div>
 					</div>
 				</div>

@@ -210,7 +210,7 @@ class EventPlannerPromotionsController extends AppController
 			$query = $this->EventPlannerPromotions->query();
 			$query->update()->set(['is_deleted' => 1])
 			->where(['id' => $event_id])->execute();			
-			$message = 'The Package has been deleted successfully';
+			$message = 'The promotions has been deleted successfully';
 			$response_code = 200;			
 		}
 		else

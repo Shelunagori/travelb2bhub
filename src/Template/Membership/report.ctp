@@ -23,9 +23,8 @@
 								<td><?= h($membership->membership_name) ?></td>
 								<td><?= h($membership->price) ?></td>
 								<td><?= h($membership->duration) ?></td> 
-								<td class="actions">
+								<td class="actions" style="text-align:center">
 									<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/Membership/add/'.$membership->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
-									<?php echo $this->Form->PostLink('<i class="fa fa-trash"></i>','/Membership/delete/'.$membership->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $membership->id)));?>
 								</td>
 								 
 							</tr>

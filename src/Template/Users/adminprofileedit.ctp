@@ -78,20 +78,18 @@ hr { margin-top:0px!important;}
           <!-- general form elements -->
           <div class="box box-primary">
              <div class="box-header with-border">
-              <h3 class="box-title">Edit Profile</h3>
+              <h3 class="box-title">Edit User Profile</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
 			<?php $pararm = $users['id']; ?>
-            <?php  echo $this->Form->create("Users", ['type' => 'file', 'url' => ['controller' => 'Users', 'action' => 'edit',$pararm], 'id'=>"UserRegisterForm"]); ?>
+            <?php  echo $this->Form->create("Users", ['type' => 'file', 'url' => ['controller' => 'Users', 'action' => 'adminedit',$pararm], 'id'=>"UserRegisterForm"]); ?>
               <div class="box-body">
 			  <fieldset>
-				<?php if($users['role_id'] == 3) { ?>
-				<legend><b>HOTEL INFORMATION</b></legend>
-				<?php }else {?><legend><b>COMPANY INFORMATION</b></legend><?php } ?>
+				<legend><b>COMPANY INFORMATION</b></legend>
 			  <div>
 				 <?php 
-				 $role_id=$this->request->session()->read('Auth.User.role_id');
+				 $role_id=$users['role_id'];  
 				 ?>
 				 <div class="form-group col-md-12" style="display:none">
                   <label>Category</label>
@@ -115,7 +113,7 @@ hr { margin-top:0px!important;}
                   <label>Hotel Name</label>
                   <input type="text" class="form-control" name="company_name" value="<?php echo $users['company_name'] ?>" id="hotel_name" placeholder="Hotel Name">
                 </div>
-				<?php } else{ ?>
+				<?php } else{?>
 				<div class="form-group col-md-6">
                   <label>Company Name</label>
                   <input type="text" class="form-control" name="company_name" value="<?php echo $users['company_name'] ?>" id="company_name" placeholder="Company Name">
@@ -177,7 +175,7 @@ hr { margin-top:0px!important;}
                           <input type='hidden' id='country_id' name="country_id" value="<?php echo (!empty($users['country_id']))?$users['country_id']:""; ?>" />
 					</div>
 				</div> 
-				<?php if($users['role_id'] == 1) { ?>
+				<?php if($role_id==1){ ?>
 				<div class="form-group col-md-12">
                   <label>States of Operation</label>
                    <?php 
@@ -188,11 +186,11 @@ hr { margin-top:0px!important;}
 					}	
 					echo $this->Form->control('preference', ["value"=>$selectedPreferenceStates, "id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control select2", "data-placeholder"=>"Select Some States", "style"=>"height:125px;"]); ?>
                 </div>
-				<?php } ?>
+				<?php }?>
                  </div>
 				 </div>
 				</fieldset>
-				<?php if($users['role_id'] == 1) { ?>
+				<?php if($role_id==1){ ?>
 				<fieldset>
 				<legend><b>CERTIFICATES</b></legend>
 			   
@@ -296,7 +294,7 @@ hr { margin-top:0px!important;}
 					</div>
 				 </div>
 				</fieldset>
-				<?php }?>
+				<?php } ?>
 				<fieldset>
 				<legend><b>UPLOAD PHOTO</b></legend>
 			   

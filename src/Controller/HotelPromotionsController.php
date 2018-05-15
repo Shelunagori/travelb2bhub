@@ -20,112 +20,126 @@ class HotelPromotionsController extends AppController
 	{
 		parent::initialize();
 		$this->Auth->allow(['logout']);
-		$first_name=$this->Auth->User('first_name');
-		$last_name=$this->Auth->User('last_name');
-		$profile_pic=$this->Auth->User('profile_pic');    
-		$loginId=$this->Auth->User('id');
-		$role_id=$this->Auth->User('role_id');
-		$authUserName=$first_name.' '.$last_name;
-		$this->set('MemberName',$authUserName);
-		$this->set('profile_pic', $profile_pic);
-		$this->set('loginId',$loginId);
-		$this->set('roleId',$role_id);
-		$this->loadModel('Requests');
-		$this->loadModel('Responses');
-		$current_date=date('Y-m-d');
-		
-		$conditions[]= array (
-			'OR' => array(
-				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
-				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
-				
-				array("Requests.start_date <=" =>  $current_date,'Requests.category_id'=> 2,'Requests.total_response >' =>0),
-				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
-			)
-		);
-		//,'Requests.total_response >' =>0
-		$conditionsss[]= array (
-			'OR' => array(
-				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
-				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
-			)
-		);
-		
-		$this->set("respondToRequestCountNew", $this->__getRespondToRequestCount());
-		$this->loadModel('BlockedUsers');
-		$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
-			->hydrate(false)
-			->where(['blocked_by' => $loginId])
-			->toArray();
-		$myBlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_by'])
-			->hydrate(false)
-			->where(['blocked_user_id' => $loginId])
-			->toArray();
-		if(!empty($BlockedUsers)) {
-			$BlockedUsers = array_values($BlockedUsers);
+		$loginId=$this->Auth->User('id');  
+		if(!empty($loginId)){
+			//--- Blocked
+			$this->loadModel('Users'); 
+			$UsersData=$this->Users->find()->where(['id'=>$loginId])->first();
+			$blocked=$UsersData['blocked'];
+			if($blocked==1){
+				$this->redirect($this->Auth->logout());
+				$this->Flash->error(__('You are blocked by Administrator.'));	
+			}
+			//--Blocked
+			$first_name=$this->Auth->User('first_name');
+			$last_name=$this->Auth->User('last_name');
+			$profile_pic=$this->Auth->User('profile_pic');    
+			
+			$role_id=$this->Auth->User('role_id');
+			$authUserName=$first_name.' '.$last_name;
+			$this->set('MemberName',$authUserName);
+			$this->set('profile_pic', $profile_pic);
+			$this->set('loginId',$loginId);
+			$this->set('roleId',$role_id);
+			$this->loadModel('Requests');
+			$this->loadModel('Responses');
+			$current_date=date('Y-m-d');
+			
+			$conditions[]= array (
+				'OR' => array(
+					array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
+					array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
+					
+					array("Requests.start_date <=" =>  $current_date,'Requests.category_id'=> 2,'Requests.total_response >' =>0),
+					array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
+				)
+			);
+			//,'Requests.total_response >' =>0
+			$conditionsss[]= array (
+				'OR' => array(
+					array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
+					array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
+				)
+			);
+			
+			$this->set("respondToRequestCountNew", $this->__getRespondToRequestCount());
+			$this->loadModel('BlockedUsers');
+			$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
+				->hydrate(false)
+				->where(['blocked_by' => $loginId])
+				->toArray();
+			$myBlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_by'])
+				->hydrate(false)
+				->where(['blocked_user_id' => $loginId])
+				->toArray();
+			if(!empty($BlockedUsers)) {
+				$BlockedUsers = array_values($BlockedUsers);
+			}
+			if(!empty($myBlockedUsers)) {
+				$myBlockedUsers = array_values($myBlockedUsers);
+			}
+			$BlockedUsers=array_merge($BlockedUsers,$myBlockedUsers);
+			$BlockedUsers = array_unique($BlockedUsers);
+			array_push($BlockedUsers,$loginId);
+			if(sizeof($BlockedUsers)>0){
+				$conditionssd["Requests.user_id NOT IN"] =  $BlockedUsers; 
+			}
+			
+			$myRequestCount = 0;
+			$myRequestCount = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2,$conditions]])->count();
+			
+			$reqcountNew = $this->getSettings('requestcount');
+			$this->set('reqcountNew', $reqcountNew);
+			$this->set('myRequestCountNew', $myRequestCount);
+			$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->where(["Requests.user_id NOT IN"=>$BlockedUsers]);
+			$myReponseCount = $queryr->count(); 
+			
+			$this->set('myReponseCountNew', $myReponseCount);
+			//----	 FInalized
+			$finalreq["Requests.user_id"] = $this->Auth->user('id');
+			$finalreq["Requests.status"] = 2;
+			$finalreq["Requests.is_deleted "] = 0;
+			$finalizeRequest = $this->Requests->find()->where($finalreq)->count();
+			$this->set('finalizeRequestNew', $finalizeRequest);
+			//--- Removed Request
+			$remoev["Requests.user_id"] = $this->Auth->user('id');
+			$remoev["Requests.is_deleted "] = 1;
+			$RemovedReqest = $this->Requests->find()->where($remoev)->count();
+			$this->set('RemovedReqestNew', $RemovedReqest);
+			//--- Blocked User
+			$this->loadModel('blocked_users');
+			$blk["blocked_users.blocked_by"] = $this->Auth->user('id');
+			$blockedUserscount = $this->blocked_users->find()->where($blk)->count();
+			$this->set('blockedUserscountnew', $blockedUserscount);
+			//--- Finalize Response;
+			
+			$FInalResponseCount = $this->Responses->find('all', ['conditions' => ['Responses.status' =>1,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->count();
+			$this->set('FInalResponseCountNew', $FInalResponseCount);
+			//*--- UserChats
+			$this->loadModel('UserChats');
+			$csort['created'] = "DESC";
+			$new_time = date("Y-m-d H:i:s", strtotime('-24 hours'));
+			$totalIds=array();
+			$NewNotifications=array();
+			$unreadnotification = $this->UserChats->find()->contain(['Users'])->where(['UserChats.send_to_user_id'=> $this->Auth->user('id'),'read_date_time >='=>$new_time,'is_read'=>1])->order($csort)->all();
+			
+			foreach($unreadnotification as $data){
+					$totalIds[]=$data['id'];
+			}
+			
+			$unreadnotification2 = $this->UserChats->find()->contain(['Users'])->where(['UserChats.send_to_user_id'=> $this->Auth->user('id'),'is_read'=>0])->order($csort)->all();
+			foreach($unreadnotification2 as $datas){
+				$totalIds[]=$datas['id'];
+			}
+			//pr($unreadnotification2); exit;
+			if(!empty($totalIds)){
+				$NewNotifications = $this->UserChats->find()->contain(['Users'])->where(['UserChats.id IN'=> $totalIds])->order($csort)->all();
+			}
+			//pr($totalIds); exit;
+			$chatCount = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->count(); 
+			$this->set('chatCount',$chatCount); 
+			$this->set('NewNotifications',$NewNotifications);
 		}
-		if(!empty($myBlockedUsers)) {
-			$myBlockedUsers = array_values($myBlockedUsers);
-		}
-		$BlockedUsers=array_merge($BlockedUsers,$myBlockedUsers);
-		$BlockedUsers = array_unique($BlockedUsers);
-		array_push($BlockedUsers,$loginId);
-		if(sizeof($BlockedUsers)>0){
-			$conditionssd["Requests.user_id NOT IN"] =  $BlockedUsers; 
-		}
-		
-		$myRequestCount = 0;
- 		$myRequestCount = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2,$conditions]])->count();
-		
-		$reqcountNew = $this->getSettings('requestcount');
- 		$this->set('reqcountNew', $reqcountNew);
- 		$this->set('myRequestCountNew', $myRequestCount);
- 		$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->where(["Requests.user_id NOT IN"=>$BlockedUsers]);
-		$myReponseCount = $queryr->count(); 
-		
-		$this->set('myReponseCountNew', $myReponseCount);
- 		//----	 FInalized
- 		$finalreq["Requests.user_id"] = $this->Auth->user('id');
-		$finalreq["Requests.status"] = 2;
-		$finalreq["Requests.is_deleted "] = 0;
-		$finalizeRequest = $this->Requests->find()->where($finalreq)->count();
-		$this->set('finalizeRequestNew', $finalizeRequest);
-		//--- Removed Request
-		$remoev["Requests.user_id"] = $this->Auth->user('id');
-		$remoev["Requests.is_deleted "] = 1;
-		$RemovedReqest = $this->Requests->find()->where($remoev)->count();
-		$this->set('RemovedReqestNew', $RemovedReqest);
-		//--- Blocked User
-		$this->loadModel('blocked_users');
-		$blk["blocked_users.blocked_by"] = $this->Auth->user('id');
-		$blockedUserscount = $this->blocked_users->find()->where($blk)->count();
-		$this->set('blockedUserscountnew', $blockedUserscount);
-		//--- Finalize Response;
-		
-		$FInalResponseCount = $this->Responses->find('all', ['conditions' => ['Responses.status' =>1,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->count();
-		$this->set('FInalResponseCountNew', $FInalResponseCount);
-		//*--- UserChats
-		$this->loadModel('UserChats');
-		$csort['created'] = "DESC";
-		$new_time = date("Y-m-d H:i:s", strtotime('-24 hours'));
-		$totalIds=array();
-		$NewNotifications=array();
-		$unreadnotification = $this->UserChats->find()->contain(['Users'])->where(['UserChats.send_to_user_id'=> $this->Auth->user('id'),'read_date_time >='=>$new_time,'is_read'=>1])->order($csort)->all();
-		foreach($unreadnotification as $data){
- 				$totalIds[]=$data['id'];
-		}
-		
-		$unreadnotification2 = $this->UserChats->find()->contain(['Users'])->where(['UserChats.send_to_user_id'=> $this->Auth->user('id'),'is_read'=>0])->order($csort)->all();
-		foreach($unreadnotification2 as $datas){
-			$totalIds[]=$datas['id'];
-		}
-		//pr($unreadnotification2); exit;
-		if(!empty($totalIds)){
-			$NewNotifications = $this->UserChats->find()->contain(['Users'])->where(['UserChats.id IN'=> $totalIds])->order($csort)->all();
-		}
-		$chatCount = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->count(); 
- 		$this->set('chatCount',$chatCount); 
-		$this->set('NewNotifications',$NewNotifications);
 		//pr($totalIds); exit;
 		//---
  	}
@@ -136,7 +150,6 @@ class HotelPromotionsController extends AppController
 		$this->loadModel('BlockedUsers');
 		$this->loadModel('Requests');
 		$this->loadModel('Responses');
-		$this->loadModel('Users');
 		$this->loadModel('Hotels');
 		$this->loadModel('User_Chats');
 		$current_date=date('Y-m-d');
