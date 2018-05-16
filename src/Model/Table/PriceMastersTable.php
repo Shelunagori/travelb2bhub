@@ -10,8 +10,13 @@ use Cake\Validation\Validator;
  * PriceMasters Model
  *
  * @property \Cake\ORM\Association\BelongsTo $PromotionTypes
+ * @property \Cake\ORM\Association\HasMany $EventPlannerPromotionPriceBeforeRenews
  * @property \Cake\ORM\Association\HasMany $EventPlannerPromotions
+ * @property \Cake\ORM\Association\HasMany $HotelPromotionPriceBeforeRenews
+ * @property \Cake\ORM\Association\HasMany $HotelPromotions
+ * @property \Cake\ORM\Association\HasMany $PostTravlePackagePriceBeforeRenews
  * @property \Cake\ORM\Association\HasMany $PostTravlePackages
+ * @property \Cake\ORM\Association\HasMany $TaxiFleetPromotionPriceBeforeRenews
  * @property \Cake\ORM\Association\HasMany $TaxiFleetPromotions
  *
  * @method \App\Model\Entity\PriceMaster get($primaryKey, $options = [])
@@ -20,7 +25,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\PriceMaster|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\PriceMaster patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\PriceMaster[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\PriceMaster findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\PriceMaster findOrCreate($search, callable $callback = null)
  */
 class PriceMastersTable extends Table
 {
@@ -37,17 +42,31 @@ class PriceMastersTable extends Table
 
         $this->table('price_masters');
         $this->displayField('week');
-        //$this->displayField('price');
         $this->primaryKey('id');
 
         $this->belongsTo('PromotionTypes', [
             'foreignKey' => 'promotion_type_id',
             'joinType' => 'INNER'
         ]);
+        $this->hasMany('EventPlannerPromotionPriceBeforeRenews', [
+            'foreignKey' => 'price_master_id'
+        ]);
         $this->hasMany('EventPlannerPromotions', [
             'foreignKey' => 'price_master_id'
         ]);
+        $this->hasMany('HotelPromotionPriceBeforeRenews', [
+            'foreignKey' => 'price_master_id'
+        ]);
+        $this->hasMany('HotelPromotions', [
+            'foreignKey' => 'price_master_id'
+        ]);
+        $this->hasMany('PostTravlePackagePriceBeforeRenews', [
+            'foreignKey' => 'price_master_id'
+        ]);
         $this->hasMany('PostTravlePackages', [
+            'foreignKey' => 'price_master_id'
+        ]);
+        $this->hasMany('TaxiFleetPromotionPriceBeforeRenews', [
             'foreignKey' => 'price_master_id'
         ]);
         $this->hasMany('TaxiFleetPromotions', [
@@ -76,10 +95,10 @@ class PriceMastersTable extends Table
             ->requirePresence('week', 'create')
             ->notEmpty('week');
 
-        $validator
+        /* $validator
             ->integer('is_deleted')
             ->requirePresence('is_deleted', 'create')
-            ->notEmpty('is_deleted');
+            ->notEmpty('is_deleted'); */
 
         return $validator;
     }

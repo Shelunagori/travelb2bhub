@@ -1,3 +1,4 @@
+
 <?php
 /**
   * @var \App\View\AppView $this
@@ -9,22 +10,41 @@
 		<div class="box box-primary">
 			<div class="box-header with-border">
 			<?php if(!empty($id)){ ?>
-							 <b> Edit Category </b>
+							 <b> Edit Price </b>
 						<?php }else{ ?>
-							 <b> Add Category </b>
+							 <b> Add Price </b>
 						<?php } ?>
 				
 			</div>
 			<div class="box-body"> 
 				<div class="">
-				<?= $this->Form->create($postTravlePackageCategory,['id'=>'CountryForm']) ?>
+				<?= $this->Form->create($priceMaster,['id'=>'CountryForm']) ?>
 					<div class="row">
 						<div class="col-md-4">
-							<label class="control-label">Category Name</label>
+							<label class="control-label">Select Promotion</label>
 						</div>
 						<div class="col-md-8">
 							<?php 
-							echo $this->Form->input('name',['label' => false,'class'=>'form-control input-medium ','Placeholder'=> 'Enter Category Name']);?>	
+							echo $this->Form->input('state_id',['options' =>$promotionTypes,'label' => false,'class'=>'form-control select2 ','empty'=> 'Select...']);?>
+						</div>
+					</div>
+					<span class="help-block"></span>
+					<div class="row">
+						<div class="col-md-4">
+							<label class="control-label">Price</label>
+						</div>
+						<div class="col-md-8">
+							<?php 
+							echo $this->Form->input('price',['label' => false,'class'=>'form-control input-medium ','Placeholder'=> 'Enter Price Here']);?>	
+						</div>
+					</div><span class="help-block"></span>
+					<div class="row">
+						<div class="col-md-4">
+							<label class="control-label">Week</label>
+						</div>
+						<div class="col-md-8">
+							<?php 
+							echo $this->Form->input('week',['label' => false,'class'=>'form-control input-medium ','Placeholder'=> 'Enter Week Here']);?>	
 						</div>
 					</div>
 					<span class="help-block"> </span>
@@ -47,7 +67,7 @@
 	<div class="col-md-6">
 		<div class="box box-primary">
 			<div class="box-header with-border">
-				<b> View Category List </b>
+				<b> View Price List </b>
 				<div class="box-tools pull-right">
 				<!--	<a style="font-size:19px;  margin-top: -6px;" class="btn btn-box-tool" data-target="#myModal122" data-toggle="collapse"> <i class="fa fa-filter"></i></a>-->
 				</div>

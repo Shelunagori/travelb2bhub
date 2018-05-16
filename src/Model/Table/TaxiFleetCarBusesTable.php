@@ -17,7 +17,7 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\TaxiFleetCarBus|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
  * @method \App\Model\Entity\TaxiFleetCarBus patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\TaxiFleetCarBus[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\TaxiFleetCarBus findOrCreate($search, callable $callback = null, $options = [])
+ * @method \App\Model\Entity\TaxiFleetCarBus findOrCreate($search, callable $callback = null)
  */
 class TaxiFleetCarBusesTable extends Table
 {
