@@ -83,9 +83,13 @@ li > p{
 		margin-top: 25px;
 	}
 }
+.tbhight{height:140px;}
 @media all and (min-width: 770px) {
 	.small-box {margin-bottom: 0px !important;}
+	.Dashbord{ margin-bottom:15px;}
+	.tbhight{height:110px !important;}
 }
+
 .content{padding-top: 0px !important; margin-top: -7px !important;}
 </style>
 
@@ -95,14 +99,14 @@ li > p{
 	$role_id=$users->role_id 
 ?>
  <div class="row equal_column tets" style="margin-bottom:20px">
-	 <div class="col-md-8">
+	 <div class="col-md-9">
 		<?php if($role_id==1) { ?>
-		<div class=""> 
-		<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Travel.jpg);height:33%;width:100%;background-repeat:round; ">
+		<div class="" style=""> 
+		<li class="col-lg-12 col-xs-12 text-center Dashbord" style="background-image:url(../images/Travel.jpg);height:33%;width:100%;background-repeat:round;">
 			  <!-- small box -->
 			  <div class="small-box" >
 				<div class="inner" align="center">
-					<table border="0" height="130px" style="text-align: center;">
+					<table border="0" class="tbhight" style="text-align: center;">
 						<tr>
 							<td colspan="2" style="font-size:17px"><b>Listed Packages</b></td>	
 						</tr>
@@ -126,11 +130,11 @@ li > p{
 		</div>
 		<?php } ?>
 		<div class=" neww" > 
-			<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Hotel.jpg);height:33%;width:100%;background-repeat:round; ;">
+			<li class="col-lg-12 col-xs-12 text-center Dashbord" style="background-image:url(../images/Hotel.jpg);height:33%;width:100%;background-repeat:round;">
 			  <!-- small box -->
 			  <div class="small-box" >
 				<div class="inner" align="center">
-					<table border="0" height="130px" style="text-align: center;">
+					<table border="0" class="tbhight" style="text-align: center;">
 						<tr>
 							<td colspan="2" style="font-size:17px"><b>Hotel Promotions</b></td>	
 						</tr>
@@ -154,11 +158,11 @@ li > p{
 		</div>
 		
 		<div class="">
-		<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Taxi.jpg);height:33%;width:100%;background-repeat:round; ">
+		<li class="col-lg-12 col-xs-12 text-center Dashbord" style="background-image:url(../images/Taxi.jpg);height:33%;width:100%;background-repeat:round; ">
 			  <!-- small box -->
 			  <div class="small-box" >
 				<div class="inner" align="center">
-					<table border="0" height="130px" style="text-align: center;">
+					<table border="0" class="tbhight" style="text-align: center;">
 						<tr>
 							<td colspan="2" style="font-size:17px"><b>Listed Taxi/Fleet Services</b></td>	
 						</tr>
@@ -179,11 +183,11 @@ li > p{
 		</div>
 		<?php if($role_id==2 || $role_id==3) { ?>
 		<div class=""> 
-			<li class="col-lg-12 col-xs-12 text-center" style="background-image:url(../images/Event.jpg);height:33%;width:100%;background-repeat:round; ">
+			<li class="col-lg-12 col-xs-12 text-center Dashbord" style="background-image:url(../images/Event.jpg);height:33%;width:100%;background-repeat:round; ">
 			  <!-- small box -->
 			  <div class="small-box" >
 				<div class="inner" align="center">
-					<table border="0" height="130px" style="text-align: center;">
+					<table border="0" class="tbhight" style="text-align: center;">
 						<tr>
 							<td colspan="2" style="font-size:17px"><b>Event Planner Promotions</b></td>	
 						</tr>
@@ -210,15 +214,15 @@ li > p{
 		<?php echo $this->element('subheader');?> 
 	</div>
 	</div>
-	<div class='col-md-4 hideinphone' align="left">
+	<div class='col-md-3 hideinphone' align="left">
 		<div class="col-md-12" style="background-color:#FFF; margin-left:-8px !important;">
-			<h3 align="center"><b>Download the app</b> for a GREAT <b>user experience</b></h3><br>
-			<p style="color:#5c5a5a;font-size:16px;">1) <b>Don’t miss any business leads:</b> Receive instantaneous notifications about new leads and receive responses in real-time.</p><br>
-			<p style="color:#5c5a5a;font-size:16px;">2) <b>Real-time communication:</b> Have live chats directly with buyers and sellers or Call them by clicking a button for buying listed packages, transport, or hotels.</p><br>
-			<p style="color:#5c5a5a;font-size:16px;">3) <b>Improved User Interface / User Experience:</b> Mobile specific design elements and processes make the App very easy to operate.</p><br><br>
-			<div align="center">
-				<a href="https://www.google.com"><?php echo  $this->Html->image('/images/google_play.png', ['style'=>'width:60%;']) ?></a>
-			</div><br><br>
+			<h4 align="center"><b>Download the app</b> for a GREAT <b>user experience</b></h4><br>
+			<p style="color:#5c5a5a;font-size:14px;">1) <b>Don’t miss any business leads:</b> Receive instantaneous notifications about new leads and receive responses in real-time.</p><br>
+			<p style="color:#5c5a5a;font-size:14px;">2) <b>Real-time communication:</b> Have live chats directly with buyers and sellers or Call them by clicking a button for buying listed packages, transport, or hotels.</p><br>
+			<p style="color:#5c5a5a;font-size:14px;">3) <b>Improved User Interface / User Experience:</b> Mobile specific design elements and processes make the App very easy to operate.</p><br><br>
+			<div align="center" style="margin-bottom:48px">
+				<a target="_blank" href="https://play.google.com/store/apps/details?id=com.app.travel.TravelB2B"><?php echo  $this->Html->image('/images/google_play.png', ['style'=>'width:60%;']) ?></a>
+			</div> 
 		</div>
 	</div>
 	
