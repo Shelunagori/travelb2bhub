@@ -10,7 +10,22 @@ use App\Controller\AppController;
  */
 class TaxiFleetCarBusesController extends AppController
 {
-
+public function initialize()
+	{
+		parent::initialize();
+		$this->Auth->allow(['logout']);
+		 
+		$loginId=$this->Auth->User('id');  
+		if(!empty($loginId)){
+			$first_name=$this->Auth->User('first_name');
+			$last_name=$this->Auth->User('last_name');
+			$profile_pic=$this->Auth->User('profile_pic');  
+			$authUserName=$first_name.' '.$last_name;
+			$this->set('MemberName',$authUserName);
+			$this->set('profile_pic', $profile_pic);
+			$this->set('loginId',$loginId); 
+		}
+	} 
     /**
      * Index method
      *
@@ -46,21 +61,31 @@ class TaxiFleetCarBusesController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($id= null)
     {
-        $taxiFleetCarBus = $this->TaxiFleetCarBuses->newEntity();
-        if ($this->request->is('post')) {
+		$this->viewBuilder()->layout('admin_layout');
+		if(!$id)
+		{
+			$taxiFleetCarBus = $this->TaxiFleetCarBuses->newEntity();
+        }
+		else{
+			$taxiFleetCarBus = $this->TaxiFleetCarBuses->get($id, [
+            'contain' => []
+			]);
+		}
+		if ($this->request->is(['patch','post','put'])) {
             $taxiFleetCarBus = $this->TaxiFleetCarBuses->patchEntity($taxiFleetCarBus, $this->request->data);
             if ($this->TaxiFleetCarBuses->save($taxiFleetCarBus)) {
                 $this->Flash->success(__('The taxi fleet car bus has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'add']);
             } else {
                 $this->Flash->error(__('The taxi fleet car bus could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('taxiFleetCarBus'));
-        $this->set('_serialize', ['taxiFleetCarBus']);
+		$taxiFleetCarBuses = $this->paginate($this->TaxiFleetCarBuses->find()->where(['TaxiFleetCarBuses.is_deleted'=>0]));
+        $this->set(compact('taxiFleetCarBus','taxiFleetCarBuses','id'));
+        $this->set('_serialize', ['taxiFleetCarBus','taxiFleetCarBuses','id']);
     }
 
     /**
@@ -98,14 +123,16 @@ class TaxiFleetCarBusesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+       $this->request->allowMethod(['patch','post', 'put']);
         $taxiFleetCarBus = $this->TaxiFleetCarBuses->get($id);
-        if ($this->TaxiFleetCarBuses->delete($taxiFleetCarBus)) {
+		$this->request->data['is_deleted']=1;
+		$taxiFleetCarBus = $this->TaxiFleetCarBuses->patchEntity($taxiFleetCarBus, $this->request->data);
+        if ($this->TaxiFleetCarBuses->save($taxiFleetCarBus)) {
             $this->Flash->success(__('The taxi fleet car bus has been deleted.'));
         } else {
             $this->Flash->error(__('The taxi fleet car bus could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'add']);
     }
 }

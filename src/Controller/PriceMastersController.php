@@ -65,23 +65,33 @@ public function initialize()
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($id= null)
     {
 		$this->viewBuilder()->layout('admin_layout');
-        $priceMaster = $this->PriceMasters->newEntity();
-        if ($this->request->is('post')) {
+		if(!$id)
+		{	
+			$priceMaster = $this->PriceMasters->newEntity();
+		}
+		else{
+			$priceMaster = $this->PriceMasters->get($id, [
+            'contain' => []
+			]);
+		}
+        if ($this->request->is(['patch','post','put'])) {
             $priceMaster = $this->PriceMasters->patchEntity($priceMaster, $this->request->data);
             if ($this->PriceMasters->save($priceMaster)) {
                 $this->Flash->success(__('The price master has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'add']);
             } else {
                 $this->Flash->error(__('The price master could not be saved. Please, try again.'));
             }
         }
         $promotionTypes = $this->PriceMasters->PromotionTypes->find('list', ['limit' => 200]);
-        $this->set(compact('priceMaster', 'promotionTypes'));
-        $this->set('_serialize', ['priceMaster']);
+		$priceMasters = $this->paginate($this->PriceMasters->find()->where(['PriceMasters.is_deleted'=>0])->contain(['PromotionTypes'])); 
+		//pr($priceMasters);exit;
+        $this->set(compact('priceMaster', 'promotionTypes','priceMasters'));
+        $this->set('_serialize', ['priceMaster','priceMasters','promotionTypes','id']);
     }
 
     /**
@@ -120,14 +130,15 @@ public function initialize()
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        $this->request->allowMethod(['patch','post', 'put']);
         $priceMaster = $this->PriceMasters->get($id);
-        if ($this->PriceMasters->delete($priceMaster)) {
+		$this->request->data['is_deleted']=1;
+		$priceMaster = $this->PriceMasters->patchEntity($priceMaster, $this->request->data);
+        if ($this->PriceMasters->save($priceMaster)) {
             $this->Flash->success(__('The price master has been deleted.'));
         } else {
             $this->Flash->error(__('The price master could not be deleted. Please, try again.'));
         }
-
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'add']);
     }
 }

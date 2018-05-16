@@ -9,7 +9,7 @@
 	<div class="col-md-6">
 		<div class="box box-primary">
 			<div class="box-header with-border">
-			<?php if(!empty($id)){ ?>
+				<?php if(!empty($id)){ ?>
 							 <b> Edit Price </b>
 						<?php }else{ ?>
 							 <b> Add Price </b>
@@ -25,7 +25,7 @@
 						</div>
 						<div class="col-md-8">
 							<?php 
-							echo $this->Form->input('state_id',['options' =>$promotionTypes,'label' => false,'class'=>'form-control select2 ','empty'=> 'Select...']);?>
+							echo $this->Form->input('promotion_type_id',['options' =>$promotionTypes,'label' => false,'class'=>'form-control select2 ','empty'=> 'Select...']);?>
 						</div>
 					</div>
 					<span class="help-block"></span>
@@ -35,7 +35,7 @@
 						</div>
 						<div class="col-md-8">
 							<?php 
-							echo $this->Form->input('price',['label' => false,'class'=>'form-control input-medium ','Placeholder'=> 'Enter Price Here']);?>	
+							echo $this->Form->input('price',['label' => false,'class'=>'form-control input-medium ','Placeholder'=> 'Enter Price Here','type'=>'text']);?>	
 						</div>
 					</div><span class="help-block"></span>
 					<div class="row">
@@ -98,26 +98,30 @@
 				<thead>
 					<tr style="background-color:#DFD9C4;">
 						<th scope="col"><?= ('S.No') ?></th> 
-						<th scope="col"><?= ('Category name') ?></th>
+						<th scope="col"><?= $this->Paginator->sort('Promotion Type') ?></th>
+						<th scope="col"><?= $this->Paginator->sort('week') ?></th>
+						<th scope="col"><?= $this->Paginator->sort('price') ?></th>
 						<th scope="col" class="actions"><?= __('Actions') ?></th>
 					</tr>
 				</thead>
 				<tbody>
-					<?php $i=1;foreach ($postTravlePackageCategoryss as $package_category): ?>
+					<?php $i=1;foreach ($priceMasters as $priceMaster): ?>
 					<tr>
 						<td><?php echo $i;?></td> 
-						<td><?= h($package_category->name) ?></td>
+						<td><?= h($priceMaster->promotion_type->name) ?></td>
+						<td><?= h($priceMaster->week) ?></td>
+						<td><?= $this->Number->format($priceMaster->price) ?></td>
 						<td class="actions">
-							<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/PostTravlePackageCategories/add/'.$package_category->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
-							<a class=" btn btn-danger btn-xs" data-target="#deletemodal<?php echo $package_category->id; ?>" data-toggle=modal><i class="fa fa-trash"></i></a>
-									<div id="deletemodal<?php echo $package_category->id; ?>" class="modal fade" role="dialog">
+							<?php echo $this->Html->link('<i class="fa fa-edit"></i>','/PriceMasters/add/'.$priceMaster->id,array('escape'=>false,'class'=>'btn btn-warning btn-xs'));?>
+							<a class=" btn btn-danger btn-xs" data-target="#deletemodal<?php echo $priceMaster->id; ?>" data-toggle=modal><i class="fa fa-trash"></i></a>
+									<div id="deletemodal<?php echo $priceMaster->id; ?>" class="modal fade" role="dialog">
 										<div class="modal-dialog modal-md" >
-											<form method="post" action="<?php echo $this->Url->build(array('controller'=>'PostTravlePackageCategories','action'=>'delete',$package_category->id)) ?>">
+											<form method="post" action="<?php echo $this->Url->build(array('controller'=>'PriceMasters','action'=>'delete',$priceMaster->id)) ?>">
 												<div class="modal-content">
 												  <div class="modal-header">
 														<button type="button" class="close" data-dismiss="modal">&times;</button>
 														<h4 class="modal-title">
-														Are you sure you want to remove this Package Category?
+														Are you sure you want to remove this Price?
 														</h4>
 													</div>
 													<div class="modal-footer">
@@ -128,7 +132,7 @@
 											</form>
 										</div>
 									</div>
-						   <?php  $this->Form->PostLink('<i class="fa fa-trash"></i>','/PostTravlePackageCategories/delete/'.$package_category->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $package_category->id)));?>
+						   <?php  $this->Form->PostLink('<i class="fa fa-trash"></i>','/PriceMasters/delete/'.$priceMaster->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','confirm' => __('Are you sure you want to delete # {0}?', $priceMaster->id)));?>
 						</td>
 					</tr>
 					<?php $i++; endforeach;  ?>

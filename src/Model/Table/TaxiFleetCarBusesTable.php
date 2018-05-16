@@ -61,10 +61,10 @@ class TaxiFleetCarBusesTable extends Table
             ->requirePresence('type', 'create')
             ->notEmpty('type');
 
-        $validator
+       /*  $validator
             ->integer('is_deleted')
             ->requirePresence('is_deleted', 'create')
-            ->notEmpty('is_deleted');
+            ->notEmpty('is_deleted'); */
 
         return $validator;
     }
