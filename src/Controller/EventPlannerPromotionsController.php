@@ -1066,12 +1066,12 @@ class EventPlannerPromotionsController extends AppController
 		$CityList = $this->Cities->find()->where(['Cities.state_id IN' =>$data]);
 		$options=array();
 		echo "
-			<select name='city_id[]' size='3' class='form-control city_id' multiple='multiple' tabindex='1'>";
+			<select name='city_id[]' size='3' class='form-control requiredfield city_id' multiple='multiple' tabindex='1'>";
 			foreach($CityList as $cty)
 			{
 				echo "<option value='".$cty->id."' > ".$cty->name."</option>";
 			}
-			echo "</select>";
+			echo "</select><label style='display:none' class='helpblock error' > This field is required.</label>";
 		exit;
 	}
 	

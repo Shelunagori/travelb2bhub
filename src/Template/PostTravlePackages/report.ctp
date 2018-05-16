@@ -44,7 +44,7 @@ $response = curl_exec($curl);
 $err = curl_error($curl);
 curl_close($curl);
 
-$priceMasters=array();
+$postTravlePackages=array();
 if ($err) {
   echo "cURL Error #:" . $err;
 } else {
@@ -52,7 +52,7 @@ if ($err) {
 	$List=json_decode($response);
 	$postTravlePackages=$List->getTravelPackages;
 }
-//pr($postTravlePackages); exit;
+ 
 //--- COUNTRY STATE & CITY
 $curl = curl_init();
 curl_setopt_array($curl, array(
@@ -726,6 +726,11 @@ a{
 													</span>
 													</div>					
 												</div>
+												<div class="row rowspace" >
+													<div class="col-md-12"><label>Company Name: </label>
+													<span><?= h($postTravlePackage->user->company_name); ?></span>
+													</div>					
+												</div>	
 												
 											</div>
 											<div class="col-md-8">

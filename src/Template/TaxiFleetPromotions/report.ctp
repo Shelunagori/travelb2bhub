@@ -19,7 +19,7 @@ curl_setopt_array($curl, array(
 $response = curl_exec($curl);
 $err = curl_error($curl);
 curl_close($curl);
-$priceMasters=array();
+$taxiFleetPromotions=array();
 if ($err) {
   echo "cURL Error #:" . $err;
 } else {
@@ -109,6 +109,7 @@ if ($err) {
 	$List=json_decode($response);
 	$reasonslist=$List->reasonslist;
 }
+ 
 ?>
 <style>
 @media all and (max-width: 410px) {
@@ -473,6 +474,7 @@ a{
 										<span ><?= h($stateLists); ?> </span>
 										</div>
 									</div>
+									
 								</div>
 								<div class="col-md-5">
 									<div class="row rowspace" >
@@ -498,6 +500,12 @@ a{
 											</span>
 										</div>					
 									</div>
+									<div class="row rowspace" >
+										<div class="col-md-12"><label>Company Name: </label>
+										<span><?= h($taxiFleetPromotion->user->company_name); ?></span>
+										</div>					
+									</div>
+									
 									<!-----button list-->
 							<div class="row" style="padding-top:15px;">
 							<div id="fleetdetail<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">

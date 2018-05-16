@@ -448,13 +448,13 @@ fieldset{
 					}
 					$options[] = ['value'=>$country->id,'text'=>$country->country_name];
 				};
-				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select Countries "]);?>');
+				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select Countries "]);?> <label style="display:none" class="helpblock error" > This field is required.</label>');
 			}
 			else{
 				$(".replacedata").html('<?php $options=array();
 				$options[] = ['value'=>'101','text'=>'India','selected'];
 				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry","multiple"=>true ,'options' => $options,'label'=>false]);
-				?>');
+				?> <label style="display:none" class="helpblock error" > This field is required.</label>');
 			}
 			$('.select2').select2();
 			
@@ -462,11 +462,18 @@ fieldset{
 		$('form').submit(function () {
 			var x=0;
 			$( ".requiredfield" ).each(function() {
-  				if($(this).val()==''){
+				if($(this).val()!=''){ 
+ 					$(this).closest('div.form-group').find('.helpblock').hide();
+				}
+  				if($(this).val()==''){ 
  					$(this).closest('div.form-group').find('.helpblock').show();
 					x = 1;
 				}
-			});
+				if($(this).val()==null){
+ 					$(this).closest('div.form-group').find('.helpblock').show();
+					x = 1;
+				}
+ 			});
 			if(x==1){
 				$('html, body').animate({scrollTop:0}, 'slow');
 				return false;
@@ -496,7 +503,7 @@ fieldset{
 				dataType:'text',
 				success: function(data)
 				{
-					$('#mcity').html('<select name="city_id[]" multiple="multiple" class="form-control select2 requiredfield max_limit" data-placeholder="Select City" id="multi_city" style="height:125px;">'+data+'</select>');
+					$('#mcity').html('<select name="city_id[]" multiple="multiple" class="form-control select2 requiredfield max_limit" data-placeholder="Select City" id="multi_city" style="height:125px;">'+data+'</select> <label style="display:none" class="helpblock error" > This field is required.</label>');
 					$("#multi_city").select2();
 				}
 			});
@@ -550,7 +557,7 @@ fieldset{
 					}
 					$options[] = ['value'=>$country->id,'text'=>$country->country_name];
 				};
-				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select Countries "]);?>');
+				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select Countries "]);?><label style="display:none" class="helpblock error" > This field is required.</label>');
 			}
 			else{
 				$('#mcity').html('<select name="city_id[]" multiple="multiple" class="form-control select2 requiredfield max_limit" data-placeholder="Select City" id="multi_city" style="height:125px;"><option value="">Select Please </option></select>');
@@ -558,7 +565,7 @@ fieldset{
 				$(".replacedata").html('<?php $options=array();
 				$options[] = ['value'=>'101','text'=>'India'];
 				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry","multiple"=>true ,'options' => $options,'label'=>false]);
-				?>');
+				?> <label style="display:none" class="helpblock error" > This field is required.</label>');
 			}
 			$('.select2').select2();
 		});

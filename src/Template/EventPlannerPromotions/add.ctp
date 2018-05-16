@@ -361,7 +361,7 @@ $(document).ready(function (){
 		$(".replacedata").html('<?php $options=array();
 			$options[] = ['value'=>'0','text'=>'All Cities','selected'];
 			echo $this->Form->input('city_id',["class"=>"form-control city_id requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
-			?>');
+			?><label style="display:none" class="helpblock error" > This field is required.</label>');
 		$('.city_id').select2();
 		$(document).on('change','.city_type',function()
 		{
@@ -376,7 +376,7 @@ $(document).ready(function (){
 				$(".replacedata").html('<?php $options=array();
 				$options[] = ['value'=>'0','text'=>'All Cities','selected'];
 				echo $this->Form->input('city_id',["class"=>"form-control city_id requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
-				?>');
+				?><label style="display:none" class="helpblock error" > This field is required.</label>');
 			}
 			$(this).closest('form').find('.city_id').select2();
 		});

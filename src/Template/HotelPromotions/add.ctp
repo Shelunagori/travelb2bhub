@@ -263,7 +263,8 @@ label{
 											$hotllocality[]=$userss['state']['state_name'];
 											$hotllocality=array_filter($hotllocality);
 											$showname=implode(', ',$hotllocality);
-											echo $this->Form->input('hotel_location',['class'=>'form-control ','label'=>false,'placeholder'=>"Enter Your Hotel Location (City, State)",'value'=>$showname]);?>
+											echo $this->Form->input('hotel_location',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>"Enter Your Hotel Location (City, State)",'value'=>$showname]);?>
+											<label style="display:none" class="helpblock error" > This field is required.</label>
 										</div>
 									</div>
 									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
@@ -339,11 +340,18 @@ label{
 		$('form').submit(function () {
 			var x=0;
 			$( ".requiredfield" ).each(function() {
-  				if($(this).val()==''){
+				if($(this).val()!=''){ 
+ 					$(this).closest('div.form-group').find('.helpblock').hide();
+				}
+  				if($(this).val()==''){ 
  					$(this).closest('div.form-group').find('.helpblock').show();
 					x = 1;
 				}
-			});
+				if($(this).val()==null){
+ 					$(this).closest('div.form-group').find('.helpblock').show();
+					x = 1;
+				}
+ 			});
 			if(x==1){
 				$('html, body').animate({scrollTop:0}, 'slow');
 				return false;

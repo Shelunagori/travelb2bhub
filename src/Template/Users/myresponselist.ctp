@@ -637,7 +637,7 @@ $(document).ready(function(){
 		
 		else {?>
              <div class=" ">
-                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 box-event">
+                <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11 box-event text-center">
 					 <?php if(isset($_GET['req_typesearch'])){ echo "No matching data.";}else{ echo "You have not responded to any requests.";}?>
                 </div>
             </div>
@@ -645,7 +645,7 @@ $(document).ready(function(){
 		
 		<?php if(isset($total_responses) AND $total_responses==0){?>
 				<div class=" ">
-                <div class="col-lg-11 col-md-11 col-sm-11 text-center col-xs-11 box-event">
+                <div class="col-lg-11 col-md-11 col-sm-11 text-center col-xs-11 box-event text-center">
 					<?php if(isset($_GET['req_typesearch'])){ echo "No matching data.";}else{ echo "You have not responded to any requests.";}?>
                 </div>
             </div>
