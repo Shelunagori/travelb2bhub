@@ -113,12 +113,12 @@ hr { margin-top:0px!important;}
 				<?php if($users['role_id'] == 3) { ?>
 				<div class="form-group col-md-6">
                   <label>Hotel Name</label>
-                  <input type="text" class="form-control" name="company_name" value="<?php echo $users['company_name'] ?>" id="hotel_name" placeholder="Hotel Name">
+                  <input type="text" class="form-control" readonly  value="<?php echo $users['company_name'] ?>" id="hotel_name" placeholder="Hotel Name">
                 </div>
 				<?php } else{ ?>
 				<div class="form-group col-md-6">
                   <label>Company Name</label>
-                  <input type="text" class="form-control" name="company_name" value="<?php echo $users['company_name'] ?>" id="company_name" placeholder="Company Name">
+                  <input type="text" class="form-control" readonly  value="<?php echo $users['company_name'] ?>" id="company_name" placeholder="Company Name">
                 </div>
 				<?php } ?>
 				<div class="form-group col-md-6">
@@ -127,11 +127,11 @@ hr { margin-top:0px!important;}
                 </div>
                 <div class="form-group col-md-4">
                   <label for="exampleInputEmail1">Email Id</label>
-                  <input type="email" class="form-control" name="email" class="form-control" value="<?php echo $users['email'] ?>" id="email" placeholder="Enter Here">
+                  <input type="email" readonly class="form-control" class="form-control" value="<?php echo $users['email'] ?>" id="email" placeholder="Enter Here">
                 </div>
                 <div class="form-group col-md-4">
                   <label for="exampleInputPassword1">Mobile No.</label>
-                  <input type="text" class="form-control" name="" readonly value="<?php echo str_replace(' ','',$users['mobile_number']); ?>" id="mobile_number" placeholder="Enter Here" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+                  <input type="text" class="form-control"   readonly value="<?php echo str_replace(' ','',$users['mobile_number']); ?>" id="mobile_number" placeholder="Enter Here" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
                 </div>
 				<div class="form-group col-md-4">
                   <label for="exampleInputPassword1">Secondary Contact No.</label>
@@ -169,12 +169,12 @@ hr { margin-top:0px!important;}
 						$states_show=$states_show->toarray();?>
 						  <label>States</label>
 							<input type="text" class="form-control" id ="state_name" value="<?php echo $states_show[$users['state_id']];?>" name="state_name" placeholder="Select State" readonly />
-							<input type='hidden' id='state_id' name="state_id" value="<?php echo (!empty($users['state_id']))?$users['state_id']:""; ?>" />
+							 
 					</div><?php $country_show=$country_show->toarray();  ?>
 					<div class="form-group col-md-4">
 						  <label>Country</label>
 						  <input type="text" class="form-control" id ="country_name" Value ="<?php echo $country_show[$users['country_id']];?>" name="country_name" placeholder="Select Country" readonly />
-                          <input type='hidden' id='country_id' name="country_id" value="<?php echo (!empty($users['country_id']))?$users['country_id']:""; ?>" />
+                           
 					</div>
 				</div> 
 				<?php if($users['role_id'] == 1) { ?>

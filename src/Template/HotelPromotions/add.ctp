@@ -255,7 +255,15 @@ label{
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
-										 <?php echo $this->Form->input('hotel_location',['class'=>'form-control ','label'=>false,'placeholder'=>"Enter Your Hotel Location (City, State)",'value'=>$userss['adress1'].$userss['locality']]);?>
+										 <?php
+										  
+											$hotllocality[]=$userss['address'];
+											$hotllocality[]=$userss['locality'];
+											$hotllocality[]=$userss['city']['name'];
+											$hotllocality[]=$userss['state']['state_name'];
+											$hotllocality=array_filter($hotllocality);
+											$showname=implode(', ',$hotllocality);
+											echo $this->Form->input('hotel_location',['class'=>'form-control ','label'=>false,'placeholder'=>"Enter Your Hotel Location (City, State)",'value'=>$showname]);?>
 										</div>
 									</div>
 									<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
@@ -381,9 +389,9 @@ label{
 				});
 				function calculate()
 				{
-					var low_rate=$('.low_rate').val();
-					var high_rate=$('.high_rate').val();
-					if(low_rate.length>high_rate.length)
+					var low_rate=parseInt($('.low_rate').val());
+					var high_rate=parseInt($('.high_rate').val());
+					if(low_rate>high_rate)
 					{
 						alert("Most Expensive Room Rate should be greater then Cheapest Room Rate");
 						$('.high_rate').val('');

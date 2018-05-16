@@ -384,7 +384,8 @@ class HotelPromotionsController extends AppController
 		
 		$this->viewBuilder()->layout('user_layout');
 		$user_id=$this->Auth->User('id');
-		$userss=$this->Auth->User();
+		$userss=$this->Users->find()->contain(['Cities','States'])->where(['Users.id'=>$user_id])->first();
+		 
 		$this->set(compact('user_id','userss'));
     }
 

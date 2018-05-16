@@ -41,6 +41,11 @@ label{
 	color:#96989A !important;
 	font-weight:100;
 }
+@media all and (max-width: 994px) {
+	.imagesize {
+		width:90% !important;
+	}
+}
 </style>
 
 <section class="content">
@@ -871,92 +876,93 @@ label{
 						<div class="form-group col-md-12 " >
 						<table  width="100%"><br>
 						<tr>
-							<td align="center" width="25%">
+							<td align="center" width="25%">&nbsp;
 							<div >
 								<?php if(!empty($users['iata_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iata_pic'])>0) { 
-									echo $this->Html->image('icon/iata.png', ["alt"=>"IATA Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+									echo $this->Html->image('icon/iata.png', ["class"=>"img-responsive imagesize","alt"=>"IATA Pic",  'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
-									echo $this->Html->image('icon/iata-1.png', ["class"=>"img-responsive", "alt"=>"IATA Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+									echo $this->Html->image('icon/iata-1.png', ["class"=>"img-responsive imagesize", "alt"=>"IATA Pic",  'style'=>'border-radius: 50%;']); 
 									} ?>
 								 
-							</div>
+							</div>&nbsp;
 							</td>
-							<td align="center"  width="25%">
-							<div >
+							 
+							<td align="center"  width="25%">&nbsp;
+							<div>
 								<?php if(!empty($users['tafi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['tafi_pic'])>0) {
-									echo $this->Html->image('icon/tafi.png', ["alt"=>"T A F I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+									echo $this->Html->image('icon/tafi.png', ["class"=>"img-responsive imagesize","alt"=>"T A F I Pic",  'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
-									echo $this->Html->image('icon/tafi-1.png', ["class"=>"img-responsive", "alt"=>"T A F I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+									echo $this->Html->image('icon/tafi-1.png', ["class"=>"img-responsive imagesize", "alt"=>"T A F I Pic",  'style'=>'border-radius: 50%;']); 
 									} ?>
 								 
-							</div>
+							</div>&nbsp;
 							</td>
-							<td align="center"  width="25%">
+							<td align="center"  width="25%">&nbsp;
 							<div >
 								<?php if(!empty($users['taai_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['taai_pic'])>0) { 
-									echo $this->Html->image('icon/taai.png', ["alt"=>"T A A I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+									echo $this->Html->image('icon/taai.png', ["class"=>"img-responsive imagesize","alt"=>"T A A I Pic",  'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
-									echo $this->Html->image('icon/taai-1.png', ["class"=>"img-responsive", "alt"=>"T A A I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+									echo $this->Html->image('icon/taai-1.png', ["class"=>"img-responsive imagesize", "alt"=>"T A A I Pic",  'style'=>'border-radius: 50%;']); 
 									} ?>
 								 
-							</div>
+							</div>&nbsp;
 							</td>
 							 
 							
-							<td align="center"  width="25%">
+							<td align="center"  width="25%">&nbsp;
 							<div >
 								<?php if(!empty($users['iato_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iato_pic'])>0) { 
-									echo $this->Html->image('icon/iato.png', ["alt"=>"I A T O Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+									echo $this->Html->image('icon/iato.png', ["class"=>"img-responsive imagesize","alt"=>"I A T O Pic",  'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
-									echo $this->Html->image('icon/iato-1.png', ["class"=>"img-responsive", "alt"=>"I A T O Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+									echo $this->Html->image('icon/iato-1.png', ["class"=>"img-responsive imagesize", "alt"=>"I A T O Pic",  'style'=>'border-radius: 50%;']); 
 									} ?>
 								 
-							</div>
+							</div>&nbsp;
 							</td>
 							</tr>
 							 <tr>
 							 <td><br></td>
 							 </tr>
 							<tr>
-							<td align="center"  width="25%">
+							<td align="center"  width="25%">&nbsp;
 							<div >
 								<?php if(!empty($users['adyoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adyoi_pic'])>0) { 
-									echo $this->Html->image('icon/adyoi.png', ["alt"=>"A D Y O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+									echo $this->Html->image('icon/adyoi.png', ["class"=>"img-responsive imagesize","alt"=>"A D Y O I Pic",  'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
-									echo $this->Html->image('icon/adyoi-1.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+									echo $this->Html->image('icon/adyoi-1.png', ["class"=>"img-responsive imagesize", "alt"=>"A D T O I Pic",  'style'=>'border-radius: 50%;']); 
 									} ?>
 								 
-							</div>
+							</div>&nbsp;
 							</td>
-							<td align="center"  width="25%">
+							<td align="center"  width="25%">&nbsp;
 							<div >
 								<?php if(!empty($users['iso9001_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['iso9001_pic'])>0) { 
-									echo $this->Html->image('icon/iso.png', ["alt"=>"I S O 9001 Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+									echo $this->Html->image('icon/iso.png', ["class"=>"img-responsive imagesize","alt"=>"I S O 9001 Pic",  'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
-									echo $this->Html->image('icon/iso-1.png', ["class"=>"img-responsive", "alt"=>"I S O 9001 Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+									echo $this->Html->image('icon/iso-1.png', ["class"=>"img-responsive imagesize", "alt"=>"I S O 9001 Pic",  'style'=>'border-radius: 50%;']); 
 									} ?>
 							 
-							</div>
+							</div>&nbsp;
 							</td>
-							<td align="center"  width="25%">
+							<td align="center"  width="25%">&nbsp;
 							<div >
 								<?php if(!empty($users['uftaa_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['uftaa_pic'])>0) { 
-								   echo $this->Html->image('icon/uftaa.png', ["alt"=>"U F T A A Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+								   echo $this->Html->image('icon/uftaa.png', ["class"=>"img-responsive imagesize","alt"=>"U F T A A Pic",  'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
-									echo $this->Html->image('icon/uftaa-1.png', ["class"=>"img-responsive", "alt"=>"U F T A A Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+									echo $this->Html->image('icon/uftaa-1.png', ["class"=>"img-responsive imagesize", "alt"=>"U F T A A Pic",  'style'=>'border-radius: 50%;']); 
 									} ?>
 									 
-							</div>
+							</div>&nbsp;
 							</td>
-							<td align="center"  width="25%">
+							<td align="center"  width="25%">&nbsp;
 							<div >
 								<?php if(!empty($users['adtoi_pic']) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$users['adtoi_pic'])>0) { 
-									echo $this->Html->image('icon/adtoi.png', ["alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']);?>
+									echo $this->Html->image('icon/adtoi.png', ["class"=>"img-responsive imagesize","alt"=>"A D T O I Pic",  'style'=>'border-radius: 50%;']);?>
 								<?php }else{ 
-									echo $this->Html->image('icon/adtoi-1.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>130, 'width'=>130, 'style'=>'border-radius: 50%;']); 
+									echo $this->Html->image('icon/adtoi-1.png', ["class"=>"img-responsive imagesize", "alt"=>"A D T O I Pic",  'style'=>'border-radius: 50%;']); 
 									} ?>
 								 
-							</div>
+							</div>&nbsp;
 							</td>
 							</tr>
 							 
@@ -985,26 +991,26 @@ label{
 						<table width="100%"><br>
 							<tr>
 								<td width="48%" align="center">
-									<div>
+									<div>&nbsp;
 										 
 										<?php if(!empty($users['company_img_1_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_img_1_pic'])>0) {
-										echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_1_pic'], [ "alt"=>"Company Image 1 Pic", 'width'=>110,"height"=>"110px;", 'style'=>'border-radius: 50%;']);?>
+										echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_1_pic'], [ "class"=>"img-responsive imagesize","alt"=>"Company Image 1 Pic", 'width'=>110,"height"=>"110px;", 'style'=>'border-radius: 50%;']);?>
 										<?php }
 										else{
-											echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic",   'width'=>110, 'style'=>'border-radius: 50%;height:110px !important;']); 
+											echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive imagesize", "alt"=>"A D T O I Pic",   'width'=>110, 'style'=>'border-radius: 50%;height:110px !important;']); 
 										}?>
-									</div>
+									</div>&nbsp;
 								</td >
 								<td width="1%">&nbsp;</td>
-								<td width="48%"  align="center">
+								<td width="48%"  align="center">&nbsp;
 									<div>
 										<?php if(!empty($users['company_img_2_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_img_2_pic'])>0) {
-										echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_2_pic'], [ "alt"=>"Company Image 2 Pic", 'width'=>110,"height"=>"110px;", 'style'=>'border-radius: 50%;']);?>
+										echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_2_pic'], [ "class"=>"img-responsive imagesize","alt"=>"Company Image 2 Pic", 'width'=>110,"height"=>"110px;", 'style'=>'border-radius: 50%;']);?>
 										<?php }
 										else{
-											echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic",  'width'=>110,  'style'=>'border-radius: 50%;height:110px !important;']); 
+											echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive imagesize", "alt"=>"A D T O I Pic",  'width'=>110,  'style'=>'border-radius: 50%;height:110px !important;']); 
 										}?>
-									</div>
+									</div>&nbsp;
 								</td>
 							</tr>
 						</table>
@@ -1033,40 +1039,40 @@ label{
 						<div class="form-group col-md-12">
 						<table width="100%"><br>
 						<tr>
-						<td width="33%">
+						<td width="33%">&nbsp;
 							<div  align="center">
 								 
 								<?php if(!empty($users['pancard_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['pancard_pic'])>0) {
-								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['pancard_pic'], [ "alt"=>"Pan Card", "width"=>"110", "style"=>"height:110px;border-radius: 50% !important;"]);?>
+								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['pancard_pic'], [ "class"=>"img-responsive imagesize","alt"=>"Pan Card", "width"=>"110", "style"=>"height:110px;border-radius: 50% !important;"]);?>
 								<?php }
 								else{
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"Pan Card",  "width"=>"110", 'style'=>'border-radius: 50%;height:110px !important;']); 
+									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive imagesize", "alt"=>"Pan Card",  "width"=>"110", 'style'=>'border-radius: 50%;height:110px !important;']); 
 								}?>
 								 
-							</div>
+							</div>&nbsp;
 							</td>
-							<td width="33%">
+							<td width="33%">&nbsp;
 							<div   align="center">
 								<?php if(!empty($users['id_card_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['id_card_pic'])>0) {
-								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['id_card_pic'], [ "alt"=>"Business card",  "width"=>"110","style"=>"height:110px;border-radius: 50% !important;"]);?>
+								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['id_card_pic'], [ "class"=>"img-responsive imagesize","alt"=>"Business card",  "width"=>"110","style"=>"height:110px;border-radius: 50% !important;"]);?>
 								<?php }
 								else{
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"Business card", "width"=>"110", 'style'=>'border-radius: 50%;height:110px !important;']); 
+									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive imagesize", "alt"=>"Business card", "width"=>"110", 'style'=>'border-radius: 50%;height:110px !important;']); 
 								}?>
 								 
-							</div>
+							</div>&nbsp;
 							</td>
-							<td width="33%">
+							<td width="33%"> &nbsp;
 							<div   align="center">
 								<?php if(!empty($users['company_shop_registration_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_shop_registration_pic'])>0) {
-								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_shop_registration_pic'], [ "alt"=>"Company Shop Act Registration","width"=>"110", "style"=>"height:110px;border-radius: 50% !important;"]);?>
+								echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_shop_registration_pic'], [ "class"=>"img-responsive imagesize","alt"=>"Company Shop Act Registration","width"=>"110", "style"=>"height:110px;border-radius: 50% !important;"]);?>
 								<?php }
 								else{
-									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"Company Shop Act Registration", "width"=>"110", 'style'=>'border-radius: 50%;height:110px !important;']); 
+									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive imagesize", "alt"=>"Company Shop Act Registration", "width"=>"110", 'style'=>'border-radius: 50%;height:110px !important;']); 
 								}?>
 									
 							</div>
-							 
+							&nbsp;
 							</td>
 							</tr>
 							<tr>
@@ -1075,7 +1081,6 @@ label{
 								<td align="center">Company Shop Act Registration</td>
 							</tr>
 							</table>
-							
 						</div>
 					</div>
 				</div>
