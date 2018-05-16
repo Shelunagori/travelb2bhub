@@ -64,9 +64,9 @@ fieldset{
 				<div class="col-md-12"> 
 					<?php echo  $this->Flash->render() ?>
 				</div>
-				<?= $this->Form->create($eventPlannerPromotion,['type'=>'file']); 
+				<?= $this->Form->create($taxiFleetPromotion,['type'=>'file']); 
  				$cityList=array();
-				foreach($eventPlannerPromotion->event_planner_promotion_cities as $cities)
+				foreach($taxiFleetPromotion->event_planner_promotion_cities as $cities)
 				{ 
 					
 					if($cities->city_id==0){@$cityList[]='All Cities';}
@@ -76,7 +76,7 @@ fieldset{
 				}
 				
 				$stateList=array();
-				foreach($eventPlannerPromotion->event_planner_promotion_states as $states)
+				foreach($taxiFleetPromotion->event_planner_promotion_states as $states)
 				{
 					$stateList[]=$states->state_id;
 				}
@@ -94,11 +94,11 @@ fieldset{
 										Company Name
  									</p>
 									<div class="input-field">
-										 <?php echo $this->Form->input('company_name',['class'=>'form-control','label'=>false,'autocomplete'=> "off",'placeholder'=>"Company Name",'readonly'=>'readonly','value'=>$eventPlannerPromotion->user->company_name]);?>
+										 <?php echo $this->Form->input('company_name',['class'=>'form-control','label'=>false,'autocomplete'=> "off",'placeholder'=>"Company Name",'readonly'=>'readonly','value'=>$taxiFleetPromotion->user->company_name]);?>
 									</div>
 								</div>
-								<input type="hiddens" name="user_id" value="<?php echo $eventPlannerPromotion->user->id;?>"> 
-								<input type="hiddens" name="id" value="<?php echo $eventPlannerPromotion->id;?>"> 
+								<input type="hiddens" name="user_id" value="<?php echo $taxiFleetPromotion->user->id;?>"> 
+								<input type="hiddens" name="id" value="<?php echo $taxiFleetPromotion->id;?>"> 
 								<div class="col-md-6 form-group ">
 									<p for="from">
 										Upload Image of Promotion
@@ -324,7 +324,7 @@ $(document).ready(function (){
 			var cur_obj = $(this);
 			m_data.append('state_id',state_id);			
 			$.ajax({
-				url: "<?php echo $this->Url->build(["controller" => "EventPlannerPromotions", "action" => "cityStateList"]); ?>",
+				url: "<?php echo $this->Url->build(["controller" => "taxiFleetPromotions", "action" => "cityStateList"]); ?>",
 				data: m_data,
 				processData: false,
 				contentType: false,

@@ -390,9 +390,14 @@ class TaxiFleetPromotionsController extends AppController
      */
     public function edit($id = null)
     {
+		$this->viewBuilder()->layout('admin_layout');	
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id'));
         $taxiFleetPromotion = $this->TaxiFleetPromotions->get($id, [
             'contain' => []
         ]);
+		$user_id=$taxiFleetPromotion['user_id'];
+		//pr($user_id);exit;
         if ($this->request->is(['patch', 'post', 'put'])) {
             $taxiFleetPromotion = $this->TaxiFleetPromotions->patchEntity($taxiFleetPromotion, $this->request->data);
             if ($this->TaxiFleetPromotions->save($taxiFleetPromotion)) {
@@ -405,7 +410,9 @@ class TaxiFleetPromotionsController extends AppController
         $countries = $this->TaxiFleetPromotions->Countries->find('list', ['limit' => 200]);
         $priceMasters = $this->TaxiFleetPromotions->PriceMasters->find('list', ['limit' => 200]);
         $users = $this->TaxiFleetPromotions->Users->find('list', ['limit' => 200]);
-		$this->set(compact('taxiFleetPromotion', 'countries', 'priceMasters', 'users'));
+        $userss = $this->TaxiFleetPromotions->Users->find()->where(['Users.id'=>$user_id]);
+		//pr($userss->toArray());exit;
+		$this->set(compact('taxiFleetPromotion', 'countries', 'priceMasters', 'users','userss'));
         $this->set('_serialize', ['taxiFleetPromotion']);
     }
 
@@ -1167,4 +1174,8 @@ class TaxiFleetPromotionsController extends AppController
 		}
 		$this->set(compact('user_id','id'));
     }
+	public function adminedit($id = null)
+    {
+        $this->viewBuilder()->layout('admin_layout');
+	}
 }
