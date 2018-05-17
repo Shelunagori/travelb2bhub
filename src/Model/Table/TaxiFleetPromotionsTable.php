@@ -99,20 +99,17 @@ class TaxiFleetPromotionsTable extends Table
             ->requirePresence('fleet_detail', 'create')
             ->notEmpty('fleet_detail');
 
-        $validator
+       /*  $validator
             ->requirePresence('image', 'create')
-            ->notEmpty('image');
+            ->notEmpty('image'); */
 
         $validator
             ->requirePresence('document', 'create')
             ->notEmpty('document');
-
-
-
-        $validator
+        /* $validator
             ->date('visible_date')
             ->requirePresence('visible_date', 'create')
-            ->notEmpty('visible_date');
+            ->notEmpty('visible_date'); */
 
 
         return $validator;

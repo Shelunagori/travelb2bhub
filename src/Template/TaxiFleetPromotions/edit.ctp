@@ -145,7 +145,7 @@ fieldset{
 </style> 
 <div class="container-fluid">
 	<div class="box box-primary">
-	<?= $this->Form->create($taxiFleetPromotion) ?>
+	<?= $this->Form->create($taxiFleetPromotion,['type'=>'file','id'=>'TaxtEDIT']) ?>
 		<div class="row"> 
 			<div class="box-body">
 			<?php $i=1;
@@ -212,7 +212,7 @@ fieldset{
 												<span class="required">*</span>
 											</p>
 											<div class="input-field">
-												<?php  echo $this->Form->input('image',['class'=>'form-control requiredfield','label'=>false,'type'=>'file','onchange'=>'checkCertificate()','id'=>'hotelImg']); ?>
+												<?php  echo $this->Form->input('image',['class'=>'form-control','label'=>false,'type'=>'file','onchange'=>'checkCertificate()','id'=>'hotelImg']); ?>
 												<label style="display:none" class="helpblock error" > This field is required.</label>
 											</div>
 										</div>
@@ -428,28 +428,7 @@ $(document).ready(function ()
 	 
     $(document).ready(function ()
 	{
-		$('form').submit(function () {
-			var x=0;
-			$( ".requiredfield" ).each(function() {
-				if($(this).val()!=''){ 
- 					$(this).closest('div.form-group').find('.helpblock').hide();
-				}
-  				if($(this).val()==''){ 
- 					$(this).closest('div.form-group').find('.helpblock').show();
-					x = 1;
-				}
-				if($(this).val()==null){
- 					$(this).closest('div.form-group').find('.helpblock').show();
-					x = 1;
-				}
- 			});
-			if(x==1){
-				$('html, body').animate({scrollTop:0}, 'slow');
-				return false;
-			}
-			$("#loader-1").show();
-		});
-		
+
 		$(document).on('change','.priceMasters',function()
 		{
 			var blank=$(this).val();
@@ -559,4 +538,19 @@ $("#multi_vehicle").multiselect();
             }
         }
     }
+</script>
+
+<?php echo $this->Html->script(['jquery.validate']);?>
+<script>
+$('#TaxtEDIT').validate({
+		rules: {
+			"image" : {
+				required : false,
+			}
+		}, 
+		submitHandler: function (form) {
+ 			$("#loader-1").show();
+			form[0].submit(); 
+		}
+	});
 </script>

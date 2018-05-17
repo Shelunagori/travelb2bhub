@@ -1224,7 +1224,7 @@ class HotelPromotionsController extends AppController
 				$hotelPromotion->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
 			}
 			$hotelPromotion = $this->HotelPromotions->patchEntity($hotelPromotion, $this->request->data);
-///pr($hotelPromotion); exit;			
+			///pr($hotelPromotion); exit;			
 			if ($this->HotelPromotions->save($hotelPromotion)) {
 				$message = 'The hotel promotions has been saved';
 				$this->Flash->success(__($message)); 

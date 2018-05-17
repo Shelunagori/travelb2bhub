@@ -1,7 +1,8 @@
 <?php
 namespace App\Controller;
-
 use App\Controller\AppController;
+use Cake\Filesystem\Folder;
+use Cake\Filesystem\File;
 
 /**
  * TaxiFleetPromotions Controller
@@ -398,7 +399,134 @@ class TaxiFleetPromotionsController extends AppController
         ]);
 		//pr($taxiFleetPromotion);exit;
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $taxiFleetPromotion = $this->TaxiFleetPromotions->patchEntity($taxiFleetPromotion, $this->request->data);
+			
+			$ids = $taxiFleetPromotion->user_id;
+			$title = $taxiFleetPromotion->title;
+			$image = $this->request->data('image');
+			$tmp_name = $this->request->data['image']['tmp_name'];
+			if(!empty($tmp_name))
+			{	
+				$dir = new Folder(WWW_ROOT . 'images/taxiFleetPromotion/'.$ids.'/'.$title.'/image', true, 0755);
+				$ext = substr(strtolower(strrchr($image['name'], '.')), 1); 
+				$arr_ext = array('jpg', 'jpeg','png'); 				
+				
+				if(!empty($ext))
+				{
+					if(in_array($ext, $arr_ext)) { 
+						 
+						if (!file_exists('path/to/directory')) {
+							mkdir('path/to/directory', 0777, true);
+						}
+						$percentageTOReduse=100;
+						if(@$submitted_from=='web')
+						{
+							if(($image['size']>3000000) &&($image['size']<=4000000)){
+								$percentageTOReduse=50;
+							}
+							elseif(($image['size']>4000000) &&($image['size']<=6000000)){ 
+								$percentageTOReduse=20;
+							}
+							elseif($image['size']>6000000){
+								$percentageTOReduse=10;
+							}
+						}
+						/* Resize Image */
+						$destination_url = WWW_ROOT . '/images/taxiFleetPromotion/'.$ids.'/'.$title.'/image/'.$ids.'.'.$ext;
+						if($ext=='png'){
+							$image = imagecreatefrompng($image['tmp_name']);
+						}else{
+							$image = imagecreatefromjpeg($image['tmp_name']); 
+						}
+						imagejpeg($image, $destination_url, $percentageTOReduse);
+						$taxiFleetPromotion->image='images/taxiFleetPromotion/'.$ids.'/'.$title.'/image/'.$ids.'.'.$ext;
+						if(file_exists(WWW_ROOT . '/images/taxiFleetPromotion/'.$ids.'/'.$title.'/image/'.$ids.'.'.$ext)>0) {
+						}
+						else
+						{
+							$message = 'Image not uploaded';
+							$this->Flash->error(__($message));
+							 
+						} 
+					} 
+					else 
+					{ 
+						$message = 'Invalid image extension';
+						$this->Flash->error(__($message)); 
+						 
+						
+					}					
+				}
+				else 
+				{ 	
+					$message = 'Invalid image extension';
+					$this->Flash->error(__($message)); 
+					 
+				}				
+			} 
+			$submitted_from = @$this->request->data('submitted_from');
+			if(@$submitted_from=='web')
+			{
+				$state_id=$this->request->data['state_id'];
+				$x=0; 
+				$taxiFleetPromotion->taxi_fleet_promotion_states = [];
+				$taxiFleetPromotion->taxi_fleet_promotion_cities = [];
+				$taxiFleetPromotion->taxi_fleet_promotion_rows = [];
+				foreach($state_id as $state)
+				{
+                    $taxiFleetPromotion_state = $this->TaxiFleetPromotions->TaxiFleetPromotionStates->newEntity();
+					
+					$taxiFleetPromotion_state->state_id = $state;
+					
+					$taxiFleetPromotion->taxi_fleet_promotion_states[$x]=$taxiFleetPromotion_state;
+					$x++;	
+ 
+				} 
+				$city_id=$this->request->data['city_id'];
+				 
+				$y=0; 
+				foreach($city_id as $city)
+				{
+					$taxiFleetPromotion_cities = $this->TaxiFleetPromotions->TaxiFleetPromotionCities->newEntity();
+					$taxiFleetPromotion_cities->city_id = $city;
+					$taxiFleetPromotion->taxi_fleet_promotion_cities[$y]=$taxiFleetPromotion_cities;
+					$y++;	
+				}
+				 
+				$vehicle_type=$this->request->data['vehicle_type'];
+				$z=0; 
+				foreach($vehicle_type as $vehicle)
+				{
+					$taxiFleetPromotion_row = $this->TaxiFleetPromotions->TaxiFleetPromotionRows->newEntity();$taxiFleetPromotion_row->taxi_fleet_car_bus_id = $vehicle;
+					$taxiFleetPromotion->taxi_fleet_promotion_rows[$z]=$taxiFleetPromotion_row;					
+					$z++;	
+				}
+			}
+			if(!empty($this->request->data('visible_date')))
+			{
+				$taxiFleetPromotion->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
+			}
+			$taxiFleetPromotion = $this->TaxiFleetPromotions->patchEntity($taxiFleetPromotion, $this->request->data);
+			//pr($taxiFleetPromotion);exit;
+			if ($this->TaxiFleetPromotions->save($taxiFleetPromotion)) {
+				$message = 'The Taxi/Fleet promotions has been saved';
+				$this->Flash->success(__($message)); 
+				$response_code = 200;
+			}else{
+				$message = 'The Taxi/Fleet promotions has not been saved';
+				$this->Flash->error(__($message)); 
+				$response_code = 204; 
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+            
             if ($this->TaxiFleetPromotions->save($taxiFleetPromotion)) {
                 $this->Flash->success(__('The taxi fleet promotion has been saved.'));
 
