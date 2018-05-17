@@ -530,7 +530,7 @@ a{
 			
 			<button style="margin-top:5px;" type="button" class="btn btn-success btn-md btnlayout" data-target="#renew<?php echo $taxiFleetPromotion->id; ?>" data-toggle=modal>Renew </button>&nbsp;&nbsp;
 
-			<!--<a style="margin-top:5px" href="<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions",'action'=>'adminedit/'.$taxiFleetPromotion->id]); ?>" class="btn btn-successto btn-md btnlayout" >Edit Event</a>&nbsp;&nbsp;-->
+			<a style="margin-top:5px" href="<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions",'action'=>'edit/'.$taxiFleetPromotion->id]); ?>" class="btn btn-successto btn-md btnlayout" >Edit Event</a>&nbsp;&nbsp;
 
 			 
 		</div>

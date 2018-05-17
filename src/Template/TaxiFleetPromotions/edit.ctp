@@ -1,37 +1,180 @@
 <?php
-/**
-  * @var \App\View\AppView $this
-  */
-?>
+//-- priceMasters
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/price_masters/index.json?promotion_type_id=2",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: 4f8087cd-6560-4ca6-5539-9499d3c5b967"
+  ),
+));
+$response = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+$priceMasters=array();
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+	$response;
+	$priceMasters=json_decode($response);
+	$priceMasters=$priceMasters->PriceMasters;
+}
 
-<div class="taxiFleetPromotions form large-9 medium-8 columns content">
-    <?= $this->Form->create($taxiFleetPromotion) ?>
-    <fieldset>
-        <legend><?= __('Edit Taxi Fleet Promotion') ?></legend>
-        <?php
-            echo $this->Form->input('title');
-            echo $this->Form->input('country_id', ['options' => $countries]);
-            echo $this->Form->input('fleet_detail');
-            echo $this->Form->input('image');
-            echo $this->Form->input('document');
-            echo $this->Form->input('price_master_id', ['options' => $priceMasters]);
-            echo $this->Form->input('like_count');
-            echo $this->Form->input('visible_date');
-            echo $this->Form->input('user_id', ['options' => $users]);
-            echo $this->Form->input('created_on');
-            echo $this->Form->input('edited_by');
-            echo $this->Form->input('edited_on');
-            echo $this->Form->input('is_deleted');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
+//-- BUSES LIST 
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/taxi_fleet_car_buses/index.json",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: f0bdc3fd-dd35-cc7d-9c8b-a8ebdcf4b05e"
+  ),
+));
+$Result = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+$TaxiFleetCarBuses=array();
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+$TaxiFleetCarBuses=json_decode($Result);
+$TaxiFleetCarBuses=$TaxiFleetCarBuses->TaxiFleetCarBuses;
+}
+//--- COUNTRY STATE & CITY
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => $coreVariable['SiteUrl']."pages/masterCountry",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: 39e47dc1-a66a-2347-2fc6-3b5e0160d26d"
+  ),
+));
+$masterCountry = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+$countries=array();
+$states=array();
+$city=array();
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+	$masterCountry=json_decode($masterCountry);
+	$countries=$masterCountry->countryData->ResponseObject;
+	$states=$masterCountry->stateData->ResponseObject;
+	$city=$masterCountry->cityData->ResponseObject;
+}
+
+?>
+<style>
+.hr{
+	margin-top:25px !important;
+}
+	
+a:hover,a:focus{
+    outline: none !important;
+    text-decoration: none !important;
+}
+.tab .nav-tabs{
+    display: inline-block !important;
+    background: #F0F0F0 !important;
+    border-radius: 50px !important;
+    border: none !important;
+    padding: 1px !important;
+}
+.tab .nav-tabs li{
+    float: none !important;
+    display: inline-block !important;
+    position: relative !important;
+}
+.tab .nav-tabs li a{
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    background: none !important;
+    color: #999 !important;
+    border: none !important;
+    padding: 10px 15px !important;
+    border-radius: 50px !important;
+    transition: all 0.5s ease 0s !important;
+}
+.tab .nav-tabs li a:hover{
+    background: #1295A2 !important;
+    color: #fff !important;
+    border: none !important;
+}
+.tab .nav-tabs li.active a,
+.tab .nav-tabs li.active a:focus,
+.tab .nav-tabs li.active a:hover{
+    border: none !important;
+    background: #1295A2 !important;
+    color: #fff !important;
+}
+.tab .tab-content{
+    font-size: 14px !important;
+    color: #686868 !important;
+    line-height: 25px !important;
+    text-align: left !important;
+    padding: 5px 20px !important;
+}
+.tab .tab-content h3{
+    font-size: 22px !important;
+    color: #5b5a5a !important;
+} 
+fieldset{
+	margin:10px !important;
+	border-radius: 6px;
+} 
+</style> 
 <div class="container-fluid">
 	<div class="box box-primary">
+	<?= $this->Form->create($taxiFleetPromotion) ?>
+		<div class="row"> 
 			<div class="box-body">
-				<?= $this->Form->create($taxiFleetPromotion) ?>
-				<div class="row"> 
+			<?php $i=1;
+			//pr($taxiFleetPromotion->taxi_fleet_promotion_rows);exit;
+		
+				$vehicleList=array(); 
+				foreach($taxiFleetPromotion->taxi_fleet_promotion_rows as $vehicle)
+				{
+					$vehicleList[]=$vehicle->taxi_fleet_car_bus_id;
+				}
+				$cityList=array();
+				foreach($taxiFleetPromotion->taxi_fleet_promotion_cities as $cities)
+				{
+					 
+					if($cities->city_id==0){@$cityList[]='All Cities';}
+					else{
+						@$cityList[]=$cities->city_id;
+					}
+				}
+				$stateList=array();
+				foreach($taxiFleetPromotion->taxi_fleet_promotion_states as $statess)
+				{ 
+					$stateList[]=$statess->state_id;
+				}
+				$vehicleLists=array_unique($vehicleList);
+				$stateLists=array_unique($stateList);
+				$cityLists=array_unique($cityList);
+				$i++; 
+			?>
 					<div class="col-md-12"> 
 						<div class="form-box">
 							<div class="panel-group" style="background-color:white;">
@@ -47,7 +190,7 @@
 											</p>
 											<div class="input-field">
 												 <?php
-												 echo $this->Form->input('company_name',['class'=>'form-control requiredfield','label'=>false,'autocomplete'=> "off",'placeholder'=>"Company Name",'readonly'=>'readonly','value'=>$userss['company_name']);?>
+												 echo $this->Form->input('company_name',['class'=>'form-control requiredfield','label'=>false,'autocomplete'=> "off",'placeholder'=>"Company Name",'readonly'=>'readonly','value'=>$taxiFleetPromotion->user->company_name]) ?>
 												<label style="display:none;" class="helpblock error" > This field is required.</label>
 											</div>
 										</div>
@@ -101,11 +244,16 @@
 									
 									<div class="input-field">
 								
-										<?php 
+										<?php  
 										$options=array();
 										foreach($states as $st)
 										{
-											$options[] = ['value'=>$st->id,'text'=>$st->state_name];
+											if(in_array($st->id, $stateLists)){
+												$options[] = ['value'=>$st->id,'text'=>$st->state_name,'selected'=>'selected'];
+											}
+											else{
+												$options[] = ['value'=>$st->id,'text'=>$st->state_name];
+											}
 										};
 										echo $this->Form->control('state_id', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield state_list","data-placeholder"=>"Select Options","style"=>"height:125px;"]);?>
 										<label style="display:none" class="helpblock error" > This field is required.</label>
@@ -152,11 +300,17 @@
 											<span class="required">*</span>
 										</p>
 										<div class="input-field">
+										
 											<?php 
 											$options=array();
-											foreach($priceMasters as $Buses)
+											foreach($TaxiFleetCarBuses as $Buses)
 											{
-												$options[] = ['value'=>$Buses->id,'text'=>$Buses->name];
+												if(in_array($Buses->id, $vehicleLists)){
+												$options[] = ['value'=>$Buses->id,'text'=>$Buses->name,'selected'=>'selected'];
+												}
+												else{
+													$options[] = ['value'=>$Buses->id,'text'=>$Buses->name];
+												}
 											};
 											echo $this->Form->control('vehicle_type', ['label'=>false,"id"=>"multi_vehicle", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
 											<label style="display:none" class="helpblock error" > This field is required.</label>
@@ -169,10 +323,9 @@
 									<div class="col-md-12 form-group">
 										<p for="from">
 											Fleet Description
-											
 										</p>
 										<div class="input-field">
-											<?php echo $this->Form->input('fleet_detail',['class'=>'form-control requiredfield','label'=>false,'rows'=>'2']);?>
+											<?php echo $this->Form->input('fleet_detail',['class'=>'form-control requiredfield','label'=>false]);?>
 											<label style="display:none" class="helpblock error" > This field is required.</label>
 										</div>
 									</div>
@@ -188,7 +341,6 @@
 													Select Duration of Promotion <span class="required">*</span>
 													</p>
 													<div class="input-field">
-															 
 													<?php				 
 														$options=array();
 														foreach($priceMasters as $Price)
@@ -226,12 +378,185 @@
 										</div>
 									</div>
 								</div>
-							</div>
+							</div>									
 						</div>
 						<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
 						<input type="hidden" name="visible_date" class="visible_date" value="">
 				  <?= $this->Form->end() ?>
 			</div>
+			
 			<div id="selectbox" style="display:none;"> </div>
 		</div>
 	</div>
+<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
+	<div id="loader"></div>
+</div>
+ <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+ <?php echo $this->Html->script(['jquery.validate']);?>	
+<script>
+$(document).ready(function ()
+{
+	<?php foreach($stateLists as $stateIID){?>
+	var state_id=<?php echo $stateIID;?>;
+	var m_data = new FormData();
+	var cur_obj = $(this);
+	m_data.append('state_id',state_id);			
+	$.ajax({
+		url: "<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions", "action" => "cityStateList"]); ?>",
+		data: m_data,
+		processData: false,
+		contentType: false,
+		type: 'POST',
+		dataType:'text',
+		success: function(data)
+		{
+			if($("input[name='package_type']:checked").val()==1){
+				$(".replacedata").html(data);
+				$('#selectbox').html(data);
+			}
+			else{
+				$('#selectbox').html(data);
+			}
+			cur_obj.closest('form').find('.city_id').select2();
+		}
+	});
+	
+<?php }?>
+});
+</script>
+<script>
+	 
+    $(document).ready(function ()
+	{
+		$('form').submit(function () {
+			var x=0;
+			$( ".requiredfield" ).each(function() {
+				if($(this).val()!=''){ 
+ 					$(this).closest('div.form-group').find('.helpblock').hide();
+				}
+  				if($(this).val()==''){ 
+ 					$(this).closest('div.form-group').find('.helpblock').show();
+					x = 1;
+				}
+				if($(this).val()==null){
+ 					$(this).closest('div.form-group').find('.helpblock').show();
+					x = 1;
+				}
+ 			});
+			if(x==1){
+				$('html, body').animate({scrollTop:0}, 'slow');
+				return false;
+			}
+			$("#loader-1").show();
+		});
+		
+		$(document).on('change','.priceMasters',function()
+		{
+			var blank=$(this).val();
+			var priceVal=$('.priceMasters option:selected').attr('priceVal');
+			var price=$('.priceMasters option:selected').attr('price');
+			if(blank!=''){
+			var Result = priceVal.split(" ");
+			var Result1 = price.split(" ");
+			var weeks=Result[0];
+			var price=Result1[0];
+			var todaydate = new Date(); // Parse date
+			for(var x=0; x < weeks; x++){
+				todaydate.setDate(todaydate.getDate() + 7); // Add 7 days
+			}
+			var dd = todaydate .getDate();
+			var mm = todaydate .getMonth()+1; //January is 0!
+			var yyyy = todaydate .getFullYear();
+			if(dd<10){  dd='0'+dd } 
+			if(mm<10){  mm='0'+mm } 
+			var date = dd+'-'+mm+'-'+yyyy;	
+			$('.visible_date').val(date);
+			$('.payment_amount').val(price);
+			}
+			else{
+				$('.payment_amount').val(0);
+			}
+		});
+		$("#newlist").show();
+		$(".replacedata").html('<?php $options=array();
+				$options[] = ['value'=>'0','text'=>'All Cities','selected'];
+				echo $this->Form->input('city_id',["class"=>"form-control city_id requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
+				?><label style="display:none" class="helpblock error" > This field is required.</label>');
+		$('.city_id').select2();
+		$(document).on('change','.city_type',function()
+		{
+			var city_type=$(this).val();
+			var selectbox=$('#selectbox').html();
+			if(city_type==1){
+				$("#newlist").show();
+				$(".replacedata").html(selectbox);
+			}
+			else{
+				$("#newlist").show();
+				$(".replacedata").html('<?php $options=array();
+				$options[] = ['value'=>'0','text'=>'All Cities','selected'];
+				echo $this->Form->input('city_id',["class"=>"form-control city_id requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
+				?><label style="display:none" class="helpblock error" > This field is required.</label>');
+			}
+			$(this).closest('form').find('.city_id').select2();
+		});
+		$(document).on('change','.state_list',function()
+		{
+			var state_id=$(this).val();
+			var m_data = new FormData();
+			var cur_obj = $(this);
+			m_data.append('state_id',state_id);			
+			$.ajax({
+				url: "<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions", "action" => "cityStateList"]); ?>",
+				data: m_data,
+				processData: false,
+				contentType: false,
+				type: 'POST',
+				dataType:'text',
+				success: function(data)
+				{
+					if($("input[name='package_type']:checked").val()==1){
+						$(".replacedata").html(data);
+						$('#selectbox').html(data);
+					}
+					else{
+						$('#selectbox').html(data);
+					}
+					cur_obj.closest('form').find('.city_id').select2();
+				}
+			});
+		});
+$("#multi_city").multiselect();
+$("#multi_states").multiselect();
+$("#multi_vehicle").multiselect();
+	});
+</script>
+<script type="text/javascript">
+    function checkCertificate() {
+        var fuData = document.getElementById('hotelImg');
+        var FileUploadPath = fuData.value;
+        if (FileUploadPath == '') {
+            alert("Please upload an image");
+        } else {
+            var Extension = FileUploadPath.substring(
+                    FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+			if ( Extension == "png" ||  Extension == "jpeg" || Extension == "jpg") {
+
+                if (fuData.files && fuData.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#blah').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(fuData.files[0]);
+                }
+
+            } 
+		else {
+                alert("Photo only allows file types of PNG, JPG and JPEG.");
+				$("#hotelImg").val('');
+            }
+        }
+    }
+</script>
