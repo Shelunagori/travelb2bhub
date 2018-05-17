@@ -462,17 +462,77 @@ class EventPlannerPromotionsController extends AppController
     public function adminedit($id = null)
     {
 		$this->viewBuilder()->layout('admin_layout');
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id'));
         $eventPlannerPromotion = $this->EventPlannerPromotions->get($id, [
             'contain' => ['Users','EventPlannerPromotionStates'=>['States'],'EventPlannerPromotionCities'=>['Cities']]
         ]); 
-		//$eventPlannerPromotion= $this->EventPlannerPromotions->find()->contain(['Users','EventPlannerPromotionStates'=>['States'],'EventPlannerPromotionCities'=>['Cities']])->where(['EventPlannerPromotions.id'=>$id]);
-		//pr($eventPlannerPromotion); exit;
+	
+		pr($eventPlannerPromotion); exit;
         if ($this->request->is(['patch', 'post', 'put'])) {
             $eventPlannerPromotion = $this->EventPlannerPromotions->patchEntity($eventPlannerPromotion, $this->request->data);
+			$ids = $eventPlannerPromotion->user_id;
+			$title = $eventPlannerPromotion->title;
+			$image = $this->request->data('image');
+			$tmp_name = $this->request->data['image']['tmp_name'];
+			if(!empty($ext))
+				{
+					if(in_array($ext, $arr_ext)) { 
+						 
+						if (!file_exists('path/to/directory')) {
+							mkdir('path/to/directory', 0777, true);
+						}
+						$percentageTOReduse=100;
+						if(@$submitted_from=='web')
+						{
+							if(($image['size']>3000000) &&($image['size']<=4000000)){
+								$percentageTOReduse=50;
+							}
+							elseif(($image['size']>4000000) &&($image['size']<=6000000)){ 
+								$percentageTOReduse=20;
+							}
+							elseif($image['size']>6000000){
+								$percentageTOReduse=10;
+							}
+						}
+						/* Resize Image */
+						$destination_url = WWW_ROOT . '/images/EventPlannerPromotion/'.$ids.'/'.$title.'/image/'.$ids.'.'.$ext;
+						if($ext=='png'){
+							$image = imagecreatefrompng($image['tmp_name']);
+						}else{
+							$image = imagecreatefromjpeg($image['tmp_name']); 
+						}
+						imagejpeg($image, $destination_url, $percentageTOReduse);
+						$taxiFleetPromotion->image='images/EventPlannerPromotion/'.$ids.'/'.$title.'/image/'.$ids.'.'.$ext;
+						if(file_exists(WWW_ROOT . '/images/EventPlannerPromotion/'.$ids.'/'.$title.'/image/'.$ids.'.'.$ext)>0) {
+						}
+						else
+						{
+							$message = 'Image not uploaded';
+							$this->Flash->error(__($message));
+							 
+						} 
+					} 
+					else 
+					{ 
+						$message = 'Invalid image extension';
+						$this->Flash->error(__($message)); 
+						 
+						
+					}					
+				}
+				else 
+				{ 	
+					$message = 'Invalid image extension';
+					$this->Flash->error(__($message)); 
+					 
+				}				
+			}
+			$submitted_from = @$this->request->data('submitted_from');
             if ($this->EventPlannerPromotions->save($eventPlannerPromotion)) {
                 $this->Flash->success(__('The event planner promotion has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'edit/'.$id]);
             }
             $this->Flash->error(__('The event planner promotion could not be saved. Please, try again.'));
         }

@@ -1,3 +1,34 @@
+<?php
+//--- COUNTRY STATE & CITY
+$curl = curl_init();
+curl_setopt_array($curl, array(
+  CURLOPT_URL => $coreVariable['SiteUrl']."pages/masterCountry",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "cache-control: no-cache",
+    "postman-token: 39e47dc1-a66a-2347-2fc6-3b5e0160d26d"
+  ),
+));
+$masterCountry = curl_exec($curl);
+$err = curl_error($curl);
+curl_close($curl);
+$countries=array();
+$states=array();
+$city=array();
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+	$masterCountry=json_decode($masterCountry);
+	$countries=$masterCountry->countryData->ResponseObject;
+	$states=$masterCountry->stateData->ResponseObject;
+	$city=$masterCountry->cityData->ResponseObject;
+}
+ ?>
 <style>
 .hr{
 	margin-top:25px !important;
@@ -97,15 +128,15 @@ fieldset{
 										 <?php echo $this->Form->input('company_name',['class'=>'form-control','label'=>false,'autocomplete'=> "off",'placeholder'=>"Company Name",'readonly'=>'readonly','value'=>$eventPlannerPromotion->user->company_name]);?>
 									</div>
 								</div>
-								<input type="hiddens" name="user_id" value="<?php echo $eventPlannerPromotion->user->id;?>"> 
-								<input type="hiddens" name="id" value="<?php echo $eventPlannerPromotion->id;?>"> 
+								<input type="hidden" name="user_id" value="<?php echo $eventPlannerPromotion->user->id;?>"> 
+								<input type="hidden" name="id" value="<?php echo $eventPlannerPromotion->id;?>"> 
 								<div class="col-md-6 form-group ">
 									<p for="from">
 										Upload Image of Promotion
 										<span class="required">*</span>
 									</p>
 									<div class="input-field">
-										<?php  echo $this->Form->input('image',['class'=>'form-control requiredfield','label'=>false,'type'=>'file','onchange'=>'checkCertificate()','id'=>'hotelImg']); ?>
+										<?php  echo $this->Form->input('image',['class'=>'form-control ','label'=>false,'type'=>'file','onchange'=>'checkCertificate()','id'=>'hotelImg']); ?>
 										<label style="display:none" class="helpblock error" > This field is required.</label>
 									</div>
 								</div>
@@ -242,7 +273,7 @@ fieldset{
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
 $(document).ready(function (){
-		$('form').submit(function () {
+	/* 	$('form').submit(function () {
 			var x=0;
 			$( ".requiredfield" ).each(function() {
 				if($(this).val()!=''){ 
@@ -262,7 +293,7 @@ $(document).ready(function (){
 				return false;
 			}
 			$("#loader-1").show();
-		});
+		}); */
 		
 		$(document).on('change','.priceMasters',function()
 		{
@@ -379,4 +410,18 @@ else {
             }
         }
     }
+</script>
+<?php echo $this->Html->script(['jquery.validate']);?>
+<script>
+$('#TaxtEDIT').validate({
+		rules: {
+			"image" : {
+				required : false,
+			}
+		}, 
+		submitHandler: function (form) {
+ 			$("#loader-1").show();
+			form[0].submit(); 
+		}
+	});
 </script>

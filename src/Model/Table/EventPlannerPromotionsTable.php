@@ -95,19 +95,19 @@ class EventPlannerPromotionsTable extends Table
             ->requirePresence('event_detail', 'create')
             ->notEmpty('event_detail');
 
-        $validator
+       /*  $validator
             ->requirePresence('image', 'create')
-            ->notEmpty('image');
+            ->notEmpty('image'); */
 
-        $validator
+       /*  $validator
             ->requirePresence('document', 'create')
             ->notEmpty('document');
-
-        $validator
+ */
+       /*  $validator
             ->date('visible_date')
             ->requirePresence('visible_date', 'create')
             ->notEmpty('visible_date');
-
+ */
 
 
         return $validator;

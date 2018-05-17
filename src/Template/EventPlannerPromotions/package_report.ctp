@@ -487,7 +487,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 								 
 								<button  style="margin-top:5px" type="button" class="btn btn-success btn-md btnlayout" data-target="#renew<?php echo $eventPlannerPromotion->id; ?>" data-toggle=modal>Renew</button>&nbsp;&nbsp;
 								
-								<!--<a style="margin-top:5px" href="<?php echo $this->Url->build(["controller" => "EventPlannerPromotions",'action'=>'adminedit/'.$eventPlannerPromotion->id]); ?>" class="btn btn-successto btn-md btnlayout" >Edit Event</a>&nbsp;&nbsp;-->
+								<a style="margin-top:5px" href="<?php echo $this->Url->build(["controller" => "EventPlannerPromotions",'action'=>'adminedit/'.$eventPlannerPromotion->id]); ?>" class="btn btn-successto btn-md btnlayout" >Edit Event</a>&nbsp;&nbsp;
 								
 								 
 								 
