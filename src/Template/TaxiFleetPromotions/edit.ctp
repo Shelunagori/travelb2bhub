@@ -160,7 +160,7 @@ fieldset{
 				foreach($taxiFleetPromotion->taxi_fleet_promotion_cities as $cities)
 				{
 					 
-					if($cities->city_id==0){@$cityList[]='All Cities';}
+					if($cities->city_id==0){@$cityList[]='0';}
 					else{
 						@$cityList[]=$cities->city_id;
 					}
@@ -173,6 +173,7 @@ fieldset{
 				$vehicleLists=array_unique($vehicleList);
 				$stateLists=array_unique($stateList);
 				$cityLists=array_unique($cityList);
+				$cityListsAry=implode(',',array_unique($cityList));
 				$i++; 
 			?>
 					<div class="col-md-12"> 
@@ -270,10 +271,10 @@ fieldset{
 									</p>
 									<div class="input-field">
 										 <label class="radio-inline">
-										  <input class="city_type" type="radio" name="package_type" value="0" checked="checked"/>All Cities
+										  <input class="city_type" type="radio" name="package_type" value="0" <?php if(empty($cityLists)){?> checked="checked" <?php }?>/>All Cities
 										</label>
 										<label class="radio-inline">
-										  <input class="city_type" type="radio" name="package_type" value="1"/>Specific Cities
+										  <input class="city_type" type="radio" name="package_type" <?php if(!empty($cityLists)){?> checked="checked" <?php }?> value="1"/>Specific Cities
 										</label>
 									</div>
 								</div>
@@ -398,11 +399,14 @@ $(document).ready(function ()
 {
 	<?php foreach($stateLists as $stateIID){?>
 	var state_id=<?php echo $stateIID;?>;
+	var Cty_id='<?php echo $cityListsAry;?>';
+	//alert(Cty_id);
 	var m_data = new FormData();
 	var cur_obj = $(this);
 	m_data.append('state_id',state_id);			
+	m_data.append('Cty_id',Cty_id);			
 	$.ajax({
-		url: "<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions", "action" => "cityStateList"]); ?>",
+		url: "<?php echo $this->Url->build(["controller" => "TaxiFleetPromotions", "action" => "cityStateListEdit"]); ?>",
 		data: m_data,
 		processData: false,
 		contentType: false,
@@ -417,6 +421,7 @@ $(document).ready(function ()
 			else{
 				$('#selectbox').html(data);
 			}
+			$('.city_id').select2();
 			cur_obj.closest('form').find('.city_id').select2();
 		}
 	});
@@ -457,10 +462,16 @@ $(document).ready(function ()
 			}
 		});
 		$("#newlist").show();
+		<?php if(!empty($cityLists)){ ?>
+ 			$(".replacedata").html(selectbox);
+			$('.city_id').select2();
+		<?php } ?>
+		<?php if(empty($cityLists)){?>
 		$(".replacedata").html('<?php $options=array();
 				$options[] = ['value'=>'0','text'=>'All Cities','selected'];
 				echo $this->Form->input('city_id',["class"=>"form-control city_id requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
 				?><label style="display:none" class="helpblock error" > This field is required.</label>');
+		<?php } ?>
 		$('.city_id').select2();
 		$(document).on('change','.city_type',function()
 		{

@@ -1704,7 +1704,7 @@ public function sendrequest() {
 	$this->loadModel('User_Chats');
 	$this->loadModel('taxi_fleet_car_buses');
 	$this->loadModel('MealPlans');
-	$this->loadModel('CrojJobTable');
+	//$this->loadModel('CrojJobTable');
 	$constReqCount=10;
 	$this->viewBuilder()->layout('user_layout');
 	$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first(); 

@@ -1139,6 +1139,33 @@ class TaxiFleetPromotionsController extends AppController
 		exit;
 		
 	}
+	public function cityStateListEdit()
+	{
+		$this->loadModel('Cities');
+		$state_id=$this->request->data['state_id'];
+		$Cty_id=$this->request->data['Cty_id'];
+		$Cty_idArray = explode(",", $Cty_id);
+		$data = explode(",", $state_id);
+		$CityList = $this->Cities->find()->where(['Cities.state_id IN' =>$data]);
+		$options=array();
+		
+		//pr($options);
+		
+		echo "
+			<select name='city_id[]' size='3' class=' form-control requiredfield city_id' multiple='multiple' tabindex='1'>";
+			foreach($CityList as $cty)
+			{
+				if(in_array($cty->id, $Cty_idArray)){
+				echo "<option selected value='".$cty->id."' > ".$cty->name."</option>";
+				}
+				else{
+					echo "<option value='".$cty->id."' > ".$cty->name."</option>";
+				}
+			}
+			echo "</select><label style='display:none' class='helpblock error' > This field is required.</label>";
+		exit;
+		
+	}
 	
 	public function PackageReport($higestSort = null,$search = null,$country_id = null,$state_id = null,$city_id = null,$car_bus_id = null,$taxifleet_id= null,$removetaxifleet=null)
     {

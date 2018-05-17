@@ -54,10 +54,12 @@ class TaxiFleetPromotionsTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->hasMany('TaxiFleetPromotionCities', [
-            'foreignKey' => 'taxi_fleet_promotion_id'
+            'foreignKey' => 'taxi_fleet_promotion_id',
+			'saveStrategy'=>'replace'
         ]);
         $this->hasMany('TaxiFleetPromotionRows', [
-            'foreignKey' => 'taxi_fleet_promotion_id'
+            'foreignKey' => 'taxi_fleet_promotion_id',
+			'saveStrategy'=>'replace'
         ]);
         $this->hasMany('TaxiFleetPromotionLikes', [
             'foreignKey' => 'taxi_fleet_promotion_id'
@@ -66,7 +68,8 @@ class TaxiFleetPromotionsTable extends Table
             'foreignKey' => 'taxi_fleet_promotion_id'
         ]);		
         $this->hasMany('TaxiFleetPromotionStates', [
-            'foreignKey' => 'taxi_fleet_promotion_id'
+            'foreignKey' => 'taxi_fleet_promotion_id',
+			'saveStrategy'=>'replace'
         ]);
         $this->hasMany('TaxiFleetPromotionPriceBeforeRenews', [
             'foreignKey' => 'taxi_fleet_promotion_id'
