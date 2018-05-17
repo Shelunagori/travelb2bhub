@@ -832,25 +832,28 @@ $(document).ready(function (){
 });
 </script>	
 <script type="text/javascript">
-var prootionId=<?php echo $_GET['promotion_id'];?>;
-
-if(prootionId == 1 ){
+$(document).ready(function (){
+<?php if($_GET['promotion_id']==1){?>
+  
 	$('.preferenceStateDiv').show();
-}
-if(prootionId == 3 ){
-	$('.lablename').removeAttr('data-placeholder');
-	$('.lablename').attr('data-placeholder','Hotel Name');
-	
-	$('.taxtboxname').removeAttr('name');
-	$('.taxtboxname').attr('name','company_name');
-}
-else{
-	$('.lablename').removeAttr('data-placeholder');
-	$('.lablename').attr('data-placeholder','Company Name');
-	
-	$('.taxtboxname').removeAttr('name');
-	$('.taxtboxname').attr('name','company_name');
-}
+
+<?php } ?>
+var prootionId=<?php echo $_GET['promotion_id'];?>;
+	if(prootionId == 3 ){
+		$('.lablename').removeAttr('data-placeholder');
+		$('.lablename').attr('data-placeholder','Hotel Name');
+		
+		$('.taxtboxname').removeAttr('name');
+		$('.taxtboxname').attr('name','company_name');
+	}
+	else{
+		$('.lablename').removeAttr('data-placeholder');
+		$('.lablename').attr('data-placeholder','Company Name');
+		
+		$('.taxtboxname').removeAttr('name');
+		$('.taxtboxname').attr('name','company_name');
+	}
+});
 </script>	
 <script type="text/javascript">
  	setInterval(function(){ abc(); }, 2000);

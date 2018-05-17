@@ -255,7 +255,7 @@ a{
 									<button  style="margin-top:5px;" class="btn btn-info btn-md btnlayout" data-target="#contactdetails<?php echo $hotelPromotion->id;?>" data-toggle="modal" type="button">Contact Info</button>&nbsp;&nbsp;
 									
 									<button  style="margin-top:5px;" type="button" class="btn btn-success btn-md btnlayout" data-target="#renew<?php echo $hotelPromotion->id; ?>" data-toggle=modal>Renew</button>&nbsp;&nbsp;
-									<!--<a style="margin-top:5px" href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>'adminedit/'.$hotelPromotion->id]); ?>" class="btn btn-successto btn-md btnlayout" >Edit Event</a>&nbsp;&nbsp;-->
+									<a style="margin-top:5px" href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>'adminedit/'.$hotelPromotion->id]); ?>" class="btn btn-successto btn-md btnlayout" >Edit Event</a>&nbsp;&nbsp;
 									<button  style="margin-top:5px;" type="button" class="btn btn-danger btn-md btnlayout" data-target="#remove<?php echo $hotelPromotion->id; ?>" data-toggle=modal>Remove Promotion</button>&nbsp;&nbsp;
 								</div>
 							</div>

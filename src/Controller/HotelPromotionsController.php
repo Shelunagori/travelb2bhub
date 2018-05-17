@@ -1,8 +1,9 @@
 <?php
 namespace App\Controller;
-
 use App\Controller\AppController;
-
+use Cake\Filesystem\Folder;
+use Cake\Filesystem\File;
+/**
 /**
  * HotelPromotions Controller
  *
@@ -1148,5 +1149,94 @@ class HotelPromotionsController extends AppController
 			}
 		}
 		$this->set(compact('user_id','id'));
+    }
+	
+	public function adminedit($id=null)
+    {
+		$this->viewBuilder()->layout('admin_layout');
+		$hotelPromotion = $this->HotelPromotions->get($id, [
+            'contain' => ['Users']
+        ]);
+		
+		if ($this->request->is(['patch', 'post', 'put'])) 
+		{
+			$ids=$hotelPromotion->user_id;
+			$title = $ids.'hotel_'.rand();
+			$image = $this->request->data('hotel_pic');
+			$tmp_name = $this->request->data['hotel_pic']['tmp_name'];
+			if(!empty($tmp_name))
+			{	
+				$dir = new Folder(WWW_ROOT . 'img/hotels/', true, 0755);
+				$ext = substr(strtolower(strrchr($image['name'], '.')), 1); 
+				$arr_ext = array('jpg', 'jpeg','png'); 				
+				
+				if(!empty($ext))
+				{
+					if(in_array($ext, $arr_ext)) { 
+						if (!file_exists('path/to/directory')) {
+								mkdir('path/to/directory', 0777, true);
+						}
+						$percentageTOReduse=100;
+						if(@$submitted_from=='web')
+						{
+							if(($image['size']>3000000) &&($image['size']<=4000000)){
+								$percentageTOReduse=50;
+							}
+							elseif(($image['size']>4000000) &&($image['size']<=6000000)){ 
+								$percentageTOReduse=20;
+							}
+							elseif($image['size']>6000000){
+								$percentageTOReduse=10;
+							}
+						} 
+						/* Resize Image */
+						$destination_url = WWW_ROOT . '/img/hotels/'.$title.'.'.$ext;
+						if($ext=='png'){
+							$image = imagecreatefrompng($image['tmp_name']);
+						}else{
+							$image = imagecreatefromjpeg($image['tmp_name']); 
+						}
+						imagejpeg($image, $destination_url, $percentageTOReduse);
+						$hotelPromotion->hotel_pic='img/hotels/'.$title.'.'.$ext;
+						if(file_exists(WWW_ROOT . '/img/hotels/'.$title.'.'.$ext)>0) {
+						}
+						else
+						{
+							$message = 'Image not uploaded';
+							$this->Flash->error(__($message));
+						}
+ 					} 
+					else 
+					{ 
+						$message = 'Invalid image extension';
+						$this->Flash->error(__($message)); 
+					}					
+				}
+				else 
+				{ 	
+					$message = 'Invalid image extension';
+					$this->Flash->error(__($message)); 
+				}				
+			}
+			 
+			if(!empty($this->request->data('visible_date')))
+			{
+				$hotelPromotion->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
+			}
+			$hotelPromotion = $this->HotelPromotions->patchEntity($hotelPromotion, $this->request->data);
+///pr($hotelPromotion); exit;			
+			if ($this->HotelPromotions->save($hotelPromotion)) {
+				$message = 'The hotel promotions has been saved';
+				$this->Flash->success(__($message)); 
+			}else{
+				$message = 'The hotel promotions has not been saved';
+				$this->Flash->error(__($message)); 
+			}
+			return $this->redirect(['action' => 'package-report']);
+			 
+		}
+		
+		$user_id=$this->Auth->User('id');
+		$this->set(compact('user_id','hotelPromotion'));
     }
 }

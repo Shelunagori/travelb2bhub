@@ -116,7 +116,7 @@ class HotelPromotionsTable extends Table
             ->requirePresence('status', 'create')
             ->notEmpty('status');
 		*/
-        $validator
+       /* $validator
             ->integer('hotel_pic')
             ->requirePresence('hotel_pic', 'create')
             ->notEmpty('hotel_pic');
