@@ -1704,6 +1704,7 @@ public function sendrequest() {
 	$this->loadModel('User_Chats');
 	$this->loadModel('taxi_fleet_car_buses');
 	$this->loadModel('MealPlans');
+	$this->loadModel('CrojJobTable');
 	$constReqCount=10;
 	$this->viewBuilder()->layout('user_layout');
 	$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first(); 
@@ -1748,129 +1749,129 @@ public function sendrequest() {
 	}
 	elseif($myRequestCount < $reqcount['value']) {
 	
-if($this->request->is('post')){
-$d = $this->request->data;
+	if($this->request->is('post')){
+		$d = $this->request->data;
 
-//Change input date format to mysql date format
-if(isset($d['check_in']) && !empty($d['check_in']))
-{
-$d['check_in']=date('Y-m-d',strtotime($d['check_in']));
-}
-else{
-$d['check_in']	='0000-00-00';
-}
-if(isset($d['check_out']) && !empty($d['check_out']))
-{
-$d['check_out']=date('Y-m-d',strtotime($d['check_out']));
-}
-else{
-$d['check_out']	='0000-00-00';
-}
-if(isset($d['start_date']) && !empty($d['start_date']))
-{
-$d['start_date']=date('Y-m-d',strtotime($d['start_date']));
-}
-else{
-$d['start_date']	='0000-00-00';
-}
-if(isset($d['end_date']) && !empty($d['end_date']))
-{
-$d['end_date']=date('Y-m-d',strtotime($d['end_date']));
-}
-else{
-$d['end_date']	='0000-00-00';
-}
+		//Change input date format to mysql date format
+		if(isset($d['check_in']) && !empty($d['check_in']))
+		{
+		$d['check_in']=date('Y-m-d',strtotime($d['check_in']));
+		}
+		else{
+		$d['check_in']	='0000-00-00';
+		}
+		if(isset($d['check_out']) && !empty($d['check_out']))
+		{
+		$d['check_out']=date('Y-m-d',strtotime($d['check_out']));
+		}
+		else{
+		$d['check_out']	='0000-00-00';
+		}
+		if(isset($d['start_date']) && !empty($d['start_date']))
+		{
+		$d['start_date']=date('Y-m-d',strtotime($d['start_date']));
+		}
+		else{
+		$d['start_date']	='0000-00-00';
+		}
+		if(isset($d['end_date']) && !empty($d['end_date']))
+		{
+		$d['end_date']=date('Y-m-d',strtotime($d['end_date']));
+		}
+		else{
+		$d['end_date']	='0000-00-00';
+		}
  
 
-	if($this->request->data['category_id'] == 2 ){
-		$p['transport_requirement'] = $d['transport_requirement'];
-		$p['pickup_city'] = $d['t_pickup_city_id'];
-		$p['pickup_state'] = $d['t_pickup_state_id'];
-		$p['pickup_country'] = $d['t_pickup_country_id'];
-		$p['final_city'] = $d['t_final_city_id'];
-		$p['final_state'] = $d['t_final_state_id'];
-		$p['final_country'] = $d['t_final_country_id'];
-		$p['pickup_locality'] = $d['pickup_locality'];
-		$p['final_locality'] = $d['finalLocality'];
-		$p['start_date'] = $d['start_date'];
-		$p['end_date'] = $d['end_date'];
-		$p['comment'] = $d['comment'];
-		$p['category_id'] = $d['category_id'];
-		$p['reference_id'] = $d['reference_id'];
-		$p['user_id'] = $this->Auth->user('id');
-		$p['total_budget'] = $d['total_budget'];
-		$p['adult'] = $d['transportAdult'];
-		$p['children'] = $d['transportChildren'];
-		$stopes = "";
-		if(isset($d['stops'])) {
-			foreach($d['stops'] as $key=>$row) {
-				$stopes .=  $row.",";
+		if($this->request->data['category_id'] == 2 ){
+			$p['transport_requirement'] = $d['transport_requirement'];
+			$p['pickup_city'] = $d['t_pickup_city_id'];
+			$p['pickup_state'] = $d['t_pickup_state_id'];
+			$p['pickup_country'] = $d['t_pickup_country_id'];
+			$p['final_city'] = $d['t_final_city_id'];
+			$p['final_state'] = $d['t_final_state_id'];
+			$p['final_country'] = $d['t_final_country_id'];
+			$p['pickup_locality'] = $d['pickup_locality'];
+			$p['final_locality'] = $d['finalLocality'];
+			$p['start_date'] = $d['start_date'];
+			$p['end_date'] = $d['end_date'];
+			$p['comment'] = $d['comment'];
+			$p['category_id'] = $d['category_id'];
+			$p['reference_id'] = $d['reference_id'];
+			$p['user_id'] = $this->Auth->user('id');
+			$p['total_budget'] = $d['total_budget'];
+			$p['adult'] = $d['transportAdult'];
+			$p['children'] = $d['transportChildren'];
+			$stopes = "";
+			if(isset($d['stops'])) {
+				foreach($d['stops'] as $key=>$row) {
+					$stopes .=  $row.",";
+				}
 			}
-		}
-		$p['stops'] = $stopes;
-		//pr($p); exit;
-		$contact = $this->Requests->newEntity($p);
-		if ($re = $this->Requests->save($contact)) {
-		$ui = $re->id;
-		if(isset($d['stops'])) {
-			foreach($d['stops'] as $key=>$row) {
-				$stopData['request_id'] = $ui;
-				$stopData['locality'] =  $row;
-				$stopData['city_id'] =  $d['id_trasport_stop_city'][$key];
-				$stopData['state_id'] =  $d['state_id_trasport_stop_city'][$key];
-				$result = $this->RequestStops->newEntity($stopData);
-				$this->RequestStops->save($result);
-			}
-		}
-		/*Users List */
-		$userchatTable = TableRegistry::get('User_Chats');
-		$conn = ConnectionManager::get('default');
-		$sql = "SELECT * FROM users WHERE id !='".$this->Auth->user('id')."' AND role_id in ('1') AND FIND_IN_SET ('".$p['pickup_state']."', preference) > 0";
-		$stmt = $conn->execute($sql);
-		$Userlist = $stmt ->fetchAll('assoc');
-			foreach($Userlist as $usr)
-			{
-				$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$usr['id']."' AND blocked_by='".$this->Auth->user('id')."'";
-					$stmt = $conn->execute($sql1);
-					$bresult = $stmt ->fetch('assoc');
-				if($bresult['block_count']==0){
-					$userchats = $userchatTable->newEntity();
-					$userchats->request_id = $ui;
-					$userchats->user_id = $this->Auth->user('id');
-					$userchats->send_to_user_id = $usr["id"];
-					$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
-					$userchats->created = date("Y-m-d H:i:s");
-					$userchats->type = 'Request';
-					$userchats->notification = 1;
-					if ($userchatTable->save($userchats)) {
-						$id = $userchats->id;
-						$push_message="You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
-						$this->sendpushnotification($usr["id"],$push_message,$push_message);
-						
+			$p['stops'] = $stopes;
+			//pr($p); exit;
+			$contact = $this->Requests->newEntity($p);
+			if ($re = $this->Requests->save($contact)) {
+				$ui = $re->id;
+				if(isset($d['stops'])) {
+					foreach($d['stops'] as $key=>$row) {
+						$stopData['request_id'] = $ui;
+						$stopData['locality'] =  $row;
+						$stopData['city_id'] =  $d['id_trasport_stop_city'][$key];
+						$stopData['state_id'] =  $d['state_id_trasport_stop_city'][$key];
+						$result = $this->RequestStops->newEntity($stopData);
+						$this->RequestStops->save($result);
 					}
 				}
-			}		
-	if($myRequestCount1==($constReqCount-2) ){			 
-		$msg = "Alert! You are about to reach the 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing another request.";
-		$this->Flash->Error(__($msg));
-	}
-	else if($myRequestCount1==($constReqCount-1) ){		 
-		$msg = "Alert! You have reached the count of 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing a request.";
-		$this->Flash->Error(__($msg));
-	}
-	else
-	{
-		$msg = "Congratulations! Your request has been submitted successfully.";
-		$this->Flash->success(__($msg));
-	}		
- 
-				return $this->redirect('/users/requestlist');
+				/*Users List */
+				$userchatTable = TableRegistry::get('User_Chats');
+				$conn = ConnectionManager::get('default');
+				$sql = "SELECT * FROM users WHERE id !='".$this->Auth->user('id')."' AND role_id in ('1') AND FIND_IN_SET ('".$p['pickup_state']."', preference) > 0";
+				$stmt = $conn->execute($sql);
+				$Userlist = $stmt ->fetchAll('assoc');
+					foreach($Userlist as $usr)
+					{
+						$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$usr['id']."' AND blocked_by='".$this->Auth->user('id')."'";
+							$stmt = $conn->execute($sql1);
+							$bresult = $stmt ->fetch('assoc');
+						if($bresult['block_count']==0){
+							$userchats = $userchatTable->newEntity();
+							$userchats->request_id = $ui;
+							$userchats->user_id = $this->Auth->user('id');
+							$userchats->send_to_user_id = $usr["id"];
+							$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+							$userchats->created = date("Y-m-d H:i:s");
+							$userchats->type = 'Request';
+							$userchats->notification = 1;
+							if ($userchatTable->save($userchats)) {
+								$id = $userchats->id;
+								$push_message="You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+								$this->sendpushnotification($usr["id"],$push_message,$push_message);
+								
+							}
+						}
+					}		
+					if($myRequestCount1==($constReqCount-2) ){			 
+						$msg = "Alert! You are about to reach the 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing another request.";
+						$this->Flash->Error(__($msg));
+					}
+					else if($myRequestCount1==($constReqCount-1) ){		 
+						$msg = "Alert! You have reached the count of 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing a request.";
+						$this->Flash->Error(__($msg));
+					}
+					else
+					{
+						$msg = "Congratulations! Your request has been submitted successfully.";
+						$this->Flash->success(__($msg));
+					}		
+	 
+					return $this->redirect('/users/requestlist');
+				} 
+				else {
+					$this->Flash->error(__('Sorry.'));
+					return $this->redirect('/users/sendrequest');
+				}
 			} 
-			else {
-				$this->Flash->error(__('Sorry.'));
-				return $this->redirect('/users/sendrequest');
-			}
-		} 
 else if($this->request->data['category_id'] == 1 ){
 	
 	$p['transport_requirement'] = $d['transport_requirement'];
