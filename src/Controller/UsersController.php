@@ -21,7 +21,7 @@ class UsersController extends AppController {
 	var $helpers = array('Html', 'Form', 'Response');
 	public function beforeFilter(\Cake\Event\Event $event) {
 		parent::beforeFilter($event);
-		$this->Auth->allow(['register', 'login','getcitylist', 'userVerification', 'forgotPassword', 'activatePassword', 'cakeVersion', 'deleteAllCache', 'addNewsLatter', 'otpVerifiy', 'otpResend', 'passwordotpVerifiy','ajaxCity','ajaxCityRegister','checkMobileExixt','blockedWindow','cronobforremoverequest']);
+		$this->Auth->allow(['register', 'login','getcitylist', 'userVerification', 'forgotPassword', 'activatePassword', 'cakeVersion', 'deleteAllCache', 'addNewsLatter', 'otpVerifiy', 'otpResend', 'passwordotpVerifiy','ajaxCity','ajaxCityRegister','checkMobileExixt','blockedWindow','cronobforremoverequest','sendpushnotification','cronobfornotification']);
 	}
 	
 	public function beforeRender(\Cake\Event\Event $event) {
@@ -1704,7 +1704,6 @@ public function sendrequest() {
 	$this->loadModel('User_Chats');
 	$this->loadModel('taxi_fleet_car_buses');
 	$this->loadModel('MealPlans');
-	//$this->loadModel('CrojJobTable');
 	$constReqCount=10;
 	$this->viewBuilder()->layout('user_layout');
 	$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first(); 
@@ -1846,7 +1845,7 @@ public function sendrequest() {
 							if ($userchatTable->save($userchats)) {
 								$id = $userchats->id;
 								$push_message="You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
-								$this->sendpushnotification($usr["id"],$push_message,$push_message);
+								//$this->sendpushnotification($usr["id"],$push_message,$push_message);
 								
 							}
 						}
@@ -2001,7 +2000,7 @@ $Userlist = $stmt ->fetchAll('assoc');
 					if ($userchatTable->save($userchats)) {
 						$id = $userchats->id;
 						$push_message="You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
-						$this->sendpushnotification($usr["id"],$push_message,$push_message);
+						//$this->sendpushnotification($usr["id"],$push_message,$push_message);
 					}
 				}
 			}
@@ -2081,7 +2080,7 @@ elseif($this->request->data['category_id'] == 3 ){
 						if ($userchatTable->save($userchats)) {
 						$id = $userchats->id;
 							$push_message="You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
-							$this->sendpushnotification($usr["id"],$push_message,$push_message);
+							//$this->sendpushnotification($usr["id"],$push_message,$push_message);
 						}
 									
 					}
@@ -2109,7 +2108,7 @@ $Userlisth = $stmth->fetchAll('assoc');
 						if ($userchatTable->save($userchats)) {
 							$id = $userchats->id;
 							$push_message="You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
-							$this->sendpushnotification($usr["id"],$push_message,$push_message);
+							//$this->sendpushnotification($usr["id"],$push_message,$push_message);
 						}	
 					}
 			}
@@ -2149,7 +2148,7 @@ return $this->redirect('/users/sendrequest');
 		if ($userchatTable->save($userchats)) {
 			$id = $userchats->id;
 			$push_message="You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
-			$this->sendpushnotification($usr["id"],$push_message,$push_message);
+			//$this->sendpushnotification($usr["id"],$push_message,$push_message);
 		}
 	}
 }
@@ -3269,7 +3268,7 @@ public function acceptOffer() {
 			$userchats->notification = 1;;
 				if ($userchatTable->save($userchats)) {
 					$id = $userchats->id;
-					$this->sendpushnotification($send_to_user_id,$message,$message);
+					//$this->sendpushnotification($send_to_user_id,$message,$message);
 					$res = 1;
 				}
 		}
@@ -4548,7 +4547,7 @@ public function addresponse() {
 			$userchats->notification = 1;;
 			if ($userchatTable->save($userchats)) {
 				$id = $userchats->id;
-				$this->sendpushnotification($request["user_id"],$message,$message);
+				//$this->sendpushnotification($request["user_id"],$message,$message);
 			}
 			$this->Flash->success(__('Your response has bee submitted successfully.'));
 		} 
@@ -4798,7 +4797,7 @@ $sql = "Insert into user_chats SET user_id='".$this->Auth->user('id')."',send_to
 	created='".date("Y-m-d H:i:s")."',request_id='".$d['request_id']."',screen_id='".$d['screen_id']."',message='".$_POST['message']."',type='Chat'";
 $stmt = $conn->execute($sql);
 $message=$_POST['message'];
-$this->sendpushnotification($d['chat_user_id'],$message,$message);
+//$this->sendpushnotification($d['chat_user_id'],$message,$message);
 /*if(isset($d['screen_id']))
 	{
 	$d["screen_id"] = $d['screen_id'];
@@ -4860,7 +4859,7 @@ $userchats->created = date("Y-m-d H:i:s");
 $userchats->notification = 1;
 if ($userchatTable->save($userchats)) {
 $id = $userchats->id;
-$this->sendpushnotification($send_to_user_id,$message,$message);
+//$this->sendpushnotification($send_to_user_id,$message,$message);
 $res = 1;
 }
 $res = 1;
@@ -5421,25 +5420,47 @@ $data[$req['id']]  = $queryr->count();
 		$this->loadModel('Requests');
 		$current_date=date("Y-m-d");
 		$conditions[]= array (
-			'OR' => array(
-				array("Requests.start_date <=" =>  $current_date,'Requests.category_id'=> 2),
-				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2),
-				
-				array("Requests.start_date <=" =>  $current_date,'Requests.category_id'=> 2,'Requests.total_response >' =>0),
-				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
+			'OR' => array( 
+				array("Requests.start_date <" =>  $current_date,'Requests.category_id'=> 2,'Requests.total_response' =>0),
+				array("Requests.check_in <" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response' =>0),
 			)
 		);
-		$conditions[]= array ('Requests.status'=> 0);
-		
+		$conditions['status']=0;
 		$conditions['is_deleted']=0;
+		//print_r($conditions);
 		$requests = $this->Requests->find()->where($conditions); 
-		print_r($requests->toArray()); exit;
+		//print_r($requests->toArray()); exit;
 		foreach($requests as $request){
 			$updateId=$request['id'];
-			//$this->Requests->updateAll(['is_deleted' => 1], ['id' => $updateId]);
+			$this->Requests->updateAll(['is_deleted' => 1], ['id' => $updateId]);
 		}
 		exit;
 	}
+	public function cronobfornotification()
+	{
+		$this->loadModel('UserChats');
+ 		$conditions[]= array ('UserChats.notified'=> 0);
+ 		$conditions['UserChats.is_read']=0;
+		$UserChats = $this->UserChats->find()->where($conditions); 
+		foreach($UserChats as $UserChat){
+			$updateId=$UserChat['id'];
+			$send_to_user_id=$UserChat['send_to_user_id'];
+			$user_id=$UserChat['user_id'];
+			$message=$UserChat['message'];
+			$type=$UserChat['type'];
+			if($type=='Chat'){
+				$conn = ConnectionManager::get('default');
+				$sql = "SELECT first_name,last_name FROM users where id='".$user_id."'";
+				$stmt = $conn->execute($sql);
+				$res = $stmt ->fetch('assoc');   
+				$name = $res['first_name'].' '.$res['last_name'];
+				$message = "You have received a CHAT MESSAGE from $name";	
+			}
+			$this->sendpushnotification($send_to_user_id,$message,$message);
+			$this->UserChats->updateAll(['notified' => 1], ['id' => $updateId]);
+ 		}
+		exit;
+ 	}
 	public function sendpushnotification($userid,$message,$message_data)
 	{
 		$conn = ConnectionManager::get('default');
@@ -5481,8 +5502,6 @@ $data[$req['id']]  = $queryr->count();
 		'Authorization: key='.$API_ACCESS_KEY,
 		'Content-Type: application/json'
 		);
-
-		
 		$ch = curl_init();
 		curl_setopt( $ch,CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send' );
 		curl_setopt( $ch,CURLOPT_POST, true );
@@ -5494,7 +5513,6 @@ $data[$req['id']]  = $queryr->count();
 		curl_close( $ch );
 		return $result;
 		}
-		
 	}
 	public function adminBlockUser($id = null)
 	{
@@ -5530,4 +5548,21 @@ $data[$req['id']]  = $queryr->count();
 	{
 		$this->viewBuilder()->layout('');
 	}
+	public function temppage()
+	{
+		$this->loadModel('Users'); 
+		$Users = $this->Users->find()->where(['mobile_number LIKE'=>'%+%']); 
+		foreach($Users as $UserChat){
+			$updateId=$UserChat['id'];
+			$mobile_number=$UserChat['mobile_number'];
+			$p_contact=$UserChat['p_contact'];
+			$newMobileNO= str_replace("+91 ","",$mobile_number);
+			$newContact= str_replace("+91 ","",$p_contact);
+			$this->Users->updateAll(['mobile_number' => $newMobileNO,'p_contact' => $newContact], ['id' => $updateId]);
+ 		}
+		exit;
+ 	}
+	
+	
+	
 }

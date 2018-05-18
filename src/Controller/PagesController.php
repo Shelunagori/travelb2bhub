@@ -16,7 +16,7 @@ class PagesController extends AppController
 		$this->loadModel('Users');
 		$this->loadModel('Contacts');
 		parent::beforeFilter($event);
-		$this->Auth->allow();
+		$this->Auth->allow(['sendpushnotification']);
 	}
     /**
      * Displays a view
@@ -4071,7 +4071,7 @@ $this->UserChats->updateAll(['type' => 'Chat'], ['id' => $ChatId]);
 				$name = $res['first_name'].' '.$res['last_name'];
 				$push_message = "You have received a CHAT MESSAGE from $name. $res_text";
 				$message_data = $_POST['message'];
-				$this->sendpushnotification($d['chat_user_id'],$push_message,$message_data);
+				//$this->sendpushnotification($d['chat_user_id'],$push_message,$message_data);
 
 				$result['response_code'] = 200;
 				$result['response_object'] = "Message sent successfully";
@@ -4144,7 +4144,7 @@ $this->UserChats->updateAll(['type' => 'Chat'], ['id' => $ChatId]);
 			if ($userchatTable->save($userchats)) {
 $ChatId= $userchats->id;
 $this->User_Chats->updateAll(['type' => 'Final Response'], ['id' => $ChatId]);
-			$this->sendpushnotification($send_to_user_id,$msg,$message_data);
+			//$this->sendpushnotification($send_to_user_id,$msg,$message_data);
 			}
 			}
 			$result['response_code'] = 200;
@@ -4195,7 +4195,7 @@ $this->User_Chats->updateAll(['type' => 'Final Response'], ['id' => $ChatId]);
 				$userchats->notification = 1;
 				$message_data='';
 					if ($userchatTable->save($userchats)) {
-						$this->sendpushnotification($send_to_user_id,$msg,$message_data);
+						//$this->sendpushnotification($send_to_user_id,$msg,$message_data);
 						$ChatId= $userchats->id;
 $this->UserChats->updateAll(['type' => 'Detail Share'], ['id' => $ChatId]);
 						$res = 1;
@@ -4320,7 +4320,7 @@ $this->UserChats->updateAll(['type' => 'Detail Share'], ['id' => $ChatId]);
 $ChatId= $userchats->id;
 $this->User_Chats->updateAll(['type' => 'Response'], ['id' => $ChatId]);
 $message_data='';
-						$this->sendpushnotification($request["user_id"],$message,$message_data);
+						//$this->sendpushnotification($request["user_id"],$message,$message_data);
 					}
 					$res =1;
 					$result['response_code'] = 200;
@@ -5088,7 +5088,7 @@ $response=array('success'=>$success,'error'=>$error,'response'=>$response);
 								$id = $userchats->id;
 								$message_data='';
 $this->User_Chats->updateAll(['type' => 'Request'], ['id' => $id]);
-								$this->sendpushnotification($usr["id"],$userchats->message,$message_data);
+								//$this->sendpushnotification($usr["id"],$userchats->message,$message_data);
 							}
 						}
 					}
@@ -5241,7 +5241,7 @@ $result['response_object'] = "Congratulations! Your request has been submitted s
 							$userchats->notification = 1;;
 							if ($userchatTable->save($userchats)) {
 								$message_data='';
-								$this->sendpushnotification($usr["id"],$userchats->message,$message_data);
+								//$this->sendpushnotification($usr["id"],$userchats->message,$message_data);
 $this->User_Chats->updateAll(['type' => 'Request'], ['id' => $id]);
 								$id = $userchats->id;
 							}
@@ -5391,7 +5391,7 @@ $result['response_object'] = "Congratulations! Your request has been submitted s
 							$id = $userchats->id;
 							$message_data='';
 $this->User_Chats->updateAll(['type' => 'Request'], ['id' => $id]);
-							$this->sendpushnotification($usr["id"],$userchats->message,$message_data);
+							//$this->sendpushnotification($usr["id"],$userchats->message,$message_data);
 						}
 					}
 				}
@@ -5416,7 +5416,7 @@ $this->User_Chats->updateAll(['type' => 'Request'], ['id' => $id]);
 							$id = $userchats->id;
 							$message_data='';
 $this->User_Chats->updateAll(['type' => 'Request'], ['id' => $id]);
-							$this->sendpushnotification($usrh["id"],$userchats->message,$message_data);
+							//$this->sendpushnotification($usrh["id"],$userchats->message,$message_data);
 						}
 					}
 				}
