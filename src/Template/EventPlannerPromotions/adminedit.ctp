@@ -242,7 +242,7 @@ fieldset{
 																
 													</p>
 													<div class="input-field">
-													<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text']);?> 
+													<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text','value'=>$eventPlannerPromotion->price]);?> 
 													</div>
 												</div>
 											</div>
@@ -262,7 +262,8 @@ fieldset{
 							</div>
 						</div>
 					</div> 
-					<input type="hidden" name="visible_date" class="visible_date" value="">
+					<input type="hidden" name="visible_date" class="visible_date" value="<?php echo $eventPlannerPromotion->visible_date;?>">
+					<input type="hidden" name="submitted_from" class="" value="web">
 				<?= $this->Form->end() ?>
 				<div id="selectbox" style="display:none;"> </div>
 			</div>

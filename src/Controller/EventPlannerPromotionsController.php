@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Filesystem\Folder;
+use Cake\Filesystem\File;
 
 /**
  * EventPlannerPromotions Controller
@@ -476,7 +478,12 @@ class EventPlannerPromotionsController extends AppController
 			$title = $eventPlannerPromotion->title;
 			$image = $this->request->data('image');
 			$tmp_name = $this->request->data['image']['tmp_name'];
-			if(!empty($ext))
+			if(!empty($tmp_name))
+			{	
+				$dir = new Folder(WWW_ROOT . 'images/EventPlannerPromotion/'.$ids.'/'.$title.'/image', true, 0755);
+				$ext = substr(strtolower(strrchr($image['name'], '.')), 1); 
+				$arr_ext = array('jpg', 'jpeg','png'); 	
+				if(!empty($ext))
 				{
 					if(in_array($ext, $arr_ext)) { 
 						 
@@ -504,7 +511,7 @@ class EventPlannerPromotionsController extends AppController
 							$image = imagecreatefromjpeg($image['tmp_name']); 
 						}
 						imagejpeg($image, $destination_url, $percentageTOReduse);
-						$taxiFleetPromotion->image='images/EventPlannerPromotion/'.$ids.'/'.$title.'/image/'.$ids.'.'.$ext;
+						$eventPlannerPromotion->image='images/EventPlannerPromotion/'.$ids.'/'.$title.'/image/'.$ids.'.'.$ext;
 						if(file_exists(WWW_ROOT . '/images/EventPlannerPromotion/'.$ids.'/'.$title.'/image/'.$ids.'.'.$ext)>0) {
 						}
 						else
@@ -528,6 +535,7 @@ class EventPlannerPromotionsController extends AppController
 					$this->Flash->error(__($message)); 
 					 
 				}				
+			}				
 			
 			$submitted_from = @$this->request->data('submitted_from');
 			if(@$submitted_from=='web')
@@ -562,7 +570,7 @@ class EventPlannerPromotionsController extends AppController
 				$eventPlannerPromotion->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
 			}
 			$eventPlannerPromotion->price=$this->request->data('payment_amount');
-			pr($eventPlannerPromotion); exit;
+			//pr($eventPlannerPromotion); exit;
 			 if ($this->EventPlannerPromotions->save($eventPlannerPromotion)) {
 				$message = 'The EventPlanner promotions has been saved';
 				$this->Flash->success(__($message)); 
