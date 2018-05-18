@@ -118,10 +118,10 @@ class PostTravlePackagesTable extends Table
             ->requirePresence('duration_day', 'create')
             ->notEmpty('duration_day'); */
 
-        $validator
+        /* $validator
             ->date('valid_date')
             ->requirePresence('valid_date', 'create')
-            ->notEmpty('valid_date');
+            ->notEmpty('valid_date'); */
 
         $validator
             ->decimal('starting_price')
@@ -132,14 +132,14 @@ class PostTravlePackagesTable extends Table
             ->requirePresence('package_detail', 'create')
             ->notEmpty('package_detail');
 
-        $validator
+  /*       $validator
             ->requirePresence('image', 'create')
             ->notEmpty('image');
 
         $validator
             ->date('visible_date')
             ->requirePresence('visible_date', 'create')
-            ->notEmpty('visible_date');
+            ->notEmpty('visible_date'); */
 
         return $validator;
     }

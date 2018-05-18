@@ -54,7 +54,7 @@ if ($err) {
 } else {
 	$masterCountry=json_decode($masterCountry);
 	$countries=$masterCountry->countryData->ResponseObject;
-	//pr($masterCountry);exit;
+	
 	$states=$masterCountry->stateData->ResponseObject;
 	$city=$masterCountry->cityData->ResponseObject;
 }
@@ -180,7 +180,33 @@ fieldset{
 
 	<div class="box box-primary">
 		<div class="box-body">
-			<?= $this->Form->create($postTravlePackage,['enctype'=>'multipart/form-data']) ?>
+			<?= $this->Form->create($postTravlePackage,['enctype'=>'multipart/form-data']);
+					$CategoryList=array();
+//pr($postTravlePackage); exit;
+					foreach($postTravlePackage->post_travle_package_rows as $category)
+					{
+						$CategoryList[]=$category->post_travle_package_category_id;
+					}
+					$cityList=array();
+					foreach($postTravlePackage->post_travle_package_cities as $cities)
+					{
+						$cityList[]=$cities->city_id;
+					}
+					$countryList=array();
+					$p=0;
+					foreach($postTravlePackage->post_travle_package_countries as $countriess)
+					{
+						$countryList[]=$countriess->country_id;
+					} 
+					$CategoryLists=array_unique($CategoryList);
+					$countryLists=array_unique($countryList);
+					$cityLists=array_unique($cityList);
+					$cityListsAry=implode(',',array_unique($cityList));
+
+					?>
+
+
+ 
 				<div class="row"> 
 					<div class="col-md-12"> 
 						<div class="form-box">
@@ -233,7 +259,7 @@ fieldset{
 															</p>
 															
 															<div class="input-field">
-																<?php  echo $this->Form->input('image',['class'=>'form-control requiredfield','label'=>false,'type'=>'file','onchange'=>'checkCertificate()','id'=>'hotelImg']); ?>
+																<?php  echo $this->Form->input('image',['class'=>'form-control ','label'=>false,'type'=>'file','onchange'=>'checkCertificate()','id'=>'hotelImg']); ?>
 																<label style="display:none" class="helpblock error" > This field is required.</label>
 															</div>
 														</div>
@@ -279,7 +305,7 @@ fieldset{
 																	<span class="required">*</span>
 																</p>
 																<div class="input-field">
-																	<?php echo $this->Form->input('valid_date',['class'=>'form-control date-picker date requiredfield','label'=>false,'data-date-format'=>'dd-mm-yyyy','placeholder'=>'Select Date']);?>
+																	<?php echo $this->Form->input('valid_date',['class'=>'form-control date-picker date requiredfield','label'=>false,'data-date-format'=>'dd-mm-yyyy','placeholder'=>'Select Date','type'=>'text','value'=>$val_date]);?>
 																	<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 															</div>
@@ -289,7 +315,7 @@ fieldset{
 																	<span class="required">*</span>
 																</p>
 																<div class="input-field">
-																	<?php echo $this->Form->input('starting_price',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>'Starting Price','type'=>'test','oninput'=>"this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"]);?>
+																	<?php echo $this->Form->input('starting_price',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>'Starting Price','oninput'=>"this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"]);?>
 																	<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 															</div>							 
@@ -305,10 +331,10 @@ fieldset{
 																</p>
 																<div class="input-field">
 																	 <label class="radio-inline">
-																	  <input id="pack_type" type="radio" name="package_type" value="0" checked="checked"/>Domestic
+																	  <input id="pack_type" type="radio" name="package_type" value="0" <?php if($countryLists[0]==101){?> checked="checked" <?php } ?> />Domestic
 																	</label>
 																	<label class="radio-inline">
-																	  <input id="pack_type" type="radio" name="package_type" value="1"/>International
+																	  <input id="pack_type" <?php if($countryLists[0]!=101){?> checked="checked" <?php } ?>  type="radio" name="package_type" value="1"/>International
 																	</label>
 																</div>
 															</div>
@@ -424,35 +450,43 @@ fieldset{
 <div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
 	<div id="loader"></div>
 </div>
-<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<?php  echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
- 	$(document).on('keyup',".number",function(e){
-	
-		if ($.inArray(e.which, [46, 9, 27, 13]) !== -1 ||
-             // Allow: Ctrl/cmd+A
-            (e.which == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
-             // Allow: Ctrl/cmd+C
-            (e.which == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
-             // Allow: Ctrl/cmd+X
-            (e.which == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
-             // which: home, end, left, right
-            (e.which >= 35 && e.which <= 39)) { 
-                 // let it happen, don't do anything
-                 return;
-        }
-        // Ensure that it is a number and stop the keypress
-			if(e.which == 190)
-			{
-				$(this).val('');
-			  e.preventDefault();
-			}
-        else if ((e.shiftKey || (e.which < 48 || e.which > 57)) && (e.which < 96 || e.which > 105) && (e.which != 8)) {
-			$(this).val('');
-            e.preventDefault();
-        }
-	}); 
+ $(document).ready(function () {
+ 
+<?php if($countryLists[0]!=101){?> 
+	$(".replacedata").html('<?php $options=array();
+	foreach($countries as $country)
+	{
+		if($country->id==101){
+			continue;
+		}
+		if(in_array($country->id, $countryLists)){
+			$options[] = ['value'=>$country->id,'text'=>$country->country_name,'selected'=>'selected'];
+		}
+		else
+		{
+			$options[] = ['value'=>$country->id,'text'=>$country->country_name];
+		}
+	};
+	echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select Countries "]);?> <label style="display:none" class="helpblock error" > This field is required.</label>');
+
+	<?php } else { ?>
+	 
+		$(".replacedata").html('<?php $options=array();
+		$options[] = ['value'=>'101','text'=>'India','selected'];
+		echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry","multiple"=>true ,'options' => $options,'label'=>false]);
+	?> <label style="display:none" class="helpblock error" > This field is required.</label>');
+		 
+
+	<?php } ?>
+	$('.select2').select2();
+});
+</script>
+<script>
+ 	  
     $(document).ready(function () {
-		 var pack_type=$('#pack_type').val();
+			/* var pack_type=$('#pack_type').val();
 			//alert(pack_type);
 			if(pack_type==1){
 				$(".replacedata").html('<?php $options=array();
@@ -472,29 +506,9 @@ fieldset{
 				?> <label style="display:none" class="helpblock error" > This field is required.</label>');
 			}
 			$('.select2').select2();
+			 */
 			
-			
-		$('form').submit(function () {
-			var x=0;
-			$( ".requiredfield" ).each(function() {
-				if($(this).val()!=''){ 
- 					$(this).closest('div.form-group').find('.helpblock').hide();
-				}
-  				if($(this).val()==''){ 
- 					$(this).closest('div.form-group').find('.helpblock').show();
-					x = 1;
-				}
-				if($(this).val()==null){
- 					$(this).closest('div.form-group').find('.helpblock').show();
-					x = 1;
-				}
- 			});
-			if(x==1){
-				$('html, body').animate({scrollTop:0}, 'slow');
-				return false;
-			}
-			$("#loader-1").show();
-		});
+
 		
 		$(document).on('change','.cntry',function()
 		{
@@ -617,4 +631,18 @@ $("#multi_category").multiselect();
             }
         }
     }
+</script>
+<?php echo $this->Html->script(['jquery.validate']);?>
+<script>
+$('#TaxtEDIT').validate({
+		rules: {
+			"image" : {
+				required : false,
+			}
+		}, 
+		submitHandler: function (form) {
+ 			$("#loader-1").show();
+			form[0].submit(); 
+		}
+	});
 </script>

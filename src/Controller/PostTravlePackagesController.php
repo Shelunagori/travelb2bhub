@@ -412,9 +412,15 @@ class PostTravlePackagesController extends AppController
         $postTravlePackage = $this->PostTravlePackages->get($id, [
             'contain' => ['PostTravlePackageRows','PostTravlePackageCities','PostTravlePackageStates','PostTravlePackageCountries']
         ]);
-		//pr($postTravlePackage);exit;
+		$val_date=date('d-m-Y',strtotime($postTravlePackage->valid_date));
+		//pr($val_date);exit;
         if ($this->request->is(['patch', 'post', 'put'])) {
+			$ids = $postTravlePackage->user_id;
+			$title = $postTravlePackage->title;
+			$image = $this->request->data('image');
+			$tmp_name = $this->request->data['image']['tmp_name'];
             $postTravlePackage = $this->PostTravlePackages->patchEntity($postTravlePackage, $this->request->data);
+			pr($postTravlePackage);exit;
             if ($this->PostTravlePackages->save($postTravlePackage)) {
                 $this->Flash->success(__('The post travle package has been saved.'));
 
@@ -426,7 +432,7 @@ class PostTravlePackagesController extends AppController
         $countries = $this->PostTravlePackages->Countries->find('list', ['limit' => 200]);
         $priceMasters = $this->PostTravlePackages->PriceMasters->find('list', ['limit' => 200]);
         $users = $this->PostTravlePackages->Users->find('list', ['limit' => 200]);
-        $this->set(compact('postTravlePackage', 'currencies', 'countries', 'priceMasters', 'users'));
+        $this->set(compact('postTravlePackage', 'currencies', 'countries', 'priceMasters', 'users','val_date'));
         $this->set('_serialize', ['postTravlePackage']);
     }
     /**
