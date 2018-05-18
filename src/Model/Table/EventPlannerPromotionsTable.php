@@ -57,7 +57,8 @@ class EventPlannerPromotionsTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->hasMany('EventPlannerPromotionCities', [
-            'foreignKey' => 'event_planner_promotion_id'
+            'foreignKey' => 'event_planner_promotion_id',
+			'saveStrategy'=>'replace'
         ]);
         $this->hasMany('EventPlannerPromotionLikes', [
             'foreignKey' => 'event_planner_promotion_id'
@@ -66,7 +67,8 @@ class EventPlannerPromotionsTable extends Table
             'foreignKey' => 'event_planner_promotion_id'
         ]);		
         $this->hasMany('EventPlannerPromotionStates', [
-            'foreignKey' => 'event_planner_promotion_id'
+            'foreignKey' => 'event_planner_promotion_id',
+			'saveStrategy'=>'replace'
         ]);
         $this->hasMany('EventPlannerPromotionPriceBeforeRenews', [
             'foreignKey' => 'event_planner_promotion_id'

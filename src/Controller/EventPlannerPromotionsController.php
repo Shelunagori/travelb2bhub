@@ -468,9 +468,10 @@ class EventPlannerPromotionsController extends AppController
             'contain' => ['Users','EventPlannerPromotionStates'=>['States'],'EventPlannerPromotionCities'=>['Cities']]
         ]); 
 	
-		pr($eventPlannerPromotion); exit;
+		//pr($eventPlannerPromotion); exit;
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $eventPlannerPromotion = $this->EventPlannerPromotions->patchEntity($eventPlannerPromotion, $this->request->data);
+            
+			$eventPlannerPromotion = $this->EventPlannerPromotions->patchEntity($eventPlannerPromotion, $this->request->data);
 			$ids = $eventPlannerPromotion->user_id;
 			$title = $eventPlannerPromotion->title;
 			$image = $this->request->data('image');
@@ -527,14 +528,59 @@ class EventPlannerPromotionsController extends AppController
 					$this->Flash->error(__($message)); 
 					 
 				}				
-			}
+			
 			$submitted_from = @$this->request->data('submitted_from');
-            if ($this->EventPlannerPromotions->save($eventPlannerPromotion)) {
+			if(@$submitted_from=='web')
+			{
+				$state_id=$this->request->data['state_id'];
+				$x=0; 
+				$eventPlannerPromotion->event_planner_promotion_states = [];
+				$eventPlannerPromotion->event_planner_promotion_cities = [];
+				foreach($state_id as $state)
+				{
+                    $event_planner_promotion_state = $this->EventPlannerPromotions->EventPlannerPromotionStates->newEntity();
+					
+					$event_planner_promotion_state->state_id = $state;
+					
+					$eventPlannerPromotion->event_planner_promotion_states[$x]=$event_planner_promotion_state;
+					$x++;	
+ 
+				} 
+				$city_id=$this->request->data['city_id'];
+				 
+				$y=0; 
+				foreach($city_id as $city)
+				{
+					$eventPlannerPromotion_cities = $this->EventPlannerPromotions->EventPlannerPromotionCities->newEntity();
+					$eventPlannerPromotion_cities->city_id = $city;
+					$eventPlannerPromotion->event_planner_promotion_cities[$y]=$eventPlannerPromotion_cities;
+					$y++;	
+				}
+			}
+			if(!empty($this->request->data('visible_date')))
+			{
+				$eventPlannerPromotion->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
+			}
+			$eventPlannerPromotion->price=$this->request->data('payment_amount');
+			pr($eventPlannerPromotion); exit;
+			 if ($this->EventPlannerPromotions->save($eventPlannerPromotion)) {
+				$message = 'The EventPlanner promotions has been saved';
+				$this->Flash->success(__($message)); 
+				$response_code = 200;
+			}else{
+				$message = 'The ventPlanner promotions has not been saved';
+				$this->Flash->error(__($message)); 
+				$response_code = 204; 
+			}
+ 			return $this->redirect(['action' => 'adminedit/'.$id]);
+			
+           /*  if ($this->EventPlannerPromotions->save($eventPlannerPromotion)) {
                 $this->Flash->success(__('The event planner promotion has been saved.'));
 
-                return $this->redirect(['action' => 'edit/'.$id]);
-            }
-            $this->Flash->error(__('The event planner promotion could not be saved. Please, try again.'));
+                return $this->redirect(['action' => 'adminedit/'.$id]);
+            } 
+            $this->Flash->error(__('The event planner promotion could not be saved. Please, try again.'));*/
+		}
         $allstateslistsss = $this->EventPlannerPromotions->States->find()->where(['States.is_deleted'=>0]);
         $priceMasters = $this->EventPlannerPromotions->PriceMasters->find()->where(['PriceMasters.promotion_type_id'=>2]);
 		 
