@@ -240,6 +240,7 @@ fieldset{
 	<div id="loader"></div>
 </div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+
 <script>
 $(document).ready(function (){
 		$('form').submit(function () {

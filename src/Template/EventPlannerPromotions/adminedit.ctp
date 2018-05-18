@@ -95,12 +95,12 @@ fieldset{
 				<div class="col-md-12"> 
 					<?php echo  $this->Flash->render() ?>
 				</div>
-				<?= $this->Form->create($eventPlannerPromotion,['type'=>'file']); 
+				<?= $this->Form->create($eventPlannerPromotion,['type'=>'file','id'=>'TaxtEDIT']); 
  				$cityList=array();
 				foreach($eventPlannerPromotion->event_planner_promotion_cities as $cities)
 				{ 
 					
-					if($cities->city_id==0){@$cityList[]='All Cities';}
+					if($cities->city_id==0){}
 					else{
 						@$cityList[]=$cities->city_id;
 					}
@@ -112,6 +112,10 @@ fieldset{
 					$stateList[]=$states->state_id;
 				}
 				 
+				 
+				$stateList=array_unique($stateList);
+				$cityList=array_unique($cityList);
+				$cityListsAry=implode(',',array_unique($cityList));
 				?>
 				
 				<form method="post" enctype="multipart/form-data">	
@@ -172,8 +176,8 @@ fieldset{
 											$options[] = ['value'=>$st->id,'text'=>$st->state_name];
 										}
 									}
-									echo $this->Form->input('state_id', ['options' => $options,'class'=>'form-control select2 requiredfield state_list','label'=>false,"data-placeholder"=>"Select Options",'multiple'=>true]); ?>
-									<label style="display:none" class="helpblock error" > This field is required.</label>									
+									echo $this->Form->input('state_id', ['options' => $options,'class'=>'form-control select2 requiredfield state_list','label'=>false,"data-placeholder"=>"Select Options",'multiple'=>true,'required']); ?>
+									<label style="display:none" id="state-id-error" for="state-id" class="helpblock error" > This field is required.</label>									
 								</div>
 							</div>
 						</div>
@@ -186,10 +190,10 @@ fieldset{
 									
 									<div class="input-field">
 										 <label class="radio-inline">
-										  <input class="city_type" type="radio" name="package_type" value="0" checked="checked"/>All Cities
+										  <input class="city_type" type="radio" name="package_type" value="0" <?php if(empty($cityList)){?> checked="checked" <?php } ?>/>All Cities
 										</label>
 										<label class="radio-inline">
-										  <input class="city_type" type="radio" name="package_type" value="1"/>Specific Cities
+										  <input class="city_type" type="radio" name="package_type" <?php if(!empty($cityList)){?> checked="checked" <?php } ?> value="1"/>Specific Cities
 										</label>
 									</div>
 								</div>
@@ -208,7 +212,7 @@ fieldset{
 							<div class="col-md-12">
 								<div class="col-md-12 form-group">
 									<p>Enter Description of Your Company </p>
-									<?php echo $this->Form->textarea('event_detail', ['class'=>'form-control requiredfield','label'=>false,'rows'=>3,'style'=>'resize:none']); ?> 	 
+									<?php echo $this->Form->textarea('event_detail', ['class'=>'form-control requiredfield','label'=>false,'rows'=>3,'style'=>'resize:none','required']); ?> 	 
 									<label style="display:none" class="helpblock error" > This field is required.</label>
 								</div>
 							</div>
@@ -231,9 +235,9 @@ fieldset{
 														 
 															$options[] = ['value'=>$Price->id,'text'=>$Price->week,'priceVal'=>$Price->week,'price'=>$Price->price];
 														};
-														echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters requiredfield select2','label'=>false,'empty'=>'Select ...']);?>
+														echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters requiredfield select2','label'=>false,'empty'=>'Select ...' ,'required']);?>
 														<?php // echo $this->Form->input('duration', ['options' => $priceMasters,'class'=>'form-control','label'=>false]); ?>
-														<label style="display:none" class="helpblock error" > This field is required.</label>
+														<label id="price-master-id-error" for="price-master-id" style="display:none" class="helpblock error" > This field is required.</label>
 													</div>
 												</div>
 												<div class="col-md-6 form-group">
@@ -272,6 +276,42 @@ fieldset{
 	<div id="loader"></div>
 </div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<?php echo $this->Html->script(['jquery.validate']);?>	
+<script>
+$(document).ready(function ()
+{
+	<?php foreach($stateList as $stateIID){?>
+	var state_id=<?php echo $stateIID;?>;
+	var Cty_id='<?php echo $cityListsAry;?>';
+	
+	var m_data = new FormData();
+	var cur_obj = $(this);
+	m_data.append('state_id',state_id);			
+	m_data.append('Cty_id',Cty_id);			
+	$.ajax({
+		url: "<?php echo $this->Url->build(["controller" => "EventPlannerPromotions", "action" => "cityStateListEdit"]); ?>",
+		data: m_data,
+		processData: false,
+		contentType: false,
+		type: 'POST',
+		dataType:'text',
+		success: function(data)
+		{
+			if($("input[name='package_type']:checked").val()==1){
+				$(".replacedata").html(data);
+				$('#selectbox').html(data);
+			}
+			else{
+				$('#selectbox').html(data);
+			}
+			$('.city_id').select2();
+			cur_obj.closest('form').find('.city_id').select2();
+		}
+	});
+	
+<?php }?>
+});
+</script>
 <script>
 $(document).ready(function (){
 	/* 	$('form').submit(function () {
@@ -329,7 +369,7 @@ $(document).ready(function (){
 		$("#newlist").show();
 		$(".replacedata").html('<?php $options=array();
 			$options[] = ['value'=>'0','text'=>'All Cities','selected'];
-			echo $this->Form->input('city_id',["class"=>"form-control city_id requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
+			echo $this->Form->input('city_id',["class"=>"form-control city_id ","multiple"=>true ,'options' => $options,'label'=>false,'required']);
 			?>');
 		$('.city_id').select2();
 		$(document).on('change','.city_type',function()
@@ -389,10 +429,10 @@ $(document).ready(function (){
         } else {
             var Extension = FileUploadPath.substring(
                     FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
-//The file uploaded is an image
-if (Extension == "png" || Extension == "jpeg" || Extension == "jpg") {
+		//The file uploaded is an image
+		if (Extension == "png" || Extension == "jpeg" || Extension == "jpg") {
 
-// To Display
+		// To Display
                 if (fuData.files && fuData.files[0]) {
                     var reader = new FileReader();
 
@@ -405,7 +445,7 @@ if (Extension == "png" || Extension == "jpeg" || Extension == "jpg") {
 
             } 
 //The file upload is NOT an image
-else {
+		else {
                 alert("Photo only allows file types of PNG, JPG and JPEG.");
 				$("#hotelImg").val('');
             }
@@ -415,14 +455,14 @@ else {
 <?php echo $this->Html->script(['jquery.validate']);?>
 <script>
 $('#TaxtEDIT').validate({
-		rules: {
-			"image" : {
-				required : false,
-			}
-		}, 
-		submitHandler: function (form) {
- 			$("#loader-1").show();
-			form[0].submit(); 
+	rules: {
+		"image" : {
+			required : false,
 		}
-	});
+	}, 
+	submitHandler: function (form) {
+		$("#loader-1").show();
+		form[0].submit(); 
+	}
+});
 </script>
