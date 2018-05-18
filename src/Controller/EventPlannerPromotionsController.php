@@ -535,12 +535,11 @@ class EventPlannerPromotionsController extends AppController
                 return $this->redirect(['action' => 'edit/'.$id]);
             }
             $this->Flash->error(__('The event planner promotion could not be saved. Please, try again.'));
-        }
-        $allstateslist = $this->EventPlannerPromotions->States->find()->where(['States.is_deleted'=>0]);
+        $allstateslistsss = $this->EventPlannerPromotions->States->find()->where(['States.is_deleted'=>0]);
         $priceMasters = $this->EventPlannerPromotions->PriceMasters->find()->where(['PriceMasters.promotion_type_id'=>2]);
 		 
 		//pr($eventPlannerPromotion); exit;
-        $this->set(compact('eventPlannerPromotion', 'priceMasters','allstateslist'));
+        $this->set(compact('eventPlannerPromotion', 'priceMasters','allstateslistsss'));
         $this->set('_serialize', ['eventPlannerPromotion']);
     }
 

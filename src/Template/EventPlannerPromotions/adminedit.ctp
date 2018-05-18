@@ -162,7 +162,7 @@ fieldset{
 									<?php 
 									 
 									$options=array();
-									foreach($allstateslist as $st)
+									foreach($allstateslistsss as $st)
 									{
 										if(in_array($st->id,$stateList)){
 											$options[] = ['value'=>$st->id,'text'=>$st->state_name,'selected'];
