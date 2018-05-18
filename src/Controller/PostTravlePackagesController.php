@@ -408,9 +408,11 @@ class PostTravlePackagesController extends AppController
     }
     public function edit($id = null)
     {
+		$this->viewBuilder()->layout('admin_layout');
         $postTravlePackage = $this->PostTravlePackages->get($id, [
-            'contain' => []
+            'contain' => ['PostTravlePackageRows','PostTravlePackageCities','PostTravlePackageStates','PostTravlePackageCountries']
         ]);
+		//pr($postTravlePackage);exit;
         if ($this->request->is(['patch', 'post', 'put'])) {
             $postTravlePackage = $this->PostTravlePackages->patchEntity($postTravlePackage, $this->request->data);
             if ($this->PostTravlePackages->save($postTravlePackage)) {

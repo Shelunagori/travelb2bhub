@@ -59,10 +59,12 @@ class PostTravlePackagesTable extends Table
             'joinType' => 'INNER'
         ]);
         $this->hasMany('PostTravlePackageCities', [
-            'foreignKey' => 'post_travle_package_id'
+            'foreignKey' => 'post_travle_package_id',
+			'saveStrategy'=>'replace'
         ]);
         $this->hasMany('PostTravlePackageRows', [
-            'foreignKey' => 'post_travle_package_id'
+            'foreignKey' => 'post_travle_package_id',
+			'saveStrategy'=>'replace'
         ]);
         $this->hasMany('PostTravlePackageLikes', [
             'foreignKey' => 'post_travle_package_id'
@@ -71,10 +73,12 @@ class PostTravlePackagesTable extends Table
             'foreignKey' => 'post_travle_package_id'
         ]);
         $this->hasMany('PostTravlePackageStates', [
-            'foreignKey' => 'post_travle_package_id'
+            'foreignKey' => 'post_travle_package_id',
+			'saveStrategy'=>'replace'
         ]);
         $this->hasMany('PostTravlePackageCountries', [
-            'foreignKey' => 'post_travle_package_id'
+            'foreignKey' => 'post_travle_package_id',
+			'saveStrategy'=>'replace'
         ]);
         $this->hasMany('PostTravlePackagePriceBeforeRenews', [
             'foreignKey' => 'post_travle_package_id'
