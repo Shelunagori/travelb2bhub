@@ -149,7 +149,7 @@ fieldset{
 		<div class="row"> 
 			<div class="box-body">
 			<?php $i=1;
-			//pr($taxiFleetPromotion->taxi_fleet_promotion_rows);exit;
+			//pr($taxiFleetPromotion);exit;
 		
 				$vehicleList=array(); 
 				foreach($taxiFleetPromotion->taxi_fleet_promotion_rows as $vehicle)
@@ -160,7 +160,7 @@ fieldset{
 				foreach($taxiFleetPromotion->taxi_fleet_promotion_cities as $cities)
 				{
 					 
-					if($cities->city_id==0){@$cityList[]='0';}
+					if($cities->city_id==0){}
 					else{
 						@$cityList[]=$cities->city_id;
 					}
@@ -263,6 +263,7 @@ fieldset{
 								</div>
 							</div>
 						</div>
+						 
 						<div class="row">
 							<div class="col-md-12">
 								<div class="col-md-6 form-group" >
@@ -359,7 +360,7 @@ fieldset{
 														Promotion Amount
 													</p>
 													<div class="input-field">
-													<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text']);?> 
+													<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text','value'=>$taxiFleetPromotion->price]);?> 
 													</div>
 												</div>
 											</div>
@@ -381,8 +382,8 @@ fieldset{
 								</div>
 							</div>									
 						</div>
-						<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
-						<input type="hidden" name="visible_date" class="visible_date" value="">
+						<input type="hidden" name="user_id" value="<?php echo $taxiFleetPromotion->user_id;?>">
+						<input type="hidden" name="visible_date" class="visible_date" value="<?php echo date('d-m-Y',strtotime($taxiFleetPromotion['visible_date']));?>">
 				  <?= $this->Form->end() ?>
 			</div>
 			

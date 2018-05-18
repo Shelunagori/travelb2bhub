@@ -404,6 +404,7 @@ class TaxiFleetPromotionsController extends AppController
 			$title = $taxiFleetPromotion->title;
 			$image = $this->request->data('image');
 			$tmp_name = $this->request->data['image']['tmp_name'];
+			$taxiFleetPromotion = $this->TaxiFleetPromotions->patchEntity($taxiFleetPromotion, $this->request->data);
 			if(!empty($tmp_name))
 			{	
 				$dir = new Folder(WWW_ROOT . 'images/taxiFleetPromotion/'.$ids.'/'.$title.'/image', true, 0755);
@@ -505,8 +506,9 @@ class TaxiFleetPromotionsController extends AppController
 			{
 				$taxiFleetPromotion->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
 			}
-			$taxiFleetPromotion = $this->TaxiFleetPromotions->patchEntity($taxiFleetPromotion, $this->request->data);
-			//pr($taxiFleetPromotion);exit;
+			$taxiFleetPromotion->price=$this->request->data('payment_amount');
+			
+			 
 			if ($this->TaxiFleetPromotions->save($taxiFleetPromotion)) {
 				$message = 'The Taxi/Fleet promotions has been saved';
 				$this->Flash->success(__($message)); 
@@ -516,24 +518,8 @@ class TaxiFleetPromotionsController extends AppController
 				$this->Flash->error(__($message)); 
 				$response_code = 204; 
 			}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-            
-            if ($this->TaxiFleetPromotions->save($taxiFleetPromotion)) {
-                $this->Flash->success(__('The taxi fleet promotion has been saved.'));
-
-                return $this->redirect(['action' => 'edit/'.$id]);
-            }
-            $this->Flash->error(__('The taxi fleet promotion could not be saved. Please, try again.'));
-        }
+ 			return $this->redirect(['action' => 'edit/'.$id]);
+         }
         $countries = $this->TaxiFleetPromotions->Countries->find('list', ['limit' => 200]);
 		$this->set(compact('taxiFleetPromotion', 'countries'));
         $this->set('_serialize', ['taxiFleetPromotion']);
