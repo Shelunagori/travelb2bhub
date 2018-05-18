@@ -54,7 +54,9 @@ $conn = ConnectionManager::get('default');
 					</div>
 				</fieldset>
 			</form>
-
+			<div class="col-md-12" align="right">
+				<a style="margin:2px" href="<?php echo $this->Url->build(array('controller'=>'Requests','action'=>'excelDownload?RefID='.$RefID.'&status='.$status.'&removed='.$removed.'&category='.$category)) ?>" title="Download Excel" class="btn btn-info btn-xs"  ><i class="fa fa-download"></i> Excel</i> </a>
+			</div>
 				<table class="table table-bordered" cellpadding="0" cellspacing="0" id="main_tble">
 						<thead>
 							<tr style="background-color:#DFD9C4;">
