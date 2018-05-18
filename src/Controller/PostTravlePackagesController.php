@@ -241,6 +241,30 @@ class PostTravlePackagesController extends AppController
 		}
 		exit; 
 	}
+	public function ajaxCityEdit($country_id = null)
+	{
+		$this->loadModel('Cities');
+		$country_id=$this->request->data('country_id');
+		$Cty_id=$this->request->data['Cty_id'];
+		$Cty_idArray = explode(",", $Cty_id);
+		$countryArray=explode(',',$country_id);
+		$citiesapi = $this->Cities->find()->contain(['States'])->where(['Cities.is_deleted'=>0,'Cities.country_id IN'=>$countryArray]);
+		foreach($citiesapi as $citiesa){
+		
+			$city_id=$citiesa->id;
+			$city_name=$citiesa->name;
+			$state_name=$citiesa->state->state_name;
+				if(in_array($city_id, $Cty_idArray)){
+					echo '<option value="'.$city_id.'" selected>'.$city_name.' ('.$state_name.')</option>';
+				}
+				else{
+					echo '<option value="'.$city_id.'">'.$city_name.' ('.$state_name.')</option>';
+				}
+
+			
+		}
+		exit; 
+	}
  	 
     public function view($id = null)
     {
@@ -419,12 +443,119 @@ class PostTravlePackagesController extends AppController
 			$title = $postTravlePackage->title;
 			$image = $this->request->data('image');
 			$tmp_name = $this->request->data['image']['tmp_name'];
-            $postTravlePackage = $this->PostTravlePackages->patchEntity($postTravlePackage, $this->request->data);
-			pr($postTravlePackage);exit;
+			$postTravlePackage = $this->PostTravlePackages->patchEntity($postTravlePackage, $this->request->data);
+			if(!empty($tmp_name))
+			{	
+				$dir = new Folder(WWW_ROOT . 'images/PostTravelPackages/'.$ids.'/'.$title.'/image', true, 0755);
+				$ext = substr(strtolower(strrchr($image['name'], '.')), 1); 
+				$arr_ext = array('jpg', 'jpeg','png'); 				
+				
+				if(!empty($ext))
+				{
+					if(in_array($ext, $arr_ext)) { 
+						if (!file_exists('path/to/directory')) {
+							mkdir('path/to/directory', 0777, true);
+						}
+						 
+						$percentageTOReduse=100;
+						if(@$submitted_from=='web')
+						{
+							if(($image['size']>3000000) &&($image['size']<=4000000)){
+								$percentageTOReduse=50;
+							}
+							elseif(($image['size']>4000000) &&($image['size']<=6000000)){ 
+								$percentageTOReduse=20;
+							}
+							elseif($image['size']>6000000){
+								$percentageTOReduse=10;
+							}
+						}
+						/* Resize Image */
+						$destination_url = WWW_ROOT . '/images/PostTravelPackages/'.$ids.'/'.$title.'/image/'.$ids.'.'.$ext;
+						if($ext=='png'){
+							$image = imagecreatefrompng($image['tmp_name']);
+						}else{
+							$image = imagecreatefromjpeg($image['tmp_name']); 
+						}
+						$immm=imagejpeg($image, $destination_url, $percentageTOReduse);
+ 						$postTravlePackage->image='images/PostTravelPackages/'.$ids.'/'.$title.'/image/'.$ids.'.'.$ext;
+						if(file_exists(WWW_ROOT . '/images/PostTravelPackages/'.$ids.'/'.$title.'/image/'.$ids.'.'.$ext)>0) {
+						}
+						else
+						{
+							$message = 'Image not uploaded';
+							$this->Flash->error(__($message));
+							$response_code = 102;
+						} 
+					} 
+					else 
+					{ 
+						$message = 'Invalid image extension';
+						$this->Flash->error(__($message));
+						$response_code = 103;  
+						
+					}					
+				}
+				else 
+				{ 	
+					$message = 'Invalid image extension';
+					$this->Flash->error(__($message));
+					$response_code = 103;  
+				
+				}				
+			}
+			if(!empty($this->request->data('visible_date')))
+			{
+				$postTravlePackage->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
+			}
+			if(!empty($this->request->data('valid_date')))
+			{
+				$postTravlePackage->valid_date = date('Y-m-d',strtotime($this->request->data('valid_date')));
+			}
+			
+			$submitted_from = @$this->request->data('submitted_from'); 
+            
+			if(@$submitted_from=='web')
+			{
+				$country_id=$this->request->data['country_id'];
+				$x=0; 
+				$postTravlePackage->post_travle_package_countries = [];
+				$postTravlePackage->post_travle_package_cities = [];  
+				$postTravlePackage->post_travle_package_rows = [];  
+				foreach($country_id as $state)
+				{
+					$postTravlePackage_state = $this->PostTravlePackages->PostTravlePackageCountries->newEntity();
+					$postTravlePackage_state->country_id = $state;
+					$postTravlePackage->post_travle_package_countries[$x]=$postTravlePackage_state;
+	//$postTravlePackage['PostTravlePackageCountries['.$x.']["country_id"]']=$country_id[$x];
+					$x++;	
+				}
+				
+				$city_id=$this->request->data['city_id'];
+				$y=0; 
+				foreach($city_id as $city)
+				{
+					$postTravlePackage_city = $this->PostTravlePackages->PostTravlePackageCities->newEntity();
+					$postTravlePackage_city->city_id = $city;
+					$postTravlePackage->post_travle_package_cities[$y]=$postTravlePackage_city;
+//$postTravlePackage['PostTravlePackageCities['.$y.']["city_id"]']=$city_id[$y];
+					$y++;	
+				}
+				$package_category_id=$this->request->data['package_category_id'];
+				$z=0;  
+				foreach($package_category_id as $category)
+				{
+					$postTravlePackage_citys = $this->PostTravlePackages->PostTravlePackageRows->newEntity();
+					$postTravlePackage_citys->post_travle_package_category_id = $category;
+					$postTravlePackage->post_travle_package_rows[$z]=$postTravlePackage_citys;
+//$postTravlePackage['PostTravlePackageRows['.$z.']["post_travle_package_category_id"]']=$package_category_id[$z];
+					$z++;	
+				}
+			}
             if ($this->PostTravlePackages->save($postTravlePackage)) {
                 $this->Flash->success(__('The post travle package has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'package_report']);
             }
             $this->Flash->error(__('The post travle package could not be saved. Please, try again.'));
         }

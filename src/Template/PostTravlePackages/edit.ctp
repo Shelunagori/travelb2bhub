@@ -180,7 +180,7 @@ fieldset{
 
 	<div class="box box-primary">
 		<div class="box-body">
-			<?= $this->Form->create($postTravlePackage,['enctype'=>'multipart/form-data']);
+			<?= $this->Form->create($postTravlePackage,['type'=>'file','id'=>'TaxtEDIT']);
 					$CategoryList=array();
 //pr($postTravlePackage); exit;
 					foreach($postTravlePackage->post_travle_package_rows as $category)
@@ -200,8 +200,10 @@ fieldset{
 					} 
 					$CategoryLists=array_unique($CategoryList);
 					$countryLists=array_unique($countryList);
+					$countryListsARYY=implode(',',array_unique($countryLists));
 					$cityLists=array_unique($cityList);
 					$cityListsAry=implode(',',array_unique($cityList));
+					//$val_date=date('d-m-Y',strtotime($postTravlePackage->valid_date));
 
 					?>
 
@@ -220,7 +222,7 @@ fieldset{
 															<span class="required">*</span>
 														</p>
 														<div class="input-field">
-															 <?php echo $this->Form->input('title',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>"Enter Package Title",]);?>
+															 <?php echo $this->Form->input('title',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>"Enter Package Title",'required']);?>
 															 <label style="display:none" class="helpblock error" > This field is required.</label>
 														</div>
 													</div>
@@ -305,7 +307,7 @@ fieldset{
 																	<span class="required">*</span>
 																</p>
 																<div class="input-field">
-																	<?php echo $this->Form->input('valid_date',['class'=>'form-control date-picker date requiredfield','label'=>false,'data-date-format'=>'dd-mm-yyyy','placeholder'=>'Select Date','type'=>'text','value'=>$val_date]);?>
+																	<?php echo $this->Form->input('valid_date',['class'=>'form-control date-picker date','label'=>false,'data-date-format'=>'dd-mm-yyyy','placeholder'=>'Select Date','type'=>'text','required']);?>
 																	<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 															</div>
@@ -315,7 +317,7 @@ fieldset{
 																	<span class="required">*</span>
 																</p>
 																<div class="input-field">
-																	<?php echo $this->Form->input('starting_price',['class'=>'form-control requiredfield','label'=>false,'placeholder'=>'Starting Price','oninput'=>"this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"]);?>
+																	<?php echo $this->Form->input('starting_price',['class'=>'form-control requiredfield','required','label'=>false,'placeholder'=>'Starting Price','oninput'=>"this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');",'type'=>'text']);?>
 																	<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 															</div>							 
@@ -359,8 +361,9 @@ fieldset{
 																{
 																	$options[] = ['value'=>$cty->cityid,'text'=>$cty->name, 'country_id'=>$cty->country_id];
 																};
-																echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield max_limit","data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
-																<label style="display:none" class="helpblock error" > This field is required.</label>
+																echo $this->Form->control('city_id', ['label'=>false,"id"=>"multi_city", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield max_limit",'required',"data-placeholder"=>"Select City ","style"=>"height:125px;"]);?>
+																<label id="multi_city-error" style="display:none" class="error" for="multi_city">This field is required.</label>
+																 
 																</div>
 															</div>
 														</div>
@@ -373,7 +376,7 @@ fieldset{
 																</p>
 																 
 																<div class="input-field">
-																	 <?php echo $this->Form->textarea('package_detail',['class'=>'form-control requiredfield','label'=>false,'rows'=>2]);?>
+																	 <?php echo $this->Form->textarea('package_detail',['class'=>'form-control requiredfield','required','label'=>false,'rows'=>2]);?>
 																	<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 															</div>
@@ -410,8 +413,8 @@ fieldset{
 															{
 																$options[] = ['value'=>$Price->id,'text'=>$Price->week,'priceVal'=>$Price->week,'price'=>$Price->price];
 															};
-															echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters requiredfield select2','label'=>false,'empty'=>'Select Options']);?>
-															<label style="display:none" class="helpblock error" > This field is required.</label>
+															echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters requiredfield select2','required','label'=>false,'empty'=>'Select Options']);?>
+															<label id="price-master-id-error" for="price-master-id" style="display:none" class="helpblock error" > This field is required.</label>
 														</div>
 													</div>
 													<div class="col-md-6 form-group">
@@ -419,7 +422,7 @@ fieldset{
 																	Promotion Amount
 														</p>
 														<div class="input-field">
-														<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text']);?> 
+														<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text','value'=>$postTravlePackage->price]);?> 
 														<input type="hidden" class="visible_date" name="visible_date">
 														</div>
 													</div>
@@ -450,7 +453,7 @@ fieldset{
 <div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
 	<div id="loader"></div>
 </div>
-<?php  echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
  $(document).ready(function () {
  
@@ -469,18 +472,38 @@ fieldset{
 			$options[] = ['value'=>$country->id,'text'=>$country->country_name];
 		}
 	};
-	echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select Countries "]);?> <label style="display:none" class="helpblock error" > This field is required.</label>');
+	echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry",'required', "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select Countries "]);?> <label id="country-id-error" for="country-id" style="display:none" class="helpblock error" > This field is required.</label>');
 
 	<?php } else { ?>
 	 
 		$(".replacedata").html('<?php $options=array();
 		$options[] = ['value'=>'101','text'=>'India','selected'];
-		echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry","multiple"=>true ,'options' => $options,'label'=>false]);
-	?> <label style="display:none" class="helpblock error" > This field is required.</label>');
+		echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry",'required',"multiple"=>true ,'options' => $options,'label'=>false]);
+	?> <label style="display:none" for="country-id" id="country-id-error" class="helpblock error" > This field is required.</label>');
 		 
 
 	<?php } ?>
 	$('.select2').select2();
+	//------ COUNTERY
+  	var countries = '<?php echo $countryListsARYY;?>';
+  	var Cty_id = '<?php echo $cityListsAry;?>';
+ 
+	var m_data = new FormData();
+	m_data.append('country_id',countries);			
+	m_data.append('Cty_id',Cty_id);			
+	$.ajax({
+		url: "<?php echo $this->Url->build(["controller" => "PostTravlePackages", "action" => "ajaxCityEdit"]); ?>",
+		data: m_data,
+		processData: false,
+		contentType: false,
+		type: 'POST',
+		dataType:'text',
+		success: function(data)
+		{
+			$('#mcity').html('<select name="city_id[]" multiple="multiple" class="form-control select2 requiredfield max_limit" required data-placeholder="Select City" id="multi_city" style="height:125px;">'+data+'</select><label id="multi_city-error" style="display:none" class="error" for="multi_city">This field is required.</label>');
+			$("#multi_city").select2();
+		}
+	});
 });
 </script>
 <script>
@@ -513,15 +536,12 @@ fieldset{
 		$(document).on('change','.cntry',function()
 		{
 			var country_id=$('option:selected', this).val();
-			
-		var countries = [];
-        $.each($(".cntry option:selected"), function(){
-             countries.push($(this).val());
-        });
-         
-		 
-		 
-		 var m_data = new FormData();
+			var countries = [];
+			$.each($(".cntry option:selected"), function(){
+				 countries.push($(this).val());
+			});
+         		 
+		    var m_data = new FormData();
 			m_data.append('country_id',countries);			
 			$.ajax({
 				url: "<?php echo $this->Url->build(["controller" => "PostTravlePackages", "action" => "ajax_city"]); ?>",
@@ -532,16 +552,12 @@ fieldset{
 				dataType:'text',
 				success: function(data)
 				{
-					$('#mcity').html('<select name="city_id[]" multiple="multiple" class="form-control select2 requiredfield max_limit" data-placeholder="Select City" id="multi_city" style="height:125px;">'+data+'</select> <label style="display:none" class="helpblock error" > This field is required.</label>');
+					$('#mcity').html('<select name="city_id[]" multiple="multiple" class="form-control select2 requiredfield max_limit" data-placeholder="Select City" id="multi_city" required style="height:125px;">'+data+'</select> <label id="multi_city-error" style="display:none" class="error" for="multi_city">This field is required.</label>');
 					$("#multi_city").select2();
 				}
 			});
-		  
-			 
 		});	
 		
-		
-	 
 		$(document).on('change','.priceMasters',function()
 		{
 			var blank=$(this).val();
@@ -577,7 +593,7 @@ fieldset{
 			//alert(pack_type);
 			 
 			if(pack_type==1){
-				$('#mcity').html('<select name="city_id[]" multiple="multiple" class="form-control select2 requiredfield max_limit" data-placeholder="Select City" id="multi_city" style="height:125px;"><option value="">Select Please </option></select>');
+				$('#mcity').html('<select name="city_id[]" multiple="multiple" class="form-control select2 requiredfield max_limit" data-placeholder="Select City" id="multi_city" required style="height:125px;"><option value="">Select Please </option></select><label id="multi_city-error" style="display:none" class="error" for="multi_city">This field is required.</label>');
 				$(".replacedata").html('<?php $options=array();
 				foreach($countries as $country)
 				{
@@ -586,15 +602,15 @@ fieldset{
 					}
 					$options[] = ['value'=>$country->id,'text'=>$country->country_name];
 				};
-				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select Countries "]);?><label style="display:none" class="helpblock error" > This field is required.</label>');
+				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry", "required", "multiple"=>true ,'options' => $options,'label'=>false,"data-placeholder"=>"Select Countries "]);?><label style="display:none" class="helpblock error" for="country-id" > This field is required.</label>');
 			}
 			else{
-				$('#mcity').html('<select name="city_id[]" multiple="multiple" class="form-control select2 requiredfield max_limit" data-placeholder="Select City" id="multi_city" style="height:125px;"><option value="">Select Please </option></select>');
+				$('#mcity').html('<select name="city_id[]" multiple="multiple" class="form-control select2 requiredfield max_limit" data-placeholder="Select City" required id="multi_city" style="height:125px;"><option value="">Select Please </option></select><label id="multi_city-error" style="display:none" class="error" for="multi_city">This field is required.</label>');
 					$("#multi_city").select2();
 				$(".replacedata").html('<?php $options=array();
 				$options[] = ['value'=>'101','text'=>'India'];
-				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry","multiple"=>true ,'options' => $options,'label'=>false]);
-				?> <label style="display:none" class="helpblock error" > This field is required.</label>');
+				echo $this->Form->input('country_id',["class"=>"form-control select2 requiredfield cntry",'required',"multiple"=>true ,'options' => $options,'label'=>false]);
+				?> <label style="display:none" for="country-id" class="helpblock error" > This field is required.</label>');
 			}
 			$('.select2').select2();
 		});

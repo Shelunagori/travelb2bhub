@@ -123,11 +123,11 @@ class PostTravlePackagesTable extends Table
             ->requirePresence('valid_date', 'create')
             ->notEmpty('valid_date'); */
 
-        $validator
+        /* $validator
             ->decimal('starting_price')
             ->requirePresence('starting_price', 'create')
             ->notEmpty('starting_price');
-
+ */
         $validator
             ->requirePresence('package_detail', 'create')
             ->notEmpty('package_detail');
