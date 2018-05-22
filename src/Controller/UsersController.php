@@ -299,7 +299,7 @@ class UsersController extends AppController {
 		 return $advertisementcount;
     }
 	
-	public function report($first_name=null,$last_name=null,$email=null,$role_id=null,$city_id=null,$state_id=null,$statusWise=null,$blocked=null) {
+	public function report($first_name=null,$last_name=null,$email=null,$role_id=null,$city_id=null,$state_id=null,$statusWise=null,$blocked=null,$mobile=null,$lastlogin=null) {
 		$this->viewBuilder()->layout('admin_layout');
 		$first_name=$this->request->query('first_name');
 		$last_name=$this->request->query('last_name');
@@ -309,6 +309,8 @@ class UsersController extends AppController {
 		$state_id=$this->request->query('state_id');
 		$statusWise=$this->request->query('statusWise');
 		$blocked=$this->request->query('blocked');
+		$mobile=$this->request->query('mobile');
+		$lastlogin=$this->request->query('lastlogin');
 		$this->set('first_name', $first_name);
 		$this->set('last_name', $last_name);
 		$this->set('email', $email);
@@ -317,6 +319,8 @@ class UsersController extends AppController {
 		$this->set('state_id', $state_id);
 		$this->set('statusWise', $statusWise);
 		$this->set('blocked', $blocked);
+		$this->set('mobile', $mobile);
+		$this->set('lastlogin', $lastlogin);
 		$condition=array();
 		if(!empty($first_name))
 		{
@@ -333,6 +337,14 @@ class UsersController extends AppController {
 		if(!empty($role_id))
 		{
 			$condition['Users.role_id']=$role_id;
+		}
+		if(!empty($lastlogin))
+		{
+			$condition['Users.last_login < ']=$lastlogin;
+		}
+		if(!empty($mobile))
+		{
+			$condition['Users.mobile_number']=$mobile;
 		}
 		if(!empty($city_id))
 		{
@@ -382,7 +394,7 @@ class UsersController extends AppController {
 		
 	}
 	
-	public function excelDownload($first_name=null,$last_name=null,$email=null,$role_id=null,$city_id=null,$state_id=null,$statusWise=null,$blocked=null) {
+	public function excelDownload($first_name=null,$last_name=null,$email=null,$role_id=null,$city_id=null,$state_id=null,$statusWise=null,$blocked=null,$mobile=null,$lastlogin=null) {
 		$this->viewBuilder()->layout('');
 		$first_name=$this->request->query('first_name');
 		$last_name=$this->request->query('last_name');
@@ -392,6 +404,8 @@ class UsersController extends AppController {
 		$state_id=$this->request->query('state_id');
 		$statusWise=$this->request->query('statusWise');
 		$blocked=$this->request->query('blocked');
+		$mobile=$this->request->query('mobile');
+		$lastlogin=$this->request->query('lastlogin');
 		$this->set('first_name', $first_name);
 		$this->set('last_name', $last_name);
 		$this->set('email', $email);
@@ -400,10 +414,16 @@ class UsersController extends AppController {
 		$this->set('state_id', $state_id);
 		$this->set('statusWise', $statusWise);
 		$this->set('blocked', $blocked);
+		$this->set('mobile', $mobile);
+		$this->set('lastlogin', $lastlogin);
 		$condition=array();
 		if(!empty($first_name))
 		{
 			$condition['Users.first_name LIKE']=$first_name."%";
+		}
+		if(!empty($lastlogin))
+		{
+			$condition['Users.last_login < ']=$lastlogin;
 		}
 		if(!empty($last_name))
 		{
@@ -420,6 +440,11 @@ class UsersController extends AppController {
 		if(!empty($city_id))
 		{
 			$condition['Users.city_id']=$city_id;
+		}
+		
+		if(!empty($mobile))
+		{
+			$condition['Users.mobile_number']=$mobile;
 		}
 		if(!empty($statusWise))
 		{
@@ -595,7 +620,7 @@ if ($this->request->is('post')) {
  			if ($res = $this->Users->save($user)) {
 				
 				$mobile_no=$d['mobile_number'];
-				$sms_sender='B2BHUB';
+				$sms_sender='TRAHUB';
 				$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
 				file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
 								
@@ -4299,7 +4324,7 @@ public function forgotPassword() {
 					->where(['id' => $user_id])
 					->execute();
 					
-			$sms_sender='B2BHUB';
+			$sms_sender='TRAHUB';
 			$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
 			file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
 			 
@@ -4337,7 +4362,7 @@ public function otpResend($dummy_user_id) {
 				->where(['id' => $user_id])
 				->execute();
 			
-		$sms_sender='B2BHUB';
+		$sms_sender='TRAHUB';
 		$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
 		file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
 	}

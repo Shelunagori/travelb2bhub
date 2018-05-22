@@ -187,6 +187,8 @@ hr { margin-top:0px!important;}
 						$selectedPreferenceStates = explode(",", $users['preference']);
 					}	
 					echo $this->Form->control('preference', ["value"=>$selectedPreferenceStates, "id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control select2", "data-placeholder"=>"Select Some States", "style"=>"height:125px;"]); ?>
+					<label style="display:none" id="preference-error" for="preference" class="helpblock error" > This field is required.</label>
+					
                 </div>
 				<?php } ?>
                  </div>
@@ -411,7 +413,13 @@ hr { margin-top:0px!important;}
    
 <script>
 
-$(document).ready(function(){	 
+$(document).ready(function(){	
+ 	 
+		 
+	$("#preference").select2({
+	  maximumSelectionLength: 5,width: '100%'
+	});
+ 
 
 	$(document).on('blur',".city_select",function(){
 		var master=$(this);
@@ -596,7 +604,11 @@ $(document).ready(function(){
 			},*/
 			"hotel_categories": {
 				required: hotel_category_flag
-			}
+			},
+			"preference[]": {
+				required: true,
+				maxlenght:5,
+			},
 		},
 		messages: {
 			/*"profile_pic" : {

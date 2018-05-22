@@ -27,6 +27,7 @@
 	<?php echo $this->Html->css('/assets/loader-1.css'); ?>
 	<?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Raleway'); ?>
  	<?php echo $this->Html->css('//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'); ?>
+	
 	 
 <link rel="stylesheet" href="">
  
@@ -594,7 +595,9 @@ fieldset
 <?php echo $this->Html->script('/assets/plugins/fastclick/fastclick.js'); ?>
 <?php echo $this->Html->script('/assets/dist/js/app.js'); ?>
 <?php echo $this->Html->script('/assets/dist/js/demo.js'); ?> 
-<?php echo $this->Html->script('/assets/plugins/WYSIWYG/editor.js'); ?>
+<?php echo $this->Html->script('/assets/plugins/WYSIWYG/editor.js'); ?> 
+<?php echo $this->Html->script('/assets/highcharts.js'); ?> 
+<?php echo $this->Html->script('/assets/exporting.js'); ?> 
 <script>
 	$('.select2').select2();
 	var date = new Date();
@@ -608,6 +611,10 @@ fieldset
 		minDate:0,
 		startDate: date,
 		autoclose:true
+	})
+	$('.monthpicker').datepicker({
+ 		autoclose:true,
+		format: 'mm-yyyy'
 	});
 	$('.datepickers').datepicker({autoclose:true});
 	//--

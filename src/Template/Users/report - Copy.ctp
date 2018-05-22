@@ -107,53 +107,56 @@
 			<div class="col-md-12" align="right">
 				<a style="margin:2px" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'excelDownload?first_name='.$first_name.'&last_name='.$last_name.'&email='.$email.'&role_id='.$role_id.'&city_id='.$city_id.'&state_id='.$state_id.'&statusWise='.$statusWise.'&blocked='.$blocked.'&mobile='.$mobile.'&lastlogin='.$lastlogin.'')) ?>" title="Download Excel" class="btn btn-info btn-xs"  ><i class="fa fa-download"></i> Excel</i> </a>
 			</div>
-		<div style="overflow:scroll; width:1075px; height:420px; ">	 
-		<table border="1" class="table table-bordered" cellpadding="0" cellspacing="0" id="main_tble">
-		<thead>
-			<tr>
-				<th  width="50px"><?= ('Action') ?></th> 
-				<th><?= ('S. No.') ?></th> 
-				<th><?= ('Name') ?></th>
-				<th><?= ('email') ?></th>
-				<th><?= ('Mobile') ?></th>
-				<th><?= ('Company Name') ?></th>
-				<th><?= ('Category') ?></th> 
-				<th><?= ('Address') ?></th> 
-				<th><?= ('Locality') ?></th> 
-				<th><?= ('City') ?></th> 
-				<th><?= ('Pincode') ?></th> 
-				<th><?= ('State') ?></th> 
-				<th><?= ('Country') ?></th> 
-				<th><?= ('State of Operation') ?></th> 
-				<th><?= ('Created On') ?></th> 
-				<th><?= ('Last Login') ?></th> 				
-			</tr>
-		</thead>
-		<tbody>
-			<?php $x=0; foreach ($users as $user): $x++;
-			$role_id=$user->role_id;
-			$blocked=$user->blocked;
-			if($role_id==1){ $roleShow="Travel Agent";}
-			if($role_id==2){ $roleShow="Event Planner";}
-			if($role_id==3){ $roleShow="Hotelier";}
-			$rowcolor='';
-			if($blocked==1){ $rowcolor="#f5d8d8";}
-			$selectedPreferenceStates = "";
-			$state_name=array();
-			if(!empty($user['preference'])) 
-			{
-				$selectedPreferenceStates = explode(",", $user['preference']);
-				
-				foreach($selectedPreferenceStates as $operated)
-				{
-					$state_name[]=$allStates[$operated];
-				}
-			}
-			$stateofoperation='';
-			if(!empty($state_name)){$stateofoperation=implode(', ',$state_name);}
-			?>
-			<tr style="background-color:<?php echo $rowcolor; ?>">
-				<td class="actions">
+			 
+					<table class="table table-bordered" cellpadding="0" cellspacing="0" id="main_tble">
+						<thead>
+							<tr>
+								<th><?= $this->Paginator->sort('id') ?></th> 
+								<th><?= ('Name') ?></th>
+								<th><?= $this->Paginator->sort('email') ?></th>
+								<th><?= ('Mobile') ?></th>
+								<th><?= ('Company Name') ?></th>
+								<th><?= ('Category') ?></th> 
+								<th><?= ('City') ?></th> 
+								<th><?= ('State') ?></th> 
+								<th><?= ('State of Operation') ?></th> 
+								<th width="12%" class="actions"><?= __('Actions') ?></th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php $x=0; foreach ($users as $user): $x++;
+							$role_id=$user->role_id;
+							$blocked=$user->blocked;
+							if($role_id==1){ $roleShow="Travel Agent";}
+							if($role_id==2){ $roleShow="Event Planner";}
+							if($role_id==3){ $roleShow="Hotelier";}
+							$rowcolor='';
+							if($blocked==1){ $rowcolor="#f5d8d8";}
+							$selectedPreferenceStates = "";
+							$state_name=array();
+							if(!empty($user['preference'])) 
+							{
+								$selectedPreferenceStates = explode(",", $user['preference']);
+								
+								foreach($selectedPreferenceStates as $operated)
+								{
+									$state_name[]=$allStates[$operated];
+								}
+							}
+							$stateofoperation='';
+							if(!empty($state_name)){$stateofoperation=implode(', ',$state_name);}
+							?>
+							<tr style="background-color:<?php echo $rowcolor; ?>">
+								<td><?= $x; ?></td> 
+								<td><?= h($user->first_name.' '.$user->last_name) ?></td>
+								<td><?= h($user->email) ?></td>
+								<td><?= h($user->mobile_number) ?></td> 
+								<td><?= h($user->company_name) ?></td> 
+								<td><?php echo $roleShow; ?></td> 
+								<td><?= h($user->city->name) ?></td> 
+								<td><?= h($user->state->state_name) ?></td> 
+								<td><?= h($stateofoperation) ?></td> 
+								<td class="actions">
 									 
 
 						<a style="margin-top:2px" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'adminviewprofile/'.$user->id)) ?>" title="View Details" class="btn btn-success btn-xs"  ><i class="fa fa-book"></i></i> </a>
@@ -224,28 +227,11 @@
 						
 						<?php  $this->Form->PostLink('<i class="fa fa-trash"></i>','/Users/delete/'.$user->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','title'=>'Delete','confirm' => __('Are you sure you want to delete # {0}?', $user->id)));?>
 								</td>
-				<td><?= $x; ?></td> 
-				<td><?= h($user->first_name.' '.$user->last_name) ?></td>
-				<td><?= h($user->email) ?></td>
-				<td><?= h($user->mobile_number) ?></td> 
-				<td><?= h($user->company_name) ?></td> 
-				<td><?php echo $roleShow; ?></td>
-				<td><?php echo $user->address; ?></td>
-				<td><?php echo $user->locality; ?></td>
-				<td><?= h($user->city->name) ?></td> 
-				<td><?= h($user->pincode) ?></td> 
-				<td><?= h($user->state->state_name) ?></td> 
-				<td><?= h($user->country->country_name) ?></td> 
-				<td><?= h($stateofoperation) ?></td> 
-				<td><?= h(date('d-m-Y',strtotime($user->create_at))) ?></td> 
-				<td><?= h(date('d-m-Y',strtotime($user->last_login))) ?></td> 
-				
 								 
 							</tr>
 							<?php endforeach; ?>
 						</tbody>
 					</table>
-					</div>
 					<div class="paginator">
 						<ul class="pagination">
 							<?= $this->Paginator->prev('< ' . __('previous')) ?>

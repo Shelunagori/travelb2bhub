@@ -461,9 +461,12 @@ class TaxiFleetPromotionsController extends AppController
 				{ 	
 					$message = 'Invalid image extension';
 					$this->Flash->error(__($message)); 
-					 
 				}				
 			} 
+			else
+			{
+			    unset($taxiFleetPromotion->image);
+			}
 			$submitted_from = @$this->request->data('submitted_from');
 			if(@$submitted_from=='web')
 			{
@@ -507,7 +510,7 @@ class TaxiFleetPromotionsController extends AppController
 				$taxiFleetPromotion->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
 			}
 			$taxiFleetPromotion->price=$this->request->data('payment_amount');
-			
+		 
 			 
 			if ($this->TaxiFleetPromotions->save($taxiFleetPromotion)) {
 				$message = 'The Taxi/Fleet promotions has been saved';
@@ -1116,12 +1119,12 @@ class TaxiFleetPromotionsController extends AppController
 		//pr($options);
 		
 		echo "
-			<select name='city_id[]' size='3' class=' form-control requiredfield city_id' multiple='multiple' tabindex='1'>";
+			<select name='city_id[]' size='3' class=' form-control requiredfield city_id' required multiple='multiple' tabindex='1'>";
 			foreach($CityList as $cty)
 			{
 				echo "<option value='".$cty->id."' > ".$cty->name."</option>";
 			}
-			echo "</select><label style='display:none' class='helpblock error' > This field is required.</label>";
+			echo "</select><label style='display:none' id='city_id[]-error' for='city_id[]' class='helpblock error' > This field is required.</label>";
 		exit;
 		
 	}
@@ -1138,7 +1141,7 @@ class TaxiFleetPromotionsController extends AppController
 		//pr($options);
 		
 		echo "
-			<select name='city_id[]' size='3' class=' form-control requiredfield city_id' multiple='multiple' tabindex='1'>";
+			<select name='city_id[]' size='3' class=' form-control requiredfield city_id' required  multiple='multiple' tabindex='1'>";
 			foreach($CityList as $cty)
 			{
 				if(in_array($cty->id, $Cty_idArray)){
@@ -1148,7 +1151,7 @@ class TaxiFleetPromotionsController extends AppController
 					echo "<option value='".$cty->id."' > ".$cty->name."</option>";
 				}
 			}
-			echo "</select><label style='display:none' class='helpblock error' > This field is required.</label>";
+			echo "</select><label style='display:none' id='city_id[]-error' for='city_id[]' class='helpblock error' > This field is required.</label>";
 		exit;
 		
 	}

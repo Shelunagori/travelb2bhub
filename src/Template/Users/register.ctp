@@ -116,7 +116,7 @@ input[type=checkbox] {
 		.bgdiv { background-image: url('../webroot/assets/login/login_background.jpg'); }
 		.p-b-34 { padding-bottom: 10px !important; }
 		.login100-form-title { font-size:14px; }
-		.wrap-login100 { background:#1f222db8 !important; width:420px !important; padding: 18px 55px 37px 55px; }
+		.wrap-login100 { background-color:#1f222db8 !important; width:420px !important; padding: 18px 55px 37px 55px; }
 		.p-t-27 { padding-top: 10px; }
 		.error { color: #ff9898; text-align:center; }
 		.wrap-input100 {
@@ -395,28 +395,16 @@ $(document).ready(function(){
 		});
 	});
 	
-	 $("#chk_cond").hide();
-	$(document).on('click',"#ckb1",function(){
-		var va = +$('.chk_input').is( ':checked' );
-		if(va==0)
-		{
-			$("#chk_cond").show();
-		}
-		else
-		{
-			$("#chk_cond").hide();
-		}
-	});
-  
+	 
 	$(document).on('change',"#role_id",function(){
  		var roleid = jQuery( "#role_id option:selected" ).val();
  		if(roleid != "" && roleid == 3) {
- 
 			$('.lablename').removeAttr('data-placeholder');
 			$('.lablename').attr('data-placeholder','Hotel Name');
 			
 			$('.taxtboxname').removeAttr('name');
 			$('.taxtboxname').attr('name','company_name');
+			
  		}
 		else
 		{
@@ -428,16 +416,19 @@ $(document).ready(function(){
  		}
 		if(roleid != "" && roleid == 1) {
 			$('#preferenceStateDiv').show();
+			$('#preference').attr('required','required');
 			var needPreferenceState = true;
 		} else {
 			$('#preferenceStateDiv').hide();
+			$('#preference').removeAttr('required','required');
 			var needPreferenceState = false;
 		}
 		var settings = $('#UserRegisterForm').validate().settings;
 		$.extend(true, settings, {
 			rules: {
 				"preference[]": {
-					needsSelection: needPreferenceState
+					required: true,
+					needsSelection: needPreferenceState,
 				}
 			},
 			messages: {
@@ -698,6 +689,7 @@ $(function () {
 		$.extend(true, settings, {
 			rules: {
 				"preference[]": {
+					required: true,
 					needsSelection: needPreferenceState
 				}
 			},
@@ -748,7 +740,7 @@ $(this).find(':input[type=submit]').prop('disabled', true);
 });
 $(document).ready(function($){
 
-	//$(".chosen-select").chosen({ max_selected_options: 5 });
+	 
 	
 	$("#preferenceStateDiv").hide();
 	<?php if(isset($_GET['role']) && $_GET['role']=="1"){ ?>
@@ -758,10 +750,7 @@ $(document).ready(function($){
 	<?php if(isset($_GET['role']) && $_GET['role']=="3"){ ?>
 	$('.hotelname').html('Hotel Name');
 	<?php } ?>
-	$(".chosen-select").select2({
-		  maximumSelectionLength: 5,width: '100%'
-		 
-		 });
+	
 	/*var last_valid_selection = null;
 	$( "#preference" ).change(function(event) {
   	var total_preference = $("#preference :selected").length;
@@ -774,7 +763,11 @@ $(document).ready(function($){
   	last_valid_selection = $(this).val();
   	}
 	});*/
-	
+	$(".chosen-select").chosen({ max_selected_options: 5 });
+	$(".chosen-select").select2({
+		  maximumSelectionLength: 5,width: '100%'
+		 
+	});
 	$(".select2-search__field").css("width", "280");
 	
 });

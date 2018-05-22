@@ -1164,6 +1164,7 @@ class HotelPromotionsController extends AppController
 			$title = $ids.'hotel_'.rand();
 			$image = $this->request->data('hotel_pic');
 			$tmp_name = $this->request->data['hotel_pic']['tmp_name'];
+		    $hotelPromotion = $this->HotelPromotions->patchEntity($hotelPromotion, $this->request->data);
 			if(!empty($tmp_name))
 			{	
 				$dir = new Folder(WWW_ROOT . 'img/hotels/', true, 0755);
@@ -1189,6 +1190,7 @@ class HotelPromotionsController extends AppController
 								$percentageTOReduse=10;
 							}
 						} 
+					
 						/* Resize Image */
 						$destination_url = WWW_ROOT . '/img/hotels/'.$title.'.'.$ext;
 						if($ext=='png'){
@@ -1197,6 +1199,8 @@ class HotelPromotionsController extends AppController
 							$image = imagecreatefromjpeg($image['tmp_name']); 
 						}
 						imagejpeg($image, $destination_url, $percentageTOReduse);
+							 
+						
 						$hotelPromotion->hotel_pic='img/hotels/'.$title.'.'.$ext;
 						if(file_exists(WWW_ROOT . '/img/hotels/'.$title.'.'.$ext)>0) {
 						}
@@ -1223,8 +1227,7 @@ class HotelPromotionsController extends AppController
 			{
 				$hotelPromotion->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
 			}
-			$hotelPromotion = $this->HotelPromotions->patchEntity($hotelPromotion, $this->request->data);
-			///pr($hotelPromotion); exit;			
+ 			 		
 			if ($this->HotelPromotions->save($hotelPromotion)) {
 				$message = 'The hotel promotions has been saved';
 				$this->Flash->success(__($message)); 

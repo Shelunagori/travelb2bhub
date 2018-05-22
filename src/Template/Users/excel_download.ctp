@@ -6,7 +6,7 @@ header("Content-Type: application/force-download");
 header("Cache-Control: post-check=0, pre-check=0", true);
 
 ?> 
-	<table border="1">
+	<table border="1" >
 		<thead>
 			<tr>
 				<th><?= ('S. No.') ?></th> 

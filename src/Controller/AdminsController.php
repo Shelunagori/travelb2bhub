@@ -355,4 +355,75 @@ class AdminsController extends AppController
 		}
 	}	
 	
+	public function statistics($month_from=null,$month_to=null)
+    {
+		$this->viewBuilder()->layout('admin_layout');
+		$month_from=$this->request->query('month_from');
+		$month_to=$this->request->query('month_to'); 
+		if(!empty($month_from) && !empty($month_to)){
+			$month_from='01-'.$month_from;
+			$month_to='01-'.$month_to;
+			$start = strtotime($month_from);
+			$end = strtotime($month_to);
+			while($start < $end)
+			{
+				//date('F Y', $start), PHP_EOL;
+				$MH = date('m', $start);
+				$YR = date('Y', $start);
+				$month_from='01-'.$MH.'-'.$YR; 
+				$first_date=date('Y-m-d',strtotime($month_from));
+				$last_date=date('Y-m-t',strtotime($month_from));
+				$Month_name=date('M',strtotime($first_date));  
+				
+				$TA=$this->Users->find()->where(['Users.role_id'=>1,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$TravelAgentCount[]=$TA;
+				
+				$EP=$this->Users->find()->where(['Users.role_id'=>2,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$EventPlannerCount[]=$EP;
+				
+				$H=$this->Users->find()->where(['Users.role_id'=>3,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$HotelierCount[]=$H;
+				
+				$MonthName[]=$Month_name;
+				
+				$TotalRegistration[]=$TA+$EP+$H;
+ 				 
+				$start = strtotime("+1 month", $start);
+			}
+ 		}
+		else
+		{
+			for($x=1;$x<=12;$x++)
+			{
+				$month=$x;
+				$current_year=date('Y');
+				$first_date='01-'.$month.'-'.$current_year;
+				$first_date=date('Y-m-d',strtotime($first_date));
+				$last_date=date('Y-m-t',strtotime($first_date));
+				$Month_name=date('M',strtotime($first_date));
+				//-- COUNTRING
+				
+				$TA=$this->Users->find()->where(['Users.role_id'=>1,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$TravelAgentCount[]=$TA;
+				
+				$EP=$this->Users->find()->where(['Users.role_id'=>2,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$EventPlannerCount[]=$EP;
+				
+				$H=$this->Users->find()->where(['Users.role_id'=>3,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$HotelierCount[]=$H;
+				
+				$MonthName[]=$Month_name;
+				
+				$TotalRegistration[]=$TA+$EP+$H;
+			}
+		}
+		$TotalRegistration=implode(',', $TotalRegistration);
+		$TravelAgentCount=implode(',', $TravelAgentCount);
+		$EventPlannerCount=implode(',', $EventPlannerCount);
+		$HotelierCount=implode(',', $HotelierCount); 
+		$MonthName=implode("','", $MonthName); 
+		$MonthName="'".$MonthName."'";
+		$this->set(compact('TravelAgentCount','EventPlannerCount','HotelierCount','TotalRegistration','MonthName'));
+    }
+	
 }

@@ -240,8 +240,9 @@ class RequestsController extends AppController
 		else {
 			$requests = $this->paginate($this->Requests);
 		}
+		$this->set("hotelCategories", $this->_getHotelCategoriesArray());
  		$CategoriesList = $this->Requests->Categories->find('list', ['limit' => 200]);
-         $this->set(compact('requests','CategoriesList'));
+        $this->set(compact('requests','CategoriesList'));
         $this->set('_serialize', ['requests','CategoriesList']);
 	
 	}

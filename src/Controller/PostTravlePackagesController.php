@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Filesystem\Folder;
+use Cake\Filesystem\File;
 
 /**
  * PostTravlePackages Controller
@@ -504,6 +506,10 @@ class PostTravlePackagesController extends AppController
 				
 				}				
 			}
+			else
+			{
+			    unset($postTravlePackage->image);
+			}
 			if(!empty($this->request->data('visible_date')))
 			{
 				$postTravlePackage->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
@@ -512,7 +518,7 @@ class PostTravlePackagesController extends AppController
 			{
 				$postTravlePackage->valid_date = date('Y-m-d',strtotime($this->request->data('valid_date')));
 			}
-			
+			$postTravlePackage->price=$this->request->data('payment_amount');
 			$submitted_from = @$this->request->data('submitted_from'); 
             
 			if(@$submitted_from=='web')

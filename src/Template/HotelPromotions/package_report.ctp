@@ -427,7 +427,7 @@ a{
 									
 									<button  style="margin-top:5px;" type="button" class="btn btn-success btn-md btnlayout" data-target="#renew<?php echo $hotelPromotion->id; ?>" data-toggle=modal>Renew</button>&nbsp;&nbsp;
 									
-									<a style="margin-top:5px" href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>'adminedit/'.$hotelPromotion->id]); ?>" class="btn btn-danger btn-md btnlayout" >Edit Promotion</a>&nbsp;&nbsp;
+									<a style="margin-top:5px" href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>'adminedit/'.$hotelPromotion->id]); ?>" class="btn btn-danger btn-md btnlayout" >Edit</a>&nbsp;&nbsp;
  								</div>
 
 									

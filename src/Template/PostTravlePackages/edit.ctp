@@ -203,7 +203,7 @@ fieldset{
 					$countryListsARYY=implode(',',array_unique($countryLists));
 					$cityLists=array_unique($cityList);
 					$cityListsAry=implode(',',array_unique($cityList));
-					//$val_date=date('d-m-Y',strtotime($postTravlePackage->valid_date));
+					$val_date=date('d-m-Y',strtotime($postTravlePackage->valid_date));
 
 					?>
 
@@ -307,7 +307,7 @@ fieldset{
 																	<span class="required">*</span>
 																</p>
 																<div class="input-field">
-																	<?php echo $this->Form->input('valid_date',['class'=>'form-control date-picker date','label'=>false,'data-date-format'=>'dd-mm-yyyy','placeholder'=>'Select Date','type'=>'text','required']);?>
+																	<?php echo $this->Form->input('valid_date',['class'=>'form-control date-picker','label'=>false,'data-date-format'=>'dd-mm-yyyy','placeholder'=>'Select Date','type'=>'text','required','value'=>$val_date]);?>
 																	<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 															</div>
@@ -423,7 +423,7 @@ fieldset{
 														</p>
 														<div class="input-field">
 														<?php echo $this->Form->input('payment_amount', ['class'=>'form-control payment_amount','label'=>false,"placeholder"=>"Payment Amount",'readonly'=>'readonly','type'=>'text','value'=>$postTravlePackage->price]);?> 
-														<input type="hidden" class="visible_date" name="visible_date">
+														<input type="hidden" class="visible_date" name="visible_date" value="<?php echo date('d-m-Y',strtotime($postTravlePackage->visible_date)); ?>">
 														</div>
 													</div>
 												</div>

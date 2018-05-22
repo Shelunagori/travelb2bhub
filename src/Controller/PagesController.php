@@ -4,7 +4,7 @@ namespace App\Controller;
 use Cake\Core\Configure;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
-use Cake\Event\Event;
+use Cake\Event\Event; 
 use Cake\ORM\TableRegistry;
 use Cake\Datasource\ConnectionManager;
 use Cake\Network\Email\Email;
@@ -16,7 +16,7 @@ class PagesController extends AppController
 		$this->loadModel('Users');
 		$this->loadModel('Contacts');
 		parent::beforeFilter($event);
-		$this->Auth->allow(['sendpushnotification']);
+		$this->Auth->allow();
 	}
     /**
      * Displays a view
@@ -1089,7 +1089,7 @@ class PagesController extends AppController
 				$da["Requests.check_in >="] =  $sdate;
 				$conditions["OR"] =  $da;
 			}
-			else{
+			/*else{
 				$current_date=date('Y-m-d'); 
 				$da=array("Requests.start_date >=" =>  $current_date,'category_id !='=> 3);
 				$da1=array("Requests.check_in >=" =>  $current_date,'category_id'=> 3); 
@@ -1099,7 +1099,7 @@ class PagesController extends AppController
 						array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
 					)
 				);
-			}
+			}*/
 		
 			if(isset($_POST["enddatesearch"])) {
 				$edate = $_POST["enddatesearch"];
@@ -3476,12 +3476,12 @@ $current_date = date("Y-m-d");
 			)
 		);
 		//,'Requests.total_response >' =>0
-		$conditionsss[]= array (
+		/*$conditionsss[]= array (
 			'OR' => array(
 				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
 				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
 			)
-		);
+		);*/
 		
 		$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>0,"Requests.status "=>2]]);
 		$myfinalCount = $query3 ->count();

@@ -116,6 +116,7 @@ fieldset{
 				$stateList=array_unique($stateList);
 				$cityList=array_unique($cityList);
 				$cityListsAry=implode(',',array_unique($cityList));
+				$stateListAry=implode(',',array_unique($stateList));
 				?>
 				
 				<form method="post" enctype="multipart/form-data">	
@@ -280,8 +281,8 @@ fieldset{
 <script>
 $(document).ready(function ()
 {
-	<?php foreach($stateList as $stateIID){?>
-	var state_id=<?php echo $stateIID;?>;
+ 
+	var state_id='<?php echo $stateListAry;?>';
 	var Cty_id='<?php echo $cityListsAry;?>';
 	
 	var m_data = new FormData();
@@ -308,9 +309,7 @@ $(document).ready(function ()
 			cur_obj.closest('form').find('.city_id').select2();
 		}
 	});
-	
-<?php }?>
-});
+ });
 </script>
 <script>
 $(document).ready(function (){

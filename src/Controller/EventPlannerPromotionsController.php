@@ -475,7 +475,7 @@ class EventPlannerPromotionsController extends AppController
             
 			$eventPlannerPromotion = $this->EventPlannerPromotions->patchEntity($eventPlannerPromotion, $this->request->data);
 			$ids = $eventPlannerPromotion->user_id;
-			$title = $eventPlannerPromotion->title;
+		    $title = 'Event_'.rand();
 			$image = $this->request->data('image');
 			$tmp_name = $this->request->data['image']['tmp_name'];
 			if(!empty($tmp_name))
@@ -570,7 +570,7 @@ class EventPlannerPromotionsController extends AppController
 				$eventPlannerPromotion->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
 			}
 			$eventPlannerPromotion->price=$this->request->data('payment_amount');
-			//pr($eventPlannerPromotion); exit;
+			 
 			 if ($this->EventPlannerPromotions->save($eventPlannerPromotion)) {
 				$message = 'The EventPlanner promotions has been saved';
 				$this->Flash->success(__($message)); 
@@ -1198,7 +1198,7 @@ class EventPlannerPromotionsController extends AppController
 		$data = explode(",", $state_id);
 		$CityList = $this->Cities->find()->where(['Cities.state_id IN' =>$data]);
 		$options=array();
-		echo "
+	echo "
 			<select name='city_id[]' size='3' class=' form-control  city_id' multiple='multiple' tabindex='1' required >";
 			foreach($CityList as $cty)
 			{

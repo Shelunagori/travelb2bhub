@@ -143,6 +143,8 @@ fieldset{
 	border-radius: 6px;
 } 
 </style> 
+<div class="row">
+</div>
 <div class="container-fluid">
 	<div class="box box-primary">
 	<?= $this->Form->create($taxiFleetPromotion,['type'=>'file','id'=>'TaxtEDIT']) ?>
@@ -174,6 +176,8 @@ fieldset{
 				$stateLists=array_unique($stateList);
 				$cityLists=array_unique($cityList);
 				$cityListsAry=implode(',',array_unique($cityList));
+				$stateListsAry=implode(',',array_unique($stateList));
+			 
 				$i++; 
 			?>
 					<div class="col-md-12"> 
@@ -256,8 +260,8 @@ fieldset{
 												$options[] = ['value'=>$st->id,'text'=>$st->state_name];
 											}
 										};
-										echo $this->Form->control('state_id', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield state_list","data-placeholder"=>"Select Options","style"=>"height:125px;"]);?>
-										<label style="display:none" class="helpblock error" > This field is required.</label>
+										echo $this->Form->control('state_id', ['label'=>false,"id"=>"multi_states", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield state_list","data-placeholder"=>"Select Options","style"=>"height:125px;" ,'required']);?>
+										<label style="display:none" id="multi_states-error" for="multi_states" class="helpblock error" > This field is required.</label>
 										
 									</div>
 								</div>
@@ -314,8 +318,8 @@ fieldset{
 													$options[] = ['value'=>$Buses->id,'text'=>$Buses->name];
 												}
 											};
-											echo $this->Form->control('vehicle_type', ['label'=>false,"id"=>"multi_vehicle", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
-											<label style="display:none" class="helpblock error" > This field is required.</label>
+											echo $this->Form->control('vehicle_type', ['label'=>false,"id"=>"multi_vehicle", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2 requiredfield","data-placeholder"=>"Select Options ","style"=>"height:125px;",'required']);?>
+											<label id="multi_vehicle-error" for="multi_vehicle" style="display:none" class="helpblock error" > This field is required.</label>
 										</div>
 									</div>
 								</div>  
@@ -327,7 +331,7 @@ fieldset{
 											Fleet Description
 										</p>
 										<div class="input-field">
-											<?php echo $this->Form->input('fleet_detail',['class'=>'form-control requiredfield','label'=>false]);?>
+											<?php echo $this->Form->input('fleet_detail',['class'=>'form-control requiredfield','label'=>false,'required']);?>
 											<label style="display:none" class="helpblock error" > This field is required.</label>
 										</div>
 									</div>
@@ -350,9 +354,9 @@ fieldset{
 														 
 															$options[] = ['value'=>$Price->id,'text'=>$Price->week,'priceVal'=>$Price->week,'price'=>$Price->price];
 														};
-														echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters requiredfield select2','label'=>false,'empty'=>'Select ...']);?>
+														echo $this->Form->input('price_master_id',['options'=>$options,'class'=>'form-control priceMasters requiredfield select2','label'=>false,'empty'=>'Select ...','required']);?>
 														<?php // echo $this->Form->input('duration', ['options' => $priceMasters,'class'=>'form-control','label'=>false]); ?>
-														<label style="display:none" class="helpblock error" > This field is required.</label>
+														<label id="price-master-id-error" for="price-master-id" style="display:none" class="helpblock error" > This field is required.</label>
 													</div>
 												</div>
 												<div class="col-md-6 form-group">
@@ -387,7 +391,7 @@ fieldset{
 				  <?= $this->Form->end() ?>
 			</div>
 			
-			<div id="selectbox" style="display:none;"> </div>
+			<div id="selectbox" style="display:none;">  </div>
 		</div>
 	</div>
 <div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
@@ -398,8 +402,7 @@ fieldset{
 <script>
 $(document).ready(function ()
 {
-	<?php foreach($stateLists as $stateIID){?>
-	var state_id=<?php echo $stateIID;?>;
+	var state_id='<?php echo $stateListsAry;?>';
 	var Cty_id='<?php echo $cityListsAry;?>';
 	//alert(Cty_id);
 	var m_data = new FormData();
@@ -415,26 +418,19 @@ $(document).ready(function ()
 		dataType:'text',
 		success: function(data)
 		{
-			if($("input[name='package_type']:checked").val()==1){
-				$(".replacedata").html(data);
-				$('#selectbox').html(data);
-			}
-			else{
-				$('#selectbox').html(data);
-			}
-			$('.city_id').select2();
-			cur_obj.closest('form').find('.city_id').select2();
+			 
+			$(".replacedata").html(data);
+			$('#selectbox').html(data);
+ 			$('.city_id').select2();
 		}
 	});
-	
-<?php }?>
+
 });
 </script>
 <script>
 	 
     $(document).ready(function ()
 	{
-
 		$(document).on('change','.priceMasters',function()
 		{
 			var blank=$(this).val();
@@ -463,21 +459,21 @@ $(document).ready(function ()
 			}
 		});
 		$("#newlist").show();
-		<?php if(!empty($cityLists)){ ?>
- 			$(".replacedata").html(selectbox);
-			$('.city_id').select2();
-		<?php } ?>
-		<?php if(empty($cityLists)){?>
+		 
+		<?php if(empty($cityLists)){ ?>
+	 
 		$(".replacedata").html('<?php $options=array();
 				$options[] = ['value'=>'0','text'=>'All Cities','selected'];
-				echo $this->Form->input('city_id',["class"=>"form-control city_id requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
+				echo $this->Form->input('city_id',["class"=>"form-control city_id requiredfield",'required',"multiple"=>true ,'options' => $options,'label'=>false]);
 				?><label style="display:none" class="helpblock error" > This field is required.</label>');
+				$('.city_id').select2();
 		<?php } ?>
-		$('.city_id').select2();
+ 
 		$(document).on('change','.city_type',function()
 		{
 			var city_type=$(this).val();
 			var selectbox=$('#selectbox').html();
+			 
 			if(city_type==1){
 				$("#newlist").show();
 				$(".replacedata").html(selectbox);
@@ -486,10 +482,10 @@ $(document).ready(function ()
 				$("#newlist").show();
 				$(".replacedata").html('<?php $options=array();
 				$options[] = ['value'=>'0','text'=>'All Cities','selected'];
-				echo $this->Form->input('city_id',["class"=>"form-control city_id requiredfield","multiple"=>true ,'options' => $options,'label'=>false]);
+				echo $this->Form->input('city_id',["class"=>"form-control city_id requiredfield",'required',"multiple"=>true ,'options' => $options,'label'=>false]);
 				?><label style="display:none" class="helpblock error" > This field is required.</label>');
+				$('.city_id').select2();
 			}
-			$(this).closest('form').find('.city_id').select2();
 		});
 		$(document).on('change','.state_list',function()
 		{

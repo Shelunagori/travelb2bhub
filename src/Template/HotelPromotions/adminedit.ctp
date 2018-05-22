@@ -203,7 +203,7 @@ label{
 														$options[] = ['value'=>$cat->id,'text'=>$cat->name];
 													};
 													
-													echo $this->Form->input('hotel_category_id',['class'=>'form-control select2 ','options' => $options,'label'=>false,"empty"=>"Select Hotel Category"]);?>
+													echo $this->Form->input('hotel_category_id',['class'=>'form-control select2 ','options' => $options,'label'=>false,"empty"=>"Select Hotel Category",'required']);?>
 											</div>
 										</div>
 										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
@@ -277,7 +277,7 @@ label{
 															$options[] = ['value'=>$duration->id,'text'=>$duration->week,'priceVal'=>$duration->week,'price'=>$duration->price];
 														};
 												 echo $this->Form->input('price_master_id',['class'=>'form-control  requiredfield duration select2 ','options' => $options,'label'=>false,'empty'=>'Select Options','required']);?>
-												 <label style="display:none" class="helpblock error" > This field is required.</label>
+												 <label id="price-master-id-error" for="price-master-id" style="display:none" class="helpblock error" > This field is required.</label>
 											</div>
 										</div>
 										<div class="col-md-6 form-group">

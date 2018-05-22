@@ -410,7 +410,9 @@ hr { margin-top:0px!important;}
 <script>
 
 $(document).ready(function(){	 
-
+	$("#preference").select2({
+	  maximumSelectionLength: 5,width: '100%'
+	});
 	$(document).on('blur',".city_select",function(){
 		var master=$(this);
 		master.closest('div').find('div.suggesstion-box').delay(2000).fadeOut(1000);
@@ -480,16 +482,7 @@ $(document).ready(function(){
 			},
 			"locality": {
 				required: true
-			},
-			"pincode": {
-				required: true
-			},
-			"description": {
-				required: true
-			},
-			"hotel_rating": {
-				required: true
-			}
+			}, 
 		},
 		messages: {
 			"company_name" : {
@@ -574,49 +567,6 @@ $(document).ready(function(){
 		var travel_certificate_flag = false;
 		var hotel_category_flag = true;
 	}
-	var settings = $('#UserRegisterForm').validate().settings;
-	$.extend(true, settings, {
-		rules: {
-		  /* "profile_pic": {
-			   required: profile_pic_flag
-			},
-			"company_img_1": {
-				required: company_img_1_pic_flag
-			},
-			"pancard": {
-				required: pancard_pic_flag
-			},
-			"id_card": {
-				required: id_card_pic_flag
-			},
-			"company_shop_registration": {
-				required: company_shop_registration_pic_flag
-			},*/
-			"hotel_categories": {
-				required: hotel_category_flag
-			}
-		},
-		messages: {
-			/*"profile_pic" : {
-				required : "Please upload profile pic."
-			},
-			"company_img_1": {
-				required: "Please upload company image 1."
-			},
-			"pancard": {
-				required: "Please upload pancard."
-			},
-			"id_card": {
-				required: "Please upload id card."
-			},
-			"company_shop_registration": {
-				required: "Please upload company shop registration."
-			},*/
-			"hotel_categories": {
-				required: "Please select hotel categories."
-			}
-		}
-	});
  });
 	function selectCountry(value,city_code,state) {
 		var state_id=state;
