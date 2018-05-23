@@ -211,7 +211,18 @@ fieldset{
 										</div>
 										<input type="hidden" name="user_id" value="<?php echo $user_id;?>">
 										<input type="hidden" name="submitted_from" value="web">
-										<div class="col-md-4 form-group">
+										<div class="col-md-1 form-group  pull-right">
+									<?php 
+										if(file_exists($taxiFleetPromotion->image)>0)
+										{
+											echo $this->Html->image('../'.$taxiFleetPromotion->image, ["class"=>"img-responsive",'style'=>"width: 57px; height:53px"]);
+										}
+										else{
+											echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive",'style'=>"width: 57px; height:53px"]);
+										}	 
+									?> 
+									</div>
+										<div class="col-md-3 form-group">
 											<p for="from">
 												Upload Image of Promotion
 												<span class="required">*</span>

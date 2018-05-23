@@ -1,11 +1,11 @@
 <?php
 use Cake\Datasource\ConnectionManager; 
 $conn = ConnectionManager::get('default');
-/* $file_name='Response List';
+  $file_name='Response List';
  header("Content-Type: application/xls");
 header("Content-Disposition: attachment; filename=$file_name.xls");
 header("Content-Type: application/force-download");
-header("Cache-Control: post-check=0, pre-check=0", true);  */
+header("Cache-Control: post-check=0, pre-check=0", true);  
  
 ?> 
 
@@ -14,6 +14,7 @@ header("Cache-Control: post-check=0, pre-check=0", true);  */
 		<tr style="background-color:#DFD9C4;">
 		<th scope="col"><?= __('Sr.No') ?></th>
 		<th scope="col"><?= __('Reference_id') ?></th>
+		<th scope="col"><?= __('User ID') ?></th>
 		<th scope="col"><?= __('Agent Name') ?></th>
 		<th scope="col"><?= __('Locality') ?></th>
 		<th scope="col"><?= __('Total Budget') ?></th>
@@ -28,7 +29,7 @@ header("Cache-Control: post-check=0, pre-check=0", true);  */
 	</tr>
 	</thead>
 	<tbody>
-		<?php pr($requests); exit; $i=1;foreach ($requests as $request):
+		<?php $i=1;foreach ($requests as $request):
 			$status=$request->status;
 			$is_deleted=$request->is_deleted;
 			if($status==2){ $showStatus="Finalized";}
@@ -97,7 +98,7 @@ header("Cache-Control: post-check=0, pre-check=0", true);  */
 					@$hotel_category[]=$hotelCategories[$row1]; 
 					$count++;
 				}
-				echo $hotel_category=implode(', ',$hotel_category);
+				$hotel_category=implode(', ',$hotel_category);
 			}
 			$meal_plan=$request->meal_plan;
 			$destination_city=$request->destination_city;
@@ -121,7 +122,8 @@ header("Cache-Control: post-check=0, pre-check=0", true);  */
 		<tr>
 			<td><?= $i; ?></td>
 			<td><?= h($request->reference_id) ?></td>
-			<td><?= h($request->user->first_name.$request->user->last_name) ?></td>
+			<td><?= h($request->user_id) ?></td>
+			<td><?= h($request->user->first_name.' '.$request->user->last_name) ?></td>
 			<td><?= h($request->locality) ?></td>
 			<td><?= h($request->total_budget) ?></td>
 			<td><?= h($request->category->name) ?></td>

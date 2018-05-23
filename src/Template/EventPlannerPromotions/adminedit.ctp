@@ -134,8 +134,19 @@ fieldset{
 									</div>
 								</div>
 								<input type="hidden" name="user_id" value="<?php echo $eventPlannerPromotion->user->id;?>"> 
-								<input type="hidden" name="id" value="<?php echo $eventPlannerPromotion->id;?>"> 
-								<div class="col-md-6 form-group ">
+								<input type="hidden" name="id" value="<?php echo $eventPlannerPromotion->id;?>">
+								<div class="col-md-1 form-group  pull-right">
+								<?php 
+									if(file_exists($eventPlannerPromotion->image)>0)
+									{
+										echo $this->Html->image('../'.$eventPlannerPromotion->image, ["class"=>"img-responsive",'style'=>"width: 57px; height:53px"]);
+									}
+									else{
+										echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive",'style'=>"width: 57px; height:53px"]);
+									}	 
+								?> 
+								</div>
+								<div class="col-md-5 form-group ">
 									<p for="from">
 										Upload Image of Promotion
 										<span class="required">*</span>

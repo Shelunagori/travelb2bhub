@@ -55,13 +55,14 @@ $conn = ConnectionManager::get('default');
 				</fieldset>
 			</form>
 			<div class="col-md-12" align="right">
-				<a style="margin:2px" href="<?php echo $this->Url->build(array('controller'=>'Requests','action'=>'excelDownload?RefID='.$RefID.'&status='.$status.'&removed='.$removed.'&category='.$category)) ?>" title="Download Excel" class="btn btn-info btn-xs"  ><i class="fa fa-download"></i> Excel</i> </a>
+				<a style="margin:2px" href="<?php echo $this->Url->build(array('controller'=>'Requests','action'=>'excelDownload?Refid='.$RefID.'&status='.$status.'&removed='.$removed.'&category='.$category)) ?>" title="Download Excel" class="btn btn-info btn-xs"  ><i class="fa fa-download"></i> Excel</i> </a>
 			</div>
 				<table class="table table-bordered" cellpadding="0" cellspacing="0" id="main_tble">
 						<thead>
 							<tr style="background-color:#DFD9C4;">
 							<th scope="col"><?= __('Sr.No') ?></th>
 							<th scope="col"><?= __('Reference_id') ?></th>
+							<th scope="col"><?= __('User ID') ?></th>
 							<th scope="col"><?= __('Agent Name') ?></th>
 							<th scope="col"><?= __('Locality') ?></th>
 							<th scope="col"><?= __('Total Budget') ?></th>
@@ -69,7 +70,6 @@ $conn = ConnectionManager::get('default');
 							<th scope="col"><?= __('Created date') ?></th>
 							<th scope="col"><?= __('Start Date') ?></th>
 							<th scope="col"><?= __('End Date') ?></th>
-							
 							<th scope="col"><?= __('Status') ?></th>
 							<th scope="col"><?= __('Removed') ?></th>
 							<th scope="col"><?= __('City') ?></th>
@@ -137,7 +137,8 @@ $conn = ConnectionManager::get('default');
             <tr>
                 <td><?= $i; ?></td>
                 <td><?= h($request->reference_id) ?></td>
-                <td><?= h($request->user->first_name.$request->user->last_name) ?></td>
+                <td><?= h($request->user_id) ?></td>
+                <td><?= h($request->user->first_name.' '.$request->user->last_name) ?></td>
                 <td><?= h($request->locality) ?></td>
                 <td><?= h($request->total_budget) ?></td>
                 <td><?= h($request->category->name) ?></td>

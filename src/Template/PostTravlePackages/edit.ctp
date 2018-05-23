@@ -227,34 +227,45 @@ fieldset{
 														</div>
 													</div>
 													<div class="col-md-4 form-group">
-																<p for="from">
-																	Select Package Category
-																</p>
-																<div class="input-field">
-																<?php 
-																$catList=array();
-																foreach($postTravlePackage->post_travle_package_rows as $postTravlePackagess)
-																{ 
-																	$catList[]=$postTravlePackagess->post_travle_package_category_id;
+															<p for="from">
+																Select Package Category
+															</p>
+															<div class="input-field">
+															<?php 
+															$catList=array();
+															foreach($postTravlePackage->post_travle_package_rows as $postTravlePackagess)
+															{ 
+																$catList[]=$postTravlePackagess->post_travle_package_category_id;
+															}
+																$catLists=array_unique($catList);
+																
+															?>
+															<?php 
+															$options=array();
+															foreach($cat as $sts)
+															{
+																if(in_array($sts->id, $catLists)){
+																	$options[] = ['value'=>$sts->id,'text'=>$sts->name,'selected'=>'selected'];
 																}
-																	$catLists=array_unique($catList);
-																	
-																?>
-																<?php 
-																$options=array();
-																foreach($cat as $sts)
-																{
-																	if(in_array($sts->id, $catLists)){
-																		$options[] = ['value'=>$sts->id,'text'=>$sts->name,'selected'=>'selected'];
-																	}
-																	else{
-																		$options[] = ['value'=>$sts->id,'text'=>$sts->name];
-																	}
-																	};
-																echo $this->Form->control('package_category_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
-																</div>
+																else{
+																	$options[] = ['value'=>$sts->id,'text'=>$sts->name];
+																}
+																};
+															echo $this->Form->control('package_category_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
 															</div>
-														<div class="col-md-4 form-group">
+														</div>
+														<div class="col-md-1 form-group  pull-right">
+														<?php 
+															if(file_exists($postTravlePackage->image)>0)
+															{
+																echo $this->Html->image('../'.$postTravlePackage->image, ["class"=>"img-responsive",'style'=>"width: 57px; height:53px"]);
+															}
+															else{
+																echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive",'style'=>"width: 57px; height:53px"]);
+															}	 
+														?> 
+														</div>
+														<div class="col-md-3 form-group">
 															<p for="from">
 																Upload Image of Promotion
 																<span class="required">*</span>

@@ -10,6 +10,7 @@ header("Cache-Control: post-check=0, pre-check=0", true);
 					<thead>
 						<tr>
 							<th scope="col"><?= ('S.No') ?></th>
+							<th scope="col"><?= ('User ID') ?></th>
 							<th scope="col"><?= h('Rreference ID') ?></th>
 							<th scope="col"><?= h('Request Type') ?></th>
 							<th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
@@ -44,9 +45,10 @@ header("Cache-Control: post-check=0, pre-check=0", true);
 						?>
 						<tr>
 							<td><?= h($response->id) ?></td>
+							<td><?php echo $response->user_id; ?></td>
 							<td><?= $response->request->reference_id ?></td>
 							<td><?= h($text) ?></td>
-							<td><?php echo $response->user->first_name.$response->user->last_name; ?></td>
+							<td><?php echo $response->user->first_name.' '.$response->user->last_name; ?></td>
 							<td><?= h($response->quotation_price) ?></td>
 							<td><?php echo $showis_details_shared; ?></td>
 							<td><?= h(date('d-m-Y',strtotime($response->created))) ?></td>

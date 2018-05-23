@@ -70,6 +70,26 @@ class TestimonialController extends AppController
 		else {
 			 $testimonial = $this->paginate($this->Testimonial);
 		}
+		$this->set('Rateing',$Rateing);
+       
+        $this->set(compact('testimonial'));
+        $this->set('_serialize', ['testimonial']);
+    }
+	public function excelDownload($Rateing=null)
+    {
+		$this->viewBuilder()->layout('');		
+		$Rateing = $this->request->query['rateing'];
+ 		if(!empty($Rateing)){
+			 
+			if(!empty($Rateing)){
+				$conditions['Testimonial.rating LIKE']=$Rateing;
+			}
+ 			$testimonial = $this->Testimonial->find()->contain(['Users','Authors'])->where($conditions);
+  		}
+		else {
+			 $testimonial = $this->Testimonial->find()->contain(['Users','Authors'])->toArray();
+		}
+		$this->set('Rateing',$Rateing);
        
         $this->set(compact('testimonial'));
         $this->set('_serialize', ['testimonial']);
@@ -132,20 +152,15 @@ class TestimonialController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $testimonial = $this->Testimonial->patchEntity($testimonial, $this->request->data);
+			
             if ($this->Testimonial->save($testimonial)) {
                 $this->Flash->success(__('The testimonial has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'report']);
             } else {
                 $this->Flash->error(__('The testimonial could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Testimonial->Users->find('list', ['limit' => 200]);
-        $authors = $this->Testimonial->Authors->find('list', ['limit' => 200]);
-        $requests = $this->Testimonial->Requests->find('list', ['limit' => 200]);
-        $responses = $this->Testimonial->Responses->find('list', ['limit' => 200]);
-        $this->set(compact('testimonial', 'users', 'authors', 'requests', 'responses'));
-        $this->set('_serialize', ['testimonial']);
     }
 
     /**
@@ -165,6 +180,6 @@ class TestimonialController extends AppController
             $this->Flash->error(__('The testimonial could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'report']);
     }
 }

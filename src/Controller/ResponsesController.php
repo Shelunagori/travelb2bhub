@@ -67,7 +67,7 @@ class ResponsesController extends AppController
 			$responses = $this->paginate($this->Responses->find()->where($conditions));
   		}
 		else {
-			$responses = $this->paginate($this->Responses);
+			$responses = $this->paginate($this->Responses->find()->where(['is_deleted'=>0]));
 		}
 		 
 	//pr($responses); exit;

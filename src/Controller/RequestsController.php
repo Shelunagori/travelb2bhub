@@ -64,7 +64,7 @@ class RequestsController extends AppController
  			$requests = $this->paginate($this->Requests->find()->where($conditions));
   		}
 		else {
-			$requests = $this->paginate($this->Requests);
+			$requests = $this->paginate($this->Requests->find()->where(['is_deleted'=>0]));
 		}
  		$CategoriesList = $this->Requests->Categories->find('list', ['limit' => 200]);
          $this->set(compact('requests','CategoriesList'));
@@ -240,10 +240,11 @@ class RequestsController extends AppController
 		else {
 			$requests = $this->paginate($this->Requests);
 		}
-		$this->set("hotelCategories", $this->_getHotelCategoriesArray());
- 		$CategoriesList = $this->Requests->Categories->find('list', ['limit' => 200]);
-        $this->set(compact('requests','CategoriesList'));
-        $this->set('_serialize', ['requests','CategoriesList']);
+		$this->loadModel('HotelCategories');
+		$hotelCategories = $this->HotelCategories->find('list', ['limit' => 200])->where(['is_deleted'=>0])->toArray();
+ 
+        $this->set(compact('requests','hotelCategories'));
+        $this->set('_serialize', ['requests','hotelCategories']);
 	
 	}
 }

@@ -47,6 +47,23 @@ class AdminsController extends AppController
 		$HotelPromotionCount = $this->Admins->HotelPromotions->find()
 			->where(['HotelPromotions.visible_date >=' => $valid_date,'is_deleted'=>0])->count();
 		$this->set('HotelPromotionCount', $HotelPromotionCount);
+		//---
+		$this->loadModel('Testimonial'); 
+		$TestimonialCount=$this->Testimonial->find()->count();
+		$this->set('TestimonialCount', $TestimonialCount);
+		
+		$this->loadModel('Requests'); 
+		$RequestsCount=$this->Requests->find()->where(['is_deleted'=>0])->count();
+		$this->set('RequestsCount', $RequestsCount);
+		
+		$this->loadModel('Responses'); 
+		$ResponsesCount=$this->Responses->find()->where(['is_deleted'=>0])->count();
+		$this->set('ResponsesCount', $ResponsesCount);
+		
+		$UsersCount=$this->Users->find()->where(['is_deleted'=>0])->count();
+		$this->set('UsersCount', $UsersCount);
+		
+		
     }
  	public function changePassword()
     {

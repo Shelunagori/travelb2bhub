@@ -1,9 +1,9 @@
-<?php
+<?php  
 $file_name='User List';
 header("Content-Type: application/xls");
 header("Content-Disposition: attachment; filename=$file_name.xls");
 header("Content-Type: application/force-download");
-header("Cache-Control: post-check=0, pre-check=0", true);
+header("Cache-Control: post-check=0, pre-check=0", true);  
 
 ?> 
 	<table border="1" >
@@ -27,7 +27,7 @@ header("Cache-Control: post-check=0, pre-check=0", true);
 			</tr>
 		</thead>
 		<tbody>
-			<?php $x=0; foreach ($users as $user): $x++;
+			<?php $x=0; foreach ($users as $user): $x++;  
 			$role_id=$user->role_id;
 			$blocked=$user->blocked;
 			if($role_id==1){ $roleShow="Travel Agent";}

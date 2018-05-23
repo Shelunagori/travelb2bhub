@@ -130,7 +130,8 @@ label{
 				
 				<?= $this->Form->create($hotelPromotion,['type'=>'file','id'=>'HotelEdit']);
 					$userss=$hotelPromotion['user'];
-					$hotel_ratings=4;//$hotelPromotion['hotel_rating'];
+					$hotel_ratings=$hotelPromotion['hotel_rating'];
+ //pr($hotelPromotion); exit;
 				?>
 				 
 				<fieldset>
@@ -157,7 +158,17 @@ label{
 									 echo $this->Form->input('hotel_name',['class'=>'form-control ','label'=>false,'placeholder'=>"Enter Your Hotel Name",'value'=>$userss['company_name'],'readonly']);?>
 									</div>
 								</div>
-								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
+								<div class="col-md-1 form-group  pull-right">
+								<?php 
+									if(file_exists($hotelPromotion->hotel_pic)>0)
+									{
+										echo $this->Html->image('../'.$hotelPromotion->hotel_pic, ["class"=>"img-responsive",'style'=>"width: 57px; height:53px"]);
+									}
+									else{
+										echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive",'style'=>"width: 57px; height:53px"]);
+									}	 
+								?> 
+								</div><div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 mt form-group">
 									<p for="from">
 										Upload Image of Hotel	
 									</p>
