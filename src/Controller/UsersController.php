@@ -299,28 +299,31 @@ class UsersController extends AppController {
 		 return $advertisementcount;
     }
 	
-	public function report($first_name=null,$last_name=null,$email=null,$role_id=null,$city_id=null,$state_id=null,$statusWise=null,$blocked=null,$mobile=null,$lastlogin=null) {
+	public function report($first_name=null,$last_name=null,$email=null,$role_id=null,$city_id=null,$state_id=null,$statusWise=null,$blocked=null,$mobile=null,$lastlogin=null,$country=null,$limit_data=null) {
 		$this->viewBuilder()->layout('admin_layout');
 		$first_name=$this->request->query('first_name');
 		$last_name=$this->request->query('last_name');
 		$email=$this->request->query('email');
-		$role_id=$this->request->query('role_id');
+		$role_id=$this->request->query('role_id');  
+ 
 		$city_id=$this->request->query('city_id');
 		$state_id=$this->request->query('state_id');
 		$statusWise=$this->request->query('statusWise');
 		$blocked=$this->request->query('blocked');
 		$mobile=$this->request->query('mobile');
 		$lastlogin=$this->request->query('lastlogin');
+		$country=$this->request->query('country');
+		$limit_data=$this->request->query('limit_data');
 		$this->set('first_name', $first_name);
 		$this->set('last_name', $last_name);
 		$this->set('email', $email);
-		$this->set('role_id', $role_id);
-		$this->set('city_id', $city_id);
+		
 		$this->set('state_id', $state_id);
 		$this->set('statusWise', $statusWise);
 		$this->set('blocked', $blocked);
 		$this->set('mobile', $mobile);
 		$this->set('lastlogin', $lastlogin);
+		$this->set('limit_data', $limit_data);
 		$condition=array();
 		if(!empty($first_name))
 		{
@@ -334,9 +337,12 @@ class UsersController extends AppController {
 		{
 			$condition['Users.email LIKE']=$email."%";
 		}
+		$this->set('role_id', '');
 		if(!empty($role_id))
 		{
-			$condition['Users.role_id']=$role_id;
+			$condition['Users.role_id IN ']=$role_id;
+			$role=implode(',',$role_id);
+			$this->set('role_id', $role);
 		}
 		if(!empty($lastlogin))
 		{
@@ -346,9 +352,19 @@ class UsersController extends AppController {
 		{
 			$condition['Users.mobile_number']=$mobile;
 		}
+		$this->set('city_id', '');
 		if(!empty($city_id))
 		{
-			$condition['Users.city_id']=$city_id;
+			$condition['Users.city_id IN']=$city_id;
+			$ctry=implode(',',$city_id);
+			$this->set('city_id', $ctry);
+		}
+		$this->set('country', '');
+		if(!empty($country))
+		{
+			$condition['Users.country_id IN']=$country;
+			$cunty=implode(',',$country);
+			$this->set('country', $cunty);
 		}
 		if(!empty($statusWise))
 		{
@@ -365,106 +381,20 @@ class UsersController extends AppController {
 		{
 			$condition['Users.preference LIKE']='%'.$state_id.'%';
 			
+		}
+		$LimitRecord=20;
+		if(!empty($limit_data))
+		{
+			$LimitRecord=$limit_data;
 		}
 		$condition['Users.is_deleted']=0;
 		//pr($condition); exit;
 		$this->paginate = [
-		'contain' => ['Cities','States','Countries']
+		'contain' => ['Cities','States','Countries'],
+		'limit'=>$LimitRecord
 		];
 		$users = $this->paginate($this->Users->find()->where($condition)->order(['Users.id' => 'DESC']));
-		
-		//----
-		$states = $this->Users->States->find()->where(['country_id' => '101'])->all();
-		$allStates = array();
-		foreach($states as $state){
-			$allStates[$state["id"]] = $state['state_name'];
-			$allState[] = array("value"=>$state['id'], "state_name"=>$state['state_name']);
-		}
-		$cities = $this->Users->Cities->getAllCities();
-		$allCities1 = array();
-		if(!empty($cities)) {
-			foreach($cities as $city) {
-				$cit = $city['name'].' ('.$city['state']->state_name.')';
-				$cit1 = $city['name'];
-				$allCities1[] = array("label"=>str_replace("'", "", $cit), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
-			}
-		}
-		$this->set(compact('users','allStates','allCities1','allState'));
-		$this->set('_serialize', ['users']);
-		
-	}
-	
-	public function excelDownload($first_name=null,$last_name=null,$email=null,$role_id=null,$city_id=null,$state_id=null,$statusWise=null,$blocked=null,$mobile=null,$lastlogin=null) {
-		$this->viewBuilder()->layout('');
-		$first_name=$this->request->query('first_name');
-		$last_name=$this->request->query('last_name');
-		$email=$this->request->query('email');
-		$role_id=$this->request->query('role_id');
-		$city_id=$this->request->query('city_id');
-		$state_id=$this->request->query('state_id');
-		$statusWise=$this->request->query('statusWise');
-		$blocked=$this->request->query('blocked');
-		$mobile=$this->request->query('mobile');
-		$lastlogin=$this->request->query('lastlogin');
-		$this->set('first_name', $first_name);
-		$this->set('last_name', $last_name);
-		$this->set('email', $email);
-		$this->set('role_id', $role_id);
-		$this->set('city_id', $city_id);
-		$this->set('state_id', $state_id);
-		$this->set('statusWise', $statusWise);
-		$this->set('blocked', $blocked);
-		$this->set('mobile', $mobile);
-		$this->set('lastlogin', $lastlogin);
-		$condition=array();
-		if(!empty($first_name))
-		{
-			$condition['Users.first_name LIKE']=$first_name."%";
-		}
-		if(!empty($lastlogin))
-		{
-			$condition['Users.last_login < ']=$lastlogin;
-		}
-		if(!empty($last_name))
-		{
-			$condition['Users.last_name LIKE']=$last_name."%";
-		}
-		if(!empty($email))
-		{
-			$condition['Users.email LIKE']=$email."%";
-		}
-		if(!empty($role_id))
-		{
-			$condition['Users.role_id']=$role_id;
-		}
-		if(!empty($city_id))
-		{
-			$condition['Users.city_id']=$city_id;
-		}
-		
-		if(!empty($mobile))
-		{
-			$condition['Users.mobile_number']=$mobile;
-		}
-		if(!empty($statusWise))
-		{
-			$status=1;
-			if($statusWise==2){$status=0;}
-			$condition['Users.status']=$status;
-		}
-		if(!empty($blocked))
-		{
-			if($blocked==2){$blocked=0;}
-			$condition['Users.blocked']=$blocked;
-		}
-		if(!empty($state_id))
-		{
-			$condition['Users.preference LIKE']='%'.$state_id.'%';
-			
-		}
-		$condition['Users.is_deleted']=0;
-		 
-		$users = $this->Users->find()->contain(['Cities','States','Countries'])->where($condition);
+ 
  		//----
 		$states = $this->Users->States->find()->where(['country_id' => '101'])->all();
 		$allStates = array();
@@ -481,9 +411,103 @@ class UsersController extends AppController {
 				$allCities1[] = array("label"=>str_replace("'", "", $cit), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
 			}
 		}
-		$this->set(compact('users','allStates','allCities1','allState'));
+		$countries=$this->Users->Countries->find('list', ['limit' => 200])->where(['Countries.is_deleted'=>0]); 
+		$this->set(compact('users','allStates','allCities1','allState','countries'));
 		$this->set('_serialize', ['users']);
 		
+	}
+	
+	public function excelDownload($first_name=null,$last_name=null,$email=null,$role_id=null,$city_id=null,$state_id=null,$statusWise=null,$blocked=null,$mobile=null,$lastlogin=null,$country=null) {
+
+		$this->viewBuilder()->layout('');
+		$first_name=$this->request->query('first-name');
+		$last_name=$this->request->query('last-name');
+		$email=$this->request->query('email');
+		$role_id=$this->request->query('role-id');
+		$city_id=$this->request->query('city-id');
+		$state_id=$this->request->query('state-id');
+		$statusWise=$this->request->query('statusWise');
+		$blocked=$this->request->query('blocked');
+		$mobile=$this->request->query('mobile');
+		$lastlogin=$this->request->query('lastlogin');
+		$country=$this->request->query('country'); 
+		 
+
+		$condition=array();
+		if(!empty($first_name))
+		{
+			$condition['Users.first_name LIKE']=$first_name."%";
+		}
+		if(!empty($lastlogin))
+		{
+			$condition['Users.last_login < ']=$lastlogin;
+		}
+		if(!empty($last_name))
+		{
+			$condition['Users.last_name LIKE']=$last_name."%";
+		}
+		if(!empty($email))
+		{
+			$condition['Users.email LIKE']=$email."%";
+		}
+		if(!empty($role_id))
+		{
+			$role=explode(',',$role_id);
+			$condition['Users.role_id IN']=$role;
+		}
+		if(!empty($city_id))
+		{
+			$city_id=explode(',',$city_id);
+			$condition['Users.city_id IN']=$city_id;
+		}
+		if(!empty($country))
+		{
+			$country=explode(',',$country);
+			$condition['Users.country_id IN']=$country;
+		}
+ 		if(!empty($mobile))
+		{
+			$condition['Users.mobile_number']=$mobile;
+		}
+		if(!empty($statusWise))
+		{
+			$status=1;
+			if($statusWise==2){$status=0;}
+			$condition['Users.status']=$status;
+		}
+		if(!empty($blocked))
+		{
+			if($blocked==2){$blocked=0;}
+			$condition['Users.blocked']=$blocked;
+		}
+		if(!empty($state_id))
+		{
+			$condition['Users.preference LIKE']='%'.$state_id.'%';
+			
+		}
+		$condition['Users.is_deleted']=0;
+		// pr($condition);
+		$users = $this->Users->find()->contain(['Cities','States','Countries'])->where($condition);
+//pr($users->toArray()); exit;
+ 		//----
+		$states = $this->Users->States->find()->where(['country_id' => 101])->all();
+		$allStates = array();
+		foreach($states as $state){
+			$allStates[$state["id"]] = $state['state_name'];
+			$allState[] = array("value"=>$state['id'], "state_name"=>$state['state_name']);
+		}
+		$cities = $this->Users->Cities->getAllCities();
+		$allCities1 = array();
+		if(!empty($cities)) {
+			foreach($cities as $city) {
+				$cit = $city['name'].' ('.$city['state']->state_name.')';
+				$cit1 = $city['name'];
+				$allCities1[] = array("label"=>str_replace("'", "", $cit), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
+			}
+		}
+		$this->set(compact('users','allStates','allCities1','allState'));
+		$this->set('_serialize', ['users']);
+		 
 	}
 	
 	
@@ -1739,9 +1763,8 @@ public function sendrequest() {
 	$this->set('users', $user);
 	$myRequestCount = $myReponseCount =  0;
 	$myfinalCount  = 0;
-	$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status "=>2]]);
-	$myfinalCount = $query3 ->count();
-	$this->set('myfinalCount', $myfinalCount );
+	$RemainingREQ = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id')]])->count();
+ 	$this->set('RemainingREQ', $RemainingREQ );
 	$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
 	$myRequestCount = $query->count();
 	$myRequestCount1 = $query->count(); 
@@ -5576,14 +5599,13 @@ $data[$req['id']]  = $queryr->count();
 	public function temppage()
 	{
 		$this->loadModel('Users'); 
-		$Users = $this->Users->find()->where(['mobile_number LIKE'=>'%+%']); 
+		$Users = $this->Users->find()->where(['preference'=>'','role_id'=>1]); 
+		print_r($Users); exit;
 		foreach($Users as $UserChat){
 			$updateId=$UserChat['id'];
-			$mobile_number=$UserChat['mobile_number'];
-			$p_contact=$UserChat['p_contact'];
-			$newMobileNO= str_replace("+91 ","",$mobile_number);
-			$newContact= str_replace("+91 ","",$p_contact);
-			$this->Users->updateAll(['mobile_number' => $newMobileNO,'p_contact' => $newContact], ['id' => $updateId]);
+			$state_id=$UserChat['state_id'];
+			
+			$this->Users->updateAll(['preference' => $state_id], ['id' => $updateId]);
  		}
 		exit;
  	}
