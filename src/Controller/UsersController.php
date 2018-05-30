@@ -11,6 +11,7 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Cake\Datasource\ConnectionManager;
 use Cake\Network\Email\Email;
+date_default_timezone_set('Asia/Kolkata');
 /**
 * Users Controller
 *
@@ -21,7 +22,7 @@ class UsersController extends AppController {
 	var $helpers = array('Html', 'Form', 'Response');
 	public function beforeFilter(\Cake\Event\Event $event) {
 		parent::beforeFilter($event);
-		$this->Auth->allow(['register', 'login','getcitylist', 'userVerification', 'forgotPassword', 'activatePassword', 'cakeVersion', 'deleteAllCache', 'addNewsLatter', 'otpVerifiy', 'otpResend', 'passwordotpVerifiy','ajaxCity','ajaxCityRegister','checkMobileExixt','blockedWindow','cronobforremoverequest','sendpushnotification','cronobfornotification']);
+		$this->Auth->allow(['register', 'login','getcitylist', 'userVerification', 'forgotPassword', 'activatePassword', 'cakeVersion', 'deleteAllCache', 'addNewsLatter', 'otpVerifiy', 'otpResend', 'passwordotpVerifiy','ajaxCity','ajaxCityRegister','checkMobileExixt','blockedWindow','cronobforremoverequest','sendpushnotification','cronobfornotification','cronobforpromotions']);
 	}
 	
 	public function beforeRender(\Cake\Event\Event $event) {
@@ -61,6 +62,7 @@ class UsersController extends AppController {
 			$this->set('profile_pic', $profile_pic);
 			$this->set('loginId',$loginId);
 			$this->set('roleId',$role_id);
+			//--
 			$this->loadModel('Requests');
 			$this->loadModel('Responses');
 			$current_date=date('Y-m-d');
@@ -69,20 +71,13 @@ class UsersController extends AppController {
 				'OR' => array(
 					array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
 					array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
-					
 					array("Requests.start_date <=" =>  $current_date,'Requests.category_id'=> 2,'Requests.total_response >' =>0),
 					array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
 				)
 			);
-			//,'Requests.total_response >' =>0
-			$conditionsss[]= array (
-				'OR' => array(
-					array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
-					array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
-				)
-			);
-			
+			 
 			$this->set("respondToRequestCountNew", $this->__getRespondToRequestCount());
+			//-- Block USER
 			$this->loadModel('BlockedUsers');
 			$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
 				->hydrate(false)
@@ -104,37 +99,50 @@ class UsersController extends AppController {
 			if(sizeof($BlockedUsers)>0){
 				$conditionssd["Requests.user_id NOT IN"] =  $BlockedUsers; 
 			}
-			
-			$myRequestCount = 0;
-			$myRequestCount = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2,$conditions]])->count();
-			
+			//---
 			$reqcountNew = $this->getSettings('requestcount');
 			$this->set('reqcountNew', $reqcountNew);
+
+			$myRequestCount = 0;
+			$myRequestCount = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2, $conditions]])->count();
 			$this->set('myRequestCountNew', $myRequestCount);
+
+			$RequestCount1 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'),"Requests.status !="=>2,'is_deleted'=>0, $conditions]])->count();
+			
+			$RequestCount = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.total_response >"=>0,"Requests.status !="=>2,'is_deleted'=>1, $conditions]])->count();
+			
+			$RequestCount2 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.total_response >"=>0,"Requests.status"=>2, $conditions]])->count();
+			
+			$PlaceReqCount=$reqcountNew['value']-($RequestCount+$RequestCount1+$RequestCount2);
+			$this->set('PlaceReqCount', $PlaceReqCount);
+			
 			$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->where(["Requests.user_id NOT IN"=>$BlockedUsers]);
 			$myReponseCount = $queryr->count(); 
-			
 			$this->set('myReponseCountNew', $myReponseCount);
+
 			//----	 FInalized
 			$finalreq["Requests.user_id"] = $this->Auth->user('id');
 			$finalreq["Requests.status"] = 2;
 			$finalreq["Requests.is_deleted "] = 0;
 			$finalizeRequest = $this->Requests->find()->where($finalreq)->count();
 			$this->set('finalizeRequestNew', $finalizeRequest);
+
 			//--- Removed Request
 			$remoev["Requests.user_id"] = $this->Auth->user('id');
 			$remoev["Requests.is_deleted "] = 1;
 			$RemovedReqest = $this->Requests->find()->where($remoev)->count();
 			$this->set('RemovedReqestNew', $RemovedReqest);
+
 			//--- Blocked User
 			$this->loadModel('blocked_users');
 			$blk["blocked_users.blocked_by"] = $this->Auth->user('id');
 			$blockedUserscount = $this->blocked_users->find()->where($blk)->count();
 			$this->set('blockedUserscountnew', $blockedUserscount);
+
 			//--- Finalize Response;
-			
 			$FInalResponseCount = $this->Responses->find('all', ['conditions' => ['Responses.status' =>1,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->count();
 			$this->set('FInalResponseCountNew', $FInalResponseCount);
+
 			//*--- UserChats
 			$this->loadModel('UserChats');
 			$csort['created'] = "DESC";
@@ -142,7 +150,6 @@ class UsersController extends AppController {
 			$totalIds=array();
 			$NewNotifications=array();
 			$unreadnotification = $this->UserChats->find()->contain(['Users'])->where(['UserChats.send_to_user_id'=> $this->Auth->user('id'),'read_date_time >='=>$new_time,'is_read'=>1])->order($csort)->all();
-			
 			foreach($unreadnotification as $data){
 					$totalIds[]=$data['id'];
 			}
@@ -155,12 +162,11 @@ class UsersController extends AppController {
 			if(!empty($totalIds)){
 				$NewNotifications = $this->UserChats->find()->contain(['Users'])->where(['UserChats.id IN'=> $totalIds])->order($csort)->all();
 			}
-			//pr($totalIds); exit;
-			$chatCount = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->count(); 
-			$this->set('chatCount',$chatCount); 
+ 			$chatCount = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->count();
+			$this->set('chatCountNew',$chatCount); 
 			$this->set('NewNotifications',$NewNotifications);
 		}
-		//pr($totalIds); exit;
+		 
 		//---
  	}
 	public function __getRespondToRequestCount() {
@@ -1763,8 +1769,7 @@ public function sendrequest() {
 	$this->set('users', $user);
 	$myRequestCount = $myReponseCount =  0;
 	$myfinalCount  = 0;
-	$RemainingREQ = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id')]])->count();
- 	$this->set('RemainingREQ', $RemainingREQ );
+ 
 	$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
 	$myRequestCount = $query->count();
 	$myRequestCount1 = $query->count(); 
@@ -3104,6 +3109,7 @@ public function checkresponses($id) {
 	$keyword = "";
 	$acceptDeals = "";
 	$conditions["Responses.request_id"] = $id;
+	$conditions["Requests.status"] = 0;
 	if(!empty($this->request->query("agentname"))) {
 		$conditions["Responses.user_id IN"] = $this->request->query("agentname");
 	}
@@ -4559,6 +4565,7 @@ function addNewDestinationRow() {
 	$this->render('/Element/new_destination');
 }
 public function addresponse() {
+	 
 	date_default_timezone_set('Asia/Kolkata');
 	$this->loadModel('Responses');
 	$this->loadModel('Requests');
@@ -4568,6 +4575,7 @@ public function addresponse() {
 	$this->set('users', $user);
 	if($this->request->is('post')){
 		$d = $this->request->data;
+		
 		$TableRequest = TableRegistry::get('Requests');
 		$request = $TableRequest->get($_POST["request_id"]);
 		$d["user_id"] = $this->Auth->user('id');
@@ -4597,7 +4605,7 @@ public function addresponse() {
 				$id = $userchats->id;
 				//$this->sendpushnotification($request["user_id"],$message,$message);
 			}
-			$this->Flash->success(__('Your response has bee submitted successfully.'));
+			$this->Flash->success(__('Your response has been submitted successfully.'));
 		} 
 		else {
 			$this->Flash->error(__('Sorry.'));
@@ -5433,8 +5441,44 @@ $data[$req['id']]  = $queryr->count();
 			echo json_encode($data);
 			die();
 		}	
-		
 	}
+	public function acceptReviewRequest(){
+		$this->loadModel('TempRatings');
+		$this->loadModel('Testimonial');
+		$update_id=$this->request->data['update_id'];
+		$Count=$this->TempRatings->find()->where(['id'=>$update_id])->count();
+		if($Count>0){
+			$TempRatings_data=$this->TempRatings->find()->where(['id'=>$update_id])->first();
+			$testimonial = $this->Testimonial->newEntity();
+
+			$this->request->data['user_id']=$TempRatings_data->user_id;
+			$this->request->data['author_id']=$TempRatings_data->author_id;
+			$this->request->data['comment']=$TempRatings_data->comment;
+			$this->request->data['rating']=$TempRatings_data->rating;
+			$this->request->data['request_id']=0;
+			$this->request->data['status']=0;
+			$this->request->data['created_at']=$TempRatings_data->created_on ;
+			$this->request->data['promotion_id']=$TempRatings_data->promotion_id;
+			$this->request->data['promotion_type_id']=$TempRatings_data->promotion_type_id;
+			$testimonials = $this->Testimonial->patchEntity($testimonial, $this->request->data);
+			
+			if ($this->Testimonial->save($testimonials)) {
+				 
+				$TempRatings = $this->TempRatings->get($update_id);
+				$this->TempRatings->delete($TempRatings);
+				$this->Flash->success(__('You have approved the Review!'));
+			} else {
+				$this->Flash->error(__('something went wrong. Please, try again.'));
+			}
+			 return $this->redirect(['action' => 'dashboard']);
+		}
+		else{
+			$this->Flash->error(__('You have already approved the Review!'));
+			return $this->redirect(['action' => 'dashboard']);
+		}
+	}
+	
+	
 
 	public function encode($string,$key) {
 		$key = sha1($key);
@@ -5506,6 +5550,84 @@ $data[$req['id']]  = $queryr->count();
 			}
 			$this->sendpushnotification($send_to_user_id,$message,$message);
 			$this->UserChats->updateAll(['notified' => 1], ['id' => $updateId]);
+ 		}
+		exit;
+ 	}
+	public function cronobforpromotions()
+	{
+		$this->loadModel('PostTravlePackages');
+		$this->loadModel('TaxiFleetPromotions');
+		$this->loadModel('EventPlannerPromotions');
+		$this->loadModel('HotelPromotions');
+		$this->loadModel('UserChats');
+ 		$cur_date=date('Y-m-d'); 
+		//-- Package Promotions
+		$PostTravlePackages = $this->PostTravlePackages->find()->where(['visible_date <'=>$cur_date,'notified'=>0,'is_deleted'=>0]);
+		foreach($PostTravlePackages as $PostTravlePackage){
+			 
+			$UserChats = $this->UserChats->newEntity();
+			$this->request->data['send_to_user_id']=$PostTravlePackage['user_id'];
+			$this->request->data['user_id']=1;
+			$this->request->data['request_id']=0;
+			$this->request->data['message']='Your promotion has expired, would you like to RENEW it?';
+			$this->request->data['type']='Promotions';
+			$this->request->data['screen_id']=1;
+			$this->request->data['promotion_id']=$PostTravlePackage['id'];
+			$UserChats = $this->UserChats->patchEntity($UserChats, $this->request->data);
+			$this->UserChats->save($UserChats);
+			$query = $this->PostTravlePackages->query();
+			$query->update()->set(['notified' => 1])->where(['id' => $PostTravlePackage['id']])->execute();
+ 		}
+		//-- Taxi Promotions
+		$TaxiFleetPromotions = $this->TaxiFleetPromotions->find()->where(['visible_date <'=>$cur_date,'notified'=>0,'is_deleted'=>0]);
+		foreach($TaxiFleetPromotions as $TaxiFleetPromotion){
+			 
+			$UserChats = $this->UserChats->newEntity();
+			$this->request->data['send_to_user_id']=$TaxiFleetPromotion['user_id'];
+			$this->request->data['user_id']=1;
+			$this->request->data['request_id']=0;
+			$this->request->data['message']='Your promotion has expired, would you like to RENEW it?';
+			$this->request->data['type']='Promotions';
+			$this->request->data['screen_id']=2;
+			$this->request->data['promotion_id']=$TaxiFleetPromotion['id'];
+			$UserChats = $this->UserChats->patchEntity($UserChats, $this->request->data);
+			$this->UserChats->save($UserChats);
+			$query = $this->TaxiFleetPromotions->query();
+			$query->update()->set(['notified' => 1])->where(['id' => $TaxiFleetPromotion['id']])->execute();
+ 		}
+		//-- Event Promotions
+		$EventPlannerPromotions = $this->EventPlannerPromotions->find()->where(['visible_date <'=>$cur_date,'notified'=>0,'is_deleted'=>0]);
+		foreach($EventPlannerPromotions as $EventPlannerPromotion){
+			 
+			$UserChats = $this->UserChats->newEntity();
+			$this->request->data['send_to_user_id']=$EventPlannerPromotion['user_id'];
+			$this->request->data['user_id']=1;
+			$this->request->data['request_id']=0;
+			$this->request->data['message']='Your promotion has expired, would you like to RENEW it?';
+			$this->request->data['type']='Promotions';
+			$this->request->data['screen_id']=3;
+			$this->request->data['promotion_id']=$EventPlannerPromotion['id'];
+			$UserChats = $this->UserChats->patchEntity($UserChats, $this->request->data);
+			$this->UserChats->save($UserChats);
+			$query = $this->EventPlannerPromotions->query();
+			$query->update()->set(['notified' => 1])->where(['id' => $EventPlannerPromotion['id']])->execute();
+ 		}
+		//-- Hotel Promotions
+		$HotelPromotions = $this->HotelPromotions->find()->where(['visible_date <'=>$cur_date,'notified'=>0,'is_deleted'=>0]);
+		foreach($HotelPromotions as $HotelPromotion){
+			 
+			$UserChats = $this->UserChats->newEntity();
+			$this->request->data['send_to_user_id']=$HotelPromotion['user_id'];
+			$this->request->data['user_id']=1;
+			$this->request->data['request_id']=0;
+			$this->request->data['message']='Your promotion has expired, would you like to RENEW it?';
+			$this->request->data['type']='Promotions';
+			$this->request->data['screen_id']=4;
+			$this->request->data['promotion_id']=$HotelPromotion['id'];
+			$UserChats = $this->UserChats->patchEntity($UserChats, $this->request->data);
+			$this->UserChats->save($UserChats);
+			$query = $this->HotelPromotions->query();
+			$query->update()->set(['notified' => 1])->where(['id' => $HotelPromotion['id']])->execute();
  		}
 		exit;
  	}

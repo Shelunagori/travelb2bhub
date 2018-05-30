@@ -25,6 +25,7 @@ class HotelPromotionsController extends AppController
 			$submitted_from = @$this->request->data('submitted_from');
 			if(@$submitted_from=='web')
 			{
+				$hotelPromotions->submitted_from=1;
 				/*$state_id=$this->request->data['state_id'];
 				$x=0;
 				foreach($state_id as $state)
@@ -277,7 +278,8 @@ $getHotelPromotion=$getEventPlanners ;
 				$rating_filter_filter = ['HotelPromotions.hotel_rating IN'=>$Ratings];
 			}
 			//-- SHORTs
-			$where_short=['HotelPromotions.id' =>'DESC'];
+			//$where_short=['HotelPromotions.position' =>'ASC'];
+			$where_short=['HotelPromotions.position' =>'ASC','HotelPromotions.id' =>'DESC'];
 			if(!empty($short))
 			{ 
 				if($short=='cheap_tariff')
@@ -421,7 +423,7 @@ $getHotelPromotion=$getEventPlanners ;
 		$getEventPlannersDetails = $this->HotelPromotions->find();
 		$getEventPlannersDetails->select(['total_likes'=>$getEventPlannersDetails->func()->count('HotelPromotionLikes.id')])
 			->leftJoinWith('HotelPromotionLikes')
-			->contain(['HotelCategories','Users','PriceMasters'])
+			->contain(['HotelCategories','Users'=>['Cities','States','Countries'],'PriceMasters'])
 			->where(['HotelPromotions.id'=>$id])
 			->where(['HotelPromotions.is_deleted' =>0])
 			->group(['HotelPromotions.id'])
@@ -539,7 +541,7 @@ $getHotelPromotion=$getEventPlanners ;
 					if ($this->HotelPromotions->HotelPromotionPriceBeforeRenews->save($PriceBeforeRenews))
 					{
 						$query = $this->HotelPromotions->query();
-						$query->update()->set(['price_master_id' => $price_master_id,'total_charges'=>$price,'visible_date'=>date('Y-m-d',strtotime($visible_date))])
+						$query->update()->set(['price_master_id' => $price_master_id,'total_charges'=>$price,'visible_date'=>date('Y-m-d',strtotime($visible_date)),'notified'=>0])
 						->where(['id' => $event_id])->execute();			
 						$message = 'Update Successfully';
 						$response_code = 200;						

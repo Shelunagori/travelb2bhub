@@ -19,7 +19,7 @@
 						<div class="col-md-8">
 							<?php echo $this->Form->input('name',[
 							'label' => false,'class'=>'form-control ','placeholder'=>'Enter City Name']);?>
-						</div>
+ 						</div>
 					</div>
 					<span class="help-block"></span>
 					<div class="row">
@@ -148,11 +148,12 @@
 	</div>
 </div>
 </section>
-<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?> 
+
 <script>
 jQuery(".loadingshow").submit(function(){
 	jQuery("#loader-1").show();
-});
+}); 
 $(document).ready(function() {
 	// validate signup form on keyup and submit
 	$(document).on('change','.selectState',function(){
@@ -160,15 +161,26 @@ $(document).ready(function() {
 		var selected = $('option:selected', this).attr('country_id');
 		$('#country_id').val(selected);
 	});
+	$.validator.addMethod("specialChars", function( value, element ) {
+		var regex = new RegExp("^[a-zA-Z ]+$");
+		var key = value;
+
+		if (!regex.test(key)) {
+		   return false;
+		}
+		return true;
+	}, "please use only alphabetic characters");
 	 $("#CityForm").validate({ 
 		rules: {
 			name: {
-				required: true
+				required: true,
+				specialChars: true
 			},
 			state_id: {
 				required: true
 			} 
 		},
+		
 		submitHandler: function () {
 			$("#submit_member").attr('disabled','disabled');
 			$("#loader-1").show();

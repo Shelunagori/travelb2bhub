@@ -17,7 +17,7 @@ fieldset
         <div class="col-md-12">
          <div class="box box-primary">
 			<div class="box-header with-border">
-              <h3 class="box-title">New Registrations Trend Lines</h3>
+              <h3 class="box-title">Requests Trend Lines</h3>
             </div>
 			<div class="box-body">
 			<form method="get" class="loadingshow">
@@ -49,7 +49,7 @@ fieldset
 					<div class="col-md-3">
 						<div class="form-group">
 						  <label class="control-label col-md-12">&nbsp;</label>  
-							<a href="<?php echo $this->Url->build(array('controller'=>'admins','action'=>'statistics')) ?>"class="btn btn-danger btn-sm">Reset</a>
+							<a href="<?php echo $this->Url->build(array('controller'=>'admins','action'=>'request-statistics')) ?>"class="btn btn-danger btn-sm">Reset</a>
 							<?php echo $this->Form->button('Search',['class'=>'btn btn-sm btn-success']); ?> 
 						</div>
 					</div>	
@@ -62,7 +62,7 @@ fieldset
 				<div align="right" class="col-md-12" style="margin-bottom:5px"> 
 					<form method="post" target="_blank">
 						<textarea name="export_data" hidden ></textarea> <!---->
-						<input type="hidden" value="Registrations_Report" name="file_name" />
+						<input type="hidden" value="Requests_Report" name="file_name" />
 						<button type="submit" formaction="pdf_excel" name="excel" style="margin:10px" class="btn btn-info btn-xs" ><i class="fa fa-download "></i> &nbsp; Excel &nbsp; </button>   
 					 </form>
 				</div>
@@ -102,14 +102,7 @@ fieldset
 					<?php $x=0; foreach($MonthArray as $MName){  ?>
 						<td><?php echo $EPArray[$x]; ?></td>
 					<?php $x++; } ?>
-				</tr>
-				<tr>
-					<th>3</th>
-					<th>Hotelier</th>
-					<?php $x=0; foreach($MonthArray as $MName){  ?>
-						<td><?php echo $HArray[$x]; ?></td>
-					<?php $x++; } ?>
-				</tr>
+				</tr> 
 				<tr>
 					<th>4</th>
 					<th>Total</th>
@@ -129,7 +122,7 @@ fieldset
 $(function () {  
     $('#container').highcharts({
         title: {
-            text: 'Monthly Registrations',
+            text: 'Monthly Requests',
             x: -20 //center
         },
         subtitle: {
@@ -141,7 +134,7 @@ $(function () {
         },
         yAxis: {
             title: {
-                text: 'No of Registrations'
+                text: 'No of Requests'
             },
             plotLines: [{
                 value: 0,
@@ -164,9 +157,6 @@ $(function () {
         }, {
             name: 'Event Planner',
             data: [<?php echo $EventPlannerCount;?>]
-        }, {
-            name: 'Hotelier',
-            data: [<?php echo $HotelierCount;?>]
         }, {
             name: 'Total',
             data: [<?php echo $TotalRegistration;?>]

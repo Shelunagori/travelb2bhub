@@ -17,7 +17,7 @@ fieldset
         <div class="col-md-12">
          <div class="box box-primary">
 			<div class="box-header with-border">
-              <h3 class="box-title">New Registrations Trend Lines</h3>
+              <h3 class="box-title">Registeration Percentage Pie Graph</h3>
             </div>
 			<div class="box-body">
 			<form method="get" class="loadingshow">
@@ -49,7 +49,7 @@ fieldset
 					<div class="col-md-3">
 						<div class="form-group">
 						  <label class="control-label col-md-12">&nbsp;</label>  
-							<a href="<?php echo $this->Url->build(array('controller'=>'admins','action'=>'statistics')) ?>"class="btn btn-danger btn-sm">Reset</a>
+							<a href="<?php echo $this->Url->build(array('controller'=>'admins','action'=>'registered-percentage')) ?>"class="btn btn-danger btn-sm">Reset</a>
 							<?php echo $this->Form->button('Search',['class'=>'btn btn-sm btn-success']); ?> 
 						</div>
 					</div>	
@@ -62,7 +62,7 @@ fieldset
 				<div align="right" class="col-md-12" style="margin-bottom:5px"> 
 					<form method="post" target="_blank">
 						<textarea name="export_data" hidden ></textarea> <!---->
-						<input type="hidden" value="Registrations_Report" name="file_name" />
+						<input type="hidden" value="Removed_Requests_Report" name="file_name" />
 						<button type="submit" formaction="pdf_excel" name="excel" style="margin:10px" class="btn btn-info btn-xs" ><i class="fa fa-download "></i> &nbsp; Excel &nbsp; </button>   
 					 </form>
 				</div>
@@ -83,40 +83,26 @@ fieldset
 				<tr>
 					<th>S.No.</th>
 					<th>User Category</th>
-					<?php foreach($MonthArray as $MName){ ?>
-						<th><?php echo $MName; ?></th>
-					<?php } ?>
+					<th>Registeration Percentage</th>
+					 
 				</tr>
 			</thead>
 			<tbody>
 				<tr>
 					<td>1</td>
 					<th>Travel Agent</th>
-					<?php $x=0; foreach($MonthArray as $MName){  ?>
-						<td><?php echo $TAArray[$x]; ?></td>
-					<?php $x++; } ?>
+					<td><?php echo $TAPER;?></td>
 				</tr>
 				<tr>
 					<th>2</th>
 					<th>Event Planner</th>
-					<?php $x=0; foreach($MonthArray as $MName){  ?>
-						<td><?php echo $EPArray[$x]; ?></td>
-					<?php $x++; } ?>
-				</tr>
+					<td><?php echo $EPPER;?></td>
+				</tr> 
 				<tr>
 					<th>3</th>
-					<th>Hotelier</th>
-					<?php $x=0; foreach($MonthArray as $MName){  ?>
-						<td><?php echo $HArray[$x]; ?></td>
-					<?php $x++; } ?>
-				</tr>
-				<tr>
-					<th>4</th>
-					<th>Total</th>
-					<?php $x=0; foreach($MonthArray as $MName){  ?>
-						<td><?php echo $TArray[$x]; ?></td>
-					<?php $x++; } ?>
-				</tr>
+					<th>Event Planner</th>
+					<td><?php echo $HPER;?></td>
+				</tr> 
 			</tbody>
 		</table>
 	</div>
@@ -126,50 +112,48 @@ fieldset
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 
 <script type="text/javascript">
-$(function () {  
+$(function () {
     $('#container').highcharts({
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
         title: {
-            text: 'Monthly Registrations',
-            x: -20 //center
-        },
-        subtitle: {
-           // text: 'Source: travelb2bhub.com.com',
-           // x: -20
-        },
-        xAxis: {
-            categories: [<?php echo $MonthName;?>]
-        },
-        yAxis: {
-            title: {
-                text: 'No of Registrations'
-            },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
+            text: 'Registeration Percentage'
         },
         tooltip: {
-           //valueSuffix: '°C'
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
         },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: true,
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                    style: {
+                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                    }
+                }
+            }
         },
         series: [{
-            name: 'Travel Agent',
-            data: [<?php echo $TravelAgentCount;?>]
-        }, {
-            name: 'Event Planner',
-            data: [<?php echo $EventPlannerCount;?>]
-        }, {
-            name: 'Hotelier',
-            data: [<?php echo $HotelierCount;?>]
-        }, {
-            name: 'Total',
-            data: [<?php echo $TotalRegistration;?>]
+            name: 'Registeration',
+            colorByPoint: true,
+            data: [{
+                name: 'Travel Agent',
+                y: <?php echo $TAPER;?>,
+				sliced: true,
+                selected: true
+            }, {
+                name: 'Event Planner',
+                y: <?php echo $EPPER;?>                
+            }, {
+                name: 'Hotelier',
+                y: <?php echo $HPER;?>
+            }]
         }]
     });
 });

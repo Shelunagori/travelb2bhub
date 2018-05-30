@@ -77,7 +77,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 										<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:40px;width:50px')); ?>
 									</td>
 									<td  align="left" style="padding-top:20px; font-size:20px">
-										<?php echo ($reqcountNew['value']-$myRequestCountNew); ?>
+										<?php echo $PlaceReqCount; ?>
 									</td>
 								</tr>
 								<tr>

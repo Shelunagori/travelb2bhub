@@ -18,7 +18,7 @@
 			</div>
 			<div class="box-body"> 
 				<div class="">
-				<?= $this->Form->create($taxiFleetCarBus,['id'=>'CountryForm']) ?>
+				<?= $this->Form->create($taxiFleetCarBus,['id'=>'main_form']) ?>
 				
 					<div class="row">
 						<div class="col-md-4">
@@ -140,20 +140,33 @@
 	</div>
 </div>
 </section>
-<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
-
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?> 
+<?php echo $this->Html->script(['jquery.validate']);?>
 <script>
-
 $(document).ready(function() {
-	jQuery(".loadingshow").submit(function(){
-	jQuery("#loader-1").show();
-});
+	$(".loadingshow").submit(function(){
+		jQuery("#loader-1").show();
+	});
 	// validate signup form on keyup and submit
-	 $("#CountryForm").validate({ 
+	$.validator.addMethod("specialChars", function( value, element ) {
+		var regex = new RegExp("^[a-zA-Z ]+$");
+		var key = value;
+
+		if (!regex.test(key)) {
+		   return false;
+		}
+		return true;
+	}, "please use only alphabetic characters");
+	
+	$("#main_form").validate({ 
 		rules: {
-			country_name: {
+			name: {
 				required: true
-			} 
+			},
+			type: {
+				required: true, 
+				specialChars: true
+			}
 		},
 		submitHandler: function () {
 			$("#submit_member").attr('disabled','disabled');
@@ -161,6 +174,5 @@ $(document).ready(function() {
 			form.submit();
 		}
 	}); 
-
 });
 </script>

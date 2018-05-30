@@ -216,11 +216,11 @@ li > p{
 	</div>
 	<div class='col-md-3 hideinphone' align="left">
 		<div class="col-md-12" style="background-color:#FFF; margin-left:-8px !important;">
-			<h4 align="center"><b>Download the app</b> for a GREAT <b>user experience</b></h4><br>
+			<h4 align="center" style="padding-top:10px"><b>Download the app</b> for a GREAT <b>user experience</b></h4><br>
 			<p style="color:#5c5a5a;font-size:14px;">1) <b>Don’t miss any business leads:</b> Receive instantaneous notifications about new leads and receive responses in real-time.</p><br>
 			<p style="color:#5c5a5a;font-size:14px;">2) <b>Real-time communication:</b> Have live chats directly with buyers and sellers or Call them by clicking a button for buying listed packages, transport, or hotels.</p><br>
 			<p style="color:#5c5a5a;font-size:14px;">3) <b>Improved User Interface / User Experience:</b> Mobile specific design elements and processes make the App very easy to operate.</p><br><br>
-			<div align="center" style="margin-bottom:48px">
+			<div align="center" style="margin-bottom:38px">
 				<a target="_blank" href="https://play.google.com/store/apps/details?id=com.app.travel.TravelB2B"><?php echo  $this->Html->image('/images/google_play.png', ['style'=>'width:60%;']) ?></a>
 			</div> 
 		</div>

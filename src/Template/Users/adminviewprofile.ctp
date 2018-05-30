@@ -263,14 +263,14 @@ label{
 								</td>
 								<td width="20%">
 									 <div style="float:right;"  >
-										<div style="width: 32px;height: 25px;background-color:#1295A2;border-radius:13px;color:#FEFEFE;">		
+										<div style="width: 32px;height: 25px;background-color:#1295A2;border-radius:13px;color:#FEFEFE;padding: 5px;">		
 											<?php echo $userRequestCount;?>
 										</div>
 									 </div>
 								 </td>
 							 <?php }
 							 else if($users['role_id'] == 2){ ?>
-								<td width="80%">
+								<td width="80%" height="76px">
 									 <div style="float:left" class="col-md-10" align="left">
 										<a href="<?php echo $Final_hrefurl; ?>"> 
 											<font style="font-size:14px !important;">
@@ -281,7 +281,7 @@ label{
 								</td>
 								<td width="20%">
 									 <div style="float:right;">
-										<div style="width: 32px; height: 25px; background-color: #1295A2;border-radius:9px;color:#FEFEFE;">		
+										<div style="width: 32px; height: 25px; background-color: #1295A2;border-radius:9px;color:#FEFEFE;padding: 5px;">		
 										<?php echo $userRequestCount;?>
 										</div>
 									 </div>
@@ -308,14 +308,14 @@ label{
 								 </td>
 								 <td>
 									 <div style="float:right;padding-top:1px"  >
-										<div style="width: 32px !important; height: 25px; background-color: #DFBA49;border-radius:13px;color:#FEFEFE;">		
+										<div style="width: 32px !important; height: 25px; background-color: #DFBA49;border-radius:13px;color:#FEFEFE;padding: 5px;">		
 											<?php echo $userrespondToRequestCount;?>
 										</div>
 									 </div>
 								</td>
 							<?php }
 							 else if($users['role_id'] == 3){ ?>
-								<td>
+								<td height="38px">
 									<div style="float:left" class="col-md-10" align="left">
 										<a href="<?php echo $Res_req_hrefurl; ?>"> 
 											<font style="font-size:14px !important;">
@@ -324,9 +324,9 @@ label{
 										</a>
 									 </div>
 								 </td>
-								 <td>
+								 <td height="38px">
 									 <div style="float:right; padding-top:1px">
-										<div style="width: 32px !important; height: 25px; background-color: #DFBA49;border-radius:13px;color:#FEFEFE;">		
+										<div style="width: 32px !important; height: 25px; background-color: #DFBA49;border-radius:13px;color:#FEFEFE;padding: 5px;">		
 										<?php echo $userrespondToRequestCount;?>
 										</div>
 									 </div>
@@ -353,14 +353,14 @@ label{
 								 </td>
 								 <td>
 									 <div style="float:right;padding-top:1px"  >
-										<div style="width: 32px; height: 25px; background-color: #F3565D;border-radius:13px;color:#FEFEFE;">	
+										<div style="width: 32px; height: 25px; background-color: #F3565D;border-radius:13px;color:#FEFEFE;padding: 5px;">	
 											<?php echo $userReponseCount;?>
 										</div>
 									 </div>
 								</td>
 							<?php }
 							 else if($users['role_id'] == 3){ ?>
-								<td>
+								<td  height="38px">
 									 <div style="float:left" class="col-md-10" align="left">
 										<a href="<?php echo $final_res_hrefurl; ?>"> 
 											<font style="font-size:14px !important;">
@@ -369,9 +369,9 @@ label{
 										</a>
 									 </div>
 								</td>
-								<td>
+								<td height="38px">
 									 <div style="float:right;padding-top:1px"  >
-										<div style="width: 32px; height: 25px; background-color: #F3565D;border-radius:13px;color:#FEFEFE;">		
+										<div style="width: 32px; height: 25px; background-color: #F3565D;border-radius:13px;color:#FEFEFE;padding: 5px;">		
 											<?php echo $userReponseCount;?>
 										</div>
 									 </div>
@@ -984,7 +984,11 @@ label{
 						<?php } ?>
 					</div> 
 					<div class="rating-block">
-					<h4 style="color:#1295A2">Office Photographs</h4>
+					<?php if($users['role_id'] == 3) { ?>
+						<h4 style="color:#1295A2">Hotel Photographs</h4>
+					<?php } else { ?>
+						<h4 style="color:#1295A2">Office Photographs</h4>
+					<?php } ?>
 				<hr>
 					<div>
 						<div class="form-group col-md-12">

@@ -22,6 +22,7 @@ class PostTravlePackagesController extends AppController
 			//print_r($this->request->data); exit;
 			if(@$submitted_from=='web')
 			{
+				$postTravlePackage->submitted_from=1;
 				$country_id=$this->request->data['country_id'];
 				$x=0; 
 				$postTravlePackage->post_travle_package_countries = [];
@@ -243,7 +244,7 @@ class PostTravlePackagesController extends AppController
 			}
 			else
 			{ 
-				$valid_date = ['valid_date >=' =>date('Y-m-d')]; 
+				$valid_date = ['visible_date >=' =>date('Y-m-d')]; 
 			}
 			
 /* 			if(!empty($duration_short) && $duration_short == 'ASC')
@@ -257,7 +258,8 @@ class PostTravlePackagesController extends AppController
 			{
 				$where_short = null;
 			} */
-			$where_short=['PostTravlePackages.id' =>'DESC'];
+			//$where_short=['PostTravlePackages.position' =>'ASC'];
+			$where_short=['PostTravlePackages.position' =>'ASC','PostTravlePackages.id' =>'DESC'];
 			if(!empty($valid_date_short))
 			{
 				$where_short = ['valid_date' =>$valid_date_short];
@@ -521,7 +523,7 @@ class PostTravlePackagesController extends AppController
 		$getTravelPackageDetails = $this->PostTravlePackages->find();
 		$getTravelPackageDetails->select(['total_likes'=>$getTravelPackageDetails->func()->count('PostTravlePackageLikes.id')])
 			->leftJoinWith('PostTravlePackageLikes')
-			->contain(['Users','PriceMasters','PostTravlePackageRows'=>['PostTravlePackageCategories'],'PostTravlePackageCities'=>['Cities'=>['States']],'PostTravlePackageCountries'=>['Countries']])
+			->contain(['Users'=>['Cities','States','Countries'],'PriceMasters','PostTravlePackageRows'=>['PostTravlePackageCategories'],'PostTravlePackageCities'=>['Cities'=>['States']],'PostTravlePackageCountries'=>['Countries']])
 			->where(['PostTravlePackages.id'=>$id])
 			->group(['PostTravlePackages.id'])
 		->autoFields(true);
@@ -747,7 +749,7 @@ class PostTravlePackagesController extends AppController
 					if ($this->PostTravlePackages->PostTravlePackagePriceBeforeRenews->save($PriceBeforeRenews))
 					{
 						$query = $this->PostTravlePackages->query();
-						$query->update()->set(['price_master_id' => $price_master_id,'price'=>$price,'visible_date'=>date('Y-m-d',strtotime($visible_date))])
+						$query->update()->set(['price_master_id' => $price_master_id,'price'=>$price,'visible_date'=>date('Y-m-d',strtotime($visible_date)),'notified'=>0])
 						->where(['id' => $post_travel_id])->execute();			
 						$message = 'Update Successfully';
 						$response_code = 200;						

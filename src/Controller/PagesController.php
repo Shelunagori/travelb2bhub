@@ -502,7 +502,7 @@ class PagesController extends AppController
 					if ($res = $this->Users->save($user)) {
 						//--			
 						$mobile_no=$d['mobile_number'];
-						$sms_sender='B2BHUB';
+						$sms_sender='TRAHUB';
 						$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
 						file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
 						//--
@@ -548,6 +548,7 @@ class PagesController extends AppController
 						$creditd = $this->Credits->newEntity($c);
 						$this->Credits->save($creditd);
 						$result['response_code'] = 200;
+						$result['mobile_otp'] = $res->mobile_otp;
 						$result['msg'] = 'Thank you for registering with Travelb2bhub.com! Please activate your account by verify your mobile no.';
 					} 
 					else 
@@ -583,7 +584,7 @@ class PagesController extends AppController
 			if(!empty($mobile_otp))
 			{
 				//--			
-				$sms_sender='B2BHUB';
+				$sms_sender='TRAHUB';
 				$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$mobile_otp);
 				file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
 				//--
@@ -591,12 +592,14 @@ class PagesController extends AppController
 			else{
 				//--	
 				$rendomCode=rand('1010', '9999');
-				$sms_sender='B2BHUB';
+				$mobile_otp=$rendomCode;
+				$sms_sender='TRAHUB';
 				$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
 				file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
 				//--
 				$this->Users->updateAll(array('mobile_otp'=>$rendomCode), array('mobile_number'=>$mobile_no));
 			}
+			$result['mobile_otp'] = $mobile_otp;
 			$result['response_code']=200;
 			$result['message']='OTP send Successfully';
 		}
@@ -649,7 +652,7 @@ class PagesController extends AppController
 					
 				//--
 			$rendomCode=rand('1010', '9999');		
-			$sms_sender='B2BHUB';
+			$sms_sender='TRAHUB';
 			$sms=str_replace(' ', '+', 'Dear '.$full_name.', Your one time password is '.$rendomCode);
 			file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
 			$this->Users->updateAll(array('mobile_otp'=>$rendomCode,'activation' => $theKey), array('id' => $userId));		
@@ -827,40 +830,53 @@ class PagesController extends AppController
 				$result = array();
 				if ($user) {
 					$conn = ConnectionManager::get('default');
-           
-					$_SESSION['token']=sha1($user['email']);
-					$result['response_code'] = 200;
-					$result['msg'] = 'success';
-					$user['access_token'] = $_SESSION['token'];
-					$result['response_object'] = $user;
-					date_default_timezone_set('Asia/Kolkata');
-					$logintime = date("Y-m-d h:i:s");   
-					if(isset($_POST['device_id'])){
-						$upsql = "UPDATE users set device_id='".$_POST['device_id']."',last_login='".$logintime."' where id='".$user['id']."'";
-						$stmt = $conn->execute($upsql);
+					$blocked=$user['blocked'];
+					if($blocked==1){
+						$email=$this->request->data['email'];
+						$user=$this->Users->find()->where(['email'=>$email]);
+						$result['response_object'] = $user;
+						$result['response_code'] = 204;
+						$result['msg'] = 'You are blocked by Administrator. Please Contact customer care of Travel B2B Hub.';
+						$data =  json_encode($result);
+						echo $data;
+						exit;
 					}
-                   
-					$sql = "SELECT u.profile_pic as author_profile_pic,t.* FROM testimonial as t INNER JOIN users as u on u.id=t.author_id	WHERE t.user_id='".$user['id']."' ";
-					$stmt = $conn->execute($sql);
-					$testimonials = $stmt ->fetchAll('assoc');
-					$testimonialcount = count($testimonials);
-					$result['testimonialcount'] = $testimonialcount;
-					if($testimonialcount>=1)
+					else
 					{
-						$result['testimonials']=$testimonials;
-						$query ="SELECT AVG(rating) AS average_rating FROM testimonial WHERE user_id='".$user['id']."'";
-						$stmt = $conn->execute($query);
-						$average_rating = $stmt ->fetch('assoc');
-						$result['average_rating']=$average_rating['average_rating'];
+						$_SESSION['token']=sha1($user['email']);
+						$result['response_code'] = 200;
+						$result['msg'] = 'success';
+						$user['access_token'] = $_SESSION['token'];
+						$result['response_object'] = $user;
+						date_default_timezone_set('Asia/Kolkata');
+						$logintime = date("Y-m-d h:i:s");   
+						if(isset($_POST['device_id'])){
+							$upsql = "UPDATE users set device_id='".$_POST['device_id']."',last_login='".$logintime."' where id='".$user['id']."'";
+							$stmt = $conn->execute($upsql);
+						}
+					   
+						$sql = "SELECT u.profile_pic as author_profile_pic,t.* FROM testimonial as t INNER JOIN users as u on u.id=t.author_id	WHERE t.user_id='".$user['id']."' ";
+						$stmt = $conn->execute($sql);
+						$testimonials = $stmt ->fetchAll('assoc');
+						$testimonialcount = count($testimonials);
+						$result['testimonialcount'] = $testimonialcount;
+						if($testimonialcount>=1)
+						{
+							$result['testimonials']=$testimonials;
+							$query ="SELECT AVG(rating) AS average_rating FROM testimonial WHERE user_id='".$user['id']."'";
+							$stmt = $conn->execute($query);
+							$average_rating = $stmt ->fetch('assoc');
+							$result['average_rating']=$average_rating['average_rating'];
+						}
+						else {
+							$result['testimonials']=[];
+							$result['average_rating']=0;
+						}
+					
+						$data =  json_encode($result);
+						echo $data;
+						exit;
 					}
-					else {
-						$result['testimonials']=[];
-						$result['average_rating']=0;
-					}
-				
-					$data =  json_encode($result);
-					echo $data;
-					exit;
 				} 
 				else 
 				{
@@ -2133,7 +2149,7 @@ public function removebusinessbuddyapi() {
 		if(sizeof($BlockedUsers)>0){
 				$conditions["Responses.user_id NOT IN"] =  $BlockedUsers; 
 		}
- 
+	$conditions["Requests.status"] = 0;
 //---
 	$responses = $this->Responses->find()
 	->contain(["Users", "Requests","Requests.Hotels","Testimonial"])
@@ -3447,97 +3463,92 @@ $current_date = date("Y-m-d");
 	echo $result;
 	exit;
 	}
- public function dashboardcounterapi() 
- {
- if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
-        $this->loadModel('Requests');
-        $this->loadModel('Responses');
-		$this->loadModel('Hotels');
-		$this->loadModel('BlockedUsers');
-        $myRequestCount = $myReponseCount = 0;
-		$myfinalCount  = 0;
-		
-		$current_date=date('Y-m-d'); 
-		$da=array("Requests.start_date >=" =>  $current_date,'category_id !='=> 3);
-		$da1=array("Requests.check_in >=" =>  $current_date,'category_id'=> 3); 
-		/*$conditions[]= array (
-			'OR' => array(
-				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
-				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
-			)
-		);*/
-		$conditions[]= array (
-			'OR' => array(
-				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
-				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
-				
-				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
-				array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
-			)
-		);
-		//,'Requests.total_response >' =>0
-		/*$conditionsss[]= array (
-			'OR' => array(
-				array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
-				array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
-			)
-		);*/
-		
-		$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>0,"Requests.status "=>2]]);
-		$myfinalCount = $query3 ->count();
+	public function dashboardcounterapi() 
+	 {
+		if(isset($_GET['token']) AND base64_decode($_GET['token'])=='321456654564phffjhdfjh') {
+			$this->loadModel('Requests');
+			$this->loadModel('Responses');
+			$this->loadModel('Hotels');
+			$this->loadModel('BlockedUsers');
+			$myRequestCount = $myReponseCount = 0;
+			$myfinalCount  = 0;
+			
+			$current_date=date('Y-m-d'); 
+			$da=array("Requests.start_date >=" =>  $current_date,'category_id !='=> 3);
+			$da1=array("Requests.check_in >=" =>  $current_date,'category_id'=> 3); 
+			 
+			$conditions[]= array (
+				'OR' => array(
+					array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
+					array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
+					array("Requests.start_date <=" =>  $current_date,'Requests.category_id'=> 2,'Requests.total_response >' =>0),
+					array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
+				)
+			);
+			
+			$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>0,"Requests.status "=>2]]);
+			$myfinalCount = $query3 ->count();
 
-		$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>0,"Requests.status !="=>2,$conditions]]);
-		$myRequestCount = $query->count();
+			$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>0,"Requests.status !="=>2,$conditions]]);
+			$myRequestCount = $query->count();
 
-		$myRequestCount1 = $query->count();
-		$delcount=0;
-		$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>1]]);
-		foreach($requests as $req){
-			$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
-			if($rqueryr->count()!=0){
-				$delcount++;
+			$myRequestCount1 = $query->count();
+			$delcount=0;
+			$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.is_deleted"=>1]]);
+			foreach($requests as $req){
+				$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
+				if($rqueryr->count()!=0){
+					$delcount++;
+				}
+			}
+			if($myRequestCount > $delcount) {
+				$myRequestCount = $myRequestCount-$delcount;
+			}   
+		
+		$reqcount = $this->getSettings('requestcount');
+		$conditionsss["Requests.status"] = 0;
+		$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $_POST['user_id'],$conditionsss]]);
+
+		$myReponseCount = $queryr->count();
+		if($myReponseCount>0){
+			foreach($queryr as $req){
+				$checkblockedUsers = $this->BlockedUsers->find()->where(['blocked_by' => $req['request']['user_id'],'blocked_user_id'=>$_POST['user_id']])->count(); 
+				$checkblockedUsers1 = $this->BlockedUsers->find()->where(['blocked_user_id' => $req['request']['user_id'],'blocked_by'=>$_POST['user_id']])->count();
+				if($checkblockedUsers>0){
+					$myReponseCount--;
+				}if($checkblockedUsers1>0){
+					$myReponseCount--;
+				}
 			}
 		}
-		if($myRequestCount > $delcount) {
-			$myRequestCount = $myRequestCount-$delcount;
-		}   
-
-	$reqcount = $this->getSettings('requestcount');
-	$conditionsss["Requests.status"] = 0;
-	$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $_POST['user_id'],$conditionsss]]);
-
-	$myReponseCount = $queryr->count();
-	if($myReponseCount>0){
-		foreach($queryr as $req){
-			$checkblockedUsers = $this->BlockedUsers->find()->where(['blocked_by' => $req['request']['user_id'],'blocked_user_id'=>$_POST['user_id']])->count(); 
-			$checkblockedUsers1 = $this->BlockedUsers->find()->where(['blocked_user_id' => $req['request']['user_id'],'blocked_by'=>$_POST['user_id']])->count();
-			if($checkblockedUsers>0){
-				$myReponseCount--;
-			}if($checkblockedUsers1>0){
-				$myReponseCount--;
-			}
+		// Place RRE
+		$RequestCount = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.status !="=>2,'is_deleted'=>0, $conditions]])->count();
+		$RequestCount1 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'], "Requests.total_response >"=>0,"Requests.status !="=>2,'is_deleted'=>1, $conditions]])->count();
+		$RequestCount2 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $_POST['user_id'],"Requests.status"=>2, $conditions]])->count();
+	    $PlaceReqCount=$reqcount['value']-($RequestCount+$RequestCount1+$RequestCount2);
+		
+		$this->set('myReponseCount', $myReponseCount);
+		
+		$Users=$this->Users->find()->where(['id'=>$_POST['user_id']])->first();
+		$blocked=$Users['blocked'];
+		$countarr = array();
+			$coountarr['myRequestCount'] = $myRequestCount1 ;
+			$coountarr['myReponseCount'] = $myReponseCount;
+			$coountarr['placereq'] = $PlaceReqCount;
+			$coountarr['respondToRequestCount'] = $this->__getRespondToRequestCount($_POST['user_id']);
+			$coountarr['blocked'] = $blocked ;
+			$coountarr['msg'] = 'You are blocked by Administrator. Please Contact customer care of Travel B2B Hub.' ;
+			$result = array();
+			$result['response_code'] = 200;
+			$result['response_object'] = $coountarr;
+			$data =   json_encode($result);
+			echo $data;
+			exit;
+		} else {
+			echo "Invalid Access";   
+			exit;
 		}
-	} 
-	$this->set('myReponseCount', $myReponseCount);
-
-	//$myReponseCount = $queryr->count();
-	$reqcount = (($reqcount['value']-$myRequestCount1)-($delcount+ $myfinalCount));
-	$countarr = array();
-        $coountarr['myRequestCount'] = $myRequestCount1 ;
-        $coountarr['myReponseCount'] = $myReponseCount;
-        $coountarr['placereq'] = $reqcount;
-        $coountarr['respondToRequestCount'] = $this->__getRespondToRequestCount($_POST['user_id']);
-        $result = array();
-        $result['response_code'] = 200;
-        $result['response_object'] = $coountarr;
-        $data =   json_encode($result);
-        echo $data;
-        exit;
-    } else {
-echo "Invalid Access";   
-exit;
-    }
- }
+	 }
 	public function __getRespondToRequestCount($userid) {
 		$requests =0;
 		date_default_timezone_set('Asia/Kolkata');
@@ -3986,7 +3997,6 @@ $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField
 		order by c.created DESC ";
 		$stmt1 = $conn->execute($sql1);
 		$countchat = $stmt1 ->fetch('assoc');
-			
 			
 			$API_ACCESS_KEY='AIzaSyBMQtE5umATnqJkV4edMYQ_fR8263Zm21E';
 

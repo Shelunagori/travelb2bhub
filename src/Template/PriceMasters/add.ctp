@@ -26,6 +26,7 @@
 						<div class="col-md-8">
 							<?php 
 							echo $this->Form->input('promotion_type_id',['options' =>$promotionTypes,'label' => false,'class'=>'form-control select2 ','empty'=> 'Select...']);?>
+							<label id="promotion-type-id-error" style="display:none" class="error" for="promotion-type-id">This field is required.</label>
 						</div>
 					</div>
 					<span class="help-block"></span>
@@ -44,7 +45,7 @@
 						</div>
 						<div class="col-md-8">
 							<?php 
-							echo $this->Form->input('week',['label' => false,'class'=>'form-control input-medium ','Placeholder'=> 'Enter Week Here']);?>	
+							echo $this->Form->input('week',['label' => false,'class'=>'form-control input-medium ','Placeholder'=> 'Enter Week Here Ex. ( 2 Week)']);?>	
 						</div>
 					</div>
 					<span class="help-block"> </span>
@@ -157,13 +158,20 @@
 
 $(document).ready(function() {
 	jQuery(".loadingshow").submit(function(){
-	jQuery("#loader-1").show();
-});
+		jQuery("#loader-1").show();
+	});
 	// validate signup form on keyup and submit
 	 $("#CountryForm").validate({ 
 		rules: {
-			country_name: {
+			promotion_type_id: {
 				required: true
+			},
+			price: {
+				required: true,
+				digits: true
+			},
+			week: {
+				required: true 
 			} 
 		},
 		submitHandler: function () {

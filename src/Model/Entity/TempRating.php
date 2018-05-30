@@ -4,19 +4,21 @@ namespace App\Model\Entity;
 use Cake\ORM\Entity;
 
 /**
- * UserRating Entity
+ * TempRating Entity
  *
  * @property int $id
  * @property int $user_id
- * @property int $request_id
+ * @property int $author_id
+ * @property int $promotion_id
  * @property int $rating
- * @property \Cake\I18n\Time $created
+ * @property string $comment
+ * @property \Cake\I18n\Time $created_on
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Author $author
  * @property \App\Model\Entity\Promotion $promotion
  */
-class UserRating extends Entity
+class TempRating extends Entity
 {
 
     /**

@@ -107,8 +107,8 @@ class TestimonialTable extends Table
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
         //$rules->add($rules->existsIn(['author_id'], 'Authors'));
-        $rules->add($rules->existsIn(['request_id'], 'Requests'));
-        $rules->add($rules->existsIn(['response_id'], 'Responses'));
+        //$rules->add($rules->existsIn(['request_id'], 'Requests'));
+        //$rules->add($rules->existsIn(['response_id'], 'Responses'));
 
         return $rules;
     }

@@ -7,22 +7,21 @@ use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * UserRatings Model
+ * TempRatings Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Users
- * @property \Cake\ORM\Association\BelongsTo $Requests
+ * @property \Cake\ORM\Association\BelongsTo $Authors
+ * @property \Cake\ORM\Association\BelongsTo $Promotions
  *
- * @method \App\Model\Entity\UserRating get($primaryKey, $options = [])
- * @method \App\Model\Entity\UserRating newEntity($data = null, array $options = [])
- * @method \App\Model\Entity\UserRating[] newEntities(array $data, array $options = [])
- * @method \App\Model\Entity\UserRating|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
- * @method \App\Model\Entity\UserRating patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
- * @method \App\Model\Entity\UserRating[] patchEntities($entities, array $data, array $options = [])
- * @method \App\Model\Entity\UserRating findOrCreate($search, callable $callback = null, $options = [])
- *
- * @mixin \Cake\ORM\Behavior\TimestampBehavior
+ * @method \App\Model\Entity\TempRating get($primaryKey, $options = [])
+ * @method \App\Model\Entity\TempRating newEntity($data = null, array $options = [])
+ * @method \App\Model\Entity\TempRating[] newEntities(array $data, array $options = [])
+ * @method \App\Model\Entity\TempRating|bool save(\Cake\Datasource\EntityInterface $entity, $options = [])
+ * @method \App\Model\Entity\TempRating patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
+ * @method \App\Model\Entity\TempRating[] patchEntities($entities, array $data, array $options = [])
+ * @method \App\Model\Entity\TempRating findOrCreate($search, callable $callback = null, $options = [])
  */
-class UserRatingsTable extends Table
+class TempRatingsTable extends Table
 {
 
     /**
@@ -35,19 +34,14 @@ class UserRatingsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('user_ratings');
+        $this->table('temp_ratings');
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->addBehavior('Timestamp');
-
         $this->belongsTo('Users', [
             'foreignKey' => 'user_id'
-        ]);
-        $this->belongsTo('Requests', [
-            'foreignKey' => 'request_id'
-        ]);
-    }
+        ]);  
+	}
 
     /**
      * Default validation rules.
@@ -64,7 +58,16 @@ class UserRatingsTable extends Table
         $validator
             ->integer('rating')
             ->allowEmpty('rating');
+/* 
+        $validator
+            ->requirePresence('comment', 'create')
+            ->notEmpty('comment');
 
+        $validator
+            ->dateTime('created_on')
+            ->requirePresence('created_on', 'create')
+            ->notEmpty('created_on');
+ */
         return $validator;
     }
 
@@ -77,8 +80,7 @@ class UserRatingsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
-        $rules->add($rules->existsIn(['request_id'], 'Requests'));
+        $rules->add($rules->existsIn(['user_id'], 'Users')); 
 
         return $rules;
     }

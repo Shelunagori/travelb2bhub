@@ -240,6 +240,10 @@ Router::scope('/', function (RouteBuilder $routes) {
 						   'EventPlannerViews' => [
 							   'action' => 'EventPlannerViews',
 							   'method' => 'GET'
+						   ],
+						   'ReviewRating' => [
+							   'action' => 'ReviewRating',
+							   'method' => 'POST'
 						   ]
 					   ]
 					]

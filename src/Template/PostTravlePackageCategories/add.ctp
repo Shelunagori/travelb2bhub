@@ -133,13 +133,23 @@
 
 $(document).ready(function() {
 	jQuery(".loadingshow").submit(function(){
-	jQuery("#loader-1").show();
-});
+		jQuery("#loader-1").show();
+	});
 	// validate signup form on keyup and submit
+	$.validator.addMethod("specialChars", function( value, element ) {
+		var regex = new RegExp("^[a-zA-Z ]+$");
+		var key = value;
+
+		if (!regex.test(key)) {
+		   return false;
+		}
+		return true;
+	}, "please use only alphabetic characters");
 	 $("#CountryForm").validate({ 
 		rules: {
-			country_name: {
-				required: true
+			name: {
+				required: true,
+				specialChars: true
 			} 
 		},
 		submitHandler: function () {

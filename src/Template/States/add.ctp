@@ -149,12 +149,21 @@ jQuery(".loadingshow").submit(function(){
 	jQuery("#loader-1").show();
 });
 $(document).ready(function() {
-	
+	$.validator.addMethod("specialChars", function( value, element ) {
+		var regex = new RegExp("^[a-zA-Z ]+$");
+		var key = value;
+
+		if (!regex.test(key)) {
+		   return false;
+		}
+		return true;
+	}, "please use only alphabetic characters");
 	// validate signup form on keyup and submit
 	 $("#StateForm").validate({ 
 		rules: {
 			state_name: {
-				required: true
+				required: true,
+				specialChars: true
 			},
 			country_id: {
 				required: true

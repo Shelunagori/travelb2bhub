@@ -3,7 +3,7 @@ namespace App\Controller\Api;
 use App\Controller\Api\AppController;
 use Cake\Filesystem\Folder;
 use Cake\Filesystem\File;
-
+date_default_timezone_set('Asia/Kolkata');
 
 class EventPlannerPromotionsController extends AppController
 {
@@ -322,7 +322,8 @@ class EventPlannerPromotionsController extends AppController
 				$city_filter = null;
 			}
 			
-			$where_short = ['EventPlannerPromotions.id' =>'DESC'];
+			//$where_short = ['EventPlannerPromotions.position' =>'ASC'];
+			$where_short=['EventPlannerPromotions.position' =>'ASC','EventPlannerPromotions.id' =>'DESC'];
 			if(!empty($country_id_short))
 			{
 				$where_short = ['EventPlannerPromotions.country_id' =>$country_id_short];
@@ -511,7 +512,7 @@ class EventPlannerPromotionsController extends AppController
 		$getEventPlannersDetails = $this->EventPlannerPromotions->find();
 		$getEventPlannersDetails->select(['total_likes'=>$getEventPlannersDetails->func()->count('EventPlannerPromotionLikes.id')])
 			->leftJoinWith('EventPlannerPromotionLikes')
-			->contain(['Users','PriceMasters','Countries','EventPlannerPromotionStates'=>['States'],'EventPlannerPromotionCities'=>['Cities']])
+			->contain(['Users'=>['Cities','States','Countries'],'PriceMasters','Countries','EventPlannerPromotionStates'=>['States'],'EventPlannerPromotionCities'=>['Cities']])
 			->where(['EventPlannerPromotions.id'=>$id])
 			->where(['EventPlannerPromotions.is_deleted' =>0])
 			->group(['EventPlannerPromotions.id'])
@@ -632,7 +633,7 @@ class EventPlannerPromotionsController extends AppController
 					if ($this->EventPlannerPromotions->EventPlannerPromotionPriceBeforeRenews->save($PriceBeforeRenews))
 					{
 						$query = $this->EventPlannerPromotions->query();
-						$query->update()->set(['price_master_id' => $price_master_id,'price'=>$price,'visible_date'=>date('Y-m-d',strtotime($visible_date))])
+						$query->update()->set(['price_master_id' => $price_master_id,'price'=>$price,'visible_date'=>date('Y-m-d',strtotime($visible_date)),'notified'=>0])
 						->where(['id' => $event_id])->execute();			
 						$message = 'Update Successfully';
 						$response_code = 200;						
@@ -741,8 +742,98 @@ class EventPlannerPromotionsController extends AppController
 		}
 			
 		$this->set(compact('message','response_code','response_object'));
-        $this->set('_serialize', ['message','response_code','response_object']);		
-		
+        $this->set('_serialize', ['message','response_code','response_object']);			
+	}
+	
+	public function ReviewRating()
+	{
+		$this->loadModel('TempRatings');
+		$this->loadModel('UserChats');
+		$this->loadModel('Testimonial');
+		$this->loadModel('Users');
+		$tempRatings = $this->TempRatings->newEntity();
+		$promotion_id=$this->request->data('promotion_id');
+		$promotion_type_id=$this->request->data('promotion_type_id');
+		$author_id=$this->request->data('author_id');
+		$user_id=$this->request->data('user_id');
+		$rating=$this->request->data('rating');
+		$Testimonialcount = $this->Testimonial->find()->where(['promotion_id'=>$promotion_id,'author_id'=>$author_id,'user_id'=>$user_id,'promotion_type_id'=>$promotion_type_id])->count();
+		if($Testimonialcount==0){
+			$TempRatingscount = $this->TempRatings->find()->where(['promotion_id'=>$promotion_id,'author_id'=>$author_id,'user_id'=>$user_id,'promotion_type_id'=>$promotion_type_id])->count(); 
+			if($TempRatingscount==0){
+				$this->request->data['promotion_id']=$promotion_id;		 
+				$tempRatings = $this->TempRatings->patchEntity($tempRatings, $this->request->data);
+				
+				if ($datasss=$this->TempRatings->save($tempRatings)) {
+					$Users=$this->Users->find()->where(['id'=>$author_id])->first();
+					$Name=ucwords($Users['first_name'].' '.$Users['last_name']);  
+					$userChatsS= $this->UserChats->newEntity();
+					$userchats = $this->UserChats->patchEntity($userChatsS, $this->request->data);
+					$userchats->user_id = $author_id;
+					$userchats->request_id = 0; 
+					$userchats->send_to_user_id = $user_id;
+					$userchats->screen_id = $datasss->id;
+					$userchats->message = $Name.' wants to give you a Review. Would you like to accept his Review?';
+					$userchats->type = 'Review';
+					$userchats->created = date("Y-m-d H:i:s");
+					$userchats->notification = 0;
+					$this->UserChats->save($userchats) ;
+					$response_code=200;
+					$message='The user Rating/Review has been submitted.';
+ 				}
+				else{
+					$response_code=204;
+					$message='Something went wrong. Please, try again.';
+				}
+			}else{
+				$response_code=204;
+				$message='You are already submitted your Rating/Review';
+			}
+		}
+		else{
+			$response_code=204;
+			$message='You are already submitted your Rating/Review';
+		}
+		$this->set(compact('message','response_code'));
+        $this->set('_serialize', ['message','response_code']);	
+	}
+	
+	public function AcceptReviewRating($update_id=null)
+	{
+		$this->loadModel('TempRatings');
+		$this->loadModel('Testimonial');
+		$update_id=$this->request->query['update_id'];
+		$Count=$this->TempRatings->find()->where(['id'=>$update_id])->count();
+		if($Count>0){
+			$TempRatings_data=$this->TempRatings->find()->where(['id'=>$update_id])->first();
+			$testimonial = $this->Testimonial->newEntity();
+			$this->request->data['user_id']=$TempRatings_data->user_id;
+			$this->request->data['author_id']=$TempRatings_data->author_id;
+			$this->request->data['comment']=$TempRatings_data->comment;
+			$this->request->data['rating']=$TempRatings_data->rating;
+			$this->request->data['request_id']=0;
+			$this->request->data['status']=0;
+			$this->request->data['created_at']=$TempRatings_data->created_on ;
+			$this->request->data['promotion_id']=$TempRatings_data->promotion_id;
+			$this->request->data['promotion_type_id']=$TempRatings_data->promotion_type_id;
+			$testimonials = $this->Testimonial->patchEntity($testimonial, $this->request->data);
+			if ($this->Testimonial->save($testimonials)) {
+				 
+				$TempRatings = $this->TempRatings->get($update_id);
+				$this->TempRatings->delete($TempRatings);
+				$response_code=200;
+				$message='You have approved the Review.'; 
+			} else {
+				$response_code=204;
+				$message='Something went wrong. please try again';
+			}
+		}
+		else{
+			$response_code=204;
+			$message='You have already approved the Review.';
+		}
+ 		$this->set(compact('message','response_code'));
+        $this->set('_serialize', ['message','response_code']);	
 	}
 	
 }

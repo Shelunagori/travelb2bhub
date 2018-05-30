@@ -428,6 +428,8 @@ a{
 									<button  style="margin-top:5px;" type="button" class="btn btn-success btn-md btnlayout" data-target="#renew<?php echo $hotelPromotion->id; ?>" data-toggle=modal>Renew</button>&nbsp;&nbsp;
 									
 									<a style="margin-top:5px" href="<?php echo $this->Url->build(["controller" => "HotelPromotions",'action'=>'adminedit/'.$hotelPromotion->id]); ?>" class="btn btn-danger btn-md btnlayout" >Edit</a>&nbsp;&nbsp;
+									
+									<button style="margin-top:5px;" class="btn btn-warning btn-md btnlayout viewCount" data-target="#Priority<?php echo $hotelPromotion->id;?>" data-toggle="modal" type="button">Priority</button>&nbsp;&nbsp;
  								</div>
 
 									
@@ -489,6 +491,55 @@ a{
 								</div>
 							</form>
 <!------Contact Details Modal --------->
+<div id="Priority<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-md" >
+		<!-- Modal content-->
+		<form method="post" class="formSubmit">
+			<div class="modal-content">
+			  <div class="modal-header" >
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">
+						Do you want to set Priority ?
+					</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row mainrow" style="padding: 12px;">
+						<div class="col-md-12">
+							 
+							<div class="col-md-6">
+								<p for="from">
+									Select Position
+								</p>
+								<div class="input-field">
+									<select class="form-control" name="position">
+										<option value="">Select...</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">10</option>
+										<option value="11">11 (Defult)</option>
+									</select>
+								</div>
+							</div> 
+						</div>
+						 
+					</div>
+				</div>
+				<div class="modal-footer" style="height:60px;">
+					<button type="submit"  name="setpriority" class=" btn btn-success btn-md" value="yes" >Submit</button>
+					<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+			<input type="hidden" name="hotel_id" value="<?php echo $hotelPromotion->id; ?>">
+		</form>
+	</div>
+</div>
 <div id="renew<?php echo $hotelPromotion->id; ?>" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-md" >
 								<!-- Modal content-->

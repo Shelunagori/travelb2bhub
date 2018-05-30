@@ -120,7 +120,7 @@ label {
 						<li ><a href="#tab2" data-toggle="tab">Package</a></li>
  					</ul>
 					<ul>
-						<li style="color:red;margin-top:15px;"><?php echo ($reqcountNew['value']-$myRequestCountNew); ?> Requests Remaining</li>
+						<li style="color:red;margin-top:15px;"><?php echo ($PlaceReqCount); ?> Requests Remaining</li>
 					</ul>
 				</div>
 				</br>

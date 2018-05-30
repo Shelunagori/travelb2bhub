@@ -750,120 +750,174 @@ a{
 													</div>
 												</div>
 												
-					<div id="Inclusion<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
-							<div class="modal-dialog modal-md">
-							<!-- Modal content-->
-								<div class="modal-content">
-								  <div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<span class="modal-title">Including in Package</span>
-								  </div>
-									<div class="modal-body" >
-										<div class="row ">
-											<div class="col-md-12" style="padding:15px;">
-											<div class="col-md-12">
-												<span ><?= h($postTravlePackage->package_detail); ?></span>
-											</div>
-											</div>
-										</div>
-									</div>
-									<div class="modal-footer" >
-										<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancel</button>
-									</div>
-								</div>
-							</div>
+<div id="Inclusion<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-md">
+	<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<span class="modal-title">Including in Package</span>
+		  </div>
+			<div class="modal-body" >
+				<div class="row ">
+					<div class="col-md-12" style="padding:15px;">
+					<div class="col-md-12">
+						<span ><?= h($postTravlePackage->package_detail); ?></span>
+					</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer" >
+				<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="Exclusion<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-md">
+	<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<span class="modal-title">Excluded from Package</span>
+		  </div>
+			<div class="modal-body" >
+				<div class="row ">
+					<div class="col-md-12" style="padding:15px;">
+					<div class="col-md-12">
+						<span ><?= h($postTravlePackage->excluded_detail); ?></apan>
+					</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer" >
+				<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="contactdetails<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-sm" >
+		<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<span class="modal-title">
+				Seller Details
+				</span>
+				</div>
+				<div class="modal-body" style="padding-left:15px!important;">
+					<span class="help-block"></span>
+					<div class="row" >
+						<div class="col-md-12"><label>Seller Name: </label>
+						<span style="padding-top:2px;"><u>
+							<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
+							<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>"> 
+							<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?></u>
+							<?php
+							if($postTravlePackage->user_rating==0)
+							{
+								echo "";
+							}
+							else{
+									echo "(".$postTravlePackage->user_rating." <i class='fa fa-star'></i>)";
+								}
+							?></a></span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+					<label>	Mobile No: </label>
+					<span >
+					<?= h($postTravlePackage->user->mobile_number);?>
+					</span>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<label>Email: </label>
+						<span >
+						<a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a>
+						</span>
+					</div>
+				</div>
+				<div class="row" style="display:none;">
+					<div class="col-md-12">
+						Location: 
+						<div >
+						<?= h($postTravlePackage->user->location);?>
 						</div>
-						<div id="Exclusion<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
-							<div class="modal-dialog modal-md">
-							<!-- Modal content-->
-								<div class="modal-content">
-								  <div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<span class="modal-title">Excluded from Package</span>
-								  </div>
-									<div class="modal-body" >
-										<div class="row ">
-											<div class="col-md-12" style="padding:15px;">
-											<div class="col-md-12">
-												<span ><?= h($postTravlePackage->excluded_detail); ?></apan>
-											</div>
-											</div>
+					</div>
+				</div>
+				<span class="help-block"></span>
+			</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="ReviewUser<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-md">
+		<!-- Modal content-->
+			<div class="modal-content">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h3 class="modal-title">Review/Rating</h3>
+			  </div>
+				<div class="modal-body" >
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<table width="90%" border="0" height="142px">
+								<tr>
+									<td><label class="control-label" for="Rating">Rating :</label></td>
+									<td>
+									<?php $rate=0;?>
+										<div class="pull-left">
+											<input class="star star-5" id="star-5<?php echo $postTravlePackage->id; ?>" type="radio" name="rating" <?php if($rate=="5") {echo "checked";} ?> value="5"/>
+											<label class="star star-5" for="star-5<?php echo $postTravlePackage->id; ?>"></label>
+											<input class="star star-4" id="star-4<?php echo $postTravlePackage->id; ?>" type="radio" name="rating" <?php if($rate=="4") {echo "checked";} ?> value="4"/>
+											<label class="star star-4" for="star-4<?php echo $postTravlePackage->id; ?>"></label>
+											<input class="star star-3" id="star-3<?php echo $postTravlePackage->id; ?>" type="radio" name="rating" <?php if($rate=="3") {echo "checked";} ?> value="3"/>
+											<label class="star star-3" for="star-3<?php echo $postTravlePackage->id; ?>"></label>
+											<input class="star star-2" id="star-2<?php echo $postTravlePackage->id; ?>" type="radio" name="rating" <?php if($rate=="2") {echo "checked";} ?> value="2"/>
+											<label class="star star-2" for="star-2<?php echo $postTravlePackage->id; ?>"></label>
+											<input class="star star-1" id="star-1<?php echo $postTravlePackage->id; ?>" type="radio" name="rating" <?php if($rate=="1") {echo "checked";} ?> value="1"/>
+											<label class="star star-1" for="star-1<?php echo $postTravlePackage->id; ?>"></label>
+											<input style="display:none;" type="radio" name="rating" <?php if($rate=="0") {echo "checked";} ?> value="0"/>
 										</div>
-									</div>
-									<div class="modal-footer" >
-										<button type="button" class="btn btn-danger btn-md " data-dismiss="modal">Cancel</button>
-									</div>
-								</div>
-							</div>
+									</td>
+								</tr>
+								<tr>
+								<input type="hidden" name="author_id" value="<?php echo $user_id;?>">
+								<input type="hidden" name="promotion_type_id" value="1">
+								<input type="hidden" name="user_id" value="<?php echo $postTravlePackage->user_id;?>">
+									<td><label class="control-label" for="Comment">Comment :</label></td>
+									<td> <textarea name="comment" class="form-control input-large" rows="2"  id="comment"></textarea> 
+									</td>
+								</tr>
+							</table>
 						</div>
-						<div id="contactdetails<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
-							<div class="modal-dialog modal-sm" >
-								<!-- Modal content-->
-									<div class="modal-content">
-									  <div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-											<span class="modal-title">
-											Seller Details
-											</span>
-											</div>
-											<div class="modal-body" style="padding-left:15px!important;">
-												<span class="help-block"></span>
-												<div class="row" >
-													<div class="col-md-12"><label>Seller Name: </label>
-													<span style="padding-top:2px;"><u>
-															<?php $hrefurl =  $this->Url->build(array('controller'=>'users','action'=>'viewprofile',$postTravlePackage->user_id),1);?>
-															<a style="color:#d69d5c" href="<?php echo $hrefurl; ?>"> 
-															<?= h($postTravlePackage->user->first_name.' '.$postTravlePackage->user->last_name);?></u>
-															<?php
-															if($postTravlePackage->user_rating==0)
-															{
-																echo "";
-															}
-															else{
-																	echo "(".$postTravlePackage->user_rating." <i class='fa fa-star'></i>)";
-																}
-															?></a></span>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-12">
-													<label>	Mobile No: </label>
-													<span >
-													<?= h($postTravlePackage->user->mobile_number);?>
-													</span>
-													</div>
-												</div>
-												<div class="row">
-													<div class="col-md-12">
-														<label>Email: </label>
-														<span >
-														<a href="mailto:<?php echo $postTravlePackage->user->email;?>"><?= h($postTravlePackage->user->email);?></a>
-														</span>
-													</div>
-												</div>
-												<div class="row" style="display:none;">
-													<div class="col-md-12">
-														Location: 
-														<div >
-														<?= h($postTravlePackage->user->location);?>
-														</div>
-													</div>
-												</div>
-												<span class="help-block"></span>
-											</div>
-											<div class="modal-footer">
-											<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-											</div>
-										</div>
-									</div>
-								</div>
+					</div>
+				</div>
+				<div class="modal-footer" >
+					<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
+					<button type="submit" name="rate_user" class="btn btn-success btn-md" >Submit</button>
+				</div>
+			</div>
+		</div>
+	</div>	
 								<div class="row" style="padding-top:15px;">
 								<div class="col-md-12 text-center" >
 									<button class="btn btn-info btn-md btnlayout viewCount" data-target="#Inclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal"  promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" type="button">Inclusions</button>&nbsp;&nbsp;
 										<!-------Report Modal Start--------->
 									<button class="btn btn-warning btn-md btnlayout viewCount" data-target="#Exclusion<?php echo $postTravlePackage->id;?>"   promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" data-toggle="modal" type="button">Exclusions</button>&nbsp;&nbsp;
-									<button class="btn btn-danger btn-md  btnlayout viewCount" data-target="#contactdetails<?php echo $postTravlePackage->id;?>" promotionid="<?php echo $postTravlePackage->id;?>" data-toggle="modal" userId="<?php echo $user_id;?>" type="button">Contact Info</button>
-										
+									<button class="btn btn-danger btn-md  btnlayout viewCount" data-target="#contactdetails<?php echo $postTravlePackage->id;?>" promotionid="<?php echo $postTravlePackage->id;?>" data-toggle="modal" userId="<?php echo $user_id;?>" type="button">Contact Info</button>&nbsp;&nbsp;
+									<?php
+									if($postTravlePackage->user_id != $user_id){ ?>
+										<button style="padding-top:5px" class="btn btn-success btn-md btnlayout viewCount" data-target="#ReviewUser<?php echo $postTravlePackage->id;?>" data-toggle="modal" promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" type="button">Rate User</button>&nbsp;&nbsp;
+									<?php	}
+									?>	
 												</div>
 											</div>
 										</div>

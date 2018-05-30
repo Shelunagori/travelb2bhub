@@ -27,8 +27,7 @@ fieldset
 						<div class="form-group ">
 						  <label>Select Type:</label>
 						  <select name="type" class="form-control type">
-							<option value="">Select...</option>
-							<option value="1">Weekly</option>
+							<option value="">Select...</option> 
 							<option value="2">Montly</option>
 							<option value="3">Yearly</option>
 							</select>
@@ -49,7 +48,7 @@ fieldset
 					<div class="col-md-3">
 						<div class="form-group">
 						  <label class="control-label col-md-12">&nbsp;</label>  
-							<a href="<?php echo $this->Url->build(array('controller'=>'admins','action'=>'statistics')) ?>"class="btn btn-danger btn-sm">Reset</a>
+							<a href="<?php echo $this->Url->build(array('controller'=>'admins','action'=>'statewise-statistics')) ?>"class="btn btn-danger btn-sm">Reset</a>
 							<?php echo $this->Form->button('Search',['class'=>'btn btn-sm btn-success']); ?> 
 						</div>
 					</div>	
@@ -66,8 +65,8 @@ fieldset
 						<button type="submit" formaction="pdf_excel" name="excel" style="margin:10px" class="btn btn-info btn-xs" ><i class="fa fa-download "></i> &nbsp; Excel &nbsp; </button>   
 					 </form>
 				</div>
-				<div class="col-md-12">
-					<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+				<div class="" style="width:100%; overflow-x:scroll">
+					<div id="container" style="min-width: 1000px; height: 400px; margin: 0 auto"></div>
 				</div>				
 			</div>				
         </div>
@@ -126,39 +125,43 @@ fieldset
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 
 <script type="text/javascript">
-$(function () {  
-    $('#container').highcharts({
-        title: {
-            text: 'Monthly Registrations',
-            x: -20 //center
-        },
-        subtitle: {
-           // text: 'Source: travelb2bhub.com.com',
-           // x: -20
-        },
-        xAxis: {
-            categories: [<?php echo $MonthName;?>]
-        },
-        yAxis: {
-            title: {
-                text: 'No of Registrations'
-            },
-            plotLines: [{
-                value: 0,
-                width: 1,
-                color: '#808080'
-            }]
-        },
-        tooltip: {
-           //valueSuffix: '°C'
-        },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
-        },
-        series: [{
+
+$(function () {
+	$('#container').highcharts({
+		chart: {
+			type: 'column'
+		},
+		title: {
+			text: 'Monthly Registrations '
+		},
+		subtitle: {
+			//text: 'Source: WorldClimate.com'
+		},
+		xAxis: {
+			categories: [<?php echo $MonthName; ?>],
+			crosshair: true
+		},
+		yAxis: {
+			min: 0,
+			title: {
+				text: 'Application'
+			}
+		},
+		tooltip: { 
+			headerFormat: '<span style="font-size:12px font-weight:bold;">{point.key}</span><table>',
+			pointFormat: '<tr><td style="font-size:12px; font-weight:bold;color:{series.color};padding:0">{series.name}: </td>' +
+				'<td style="padding:0"><b>{point.y}</b></td></tr>',
+			footerFormat: '</table>',
+			shared: true,
+			useHTML: true
+		},
+		plotOptions: {
+			column: {
+				pointPadding: 0.1,
+				borderWidth: 0
+			}
+		},
+		series: [{
             name: 'Travel Agent',
             data: [<?php echo $TravelAgentCount;?>]
         }, {
@@ -171,7 +174,7 @@ $(function () {
             name: 'Total',
             data: [<?php echo $TotalRegistration;?>]
         }]
-    });
+	});
 });
  
 $(document).ready(function(){ 

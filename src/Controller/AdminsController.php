@@ -53,7 +53,7 @@ class AdminsController extends AppController
 		$this->set('TestimonialCount', $TestimonialCount);
 		
 		$this->loadModel('Requests'); 
-		$RequestsCount=$this->Requests->find()->where(['is_deleted'=>0])->count();
+		$RequestsCount=$this->Requests->find()->contain(['Users','Cities','States','Categories'])->count();
 		$this->set('RequestsCount', $RequestsCount);
 		
 		$this->loadModel('Responses'); 
@@ -377,37 +377,73 @@ class AdminsController extends AppController
 		$this->viewBuilder()->layout('admin_layout');
 		$month_from=$this->request->query('month_from');
 		$month_to=$this->request->query('month_to'); 
+		$type=$this->request->query('type'); 
 		if(!empty($month_from) && !empty($month_to)){
 			$month_from='01-'.$month_from;
 			$month_to='01-'.$month_to;
-			$start = strtotime($month_from);
-			$end = strtotime($month_to);
-			while($start < $end)
-			{
-				//date('F Y', $start), PHP_EOL;
-				$MH = date('m', $start);
-				$YR = date('Y', $start);
-				$month_from='01-'.$MH.'-'.$YR; 
-				$first_date=date('Y-m-d',strtotime($month_from));
-				$last_date=date('Y-m-t',strtotime($month_from));
-				$Month_name=date('M',strtotime($first_date));  
-				
-				$TA=$this->Users->find()->where(['Users.role_id'=>1,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
-				$TravelAgentCount[]=$TA;
-				
-				$EP=$this->Users->find()->where(['Users.role_id'=>2,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
-				$EventPlannerCount[]=$EP;
-				
-				$H=$this->Users->find()->where(['Users.role_id'=>3,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
-				$HotelierCount[]=$H;
-				
-				$MonthName[]=$Month_name;
-				
-				$TotalRegistration[]=$TA+$EP+$H;
- 				 
-				$start = strtotime("+1 month", $start);
+			if($type==2){
+				$start = strtotime($month_from);
+				$end = strtotime($month_to);
+				while($start < $end)
+				{
+					//date('F Y', $start), PHP_EOL;
+					$MH = date('m', $start);
+					$YR = date('Y', $start);
+					$month_from='01-'.$MH.'-'.$YR; 
+					$first_date=date('Y-m-d',strtotime($month_from));
+					$last_date=date('Y-m-t',strtotime($month_from));
+					$Month_name=date('M',strtotime($first_date));  
+					
+					$TA=$this->Users->find()->where(['Users.role_id'=>1,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+					$TravelAgentCount[]=$TA;
+					
+					$EP=$this->Users->find()->where(['Users.role_id'=>2,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+					$EventPlannerCount[]=$EP;
+					
+					$H=$this->Users->find()->where(['Users.role_id'=>3,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+					$HotelierCount[]=$H;
+					
+					$MonthName[]=$Month_name;
+					
+					$TotalRegistration[]=$TA+$EP+$H;
+					 
+					$start = strtotime("+1 month", $start);
+				}
 			}
- 		}
+			else{
+				$start_date=date('Y-m-d',strtotime($month_from));
+				$end_date=date('Y-m-t',strtotime($month_from));
+				$x=0;
+				while (strtotime($start_date) <= strtotime($end_date)) {
+					 
+					$CompairDate = date ("Y-m-d", strtotime("+7 day", strtotime($start_date)));
+					$firstdate = date ("Y-m-d", strtotime("-7 day", strtotime($CompairDate)));
+					if(strtotime($end_date) > strtotime($CompairDate)){
+						$start_date = date ("Y-m-d", strtotime("+7 day", strtotime($start_date)));
+					}
+					else{
+						$x=1;
+						$start_date = date ("Y-m-t", strtotime($start_date));
+					}
+					
+					
+					$TA=$this->Users->find()->where(['Users.role_id'=>1,'create_at >='=>$firstdate,'create_at <='=>$start_date])->count();
+					$TravelAgentCount[]=$TA;
+					
+					$EP=$this->Users->find()->where(['Users.role_id'=>2,'create_at >='=>$firstdate,'create_at <='=>$start_date])->count();
+					$EventPlannerCount[]=$EP;
+					
+					$H=$this->Users->find()->where(['Users.role_id'=>3,'create_at >='=>$firstdate,'create_at <='=>$start_date])->count();
+					$HotelierCount[]=$H;
+					
+					$MonthName[]=date('d-M-Y',strtotime($firstdate)).' - '.date('d-M-Y',strtotime($start_date));
+					
+					$TotalRegistration[]=$TA+$EP+$H;
+					 
+					if($x==1){break;}
+				}
+			}
+  		}
 		else
 		{
 			for($x=1;$x<=12;$x++)
@@ -434,13 +470,721 @@ class AdminsController extends AppController
 				$TotalRegistration[]=$TA+$EP+$H;
 			}
 		}
+		//-- For Excel
+		$this->set('TArray',$TotalRegistration);
+		$this->set('TAArray',$TravelAgentCount);
+		$this->set('EPArray',$EventPlannerCount);
+		$this->set('HArray',$HotelierCount);
+		$this->set('MonthArray',$MonthName);
+		//-- For Graph
 		$TotalRegistration=implode(',', $TotalRegistration);
 		$TravelAgentCount=implode(',', $TravelAgentCount);
 		$EventPlannerCount=implode(',', $EventPlannerCount);
 		$HotelierCount=implode(',', $HotelierCount); 
+		
 		$MonthName=implode("','", $MonthName); 
 		$MonthName="'".$MonthName."'";
 		$this->set(compact('TravelAgentCount','EventPlannerCount','HotelierCount','TotalRegistration','MonthName'));
+    }
+	
+	public function RequestStatistics($month_from=null,$month_to=null)
+    {
+		$this->viewBuilder()->layout('admin_layout');
+		$month_from=$this->request->query('month_from');
+		$month_to=$this->request->query('month_to'); 
+		$type=$this->request->query('type'); 
+		$this->loadModel('Requests');
+		if(!empty($month_from) && !empty($month_to)){
+			$month_from='01-'.$month_from;
+			$month_to='01-'.$month_to;
+			if($type==2){
+				$start = strtotime($month_from);
+				$end = strtotime($month_to);
+				while($start < $end)
+				{
+					//date('F Y', $start), PHP_EOL;
+					$MH = date('m', $start);
+					$YR = date('Y', $start);
+					$month_from='01-'.$MH.'-'.$YR; 
+					$first_date=date('Y-m-d',strtotime($month_from));
+					$last_date=date('Y-m-t',strtotime($month_from));
+					$Month_name=date('M',strtotime($first_date));  
+					
+					$TA=$this->Users->find()->where(['Users.role_id'=>1]);
+					$TAIDs=array();
+					foreach($TA as $datas){
+						$TAIDs[]=$datas['id']; 
+					}
+					//-- GET COUNT OF REQ
+					$TAS=0;
+					if(!empty($TAIDs)){
+						$TAS=$this->Requests->find()->where(['Requests.user_id IN'=>$TAIDs,'created >='=>$first_date,'created <='=>$last_date])->count();
+					}
+					$TravelAgentCount[]=$TAS;
+					
+					//-- EVENT PLANNER
+					$EP=$this->Users->find()->where(['Users.role_id'=>2]);
+					$EPIDs=array();
+					foreach($EP as $datass){
+						$EPIDs[]=$datass['id']; 
+					}
+					//-- GET COUNT OF REQ
+					$EPS=0;
+					if(!empty($EPIDs)){
+						$EPS=$this->Requests->find()->where(['Requests.user_id IN'=>$EPIDs,'created >='=>$first_date,'created <='=>$last_date])->count();
+					}
+					$EventPlannerCount[]=$EPS;
+					
+					$MonthName[]=$Month_name;
+					
+					$TotalRegistration[]=$TAS+$EPS;
+					 
+					$start = strtotime("+1 month", $start);
+				}
+			}
+			else{
+				$start_date=date('Y-m-d',strtotime($month_from));
+				$end_date=date('Y-m-t',strtotime($month_from));
+				$x=0;
+				while (strtotime($start_date) <= strtotime($end_date)) {
+					 
+					$CompairDate = date ("Y-m-d", strtotime("+7 day", strtotime($start_date)));
+					$firstdate = date ("Y-m-d", strtotime("-7 day", strtotime($CompairDate)));
+					if(strtotime($end_date) > strtotime($CompairDate)){
+						$start_date = date ("Y-m-d", strtotime("+7 day", strtotime($start_date)));
+					}
+					else{
+						$x=1;
+						$start_date = date ("Y-m-t", strtotime($start_date));
+					}
+					
+					
+					$TA=$this->Users->find()->where(['Users.role_id'=>1]);
+					$TAIDs=array();
+					foreach($TA as $datas){
+						$TAIDs[]=$datas['id']; 
+					}
+					//-- GET COUNT OF REQ
+					$TAS=0;
+					if(!empty($TAIDs)){
+						$TAS=$this->Requests->find()->where(['Requests.user_id IN'=>$TAIDs,'created >='=>$firstdate,'created <='=>$start_date])->count();
+					}
+					$TravelAgentCount[]=$TAS;
+					
+					//-- EVENT PLANNER
+					$EP=$this->Users->find()->where(['Users.role_id'=>2]);
+					$EPIDs=array();
+					foreach($EP as $datass){
+						$EPIDs[]=$datass['id']; 
+					}
+					//-- GET COUNT OF REQ
+					$EPS=0;
+					if(!empty($EPIDs)){
+						$EPS=$this->Requests->find()->where(['Requests.user_id IN'=>$EPIDs,'created >='=>$firstdate,'created <='=>$start_date])->count();
+					}
+					$EventPlannerCount[]=$EPS; 
+					
+					$TotalRegistration[]=$TAS+$EPS;
+					
+					$MonthName[]=date('d-M-Y',strtotime($firstdate)).' - '.date('d-M-Y',strtotime($start_date));
+					 
+					if($x==1){break;}
+				}
+			}
+  		}
+		else
+		{
+			for($x=1;$x<=12;$x++)
+			{
+				$month=$x;
+				$current_year=date('Y');
+				$first_date='01-'.$month.'-'.$current_year;
+				$first_date=date('Y-m-d',strtotime($first_date));
+				$last_date=date('Y-m-t',strtotime($first_date));
+				$Month_name=date('M',strtotime($first_date));
+				//-- Get All TA Id
+				$TA=$this->Users->find()->where(['Users.role_id'=>1]);
+				$TAIDs=array();
+				foreach($TA as $datas){
+					$TAIDs[]=$datas['id']; 
+				}
+ 				//-- GET COUNT OF REQ
+				$TAS=0;
+ 				if(!empty($TAIDs)){
+					$TAS=$this->Requests->find()->where(['Requests.user_id IN'=>$TAIDs,'created >='=>$first_date,'created <='=>$last_date])->count();
+				}
+				$TravelAgentCount[]=$TAS;
+				
+				//-- EVENT PLANNER
+				$EP=$this->Users->find()->where(['Users.role_id'=>2]);
+				$EPIDs=array();
+				foreach($EP as $datass){
+					$EPIDs[]=$datass['id']; 
+				}
+				//-- GET COUNT OF REQ
+ 				$EPS=0;
+ 				if(!empty($EPIDs)){
+					$EPS=$this->Requests->find()->where(['Requests.user_id IN'=>$EPIDs,'created >='=>$first_date,'created <='=>$last_date])->count();
+				}
+				$EventPlannerCount[]=$EPS;
+				
+				$MonthName[]=$Month_name;
+				
+				$TotalRegistration[]=$TAS+$EPS;
+			}
+		}
+		//-- For Excel
+		$this->set('TArray',$TotalRegistration);
+		$this->set('TAArray',$TravelAgentCount);
+		$this->set('EPArray',$EventPlannerCount); 
+		$this->set('MonthArray',$MonthName);
+		//-- For Graph
+		$TotalRegistration=implode(',', $TotalRegistration);
+		$TravelAgentCount=implode(',', $TravelAgentCount);
+		$EventPlannerCount=implode(',', $EventPlannerCount);  
+		
+		$MonthName=implode("','", $MonthName); 
+		$MonthName="'".$MonthName."'";
+		$this->set(compact('TravelAgentCount','EventPlannerCount','TotalRegistration','MonthName'));
+    }
+	
+	public function finalizeRequests($month_from=null,$month_to=null)
+    {
+		$this->viewBuilder()->layout('admin_layout');
+		$month_from=$this->request->query('month_from');
+		$month_to=$this->request->query('month_to'); 
+		$type=$this->request->query('type'); 
+		$this->loadModel('Requests');
+		if(!empty($month_from) && !empty($month_to)){
+			$month_from='01-'.$month_from;
+			$month_to='01-'.$month_to;
+			if($type==2){
+				$start = strtotime($month_from);
+				$end = strtotime($month_to);
+				while($start < $end)
+				{
+					//date('F Y', $start), PHP_EOL;
+					$MH = date('m', $start);
+					$YR = date('Y', $start);
+					$month_from='01-'.$MH.'-'.$YR; 
+					$first_date=date('Y-m-d',strtotime($month_from));
+					$last_date=date('Y-m-t',strtotime($month_from));
+					$Month_name=date('M',strtotime($first_date));  
+					
+					$TA=$this->Users->find()->where(['Users.role_id'=>1]);
+					$TAIDs=array();
+					foreach($TA as $datas){
+						$TAIDs[]=$datas['id']; 
+					}
+					//-- GET COUNT OF REQ
+					$TAS=0;
+					if(!empty($TAIDs)){
+						$TAS=$this->Requests->find()->where(['Requests.user_id IN'=>$TAIDs,'Requests.created >='=>$first_date,'Requests.created <='=>$last_date,'status'=>2])->count();
+					}
+					$TravelAgentCount[]=$TAS;
+					
+					//-- EVENT PLANNER
+					$EP=$this->Users->find()->where(['Users.role_id'=>2]);
+					$EPIDs=array();
+					foreach($EP as $datass){
+						$EPIDs[]=$datass['id']; 
+					}
+					//-- GET COUNT OF REQ
+					$EPS=0;
+					if(!empty($EPIDs)){
+						$EPS=$this->Requests->find()->where(['Requests.user_id IN'=>$EPIDs,'created >='=>$first_date,'created <='=>$last_date,'status'=>2])->count();
+					}
+					$EventPlannerCount[]=$EPS;
+					
+					$MonthName[]=$Month_name;
+					
+					$TotalRegistration[]=$TAS+$EPS;
+					 
+					$start = strtotime("+1 month", $start);
+				}
+			}
+			else{
+				$start_date=date('Y-m-d',strtotime($month_from));
+				$end_date=date('Y-m-t',strtotime($month_from));
+				$x=0;
+				while (strtotime($start_date) <= strtotime($end_date)) {
+					 
+					$CompairDate = date ("Y-m-d", strtotime("+7 day", strtotime($start_date)));
+					$firstdate = date ("Y-m-d", strtotime("-7 day", strtotime($CompairDate)));
+					if(strtotime($end_date) > strtotime($CompairDate)){
+						$start_date = date ("Y-m-d", strtotime("+7 day", strtotime($start_date)));
+					}
+					else{
+						$x=1;
+						$start_date = date ("Y-m-t", strtotime($start_date));
+					}
+					
+					
+					$TA=$this->Users->find()->where(['Users.role_id'=>1]);
+					$TAIDs=array();
+					foreach($TA as $datas){
+						$TAIDs[]=$datas['id']; 
+					}
+					//-- GET COUNT OF REQ
+					$TAS=0;
+					if(!empty($TAIDs)){
+						$TAS=$this->Requests->find()->where(['Requests.user_id IN'=>$TAIDs,'created >='=>$firstdate,'created <='=>$start_date,'status'=>2])->count();
+					}
+					$TravelAgentCount[]=$TAS;
+					
+					//-- EVENT PLANNER
+					$EP=$this->Users->find()->where(['Users.role_id'=>2]);
+					$EPIDs=array();
+					foreach($EP as $datass){
+						$EPIDs[]=$datass['id']; 
+					}
+					//-- GET COUNT OF REQ
+					$EPS=0;
+					if(!empty($EPIDs)){
+						$EPS=$this->Requests->find()->where(['Requests.user_id IN'=>$EPIDs,'created >='=>$firstdate,'created <='=>$start_date,'status'=>2])->count();
+					}
+					$EventPlannerCount[]=$EPS; 
+					
+					$TotalRegistration[]=$TAS+$EPS;
+					
+					$MonthName[]=date('d-M-Y',strtotime($firstdate)).' - '.date('d-M-Y',strtotime($start_date));
+					 
+					if($x==1){break;}
+				}
+			}
+  		}
+		else
+		{
+			for($x=1;$x<=12;$x++)
+			{
+				$month=$x;
+				$current_year=date('Y');
+				$first_date='01-'.$month.'-'.$current_year;
+				$first_date=date('Y-m-d',strtotime($first_date));
+				$last_date=date('Y-m-t',strtotime($first_date));
+				$Month_name=date('M',strtotime($first_date));
+				//-- Get All TA Id
+				$TA=$this->Users->find()->where(['Users.role_id'=>1]);
+				$TAIDs=array();
+				foreach($TA as $datas){
+					$TAIDs[]=$datas['id']; 
+				}
+ 				//-- GET COUNT OF REQ
+				$TAS=0;
+ 				if(!empty($TAIDs)){
+					$TAS=$this->Requests->find()->where(['Requests.user_id IN'=>$TAIDs,'created >='=>$first_date,'created <='=>$last_date,'status'=>2])->count();
+				}
+				$TravelAgentCount[]=$TAS;
+				
+				//-- EVENT PLANNER
+				$EP=$this->Users->find()->where(['Users.role_id'=>2]);
+				$EPIDs=array();
+				foreach($EP as $datass){
+					$EPIDs[]=$datass['id']; 
+				}
+				//-- GET COUNT OF REQ
+ 				$EPS=0;
+ 				if(!empty($EPIDs)){
+					$EPS=$this->Requests->find()->where(['Requests.user_id IN'=>$EPIDs,'created >='=>$first_date,'created <='=>$last_date,'status'=>2])->count();
+				}
+				$EventPlannerCount[]=$EPS;
+				
+				$MonthName[]=$Month_name;
+				
+				$TotalRegistration[]=$TAS+$EPS;
+			}
+		}
+		//-- For Excel
+		$this->set('TArray',$TotalRegistration);
+		$this->set('TAArray',$TravelAgentCount);
+		$this->set('EPArray',$EventPlannerCount); 
+		$this->set('MonthArray',$MonthName);
+		//-- For Graph
+		$TotalRegistration=implode(',', $TotalRegistration);
+		$TravelAgentCount=implode(',', $TravelAgentCount);
+		$EventPlannerCount=implode(',', $EventPlannerCount);  
+		
+		$MonthName=implode("','", $MonthName); 
+		$MonthName="'".$MonthName."'";
+		$this->set(compact('TravelAgentCount','EventPlannerCount','TotalRegistration','MonthName'));
+    }
+	
+	public function removedRequests($month_from=null,$month_to=null)
+    {
+		$this->viewBuilder()->layout('admin_layout');
+		$month_from=$this->request->query('month_from');
+		$month_to=$this->request->query('month_to'); 
+		$type=$this->request->query('type'); 
+		$this->loadModel('Requests');
+		if(!empty($month_from) && !empty($month_to)){
+			$month_from='01-'.$month_from;
+			$month_to='01-'.$month_to;
+			if($type==2){
+				$start = strtotime($month_from);
+				$end = strtotime($month_to);
+				while($start < $end)
+				{
+					//date('F Y', $start), PHP_EOL;
+					$MH = date('m', $start);
+					$YR = date('Y', $start);
+					$month_from='01-'.$MH.'-'.$YR; 
+					$first_date=date('Y-m-d',strtotime($month_from));
+					$last_date=date('Y-m-t',strtotime($month_from));
+					$Month_name=date('M',strtotime($first_date));  
+					
+					$TA=$this->Users->find()->where(['Users.role_id'=>1]);
+					$TAIDs=array();
+					foreach($TA as $datas){
+						$TAIDs[]=$datas['id']; 
+					}
+					//-- GET COUNT OF REQ
+					$TAS=0;
+					if(!empty($TAIDs)){
+						$TAS=$this->Requests->find()->where(['Requests.user_id IN'=>$TAIDs,'Requests.created >='=>$first_date,'Requests.created <='=>$last_date,'is_deleted'=>1])->count();
+					}
+					$TravelAgentCount[]=$TAS;
+					
+					//-- EVENT PLANNER
+					$EP=$this->Users->find()->where(['Users.role_id'=>2]);
+					$EPIDs=array();
+					foreach($EP as $datass){
+						$EPIDs[]=$datass['id']; 
+					}
+					//-- GET COUNT OF REQ
+					$EPS=0;
+					if(!empty($EPIDs)){
+						$EPS=$this->Requests->find()->where(['Requests.user_id IN'=>$EPIDs,'created >='=>$first_date,'created <='=>$last_date,'is_deleted'=>1])->count();
+					}
+					$EventPlannerCount[]=$EPS;
+					
+					$MonthName[]=$Month_name;
+					
+					$TotalRegistration[]=$TAS+$EPS;
+					 
+					$start = strtotime("+1 month", $start);
+				}
+			}
+			else{
+				$start_date=date('Y-m-d',strtotime($month_from));
+				$end_date=date('Y-m-t',strtotime($month_from));
+				$x=0;
+				while (strtotime($start_date) <= strtotime($end_date)) {
+					 
+					$CompairDate = date ("Y-m-d", strtotime("+7 day", strtotime($start_date)));
+					$firstdate = date ("Y-m-d", strtotime("-7 day", strtotime($CompairDate)));
+					if(strtotime($end_date) > strtotime($CompairDate)){
+						$start_date = date ("Y-m-d", strtotime("+7 day", strtotime($start_date)));
+					}
+					else{
+						$x=1;
+						$start_date = date ("Y-m-t", strtotime($start_date));
+					}
+					
+					
+					$TA=$this->Users->find()->where(['Users.role_id'=>1]);
+					$TAIDs=array();
+					foreach($TA as $datas){
+						$TAIDs[]=$datas['id']; 
+					}
+					//-- GET COUNT OF REQ
+					$TAS=0;
+					if(!empty($TAIDs)){
+						$TAS=$this->Requests->find()->where(['Requests.user_id IN'=>$TAIDs,'created >='=>$firstdate,'created <='=>$start_date,'is_deleted'=>1])->count();
+					}
+					$TravelAgentCount[]=$TAS;
+					
+					//-- EVENT PLANNER
+					$EP=$this->Users->find()->where(['Users.role_id'=>2]);
+					$EPIDs=array();
+					foreach($EP as $datass){
+						$EPIDs[]=$datass['id']; 
+					}
+					//-- GET COUNT OF REQ
+					$EPS=0;
+					if(!empty($EPIDs)){
+						$EPS=$this->Requests->find()->where(['Requests.user_id IN'=>$EPIDs,'created >='=>$firstdate,'created <='=>$start_date,'is_deleted'=>1])->count();
+					}
+					$EventPlannerCount[]=$EPS; 
+					
+					$TotalRegistration[]=$TAS+$EPS;
+					
+					$MonthName[]=date('d-M-Y',strtotime($firstdate)).' - '.date('d-M-Y',strtotime($start_date));
+					 
+					if($x==1){break;}
+				}
+			}
+  		}
+		else
+		{
+			for($x=1;$x<=12;$x++)
+			{
+				$month=$x;
+				$current_year=date('Y');
+				$first_date='01-'.$month.'-'.$current_year;
+				$first_date=date('Y-m-d',strtotime($first_date));
+				$last_date=date('Y-m-t',strtotime($first_date));
+				$Month_name=date('M',strtotime($first_date));
+				//-- Get All TA Id
+				$TA=$this->Users->find()->where(['Users.role_id'=>1]);
+				$TAIDs=array();
+				foreach($TA as $datas){
+					$TAIDs[]=$datas['id']; 
+				}
+ 				//-- GET COUNT OF REQ
+				$TAS=0;
+ 				if(!empty($TAIDs)){
+					$TAS=$this->Requests->find()->where(['Requests.user_id IN'=>$TAIDs,'created >='=>$first_date,'created <='=>$last_date,'is_deleted'=>1])->count();
+				}
+				$TravelAgentCount[]=$TAS;
+				
+				//-- EVENT PLANNER
+				$EP=$this->Users->find()->where(['Users.role_id'=>2]);
+				$EPIDs=array();
+				foreach($EP as $datass){
+					$EPIDs[]=$datass['id']; 
+				}
+				//-- GET COUNT OF REQ
+ 				$EPS=0;
+ 				if(!empty($EPIDs)){
+					$EPS=$this->Requests->find()->where(['Requests.user_id IN'=>$EPIDs,'created >='=>$first_date,'created <='=>$last_date,'is_deleted'=>1])->count();
+				}
+				$EventPlannerCount[]=$EPS;
+				
+				$MonthName[]=$Month_name;
+				
+				$TotalRegistration[]=$TAS+$EPS;
+			}
+		}
+		//-- For Excel
+		$this->set('TArray',$TotalRegistration);
+		$this->set('TAArray',$TravelAgentCount);
+		$this->set('EPArray',$EventPlannerCount); 
+		$this->set('MonthArray',$MonthName);
+		//-- For Graph
+		$TotalRegistration=implode(',', $TotalRegistration);
+		$TravelAgentCount=implode(',', $TravelAgentCount);
+		$EventPlannerCount=implode(',', $EventPlannerCount);  
+		
+		$MonthName=implode("','", $MonthName); 
+		$MonthName="'".$MonthName."'";
+		$this->set(compact('TravelAgentCount','EventPlannerCount','TotalRegistration','MonthName'));
+    }
+	
+	public function registeredPercentage($month_from=null,$month_to=null)
+    {
+		$this->viewBuilder()->layout('admin_layout');
+		$month_from=$this->request->query('month_from');
+		$month_to=$this->request->query('month_to'); 
+		$type=$this->request->query('type'); 
+		$this->loadModel('Requests');
+		$TAPER=0;
+		$EPPER=0;
+		$HPER=0;
+		if(!empty($month_from) && !empty($month_to)){
+			$month_from='01-'.$month_from;
+			$month_to='01-'.$month_to;
+			if($type==2){
+				$first_date=date('Y-m-d',strtotime($month_from));
+				$last_date=date('Y-m-t',strtotime($month_to));
+				//-- Get All
+				$TotalRegistration=$this->Users->find()->where(['create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				//-- SEPRATE
+				$TotalTA=$this->Users->find()->where(['Users.role_id'=>1,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$TotalEP=$this->Users->find()->where(['Users.role_id'=>2,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$TotalH=$this->Users->find()->where(['Users.role_id'=>3,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				//-- PERCENTAGE
+				if($TotalTA>0){
+					$TAPER=number_format($TotalTA*100/$TotalRegistration, 2); 
+				}
+				if($TotalEP>0){
+					$EPPER=number_format($TotalEP*100/$TotalRegistration, 2);
+				}
+				if($TotalH>0){
+					$HPER=number_format($TotalH*100/$TotalRegistration, 2);
+				}
+ 			}
+			else{
+				$first_date=date('Y-m-d',strtotime($month_from));
+				$last_date=date('Y-m-t',strtotime($month_from));
+				
+				$TotalRegistration=$this->Users->find()->where(['create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				//-- SEPRATE
+				$TotalTA=$this->Users->find()->where(['Users.role_id'=>1,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$TotalEP=$this->Users->find()->where(['Users.role_id'=>2,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$TotalH=$this->Users->find()->where(['Users.role_id'=>3,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				//-- PERCENTAGE
+				if($TotalTA>0){
+					$TAPER=number_format($TotalTA*100/$TotalRegistration, 2); 
+				}
+				if($TotalEP>0){
+					$EPPER=number_format($TotalEP*100/$TotalRegistration, 2);
+				}
+				if($TotalH>0){
+					$HPER=number_format($TotalH*100/$TotalRegistration, 2);
+				}
+			}
+  		}
+		else
+		{
+			//-- Get All
+			$TotalRegistration=$this->Users->find()->count();
+			//-- SEPRATE
+			$TotalTA=$this->Users->find()->where(['Users.role_id'=>1])->count();
+			$TotalEP=$this->Users->find()->where(['Users.role_id'=>2])->count();
+			$TotalH=$this->Users->find()->where(['Users.role_id'=>3])->count();
+			//-- PERCENTAGE
+			if($TotalTA>0){
+				$TAPER=number_format($TotalTA*100/$TotalRegistration, 2); 
+			}
+			if($TotalEP>0){
+				$EPPER=number_format($TotalEP*100/$TotalRegistration, 2);
+			}
+			if($TotalH>0){
+				$HPER=number_format($TotalH*100/$TotalRegistration, 2);
+			}
+ 		}
+ 		//-- For Graph
+ 		$this->set(compact('TAPER','EPPER','HPER'));
+    }
+	
+	public function StatewiseStatistics($month_from=null,$month_to=null)
+    {
+		$this->viewBuilder()->layout('admin_layout');
+		$month_from=$this->request->query('month_from');
+		$month_to=$this->request->query('month_to'); 
+		$type=$this->request->query('type');
+		$this->loadModel('States');
+		$States=$this->States->find()->where(['is_deleted'=>0,'country_id'=>101]);
+		//pr($States->toArray()); exit;
+		if(!empty($month_from) && !empty($month_to)){
+			$month_from='01-'.$month_from;
+			$month_to='01-'.$month_to;
+			if($type==2){
+				$first_date=date('Y-m-d',strtotime($month_from));
+				$last_date=date('Y-m-t',strtotime($month_to));
+				foreach($States as $state)
+				{
+					$state_id=$state['id'];
+					$state_name=$state['state_name'];
+					
+ 					$Categories=$state_name;
+					//-- COUNTRING
+					$TA=$this->Users->find()->where(['state_id'=>$state_id,'Users.role_id'=>1,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+					$TravelAgentCount[]=$TA;
+					
+					$EP=$this->Users->find()->where(['state_id'=>$state_id,'Users.role_id'=>2,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+					$EventPlannerCount[]=$EP;
+					
+					$H=$this->Users->find()->where(['state_id'=>$state_id,'Users.role_id'=>3,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+					$HotelierCount[]=$H;
+					
+					$MonthName[]=$Categories;
+					
+					$TotalRegistration[]=$TA+$EP+$H;
+				}	 
+				 
+			}
+			else{
+				$start_date=date('Y-m-d',strtotime($month_from));
+				$end_date=date('Y-m-t',strtotime($month_from));
+				$x=0;
+				while (strtotime($start_date) <= strtotime($end_date)) {
+					 
+					$CompairDate = date ("Y-m-d", strtotime("+7 day", strtotime($start_date)));
+					$firstdate = date ("Y-m-d", strtotime("-7 day", strtotime($CompairDate)));
+					if(strtotime($end_date) > strtotime($CompairDate)){
+						$start_date = date ("Y-m-d", strtotime("+7 day", strtotime($start_date)));
+					}
+					else{
+						$x=1;
+						$start_date = date ("Y-m-t", strtotime($start_date));
+					}
+					
+					
+					$TA=$this->Users->find()->where(['Users.role_id'=>1,'create_at >='=>$firstdate,'create_at <='=>$start_date])->count();
+					$TravelAgentCount[]=$TA;
+					
+					$EP=$this->Users->find()->where(['Users.role_id'=>2,'create_at >='=>$firstdate,'create_at <='=>$start_date])->count();
+					$EventPlannerCount[]=$EP;
+					
+					$H=$this->Users->find()->where(['Users.role_id'=>3,'create_at >='=>$firstdate,'create_at <='=>$start_date])->count();
+					$HotelierCount[]=$H;
+					
+					$MonthName[]=date('d-M-Y',strtotime($firstdate)).' - '.date('d-M-Y',strtotime($start_date));
+					
+					$TotalRegistration[]=$TA+$EP+$H;
+					 
+					if($x==1){break;}
+				}
+			}
+  		}
+		else
+		{
+			
+			foreach($States as $state)
+			{
+				$state_id=$state['id'];
+				$state_name=$state['state_name'];
+				$current_year=date('Y');
+				$first_date='01-01-'.$current_year;
+				$last_date='31-12-'.$current_year;
+				$first_date=date('Y-m-d',strtotime($first_date));
+				$last_date=date('Y-m-d',strtotime($last_date));
+				
+				$Categories=$state_name;
+				//-- COUNTRING
+				$TA=$this->Users->find()->where(['state_id'=>$state_id,'Users.role_id'=>1,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$TravelAgentCount[]=$TA;
+				
+				$EP=$this->Users->find()->where(['state_id'=>$state_id,'Users.role_id'=>2,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$EventPlannerCount[]=$EP;
+				
+				$H=$this->Users->find()->where(['state_id'=>$state_id,'Users.role_id'=>3,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$HotelierCount[]=$H;
+				
+				$MonthName[]=$Categories;
+				
+				$TotalRegistration[]=$TA+$EP+$H;
+			}
+		}
+		//-- For Excel
+		$this->set('TArray',$TotalRegistration);
+		$this->set('TAArray',$TravelAgentCount);
+		$this->set('EPArray',$EventPlannerCount);
+		$this->set('HArray',$HotelierCount);
+		$this->set('MonthArray',$MonthName);
+		//-- For Graph
+		$TotalRegistration=implode(',', $TotalRegistration);
+		$TravelAgentCount=implode(',', $TravelAgentCount);
+		$EventPlannerCount=implode(',', $EventPlannerCount);
+		$HotelierCount=implode(',', $HotelierCount); 
+		
+		$MonthName=implode("','", $MonthName); 
+		$MonthName="'".$MonthName."'";
+		$this->set(compact('TravelAgentCount','EventPlannerCount','HotelierCount','TotalRegistration','MonthName'));
+    }
+	
+	
+	
+	public function pdfExcel() 
+    {
+		$this->viewBuilder()->layout('');
+        if(isset($this->request->data['excel']))
+        {	
+			$this->set('export_data', $this->request->data['export_data']);
+			$this->set('file_name', $this->request->data['file_name']);
+			$this->set('export_in', 'excel');
+ 		 
+        }
+        if(isset($this->request->data['pdf']))
+        {
+			$this->set('export_data', $this->request->data['data_export']);
+			$this->set('application_no', $this->request->data['pdf_name']);
+			$this->set('export_in', 'pdf');
+			
+            $this->layout='pdf';
+            $this->set('file_name', $this->request->data['pdf']);
+        }
     }
 	
 }

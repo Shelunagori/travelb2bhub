@@ -124,6 +124,14 @@ input[type=checkbox] {
 		}
 		
 	</style>
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119659958-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-119659958-1');
+	</script>
 </head>
 <body>
 	<div class="limiter">
@@ -236,7 +244,7 @@ input[type=checkbox] {
 								<input class=" input100 trim_space_valid city_select" required="" id="city-search-box" type="text"  name="city"  taxboxname="" noofrows="1"/>
 								<span class="focus-input100" data-placeholder="Select City/Nearest City"></span>
 							</div>
-							<div class="suggesstion-box" style="margin-top:-20px"></div>
+							<div class="suggesstion-box" style="margin-top:-37px"></div>
 						</div>				
 					</div>
 				</div>
@@ -278,6 +286,7 @@ input[type=checkbox] {
 								
 								<div class="input-field">
 									<?php echo $this->Form->control('preference', ["id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control focus-input100 chosen-select ", "data-placeholder"=>"Select upto 5 states where you operate", "style"=>"height:100px;"]); ?>
+									<span style="display:none" class="helpblock error" style="text-align:left !important;" > This field is required.</span>
 								</div>
 							</div>
 						</div>
@@ -299,7 +308,7 @@ input[type=checkbox] {
 								</td>
 							</tr>
 							<tr>
-								<td colspan="2"><span id="chk_cond" style="color:#f16060; display:none;display: inline;">Please accept Terms & Conditions and Privacy Policy</span></td>
+								<td colspan="2"><span id="chk_cond" style="color:rgb(255, 152, 152); display:none;display: inline;">Please accept Terms & Conditions and Privacy Policy</span></td>
 							</tr>
 						</table>	
 						</div>
@@ -335,7 +344,23 @@ input[type=checkbox] {
 <script>
 $(document).ready(function(){	 
 	$('.select2').select2();
-	 
+	$(document).on('click',"#pincode",function(){ 
+		var city_id=$('#city_id').val();
+		if(city_id==''){
+			alert('Please select a city from the dropdown list');
+			$('#city-search-box').val('');
+		}
+	});
+	$(document).on('keyup',"#pincode",function(){ 
+		var city_id=$('#city_id').val();
+		if(city_id==''){
+			alert('Please select a city from the dropdown list');
+			$('#city-search-box').val('');
+		}
+	});
+	
+	
+	
 	$(document).on('blur',"#number_format",function(){ 
 			 
 		var mobile_number=$(this).val();
@@ -415,11 +440,14 @@ $(document).ready(function(){
 			$('.taxtboxname').attr('name','company_name');
  		}
 		if(roleid != "" && roleid == 1) {
+			$('.chosen-choices').hide();
 			$('#preferenceStateDiv').show();
 			$('#preference').attr('required','required');
+			$('.helpblock').show();
 			var needPreferenceState = true;
 		} else {
 			$('#preferenceStateDiv').hide();
+			('.helpblock').hide();
 			$('#preference').removeAttr('required','required');
 			var needPreferenceState = false;
 		}
@@ -821,7 +849,18 @@ $(document).ready(function (){
             e.preventDefault();
         }
 		});
- 
+ $("#chk_cond").hide();
+	$(document).on('click',"#ckb1",function(){
+		var va = +$('.chk_input').is( ':checked' );
+		if(va==0)
+		{
+			$("#chk_cond").show();
+		}
+		else
+		{
+			$("#chk_cond").hide();
+		}
+	});
 });
 </script>	
 <script type="text/javascript">

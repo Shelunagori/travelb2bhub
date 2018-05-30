@@ -390,51 +390,7 @@ $conn = ConnectionManager::get('default');
 				<?php if($users['role_id'] == 3 || $users['role_id'] == 1){
 				if(count($request["responses"]) < 20) {?>
 				<a style="width:99%" data-toggle="modal" class="btn btn-success btn-sm" data-target="#myModalshow<?php echo $request['id']; ?>" href="javascript:void(0);" onclick="f1('<?php echo $request['id']; ?>');" id="<?php echo $request['id']; ?>"> Show interest</a>
-				<?php } } ?>
-			 
-				<div id="myModalshow<?php echo $request['id']; ?>" class="modal fade form-modal" role="dialog">
-				  <div class="modal-dialog">
-					<!-- Modal content-->
-					<div class="modal-content">
-					  <div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">Show Interest</h4>
-					  </div>
-					  <?php  echo $this->Form->create("Users", ['type' => 'file', 'url' => ['controller' => 'Users', 'action' => 'addresponse'], 'id'=>"UserResponseForm"]); ?>
-					  <div class="modal-body" align="center">   
-						
-						<input type="hidden" name="request_id" class="request_id" id="request_id" value=""/><br>
-						<table width="90%" class="shotrs">
-							<tr>
-								<td >
-									<label class="form-control" style="margin-top:-24px;border: 0px solid !important;">
-										Quote price
-									</label>
-								 </td>
-								 <td>
-									  <input type="text" class="form-control" id="quotation_price" name="quotation_price" placeholder="Quote your price" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/><br>
-								 </td>
-							</tr>
-							<tr>
-								<td>.
-									<label class="form-control" style="margin-top:-30px;border: 0px solid !important;">
-										Comment
-									</label>
-								 </td>
-								 <td>
-									  <textarea name="comment" class="form-control" id="comment" placeholder="Enter comment here" col="10" row="10"></textarea>
-								 </td>
-							</tr>
-						</table>
-					  </div>
-					  <div class="modal-footer">
-						 <div style="float:right">
-							<input type="submit" name="submit" class="btn btn-info btn-sm" width="20px" style="width:70px !important;" value="Submit">
-						 </div>
-					  </div>
-					</div>
-				  </div>
-				</div>	
+				<?php } } ?>	
 			</td>
 			<td width="50%" style="padding:3px !important;"> 
 				<a style="width:99%" data-toggle="modal" class="btn btn-info btn-sm"  data-target="#myModal1<?php echo $request['id']; ?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request['id'])) ?>"> Details</a>
@@ -538,6 +494,49 @@ $conn = ConnectionManager::get('default');
 			</table>	
 		</fieldset>
 		</form>
+		<div id="myModalshow<?php echo $request['id']; ?>" class="modal fade form-modal" role="dialog">
+				  <div class="modal-dialog">
+					<!-- Modal content-->
+					<div class="modal-content">
+					  <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Show Interest</h4>
+					  </div>
+					  <?php  echo $this->Form->create("Users", ['type' => 'file', 'url' => ['controller' => 'Users', 'action' => 'addresponse'], 'id'=>"UserResponseForm"]); ?>
+					  <div class="modal-body" align="center">   
+						
+						<input type="hidden" name="request_id" class="request_id" id="request_id" value=""/><br>
+						<table width="90%" class="shotrs">
+							<tr>
+								<td >
+									<label class="form-control" style="margin-top:-24px;border: 0px solid !important;">
+										Quote price
+									</label>
+								 </td>
+								 <td>
+									  <input type="text" class="form-control" id="quotation_price" name="quotation_price" placeholder="Quote your price" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/><br>
+								 </td>
+							</tr>
+							<tr>
+								<td>.
+									<label class="form-control" style="margin-top:-30px;border: 0px solid !important;">
+										Comment
+									</label>
+								 </td>
+								 <td>
+									  <textarea name="comment" class="form-control" id="comment" placeholder="Enter comment here" col="10" row="10"></textarea>
+								 </td>
+							</tr>
+						</table>
+					  </div>
+					  <div class="modal-footer">
+						 <div style="float:right">
+							<input type="submit" name="submit" class="btn btn-info btn-sm" width="20px" style="width:70px !important;" value="Submit">
+						 </div>
+					  </div>
+					</div>
+				  </div>
+				</div>
 		</div>
 	 
 							<?php  } } ?>

@@ -92,7 +92,7 @@ class PostTravlePackageCartsController extends AppController
 		$user_id = $this->request->query('user_id');
 		if(!empty($user_id))
 		{
-			$postTravelPackageCarts=$this->PostTravlePackageCarts->find()->where(['PostTravlePackageCarts.user_id'=>$user_id, 'PostTravlePackageCarts.is_deleted'=>0,'PostTravlePackages.is_deleted'=>0])->contain(['PostTravlePackages'=>['Users'=>function($q){
+			$postTravelPackageCarts=$this->PostTravlePackageCarts->find()->where(['PostTravlePackageCarts.user_id'=>$user_id, 'PostTravlePackageCarts.is_deleted'=>0,'PostTravlePackages.is_deleted'=>0,'PostTravlePackages.visible_date >='=>date('Y-m-d')])->contain(['PostTravlePackages'=>['Users'=>function($q){
 				return $q->select(['first_name','last_name','mobile_number','company_name','email']);
 			},'PostTravlePackageCities'=>['Cities'=>['States']],'PostTravlePackageRows'=>['PostTravlePackageCategories'],'PostTravlePackageCountries'=>['Countries']]]);
 			 

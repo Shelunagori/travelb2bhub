@@ -3,6 +3,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Filesystem\Folder;
 use Cake\Filesystem\File;
+date_default_timezone_set('Asia/Kolkata');
 /**
 /**
  * HotelPromotions Controller
@@ -11,7 +12,6 @@ use Cake\Filesystem\File;
  */
 class HotelPromotionsController extends AppController
 {
-
     /**
      * Index method
      *
@@ -24,7 +24,7 @@ class HotelPromotionsController extends AppController
 		$loginId=$this->Auth->User('id');  
 		if(!empty($loginId)){
 			//--- Blocked
-			$this->loadModel('Users'); 
+			$this->loadModel('Users');
 			$UsersData=$this->Users->find()->where(['id'=>$loginId])->first();
 			$blocked=$UsersData['blocked'];
 			if($blocked==1){
@@ -42,6 +42,7 @@ class HotelPromotionsController extends AppController
 			$this->set('profile_pic', $profile_pic);
 			$this->set('loginId',$loginId);
 			$this->set('roleId',$role_id);
+			//--
 			$this->loadModel('Requests');
 			$this->loadModel('Responses');
 			$current_date=date('Y-m-d');
@@ -50,20 +51,13 @@ class HotelPromotionsController extends AppController
 				'OR' => array(
 					array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
 					array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
-					
 					array("Requests.start_date <=" =>  $current_date,'Requests.category_id'=> 2,'Requests.total_response >' =>0),
 					array("Requests.check_in <=" =>  $current_date,'Requests.category_id !='=> 2,'Requests.total_response >' =>0),
 				)
 			);
-			//,'Requests.total_response >' =>0
-			$conditionsss[]= array (
-				'OR' => array(
-					array("Requests.start_date >=" =>  $current_date,'Requests.category_id'=> 2),
-					array("Requests.check_in >=" =>  $current_date,'Requests.category_id !='=> 2),
-				)
-			);
-			
+			 
 			$this->set("respondToRequestCountNew", $this->__getRespondToRequestCount());
+			//-- Block USER
 			$this->loadModel('BlockedUsers');
 			$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
 				->hydrate(false)
@@ -85,37 +79,47 @@ class HotelPromotionsController extends AppController
 			if(sizeof($BlockedUsers)>0){
 				$conditionssd["Requests.user_id NOT IN"] =  $BlockedUsers; 
 			}
-			
-			$myRequestCount = 0;
-			$myRequestCount = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2,$conditions]])->count();
-			
+			//---
 			$reqcountNew = $this->getSettings('requestcount');
 			$this->set('reqcountNew', $reqcountNew);
+
+			$myRequestCount = 0;
+			$myRequestCount = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2, $conditions]])->count();
 			$this->set('myRequestCountNew', $myRequestCount);
+
+			$RequestCount1 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.total_response"=>0,"Requests.status !="=>2,'is_deleted'=>0, $conditions]])->count();
+			
+			$RequestCount = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.total_response >"=>0,"Requests.status !="=>2,'is_deleted'=>1, $conditions]])->count();
+			$PlaceReqCount=$reqcountNew['value']-($RequestCount+$RequestCount1);
+			$this->set('PlaceReqCount', $PlaceReqCount);
+			
 			$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->where(["Requests.user_id NOT IN"=>$BlockedUsers]);
 			$myReponseCount = $queryr->count(); 
-			
 			$this->set('myReponseCountNew', $myReponseCount);
+
 			//----	 FInalized
 			$finalreq["Requests.user_id"] = $this->Auth->user('id');
 			$finalreq["Requests.status"] = 2;
 			$finalreq["Requests.is_deleted "] = 0;
 			$finalizeRequest = $this->Requests->find()->where($finalreq)->count();
 			$this->set('finalizeRequestNew', $finalizeRequest);
+
 			//--- Removed Request
 			$remoev["Requests.user_id"] = $this->Auth->user('id');
 			$remoev["Requests.is_deleted "] = 1;
 			$RemovedReqest = $this->Requests->find()->where($remoev)->count();
 			$this->set('RemovedReqestNew', $RemovedReqest);
+
 			//--- Blocked User
 			$this->loadModel('blocked_users');
 			$blk["blocked_users.blocked_by"] = $this->Auth->user('id');
 			$blockedUserscount = $this->blocked_users->find()->where($blk)->count();
 			$this->set('blockedUserscountnew', $blockedUserscount);
+
 			//--- Finalize Response;
-			
 			$FInalResponseCount = $this->Responses->find('all', ['conditions' => ['Responses.status' =>1,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->count();
 			$this->set('FInalResponseCountNew', $FInalResponseCount);
+
 			//*--- UserChats
 			$this->loadModel('UserChats');
 			$csort['created'] = "DESC";
@@ -123,7 +127,6 @@ class HotelPromotionsController extends AppController
 			$totalIds=array();
 			$NewNotifications=array();
 			$unreadnotification = $this->UserChats->find()->contain(['Users'])->where(['UserChats.send_to_user_id'=> $this->Auth->user('id'),'read_date_time >='=>$new_time,'is_read'=>1])->order($csort)->all();
-			
 			foreach($unreadnotification as $data){
 					$totalIds[]=$data['id'];
 			}
@@ -136,12 +139,11 @@ class HotelPromotionsController extends AppController
 			if(!empty($totalIds)){
 				$NewNotifications = $this->UserChats->find()->contain(['Users'])->where(['UserChats.id IN'=> $totalIds])->order($csort)->all();
 			}
-			//pr($totalIds); exit;
-			$chatCount = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->count(); 
-			$this->set('chatCount',$chatCount); 
+ 			$chatCount = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->count(); 
+			$this->set('chatCountNew',$chatCount); 
 			$this->set('NewNotifications',$NewNotifications);
 		}
-		//pr($totalIds); exit;
+		 
 		//---
  	}
 	public function __getRespondToRequestCount() {
@@ -454,6 +456,52 @@ class HotelPromotionsController extends AppController
 		if ($this->request->is(['patch', 'post', 'put'])) 
 		{
 			//-- Like EVENT
+			if (isset($this->request->data['rate_user']))
+			{
+				$this->loadModel('TempRatings');
+				$this->loadModel('UserChats');
+				$this->loadModel('Testimonial');
+				$this->loadModel('Users');
+				$tempRatings = $this->TempRatings->newEntity();
+				
+ 				$promotion_id=$this->request->data('hotelpromotion_id');
+				$this->request->data['promotion_id']=$promotion_id;
+ 				$author_id=$this->request->data('author_id');
+ 				$user_id=$this->request->data('user_id');
+ 				$promotion_type_id=$this->request->data('promotion_type_id');
+ 				$rating=$this->request->data('rating');
+				$Testimonialcount = $this->Testimonial->find()->where(['promotion_id'=>$promotion_id,'author_id'=>$author_id,'user_id'=>$user_id,'promotion_type_id'=>$promotion_type_id])->count(); 
+				if($Testimonialcount==0){
+					$TempRatingscount = $this->TempRatings->find()->where(['promotion_id'=>$promotion_id,'author_id'=>$author_id,'user_id'=>$user_id,'promotion_type_id'=>$promotion_type_id])->count(); 
+					if($TempRatingscount==0){
+						$tempRatings = $this->TempRatings->patchEntity($tempRatings, $this->request->data);
+						if ($datasss=$this->TempRatings->save($tempRatings)) {
+							$Users=$this->Users->find()->where(['id'=>$author_id])->first();
+							$Name=ucwords($Users['first_name'].' '.$Users['last_name']);  
+							$userChatsS= $this->UserChats->newEntity();
+							$userchats = $this->UserChats->patchEntity($userChatsS, $this->request->data);
+							$userchats->user_id = $author_id;
+							$userchats->request_id = 0; 
+							$userchats->send_to_user_id = $user_id;
+							$userchats->screen_id = $datasss->id;
+							$userchats->message = $Name.' wants to give you a Review. Would you like to accept Review?';
+							$userchats->type = 'Review';
+							$userchats->created = date("Y-m-d H:i:s");
+							$userchats->notification = 0;
+							$this->UserChats->save($userchats) ; 
+							$this->Flash->success(__('The user Rating/Review has been submitted.'));
+						}
+						else{
+							$this->Flash->error(__('Something went wrong. Please, try again.'));
+						}
+					}
+					else{$this->Flash->error(__('You are already submitted your Rating/Review'));
+					}
+				}
+				else{$this->Flash->error(__('You are already submitted your Rating/Review'));
+				}
+				return $this->redirect(['action' => 'report']);
+ 			}
 			if(isset($this->request->data['LikeEvent']))
 			{
  				$hotelpromotion_id=$this->request->data('hotelpromotion_id');
@@ -1008,6 +1056,20 @@ class HotelPromotionsController extends AppController
 		if ($this->request->is(['patch', 'post', 'put'])) 
 		{
 				//-- Renew promotion
+			if(isset($this->request->data['setpriority'])){
+				
+				$position=$this->request->data['position']; 
+				$oldUpdate = $this->HotelPromotions->query();
+				$oldUpdate->update()->set(['position' => 11])->where(['position' => $position])->execute();
+				
+				$hotel_id=$this->request->data['hotel_id'];  
+				$query = $this->HotelPromotions->query();
+				$query->update()->set(['position' => $position])->where(['id' => $hotel_id])->execute();			
+				$message = 'Update Successfully';
+				$this->Flash->success(__($message));
+				return $this->redirect(['action' => 'PackageReport']);
+				
+			}
 			if(isset($this->request->data['pay_now']))
 			{
  				$hotel_id=$this->request->data('hotel_id');

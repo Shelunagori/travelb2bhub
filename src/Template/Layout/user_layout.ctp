@@ -379,6 +379,14 @@ margin-bottom: 0px!important;
 	margin-right: 20px;
 }
 </style>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-119659958-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-119659958-1');
+</script>
 </head>
 <!--<body class="hold-transition skin-blue fixed sidebar-mini">-->
 
@@ -417,7 +425,7 @@ margin-bottom: 0px!important;
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle " data-toggle="dropdown">
               <i style="font-size: 20px;" class="fa fa-bell-o"></i>
-              <span class="label label-warning"><?php echo $chatCount; ?></span>
+              <span class="label label-warning"><?php echo $chatCountNew; ?></span>
             </a>
 	 
             <ul class="dropdown-menu">
@@ -426,7 +434,7 @@ margin-bottom: 0px!important;
 				<?php use Cake\Datasource\ConnectionManager; 
 					$conn = ConnectionManager::get('default');
 					$lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/') + 1);
-					if($chatCount > 0) {
+					if(!empty($NewNotifications)) {
 						 
 						foreach($NewNotifications as $allchat) {
 							$first_name=$allchat->user->first_name;
@@ -460,6 +468,10 @@ margin-bottom: 0px!important;
 								$title="Received Contact Details!";
 								$clr="#AA3939";
 							}
+							if($type=='Review'){ 
+ 								$title="Rating/Review Request";
+								$clr="#AA3939";
+							}
 							
 							if($type=='Response'){ 
 								$url=$this->Url->build(array('controller'=>'users','action'=>'checkresponses/'.$request_id)); 
@@ -479,6 +491,11 @@ margin-bottom: 0px!important;
 								if(($statusofreq==2) && ($user_idofreq==$loginId)){ $url=$this->Url->build(array('controller'=>'users','action'=>'finalizedRequestList'));}
 								if(($statusofreq==0) && ($user_idofreq!=$loginId)){$url=$url=$this->Url->build(array('controller'=>'users','action'=>'myresponselist'));;}
 								if(($statusofreq==2) && ($user_idofreq!=$loginId)){$url=$url=$this->Url->build(array('controller'=>'users','action'=>'myFinalResponses'));}
+							}
+							
+							if($type=='Promotions'){
+								$title="Promotions";
+								$clr="#FB6542";
 							}
 							if($type=='Announcement'){
 								$title="Announcement";
@@ -506,7 +523,7 @@ margin-bottom: 0px!important;
 							if($is_read==1){$backcolor=' style="background-color: #e6e6e66b;opacity: .4;"';}
 							?>
 								<li <?php echo $backcolor; ?> class="chat_clear"  val="<?php echo $notifiId; ?>" >
-  									<a class="notify" href="<?php echo $url; ?>" <?php if($type=="Announcement"){ ?> data-toggle="modal" data-target="#Announcementpupup<?php echo$notifiId; ?>" <?php }?>>
+  									<a class="notify" href="<?php echo $url; ?>" <?php if($type=="Promotions"){ ?> data-toggle="modal" data-target="#Promotions<?php echo$notifiId; ?>" <?php } else if($type=='Review'){?> data-toggle="modal" data-target="#Reviwaction<?php echo$notifiId; ?>" <?php } ?> >
 										<div>
 										<div style="margin-top:2px;float:right;font-size:10px;">
 										<?php echo $new_date; ?></div><br>
@@ -520,7 +537,6 @@ margin-bottom: 0px!important;
 									</a>
  								</li>
  								<?php  
-							   
 						}
 					} 
 					else { 
@@ -688,6 +704,62 @@ margin-bottom: 0px!important;
 	<div class="content-wrapper">
 		 <section class="content">
 			<div class="row">
+<?php
+	foreach($NewNotifications as $allchat) {  
+		$message = $allchat['message'];
+		$type = $allchat['type'];  
+		$notifiId = $allchat['id'];
+		$screen_id = $allchat['screen_id'];
+		if($screen_id==1){$redirect=$this->Url->build(array('controller'=>'PostTravlePackages','action'=>'promotionreports'));}
+		if($screen_id==2){$redirect=$this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'promotionreports'));}
+		if($screen_id==3){$redirect=$this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'promotionreports'));}
+		if($screen_id==4){$redirect=$this->Url->build(array('controller'=>'HotelPromotions','action'=>'promotionreports'));}
+		if($type=='Promotions'){
+			?>
+			<div id="Promotions<?php echo $notifiId; ?>" class="modal fade" role="dialog">
+				  <div class="modal-dialog">
+					<div class="modal-content">
+					  <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Promotions</h4>
+					  </div>
+					  <div class="modal-body"  style="height:80px;margin-right:20px">
+						 
+							<p style="padding:20px"><?php echo $message;  ?></p>
+						 
+					  </div>
+					  <div class="modal-footer">
+						<a href="<?php echo $redirect;?>" class="btn btn-info btn-sm">  Yes </a>
+						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">  No </button>
+					  </div>
+					</div>
+				</div>
+			</div>
+			
+<?php 	}
+		if($type=='Review'){ ?>
+			<div id="Reviwaction<?php echo $notifiId; ?>" class="modal fade" role="dialog">
+			<form action="<?php echo $this->Url->build(array('controller'=>'users','action'=>'acceptReviewRequest')) ?>" method="post">
+				<div class="modal-dialog">
+					<div class="modal-content">
+					  <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Review Request</h4>
+					  </div>
+					  <input type="hidden" name="update_id" value="<?php echo $screen_id; ?>" />
+					  <div class="modal-body"  style="height:80px;margin-right:20px">
+						<p style="padding:20px"><?php echo $message;  ?></p>
+					  </div>
+					  <div class="modal-footer"> 
+						<button type="submit" class="btn btn-info btn-sm">  Yes </button>
+						<button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">  No </button>
+					  </div>
+					</div>
+				</div>
+			</form>
+			</div>
+			<?php }
+	} ?> 
 				<?php echo $this->Flash->render(); ?>
 				<?php echo $this->fetch('content'); ?>
 			</div>
@@ -700,7 +772,7 @@ margin-bottom: 0px!important;
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
 $(document).ready(function (){
- 	
+ 
 	$(".chat_clear").on('click',function () { 
 		var attrv= $(this).attr('val');
  		var url = "<?php echo $this->Url->build(array('controller'=>'users','action'=>'clearreadChats')) ?>";
@@ -711,7 +783,7 @@ $(document).ready(function (){
 		}).done(function(result){
 			 //alert(result);
 		});
-	});
+	}); 
 });
 </script>
 <script type="text/javascript">

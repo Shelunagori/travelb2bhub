@@ -79,6 +79,7 @@ class EventPlannerPromotionsTable extends Table
 		$this->hasMany('EventPlannerPromotionReports', [
             'foreignKey' => 'event_planner_promotion_id'
         ]);
+		$this->hasMany('TempRatings');
     }
 
     /**

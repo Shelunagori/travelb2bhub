@@ -24,6 +24,7 @@ class TaxiFleetPromotionsController extends AppController
 			$submitted_from = @$this->request->data('submitted_from');
 			if(@$submitted_from=='web')
 			{
+				$taxiFleetPromotion->submitted_from=1;
 				$state_id=$this->request->data['state_id'];
 				$x=0; 
 				$taxiFleetPromotion->taxi_fleet_promotion_states = [];
@@ -280,7 +281,8 @@ class TaxiFleetPromotionsController extends AppController
 				$car_bus_filter = null;
 			}	
 
-			$where_short = ['TaxiFleetPromotions.id' =>'DESC'];
+			//$where_short = ['TaxiFleetPromotions.position' =>'ASC'];
+			$where_short=['TaxiFleetPromotions.position' =>'ASC','TaxiFleetPromotions.id' =>'DESC'];
 			if(!empty($country_id_short))
 			{
 				$where_short = ['TaxiFleetPromotions.country_id' =>$country_id_short];
@@ -496,7 +498,7 @@ class TaxiFleetPromotionsController extends AppController
 		$getTaxiFleetPromotionsDetails = $this->TaxiFleetPromotions->find();
 		$getTaxiFleetPromotionsDetails->select(['total_likes'=>$getTaxiFleetPromotionsDetails->func()->count('TaxiFleetPromotionLikes.id')])
 			->leftJoinWith('TaxiFleetPromotionLikes')
-			->contain(['Users','PriceMasters','Countries','TaxiFleetPromotionStates'=>['States'],'TaxiFleetPromotionCities'=>['Cities'],'TaxiFleetPromotionRows'=>['TaxiFleetCarBuses']])
+			->contain(['Users'=>['Cities','States','Countries'],'PriceMasters','Countries','TaxiFleetPromotionStates'=>['States'],'TaxiFleetPromotionCities'=>['Cities'],'TaxiFleetPromotionRows'=>['TaxiFleetCarBuses']])
 			->where(['TaxiFleetPromotions.id'=>$id])
 			->group(['TaxiFleetPromotions.id'])
 		->autoFields(true);
@@ -683,7 +685,7 @@ class TaxiFleetPromotionsController extends AppController
 					if ($this->TaxiFleetPromotions->TaxiFleetPromotionPriceBeforeRenews->save($PriceBeforeRenews))
 					{
 						$query = $this->TaxiFleetPromotions->query();
-						$query->update()->set(['price_master_id' => $price_master_id,'price'=>$price,'visible_date'=>date('Y-m-d',strtotime($visible_date))])
+						$query->update()->set(['price_master_id' => $price_master_id,'price'=>$price,'visible_date'=>date('Y-m-d',strtotime($visible_date)),'notified'=>0])
 						->where(['id' => $taxifleet_id])->execute();			
 						$message = 'Update Successfully';
 						$response_code = 200;						

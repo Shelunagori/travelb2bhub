@@ -326,16 +326,16 @@ a{
 </div>
 </form>
 		<?php $i=1;
-				if(!empty($hotelPromotions)){
-				foreach ($hotelPromotions as $hotelPromotion){
-				?>
+			if(!empty($hotelPromotions)){
+			foreach ($hotelPromotions as $hotelPromotion){
+			?>
 		<div class="box-body bbb">	
 			<fieldset style="background-color:#fff;">
 				<form method="post" class="formSubmit">
 				<input type="hidden" name="hotelpromotion_id" value="<?php echo $hotelPromotion->id; ?>">
 					<div class="row">
 						<div class="col-md-12" style="padding-top:5px;">
-						<span style="font-size:16px;">	<?php echo $hotelPromotion->hotel_name.' ( <i class="fa fa-star" style="color:#959595;"></i> '.$hotelPromotion->hotel_rating.' Star Hotel )';?></span>
+							<span style="font-size:16px;">	<?php echo $hotelPromotion->hotel_name.' ( <i class="fa fa-star" style="color:#959595;"></i> '.$hotelPromotion->hotel_rating.' Star Hotel )';?></span>
 						</div>
 					</div>
 					<span class="help-block"></span>
@@ -504,7 +504,63 @@ a{
 							<div class="row" >
 								<div class="col-md-12 text-center" style="padding-top:15px;">
 									<button class="btn btn-danger btn-md btnlayout viewCount" data-target="#contactdetails<?php echo $hotelPromotion->id;?>" data-toggle="modal"  promotionid="<?php echo $hotelPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Contact Info</button>
+									
+									<?php
+									if($hotelPromotion->user_id != $user_id){ ?>
+										<button class="btn btn-success btn-md btnlayout viewCount" data-target="#ReviewUser<?php echo $hotelPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $hotelPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Rate User</button>
+									<?php	}
+									?>
 								</div>
+<div id="ReviewUser<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-md">
+		<!-- Modal content-->
+			<div class="modal-content">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h3 class="modal-title">Review/Rating</h3>
+			  </div>
+				<div class="modal-body" >
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<table width="90%" border="0" height="142px">
+								<tr>
+									<td><label class="control-label" for="Rating">Rating :</label></td>
+									<td>
+									<?php $rate=0;?>
+										<div class="pull-left">
+											<input class="star star-5" id="star-5<?php echo $hotelPromotion->id; ?>" type="radio" name="rating" <?php if($rate=="5") {echo "checked";} ?> value="5"/>
+											<label class="star star-5" for="star-5<?php echo $hotelPromotion->id; ?>"></label>
+											<input class="star star-4" id="star-4<?php echo $hotelPromotion->id; ?>" type="radio" name="rating" <?php if($rate=="4") {echo "checked";} ?> value="4"/>
+											<label class="star star-4" for="star-4<?php echo $hotelPromotion->id; ?>"></label>
+											<input class="star star-3" id="star-3<?php echo $hotelPromotion->id; ?>" type="radio" name="rating" <?php if($rate=="3") {echo "checked";} ?> value="3"/>
+											<label class="star star-3" for="star-3<?php echo $hotelPromotion->id; ?>"></label>
+											<input class="star star-2" id="star-2<?php echo $hotelPromotion->id; ?>" type="radio" name="rating" <?php if($rate=="2") {echo "checked";} ?> value="2"/>
+											<label class="star star-2" for="star-2<?php echo $hotelPromotion->id; ?>"></label>
+											<input class="star star-1" id="star-1<?php echo $hotelPromotion->id; ?>" type="radio" name="rating" <?php if($rate=="1") {echo "checked";} ?> value="1"/>
+											<label class="star star-1" for="star-1<?php echo $hotelPromotion->id; ?>"></label>
+											<input style="display:none;" type="radio" name="rating" <?php if($rate=="0") {echo "checked";} ?> value="0"/>
+										</div>
+									</td>
+								</tr>
+								<tr>
+								<input type="hidden" name="author_id" value="<?php echo $user_id;?>">
+								<input type="hidden" name="promotion_type_id" value="4">
+								<input type="hidden" name="user_id" value="<?php echo $hotelPromotion->user_id;?>">
+									<td><label class="control-label" for="Comment">Comment :</label></td>
+									<td> <textarea name="comment" class="form-control input-large" rows="2"  id="comment"></textarea> 
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer" >
+					<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
+					<button type="submit" name="rate_user" class="btn btn-success btn-md" >Submit</button>
+				</div>
+			</div>
+		</div>
+	</div>								
 
 									<!------Contact Details Modal --------->
 										<div id="contactdetails<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
@@ -564,6 +620,7 @@ a{
 										<!----button list end--->
 								</div>
 							</form>	
+
 					</fieldset>	
 				</div>
 						

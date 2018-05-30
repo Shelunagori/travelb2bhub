@@ -92,7 +92,7 @@ class EventPlannerPromotionCartsController extends AppController
 		$user_id = $this->request->query('user_id');
 		if(!empty($user_id))
 		{
-			$eventPlannerPromotionCarts=$this->EventPlannerPromotionCarts->find()->where(['EventPlannerPromotionCarts.user_id'=>$user_id, 'EventPlannerPromotionCarts.is_deleted'=>0,'EventPlannerPromotions.is_deleted'=>0])->contain(['EventPlannerPromotions'=>['PriceMasters','Countries','EventPlannerPromotionCities'=>['Cities'],'EventPlannerPromotionStates'=>['States'],'Users'=>function($q){
+			$eventPlannerPromotionCarts=$this->EventPlannerPromotionCarts->find()->where(['EventPlannerPromotionCarts.user_id'=>$user_id, 'EventPlannerPromotionCarts.is_deleted'=>0,'EventPlannerPromotions.is_deleted'=>0,'EventPlannerPromotions.visible_date >='=>date('Y-m-d')])->contain(['EventPlannerPromotions'=>['PriceMasters','Countries','EventPlannerPromotionCities'=>['Cities'],'EventPlannerPromotionStates'=>['States'],'Users'=>function($q){
 				return $q->select(['first_name','last_name','mobile_number','company_name','email']);
 			},'EventPlannerPromotionCities'=>['Cities']]]);
 			//pr($eventPlannerPromotionCarts->toArray()); exit;
