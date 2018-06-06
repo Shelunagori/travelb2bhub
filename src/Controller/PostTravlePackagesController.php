@@ -1416,5 +1416,35 @@ class PostTravlePackagesController extends AppController
 		}
 		$this->set(compact('user_id','id'));
     }
-    
+    public function flagreport($promotion_type_id=null)
+    {
+        $this->viewBuilder()->layout('admin_layout');
+		$promotion_id=23;//$this->request->query('promotion_type_id'); 
+		/* $PostTravlePackageReports=$this->paginate($this->PostTravlePackages->PostTravlePackageReports->find()->contain(['PostTravlePackages'=>['Users'],'Users','ReportReasons'])->where(['PostTravlePackageReports.post_travle_package_id'=>$promotion_id])); */
+		
+		$report_reason=$this->PostTravlePackages->PostTravlePackageReports->ReportReasons->find('list', ['limit' => 200]);
+		//pr($report_reason->toArray()); exit;
+		
+		if(isset($this->request->query['Search'])){
+			$report_reason_id = $this->request->query['report_reason_id'];
+			$start_date = $this->request->query['start_date'];
+			$end_date = $this->request->query['end_date'];
+			if(!empty($report_reason_id)){
+				$conditions['PostTravlePackageReports.report_reason_id']=$report_reason_id;
+			}
+			if(!empty($start_date)){
+				$conditions['PostTravlePackageReports.created_on >=']=date('Y-m-d',strtotime($start_date));
+			}
+			if(!empty($end_date)){
+				$conditions['PostTravlePackageReports.created_on <=']=date('Y-m-d',strtotime($end_date));
+			}
+ 			//$testimonial = $this->paginate($this->Testimonial->find()->where($conditions));
+			$PostTravlePackageReports=$this->paginate($this->PostTravlePackages->PostTravlePackageReports->find()->contain(['PostTravlePackages'=>['Users'],'Users','ReportReasons'])->where($conditions));
+			//pr($PostTravlePackageReports);exit;
+  		}
+		else{
+			$PostTravlePackageReports=$this->paginate($this->PostTravlePackages->PostTravlePackageReports->find()->contain(['PostTravlePackages'=>['Users'],'Users','ReportReasons'])->where(['PostTravlePackageReports.post_travle_package_id'=>$promotion_id]));
+		}
+		$this->set(compact('PostTravlePackageReports','report_reason'));
+	}
 }

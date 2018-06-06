@@ -465,7 +465,7 @@ a{
 										<?= h($postTravlePackage->total_saved);?></span>
 									</td>
 									<td width="25%" >
-										<span><img src="../images/flag.png" height="15px"/>
+										<span><a target="blank" href="flagreport?promotion_type_id=<?php echo $postTravlePackage->id ;?>"><img src="../images/flag.png" height="15px"/></a>
 										<?= h($postTravlePackage->total_flagged);?></span>
 									</td>
 								</tr>

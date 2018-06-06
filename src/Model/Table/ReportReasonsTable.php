@@ -36,7 +36,7 @@ class ReportReasonsTable extends Table
         parent::initialize($config);
 
         $this->table('report_reasons');
-        $this->displayField('id');
+        $this->displayField('reason');
         $this->primaryKey('id');
 
         $this->belongsTo('PromotionTypes', [
