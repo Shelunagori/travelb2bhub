@@ -30,7 +30,7 @@
 						<div class="row"> 
 							<div class="col-md-12" align="center">
 								<label class="control-label col-md-12">&nbsp;</label> 
-								<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'flagreport')) ?>"class="btn btn-danger btn-sm">Reset</a>
+								<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'flagreport')) ?>"class="btn btn-danger btn-sm">Reset</a>
 								
 								<?php echo $this->Form->button('Search',['class'=>'btn btn-sm btn-success','id'=>'submit_member','name'=>'Search']); ?> 
 							</div> 
@@ -56,22 +56,24 @@
 								</tr>
 						</thead>
 						<tbody>
-							<?php $i=1; foreach ($PostTravlePackageReports as $PostTravlePackageReport): ?>
+							<?php $i=1; foreach ($texifleetpromotionreport as $texifleetpromotion): 
+							
+							//pr($texifleetpromotion->toArray());exit;?>
 							<tr>
 								<td><?php echo $i; ?></td> 
 								<td>
-								<?php $hrefurl =  $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'edit',$PostTravlePackageReport->post_travle_package->id),1);?>
-								<a href="<?php echo $hrefurl ;?>"><?= $PostTravlePackageReport->post_travle_package->title; ?></a></td>
+								<?php $hrefurl =  $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'edit',$texifleetpromotion->taxi_fleet_promotion->id),1);?>
+								<a href="<?php echo $hrefurl ;?>"><?= $texifleetpromotion->taxi_fleet_promotion->title; ?></a></td>
 								<td>
-								<?php $hrefurl1 =  $this->Url->build(array('controller'=>'Users','action'=>'adminviewprofile',$PostTravlePackageReport->post_travle_package->user_id),1);?>
-								<a href="<?php echo $hrefurl1 ;?>"><?= $PostTravlePackageReport->post_travle_package->user->first_name.' '.$PostTravlePackageReport->post_travle_package->user->last_name ?></a></td>
-								<td><?= $PostTravlePackageReport->report_reason->reason; ?></td>
-								<td><?= $PostTravlePackageReport->comment; ?></td>
+								<?php $hrefurl1 =  $this->Url->build(array('controller'=>'Users','action'=>'adminviewprofile',$texifleetpromotion->taxi_fleet_promotion->user_id),1);?>
+								<a href="<?php echo $hrefurl1 ;?>"><?= $texifleetpromotion->taxi_fleet_promotion->user->first_name.' '.$texifleetpromotion->taxi_fleet_promotion->user->last_name ?></a></td>
+								<td><?= $texifleetpromotion->report_reason->reason; ?></td>
+								<td><?= $texifleetpromotion->comment; ?></td>
 								<td>
-								<?php $hrefurl1 =  $this->Url->build(array('controller'=>'Users','action'=>'adminviewprofile',$PostTravlePackageReport->user_id),1);?>
-								<a href="<?php echo $hrefurl1 ;?>"><?= $PostTravlePackageReport->user->first_name.' '.$PostTravlePackageReport->user->last_name ?></a></td>
+								<?php $hrefurl1 =  $this->Url->build(array('controller'=>'Users','action'=>'adminviewprofile',$texifleetpromotion->user_id),1);?>
+								<a href="<?php echo $hrefurl1 ;?>"><?= $texifleetpromotion->user->first_name.' '.$texifleetpromotion->user->last_name ?></a></td>
 								<td><?php 
-								$date=date('d-m-Y',strtotime($PostTravlePackageReport->created_on));
+								$date=date('d-m-Y',strtotime($texifleetpromotion->created_on));
 								echo $date; ?></td>
 							</tr>
 							<?php $i++; endforeach;  ?>

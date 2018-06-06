@@ -1377,5 +1377,36 @@ class TaxiFleetPromotionsController extends AppController
 		}
 		$this->set(compact('user_id','id'));
     }
-	 
+	   public function flagreport($promotion_type_id=null)
+    {
+        $this->viewBuilder()->layout('admin_layout');
+		$promotion_id=$this->request->query('promotion_type_id');
+		//pr($promotion_id);exit;
+		/* $texifleetpromotionreport=$this->paginate($this->TaxiFleetPromotions->TaxiFleetPromotionReports->find()->contain(['TaxiFleetPromotions'=>['Users'],'Users','ReportReasons'])->where(['TaxiFleetPromotionReports.taxi_fleet_promotion_id'=>$promotion_id])); */
+		
+		//pr($texifleetpromotionreport);exit;
+		
+		if(isset($this->request->query['Search'])){
+			$report_reason_id = $this->request->query['report_reason_id'];
+			$start_date = $this->request->query['start_date'];
+			$end_date = $this->request->query['end_date'];
+			if(!empty($report_reason_id)){
+				$conditions['TaxiFleetPromotionReports.report_reason_id']=$report_reason_id;
+			}
+			if(!empty($start_date)){
+				$conditions['TaxiFleetPromotionReports.created_on >=']=date('Y-m-d',strtotime($start_date));
+			}
+			if(!empty($end_date)){
+				$conditions['TaxiFleetPromotionReports.created_on <=']=date('Y-m-d',strtotime($end_date));
+			}
+			$texifleetpromotionreport=$this->paginate($this->TaxiFleetPromotions->TaxiFleetPromotionReports->find()->contain(['TaxiFleetPromotions'=>['Users'],'Users','ReportReasons'])->where($conditions));
+			//pr($TaxiFleetPromotionReports);exit;
+  		}
+		else{
+			$texifleetpromotionreport=$this->paginate($this->TaxiFleetPromotions->TaxiFleetPromotionReports->find()->contain(['TaxiFleetPromotions'=>['Users'],'Users','ReportReasons'])->where(['TaxiFleetPromotionReports.taxi_fleet_promotion_id'=>$promotion_id]));
+		}
+		
+		$report_reason=$this->TaxiFleetPromotions->TaxiFleetPromotionReports->ReportReasons->find('list', ['limit' => 200]);
+		$this->set(compact('texifleetpromotionreport','report_reason'));
+	}
 }

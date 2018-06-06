@@ -1419,7 +1419,7 @@ class PostTravlePackagesController extends AppController
     public function flagreport($promotion_type_id=null)
     {
         $this->viewBuilder()->layout('admin_layout');
-		$promotion_id=23;//$this->request->query('promotion_type_id'); 
+		$promotion_id=$this->request->query('promotion_type_id'); 
 		/* $PostTravlePackageReports=$this->paginate($this->PostTravlePackages->PostTravlePackageReports->find()->contain(['PostTravlePackages'=>['Users'],'Users','ReportReasons'])->where(['PostTravlePackageReports.post_travle_package_id'=>$promotion_id])); */
 		
 		$report_reason=$this->PostTravlePackages->PostTravlePackageReports->ReportReasons->find('list', ['limit' => 200]);
@@ -1438,7 +1438,6 @@ class PostTravlePackagesController extends AppController
 			if(!empty($end_date)){
 				$conditions['PostTravlePackageReports.created_on <=']=date('Y-m-d',strtotime($end_date));
 			}
- 			//$testimonial = $this->paginate($this->Testimonial->find()->where($conditions));
 			$PostTravlePackageReports=$this->paginate($this->PostTravlePackages->PostTravlePackageReports->find()->contain(['PostTravlePackages'=>['Users'],'Users','ReportReasons'])->where($conditions));
 			//pr($PostTravlePackageReports);exit;
   		}
