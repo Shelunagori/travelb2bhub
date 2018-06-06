@@ -620,9 +620,9 @@ $getHotelPromotion=$getEventPlanners ;
 				->contain(['Users'=>function($q)use($filter_search){
 					return $q->select(['first_name','last_name','mobile_number','company_name','role_id'])->where($filter_search);
 				}])
-				->where(['hotel_promotion_id'=>$hotel_promotion_id])
-				->limit($limit)
-				->page($page);
+				->where(['hotel_promotion_id'=>$hotel_promotion_id]);
+				//->limit($limit)
+				//->page($page);
 			foreach($getTravelPackages as $packages){
 				$Follow = $this->HotelPromotions->HotelPromotionViews->Users->BusinessBuddies->exists(['user_id'=>$user_id,'bb_user_id'=>$packages->user_id]);  
 				if($Follow==0){
@@ -665,9 +665,9 @@ $getHotelPromotion=$getEventPlanners ;
 				->contain(['Users'=>function($q)use($filter_search){
 					return $q->select(['first_name','last_name','mobile_number','company_name','role_id'])->where($filter_search);
 				}])
-				->where(['hotel_promotion_id'=>$hotel_promotion_id])
-				->limit($limit)
-				->page($page);
+				->where(['hotel_promotion_id'=>$hotel_promotion_id]);
+				//->limit($limit)
+				//->page($page);
 			foreach($getTravelPackages as $packages){
 				$Follow = $this->HotelPromotions->HotelPromotionLikes->Users->BusinessBuddies->exists(['user_id'=>$user_id,'bb_user_id'=>$packages->user_id]);  
 				if($Follow==0){

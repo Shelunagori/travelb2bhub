@@ -433,6 +433,13 @@ $(document).ready(function ()
 			$(".replacedata").html(data);
 			$('#selectbox').html(data);
  			$('.city_id').select2();
+			<?php if(empty($cityLists)){  ?>
+				$(".replacedata").html('<?php $options=array();
+				$options[] = ['value'=>'0','text'=>'All Cities','selected'];
+				echo $this->Form->input('city_id',["class"=>"form-control city_id requiredfield",'required',"multiple"=>true ,'options' => $options,'label'=>false]);
+				?><label style="display:none" class="helpblock error" > This field is required.</label>');
+				$('.city_id').select2();
+			<?php } ?>
 		}
 	});
 
@@ -471,9 +478,9 @@ $(document).ready(function ()
 		});
 		$("#newlist").show();
 		 
-		<?php if(empty($cityLists)){ ?>
+		<?php if(empty($cityLists)){  ?>
 	 
-		$(".replacedata").html('<?php $options=array();
+				$(".replacedata").html('<?php $options=array();
 				$options[] = ['value'=>'0','text'=>'All Cities','selected'];
 				echo $this->Form->input('city_id',["class"=>"form-control city_id requiredfield",'required',"multiple"=>true ,'options' => $options,'label'=>false]);
 				?><label style="display:none" class="helpblock error" > This field is required.</label>');

@@ -11,7 +11,7 @@ use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use Cake\Datasource\ConnectionManager;
 use Cake\Network\Email\Email;
-date_default_timezone_set('Asia/Kolkata');
+date_default_timezone_set('Asia/Kolkata'); 
 /**
 * Users Controller
 *
@@ -1892,6 +1892,7 @@ public function sendrequest() {
 							$userchats->user_id = $this->Auth->user('id');
 							$userchats->send_to_user_id = $usr["id"];
 							$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+							date_default_timezone_set('Asia/Kolkata');
 							$userchats->created = date("Y-m-d H:i:s");
 							$userchats->type = 'Request';
 							$userchats->notification = 1;
@@ -2047,6 +2048,7 @@ $Userlist = $stmt ->fetchAll('assoc');
 					$userchats->user_id = $this->Auth->user('id');
 					$userchats->send_to_user_id = $usr["id"];
 					$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+					date_default_timezone_set('Asia/Kolkata');
 					$userchats->created = date("Y-m-d H:i:s");
 					$userchats->type = 'Request';
  					$userchats->notification = 1;
@@ -2128,6 +2130,7 @@ elseif($this->request->data['category_id'] == 3 ){
 						$userchats->send_to_user_id = $usr["id"];
 						$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
 						$userchats->type = 'Request';
+						date_default_timezone_set('Asia/Kolkata');
 						$userchats->created = date("Y-m-d H:i:s");
 						$userchats->notification = 1;
 						if ($userchatTable->save($userchats)) {
@@ -2155,6 +2158,7 @@ $Userlisth = $stmth->fetchAll('assoc');
 						$userchats->user_id = $this->Auth->user('id');
 						$userchats->send_to_user_id = $usrh["id"];
 						$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+						date_default_timezone_set('Asia/Kolkata');
 						$userchats->created = date("Y-m-d H:i:s");
 						$userchats->notification = 1;
 						$userchats->type = 'Request';
@@ -2196,6 +2200,7 @@ return $this->redirect('/users/sendrequest');
 		$userchats->send_to_user_id = $usr["id"];
 		$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
 		$userchats->type = 'Request';
+		date_default_timezone_set('Asia/Kolkata');
 		$userchats->created = date("Y-m-d H:i:s");
 		$userchats->notification = 1;;
 		if ($userchatTable->save($userchats)) {
@@ -3318,6 +3323,7 @@ public function acceptOffer() {
 			$userchats->send_to_user_id = $send_to_user_id;
 			$userchats->message = $message;
 			$userchats->type = 'Final Response';
+			date_default_timezone_set('Asia/Kolkata');
 			$userchats->created = date("Y-m-d H:i:s");
 			$userchats->notification = 1;;
 				if ($userchatTable->save($userchats)) {
@@ -4145,8 +4151,8 @@ public function clearreadChats() {
 	$loggedinid = $this->Auth->user('id');
 	$conn = ConnectionManager::get('default');
 	 
-	$sql = "UPDATE user_chats SET `is_read` = '1',`read_date_time`='".date("Y-m-d h:i:s")."'
-		 WHERE `id` = $chatid ;";  
+	$sql = "UPDATE user_chats SET `is_read` = '1',`read_date_time`='".date("Y-m-d H:i:s")."'
+		 WHERE `id` = '$chatid'  && `is_read` = '0';";  
  	$stmt = $conn->execute($sql);
 	exit;
 }
@@ -4599,6 +4605,7 @@ public function addresponse() {
 			$userchats->send_to_user_id = $request["user_id"];
 			$userchats->message = $message;
 			$userchats->type = 'Response';
+			date_default_timezone_set('Asia/Kolkata');
 			$userchats->created = date("Y-m-d H:i:s");
 			$userchats->notification = 1;;
 			if ($userchatTable->save($userchats)) {
@@ -4847,6 +4854,7 @@ $name = $user['first_name'].' '.$user['last_name'];
 //$d["message"] = "You have received a chat message from $name";	
 $d["user_id"] = $this->Auth->user('id');
 $d["send_to_user_id"] = $d['chat_user_id'];
+date_default_timezone_set('Asia/Kolkata');
 $d["created"] = date("Y-m-d H:i:s");
 	
 $sql = "Insert into user_chats SET user_id='".$this->Auth->user('id')."',send_to_user_id='".$d['chat_user_id']."',
@@ -4911,6 +4919,7 @@ $userchats->user_id = $user_from_id;
 $userchats->send_to_user_id = $send_to_user_id;
 $userchats->type = 'Detail Share';
 $userchats->message = $message;
+date_default_timezone_set('Asia/Kolkata');
 $userchats->created = date("Y-m-d H:i:s");
 $userchats->notification = 1;
 if ($userchatTable->save($userchats)) {
@@ -5473,7 +5482,7 @@ $data[$req['id']]  = $queryr->count();
 			 return $this->redirect(['action' => 'dashboard']);
 		}
 		else{
-			$this->Flash->error(__('You have already approved the Review!'));
+			$this->Flash->error(__('You have already approved the Review!')); 
 			return $this->redirect(['action' => 'dashboard']);
 		}
 	}

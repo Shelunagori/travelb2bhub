@@ -54,7 +54,7 @@
 				 
                 <?php  echo $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'login'],'id'=>"UserLoginForm", 'class'=>'login100-form validate-form']); ?>
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="text" autocomplete="new-password" name="email" >
+						<input class="input100" type="email" autocomplete="new-password" name="email" >
 						<span class="focus-input100" data-placeholder="Email"></span>
 					</div>
 

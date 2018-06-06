@@ -252,8 +252,8 @@ input[type=checkbox] {
 				<input type="hidden" name="city_id" id="city_id">
 				<input type="hidden" name="state_id" id="state_id">
 				<div class="row">
-					<div class="col-md-12">
-						<div class="col-md-6"><div id="pcfdfg"> </div>
+					<div class="col-md-12" style="margin-top:10px">
+						<div class="col-md-6"> 
 							<div class="wrap-input100 validate-input" data-validate = "Pincode">
 								<input class="input100 trim_space_valid"  required=""  type="text" name="pincode" id="pincode" maxlength="6" minlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/>
 								<span class="focus-input100" data-placeholder="Pincode"></span>
@@ -342,7 +342,8 @@ input[type=checkbox] {
 <?php echo $this->Html->script('/assets/login/js/main.js'); ?>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
-$(document).ready(function(){	 
+$(document).ready(function(){
+$(".suggesstion-box").hide();	
 	$('.select2').select2();
 	$(document).on('click',"#pincode",function(){ 
 		var city_id=$('#city_id').val();

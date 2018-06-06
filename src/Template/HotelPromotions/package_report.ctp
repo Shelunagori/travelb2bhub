@@ -322,7 +322,7 @@ a{
 					<span class="help-block"></span>
 					<div class="row">						
 					<div class="col-md-3 rowspace">
-					<?= $this->Html->image($hotelPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:80px;','data-target'=>'#imagemodal'.$hotelPromotion->id,'data-toggle'=>'modal','promotionid'=>$hotelPromotion->id,'userId'=>$user_id,'class'=>'viewCount']) ?>
+					<?= $this->Html->image($hotelPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:109px;','data-target'=>'#imagemodal'.$hotelPromotion->id,'data-toggle'=>'modal','promotionid'=>$hotelPromotion->id,'userId'=>$user_id,'class'=>'viewCount']) ?>
 					<div id="imagemodal<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-md">
 						<!-- Modal content-->
@@ -334,7 +334,7 @@ a{
 							</div>
 						</div>
 					</div>
-					<hr></hr>
+					<hr style="margin-top:4px !important"></hr>
 					<div class="row" style="padding-top:5px;">					
 						<input type="hidden" name="taxifleet_id" value="<?php echo $hotelPromotion->id; ?>">
 							<table  width="100%" style="text-align:center;" >
@@ -523,7 +523,7 @@ a{
 										<option value="8">8</option>
 										<option value="9">9</option>
 										<option value="10">10</option>
-										<option value="11">11 (Defult)</option>
+										<option value="11">11 (Default)</option>
 									</select>
 								</div>
 							</div> 

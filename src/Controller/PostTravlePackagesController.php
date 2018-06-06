@@ -651,10 +651,10 @@ class PostTravlePackagesController extends AppController
 							$this->Flash->error(__('Something went wrong. Please, try again.'));
 						}
 					}
-					else{$this->Flash->error(__('You are already submitted your Rating/Review'));
+					else{$this->Flash->error(__('You have already submitted your Rating/Review'));
 					}
 				}
-				else{$this->Flash->error(__('You are already submitted your Rating/Review'));
+				else{$this->Flash->error(__('You have already submitted your Rating/Review'));
 				}
 				return $this->redirect(['action' => 'report']);
  			}

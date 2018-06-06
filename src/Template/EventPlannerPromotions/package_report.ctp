@@ -318,7 +318,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 					<span class="help-block"></span>
 				<div class="row">
 					<div class="col-md-3">
-					<?= $this->Html->image($eventPlannerPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:80px;','data-target'=>'#imagemodal'.$eventPlannerPromotion->id,'data-toggle'=>'modal','promotionid'=>$eventPlannerPromotion->id,'userId'=>$user_id,'class'=>'viewCount']) ?>
+					<?= $this->Html->image($eventPlannerPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:109px;','data-target'=>'#imagemodal'.$eventPlannerPromotion->id,'data-toggle'=>'modal','promotionid'=>$eventPlannerPromotion->id,'userId'=>$user_id,'class'=>'viewCount']) ?>
 					 
 					<div id="imagemodal<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-md">
@@ -331,7 +331,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 							</div>
 						</div>
 					</div>
-					<hr></hr>
+					<hr style="margin-top:4px !important"></hr>
 					<div class="row" style="padding-top:5px;">					
 						<input type="hidden" name="event_id" value="<?php echo $eventPlannerPromotion->id; ?>">
 							<table  width="100%" style="text-align:center;" >
@@ -529,7 +529,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 										<option value="8">8</option>
 										<option value="9">9</option>
 										<option value="10">10</option>
-										<option value="11">11 (Defult)</option>
+										<option value="11">11 (Default)</option>
 									</select>
 								</div>
 							</div> 

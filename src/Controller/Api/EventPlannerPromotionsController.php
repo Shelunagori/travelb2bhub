@@ -675,9 +675,9 @@ class EventPlannerPromotionsController extends AppController
 				->contain(['Users'=>function($q)use($filter_search){
 					return $q->select(['first_name','last_name','mobile_number','company_name','role_id'])->where($filter_search);
 				}])
-				->where(['event_planner_promotion_id'=>$event_planner_promotion_id])
-				->limit($limit)
-				->page($page);
+				->where(['event_planner_promotion_id'=>$event_planner_promotion_id]);
+				//->limit($limit)
+				//->page($page);
 			foreach($getTravelPackages as $packages){
 				$Follow = $this->EventPlannerPromotions->EventPlannerPromotionViews->Users->BusinessBuddies->exists(['user_id'=>$user_id,'bb_user_id'=>$packages->user_id]);  
 				if($Follow==0){
@@ -720,9 +720,9 @@ class EventPlannerPromotionsController extends AppController
 				->contain(['Users'=>function($q)use($filter_search){
 					return $q->select(['first_name','last_name','mobile_number','company_name','role_id'])->where($filter_search);
 				}])
-				->where(['event_planner_promotion_id'=>$event_planner_promotion_id])
-				->limit($limit)
-				->page($page);
+				->where(['event_planner_promotion_id'=>$event_planner_promotion_id]);
+				//->limit($limit)
+				//->page($page);
 			foreach($getTravelPackages as $packages){
 				$Follow = $this->EventPlannerPromotions->EventPlannerPromotionLikes->Users->BusinessBuddies->exists(['user_id'=>$user_id,'bb_user_id'=>$packages->user_id]);  
 				if($Follow==0){
@@ -787,12 +787,12 @@ class EventPlannerPromotionsController extends AppController
 				}
 			}else{
 				$response_code=204;
-				$message='You are already submitted your Rating/Review';
+				$message='You have already submitted your Rating/Review';
 			}
 		}
 		else{
 			$response_code=204;
-			$message='You are already submitted your Rating/Review';
+			$message='You have already submitted your Rating/Review';
 		}
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);	

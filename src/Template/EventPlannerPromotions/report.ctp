@@ -314,20 +314,20 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 					<span class="help-block"></span>
 				<div class="row">
 					<div class="col-md-3">
-					<?= $this->Html->image($eventPlannerPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:80px;','data-target'=>'#imagemodal'.$eventPlannerPromotion->id,'data-toggle'=>'modal','promotionid'=>$eventPlannerPromotion->id,'userId'=>$user_id,'class'=>'viewCount']) ?>
+					<?= $this->Html->image($eventPlannerPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:109px;','data-target'=>'#imagemodal'.$eventPlannerPromotion->id,'data-toggle'=>'modal','promotionid'=>$eventPlannerPromotion->id,'userId'=>$user_id,'class'=>'viewCount']) ?>
 					 
 					<div id="imagemodal<?php echo $eventPlannerPromotion->id;?>" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-md">
 						<!-- Modal content-->
 							<div class="modal-content">
-								<div class="modal-body" >
+								<div class="modal-body">
 								<button type="button" class="close" data-dismiss="modal" style="padding-right:8px !important;">&times;</button>
 								<?= $this->Html->image($eventPlannerPromotion->full_image,['style'=>'width:100%;;padding:20px;padding-top:0px!important;']) ?>
 								</div>
 							</div>
 						</div>
 					</div>
-					<hr></hr>
+					<hr style="margin-top:4px !important"></hr>
 					<div class="row" style="padding-top:5px;">					
 						<input type="hidden" name="event_id" value="<?php echo $eventPlannerPromotion->id; ?>">
 						<table  width="100%" style="text-align:center;" >

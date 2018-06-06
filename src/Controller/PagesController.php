@@ -8,7 +8,7 @@ use Cake\Event\Event;
 use Cake\ORM\TableRegistry;
 use Cake\Datasource\ConnectionManager;
 use Cake\Network\Email\Email;
-
+date_default_timezone_set('Asia/Kolkata');
 
 class PagesController extends AppController
 {
@@ -2048,8 +2048,8 @@ public function removebusinessbuddyapi() {
 	$this->loadModel('BusinessBuddies');
 	$this->loadModel('User_Chats');
 	$this->loadModel('Testimonial');
-	$conditions["Responses.request_id"] = $_POST['request_id'];
-	  
+	$conditions["Responses.request_id"] = $_POST['request_id']; 
+	$conditions["Requests.status"] = 0; 
 	if(isset($_POST["agentnamesearch"]) && !empty($_POST["agentnamesearch"])) {
 		$keyword = $_POST["agentnamesearch"];
 		$AjentArray = explode(',',$keyword);
@@ -2149,7 +2149,7 @@ public function removebusinessbuddyapi() {
 		if(sizeof($BlockedUsers)>0){
 				$conditions["Responses.user_id NOT IN"] =  $BlockedUsers; 
 		}
-	$conditions["Requests.status"] = 0;
+ 
 //---
 	$responses = $this->Responses->find()
 	->contain(["Users", "Requests","Requests.Hotels","Testimonial"])
@@ -4068,6 +4068,7 @@ $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField
 			}
 			$d["user_id"] = $_POST['user_id'];
 			$d["send_to_user_id"] = $d['chat_user_id'];
+			date_default_timezone_set('Asia/Kolkata');
 			$d["created"] = date("Y-m-d H:i:s");
 //$response_id=$_POST['response_id'];
 			$UserChat = $this->UserChats->newEntity($d);
@@ -4142,6 +4143,7 @@ $this->UserChats->updateAll(['type' => 'Chat'], ['id' => $ChatId]);
 			
 			$message = "$name has accepted your offer. Click here to go to Finalized Reponses to add a Review for $name";
 			$msg = "$name has accepted your offer. Click here to go to Finalized Reponses to add a Review for $name";
+			date_default_timezone_set('Asia/Kolkata');
 			$userchatTable = TableRegistry::get('User_Chats');
 			$userchats = $userchatTable->newEntity();
 			$userchats->request_id = $request_id;
@@ -4201,6 +4203,7 @@ $this->User_Chats->updateAll(['type' => 'Final Response'], ['id' => $ChatId]);
 				$userchats->user_id = $user_from_id;
 				$userchats->send_to_user_id = $send_to_user_id;
 				$userchats->message = $message;
+				date_default_timezone_set('Asia/Kolkata');
 				$userchats->created = date("Y-m-d H:i:s");
 				$userchats->notification = 1;
 				$message_data='';
@@ -4324,6 +4327,7 @@ $this->UserChats->updateAll(['type' => 'Detail Share'], ['id' => $ChatId]);
 					$userchats->user_id = $d["user_id"];
 					$userchats->send_to_user_id = $request["user_id"];
 					$userchats->message = $message;
+					date_default_timezone_set('Asia/Kolkata');
 					$userchats->created = date("Y-m-d H:i:s");
 					$userchats->notification = 1;
 					if ($userchatTable->save($userchats)) {
@@ -4780,7 +4784,7 @@ $expiry_date = date('Y-m-d H:i:s', strtotime('+'.$total_days.' days'));
 		$conn = ConnectionManager::get('default');
 		date_default_timezone_set('Asia/Kolkata');
 		 $user_id = $_POST['user_id'];$id= $_POST['id'];
-		$sql="UPDATE user_chats SET is_read='1', read_date_time='".date("Y-m-d h:i:s")."' 
+		$sql="UPDATE user_chats SET is_read='1', read_date_time='".date("Y-m-d H:i:s")."' 
 		where send_to_user_id='".$user_id."' AND is_read=0 AND  id = '".$id."'"; 
  
 
@@ -5092,6 +5096,7 @@ $response=array('success'=>$success,'error'=>$error,'response'=>$response);
 								$userchats->type = 'Request';
 							$userchats->send_to_user_id = $usr["id"];
 							$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+							date_default_timezone_set('Asia/Kolkata');
 							$userchats->created = date("Y-m-d H:i:s");
 							$userchats->notification = 1;;
 							if ($userchatTable->save($userchats)) {
@@ -5247,6 +5252,7 @@ $result['response_object'] = "Congratulations! Your request has been submitted s
 								$userchats->type = 'Request';
 							$userchats->send_to_user_id = $usr["id"];
 							$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+							date_default_timezone_set('Asia/Kolkata');
 							$userchats->created = date("Y-m-d H:i:s");
 							$userchats->notification = 1;;
 							if ($userchatTable->save($userchats)) {
@@ -5394,6 +5400,7 @@ $result['response_object'] = "Congratulations! Your request has been submitted s
 						$userchats->send_to_user_id = $usr["id"];
 						$userchats['type'] = 'Request';
 						$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+						date_default_timezone_set('Asia/Kolkata');
 						$userchats->created = date("Y-m-d H:i:s");
 						$userchats->notification = 1;
  
@@ -5420,6 +5427,7 @@ $this->User_Chats->updateAll(['type' => 'Request'], ['id' => $id]);
 						$userchats->user_id = $_POST['user_id'];
 						$userchats->send_to_user_id = $usrh["id"]; 
 						$userchats->message = "You have received a Request! Click here to go to RESPOND TO REQUEST tab to view it.";
+						date_default_timezone_set('Asia/Kolkata');
 						$userchats->created = date("Y-m-d H:i:s");
 						$userchats->notification = 1;;
 						if ($userchatTable->save($userchats)) {
@@ -5460,5 +5468,23 @@ $result['response_object'] = "Congratulations! Your request has been submitted s
 			echo $data;
 			exit;
 		}
+	}
+	
+	public function newtest(){
+		//date_default_timezone_set('Asia/Kolkata');
+		$userchatTable = TableRegistry::get('User_Chats');
+		$userchats = $userchatTable->newEntity();
+		$userchats->request_id = '0';
+		$userchats->user_id = '1708';
+		$userchats->send_to_user_id = '1622'; 
+		$userchats->message = "test";
+		$userchats->created = date("Y-m-d H:i:s");
+		$userchats->notification = 1;;
+		$userchats->notified = 1;
+		
+		if ($userchatTable->save($userchats)) {
+ 		}
+		echo"<pre>";
+		print_r($userchats); exit;
 	}
 }
