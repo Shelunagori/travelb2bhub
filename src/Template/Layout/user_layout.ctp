@@ -83,9 +83,10 @@ sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a {
  textarea {
 	resize: none !important;
 }
-fieldset{
-	margin:10px !important;
-	border-radius: 6px;
+fieldset {
+	padding: 10px ;
+	border: 1px solid #bfb7b7f7;
+	margin: 0px;
 }
 legend{
 	margin-left: 20px;

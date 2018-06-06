@@ -1139,6 +1139,7 @@ class PagesController extends AppController
 			$conditions["Responses.is_deleted"] = 0;
 			$conditions["Responses.status"] = 0;
 			$conditions["Requests.status"] = 0;
+			$conditions["Requests.is_deleted"] = 0;
 			$this->loadModel('BlockedUsers');
 			$BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField' => 'blocked_user_id'])
 				->hydrate(false)

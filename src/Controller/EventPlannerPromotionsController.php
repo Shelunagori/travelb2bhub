@@ -88,7 +88,7 @@ class EventPlannerPromotionsController extends AppController
 			$PlaceReqCount=$reqcountNew['value']-($RequestCount+$RequestCount1);
 			$this->set('PlaceReqCount', $PlaceReqCount);
 			
-			$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->where(["Requests.user_id NOT IN"=>$BlockedUsers]);
+			$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Requests.status' =>0,'Requests.is_deleted' =>0,'Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->where(["Requests.user_id NOT IN"=>$BlockedUsers]);
 			$myReponseCount = $queryr->count(); 
 			$this->set('myReponseCountNew', $myReponseCount);
 
