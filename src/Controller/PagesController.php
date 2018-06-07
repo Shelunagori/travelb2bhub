@@ -4075,7 +4075,7 @@ $BlockedUsers = $this->BlockedUsers->find('list',['keyField' => "id",'valueField
 			$UserChat = $this->UserChats->newEntity($d);
 			if ($re = $this->UserChats->save($UserChat)) {
 $ChatId= $re ->id;
-$this->UserChats->updateAll(['type' => 'Chat'], ['id' => $ChatId]);
+$this->UserChats->updateAll(['type' => 'Chat','notified'=>1], ['id' => $ChatId]);
 				$conn = ConnectionManager::get('default');
 				$sql = "SELECT first_name,last_name FROM users	where id='".$_POST['user_id']."'";
 				$stmt = $conn->execute($sql);
@@ -4083,7 +4083,7 @@ $this->UserChats->updateAll(['type' => 'Chat'], ['id' => $ChatId]);
 				$name = $res['first_name'].' '.$res['last_name'];
 				$push_message = "You have received a CHAT MESSAGE from $name. $res_text";
 				$message_data = $_POST['message'];
-				//$this->sendpushnotification($d['chat_user_id'],$push_message,$message_data);
+				$this->sendpushnotification($d['chat_user_id'],$push_message,$message_data);
 
 				$result['response_code'] = 200;
 				$result['response_object'] = "Message sent successfully";
@@ -4153,11 +4153,12 @@ $this->UserChats->updateAll(['type' => 'Chat'], ['id' => $ChatId]);
 			$userchats->message = $message;
 			$userchats->created = date("Y-m-d H:i:s");
 			$userchats->notification = 1;
+			$userchats->notified = 1;
 			$message_data='';
 			if ($userchatTable->save($userchats)) {
 $ChatId= $userchats->id;
 $this->User_Chats->updateAll(['type' => 'Final Response'], ['id' => $ChatId]);
-			//$this->sendpushnotification($send_to_user_id,$msg,$message_data);
+			$this->sendpushnotification($send_to_user_id,$msg,$message_data);
 			}
 			}
 			$result['response_code'] = 200;
@@ -4207,9 +4208,10 @@ $this->User_Chats->updateAll(['type' => 'Final Response'], ['id' => $ChatId]);
 				date_default_timezone_set('Asia/Kolkata');
 				$userchats->created = date("Y-m-d H:i:s");
 				$userchats->notification = 1;
+				$userchats->notified = 1;
 				$message_data='';
 					if ($userchatTable->save($userchats)) {
-						//$this->sendpushnotification($send_to_user_id,$msg,$message_data);
+						$this->sendpushnotification($send_to_user_id,$msg,$message_data);
 						$ChatId= $userchats->id;
 $this->UserChats->updateAll(['type' => 'Detail Share'], ['id' => $ChatId]);
 						$res = 1;
@@ -4331,11 +4333,12 @@ $this->UserChats->updateAll(['type' => 'Detail Share'], ['id' => $ChatId]);
 					date_default_timezone_set('Asia/Kolkata');
 					$userchats->created = date("Y-m-d H:i:s");
 					$userchats->notification = 1;
+					$userchats->notified = 1;
 					if ($userchatTable->save($userchats)) {
 $ChatId= $userchats->id;
 $this->User_Chats->updateAll(['type' => 'Response'], ['id' => $ChatId]);
 $message_data='';
-						//$this->sendpushnotification($request["user_id"],$message,$message_data);
+						$this->sendpushnotification($request["user_id"],$message,$message_data);
 					}
 					$res =1;
 					$result['response_code'] = 200;

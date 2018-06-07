@@ -271,7 +271,7 @@ class EventPlannerPromotionsController extends AppController
         $this->set('_serialize', ['getEventPlanners','message','response_code']);				
 	}	
 	
-	public function getEventPlanners($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$higestSort=null,$search=null,$page=null,$submitted_from=null)
+	public function getEventPlanners($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$higestSort=null,$search=null,$page=null,$submitted_from=null,$following=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
@@ -285,6 +285,7 @@ class EventPlannerPromotionsController extends AppController
 				$limit=10;
 			}
 			$country_id = $this->request->query('country_id');
+			$following = $this->request->query('following');
 			$country_id_short = $this->request->query('country_id_short');
 			$state_id = $this->request->query('state_id');
 			$state_id_short = $this->request->query('state_id_short');
@@ -339,7 +340,13 @@ class EventPlannerPromotionsController extends AppController
 			{
 				$where_short = ['EventPlannerPromotionCities.id' =>$city_id_short];
 			} 	
-
+			$conditions=array()	;	
+			if(!empty($following))
+			{
+  				$this->loadModel('BusinessBuddies');
+				$BusinessBuddies = $this->BusinessBuddies->find('list',['keyField' => "bb_user_id",'valueField' => 'bb_user_id'])->where(['user_id' => $isLikedUserId])->toArray();
+				$conditions = ['EventPlannerPromotions.user_id IN' => $BusinessBuddies];
+			}
 			$search_bar_title = null;
 			$data_arr = [];
 			$data_arr_state=[];
@@ -404,6 +411,7 @@ class EventPlannerPromotionsController extends AppController
 			->where(['visible_date >=' =>date('Y-m-d')])
 			->where(['EventPlannerPromotions.is_deleted' =>0])
 			->where($country_id)
+			->where($conditions)
 			->order($where_short)
 			->where($search_bar_title)
 			->group(['EventPlannerPromotions.id'])

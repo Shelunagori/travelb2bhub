@@ -194,7 +194,7 @@ class PostTravlePackagesController extends AppController
         $this->set('_serialize', ['message','response_code']);
     }
 
-	public function getTravelPackages($isLikedUserId=null,$category_id = null, $category_short = null,$duration_day=null,$duration_night=null,$duration_short=null,$valid_date=null,$valid_date_short=null,$starting_price=null,$starting_price_short=null,$country_id=null,$country_id_short=null,$city_id=null,$city_id_short=null,$category_name=null,$higestSort=null,$search = null,$page = null,$submitted_from=null,$starting_price_Filter=null)
+	public function getTravelPackages($isLikedUserId=null,$category_id = null, $category_short = null,$duration_day=null,$duration_night=null,$duration_short=null,$valid_date=null,$valid_date_short=null,$starting_price=null,$starting_price_short=null,$country_id=null,$country_id_short=null,$city_id=null,$city_id_short=null,$category_name=null,$higestSort=null,$search = null,$page = null,$submitted_from=null,$starting_price_Filter=null,$following=null)
 	{
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
@@ -224,6 +224,7 @@ class PostTravlePackagesController extends AppController
 			$higestSort = $this->request->query('higestSort');
 			$search_bar = $this->request->query('search');
 			$page = $this->request->query('page');
+			$following = $this->request->query('following');
 			
 			if(empty($page)){$page=1;}
 			// Start shorting code
@@ -331,6 +332,13 @@ class PostTravlePackagesController extends AppController
 				$starting_price_Filter["PostTravlePackages.starting_price <="] = $MaxQuotePrice;
 			 
 			}
+			$conditions=array()	;
+			if(!empty($following))
+			{
+  				$this->loadModel('BusinessBuddies');
+				$BusinessBuddies = $this->BusinessBuddies->find('list',['keyField' => "bb_user_id",'valueField' => 'bb_user_id'])->where(['user_id' => $isLikedUserId])->toArray();
+				$conditions = ['PostTravlePackages.user_id IN' => $BusinessBuddies];
+			}
 			//print_r($starting_price_Filter); exit;
 			$country_filter=null;
 			if(!empty($country_id))
@@ -412,6 +420,7 @@ class PostTravlePackagesController extends AppController
 			->where($valid_date)
 			->where($starting_price_Filter)
 			->where($search_bar_title)
+			->where($conditions)
 			->where(['PostTravlePackages.is_deleted' =>0])
 			->order($where_short)
 			->order(['PostTravlePackageRows.id' => $category_short])

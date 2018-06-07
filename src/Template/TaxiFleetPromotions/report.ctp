@@ -1,10 +1,10 @@
 <?php //echo $this->Html->css('/assets/loader-1.css'); ?>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
-<?php
+<?php 
 //-- LIST 
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => $coreVariable['SiteUrl']."api/TaxiFleetPromotions/getTaxiFleetPromotions.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&city_id=".$city_id."&state_id=".$state_id."&car_bus_id=".$car_bus_id."&search=".$search."&submitted_from=web",
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/TaxiFleetPromotions/getTaxiFleetPromotions.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&city_id=".$city_id."&state_id=".$state_id."&car_bus_id=".$car_bus_id."&search=".$search."&following=".$following."&submitted_from=web",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -231,7 +231,7 @@ a{
 						</div>
 						<div class="row ">
 							<div class="col-md-12" >
-								<div class="col-md-12" style="padding-top:8px;">
+								<div class="col-md-8" style="padding-top:8px;">
 									<label class="col-form-label"for=example-text-input>Select Taxt/Fleet Category:  </label>
 									<div class="input-field" style="padding-top:4px;">
 										<?php 
@@ -241,6 +241,17 @@ a{
 											$options[] = ['value'=>$Buses->id,'text'=>$Buses->name];
 										};
 										echo $this->Form->control('car_bus_id', ['label'=>false,"id"=>"multi_vehicle", "type"=>"select",'options' =>$options, "class"=>"form-control select2","style"=>"height:125px;",'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']);?>
+									</div>
+								</div>
+								<div class="col-md-4" style="padding-top:8px;">
+									<div class="form-group" style="padding-top:10px;">
+									<label class="col-form-label" for=example-text-input>&nbsp;  </label>
+										<div class="checkbox">
+											<label>
+											  <input type="checkbox" name="following" value="following">
+											  Following
+											</label>
+										</div>
 									</div>
 								</div>
 							</div>

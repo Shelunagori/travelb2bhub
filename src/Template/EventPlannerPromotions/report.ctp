@@ -3,7 +3,7 @@
 //-- List
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => $coreVariable['SiteUrl']."api/EventPlannerPromotions/getEventPlanners.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&city_id=".$city_id."&state_id=".$state_id."&search=".$search."&submitted_from=web",
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/EventPlannerPromotions/getEventPlanners.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&city_id=".$city_id."&state_id=".$state_id."&search=".$search."&following=".$following."&submitted_from=web",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -175,7 +175,7 @@ a{
 					<fieldset><legend>Filter</legend>
 						<div class="row">
 							<div class="col-md-12">
-							 <div class="col-md-6" style="padding-top:8px;">
+							 <div class="col-md-5" style="padding-top:8px;">
 								 <label class="col-form-label" for=example-text-input>State:  </label>
 									<div class="input-field" style="padding-top:8px;">
 									<?php 
@@ -188,7 +188,7 @@ a{
 									?> 
 									</div>
 								</div>	
-								<div class="col-md-6" style="padding-top:8px;">
+								<div class="col-md-5" style="padding-top:8px;">
 									<label class="col-form-label" for=example-text-input>City:  </label>
 									<div class="input-field" style="padding-top:8px;">
 									<?php 
@@ -200,7 +200,17 @@ a{
 										echo $this->Form->input('city_id', ['options' =>$options,'class'=>'form-control select2','label'=>false,"data-placeholder"=>"Select Cities",'empty'=>'Select...','multiple'=>true,'data-placeholder'=>'Select Multiple']); ?>
 									</div>
 								</div>	
-							 
+								<div class="col-md-2" style="padding-top:8px;">
+									<div class="form-group" style="padding-top:10px;">
+									<label class="col-form-label" for=example-text-input>&nbsp;  </label>
+										<div class="checkbox">
+											<label>
+											  <input type="checkbox" name="following" value="following">
+											  Following
+											</label>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 						<hr ></hr>	

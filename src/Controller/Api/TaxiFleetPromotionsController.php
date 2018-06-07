@@ -220,7 +220,7 @@ class TaxiFleetPromotionsController extends AppController
 		$this->set(compact('message','response_code'));
         $this->set('_serialize', ['message','response_code']);		
 	}
-	public function getTaxiFleetPromotions($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$car_bus_id=null,$car_bus_short=null,$higestSort=null,$search=null,$page=null,$submitted_from=null)
+	public function getTaxiFleetPromotions($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$car_bus_id=null,$car_bus_short=null,$higestSort=null,$search=null,$page=null,$submitted_from=null,$following=null)
 	{
 		$submitted_from = $this->request->query('submitted_from');
 		if($submitted_from="web")
@@ -242,6 +242,7 @@ class TaxiFleetPromotionsController extends AppController
 		$car_bus_id = $this->request->query('car_bus_id');	
 		$search_bar = $this->request->query('search');		
 		$page = $this->request->query('page');		
+		$following = $this->request->query('following');		
 		if(empty($page)){$page=1;}
 		if(!empty($isLikedUserId))
 		{
@@ -299,8 +300,14 @@ class TaxiFleetPromotionsController extends AppController
 			if(!empty($car_bus_short))
 			{
 				$where_short = ['TaxiFleetPromotionRows.id' =>$car_bus_short];
-			} 				
-
+			} 
+			$conditions=array()	;	
+			if(!empty($following))
+			{
+  				$this->loadModel('BusinessBuddies');
+				$BusinessBuddies = $this->BusinessBuddies->find('list',['keyField' => "bb_user_id",'valueField' => 'bb_user_id'])->where(['user_id' => $isLikedUserId])->toArray();
+				$conditions = ['TaxiFleetPromotions.user_id IN' => $BusinessBuddies];
+			}
 
 			$search_bar_title = null;
 			$data_arr = [];
@@ -389,6 +396,7 @@ class TaxiFleetPromotionsController extends AppController
 				->where(['TaxiFleetPromotions.visible_date >=' =>date('Y-m-d')])
 				->where($country_id)
 				->where($search_bar_title)
+				->where($conditions)
 				->where(['TaxiFleetPromotions.is_deleted' =>0])
 				->order($where_short)
 				->group(['TaxiFleetPromotions.id'])

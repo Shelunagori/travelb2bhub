@@ -1,6 +1,5 @@
 <?php //echo $this->Html->css('/assets/loader-1.css'); ?>
-<?php
-
+<?php 
  if(!empty($duration_day_night)){
 	$duration_day_night=explode(',', $duration_day_night);
 
@@ -27,7 +26,7 @@
   
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => $coreVariable['SiteUrl']."api/PostTravlePackages/getTravelPackages.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&category_id=".$category_id."&duration_day_night=".$duration_day_night."&starting_price=".$starting_price."&city_id=".$city_id."&search=".$search."&valid_date=".$valid_date."&submitted_from=web",
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/PostTravlePackages/getTravelPackages.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&category_id=".$category_id."&duration_day_night=".$duration_day_night."&starting_price=".$starting_price."&city_id=".$city_id."&search=".$search."&valid_date=".$valid_date."&following=".$following."&submitted_from=web",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -43,7 +42,7 @@ curl_setopt_array($curl, array(
 $response = curl_exec($curl);
 $err = curl_error($curl);
 curl_close($curl);
-
+ 
 $postTravlePackages=array();
 if ($err) {
   echo "cURL Error #:" . $err;
@@ -297,9 +296,9 @@ a{
 						</div>
 							<div class="row ">
 								<div class="col-md-12">
-									<div class="col-md-6" style="padding-top:8px;">
-									 <label class="col-form-label" for=example-text-input>Select Package Category: </label>
-									 <div class="input-field" style="padding-top:4px;">
+									<div class="col-md-4" style="padding-top:8px;">
+										 <label class="col-form-label" for=example-text-input>Select Package Category: </label>
+										 <div class="input-field" style="padding-top:4px;">
 										<?php 
 											$options=array();
 											foreach($cat as $sts)
@@ -309,15 +308,26 @@ a{
 											echo $this->Form->control('category_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "class"=>"form-control select2","data-placeholder"=>"Select... ","style"=>"height:125px;",'empty'=>'Select...',"multiple"=> true,'data-placeholder'=>"Select Multiple"]);?>
 										 </div>
 									</div>	
-									<div class="col-md-6 form-group" style="padding-top:8px;">
-									<label class="col-form-label" for="from">
-										Package Valid Till
-									</label>
-									<div class="input-field" style="padding-top:4px;">
-										<?php echo $this->Form->input('valid_date',['class'=>'form-control date-picker date requiredfield','label'=>false,'data-date-format'=>'dd-mm-yyyy','placeholder'=>'Select Date']);?>
-										<label style="display:none" class="helpblock error" > This field is required.</label>
+									<div class="col-md-4 form-group" style="padding-top:8px;">
+										<label class="col-form-label" for="from">
+											Package Valid Till
+										</label>
+										<div class="input-field" style="padding-top:4px;">
+											<?php echo $this->Form->input('valid_date',['class'=>'form-control date-picker date requiredfield','label'=>false,'data-date-format'=>'dd-mm-yyyy','placeholder'=>'Select Date']);?>
+											<label style="display:none" class="helpblock error" > This field is required.</label>
+										</div>
 									</div>
-								</div>
+									<div class="col-md-4" style="padding-top:8px;">
+										<div class="form-group" style="padding-top:10px;">
+										<label class="col-form-label" for=example-text-input>&nbsp;  </label>
+											<div class="checkbox">
+												<label>
+												  <input type="checkbox" name="following" value="following">
+												  Following
+												</label>
+											</div>
+										</div>
+									</div>
 								</div>	
 							</div>
 							<hr style="margin-top: 0px !important;margin-bottom: 0px !important;"></hr>	

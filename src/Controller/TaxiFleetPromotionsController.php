@@ -550,7 +550,7 @@ class TaxiFleetPromotionsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-	public function report($higestSort = null,$search = null,$country_id = null,$state_id = null,$city_id = null,$car_bus_id = null,$taxifleet_id= null,$removetaxifleet=null)
+	public function report($higestSort = null,$search = null,$country_id = null,$state_id = null,$city_id = null,$car_bus_id = null,$taxifleet_id= null,$removetaxifleet=null,$following=null)
     {
         $higestSort=$this->request->query('higestSort'); 
 		$city_ids=$this->request->query('city_id'); 
@@ -561,6 +561,7 @@ class TaxiFleetPromotionsController extends AppController
 		$state_id=$this->request->query('state_id');
 		if(!empty($state_id)) {$state_id=implode(',',$state_id);}
 		$search=$this->request->query('search');
+		$following=$this->request->query('following');
 		$user_id=$this->Auth->User('id');
 		if ($this->request->is(['patch', 'post', 'put'])) 
 		{
@@ -761,7 +762,7 @@ class TaxiFleetPromotionsController extends AppController
 			
 		}
 		$this->viewBuilder()->layout('user_layout');
-		$this->set(compact('user_id','higestSort','country_id','city_id','state_id','car_bus_id','search'));
+		$this->set(compact('user_id','higestSort','country_id','city_id','state_id','car_bus_id','search','following'));
     }
 	 public function promotionreports()
     {

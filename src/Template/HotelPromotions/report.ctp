@@ -3,7 +3,7 @@
 //-- List
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => $coreVariable['SiteUrl']."api/hotel_promotions/getHotelList.json?isLikedUserId=".$user_id.'&higestSort='.$higestSort.'&category_id='.$category_id.'&search='.$search.'&rating_filter='.$rating_filter.'&starting_price='.$starting_price."&submitted_from=web",
+  CURLOPT_URL => $coreVariable['SiteUrl']."api/hotel_promotions/getHotelList.json?isLikedUserId=".$user_id.'&higestSort='.$higestSort.'&category_id='.$category_id.'&search='.$search.'&rating_filter='.$rating_filter.'&starting_price='.$starting_price.'&following='.$following."&submitted_from=web",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_ENCODING => "",
   CURLOPT_MAXREDIRS => 10,
@@ -190,7 +190,7 @@ a{
 							</div>
 							<div class="row ">
 								<div class="col-md-12">
-									<div class="col-md-6" style="padding-top:8px;">
+									<div class="col-md-4" style="padding-top:8px;">
 									 <label class="col-form-label" for=example-text-input>Select Hotel Rating: </label>
 										 <div class="input-field" style="padding-top:8px;">
 											<select name="rating_filter" class="form-control">
@@ -203,7 +203,7 @@ a{
 											</select>
 										 </div>
 									</div>	
-									<div class="col-md-6" style="padding-top:8px;">
+									<div class="col-md-4" style="padding-top:8px;">
 										<label class="col-form-label" for=example-text-input>Room Price Range:  </label>
 										<div class="input-field" style="padding-top:8px;">
 											<select name="starting_price" class="form-control">
@@ -221,7 +221,18 @@ a{
 												</option>
 											</select>
 										 </div>
-									</div>	
+									</div>
+									<div class="col-md-4" style="padding-top:8px;">
+										<div class="form-group" style="padding-top:12px;">
+										<label class="col-form-label" for=example-text-input>&nbsp;  </label>
+											<div class="checkbox">
+												<label>
+												  <input type="checkbox" name="following" value="following">
+												  Following
+												</label>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 							<hr ></hr>	

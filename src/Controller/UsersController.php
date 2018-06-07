@@ -1363,6 +1363,7 @@ $this->set('redirect_page', $redirect_page);
 }
 	
 public function dashboard() {
+	 
 date_default_timezone_set('Asia/Kolkata');
 $current_date = date("Y-m-d");
 //Configure::write('debug',2);
@@ -3326,9 +3327,10 @@ public function acceptOffer() {
 			date_default_timezone_set('Asia/Kolkata');
 			$userchats->created = date("Y-m-d H:i:s");
 			$userchats->notification = 1;;
+			$userchats->notified = 1;;
 				if ($userchatTable->save($userchats)) {
 					$id = $userchats->id;
-					//$this->sendpushnotification($send_to_user_id,$message,$message);
+					$this->sendpushnotification($send_to_user_id,$message,$message);
 					$res = 1;
 				}
 		}
@@ -4609,9 +4611,10 @@ public function addresponse() {
 			date_default_timezone_set('Asia/Kolkata');
 			$userchats->created = date("Y-m-d H:i:s");
 			$userchats->notification = 1;;
+			$userchats->notified = 1;;
 			if ($userchatTable->save($userchats)) {
 				$id = $userchats->id;
-				//$this->sendpushnotification($request["user_id"],$message,$message);
+				$this->sendpushnotification($request["user_id"],$message,$message);
 			}
 			$this->Flash->success(__('Your response has been submitted successfully.'));
 		} 
@@ -4859,10 +4862,10 @@ date_default_timezone_set('Asia/Kolkata');
 $d["created"] = date("Y-m-d H:i:s");
 	
 $sql = "Insert into user_chats SET user_id='".$this->Auth->user('id')."',send_to_user_id='".$d['chat_user_id']."',
-	created='".date("Y-m-d H:i:s")."',request_id='".$d['request_id']."',screen_id='".$d['screen_id']."',message='".$_POST['message']."',type='Chat'";
+	created='".date("Y-m-d H:i:s")."',request_id='".$d['request_id']."',screen_id='".$d['screen_id']."',message='".$_POST['message']."',type='Chat',notified='1'";
 $stmt = $conn->execute($sql);
 $message=$_POST['message'];
-//$this->sendpushnotification($d['chat_user_id'],$message,$message);
+$this->sendpushnotification($d['chat_user_id'],$message,$message);
 /*if(isset($d['screen_id']))
 	{
 	$d["screen_id"] = $d['screen_id'];
@@ -4923,9 +4926,10 @@ $userchats->message = $message;
 date_default_timezone_set('Asia/Kolkata');
 $userchats->created = date("Y-m-d H:i:s");
 $userchats->notification = 1;
+$userchats->notified = 1;
 if ($userchatTable->save($userchats)) {
 $id = $userchats->id;
-//$this->sendpushnotification($send_to_user_id,$message,$message);
+$this->sendpushnotification($send_to_user_id,$message,$message);
 $res = 1;
 }
 $res = 1;
