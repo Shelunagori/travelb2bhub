@@ -349,7 +349,7 @@ foreach ($eventPlannerPromotions as $eventPlannerPromotion){
 									<?= h($eventPlannerPromotion->total_saved);?></span>
 								</td>
 								<td width="25%" >
-									<span><img src="../images/flag.png" height="15px"/>
+									<span><a target="blank" href="flagreport?promotion_type_id=<?php echo $eventPlannerPromotion->id ;?>"><img src="../images/flag.png" height="15px"/></a>
 									<?= h($eventPlannerPromotion->total_flagged);?></span>
 								</td>
 							</tr>

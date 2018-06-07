@@ -3,7 +3,7 @@
 	<div class="col-md-12">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<b>Package Report List</b>
+					<b>Event Report List</b>
 					<div class="box-tools pull-right">
 						<a style="font-size:19px;  margin-top: -6px;" class="btn btn-box-tool" data-target="#myModal122" data-toggle="collapse"> <i class="fa fa-filter"></i></a>
 					</div>
@@ -30,7 +30,7 @@
 						<div class="row"> 
 							<div class="col-md-12" align="center">
 								<label class="control-label col-md-12">&nbsp;</label> 
-								<a href="<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'flagreport')) ?>"class="btn btn-danger btn-sm">Reset</a>
+								<a href="<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'flagreport')) ?>"class="btn btn-danger btn-sm">Reset</a>
 								
 								<?php echo $this->Form->button('Search',['class'=>'btn btn-sm btn-success','id'=>'submit_member','name'=>'Search']); ?> 
 							</div> 
@@ -56,22 +56,24 @@
 								</tr>
 						</thead>
 						<tbody>
-							<?php $i=1; foreach ($PostTravlePackageReports as $PostTravlePackageReport): ?>
+							<?php $i=1; foreach ($eventPlannerPromotion as $eventPlannerPromotionreport): 
+							
+							//pr($texifleetpromotion->toArray());exit;?>
 							<tr>
 								<td><?php echo $i; ?></td> 
 								<td>
-								<?php $hrefurl =  $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'edit',$PostTravlePackageReport->post_travle_package->id),1);?>
-								<a href="<?php echo $hrefurl ;?>"><?= $PostTravlePackageReport->post_travle_package->title; ?></a></td>
+								<?php $hrefurl =  $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'adminedit',$eventPlannerPromotionreport->event_planner_promotion_id),1);?>
+								<a href="<?php echo $hrefurl ;?>"><?= $eventPlannerPromotionreport->event_planner_promotion->user->company_name; ?></a></td>
 								<td>
-								<?php $hrefurl1 =  $this->Url->build(array('controller'=>'Users','action'=>'adminviewprofile',$PostTravlePackageReport->post_travle_package->user_id),1);?>
-								<a href="<?php echo $hrefurl1 ;?>"><?= $PostTravlePackageReport->post_travle_package->user->first_name.' '.$PostTravlePackageReport->post_travle_package->user->last_name ?></a></td>
-								<td><?= $PostTravlePackageReport->report_reason->reason; ?></td>
-								<td><?= $PostTravlePackageReport->comment; ?></td>
+								<?php $hrefurl1 =  $this->Url->build(array('controller'=>'Users','action'=>'adminviewprofile',$eventPlannerPromotionreport->event_planner_promotion->user_id),1);?>
+								<a href="<?php echo $hrefurl1 ;?>"><?= $eventPlannerPromotionreport->event_planner_promotion->user->first_name.' '.$eventPlannerPromotionreport->event_planner_promotion->user->last_name ?></a></td>
+								<td><?= $eventPlannerPromotionreport->report_reason->reason; ?></td>
+								<td><?= $eventPlannerPromotionreport->comment; ?></td>
 								<td>
-								<?php $hrefurl1 =  $this->Url->build(array('controller'=>'Users','action'=>'adminviewprofile',$PostTravlePackageReport->user_id),1);?>
-								<a href="<?php echo $hrefurl1 ;?>"><?= $PostTravlePackageReport->user->first_name.' '.$PostTravlePackageReport->user->last_name ?></a></td>
+								<?php $hrefurl1 =  $this->Url->build(array('controller'=>'Users','action'=>'adminviewprofile',$eventPlannerPromotionreport->user_id),1);?>
+								<a href="<?php echo $hrefurl1 ;?>"><?= $eventPlannerPromotionreport->user->first_name.' '.$eventPlannerPromotionreport->user->last_name ?></a></td>
 								<td><?php 
-								$date=date('d-m-Y',strtotime($PostTravlePackageReport->created_on));
+								$date=date('d-m-Y',strtotime($eventPlannerPromotionreport->created_on));
 								echo $date; ?></td>
 							</tr>
 							<?php $i++; endforeach;  ?>

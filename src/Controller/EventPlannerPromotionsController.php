@@ -1324,4 +1324,34 @@ class EventPlannerPromotionsController extends AppController
 		$this->viewBuilder()->layout('admin_layout');
 		$this->set(compact('user_id','higestSort','search','country_id','city_id','state_id'));
     }
+	  public function flagreport($promotion_type_id=null)
+    {
+        $this->viewBuilder()->layout('admin_layout');
+		$promotion_id=$this->request->query('promotion_type_id');
+		if(isset($this->request->query['Search'])){
+			$report_reason_id = $this->request->query['report_reason_id'];
+			$start_date = $this->request->query['start_date'];
+			$end_date = $this->request->query['end_date'];
+			$conditions=[];
+			if(!empty($report_reason_id)){
+				$conditions['EventPlannerPromotionReports.report_reason_id']=$report_reason_id;
+			}
+			if(!empty($start_date)){
+				$conditions['EventPlannerPromotionReports.created_on >=']=date('Y-m-d',strtotime($start_date));
+			}
+			if(!empty($end_date)){
+				$conditions['EventPlannerPromotionReports.created_on <=']=date('Y-m-d',strtotime($end_date));
+			}
+			$eventPlannerPromotion=$this->paginate($this->EventPlannerPromotions->EventPlannerPromotionReports->find()->contain(['EventPlannerPromotions'=>['Users'],'Users','ReportReasons'])->where($conditions));
+			//pr($EventPlannerPromotionReports);exit;
+  		}
+		else if(!empty($promotion_id)){
+			$eventPlannerPromotion=$this->paginate($this->EventPlannerPromotions->EventPlannerPromotionReports->find()->contain(['EventPlannerPromotions'=>['Users'],'Users','ReportReasons'])->where(['EventPlannerPromotionReports.event_planner_promotion_id'=>$promotion_id]));
+		}else{
+		$eventPlannerPromotion=$this->paginate($this->EventPlannerPromotions->EventPlannerPromotionReports->find()->contain(['EventPlannerPromotions'=>['Users'],'Users','ReportReasons']));
+		}
+		$report_reason=$this->EventPlannerPromotions->EventPlannerPromotionReports->ReportReasons->find('list', ['limit' => 200]);
+		//pr($report_reason->toArray());exit;
+		$this->set(compact('eventPlannerPromotion','report_reason'));
+	}
 }

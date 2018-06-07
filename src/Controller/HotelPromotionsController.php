@@ -1304,4 +1304,35 @@ class HotelPromotionsController extends AppController
 		$user_id=$this->Auth->User('id');
 		$this->set(compact('user_id','hotelPromotion'));
     }
+	 public function flagreport($promotion_type_id=null)
+    {
+        $this->viewBuilder()->layout('admin_layout');
+		$promotion_id=$this->request->query('promotion_type_id');
+		if(isset($this->request->query['Search'])){
+			$report_reason_id = $this->request->query['report_reason_id'];
+			$start_date = $this->request->query['start_date'];
+			$end_date = $this->request->query['end_date'];
+			$conditions=[];
+			if(!empty($report_reason_id)){
+				$conditions['HotelPromotionReports.report_reason_id']=$report_reason_id;
+			}
+			if(!empty($start_date)){
+				$conditions['HotelPromotionReports.created_on >=']=date('Y-m-d',strtotime($start_date));
+			}
+			if(!empty($end_date)){
+				$conditions['HotelPromotionReports.created_on <=']=date('Y-m-d',strtotime($end_date));
+			}
+			$hotelPromotion=$this->paginate($this->HotelPromotions->HotelPromotionReports->find()->contain(['HotelPromotions'=>['Users'],'Users','ReportReasons'])->where($conditions));
+			//pr($HotelPromotionReports);exit;
+  		}
+		else if(!empty($promotion_id)){
+			$hotelPromotion=$this->paginate($this->HotelPromotions->HotelPromotionReports->find()->contain(['HotelPromotions'=>['Users'],'Users','ReportReasons'])->where(['HotelPromotionReports.hotel_promotion_id'=>$promotion_id]));
+		}
+		else{
+		$hotelPromotion=$this->paginate($this->HotelPromotions->HotelPromotionReports->find()->contain(['HotelPromotions'=>['Users'],'Users','ReportReasons']));
+		}
+		$report_reason=$this->HotelPromotions->HotelPromotionReports->ReportReasons->find('list', ['limit' => 200]);
+		//pr($hotelPromotion);exit;
+		$this->set(compact('report_reason','hotelPromotion'));
+	}
 }

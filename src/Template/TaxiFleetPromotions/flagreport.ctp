@@ -3,7 +3,7 @@
 	<div class="col-md-12">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<b>Report List</b>
+					<b>Taxi/Fleet Report List</b>
 					<div class="box-tools pull-right">
 						<a style="font-size:19px;  margin-top: -6px;" class="btn btn-box-tool" data-target="#myModal122" data-toggle="collapse"> <i class="fa fa-filter"></i></a>
 					</div>
@@ -47,9 +47,9 @@
 							<thead>
 								<tr style="background-color:#DFD9C4;">
 									<th scope="col"><?= __('Sr.No') ?></th>
-									<th scope="col"><?= __('Package Title') ?></th>
+									<th scope="col"><?= __('Promotion Title') ?></th>
 									<th scope="col"><?= __('Posted By') ?></th>
-									<th scope="col"><?= __('Report Reason') ?></th>
+									<th scope="col"><?= __('Reason') ?></th>
 									<th scope="col"><?= __('Comment') ?></th> 
 									<th scope="col"><?= __('Reviewer') ?></th>
 									<th scope="col"><?= __('Reported On') ?></th> 

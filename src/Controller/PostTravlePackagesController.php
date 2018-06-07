@@ -1441,9 +1441,13 @@ class PostTravlePackagesController extends AppController
 			$PostTravlePackageReports=$this->paginate($this->PostTravlePackages->PostTravlePackageReports->find()->contain(['PostTravlePackages'=>['Users'],'Users','ReportReasons'])->where($conditions));
 			//pr($PostTravlePackageReports);exit;
   		}
-		else{
+		else if(!empty($promotion_id)){
 			$PostTravlePackageReports=$this->paginate($this->PostTravlePackages->PostTravlePackageReports->find()->contain(['PostTravlePackages'=>['Users'],'Users','ReportReasons'])->where(['PostTravlePackageReports.post_travle_package_id'=>$promotion_id]));
 		}
+		else {
+			$PostTravlePackageReports=$this->paginate($this->PostTravlePackages->PostTravlePackageReports->find()->contain(['PostTravlePackages'=>['Users'],'Users','ReportReasons']));
+		}
+		
 		$this->set(compact('PostTravlePackageReports','report_reason'));
 	}
 }

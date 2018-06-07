@@ -1402,8 +1402,11 @@ class TaxiFleetPromotionsController extends AppController
 			$texifleetpromotionreport=$this->paginate($this->TaxiFleetPromotions->TaxiFleetPromotionReports->find()->contain(['TaxiFleetPromotions'=>['Users'],'Users','ReportReasons'])->where($conditions));
 			//pr($TaxiFleetPromotionReports);exit;
   		}
-		else{
+		else if(!empty($promotion_id)){
 			$texifleetpromotionreport=$this->paginate($this->TaxiFleetPromotions->TaxiFleetPromotionReports->find()->contain(['TaxiFleetPromotions'=>['Users'],'Users','ReportReasons'])->where(['TaxiFleetPromotionReports.taxi_fleet_promotion_id'=>$promotion_id]));
+		}
+		else {
+			$texifleetpromotionreport=$this->paginate($this->TaxiFleetPromotions->TaxiFleetPromotionReports->find()->contain(['TaxiFleetPromotions'=>['Users'],'Users','ReportReasons']));
 		}
 		
 		$report_reason=$this->TaxiFleetPromotions->TaxiFleetPromotionReports->ReportReasons->find('list', ['limit' => 200]);
