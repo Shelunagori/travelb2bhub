@@ -246,7 +246,7 @@ $lastPage=$counterArray[2];
 								<td style="width:100px !important;"><?= h($user->country->country_name) ?></td> 
 								<td style="width:250px !important;"><?= h($stateofoperation) ?></td> 
 								<td style="width:100px !important;"><?= h(date('d-m-Y',strtotime($user->create_at))) ?></td> 
-								<td style="width:100px !important;"><?= h(date('d-m-Y',strtotime($user->last_login))) ?></td> 
+								<td style="width:100px !important;"><?php if($user->last_login=='0000-00-00 00:00:00' || empty($user->last_login)){ echo "NL";} else { echo date('d-m-Y',strtotime($user->last_login)); } ?></td> 
 							</tr>
 						<?php endforeach; ?>
 						</tbody>

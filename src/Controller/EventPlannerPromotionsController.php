@@ -536,7 +536,11 @@ class EventPlannerPromotionsController extends AppController
 					$this->Flash->error(__($message)); 
 					 
 				}				
-			}				
+			}
+			else
+			{
+			    unset($eventPlannerPromotion->hotel_pic);
+			}			
 			
 			$submitted_from = @$this->request->data('submitted_from');
 			if(@$submitted_from=='web')

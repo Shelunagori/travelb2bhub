@@ -849,7 +849,7 @@ class PagesController extends AppController
 						$user['access_token'] = $_SESSION['token'];
 						$result['response_object'] = $user;
 						date_default_timezone_set('Asia/Kolkata');
-						$logintime = date("Y-m-d h:i:s");   
+						$logintime = date("Y-m-d H:i:s");   
 						if(isset($_POST['device_id'])){
 							$upsql = "UPDATE users set device_id='".$_POST['device_id']."',last_login='".$logintime."' where id='".$user['id']."'";
 							$stmt = $conn->execute($upsql);
@@ -2536,9 +2536,9 @@ $result['testimonial'] = $alltestimonials;
     }
 	
  public function counterapi(){
-$travelAgentCount = $this->Users->find()->where(['role_id' => 1])->count();
-$eventPlannerCount = $this->Users->find()->where(['role_id' => 2])->count();
-$hotelierCount = $this->Users->find()->where(['role_id' => 3])->count(); 
+$travelAgentCount = $this->Users->find()->where(['role_id' => 1,'is_deleted'=>0])->count();
+$eventPlannerCount = $this->Users->find()->where(['role_id' => 2,'is_deleted'=>0])->count();
+$hotelierCount = $this->Users->find()->where(['role_id' => 3,'is_deleted'=>0])->count(); 
 $countarr = array();
 $coountarr['travelAgentCount'] = $travelAgentCount;
 $coountarr['eventPlannerCount'] = $eventPlannerCount;

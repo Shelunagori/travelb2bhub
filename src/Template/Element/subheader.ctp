@@ -189,7 +189,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 			?>
 		
 				<!-- COls -->
-				<div class="col-md-3" >
+				<div style="width:25%; float:left" >
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'finalized-request-list')) ?>">
 					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
 					  <!-- small box -->
@@ -218,7 +218,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 				</a>
 				</div>
 				<!---COls--->
-				<div class="col-md-3" >
+				<div style="width:25%; float:left" >
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'removed-request-list')) ?>">
 					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
 					  <!-- small box -->
@@ -250,7 +250,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 			if($users['role_id'] == 3)
 			{
 				?>
-				<div class="col-md-3" >
+				<div style="width:25%; float:left" >
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'my-final-responses')) ?>">
 					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
 					  <!-- small box -->
@@ -279,7 +279,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 				</a>
 				</div>
 				<!-- ./col -->
-				<div class="col-md-3" >
+				<div style="width:25%; float:left" >
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'blocked-user-list')) ?>">
 					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
 					  <!-- small box -->

@@ -1285,12 +1285,16 @@ class HotelPromotionsController extends AppController
 					$this->Flash->error(__($message)); 
 				}				
 			}
+			else
+			{
+			    unset($hotelPromotion->hotel_pic);
+			}
 			 
 			if(!empty($this->request->data('visible_date')))
 			{
 				$hotelPromotion->visible_date = date('Y-m-d',strtotime($this->request->data('visible_date')));
 			}
- 			 		
+ 			pr($hotelPromotion); exit;		
 			if ($this->HotelPromotions->save($hotelPromotion)) {
 				$message = 'The hotel promotions has been saved';
 				$this->Flash->success(__($message)); 

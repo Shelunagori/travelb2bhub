@@ -455,8 +455,6 @@ class TaxiFleetPromotionsController extends AppController
 					{ 
 						$message = 'Invalid image extension';
 						$this->Flash->error(__($message)); 
-						 
-						
 					}					
 				}
 				else 

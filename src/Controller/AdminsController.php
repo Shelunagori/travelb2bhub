@@ -56,7 +56,7 @@ class AdminsController extends AppController
 		$RequestsCount=$this->Requests->find()->contain(['Users','Cities','States','Categories'])->count();
 		$this->set('RequestsCount', $RequestsCount);
 		
-		$this->loadModel('Responses'); 
+		$this->loadModel('Responses');
 		$ResponsesCount=$this->Responses->find()->where(['is_deleted'=>0])->count();
 		$this->set('ResponsesCount', $ResponsesCount);
 		
