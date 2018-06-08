@@ -17,6 +17,7 @@ class PostTravlePackagesController extends AppController
  			$id=$postTravlePackage->user_id;
 			$image = $this->request->data('image');	
 			$title = $postTravlePackage->title;
+			$time=time().rand();
 			$document = $this->request->data('document');
 			$submitted_from = @$this->request->data('submitted_from'); 
 			//print_r($this->request->data); exit;
@@ -69,7 +70,7 @@ class PostTravlePackagesController extends AppController
 			
 			if(!empty($image))
 			{	
-				$dir = new Folder(WWW_ROOT . 'images/PostTravelPackages/'.$id.'/'.$title.'/image', true, 0755);
+				$dir = new Folder(WWW_ROOT . 'images/PostTravelPackages/'.$id.'/'.$time.'/image', true, 0755);
 				$ext = substr(strtolower(strrchr($image['name'], '.')), 1); 
 				$arr_ext = array('jpg', 'jpeg','png'); 				
 				
@@ -94,15 +95,15 @@ class PostTravlePackagesController extends AppController
 							}
 						}
 						/* Resize Image */
-						$destination_url = WWW_ROOT . '/images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
+						$destination_url = WWW_ROOT . '/images/PostTravelPackages/'.$id.'/'.$time.'/image/'.$id.'.'.$ext;
 						if($ext=='png'){
 							$image = imagecreatefrompng($image['tmp_name']);
 						}else{
 							$image = imagecreatefromjpeg($image['tmp_name']); 
 						}
 						$immm=imagejpeg($image, $destination_url, $percentageTOReduse);
- 						$postTravlePackage->image='images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
-						if(file_exists(WWW_ROOT . '/images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)>0) {
+ 						$postTravlePackage->image='images/PostTravelPackages/'.$id.'/'.$time.'/image/'.$id.'.'.$ext;
+						if(file_exists(WWW_ROOT . '/images/PostTravelPackages/'.$id.'/'.$time.'/image/'.$id.'.'.$ext)>0) {
 						}
 						else
 						{
@@ -112,8 +113,8 @@ class PostTravlePackagesController extends AppController
 						}
 					
 						/*//imagedestroy($image);
-						if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)) {
-							$postTravlePackage->image='images/PostTravelPackages/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
+						if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/PostTravelPackages/'.$id.'/'.$time.'/image/'.$id.'.'.$ext)) {
+							$postTravlePackage->image='images/PostTravelPackages/'.$id.'/'.$time.'/image/'.$id.'.'.$ext;
 						} else {
 							$message = 'Image not uploaded';
 							$this->Flash->error(__($message));
@@ -138,7 +139,7 @@ class PostTravlePackagesController extends AppController
 			} else { $postTravlePackage->image ='';  }
  			if(!empty($document))
 			{  
-				$dir = new Folder(WWW_ROOT . 'images/PostTravelPackages/'.$id.'/'.$title.'/document', true, 0755);
+				$dir = new Folder(WWW_ROOT . 'images/PostTravelPackages/'.$id.'/'.$time.'/document', true, 0755);
 				$ext = substr(strtolower(strrchr($document['name'], '.')), 1); 
 				$arr_ext = array('jpg', 'jpeg','png','pdf'); 				
 				if(!empty($ext))
@@ -147,8 +148,8 @@ class PostTravlePackagesController extends AppController
 						if (!file_exists('path/to/directory')) {
 								mkdir('path/to/directory', 0777, true);
 							}
-						if(move_uploaded_file($document['tmp_name'], WWW_ROOT . '/images/PostTravelPackages/'.$id.'/'.$title.'/document/'.$id.'.'.$ext)) {
-							$postTravlePackage->document='images/PostTravelPackages/'.$id.'/'.$title.'/document/'.$id.'.'.$ext;
+						if(move_uploaded_file($document['tmp_name'], WWW_ROOT . '/images/PostTravelPackages/'.$id.'/'.$time.'/document/'.$id.'.'.$ext)) {
+							$postTravlePackage->document='images/PostTravelPackages/'.$id.'/'.$time.'/document/'.$id.'.'.$ext;
 						} else {
 							$message = 'Document not uploaded';
 							$this->Flash->error(__($message));

@@ -16,7 +16,7 @@ class TaxiFleetPromotionsController extends AppController
 
 			$message = 'PERFECT';
 			$response_code = 101;
-
+			$time=time().rand();
 			$id = $taxiFleetPromotion->user_id;
 			$title = $taxiFleetPromotion->title;
 			$image = $this->request->data('image');	
@@ -66,7 +66,7 @@ class TaxiFleetPromotionsController extends AppController
 			}
 			if(!empty($image))
 			{	
-				$dir = new Folder(WWW_ROOT . 'images/taxiFleetPromotion/'.$id.'/'.$title.'/image', true, 0755);
+				$dir = new Folder(WWW_ROOT . 'images/taxiFleetPromotion/'.$id.'/'.$time.'/image', true, 0755);
 				$ext = substr(strtolower(strrchr($image['name'], '.')), 1); 
 				$arr_ext = array('jpg', 'jpeg','png'); 				
 				
@@ -91,15 +91,15 @@ class TaxiFleetPromotionsController extends AppController
 							}
 						}
 						/* Resize Image */
-						$destination_url = WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
+						$destination_url = WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$time.'/image/'.$id.'.'.$ext;
 						if($ext=='png'){
 							$image = imagecreatefrompng($image['tmp_name']);
 						}else{
 							$image = imagecreatefromjpeg($image['tmp_name']); 
 						}
 						imagejpeg($image, $destination_url, $percentageTOReduse);
-						$taxiFleetPromotion->image='images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
-						if(file_exists(WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)>0) {
+						$taxiFleetPromotion->image='images/taxiFleetPromotion/'.$id.'/'.$time.'/image/'.$id.'.'.$ext;
+						if(file_exists(WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$time.'/image/'.$id.'.'.$ext)>0) {
 						}
 						else
 						{
@@ -107,8 +107,8 @@ class TaxiFleetPromotionsController extends AppController
 							$this->Flash->error(__($message));
 							$response_code = 102;
 						}
-						/*if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)) {
-							$taxiFleetPromotion->image='images/taxiFleetPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
+						/*if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$time.'/image/'.$id.'.'.$ext)) {
+							$taxiFleetPromotion->image='images/taxiFleetPromotion/'.$id.'/'.$time.'/image/'.$id.'.'.$ext;
 						} else {
 							$message = 'Image not uploaded';
 							$this->Flash->error(__($message)); 
@@ -133,7 +133,7 @@ class TaxiFleetPromotionsController extends AppController
 
 			if(!empty($document))
 			{  
-				$dir = new Folder(WWW_ROOT . 'images/taxiFleetPromotion/'.$id.'/'.$title.'/document', true, 0755);
+				$dir = new Folder(WWW_ROOT . 'images/taxiFleetPromotion/'.$id.'/'.$time.'/document', true, 0755);
 				$ext = substr(strtolower(strrchr($document['name'], '.')), 1); 
 				$arr_ext = array('jpg', 'jpeg','png','pdf'); 				
 				if(!empty($ext))
@@ -142,8 +142,8 @@ class TaxiFleetPromotionsController extends AppController
 						if (!file_exists('path/to/directory')) {
 								mkdir('path/to/directory', 0777, true);
 							}
-						if(move_uploaded_file($document['tmp_name'], WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$title.'/document/'.$id.'.'.$ext)) {
-							$taxiFleetPromotion->document='images/taxiFleetPromotion/'.$id.'/'.$title.'/document/'.$id.'.'.$ext;
+						if(move_uploaded_file($document['tmp_name'], WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$time.'/document/'.$id.'.'.$ext)) {
+							$taxiFleetPromotion->document='images/taxiFleetPromotion/'.$id.'/'.$time.'/document/'.$id.'.'.$ext;
 						} else {
 							$message = 'Document not uploaded';
 							$this->Flash->error(__($message)); 

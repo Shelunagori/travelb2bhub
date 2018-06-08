@@ -2535,26 +2535,26 @@ $result['testimonial'] = $alltestimonials;
 		}
     }
 	
- public function counterapi(){
-$travelAgentCount = $this->Users->find()->where(['role_id' => 1,'is_deleted'=>0])->count();
-$eventPlannerCount = $this->Users->find()->where(['role_id' => 2,'is_deleted'=>0])->count();
-$hotelierCount = $this->Users->find()->where(['role_id' => 3,'is_deleted'=>0])->count(); 
-$countarr = array();
-$coountarr['travelAgentCount'] = $travelAgentCount;
-$coountarr['eventPlannerCount'] = $eventPlannerCount;
-$coountarr['hotelierCount'] = $hotelierCount;
-$result = array();
-$result['response_code'] = 200;
-$result['response_object'] = $coountarr;
-$data =   json_encode($result);
-      echo $data;
-      exit;
- }
- public function getrequestcount() {
- $requestcount = $this->Setting->find()->where(['field' => 'requestcount'])->first();
- $requestcountval =  $requestcount['value'];
- return $requestcountval;
- }
+	 public function counterapi(){
+		$travelAgentCount = $this->Users->find()->where(['role_id' => 1,'is_deleted'=>0])->count();
+		$eventPlannerCount = $this->Users->find()->where(['role_id' => 2,'is_deleted'=>0])->count();
+		$hotelierCount = $this->Users->find()->where(['role_id' => 3,'is_deleted'=>0])->count(); 
+		$countarr = array();
+		$coountarr['travelAgentCount'] = $travelAgentCount;
+		$coountarr['eventPlannerCount'] = $eventPlannerCount;
+		$coountarr['hotelierCount'] = $hotelierCount;
+		$result = array();
+		$result['response_code'] = 200;
+		$result['response_object'] = $coountarr;
+		$data =   json_encode($result);
+		echo $data;
+		exit;
+	 }
+	public function getrequestcount() {
+		$requestcount = $this->Setting->find()->where(['field' => 'requestcount'])->first();
+		$requestcountval =  $requestcount['value'];
+		return $requestcountval;
+	}
 	public function requestlistapi() { 
 	$this->loadModel('Responses');
 	$this->loadModel('Hotels');

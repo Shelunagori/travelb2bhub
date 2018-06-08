@@ -48,7 +48,7 @@ class HotelPromotionsController extends AppController
 			}
 			if(!empty($image))
 			{	
-				$dir = new Folder(WWW_ROOT . 'img/hotels/', true, 0755);
+				$dir = new Folder(WWW_ROOT . 'img/hotels/'.$id.'/', true, 0755);
 				$ext = substr(strtolower(strrchr($image['name'], '.')), 1); 
 				$arr_ext = array('jpg', 'jpeg','png'); 				
 				
@@ -73,15 +73,15 @@ class HotelPromotionsController extends AppController
 						}
 						//pr($percentageTOReduse); exit;
 						/* Resize Image */
-						$destination_url = WWW_ROOT . '/img/hotels/'.$title.'.'.$ext;
+						$destination_url = WWW_ROOT . '/img/hotels/'.$id.'/'.$title.'.'.$ext;
 						if($ext=='png'){
 							$image = imagecreatefrompng($image['tmp_name']);
 						}else{
 							$image = imagecreatefromjpeg($image['tmp_name']); 
 						}
 						imagejpeg($image, $destination_url, $percentageTOReduse);
-						$hotelPromotions->hotel_pic='img/hotels/'.$title.'.'.$ext;
-						if(file_exists(WWW_ROOT . '/img/hotels/'.$title.'.'.$ext)>0) {
+						$hotelPromotions->hotel_pic='img/hotels/'.$id.'/'.$title.'.'.$ext;
+						if(file_exists(WWW_ROOT . '/img/hotels/'.$id.'/'.$title.'.'.$ext)>0) {
 						}
 						else
 						{

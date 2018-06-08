@@ -375,9 +375,28 @@ class AdminsController extends AppController
 	public function statistics($month_from=null,$month_to=null)
     {
 		$this->viewBuilder()->layout('admin_layout');
+		/* // set current date
+		$date = '02/01/2018';
+		// parse about any English textual datetime description into a Unix timestamp 
+		$ts = strtotime($date);
+		// calculate the number of days since Monday
+		$dow = date('w', $ts);
+		$offset = $dow - 1;
+		if ($offset < 0) {
+			$offset = 6;
+		}
+		// calculate timestamp for the Monday
+		$ts = $ts - $offset*86400;
+		// loop from Monday till Sunday 
+		for ($i = 0; $i < 7; $i++, $ts += 86400){
+			print date("d/M/Y l", $ts) . "\n";
+		}
+		exit;*/
 		$month_from=$this->request->query('month_from');
 		$month_to=$this->request->query('month_to'); 
 		$type=$this->request->query('type'); 
+		$year_from=$this->request->query('year_from'); 
+		$year_to=$this->request->query('year_to'); 
 		if(!empty($month_from) && !empty($month_to)){
 			$month_from='01-'.$month_from;
 			$month_to='01-'.$month_to;
@@ -412,7 +431,7 @@ class AdminsController extends AppController
 			}
 			else{
 				$start_date=date('Y-m-d',strtotime($month_from));
-				$end_date=date('Y-m-t',strtotime($month_from));
+				$end_date=date('Y-m-t',strtotime($month_to));
 				$x=0;
 				while (strtotime($start_date) <= strtotime($end_date)) {
 					 
