@@ -1297,11 +1297,10 @@ if ($this->request->is('post')) {
 */
 public function delete($id = null) {
 	$this->request->allowMethod(['patch','post', 'put']);
-	$city = $this->Users->get($id);
-	$this->request->data['is_deleted']=1;
-	$this->request->data['email']='deleted@travelb2bhub.com';
-	$this->request->data['mobile_number']='0000000001';
-	if ($this->Users->updateAll(['email' => 'deleted@travelb2bhub.com', "mobile_number"=>'0000000001', "is_deleted"=>1], ['id'=> $id])) {
+ 	date_default_timezone_set('Asia/Kolkata');
+	$date=date('Y-m-d H:i:s');
+	$dateupdate=date("Y-m-d H:i:s", strtotime($date.' -5 hour')); 
+	if ($this->Users->updateAll(['email' => 'deleted@travelb2bhub.com', "mobile_number"=>'0000000001', "is_deleted"=>1, "deleted_on"=>$dateupdate], ['id'=> $id])) {
 		$this->Flash->success(__('The User has been deleted.'));
 	} else {
 		$this->Flash->error(__('The User could not be deleted. Please, try again.'));
@@ -5719,9 +5718,7 @@ $data[$req['id']]  = $queryr->count();
 		$this->request->allowMethod(['patch','post', 'put']);
 		$city = $this->Users->get($id);
 		$this->request->data['blocked']=0;
-		
 		$city = $this->Users->patchEntity($city, $this->request->data());
-		 
 		if ($this->Users->save($city)) {
 			$this->Flash->success(__('The User has been unblocked.'));
 		} else {
@@ -5729,20 +5726,34 @@ $data[$req['id']]  = $queryr->count();
 		}
 		return $this->redirect(['action' => 'report']);
 	}
+	public function adminActiveUser($id = null)
+	{
+		$this->request->allowMethod(['patch','post', 'put']);
+		$city = $this->Users->get($id);
+		$this->request->data['status']=1;
+		$this->request->data['mobile_otp']='';
+		$city = $this->Users->patchEntity($city, $this->request->data());
+		if ($this->Users->save($city)) {
+			$this->Flash->success(__('The User has been activated.'));
+		} else {
+			$this->Flash->error(__('The User could not be activat. Please, try again.'));
+		}
+		return $this->redirect(['action' => 'report']);
+	}
+
 	public function blockedWindow()
 	{
 		$this->viewBuilder()->layout('');
 	}
 	public function temppage()
 	{
+		date_default_timezone_set('Asia/Kolkata');
 		$this->loadModel('Users'); 
-		$Users = $this->Users->find()->where(['preference'=>'','role_id'=>1]); 
-		print_r($Users); exit;
-		foreach($Users as $UserChat){
-			$updateId=$UserChat['id'];
-			$state_id=$UserChat['state_id'];
-			
-			$this->Users->updateAll(['preference' => $state_id], ['id' => $updateId]);
+		$Users = $this->Users->find()->where(['is_deleted'=>1]); 
+print_r($Users); exit;
+ 		foreach($Users as $UserChat){
+			$updateId=$UserChat['id']; 
+			$this->Users->updateAll(['deleted_on' =>date('Y-m-d H:i:s') ], ['id' => $updateId]);
  		}
 		exit;
  	}

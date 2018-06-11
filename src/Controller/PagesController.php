@@ -2535,10 +2535,10 @@ $result['testimonial'] = $alltestimonials;
 		}
     }
 	
-	 public function counterapi(){
-		$travelAgentCount = $this->Users->find()->where(['role_id' => 1,'is_deleted'=>0])->count();
-		$eventPlannerCount = $this->Users->find()->where(['role_id' => 2,'is_deleted'=>0])->count();
-		$hotelierCount = $this->Users->find()->where(['role_id' => 3,'is_deleted'=>0])->count(); 
+	 public function counterapi(){ // 
+		$travelAgentCount = $this->Users->find()->where(['role_id' => 1,'is_deleted'=>0,'last_login !='=>'0000-00-00 00:00:00'])->count();
+		$eventPlannerCount = $this->Users->find()->where(['role_id' => 2,'is_deleted'=>0,'last_login !='=>'0000-00-00 00:00:00'])->count();
+		$hotelierCount = $this->Users->find()->where(['role_id' => 3,'is_deleted'=>0,'last_login !='=>'0000-00-00 00:00:00'])->count(); 
 		$countarr = array();
 		$coountarr['travelAgentCount'] = $travelAgentCount;
 		$coountarr['eventPlannerCount'] = $eventPlannerCount;

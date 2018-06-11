@@ -229,6 +229,9 @@ $lastPage=$counterArray[2];
 								<a style="margin-top:2px" class=" btn btn-successto btn-xs" title="Unblock User" data-target="#unvBlock<?php echo $user->id; ?>" data-toggle=modal><i class="fa fa-gavel"></i></a>
 	
 						<?php } ?>
+					<?php if($user->status==0){ ?>
+							<a style="margin-top:2px" class=" btn btn-success btn-xs" title="Active User" data-target="#Actiontion<?php echo $user->id; ?>" data-toggle=modal><i class="fa fa-user"></i></a>
+					<?php } ?>
 						
 								<?php  $this->Form->PostLink('<i class="fa fa-trash"></i>','/Users/delete/'.$user->id,array('escape'=>false,'class'=>'btn btn-danger btn-xs','title'=>'Delete','confirm' => __('Are you sure you want to delete # {0}?', $user->id)));?>
 								</td>
@@ -289,23 +292,41 @@ $lastPage=$counterArray[2];
 </div>
 
 <div id="unvBlock<?php echo $user->id; ?>" class="modal fade" role="dialog">
-		<div class="modal-dialog modal-md" >
-			<form method="post" action="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'adminUnBlockUser',$user->id)) ?>">
-				<div class="modal-content">
-				  <div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">
-						Are you sure you want to unblock this User?
-						</h4>
-					</div>
-					<div class="modal-footer">
-						<button type="submit" class="btn  btn-sm btn-info">Yes</button>
-						<button type="button" class="btn  btn-sm btn-danger" data-dismiss="modal">Cancel</button>
-					</div>
+	<div class="modal-dialog modal-md" >
+		<form method="post" action="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'adminUnBlockUser',$user->id)) ?>">
+			<div class="modal-content">
+			  <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">
+					Are you sure you want to unblock this User?
+					</h4>
 				</div>
-			</form>
-		</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn  btn-sm btn-info">Yes</button>
+					<button type="button" class="btn  btn-sm btn-danger" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+		</form>
 	</div>
+</div>
+<div id="Actiontion<?php echo $user->id; ?>" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-md" >
+		<form method="post" action="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'adminActiveUser',$user->id)) ?>">
+			<div class="modal-content">
+			  <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">
+					Are you sure you want to Active this User?
+					</h4>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn  btn-sm btn-info">Yes</button>
+					<button type="button" class="btn  btn-sm btn-danger" data-dismiss="modal">Cancel</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
 <div id="Block<?php echo $user->id; ?>" class="modal fade" role="dialog">
 	<div class="modal-dialog modal-md" >
 		<form method="post" action="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'adminBlockUser',$user->id)) ?>">
