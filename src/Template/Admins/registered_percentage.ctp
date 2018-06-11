@@ -20,12 +20,12 @@ fieldset
               <h3 class="box-title">Registeration Percentage Pie Graph</h3>
             </div>
 			<div class="box-body">
-			<form method="get" class="loadingshow">
+			<!--<form method="get" class="loadingshow">
 				<div class="col-md-12">
 					
 					<div class="col-md-3">
 						<div class="form-group ">
-						  <label>Select Type:</label>
+						  <label>Time Interval:</label>
 						  <select name="type" class="form-control type">
 							<option value="">Select...</option>
 							<option value="1">Weekly</option>
@@ -46,6 +46,18 @@ fieldset
 						  <input type="text" class="form-control monthpicker" placeholder="Select month" name="month_to">
 						</div>
 					</div>
+<div class="col-md-3 yearshow">
+						<div class="form-group ">
+						  <label>Year From:</label>
+						  <input type="text" maxlength="4" minlength="4" class="form-control" placeholder="Enter Year From" name="year_from" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+						</div>
+					</div>
+					<div class="col-md-3 year yearshow">
+						<div class="form-group ">
+						  <label>Year To:</label>
+						  <input type="text" maxlength="4" minlength="4" class="form-control" placeholder="Enter Year To" name="year_to" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+						</div>
+					</div>
 					<div class="col-md-3">
 						<div class="form-group">
 						  <label class="control-label col-md-12">&nbsp;</label>  
@@ -54,7 +66,7 @@ fieldset
 						</div>
 					</div>	
 				</div>
-			</form>	
+			</form>	--->
 			
 				<div class="col-md-12">
 				<hr style="margin-top:5px;margin-bottom:5px;"></hr>
@@ -157,14 +169,17 @@ $(function () {
         }]
     });
 });
- 
+$('.yearshow').hide(); 
 $(document).ready(function(){ 
 	$('.type').on('change',function(){
 		if($(this).val()==3){
 			$('.year').hide();
+			$('.yearshow').show();
+
 		}else {
 			$('.year').show();
-		} 
+			$('.yearshow').hide();
+		}  
 	});
 }); 
 $('textarea[name=export_data]').html($('#data_get').html());

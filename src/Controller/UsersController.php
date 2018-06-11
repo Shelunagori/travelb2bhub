@@ -1299,8 +1299,9 @@ public function delete($id = null) {
 	$this->request->allowMethod(['patch','post', 'put']);
 	$city = $this->Users->get($id);
 	$this->request->data['is_deleted']=1;
-	$city = $this->Users->patchEntity($city, $this->request->data());
-	if ($this->Users->save($city)) {
+	$this->request->data['email']='deleted@travelb2bhub.com';
+	$this->request->data['mobile_number']='0000000001';
+	if ($this->Users->updateAll(['email' => 'deleted@travelb2bhub.com', "mobile_number"=>'0000000001', "is_deleted"=>1], ['id'=> $id])) {
 		$this->Flash->success(__('The User has been deleted.'));
 	} else {
 		$this->Flash->error(__('The User could not be deleted. Please, try again.'));

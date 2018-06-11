@@ -455,7 +455,7 @@ class AdminsController extends AppController
 					$H=$this->Users->find()->where(['Users.role_id'=>3,'create_at >='=>$firstdate,'create_at <='=>$start_date])->count();
 					$HotelierCount[]=$H;
 					
-					$MonthName[]=date('d-M-Y',strtotime($firstdate)).' - '.date('d-M-Y',strtotime($start_date));
+					$MonthName[]=date('d-M',strtotime($firstdate)).' - '.date('d-M',strtotime($start_date));
 					
 					$TotalRegistration[]=$TA+$EP+$H;
 					 
@@ -463,6 +463,33 @@ class AdminsController extends AppController
 				}
 			}
   		}
+		else if(!empty($year_from) && !empty($year_to)){
+			$years = range ($year_from,$year_to);
+			foreach($years as $year)
+			{
+ 				$first_date='01-01-'.$year;
+				$first_date=date('Y-m-d',strtotime($first_date));
+
+				$last_date='31-12-'.$year;
+				$last_date=date('Y-m-t',strtotime($last_date));
+				
+				$Month_name=$year;
+				//-- COUNTRING
+				
+				$TA=$this->Users->find()->where(['Users.role_id'=>1,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$TravelAgentCount[]=$TA;
+				
+				$EP=$this->Users->find()->where(['Users.role_id'=>2,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$EventPlannerCount[]=$EP;
+				
+				$H=$this->Users->find()->where(['Users.role_id'=>3,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$HotelierCount[]=$H;
+				
+				$MonthName[]=$Month_name;
+				
+				$TotalRegistration[]=$TA+$EP+$H;
+			}
+		}
 		else
 		{
 			for($x=1;$x<=12;$x++)
@@ -506,20 +533,23 @@ class AdminsController extends AppController
 		$this->set(compact('TravelAgentCount','EventPlannerCount','HotelierCount','TotalRegistration','MonthName'));
     }
 	
-	public function RequestStatistics($month_from=null,$month_to=null)
+	public function RequestStatistics($month_from=null,$month_to=null,$year_from=null,$year_to=null)
     {
 		$this->viewBuilder()->layout('admin_layout');
 		$month_from=$this->request->query('month_from');
 		$month_to=$this->request->query('month_to'); 
-		$type=$this->request->query('type'); 
+		$type=$this->request->query('type');  
+		$year_from=$this->request->query('year_from'); 
+		$year_to=$this->request->query('year_to'); 
 		$this->loadModel('Requests');
 		if(!empty($month_from) && !empty($month_to)){
 			$month_from='01-'.$month_from;
-			$month_to='01-'.$month_to;
+			$month_to='01-'.$month_to; 
 			if($type==2){
 				$start = strtotime($month_from);
 				$end = strtotime($month_to);
-				while($start < $end)
+ 
+				while($start <= $end)
 				{
 					//date('F Y', $start), PHP_EOL;
 					$MH = date('m', $start);
@@ -563,7 +593,7 @@ class AdminsController extends AppController
 			}
 			else{
 				$start_date=date('Y-m-d',strtotime($month_from));
-				$end_date=date('Y-m-t',strtotime($month_from));
+				$end_date=date('Y-m-t',strtotime($month_to));
 				$x=0;
 				while (strtotime($start_date) <= strtotime($end_date)) {
 					 
@@ -605,12 +635,40 @@ class AdminsController extends AppController
 					
 					$TotalRegistration[]=$TAS+$EPS;
 					
-					$MonthName[]=date('d-M-Y',strtotime($firstdate)).' - '.date('d-M-Y',strtotime($start_date));
+					$MonthName[]=date('d-M',strtotime($firstdate)).' - '.date('d-M',strtotime($start_date));
 					 
 					if($x==1){break;}
 				}
 			}
   		}
+		
+		else if(!empty($year_from) && !empty($year_to)){
+			$years = range ($year_from,$year_to);
+			foreach($years as $year)
+			{
+ 				$first_date='01-01-'.$year;
+				$first_date=date('Y-m-d',strtotime($first_date));
+
+				$last_date='31-12-'.$year;
+				$last_date=date('Y-m-t',strtotime($last_date));
+				
+				$Month_name=$year;
+				//-- COUNTRING
+				
+				$TA=$this->Users->find()->where(['Users.role_id'=>1,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$TravelAgentCount[]=$TA;
+				
+				$EP=$this->Users->find()->where(['Users.role_id'=>2,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$EventPlannerCount[]=$EP;
+				
+				$H=$this->Users->find()->where(['Users.role_id'=>3,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$HotelierCount[]=$H;
+				
+				$MonthName[]=$Month_name;
+				
+				$TotalRegistration[]=$TA+$EP+$H;
+			}
+		}
 		else
 		{
 			for($x=1;$x<=12;$x++)
@@ -667,11 +725,13 @@ class AdminsController extends AppController
 		$this->set(compact('TravelAgentCount','EventPlannerCount','TotalRegistration','MonthName'));
     }
 	
-	public function finalizeRequests($month_from=null,$month_to=null)
+	public function finalizeRequests($month_from=null,$month_to=null,$year_from=null,$year_to=null)
     {
 		$this->viewBuilder()->layout('admin_layout');
 		$month_from=$this->request->query('month_from');
 		$month_to=$this->request->query('month_to'); 
+		$year_from=$this->request->query('year_from'); 
+		$year_to=$this->request->query('year_to'); 
 		$type=$this->request->query('type'); 
 		$this->loadModel('Requests');
 		if(!empty($month_from) && !empty($month_to)){
@@ -680,7 +740,7 @@ class AdminsController extends AppController
 			if($type==2){
 				$start = strtotime($month_from);
 				$end = strtotime($month_to);
-				while($start < $end)
+				while($start <= $end)
 				{
 					//date('F Y', $start), PHP_EOL;
 					$MH = date('m', $start);
@@ -724,7 +784,7 @@ class AdminsController extends AppController
 			}
 			else{
 				$start_date=date('Y-m-d',strtotime($month_from));
-				$end_date=date('Y-m-t',strtotime($month_from));
+				$end_date=date('Y-m-t',strtotime($month_to));
 				$x=0;
 				while (strtotime($start_date) <= strtotime($end_date)) {
 					 
@@ -766,12 +826,39 @@ class AdminsController extends AppController
 					
 					$TotalRegistration[]=$TAS+$EPS;
 					
-					$MonthName[]=date('d-M-Y',strtotime($firstdate)).' - '.date('d-M-Y',strtotime($start_date));
+					$MonthName[]=date('d-M',strtotime($firstdate)).' - '.date('d-M',strtotime($start_date));
 					 
 					if($x==1){break;}
 				}
 			}
   		}
+		else if(!empty($year_from) && !empty($year_to)){
+			$years = range ($year_from,$year_to);
+			foreach($years as $year)
+			{
+ 				$first_date='01-01-'.$year;
+				$first_date=date('Y-m-d',strtotime($first_date));
+
+				$last_date='31-12-'.$year;
+				$last_date=date('Y-m-t',strtotime($last_date));
+				
+				$Month_name=$year;
+				//-- COUNTRING
+				
+				$TA=$this->Users->find()->where(['Users.role_id'=>1,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$TravelAgentCount[]=$TA;
+				
+				$EP=$this->Users->find()->where(['Users.role_id'=>2,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$EventPlannerCount[]=$EP;
+				
+				$H=$this->Users->find()->where(['Users.role_id'=>3,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$HotelierCount[]=$H;
+				
+				$MonthName[]=$Month_name;
+				
+				$TotalRegistration[]=$TA+$EP+$H;
+			}
+		}
 		else
 		{
 			for($x=1;$x<=12;$x++)
@@ -828,11 +915,13 @@ class AdminsController extends AppController
 		$this->set(compact('TravelAgentCount','EventPlannerCount','TotalRegistration','MonthName'));
     }
 	
-	public function removedRequests($month_from=null,$month_to=null)
+	public function removedRequests($month_from=null,$month_to=null,$year_from=null,$year_to=null)
     {
 		$this->viewBuilder()->layout('admin_layout');
 		$month_from=$this->request->query('month_from');
-		$month_to=$this->request->query('month_to'); 
+		$month_to=$this->request->query('month_to');
+		$year_from=$this->request->query('year_from'); 
+		$year_to=$this->request->query('year_to');  
 		$type=$this->request->query('type'); 
 		$this->loadModel('Requests');
 		if(!empty($month_from) && !empty($month_to)){
@@ -841,7 +930,7 @@ class AdminsController extends AppController
 			if($type==2){
 				$start = strtotime($month_from);
 				$end = strtotime($month_to);
-				while($start < $end)
+				while($start <= $end)
 				{
 					//date('F Y', $start), PHP_EOL;
 					$MH = date('m', $start);
@@ -885,7 +974,7 @@ class AdminsController extends AppController
 			}
 			else{
 				$start_date=date('Y-m-d',strtotime($month_from));
-				$end_date=date('Y-m-t',strtotime($month_from));
+				$end_date=date('Y-m-t',strtotime($month_to));
 				$x=0;
 				while (strtotime($start_date) <= strtotime($end_date)) {
 					 
@@ -927,12 +1016,39 @@ class AdminsController extends AppController
 					
 					$TotalRegistration[]=$TAS+$EPS;
 					
-					$MonthName[]=date('d-M-Y',strtotime($firstdate)).' - '.date('d-M-Y',strtotime($start_date));
+					$MonthName[]=date('d-M',strtotime($firstdate)).' - '.date('d-M',strtotime($start_date));
 					 
 					if($x==1){break;}
 				}
 			}
   		}
+		else if(!empty($year_from) && !empty($year_to)){
+			$years = range ($year_from,$year_to);
+			foreach($years as $year)
+			{
+ 				$first_date='01-01-'.$year;
+				$first_date=date('Y-m-d',strtotime($first_date));
+
+				$last_date='31-12-'.$year;
+				$last_date=date('Y-m-t',strtotime($last_date));
+				
+				$Month_name=$year;
+				//-- COUNTRING
+				
+				$TA=$this->Users->find()->where(['Users.role_id'=>1,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$TravelAgentCount[]=$TA;
+				
+				$EP=$this->Users->find()->where(['Users.role_id'=>2,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$EventPlannerCount[]=$EP;
+				
+				$H=$this->Users->find()->where(['Users.role_id'=>3,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$HotelierCount[]=$H;
+				
+				$MonthName[]=$Month_name;
+				
+				$TotalRegistration[]=$TA+$EP+$H;
+			}
+		}
 		else
 		{
 			for($x=1;$x<=12;$x++)
@@ -989,88 +1105,45 @@ class AdminsController extends AppController
 		$this->set(compact('TravelAgentCount','EventPlannerCount','TotalRegistration','MonthName'));
     }
 	
-	public function registeredPercentage($month_from=null,$month_to=null)
+	public function registeredPercentage($month_from=null,$month_to=null,$year_from=null,$year_to=null)
     {
 		$this->viewBuilder()->layout('admin_layout');
 		$month_from=$this->request->query('month_from');
-		$month_to=$this->request->query('month_to'); 
+		$month_to=$this->request->query('month_to');
+		$year_from=$this->request->query('year_from'); 
+		$year_to=$this->request->query('year_to'); 
 		$type=$this->request->query('type'); 
 		$this->loadModel('Requests');
 		$TAPER=0;
 		$EPPER=0;
-		$HPER=0;
-		if(!empty($month_from) && !empty($month_to)){
-			$month_from='01-'.$month_from;
-			$month_to='01-'.$month_to;
-			if($type==2){
-				$first_date=date('Y-m-d',strtotime($month_from));
-				$last_date=date('Y-m-t',strtotime($month_to));
-				//-- Get All
-				$TotalRegistration=$this->Users->find()->where(['create_at >='=>$first_date,'create_at <='=>$last_date])->count();
-				//-- SEPRATE
-				$TotalTA=$this->Users->find()->where(['Users.role_id'=>1,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
-				$TotalEP=$this->Users->find()->where(['Users.role_id'=>2,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
-				$TotalH=$this->Users->find()->where(['Users.role_id'=>3,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
-				//-- PERCENTAGE
-				if($TotalTA>0){
-					$TAPER=number_format($TotalTA*100/$TotalRegistration, 2); 
-				}
-				if($TotalEP>0){
-					$EPPER=number_format($TotalEP*100/$TotalRegistration, 2);
-				}
-				if($TotalH>0){
-					$HPER=number_format($TotalH*100/$TotalRegistration, 2);
-				}
- 			}
-			else{
-				$first_date=date('Y-m-d',strtotime($month_from));
-				$last_date=date('Y-m-t',strtotime($month_from));
-				
-				$TotalRegistration=$this->Users->find()->where(['create_at >='=>$first_date,'create_at <='=>$last_date])->count();
-				//-- SEPRATE
-				$TotalTA=$this->Users->find()->where(['Users.role_id'=>1,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
-				$TotalEP=$this->Users->find()->where(['Users.role_id'=>2,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
-				$TotalH=$this->Users->find()->where(['Users.role_id'=>3,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
-				//-- PERCENTAGE
-				if($TotalTA>0){
-					$TAPER=number_format($TotalTA*100/$TotalRegistration, 2); 
-				}
-				if($TotalEP>0){
-					$EPPER=number_format($TotalEP*100/$TotalRegistration, 2);
-				}
-				if($TotalH>0){
-					$HPER=number_format($TotalH*100/$TotalRegistration, 2);
-				}
-			}
-  		}
-		else
-		{
-			//-- Get All
-			$TotalRegistration=$this->Users->find()->count();
-			//-- SEPRATE
-			$TotalTA=$this->Users->find()->where(['Users.role_id'=>1])->count();
-			$TotalEP=$this->Users->find()->where(['Users.role_id'=>2])->count();
-			$TotalH=$this->Users->find()->where(['Users.role_id'=>3])->count();
-			//-- PERCENTAGE
-			if($TotalTA>0){
-				$TAPER=number_format($TotalTA*100/$TotalRegistration, 2); 
-			}
-			if($TotalEP>0){
-				$EPPER=number_format($TotalEP*100/$TotalRegistration, 2);
-			}
-			if($TotalH>0){
-				$HPER=number_format($TotalH*100/$TotalRegistration, 2);
-			}
- 		}
- 		//-- For Graph
+		$HPER=0; 		
+		//-- Get All
+		$TotalRegistration=$this->Users->find()->count();
+		//-- SEPRATE
+		$TotalTA=$this->Users->find()->where(['Users.role_id'=>1])->count();
+		$TotalEP=$this->Users->find()->where(['Users.role_id'=>2])->count();
+		$TotalH=$this->Users->find()->where(['Users.role_id'=>3])->count();
+		//-- PERCENTAGE
+		if($TotalTA>0){
+			$TAPER=number_format($TotalTA*100/$TotalRegistration, 2); 
+		}
+		if($TotalEP>0){
+			$EPPER=number_format($TotalEP*100/$TotalRegistration, 2);
+		}
+		if($TotalH>0){
+			$HPER=number_format($TotalH*100/$TotalRegistration, 2);
+		}
+  		//-- For Graph
  		$this->set(compact('TAPER','EPPER','HPER'));
     }
 	
-	public function StatewiseStatistics($month_from=null,$month_to=null)
+	public function StatewiseStatistics($month_from=null,$month_to=null,$year_from=null,$year_to=null)
     {
 		$this->viewBuilder()->layout('admin_layout');
 		$month_from=$this->request->query('month_from');
 		$month_to=$this->request->query('month_to'); 
+		$year_from=$this->request->query('year_from'); 
+		$year_to=$this->request->query('year_to'); 
 		$type=$this->request->query('type');
 		$this->loadModel('States');
 		$States=$this->States->find()->where(['is_deleted'=>0,'country_id'=>101]);
@@ -1105,7 +1178,7 @@ class AdminsController extends AppController
 			}
 			else{
 				$start_date=date('Y-m-d',strtotime($month_from));
-				$end_date=date('Y-m-t',strtotime($month_from));
+				$end_date=date('Y-m-t',strtotime($month_to));
 				$x=0;
 				while (strtotime($start_date) <= strtotime($end_date)) {
 					 
@@ -1129,7 +1202,7 @@ class AdminsController extends AppController
 					$H=$this->Users->find()->where(['Users.role_id'=>3,'create_at >='=>$firstdate,'create_at <='=>$start_date])->count();
 					$HotelierCount[]=$H;
 					
-					$MonthName[]=date('d-M-Y',strtotime($firstdate)).' - '.date('d-M-Y',strtotime($start_date));
+					$MonthName[]=date('d-M',strtotime($firstdate)).' - '.date('d-M',strtotime($start_date));
 					
 					$TotalRegistration[]=$TA+$EP+$H;
 					 
@@ -1137,6 +1210,33 @@ class AdminsController extends AppController
 				}
 			}
   		}
+		else if(!empty($year_from) && !empty($year_to)){
+			$years = range ($year_from,$year_to);
+			foreach($years as $year)
+			{
+ 				$first_date='01-01-'.$year;
+				$first_date=date('Y-m-d',strtotime($first_date));
+
+				$last_date='31-12-'.$year;
+				$last_date=date('Y-m-t',strtotime($last_date));
+				
+				$Month_name=$year;
+				//-- COUNTRING
+				
+				$TA=$this->Users->find()->where(['Users.role_id'=>1,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$TravelAgentCount[]=$TA;
+				
+				$EP=$this->Users->find()->where(['Users.role_id'=>2,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$EventPlannerCount[]=$EP;
+				
+				$H=$this->Users->find()->where(['Users.role_id'=>3,'create_at >='=>$first_date,'create_at <='=>$last_date])->count();
+				$HotelierCount[]=$H;
+				
+				$MonthName[]=$Month_name;
+				
+				$TotalRegistration[]=$TA+$EP+$H;
+			}
+		}
 		else
 		{
 			
@@ -1182,7 +1282,6 @@ class AdminsController extends AppController
 		$MonthName="'".$MonthName."'";
 		$this->set(compact('TravelAgentCount','EventPlannerCount','HotelierCount','TotalRegistration','MonthName'));
     }
-	
 	
 	
 	public function pdfExcel() 

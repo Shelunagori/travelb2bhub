@@ -25,7 +25,7 @@ fieldset
 					
 					<div class="col-md-3">
 						<div class="form-group ">
-						  <label>Select Type:</label>
+						  <label>Time Interval:</label>
 						  <select name="type" class="form-control type">
 							<option value="">Select...</option>
 							<option value="1">Weekly</option>
@@ -44,6 +44,18 @@ fieldset
 						<div class="form-group ">
 						  <label>Month To:</label>
 						  <input type="text" class="form-control monthpicker" placeholder="Select month" name="month_to">
+						</div>
+					</div>
+					<div class="col-md-3 yearshow">
+						<div class="form-group ">
+						  <label>Year From:</label>
+						  <input type="text" maxlength="4" minlength="4" class="form-control" placeholder="Enter Year From" name="year_from" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
+						</div>
+					</div>
+					<div class="col-md-3 year yearshow">
+						<div class="form-group ">
+						  <label>Year To:</label>
+						  <input type="text" maxlength="4" minlength="4" class="form-control" placeholder="Enter Year To" name="year_to" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');">
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -122,7 +134,7 @@ fieldset
 $(function () {  
     $('#container').highcharts({
         title: {
-            text: 'Monthly Removed Requests',
+            text: 'Removed Requests',
             x: -20 //center
         },
         subtitle: {
@@ -163,13 +175,16 @@ $(function () {
         }]
     });
 });
- 
+ $('.yearshow').hide();
 $(document).ready(function(){ 
 	$('.type').on('change',function(){
 		if($(this).val()==3){
 			$('.year').hide();
+			$('.yearshow').show();
+
 		}else {
 			$('.year').show();
+			$('.yearshow').hide();
 		} 
 	});
 }); 
