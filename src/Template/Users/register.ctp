@@ -340,7 +340,7 @@ input[type=checkbox] {
 <?php echo $this->Html->script('/assets/login/daterangepicker/daterangepicker.js'); ?>
 <?php echo $this->Html->script('/assets/login/countdowntime/countdowntime.js'); ?>
 <?php echo $this->Html->script('/assets/login/js/main.js'); ?>
-<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?> 
 <script>
 $(document).ready(function(){
 $(".suggesstion-box").hide();	

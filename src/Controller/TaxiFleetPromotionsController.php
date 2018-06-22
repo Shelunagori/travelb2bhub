@@ -86,14 +86,17 @@ class TaxiFleetPromotionsController extends AppController
 			$myRequestCount = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2, $conditions]])->count();
 			$this->set('myRequestCountNew', $myRequestCount);
 
-			$RequestCount1 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.total_response"=>0,"Requests.status !="=>2,'is_deleted'=>0, $conditions]])->count();
+			$RequestCount1 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'),"Requests.status !="=>2,'is_deleted'=>0, $conditions]])->count();
 			
 			$RequestCount = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.total_response >"=>0,"Requests.status !="=>2,'is_deleted'=>1, $conditions]])->count();
-			$PlaceReqCount=$reqcountNew['value']-($RequestCount+$RequestCount1);
+			
+			$RequestCount2 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.total_response >"=>0,"Requests.status"=>2, $conditions]])->count();
+			
+			$PlaceReqCount=$reqcountNew['value']-($RequestCount+$RequestCount1+$RequestCount2);
 			$this->set('PlaceReqCount', $PlaceReqCount);
 			
 			$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Requests.status' =>0,'Requests.is_deleted' =>0,'Responses.status' =>0,'Responses.is_deleted' =>0,'Responses.user_id' => $this->Auth->user('id')]])->where(["Requests.user_id NOT IN"=>$BlockedUsers]);
-			$myReponseCount = $queryr->count(); 
+			$myReponseCount = $queryr->count();
 			$this->set('myReponseCountNew', $myReponseCount);
 
 			//----	 FInalized
@@ -138,7 +141,7 @@ class TaxiFleetPromotionsController extends AppController
 			if(!empty($totalIds)){
 				$NewNotifications = $this->UserChats->find()->contain(['Users'])->where(['UserChats.id IN'=> $totalIds])->order($csort)->all();
 			}
- 			$chatCount = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->count(); 
+ 			$chatCount = $this->UserChats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->count();
 			$this->set('chatCountNew',$chatCount); 
 			$this->set('NewNotifications',$NewNotifications);
 		}

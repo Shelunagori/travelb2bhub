@@ -197,17 +197,21 @@ class PostTravlePackagesController extends AppController
 
 	public function getTravelPackages($isLikedUserId=null,$category_id = null, $category_short = null,$duration_day=null,$duration_night=null,$duration_short=null,$valid_date=null,$valid_date_short=null,$starting_price=null,$starting_price_short=null,$country_id=null,$country_id_short=null,$city_id=null,$city_id_short=null,$category_name=null,$higestSort=null,$search = null,$page = null,$submitted_from=null,$starting_price_Filter=null,$following=null)
 	{
+		
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		if(!empty($isLikedUserId))
 		{
+			
 			$submitted_from = $this->request->query('submitted_from');
-			if($submitted_from="web")
+			if($submitted_from=="web")
 			{
 				$limit=100;
 			}
 			else{
 				$limit=10;
 			}
+			
+			
 			$category_id = $this->request->query('category_id');
 			$category_short = $this->request->query('category_short');
 			//$duration_day = $this->request->query('duration_day');
@@ -331,14 +335,19 @@ class PostTravlePackagesController extends AppController
 				if($MaxQuotePrice=='200000'){ $MaxQuotePrice='100000000';}
 				$starting_price_Filter["PostTravlePackages.starting_price >="] = $MinQuotePrices;
 				$starting_price_Filter["PostTravlePackages.starting_price <="] = $MaxQuotePrice;
-			 
 			}
 			$conditions=array()	;
 			if(!empty($following))
 			{
   				$this->loadModel('BusinessBuddies');
-				$BusinessBuddies = $this->BusinessBuddies->find('list',['keyField' => "bb_user_id",'valueField' => 'bb_user_id'])->where(['user_id' => $isLikedUserId])->toArray();
-				$conditions = ['PostTravlePackages.user_id IN' => $BusinessBuddies];
+				$BuddyCount = $this->BusinessBuddies->find()->where(['user_id' => $isLikedUserId])->count();
+				if($BuddyCount>0){
+					$BusinessBuddies = $this->BusinessBuddies->find('list',['keyField' => "bb_user_id",'valueField' => 'bb_user_id'])->where(['user_id' => $isLikedUserId])->toArray();
+					$conditions = ['PostTravlePackages.user_id IN' => $BusinessBuddies];
+				}
+				else{
+					$conditions = ['PostTravlePackages.user_id IN' => 1];
+				}
 			}
 			//print_r($starting_price_Filter); exit;
 			$country_filter=null;
@@ -563,12 +572,26 @@ class PostTravlePackagesController extends AppController
 					$testimonial=$this->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id]);
 					$testimonial_count=$this->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id])->count();
 						 
+						
+						 
 						 foreach($testimonial as $test_data){
 							 
 							 $rating=$test_data->rating;
 							 $all_raiting+=$rating;
 						 }
-						 $final_raiting=($all_raiting/$testimonial_count);
+						
+						//$final_raiting=($all_raiting/$testimonial_count);
+						
+
+						
+						if($testimonial_count > 0)
+						{
+							$final_raiting=($all_raiting/$testimonial_count);	
+						}else { $final_raiting = 0;  }
+						
+						 
+						 
+						 
 					 if($testimonial_count>0){
 						 foreach($getTravelPackageDetails as $rat){
 							 if($final_raiting>0){

@@ -277,7 +277,7 @@ class EventPlannerPromotionsController extends AppController
 		if(!empty($isLikedUserId))
 		{
 			$submitted_from = $this->request->query('submitted_from');
-			if($submitted_from="web")
+			if($submitted_from=="web")
 			{
 				$limit=100;
 			}
@@ -344,9 +344,15 @@ class EventPlannerPromotionsController extends AppController
 			if(!empty($following))
 			{
   				$this->loadModel('BusinessBuddies');
-				$BusinessBuddies = $this->BusinessBuddies->find('list',['keyField' => "bb_user_id",'valueField' => 'bb_user_id'])->where(['user_id' => $isLikedUserId])->toArray();
-				$conditions = ['EventPlannerPromotions.user_id IN' => $BusinessBuddies];
-			}
+				$BuddyCount = $this->BusinessBuddies->find()->where(['user_id' => $isLikedUserId])->count();
+				if($BuddyCount>0){
+					$BusinessBuddies = $this->BusinessBuddies->find('list',['keyField' => "bb_user_id",'valueField' => 'bb_user_id'])->where(['user_id' => $isLikedUserId])->toArray();
+					$conditions = ['EventPlannerPromotions.user_id IN' => $BusinessBuddies];
+				}
+				else{
+					$conditions = ['EventPlannerPromotions.user_id IN' => 1];
+				}
+			} 
 			$search_bar_title = null;
 			$data_arr = [];
 			$data_arr_state=[];

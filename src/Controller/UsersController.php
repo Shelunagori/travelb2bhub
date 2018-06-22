@@ -645,8 +645,12 @@ if ($this->request->is('post')) {
 		 
 		$rendomCode=rand('1010', '9999');
 		$d['mobile_otp'] = $rendomCode;
-
+		
 		$user = $this->Users->newEntity($d);
+		$user->p_contact = '';
+		$user->fax = '';
+		$user->comp_image1 = '';
+		$user->comp_image2 = '';
  			if ($res = $this->Users->save($user)) {
 				
 				$mobile_no=$d['mobile_number'];
@@ -3297,7 +3301,8 @@ public function acceptOffer() {
 		$request_id = $_POST["request_id"];
 		$request->status = 2;
 		$request->final_id = $_POST["response_id"];
-		$request->accept_date =  date("Y-m-d H:i:s");
+		$request->accept_date =  date("Y-m-d h:i:s");
+		$request->final_date =  date("Y-m-d h:i:s");
 		$request->response_id = $_POST["response_id"];
 		if ($TableRequest->save($request)){
 			$TableResponse = TableRegistry::get('Responses');
@@ -4314,7 +4319,7 @@ $mobileNo = 1234567890;
 }
 return md5(md5($mobileNo));
 }
-public function sendMail() {
+/*public function sendMail() {
 $subject="TravelB2Bhub Email Verification";
 //$to=$d['email'];
 $to="dasumenaria@gmail.com";
@@ -4364,7 +4369,7 @@ public function forgotPassword() {
 					
 			$sms_sender='TRAHUB';
 			$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
-			file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
+			//file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
 			 
 			 $encrypted_data=$this->encode($user_id,'B2BHUB');
 			 $dummy_user_id=$encrypted_data;
@@ -4441,9 +4446,16 @@ public function otpVerifiy($dummy_user_id) {
 			$headers .= 'From: TravelB2Bhub <contactus@travelb2bhub.com>' . "\r\n";
 			//$headers .= "Bcc: business.leadindia@gmail.com"; // BCC mail
 			$message='<p>Dear '.$UserS['first_name'].',</p>';
-			$message.='<p>Thank you for registering with TravelB2Bhub.com, the  COMMISSION FREE, Business to Business, tourism trading network. </p>';
-			$message.='<p style="color:#000;">Note: You will receive a notification when there are enough registered members for you to begin trading. Please encourage your contacts to enroll.</p>';
-			$message.='<p style="color:#000;">We are committed to enhance your trading experience!</p>';
+			$message.='<p>Thank you for registering with TravelB2Bhub.com, the B2B Travel Marketplace for the Tourism Industry. </p>';
+			$message.='<p>Download App for live business notifications and a better user experience:
+				https://play.google.com/store/apps/details?id=com.app.travel.TravelB2B </p>';
+			$message.='<p>Benefits: <br>
+					1. Free Registration, and listing of your packages, services, or property. <br>
+					2. Connect with a large network of Travel Agents, Cab Services, and Hoteliers from all over India.<br>
+					3. Sell & Buy services, and we will charge no commission from you! <br>
+					We are sure that our ever expanding network will help you increase your business. Please encourage your contacts to enroll. </p>';
+		 
+			//$message.='<p style="color:#000;">We are committed to enhance your trading experience!</p>';
 			$message.='<p style="color:#000;">Sincerely,<br>The TravelB2Bhub Team</p>';
 			$userId = $user_id;
 			//$subject= $UserS['first_name'].": TravelB2Bhub Account Activation";

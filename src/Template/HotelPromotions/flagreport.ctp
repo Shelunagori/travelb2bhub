@@ -3,7 +3,7 @@
 	<div class="col-md-12">
 			<div class="box box-primary">
 				<div class="box-header with-border">
-					<b>Event Report List</b>
+					<b>Hotel Promotion Report List</b>
 					<div class="box-tools pull-right">
 						<a style="font-size:19px;  margin-top: -6px;" class="btn btn-box-tool" data-target="#myModal122" data-toggle="collapse"> <i class="fa fa-filter"></i></a>
 					</div>

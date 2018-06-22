@@ -240,7 +240,7 @@ $getHotelPromotion=$getEventPlanners ;
 		$isLikedUserId = $this->request->query('isLikedUserId');
 		$submitted_from = $this->request->query('submitted_from');
 		
-		if($submitted_from="web")
+		if($submitted_from=="web")
 		{
 			$limit=100;
 		}
@@ -259,6 +259,7 @@ $getHotelPromotion=$getEventPlanners ;
 			$search_bar = $this->request->query('search');
 			if(empty($page)){$page=1;}
 			$category_id_filter = null;
+			$Searchbox = '';
 			//-- Filter 
 			if(!empty($search_bar))
 			{
@@ -297,19 +298,23 @@ $getHotelPromotion=$getEventPlanners ;
 			$conditions=array();
 			if(!empty($starting_price)) {
  				$result = explode("-", $starting_price); 
-				$MinQuotePrice = $result[0];
+				$MinQuotePrice = $result[0]; 
 				$MaxQuotePrice = $result[1];
 				if($MaxQuotePrice=='100000'){ $MaxQuotePrice='1000000000';}
 				$conditions["HotelPromotions.cheap_tariff >="] = $MinQuotePrice;
 				$conditions["HotelPromotions.cheap_tariff <="] = $MaxQuotePrice;
-			}
+			} 
 			if(!empty($following))
 			{
 				$this->loadModel('BusinessBuddies');
-				$BusinessBuddies = $this->BusinessBuddies->find('list',['keyField' => "bb_user_id",'valueField' => 'bb_user_id']) 
-				->where(['user_id' => $isLikedUserId])
-				->toArray();
-				$conditions = ['HotelPromotions.user_id IN' => $BusinessBuddies];
+				$BuddyCount = $this->BusinessBuddies->find()->where(['user_id' => $isLikedUserId])->count();
+				if($BuddyCount>0){
+					$BusinessBuddies = $this->BusinessBuddies->find('list',['keyField' => "bb_user_id",'valueField' => 'bb_user_id'])->where(['user_id' => $isLikedUserId])->toArray();
+					$conditions = ['HotelPromotions.user_id IN' => $BusinessBuddies];
+				}
+				else{
+					$conditions = ['HotelPromotions.user_id IN' => 1];
+				}
 			}
 			$getHotelPromotion = $this->HotelPromotions->find();
 			

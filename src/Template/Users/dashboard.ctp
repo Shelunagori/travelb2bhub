@@ -93,13 +93,13 @@ li > p{
 .content{padding-top: 0px !important; margin-top: -7px !important;}
 </style>
 
-<section class="" align="center">
-<div class="container-fluid" align="center" style="margin-left:14%">  
+<section class="">
+<div class="container-fluid">  
 <?php 
 	$role_id=$users->role_id 
 ?>
- <div class="row equal_column tets" align="center" style="margin-bottom:20px;">
-	 <div class="col-md-7">
+ <div class="row equal_column tets" style="margin-bottom:20px">
+	 <div class="col-md-9">
 		<?php if($role_id==1) { ?>
 		<div class="" style=""> 
 		<li class="col-lg-12 col-xs-12 text-center Dashbord" style="background-image:url(../images/Travel.jpg);height:33%;width:100%;background-repeat:round;">
@@ -210,17 +210,17 @@ li > p{
 			</li> 
 		</div>
 	<?php } ?> 
-	<div style="top: 28px; margin-left:15px;margin-right:15px">
+	<div style="top: 28px;">
 		<?php echo $this->element('subheader');?> 
 	</div>
 	</div>
 	<div class='col-md-3 hideinphone' align="left">
 		<div class="col-md-12" style="background-color:#FFF; margin-left:-8px !important;">
-			<h4 align="center" style="padding-top:10px;font-size:17px;"><b>Download the app</b> for a GREAT <b>user experience</b></h4> 
+			<h4 align="center" style="padding-top:10px"><b>Download the app</b> for a GREAT <b>user experience</b></h4><br>
 			<p style="color:#5c5a5a;font-size:14px;">1) <b>Don’t miss any business leads:</b> Receive instantaneous notifications about new leads and receive responses in real-time.</p><br>
 			<p style="color:#5c5a5a;font-size:14px;">2) <b>Real-time communication:</b> Have live chats directly with buyers and sellers or Call them by clicking a button for buying listed packages, transport, or hotels.</p><br>
-			<p style="color:#5c5a5a;font-size:14x;">3) <b>Improved User Interface / User Experience:</b> Mobile specific design elements and processes make the App very easy to operate.</p><br> 
-			<div align="center" style="margin-bottom:12px">
+			<p style="color:#5c5a5a;font-size:14px;">3) <b>Improved User Interface / User Experience:</b> Mobile specific design elements and processes make the App very easy to operate.</p><br><br>
+			<div align="center" style="margin-bottom:38px">
 				<a target="_blank" href="https://play.google.com/store/apps/details?id=com.app.travel.TravelB2B"><?php echo  $this->Html->image('/images/google_play.png', ['style'=>'width:60%;']) ?></a>
 			</div> 
 		</div>

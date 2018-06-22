@@ -251,7 +251,7 @@ label {
 									</div>
 									<div>
 										<input autocomplete="off" type="text" class="form-control city_select" id="h_city_name" name="h_city_name" noofrows="1" placeholder="Select City or Nearest City"/>
- 										<input type='hidden' id='h_city_id' class="ctyidd" name="h_city_id" />
+ 										<input type='hidden' id='h_city_id' class="ctyidd city_real" name="h_city_id" />
 										<div class="suggesstion-box" style="margin-top:-10px;"></div>
 									</div>
 							</div>
@@ -464,7 +464,7 @@ label {
 								</div>
 								<div>
 								<input type="text" class="form-control city_select ctynamerecord" taxboxname="state_id" noofrows="6"  id="city_name" name="city_name" placeholder="Select City or Nearest City"/>
-								<input type='hidden' class="ctyIDname" id='city_id' name="city_id" />
+								<input type='hidden' class="ctyIDname city_real" id='city_id' name="city_id" />
 								<div class="suggesstion-box" style="margin-top:-10px"></div>
 								</div>
 							</div>
@@ -584,7 +584,7 @@ label {
 											<div class="input-field">
 												<p for="from">Pickup City</p>
 												<input type="text" class="form-control city_select ctynamerecord" id="pickup_city_name" name="pickup_city_name"  placeholder="Select City or Nearest City" taxboxname="pickup_state_id" noofrows="5" />
-												<input type='hidden' class="ctyIDname" id='pickup_city_id' name="pickup_city_id" />
+												<input type='hidden' class="ctyIDname city_real" id='pickup_city_id' name="pickup_city_id" />
 												<div class="suggesstion-box" style="margin-top:-10px"></div>
 											</div>
 										</div>	
@@ -636,7 +636,7 @@ label {
 											<div class="input-field">
 												<p for="from">Final Locality
 													</p>
-												<input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="finalLocality"/>
+												<input class="form-control" type="text" placeholder="Enter Locality or Village or Town" name="finalLocality" id="finalLocality"/>
 											</div>
 										</div>
 										<div class="col-md-6 form-group">
@@ -645,7 +645,7 @@ label {
 													 
 												</p>
 												<input type="text" class="form-control city_select" id="p_final_city_name" noofrows="2" name="p_final_city_name" required placeholder="Select City or Nearest City"/>
-												<input type='hidden' id='p_final_city_id' name="p_final_city_id" />
+												<input type='hidden' id='p_final_city_id' class="city_real" name="p_final_city_id" />
 												<div class="suggesstion-box" style="margin-top:-10px"></div>
 											</div>
 										</div>
@@ -808,7 +808,7 @@ label {
 													<span class="required">*</span>
 													</p>
 													<input type="text" class="form-control city_select ctynamerecord" id="t_pickup_city_name"  noofrows="4" taxboxname="t_pickup_state_id" name="t_pickup_city_name"  placeholder="Select City or Nearest City"/>
-													<input class="ctyIDname" type='hidden' id='t_pickup_city_id' name="t_pickup_city_id" />
+													<input class="ctyIDname city_real" type='hidden' id='t_pickup_city_id' name="t_pickup_city_id" />
 													<div class="suggesstion-box" style="margin-top:-10px"></div>
 												</div>
 											</div>										
@@ -847,7 +847,7 @@ label {
 														 <span class="required">*</span>    
 														</p>
 														<input type="text" class="form-control city_select" id="t_final_city_name" noofrows="3" name="t_final_city_name" placeholder="Select City or Nearest City"/>
-														<input type='hidden' id='t_final_city_id' name="t_final_city_id" />
+														<input type='hidden' id='t_final_city_id' name="t_final_city_id" class="city_real" />
 											<div class="suggesstion-box" style="margin-top:-10px"></div>
 														
 													</div>
@@ -1374,10 +1374,9 @@ $('#PackgeRequestForm').submit(function(){
 			required : true,
 			min: 1
 			},
-			/*"children":{
-			required : true,
-			min: 0
-			},*/
+			"city_name":{
+			required : true, 
+			},
 			"check_in" : {
 				required : true
 			},
@@ -1447,6 +1446,7 @@ $('#PackgeRequestForm').submit(function(){
 			form[0].submit(); 
 		}
 	});
+ 	
 	$('#HotelRequestForm').validate({
 		rules: {
 			"reference_id" : {
@@ -1456,10 +1456,9 @@ $('#PackgeRequestForm').submit(function(){
 				required : true,
 				min: 1
 			},
-			/*"hotelChildren":{
-				required : true,
-				min: 0
-			},*/
+			"h_city_name":{
+				required : true, 
+			},
 			"total_budget" : {
 				required : true
 			},
@@ -1512,6 +1511,7 @@ $('#PackgeRequestForm').submit(function(){
 			form[0].submit(); 
 		}
 	});
+  	
 	$('#TransportRequestForm').validate({
 		rules: {
 			"reference_id" : {
@@ -1524,10 +1524,9 @@ $('#PackgeRequestForm').submit(function(){
 			required : true,
 			min: 1
 			},
-			/*"transportChildren":{
-			required : true,
-			min: 0
-			},*/
+			"t_pickup_city_name":{
+				required : true,
+			},
 			"start_date" : {
 				required : true
 			},
@@ -1584,33 +1583,19 @@ $('#PackgeRequestForm').submit(function(){
 			form[0].submit(); 
 		}
 	});
-	 
-	/*$('#PackgeRequestForm').submit(function(){
-		if ($("#PackgeRequestForm").valid()) {
-			$(this).find(':input[type=submit]').prop('disabled', true);
-		}else{
-			alert('Please Check All Required Fields.');
-		}   
-	});
-
-	$('#HotelRequestForm').submit(function(){
-		if ($("#HotelRequestForm").valid()) {
-			$(this).find(':input[type=submit]').prop('disabled', true);
-		}else{
-			alert('Please Check All Required Fields.');
-		}   
-	});
-
-	$('#TransportRequestForm').submit(function(){
-		if ($("#TransportRequestForm").valid()) {
-			$(this).find(':input[type=submit]').prop('disabled', true);
-		}else{
-			alert('Please Check All Required Fields.');
-		}   
-	});	
-*/
+ 	
+	$(document).on('blur',".city_select ",function(){ 
+		var now=$(this);
+		setTimeout(function() {
+			var city_id=now.closest('div').find('.city_real').val();
+            if(city_id==''){
+				alert('Please select a city from the dropdown list');
+				now.val(''); 
+			}	 
+		}, 1000);
+ 	}); 
+ 	
 	$('#accordion').on('shown.bs.collapse', function () {
-		
 		$('.ref2').focus()
 	});
 
@@ -1709,7 +1694,7 @@ $(document).ready(function () {
             e.preventDefault();
             var strHtml = '<div class="stop col-md-12 main_row" style="margin-top:5px"><hr  style="margin-top: 8px; margin-bottom: 8px;"></hr> <div class="stop-title" style="font-weight:bold"> Stop ' +packageI+ ' </div><div class="row main_row">';
         	strHtml += '<div class="col-sm-4 mt form-group"> <p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality,Village or Town" name="stops[' +packageI+ ']"> </div>';
-        	strHtml += '<div class="col-sm-4 mt form-group"><p for="from">Stop City</p><input class="trans_city form-control city_select ctynamerecord" noofrows="5" taxboxname="state_id_package_stop_city[' +packageI+ ']" type="text" placeholder="Select City or Nearest City" required use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" class="ctyIDname" name="id_package_stop_city[' +packageI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div> ';
+        	strHtml += '<div class="col-sm-4 mt form-group"><p for="from">Stop City</p><input class="trans_city form-control city_select ctynamerecord" noofrows="5" taxboxname="state_id_package_stop_city[' +packageI+ ']" type="text" placeholder="Select City or Nearest City" required use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" class="ctyIDname city_real" name="id_package_stop_city[' +packageI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div> ';
         	strHtml += '<div class="stateRpl"><div class="col-sm-4 mt form-group" > <p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly> </div></div></div>';
         strHtml += '<div class="row"><div class="col-md-12" align="right" style="margin-top:5px"> <button class="btn btn-danger btn-sm package_remove_stop but"> <i class="fa fa-trash" ></i> Remove Stop</button> </div></div></div>';
         $(".package-stops").append(strHtml);
@@ -1734,7 +1719,7 @@ $(document).ready(function () {
 				e.preventDefault();
 				var strHtml = '<div class="stop col-md-12 main_row" style="margin-top:5px"><hr  style="margin-top: 8px; margin-bottom: 8px;"></hr> <div class="stop-title" style="font-weight:bold"> Stop ' +transI+ ' </div><div class="row main_row">';
 				strHtml += '<div class="col-sm-4 mt form-group"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality, Village or Town" name="stops[' +transI+ ']"></div></div>';
-				strHtml += '<div class="col-sm-4 mt form-group"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control ctynamerecord city_select" required type="text" noofrows="4" taxboxname="state_id_trasport_stop_city[' +transI+ ']" placeholder="Select City or Nearest City" use_for = "trasport" numCount = ' +transI+ ' id="trasport_stop_city[' +transI+ ']" name="trasport_stop_city[' +transI+ ']"> <input type="hidden" class="ctyIDname" id="id_trasport_stop_city[' +transI+ ']" name="id_trasport_stop_city[' +transI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div></div>';
+				strHtml += '<div class="col-sm-4 mt form-group"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control ctynamerecord city_select" required type="text" noofrows="4" taxboxname="state_id_trasport_stop_city[' +transI+ ']" placeholder="Select City or Nearest City" use_for = "trasport" numCount = ' +transI+ ' id="trasport_stop_city[' +transI+ ']" name="trasport_stop_city[' +transI+ ']"> <input type="hidden" class="ctyIDname city_real" id="id_trasport_stop_city[' +transI+ ']" name="id_trasport_stop_city[' +transI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div></div>';
 				strHtml += '<div class="stateRpl form-group" ><div class="col-sm-4 mt form-group"><div class="input-field  form-group" style="margin-top:5px !important;"><p for="from">Stop State</p><input type="hidden" id="state_id_trasport_stop_city[' +transI+ ']" name="state_id_trasport_stop_city[' +transI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_trasport_stop_city[' +transI+ ']" name="state_name_trasport_stop_city[' +transI+ ']" readonly></div></div></div></div>';
 				strHtml += '<div class="row"><div class="col-md-12" align="right" style="margin-top:5px"> <button class="btn btn-danger btn-sm transport_remove_stop but"> <i class="fa fa-trash" ></i> Remove Stop</button> </div></div></div>';
 				$(".transport-stops").append(strHtml);

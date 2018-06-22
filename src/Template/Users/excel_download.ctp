@@ -63,8 +63,9 @@ header("Cache-Control: post-check=0, pre-check=0", true);
 				<td><?= h($user->state->state_name) ?></td> 
 				<td><?= h($user->country->country_name) ?></td> 
 				<td><?= h($stateofoperation) ?></td> 
-				<td><?= h(date('d-m-Y',strtotime($user->create_at))) ?></td> 
-				<td><?= h(date('d-m-Y',strtotime($user->last_login))) ?></td> 
+				<td style="width:100px !important;">
+				<?php if($user->create_at=='0000-00-00 00:00:00' || $user->create_at == '1970-01-01 00:00:00'  || empty($user->create_at)){ echo "NL";} else { echo date('d-m-Y',strtotime($user->create_at)); } ?></td> 
+				<td style="width:100px !important;"><?php if($user->last_login=='0000-00-00 00:00:00' || empty($user->last_login)){ echo "NL";} else { echo date('d-m-Y',strtotime($user->last_login)); } ?></td> 
  			</tr>
 			<?php endforeach; ?>
 		</tbody>

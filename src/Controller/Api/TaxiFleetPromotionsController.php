@@ -223,7 +223,7 @@ class TaxiFleetPromotionsController extends AppController
 	public function getTaxiFleetPromotions($isLikedUserId = null,$country_id=null,$country_id_short = null,$state_id=null,$state_id_short=null,$city_id=null,$city_id_short=null,$car_bus_id=null,$car_bus_short=null,$higestSort=null,$search=null,$page=null,$submitted_from=null,$following=null)
 	{
 		$submitted_from = $this->request->query('submitted_from');
-		if($submitted_from="web")
+		if($submitted_from=="web")
 		{
 			$limit=100;
 		}
@@ -305,8 +305,14 @@ class TaxiFleetPromotionsController extends AppController
 			if(!empty($following))
 			{
   				$this->loadModel('BusinessBuddies');
-				$BusinessBuddies = $this->BusinessBuddies->find('list',['keyField' => "bb_user_id",'valueField' => 'bb_user_id'])->where(['user_id' => $isLikedUserId])->toArray();
-				$conditions = ['TaxiFleetPromotions.user_id IN' => $BusinessBuddies];
+				$BuddyCount = $this->BusinessBuddies->find()->where(['user_id' => $isLikedUserId])->count();
+				if($BuddyCount>0){
+					$BusinessBuddies = $this->BusinessBuddies->find('list',['keyField' => "bb_user_id",'valueField' => 'bb_user_id'])->where(['user_id' => $isLikedUserId])->toArray();
+					$conditions = ['TaxiFleetPromotions.user_id IN' => $BusinessBuddies];
+				} 
+				else{
+					$conditions = ['TaxiFleetPromotions.user_id IN' => 1];
+				}
 			}
 
 			$search_bar_title = null;

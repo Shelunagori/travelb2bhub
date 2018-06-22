@@ -1,10 +1,8 @@
-<?php echo $this->Html->script(['modernizr-2.6.2.min', 'jquery.cookie-1.3.1','selectFx','jquery.validate']);?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<title>Travel B2B HUB</title>
-	 <?php echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
+	 <?php echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?> 	
 	<?php echo $this->Html->css('/assets/login/fonts/iconic/css/material-design-iconic-font.min.css'); ?>
 	<?php echo $this->Html->css('/assets/login/animate/animate.css'); ?>
 	<?php echo $this->Html->css('/assets/login/css-hamburgers/hamburgers.min.css'); ?>
@@ -14,14 +12,25 @@
 	<?php echo $this->Html->css('/assets/login/daterangepicker/daterangepicker.css'); ?>
 	<?php echo $this->Html->css('/assets/login/css/util.css'); ?>
 	<?php echo $this->Html->css('/assets/login/css/main.css'); ?>
+	<?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Raleway'); ?>
 	<style>
 		.bgdiv { background-image: url('../webroot/assets/login/login_background.jpg'); }
 		.p-b-34 { padding-bottom: 10px !important; }
 		.login100-form-title { font-size:25px; }
-		.wrap-login100 { background:#0c0a10 !important; width:420px !important; padding: 18px 55px 37px 55px; }
+		.wrap-login100 { background:#1f222db8 !important; width:420px !important; padding: 18px 55px 37px 55px; }
 		.p-t-27 { padding-top: 10px; }
-		.error { color: #fff; margin-left: 25px; }
-		
+		.error { color: #ff9898; text-align:center; }
+		.alert-warning{ color:#FFF !important;}
+		.alert-danger{ width:95% !important;}
+		 
+		@media only screen and (max-device-width: 480px) {
+			div.prakash {
+				zoom: 2;
+			}
+			.input100 {
+				font-size: 20px !important;
+			}
+		}
 	</style>
 </head>
 <body>
@@ -79,6 +88,19 @@
 	</div>
 	<div id="dropDownSelect1"></div>
 
+<script type="text/javascript">
+
+	setInterval(function(){ abc(); }, 2000);
+		function abc()
+		{ 	
+			$('#msg_div').fadeOut(300);
+			var delay = 300;
+			setTimeout(function() {
+				$('#msg_div').remove();
+			}, delay);
+		} 
+		
+</script> 
 <?php echo $this->Html->script('/assets/login/jquery/jquery-3.2.1.min.js'); ?>
 <?php echo $this->Html->script('/assets/login/animsition/js/animsition.min.js'); ?>
 <?php echo $this->Html->script('/assets/login/bootstrap/js/popper.js'); ?>
@@ -88,6 +110,7 @@
 <?php echo $this->Html->script('/assets/login/daterangepicker/daterangepicker.js'); ?>
 <?php echo $this->Html->script('/assets/login/countdowntime/countdowntime.js'); ?>
 <?php echo $this->Html->script('/assets/login/js/main.js'); ?>
+ 
 <script>
 $('#UserRegisterForm').validate({
 	rules: {

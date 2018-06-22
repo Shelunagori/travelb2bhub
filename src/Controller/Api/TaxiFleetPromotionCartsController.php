@@ -95,7 +95,7 @@ class TaxiFleetPromotionCartsController extends AppController
 		{
 			$taxiFleetPromotionCarts=$this->TaxiFleetPromotionCarts->find()->where(['TaxiFleetPromotionCarts.user_id'=>$user_id, 'TaxiFleetPromotionCarts.is_deleted'=>0,'TaxiFleetPromotions.is_deleted'=>0,'TaxiFleetPromotions.visible_date >='=>date('Y-m-d')])->contain(['TaxiFleetPromotions'=>['TaxiFleetPromotionStates'=>['States'],'Users'=>function($q){
 				return $q->select(['first_name','last_name','mobile_number','company_name','email']);
-			},'TaxiFleetPromotionCities'=>['Cities'],TaxiFleetPromotionRows=>['TaxiFleetCarBuses']]]);
+			},'TaxiFleetPromotionCities'=>['Cities'],'TaxiFleetPromotionRows'=>['TaxiFleetCarBuses']]]);
 			if(!empty($taxiFleetPromotionCarts->toArray())){
 				
 				foreach($taxiFleetPromotionCarts as $data){

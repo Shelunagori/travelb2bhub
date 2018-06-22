@@ -65,7 +65,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 			if($users['role_id'] == 1 || $users['role_id'] == 2)
 			{
 				?>
-				<div class="" style="width:25%; float:left" >
+				<div class="col-md-3" >
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'sendrequest')) ?>">
 					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
 					  <!-- small box -->
@@ -73,8 +73,8 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						<div class="inner">
 							<table width="100%" border="0" height="90px">
 								<tr>
-									<td rowspan="2" width="30%">&nbsp;	<br>
-										<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:20px;width:20px')); ?>
+									<td rowspan="2" width="40%">&nbsp;	<br>
+										<?php echo $this->Html->image('white-place-request-icon.png',array('style'=>'height:40px;width:50px')); ?>
 									</td>
 									<td  align="left" style="padding-top:20px; font-size:20px">
 										<?php echo $PlaceReqCount; ?>
@@ -88,13 +88,13 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						</div>
 					  </div>
 					  <div class="small-box bg-white">
-						  <span style="font-size:11px">Click here to fill your Requirement for Travel Package, Hotel or Transportation. </span> 
+						  <span>Click here to fill your Requirement for Travel Package, Hotel or Transportation. </span> 
  					  </div>
 					</li>
 				</a>
 				</div>
 				<!-- ./col -->
-				<div style="width:25%; float:left"  >
+				<div class="col-md-3" >
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'requestlist')) ?>">
 					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
 					  <!-- small box -->
@@ -102,8 +102,8 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						<div class="inner">
 							<table width="100%" border="0" height="90px">
 								<tr>
-									<td rowspan="2" width="30%">&nbsp;	<br>
-										<?php echo $this->Html->image('white-my-request-icon.png',array('style'=>'height:20px;width:20px')); ?>
+									<td rowspan="2" width="40%">&nbsp;	<br>
+										<?php echo $this->Html->image('white-my-request-icon.png',array('style'=>'height:40px;width:50px')); ?>
 									</td>
 									<td  align="left" style="padding-top:20px; font-size:20px">
 										<?php echo $myRequestCountNew; ?>
@@ -116,7 +116,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						</div>
 					  </div>
 					  <div class="small-box bg-white">
-						<span style="font-size:11px"> Click here to view the list of all currently Open requests placed by you. </span> 
+						<span> Click here to view the list of all currently Open requests placed by you. <span> 
  					  </div>
 					</li>
 				</a>
@@ -126,7 +126,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 			if($users['role_id'] == 1 || $users['role_id'] == 3) { 
 			?>
 				<!-- COls -->
-				<div style="width:25%; float:left"  >
+				<div class="col-md-3" >
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'respondtorequest')) ?>">
 					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
 					  <!-- small box -->
@@ -134,8 +134,8 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						<div class="inner">
 							<table width="100%" border="0" height="90px">
 								<tr>
-									<td rowspan="2" width="30%">&nbsp;	<br>
-										<?php echo $this->Html->image('white-back-icon.png',array('style'=>'height:20px;width:20px')); ?>
+									<td rowspan="2" width="40%">&nbsp;	<br>
+										<?php echo $this->Html->image('white-back-icon.png',array('style'=>'height:40px;width:50px')); ?>
 									</td>
 									<td  align="left" style="padding-top:20px; font-size:20px">
 										<?php echo $respondToRequestCountNew; ?>
@@ -149,13 +149,13 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						</div>
 					  </div>
 					  <div class="small-box bg-white">
-						<span style="font-size:11px"> Click here to view, And Respond to Requirements placed by other users. </span> 
+						<span> Click here to view, And Respond to Requirements placed by other users. <span> 
  					  </div>
 					</li>
 				</a>
 				</div>
 				<!---COls--->
-				<div style="width:25%; float:left"  >
+				<div class="col-md-3" >
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'myresponselist')) ?>">
 					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
 					  <!-- small box -->
@@ -163,8 +163,8 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						<div class="inner">
 							<table width="100%" border="0" height="90px">
 								<tr>
-									<td rowspan="2" width="30%">&nbsp;	<br>
-										<?php echo $this->Html->image('white-my-resposes-head.png',array('style'=>'height:20px;width:20px')); ?>
+									<td rowspan="2" width="40%">&nbsp;	<br>
+										<?php echo $this->Html->image('white-my-resposes-head.png',array('style'=>'height:40px;width:50px')); ?>
 									</td>
 									<td  align="left" style="padding-top:20px; font-size:20px">
 										<?php echo $myReponseCountNew; ?>
@@ -178,7 +178,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						</div>
 					  </div>
 					  <div class="small-box bg-white">
-						<span style="font-size:11px"> Click here to view all currently open Requests, You have Respoded to. </span> 
+						<span> Click here to view all currently open Requests, You have Respoded to. <span> 
  					  </div>
 					</li>
 				</a>
@@ -189,7 +189,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 			?>
 		
 				<!-- COls -->
-				<div style="width:25%; float:left" >
+				<div class="col-md-3" >
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'finalized-request-list')) ?>">
 					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
 					  <!-- small box -->
@@ -197,8 +197,8 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						<div class="inner">
 							<table width="100%" border="0" height="90px">
 								<tr>
-									<td rowspan="2" width="30%">&nbsp;	<br>
-										<i style='font-size:26px' class="fa fa-check-square"></i>
+									<td rowspan="2" width="40%">&nbsp;	<br>
+										<i style='font-size:46px' class="fa fa-check-square"></i>
 									</td>
 									<td  align="left" style="padding-top:20px; font-size:20px">
 										<?php echo $finalizeRequestNew; ?>
@@ -212,13 +212,13 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						</div>
 					  </div>
 					  <div class="small-box bg-white">
-						<span style="font-size:11px"> Click here to view Finalized Requests placed by you. </span> 
+						<span> Click here to view, And Respond to Requirements placed by other users. <span> 
  					  </div>
 					</li>
 				</a>
 				</div>
 				<!---COls--->
-				<div style="width:25%; float:left" >
+				<div class="col-md-3" >
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'removed-request-list')) ?>">
 					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
 					  <!-- small box -->
@@ -226,8 +226,8 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						<div class="inner">
 							<table width="100%" border="0" height="90px">
 								<tr>
-									<td rowspan="2" width="30%">&nbsp;	<br>
-										<i style='font-size:26px' class="fa fa-trash"></i>
+									<td rowspan="2" width="40%">&nbsp;	<br>
+										<i style='font-size:46px' class="fa fa-trash"></i>
 									</td>
 									<td  align="left" style="padding-top:20px; font-size:20px">
 										<?php echo $RemovedReqestNew; ?>
@@ -241,7 +241,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						</div>
 					  </div>
 					  <div class="small-box bg-white">
-						<span style="font-size:11px"> Click here to view all removed Requests </span> 
+						<span> Click here to view all currently open Requests, You have Respoded to. <span> 
  					  </div>
 					</li>
 				</a>
@@ -250,7 +250,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 			if($users['role_id'] == 3)
 			{
 				?>
-				<div style="width:25%; float:left" >
+				<div class="col-md-3" >
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'my-final-responses')) ?>">
 					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
 					  <!-- small box -->
@@ -258,8 +258,8 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						<div class="inner">
 							<table width="100%" border="0" height="90px">
 								<tr>
-									<td rowspan="2" width="30%">&nbsp;	<br>
-										<i style='font-size:26px' class="fa fa-check-square"></i>
+									<td rowspan="2" width="40%">&nbsp;	<br>
+										<i style='font-size:46px' class="fa fa-check-square"></i>
 									</td>
 									<td  align="left" style="padding-top:20px; font-size:20px">
 										<?php echo $FInalResponseCountNew; ?>
@@ -273,13 +273,13 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						</div>
 					  </div>
 					  <div class="small-box bg-white">
-						  <span style="font-size:11px">Click here to view your Finalized Responses. </span> 
+						  <span>Click here to fill your Requirement for Travel Package, Hotel or Transportation. </span> 
  					  </div>
 					</li>
 				</a>
 				</div>
 				<!-- ./col -->
-				<div style="width:25%; float:left" >
+				<div class="col-md-3" >
 				<a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'blocked-user-list')) ?>">
 					<li class="col-lg-12 col-xs-12 tile   tile-1 slideTextUp">
 					  <!-- small box -->
@@ -287,8 +287,8 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						<div class="inner">
 							<table width="100%" border="0" height="90px">
 								<tr>
-									<td rowspan="2" width="30%">&nbsp;	<br>
-										<i style='font-size:26px' class="fa fa-users"></i>
+									<td rowspan="2" width="40%">&nbsp;	<br>
+										<i style='font-size:46px' class="fa fa-users"></i>
 									</td>
 									<td  align="left" style="padding-top:20px; font-size:20px">
 										<?php echo $blockedUserscountnew; ?>
@@ -301,7 +301,7 @@ $lastword=  substr($_SERVER['REQUEST_URI'], strrpos($_SERVER['REQUEST_URI'], '/'
 						</div>
 					  </div>
 					  <div class="small-box bg-white">
-						<span style="font-size:11px"> Click here to view the list of all Blocked Users. </span> 
+						<span> Click here to view the list of all currently Open requests placed by you. <span> 
  					  </div>
 					</li>
 				</a>

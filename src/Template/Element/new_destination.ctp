@@ -70,12 +70,12 @@
 			<div class="col-md-4">
 					<div class="input-field">
 					<p for="from">
-						Destination City
+						Destination City 
 					</p>
 					</div>
 					<div>
 						<input type="text" class="form-control city_select ctynamerecord" taxboxname="hh_state_id[<?php echo $randomNumber; ?>]" noofrows="6" name="hh_city_name[<?php echo $randomNumber; ?>]" id="hh_city_name[<?php echo $randomNumber; ?>]" placeholder="Select City or Nearest City"/>
-						<input type='hidden' class="ctyIDname" id='hh_city_id' name="hh_city_id[<?php echo $randomNumber; ?>]" />
+						<input type='hidden' class="ctyIDname city_real" id='hh_city_id' name="hh_city_id[<?php echo $randomNumber; ?>]" />
 						<div class="suggesstion-box" style="margin-top:-10px"></div>
 					</div>
 			</div>
