@@ -803,10 +803,8 @@ a{
 					{
 						echo"<div class='row col-md-12 text-center'><tr><th colspan='10' ><span>No Record Found</span></th></tr></div>";
 					}							?>
-			<table class="maintbl" width="100%">
-				<tbody>
-				</tbody>
-			</table>
+			<div class="maintbl2">
+ 			</div>
 			<div class="col-md-12 text-center loading" style="display:none">
 				<?=  $this->Html->image('/img/loading.gif', ['style'=>'width:5%;']) ?> .
 			</div>
@@ -815,15 +813,70 @@ a{
 				</div>
 			</div>
 <input type="hidden" id="page" value="2">
-<input type="hidden" value="<?php $user_id; ?>" id="user_id">
-<input type="hidden" value="<?php $higestSort; ?>" id="higestSort">
-<input type="hidden" value="<?php $country_id; ?>" id="country_id">
-<input type="hidden" value="<?php $category_id; ?>" id="category_id">
-<input type="hidden" value="<?php $duration_day_night; ?>" id="duration_day_night">
-<input type="hidden" value="<?php $starting_price; ?>" id="starting_price">
+<input type="hidden" value="<?php echo $user_id; ?>" id="user_idfornext">
+<input type="hidden" value="<?php echo $higestSort; ?>" id="higestSort">
+<input type="hidden" value="<?php echo $country_id; ?>" id="country_id">
+<input type="hidden" value="<?php echo $category_id; ?>" id="category_id">
+<input type="hidden" value="<?php echo $duration_day_night; ?>" id="duration_day_night">
+<input type="hidden" value="<?php echo $starting_price; ?>" id="starting_price">
+<input type="hidden" value="<?php echo $search; ?>" id="search">
+<input type="hidden" value="<?php echo $city_id; ?>" id="city_id">
+<input type="hidden" value="<?php echo $following; ?>" id="following">
+<input type="hidden" value="<?php echo $valid_date; ?>" id="valid_date">
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script type="text/javascript">	
 $(document).ready(function(){
+	$(window).scroll(function() { 
+			var scrollTop = $(window).scrollTop();
+			var docHeight = $(document).height();
+			var winHeight = $(window).height();
+			var scrollPercent = (scrollTop) / (docHeight - winHeight);
+			var scrollPercentRounded = Math.round(scrollPercent*100);
+ 			if ( scrollPercentRounded > 70 ) {
+ 				var t = $("#page").val();
+				$('.loading').show();
+				 
+ 				var starting_price = $("#starting_price").val();
+				var duration_day_night = $("#duration_day_night").val();
+				var category_id = $("#category_id").val();
+				var country_id = $("#country_id").val();
+				var higestSort = $("#higestSort").val();
+				var search = $("#search").val();
+				var city_id = $("#city_id").val();
+				var following = $("#following").val();
+				var valid_date = $("#valid_date").val();
+				var user_id = $("#user_idfornext").val(); 
+				$.ajax({
+					url: "<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'moredataadmin')) ?>",
+					type: "POST",
+					data: {
+						user_id: user_id,
+						higestSort: higestSort,
+						country_id: country_id,
+						category_id: category_id,
+						duration_day_night: duration_day_night,
+						search: search, 
+						city_id: city_id, 
+						following: following, 
+						valid_date: valid_date, 
+						starting_price: starting_price,  
+						page: t
+					}
+				}).done(function(e) {
+					 
+ 					$('.loading').hide();
+					if(e!=''){ 
+						var pagenew = parseInt(t)+1;
+						$('.maintbl'+t).html(e);
+						$("#page").val(pagenew);						
+					}
+					else {  
+						$('.loading').html('');
+					}
+					
+				});
+			}
+		});
  	$(document).on('change','.cntry',function()
 	{
 		var country_id=$('option:selected', this).val();
@@ -847,6 +900,7 @@ $(document).ready(function(){
 			}
 		});
 	});
+	
 	$(document).on('change','.priceMasters',function()
 		{
 			var ab=$(this).closest('div').find('.priceMasters option:selected').val();

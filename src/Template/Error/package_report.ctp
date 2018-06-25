@@ -625,74 +625,14 @@ else
 	{
 		echo"<div class='row col-md-12 text-center'><tr><th colspan='10' ><span>No Record Found</span></th></tr></div>";
 	}							?>
-	<div class="maintbl2">
- 			</div>
-			<div class="col-md-12 text-center loading" id="" style="display:none">
-				<?=  $this->Html->image('/img/loading.gif', ['style'=>'width:5%;','id'=>'imageofloagin']) ?> .
-			</div>		 
+			 
 		</div>
-<input type="hidden" id="page" value="2">
-<input type="hidden" value="<?php echo $user_id; ?>" id="user_idfornext">
-<input type="hidden" value="<?php echo $higestSort; ?>" id="higestSort">
-<input type="hidden" value="" id="country_id">
-<input type="hidden" value="<?php echo $state_id; ?>" id="state_id"> 
-<input type="hidden" value="<?php echo $search; ?>" id="search">
-<input type="hidden" value="<?php echo $city_id; ?>" id="city_id">
-<input type="hidden" value="" id="following"> 
 		<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
 					<div id="loader"></div>
 					</div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
-<script>	
- 
+<script>	 
 $(document).ready(function(){
-	 
-	$(window).scroll(function() {   
-			var scrollTop = $(window).scrollTop();
-			var docHeight = $(document).height();
-			var winHeight = $(window).height();
-			var scrollPercent = (scrollTop) / (docHeight - winHeight);
-			var scrollPercentRounded = Math.round(scrollPercent*100);
- 			if ( scrollPercentRounded > 70 ) {
- 				var t = $("#page").val();
-				$('.loading').show();
-				    
-				var country_id = $("#country_id").val();
-				var higestSort = $("#higestSort").val();
-				var search = $("#search").val();
-				var city_id = $("#city_id").val();
-				var following = $("#following").val();
-				var state_id = $("#state_id").val();
-				var user_id = $("#user_idfornext").val(); 
-				$.ajax({
-					url: "<?php echo $this->Url->build(array('controller'=>'EventPlannerPromotions','action'=>'moredataadmin')) ?>",
-					type: "POST",
-					data: {
-						user_id: user_id,
-						higestSort: higestSort,
-						country_id: country_id,
-						state_id: state_id, 
-						search: search, 
-						city_id: city_id, 
-						following: following,    
-						page: t
-					}
-				}).done(function(e) {
-					 
- 					$('.loading').hide();
-					if(e!=''){ 
-						var pagenew = parseInt(t)+1;
-						$('.maintbl'+t).html(e);
-						$("#page").val(pagenew);						
-					}
-					else {  
-						$('.loading').html('');
-					}
-					
-				});
-			}
-		});
-	
 	$(document).on('change','.priceMasters',function()
 		{
 			var ab=$(this).closest('div').find('.priceMasters option:selected').val();
@@ -727,11 +667,5 @@ $(document).ready(function(){
  	jQuery("form").submit(function(){
 		jQuery("#loader-1").show();
 	});
-	var delay = 5000;
-	setTimeout(function() {
-		var main=$(body).find('div.modal-backdrop fade in').html();
-		alert($main);
-	}, delay);
-	
  });
 </script>

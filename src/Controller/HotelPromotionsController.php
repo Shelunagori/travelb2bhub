@@ -655,6 +655,93 @@ class HotelPromotionsController extends AppController
 		$user_id=$this->Auth->User('id');
         $this->set(compact('user_id','search','starting_price','higestSort','category_id','rating_filter','following'));
 	}
+	public function moredata()
+	{
+		$page=$this->request->data['page'];
+		$user_id=$this->request->data['user_id'];
+		$higestSort=$this->request->query('higestSort');
+		$following=$this->request->query('following');
+		$category_id=$this->request->query('category_id');
+		if(!empty($category_id)) {$category_id=implode(',',$category_id);}
+		$rating_filter=$this->request->query('rating_filter');
+		$search=$this->request->query('search');
+		$starting_price=$this->request->query('starting_price'); 
+		 
+		$curl = curl_init();
+		 curl_setopt_array($curl, array(
+		  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/hotel_promotions/getHotelList.json?isLikedUserId=".$user_id.'&higestSort='.$higestSort.'&category_id='.$category_id.'&search='.$search.'&rating_filter='.$rating_filter.'&starting_price='.$starting_price.'&following='.$following.'&page='.$page."&submitted_from=web",
+		  CURLOPT_RETURNTRANSFER => true,
+		  CURLOPT_ENCODING => "",
+		  CURLOPT_MAXREDIRS => 10,
+		  CURLOPT_TIMEOUT => 30,
+		  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		  CURLOPT_CUSTOMREQUEST => "GET",
+		  CURLOPT_HTTPHEADER => array(
+			"cache-control: no-cache",
+			"postman-token: 4f8087cd-6560-4ca6-5539-9499d3c5b967"
+		  ),
+		));
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+		curl_close($curl);
+		$hotelPromotions=array();
+		if ($err) {
+		  echo "cURL Error #:" . $err;
+		} else {
+			$response;
+			$List=json_decode($response);
+			//pr($List); exit;
+			$hotelPromotions=$List->getHotelPromotion;
+		}
+		$this->set(compact('hotelPromotions'));
+		$this->set(compact('user_id'));
+		$this->set(compact('page'));
+	}
+	
+	public function moredataadmin()
+	{
+		$page=$this->request->data['page'];
+		$user_id=$this->request->data['user_id'];
+		$higestSort=$this->request->query('higestSort');
+		$following=$this->request->query('following');
+		$category_id=$this->request->query('category_id');
+		if(!empty($category_id)) {$category_id=implode(',',$category_id);}
+		$rating_filter=$this->request->query('rating_filter');
+		$search=$this->request->query('search');
+		$starting_price=$this->request->query('starting_price'); 
+		 
+		$curl = curl_init();
+		 curl_setopt_array($curl, array(
+		  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/hotel_promotions/getHotelList.json?isLikedUserId=".$user_id.'&higestSort='.$higestSort.'&category_id='.$category_id.'&search='.$search.'&rating_filter='.$rating_filter.'&starting_price='.$starting_price.'&following='.$following.'&page='.$page."&submitted_from=web",
+		  CURLOPT_RETURNTRANSFER => true,
+		  CURLOPT_ENCODING => "",
+		  CURLOPT_MAXREDIRS => 10,
+		  CURLOPT_TIMEOUT => 30,
+		  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		  CURLOPT_CUSTOMREQUEST => "GET",
+		  CURLOPT_HTTPHEADER => array(
+			"cache-control: no-cache",
+			"postman-token: 4f8087cd-6560-4ca6-5539-9499d3c5b967"
+		  ),
+		));
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+		curl_close($curl);
+		$hotelPromotions=array();
+		if ($err) {
+		  echo "cURL Error #:" . $err;
+		} else {
+			$response;
+			$List=json_decode($response);
+			//pr($List); exit;
+			$hotelPromotions=$List->getHotelPromotion;
+		}
+		$this->set(compact('hotelPromotions'));
+		$this->set(compact('user_id'));
+		$this->set(compact('page'));
+	}
+	
+	
 	public function promotionreports()
     {
 		$this->viewBuilder()->layout('user_layout');

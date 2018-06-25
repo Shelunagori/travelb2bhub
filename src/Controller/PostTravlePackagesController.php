@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Filesystem\Folder;
 use Cake\Filesystem\File;
+use Cake\ORM\TableRegistry;
 date_default_timezone_set('Asia/Kolkata');
 
 /**
@@ -823,10 +824,15 @@ class PostTravlePackagesController extends AppController
 		$country_id=$this->request->data['country_id'];
 		$category_id=$this->request->data['category_id'];
 		$duration_day_night=$this->request->data['duration_day_night'];
-		$starting_price=$this->request->data['starting_price'];
+		$search=$this->request->data['search'];
+		$city_id=$this->request->data['city_id'];
+		$valid_date=$this->request->data['valid_date'];
+		$following=$this->request->data['following'];
+		$starting_price=$this->request->data['starting_price']; 
+		 
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
-		CURLOPT_URL => $this->coreVariable['SiteUrl']."api/PostTravlePackages/getTravelPackages.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&category_id=".$category_id."&duration_day_night=".$duration_day_night."&starting_price=".$starting_price."&page=".$page,
+		CURLOPT_URL => $this->coreVariable['SiteUrl']."api/PostTravlePackages/getTravelPackages.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&category_id=".$category_id."&duration_day_night=".$duration_day_night."&starting_price=".$starting_price."&page=".$page."&search=".$search."&city_id=".$city_id."&valid_date=".$valid_date."&following=".$following."&submitted_from=web",
 		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_ENCODING => "",
 		CURLOPT_MAXREDIRS => 10,
@@ -851,6 +857,54 @@ class PostTravlePackagesController extends AppController
 			$postTravlePackages=$List->getTravelPackages;
 		}
 		$this->set(compact('postTravlePackages'));
+		$this->set(compact('user_id'));
+		$this->set(compact('page'));
+		
+	}
+	
+	public function moredataadmin()
+	{
+		$page=$this->request->data['page'];
+		$user_id=$this->request->data['user_id'];
+		$higestSort=$this->request->data['higestSort'];
+		$country_id=$this->request->data['country_id'];
+		$category_id=$this->request->data['category_id'];
+		$duration_day_night=$this->request->data['duration_day_night'];
+		$search=$this->request->data['search'];
+		$city_id=$this->request->data['city_id'];
+		$valid_date=$this->request->data['valid_date'];
+		$following=$this->request->data['following'];
+		$starting_price=$this->request->data['starting_price']; 
+		 
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => $this->coreVariable['SiteUrl']."api/PostTravlePackages/getTravelPackages.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&category_id=".$category_id."&duration_day_night=".$duration_day_night."&starting_price=".$starting_price."&page=".$page."&search=".$search."&city_id=".$city_id."&valid_date=".$valid_date."&following=".$following."&submitted_from=web",
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 30,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => "GET",
+		CURLOPT_HTTPHEADER => array(
+			"cache-control: no-cache",
+			"postman-token: 4f8087cd-6560-4ca6-5539-9499d3c5b967"
+		  ),
+		));
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+		curl_close($curl);
+		$postTravlePackages=array();
+		if ($err) {
+		  echo "cURL Error #:" . $err;
+		} else {
+			$response;
+			$List=json_decode($response);
+			  
+			$postTravlePackages=$List->getTravelPackages;
+		}
+		$this->set(compact('postTravlePackages'));
+		$this->set(compact('user_id'));
+		$this->set(compact('page'));
 		
 	}
 	public function promotionreports()
@@ -1266,13 +1320,13 @@ class PostTravlePackagesController extends AppController
 		if ($this->request->is(['patch', 'post', 'put'])) 
 		{
 			if(isset($this->request->data['setpriority'])){
-				
+				$PostTravelPackages = TableRegistry::get('PostTravlePackages');
 				$position=$this->request->data['position'];  
-				$oldUpdate = $this->PostTravelPackages->query();
+				$oldUpdate = $PostTravelPackages->query();
 				$oldUpdate->update()->set(['position' => 11])->where(['position' => $position])->execute();
 				
 				$post_travel_id=$this->request->data['post_travel_id'];  
-				$query = $this->PostTravelPackages->query();
+				$query = $PostTravelPackages->query();
 				$query->update()->set(['position' => $position])->where(['id' => $post_travel_id])->execute();			
 				$message = 'Update Successfully';
 				$this->Flash->success(__($message));

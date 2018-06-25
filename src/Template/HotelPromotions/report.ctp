@@ -640,19 +640,27 @@ a{
 				else {
 				echo"<div class='row col-md-12 text-center'><tr><th colspan='10' ><span>No Record Found</span></th></tr></div>";
 				}?>
-			</div>
+				<div class="maintbl2">
+</div>
+			</div> 
+
+<div class="col-md-12 text-center loading" id="" style="display:none">
+	<?=  $this->Html->image('/img/loading.gif', ['style'=>'width:5%;','id'=>'imageofloagin']) ?> .
+</div>
+<input type="hidden" id="page" value="2">
+<input type="hidden" value="<?php echo $user_id; ?>" id="user_idfornext">
+<input type="hidden" value="<?php echo $higestSort; ?>" id="higestSort"> 
+<input type="hidden" value="<?php echo $category_id; ?>" id="category_id"> 
+<input type="hidden" value="<?php echo $search; ?>" id="search">
+<input type="hidden" value="<?php echo $rating_filter; ?>" id="rating_filter">
+<input type="hidden" value="<?php echo $following; ?>" id="following">
+<input type="hidden" value="<?php echo $starting_price; ?>" id="starting_price">
+
 			<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
-									<div id="loader"></div>
-									</div>
-<h2><span class="show_msg"></span></h2>
-<!-- <div class="paginator">
-<ul class="pagination">
-<?= $this->Paginator->prev('< ' . __('previous')) ?>
-<?= $this->Paginator->numbers() ?>
-<?= $this->Paginator->next(__('next') . ' >') ?>
-</ul>
-<p><?= $this->Paginator->counter() ?></p>
-</div>-->
+			<div id="loader"></div>
+			</div>
+			<h2><span class="show_msg"></span></h2>
+ 
 </div>
 </div>
 </div>
@@ -662,16 +670,63 @@ a{
 <script type='text/javascript'>
 
 $(document).ready(function(){
-$('.reason_box').on('change', function() {
-//var b=$(this);
-var a=$(this).closest("div").find(" option:selected").val();
-if(a == '5')
-  {
-	$(".report_text").show();
-  }
-  else
-  {
-	$(".report_text").hide();
+		$(window).scroll(function() {
+			 
+			var scrollTop = $(window).scrollTop();
+			var docHeight = $(document).height();
+			var winHeight = $(window).height();
+			var scrollPercent = (scrollTop) / (docHeight - winHeight);
+			var scrollPercentRounded = Math.round(scrollPercent*100);
+ 			if ( scrollPercentRounded > 70 ) {
+ 				var t = $("#page").val();
+				$('.loading').show();
+				
+ 				var starting_price = $("#starting_price").val();
+				var rating_filter = $("#rating_filter").val();
+				var category_id = $("#category_id").val(); 
+				var higestSort = $("#higestSort").val();
+				var search = $("#search").val(); 
+				var following = $("#following").val();
+				var user_id = $("#user_idfornext").val(); 
+				$.ajax({
+					url: "<?php echo $this->Url->build(array('controller'=>'HotelPromotions','action'=>'moredata')) ?>",
+					type: "POST",
+					data: {
+						user_id: user_id,
+						higestSort: higestSort, 
+						category_id: category_id,
+						rating_filter: rating_filter,
+						search: search,  
+						following: following,   
+						starting_price: starting_price,  
+						page: t
+					}
+				}).done(function(e) {
+					 
+ 					$('.loading').hide();
+					if(e!=''){ 
+						var pagenew = parseInt(t)+1;
+						$('.maintbl'+t).html(e);
+						$("#page").val(pagenew);						
+					}
+					else {  
+						$('.loading').html('');
+					}
+					
+				});
+			}
+		});
+		
+		$('.reason_box').on('change', function() {
+			//var b=$(this);
+			var a=$(this).closest("div").find(" option:selected").val();
+			if(a == '5')
+			  {
+				$(".report_text").show();
+			  }
+			  else
+			  {
+				$(".report_text").hide();
 			  }
 		});
 		jQuery("form").submit(function(){

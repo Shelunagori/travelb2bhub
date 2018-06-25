@@ -805,6 +805,91 @@ class EventPlannerPromotionsController extends AppController
 		$this->viewBuilder()->layout('user_layout');
 		$this->set(compact('user_id','higestSort','search','country_id','city_id','state_id','following'));
     }
+	
+	public function moredata()
+	{
+		$page=$this->request->data['page'];
+		$user_id=$this->request->data['user_id'];
+		$higestSort=$this->request->query('higestSort');  
+		$search=$this->request->query('search'); 
+		$following=$this->request->query('following'); 
+		$city_id=$this->request->query('city_id'); 
+ 		$state_id=$this->request->query('state_id');
+ 		$country_id=null;
+			
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => $this->coreVariable['SiteUrl']."api/EventPlannerPromotions/getEventPlanners.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&city_id=".$city_id."&state_id=".$state_id."&search=".$search."&following=".$following."&page=".$page."&submitted_from=web",
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 30,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => "GET",
+		CURLOPT_HTTPHEADER => array(
+			"cache-control: no-cache",
+			"postman-token: 4f8087cd-6560-4ca6-5539-9499d3c5b967"
+		  ),
+		));
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+		curl_close($curl);
+		$eventPlannerPromotions=array();
+		if ($err) {
+		  echo "cURL Error #:" . $err;
+		} else {
+			$response;
+			$List=json_decode($response);
+			  
+			$eventPlannerPromotions=$List->getEventPlanners;
+		}
+		$this->set(compact('eventPlannerPromotions'));
+		$this->set(compact('user_id'));
+		$this->set(compact('page'));
+	}
+	public function moredataadmin()
+	{
+		$page=$this->request->data['page'];
+		$user_id=$this->request->data['user_id'];
+		$higestSort=$this->request->query('higestSort');  
+		$search=$this->request->query('search'); 
+		$following=$this->request->query('following'); 
+		$city_id=$this->request->query('city_id'); 
+ 		$state_id=$this->request->query('state_id');
+ 		$country_id=$this->request->query('country_id');
+			
+		$curl = curl_init();
+		curl_setopt_array($curl, array(
+		CURLOPT_URL => $this->coreVariable['SiteUrl']."api/EventPlannerPromotions/getEventPlanners.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&city_id=".$city_id."&state_id=".$state_id."&search=".$search."&following=".$following."&page=".$page."&submitted_from=web",
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_ENCODING => "",
+		CURLOPT_MAXREDIRS => 10,
+		CURLOPT_TIMEOUT => 30,
+		CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+		CURLOPT_CUSTOMREQUEST => "GET",
+		CURLOPT_HTTPHEADER => array(
+			"cache-control: no-cache",
+			"postman-token: 4f8087cd-6560-4ca6-5539-9499d3c5b967"
+		  ),
+		));
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+		curl_close($curl);
+		$eventPlannerPromotions=array();
+		if ($err) {
+		  echo "cURL Error #:" . $err;
+		} else {
+			$response;
+			$List=json_decode($response);
+			  
+			$eventPlannerPromotions=$List->getEventPlanners;
+		}
+		$this->set(compact('eventPlannerPromotions'));
+		$this->set(compact('user_id'));
+		$this->set(compact('page'));
+	}
+	
+	
 	public function promotionreports()
     {
 		$this->viewBuilder()->layout('user_layout');

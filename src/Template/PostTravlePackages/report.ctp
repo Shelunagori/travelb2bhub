@@ -919,13 +919,13 @@ a{
 	</div>	
 								<div class="row" style="padding-top:15px;">
 								<div class="col-md-12 text-center" >
-									<button class="btn btn-info btn-md btnlayout viewCount" data-target="#Inclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal"  promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" type="button">Inclusions</button>&nbsp;&nbsp;
+									<button style="margin-top:5px"  class="btn btn-info btn-md btnlayout viewCount" data-target="#Inclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal"  promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" type="button">Inclusions</button>&nbsp;&nbsp;
 										<!-------Report Modal Start--------->
-									<button class="btn btn-warning btn-md btnlayout viewCount" data-target="#Exclusion<?php echo $postTravlePackage->id;?>"   promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" data-toggle="modal" type="button">Exclusions</button>&nbsp;&nbsp;
-									<button class="btn btn-danger btn-md  btnlayout viewCount" data-target="#contactdetails<?php echo $postTravlePackage->id;?>" promotionid="<?php echo $postTravlePackage->id;?>" data-toggle="modal" userId="<?php echo $user_id;?>" type="button">Contact Info</button>&nbsp;&nbsp;
+									<button style="margin-top:5px"  class="btn btn-warning btn-md btnlayout viewCount" data-target="#Exclusion<?php echo $postTravlePackage->id;?>"   promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" data-toggle="modal" type="button">Exclusions</button>&nbsp;&nbsp;
+									<button style="margin-top:5px"  class="btn btn-danger btn-md  btnlayout viewCount" data-target="#contactdetails<?php echo $postTravlePackage->id;?>" promotionid="<?php echo $postTravlePackage->id;?>" data-toggle="modal" userId="<?php echo $user_id;?>" type="button">Contact Info</button>&nbsp;&nbsp;
 									<?php
 									if($postTravlePackage->user_id != $user_id){ ?>
-										<button style="padding-top:5px" class="btn btn-success btn-md btnlayout viewCount" data-target="#ReviewUser<?php echo $postTravlePackage->id;?>" data-toggle="modal" promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" type="button">Rate User</button>&nbsp;&nbsp;
+										<button style="margin-top:5px" class="btn btn-success btn-md btnlayout viewCount" data-target="#ReviewUser<?php echo $postTravlePackage->id;?>" data-toggle="modal" promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" type="button">Rate User</button>&nbsp;&nbsp;
 									<?php	}
 									?>	
 												</div>
@@ -941,24 +941,28 @@ a{
 					{
 						echo"<div class='row col-md-12 text-center'><tr><th colspan='10' ><span>No Record Found</span></th></tr></div>";
 					}							?>
-			<table class="maintbl" width="100%">
-				<tbody>
-				</tbody>
-			</table>
-			<div class="col-md-12 text-center loading" style="display:none">
-				<?=  $this->Html->image('/img/loading.gif', ['style'=>'width:5%;']) ?> .
+			<div class="maintbl2">
+ 			</div>
+			<div class="col-md-12 text-center loading" id="" style="display:none">
+				<?=  $this->Html->image('/img/loading.gif', ['style'=>'width:5%;','id'=>'imageofloagin']) ?> .
 			</div>
 			<div class="loader-wrapper" style="width: 100%;height: 100%;  display: none;  position: fixed; top: 0px; left: 0px;    background: rgba(0,0,0,0.25); display: none; z-index: 1000;" id="loader-1">
 									<div id="loader"></div>
 									</div>
 				</div>
+ 
 <input type="hidden" id="page" value="2">
-<input type="hidden" value="<?php $user_id; ?>" id="user_id">
-<input type="hidden" value="<?php $higestSort; ?>" id="higestSort">
-<input type="hidden" value="<?php $country_id; ?>" id="country_id">
-<input type="hidden" value="<?php $category_id; ?>" id="category_id">
-<input type="hidden" value="<?php $duration_day_night; ?>" id="duration_day_night">
-<input type="hidden" value="<?php $starting_price; ?>" id="starting_price">
+<input type="hidden" value="<?php echo $user_id; ?>" id="user_idfornext">
+<input type="hidden" value="<?php echo $higestSort; ?>" id="higestSort">
+<input type="hidden" value="<?php echo $country_id; ?>" id="country_id">
+<input type="hidden" value="<?php echo $category_id; ?>" id="category_id">
+<input type="hidden" value="<?php echo $duration_day_night; ?>" id="duration_day_night">
+<input type="hidden" value="<?php echo $starting_price; ?>" id="starting_price">
+<input type="hidden" value="<?php echo $search; ?>" id="search">
+<input type="hidden" value="<?php echo $city_id; ?>" id="city_id">
+<input type="hidden" value="<?php echo $following; ?>" id="following">
+<input type="hidden" value="<?php echo $valid_date; ?>" id="valid_date">
+
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script type="text/javascript">	
 	
@@ -1021,22 +1025,26 @@ a{
 	});
 
 
-		/*$(window).scroll(function() {
-			var schorll = $(this).scrollTop();
+		$(window).scroll(function() { 
 			var scrollTop = $(window).scrollTop();
 			var docHeight = $(document).height();
 			var winHeight = $(window).height();
 			var scrollPercent = (scrollTop) / (docHeight - winHeight);
 			var scrollPercentRounded = Math.round(scrollPercent*100);
- 			if ( scrollPercentRounded == 70 ) {
+ 			if ( scrollPercentRounded > 70 ) {
  				var t = $("#page").val();
 				$('.loading').show();
+				 
  				var starting_price = $("#starting_price").val();
 				var duration_day_night = $("#duration_day_night").val();
 				var category_id = $("#category_id").val();
 				var country_id = $("#country_id").val();
 				var higestSort = $("#higestSort").val();
-				var user_id = $("#user_id").val();
+				var search = $("#search").val();
+				var city_id = $("#city_id").val();
+				var following = $("#following").val();
+				var valid_date = $("#valid_date").val();
+				var user_id = $("#user_idfornext").val(); 
 				$.ajax({
 					url: "<?php echo $this->Url->build(array('controller'=>'PostTravlePackages','action'=>'moredata')) ?>",
 					type: "POST",
@@ -1046,21 +1054,28 @@ a{
 						country_id: country_id,
 						category_id: category_id,
 						duration_day_night: duration_day_night,
-						starting_price: starting_price, 
+						search: search, 
+						city_id: city_id, 
+						following: following, 
+						valid_date: valid_date, 
+						starting_price: starting_price,  
 						page: t
 					}
 				}).done(function(e) {
+					 
  					$('.loading').hide();
-					var pagenew = parseInt(t)+1;
-					if(e=='No More Data'){
+					if(e!=''){ 
+						var pagenew = parseInt(t)+1;
+						$('.maintbl'+t).html(e);
+						$("#page").val(pagenew);						
 					}
-					else{
-					$('.maintbl').find('tbody').append(e);
+					else {  
+						$('.loading').html('');
 					}
-					$("#page").val(pagenew);
+					
 				});
 			}
-		});*/
+		});
 		$('.reason_box').on('change', function() {
 		  //var b=$(this);
 		  var a=$(this).closest("div").find(" option:selected").val();
