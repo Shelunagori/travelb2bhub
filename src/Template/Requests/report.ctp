@@ -55,24 +55,22 @@ $conn = ConnectionManager::get('default');
 				</fieldset>
 			</form>
 			<div class="col-md-12" align="right">
-				<a style="margin:2px" href="<?php echo $this->Url->build(array('controller'=>'Requests','action'=>'excelDownload?Refid='.$RefID.'&status='.$status.'&removed='.$removed.'&category='.$category)) ?>" title="Download Excel" class="btn btn-info btn-xs"  ><i class="fa fa-download"></i> Excel</i> </a>
+				<a style="margin:2px" href="<?php echo $this->Url->build(array('controller'=>'Requests','action'=>'excelDownload?refid='.$RefID.'&status='.$status.'&removed='.$removed.'&category='.$category.'&search_report=')) ?>" title="Download Excel" class="btn btn-info btn-xs"  ><i class="fa fa-download"></i> Excel</i> </a>
 			</div>
 				<table class="table table-bordered" cellpadding="0" cellspacing="0" id="main_tble">
 						<thead>
 							<tr style="background-color:#DFD9C4;">
-							<th scope="col"><?= __('Sr.No') ?></th>
-							<th scope="col"><?= __('Reference_id') ?></th>
+							<th scope="col"><?= __('Sr. No.') ?></th>
+							<th scope="col"><?= __('Reference ID') ?></th>
 							<th scope="col"><?= __('User ID') ?></th>
-							<th scope="col"><?= __('Agent Name') ?></th>
+							<th scope="col"><?= __('Placed By') ?></th>
 							<th scope="col"><?= __('Locality') ?></th>
 							<th scope="col"><?= __('Total Budget') ?></th>
 							<th scope="col"><?= __('Request Type') ?></th>
 							<th scope="col"><?= __('Created date') ?></th>
 							<th scope="col"><?= __('Start Date') ?></th>
 							<th scope="col"><?= __('End Date') ?></th>
-							<th scope="col"><?= __('Status') ?></th>
-							<th scope="col"><?= __('Removed') ?></th>
-							<th scope="col"><?= __('City') ?></th>
+							<th scope="col"><?= __('Status') ?></th> 
 							<th scope="col"><?= __('Action') ?></th> 							
 							<!--<th scope="col"><?= __('Pickup State') ?></th>							
 							<th scope="col" class="actions"><?= __('Actions') ?></th>-->
@@ -83,9 +81,11 @@ $conn = ConnectionManager::get('default');
 				$status=$request->status;
 				$is_deleted=$request->is_deleted;
 				if($status==2){ $showStatus="Finalized";}
-				if($status==0){ $showStatus="Open";}
-				if($is_deleted==0){ $is_deletedShow="Open";}
-				if($is_deleted==1){ $is_deletedShow="Removed";}
+				if($status==0){ $showStatus="Open";
+					if($is_deleted==0){ $showStatus="Open";}
+					if($is_deleted==1){ $showStatus="Removed";}
+				}
+				
 				
 				
 					
@@ -120,14 +120,14 @@ $conn = ConnectionManager::get('default');
 				if($request['category_id']==2){
 					if($start_datess <= $current_date){
 						if($total_response==0){
-							$is_deletedShow='Expired';
+							$showStatus='Expired';
 						}
 					}
 				}
 				if($request['category_id']!=2){
 					if($start_datess <= $current_date){
 						if($total_response==0){
-							$is_deletedShow='Expired';
+							$showStatus='Expired';
 						}
 					}
 				}
@@ -145,10 +145,9 @@ $conn = ConnectionManager::get('default');
 				<td><?= h(date('d-m-Y',strtotime($request->created))); ?></td>
 				<td><?php echo $start_date; ?></td>
 				<td><?php echo $end_date; ?></td>
-				<td><?php echo $showStatus; ?></td>
-				<td><?php echo $is_deletedShow; ?></td>
-				<td><?= h($request->city->name) ?></td>
+				<td><?php echo $showStatus; ?></td>  
 				<td>
+				
 					<a data-toggle="modal" class="btn btn-info btn-xs" title="View Details" data-target="#myModal1<?php echo $request->id; ?>" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'viewdetails',$request->id)) ?>"><i class="fa fa-book"></i></a>
 					 <div class="modal fade" id="myModal1<?php echo $request->id; ?>" role="dialog">
 						<div class="modal-dialog">
@@ -163,6 +162,9 @@ $conn = ConnectionManager::get('default');
 						  </div>
 						</div>
 					</div>
+					<?php if($request->total_response >0){ ?>
+					<a target="_blank" class="btn btn-success btn-xs" title="View Responses" href="<?php echo $this->Url->build(array('controller'=>'Responses','action'=>'Report',$request->id)) ?>"><i class="fa fa-group"></i></a>
+					<?php } ?>
 					<a style="margin-top:2px" class=" btn btn-danger btn-xs" title="Delete Request" data-target="#deletemodal<?php echo $request->id; ?>" data-toggle=modal><i class="fa fa-trash"></i></a>
 							<div id="deletemodal<?php echo $request->id; ?>" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-md" >

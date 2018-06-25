@@ -103,10 +103,10 @@ class RequestsController extends AppController
 			if(!empty($category)){
 				$conditions['Requests.category_id']=$category;	
 			}
- 			$requests = $this->paginate($this->Requests->find()->where($conditions));
+ 			$requests = $this->paginate($this->Requests->find()->where($conditions)->order(['Requests.id' => 'DESC']));
   		}
 		else {
-			$requests = $this->paginate($this->Requests);
+			$requests = $this->paginate($this->Requests->find()->order(['Requests.id' => 'DESC']));
 		}
 		$this->set('RefID',$RefID);
 		$this->set('status',$status);
@@ -211,8 +211,8 @@ class RequestsController extends AppController
         $this->paginate = [
             'contain' => ['Users','Cities','States','Categories']
         ];
-		if(isset($this->request->query['search_report'])){
- 			$RefID = $this->request->query['RefID'];
+		if(isset($this->request->query['search-report'])){
+ 			$RefID = $this->request->query['refid'];
 			$status = $this->request->query['status'];
 			$removed = $this->request->query['removed'];
 			$category = $this->request->query['category'];
@@ -235,10 +235,10 @@ class RequestsController extends AppController
 			if(!empty($category)){
 				$conditions['Requests.category_id']=$category;	
 			}
- 			$requests = $this->paginate($this->Requests->find()->where($conditions));
+ 			$requests = $this->paginate($this->Requests->find()->where($conditions)->order(['Requests.id' => 'DESC']));
   		}
 		else {
-			$requests = $this->paginate($this->Requests);
+			$requests = $this->paginate($this->Requests->find()->order(['Requests.id' => 'DESC']));
 		}
 		$this->loadModel('HotelCategories');
 		$hotelCategories = $this->HotelCategories->find('list', ['limit' => 200])->where(['is_deleted'=>0])->toArray();

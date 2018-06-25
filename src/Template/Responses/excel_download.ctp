@@ -1,5 +1,5 @@
 <?php
-$file_name='Response List';
+$file_name='ResponseList';
 header("Content-Type: application/xls");
 header("Content-Disposition: attachment; filename=$file_name.xls");
 header("Content-Type: application/force-download");
@@ -10,19 +10,18 @@ header("Cache-Control: post-check=0, pre-check=0", true);
 					<thead>
 						<tr>
 							<th scope="col"><?= ('S.No') ?></th>
-							<th scope="col"><?= ('User ID') ?></th>
 							<th scope="col"><?= h('Rreference ID') ?></th>
 							<th scope="col"><?= h('Request Type') ?></th>
-							<th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
-							<th scope="col"><?= $this->Paginator->sort('quotation_price') ?></th>
+							<th scope="col"><?= h('User ID') ?></th>
+							<th scope="col"><?= h('Response By') ?></th>
+							<th scope="col"><?= h('Quotation Price') ?></th>
 							<th scope="col"><?= ('Detail Shared') ?></th>
-							<th scope="col"><?= $this->Paginator->sort('created') ?></th>
-							<th scope="col"><?= $this->Paginator->sort('status') ?></th>
-							<th scope="col"><?= $this->Paginator->sort('is_deleted') ?></th> 
+							<th scope="col"><?= ('created') ?></th>
+							<th scope="col"><?= ('status') ?></th>  
 						</tr>
 					</thead>
 					<tbody>
-						<?php  foreach ($responses as $response): 
+						<?php foreach ($responses as $response): 
 							$status= $response->status;
 							if($status==0){$showStatus='Open';}
 							if($status==1){$showStatus='Finalized';}
@@ -52,8 +51,7 @@ header("Cache-Control: post-check=0, pre-check=0", true);
 							<td><?= h($response->quotation_price) ?></td>
 							<td><?php echo $showis_details_shared; ?></td>
 							<td><?= h(date('d-m-Y',strtotime($response->created))) ?></td>
-							<td><?php echo $showStatus; ?></td>
-							<td><?php echo $showis_deleted; ?></td>
+							<td><?php echo $showStatus; ?></td> 
  						</tr>
 						<?php endforeach; ?>
 					</tbody>

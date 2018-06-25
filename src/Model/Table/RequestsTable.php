@@ -95,16 +95,24 @@ class RequestsTable extends Table
         ]);*/
 		//--
         $this->hasMany('RequestStops', [
-            'foreignKey' => 'request_id'
+            'foreignKey' => 'request_id',
+			'dependent' => true,
+			'cascadeCallbacks' => true,
         ]);
         $this->hasMany('Responses', [
-            'foreignKey' => 'request_id'
+            'foreignKey' => 'request_id',
+			'dependent' => true,
+			'cascadeCallbacks' => true,
         ]);
         $this->hasMany('Testimonial', [
-            'foreignKey' => 'request_id'
+            'foreignKey' => 'request_id',
+			'dependent' => true,
+			'cascadeCallbacks' => true,
         ]);
         $this->hasMany('UserChats', [
-            'foreignKey' => 'request_id'
+            'foreignKey' => 'request_id',
+			'dependent' => true,
+			'cascadeCallbacks' => true,
         ]);
         $this->hasMany('UserChats123', [
             'foreignKey' => 'request_id'
@@ -114,11 +122,13 @@ class RequestsTable extends Table
         ]);
 		$this->hasMany('Hotels', [
             'foreignKey' => 'req_id',
-            'dependent' => TRUE
+            'dependent' => true,
+			'cascadeCallbacks' => true,
         ]);
 		$this->hasMany('RequestStops', [
             'foreignKey' => 'request_id',
-            'dependent' => TRUE
+			'dependent' => true,
+			'cascadeCallbacks' => true,
         ]);
     }
 

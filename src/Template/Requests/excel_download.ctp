@@ -1,11 +1,11 @@
 <?php
 use Cake\Datasource\ConnectionManager; 
 $conn = ConnectionManager::get('default');
-  $file_name='Response List';
+$file_name='RequestsList';
  header("Content-Type: application/xls");
 header("Content-Disposition: attachment; filename=$file_name.xls");
 header("Content-Type: application/force-download");
-header("Cache-Control: post-check=0, pre-check=0", true);  
+header("Cache-Control: post-check=0, pre-check=0", true);
  
 ?> 
 
@@ -13,29 +13,33 @@ header("Cache-Control: post-check=0, pre-check=0", true);
 	<thead>
 		<tr style="background-color:#DFD9C4;">
 		<th scope="col"><?= __('Sr.No') ?></th>
-		<th scope="col"><?= __('Reference_id') ?></th>
 		<th scope="col"><?= __('User ID') ?></th>
-		<th scope="col"><?= __('Agent Name') ?></th>
-		<th scope="col"><?= __('Locality') ?></th>
-		<th scope="col"><?= __('Total Budget') ?></th>
+		<th scope="col"><?= __('Placed By') ?></th>
+		
 		<th scope="col"><?= __('Request Type') ?></th>
+		<th scope="col"><?= __('Reference_id') ?></th>
+		<th scope="col"><?= __('Total Budget') ?></th>
+		<th scope="col"><?= __('Adult') ?></th>
+		<th scope="col"><?= __('Children below 6') ?></th>
+		<th scope="col"><?= __('Locality') ?></th>
+		<th scope="col"><?= __('Comments') ?></th> 
 		<th scope="col"><?= __('Created date') ?></th>
 		<th scope="col"><?= __('Start Date') ?></th>
 		<th scope="col"><?= __('End Date') ?></th>
+		<th scope="col"><?= __('Status') ?></th> 
 		
-		<th scope="col"><?= __('Status') ?></th>
-		<th scope="col"><?= __('Removed') ?></th>
-		<th scope="col"><?= __('City') ?></th> 
 	</tr>
 	</thead>
 	<tbody>
-		<?php $i=1;foreach ($requests as $request):
+		<?php  $i=1;foreach ($requests as $request):
 			$status=$request->status;
 			$is_deleted=$request->is_deleted;
 			if($status==2){ $showStatus="Finalized";}
-			if($status==0){ $showStatus="Open";}
-			if($is_deleted==0){ $is_deletedShow="Open";}
-			if($is_deleted==1){ $is_deletedShow="Removed";}
+			if($status==0){ $showStatus="Open";
+				if($is_deleted==0){ $showStatus="Open";}
+				if($is_deleted==1){ $showStatus="Removed";}
+			}
+			
 			
 			
 				
@@ -69,14 +73,14 @@ header("Cache-Control: post-check=0, pre-check=0", true);
  			if($request['category_id']==2){
 				if($start_datess <= $current_date){
 					if($total_response==0){
-						$is_deletedShow='Expired';
+						$showStatus='Expired';
 					}
 				}
 			}
 			if($request['category_id']!=2){
 				if($start_datess <= $current_date){
 					if($total_response==0){
-						$is_deletedShow='Expired';
+						$showStatus='Expired';
 					}
 				}
 			}
@@ -96,7 +100,6 @@ header("Cache-Control: post-check=0, pre-check=0", true);
 				foreach($result as $row1)
 				{
 					@$hotel_category[]=$hotelCategories[$row1]; 
-					$count++;
 				}
 				$hotel_category=implode(', ',$hotel_category);
 			}
@@ -121,18 +124,20 @@ header("Cache-Control: post-check=0, pre-check=0", true);
 		?>
 		<tr>
 			<td><?= $i; ?></td>
-			<td><?= h($request->reference_id) ?></td>
 			<td><?= h($request->user_id) ?></td>
 			<td><?= h($request->user->first_name.' '.$request->user->last_name) ?></td>
-			<td><?= h($request->locality) ?></td>
-			<td><?= h($request->total_budget) ?></td>
+			
 			<td><?= h($request->category->name) ?></td>
+			<td><?= h($request->reference_id) ?></td>
+			<td><?= h($request->total_budget) ?></td>
+			<td><?= h($request->adult) ?></td>
+			<td><?= h($request->children) ?></td>
+			<td><?= h($request->locality) ?></td>
+			<td><?= h($request->comment) ?></td>
 			<td><?= h(date('d-m-Y',strtotime($request->created))); ?></td>
 			<td><?php echo $start_date; ?></td>
 			<td><?php echo $end_date; ?></td>
-			<td><?php echo $showStatus; ?></td>
-			<td><?php echo $is_deletedShow; ?></td>
-			<td><?= h($request->city->name) ?></td>
+			<td><?php echo $showStatus; ?></td> 
 		</tr>
 		<?php $i++;endforeach; ?>
 	</tbody>

@@ -75,13 +75,14 @@ class ResponsesController extends AppController
         $this->set('_serialize', ['responses']);
     }
 	
-	public function report()
+	public function report($id=null)
     {
 		$this->viewBuilder()->layout('admin_layout');	
         $this->paginate = [
             'contain' => ['Users', 'Requests', 'Testimonial']
         ];
 		$ReqID='';$status='';$removed='';$Quotation='';$category_id='';$is_details_shared='';
+		
 		if(isset($this->request->query['search_report'])){
 			
  			$ReqID  = $this->request->query['ReqID'];
@@ -99,6 +100,7 @@ class ResponsesController extends AppController
 			if(!empty($ReqID)){
 				$conditions['Requests.reference_id LIKE']='%'.$ReqID.'%';
 			}
+			
 			if(!empty($category_id)){
 				$conditions['Requests.category_id']=$category_id;
 			}
@@ -121,83 +123,101 @@ class ResponsesController extends AppController
 				if($is_details_shared==2){$is_details_shared=0;}
 				$conditions['Responses.is_details_shared']=$is_details_shared;
 			}
-			
-			$responses = $this->paginate($this->Responses->find()->where($conditions));
 			 
+			$responses = $this->paginate(
+				$this->Responses->find()
+					->innerJoinWith('Requests',function($q){
+						return $q;
+					})	
+				->where($conditions)
+				->order(['Responses.id' => 'DESC'])
+			);
+			//pr(); exit;
   		}
+		else if(!empty($id)){
+			 
+			$conditions['Responses.request_id']=$id;
+ 			$responses = $this->paginate($this->Responses->find()->where($conditions)->order(['Responses.id' => 'DESC'])); 
+		}
 		else {
-			$responses = $this->paginate($this->Responses);
+			$responses = $this->paginate($this->Responses->find()->innerJoinWith('Requests',function($q){
+				return $q;
+			})
+			->order(['Responses.id' => 'DESC'])
+			);
 		}
 		$this->set('ReqID',$ReqID);
-			$this->set('status',$status);
-			$this->set('removed',$removed);
-			$this->set('Quotation',$Quotation);
-			$this->set('category_id',$category_id);
-			$this->set('is_details_shared',$is_details_shared);
-	//pr($responses); exit;
-        $this->set(compact('responses'));
-        $this->set('_serialize', ['responses']);
-    }
-	
-	public function excelDownload()
-    {
-		$this->viewBuilder()->layout('');	
-        $this->paginate = [
-            'contain' => ['Users', 'Requests', 'Testimonial']
-        ];
-		$ReqID='';$status='';$removed='';$Quotation='';$category_id='';$is_details_shared='';
-		if(isset($this->request->query['search_report'])){
-			
- 			$ReqID  = $this->request->query['ReqID'];
-			$status = $this->request->query['status'];
-			$removed = $this->request->query['removed'];
-			$Quotation = $this->request->query['Quotation'];
-			$category_id = $this->request->query['category_id'];
-			$is_details_shared = $this->request->query['is_details_shared'];
-			$this->set('ReqID',$ReqID);
-			$this->set('status',$status);
-			$this->set('removed',$removed);
-			$this->set('Quotation',$Quotation);
-			$this->set('category_id',$category_id);
-			$this->set('is_details_shared',$is_details_shared);
-			if(!empty($ReqID)){
-				$conditions['Requests.reference_id LIKE']='%'.$ReqID.'%';
-			}
-			if(!empty($category_id)){
-				$conditions['Requests.category_id']=$category_id;
-			}
-			if($status==1){
-				$conditions['Responses.status']=0;	
-			}
-			if($status==2){
-				$conditions['Responses.status']=1;	
-			}
-			if($removed==2){
-				$conditions['Responses.is_deleted']=0;	
-			}
-			if($removed==1){
-				$conditions['Responses.is_deleted']=1;	
-			}
-			if(!empty($Quotation)){
-				$conditions['Responses.quotation_price']=$Quotation;
-			}
-			if(!empty($is_details_shared)){
-				if($is_details_shared==2){$is_details_shared=0;}
-				$conditions['Responses.is_details_shared']=$is_details_shared;
-			}
-			$responses = $this->Responses->find()->contain(['Users', 'Requests', 'Testimonial'])->where($conditions);
-  		}
-		else {
-			$responses = $this->Responses->find()->contain(['Users', 'Requests', 'Testimonial']);;
-		}
-		$this->set('ReqID',$ReqID);
+		$this->set('id',$id);
 		$this->set('status',$status);
 		$this->set('removed',$removed);
 		$this->set('Quotation',$Quotation);
 		$this->set('category_id',$category_id);
 		$this->set('is_details_shared',$is_details_shared);
+        $this->set(compact('responses'));
+        $this->set('_serialize', ['responses']);
+    }
+	
+	public function excelDownload($id=null)
+    {
+		$this->viewBuilder()->layout('');	
+        $this->paginate = [
+            'contain' => ['Users', 'Requests', 'Testimonial']
+        ];
+		
+		if(isset($this->request->query['search-report'])){
+			$conditions=array();
+			$ReqID='';$status='';$removed='';$Quotation='';$category_id='';$is_details_shared='';
+ 			$ReqID  = $this->request->query['reqid'];
+ 			$id  = $this->request->query['id'];
+			$status = $this->request->query['status'];
+			$removed = $this->request->query['removed'];
+			$Quotation = $this->request->query['quotation'];
+			$category_id = $this->request->query['category-id'];
+			$is_details_shared = $this->request->query['is-details-shared'];
+ 			if(!empty($ReqID)){
+				$conditions['Requests.reference_id LIKE']='%'.$ReqID.'%';
+			}
+ 			if(!empty($id)){
+				$conditions['Responses.request_id']=$id;
+			}
+			if(!empty($category_id)){
+				$conditions['Requests.category_id']=$category_id;
+			}
+			if($status==1){
+				$conditions['Responses.status']=0;	
+			}
+			if($status==2){
+				$conditions['Responses.status']=1;	
+			}
+			if($removed==2){
+				$conditions['Responses.is_deleted']=0;	
+			}
+			if($removed==1){
+				$conditions['Responses.is_deleted']=1;	
+			}
+			if(!empty($Quotation)){
+				$conditions['Responses.quotation_price']=$Quotation;
+			}
+			if(!empty($is_details_shared)){
+				if($is_details_shared==2){$is_details_shared=0;}
+				$conditions['Responses.is_details_shared']=$is_details_shared;
+			}
+			 
+			$responses = $this->Responses->find()
+				->innerJoinWith('Requests',function($q){
+					return $q;
+				})	
+				->contain(['Users','Requests','Testimonial'])->where($conditions);
+  		} 
+		else {
+			pr($conditions); exit;
+			$responses = $this->Responses->find()
+				->innerJoinWith('Requests',function($q){
+					return $q;
+				})	
+			->contain(['Users','Requests','Testimonial']);
+		} 
 		 
-	//pr($responses); exit;
         $this->set(compact('responses'));
         $this->set('_serialize', ['responses']);
     }
