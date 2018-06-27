@@ -317,7 +317,7 @@ $conn = ConnectionManager::get('default');
 					$image= $this->Html->image('/img/slider/hotelier-icon.png');
 					$text="<span class='hotelType'>Hotel</span>";
 				}
-				$created=$row['created'];
+				$created=$row['request']['final_date'];
 				$org_created=date('d-M-Y', strtotime($created));
 				?>
 				<fieldset>

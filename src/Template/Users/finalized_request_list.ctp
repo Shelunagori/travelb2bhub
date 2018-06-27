@@ -113,7 +113,7 @@ $conn = ConnectionManager::get('default');
 							<div >
 								<input type="text" class="form-control date-picker" placeholder="Select Date" name=startdatesearch   data-date-format="dd-mm-yyyy">
 							</div>
-						</div>	 							
+						</div> 							
 						<div class=col-md-6>
 							<div >
 							  <label class="col-form-label" for=example-text-input>End Date:  </label>
@@ -378,10 +378,8 @@ $(".req").sort(function (a, b) {
 										$image= $this->Html->image('/img/slider/hotelier-icon.png');
 										$text="<span class='hotelType'>Hotel</span>";
 									} 
-									$created=$request['created'];
+									$created=$request['final_date'];
 									$org_created=date('d-M-Y', strtotime($created));
-				?>
-				<?php 
 					$total_rating=0;
 					$rate_count=0;
 					$final_rating=0;

@@ -2,10 +2,10 @@
 .containerss {
     border: 2px solid #dedede;
     background-color:#;
-    border-radius: 5px;
-    padding:20px;
+    border-radius: 10px;
+    padding:7px;
     padding-bottom:0px;
-    margin: 3px 0;
+    margin: 3px 2px;
 	
 }
 
@@ -57,40 +57,40 @@
 				foreach($UserChats as $row){
 					if($row["user_id"] == $this->request->session()->read('Auth.User.id')) {?>
 						<?php 
-						if(file_exists($this->Html->image('user_docs/'.$row["user"]["id"].'/'.$row["user"]["profile_pic"]))){
-							$img= $this->Html->image('user_docs/'.$row["user"]["id"].'/'.$row["user"]["profile_pic"], ["alt"=>"User Pic.", "style"=>"width:58px;height:58px;", "class"=>"img-circle right"]);
+						if(file_exists('img/user_docs/'.$row["user"]["id"].'/'.$row["user"]["profile_pic"])>0){
+							$img= $this->Html->image('user_docs/'.$row["user"]["id"].'/'.$row["user"]["profile_pic"], ["alt"=>"User Pic.", "style"=>"width:58px;height:58px;margin-top: 10px;", "class"=>"img-circle right"]);
 						}
 						else
 						{
-							$img= $this->Html->image('no-profile-image.jpg', ["alt"=>"User Pic.", "style"=>"width:58px; height:58px;", "class"=>"img-circle right"]);
+							$img= $this->Html->image('profile.png', ["alt"=>"User Pic.", "style"=>"width:58px; height:58px;margin-top: 10px;", "class"=>"img-circle right"]);
 						}
-						?>
+					?>
 						
 						<div class="containerss">
 							<?php echo $img;?>
 							<p style="text-align: right;"><b><?php echo ucwords($row["user"]["first_name"]); ?></b></p>
-							<fieldset style="text-align:left;border-radius:20px;"><p style="text-align: right;"><?php echo ucwords($row["message"]); ?></p></fieldset>
-							<span class="time-left" style="margin-top: 10px;"><?php echo date("d M Y h:i A", strtotime($row["created"])); ?></span>
+							<fieldset style="text-align:left;border-radius:5px;box-shadow:0 1px 5px rgba(0,0,0,0.25), 0 0px 6px rgba(0,0,0,0.22)"><p style="text-align: right;"><?php echo ucwords($row["message"]); ?></p></fieldset>
+							<span class="time-left" style="margin-top: 2px;font-size: 10px;"><?php echo date("d M Y h:i A", strtotime($row["created"])); ?></span>
 						</div>
 			<?php   } 
 					else 
 					{ ?>
 				 
 							<?php 
-								if(file_exists($this->Html->image('user_docs/'.$row["user"]["id"].'/'.$row["user"]["profile_pic"]))){
-									
-									$images= $this->Html->image('user_docs/'.$row["user"]["id"].'/'.$row["user"]["profile_pic"], ["alt"=>"User Pic.", "style"=>"width:58px; height:58px;", "class"=>"img-circle "]);
+								 
+								if(file_exists('img/user_docs/'.$row["user"]["id"].'/'.$row["user"]["profile_pic"])>0){	
+									$images= $this->Html->image('user_docs/'.$row["user"]["id"].'/'.$row["user"]["profile_pic"], ["alt"=>"User Pic.", "style"=>"width:58px; height:58px;margin-top: 10px;", "class"=>"img-circle "]);
 								}
 								else {
-									$images=  $this->Html->image('no-profile-image.jpg', ["alt"=>"User Pic.", "style"=>"width:58px; height:58px;", "class"=>"img-circle "]);
+									$images=  $this->Html->image('profile.png', ["alt"=>"User Pic.", "style"=>"width:58px; height:58px;margin-top: 10px;", "class"=>"img-circle "]);
 								}
 						 
 							?>
-						<div class="containerss darker" style="background-color:#F2F3F4;">
+						<div class="containerss darker" style="background-color:#f7f7f7;">
 							<?php echo $images;?>
-							<p style="text-align: right;"><b><?php echo ucwords($row["user"]["first_name"]); ?></b></p>
-							<fieldset style="text-align:left;border-radius:20px;"><p style="text-align: right;"><?php echo ucwords($row["message"]); ?></p></fieldset>
-							<span class="time-right" style="margin-top: 10px;"><?php echo date("d M Y h:i A", strtotime($row["created"])); ?></span>
+							<p style="text-align: left;"><b><?php echo ucwords($row["user"]["first_name"]); ?></b></p>
+							<fieldset style="text-align:left;border-radius:5px; box-shadow:0 1px 5px rgba(0,0,0,0.25), 0 0px 6px rgba(0,0,0,0.22)"><p style="text-align: left;"><?php echo ucwords($row["message"]); ?></p></fieldset>
+							<span class="time-right" style="margin-top: 2px; font-size: 10px;"><?php echo date("d M Y h:i A", strtotime($row["created"])); ?></span>
 						</div>
 						 		 
 					<?php } ?>

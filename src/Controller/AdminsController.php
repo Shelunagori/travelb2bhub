@@ -70,20 +70,32 @@ class AdminsController extends AppController
 		$this->viewBuilder()->layout('admin_layout');
 		$loginId=$this->Auth->User('id');
 		if ($this->request->is('post')) {
-			$Admins = $this->Admins->find()->where(['id' => $loginId])->first();
-			
-			$verify = (new \Cake\Auth\DefaultPasswordHasher)->check($this->request->data['old_password'], $Admins->password);
-			if($verify) {
-				$result = $this->Admins->patchEntity($Admins, ['password' => $this->request->data['password']]);
- 				if ($this->Admins->save($result)) {
-					$this->Flash->success(__('Your password has been changed successfully.'));
+			if(isset($this->request->data['own_password'])){
+				$Admins = $this->Admins->find()->where(['id' => $loginId])->first();
+				$verify = (new \Cake\Auth\DefaultPasswordHasher)->check($this->request->data['old_password'], $Admins->password);
+				if($verify) {
+					$result = $this->Admins->patchEntity($Admins, ['password' => $this->request->data['password']]);
+					if ($this->Admins->save($result)) {
+						$this->Flash->success(__('Your password has been changed successfully.'));
+						return $this->redirect(['action' => 'changePassword']);
+					}
+				} else {
+					$this->Flash->error(__('Current Password does not matched.'));
 					return $this->redirect(['action' => 'changePassword']);
- 				}
-			} else {
- 				$this->Flash->error(__('Current Password does not matched.'));
-				return $this->redirect(['action' => 'changePassword']);
+				}
 			}
-		}		
+			if(isset($this->request->data['other_password'])){
+ 				$userid=$this->request->data['userid'];
+				$Users = $this->Users->find()->where(['id' => $userid])->first();
+				$result = $this->Users->patchEntity($Users, ['password' => $this->request->data['new']]);
+				if ($this->Users->save($result)) {
+					$this->Flash->success(__('Password has been changed successfully.'));
+					return $this->redirect(['action' => 'changePassword']);
+				}
+			}
+		}
+		$Users=$this->Users->find()->where(['is_deleted'=>0])->order(['Users.id' => 'DESC']);
+		$this->set('Users', $Users);
     }
  	public function profileedit()
     {

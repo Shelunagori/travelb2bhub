@@ -378,7 +378,7 @@ legend
 												<div class="form-group" style="height:50px">
 													<label class="col-md-4 control-label" for="comment">Comment (Optional)</label>
 													<div class="col-md-6">
-														<textarea name="comment" class="form-control" id="comment"><?php echo $comment; ?></textarea>
+														<textarea name="comment" class="form-control" id="comment"></textarea>
 													</div>
 												</div>
 											</div>
@@ -585,48 +585,7 @@ legend
 	  </div>
    </div>
 </div>
-		 
-<div class="modal fade" id="myModal2" role="dialog">
-	<div class="modal-dialog">
-	
-	  <!-- Modal content-->
-	  <div class="modal-content">
-		<div class="modal-header">
-		  <button type="button" class="close" data-dismiss="modal">&times;</button>
-		  <h4 class="modal-title">Rating</h4>
-		</div>
-		<div class="modal-body">
-			<div class="form text-center">
-				<?php  echo $this->Form->create("Users", ['type' => 'file', 'url' => ['controller' => 'Users', 'action' => 'rateUser'],'onSubmit' => 'return UserRatingForm();', 'id'=>"UserRatingForm"]); ?>
-				<input type="hidden" name="rating_request_id" id="rating_request_id">
-				<input type="hidden" name="rating_user_id" id="rating_user_id">
-				<h2>Select Rating</h2>
-				<fieldset id='demo1' class="rating">
-					<input class="stars" type="radio" id="star5" name="rating" value="5" />
-					<label class = "full" for="star5" title="Awesome - 5 stars"></label>
-					<input class="stars" type="radio" id="star4" name="rating" value="4" />
-					<label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-					<input class="stars" type="radio" id="star3" name="rating" value="3" />
-					<label class = "full" for="star3" title="Meh - 3 stars"></label>
-					<input class="stars" type="radio" id="star2" name="rating" value="2" />
-					<label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-					<input class="stars" type="radio" id="star1" name="rating" value="1" />
-					<label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-
-				</fieldset>
-				<div style='clear:both;'></div>
-				<!-- <div class="margi1">
-					<input type="submit" name="submit" class="btn btn-primary btn-block " value="Submit">
-				</div> -->
-				</form>
-			</div>
-		</div>
-		<div class="modal-footer">
-		  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		</div>
-	  </div>
-	</div>
-</div>
+ 
 <div class="fade modal"id="myModal1<?php echo $responseid; ?>"role=dialog>
 			<div class=modal-dialog>
 				<div class=modal-content>
