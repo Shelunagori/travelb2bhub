@@ -43,7 +43,7 @@ class AppController extends Controller {
      * e.g. `$this->loadComponent('Security');`
      *
      * @return void
-     */
+     */ 
    public function initialize() {
         parent::initialize();
         $this->loadComponent('RequestHandler');

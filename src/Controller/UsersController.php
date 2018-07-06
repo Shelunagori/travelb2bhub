@@ -22,7 +22,7 @@ class UsersController extends AppController {
 	var $helpers = array('Html', 'Form', 'Response');
 	public function beforeFilter(\Cake\Event\Event $event) {
 		parent::beforeFilter($event);
-		$this->Auth->allow(['register', 'login','getcitylist', 'userVerification', 'forgotPassword', 'activatePassword', 'cakeVersion', 'deleteAllCache', 'addNewsLatter', 'otpVerifiy', 'otpResend', 'passwordotpVerifiy','ajaxCity','ajaxCityRegister','checkMobileExixt','blockedWindow','cronobforremoverequest','sendpushnotification','cronobfornotification','cronobforpromotions']);
+		$this->Auth->allow(['register', 'login','getcitylist', 'userVerification', 'forgotPassword', 'activatePassword', 'cakeVersion', 'deleteAllCache', 'addNewsLatter', 'otpVerifiy', 'otpResend', 'passwordotpVerifiy','ajaxCity','ajaxCityRegister','checkMobileExixt','blockedWindow','cronobforremoverequest','sendpushnotification','cronobfornotification','cronobforpromotions','checkEmaileExixt']);
 	}
 	
 	public function beforeRender(\Cake\Event\Event $event) {
@@ -697,7 +697,10 @@ if ($this->request->is('post')) {
 		$this->loadModel("TravelCertificates");
 		$userDetails = $this->Users->get($id);
 		if($this->request->is(['post', 'put'])) {
-			//pr($userDetails);
+			$first_name=$this->request->data['first_name'];
+			$this->request->session()->write('Auth.User.first_name', $first_name);
+			$last_name=$this->request->data['last_name'];
+			$this->request->session()->write('Auth.User.last_name', $last_name);
 			if($userDetails["role_id"] == 3) {
 				if(isset($this->request->data["hotel_categories"]) && !empty($this->request->data["hotel_categories"])) {
 					$this->request->data["hotel_categories"] = $this->request->data["hotel_categories"];
@@ -982,15 +985,15 @@ if ($this->request->is('post')) {
 			if ($this->Users->save($user)) {
 				$this->Flash->success(__('User has been updated successfully.'));
 				$result['msg'] = "User has been updated successfully";
-				$this->redirect('/users/profileedit');
+				$this->redirect('/users/profileedit/'.$id);
 			} else {
 				$this->Flash->error(__('Something went wrong please try again.'));
-				$this->redirect('/users/profileedit');
+				$this->redirect('/users/profileedit/'.$id);
 			}
 		}
 		else 
 		{
-			$this->redirect('/users/profileedit');
+			$this->redirect('/users/profileedit/'.$id);
 		}
 	}
 	public function adminedit($id) {
@@ -1023,7 +1026,7 @@ if ($this->request->is('post')) {
 				move_uploaded_file($this->request->data['profile_pic']['tmp_name'],$fullpath.DS.$photo);
 				$this->request->data['profile_pic'] = $photo; 
 		 
-				$this->request->session()->write('Auth.User.profile_pic', $photo);
+			 
  				/*if(!empty($user['profile_pic']) && file_exists($fullpath.DS.$user['profile_pic'])) {
 				unlink($fullpath.DS.$user['profile_pic']);
 				}*/
@@ -1289,7 +1292,7 @@ if ($this->request->is('post')) {
 		}
 		else 
 		{
-			$this->redirect('/users/profileedit');
+			$this->redirect('/users/profileedit/'.$id);
 		}
 	}
 /**
@@ -1531,82 +1534,37 @@ public function adminprofileedit($id=null){
 		$this->set('chatCount',$chatCount); 
 		$this->set('allunreadchat',$allUnreadChat);
 }
-	public function profileedit() {
-		$this->loadModel("UserRatings");
-		$this->loadModel("TravelCertificates");
+	public function profileedit($id=null) {
 		$this->loadModel('States');
 		$this->loadModel('Cities');
-		$this->loadModel('Requests');
-		$this->loadModel('Responses');
 		$this->viewBuilder()->layout('user_layout');
-		$user = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
-		$this->set('users', $user);
-		if(!empty($user)) {
-			$userTravelCertificates = $this->TravelCertificates->find('list',['keyField' => 'certificate_name', 'valueField' => 'certificate_pic'])
-				->hydrate(false)
-				->where(['user_id' => $this->Auth->user('id')])
-				->toArray();
-			$myRequestCount = $myReponseCount = 0;
-			$myfinalCount  = 0;
-			$query3 = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status "=>2]]);
-			$myfinalCount = $query3 ->count();
-			$this->set('myfinalCount', $myfinalCount );
-			$query = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>0,"Requests.status !="=>2]]);
-			$myRequestCount = $query->count();
-			$myRequestCount1 = $query->count(); 
-			$delcount=0;
-			$requests = $this->Requests->find('all', ['conditions' => ['Requests.user_id' => $this->Auth->user('id'), "Requests.is_deleted"=>1]]);
-			foreach($requests as $req){
-				$rqueryr = $this->Responses->find('all', ['conditions' => ['Responses.request_id' =>$req['id']]]);
-				if($rqueryr->count()!=0){
-					$delcount++;
-				}
-			}
-			if($myRequestCount > $delcount) {
-				$myRequestCount = $myRequestCount-$delcount;
-			}
-			$this->set('myRequestCountdel', $delcount);
-			$this->set('myRequestCount', $myRequestCount1);
-			$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.user_id' => $this->Auth->user('id')]]);
-			$myReponseCount = $queryr->count();
-			$this->set('myReponseCount', $myReponseCount);
-			$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.status' =>0,'Responses.user_id' => $this->Auth->user('id'),"Responses.is_deleted"=>0]]);
-			$myReponseCount = $queryr->count();
-			$this->set('myReponseCount', $myReponseCount);
-			$cities = $this->Cities->getAllCities();
-			$states = $this->States->find()->where(['country_id' => '101'])->all();
-			$states_show=$this->Users->States->find('list')->where(['country_id' => '101']);
-			$country_show=$this->Users->Countries->find('list');
-			//pr($country_show->toArray());exit;
+		$user = $this->Users->get($id, [
+            'contain' => []
+        ]);
+         
+        $cities = $this->Cities->getAllCities();
+		$states = $this->States->find()->where(['country_id' => '101'])->all();
+		$states_show=$this->Users->States->find('list')->where(['country_id' => '101']);
+		$country_show=$this->Users->Countries->find('list');
 
-			$allStates = array();
-			foreach($states as $state){
-				$allStates[$state["id"]] = $state['state_name'];
-			}
-			$allCities = array();
-			$allCityList = array();
-			if(!empty($cities)) {
-				foreach($cities as $city) {
-					/*$allCities[] = array("label"=>str_replace("'", "", $city['name']), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");*/
-					$allCities[] = array("label"=>str_replace("'", "", $city['name'].' ('.$city['state']->state_name. ')'), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
-					$allCityList[$city['id']] = str_replace("'", "", $city['name'].' ('.$city['state']->state_name. ')');
-				}
-			}
-			$allCities = json_encode($allCities);
-			$this->set(compact('states_show','country_show','cities', 'states', 'countries', 'allCities', 'allStates', 'allCityList', 'userTravelCertificates'));
-		} 
-		else {
-			$this->Flash->error(__('Please login to acces this location.'));
-			$this->redirect('/pages/home');
+		$allStates = array();
+		foreach($states as $state){
+			$allStates[$state["id"]] = $state['state_name'];
 		}
-		$this->set("travelCertificates", $this->_getCertificatesArray());
-		$this->set("hotelCategories", $this->_getHotelCategoriesArray());
-		$this->loadModel('User_Chats');
-		$csort['created'] = "DESC";
-		$allUnreadChat = $this->User_Chats->find()->where(['is_read' => 0, 'send_to_user_id'=> $this->Auth->user('id')])->order($csort)->limit(10)->all();
-		$chatCount = $allUnreadChat->count();
-		$this->set('chatCount',$chatCount); 
-		$this->set('allunreadchat',$allUnreadChat);
+		$allCities = array();
+		$allCityList = array();
+		if(!empty($cities)) {
+			foreach($cities as $city) {
+				/*$allCities[] = array("label"=>str_replace("'", "", $city['name']), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");*/
+				$allCities[] = array("label"=>str_replace("'", "", $city['name'].' ('.$city['state']->state_name. ')'), "value"=>$city['id'], "state_id"=>$city['state_id'], "state_name"=>$city['state']->state_name, "country_id"=>101, "country_name"=>"India");
+				$allCityList[$city['id']] = str_replace("'", "", $city['name'].' ('.$city['state']->state_name. ')');
+			}
+		}
+		$allCities = json_encode($allCities);
+		$users = $this->Users->find()->where(['id' => $this->Auth->user('id')])->first();
+		$this->set('users', $users);
+		$this->set(compact('states_show','country_show','cities', 'states', 'countries', 'allCities', 'allStates', 'allCityList', 'user'));
+      
 	}
 
 
@@ -1634,6 +1592,14 @@ public function adminprofileedit($id=null){
 		$mobile_number=$this->request->data['mobile_number'];
 		$city_count=$this->Users->find()
 		->where(['mobile_number'=>$mobile_number])->count();
+		if($city_count>0)
+		{ echo"remove";}		exit;
+	}
+	public  function checkEmaileExixt()
+	{
+		$email=$this->request->data['email'];
+		$city_count=$this->Users->find()
+			->where(['email'=>$email])->count();
 		if($city_count>0)
 		{ echo"remove";}		exit;
 	}
@@ -1808,35 +1774,34 @@ public function sendrequest() {
 	
 	if($this->request->is('post')){
 		$d = $this->request->data;
-
-		//Change input date format to mysql date format
+ 		//Change input date format to mysql date format
 		if(isset($d['check_in']) && !empty($d['check_in']))
 		{
-		$d['check_in']=date('Y-m-d',strtotime($d['check_in']));
+			$d['check_in']=date('Y-m-d',strtotime($d['check_in']));
 		}
 		else{
-		$d['check_in']	='0000-00-00';
+			$d['check_in']	='0000-00-00';
 		}
 		if(isset($d['check_out']) && !empty($d['check_out']))
 		{
-		$d['check_out']=date('Y-m-d',strtotime($d['check_out']));
+			$d['check_out']=date('Y-m-d',strtotime($d['check_out']));
 		}
 		else{
-		$d['check_out']	='0000-00-00';
+			$d['check_out']	='0000-00-00';
 		}
 		if(isset($d['start_date']) && !empty($d['start_date']))
 		{
-		$d['start_date']=date('Y-m-d',strtotime($d['start_date']));
+			$d['start_date']=date('Y-m-d',strtotime($d['start_date']));
 		}
 		else{
-		$d['start_date']	='0000-00-00';
+			$d['start_date']	='0000-00-00';
 		}
 		if(isset($d['end_date']) && !empty($d['end_date']))
 		{
-		$d['end_date']=date('Y-m-d',strtotime($d['end_date']));
+			$d['end_date']=date('Y-m-d',strtotime($d['end_date']));
 		}
 		else{
-		$d['end_date']	='0000-00-00';
+			$d['end_date']	='0000-00-00';
 		}
  
 
@@ -2390,7 +2355,7 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
  				)
 			);
 		}
-		 
+		//pr($conditions); exit;
 		
 		$conditions["Requests.user_id"] = $this->Auth->user('id');
 		$conditions["Requests.status !="] = 2;
@@ -2422,7 +2387,16 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		->contain(["Users","Hotels"])
 		->where($conditions)->order($sort)->all();
 		}
+		$rewqconditions["Requests.user_id"] = $this->Auth->user('id');
+		$rewqconditions["Requests.status !="] = 2;
+		$rewqconditions["Requests.is_deleted "] = 0;
+		$requestslist = $this->Requests->find()->where($rewqconditions)->toArray(); 
 		
+		$RefId = $this->Requests->find('list',['keyField' => "id",'valueField' => 'reference_id'])
+			->hydrate(false)
+			->where($rewqconditions)
+			->toArray();
+		 
 		if ($this->Auth->user('role_id') == 2) {
 			$requests = $this->Requests->find()
 				->contain(["Users","Hotels","Responses"=>function($q){
@@ -2457,13 +2431,13 @@ $this->set(compact('details', "allCities", "allStates", "allCountries", "transpo
 		}
 		$BlockedUsers=array_merge($BlockedUsers,$myBlockedUsers);
 		$BlockedUsers = array_unique($BlockedUsers);
-		$RefId=array();
+		 
 		foreach($requests as $req){
 
  		if(sizeof($BlockedUsers)>0){
 			$conditions["Responses.user_id NOT IN"] =  $BlockedUsers; 
 		}
-		$RefId[] = ['value'=>$req->id,'text'=>$req->reference_id];
+		//$RefId[] = ['value'=>$req->id,'text'=>$req->reference_id];
 		$queryr = $this->Responses->find('all', ['contain' => ["Requests.Users", "UserChats","Requests.Hotels"],'conditions' => ['Responses.request_id' =>$req['id'],$conditions]])->contain(['Users']);
 		$data['responsecount'][$req['id']]  = $queryr->count();
 		}
@@ -3340,17 +3314,20 @@ public function acceptOffer() {
 				}
 		}
 		//---- REVIEW
- 		$testimonialTable = TableRegistry::get('testimonial');
-		$testimonial = $testimonialTable->newEntity();
-		$testimonial->author_id = $request['user_id'];
-		$testimonial->request_id = $request_id;
-		$testimonial->user_id = $response['user_id'];
-		$testimonial->rating = $this->request->data['rating'];
-		$testimonial->comment = $this->request->data['comment'];
-		$testimonial->status =  '0';
-		$testimonial->created_at = date("Y-m-d H:i:s");
-		if ($testimonialTable->save($testimonial)) {
-			$id = $testimonial->id;
+		
+		if($this->request->data['rating'] >0 ){
+			$testimonialTable = TableRegistry::get('testimonial');
+			$testimonial = $testimonialTable->newEntity();
+			$testimonial->author_id = $request['user_id'];
+			$testimonial->request_id = $request_id;
+			$testimonial->user_id = $response['user_id'];
+			$testimonial->rating = $this->request->data['rating'];
+			$testimonial->comment = $this->request->data['comment'];
+			$testimonial->status =  '0';
+			$testimonial->created_at = date("Y-m-d H:i:s");
+			if ($testimonialTable->save($testimonial)) {
+				$id = $testimonial->id;
+			}
 		}
 	}
 	return $this->redirect('/users/FinalizedRequestList');
@@ -4369,7 +4346,7 @@ public function forgotPassword() {
 					
 			$sms_sender='TRAHUB';
 			$sms=str_replace(' ', '+', 'Thank you for registering with Travel B2B Hub. Your one time password is '.$rendomCode);
-			//file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
+			file_get_contents("http://103.39.134.40/api/mt/SendSMS?user=phppoetsit&password=9829041695&senderid=".$sms_sender."&channel=Trans&DCS=0&flashsms=0&number=".$mobile_no."&text=".$sms."&route=7");
 			 
 			 $encrypted_data=$this->encode($user_id,'B2BHUB');
 			 $dummy_user_id=$encrypted_data;
@@ -4569,13 +4546,16 @@ public function _getCertificatesArray() {
 return array("1"=>"IATA", "2"=>"TAFI", "3"=>"TAAI", "4"=>"IATO", "5"=>"ADYOI", "6"=>"ISO 9001", "7"=>"UFTAA", "8"=>"ADTOI");
 }
 public function _getHotelCategoriesArray() {
-return array("1"=>"Corporate Hotel", "2"=>"Boutique Hotel", "3"=>"Heritage Hotel", "4"=>"House Boat", "5"=>"Resort", "6"=>"Eco Resort", "7"=>"Farm-stay", "8"=>"Homestay", "9"=>"Heritage Homestay", "10"=>"Camping", "11"=>"Glamping","12"=>"Dormitory");
+	$this->loadModel('hotel_categories');
+	return $this->hotel_categories->find('list',['keyField' => "id",'valueField' => 'name'])->hydrate(false)->toArray();
 }
 public function _getTranspoartRequirmentsArray() {
-return array("1"=>"Luxury Car", "2"=>"Sedan", "3"=>"Innova/ Tavera", "4"=>"Tempo Traveller", "5"=>"AC Coach", "6"=>"Non AC Bus");
+	$this->loadModel('taxi_fleet_car_buses');
+	return $this->taxi_fleet_car_buses->find('list',['keyField' => "id",'valueField' => 'name'])->hydrate(false)->toArray();
 }
 public function _getMealPlansArray() {
-return array("1"=>"EP - European Plan", "2"=>"CP - Contenental Plan", "3"=>"MAP - Modified American Plan", "4"=>"AP - American Plan");
+	$this->loadModel('meal_plans');
+	return $this->meal_plans->find('list',['keyField' => "id",'valueField' => 'name'])->hydrate(false)->toArray();
 }
 function addNewDestinationRow() {
 	$this->set("hotelCategories", $this->_getHotelCategoriesArray());

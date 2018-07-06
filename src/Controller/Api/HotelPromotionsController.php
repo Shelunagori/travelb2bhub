@@ -81,7 +81,7 @@ class HotelPromotionsController extends AppController
 						}
 						imagejpeg($image, $destination_url, $percentageTOReduse);
 						$hotelPromotions->hotel_pic='img/hotels/'.$id.'/'.$title.'.'.$ext;
-						if(file_exists(WWW_ROOT . '/img/hotels/'.$id.'/'.$title.'.'.$ext)>0) { 
+						if(file_exists(WWW_ROOT . '/img/hotels/'.$id.'/'.$title.'.'.$ext)>0) {
 						}
 						else
 						{
@@ -242,7 +242,7 @@ $getHotelPromotion=$getEventPlanners ;
 		
 		if($submitted_from=="web")
 		{
-			$limit=100;
+			$limit=10;
 		}
 		else{
 			$limit=10;

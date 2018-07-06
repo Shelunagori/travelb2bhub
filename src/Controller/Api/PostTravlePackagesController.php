@@ -45,18 +45,18 @@ class PostTravlePackagesController extends AppController
 					$postTravlePackage_city = $this->PostTravlePackages->PostTravlePackageCities->newEntity();
 					$postTravlePackage_city->city_id = $city;
 					$postTravlePackage->post_travle_package_cities[$y]=$postTravlePackage_city;
-//$postTravlePackage['PostTravlePackageCities['.$y.']["city_id"]']=$city_id[$y];
-					$y++;	
+ 					$y++;	
 				}
-				$package_category_id=$this->request->data['package_category_id'];
-				$z=0;  
-				foreach($package_category_id as $category)
-				{
-					$postTravlePackage_citys = $this->PostTravlePackages->PostTravlePackageRows->newEntity();
-					$postTravlePackage_citys->post_travle_package_category_id = $category;
-					$postTravlePackage->post_travle_package_rows[$z]=$postTravlePackage_citys;
-//$postTravlePackage['PostTravlePackageRows['.$z.']["post_travle_package_category_id"]']=$package_category_id[$z];
-					$z++;	
+				if(isset($this->request->data['package_category_id'])){
+					$package_category_id=$this->request->data['package_category_id'];
+					$z=0;  
+					foreach($package_category_id as $category)
+					{
+						$postTravlePackage_citys = $this->PostTravlePackages->PostTravlePackageRows->newEntity();
+						$postTravlePackage_citys->post_travle_package_category_id = $category;
+						$postTravlePackage->post_travle_package_rows[$z]=$postTravlePackage_citys;
+						$z++;	
+					}
 				}
 			}
 			if(!empty($this->request->data('visible_date')))
@@ -205,7 +205,7 @@ class PostTravlePackagesController extends AppController
 			$submitted_from = $this->request->query('submitted_from');
 			if($submitted_from=="web")
 			{
-				$limit=100;
+				$limit=10;
 			}
 			else{
 				$limit=10;

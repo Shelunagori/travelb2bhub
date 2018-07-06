@@ -225,7 +225,7 @@ class TaxiFleetPromotionsController extends AppController
 		$submitted_from = $this->request->query('submitted_from');
 		if($submitted_from=="web")
 		{
-			$limit=100;
+			$limit=10; 
 		}
 		else{
 			$limit=10;

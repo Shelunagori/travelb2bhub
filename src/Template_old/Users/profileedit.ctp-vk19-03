@@ -1,0 +1,555 @@
+ <?php echo $this->element('header-back');?>
+  <?php echo $this->Html->script(['jquery.validate']);?>
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+ 
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+	var cityData = '<?php echo $allCities; ?>';
+	$(document).ready(function () {
+		$("#city_name").autocomplete({
+			source: JSON.parse(cityData),
+			select: function (e, ui) {
+				e.preventDefault();
+				$("#city_id").val(ui.item.value);
+				$(this).val(ui.item.label);
+				$("#state_id").val(ui.item.state_id);
+				$("#state_name").val(ui.item.state_name);
+
+				$("#country_id").val(ui.item.country_id);
+				$("#country_name").val(ui.item.country_name);
+			
+			}
+		});
+
+	});
+</script>
+  <div id="profile">
+    <div class="row">
+      <div class="col-md-3 col-sm-3 col-xs-12 left-panel">
+        <div class="col-md-10 col-xs-offset-1 text-center col-xs-12">
+          <div class="profile"><!--<img src="/userimages/<?=($users['profile_pic'] !="")?$users['profile_pic']:"dummy.jpg" ?>" alt=""/>--><?php echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['profile_pic'], ["alt"=>"Profile Pic", "height"=>150]);?></div>
+        <h3><?php echo $users['first_name'] ?></h3> 
+<h4>Email:-<?php echo $users['email'] ?></h4> 
+<h4>Number:-<?php echo $users['mobile_number'] ?></h4>
+          <a href="profileedit/<?php echo $users['id'] ?>">Edit Profile</a>
+          <p><a href="http://www.travelb2bhub.com/users/changePassword/">Change Password</a></p>
+          <div class="rating"><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i><i class="icon-star"></i></div>
+          
+          
+
+
+ </div>
+  
+  <!-- <div class="list">
+<div class="list-head">List of blocked user</div>
+
+<div class="list-subhead">Blocked user</div>
+<div class="list-user">Lorem ipsum <a href="#">Unblock</a></div>
+<div class="list-user">Lorem ipsum <a href="#">Unblock</a></div>
+<div class="list-user">Lorem ipsum <a href="#">Unblock</a></div>
+<div class="list-user">Lorem ipsum <a href="#">Unblock</a></div>
+
+</div> -->     
+          
+       
+      </div>
+      <div class="col-md-9 pro-top">
+        <div class="col-md-12"><p><strong>This site is currently being refined to serve you better. You will be notified in the next few days, once the website is fully functional</strong></p>
+			<!--<?php //if($users["role_id"] != 3) { ?>
+				<div class="col-md-3 col-sm-9 col-xs-12">
+					<div class="title"><strong>Place Request</strong><br>
+						
+					</div>
+				</div>
+			
+				<div class="col-md-3 col-sm-9 col-xs-12">
+					<div class="title"><strong>My Requests</strong><br>
+						<?php //echo $myRequestCount; ?>/<?php //echo $totalNumberRequest; ?>
+					</div>
+				</div>
+			<?php //} ?>
+			<?php //if($users["role_id"] == 3 || $users["role_id"] == 1) { ?>
+				<div class="col-md-3 col-sm-9 col-xs-12">
+					<div class="title"><strong>Respond To Requests</strong><br>
+						
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-9 col-xs-12">
+					<div class="title"><strong>My Responses</strong><br>
+					<?php //echo $myReponseCount; ?>/<?php //echo $totalNumberResponse; ?></div>
+				</div>
+			<?php //} ?>-->
+        </div>
+      </div>
+      <div class="right-panel">
+        <div class=" col-md-9 title">Edit Profile</div>
+       <div class="col-md-3">
+ <div id="top-link"><a href="javascript:void(0)" onclick="window.history.back();">Go Back</a>
+ <a href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'dashboard')) ?>" class="link-icon"><?php echo $this->Html->image('arrow.png'); ?></a>
+ <a href="#" class="link-icon"><?php echo $this->Html->image('notify.png'); ?></a>
+<?php if($users['id'] != '') {?>
+		  <a data-toggle="tooltip" title="Logout" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'logout')) ?>" class="link-icon"><?php echo $this->Html->image('logout.png'); ?></a> 
+		  <?php } ?>
+ <a href="#" class="link-icon"><?php echo $this->Html->image('search-icon.png'); ?></a>
+ </div>
+ </div>
+      </div>
+      <div class="col-md-9 col-sm-9 col-xs-12">
+        <p><!--<strong>This site is currently being refined to serve you better. You will be notified in the next few days, once the website is fully functional</strong>--></p>
+        <div class="form">
+            <?php $pararm = $users['id']; ?>
+			<?php  echo $this->Form->create("Users", ['type' => 'file', 'url' => ['controller' => 'Users', 'action' => 'edit',$pararm], 'id'=>"UserRegisterForm"]); ?>
+			 <div class="col-xxs-6 col-xs-6 mt">
+            <div class="input-field">
+              <label for="from">First Name</label>
+              <input type="text" class="form-control" name="first_name" value="<?php echo $users['first_name'] ?>" id="first_name" placeholder="Enter Here"/>
+            </div>
+          </div>
+          <div class="col-xxs-6 col-xs-6 mt">
+            <div class="input-field">
+              <label for="from">Last Name</label>
+              <input type="text" class="form-control" name="last_name" value="<?php echo $users['last_name'] ?>" id="last_name" placeholder="Enter Here"/>
+            </div>
+          </div>
+		   <div class="col-xxs-6 col-xs-6 mt">
+            <div class="input-field">
+              <label for="from">Company Name</label>
+              <input type="text" class="form-control" name="company_name" value="<?php echo $users['company_name'] ?>"" id="company_name" placeholder="Enter Here"/>
+            </div>
+          </div>
+          <div class="col-xxs-6 col-xs-6 mt">
+            <div class="input-field">
+              <label for="from">Email</label>
+              <input type="text" name="email" class="form-control" value="<?php echo $users['email'] ?>" id="email" placeholder="Enter Here" disabled/>
+            </div>
+          </div>
+             <div class="col-xxs-6 col-xs-6 mt">
+            <div class="input-field">
+              <label for="from"> Mobile Number</label>
+              <input type="text" class="form-control" name="mobile_number" value="<?php echo $users['mobile_number'] ?>" id="mobile_number" placeholder="Enter Here"/>
+            </div>
+          </div>
+		  <div class="col-xxs-6 col-xs-6 mt">
+            <div class="input-field">
+              <label for="from">Secondary Contact</label>
+              <input type="text" name="p_contact" class="form-control" value="<?php echo $users['p_contact'] ?>" id="p_contact" placeholder="Primary Contact Number"/>
+            </div>
+          </div>
+          
+          <div class="col-xxs-6 col-xs-6 mt">
+            <div class="input-field">
+              <label for="from">Address Line 1</label>
+              <input type="text" class="form-control" name="address" value="<?php echo $users['address'] ?>" id="address" placeholder="Enter Here"/>
+            </div>
+          </div>
+
+		  <div class="col-xxs-6 col-xs-6 mt">
+            <div class="input-field">
+              <label for="from">Address Line 2</label>
+              <input type="text" class="form-control" name="address1" value="<?php echo $users['address1'] ?>" id="address1" placeholder="Enter Here"/>
+            </div>
+          </div>
+
+		  <div class="col-xxs-6 col-xs-6 mt">
+            <div class="input-field">
+              <label for="from">Locality</label>
+              <input type="text" class="form-control" name="locality" value="<?php echo $users['locality'] ?>" id="locality" placeholder="Enter Here"/>
+            </div>
+          </div>
+         
+       
+         
+          <div class="col-xxs-6 col-xs-6 mt">
+            <div class="input-field">
+              <label for="from">City</label>
+			  <input type="text" class="form-control" id="city_name" name="city_name" value="<?php echo (!empty($users['city_id']))?$allCityList[$users['city_id']]:"" ;?>" placeholder="Select City"/>
+			<input type='hidden' id='city_id' name="city_id" value="<?php echo (!empty($users['city_id']))?$users['city_id']:"" ?>" />
+            </div>
+          </div>
+          
+          <div class="col-xxs-6 col-xs-6 mt">
+            <div class="input-field">
+              <label for="from">State</label>
+              <input type="text" class="form-control" id ="state_name" value = "<?php echo (!empty($users['state_id']))?$allStates[$users['state_id']]:""; ?>"name="state_name" placeholder="Select State" readonly/>
+				<input type='hidden' id='state_id' name="state_id" value="<?php echo (!empty($users['state_id']))?$users['state_id']:""; ?>" />
+            </div>
+          </div>
+          
+          <div class="col-xxs-6 col-xs-6 mt">
+            <div class="input-field">
+              <label for="from">Country</label>
+              <input type="text" class="form-control" id ="country_name" Value ="India" name="country_name" placeholder="Select Country" readonly/>
+				<input type='hidden' id='country_id' name="country_id" value="<?php echo (!empty($users['country_id']))?$users['country_id']:""; ?>" />
+            </div>
+          </div>
+		  <div class="col-xxs-6 col-xs-6 mt">
+            <div class="input-field">
+              <label for="from">Pincode</label>
+              <input type="text" class="form-control" id ="pincode" value = "<?php echo (!empty($users['pincode']))?$users['pincode']:""; ?>"name="pincode" placeholder="Enter Pincode"/>
+            </div>
+          </div>
+		<div class="col-xxs-6 col-xs-6 mt">
+            <div class="input-field">
+              <label for="from">Website URL</label>
+              <input type="text" class="form-control" id ="web_url" value = "<?php echo (!empty($users['web_url']))?$users['web_url']:""; ?>" name="web_url" placeholder="Website URL"/>
+            </div>
+          </div>
+            <?php if($users['role_id'] == 1) { ?>
+				<div class="col-xxs-6 col-xs-12 mt">
+					<h3 style="color: #000;">Certificates</h3>
+					<table class="table">
+						<thead>
+						  <tr>
+							<th style="width:6%;">Sr. No.</th>
+							<th style="width:10%;">Certificate Name</th>
+							<th style="width:20%;">Certificate Image</th>
+							<th style="width:40%;">Previous Uploaded Image</th>
+						  </tr>
+						</thead>
+						<tbody>
+							<?php 
+							$count = 1;
+							foreach($travelCertificates as $key=>$row) { ?>
+								<tr >
+									<td ><?php echo $count.".";$count++; ?></td>
+									<td><?php echo $row; ?></td>
+									<td><?php echo $this->Form->input($row.' Pic', ['type' => 'file', 'class' => 'form-control', 'name' => strtolower(str_replace(" ", "", $row)."_pic")]); ?></td>
+									<td>
+										<div>
+											<?php if(array_key_exists($row, $userTravelCertificates) && file_exists(WWW_ROOT."img".DS."user_travel_certificates".DS.$users['id'].DS.$userTravelCertificates[$row])) { 
+												echo $this->Html->image('user_travel_certificates/'.$users['id'].'/'.$userTravelCertificates[$row], ["alt"=>"Profile Pic", "height"=>70]);?>
+											<?php } ?>
+										</div>
+									</td>
+								</tr>
+							<?php } ?>
+				
+						</tbody>
+					</table>
+				</div>
+			<?php } elseif($users['role_id'] == 3) { ?>
+				<div class="col-xxs-6 col-xs-6 mt">
+					<div class="input-field">
+						<label for="from">Hotel Rating</label>
+						<?php 
+						$hotel_rating = (!empty($users['hotel_rating']))? $users['hotel_rating']:"";
+						echo $this->Form->control('hotel_rating', ["id"=>"hotel_rating", "type"=>"select", "empty"=>"Select Hotel Rating", 'options' =>array("5"=>"*****", "4"=>"****", "3"=>"***", "2"=>"**", "1"=>"*"), "value"=>$hotel_rating , "class"=>"form-control"]);?>
+					</div>
+				</div>
+				<div class="col-xxs-6 col-xs-6 mt">
+					<div class="input-field">
+						<label for="from">Hotel Categories</label>
+						<?php 
+						$selectedCetegories = (!empty($users['hotel_categories']))? explode(",",$users['hotel_categories']):"";
+						echo $this->Form->control('hotel_categories', ["id"=>"hotel_categories", "type"=>"select", "empty"=>"Select Hotel Categories", 'options' =>$hotelCategories, "value"=>$selectedCetegories , "class"=>"form-control chosen-select"]);?>
+					</div>
+				</div>
+			<?php } ?>  
+         <div class="col-xxs-6 col-xs-6 mt">
+
+
+          </div>
+          
+          <div class="col-xxs-12 col-xs-12 mt">
+			<div>
+				<?php if(!empty($users['profile_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['profile_pic'])) { 
+				echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['profile_pic'], ["alt"=>"Profile Pic", "height"=>150]);?>
+				<?php } ?>
+			</div>
+			<?php echo $this->Form->input('Profile Picture', ['type' => 'file', 'class' => 'form-control', 'name' => 'profile_pic']); ?>
+          </div>
+
+          <div class="col-xxs-12 col-xs-12 mt">
+			<div>
+				<?php if(!empty($users['company_img_1_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_img_1_pic'])) { 
+				echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_1_pic'], ["alt"=>"Company Image 1 Pic", "height"=>150]);?>
+				<?php } ?>
+			</div>
+          <?php 
+		  if($users['role_id'] == 1 or $users['role_id'] == 2) {
+			echo $this->Form->input('Photograph of your office-1', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_img_1' ]);
+		  }else{
+			  echo $this->Form->input('Photograph of your Hotel-1', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_img_1' ]);
+		  }		  ?>
+          </div>
+
+		  <div class="col-xxs-12 col-xs-12 mt">
+			<div>
+				<?php if(!empty($users['company_img_2_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_img_2_pic'])) { 
+				echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_img_2_pic'], ["alt"=>"Company Image 2 Pic", "height"=>150]);?>
+				<?php } ?>
+			</div>
+          <?php  if($users['role_id'] == 1 or $users['role_id'] == 2) {
+			echo $this->Form->input('Photograph of your office-2', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_img_2' ]);
+		  }else{
+			  echo $this->Form->input('Photograph of your Hotel-2', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_img_2' ]);
+		  }?>
+          </div>
+
+          <div class="col-xxs-12 col-xs-12 mt">
+			<div>
+				<?php if(!empty($users['pancard_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['pancard_pic'])) { 
+				echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['pancard_pic'], ["alt"=>"Pan Card Pic", "height"=>150]);?>
+				<?php } ?>
+			</div>
+          <?php echo $this->Form->input('Pan Card', ['type' => 'file', 'class' => 'form-control', 'name' => 'pancard', "pancard"]); ?>
+          </div>
+
+
+          <div class="col-xxs-12 col-xs-12 mt">
+			<div>
+				<?php if(!empty($users['id_card_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['id_card_pic'])) { 
+				echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['id_card_pic'], ["alt"=>"Business card Pic", "height"=>150]);?>
+				<?php } ?>
+			</div>
+          <?php echo $this->Form->input('Business card', ['type' => 'file', 'class' => 'form-control', 'name' => 'id_card','id'=>'id_card']); ?>
+          </div>
+
+		  <div class="col-xxs-12 col-xs-12 mt">
+			<div>
+				<?php if(!empty($users['company_shop_registration_pic']) && file_exists(WWW_ROOT."img".DS."user_docs".DS.$users['id'].DS.$users['company_shop_registration_pic'])) { 
+				echo $this->Html->image('user_docs/'.$users['id'].'/'.$users['company_shop_registration_pic'], ["alt"=>"Company Shop Act Registration Pic", "height"=>150]);?>
+				<?php } ?>
+			</div>
+          <?php echo $this->Form->input('Company Shop Act Registration', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_shop_registration']); ?>
+          </div>
+
+           <div class="col-xxs-12 col-xs-12 mt">
+            <div class="input-field">
+              <label for="from">Description</label>
+              <textarea name="description" class="form-control" id="description" placeholder="Enter Here" col="10" row="10"><?php echo $users['description'] ?></textarea>
+            </div>
+          </div>
+
+          
+          <div class="margi1">
+            <input type="submit" name="submit" class="btn btn-primary btn-block " value="Update Profile ">
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+    <div id="tra-tours" class="footemail"> <a href="mailto:contactus@travelb2bhub.com">contactus@travelb2bhub.com</a> </div>
+
+<?php echo $this->element('footer');?>
+<script>
+ $.validator.addMethod("needsSelection", function (value, element) {
+	var count = $(element).find('option:selected').length;
+	if(count == 0)
+		return false;
+	if(count > 0 && count < 6)
+		return true;
+	else
+		return false;
+});
+$('#UserRegisterForm').validate({
+	rules: {
+		"company_name" : {
+			required : true
+		},
+		"first_name" : {
+			required : true
+		},
+		"last_name" : {
+			required : true
+		},
+		"email": {
+			required : true,
+			email: true
+		},
+		"mobile_number": {
+			required : true,
+		},
+		"address": {
+			required: true
+		},
+		"city_name": {
+			required: true
+		},
+		"locality": {
+			required: true
+		},
+		"pincode": {
+			required: true
+		},
+		"description": {
+			required: true
+		},
+		"p_contact": {
+			required: true
+		},
+		"hotel_rating": {
+			required: true
+		}
+	},
+	messages: {
+		"company_name" : {
+			required : "Please enter company name."
+		},
+		"first_name" : {
+			required : "Please enter first name."
+		},
+		"last_name" : {
+			required : "Please enter last name."
+		},
+		"email": {
+			required : "Please enter email.",
+			email : "Please enter valid email."
+		},
+		"mobile_number": {
+			required : "Please enter contact number.",
+		},
+		"address": {
+			required: "Please enter address."
+		},
+		"city_name": {
+			required: "Please select city."
+		},
+		"locality": {
+			required: "Please enter locality."
+		},
+		"pincode": {
+			required: "Please enter pincode."
+		},
+		"description": {
+			required: "Please enter description."
+		},
+		"p_contact": {
+			required: "Please enter secondary contact number."
+		},
+		"hotel_rating": {
+			required: "Please select rating."
+		}
+	},
+	ignore: ":hidden:not(select)"
+});
+
+var profile_pic = '<?php echo $users["profile_pic"]; ?>';
+var role_id = '<?php echo $users["role_id"]; ?>';
+var company_img_1 = '<?php echo $users["company_img_1_pic"]; ?>';
+var pancard = '<?php echo $users["pancard_pic"]; ?>';
+var id_card = '<?php echo $users["id_card_pic"]; ?>';
+var company_shop_registration = '<?php echo $users["company_shop_registration_pic"]; ?>';
+var profile_pic_flag = true;
+var company_img_1_pic_flag = true;
+var pancard_pic_flag = true;
+var id_card_pic_flag = true;
+var company_shop_registration_pic_flag = true;
+if(profile_pic != "") {
+	profile_pic_flag = false;
+}
+if(company_img_1 != "") {
+	company_img_1_pic_flag = false;
+}
+if(pancard != "") {
+	pancard_pic_flag = false;
+}
+if(id_card != "") {
+	id_card_pic_flag = false;
+}
+if(company_shop_registration != "") {
+	company_shop_registration_pic_flag = false;
+}
+
+var travel_certificate_flag = false;
+var hotel_category_flag = false;
+if(role_id == "1") {
+	var travel_certificate_flag = true;
+	var hotel_category_flag = false;
+} else if(role_id == "3") {
+	var travel_certificate_flag = false;
+	var hotel_category_flag = true;
+}
+var settings = $('#UserRegisterForm').validate().settings;
+$.extend(true, settings, {
+	rules: {
+	   "profile_pic": {
+		   required: profile_pic_flag
+		},
+		"company_img_1": {
+			required: company_img_1_pic_flag
+		},
+		"pancard": {
+			required: pancard_pic_flag
+		},
+		"id_card": {
+			required: id_card_pic_flag
+		},
+		"company_shop_registration": {
+			required: company_shop_registration_pic_flag
+		},
+		"hotel_categories": {
+			required: hotel_category_flag
+		}
+	},
+	messages: {
+		"profile_pic" : {
+			required : "Please upload profile pic."
+		},
+		"company_img_1": {
+			required: "Please upload company image 1."
+		},
+		"pancard": {
+			required: "Please upload pancard."
+		},
+		"id_card": {
+			required: "Please upload id card."
+		},
+		"company_shop_registration": {
+			required: "Please upload company shop registration."
+		},
+		"hotel_categories": {
+			required: "Please select hotel categories."
+		}
+	}
+});
+
+</script>
+  <?php echo $this->Html->css(['chosen/chosen']);?>
+  <?php echo $this->Html->script(['chosen/chosen.jquery']);?>
+<script type="text/javascript">
+$(document).ready(function($){
+	//$(".chosen-select").chosen();
+	/*var config = {
+      '.chosen-select'           : {},
+      '.chosen-select-deselect'  : {allow_single_deselect:true},
+      '.chosen-select-no-single' : {disable_search_threshold:10},
+      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+      '.chosen-select-width'     : {width:"95%"}
+    }
+	for (var selector in config) {
+      $(selector).chosen(config[selector]);
+    }*/
+	$(".travel_certificate_chosen_select").chosen({
+
+     //disable_search_threshold: 10
+
+	}).change(function(event){
+		if(event.target == this){
+			var data ='"'+$(this).val()+'"';
+			var res = data.split(",");
+			alert(res);
+			/*var result = data.match(/<?php echo PROJECT_TYPE_APARTMENT_ID; ?>/g);
+			var result2 = data.match(/<?php echo PROPERTY_TYPE_RESALE_APARTMENT_ID; ?>/g);
+
+			if(result == <?php echo PROJECT_TYPE_APARTMENT_ID; ?>) {
+				$('#apartmentTypes').show();
+			} else {
+				$('#apartmentTypes').hide();
+				$("#apartmentTypes").find("input:checkbox").each(function () {
+					$(this).attr("checked", false);
+				});
+			}
+			if(result2 == <?php echo PROPERTY_TYPE_RESALE_APARTMENT_ID;?>) {
+				$('#apartmentTypesResale').show();
+			} else {
+				$('#apartmentTypesResale').hide();
+				$("#apartmentTypesResale").find("input:checkbox").each(function () {
+					$(this).attr("checked", false);
+				});
+			}*/
+		}
+	});
+});
+</script>

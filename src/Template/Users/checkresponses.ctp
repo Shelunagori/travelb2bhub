@@ -50,6 +50,10 @@ legend
 .margin {margin-top:5px;}
 .shotrs a {margin:5px;;}
 .modal-body {padding:2px!important;}
+.col-form-label{
+	margin-top: 4px;
+	font-weight:100 !important;
+}
 </style>
 <div class="container-fluid" id="checkresponses">
     <div class="row equal_column"> 
@@ -63,10 +67,94 @@ legend
 			
 			<div class="box-tools pull-right">
 				<!--<a style="font-size:33px" class="btn btn-box-tool" data-target="#myModal123" data-toggle="modal"> <i class="fa fa-sort-amount-asc"></i></a>-->
-				<a style="font-size:22px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="modal"> <i class="fa fa-filter"></i></a>
+				<a style="font-size:22px" class="btn btn-box-tool" data-target="#myModal122" data-toggle="collapse"> <i class="fa fa-filter"></i></a>
 			</div>
 		</div>
 		<div class="box-body">
+<div class="collapse"  id="myModal122" aria-expanded="false"> 
+	<form class="filter_box" style="padding-right: 15px;padding-left: 15px;" method="get">
+		<fieldset><legend style="text-align:left !important;">Filter</legend>
+			<div class="modal-body">
+				<div class="col-md-6" style="margin-top:5px">
+				   <div class="col-md-12">
+					<label for="example-text-input" class=" col-form-label">Agent Name: </label> 
+						
+					   <select name="agentname[]" multiple class="form-control select2" data-placeholder='Select Agent Name'>
+					   
+					   <?php if(!empty($UserResponse)){ 
+							foreach($UserResponse as $user){
+					   ?>
+						<option <?php echo (isset($_GET['agentname']) && $_GET['agentname'] ==$user['user']['id'])? 'selected':''; ?> value="<?php echo $user['user']['id']?>">
+							<?php echo $user['user']['first_name'].' '.$user['user']['last_name']?>
+						</option>
+					   <?php }}?>
+					   </select>
+				   </div>
+				</div>
+				
+				
+				 <div class="col-md-6" style="margin-top:5px">
+				   <div class="col-md-12">
+					 <label for="example-text-input" class=" col-form-label">Select Chat With: </label>
+					   <select name="chatwith[]" class="form-control select2" multiple data-placeholder='Select Chat With'>
+					   <?php if(!empty($UserResponse)){ 
+							foreach($UserResponse as $user){               
+					   ?>
+					   <option <?php echo (isset($_GET['chatwith']) && $_GET['chatwith'] ==$user['user']['id'])? 'selected':''; ?> value="<?php echo $user['user']['id']?>"><?php echo $user['user']['first_name'].' '.$user['user']['last_name']?></option>
+					   <?php }}?>
+					   </select>
+					</div>
+				</div>
+				 
+				<!--div class="col-md-12">
+				  
+				   <div class="col-md-12"> 
+					 <label for="example-text-input" class=" col-form-label">Reference ID: </label>
+					   <input type="text" name="refidsearch" value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>"  class="form-control">
+				  </div>
+				</div>
+					   
+					   
+				<div class="col-md-12">
+				   
+				   <div class="col-md-12">
+					<label for="example-text-input" class=" col-form-label">Budget: </label> 
+					   <select name="budgetsearch" class="form-control"><option value="">Select Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
+				   </div>
+				</div-->
+					   
+					   
+				<div class="col-md-6" style="margin-top:5px">
+				   
+				   <div class="col-md-12">
+					<label for="example-text-input" class=" col-form-label">Quoted Price Range: </label>
+					   <select name="quotesearch" class="form-control"><option value="">Select Quoted Price</option><option value="0-10000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="30000-50000")? 'selected':''; ?>>30000- 50000</option><option value="50000-100000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
+					</div>
+				</div>
+				
+				 
+				<div class="col-md-6" style="margin-top:5px">
+				   
+				   <div class="col-md-12">
+						<label for="example-text-input" class=" col-form-label">Following: </label> 
+					   <input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['followsearch'])? "checked":''; ?>  >
+				   </div>
+			   </div>
+				<div class="col-md-6" style="margin-top:5px">
+				   
+				   <div class="col-md-12">
+					<label for="example-text-input" class=" col-form-label">Shared Details: </label>
+					   <input type="checkbox" name="shared_details" value="1" <?php echo isset($_GET['shared_details'])? "checked":''; ?>  >
+				   </div>
+			   </div>                           
+			</div>
+			<div class="modal-footer">
+				<button type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">Filter</button>
+				<a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'checkresponses',$responseid)) ?>">Reset</a>
+			</div>
+		</fieldset>
+	</form>
+</div>
 			<?php 
 				
 				foreach($responses as $ro){
@@ -371,7 +459,7 @@ legend
 														<label class="star star-2" for="star-2<?php echo $row['id']; ?>"></label>
 														<input class="star star-1" id="star-1<?php echo $row['id']; ?>" type="radio" name="rating"  value="1" />
 														<label class="star star-1" for="star-1<?php echo $row['id']; ?>"></label>
-														<input style="display:none;" type="radio" name="rating" value="0"/>
+														<input style="display:none;" type="radio" checked name="rating" value="0"/>
 													</div>
 												</div>
 
@@ -493,98 +581,10 @@ legend
 	</div>
 	</div>
 </div>
-	
-<div class="fade modal form-modal" id="myModal122" role="dialog">
-	  <div class="modal-dialog "  >
-		 <div class=modal-content>
-			<div class=modal-header>
-			   <button class="close" data-dismiss="modal" type="button">&times;</button>
-			   <h4 class=modal-title>Filter</h4>
-			</div>
-			<form class="filter_box" method="get">
-				<div class="modal-body">
-					<div class="col-md-12" style="margin-top:5px">
-					   <div class="col-md-12">
-						<label for="example-text-input" class=" col-form-label">Agent Name: </label> 
-						    
-						   <select name="agentname[]" multiple class="form-control select2" data-placeholder='Select Agent Name'>
-						   
-						   <?php if(!empty($UserResponse)){ 
-								foreach($UserResponse as $user){
-						   ?>
-							<option <?php echo (isset($_GET['agentname']) && $_GET['agentname'] ==$user['user']['id'])? 'selected':''; ?> value="<?php echo $user['user']['id']?>">
-								<?php echo $user['user']['first_name'].' '.$user['user']['last_name']?>
-							</option>
-						   <?php }}?>
-						   </select>
-					   </div>
-					</div>
-					
-					
-					 <div class="col-md-12" style="margin-top:5px">
-					   <div class="col-md-12">
-						 <label for="example-text-input" class=" col-form-label">Select Chat With: </label>
-						   <select name="chatwith[]" class="form-control select2" multiple data-placeholder='Select Chat With'>
-						   <?php if(!empty($UserResponse)){ 
-								foreach($UserResponse as $user){               
-						   ?>
-						   <option <?php echo (isset($_GET['chatwith']) && $_GET['chatwith'] ==$user['user']['id'])? 'selected':''; ?> value="<?php echo $user['user']['id']?>"><?php echo $user['user']['first_name'].' '.$user['user']['last_name']?></option>
-						   <?php }}?>
-						   </select>
-						</div>
-					</div>
-					 
-					<!--div class="col-md-12">
-					  
-					   <div class="col-md-12"> 
-						 <label for="example-text-input" class=" col-form-label">Reference ID: </label>
-						   <input type="text" name="refidsearch" value="<?php echo isset($_GET['refidsearch'])? $_GET['refidsearch']:''; ?>"  class="form-control">
-					  </div>
-					</div>
-						   
-						   
-					<div class="col-md-12">
-					   
-					   <div class="col-md-12">
-						<label for="example-text-input" class=" col-form-label">Budget: </label> 
-						   <select name="budgetsearch" class="form-control"><option value="">Select Budget</option><option value="0-10000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="30000-50000")? 'selected':''; ?>>30000-50000</option><option value="50000-100000" <?php echo (isset($_GET['budgetsearch']) && $_GET['budgetsearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
-					   </div>
-					</div-->
-						   
-						   
-					<div class="col-md-12" style="margin-top:5px">
-					   
-					   <div class="col-md-12">
-						<label for="example-text-input" class=" col-form-label">Quoted Price Range: </label>
-						   <select name="quotesearch" class="form-control"><option value="">Select Quoted Price</option><option value="0-10000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="0-10000")? 'selected':''; ?>>0-10000</option><option value="10000-30000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="10000-30000")? 'selected':''; ?>>10000-30000</option><option value="30000-50000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="30000-50000")? 'selected':''; ?>>30000- 50000</option><option value="50000-100000" <?php echo (isset($_GET['quotesearch']) && $_GET['quotesearch'] =="50000-100000")? 'selected':''; ?>>50000-100000</option></select>
-						</div>
-					</div>
-					
-					 
-					<div class="col-md-12" style="margin-top:5px">
-					   
-					   <div class="col-md-12">
-							<label for="example-text-input" class=" col-form-label">Following: </label> 
-						   <input type="checkbox" name="followsearch" value="1" <?php echo isset($_GET['followsearch'])? "checked":''; ?>  >
-					   </div>
-				   </div>
-					<div class="col-md-12" style="margin-top:5px">
-					   
-					   <div class="col-md-12">
-						<label for="example-text-input" class=" col-form-label">Shared Details: </label>
-						   <input type="checkbox" name="shared_details" value="1" <?php echo isset($_GET['shared_details'])? "checked":''; ?>  >
-					   </div>
-				   </div>                           
-				</div>
-				<div class="modal-footer">
-					<button type="submit" name="submit" value="Submit"  class="btn btn-primary btn-submit">Filter</button>
-					<a class="btn btn-primary btn-submit" href="<?php echo $this->Url->build(array('controller'=>'Users','action'=>'checkresponses',$responseid)) ?>">Reset</a>
-				</div>
-			 </form>
-		 </div>
-	  </div>
-   </div>
-</div>
+
+
+
+ 
  
 <div class="fade modal"id="myModal1<?php echo $responseid; ?>"role=dialog>
 			<div class=modal-dialog>

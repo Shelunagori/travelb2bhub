@@ -1025,7 +1025,8 @@ a{
 	});
 
 
-		$(window).scroll(function() { 
+		$(window).scroll(function() {
+			 
 			var scrollTop = $(window).scrollTop();
 			var docHeight = $(document).height();
 			var winHeight = $(window).height();

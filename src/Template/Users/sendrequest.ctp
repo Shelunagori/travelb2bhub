@@ -169,7 +169,7 @@ label {
 								<?php echo $this->Form->control('hotelAdult', ["type"=>"text","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'oninput'=>"this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"]); ?>
 							</div>
 							<div class="col-md-4">
-								<p for="from">Children below 6 </p>
+								<p for="from">Children Below 6 </p>
 								<?php echo $this->Form->control('hotelChildren', ["type"=>"text","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'oninput'=>"this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"]); ?>
 							</div>							 
 						</div>
@@ -291,7 +291,7 @@ label {
 										</p>
 									</div>
 									<div class="">
-									<input autocomplete="off" type="text" name="check_in" id="HotelDatePicker" class="form-control " data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
+									<input autocomplete="off" type="text" name="check_in" id="HotelDatePicker" class="form-control removeerror" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
 									</div>
 								</div>
 								<div class="col-md-6">
@@ -301,7 +301,7 @@ label {
 										</p>
 									</div>
 									<div class="">
-										<input autocomplete="off" type="text" name="check_out" class="form-control" id="datepicker2" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
+										<input autocomplete="off" type="text" name="check_out" class="form-control removeerror" id="datepicker2" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
 									</div>
 								</div>
 							</div>
@@ -378,7 +378,7 @@ label {
 								<?php echo $this->Form->control('adult', ["type"=>"text","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'oninput'=>"this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"]); ?>
  							</div>
 							<div class="col-md-4">
-								<p for="from">Children below 6  </p>
+								<p for="from">Children Below 6  </p>
 								<?php echo $this->Form->control('children', ["type"=>"text","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'oninput'=>"this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"]); ?>
  							</div>
 						</div>
@@ -542,7 +542,7 @@ label {
 											<div class="col-md-4 ">
 												<div class="input-field">
 													<p for="from">
-														Select Transport
+														Select Transport <span class="required">*</span>
 													</p>
 												</div>
 												<div class="">
@@ -553,7 +553,7 @@ label {
 											<div class="col-md-4">
 											<div class="input-field">
 												<p for="from">
-													Start Date
+													Start Date <span class="required">*</span>
 												</p>
 											</div> 
 											<input autocomplete="off" name="start_date" type="text" class="form-control " data-date-format="dd-mm-yyyy" id="packageTransport" placeholder="DD-MM-YYYY"/>
@@ -563,7 +563,7 @@ label {
 										<div class="col-md-4">
 											<div class="input-field">
 												<p for="from">
-													End Date
+													End Date <span class="required">*</span>
 												</p>
 											</div>
 											<input autocomplete="off" name="end_date" type="text" class="form-control" data-date-format="dd-mm-yyyy" id="packageTransport1" placeholder="DD-MM-YYYY"/>
@@ -582,7 +582,7 @@ label {
 										</div>
 										<div class="col-md-4 mt form-group">
 											<div class="input-field">
-												<p for="from">Pickup City</p>
+												<p for="from">Pickup City <span class="required">*</span></p>
 												<input type="text" class="form-control city_select ctynamerecord" id="pickup_city_name" name="pickup_city_name"  placeholder="Select City or Nearest City" taxboxname="pickup_state_id" noofrows="5" />
 												<input type='hidden' class="ctyIDname city_real" id='pickup_city_id' name="pickup_city_id" />
 												<div class="suggesstion-box" style="margin-top:-10px"></div>
@@ -641,7 +641,7 @@ label {
 										</div>
 										<div class="col-md-6 form-group">
 											<div class="input-field">
-												<p for="from">Final City
+												<p for="from">Final City <span class="required">*</span>
 													 
 												</p>
 												<input type="text" class="form-control city_select" id="p_final_city_name" noofrows="2" name="p_final_city_name" required placeholder="Select City or Nearest City"/>
@@ -741,7 +741,7 @@ label {
 													<?php echo $this->Form->control('transportAdult', ["type"=>"text","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'oninput'=>"this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"]); ?>
 												</div>
 												<div class="col-md-4">
-													<p for="from">Children below 6  </p>
+													<p for="from">Children Below 6  </p>
 													<?php echo $this->Form->control('transportChildren', ["type"=>"text","min"=>0, "class"=>"form-control input-medium", 'p' => false, 'div' => false, "placeholder"=>"0",'oninput'=>"this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"]); ?>
 												</div>
 											</div>
@@ -843,9 +843,7 @@ label {
 											</div>
 											<div class="col-md-4 form-group  mt">
 													<div class="input-field">
-														<p for="from">Final City
-														 <span class="required">*</span>    
-														</p>
+														<p for="from">Final City</p>
 														<input type="text" class="form-control city_select" id="t_final_city_name" noofrows="3" name="t_final_city_name" placeholder="Select City or Nearest City"/>
 														<input type='hidden' id='t_final_city_id' name="t_final_city_id" class="city_real" />
 											<div class="suggesstion-box" style="margin-top:-10px"></div>
@@ -914,7 +912,15 @@ $(document).ready(function(){
 	var date = new Date();
 	date.setDate(date.getDate());
 	//-- Hotel date Pickers Starte 
-	
+	/* $('.removeerror').on('chnage',function(){
+		
+		 //$(this).closest('div').find(".removeerror").trigger( "click" );
+		var pass=  $(this).val();
+		 
+ 		if(pass.length >0){
+ 			$(this).closest('div').find('label.error').hide();
+		} 
+	}); */
 	
 	$("#HotelDatePicker").datepicker({
 		autoclose:false,
@@ -1337,11 +1343,15 @@ $('#HotelRequestForm').submit(function(){
 	$('#HotelRequestFormCITY').hide();
 	if($(this).closest('div').find('.ctyidd').val()==''){
 		$('#HotelRequestFormCITY').show();
-	}	
+	}
+ 	
 	if(x==0){
 		$('#showerror').show();
 		$('html, body').animate({scrollTop:0}, 'slow');
 		return false;
+	}
+	else{
+		$("#loader-1").show();
 	}
 }); 
 
@@ -1357,6 +1367,9 @@ $('#PackgeRequestForm').submit(function(){
 		$('#showerror12').show();
 		$('html, body').animate({scrollTop:0}, 'slow');
 		return false;
+	}
+	else{
+		$("#loader-1").show();
 	}
 	
 })
@@ -1442,8 +1455,7 @@ $('#PackgeRequestForm').submit(function(){
 			}
 		},
 		submitHandler: function (form) {
- 			$("#loader-1").show();
-			form[0].submit(); 
+ 			form[0].submit(); 
 		}
 	});
  	
@@ -1507,7 +1519,6 @@ $('#PackgeRequestForm').submit(function(){
 			}
 		},
 		submitHandler: function (form) {
- 			$("#loader-1").show();
 			form[0].submit(); 
 		}
 	});

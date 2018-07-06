@@ -198,7 +198,7 @@ fieldset{
 													</div>
 													<div class="col-md-4 form-group">
 																<p for="from">
-																	Select Package Category
+																	Select Package Category  <span class="required">*</span>
 																</p>
 																<div class="input-field">
 																<?php 
@@ -207,7 +207,8 @@ fieldset{
 																{
 																	$options[] = ['value'=>$sts->id,'text'=>$sts->name];
 																};
-																echo $this->Form->control('package_category_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control select2","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
+																echo $this->Form->control('package_category_id', ['label'=>false,"id"=>"multi_category", "type"=>"select",'options' =>$options, "multiple"=>true , "class"=>"form-control requiredfield select2","data-placeholder"=>"Select Options ","style"=>"height:125px;"]);?>
+																<label style="display:none" class="helpblock error" > This field is required.</label>
 																</div>
 															</div>
 														<div class="col-md-4 form-group">
@@ -327,7 +328,7 @@ fieldset{
 														<div class="col-md-12 form-group">
 															<div class="col-md-12 ">
 															<p for="from">
-																Included In Package
+																Included in Package <span class="required">*</span>
 																</p>
 																 
 																<div class="input-field">

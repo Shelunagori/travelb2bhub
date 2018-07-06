@@ -227,7 +227,7 @@ ul li b {
 			<ul>
 				<li class="col-md-12 ">
 				<p>Transport: &nbsp;
-					<b><?php
+					<b><?php 
 					echo ($details['transport_requirement']) ? $transpoartRequirmentArray[$details['transport_requirement']]:  "-- --"; ?>
 				</b></p>
 				</li>

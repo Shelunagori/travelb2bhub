@@ -242,7 +242,7 @@ margin-bottom: 0px!important;
 		border-color:#C9A66B !important;
 		
 	}
-	.btn.focus, .btn:focus, .btn:hover
+	.btn.focus, .btn:focus, .btn-successto {
  		color: white !important;
 	}
 	.btn-successtoNew
@@ -391,9 +391,7 @@ margin-bottom: 0px!important;
 <!--<body class="hold-transition skin-blue fixed sidebar-mini">-->
 
 <body class="hold-transition skin-blue fixed sidebar-mini">
-<!--Start of Tawk.to Script-->
  
-<!--End of Tawk.to Script-->
 <?php $this->Form->templates([
 		'inputContainer' => '{{content}}'
 	]); 

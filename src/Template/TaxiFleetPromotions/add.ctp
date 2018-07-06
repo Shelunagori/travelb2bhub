@@ -309,7 +309,7 @@ fieldset{
 									<div class="col-md-12 ">
 									<div class="col-md-12 form-group">
 										<p for="from">
-											Fleet Description
+											Fleet Description <span class="required">*</span>
 											
 										</p>
 										<div class="input-field">
@@ -394,12 +394,13 @@ fieldset{
   				if($(this).val()==''){ 
  					$(this).closest('div.form-group').find('.helpblock').show();
 					x = 1;
-				}
+ 				}
 				if($(this).val()==null){
  					$(this).closest('div.form-group').find('.helpblock').show();
 					x = 1;
 				}
  			});
+			
 			if(x==1){
 				$('html, body').animate({scrollTop:0}, 'slow');
 				return false;

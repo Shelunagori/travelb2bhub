@@ -5124,6 +5124,17 @@ $response=array('success'=>$success,'error'=>$error,'response'=>$response);
 				$p['check_out'] =  $d['check_out'];
 				$contact = $this->Requests->newEntity($p);
 				if ($re = $this->Requests->save($contact)) {
+					$result['response_code'] = 200;
+					if($myRequestCount1==8){			 
+						$result['response_object'] = "Alert! You are about to reach the 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing another request.";
+					}
+					else
+					{
+						$result['response_object'] = "Congratulations! Your request has been submitted successfully.";
+					}
+					$data = json_encode($result);
+					echo $data;
+					
 					$ui = $re->id;
 					$d['req_id'] = $ui;
 					$d['user_id'] = $_POST['user_id'];
@@ -5193,16 +5204,7 @@ $this->User_Chats->updateAll(['type' => 'Request'], ['id' => $id]);
 							}
 						}
 					}
-					$result['response_code'] = 200;
-if($myRequestCount1==8){			 
-$result['response_object'] = "Alert! You are about to reach the 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing another request.";
-}
-else
-{
-$result['response_object'] = "Congratulations! Your request has been submitted successfully.";
-}
-					$data = json_encode($result);
-					echo $data;
+					
 					exit;
 				} 
 				else {
@@ -5306,6 +5308,17 @@ $result['response_object'] = "Congratulations! Your request has been submitted s
 				$contact = $this->Requests->newEntity();
 				$contact = $this->Requests->patchEntity($contact, $p);
 				if ($re = $this->Requests->save($contact)) {
+					$result['response_code'] = 200;
+					if($myRequestCount1 ==8){			 
+						$result['response_object'] = "Alert! You are about to reach the 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing another request.";
+					}
+					else
+					{
+						$result['response_object'] = "Congratulations! Your request has been submitted successfully.";
+					}
+					$data = json_encode($result);
+					echo $data;
+					
 					$ui = $re->id;
 					if(isset($d['stops'])) {
 						ksort($d['stops']);
@@ -5350,16 +5363,7 @@ $result['response_object'] = "Congratulations! Your request has been submitted s
 						}
 					}
 						
-					$result['response_code'] = 200;
-					if($myRequestCount1 ==8){			 
-						$result['response_object'] = "Alert! You are about to reach the 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing another request.";
-					}
-					else
-					{
-						$result['response_object'] = "Congratulations! Your request has been submitted successfully.";
-					}
-					$data = json_encode($result);
-					echo $data;
+					
 					exit;
 				} 
 				else {
@@ -5461,6 +5465,16 @@ $result['response_object'] = "Congratulations! Your request has been submitted s
 
 				$contact = $this->Requests->newEntity($p);
 				if ($re = $this->Requests->save($contact)) {
+					if($myRequestCount1 ==8){			 
+						$result['response_object'] = "Alert! You are about to reach the 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing another request.";
+					}
+					else
+					{
+						$result['response_object'] = "Congratulations! Your request has been submitted successfully.";
+					}
+ 					$result['response_code'] = 200;					
+					$data = json_encode($result);
+					echo $data;
 				$ui = $re->id;
 				$d['req_id'] = $ui;
 				$d['user_id'] = $_POST['user_id'];
@@ -5525,16 +5539,7 @@ $this->User_Chats->updateAll(['type' => 'Request'], ['id' => $id]);
 					}
 				}
 
-if($myRequestCount1 ==8){			 
-			$result['response_object'] = "Alert! You are about to reach the 10 permissible open requests. You must Finalize a Request or Remove a Request, in the My Requests section, in order to proceed with placing another request.";
-}
-else
-{
-$result['response_object'] = "Congratulations! Your request has been submitted successfully.";
-}
- 					$result['response_code'] = 200;					
-					$data = json_encode($result);
-					echo $data;
+					
 					exit;
 				} 
 				else {

@@ -10,7 +10,7 @@ class AppController extends Controller
   use \Crud\Controller\ControllerTrait;
   public $components = [
         'RequestHandler','Flash',
-        'Crud.Crud' => [
+        'Crud.Crud' => [ 
             'actions' => [
                 'Crud.Index',
                 'Crud.View',

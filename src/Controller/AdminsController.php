@@ -93,7 +93,7 @@ class AdminsController extends AppController
 					return $this->redirect(['action' => 'changePassword']);
 				}
 			}
-		}
+		} 
 		$Users=$this->Users->find()->where(['is_deleted'=>0])->order(['Users.id' => 'DESC']);
 		$this->set('Users', $Users);
     }

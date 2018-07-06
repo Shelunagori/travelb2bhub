@@ -693,7 +693,8 @@ a{
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>	 
 $(document).ready(function(){
-		$(window).scroll(function() { 
+		$(window).scroll(function() {
+			 
 			var scrollTop = $(window).scrollTop();
 			var docHeight = $(document).height();
 			var winHeight = $(window).height();

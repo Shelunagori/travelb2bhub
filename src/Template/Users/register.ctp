@@ -97,8 +97,7 @@ input[type=checkbox] {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Travel B2B HUB</title>
-	<?php echo $this->Html->css('/assets/font-awesome/fonts/font-awesome.min.css'); ?>
+	<title>Travel B2B HUB</title> 
 	<?php echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
 	<?php echo $this->Html->css('/assets/login/fonts/iconic/css/material-design-iconic-font.min.css'); ?>
 	<?php echo $this->Html->css('/assets/login/animate/animate.css'); ?>
@@ -118,7 +117,7 @@ input[type=checkbox] {
 		.login100-form-title { font-size:14px; }
 		.wrap-login100 { background-color:#1f222db8 !important; width:420px !important; padding: 18px 55px 37px 55px; }
 		.p-t-27 { padding-top: 10px; }
-		.error { color: #ff9898; text-align:center; }
+		.error { color: #ff9898; text-align:left; }
 		.wrap-input100 {
 		  //margin: 10px !important;
 		}
@@ -165,7 +164,7 @@ input[type=checkbox] {
 							</div>					
 						</div>
 						<div class="col-md-6 hoteltype" >
-							<div class="wrap-input100 validate-input "  data-validate = "Company Name">
+							<div class="wrap-input100 validate-input"  data-validate = "Company Name">
 							<input class=" input100 trim_space_valid taxtboxname" required=""  id="company_name" type="text" name="company_name" >
 							<span class="focus-input100 lablename" data-placeholder="Company Name" ></span></div>				
 						</div>										
@@ -175,13 +174,13 @@ input[type=checkbox] {
 					<div class="col-md-12">
 						<div class="col-md-6" >
 								<div class="wrap-input100 validate-input" data-validate = "First name">
-									<input class="input100 trim_space_valid"  required="" type="text" name="first_name" />
+									<input class="input100 trim_space_valid only_char" required="" type="text" name="first_name"/>
 									<span class="focus-input100" data-placeholder="First Name"></span>
 								</div>
 						</div>
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Last name">
-									<input class="input100 trim_space_valid"  required="" type="text" name="last_name" />
+									<input class="input100 trim_space_valid only_char" required="" type="text" name="last_name" />
 									<span class="focus-input100" data-placeholder="Last Name"></span>
 								</div>						
 						</div>
@@ -191,17 +190,14 @@ input[type=checkbox] {
 					<div class="col-md-12">
 						<div class="col-md-6">
 							<div class="wrap-input100 validate-input" data-validate = "Email">
-								<input class="input100 trim_space_valid"  required="" type="email" name="email" />
+								<input class="input100 trim_space_valid"  required="" type="email" name="email" id="email" />
 								<span class="focus-input100" data-placeholder="Email"></span>
 							</div>
 						</div>
 						<div class="col-md-6" style="color:white;">
 							<div class="wrap-input100 validate-input" data-validate = "Contact No">
-									 
-									<input class="input100 trim_space_valid"  required="" type="text"  maxlength="10" minlength="10" id="number_format" name="mobile_number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/>
-									<span class="focus-input100" data-placeholder="Contact No. (India)"></span>
-									<!--input class="input100 trim_space_valid maxx"  required="" id="mobile_number" type="tel" name="mobile_number" maxlength="10" minlength="10" placeholder="Contact No"  />
-									<span class="focus-input100"></span-->
+								<input class="input100 trim_space_valid"  required="" type="text"  maxlength="10" minlength="10" id="number_format" name="mobile_number" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/>
+								<span class="focus-input100" data-placeholder="Contact No. (India)"></span>
 							</div>										
 						</div>
 					</div>
@@ -210,24 +206,29 @@ input[type=checkbox] {
 					<div class="col-md-12">
 							<div class="col-md-6">
 								<div class="wrap-input100 validate-input" data-validate = "Password">
-										<input class="input100 trim_space_valid" required="" type="password" name="password"  id="password"/>
-										<span class="focus-input100" data-placeholder="Password"></span>
-									</div>	
-								</div>						
+									<input class="input100 trim_space_valid allowdisallow" required="" type="password" name="password"  id="password"/>
+									<span class="focus-input100 " data-placeholder="Password"></span>
+									<label id="password_error" style="padding-top: -33px;" class="error"></label>
+								</div>	
+								
+							</div>						
 							<div class="col-md-6">
 								<div class="wrap-input100 validate-input" data-validate = "Confirm Password">
-											<input class="input100 trim_space_valid" required=""  type="password" name="cpassword" id="cpassword"/>
-											<span class="focus-input100" data-placeholder="Confirm Password"></span>
-										</div>
-									</div>	
+									<input class="input100 trim_space_valid allowdisallow" required="" type="password" name="cpassword" id="cpassword"/>
+									<span class="focus-input100 cpass" data-placeholder="Confirm Password"></span>
+									<label id="Cpassword_error" style="padding-top: -33px;" class="error"></label>
+								</div>
+								
+								
+							</div>	
 					</div>
 				</div>
 				<div class="row col-md-12">
 					<div class="col-md-12">
-							<div class="wrap-input100 validate-input" data-validate = "Address">
-										<input class="input100 trim_space_valid"  required="" type="text" name="address"  id="address"/>
-										<span class="focus-input100" data-placeholder="Address"></span>
-									</div>
+						<div class="wrap-input100 validate-input" data-validate = "Address">
+							<input class="input100 trim_space_valid"  required="" type="text" name="address"  id="address"/>
+							<span class="focus-input100" data-placeholder="Address"></span>
+						</div>
 					</div>
 				</div>
 				
@@ -257,6 +258,7 @@ input[type=checkbox] {
 							<div class="wrap-input100 validate-input" data-validate = "Pincode">
 								<input class="input100 trim_space_valid"  required=""  type="text" name="pincode" id="pincode" maxlength="6" minlength="6" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/>
 								<span class="focus-input100" data-placeholder="Pincode"></span>
+								<label id="pincode_error" style="padding-top: -33px;" class="error"></label>
 							</div>
 						</div>	
 					</div>	
@@ -286,7 +288,7 @@ input[type=checkbox] {
 								
 								<div class="input-field">
 									<?php echo $this->Form->control('preference', ["id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control focus-input100 chosen-select ", "data-placeholder"=>"Select upto 5 states where you operate", "style"=>"height:100px;"]); ?>
-									<span style="display:none" class="helpblock error" style="text-align:left !important;" > This field is required.</span>
+									<span style="display:none" class="helpblock error" id="oprateerror" style="text-align:left !important;" > This field is required.</span>
 								</div>
 							</div>
 						</div>
@@ -316,7 +318,7 @@ input[type=checkbox] {
 				</div>
 				<div class="col-md-12">
 					<div class="col-xs-12" align="center">
-						<input type="submit" class="btn btn-primary sb" id="ckb1"  value="Register">
+						<input type="submit" class="btn btn-primary sb"   value="Register">
 					</div>
 				</div><br><br>
 				<div class="col-md-12 text-center" style="margin-top: 20px;">
@@ -341,8 +343,9 @@ input[type=checkbox] {
 <?php echo $this->Html->script('/assets/login/countdowntime/countdowntime.js'); ?>
 <?php echo $this->Html->script('/assets/login/js/main.js'); ?>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?> 
+
 <script>
-$(document).ready(function(){
+$(document).ready(function(){	
 $(".suggesstion-box").hide();	
 	$('.select2').select2();
 	$(document).on('click',"#pincode",function(){ 
@@ -358,13 +361,111 @@ $(".suggesstion-box").hide();
 			alert('Please select a city from the dropdown list');
 			$('#city-search-box').val('');
 		}
+	}); 
+	$('.only_char').keyup(function(){
+		var inputtxt=  $(this).val();
+		var numbers =  /[^a-zA-Z ]/;
+ 		if(inputtxt.match(numbers))  
+		{
+			$(this).val('');
+			return false; 
+		} 
+	}); 
+	$('.allowdisallow').keyup(function(){
+		var pass=  $('#password').val();
+		var cpass=  $('#cpassword').val();
+ 		if(pass.length>5){
+ 			if((pass.length>0) && (cpass.length>0)){
+				if(pass===cpass){ $('#Cpassword_error').html('');}
+				else{
+ 					$('#Cpassword_error').html('Password Not Match.');
+ 				}			
+			}
+		}
 	});
+	$('.allowdisallow').blur(function(){
+		var pass=  $('#password').val();
+		var cpass=  $('#cpassword').val();
+ 		if(pass.length>5){
+ 			if((pass.length>0) && (cpass.length>0)){
+				if(pass===cpass){ $('#Cpassword_error').html('');}
+				else{
+ 					$('#Cpassword_error').html('Password Not Match.');
+					$('#cpassword').val('');
+				}			
+			}
+		}
+	});
+	
+	$('.allowdisallow').keyup(function(){
+		var pass=  $('#password').val();
+		if(pass.length>5){
+			$('#password_error').html('');
+		}
+		else{
+			$('#password_error').html("Password must be at least six characters long.");
+			return false;
+		}		
+	});
+	$('#pincode').keyup(function(){
+		var pass=  $('#pincode').val();
+		if(pass.length>5){
+			$('#pincode_error').html('');
+		}
+		else{
+			$('#pincode_error').html("Pincode must be at least six digits long.");
+			return false;
+		}		
+	});
+	
+	$('#pincode').blur(function(){
+		var pass=  $('#pincode').val();
+		if(pass.length>5){
+			$('#pincode_error').html('');
+		}
+		else{
+			$('#pincode_error').html("Pincode must be at least six digits long.");
+			$('#pincode').val('');
+			return false;
+		}		
+	});
+	
+	$('#preference').change(function(){
+		var pass=  $(this,'option:selected').val();
+ 		if(pass.length>4){
+			$('#oprateerror').html('');
+		}
+		else{
+			$('#oprateerror').html("Please select between 1 to 5 states.");
+			return false;
+		}		
+	});
+	
+
+	$(document).on('blur',"#email",function(){
+ 		var email=$(this).val();
+		var m_data = new FormData();
+ 		m_data.append('email',email);
+		$.ajax({
+			url: "<?php echo $this->Url->build(["controller" => "Users", "action" => "checkEmaileExixt"]); ?>",
+			data: m_data,
+			processData: false,
+			contentType: false,
+			type: 'POST',
+			dataType:'text',
+			success: function(data)
+			{	 
+				if(data=='remove'){alert("Email ID Already Exist");
+					$('#email').val('');
+				}
+			}
+		});
+ 	});
 	
 	
 	
 	$(document).on('blur',"#number_format",function(){ 
-			 
-		var mobile_number=$(this).val();
+ 		var mobile_number=$(this).val();
 		var m_data = new FormData();
 		 
 		if(mobile_number.length==10){  
@@ -486,301 +587,26 @@ function selectCountry(value,city_code,state,country_id,state_name,country_name)
 		$("#country_name").val(country_name);
  	}	
 
-</script>	
-<script>
- 
-	/*
-		var cityData = '<?php echo $allCities; ?>';
-						//alert(cityData);
-                        $(function ()
-                        {
-							
-						$('#city_id').change(function(){
-							var city=$('#city_id').val();
-							$('#state_id').val($('#city_id').find("#"+city).attr("state"));
-							 $('#country_id').val("101");
-						});
-						
-						$('.multiselect-ui').multiselect({
-							includeSelectAllOption: false,
-							maxHeight: 300,
-						});
-                       
-                        $("#wizard").steps({
-                                headerTag: "h2",
-                                bodyTag: "section",
-                                transitionEffect: "slideLeft"
-                            });
-                        }); 
-						$(document).ready(function () {
-							//alert("working..");
-						   // $.get("usersgetcitylist.json", function (d) {
-						   //   console.log(d);
-						   var data = [
-								{'label': 'Delhi,Delhi', 'value': 1},
-								{'label': 'Gurgaon,Hariyana', 'value': 2},
-								{'label': 'Saket,Delhi', 'value': 3},
-								{'label': 'Mumbai,Mahastra', 'value': 4},
-								{'label': 'Kolkatta,Paschim Bangal', 'value': 5},
-								{'label': 'Jaypur,Rajsthan', 'value': 6},
-								{'label': 'Udaypur,Rajsthan', 'value': 7},
-								{'label': 'Kota,Rajsthan', 'value': 8},
-								{'label': 'Lucknow,UttarPradesh', 'value': 9},
-								{'label': 'Varansi,UttarPradesh', 'value': 10},
-								{'label': 'Allahabad,UttarPradesh', 'value': 11},
-								{'label': 'Noida,UttarPradesh', 'value': 12},
-								{'label': 'GreaterNoida,UttarPradesh', 'value': 13},
-								{'label': 'Pune,Mahastra', 'value': 14},
-								{'label': 'Patna,Bihar', 'value': 15},
-								{'label': 'Ranchi,Jharkhand', 'value': 16},
-								{'label': 'Adampur,Haryana', 'value': 17},
-								{'label': 'Ambala,Haryana', 'value': 18},
-								{'label': 'Faridabad,Haryana', 'value': 19},
-								{'label': 'Hisar,Haryāna', 'value': 20},
-								];
-						   
-							
-							$("#city_name").autocomplete({
-								source: JSON.parse(cityData),
-								select: function (e, ui) {
-									e.preventDefault();
-									$("#city_id").val(ui.item.value);
-									$(this).val(ui.item.label);
-									$("#state_id").val(ui.item.state_id);
-									$("#state_name").val(ui.item.state_name);
-
-									$("#country_id").val(ui.item.country_id);
-									$("#country_name").val(ui.item.country_name);
-								
-								}
-							});
-							// Overrides the default autocomplete filter function to search only from the beginning of the string
-							$.ui.autocomplete.filter = function (array, term) {
-								var matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(term), "i");
-								return $.grep(array, function (value) {
-									return matcher.test(value.label);
-								});
-							};
-
-						});
-                    </script>
+</script>
+<?php echo $this->Html->css(['chosen/chosen']);?>
+<?php echo $this->Html->script(['chosen/chosen.jquery']);?>	
 <script>
 $('.trim_space_valid').change(function() {
     $(this).val($(this).val().trim());
 });
- $.validator.addMethod("needsSelection", function (value, element) {
-	var count = $(element).find('option:selected').length;
-	if(count == 0)
-		return false;
-	if(count > 0 && count < 6)
-		return true;
-	else
-		return false;
-});
-jQuery.validator.addMethod("phoneno", function(phone_number, element) {
-    	    phone_number = phone_number.replace(/\s+/g, "");
-    	    return this.optional(element) || phone_number.length > 9 && 
-phone_number.match(/^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/);
-    	}, "<br />Please specify a valid phone number");
-jQuery.validator.addMethod("email", function(value, element) {
-value = value.trim();
-return this.optional(element) || /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i.test(value);
-}, "Please enter a valid email.");
-
-$('#UserRegisterForm').validate({
-		onkeyup: function (element, event) {
-            if (event.which === 9 && this.elementValue(element) === "") {
-                return;
-            } else {
-                this.element(element);
-            }
-        },
-	rules: {
-		"company_name" : {
-			required : true
-		},
-		"first_name" : {
-			required : true
-		},
-		"last_name" : {
-			required : true
-		},
-		"email": {
-			required : true,
-			email: true
-		},
-		"mobile_number": {
-			required : true,
-			number: true,
-			minlength:10,
-  			maxlength:10
-		},
-		"address": {
-			required: true
-		},
-		"city_name": {
-			required: true
-		},
-		"state_name": {
-			required: true
-		},
-		"country_name": {
-			required: true
-		},
-		"pincode": {
-			required: true,
-			number:true
-		},
-		
-		"password": {
-			required: true
-		},
-		"cpassword": {
-			required: true,
-			equalTo: "#password"
-		},
-		"term_n_cond": {
-			required: true
-		}
-	},
-	messages: {
-		"company_name" : {
-			required : "Please enter company name."
-		},
-		"first_name" : {
-			required : "Please enter first name."
-		},
-		"last_name" : {
-			required : "Please enter last name."
-		},
-		"email": {
-			required : "Please enter email.",
-			email : "Please enter valid email."
-		},
-		"mobile_number": {
-			required : "Please enter contact number.",
-			number: "Please enter only number",
-			minlength: "Please enter at least 10 digit",
-			maxlength: "Please enter no more than 10 digit"
-		},
-		"address": {
-			required: "Please enter address."
-		},
-		"city_name": {
-			required: "Please select city."
-		},
-		"state_name": {
-			required: ""
-		},
-		"country_name": {
-			required: ""
-		},
-		"pincode": {
-			required: "Please enter pincode.",
-			number: "Please enter only number"
-		},
-		"password": {
-			required: "Please enter password."
-		},
-		"cpassword": {
-			required: "Please enter confirm password.",
-			equalTo: "Confirm password should be equal to password."
-		},
-		"term_n_cond": {
-			required: "Please select terms & conditions."
-		}
-	},
-	ignore: ":hidden:not(select)",
-errorPlacement: function(error, element) {
-        if (element.is(':checkbox')) {
-            error.insertAfter($(".termcondition"));
-        }else{
-         error.insertAfter(element);
-        } 
-    }
-});
-$(function () {
-	$('#role_id').change(function(){
-		var roleid = jQuery( "#role_id option:selected" ).val();
-		if(roleid==3){
-		$('.hotelname').html('Hotel Name<span class="asterisk"><img class="img-responsive" src="../img/Asterisk.png"></span>')		
-		} else{
-			$('.hotelname').html('Company Name<span class="asterisk"><img class="img-responsive" src="../img/Asterisk.png"></span>')		
-		}
-		if(roleid != "" && roleid == 1) {
-			$('#preferenceStateDiv').show();
-			var needPreferenceState = true;
-		} else {
-			$('#preferenceStateDiv').hide();
-			var needPreferenceState = false;
-		}
-		var settings = $('#UserRegisterForm').validate().settings;
-		$.extend(true, settings, {
-			rules: {
-				"preference[]": {
-					required: true,
-					needsSelection: needPreferenceState
-				}
-			},
-			messages: {
-				"preference[]": {
-					needsSelection: "Please select between 1 to 5 states."
-				}
-			}
-		});
-	});
-});
-function getstatevalid()
-	{
-		var statename = $('#state_name').val();
-		var cityname = $('#city_name').val();
-		var cityid = $('#city_id').val();
-		if(cityname!=""){
-		if(statename==""){
-			//stateerrormodal
-			$('body').addClass('modal-open'); 
-	$("#stateerrormodal").addClass("in");
-	$("#stateerrormodal").show();
-		 }
-		}
-	}
-$(".closepreview" ).click(function() {
-$('body').removeClass('modal-open');
-$("#stateerrormodal").removeClass("in");
-	$("#stateerrormodal").hide(); 
-});
 </script>
-  <?php echo $this->Html->css(['chosen/chosen']);?>
-  <?php echo $this->Html->script(['chosen/chosen.jquery']);?>
-  
-  <?php echo $this->Html->css(['select2/select2']);?>
-  <?php echo $this->Html->script(['select2/select2']);?>
-  
-  <?php echo $this->Html->css(['telinput/css/intlTelInput']);?>
-  <?php echo $this->Html->script(['telinput/intlTelInput']);?>
-  <?php echo $this->Html->script(['telinput/utils']);?>
-  
 <script type="text/javascript">
-$('#UserRegisterForm').submit(function(){
-if ($("#UserRegisterForm").valid()) {
-$(this).find(':input[type=submit]').prop('disabled', true);
-}
-    
-});
+ 
 $(document).ready(function($){
-
-	 
-	
-	$("#preferenceStateDiv").hide();
+ 	$("#preferenceStateDiv").hide();
 	<?php if(isset($_GET['role']) && $_GET['role']=="1"){ ?>
-	
-	$("#preferenceStateDiv").show();
+ 	$("#preferenceStateDiv").show();
 	<?php } ?>
 	<?php if(isset($_GET['role']) && $_GET['role']=="3"){ ?>
 	$('.hotelname').html('Hotel Name');
 	<?php } ?>
 	
-	/*var last_valid_selection = null;
+	var last_valid_selection = null;
 	$( "#preference" ).change(function(event) {
   	var total_preference = $("#preference :selected").length;
  	if ($(this).val().length > 5) {
@@ -791,7 +617,7 @@ $(document).ready(function($){
   	}else{
   	last_valid_selection = $(this).val();
   	}
-	});*/
+	}); 
 	$(".chosen-select").chosen({ max_selected_options: 5 });
 	$(".chosen-select").select2({
 		  maximumSelectionLength: 5,width: '100%'
@@ -800,57 +626,11 @@ $(document).ready(function($){
 	$(".select2-search__field").css("width", "280");
 	
 });
-
-    $("#mobile_number").intlTelInput({
-      // allowDropdown: false,
-      // autoHideDialCode: false,
-      // autoPlaceholder: "off",
-      // dropdownContainer: "body",
-      // excludeCountries: ["us"],
-      // formatOnDisplay: false,
-      // geoIpLookup: function(callback) {
-      //   $.get("http://ipinfo.io", function() {}, "jsonp").always(function(resp) {
-      //     var countryCode = (resp && resp.country) ? resp.country : "";
-      //     callback(countryCode);
-      //   });
-      // },
-      // hiddenInput: "full_number",
-      // initialCountry: "auto",
-      // nationalMode: false,
-      onlyCountries: ['in'],
-      // placeholderNumberType: "MOBILE",
-      // preferredCountries: ['cn', 'jp'],
-       separateDialCode: true
-      //utilsScript: "build/js/utils.js"
-    });
+ 
   </script>	
 <script>
 $(document).ready(function (){  
-	$(document).on('keyup',".maxx",function(e){
-		if ($.inArray(e.which, [46, 9, 27, 13]) !== -1 ||
-             // Allow: Ctrl/cmd+A
-            (e.which == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
-             // Allow: Ctrl/cmd+C
-            (e.which == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
-             // Allow: Ctrl/cmd+X
-            (e.which == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
-             // which: home, end, left, right
-            (e.which >= 35 && e.which <= 39)) { 
-                 // let it happen, don't do anything
-                 return;
-        }
-        // Ensure that it is a number and stop the keypress
-			if(e.which == 190)
-			{
-				$(this).val('');
-				e.preventDefault();
-			}
-        else if ((e.shiftKey || (e.which < 48 || e.which > 57)) && (e.which < 96 || e.which > 105) && (e.which != 8)) {
-			$(this).val('');
-            e.preventDefault();
-        }
-		});
- $("#chk_cond").hide();
+  $("#chk_cond").hide();
 	$(document).on('click',"#ckb1",function(){
 		var va = +$('.chk_input').is( ':checked' );
 		if(va==0)
@@ -866,12 +646,12 @@ $(document).ready(function (){
 </script>	
 <script type="text/javascript">
 $(document).ready(function (){
-<?php if($_GET['promotion_id']==1){?>
-  
-	$('.preferenceStateDiv').show();
+	<?php if($_GET['promotion_id']==1){?>
+	  
+		$('.preferenceStateDiv').show();
 
-<?php } ?>
-var prootionId=<?php echo $_GET['promotion_id'];?>;
+	<?php } ?>
+	var prootionId=<?php echo $_GET['promotion_id'];?>;
 	if(prootionId == 3 ){
 		$('.lablename').removeAttr('data-placeholder');
 		$('.lablename').attr('data-placeholder','Hotel Name');
@@ -898,6 +678,5 @@ var prootionId=<?php echo $_GET['promotion_id'];?>;
 			$('#msg_div').remove();
 		}, delay);
 	} 
-	
 </script> 
 </html>

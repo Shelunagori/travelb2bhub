@@ -1,4 +1,3 @@
-<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <style>
 hr { margin-top:0px!important;}
 .price {
@@ -67,24 +66,27 @@ hr { margin-top:0px!important;}
 </style>
 
 <section class="content">
-<div class="row" >
+	<div class="row" >
 		<div class="col-md-12">
-		
 		</div>
 	</div>
-      <div class="row">
+    <div class="row">
         <!-- left column -->
         <div class="col-md-12">
           <!-- general form elements -->
-          <div class="box box-primary">
-             <div class="box-header with-border">
-              <h3 class="box-title">Edit Profile</h3>
-            </div>
-            <!-- /.box-header -->
-            <!-- form start -->
-			<?php $pararm = $users['id']; ?>
-            <?php  echo $this->Form->create("Users", ['type' => 'file', 'url' => ['controller' => 'Users', 'action' => 'edit',$pararm], 'id'=>"UserRegisterForm"]); ?>
-              <div class="box-body">
+			<div class="box box-primary">
+				<div class="box-header with-border">
+					<h3 class="box-title">Edit Profile</h3>
+				</div>
+             
+					<?php $pararm = $users['id']; ?>
+					<?php
+					 echo $this->Form->create(null, [
+						'type' => 'file',
+						'url' => ['controller' => 'Users', 'action' => 'edit/'.$pararm.''], "id"=>"HotelRequestForm"
+					]);
+					?>
+					<div class="box-body">
 			  <fieldset>
 				<?php if($users['role_id'] == 3) { ?>
 				<legend><b>HOTEL INFORMATION</b></legend>
@@ -165,8 +167,7 @@ hr { margin-top:0px!important;}
 				<div class="shw">
 					<div class="form-group col-md-4">
 						<?php 
-						//pr($states_show->toarray());exit;
-						$states_show=$states_show->toarray();?>
+ 						$states_show=$states_show->toarray();?>
 						  <label>States</label>
 							<input type="text" class="form-control" id ="state_name" value="<?php echo $states_show[$users['state_id']];?>" name="state_name" placeholder="Select State" readonly />
 							 
@@ -185,7 +186,7 @@ hr { margin-top:0px!important;}
 					if(!empty($users['preference'])) 
 					{
 						$selectedPreferenceStates = explode(",", $users['preference']);
-					}	
+					}	 
 					echo $this->Form->control('preference', ["value"=>$selectedPreferenceStates, "id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control select2", "data-placeholder"=>"Select Some States", "style"=>"height:125px;"]); ?>
 					<label style="display:none" id="preference-error" for="preference" class="helpblock error" > This field is required.</label>
 					
@@ -207,7 +208,7 @@ hr { margin-top:0px!important;}
 								echo $this->Html->image('icon/iata-1.png', ["class"=>"img-responsive", "alt"=>"IATA Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']); 
 								} ?>
 							<p>
-								<?php echo $this->Form->input('IATA Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'iata_pic']); ?>
+								<?php echo $this->Form->input('IATA Pic', ['type' => 'file', 'class' => 'form-control imagevalid', 'name' => 'iata_pic']); ?>
 								 
 							</p>
 						</div>
@@ -218,7 +219,7 @@ hr { margin-top:0px!important;}
 								echo $this->Html->image('icon/tafi-1.png', ["class"=>"img-responsive", "alt"=>"T A F I Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']); 
 								} ?>
 							<p>
-								<?php echo $this->Form->input('T A F I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'tafi_pic']); ?>
+								<?php echo $this->Form->input('T A F I Pic', ['type' => 'file', 'class' => 'form-control imagevalid', 'name' => 'tafi_pic']); ?>
 								 
 							</p>
 						</div>
@@ -230,7 +231,7 @@ hr { margin-top:0px!important;}
 								echo $this->Html->image('icon/taai-1.png', ["class"=>"img-responsive", "alt"=>"T A A I Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']); 
 								} ?>
 							<p>
-								<?php echo $this->Form->input('T A A I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'taai_pic']); ?>
+								<?php echo $this->Form->input('T A A I Pic', ['type' => 'file', 'class' => 'form-control imagevalid', 'name' => 'taai_pic']); ?>
 								 
 							</p>
 						</div>
@@ -242,7 +243,7 @@ hr { margin-top:0px!important;}
 								echo $this->Html->image('icon/iato-1.png', ["class"=>"img-responsive", "alt"=>"I A T O Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']); 
 								} ?>
 							<p>
-								<?php echo $this->Form->input('IATO Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'iato_pic']); ?>
+								<?php echo $this->Form->input('IATO Pic', ['type' => 'file', 'class' => 'form-control imagevalid', 'name' => 'iato_pic']); ?>
 								 
 							</p>
 						</div>
@@ -254,7 +255,7 @@ hr { margin-top:0px!important;}
 								echo $this->Html->image('icon/adtoi-1.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']); 
 								} ?>
 							<p>
-								<?php echo $this->Form->input('A D Y O I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'adyoi_pic']); ?>
+								<?php echo $this->Form->input('A D Y O I Pic', ['type' => 'file', 'class' => 'form-control imagevalid', 'name' => 'adyoi_pic']); ?>
 								 
 							</p>
 						</div>
@@ -266,7 +267,7 @@ hr { margin-top:0px!important;}
 								echo $this->Html->image('icon/iso-1.png', ["class"=>"img-responsive", "alt"=>"I S O 9001 Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']); 
 								} ?>
 							<p>
-								<?php echo $this->Form->input('I S O 9001 Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'iso9001_pic']); ?>
+								<?php echo $this->Form->input('I S O 9001 Pic', ['type' => 'file', 'class' => 'form-control imagevalid', 'name' => 'iso9001_pic']); ?>
 								 
 							</p>
 						</div>
@@ -278,7 +279,7 @@ hr { margin-top:0px!important;}
 								echo $this->Html->image('icon/uftaa-1.png', ["class"=>"img-responsive", "alt"=>"U F T A A Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']); 
 								} ?>
 							<p>
-								<?php echo $this->Form->input('U F T A A Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'uftaa_pic']); ?>
+								<?php echo $this->Form->input('U F T A A Pic', ['type' => 'file', 'class' => 'form-control imagevalid', 'name' => 'uftaa_pic']); ?>
 								 
 							</p>
 						</div>
@@ -290,7 +291,7 @@ hr { margin-top:0px!important;}
 								echo $this->Html->image('icon/adtoi-1.png', ["class"=>"img-responsive", "alt"=>"A D T O I Pic", "height"=>100, 'width'=>100, 'style'=>'border-radius: 50%;']); 
 								} ?>
 							<p>
-								<?php echo $this->Form->input('A D T O I Pic', ['type' => 'file', 'class' => 'form-control', 'name' => 'adtoi_pic']); ?>
+								<?php echo $this->Form->input('A D T O I Pic', ['type' => 'file', 'class' => 'form-control imagevalid', 'name' => 'adtoi_pic']); ?>
 								 
 							</p>
 						</div>
@@ -311,7 +312,7 @@ hr { margin-top:0px!important;}
 								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"Profile Pic",'height'=>150,'width'=>170]); 
 								} ?>
 							<p>
-								<?php echo $this->Form->input('Profile Picture', ['type' => 'file', 'class' => 'form-control', 'name' => 'profile_pic']); ?>
+								<?php echo $this->Form->input('Profile Picture', ['type' => 'file', 'class' => 'form-control imagevalid', 'name' => 'profile_pic']); ?>
 								 
 							</p>
 						</div>
@@ -324,9 +325,9 @@ hr { margin-top:0px!important;}
 							<p>
 							<?php 
 							  if($this->request->session()->read('Auth.User.role_id') == 1 or $this->request->session()->read('Auth.User.role_id') == 2) {
-								echo $this->Form->input('Photograph of your office (Pic 1)', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_img_1','style'=>'height:100 !important;' ]);
+								echo $this->Form->input('Photograph of your office (Pic 1)', ['type' => 'file', 'class' => 'form-control imagevalid', 'name' => 'company_img_1','style'=>'height:100 !important;' ]);
 							  }else{
-								  echo $this->Form->input('Photograph of your Hotel-1', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_img_1' ]);
+								  echo $this->Form->input('Photograph of your Hotel-1', ['type' => 'file', 'class' => 'form-control imagevalid', 'name' => 'company_img_1' ]);
 							  } ?>
 								 
 							</p>
@@ -340,9 +341,9 @@ hr { margin-top:0px!important;}
 								} ?>
 							<p>
 								<?php  if($this->request->session()->read('Auth.User.role_id') == 1 or $this->request->session()->read('Auth.User.role_id') == 2) {
-									echo $this->Form->input('Photograph of your office (Pic 2)', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_img_2' ]);
+									echo $this->Form->input('Photograph of your office (Pic 2)', ['type' => 'file', 'class' => 'form-control imagevalid', 'name' => 'company_img_2' ]);
 								  }else{
-									  echo $this->Form->input('Photograph of your Hotel-2', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_img_2' ]);
+									  echo $this->Form->input('Photograph of your Hotel-2', ['type' => 'file', 'class' => 'form-control imagevalid', 'name' => 'company_img_2' ]);
 								}?>
 							</p>
 						</div>
@@ -358,7 +359,7 @@ hr { margin-top:0px!important;}
 									echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"Profile Pic",'height'=>150,'width'=>170]); 
 								} ?>
 								<p>
-									<?php echo $this->Form->input('Pan Card', ['type' => 'file', 'class' => 'form-control', 'name' => 'pancard', "pancard"]); ?>
+									<?php echo $this->Form->input('Pan Card', ['type' => 'file', 'class' => 'form-control imagevalid', 'name' => 'pancard', "pancard"]); ?>
 								</p>
 							</div>
 						<div class="img_show col-md-4" align="center">
@@ -369,7 +370,7 @@ hr { margin-top:0px!important;}
 								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"Profile Pic",'height'=>150,'width'=>170]); 
 								} ?>
 							<p>
-								<?php echo $this->Form->input('Business card', ['type' => 'file', 'class' => 'form-control', 'name' => 'id_card','id'=>'id_card']); ?>
+								<?php echo $this->Form->input('Business card', ['type' => 'file', 'class' => 'form-control imagevalid', 'name' => 'id_card','id'=>'id_card']); ?>
 							</p>
 						</div>
 						<div class="img_show col-md-4" align="center">
@@ -380,14 +381,14 @@ hr { margin-top:0px!important;}
 								echo $this->Html->image('user_docs/noimage.png', ["class"=>"img-responsive", "alt"=>"Profile Pic",'height'=>150,'width'=>170]); 
 								} ?>
 							<p>
-								<?php echo $this->Form->input('Company Shop Act Registration', ['type' => 'file', 'class' => 'form-control', 'name' => 'company_shop_registration']); ?>
+								<?php echo $this->Form->input('Company Shop Act Registration', ['type' => 'file', 'class' => 'form-control imagevalid', 'name' => 'company_shop_registration']); ?>
 							</p>
 						</div>
 					</div>
 				 </div>
 				</fieldset>
 				<fieldset>
-				<legend><b>Description</b></legend>
+					<legend><b>Description</b></legend>
 					<div>
 						<div class="form-group col-md-12">
 							<textarea name="description" class="form-control" id="description" placeholder="Enter Here" rows="3"><?php echo $users['description'] ?></textarea>
@@ -395,25 +396,156 @@ hr { margin-top:0px!important;}
 					</div>
 				</fieldset>
             </div>
-			   
-              <div class="box-footer">
+			<div class="box-footer">
 				<center>
 					<button type="submit" class="btn btn-primary">Update Profile</button>
 				</center>	
-              </div>
-            </form>
-          </div>
-            
-        </div>
-         
-      </div>
-      <!-- /.row -->
-    </section>
+              </div>		
+					
+					<?= $this->Form->end()?>							
+	 
+ 
+			</div>
+		</div>
+	</div>
+</section>		 
 
-   
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<?php echo $this->Html->script(['jquery.validate']);?>
+<script>
+$(document).ready(function(){ 
+  
+	$('#HotelRequestForm').validate({
+		rules: {
+			"company_name" : {
+				required : true
+			},
+			"first_name" : {
+				required : true
+			},
+			"last_name" : {
+				required : true
+			},
+			"email": {
+				required : true,
+				email: true
+			},
+			"mobile_number": {
+				required : true,
+				number: true,
+				minlength:10,
+				maxlength:10
+			},
+			"p_contact": {
+ 				number: true,
+				minlength:10,
+				maxlength:10
+			},
+			"address": {
+				required: true
+			},
+			"city_name": {
+				required: true
+			},
+			"locality": {
+				required: true
+			},
+			"pincode": {
+				required: true
+			},
+			"description": {
+				required: true
+			},
+			"hotel_rating": {
+				required: true
+			},
+			"preference[]": {
+				required: true
+			},
+		},
+		messages: {
+			"company_name" : {
+				required : "Please enter company name."
+			},
+			"first_name" : {
+				required : "Please enter first name."
+			},
+			"last_name" : {
+				required : "Please enter last name."
+			},
+			"email": {
+				required : "Please enter email.",
+				email : "Please enter valid email."
+			},
+			"mobile_number": {
+				required : "Please enter contact number.",
+				number: "Please enter only number",
+				minlength: "Please enter at least 10 digit",
+				maxlength: "Please enter no more than 10 digit"
+			},
+			"p_contact": {
+				required : "Please enter contact number.",
+				number: "Please enter only number",
+				minlength: "Please enter at least 10 digit",
+				maxlength: "Please enter no more than 10 digit"
+			},
+			"address": {
+				required: "Please enter address."
+			},
+			"city_name": {
+				required: "Please select city."
+			},
+			"locality": {
+				required: "Please enter locality."
+			},
+			"pincode": {
+				required: "Please enter pincode."
+			},
+			"description": {
+				required: "Please enter description."
+			},
+			"hotel_rating": {
+				required: "Please select rating."
+			}
+		},
+		submitHandler: function (form) {
+			form[0].submit(); 
+		}
+	});
+ });
+  
+</script>  
 <script>
 
-$(document).ready(function(){	
+$(document).ready(function(){
+
+$(document).on('change',".imagevalid",function(){ 
+        var FileUploadPath = $(this).val();
+        var noww = $(this);
+         if (FileUploadPath == '') {
+            alert("Please upload an image");
+        } else {
+            var Extension = FileUploadPath.substring(
+                    FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+			if ( Extension == "png" ||  Extension == "jpeg" || Extension == "jpg") {
+
+                if (fuData.files && fuData.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        $('#blah').attr('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(fuData.files[0]);
+                }
+
+            } 
+		else {
+                alert("Photo only allows file types of PNG, JPG and JPEG.");
+				noww.val('');
+            }
+        } 
+    });	
  	 
 		 
 	$("#preference").select2({
@@ -654,3 +786,4 @@ $(document).ready(function(){
 		});	
 	}
  </script>
+ 

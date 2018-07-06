@@ -72,7 +72,8 @@ $conn = ConnectionManager::get('default');
 							<th scope="col"><?= __('End Date') ?></th>
 							<th scope="col"><?= __('Status') ?></th> 
 							<th scope="col"><?= __('Action') ?></th> 							
-							 
+							<!--<th scope="col"><?= __('Pickup State') ?></th>							
+							<th scope="col" class="actions"><?= __('Actions') ?></th>-->
 						</tr>
 					</thead>
         <tbody>
