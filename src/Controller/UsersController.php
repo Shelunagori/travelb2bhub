@@ -3678,9 +3678,7 @@ public function myresponselist() {
 		$result = explode("-", $QPriceRange);
 		$MinQuotePrice = $result[0];
 		$MaxQuotePrice = $result[1];
-		//$conditions["Requests.total_budget >="] = $MinQuotePrice;
 		$conditions["Responses.quotation_price >="] = $MinQuotePrice;
-		//$conditions["Requests.total_budget <="] = $MaxQuotePrice;
 		$conditions["Responses.quotation_price <="] = $MaxQuotePrice;
 	}
 	$sort='';
@@ -3770,27 +3768,40 @@ public function myresponselist() {
 		if(sizeof($BlockedUsers)>0){
 			$conditions["Requests.user_id NOT IN"] =  $BlockedUsers; 
 		}
- 	//pr($responses); exit;
+ 	 
 	$responses = $this->Responses->find()
 		->contain([ "Requests.Users", "UserChats","Requests.Hotels"])
 		->where(['Responses.user_id' => $this->Auth->user('id'),$conditions])->order($sort)->all();
 	$this->set('responses', $responses);
-	$conn = ConnectionManager::get('default');
-	//pr($responses); exit;
-	$blockeddata = array();
-	$reqidarray = array();
-	$chatdata = array();
+	//--
+	$conditionsDatamy["Responses.is_deleted "] = 0;
+	$conditionsDatamy["Responses.user_id "] = $this->Auth->user('id');
+	$conditionsDatamy["Responses.status "] = 0;
+	$conditionsDatamy['Requests.status']=0;
+	$conditionsDatamy['Requests.is_deleted']=0;
 	$key = array();
 	$value = array();
 	$RefId = array();
+	$responFIlter = $this->Responses->find()
+		->contain([ "Requests.Users", "UserChats","Requests.Hotels"])
+		->where(['Responses.user_id' => $this->Auth->user('id'),$conditionsDatamy])->all();
+	foreach($responFIlter as $reqss){
+		$key[]=$reqss->request->user->id;
+		$value[]=$reqss->request->user->first_name.' '.$reqss->request->user->last_name;
+		$RefId[] = ['value'=>$reqss->request->id,'text'=>$reqss->request->reference_id];
+	}
+	
+	$conn = ConnectionManager::get('default');
+ 	$blockeddata = array();
+	$reqidarray = array();
+	$chatdata = array();
+	
 	$selectoption = array();
 	$loggedinid = $this->Auth->user('id');
 	if(count($responses)>0){
 		 
 		foreach($responses as $req){
-			$key[]=$req->request->user->id;
-			$value[]=$req->request->user->first_name.' '.$req->request->user->last_name;
-			$RefId[] = ['value'=>$req->request->id,'text'=>$req->request->reference_id];
+			
 
 			$sql1="Select count(*) as block_count from blocked_users where blocked_user_id='".$req['user_id']."' AND blocked_by='".$req['request']['user_id']."'";
 			$stmt = $conn->execute($sql1);
@@ -4566,8 +4577,7 @@ function addNewDestinationRow() {
 	$this->render('/Element/new_destination');
 }
 public function addresponse() {
-	 
-	date_default_timezone_set('Asia/Kolkata');
+ 	date_default_timezone_set('Asia/Kolkata');
 	$this->loadModel('Responses');
 	$this->loadModel('Requests');
 	$this->loadModel('User_Chats');
@@ -4580,9 +4590,9 @@ public function addresponse() {
 		$TableRequest = TableRegistry::get('Requests');
 		$request = $TableRequest->get($_POST["request_id"]);
 		$d["user_id"] = $this->Auth->user('id');
-		
 		$d["status"] = 0;
 		$response = $this->Responses->newEntity($d);
+		//pr($response); exit;
 		if ($re = $this->Responses->save($response)) {
 			$name = $user['first_name'].' '.$user['last_name'];
 			

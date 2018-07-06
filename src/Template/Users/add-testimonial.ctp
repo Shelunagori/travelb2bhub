@@ -1,4 +1,4 @@
-<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+ 
  	  <div class="modal-content">
 		<div class="modal-header">
 		  <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -23,25 +23,25 @@
 		$rating = $testimonialedit["rating"];
 		$testimonialid = $testimonialedit["id"];
 	}
-	echo $this->Form->create("Promotions", ['type' => 'file', 'class'=> 'form-horizontal', 'url' => ['controller' => 'Users', 'action' => 'addtestimonial',$authoruserId], 'onSubmit' => 'return addtestimonial();', 'id'=>"addtestimonial"]); ?>
-                       
+	echo $this->Form->create("Promotioans", ['url' => ['controller' => 'Users', 'action' => 'addtestimonial',$authoruserId], 'onsubmit' => 'return validateForm()', 'name'=>"myForm"]); ?>
+                      
 						<!-- Text input-->
 						<div class="form-group col-md-12">
 						<label class="col-md-4 control-label" for="Rating">Rating <span class="asterisk">
 
 						</span></label>
 						<div class="col-md-5">
-						<input class="star star-5" id="star-5<?php echo $reqid; ?>" type="radio" name="rating" <?php if($rating=="5") {echo "checked";} ?> value="5"/>
+						<input class="star star-5 test" id="star-5<?php echo $reqid; ?>" type="radio" name="rating" <?php if($rating=="5") {echo "checked";} ?> value="5"/>
 						<label class="star star-5" for="star-5<?php echo $reqid; ?>"></label>
-						<input class="star star-4" id="star-4<?php echo $reqid; ?>" type="radio" name="rating" <?php if($rating=="4") {echo "checked";} ?> value="4"/>
+						<input class="star star-4 test" id="star-4<?php echo $reqid; ?>" type="radio" name="rating" <?php if($rating=="4") {echo "checked";} ?> value="4"/>
 						<label class="star star-4" for="star-4<?php echo $reqid; ?>"></label>
-						<input class="star star-3" id="star-3<?php echo $reqid; ?>" type="radio" name="rating" <?php if($rating=="3") {echo "checked";} ?> value="3"/>
+						<input class="star star-3 test" id="star-3<?php echo $reqid; ?>" type="radio" name="rating" <?php if($rating=="3") {echo "checked";} ?> value="3"/>
 						<label class="star star-3" for="star-3<?php echo $reqid; ?>"></label>
-						<input class="star star-2" id="star-2<?php echo $reqid; ?>" type="radio" name="rating" <?php if($rating=="2") {echo "checked";} ?> value="2"/>
+						<input class="star star-2 test" id="star-2<?php echo $reqid; ?>" type="radio" name="rating" <?php if($rating=="2") {echo "checked";} ?> value="2"/>
 						<label class="star star-2" for="star-2<?php echo $reqid; ?>"></label>
-						<input class="star star-1" id="star-1<?php echo $reqid; ?>" type="radio" name="rating" <?php if($rating=="1") {echo "checked";} ?> value="1"/>
+						<input class="star star-1 test" id="star-1<?php echo $reqid; ?>"  type="radio" name="rating" <?php if($rating=="1") {echo "checked";} ?> value="1"/>
 						<label class="star star-1" for="star-1<?php echo $reqid; ?>"></label>
-						<input style="display:none;" type="radio" name="rating" <?php if($rating=="0") {echo "checked";} ?> value="0"/>
+						<input style="display:none;" type="radio" name="rating"  value="0"/>
 						</div>
 						</div>
 						<div class="form-group" style="display:none;">
@@ -67,21 +67,17 @@
 						<input type="submit" name="submittestimonial" id="submittestimonial" class="btn btn-primary" value="Submit ">  
 					</div>
 				</div>
+				</form>
 			</div>
-		<script>
-function addtestimonial() {  
-    var radios = document.getElementsByName("rating");
-	
-    var formValid = false;
-    var i = 0;
-    while (!formValid && i < radios.length) {
-        if (radios[i].checked) formValid = true;
-        i++;        
-    }
-
-    if (!formValid) alert("Please Select Rating!");
-    return formValid;
-}
- 
-	</script>
 	  </div>
+<script>
+function validateForm() {
+    if($("input[name='rating']:checked").val() >0 ){
+	}
+	else
+	{
+		alert("Please Select Rating.");
+		return false;
+	}
+}
+</script>

@@ -54,12 +54,12 @@
 				 
                 <?php  echo $this->Form->create(null, ['url' => ['controller' => 'Users', 'action' => 'login'],'id'=>"UserLoginForm", 'class'=>'login100-form validate-form']); ?>
 					<div class="wrap-input100 validate-input" data-validate = "Enter username">
-						<input class="input100" type="email" autocomplete="new-password" name="email" >
+						<input class="input100" type="email" required autocomplete="new-password" name="email" >
 						<span class="focus-input100" data-placeholder="Email"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" type="password" autocomplete="new-password" name="password" >
+						<input class="input100" type="password" required autocomplete="new-password" name="password" >
 						<span class="focus-input100" data-placeholder="Password"></span>
 					</div>
 

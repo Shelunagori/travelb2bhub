@@ -504,7 +504,7 @@ label {
 										</p>
 									</div>
 									<div class="">
-									<input autocomplete="off" type="text" name="check_in" class="form-control" id="datepickerofpkg" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
+									<input autocomplete="off" type="text" name="check_in" class="form-control removeerror" id="datepickerofpkg" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY"/>
 									</div>
 									</div> 
 								<div class="col-md-6">
@@ -515,7 +515,7 @@ label {
 										</p>
 									</div>
 									<div class="">
-										<input autocomplete="off" type="text" name="check_out" class="form-control checkdatefornext" id="datepickerofpkg1" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
+										<input autocomplete="off" type="text" name="check_out" class="form-control checkdatefornext removeerror" id="datepickerofpkg1" data-date-format="dd-mm-yyyy" placeholder="DD-MM-YYYY" />
 										                    
 									</div>
 								</div> 
@@ -546,7 +546,7 @@ label {
 													</p>
 												</div>
 												<div class="">
-												<?php echo $this->Form->control('transport_requirement', ["type"=>"select",'options' =>$postTravlePackageCategories, "class"=>"form-control select2","data-placeholder"=>"Select Options", "empty"=>'Select Options']);?>
+												<?php echo $this->Form->control('transport_requirement', ["type"=>"select",'options' =>$postTravlePackageCategories, "class"=>"form-control select2 removeerror ","data-placeholder"=>"Select Options", "empty"=>'Select Options']);?>
 												<label id="transport_requirement-error" class="error" for="transport_requirement"> </label>
  												</div>
 											</div>
@@ -556,7 +556,7 @@ label {
 													Start Date <span class="required">*</span>
 												</p>
 											</div> 
-											<input autocomplete="off" name="start_date" type="text" class="form-control " data-date-format="dd-mm-yyyy" id="packageTransport" placeholder="DD-MM-YYYY"/>
+											<input autocomplete="off" name="start_date" type="text" class="form-control removeerror " data-date-format="dd-mm-yyyy" id="packageTransport" placeholder="DD-MM-YYYY"/>
 												                   
 											 
 										</div>
@@ -566,7 +566,7 @@ label {
 													End Date <span class="required">*</span>
 												</p>
 											</div>
-											<input autocomplete="off" name="end_date" type="text" class="form-control" data-date-format="dd-mm-yyyy" id="packageTransport1" placeholder="DD-MM-YYYY"/>
+											<input autocomplete="off" name="end_date" type="text" class="form-control removeerror " data-date-format="dd-mm-yyyy" id="packageTransport1" placeholder="DD-MM-YYYY"/>
 										</div>	
 											
 										</div>
@@ -760,7 +760,7 @@ label {
 													</p>
 												</div>
 												<div class="">
-													<?php echo $this->Form->control('transport_requirement', ["type"=>"select",'options' =>$postTravlePackageCategories, "class"=>"form-control select2","data-placeholder"=>"Select Options","empty"=>'Select Options','required']);?>
+													<?php echo $this->Form->control('transport_requirement', ["type"=>"select",'options' =>$postTravlePackageCategories, "class"=>"form-control select2 removeerror ","data-placeholder"=>"Select Options","empty"=>'Select Options','required']);?>
 													<label id="transport_requirement-error" class="error" for="transport_requirement"> </label>
 												</div>
 												
@@ -773,7 +773,7 @@ label {
 													</p>
 												</div>
 												<div class="">
-													 <input autocomplete="off" name="start_date" type="text" class="form-control" data-date-format="dd-mm-yyyy" id="datepickerofTransport" placeholder="DD-MM-YYYY"/>
+													 <input autocomplete="off" name="start_date" type="text" class="form-control removeerror " data-date-format="dd-mm-yyyy" id="datepickerofTransport" placeholder="DD-MM-YYYY"/>
 												</div>
 											</div>
 											<div class="col-md-4">
@@ -784,7 +784,7 @@ label {
 												</p>
 												</div>
 												<div class="">
-													 <input autocomplete="off" name="end_date" type="text" class="form-control" data-date-format="dd-mm-yyyy" id="datepickerofTransport1" placeholder="DD-MM-YYYY"/>
+													 <input autocomplete="off" name="end_date" type="text" class="form-control removeerror " data-date-format="dd-mm-yyyy" id="datepickerofTransport1" placeholder="DD-MM-YYYY"/>
 												</div>
 											</div>	
 													
@@ -912,16 +912,27 @@ $(document).ready(function(){
 	var date = new Date();
 	date.setDate(date.getDate());
 	//-- Hotel date Pickers Starte 
-	/* $('.removeerror').on('chnage',function(){
-		
-		 //$(this).closest('div').find(".removeerror").trigger( "click" );
-		var pass=  $(this).val();
-		 
- 		if(pass.length >0){
- 			$(this).closest('div').find('label.error').hide();
-		} 
-	}); */
+	 
+	$(document).on('blur',".removeerror ",function(){ 
+		var now=$(this);
+ 		setTimeout(function() { 
+			var city_id=now.val();
+            if(city_id!=''){  
+				now.closest('div').find('label.error').html('');
+ 			} 
+		}, 1000);
+ 	});
 	
+	$(document).on('change',".removeerror ",function(){ 
+		var now1=$(this,'option:selected');
+ 		setTimeout(function() { 
+			var city_id=now1.val();
+             if(city_id!=''){  
+				now1.closest('div').find('label.error').html('');
+ 			} 
+		}, 1000);
+ 	});
+ 	
 	$("#HotelDatePicker").datepicker({
 		autoclose:false,
 		minDate:0,
@@ -1137,7 +1148,32 @@ $(document).ready(function(){
 		}
 	});
 ///------------------------------------
-
+	$(document).on('keyup',".hotelroom",function(){
+		var x=0;
+		$('.hotelroom').each(function(){
+			if($(this).val() >0){
+				x=1;
+			}
+		});
+		if(x==1){
+			$('#showerror').hide();
+		}
+		else{$('#showerror').show();}
+ 	});
+	$(document).on('keyup',".packageroom ",function(){
+		var x=0;
+		$('.packageroom ').each(function(){
+			if($(this).val() >0){
+				x=1;
+			}
+		});
+		if(x==1){
+			$('#showerror12').hide();
+		}
+		else{$('#showerror12').show();}
+ 	});
+	
+	 
 
  	$(document).on('blur',".city_select",function(){
 		var master=$(this);
@@ -1329,9 +1365,8 @@ function selectCountry(value,city_code,state,noofrows) {
 			}
 		});
 	}
-	 
-	
 } 
+
 $('#HotelRequestForm').submit(function(){
 	var x=0;
 	$('.hotelroom').each(function(){
@@ -1705,7 +1740,7 @@ $(document).ready(function () {
             e.preventDefault();
             var strHtml = '<div class="stop col-md-12 main_row" style="margin-top:5px"><hr  style="margin-top: 8px; margin-bottom: 8px;"></hr> <div class="stop-title" style="font-weight:bold"> Stop ' +packageI+ ' </div><div class="row main_row">';
         	strHtml += '<div class="col-sm-4 mt form-group"> <p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality,Village or Town" name="stops[' +packageI+ ']"> </div>';
-        	strHtml += '<div class="col-sm-4 mt form-group"><p for="from">Stop City</p><input class="trans_city form-control city_select ctynamerecord" noofrows="5" taxboxname="state_id_package_stop_city[' +packageI+ ']" type="text" placeholder="Select City or Nearest City" required use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" class="ctyIDname city_real" name="id_package_stop_city[' +packageI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div> ';
+        	strHtml += '<div class="col-sm-4 mt form-group"><p for="from">Stop City <span class="required">*</span> </p><input class="trans_city form-control city_select ctynamerecord" noofrows="5" taxboxname="state_id_package_stop_city[' +packageI+ ']" type="text" placeholder="Select City or Nearest City" required use_for = "package" numCount = ' +packageI+ ' id="package_stop_city[' +packageI+ ']" name="trasport_stop_city[' +packageI+ ']"><input type="hidden" id="id_package_stop_city[' +packageI+ ']" class="ctyIDname city_real" name="id_package_stop_city[' +packageI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div> ';
         	strHtml += '<div class="stateRpl"><div class="col-sm-4 mt form-group" > <p for="from">Stop State</p><input type="hidden" id="state_id_package_stop_city[' +packageI+ ']" name="state_id_package_stop_city[' +packageI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_package_stop_city[' +packageI+ ']" name="state_name_package_stop_city[' +packageI+ ']" readonly> </div></div></div>';
         strHtml += '<div class="row"><div class="col-md-12" align="right" style="margin-top:5px"> <button class="btn btn-danger btn-sm package_remove_stop but"> <i class="fa fa-trash" ></i> Remove Stop</button> </div></div></div>';
         $(".package-stops").append(strHtml);
@@ -1730,7 +1765,7 @@ $(document).ready(function () {
 				e.preventDefault();
 				var strHtml = '<div class="stop col-md-12 main_row" style="margin-top:5px"><hr  style="margin-top: 8px; margin-bottom: 8px;"></hr> <div class="stop-title" style="font-weight:bold"> Stop ' +transI+ ' </div><div class="row main_row">';
 				strHtml += '<div class="col-sm-4 mt form-group"><div class="input-field"><p for="from">Stop Locality</p><input class="form-control" type="text" placeholder="Enter Locality, Village or Town" name="stops[' +transI+ ']"></div></div>';
-				strHtml += '<div class="col-sm-4 mt form-group"><div class="input-field"><p for="from">Stop City</p><input class="trans_city form-control ctynamerecord city_select" required type="text" noofrows="4" taxboxname="state_id_trasport_stop_city[' +transI+ ']" placeholder="Select City or Nearest City" use_for = "trasport" numCount = ' +transI+ ' id="trasport_stop_city[' +transI+ ']" name="trasport_stop_city[' +transI+ ']"> <input type="hidden" class="ctyIDname city_real" id="id_trasport_stop_city[' +transI+ ']" name="id_trasport_stop_city[' +transI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div></div>';
+				strHtml += '<div class="col-sm-4 mt form-group"><div class="input-field"><p for="from">Stop City <span class="required">*</span> </p><input class="trans_city form-control ctynamerecord city_select" required type="text" noofrows="4" taxboxname="state_id_trasport_stop_city[' +transI+ ']" placeholder="Select City or Nearest City" use_for = "trasport" numCount = ' +transI+ ' id="trasport_stop_city[' +transI+ ']" name="trasport_stop_city[' +transI+ ']"> <input type="hidden" class="ctyIDname city_real" id="id_trasport_stop_city[' +transI+ ']" name="id_trasport_stop_city[' +transI+ ']" /><div class="suggesstion-box" style="margin-top:-10px"></div></div></div>';
 				strHtml += '<div class="stateRpl form-group" ><div class="col-sm-4 mt form-group"><div class="input-field  form-group" style="margin-top:5px !important;"><p for="from">Stop State</p><input type="hidden" id="state_id_trasport_stop_city[' +transI+ ']" name="state_id_trasport_stop_city[' +transI+ ']"/><input class="form-control" type="text" placeholder="State" id ="state_name_trasport_stop_city[' +transI+ ']" name="state_name_trasport_stop_city[' +transI+ ']" readonly></div></div></div></div>';
 				strHtml += '<div class="row"><div class="col-md-12" align="right" style="margin-top:5px"> <button class="btn btn-danger btn-sm transport_remove_stop but"> <i class="fa fa-trash" ></i> Remove Stop</button> </div></div></div>';
 				$(".transport-stops").append(strHtml);

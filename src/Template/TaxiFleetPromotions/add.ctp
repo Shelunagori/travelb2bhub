@@ -385,6 +385,29 @@ fieldset{
 	 
     $(document).ready(function ()
 	{
+		$(document).on('blur',".requiredfield",function(){ 
+			var now=$(this);
+			setTimeout(function() { 
+				var city_id=now.val();
+				if(city_id!=''){  
+					now.closest('div.input-field').find('label.error').html('');
+				}else {
+					now.closest('div.input-field').find('label.error').html('This field is required.');
+				}				
+			}, 1000);
+		});
+		
+		$(document).on('change',".requiredfield",function(){ 
+			var now1=$(this,'option:selected'); 
+			setTimeout(function() { 
+				var city_id=now1.val();
+				if(city_id!=''){ 
+					now1.closest('div.input-field').find('label.error').html('');
+				} else {
+					now1.closest('div.input-field').find('label.error').html('This field is required.');
+				}
+			}, 1000);
+		});
 		$('form').submit(function () {
 			var x=0;
 			$( ".requiredfield" ).each(function() {

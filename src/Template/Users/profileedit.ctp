@@ -155,7 +155,7 @@ hr { margin-top:0px!important;}
                 </div>
 				 <div class="form-group col-md-6">
                   <label>City</label>
-                  <input type="textbox" taxboxname="<?php echo $users['state_id']; ?>" noofrows="1" class="form-control city_select" required autocomplete="off" id="city-search-box" name="city" placeholder="Select city/nearest city" value="<?php echo (!empty($users['city_id']))?$allCityList[$users['city_id']]:"" ;?>">
+                  <input type="textbox" taxboxname="<?php echo $users['state_id']; ?>" noofrows="1" class="form-control city_select removeerror" required autocomplete="off" id="city-search-box" name="city" placeholder="Select city/nearest city" value="<?php echo (!empty($users['city_id']))?$allCityList[$users['city_id']]:"" ;?>">
 				  <input type="hidden" value="<?php echo $users['city_id']; ?>" id="city_id" name="city_id" >
 				  <div class="suggesstion-box" style="margin-top:-10px"></div>
                 </div>
@@ -187,7 +187,7 @@ hr { margin-top:0px!important;}
 					{
 						$selectedPreferenceStates = explode(",", $users['preference']);
 					}	 
-					echo $this->Form->control('preference', ["value"=>$selectedPreferenceStates, "id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control select2", "data-placeholder"=>"Select Some States", "style"=>"height:125px;"]); ?>
+					echo $this->Form->control('preference', ["value"=>$selectedPreferenceStates, "id"=>"preference", "type"=>"select", 'options' =>$allStates, "multiple"=>true , "class"=>"form-control select2 removeerror", "data-placeholder"=>"Select Some States", "style"=>"height:125px;"]); ?>
 					<label style="display:none" id="preference-error" for="preference" class="helpblock error" > This field is required.</label>
 					
                 </div>
@@ -414,7 +414,26 @@ hr { margin-top:0px!important;}
 <?php echo $this->Html->script(['jquery.validate']);?>
 <script>
 $(document).ready(function(){ 
-  
+	$(document).on('blur',".removeerror ",function(){ 
+		var now=$(this);
+ 		setTimeout(function() { 
+			var city_id=now.val();
+            if(city_id!=''){  
+				now.closest('div').find('label.error').html('');
+				now.removeClass('error')
+ 			} 
+		}, 1000);
+ 	});
+	
+	$(document).on('change',".removeerror ",function(){ 
+		var now1=$(this,'option:selected');
+ 		setTimeout(function() { 
+			var city_id=now1.val();
+             if(city_id!=''){  
+				now1.closest('div').find('label.error').html('');
+ 			} 
+		}, 1000);
+ 	});
 	$('#HotelRequestForm').validate({
 		rules: {
 			"company_name" : {

@@ -567,7 +567,7 @@ a{
 				</div>
 				<div class="modal-footer" >
 					<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
-					<button type="submit" name="rate_user" class="btn btn-success btn-md" >Submit</button>
+					<button type="submit" name="rate_user" class="btn btn-success btn-md rate_user" >Submit</button>
 				</div>
 			</div>
 		</div>
@@ -670,6 +670,15 @@ a{
 <script type='text/javascript'>
 
 $(document).ready(function(){
+		$(document).on('click','.rate_user',function(){
+ 			if($(this).closest('div.modal-content').find("input[name='rating']:checked").val() >0 ){
+			}
+			else
+			{
+				alert("Please Select Rating.");
+				return false;
+			}
+		});
 		$(window).scroll(function() {
 			 
 			var scrollTop = $(window).scrollTop();

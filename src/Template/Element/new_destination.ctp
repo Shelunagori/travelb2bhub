@@ -110,7 +110,7 @@
 				<div class="col-md-6">
 					<div class="input-field">
 						<p for="from">
-							Check In
+							Check In <span class="required">*</span> 
 						</p>
 					</div>
 					<div class="">
@@ -120,7 +120,7 @@
 				<div class="col-md-6">
 					<div class="input-field">
 					<p for="from">
-						Check Out
+						Check Out <span class="required">*</span> 
 					</p>
 					</div>
 					<div class="">

@@ -285,16 +285,39 @@ class PostTravlePackagesController extends AppController
 			
 			if(!empty($duration_day_night))
 			{
-				$duration_day_nightArray = explode(',',$duration_day_night);
-				$where_duration = ['PostTravlePackages.duration_day_night IN'=>$duration_day_nightArray];
-				//$where_duration = ['duration_day_night'=>$duration_day_night];
+				if($submitted_from=="web")
+				{
+					$duration_day_night=base64_decode($duration_day_night);
+					$duration_day_night=explode(',', $duration_day_night);
+					foreach($duration_day_night as $daataa){
+						if($daataa==1){$duration_day_nights[]='1 N/2 D';}
+						if($daataa==2){$duration_day_nights[]='2 N/3 D';}
+						if($daataa==3){$duration_day_nights[]='3 N/4 D';}
+						if($daataa==4){$duration_day_nights[]='4 N/5 D';}
+						if($daataa==5){$duration_day_nights[]='5 N/6 D';}
+						if($daataa==6){$duration_day_nights[]='6 N/7 D';}
+						if($daataa==7){$duration_day_nights[]='7 N/8 D';}
+						if($daataa==8){$duration_day_nights[]='8 N/9 D';}
+						if($daataa==9){$duration_day_nights[]='9 N/10 D';}
+						if($daataa==10){$duration_day_nights[]='10 N/11 D';}
+						if($daataa==11){$duration_day_nights[]='11 N/12 D';}
+						if($daataa==12){$duration_day_nights[]='12 N/13 D';}
+						if($daataa==13){$duration_day_nights[]='13 N/14 D';}
+						if($daataa==14){$duration_day_nights[]='14 N/15 D';}
+						if($daataa==15){$duration_day_nights[]='More than 15 Days';} 
+					}  
+					$where_duration = ['PostTravlePackages.duration_day_night IN'=>$duration_day_nights];
+				}
+				else{
+					$duration_day_nightArray = explode(',',$duration_day_night);
+					$where_duration = ['PostTravlePackages.duration_day_night IN'=>$duration_day_nightArray];
+				}
 			}
 			else
 			{
 				$where_duration = null;
 			}
-			
-			$category_id_filter = null;
+ 			$category_id_filter = null;
 			if(!empty($category_id))
 			{
 				$category_id = explode(',',$category_id);

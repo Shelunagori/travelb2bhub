@@ -412,32 +412,32 @@ fieldset{
 </div>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
- 	$(document).on('keyup',".number",function(e){
-	
-		if ($.inArray(e.which, [46, 9, 27, 13]) !== -1 ||
-             // Allow: Ctrl/cmd+A
-            (e.which == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
-             // Allow: Ctrl/cmd+C
-            (e.which == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
-             // Allow: Ctrl/cmd+X
-            (e.which == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
-             // which: home, end, left, right
-            (e.which >= 35 && e.which <= 39)) { 
-                 // let it happen, don't do anything
-                 return;
-        }
-        // Ensure that it is a number and stop the keypress
-			if(e.which == 190)
-			{
-				$(this).val('');
-			  e.preventDefault();
-			}
-        else if ((e.shiftKey || (e.which < 48 || e.which > 57)) && (e.which < 96 || e.which > 105) && (e.which != 8)) {
-			$(this).val('');
-            e.preventDefault();
-        }
-	}); 
-    $(document).ready(function () {
+	$(document).ready(function () {
+		
+		$(document).on('blur',".requiredfield",function(){ 
+			var now=$(this);
+			setTimeout(function() { 
+				var city_id=now.val();
+				if(city_id!=''){  
+					now.closest('div.input-field').find('label.error').html('');
+				}else {
+					now.closest('div.input-field').find('label.error').html('This field is required.');
+				}				
+			}, 1000);
+		});
+		
+		$(document).on('change',".requiredfield",function(){ 
+			var now1=$(this,'option:selected'); 
+			setTimeout(function() { 
+				var city_id=now1.val();
+				if(city_id!=''){ 
+					now1.closest('div.input-field').find('label.error').html('');
+				} else {
+					now1.closest('div.input-field').find('label.error').html('This field is required.');
+				}
+			}, 1000);
+		});
+		
 		 var pack_type=$('#pack_type').val();
 			//alert(pack_type);
 			if(pack_type==1){

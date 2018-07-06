@@ -1,30 +1,10 @@
 <?php //echo $this->Html->css('/assets/loader-1.css'); ?>
 <?php 
  if(!empty($duration_day_night)){
-	$duration_day_night=explode(',', $duration_day_night);
-
-	foreach($duration_day_night as $daataa){
-		if($daataa==1){$duration_day_nights[]='1 N/2 D';}
-		if($daataa==2){$duration_day_nights[]='2 N/3 D';}
-		if($daataa==3){$duration_day_nights[]='3 N/4 D';}
-		if($daataa==4){$duration_day_nights[]='4 N/5 D';}
-		if($daataa==5){$duration_day_nights[]='5 N/6 D';}
-		if($daataa==6){$duration_day_nights[]='6 N/7 D';}
-		if($daataa==7){$duration_day_nights[]='7 N/8 D';}
-		if($daataa==8){$duration_day_nights[]='8 N/9 D';}
-		if($daataa==9){$duration_day_nights[]='9 N/10 D';}
-		if($daataa==10){$duration_day_nights[]='10 N/11 D';}
-		if($daataa==11){$duration_day_nights[]='11 N/12 D';}
-		if($daataa==12){$duration_day_nights[]='12 N/13 D';}
-		if($daataa==13){$duration_day_nights[]='13 N/14 D';}
-		if($daataa==14){$duration_day_nights[]='14 N/15 D';}
-		if($daataa==15){$duration_day_nights[]='More than 15 Days';}
-	}
-	if(!empty($duration_day_nights)) {$duration_day_night=implode(',',$duration_day_nights);}
-}
+ 	$duration_day_night=base64_encode($duration_day_night);
+ }
  //-- List
-  
-$curl = curl_init();
+ $curl = curl_init();
 curl_setopt_array($curl, array(
   CURLOPT_URL => $coreVariable['SiteUrl']."api/PostTravlePackages/getTravelPackages.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&category_id=".$category_id."&duration_day_night=".$duration_day_night."&starting_price=".$starting_price."&city_id=".$city_id."&search=".$search."&valid_date=".$valid_date."&following=".$following."&submitted_from=web",
   CURLOPT_RETURNTRANSFER => true,
@@ -875,7 +855,7 @@ a{
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h3 class="modal-title">Review/Rating</h3>
 			  </div>
-				<div class="modal-body" >
+				<div class="modal-body main" >
 					<div class="row">
 						<div class="col-md-12 text-center">
 							<table width="90%" border="0" height="142px">
@@ -894,7 +874,7 @@ a{
 											<label class="star star-2" for="star-2<?php echo $postTravlePackage->id; ?>"></label>
 											<input class="star star-1" id="star-1<?php echo $postTravlePackage->id; ?>" type="radio" name="rating" <?php if($rate=="1") {echo "checked";} ?> value="1"/>
 											<label class="star star-1" for="star-1<?php echo $postTravlePackage->id; ?>"></label>
-											<input style="display:none;" type="radio" name="rating" <?php if($rate=="0") {echo "checked";} ?> value="0"/>
+											<input style="display:none;" type="radio" name="rating" value="0"/>
 										</div>
 									</td>
 								</tr>
@@ -912,7 +892,7 @@ a{
 				</div>
 				<div class="modal-footer" >
 					<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
-					<button type="submit" name="rate_user" class="btn btn-success btn-md" >Submit</button>
+					<button type="submit" name="rate_user" class="btn btn-success btn-md rate_user" >Submit</button>
 				</div>
 			</div>
 		</div>
@@ -967,7 +947,15 @@ a{
 <script type="text/javascript">	
 	
 	$(document).ready(function(){
-
+		$(document).on('click','.rate_user',function(){
+ 			if($(this).closest('div.modal-content').find("input[name='rating']:checked").val() >0 ){
+			}
+			else
+			{
+				alert("Please Select Rating.");
+				return false;
+			}
+		});
 		$(document).on('change','.seleteddata',function()
 		{
 		 	var fruits = [];

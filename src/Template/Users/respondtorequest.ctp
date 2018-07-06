@@ -1,5 +1,5 @@
- <?php echo $this->Html->script(['jquery.validate']);?>
- <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
+<?php echo $this->Html->script(['jquery.validate']);?>
+<?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <?php
 use Cake\Datasource\ConnectionManager; 
 $conn = ConnectionManager::get('default');
@@ -514,7 +514,7 @@ $conn = ConnectionManager::get('default');
 									</label>
 								 </td>
 								 <td>
-									  <input type="text" class="form-control" id="quotation_price" name="quotation_price" placeholder="Quote your price" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/><br>
+									  <input type="text" class="form-control" required id="quotation_price" name="quotation_price" placeholder="Quote your price" oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/(\..*)\./g, '$1');"/><br>
 								 </td>
 							</tr>
 							<tr>
@@ -524,12 +524,12 @@ $conn = ConnectionManager::get('default');
 									</label>
 								 </td>
 								 <td>
-									  <textarea name="comment" class="form-control" id="comment" placeholder="Enter comment here" col="10" row="10"></textarea>
+									  <textarea name="comment" class="form-control" required id="comment" placeholder="Enter comment here" col="10" row="10"></textarea>
 								 </td>
 							</tr>
 						</table>
 					  </div>
-					  <div class="modal-footer">
+					  <div class="modal-footer" style="margin-top:10px !important;">
 						 <div style="float:right">
 							<input type="submit" name="submit" class="btn btn-info btn-sm" width="20px" style="width:70px !important;" value="Submit">
 						 </div>

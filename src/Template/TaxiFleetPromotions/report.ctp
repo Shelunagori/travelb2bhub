@@ -269,55 +269,71 @@ a{
 		</div>
 	</div>
 </div>  
-			 <div id="myModal123" class="modal fade" role="dialog" >
-			  <div class="modal-dialog modal-sm" >
-				<!-- Modal content-->
-				<div class="modal-content">
-				  <div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Sorting</h4>
-				  </div>
-				  <form method="get" class="filter_box">
-				  <div class="modal-body" style="height:130px;">
-					<div class="col-md-12 row form-group ">
-						<div class="col-md-12 radio">
-							<label>
-								<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="user_rating"/>
-								User Rating
-							</label>
-						</div>
-					</div>
-					<div class="col-md-12 row form-group ">
-						<div class="col-md-12 radio">
-							<label>
-							<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="total_likes"/>
-								 Likes
-							</label>
-						</div>
-					</div>
-					
-					<div class="col-md-12 row form-group ">
-						<div class="col-md-12 radio">
-							<label>
-								<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="total_views"/>
-								 Views
-							</label>
-						</div>
-					</div>
-					
-				</div>
-				<div class="modal-footer" style="height:60px;">
-					  <div class="row">
-							<div class="col-md-12 text-center">
-								<input type="submit" class="btn btn-info btn-sm">
-								<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-danger btn-sm">Reset</a>
-							</div>
-					  </div>
-				</div>
-				</form>
-				</div>
+	 <div id="myModal123" class="modal fade" role="dialog" >
+	  <div class="modal-dialog modal-sm" >
+		<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Sorting</h4>
+		  </div>
+		  <form method="get" class="filter_box">
+		  <div class="modal-body" style="height:130px;">
+			<div class="col-md-12 row form-group ">
+				<div class="col-md-12 radio">
+					<label>
+						<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="user_rating"/>
+						User Rating
+					</label>
 				</div>
 			</div>
+			<div class="col-md-12 row form-group ">
+				<div class="col-md-12 radio">
+					<label>
+					<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="total_likes"/>
+						 Likes
+					</label>
+				</div>
+			</div>
+			
+			<div class="col-md-12 row form-group ">
+				<div class="col-md-12 radio">
+					<label>
+						<input class="btn btn-info btn-sm" type="radio" name="higestSort" value="total_views"/>
+						 Views
+					</label>
+				</div>
+			</div>
+			
+		</div>
+		<div class="modal-footer" style="height:60px;">
+			  <div class="row">
+					<div class="col-md-12 text-center">
+						<input type="submit" class="btn btn-info btn-sm">
+						<a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-danger btn-sm">Reset</a>
+					</div>
+			  </div>
+		</div>
+		</form>
+		</div>
+		</div>
+	</div>
+<form method="get">
+<div class="" style="margin-bottom:5px;">
+	<div class="row">
+		<div class="col-md-12">
+			<div class="">
+				<table width="100%"><tr><td width="80%"> 
+					<input class="form-control" placeholder="Type Location, State, City etc." name="search"/></td>
+					<td width="8%" style="padding-left:5px;"><button style="width:100%" class="btn btn-info btn-sm" name="submit" value="Submit" type="submit">Search</button></td>
+					<td width="8%" style="padding-left:5px;"><a href="<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'report')) ?>"class="btn btn-danger btn-sm" style="width:100%">Reset</a>
+					</td></tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+</form>
 			<?php $i=1;
 			if(!empty($taxiFleetPromotions)){
 			foreach ($taxiFleetPromotions as $taxiFleetPromotion){
@@ -637,7 +653,7 @@ a{
 				</div>
 				<div class="modal-footer" >
 					<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
-					<button type="submit" name="rate_user" class="btn btn-success btn-md" >Submit</button>
+					<button type="submit" name="rate_user" class="btn btn-success btn-md rate_user" >Submit</button>
 				</div>
 			</div>
 		</div>
@@ -687,6 +703,15 @@ a{
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>	 
   $(document).ready(function(){
+		$(document).on('click','.rate_user',function(){
+ 			if($(this).closest('div.modal-content').find("input[name='rating']:checked").val() >0 ){
+			}
+			else
+			{
+				alert("Please Select Rating.");
+				return false;
+			}
+		});
 		$(window).scroll(function() {
 			 
 			var scrollTop = $(window).scrollTop();
