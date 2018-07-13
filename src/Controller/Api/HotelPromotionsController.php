@@ -316,25 +316,71 @@ $getHotelPromotion=$getEventPlanners ;
 					$conditions = ['HotelPromotions.user_id IN' => 1];
 				}
 			}
-			$getHotelPromotion = $this->HotelPromotions->find();
-			
-				$getHotelPromotion->select(['total_likes'=>$getHotelPromotion->func()->count('HotelPromotionLikes.id')])
-				->contain(['HotelCategories','Users'=>function($q){
-				return $q->select(['first_name','last_name','mobile_number','company_name','email']);
-			}])
-			->leftJoinWith('HotelPromotionLikes')
-			->where($category_id_filter)
-			->where($Searchbox)
-			->where($rating_filter_filter)
-			->where($conditions)
-			->where(['HotelPromotions.visible_date >=' =>date('Y-m-d')])
-			->where(['HotelPromotions.is_deleted' =>0])
-			->order($where_short)
-			->group(['HotelPromotions.id'])
-			->limit($limit)
-			->page($page)
-			->autoFields(true);
-			 
+			if(!empty($higestSort))
+			{
+				
+				if($higestSort == 'total_likes')
+				{
+					$getHotelPromotion = $this->HotelPromotions->find();
+					$getHotelPromotion->select(['total_likes'=>$getHotelPromotion->func()->count('HotelPromotionLikes.id')])
+						->contain(['HotelCategories','Users'=>function($q){
+							return $q->select(['first_name','last_name','mobile_number','company_name','email']);
+						}])
+						->leftJoinWith('HotelPromotionLikes')
+						->where($category_id_filter)
+						->where($Searchbox)
+						->where($rating_filter_filter)
+						->where($conditions)
+						->where(['HotelPromotions.visible_date >=' =>date('Y-m-d')])
+						->where(['HotelPromotions.is_deleted' =>0])
+						->order(['total_likes'=>'DESC'])
+						->group(['HotelPromotions.id'])
+						->limit($limit)
+						->page($page)
+						->autoFields(true);	 
+				}
+				else if($higestSort == 'total_views')
+				{
+					$getHotelPromotion = $this->HotelPromotions->find();
+					$getHotelPromotion->select(['total_views'=>$getHotelPromotion->func()->count('HotelPromotionViews.id')])
+						->contain(['HotelCategories','Users'=>function($q){
+							return $q->select(['first_name','last_name','mobile_number','company_name','email']);
+						}])
+						->leftJoinWith('HotelPromotionViews')
+						->where($category_id_filter)
+						->where($Searchbox)
+						->where($rating_filter_filter)
+						->where($conditions)
+						->where(['HotelPromotions.visible_date >=' =>date('Y-m-d')])
+						->where(['HotelPromotions.is_deleted' =>0])
+						->order(['total_views'=>'DESC'])
+						->group(['HotelPromotions.id'])
+						->limit($limit)
+						->page($page)
+						->autoFields(true);				
+				}
+			}
+			else {
+					
+				$getHotelPromotion = $this->HotelPromotions->find();
+				
+					$getHotelPromotion->select(['total_likes'=>$getHotelPromotion->func()->count('HotelPromotionLikes.id')])
+					->contain(['HotelCategories','Users'=>function($q){
+					return $q->select(['first_name','last_name','mobile_number','company_name','email']);
+				}])
+				->leftJoinWith('HotelPromotionLikes')
+				->where($category_id_filter)
+				->where($Searchbox)
+				->where($rating_filter_filter)
+				->where($conditions)
+				->where(['HotelPromotions.visible_date >=' =>date('Y-m-d')])
+				->where(['HotelPromotions.is_deleted' =>0])
+				->order($where_short)
+				->group(['HotelPromotions.id'])
+				->limit($limit)
+				->page($page)
+				->autoFields(true);
+			}
 			if(!empty($getHotelPromotion->toArray()))
 			{
 				foreach($getHotelPromotion as $getEventPlanner)
@@ -361,7 +407,15 @@ $getHotelPromotion=$getEventPlanners ;
 						
 					$getEventPlanner->total_flagged = $this->HotelPromotions->HotelPromotionReports
 						->find()->where(['hotel_promotion_id' => $getEventPlanner->id])->count();
-
+//-- follow
+					$this->loadModel('BusinessBuddies');
+					$Follow = $this->BusinessBuddies->exists(['BusinessBuddies.bb_user_id'=>$getEventPlanner->user_id,'BusinessBuddies.user_id'=>$isLikedUserId]);
+					if($Follow==0){
+						$getEventPlanner->isfollows=false;
+					}else{
+						$getEventPlanner->isfollows=true;
+					}
+//-- follow	
 						
 					$all_raiting=0;	
 					$testimonial=$this->HotelPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getEventPlanner->user_id]);
@@ -462,7 +516,15 @@ $getHotelPromotion=$getEventPlanners ;
 				}else{
 						$sfad->issaved=true;
 				}
-			 
+			//-- follow
+				$this->loadModel('BusinessBuddies');
+				$Follow = $this->BusinessBuddies->exists(['BusinessBuddies.bb_user_id'=>$sfad->user_id,'BusinessBuddies.user_id'=>$user_id]);
+				if($Follow==0){
+					$sfad->isfollows=false;
+				}else{
+					$sfad->isfollows=true;
+				}
+			//-- follow	
 				$exists = $this->HotelPromotions->HotelPromotionLikes->exists(['hotel_promotion_id'=>$sfad->id,'user_id'=>$user_id ]);
 				if($exists == 1)
 				{ $sfad->isLiked = 'yes'; }

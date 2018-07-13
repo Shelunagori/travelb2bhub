@@ -470,7 +470,9 @@ $(document).ready(function(){
 				required: true
 			},
 			"pincode": {
-				required: true
+				required: true,
+				maxlength:6,
+				minlength:6,
 			},
 			"description": {
 				required: true

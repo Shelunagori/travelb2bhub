@@ -639,6 +639,24 @@ class EventPlannerPromotionsController extends AppController
 		if ($this->request->is(['patch', 'post', 'put'])) 
 		{
 			//pr($this->request->data); exit;
+			if (isset($this->request->data['follow_user']))
+			{
+				$this->loadModel('BusinessBuddies');
+				$UserId=$this->request->data('author_id');
+ 				$bb_user_id=$this->request->data('user_id');
+				$d["bb_user_id"] = $bb_user_id;
+				$d["user_id"] = $UserId;
+				$d["created"] = date("Y-m-d H:i:s");
+				$BusinessBuddy = $this->BusinessBuddies->newEntity($d);
+				if($this->BusinessBuddies->save($BusinessBuddy)) {
+					$this->Flash->success(__('The have successfully follow this user.'));
+				}
+				else{
+					$this->Flash->error(__('Something went wrong. Please, try again.'));
+				}
+				return $this->redirect(['action' => 'report']);
+				
+			}
 			//-- REMOVE EVENT
 			if (isset($this->request->data['rate_user']))
 			{
@@ -810,11 +828,11 @@ class EventPlannerPromotionsController extends AppController
 	{
 		$page=$this->request->data['page'];
 		$user_id=$this->request->data['user_id'];
-		$higestSort=$this->request->query('higestSort');  
-		$search=$this->request->query('search'); 
-		$following=$this->request->query('following'); 
-		$city_id=$this->request->query('city_id'); 
- 		$state_id=$this->request->query('state_id');
+		$higestSort=$this->request->data('higestSort');  
+		$search=$this->request->data('search'); 
+		$following=$this->request->data('following'); 
+		$city_id=$this->request->data('city_id'); 
+ 		$state_id=$this->request->data('state_id');
  		$country_id=null;
 			
 		$curl = curl_init();
@@ -851,12 +869,12 @@ class EventPlannerPromotionsController extends AppController
 	{
 		$page=$this->request->data['page'];
 		$user_id=$this->request->data['user_id'];
-		$higestSort=$this->request->query('higestSort');  
-		$search=$this->request->query('search'); 
-		$following=$this->request->query('following'); 
-		$city_id=$this->request->query('city_id'); 
- 		$state_id=$this->request->query('state_id');
- 		$country_id=$this->request->query('country_id');
+		$higestSort=$this->request->data('higestSort');  
+		$search=$this->request->data('search'); 
+		$following=$this->request->data('following'); 
+		$city_id=$this->request->data('city_id'); 
+ 		$state_id=$this->request->data('state_id');
+ 		$country_id=$this->request->data('country_id');
 			
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
@@ -1289,7 +1307,7 @@ class EventPlannerPromotionsController extends AppController
 		$CityList = $this->Cities->find()->where(['Cities.state_id IN' =>$data]);
 		$options=array();
 		echo "
-			<select name='city_id[]' size='3' class='form-control requiredfield city_id' multiple='multiple' required tabindex='1'>";
+			<select name='city_id[]' size='3' class='form-control city_id' multiple='multiple' required tabindex='1'>";
 			foreach($CityList as $cty)
 			{
 				echo "<option value='".$cty->id."' > ".$cty->name."</option>";

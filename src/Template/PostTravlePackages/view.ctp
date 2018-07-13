@@ -137,7 +137,7 @@ font-size:20px;
 						<div class="row">
 							<div class="col-md-12">
 								<div class="col-md-3" >
-								<?= $this->Html->image($postTravlePackage->full_image,['id'=>'myImg','style'=>'width:95%;height:80px;','data-target'=>'#imagemodal'.$postTravlePackage->id,'data-toggle'=>'modal',]) ?>
+								<?= $this->Html->image($postTravlePackage->full_image,['id'=>'myImg','style'=>'width:95%;height:100px;','data-target'=>'#imagemodal'.$postTravlePackage->id,'data-toggle'=>'modal',]) ?>
 								<div id="imagemodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 								<div class="modal-dialog modal-md">
 									<!-- Modal content-->

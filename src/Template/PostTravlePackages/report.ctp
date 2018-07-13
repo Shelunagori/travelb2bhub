@@ -1,8 +1,9 @@
 <?php //echo $this->Html->css('/assets/loader-1.css'); ?>
-<?php 
+<?php  
  if(!empty($duration_day_night)){
  	$duration_day_night=base64_encode($duration_day_night);
  }
+ 
  //-- List
  $curl = curl_init();
 curl_setopt_array($curl, array(
@@ -31,7 +32,7 @@ if ($err) {
 	$List=json_decode($response);
 	$postTravlePackages=$List->getTravelPackages;
 }
- 
+ //pr($postTravlePackages); exit;
 //--- COUNTRY STATE & CITY
 $curl = curl_init();
 curl_setopt_array($curl, array(
@@ -502,11 +503,12 @@ a{
 </div>
 </form>
 
-		<?php $i=1;
+		<?php $i=1;$ckh=0;
 					//pr($postTravlePackages); exit;			
 					if(!empty($postTravlePackages)){
 						foreach ($postTravlePackages as $postTravlePackage): 
 							$CategoryList=array();
+							$ckh++;
 							foreach($postTravlePackage->post_travle_package_rows as $category)
 							{
 								$CategoryList[]=$category->post_travle_package_category->name;
@@ -847,6 +849,22 @@ a{
 		</div>
 	</div>
 </div>
+<div id="Following<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-md">
+		<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 class="modal-title">Are you sure you want to follow the user?</h3>
+		  </div>
+		  <div class="modal-footer" >
+				<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
+				<button type="submit" name="follow_user" class="btn btn-success btn-md" >Follow</button>
+			</div>
+		</div>
+	</div>
+</div>	
+	
 <div id="ReviewUser<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 	<div class="modal-dialog modal-md">
 		<!-- Modal content-->
@@ -897,6 +915,8 @@ a{
 			</div>
 		</div>
 	</div>	
+								
+</div>
 								<div class="row" style="padding-top:15px;">
 								<div class="col-md-12 text-center" >
 									<button style="margin-top:5px"  class="btn btn-info btn-md btnlayout viewCount" data-target="#Inclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal"  promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" type="button">Inclusions</button>&nbsp;&nbsp;
@@ -906,11 +926,16 @@ a{
 									<?php
 									if($postTravlePackage->user_id != $user_id){ ?>
 										<button style="margin-top:5px" class="btn btn-success btn-md btnlayout viewCount" data-target="#ReviewUser<?php echo $postTravlePackage->id;?>" data-toggle="modal" promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" type="button">Rate User</button>&nbsp;&nbsp;
-									<?php	}
-									?>	
-												</div>
-											</div>
-										</div>
+									<?php 
+										if($postTravlePackage->isfollows==0){ ?>
+											<button style="margin-top:5px" class="btn btn-successto btn-md btnlayout viewCount" data-target="#Following<?php echo $postTravlePackage->id;?>" data-toggle="modal" promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" type="button">Follow User</button>&nbsp;&nbsp;
+										<?php } 
+										else {?>
+											<span style="margin-top:5px;background-color:#dadadabf;display: inline-block;text-align: center;cursor: no-drop !important;"  class="btn btn-defult btn-md btnlayout viewCount"> Following </span>
+										<?php } 
+									} ?>
+									</div>
+								</div>
 									</div>
 								</div>
 								</form>
@@ -1012,9 +1037,8 @@ a{
 		});
 	});
 
-
+<?php if($ckh>9){ ?>
 		$(window).scroll(function() {
-			 
 			var scrollTop = $(window).scrollTop();
 			var docHeight = $(document).height();
 			var winHeight = $(window).height();
@@ -1065,6 +1089,7 @@ a{
 				});
 			}
 		});
+<?php } ?>
 		$('.reason_box').on('change', function() {
 		  //var b=$(this);
 		  var a=$(this).closest("div").find(" option:selected").val();

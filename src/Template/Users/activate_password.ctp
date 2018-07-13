@@ -3,8 +3,7 @@
 <html lang="en">
 <head>
 	<title>Travel B2B HUB</title>
-	 <?php echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
+	<?php echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
 	<?php echo $this->Html->css('/assets/login/fonts/iconic/css/material-design-iconic-font.min.css'); ?>
 	<?php echo $this->Html->css('/assets/login/animate/animate.css'); ?>
 	<?php echo $this->Html->css('/assets/login/css-hamburgers/hamburgers.min.css'); ?>
@@ -14,42 +13,47 @@
 	<?php echo $this->Html->css('/assets/login/daterangepicker/daterangepicker.css'); ?>
 	<?php echo $this->Html->css('/assets/login/css/util.css'); ?>
 	<?php echo $this->Html->css('/assets/login/css/main.css'); ?>
+	<?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Raleway'); ?>
 	<style>
-		.bgdiv { background-image: url('../webroot/assets/login/login_background.jpg'); }
+ 
 		.p-b-34 { padding-bottom: 10px !important; }
 		.login100-form-title { font-size:25px; }
-		.wrap-login100 { background:#0c0a10 !important; width:420px !important; padding: 18px 55px 37px 55px; }
+		.wrap-login100 { background:#1f222db8 !important; width:420px !important; padding: 18px 55px 37px 55px; }
 		.p-t-27 { padding-top: 10px; }
-		.error { color: #fff; margin-left: 25px; }
-		
+		.error { color: #ff9898; }
+		@media only screen and (max-device-width: 480px) {
+			div.prakash {
+				zoom: 2;
+			}
+			.input100 {
+				font-size: 20px !important;
+			}
+		}
 	</style>
 </head>
 <body>
 	<div class="limiter">
-		<div class="container-login100 bgdiv">
+		<div class="container-login100 bgdiv" style="background-image: url('../../webroot/assets/login/login_background.jpg');">
 			<div class="wrap-login100">
 					<center>
-						<?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:20%;']) ?>
+						<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:50%;']) ?>
 					</center>
-					<span class="login100-form-title p-b-34 p-t-27">
-						TRAVEL B2b HUB
-					</span>			
-				
                     <?php  echo $this->Form->create("User", ['type' => 'file','id'=>"UserRegisterForm",'class'=>'login100-form validate-form']); ?> 
 					<?php   if (!isset($ident)) { $ident=''; }
 						if (!isset($activate)) { $activate=''; } ?>
 					<?php echo $this->Form->hidden('ident', array('value'=>$ident)); ?>
-					<?php echo $this->Form->hidden('activate', array('value'=>$activate)); ?>				
-					<div class="text-center">
-						<p style="color:#fff"> Reset Password </p>
-					</div> <br />
+					<?php echo $this->Form->hidden('activate', array('value'=>$activate)); ?>
+						</br>					
+					<center><span style="color:#fff; font-size: 18px;"> Reset Password </p>
+					</span> </center>
+					<p style="color:#fff !important;"><?php echo $this->Flash->render(); ?></p>
 					<div class="wrap-input100 validate-input" data-validate = "password">
 						<input class="input100" autocomplete="off" type="password" name="password" placeholder="New Password">
-						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+						<span class="focus-input100" data-placeholder=" "></span>
 					</div>
 					<div class="wrap-input100 validate-input" data-validate = "cpassword">
 						<input class="input100" autocomplete="off" type="password" name="cpassword" placeholder="Confirm New Password">
-						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+						<span class="focus-input100" data-placeholder=" "></span>
 					</div>					
 					<div class="container-login100-form-btn">
 						<button class="login100-form-btn" style="width: 100%;">
@@ -57,11 +61,11 @@
 						</button>
 					</div>
 					<br />
-					<p style="color:#fff !important;"><?php echo $this->Flash->render(); ?></p>
+					
 				
 					<div class="text-center p-t-90" style="padding-top: 20px;">
 						<p style="color:#fff">Already have an account ?
-							<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'register')) ?>" style="color:#5ba7a4;">
+							<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'login')) ?>" style="color:#5ba7a4;">
 								Login
 							</a>
 						</p>
@@ -77,9 +81,7 @@
 			</div>
 		</div>
 	</div>
-	<div id="dropDownSelect1"></div>
-
-<?php echo $this->Html->script('/assets/login/jquery/jquery-3.2.1.min.js'); ?>
+ <?php echo $this->Html->script('/assets/login/jquery/jquery-3.2.1.min.js'); ?>
 <?php echo $this->Html->script('/assets/login/animsition/js/animsition.min.js'); ?>
 <?php echo $this->Html->script('/assets/login/bootstrap/js/popper.js'); ?>
 <?php echo $this->Html->script('/assets/login/bootstrap/js/bootstrap.min.js'); ?>
@@ -109,6 +111,18 @@ $('#UserRegisterForm').validate({
 		}
 		}
 	});
+</script>
+<script type="text/javascript">
+
+	setInterval(function(){ abc(); }, 2000);
+		function abc()
+		{ 	
+			$('#msg_div').fadeOut(300);
+			var delay = 300;
+			setTimeout(function() {
+				$('#msg_div').remove();
+			}, delay);
+		} 
 </script>
 </body>
 </html>

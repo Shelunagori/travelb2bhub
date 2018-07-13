@@ -1378,16 +1378,12 @@ $('#HotelRequestForm').submit(function(){
 	$('#HotelRequestFormCITY').hide();
 	if($(this).closest('div').find('.ctyidd').val()==''){
 		$('#HotelRequestFormCITY').show();
-	}
- 	
+	} 
 	if(x==0){
 		$('#showerror').show();
 		$('html, body').animate({scrollTop:0}, 'slow');
 		return false;
-	}
-	else{
-		$("#loader-1").show();
-	}
+	} 
 }); 
 
 $('#PackgeRequestForm').submit(function(){
@@ -1402,9 +1398,6 @@ $('#PackgeRequestForm').submit(function(){
 		$('#showerror12').show();
 		$('html, body').animate({scrollTop:0}, 'slow');
 		return false;
-	}
-	else{
-		$("#loader-1").show();
 	}
 	
 })
@@ -1625,7 +1618,7 @@ $('#PackgeRequestForm').submit(function(){
 			}
 		},
 		submitHandler: function (form) {
- 			$("#loader-1").show();
+ 			//$("#loader-1").show();
 			form[0].submit(); 
 		}
 	});

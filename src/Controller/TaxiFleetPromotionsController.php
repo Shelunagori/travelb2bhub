@@ -567,6 +567,25 @@ class TaxiFleetPromotionsController extends AppController
 		if ($this->request->is(['patch', 'post', 'put'])) 
 		{
 			//-- Like EVENT
+			//pr($this->request->data); exit;
+			if (isset($this->request->data['follow_user']))
+			{
+				$this->loadModel('BusinessBuddies');
+				$UserId=$this->request->data('author_id');
+ 				$bb_user_id=$this->request->data('user_id');
+				$d["bb_user_id"] = $bb_user_id;
+				$d["user_id"] = $UserId;
+				$d["created"] = date("Y-m-d H:i:s");
+				$BusinessBuddy = $this->BusinessBuddies->newEntity($d);
+				if($this->BusinessBuddies->save($BusinessBuddy)) {
+					$this->Flash->success(__('The have successfully follow this user.'));
+				}
+				else{
+					$this->Flash->error(__('Something went wrong. Please, try again.'));
+				}
+				return $this->redirect(['action' => 'report']);
+				
+			}
 			if (isset($this->request->data['rate_user']))
 			{
 				$this->loadModel('TempRatings');
@@ -770,19 +789,14 @@ class TaxiFleetPromotionsController extends AppController
 	{
 		$page=$this->request->data['page'];
 		$user_id=$this->request->data['user_id'];
-		$higestSort=$this->request->query('higestSort'); 
-		$city_ids=$this->request->query('city_id'); 
-		$city_id='';
-		if(!empty($city_ids)) {$city_id=implode(',',$city_ids);}
+		$higestSort=$this->request->data('higestSort'); 
+		$city_id=$this->request->data('city_id'); 
 		$country_id=null;
-		$car_bus_id=$this->request->query('car_bus_id');
-		if(!empty($car_bus_id)) {$car_bus_id=implode(',',$car_bus_id);}
-		$state_id=$this->request->query('state_id');
-		if(!empty($state_id)) {$state_id=implode(',',$state_id);}
-		$search=$this->request->query('search');
-		$following=$this->request->query('following');
- 		 
-		$curl = curl_init();
+		$car_bus_id=$this->request->data('car_bus_id');
+		$state_id=$this->request->data('state_id');
+		$search=$this->request->data('search');
+		$following=$this->request->data('following');
+ 		$curl = curl_init();
 		curl_setopt_array($curl, array(
 		  CURLOPT_URL => $this->coreVariable['SiteUrl']."api/TaxiFleetPromotions/getTaxiFleetPromotions.json?isLikedUserId=".$user_id."&higestSort=".$higestSort."&country_id=".$country_id."&city_id=".$city_id."&state_id=".$state_id."&car_bus_id=".$car_bus_id."&search=".$search."&following=".$following."&page=".$page."&submitted_from=web",
 		  CURLOPT_RETURNTRANSFER => true,
@@ -817,17 +831,13 @@ class TaxiFleetPromotionsController extends AppController
 	{
 		$page=$this->request->data['page'];
 		$user_id=$this->request->data['user_id'];
-		$higestSort=$this->request->query('higestSort'); 
-		$city_ids=$this->request->query('city_id'); 
-		$city_id='';
-		if(!empty($city_ids)) {$city_id=implode(',',$city_ids);}
-		$country_id=null;
-		$car_bus_id=$this->request->query('car_bus_id');
-		if(!empty($car_bus_id)) {$car_bus_id=implode(',',$car_bus_id);}
-		$state_id=$this->request->query('state_id');
-		if(!empty($state_id)) {$state_id=implode(',',$state_id);}
-		$search=$this->request->query('search');
-		$following=$this->request->query('following');
+		$higestSort=$this->request->data('higestSort'); 
+		$city_id=$this->request->data('city_id'); 
+ 		$country_id=null;
+		$car_bus_id=$this->request->data('car_bus_id');
+ 		$state_id=$this->request->data('state_id');
+ 		$search=$this->request->data('search');
+		$following=$this->request->data('following');
  		 
 		$curl = curl_init();
 		curl_setopt_array($curl, array(

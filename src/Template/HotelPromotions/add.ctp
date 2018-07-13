@@ -26,33 +26,6 @@ if ($err) {
 	//pr($hotelcategory);exit;
 	$hotelcategory=$hotelcategory->hotelCategories;
 }
-//-- hotel Cities
-$curl = curl_init();
-curl_setopt_array($curl, array(
-  CURLOPT_URL => $coreVariable['SiteUrl']."pages/getHotelCities?token=MzIxNDU2NjU0NTY0cGhmZmpoZGZqaA==",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_ENCODING => "",
-  CURLOPT_MAXREDIRS => 10,
-  CURLOPT_TIMEOUT => 30,
-  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-  CURLOPT_CUSTOMREQUEST => "GET",
-  CURLOPT_HTTPHEADER => array(
-    "cache-control: no-cache",
-    "postman-token: 4f8087cd-6560-4ca6-5539-9499d3c5b967"
-  ),
-));
-$response = curl_exec($curl);
-$err = curl_error($curl);
-curl_close($curl);
-$hotelcities=array();
-if ($err) {
-  echo "cURL Error #:" . $err;
-} else {
-	$response;
-	$hotelcities=json_decode($response);
-	//pr($hotelcities);exit;
-	$hotelcities=$hotelcities->response_object;
-}
 //-- pricemaster
 $curl = curl_init();
 curl_setopt_array($curl, array(
@@ -166,7 +139,7 @@ label{
 								</div>
 								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
 									<p for="from">
-										Hotel Name
+										Hotel Name 
 									</p>
 									<div class="input-field">
 									<?php 
@@ -176,7 +149,7 @@ label{
 								</div>
 								<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
 									<p for="from">
-										Upload Image of Hotel	
+										Upload Image of Hotel <span class="required">*</span>
 									</p>
 									<div class="input-field">
 										 <?php echo $this->Form->input('hotel_pic',['class'=>'form-control imgInp requiredfield ','label'=>false,'type'=>'file','id'=>'hotelImg', 'onchange' => 'checkCertificate()']);?>
@@ -221,7 +194,8 @@ label{
 														$options[] = ['value'=>$cat->id,'text'=>$cat->name];
 													};
 													
-													echo $this->Form->input('hotel_category_id',['class'=>'form-control select2 ','options' => $options,'label'=>false,"empty"=>"Select Hotel Category"]);?>
+													echo $this->Form->input('hotel_category_id',['class'=>'form-control select2 requiredfield','options' => $options,'label'=>false,"empty"=>"Select Hotel Category"]);?>
+											<label style="display:none" class="helpblock error" > This field is required.</label>
 											</div>
 										</div>
 										<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 mt form-group">
@@ -335,8 +309,30 @@ label{
 </section>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
-	 
     $(document).ready(function () {
+		$(document).on('blur',".requiredfield",function(){ 
+			var now=$(this);
+			setTimeout(function() { 
+				var city_id=now.val();
+				if(city_id!=''){  
+					now.closest('div.input-field').find('label.error').html('');
+				}else {
+					now.closest('div.input-field').find('label.error').html('This field is required.');
+				}				
+			}, 1000);
+		});
+		
+		$(document).on('change',".requiredfield",function(){
+			var now1=$(this,'option:selected'); 
+			setTimeout(function() { 
+				var city_id=now1.val();
+				if(city_id!=''){ 
+					now1.closest('div.input-field').find('label.error').html('');
+				} else {
+					now1.closest('div.input-field').find('label.error').html('This field is required.');
+				}
+			}, 1000);
+		});
 		$('form').submit(function () {
 			var x=0;
 			$( ".requiredfield" ).each(function() {

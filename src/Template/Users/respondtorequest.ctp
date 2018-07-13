@@ -417,8 +417,7 @@ $conn = ConnectionManager::get('default');
 						<?php
 						if(array_key_exists($request["user_id"], $BusinessBuddies)) {?>
 							 
-							<span style=" width:99%;background-color:#dadadabf;display: inline-block;text-align: center;"  class=" btn-defult btn-sm ">
-										Following </span>
+							<span style=" width:99%;background-color:#dadadabf;display: inline-block;text-align: center;"  class=" btn-defult btn-sm "> Following </span>
 						<?php } 
 						else{ ?>
 							 
@@ -510,7 +509,7 @@ $conn = ConnectionManager::get('default');
 							<tr>
 								<td >
 									<label class="form-control" style="margin-top:-24px;border: 0px solid !important;">
-										Quote price
+										Quote price <span class="required">*</span>
 									</label>
 								 </td>
 								 <td>
@@ -520,7 +519,7 @@ $conn = ConnectionManager::get('default');
 							<tr>
 								<td>.
 									<label class="form-control" style="margin-top:-30px;border: 0px solid !important;">
-										Comment
+										Comment <span class="required">*</span>
 									</label>
 								 </td>
 								 <td>

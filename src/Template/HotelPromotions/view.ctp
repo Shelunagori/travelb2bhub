@@ -124,7 +124,7 @@ a{
 					<span class="help-block"></span>
 					<div class="row">						
 					<div class="col-md-3 rowspace">
-					<?= $this->Html->image($hotelPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:80px;','data-target'=>'#imagemodal'.$hotelPromotion->id,'data-toggle'=>'modal',]) ?>
+					<?= $this->Html->image($hotelPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:100px;','data-target'=>'#imagemodal'.$hotelPromotion->id,'data-toggle'=>'modal',]) ?>
 					<div id="imagemodal<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-md">
 						<!-- Modal content-->

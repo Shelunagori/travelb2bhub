@@ -1,5 +1,6 @@
 <?php 
 $i=1;
+$ckh=0;
 if(!empty($postTravlePackages)){ ?>
 <style type="text/css">
 @media all and (max-width: 410px) {
@@ -66,6 +67,7 @@ a{
 <?php 
 foreach ($postTravlePackages as $postTravlePackage): 
 	$CategoryList=array();
+	$ckh++;
 	foreach($postTravlePackage->post_travle_package_rows as $category)
 	{
 		$CategoryList[]=$category->post_travle_package_category->name;
@@ -376,6 +378,21 @@ foreach ($postTravlePackages as $postTravlePackage):
 								</div>
 							</div>
 						</div>
+<div id="Following<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-md">
+		<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 class="modal-title">Are you sure you want to follow the user?</h3>
+		  </div>
+		  <div class="modal-footer" >
+				<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
+				<button type="submit" name="follow_user" class="btn btn-success btn-md" >Follow</button>
+			</div>
+		</div>
+	</div>
+</div>	
 						<div id="ReviewUser<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 							<div class="modal-dialog modal-md">
 								<!-- Modal content-->
@@ -426,18 +443,24 @@ foreach ($postTravlePackages as $postTravlePackage):
 								</div>
 							</div>
 						</div>	
-						<div class="row" style="padding-top:15px;">
-							<div class="col-md-12 text-center" >
-								<button style="margin-top:5px"  class="btn btn-info btn-md btnlayout viewCount" data-target="#Inclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal"  promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" type="button">Inclusions</button>&nbsp;&nbsp;
-								<!-------Report Modal Start--------->
-								<button style="margin-top:5px"  class="btn btn-warning btn-md btnlayout viewCount" data-target="#Exclusion<?php echo $postTravlePackage->id;?>"   promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" data-toggle="modal" type="button">Exclusions</button>&nbsp;&nbsp;
-								<button style="margin-top:5px"  class="btn btn-danger btn-md  btnlayout viewCount" data-target="#contactdetails<?php echo $postTravlePackage->id;?>" promotionid="<?php echo $postTravlePackage->id;?>" data-toggle="modal" userId="<?php echo $user_id;?>" type="button">Contact Info</button>&nbsp;&nbsp;
-								<?php
-								if($postTravlePackage->user_id != $user_id){ ?>
-								<button style="margin-top:5px" class="btn btn-success btn-md btnlayout viewCount" data-target="#ReviewUser<?php echo $postTravlePackage->id;?>" data-toggle="modal" promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" type="button">Rate User</button>&nbsp;&nbsp;
-								<?php	}
-								?>	
-							</div>
+					</div>
+					<div class="row" style="padding-top:15px;">
+						<div class="col-md-12 text-center" >
+							<button style="margin-top:5px"  class="btn btn-info btn-md btnlayout viewCount" data-target="#Inclusion<?php echo $postTravlePackage->id;?>" data-toggle="modal"  promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" type="button">Inclusions</button>&nbsp;&nbsp;
+							<!-------Report Modal Start--------->
+							<button style="margin-top:5px"  class="btn btn-warning btn-md btnlayout viewCount" data-target="#Exclusion<?php echo $postTravlePackage->id;?>"   promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" data-toggle="modal" type="button">Exclusions</button>&nbsp;&nbsp;
+							<button style="margin-top:5px"  class="btn btn-danger btn-md  btnlayout viewCount" data-target="#contactdetails<?php echo $postTravlePackage->id;?>" promotionid="<?php echo $postTravlePackage->id;?>" data-toggle="modal" userId="<?php echo $user_id;?>" type="button">Contact Info</button>&nbsp;&nbsp;
+							<?php
+							if($postTravlePackage->user_id != $user_id){ ?>
+							<button style="margin-top:5px" class="btn btn-success btn-md btnlayout viewCount" data-target="#ReviewUser<?php echo $postTravlePackage->id;?>" data-toggle="modal" promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" type="button">Rate User</button>&nbsp;&nbsp;
+							<?php 
+								if(($postTravlePackage->isfollows==0) && ($postTravlePackage->user_id != $user_id)){ ?>
+									<button style="margin-top:5px" class="btn btn-successto btn-md btnlayout viewCount" data-target="#Following<?php echo $postTravlePackage->id;?>" data-toggle="modal" promotionid="<?php echo $postTravlePackage->id;?>" userId="<?php echo $user_id;?>" type="button">Follow User</button>&nbsp;&nbsp;
+								<?php } 
+								else { ?>
+									<span style="margin-top:5px;background-color:#dadadabf;display: inline-block;text-align: center;cursor: no-drop !important;"  class=" btn btn-defult btn-md btnlayout viewCount"> Following </span>
+								<?php }
+							}							?>	
 						</div>
 					</div>
 				</div>

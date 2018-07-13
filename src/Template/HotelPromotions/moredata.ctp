@@ -1,6 +1,6 @@
-<?php $i=1;
+<?php $i=0;
 			if(!empty($hotelPromotions)){
-			foreach ($hotelPromotions as $hotelPromotion){
+			foreach ($hotelPromotions as $hotelPromotion){ $i++;
 			?>
 		<div class="box-body bbb">	
 			<fieldset style="background-color:#fff;">
@@ -181,9 +181,31 @@
 									<?php
 									if($hotelPromotion->user_id != $user_id){ ?>
 										<button class="btn btn-success btn-md btnlayout viewCount" data-target="#ReviewUser<?php echo $hotelPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $hotelPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Rate User</button>
-									<?php	}
-									?>
+									<?php 
+									if($hotelPromotion->isfollows==0){ ?>
+										<button class="btn btn-successto btn-md btnlayout viewCount" data-target="#Following<?php echo $hotelPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $hotelPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Follow User</button>&nbsp;&nbsp;
+									<?php } 
+									else {?>
+										<span style=";background-color:#dadadabf;display: inline-block;text-align: center;cursor: no-drop !important;"  class="btn btn-defult btn-md btnlayout viewCount"> Following </span>
+									<?php } 
+									} ?>
+									 
 								</div>
+<div id="Following<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-md">
+		<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 class="modal-title">Are you sure you want to follow the user?</h3>
+		  </div>
+		  <div class="modal-footer" >
+				<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
+				<button type="submit" name="follow_user" class="btn btn-success btn-md" >Follow</button>
+			</div>
+		</div>
+	</div>
+</div>	
 <div id="ReviewUser<?php echo $hotelPromotion->id;?>" class="modal fade" role="dialog">
 	<div class="modal-dialog modal-md">
 		<!-- Modal content-->
@@ -296,7 +318,7 @@
 
 					</fieldset>	
 				</div>
-			<?php $i++; };
+			<?php };
 ?> 
 <div class="maintbl<?php echo $page+1?>"></div><?php 
 }?>

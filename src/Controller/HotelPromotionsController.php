@@ -12,11 +12,6 @@ date_default_timezone_set('Asia/Kolkata');
  */
 class HotelPromotionsController extends AppController
 {
-    /**
-     * Index method
-     *
-     * @return \Cake\Network\Response|null
-     */
 	public function initialize()
 	{
 		parent::initialize();
@@ -460,6 +455,25 @@ class HotelPromotionsController extends AppController
 		if ($this->request->is(['patch', 'post', 'put'])) 
 		{
 			//-- Like EVENT
+			//pr($this->request->data); exit;
+			if (isset($this->request->data['follow_user']))
+			{
+				$this->loadModel('BusinessBuddies');
+				$UserId=$this->request->data('author_id');
+ 				$bb_user_id=$this->request->data('user_id');
+				$d["bb_user_id"] = $bb_user_id;
+				$d["user_id"] = $UserId;
+				$d["created"] = date("Y-m-d H:i:s");
+				$BusinessBuddy = $this->BusinessBuddies->newEntity($d);
+				if($this->BusinessBuddies->save($BusinessBuddy)) {
+					$this->Flash->success(__('The have successfully follow this user.'));
+				}
+				else{
+					$this->Flash->error(__('Something went wrong. Please, try again.'));
+				}
+				return $this->redirect(['action' => 'report']);
+				
+			}
 			if (isset($this->request->data['rate_user']))
 			{
 				$this->loadModel('TempRatings');
@@ -659,13 +673,12 @@ class HotelPromotionsController extends AppController
 	{
 		$page=$this->request->data['page'];
 		$user_id=$this->request->data['user_id'];
-		$higestSort=$this->request->query('higestSort');
-		$following=$this->request->query('following');
-		$category_id=$this->request->query('category_id');
-		if(!empty($category_id)) {$category_id=implode(',',$category_id);}
-		$rating_filter=$this->request->query('rating_filter');
-		$search=$this->request->query('search');
-		$starting_price=$this->request->query('starting_price'); 
+		$higestSort=$this->request->data('higestSort');
+		$following=$this->request->data('following');
+		$category_id=$this->request->data('category_id');
+ 		$rating_filter=$this->request->data('rating_filter');
+		$search=$this->request->data('search');
+		$starting_price=$this->request->data('starting_price'); 
 		 
 		$curl = curl_init();
 		 curl_setopt_array($curl, array(
@@ -702,13 +715,12 @@ class HotelPromotionsController extends AppController
 	{
 		$page=$this->request->data['page'];
 		$user_id=$this->request->data['user_id'];
-		$higestSort=$this->request->query('higestSort');
-		$following=$this->request->query('following');
-		$category_id=$this->request->query('category_id');
-		if(!empty($category_id)) {$category_id=implode(',',$category_id);}
-		$rating_filter=$this->request->query('rating_filter');
-		$search=$this->request->query('search');
-		$starting_price=$this->request->query('starting_price'); 
+		$higestSort=$this->request->data('higestSort');
+		$following=$this->request->data('following');
+		$category_id=$this->request->data('category_id');
+ 		$rating_filter=$this->request->data('rating_filter');
+		$search=$this->request->data('search');
+		$starting_price=$this->request->data('starting_price'); 
 		 
 		$curl = curl_init();
 		 curl_setopt_array($curl, array(

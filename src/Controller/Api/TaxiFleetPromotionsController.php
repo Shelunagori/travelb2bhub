@@ -376,41 +376,102 @@ class TaxiFleetPromotionsController extends AppController
 					$search_bar_title = ['TaxiFleetPromotions.id IN' =>''];
 				}				
 			}
-
-
-			//pr($search_bar_title);exit;
-			
-			$getTaxiFleetPromotions = $this->TaxiFleetPromotions->find();
-			$getTaxiFleetPromotions->select(['total_likes'=>$getTaxiFleetPromotions->func()->count('TaxiFleetPromotionLikes.id')])
-				->contain(['Users'=>function($q){
-					return $q->select(['first_name','last_name','mobile_number','company_name','email']);
-				}])
-				->leftJoinWith('TaxiFleetPromotionLikes')
-				
-				->innerJoinWith('TaxiFleetPromotionStates',function($q) use($state_filter){ 
-						return $q->where($state_filter);
-					})
-				->innerJoinWith('TaxiFleetPromotionCities',function($q) use($city_filter){ 
-						return $q->where($city_filter);
-					})
-				->innerJoinWith('TaxiFleetPromotionRows',function($q) use($car_bus_filter){ 
-						return $q->where($car_bus_filter);
-					})					
-				
-				->contain(['Users','PriceMasters','Countries','TaxiFleetPromotionCities'=>['Cities'],'TaxiFleetPromotionRows'=>['TaxiFleetCarBuses'],'TaxiFleetPromotionStates'=>['States']])
+			if(!empty($higestSort))
+			{
+				if($higestSort == 'total_likes')
+				{
+					$getTaxiFleetPromotions = $this->TaxiFleetPromotions->find();
+					$getTaxiFleetPromotions->select(['total_likes'=>$getTaxiFleetPromotions->func()->count('TaxiFleetPromotionLikes.id')])
+						->contain(['Users'=>function($q){
+							return $q->select(['first_name','last_name','mobile_number','company_name','email']);
+						}])
+						->leftJoinWith('TaxiFleetPromotionLikes')
+						
+						->innerJoinWith('TaxiFleetPromotionStates',function($q) use($state_filter){ 
+								return $q->where($state_filter);
+							})
+						->innerJoinWith('TaxiFleetPromotionCities',function($q) use($city_filter){ 
+								return $q->where($city_filter);
+							})
+						->innerJoinWith('TaxiFleetPromotionRows',function($q) use($car_bus_filter){ 
+								return $q->where($car_bus_filter);
+							})					
+						
+						->contain(['Users','PriceMasters','Countries','TaxiFleetPromotionCities'=>['Cities'],'TaxiFleetPromotionRows'=>['TaxiFleetCarBuses'],'TaxiFleetPromotionStates'=>['States']])
+							
+						->where(['TaxiFleetPromotions.visible_date >=' =>date('Y-m-d')])
+						->where($country_id)
+						->where($search_bar_title)
+						->where($conditions)
+						->where(['TaxiFleetPromotions.is_deleted' =>0])
+						->order(['total_likes'=>'DESC'])
+						->group(['TaxiFleetPromotions.id'])
+						->limit($limit)
+						->page($page)
+						->autoFields(true); 
+				}
+				else if($higestSort == 'total_views')
+				{
+					$getTaxiFleetPromotions = $this->TaxiFleetPromotions->find();
+					$getTaxiFleetPromotions->select(['total_views'=>$getTaxiFleetPromotions->func()->count('TaxiFleetPromotionViews.id')])
+						->contain(['Users'=>function($q){
+							return $q->select(['first_name','last_name','mobile_number','company_name','email']);
+						}])
+						->leftJoinWith('TaxiFleetPromotionViews')
+						->innerJoinWith('TaxiFleetPromotionStates',function($q) use($state_filter){ 
+							return $q->where($state_filter);
+						})
+						->innerJoinWith('TaxiFleetPromotionCities',function($q) use($city_filter){ 
+							return $q->where($city_filter);
+						})
+						->innerJoinWith('TaxiFleetPromotionRows',function($q) use($car_bus_filter){ 
+							return $q->where($car_bus_filter);
+						})					
+						->contain(['Users','PriceMasters','Countries','TaxiFleetPromotionCities'=>['Cities'],'TaxiFleetPromotionRows'=>['TaxiFleetCarBuses'],'TaxiFleetPromotionStates'=>['States']])
+						->where(['TaxiFleetPromotions.visible_date >=' =>date('Y-m-d')])
+						->where($country_id)
+						->where($search_bar_title)
+						->where($conditions)
+						->where(['TaxiFleetPromotions.is_deleted' =>0])
+						->order(['total_views'=>'DESC'])
+						->group(['TaxiFleetPromotions.id'])
+						->limit($limit)
+						->page($page)
+						->autoFields(true);				
+				}
+			}
+			else {
+				$getTaxiFleetPromotions = $this->TaxiFleetPromotions->find();
+				$getTaxiFleetPromotions->select(['total_likes'=>$getTaxiFleetPromotions->func()->count('TaxiFleetPromotionLikes.id')])
+					->contain(['Users'=>function($q){
+						return $q->select(['first_name','last_name','mobile_number','company_name','email']);
+					}])
+					->leftJoinWith('TaxiFleetPromotionLikes')
 					
-				->where(['TaxiFleetPromotions.visible_date >=' =>date('Y-m-d')])
-				->where($country_id)
-				->where($search_bar_title)
-				->where($conditions)
-				->where(['TaxiFleetPromotions.is_deleted' =>0])
-				->order($where_short)
-				->group(['TaxiFleetPromotions.id'])
-				->limit($limit)
-				->page($page)
-				->autoFields(true);
-			//pr($getTravelPackages->toArray()); exit;
-			if(!empty($getTaxiFleetPromotions->toArray()))
+					->innerJoinWith('TaxiFleetPromotionStates',function($q) use($state_filter){ 
+							return $q->where($state_filter);
+						})
+					->innerJoinWith('TaxiFleetPromotionCities',function($q) use($city_filter){ 
+							return $q->where($city_filter);
+						})
+					->innerJoinWith('TaxiFleetPromotionRows',function($q) use($car_bus_filter){ 
+							return $q->where($car_bus_filter);
+						})					
+					
+					->contain(['Users','PriceMasters','Countries','TaxiFleetPromotionCities'=>['Cities'],'TaxiFleetPromotionRows'=>['TaxiFleetCarBuses'],'TaxiFleetPromotionStates'=>['States']])
+						
+					->where(['TaxiFleetPromotions.visible_date >=' =>date('Y-m-d')])
+					->where($country_id)
+					->where($search_bar_title)
+					->where($conditions)
+					->where(['TaxiFleetPromotions.is_deleted' =>0])
+					->order($where_short)
+					->group(['TaxiFleetPromotions.id'])
+					->limit($limit)
+					->page($page)
+					->autoFields(true);
+			}
+ 			if(!empty($getTaxiFleetPromotions->toArray()))
 			{
 				foreach($getTaxiFleetPromotions as $getTaxiFleetPromotion)
 				{
@@ -437,7 +498,16 @@ class TaxiFleetPromotionsController extends AppController
 					
 					$getTaxiFleetPromotion->total_flagged = $this->TaxiFleetPromotions->TaxiFleetPromotionReports
 						->find()->where(['taxi_fleet_promotion_id' => $getTaxiFleetPromotion->id])->count();
-					
+//-- follow
+					$this->loadModel('BusinessBuddies');
+					$Follow = $this->BusinessBuddies->exists(['BusinessBuddies.bb_user_id'=>$getTaxiFleetPromotion->user_id,'BusinessBuddies.user_id'=>$isLikedUserId]);
+					if($Follow==0){
+						$getTaxiFleetPromotion->isfollows=false;
+					}else{
+						$getTaxiFleetPromotion->isfollows=true;
+					}
+//-- follow						
+
 					$all_raiting=0;	
 					$testimonial=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getTaxiFleetPromotion->user_id]);
 					$testimonial_count=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getTaxiFleetPromotion->user_id])->count();
@@ -534,6 +604,15 @@ class TaxiFleetPromotionsController extends AppController
 					$sfad->issaved=true;
 				 
 			}
+			//-- follow
+				$this->loadModel('BusinessBuddies');
+				$Follow = $this->BusinessBuddies->exists(['BusinessBuddies.bb_user_id'=>$sfad->user_id,'BusinessBuddies.user_id'=>$user_id]);
+				if($Follow==0){
+					$sfad->isfollows=false;
+				}else{
+					$sfad->isfollows=true;
+				}
+			//-- follow	
 			
 			$all_raiting=0;	
 					$testimonial=$this->TaxiFleetPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id]);

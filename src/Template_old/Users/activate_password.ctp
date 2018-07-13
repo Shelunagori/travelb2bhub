@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<title>Travel B2B HUB</title>
-	 <?php echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?> 	
+	 <?php echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
 	<?php echo $this->Html->css('/assets/login/fonts/iconic/css/material-design-iconic-font.min.css'); ?>
 	<?php echo $this->Html->css('/assets/login/animate/animate.css'); ?>
 	<?php echo $this->Html->css('/assets/login/css-hamburgers/hamburgers.min.css'); ?>
@@ -14,15 +14,12 @@
 	<?php echo $this->Html->css('/assets/login/css/main.css'); ?>
 	<?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Raleway'); ?>
 	<style>
-		.bgdiv { background-image: url('../webroot/assets/login/login_background.jpg'); }
+ 
 		.p-b-34 { padding-bottom: 10px !important; }
 		.login100-form-title { font-size:25px; }
 		.wrap-login100 { background:#1f222db8 !important; width:420px !important; padding: 18px 55px 37px 55px; }
 		.p-t-27 { padding-top: 10px; }
-		.error { color: #ff9898; text-align:center; }
-		.alert-warning{ color:#FFF !important;}
-		.alert-danger{ width:95% !important;}
-		 
+		.error { color: #ff9898; }
 		@media only screen and (max-device-width: 480px) {
 			div.prakash {
 				zoom: 2;
@@ -35,8 +32,8 @@
 </head>
 <body>
 	<div class="limiter">
-		<div class="container-login100 bgdiv">
-			<div class="wrap-login100">
+		<div class="container-login100 bgdiv" style="background-image: url('../../webroot/assets/login/login_background.jpg');">
+			<div class="wrap-login100s">
 					<center>
 						<?=  $this->Html->image('/img/mini_logo.png', ['style'=>'width:20%;']) ?>
 					</center>
@@ -88,6 +85,16 @@
 	</div>
 	<div id="dropDownSelect1"></div>
 
+<?php echo $this->Html->script('/assets/login/jquery/jquery-3.2.1.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/animsition/js/animsition.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/bootstrap/js/popper.js'); ?>
+<?php echo $this->Html->script('/assets/login/bootstrap/js/bootstrap.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/select2/select2.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/daterangepicker/moment.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/daterangepicker/daterangepicker.js'); ?>
+<?php echo $this->Html->script('/assets/login/countdowntime/countdowntime.js'); ?>
+<?php echo $this->Html->script('/assets/login/js/main.js'); ?>
+ 
 <script type="text/javascript">
 
 	setInterval(function(){ abc(); }, 2000);
@@ -101,16 +108,6 @@
 		} 
 		
 </script> 
-<?php echo $this->Html->script('/assets/login/jquery/jquery-3.2.1.min.js'); ?>
-<?php echo $this->Html->script('/assets/login/animsition/js/animsition.min.js'); ?>
-<?php echo $this->Html->script('/assets/login/bootstrap/js/popper.js'); ?>
-<?php echo $this->Html->script('/assets/login/bootstrap/js/bootstrap.min.js'); ?>
-<?php echo $this->Html->script('/assets/login/select2/select2.min.js'); ?>
-<?php echo $this->Html->script('/assets/login/daterangepicker/moment.min.js'); ?>
-<?php echo $this->Html->script('/assets/login/daterangepicker/daterangepicker.js'); ?>
-<?php echo $this->Html->script('/assets/login/countdowntime/countdowntime.js'); ?>
-<?php echo $this->Html->script('/assets/login/js/main.js'); ?>
- 
 <script>
 $('#UserRegisterForm').validate({
 	rules: {

@@ -616,7 +616,24 @@ class PostTravlePackagesController extends AppController
 		$user_id=$this->Auth->User('id');
 		if ($this->request->is(['patch', 'post', 'put'])) 
 		{
-			//pr($this->request->data); exit;
+			if (isset($this->request->data['follow_user']))
+			{
+				$this->loadModel('BusinessBuddies');
+				$UserId=$this->request->data('author_id');
+ 				$bb_user_id=$this->request->data('user_id');
+				$d["bb_user_id"] = $bb_user_id;
+				$d["user_id"] = $UserId;
+				$d["created"] = date("Y-m-d H:i:s");
+				$BusinessBuddy = $this->BusinessBuddies->newEntity($d);
+				if($this->BusinessBuddies->save($BusinessBuddy)) {
+					$this->Flash->success(__('The have successfully follow this user.'));
+				}
+				else{
+					$this->Flash->error(__('Something went wrong. Please, try again.'));
+				}
+				return $this->redirect(['action' => 'report']);
+				
+			}
 			if (isset($this->request->data['rate_user']))
 			{
 				$this->loadModel('TempRatings');
@@ -850,16 +867,14 @@ class PostTravlePackagesController extends AppController
 		$postTravlePackages=array();
 		if ($err) {
 		  echo "cURL Error #:" . $err;
-		} else {
+		}else {
 			$response;
-			$List=json_decode($response);
-			  
+			$List=json_decode($response);			  
 			$postTravlePackages=$List->getTravelPackages;
 		}
 		$this->set(compact('postTravlePackages'));
 		$this->set(compact('user_id'));
 		$this->set(compact('page'));
-		
 	}
 	
 	public function moredataadmin()

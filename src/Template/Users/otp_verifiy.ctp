@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
 	<title>Travel B2B HUB</title>
-	 <?php echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">	
+	<?php echo $this->Html->css('/assets/bootstrap/css/bootstrap.min.css'); ?>
 	<?php echo $this->Html->css('/assets/login/fonts/iconic/css/material-design-iconic-font.min.css'); ?>
 	<?php echo $this->Html->css('/assets/login/animate/animate.css'); ?>
 	<?php echo $this->Html->css('/assets/login/css-hamburgers/hamburgers.min.css'); ?>
@@ -13,9 +12,9 @@
 	<?php echo $this->Html->css('/assets/login/daterangepicker/daterangepicker.css'); ?>
 	<?php echo $this->Html->css('/assets/login/css/util.css'); ?>
 	<?php echo $this->Html->css('/assets/login/css/main.css'); ?>
+	<?php echo $this->Html->css('https://fonts.googleapis.com/css?family=Raleway'); ?>?>
 	<style>
-		.bgdiv { background-image: url('../webroot/assets/login/login_background.jpg'); }
-		.p-b-34 { padding-bottom: 10px !important; }
+ 		.p-b-34 { padding-bottom: 10px !important; }
 		.login100-form-title { font-size:25px; }
 		.wrap-login100 { background:#1f222db8 !important; width:420px !important; padding: 18px 55px 37px 55px; }
 		.p-t-27 { padding-top: 10px; }
@@ -33,7 +32,7 @@
 </head>
 <body>
 	<div class="limiter">
-		<div class="container-login100 bgdiv ">
+		<div class="container-login100 bgdiv" style="background-image: url('../../webroot/assets/login/login_background.jpg');">
 			<div class="wrap-login100 prakash">
 					<center>
 						<?=  $this->Html->image('/img/Travel B2B logo.png', ['style'=>'width:50%;']) ?>
@@ -56,9 +55,9 @@
 					</div>
 					<br />
 					 
-					<div class="text-center p-t-90" style="padding-top: 20px;">
+					<div class="text-center p-t-90"  id="demo" style="padding-top: 20px;color:#fff;">
 						<p style="color:#fff">Otp resend ?
-							<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'otp_resend/'.$dummy_user_id)) ?>" style="color:#a9d4fa;">
+							<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'otp_resend/'.$dummy_user_id.'?r=2')) ?>" style="color:#a9d4fa;">
 								Re-Send
 							</a>
 						</p>
@@ -82,6 +81,15 @@
 		</div>
 	</div>
 	<div id="dropDownSelect1"></div>
+<?php echo $this->Html->script('/assets/login/jquery/jquery-3.2.1.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/animsition/js/animsition.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/bootstrap/js/popper.js'); ?>
+<?php echo $this->Html->script('/assets/login/bootstrap/js/bootstrap.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/select2/select2.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/daterangepicker/moment.min.js'); ?>
+<?php echo $this->Html->script('/assets/login/daterangepicker/daterangepicker.js'); ?>
+<?php echo $this->Html->script('/assets/login/countdowntime/countdowntime.js'); ?>
+<?php echo $this->Html->script('/assets/login/js/main.js'); ?>
 <script type="text/javascript">
 
 	setInterval(function(){ abc(); }, 2000);
@@ -93,16 +101,29 @@
 				$('#msg_div').remove();
 			}, delay);
 		} 
+</script>
+<script> 
+	// Set the date we're counting down to
+	var countDownDate = new Date();
+	countDownDate.setMinutes(countDownDate.getMinutes() + 1);
+	// Update the count down every 1 second
+	var x = setInterval(function() {
+		// Get todays date and time
+		var now = new Date().getTime();
 		
+		// Find the distance between now an the count down date
+		var distance = countDownDate - now;
+		// Time calculations for days, hours, minutes and seconds
+		var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+		 
+ 		$('#demo').html("Please wait till "+seconds + "s ");
+		 
+		if (distance < 1) {
+			clearInterval(x);
+			$('#demo').html('<p style="color:#fff">Otp resend ?<a class="txt1" href="<?php echo $this->Url->build(array('controller'=>'users','action'=>'otp_resend/'.$dummy_user_id.'?r=2')) ?>" style="color:#a9d4fa;"> Re-Send</a></p>');
+		}
+	}, 1000); 
 </script> 
-<?php echo $this->Html->script('/assets/login/jquery/jquery-3.2.1.min.js'); ?>
-<?php echo $this->Html->script('/assets/login/animsition/js/animsition.min.js'); ?>
-<?php echo $this->Html->script('/assets/login/bootstrap/js/popper.js'); ?>
-<?php echo $this->Html->script('/assets/login/bootstrap/js/bootstrap.min.js'); ?>
-<?php echo $this->Html->script('/assets/login/select2/select2.min.js'); ?>
-<?php echo $this->Html->script('/assets/login/daterangepicker/moment.min.js'); ?>
-<?php echo $this->Html->script('/assets/login/daterangepicker/daterangepicker.js'); ?>
-<?php echo $this->Html->script('/assets/login/countdowntime/countdowntime.js'); ?>
-<?php echo $this->Html->script('/assets/login/js/main.js'); ?>
+
 </body>
 </html>

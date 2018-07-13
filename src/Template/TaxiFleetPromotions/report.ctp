@@ -334,9 +334,10 @@ a{
 	</div>
 </div>
 </form>
-			<?php $i=1;
+			<?php $i=0;
 			if(!empty($taxiFleetPromotions)){
-			foreach ($taxiFleetPromotions as $taxiFleetPromotion){
+			foreach ($taxiFleetPromotions as $taxiFleetPromotion){ 
+			$i++;
 				$vehicleList=array(); 
 				foreach($taxiFleetPromotion->taxi_fleet_promotion_rows as $vehicle)
 				{
@@ -657,15 +658,36 @@ a{
 				</div>
 			</div>
 		</div>
-	</div>		
+	</div>
+<div id="Following<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
+	<div class="modal-dialog modal-md">
+		<!-- Modal content-->
+		<div class="modal-content">
+		  <div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h3 class="modal-title">Are you sure d want to follow the user?</h3>
+		  </div>
+		  <div class="modal-footer" >
+				<button type="button" class="btn btn-danger btn-md" data-dismiss="modal">Cancel</button>
+				<button type="submit" name="follow_user" class="btn btn-success btn-md" >Follow</button>
+			</div>
+		</div>
+	</div>
+</div>		
 														<div class="col-md-12 text-center" style="padding-top:10px">
 															<button class="btn btn-info btn-md btnlayout viewCount" data-target="#fleetdetail<?php echo $taxiFleetPromotion->id;?>" promotionid="<?php echo $taxiFleetPromotion->id;?>" userId="<?php echo $user_id;?>" data-toggle="modal" type="button">Fleet Details</button>&nbsp;&nbsp;
 															<button class="btn btn-danger btn-md btnlayout viewCount" data-target="#contactdetails<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $taxiFleetPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Contact Info</button>&nbsp;&nbsp;
 															<?php
 															if($taxiFleetPromotion->user_id != $user_id){ ?>
 																<button class="btn btn-success btn-md btnlayout viewCount" data-target="#ReviewUser<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $taxiFleetPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Rate User</button>&nbsp;&nbsp;
-															<?php	}
-															?>
+															<?php	 
+															if($taxiFleetPromotion->isfollows==0){ ?>
+																<button class="btn btn-successto btn-md btnlayout viewCount" data-target="#Following<?php echo $taxiFleetPromotion->id;?>" data-toggle="modal" promotionid="<?php echo $taxiFleetPromotion->id;?>" userId="<?php echo $user_id;?>" type="button">Follow User</button>&nbsp;&nbsp;
+															<?php } 
+															else {?>
+																<span style=";background-color:#dadadabf;display: inline-block;text-align: center;cursor: no-drop !important;"  class="btn btn-defult btn-md btnlayout viewCount"> Following </span>
+															<?php }
+															}	?>
 														</div>
 														</div>
 												</div>
@@ -712,6 +734,7 @@ a{
 				return false;
 			}
 		});
+	<?php if($i>9){ ?>
 		$(window).scroll(function() {
 			 
 			var scrollTop = $(window).scrollTop();
@@ -729,7 +752,7 @@ a{
 				var search = $("#search").val();
 				var city_id = $("#city_id").val();
 				var following = $("#following").val(); 
-				$.ajax({
+ 				$.ajax({
 					url: "<?php echo $this->Url->build(array('controller'=>'TaxiFleetPromotions','action'=>'moredata')) ?>",
 					type: "POST",
 					data: {
@@ -757,7 +780,7 @@ a{
 				});
 			}
 		});
-
+<?php } ?>	
 	$('.reason_box').on('change', function() {
 		  //var b=$(this);
 		  var a=$(this).closest("div").find(" option:selected").val();

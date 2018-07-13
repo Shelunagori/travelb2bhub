@@ -258,7 +258,7 @@ $m=0;
 									<input type="hidden" name="remove_package_id" value="<?php echo $eventplanner->id; ?>"/>
 								</form>
 							</div>
-						</div>
+						 
 					</div>
 	</div>
 </div>

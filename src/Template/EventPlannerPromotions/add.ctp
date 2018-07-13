@@ -195,7 +195,7 @@ fieldset{
 										echo $this->Form->input('country_id',["class"=>"form-control " ,'options' => $options,'label'=>false]);?>
 									</div>
 								</div>
-								<div class="col-md-6 form-group">
+								<div class="col-md-6 form-group input-field">
 									<p> Select States of Operation <span class="required">*</span></p>
 									<?php 
 									$options=array();
@@ -237,7 +237,7 @@ fieldset{
 						</div>
 						<div class="row">
 							<div class="col-md-12">
-								<div class="col-md-12 form-group">
+								<div class="col-md-12 form-group input-field">
 									<p>Enter Description of Your Company </p>
 									<?php echo $this->Form->textarea('event_detail', ['class'=>'form-control requiredfield','label'=>false,'rows'=>3,'style'=>'resize:none']); ?> 	 
 									<label style="display:none" class="helpblock error" > This field is required.</label>
@@ -305,6 +305,29 @@ fieldset{
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <script>
 $(document).ready(function (){
+		$(document).on('blur',".requiredfield",function(){ 
+			var now=$(this);
+			setTimeout(function() { 
+				var city_id=now.val();
+				if(city_id!=''){  
+					now.closest('div.input-field').find('label.error').html('');
+				}else {
+					now.closest('div.input-field').find('label.error').html('This field is required.');
+				}				
+			}, 1000);
+		});
+		
+		$(document).on('change',".requiredfield",function(){ 
+			var now1=$(this,'option:selected'); 
+			setTimeout(function() { 
+				var city_id=now1.val();
+				if(city_id!=''){ 
+					now1.closest('div.input-field').find('label.error').html('');
+				} else {
+					now1.closest('div.input-field').find('label.error').html('This field is required.');
+				}
+			}, 1000);
+		});
 		$('form').submit(function () {
 			var x=0;
 			$( ".requiredfield" ).each(function() {

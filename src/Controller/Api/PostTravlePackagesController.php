@@ -210,8 +210,7 @@ class PostTravlePackagesController extends AppController
 			else{
 				$limit=10;
 			}
-			
-			
+
 			$category_id = $this->request->query('category_id');
 			$category_short = $this->request->query('category_short');
 			//$duration_day = $this->request->query('duration_day');
@@ -242,8 +241,7 @@ class PostTravlePackagesController extends AppController
 			{
 				$state_id_short = 'ASC';
 			}
-			
-			
+
 			if(!empty($valid_date))
 			{ 
 				$valid_date = ['valid_date <=' =>date('Y-m-d',strtotime($valid_date))];
@@ -252,19 +250,6 @@ class PostTravlePackagesController extends AppController
 			{ 
 				$valid_date = ['visible_date >=' =>date('Y-m-d')]; 
 			}
-			
-/* 			if(!empty($duration_short) && $duration_short == 'ASC')
-			{
-				$where_short = ['duration_day' =>'ASC','duration_night' =>'DESC'];
-			}
-			else if(!empty($duration_short) && $duration_short == 'DESC')
-			{
-				$where_short = ['duration_day' =>'DESC','duration_night' =>'ASC'];
-			}else
-			{
-				$where_short = null;
-			} */
-			//$where_short=['PostTravlePackages.position' =>'ASC'];
 			$where_short=['PostTravlePackages.position' =>'ASC','PostTravlePackages.id' =>'DESC'];
 			if(!empty($valid_date_short))
 			{
@@ -278,8 +263,6 @@ class PostTravlePackagesController extends AppController
 			{
 				$country_id_short = 'ASC';
 			}
-
-
 			// End Shorting code
 			// Start Filter code
 			
@@ -428,41 +411,112 @@ class PostTravlePackagesController extends AppController
 				}				
 			}
 
+			if(!empty($higestSort))
+			{
+				if($higestSort == 'total_likes')
+				{
+					$getTravelPackages = $this->PostTravlePackages->find();
+					$getTravelPackages->select(['total_likes'=>$getTravelPackages->func()->count('PostTravlePackageLikes.id')])
+						->contain(['Users'=>function($q){
+							return $q->select(['first_name','last_name','mobile_number','company_name','email']);
+						},'PostTravlePackageCities'=>['Cities'=>['States']],'PostTravlePackageRows'=>['PostTravlePackageCategories'],'PostTravlePackageCountries'=>['Countries']])
+						->innerJoinWith('PostTravlePackageRows',function($q)use($category_id_filter,$category_short,$category_search){
+							return $q->where($category_id_filter)
+							->innerJoinWith('PostTravlePackageCategories',function($q)use($category_search){
+								return $q->where($category_search);
+							});
+						})
+						->innerJoinWith('PostTravlePackageCities',function($q) use($city_filter){ 
+							return $q->where($city_filter);
+						})
+						->innerJoinWith('PostTravlePackageCountries',function($q) use($country_filter,$country_id_short){ 
+							return $q->where($country_filter);
+						})
+						->leftJoinWith('PostTravlePackageLikes')				
+						->where($where_duration)
+						->where($valid_date)
+						->where($starting_price_Filter)
+						->where($search_bar_title)
+						->where($conditions)
+						->where(['PostTravlePackages.is_deleted' =>0])
+						->order(['total_likes'=>'DESC'])
+						->order(['PostTravlePackageRows.id' => $category_short])
+						->order(['PostTravlePackageCountries.id'=>$country_id_short])
+						->limit($limit)
+						->page($page)
+						->group(['PostTravlePackages.id'])
+						->autoFields(true);
+				}
+				else if($higestSort == 'total_views')
+				{
+					$getTravelPackages = $this->PostTravlePackages->find();
+					$getTravelPackages->select(['total_views'=>$getTravelPackages->func()->count('PostTravlePackageViews.id')])
+						->contain(['Users'=>function($q){
+							return $q->select(['first_name','last_name','mobile_number','company_name','email']);
+						},'PostTravlePackageCities'=>['Cities'=>['States']],'PostTravlePackageRows'=>['PostTravlePackageCategories'],'PostTravlePackageCountries'=>['Countries']])
+						->innerJoinWith('PostTravlePackageRows',function($q)use($category_id_filter,$category_short,$category_search){
+							return $q->where($category_id_filter)
+							->innerJoinWith('PostTravlePackageCategories',function($q)use($category_search){
+								return $q->where($category_search);
+							});
+						})
+						->innerJoinWith('PostTravlePackageCities',function($q) use($city_filter){ 
+							return $q->where($city_filter);
+						})
+						->innerJoinWith('PostTravlePackageCountries',function($q) use($country_filter,$country_id_short){ 
+							return $q->where($country_filter);
+						})
+						->leftJoinWith('PostTravlePackageViews')				
+						->where($where_duration)
+						->where($valid_date)
+						->where($starting_price_Filter)
+						->where($search_bar_title)
+						->where($conditions)
+						->where(['PostTravlePackages.is_deleted' =>0])
+						->order(['total_views'=>'DESC'])
+						->order(['PostTravlePackageRows.id' => $category_short])
+						->order(['PostTravlePackageCountries.id'=>$country_id_short])
+						->limit($limit)
+						->page($page)
+						->group(['PostTravlePackages.id'])
+						->autoFields(true);
+					// pr($getTravelPackages->toArray()); exit;				
+				}
+			}
+			else{			
 			
-			
-			
-			// End Filter code
-			
-			$getTravelPackages = $this->PostTravlePackages->find()
-			->contain(['Users'=>function($q){
-				return $q->select(['first_name','last_name','mobile_number','company_name','email']);
-			},'PostTravlePackageCities'=>['Cities'=>['States']],'PostTravlePackageRows'=>['PostTravlePackageCategories'],'PostTravlePackageCountries'=>['Countries']])
-			->innerJoinWith('PostTravlePackageRows',function($q)use($category_id_filter,$category_short,$category_search){
-				return $q->where($category_id_filter)
-				->innerJoinWith('PostTravlePackageCategories',function($q)use($category_search){
-					return $q->where($category_search);
-				});
-			})
-			->innerJoinWith('PostTravlePackageCities',function($q) use($city_filter){ 
-				return $q->where($city_filter);
-			})
-			->innerJoinWith('PostTravlePackageCountries',function($q) use($country_filter,$country_id_short){ 
-						return $q->where($country_filter);
-					})				
-			->where($where_duration)
-			->where($valid_date)
-			->where($starting_price_Filter)
-			->where($search_bar_title)
-			->where($conditions)
-			->where(['PostTravlePackages.is_deleted' =>0])
-			->order($where_short)
-			->order(['PostTravlePackageRows.id' => $category_short])
-			->order(['PostTravlePackageCountries.id'=>$country_id_short])
-			->limit($limit)
-			->page($page)
-			->group(['PostTravlePackages.id'])
-			->autoFields(true);
-			//print_r($getTravelPackages->toArray()); exit;
+			$getTravelPackages = $this->PostTravlePackages->find();
+			$getTravelPackages->select(['total_likes'=>$getTravelPackages->func()->count('PostTravlePackageLikes.id')])
+				->contain(['Users'=>function($q){
+					return $q->select(['first_name','last_name','mobile_number','company_name','email']);
+				},'PostTravlePackageCities'=>['Cities'=>['States']],'PostTravlePackageRows'=>['PostTravlePackageCategories'],'PostTravlePackageCountries'=>['Countries']])
+				->innerJoinWith('PostTravlePackageRows',function($q)use($category_id_filter,$category_short,$category_search){
+					return $q->where($category_id_filter)
+					->innerJoinWith('PostTravlePackageCategories',function($q)use($category_search){
+						return $q->where($category_search);
+					});
+				})
+				->innerJoinWith('PostTravlePackageCities',function($q) use($city_filter){ 
+					return $q->where($city_filter);
+				})
+				->innerJoinWith('PostTravlePackageCountries',function($q) use($country_filter,$country_id_short){ 
+					return $q->where($country_filter);
+				})
+				->leftJoinWith('PostTravlePackageLikes')				
+				->where($where_duration)
+				->where($valid_date)
+				->where($starting_price_Filter)
+				->where($search_bar_title)
+				->where($conditions)
+				->where(['PostTravlePackages.is_deleted' =>0])
+				->order($where_short)
+				->order(['PostTravlePackageRows.id' => $category_short])
+				->order(['PostTravlePackageCountries.id'=>$country_id_short])
+				->limit($limit)
+				->page($page)
+				->group(['PostTravlePackages.id'])
+				->autoFields(true);
+			}
 			
 			if(!empty($getTravelPackages->toArray()))
 			{
@@ -480,8 +534,16 @@ class PostTravlePackagesController extends AppController
 						$getTravelPackage->issaved=false;
 					}else{
 						$getTravelPackage->issaved=true;
-					}	
-					
+					}
+//-- follow
+					$this->loadModel('BusinessBuddies');
+					$Follow = $this->BusinessBuddies->exists(['BusinessBuddies.bb_user_id'=>$getTravelPackage->user_id,'BusinessBuddies.user_id'=>$isLikedUserId]);
+					if($Follow==0){
+						$getTravelPackage->isfollows=false;
+					}else{
+						$getTravelPackage->isfollows=true;
+					}
+//-- follow					
 					$getTravelPackage->total_views = $this->PostTravlePackages->PostTravlePackageViews
 						->find()->where(['post_travle_package_id' => $getTravelPackage->id])->count();
 						
@@ -582,15 +644,19 @@ class PostTravlePackagesController extends AppController
 			$carts = $this->PostTravlePackages->PostTravlePackageCarts->exists(['PostTravlePackageCarts.post_travle_package_id'=>$id,'PostTravlePackageCarts.user_id'=>$user_id,'PostTravlePackageCarts.is_deleted'=>0]);
 			foreach($getTravelPackageDetails as $sfad){
 			if($carts==0){
-				
 					$sfad->issaved=false;
-				 
-				
 			}else{
-				 
 					$sfad->issaved=true;
-				 
 			}
+			//-- follow
+				$this->loadModel('BusinessBuddies');
+				$Follow = $this->BusinessBuddies->exists(['BusinessBuddies.bb_user_id'=>$sfad->user_id,'BusinessBuddies.user_id'=>$user_id]);
+				if($Follow==0){
+					$sfad->isfollows=false;
+				}else{
+					$sfad->isfollows=true;
+				}
+			//-- follow	
 			  $all_raiting=0;	
 					$testimonial=$this->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id]);
 					$testimonial_count=$this->PostTravlePackages->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id])->count();

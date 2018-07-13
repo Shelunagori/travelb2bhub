@@ -114,7 +114,7 @@
 						</p>
 					</div>
 					<div class="">
-						<input require type="text" required="true" name="hh_check_in[<?php echo $randomNumber; ?>]" id="hh_check_in[<?php echo $randomNumber; ?>]" class="form-control"  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>                     
+						<input require type="text" required="true" name="hh_check_in[<?php echo $randomNumber; ?>]" id="hh_check_in[<?php echo $randomNumber; ?>]" class="form-control removeerror "  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>                     
 					</div>
 				</div> 
 				<div class="col-md-6">
@@ -124,7 +124,7 @@
 					</p>
 					</div>
 					<div class="">
-						<input type="text" required="true" name="hh_check_out[<?php echo $randomNumber; ?>]" id ="hh_check_out[<?php echo $randomNumber; ?>]" class="form-control enddate checkdatefornext"  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>                     
+						<input type="text" required="true" name="hh_check_out[<?php echo $randomNumber; ?>]" id ="hh_check_out[<?php echo $randomNumber; ?>]" class="form-control enddate checkdatefornext removeerror "  data-date-format="dd-mm-yyyy"  placeholder="DD-MM-YYYY"/>                     
 					</div>
 				</div>
 			</div>

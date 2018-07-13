@@ -40,8 +40,8 @@ class EventPlannerPromotionsController extends AppController
 				foreach($city_id as $city)
 				{
 					$eventPlannerPromotionCities = $this->EventPlannerPromotions->EventPlannerPromotionCities->newEntity();
-					$eventPlannerPromotionCities->state_id = $city;
-					$eventPlannerPromotion->event_planner_promotion_cities[$x]=$eventPlannerPromotionCities;
+					$eventPlannerPromotionCities->city_id = $city;
+					$eventPlannerPromotion->event_planner_promotion_cities[$y]=$eventPlannerPromotionCities;
 					$y++;	
 				}
 			}
@@ -310,7 +310,7 @@ class EventPlannerPromotionsController extends AppController
 				$state_filter = ['EventPlannerPromotionStates.state_id IN'=>$state_id];
 			}else
 			{
-				$state_filter = null;
+				$state_filter = "";
 			}
 			$city_filter = null;
 			
@@ -320,11 +320,10 @@ class EventPlannerPromotionsController extends AppController
 				$city_filter = ['EventPlannerPromotionCities.city_id IN'=>$city_id];
 			}else
 			{
-				$city_filter = null;
+				$city_filter = "";
 			}
 			
-			//$where_short = ['EventPlannerPromotions.position' =>'ASC'];
-			$where_short=['EventPlannerPromotions.position' =>'ASC','EventPlannerPromotions.id' =>'DESC'];
+ 			$where_short=['EventPlannerPromotions.position' =>'ASC','EventPlannerPromotions.id' =>'DESC'];
 			if(!empty($country_id_short))
 			{
 				$where_short = ['EventPlannerPromotions.country_id' =>$country_id_short];
@@ -401,37 +400,107 @@ class EventPlannerPromotionsController extends AppController
 				}				
 			}	
 			
-			$getEventPlanners = $this->EventPlannerPromotions->find();
-			 
-				$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('EventPlannerPromotionLikes.id')])
-				->contain(['Users'=>function($q){
-				return $q->select(['first_name','last_name','mobile_number','company_name','email']);
-			},'PriceMasters','Countries','EventPlannerPromotionStates'=>['States'],'EventPlannerPromotionCities'=>['Cities']])
-				->leftJoinWith('EventPlannerPromotionLikes')
-				->innerJoinWith('EventPlannerPromotionStates',function($q) use($state_filter){ 
+		/*$EventPlannerPromotions=$this->EventPlannerPromotions->find()
+									->select(['total_likes' => $this->EventPlannerPromotions->find()->func()->count('EventPlannerPromotionLikes.id')])
+									->leftJoinWith('EventPlannerPromotionLikes')
+									->group(['EventPlannerPromotions.id'])
+									->autoFields(true)
+									->order(['total_likes' => 'DESC']);
+
+			
+			pr($EventPlannerPromotions->toArray()); exit;
+			*/
+			if(!empty($higestSort))
+			{
+				$where_short=array();
+				if($higestSort == 'total_likes')
+				{
+					$where_short=['total_likes' =>'DESC']; 
+					$getEventPlanners = $this->EventPlannerPromotions->find();
+					$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('EventPlannerPromotionLikes.id')])
+					//$getEventPlanners->select(['total_views'=>$getEventPlanners->func()->count('EventPlannerPromotionViews.id')])
+					->contain(['Users'=>function($q){
+						return $q->select(['first_name','last_name','mobile_number','company_name','email']);
+					},'PriceMasters','Countries','EventPlannerPromotionStates'=>['States'],'EventPlannerPromotionCities'=>['Cities']])
+					->leftJoinWith('EventPlannerPromotionLikes')
+					->innerJoinWith('EventPlannerPromotionStates',function($q) use($state_filter){ 
 						return $q->where($state_filter);
 					})
-				->innerJoinWith('EventPlannerPromotionCities',function($q) use($city_filter){ 
+					->innerJoinWith('EventPlannerPromotionCities',function($q) use($city_filter){ 
 						return $q->where($city_filter);
 					})	
-			->where(['visible_date >=' =>date('Y-m-d')])
-			->where(['EventPlannerPromotions.is_deleted' =>0])
-			->where($country_id)
-			->where($conditions)
-			->order($where_short)
-			->where($search_bar_title)
-			->group(['EventPlannerPromotions.id'])
-			->limit($limit)
-			->page($page)
-			->autoFields(true);
+					->where(['visible_date >=' =>date('Y-m-d')])
+					->where(['EventPlannerPromotions.is_deleted' =>0])
+					->where($country_id)
+					->where($conditions)
+					->order($where_short)
+					->where($search_bar_title)
+					->group(['EventPlannerPromotions.id'])
+					->limit($limit)
+					->page($page)
+					->autoFields(true);
+				}
+				else if($higestSort == 'total_views')
+				{
+					$where_short=['total_views' =>'DESC'];  
+					$getEventPlanners = $this->EventPlannerPromotions->find();
+				//	$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('EventPlannerPromotionLikes.id')])
+					$getEventPlanners->select(['total_views'=>$getEventPlanners->func()->count('EventPlannerPromotionViews.id')])
+					->contain(['Users'=>function($q){
+						return $q->select(['first_name','last_name','mobile_number','company_name','email']);
+					},'PriceMasters','Countries','EventPlannerPromotionStates'=>['States'],'EventPlannerPromotionCities'=>['Cities']])
+					->leftJoinWith('EventPlannerPromotionViews')
+					->innerJoinWith('EventPlannerPromotionStates',function($q) use($state_filter){ 
+						return $q->where($state_filter);
+					})
+					->innerJoinWith('EventPlannerPromotionCities',function($q) use($city_filter){ 
+						return $q->where($city_filter);
+					})	
+					->where(['visible_date >=' =>date('Y-m-d')])
+					->where(['EventPlannerPromotions.is_deleted' =>0])
+					->where($country_id)
+					->where($conditions)
+					->order($where_short)
+					->where($search_bar_title)
+					->group(['EventPlannerPromotions.id'])
+					->limit($limit)
+					->page($page)
+					->autoFields(true);
+					//pr($getEventPlanners->toArray()); exit;
+				} 					
+			}
+			else{	
+			//--- my query
+			$getEventPlanners = $this->EventPlannerPromotions->find();
+				$getEventPlanners->select(['total_likes'=>$getEventPlanners->func()->count('EventPlannerPromotionLikes.id')])
+				->contain(['Users'=>function($q){
+					return $q->select(['first_name','last_name','mobile_number','company_name','email']);
+				},'PriceMasters','Countries','EventPlannerPromotionStates'=>['States'],'EventPlannerPromotionCities'=>['Cities']])
+				->leftJoinWith('EventPlannerPromotionLikes')
+				->innerJoinWith('EventPlannerPromotionStates',function($q) use($state_filter){ 
+					return $q->where($state_filter);
+				})
+				->innerJoinWith('EventPlannerPromotionCities',function($q) use($city_filter){ 
+					return $q->where($city_filter);
+				})	
+				->where(['visible_date >=' =>date('Y-m-d')])
+				->where(['EventPlannerPromotions.is_deleted' =>0])
+				->where($country_id)
+				->where($conditions)
+				->order($where_short)
+				->where($search_bar_title)
+				->group(['EventPlannerPromotions.id'])
+				->limit($limit)
+				->page($page)
+				->autoFields(true);
+			}
 			//pr($where_short);exit;	
 			if(!empty($getEventPlanners->toArray()))
 			{
 				foreach($getEventPlanners as $getEventPlanner)
 				{
 					
-					$getEventPlanner->total_likes = $this->EventPlannerPromotions->EventPlannerPromotionLikes
-                            ->find()->where(['event_planner_promotion_id' => $getEventPlanner->id])->count();
+					$getEventPlanner->total_likes = $this->EventPlannerPromotions->EventPlannerPromotionLikes->find()->where(['event_planner_promotion_id' => $getEventPlanner->id])->count();
 					
 					$exists = $this->EventPlannerPromotions->EventPlannerPromotionLikes->exists(['event_planner_promotion_id'=>$getEventPlanner->id,'user_id'=>$isLikedUserId]);
 					if($exists == 1)
@@ -453,25 +522,33 @@ class EventPlannerPromotionsController extends AppController
 						
 					$getEventPlanner->total_flagged = $this->EventPlannerPromotions->EventPlannerPromotionReports
 						->find()->where(['event_planner_promotion_id' => $getEventPlanner->id])->count();
-						
+//-- follow
+					$this->loadModel('BusinessBuddies');
+					$Follow = $this->BusinessBuddies->exists(['BusinessBuddies.bb_user_id'=>$getEventPlanner->user_id,'BusinessBuddies.user_id'=>$isLikedUserId]);
+					if($Follow==0){
+						$getEventPlanner->isfollows=false;
+					}else{
+						$getEventPlanner->isfollows=true;
+					}
+//-- follow		
 					$all_raiting=0;	
 					$testimonial=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getEventPlanner->user_id]);
 					$testimonial_count=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$getEventPlanner->user_id])->count();
 						 
-						 foreach($testimonial as $test_data){
-							 $rating=$test_data->rating;
-							 $all_raiting+=$rating;
-						 }
-						 if($testimonial_count>0){
-							 $final_raiting=($all_raiting/$testimonial_count);
-							 if($final_raiting>0){
-								$getEventPlanner->user_rating=number_format($final_raiting, 1);
-							 }else{
-								$getEventPlanner->user_rating="0";
-							 }	
+					 foreach($testimonial as $test_data){
+						 $rating=$test_data->rating;
+						 $all_raiting+=$rating;
+					 }
+					 if($testimonial_count>0){
+						 $final_raiting=($all_raiting/$testimonial_count);
+						 if($final_raiting>0){
+							$getEventPlanner->user_rating=number_format($final_raiting, 1);
 						 }else{
 							$getEventPlanner->user_rating="0";
-						 }	 
+						 }	
+					 }else{
+						$getEventPlanner->user_rating="0";
+					 }	 
 				}
 				if(!empty($higestSort))
 				{
@@ -496,7 +573,7 @@ class EventPlannerPromotionsController extends AppController
 							return $b['user_rating'] - $a['user_rating'];
 						});					
 					}					
-				}				 
+				}			 
 				$message = 'List Found Successfully';
 				$response_code = 200;
 			}
@@ -547,14 +624,19 @@ class EventPlannerPromotionsController extends AppController
 			$carts = $this->EventPlannerPromotions->EventPlannerPromotionCarts->exists(['EventPlannerPromotionCarts.event_planner_promotion_id'=>$id,'EventPlannerPromotionCarts.user_id'=>$user_id,'EventPlannerPromotionCarts.is_deleted'=>0]);
 			foreach($getEventPlannersDetails as $sfad){
 			if($carts==0){
-				
 					$sfad->issaved=false;
-				 
-				
 			}else{
 				 	$sfad->issaved=true;
-				 
 			}
+			//-- follow
+				$this->loadModel('BusinessBuddies');
+				$Follow = $this->BusinessBuddies->exists(['BusinessBuddies.bb_user_id'=>$sfad->user_id,'BusinessBuddies.user_id'=>$user_id]);
+				if($Follow==0){
+					$sfad->isfollows=false;
+				}else{
+					$sfad->isfollows=true;
+				}
+			//-- follow	
 			
 			$all_raiting=0;	
 					$testimonial=$this->EventPlannerPromotions->Users->Testimonial->find()->where(['Testimonial.user_id'=>$sfad->user_id]);

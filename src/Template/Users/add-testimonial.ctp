@@ -27,9 +27,7 @@
                       
 						<!-- Text input-->
 						<div class="form-group col-md-12">
-						<label class="col-md-4 control-label" for="Rating">Rating <span class="asterisk">
-
-						</span></label>
+						<label class="col-md-4 control-label" for="Rating">Rating <span class="required">*</span></label>
 						<div class="col-md-5">
 						<input class="star star-5 test" id="star-5<?php echo $reqid; ?>" type="radio" name="rating" <?php if($rating=="5") {echo "checked";} ?> value="5"/>
 						<label class="star star-5" for="star-5<?php echo $reqid; ?>"></label>
