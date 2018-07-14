@@ -9,7 +9,7 @@ class PostTravlePackagesController extends AppController
     {
         $postTravlePackage = $this->PostTravlePackages->newEntity();
         if ($this->request->is('post')) {
-           
+        	
 			$postTravlePackage = $this->PostTravlePackages->patchEntity($postTravlePackage, $this->request->data(),[ 'associated' => ['PostTravlePackageRows','PostTravlePackageCountries','PostTravlePackageCities'] ]);
 
 			$message = 'PERFECT';
@@ -70,10 +70,14 @@ class PostTravlePackagesController extends AppController
 			
 			if(!empty($image))
 			{	
-				$dir = new Folder(WWW_ROOT . 'images/PostTravelPackages/'.$id.'/'.$time.'/image', true, 0755);
-				$ext = substr(strtolower(strrchr($image['name'], '.')), 1); 
-				$arr_ext = array('jpg', 'jpeg','png'); 				
-				
+				//$dir = new Folder(WWW_ROOT . 'images/PostTravelPackages/'.$id.'/'.$time.'/image', true, 0755);
+				$ext=explode('/',$image['type']);
+				$keyname = 'images/PostTravelPackages/'.$id.'/'.$time.'/image/'.$id.'.'.$ext[1];
+				$postTravlePackage->image=$keyname;
+				$this->AwsFile->putObjectFile($keyname,$image['tmp_name'],$image['type']);
+
+
+				/*
 				if(!empty($ext))
 				{
 					if(in_array($ext, $arr_ext)) { 
@@ -94,7 +98,7 @@ class PostTravlePackagesController extends AppController
 								$percentageTOReduse=10;
 							}
 						}
-						/* Resize Image */
+						// Resize Image 
 						$destination_url = WWW_ROOT . '/images/PostTravelPackages/'.$id.'/'.$time.'/image/'.$id.'.'.$ext;
 						if($ext=='png'){
 							$image = imagecreatefrompng($image['tmp_name']);
@@ -112,14 +116,15 @@ class PostTravlePackagesController extends AppController
 							$response_code = 102;
 						}
 					
-						/*//imagedestroy($image);
-						if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/PostTravelPackages/'.$id.'/'.$time.'/image/'.$id.'.'.$ext)) {
-							$postTravlePackage->image='images/PostTravelPackages/'.$id.'/'.$time.'/image/'.$id.'.'.$ext;
-						} else {
-							$message = 'Image not uploaded';
-							$this->Flash->error(__($message));
-							$response_code = 102;
-						}*/
+						//imagedestroy($image);
+						/if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/PostTravelPackages/'.$id.'/'.$time.'/image/'.$id.'.'.$ext)) 
+						//{
+						//	$postTravlePackage->image='images/PostTravelPackages/'.$id.'/'.$time.'/image/'.$id.'.'.$ext;
+						//} else {
+						//	$message = 'Image not uploaded';
+						//	$this->Flash->error(__($message));
+						//	$response_code = 102;
+						//}
 					} 
 					else 
 					{ 
@@ -127,7 +132,7 @@ class PostTravlePackagesController extends AppController
 						$this->Flash->error(__($message));
 						$response_code = 103;  
 						
-					}					
+					}				
 				}
 				else 
 				{ 	
@@ -135,7 +140,7 @@ class PostTravlePackagesController extends AppController
 					$this->Flash->error(__($message));
 					$response_code = 103;  
 				
-				}				
+				}		*/			
 			} else { $postTravlePackage->image ='';  }
  			if(!empty($document))
 			{  

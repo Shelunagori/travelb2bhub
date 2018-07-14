@@ -1,5 +1,6 @@
 <?php //echo $this->Html->css('/assets/loader-1.css'); ?>
 <?php  
+$cdn_path = $awsFileLoad->cdnPath();
  if(!empty($duration_day_night)){
  	$duration_day_night=base64_encode($duration_day_night);
  }
@@ -540,14 +541,15 @@ a{
 			<span class="help-block"></span>
 			<div class="row ">						
 				<div class="col-md-3">
-				<?= $this->Html->image($postTravlePackage->full_image,['id'=>'myImg','style'=>'width:100%;height:109px;','data-target'=>'#imagemodal'.$postTravlePackage->id,'data-toggle'=>'modal','promotionid'=>$postTravlePackage->id,'userId'=>$user_id,'class'=>'viewCount']) ?>
+					
+				<?= $this->Html->image($cdn_path.$postTravlePackage->image,['id'=>'myImg','style'=>'width:100%;height:109px;','data-target'=>'#imagemodal'.$postTravlePackage->id,'data-toggle'=>'modal','promotionid'=>$postTravlePackage->id,'userId'=>$user_id,'class'=>'viewCount']) ?>
 					<div id="imagemodal<?php echo $postTravlePackage->id;?>" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-md">
 						<!-- Modal content-->
 							<div class="modal-content">
 								<div class="modal-body" >
 								<button type="button" class="close" data-dismiss="modal" style="padding-right:8px !important;">&times;</button>
-								<?= $this->Html->image($postTravlePackage->full_image,['style'=>'width:100%;padding:20px;padding-top:0px!important;','promotionid'=>$postTravlePackage->id,'userId'=>$user_id,'class'=>'viewCount']) ?>
+								<?= $this->Html->image($cdn_path.$postTravlePackage->image,['style'=>'width:100%;padding:20px;padding-top:0px!important;','promotionid'=>$postTravlePackage->id,'userId'=>$user_id,'class'=>'viewCount']) ?>
 								</div>
 							</div>
 						</div>

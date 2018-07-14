@@ -28,10 +28,11 @@ class AppController extends Controller
 	public function initialize()
     {
 		$coreVariable = [
-			'SiteUrl' => 'http://udaipurcare.com/travelb2b/',
+			'SiteUrl' => 'http://localhost/travelb2bhub/',
 		];
+        $awsFileLoad=$this->loadComponent('AwsFile');
 		$this->coreVariable = $coreVariable;
-		$this->set(compact('coreVariable'));
+		$this->set(compact('awsFileLoad','coreVariable'));
 	}
 	
 }

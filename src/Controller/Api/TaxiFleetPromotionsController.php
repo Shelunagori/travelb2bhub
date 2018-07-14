@@ -66,7 +66,12 @@ class TaxiFleetPromotionsController extends AppController
 			}
 			if(!empty($image))
 			{	
-				$dir = new Folder(WWW_ROOT . 'images/taxiFleetPromotion/'.$id.'/'.$time.'/image', true, 0755);
+				$ext=explode('/',$image['type']);
+				$keyname = 'images/taxiFleetPromotion/'.$id.'/'.$time.'/image/'.$id.'.'.$ext[1];
+				$taxiFleetPromotion->image=$keyname;
+				$this->AwsFile->putObjectFile($keyname,$image['tmp_name'],$image['type']);
+
+				/*$dir = new Folder(WWW_ROOT . 'images/taxiFleetPromotion/'.$id.'/'.$time.'/image', true, 0755);
 				$ext = substr(strtolower(strrchr($image['name'], '.')), 1); 
 				$arr_ext = array('jpg', 'jpeg','png'); 				
 				
@@ -90,7 +95,7 @@ class TaxiFleetPromotionsController extends AppController
 								$percentageTOReduse=10;
 							}
 						}
-						/* Resize Image */
+						// Resize Image 
 						$destination_url = WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$time.'/image/'.$id.'.'.$ext;
 						if($ext=='png'){
 							$image = imagecreatefrompng($image['tmp_name']);
@@ -107,13 +112,13 @@ class TaxiFleetPromotionsController extends AppController
 							$this->Flash->error(__($message));
 							$response_code = 102;
 						}
-						/*if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$time.'/image/'.$id.'.'.$ext)) {
-							$taxiFleetPromotion->image='images/taxiFleetPromotion/'.$id.'/'.$time.'/image/'.$id.'.'.$ext;
-						} else {
-							$message = 'Image not uploaded';
-							$this->Flash->error(__($message)); 
-							$response_code = 102;
-						}*/
+						//if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/taxiFleetPromotion/'.$id.'/'.$time.'/image/'.$id.'.'.$ext)) {
+						//	$taxiFleetPromotion->image='images/taxiFleetPromotion/'.$id.'/'.$time.'/image/'.$id.'.'.$ext;
+						//} else {
+						//	$message = 'Image not uploaded';
+						//	$this->Flash->error(__($message)); 
+						//	$response_code = 102;
+						//}
 					} 
 					else 
 					{ 
@@ -128,7 +133,7 @@ class TaxiFleetPromotionsController extends AppController
 					$message = 'Invalid image extension';
 					$this->Flash->error(__($message)); 
 					$response_code = 103;  
-				}				
+				}				*/
 			} else { $taxiFleetPromotion->image ='';  }	
 
 			if(!empty($document))

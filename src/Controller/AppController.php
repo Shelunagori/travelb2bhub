@@ -48,12 +48,12 @@ class AppController extends Controller {
         parent::initialize();
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-	 
+	 	$awsFileLoad=$this->loadComponent('AwsFile');
 		$coreVariable = [
-			'SiteUrl' => 'http://udaipurcare.com/travelb2b/',
+			'SiteUrl' => 'http://localhost/travelb2bhub/',
 		];
 		$this->coreVariable = $coreVariable;
-		$this->set(compact('coreVariable'));
+		$this->set(compact('awsFileLoad','coreVariable'));
 	 
         if($this->request->params['controller'] == 'Admins') 
 		{

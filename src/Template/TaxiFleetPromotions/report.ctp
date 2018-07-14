@@ -1,6 +1,7 @@
 <?php //echo $this->Html->css('/assets/loader-1.css'); ?>
 <?php echo $this->Html->script('/assets/plugins/jquery/jquery-2.2.3.min.js'); ?>
 <?php 
+$cdn_path = $awsFileLoad->cdnPath();
 //-- LIST 
 $curl = curl_init();
 curl_setopt_array($curl, array(
@@ -373,14 +374,14 @@ a{
 					<span class="help-block"></span>
 					<div class="row">						
 					<div class="col-md-3">
-					<?= $this->Html->image($taxiFleetPromotion->full_image,['id'=>'myImg','style'=>'width:100%;height:109px;','data-target'=>'#imagemodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal','promotionid'=>$taxiFleetPromotion->id,'userId'=>$user_id,'class'=>'viewCount']) ?>
+					<?= $this->Html->image($cdn_path.$taxiFleetPromotion->image,['id'=>'myImg','style'=>'width:100%;height:109px;','data-target'=>'#imagemodal'.$taxiFleetPromotion->id,'data-toggle'=>'modal','promotionid'=>$taxiFleetPromotion->id,'userId'=>$user_id,'class'=>'viewCount']) ?>
 					<div id="imagemodal<?php echo $taxiFleetPromotion->id;?>" class="modal fade" role="dialog">
 					<div class="modal-dialog modal-md">
 						<!-- Modal content-->
 							<div class="modal-content">
 								<div class="modal-body" >
 								<button type="button" class="close" data-dismiss="modal" style="padding-right:8px !important;">&times;</button>
-								<?= $this->Html->image($taxiFleetPromotion->full_image,['style'=>'width:100%;padding:20px;padding-top:0px!important;']) ?>
+								<?= $this->Html->image($cdn_path.$taxiFleetPromotion->image,['style'=>'width:100%;padding:20px;padding-top:0px!important;']) ?>
 								</div>
 							</div>
 						</div>
