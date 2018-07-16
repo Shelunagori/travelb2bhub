@@ -51,7 +51,11 @@ class EventPlannerPromotionsController extends AppController
 			}
 			if(!empty($image))
 			{	
-				$dir = new Folder(WWW_ROOT . 'images/eventPlannerPromotion/'.$id.'/'.$title.'/image', true, 0755);
+				$ext=explode('/',$image['type']);
+				$keyname = 'images/eventPlannerPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext[1];
+				$eventPlannerPromotion->image=$keyname;
+				$this->AwsFile->putObjectFile($keyname,$image['tmp_name'],$image['type']);
+				/*$dir = new Folder(WWW_ROOT . 'images/eventPlannerPromotion/'.$id.'/'.$title.'/image', true, 0755);
 				$ext = substr(strtolower(strrchr($image['name'], '.')), 1); 
 				$arr_ext = array('jpg', 'jpeg','png'); 				
 				
@@ -74,7 +78,7 @@ class EventPlannerPromotionsController extends AppController
 								$percentageTOReduse=10;
 							}
 						}
-						/* Resize Image */
+						
 						$destination_url = WWW_ROOT . '/images/eventPlannerPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
 						if($ext=='png'){
 							$image = imagecreatefrompng($image['tmp_name']);
@@ -92,13 +96,7 @@ class EventPlannerPromotionsController extends AppController
 							$response_code = 102;
 						}
 						
-						/*if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/images/eventPlannerPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext)) {
-							$eventPlannerPromotion->image='images/eventPlannerPromotion/'.$id.'/'.$title.'/image/'.$id.'.'.$ext;
-						} else {
-							$message = 'Image not uploaded';
-							$this->Flash->error(__($message));
-							$response_code = 102;
-						}*/
+						
 					} 
 					else 
 					{ 
@@ -112,7 +110,7 @@ class EventPlannerPromotionsController extends AppController
 					$message = 'Invalid image extension';
 					$this->Flash->error(__($message));
 					$response_code = 103;  
-				}				
+				}	*/			
 			} else { $eventPlannerPromotion->image ='';  }	
 
 			if(!empty($document))

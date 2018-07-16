@@ -48,7 +48,11 @@ class HotelPromotionsController extends AppController
 			}
 			if(!empty($image))
 			{	
-				$dir = new Folder(WWW_ROOT . 'img/hotels/'.$id.'/', true, 0755);
+				$ext=explode('/',$image['type']);
+				$keyname = 'img/hotels/'.$id.'/'.$title.'.'.$ext[1];
+				$hotelPromotions->hotel_pic=$keyname;
+				$this->AwsFile->putObjectFile($keyname,$image['tmp_name'],$image['type']);
+				/*$dir = new Folder(WWW_ROOT . 'img/hotels/'.$id.'/', true, 0755);
 				$ext = substr(strtolower(strrchr($image['name'], '.')), 1); 
 				$arr_ext = array('jpg', 'jpeg','png'); 				
 				
@@ -71,8 +75,6 @@ class HotelPromotionsController extends AppController
 								$percentageTOReduse=10;
 							}
 						}
-						//pr($percentageTOReduse); exit;
-						/* Resize Image */
 						$destination_url = WWW_ROOT . '/img/hotels/'.$id.'/'.$title.'.'.$ext;
 						if($ext=='png'){
 							$image = imagecreatefrompng($image['tmp_name']);
@@ -89,14 +91,7 @@ class HotelPromotionsController extends AppController
 							$this->Flash->error(__($message));
 							$response_code = 102;
 						}
-						/*
-						if(move_uploaded_file($image['tmp_name'], WWW_ROOT . '/img/hotels/'.$title.'.'.$ext)) {
-							$hotelPromotions->hotel_pic='img/hotels/'.$title.'.'.$ext;
-						} else {
-							$message = 'Image not uploaded';
-							$this->Flash->error(__($message)); 
-							$response_code = 102;
-						}*/
+
 					} 
 					else 
 					{ 
@@ -110,7 +105,7 @@ class HotelPromotionsController extends AppController
 					$message = 'Invalid image extension';
 					$this->Flash->error(__($message)); 
 					$response_code = 103;  
-				}				
+				}	*/			
 			} else { $hotelPromotions->hotel_pic ='';  }	
 
 			// print_r($hotelPromotions); exit;
